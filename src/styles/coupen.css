@@ -1,0 +1,78 @@
+.extra-isc h4{
+  color: #2e3192;
+  font-weight: 800;
+    font-size: 34px;
+  position: relative;
+}
+.extra-isc small{
+    text-align: right;
+    position: absolute;
+    left: 35%;
+    font-size: 12px;
+    font-weight: 500;
+    color: #000;
+}
+
+.divelerycol {
+    align-items: center;
+}
+
+.divelerycol p{
+    color: #2E3192;
+    font-weight: 600;
+    /* font-size: 18px; */
+}
+.coupen-row{
+    align-items: center;
+    padding: 17px 0;
+}
+
+.offers h5{
+    color: #CC0008;
+    font-size: 22px;
+    font-weight: 600;
+
+}
+
+.del_img{
+    background-color: #EAEAF4;
+    border-radius: 50%;
+    position: relative;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.offers small{
+font-size: 13px;
+}
+
+.coupen_code{
+    background: #fff;
+    text-align: center;
+    padding: 5px;
+    border: 2px dotted #000;
+    cursor: pointer;
+    color: #262262;
+}
+.signup_div{
+    text-align: center;
+}
+.signup{
+    background: #CC0008;
+    color: #fff;
+    padding: 5px 18px;
+    border: none;
+    box-shadow: 0px 0px 12px 120x currentColor;
+    /* border-radius: 10px; */
+}
+
+.signup:hover{
+    color: #CC0008;
+    background-color: #fff;
+    border: 1px solid #CC0008;
+}
+
+.signup_div p{
+    font-size: 12px;
+    font-weight: 500;
+}
