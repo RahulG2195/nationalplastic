@@ -2,7 +2,6 @@ import Image from 'next/image'
 import TopBar from "./TopBar";
 import BottomBar from "./BottomBar";
 import '../../styles/header.css';
-import Link from 'next/link';
 
 export default function Header() {
   return (
@@ -53,9 +52,9 @@ export default function Header() {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" href="/About">
+                  <a className="nav-link" href="#">
                    About Us
-                  </Link>
+                  </a>
                 </li>
                 <li className="nav-item dropdown">
                   <a

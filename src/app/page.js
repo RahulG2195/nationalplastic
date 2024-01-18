@@ -1,14 +1,14 @@
 
-import Banner from "@/Components/sections/Home/Banner";
-import CoupenBanner from "@/Components/sections/Home/CoupenBanner";
-import Features from "@/Components/sections/Home/Features";
-import TopPick from "@/Components/sections/Home/TopPick";
+import Banner from "@/Components/Home/Banner";
+import CoupenBanner from "@/Components/Home/CoupenBanner";
+import Features from "@/Components/Home/Features";
+import TopPick from "@/Components/Home/TopPick";
 
 export default function Home() {
  
   return (
     <main>
-     <Banner/>
+     <Banner />
      <Features/>
      <CoupenBanner/>
      <TopPick/>

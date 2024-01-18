@@ -1,0 +1,42 @@
+.feature_img{
+    position: relative;
+    min-height: 100px;
+    height: 100%;
+    width: 100%;
+}
+.feature_img img{
+    width: 100%;
+    object-fit: cover;
+}
+.discounts_div{
+    background-color: #D5D6E9;
+}
+
+.discounts_div_imp{
+    background-color: #FCF5DA;
+}
+
+.com-dic{
+    text-align: center;
+    padding: 10px 0;
+}
+
+.discounts_div .com-para{
+    color: #2E3192;
+    font-weight: 600;
+}
+
+.com-dic strong{
+    color: #000;
+}
+
+.discounts_div_imp .imp-para{
+    color: #CC0008;
+    font-weight: 600;
+}
+
+.coupen_sec{
+    background-color: #FFE000;
+    width: 100%;
+    margin: 30px 0;
+}
