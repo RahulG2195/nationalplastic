@@ -1,0 +1,17 @@
+.Img_cont button{
+position: absolute;
+border: none;
+top: 60%;
+left:42%;
+/* transform: translate(-50%,-50%); */
+
+}
+.Img_cont Image{
+    position: relative;
+}
+
+.Img_cont{
+    position: relative;
+    height: 100%;
+    width: 100%;
+}

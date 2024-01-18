@@ -1,0 +1,36 @@
+.Imgbottom {
+
+    height: 10vh;
+    width: 100vw;
+    background-color: #F3F3F3;
+    display: flex;
+    align-items: center;
+    justify-content:space-evenly;
+
+}
+
+/* .main_continer image{
+
+    border-radius: 0 !important;
+} */
+
+.Imgbottom img {
+    width: 2vw;
+}
+
+.Imgbottom .cont {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.Imgbottom .text h5 {
+    font-size: 1.5vh;
+
+}
+
+.Imgbottom .text h6 {
+
+    font-size: 1.5vh;
+
+}
