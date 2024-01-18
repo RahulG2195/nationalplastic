@@ -1,0 +1,21 @@
+.card3{
+
+    height: 45vh;
+    width: 17vw;
+    overflow: hidden;
+
+    
+}
+
+.card3 img{
+    transition: all .5s;
+    filter:grayscale(100);
+
+}
+
+.card3:hover img{
+
+    filter:grayscale(0);
+    scale: 1.1;
+
+}
