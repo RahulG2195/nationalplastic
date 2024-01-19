@@ -62,14 +62,14 @@ img{
 
 }
 
-<<<<<<< HEAD
+/* <<<<<<< HEAD */
 /* section haeding part end */
   .main_container{
     min-height: 100vh;
     width: 100%;
     position: relative;    
 }
-=======
+/* ======= */
 .section_header h2 span{
   font-weight: 700;
   color: var(--header-primary-clr);
@@ -91,4 +91,4 @@ img{
   color: var(--header-primary-clr);
 }
 /* section haeding part end */
->>>>>>> 70d9e029af5ce56576af0d6476cb82e536a83e0b
+/* >>>>>>> 70d9e029af5ce56576af0d6476cb82e536a83e0b */
