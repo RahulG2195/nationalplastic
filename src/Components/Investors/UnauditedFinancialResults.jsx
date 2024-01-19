@@ -1,0 +1,118 @@
+
+import "../../styles/investor.css";
+import FinancialResults from "./FinancialResults";
+
+function UnauditedFinancialResults(){
+    const Resultarr = [
+        {
+          key: 1,
+          date: "2023-2024",
+          text: "Download",
+          image: "/assets/images/investors/download.png",
+        },
+        {
+          key: 2,
+          date: "2022-2023",
+          text: "Download",
+          image: "/assets/images/investors/download.png",
+        },
+        {
+            key: 3,
+            date: "2021-2022",
+            text: "Download",
+            image: "/assets/images/investors/download.png",
+          },
+          {
+            key: 4,
+            date: "2020-2021",
+            text: "Download",
+            image: "/assets/images/investors/download.png",
+          },
+          {
+            key: 5,
+            date: "2019-2020",
+            text: "Download",
+            image: "/assets/images/investors/download.png",
+          },
+          {
+            key: 6,
+            date: "2018-2019",
+            text: "Download",
+            image: "/assets/images/investors/download.png",
+          },
+          {
+            key: 7,
+            date: "2023-2024",
+            text: "Download",
+            image: "/assets/images/investors/download.png",
+          },
+          {
+            key: 8,
+            date: "2022-2023",
+            text: "Download",
+            image: "/assets/images/investors/download.png",
+          },
+          {
+              key: 9,
+              date: "2021-2022",
+              text: "Download",
+              image: "/assets/images/investors/download.png",
+            },
+            {
+              key: 10,
+              date: "2020-2021",
+              text: "Download",
+              image: "/assets/images/investors/download.png",
+            },
+            {
+              key: 11,
+              date: "2019-2020",
+              text: "Download",
+              image: "/assets/images/investors/download.png",
+            },
+            {
+              key: 12,
+              date: "2018-2019",
+              text: "Download",
+              image: "/assets/images/investors/download.png",
+            },
+            {
+                key: 13,
+                date: "2019-2020",
+                text: "Download",
+                image: "/assets/images/investors/download.png",
+              },
+              {
+                key: 14,
+                date: "2018-2019",
+                text: "Download",
+                image: "/assets/images/investors/download.png",
+              },
+      ];
+  return (
+    <>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-2 ">
+            <div className="FinancialResults-2">
+              <h4>Unaudited Financial Results</h4>
+            </div>
+          </div>
+          <div className="col-md-10 FinancialResults-10">
+            <h2>Financial Results</h2>
+            <h4>Q1 June</h4>
+
+            <div class="row">
+          {Resultarr.map((val) => (
+            <div class="col-md-4 results-data" key={val.key}>
+              <FinancialResults date={val.date} text={val.text} image={val.image} />
+            </div>
+          ))}
+        </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+export default UnauditedFinancialResults;
