@@ -1,5 +1,5 @@
 import Image from "next/image";
-import "../../../styles/feature.css";
+import "../../styles/feature.css";
 
 function Features() {
   return (
