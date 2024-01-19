@@ -1,26 +1,43 @@
+.karen_container button {
+    background-color: #FAECB5;
+    color: #684B00;
+    position: absolute;
+    right: 13%;
+    top: 45%;
+    width: 15%;
+    height: 8%;
+    font-size: 1.3vw;
+    border: none;
+    border-radius: 10px;
+
+}
+
+
 .Imgbottom {
 
     height: 10vh;
     width: 100vw;
     background-color: #F3F3F3;
-    display: flex;
-    align-items: center;
-    justify-content:space-evenly;
+    
 
 }
 
-/* .main_continer image{
+.Imgbottom .img{
+    width: 3vw;
+    height: 4vh;
+}
 
-    border-radius: 0 !important;
-} */
+.Imgbottom .img img{
+    height: 100%;
+    width: 100%;
+}
 
 .Imgbottom img {
-    width: 2vw;
+    width: 4vw;
 }
 
 .Imgbottom .cont {
     display: flex;
-    /* justify-content: center; */
     align-items: center;
 }
 

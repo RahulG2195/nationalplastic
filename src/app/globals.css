@@ -33,15 +33,15 @@ a:hover{
   text-decoration: none;
   color: #000;
 }
-/* p{
+p{
   font-size: 16px;
-} */
+}
 .common_section{
   margin: 50px 0;
 }
 img{
   border-radius: 10px;
-}
+} */
 
 .carousel-item img{
   border-radius: 0;
@@ -51,6 +51,8 @@ img{
 .section_header{
   margin-top: 80px;
   /* max-width: 60%; why this max width is given?  */
+  margin: 80px 0 35px 0;
+  /* max-width: 60%; why this max width is given?*/ 
   width: 100%;
   text-align: center;
 }
@@ -58,6 +60,8 @@ img{
   font-size: 40px;
   color: var(--header-secondary-clr);
   padding: 0 0 15px 0;
+  text-transform: capitalize;
+
 }
 
 /* <<<<<<< HEAD */
@@ -77,6 +81,16 @@ img{
     font-weight: 500;
     font-size: 13px;
     line-height: normal;
+}
+
+
+.section_header h3{
+  color: var(--header-secondary-clr);
+  font-size: 36px;
+}
+
+.section_header h2 span{
+  color: var(--header-primary-clr);
 }
 /* section haeding part end */
 /* >>>>>>> 70d9e029af5ce56576af0d6476cb82e536a83e0b */
