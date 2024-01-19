@@ -1,0 +1,114 @@
+.cta{
+    background-color: #262262;
+    /* margin: 200px; */
+    text-align: center;
+    /* padding: 50px 100px; */
+    color: #fff;
+}
+
+.row1, .row2{
+    padding: 70px 106px 0px;
+}
+.row3{
+    padding:70px 55px 70px;
+    margin: auto;
+}
+.about_icons{
+    display: flex;
+    justify-content: center;
+}
+.about_icons img {
+    width: 75px;
+    height: 65px;
+    padding-right: 14px;
+}
+
+.about_text p, h5{
+    color: #FAECB5;
+    text-align: left;
+}
+
+.about_text p{
+    font-size: 12px;
+}
+
+
+.vmcontainer{
+    text-align: center;
+    margin: 47px;
+    background-color: #2622621F;
+    padding: 50px;
+    border-radius: 10px;
+}
+
+.vmcontainer h2{
+    margin: 10px;
+    color: #CC0008;
+    font-weight: 700;
+    font-size: 40px;
+
+}
+.infrastructure-row{
+    align-items: center;
+}
+.india-map-image{
+    width: 70%;
+    position: relative;
+    /* text-align: center; */
+    margin: 30px auto;
+}
+.india-map-text{
+    margin: auto;
+    text-align: center;
+    padding: 85px;
+}
+.india-map-text h2{
+    font-weight: 700;
+    font-size: 35px;
+    color: #2E3192;
+    padding: 20px;
+}
+
+.india-map-text p{
+    padding: 20px;
+    line-height: normal;
+    font-weight: 400;
+}
+
+.india-map-text button{
+    font-size: 14px;
+    background-color: #CC0008;
+    padding: 15px;
+    border-radius: 10px;
+    color: #fff;
+    border: none;
+    font-weight: 500;
+}
+
+/* infrastructure component style */
+/* .infrastructure{
+    text-align: center;
+}
+.infrastructure h2{
+    color: var(--header-secondary-clr);
+    
+}
+.infrastructure h2 span{
+    color: var(--header-primary-clr);
+} */
+
+/* Team start */
+.team-header h2{
+font-weight: 700;
+color:#262262;
+}
+
+.team-header h3{
+    color: #CC0008;
+    font-weight: 600;
+    padding: 10px;
+}
+
+.team-members{
+    margin: 40px auto;
+}

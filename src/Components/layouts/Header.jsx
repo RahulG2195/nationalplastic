@@ -2,6 +2,7 @@ import Image from 'next/image'
 import TopBar from "./TopBar";
 import BottomBar from "./BottomBar";
 import '../../styles/header.css';
+import Link from 'next/link';
 
 export default function Header() {
   return (
@@ -47,14 +48,14 @@ export default function Header() {
             >
               <ul className="navbar-nav mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="#">
+                  <Link className="nav-link active" aria-current="page" href="/">
                     Home
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <Link className="nav-link" href="/About">
                    About Us
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item dropdown">
                   <a
@@ -92,14 +93,14 @@ export default function Header() {
                   </ul>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
-                  Media/News
-                  </a>
+                  <Link className="nav-link" href="/NewsAndMedia">
+                    Media/News
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <Link className="nav-link" href="/CSR">
                   CSR
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link bulk_ord" href="#">
@@ -112,9 +113,9 @@ export default function Header() {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <Link className="nav-link" href="/Wishlist">
                   <i className="fa fa-heart-o"></i>
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="#">

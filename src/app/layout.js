@@ -1,12 +1,12 @@
 'use client'
 import { Inter } from 'next/font/google';
-import React, { useEffect } from 'react';
+import { useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.min.css'
-import './globals.css';
-// import './bootstrap/dist/js/bootstrap.bundle.min.js';
-import Header from "@/Components/layouts/Header";
-import Footer from "@/Components/layouts/Footer";
+import Header from '@/Components/layouts/Header';
+import Footer from '@/Components/layouts/Footer';
+import './globals.css'
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,13 +28,11 @@ export default function RootLayout({ children }) {
   }, [])
   return (
     <html lang="en">
-      
-      <body>
+      <body className={inter.className}>
         <Header/>
         {children}
         <Footer/>
-        </body>
-      
+      </body>
     </html>
   )
 }
