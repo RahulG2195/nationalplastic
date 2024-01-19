@@ -1,0 +1,17 @@
+.preCont {
+    height: max-content;
+    width: 20vw;
+    margin: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border-radius: 20px;
+}
+
+.small {
+    font-size: .7rem;
+}
+.PreFoot .left{
+    font-size: medium;
+}
+.medium{
+    font-size: 1rem;
+}

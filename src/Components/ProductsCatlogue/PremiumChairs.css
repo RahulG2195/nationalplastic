@@ -1,0 +1,10 @@
+.arrow button::after{
+    content: "";
+    color: #FF0909 !important;
+}
+
+.arrow button{
+
+    border:1.5px solid var(--primary-color) !important;
+    color:var(--primary-color) !important;
+}
