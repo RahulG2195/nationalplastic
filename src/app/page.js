@@ -1,8 +1,10 @@
 
-import Banner from "@/Components/sections/Home/Banner";
-import CoupenBanner from "@/Components/sections/Home/CoupenBanner";
-import Features from "@/Components/sections/Home/Features";
-import TopPick from "@/Components/sections/Home/TopPick";
+import Banner from "@/Components/Home/Banner";
+import CoupenBanner from "@/Components/Home/CoupenBanner";
+import Features from "@/Components/Home/Features";
+import TopPick from "@/Components/Home/TopPick";
+  import '../styles/home_prod.css';
+import ShopRoom from "@/Components/Home/ShopRoom";
 
 export default function Home() {
  
@@ -12,6 +14,7 @@ export default function Home() {
      <Features/>
      <CoupenBanner/>
      <TopPick/>
+     <ShopRoom/>
     </main>
   )
 }

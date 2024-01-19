@@ -31,9 +31,9 @@ a:hover{
   text-decoration: none;
   color: #000;
 }
-/* p{
+p{
   font-size: 16px;
-} */
+}
 .common_section{
   margin: 50px 0;
 }
@@ -46,5 +46,35 @@ img{
 }
 
 /* section haeding part start */
+.section_header{
+  margin-top: 40px;
+  max-width: 60%;
+  width: 100%;
+}
+.section_header h2{
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--header-secondary-clr);
+  padding: 0 0 15px 0;
+  text-transform: capitalize;
+}
 
+.section_header h3{
+  color: var(--header-secondary-clr);
+  font-size: 36px;
+}
+
+.section_header p{
+  font-size: 13px;
+}
+
+.section_header h2 span{
+  color: var(--header-primary-clr);
+}
 /* section haeding part end */
+
+/* Products start  */
+.products_col{
+  margin-top: 25px;
+}
+/* products ends  */

@@ -1,0 +1,24 @@
+.prodname{
+    margin-top: 10px;
+    align-items: center;
+}
+
+.prodname h4{
+    color: #2E3192;
+    font-weight: 700;
+}
+
+.prodname i{
+    color: gray;
+    font-size: 18px;
+}
+
+.card_img{
+    position: relative;
+    /* height: 227px;
+    object-fit: fill; */
+}
+
+.shop-room a h4{
+    color: var(--header-primary-clr);
+}

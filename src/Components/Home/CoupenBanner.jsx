@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import "../../../styles/coupen.css";
+import "../../styles/coupen.css";
 
 function CoupenBanner() {
   return (

@@ -1,4 +1,4 @@
-import Banner from "@/Components/sections/Home/Banner"
+import Banner from "@/Components/Home/Banner"
 
 function About() {
   return (
