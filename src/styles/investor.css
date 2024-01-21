@@ -1,0 +1,100 @@
+
+.InvestorBanner{
+    position: relative;
+}
+.InvestorBannerText{
+    position: absolute;
+    top: 50%;
+    left: 20px;
+}
+
+.NationalFitnessUpp-contaner{
+    background-color: #2E3192;
+    color: #fff;
+}
+.NationalFitnessUpp-text h2{
+   color: #FFE000; 
+   padding: 10px;
+}
+
+.NationalFitnessUpp-text{
+    padding: 50px;
+    text-align: center;
+}
+
+.NationalFitness-container h2{
+    font-size: 40px;
+    color: var(--header-secondary-clr);
+    padding: 0 0 15px 0;
+}
+.NationalFitness-container h2 span {
+    font-weight: 700;
+    color: var(--header-primary-clr);
+}
+.NationalFitness-container{
+    width: 100%;
+    text-align: center;
+    margin: 60px auto;
+}
+
+.NationalFitness-container p{
+    /* padding: 0px 267px; */
+    font-weight: 500;
+    font-size: 13px;
+    line-height: normal;
+}
+.FinancialResults-2{
+    background-color: #CC0008;
+    width: 255px;
+    height: 120px;
+    position: absolute;
+    margin-top: 95px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+.FinancialResults-2 h4{
+    color: #fff;
+}
+.FinancialResults-10{
+    background-color: #F4F4F4;
+    text-align: center;
+}
+
+.FinancialResults-10 h2{
+    color: #2E3192;
+    font-weight: 700;
+    margin: 35px auto 0px;
+}
+
+.FinancialResults-10 h4{
+    color: #CC0008;
+    font-weight: 600;
+    margin: 7px;
+    }
+
+    .download-btn{
+        display: inline-flex;
+    }
+   .Download-p{
+    display: flex;
+    align-items: center;
+    margin: 5px;
+   }
+   .Download-p p{ 
+    color:#2E3192;    
+    font-weight: 500;
+   }
+   .Download-img{
+    width: 15px;
+    align-items: center;
+    display: flex;
+   }
+
+   .results-data{
+padding: 20px;
+   }
+   .results-data h5{
+    font-weight: 600;
+   }
+    

@@ -3,7 +3,6 @@ import TopBar from "./TopBar";
 import BottomBar from "./BottomBar";
 import '../../styles/header.css';
 import Link from 'next/link';
-
 export default function Header() {
   return (
     <>
@@ -58,16 +57,18 @@ export default function Header() {
                   </Link>
                 </li>
                 <li className="nav-item dropdown">
-                  <a
+                  {/* <a 
                     className="nav-link dropdown-toggle"
-                    href="#"
+                    href="/Investor"
                     id="navbarDropdown"
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
-                  >
+                  /> */}
+                    <Link className="nav-link" href="/Investor" >
                     Investors
-                  </a>
+                    </Link>
+                  
                   <ul
                     className="dropdown-menu"
                     aria-labelledby="navbarDropdown"
