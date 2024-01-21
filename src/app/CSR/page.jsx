@@ -1,7 +1,7 @@
 import React from "react";
 import Banner from "../../Components/CSR/Banner";
 import HealthCare from "../../Components/CSR/HealthCare"
-// import Slider from "../../Components/CSR/Slider"
+import Slider from "../../Components/CSR/Slider"
 import EnvironmentalConservation from "../../Components/CSR/EnvironmentalConservation"
 
 const CSR = () => {
@@ -10,7 +10,7 @@ const CSR = () => {
         <>
             <Banner />
             <HealthCare />
-            {/* <Slider /> */}
+            <Slider />
             <EnvironmentalConservation />
         
 

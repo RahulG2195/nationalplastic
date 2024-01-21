@@ -21,16 +21,16 @@ export default function Header() {
               />
             </a>
             <form className="d-flex">
-                <input
-                  className="form-control me-2"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                />
-                {/* <button className="btn btn-outline-success" type="submit">
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              {/* <button className="btn btn-outline-success" type="submit">
                   Search
                 </button> */}
-              </form>
+            </form>
             <button
               className="navbar-toggler"
               type="button"
@@ -54,7 +54,7 @@ export default function Header() {
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" href="/About">
-                   About Us
+                    About Us
                   </Link>
                 </li>
                 <li className="nav-item dropdown">
@@ -99,36 +99,36 @@ export default function Header() {
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" href="/CSR">
-                  CSR
+                    CSR
                   </Link>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link bulk_ord" href="#">
-                  Bulk Orders
+                    Bulk Orders
                   </a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="#">
-                  <i className="fa fa-phone"></i>
+                    <i className="fa fa-phone"></i>
                   </a>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" href="/Wishlist">
-                  <i className="fa fa-heart-o"></i>
+                    <i className="fa fa-heart-o"></i>
                   </Link>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="#">
-                  <i className="fa fa-user"></i>
+                    <i className="fa fa-user"></i>
                   </a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="#">
-                  <i className="fa fa-cart-arrow-down"></i>
+                    <i className="fa fa-cart-arrow-down"></i>
                   </a>
                 </li>
               </ul>
-              
+
             </div>
           </div>
         </nav>

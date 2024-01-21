@@ -1,9 +1,9 @@
-@media (max-width: 991){
+@media (max-width: 991px){
 
     .circularimg {
 
-        width: 350px;
-        height: 350px;
+        width: 150px;
+        height: 150px;
     }
 
 }

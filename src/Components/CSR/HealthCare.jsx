@@ -8,7 +8,7 @@ const HealthCare = () => {
 
     return (
         <>
-            < div className="main_container mt-5">
+            < div className="mt-5">
 
 
                 <div className="text-center ">
