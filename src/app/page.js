@@ -44,7 +44,7 @@
 // =======
 
 // export default function Home() {
- 
+
 // >>>>>>> 36060bf1dd1974d93c55fbbb22236d0c645868f5
 //   return (
 //     <main>
@@ -71,14 +71,6 @@ import News from './NewsAndMedia/Page'
 import CSR from './CSR/page'
 import Page from './PrivacyAndPolicy/Page'
 import TC from './TermsAndConditions/Page'
-// =======
-// import Career from './career/page'
-// import News from './NewsAndMedia/Page'
-// import CSR from './CSR/CSR'
-// import Page from './PrivacyAndPolicy/Page'
-// import TC from './TermsAndConditions/Page'
-// >>>>>>> 36060bf1dd1974d93c55fbbb22236d0c645868f5
-// import Wishlist from './Wishlist/Wishlist'
 import ShippingAndDelivery from './ShippingAndDelivery/page'
 import ProductCatlogue from './ProductCatlogue/page'
 
@@ -91,11 +83,8 @@ const page = () => {
 
       {/* <News /> */}
 
-{/* <<<<<<< HEAD */}
-      <CSR />
-{/* ======= */}
       {/* <CSR /> */}
-{/* >>>>>>> 36060bf1dd1974d93c55fbbb22236d0c645868f5 */}
+      {/* <CSR /> */}
 
       {/* <Career /> */}
 
@@ -107,11 +96,7 @@ const page = () => {
 
       {/* <ShippingAndDelivery /> */}
 
-{/* <<<<<<< HEAD */}
-      {/* < ProductCatlogue /> */}
-=======
       < ProductCatlogue />
-{/* >>>>>>> 36060bf1dd1974d93c55fbbb22236d0c645868f5 */}
 
     </>
 
@@ -120,8 +105,4 @@ const page = () => {
 }
 
 export default page
-// <<<<<<< HEAD
-// =======
 
-
-// >>>>>>> 36060bf1dd1974d93c55fbbb22236d0c645868f5
