@@ -23,7 +23,7 @@
     padding-right: 14px;
 }
 
-.about_text p, h5{
+.about_text p,.about_text h5{
     color: #FAECB5;
     text-align: left;
 }
@@ -47,6 +47,9 @@
     font-weight: 700;
     font-size: 40px;
 
+}
+.vmcontainer img{
+    padding: 12px;
 }
 .infrastructure-row{
     align-items: center;
@@ -111,4 +114,20 @@ color:#262262;
 
 .team-members{
     margin: 40px auto;
+}
+.SharePrices-row{
+    padding: 0px 175px;
+}
+.about-slider-yellow{
+    background-color: #FFE000;
+    text-align: center;
+}
+.about-slider-yellow img{
+    width: 80px !important;
+    border-radius: 50%;
+    background-color: #fff;
+    padding: 20px;
+}
+.my-slider{
+    margin: 0px 100px;
 }

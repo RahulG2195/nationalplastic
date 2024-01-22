@@ -19,8 +19,8 @@ function InvestorBanner()
       </div>
       <div className="InvestorBannerText">
         <h2>Investor Deck</h2>
-        <p>We strive to deliver value and</p>
-        <p>sustained financial performance</p>
+        <p><i>We strive to deliver value and</i></p>
+        <p><i>sustained financial performance</i></p>
         <button>LEARN MORE</button>
       </div>
       
