@@ -1,16 +1,17 @@
-.Img_cont button{
-position: absolute;
-border: none;
-top: 60%;
-left:42%;
-/* transform: translate(-50%,-50%); */
-
+.Img_cont .CareerButton {
+    background-color: #CC0008;
+    color:white;
+    position: absolute;
+    right: 45%;
+    top: 62%;
+    width: 15%;
+    height: 8%;
+    font-size: 1.3vw;
+    border: none;
+    border-radius: 10px;
 }
-.Img_cont Image{
-    position: relative;
-}
 
-.Img_cont{
+.Img_cont {
     position: relative;
     height: 100%;
     width: 100%;
