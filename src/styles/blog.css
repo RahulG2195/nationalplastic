@@ -1,0 +1,27 @@
+.blog_card .blog_body {
+    background-color: #FDF7E1;
+    padding: 30px 15px;
+}
+.cat_badge{
+    background-color: var(--header-primary-clr);
+    border-radius: 0;
+    color: #fff;
+    padding: 6px 15px;
+    font-weight: 400;
+    margin: 0 10px 0 0;
+}
+
+.blog_data h4{
+    color: #2e3192;
+    font-weight: 600;
+    margin: 20px 0;
+    font-size: 21px;
+}
+
+.blog_data p{
+    font-size: 14px;
+}
+
+.continue_div{
+    margin: 18px 0;
+}

@@ -39,7 +39,7 @@ p{
 .common_section{
   margin: 50px 0;
 }
-img{
+/*img{
   border-radius: 10px;
 } */
 
@@ -64,7 +64,6 @@ img{
 
 }
 
-/* <<<<<<< HEAD */
 /* section haeding part end */
   .main_container{
     min-height: 100vh;
@@ -93,4 +92,12 @@ img{
   color: var(--header-primary-clr);
 }
 /* section haeding part end */
-/* >>>>>>> 70d9e029af5ce56576af0d6476cb82e536a83e0b */
+
+
+/* view all  */
+
+.view_all_sec{
+  text-align: end;
+    margin: 10px 0;
+    text-transform: uppercase;
+}

@@ -38,14 +38,18 @@ export default function HappyStory() {
                   productArr.map((product) => (
                       <div key={product.key} className="col-md-4">
                         <div className="card">
-                          <Image
-                          src={product.image}
-                          alt={product.image}
-                          width={100}
-                          height={100}
-                          layout="responsive"
-                          objectFit="cover"
-                          />
+                            <div className="card-img">
+                              <Image
+                            src={product.image}
+                            alt={product.image}
+                            // width={100}
+                            // height={100}
+                            // layout="responsive"
+                            // objectFit="cover"
+                            fill
+                            
+                            />
+                            </div>
                           <div className="card-body">
                             <h5 className="card-title">{product.title}</h5>
                             <p className="card-text">{product.short_desc}</p>

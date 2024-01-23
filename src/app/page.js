@@ -1,127 +1,34 @@
 
-// import Banner from "@/Components/Home/Banner";
-// import CoupenBanner from "@/Components/Home/CoupenBanner";
-// import Features from "@/Components/Home/Features";
-// import TopPick from "@/Components/Home/TopPick";
-// <<<<<<< HEAD
-//   import '../styles/home_prod.css';
-// import ShopRoom from "@/Components/Home/ShopRoom";
-// import Manufacture from "@/Components/Home/Manufacture";
-// import Houseware from "@/Components/Home/Houseware";
-// import Highlight from "@/Components/Home/Highlight";
-// import HappyStory from "@/Components/Home/HappyStory";
+import Banner from "@/Components/Home/Banner";
+import CoupenBanner from "@/Components/Home/CoupenBanner";
+import Features from "@/Components/Home/Features";
+import TopPick from "@/Components/Home/TopPick";
+  import '../styles/home_prod.css';
+import ShopRoom from "@/Components/Home/ShopRoom";
+import Manufacture from "@/Components/Home/Manufacture";
+import Houseware from "@/Components/Home/Houseware";
+import Highlight from "@/Components/Home/Highlight";
+import HappyStory from "@/Components/Home/HappyStory";
+import Dealers from "@/Components/Home/Dealers";
+import Blog from "@/Components/Home/Blog";
+import Catalogue from "@/Components/Home/Catalogue";
 
-// export default function Home() {
-
-// // <<<<<<< HEAD
-// //   return (
-// //     <main>
-// //      <Banner />
-// //      <Features/>
-// //      <CoupenBanner/>
-// //      <TopPick/>
-// //     </main>
-// //   )
-// }
-
-
-
-
-// import Career from './career/page'
-// // import News from './NewsAndMedia/Page'
-// // import CSR from './CSR/CSR'
-// // import Page from './PrivacyAndPolicy/Page'
-// // import TC from './TermsAndConditions/Page'
-// // import Wishlist from './Wishlist/Wishlist'
-// // import ShippingAndDelivery from './ShippingAndDelivery/ShippingAndDeliver'
-// import ProductCatlogue from './ProductCatlogue/page'
-
-// const page = () => {
-
-
-// // =======
-// // >>>>>>> 81543873cf306e66b9c0c930242809d223d12f1e
-// =======
-
-// export default function Home() {
+export default function Home() {
  
-// >>>>>>> 36060bf1dd1974d93c55fbbb22236d0c645868f5
-//   return (
-//     <main>
-//      <Banner />
-//      <Features/>
-//      <CoupenBanner/>
-//      <TopPick/>
-//      <Manufacture/>
-//      <ShopRoom/>
-//      <Houseware/>
-//      <Highlight/>
-//      <HappyStory/>
-//     </main>
-//   )
-// }
-
-
-
-
-// <<<<<<< HEAD
-
-import Career from './career/page'
-import News from './NewsAndMedia/Page'
-import CSR from './CSR/page'
-import Page from './PrivacyAndPolicy/Page'
-import TC from './TermsAndConditions/Page'
-// =======
-// import Career from './career/page'
-// import News from './NewsAndMedia/Page'
-// import CSR from './CSR/CSR'
-// import Page from './PrivacyAndPolicy/Page'
-// import TC from './TermsAndConditions/Page'
-// >>>>>>> 36060bf1dd1974d93c55fbbb22236d0c645868f5
-// import Wishlist from './Wishlist/Wishlist'
-import ShippingAndDelivery from './ShippingAndDelivery/page'
-import ProductCatlogue from './ProductCatlogue/page'
-
-
-const page = () => {
-
-
   return (
-    <>
-
-      {/* <News /> */}
-
-{/* <<<<<<< HEAD */}
-      <CSR />
-{/* ======= */}
-      {/* <CSR /> */}
-{/* >>>>>>> 36060bf1dd1974d93c55fbbb22236d0c645868f5 */}
-
-      {/* <Career /> */}
-
-      {/* <Page /> */}
-
-      {/* <TC /> */}
-
-      {/* <Wishlist/> */}
-
-      {/* <ShippingAndDelivery /> */}
-
-{/* <<<<<<< HEAD */}
-      {/* < ProductCatlogue /> */}
-=======
-      < ProductCatlogue />
-{/* >>>>>>> 36060bf1dd1974d93c55fbbb22236d0c645868f5 */}
-
-    </>
-
+    <main>
+     <Banner />
+     <Features/>
+     <CoupenBanner/>
+     <TopPick/>
+     <Manufacture/>
+     <ShopRoom/>
+     <Houseware/>
+     <Highlight/>
+     <HappyStory/>
+     <Dealers/>
+     <Blog/>
+     <Catalogue/>
+    </main>
   )
-
 }
-
-export default page
-// <<<<<<< HEAD
-// =======
-
-
-// >>>>>>> 36060bf1dd1974d93c55fbbb22236d0c645868f5
