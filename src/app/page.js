@@ -73,6 +73,7 @@ import Page from './PrivacyAndPolicy/Page'
 import TC from './TermsAndConditions/Page'
 import ShippingAndDelivery from './ShippingAndDelivery/page'
 import ProductCatlogue from './ProductCatlogue/page'
+import AddressPage from './Address/page'
 
 
 const page = () => {
@@ -96,7 +97,9 @@ const page = () => {
 
       {/* <ShippingAndDelivery /> */}
 
-      < ProductCatlogue />
+      {/* < ProductCatlogue /> */}
+
+      <AddressPage/>
 
     </>
 
