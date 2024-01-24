@@ -1,6 +1,6 @@
 "use client"
 import React from 'react';
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import Image from 'next/image'
 
 
@@ -9,7 +9,7 @@ import Image from 'next/image'
 const NewsBanner = () => {
   return (
 
-    <div className="mt-0">
+    <>
 
       <Image
         src="/Assets/images/Media_-News-banner/Media_-News-banner.png"
@@ -19,7 +19,7 @@ const NewsBanner = () => {
         objectFit='cover'
         alt="Picture of the author"
       />
-    </div>
+    </>
   )
 }
 
