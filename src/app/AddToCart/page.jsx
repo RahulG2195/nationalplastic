@@ -1,13 +1,20 @@
+'use client'
 import Image from "next/image";
 import "../../styles/addtocart.css";
 const { main } = require("@popperjs/core");
 import CartProduct from "@/Components/AddToCart/CartProduct";
+import PriceDetailsCard from "@/Components/PriceDetails/PriceDetailsCard";
+import FooterRow from "@/Components/FooterRow/FooterRow";
+import React, { useState } from "react";
 
 function AddToCart() {
+// const [inputArr, setInputArr]= useState ([ProductDetailArr]);
+
+
   const ProductDetailArr = [
     {
       key: 1,
-      image: "/assets/images/investors/BombayStock.png",
+      image1: "/assets/images/AddTOCart/product-Chairs.png",
       productName: "Lorem ipsum dolor sit amet",
       productPrice: "10000",
       discountedPrice: "7000",
@@ -15,14 +22,13 @@ function AddToCart() {
     },
     {
       key: 2,
-      image: "/assets/images/AddTOCart/Investor-pg-banner.png",
+      image1: "/assets/images/AddTOCart/product-Chairs.png",
       productName: "Lorem ipsum dolor sit amet 2",
       productPrice: "1000",
       discountedPrice: "700",
       productDesc: "Lorem ipsum dolor sit amet, consetetur2",
     },
   ];
-
   return (
     <>
       {/* <h1>THis is Add To Cart</h1> */}
@@ -82,7 +88,7 @@ function AddToCart() {
                 {ProductDetailArr.map((val) => (
                   <div className="row" key={val.key}>
                     <CartProduct
-                      src={val.image}
+                      src={val.image1}
                       productName={val.productName}
                       productPrice={val.productPrice}
                       discountedPrice={val.discountedPrice}
@@ -94,9 +100,13 @@ function AddToCart() {
             </div>
           </div>
 
-          <div className="col-md-4 place-order">3</div>
+          <div className="col-md-4 place-order">
+            <PriceDetailsCard/>
+          </div>
         </div>
       </div>
+
+      <FooterRow/>
     </>
   );
 }

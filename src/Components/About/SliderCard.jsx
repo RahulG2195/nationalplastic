@@ -9,7 +9,7 @@ import {
   Scrollbar,
   A11y,
 } from "swiper/modules";
-import "swiper/swiper-bundle.css";
+
 import AboutSlider from "./AboutSlider";
 
 function SliderCard() {
@@ -62,6 +62,9 @@ function SliderCard() {
         slidesPerView={3}
         navigation
         pagination={{ clickable: true }}
+        // scrollbar={{ draggable: true }}
+        // onSwiper={(swiper) => console.log(swiper)}
+        // onSlideChange={() => console.log('slide change')}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
