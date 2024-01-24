@@ -66,11 +66,11 @@ export default function Dealers() {
     <section className="dealer_Sec common_section">
         <div className="container">
             <div className="row">
-                <div className="section_header mx-auto text-center">
+                <div className="section_header mx-auto text-center"data-aos="zoom-in">
                     <h2><span>National Plastic  </span> Dealers</h2>
                     <p>States We Deliver In (carousel will be here)</p>
                 </div>
-                <div className="col-12 view_all_sec">
+                <div className="col-12 view_all_sec"data-aos="slide-left">
                   <Link href='#' className="my-3"><h6>View All</h6></Link>
                 </div>
                 <div className="col-12 products_col">
@@ -80,6 +80,7 @@ export default function Dealers() {
                     spaceBetween={10}
                     slidesPerView={6}
                     loop={true}
+                    data-aos="fade-up"
                     // navigation
                     // pagination={{ clickable: true }}
                     // scrollbar={{ draggable: true }}

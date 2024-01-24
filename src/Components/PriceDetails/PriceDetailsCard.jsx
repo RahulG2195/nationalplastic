@@ -13,7 +13,7 @@ const PriceDetailsCard = () => {
         <>
 
                     <div>
-                        <div className="fw-medium">Price Detail (2 items)</div>
+                        <div className="fw-semibold">Price Detail (2 items)</div>
 
 
                         <div className="mt-4">
@@ -30,9 +30,9 @@ const PriceDetailsCard = () => {
 
                         <div className="d-flex justify-content-between mt-3">
                             <div>Total Payable</div>
-                            <div className="medium fw-semibold">00,000</div>
+                            <div className="medium fw-bold">00,000</div>
                         </div>
-                        <div className="small my-2 text-success">Congratulations you've just saved Rs 0,000 on your order</div>
+                        <div className="small my-2 text-success fw-bold">Congratulations you've just saved Rs 0,000 on your order</div>
                         <div className="small text-center ">EMI starts with Rs 0,000</div>
 
                         <div className="d-flex justify-content-center mt-2">

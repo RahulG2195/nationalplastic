@@ -45,7 +45,12 @@ a:hover {
 p {
   font-size: 16px;
 }
-
+.medium{
+  font-size: 12px;
+}
+.small{
+  font-size: 10px;
+}
 .common_section {
   margin: 50px 0;
 }

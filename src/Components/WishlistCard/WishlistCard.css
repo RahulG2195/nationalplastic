@@ -15,6 +15,15 @@
 .BG-gray {
     background-color: #F6F6F6;
 }
+.p200{
+   color:gray;
+   font-size: 13px;
+}
+.icont{
+    /* background-color: red; */
+    /* width:100px; */
+    /* height: 100px; */
+}
 
 @media (max-width: 350px) {
 

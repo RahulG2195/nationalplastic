@@ -47,9 +47,9 @@ export default function Manufacture() {
   ];
   return (
     <section className="shop_room_sec common_section">
-        <div className="container">
+        <div className="container ">
             <div className="row">
-                <div className="section_header mx-auto text-center">
+                <div className="section_header mx-auto text-center" data-aos="zoom-in">
                     <h2><span>Indias Largest Manufacturer</span></h2>
                     <h3> Of Household Products</h3>
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,</p>
@@ -58,7 +58,7 @@ export default function Manufacture() {
                   <div className="row">
                   {
                   productArr.map((product) => (
-                      <div key={product.key} className="col-md-4 shop_col my-md-4 my-2">
+                      <div key={product.key} className="col-md-4 shop_col my-md-4 my-2 " data-aos="slide-up">
                         <CatCards
                           image={product.image}
                           title={product.title}

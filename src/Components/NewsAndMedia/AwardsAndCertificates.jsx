@@ -18,22 +18,22 @@ const AwardsAndCertificates = () => {
 
             <div class="container text-center mt-5">
                 <div class="row">
-                    <div class="col-md-3 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
-                    <div class="col-md-3 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
-                    <div class="col-md-3 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
-                    <div class="col-md-3 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
+                    <div class="col-md-3 col-sm-6 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
+                    <div class="col-md-3 col-sm-6 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
+                    <div class="col-md-3 col-sm-6 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
+                    <div class="col-md-3 col-sm-6 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
-                    <div class="col-md-3 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
-                    <div class="col-md-3 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
-                    <div class="col-md-3 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
+                    <div class="col-md-3 col-sm-6 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
+                    <div class="col-md-3 col-sm-6 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
+                    <div class="col-md-3 col-sm-6 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
+                    <div class="col-md-3 col-sm-6 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
-                    <div class="col-md-3 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
-                    <div class="col-md-3 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
-                    <div class="col-md-3 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
+                    <div class="col-md-3 col-sm-6 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
+                    <div class="col-md-3 col-sm-6 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
+                    <div class="col-md-3 col-sm-6 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
+                    <div class="col-md-3 col-sm-6 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
                 </div>
             </div>
 

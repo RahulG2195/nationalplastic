@@ -1,4 +1,3 @@
-import './Opening.css'
 import JobCard from '../Job_Card/JobCard'
 
 const Opening = () => {
@@ -19,18 +18,13 @@ const Opening = () => {
 
                         <div class="container text-center">
                             <div class="row">
-                                <div class="col-md-4"><JobCard /></div>
-                                <div class="col-md-4"><JobCard /></div>
-                                <div class="col-md-4"><JobCard /></div>
-                                <div class="col-md-4"><JobCard /></div>
-                                <div class="col-md-4"><JobCard /></div>
-                                <div class="col-md-4"><JobCard /></div>
-                                <div class="col-md-4"><JobCard /></div>
-                                <div class="col-md-4"><JobCard /></div>
-                                <div class="col-md-4"><JobCard /></div>
+                                {[...Array(9)].map((_, index) => (
+                                    <div class="col-md-4" key={index}>
+                                        <JobCard />
+                                    </div>
+                                ))}
                             </div>
                         </div>
-
                     </div>
 
 

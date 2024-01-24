@@ -34,6 +34,7 @@ const Registration = () => {
                                     <label class="form-label fw-bold">Mobile Number*</label>
                                     <input type="Number" class="form-control " id="MobileNumber" required />
                                 </div>
+                                
                                 <div class="mb-3 col-md-4 d-flex align-items-end justify-content-center gap-5">
 
                                         <button class="btn btn-danger px-4" type="submit">Submit</button>

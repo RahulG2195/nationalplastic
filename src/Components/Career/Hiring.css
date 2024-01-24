@@ -1,7 +1,7 @@
 
 .HC2{
     position: absolute;
-    top: 55%;
+    top: 35%;
 }
 .HC1{
     position: relative;
@@ -23,8 +23,12 @@
     content: url("/Assets/svg/Group 931.svg");
     position: absolute;
     right: 35%;
-    bottom: -38%;
+    bottom:1%;
 
+}
+.height{
+    height:100vh;
+    position:relative !important;
 }
 
 

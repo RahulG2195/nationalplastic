@@ -10,6 +10,7 @@ function Catalogue() {
                     <div className="cataImg">
                         <Image
                         src = "/assets/images/HomepageImages/Catalouge.jpg"
+                        data-aos="fade-right"
                         // width={100}
                         // height={100}
                         // layout="responsive"
@@ -19,7 +20,7 @@ function Catalogue() {
                         />
                     </div>
                 </div>
-                <div className="col-md-7 catalogueConntentDiv">
+                <div className="col-md-7 catalogueConntentDiv" data-aos="fade-left">
                     <h2>Catalogue</h2>
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                     <div className="Catasec">
