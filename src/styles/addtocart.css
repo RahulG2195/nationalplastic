@@ -1,0 +1,108 @@
+.locationIcon,
+.LocationIconPin,
+.LocationPin, .InstallationCharges, .CouponApplied, .productPrice {
+    display: flex;
+}
+.locationIcon{
+    padding: 8px;
+}
+
+.iconImage img {
+    display: flex;
+    height: auto;
+    width: 18px;
+    position: relative;
+    padding: 4px;
+}
+
+.input-group-append button{
+    border: none;
+    background-color: #C9070F;
+    padding: 7px;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.ATCflow {
+    display: flex;
+    justify-content: center;
+    background-color: #F6F6F6;
+    padding: 20px;
+    font-weight: 600;
+}
+
+.ATCflow p {
+    color: #262262;
+}
+
+.ATCflow p span {
+    color: #C9070F;
+}
+
+.cartView {
+    margin: 50px;
+}
+.my-cart{
+    background-color: #F6F6F6; 
+    padding: 19px 4px;
+}
+.place-order{
+    background-color: gray; 
+}
+
+.locationPin .input-group input{
+    font-size: 12px;
+    width: 140px;
+}
+
+.search-pin {
+    display: inline-flex;
+    justify-content: right;
+
+}
+.my-cart h5{
+    color: #262262;
+}
+
+.CartQuantity .input-group{
+    width: 20% !important;
+    margin: 0px 10px;
+}
+.CartQuantity{
+    display: flex;
+}
+
+.CouponApplied img{
+    vertical-align: middle;
+    width: 30px;
+    height: auto;
+    padding: 10px 6px;
+}
+    
+.productPrice p span {
+    color: #0EA313;
+    font-size: 12px;
+    font-weight: 700;
+    margin: 0 12px;
+}
+.productPrice p{
+    margin: 0 12px;
+}
+
+ .card-Quantity-section p{
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 3;
+}
+ .CouponApplied{
+    margin: 0 20px;
+ }
+
+ .form-control:focus{
+border: none !important;
+box-shadow:none !important;
+ }
+ span button{
+    border: none;
+    background-color: #f8f9fa;
+ }

@@ -1,151 +1,227 @@
-.prodname{
-    margin-top: 10px;
-    align-items: center;
+.prodname {
+  margin-top: 10px;
+  align-items: center;
 }
 
-.prodname h4{
-    color: #2E3192;
-    font-weight: 700;
+.prodname h4 {
+  color: #2e3192;
+  font-weight: 700;
 }
 
-.prodname i{
-    color: gray;
-    font-size: 18px;
+.prodname i {
+  color: gray;
+  font-size: 18px;
 }
 
-.card_img{
-    position: relative;
-    /* height: 227px;
+.card_img {
+  position: relative;
+  /* height: 227px;
     object-fit: fill; */
 }
 
-.shop-room a h4{
-    color: var(--header-primary-clr);
+.shop-room a h4 {
+  color: var(--header-primary-clr);
 }
-
 
 /* house ware home setion  */
-.houseware_sec{
-height: 430px;
+.houseware_sec {
+  height: 430px;
 }
-.houseConntentDiv{
-    background-color: var(--primary-color);
-    color: #fff;
-    padding: 75px 40px;
+.houseConntentDiv {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 75px 40px;
 }
-.houseConntentDiv h2 span{
-    color: var(--secondary-color);
+.houseConntentDiv h2 span {
+  color: var(--secondary-color);
 }
-.houseConntentDiv h2{
-    font-size: 35px;
-}
-
-
-.houseConntentDiv p{
-    font-size: 20px;
-    letter-spacing: 3px;
-    font-weight: 200;
-}
-.houseDiv{
-    padding: 0;
-    margin: 0;
-}
-.houseImg{
-    position: relative;
-    height: 430px;
-    width: 100%;
-}
-.houseImg img{
-    object-fit: cover;
-    /* height: 100%; */
-    width: 100%;
+.houseConntentDiv h2 {
+  font-size: 35px;
 }
 
-.house-know-more{
-    position: relative;
+.houseConntentDiv p {
+  font-size: 20px;
+  letter-spacing: 3px;
+  font-weight: 200;
 }
-.house-know-more::after{
-    content: "";
-    position: absolute;
-    width: 75%;
-    height: 1px;
-    background-color: #fff;
-    bottom: 14%;
-    left: -7%;
-    opacity: 0.5;
-    /* transform: translateX(-50%);
+.houseDiv {
+  padding: 0;
+  margin: 0;
+}
+.houseImg {
+  position: relative;
+  height: 430px;
+  width: 100%;
+}
+.houseImg img {
+  object-fit: cover;
+  /* height: 100%; */
+  width: 100%;
+}
+
+.house-know-more {
+  position: relative;
+}
+.house-know-more::after {
+  content: "";
+  position: absolute;
+  width: 75%;
+  height: 1px;
+  background-color: #fff;
+  bottom: 14%;
+  left: -7%;
+  opacity: 0.5;
+  /* transform: translateX(-50%);
     transition: width 0.3s ease; */
 }
 
-.knowmoresec{
-    display: grid;
-    padding: 40px 0;
+.knowmoresec {
+  display: grid;
+  padding: 40px 0;
 }
 
-.knowmoresec a{
-    padding: 20px 0;
-    color: #fff;
-    font-weight: 200;
-    text-transform: uppercase;
+.knowmoresec a {
+  padding: 20px 0;
+  color: #fff;
+  font-weight: 200;
+  text-transform: uppercase;
 }
 /* house ware home setion end */
 
 /* heighlight sec start  */
-.highlight_col .card{
-    height: 500px;
-    position: relative;
+.highlight_col .card {
+  height: 500px;
+  position: relative;
 }
 
-.highlight_col .card{
-    cursor: pointer;
+.highlight_col .card {
+  cursor: pointer;
 }
-.highlight_col .card .card-body{
-background-color: #FCF5DA;
-}
-
-.highlight_col .card:hover .card-body{
-    background-color: var(--header-primary-clr);
-    color: #fff;
+.highlight_col .card .card-body {
+  background-color: #fcf5da;
 }
 
-.highlight_col .card:hover .highArrow{
-background-color: #fff;
-border: none;
-}
-.highlight_col .card:hover .highArrow i{
-    color: var(--header-primary-clr);
-
-}
-.highlight_col .card .card-title{
-    font-size: 19px;
+.highlight_col .card:hover .card-body {
+  background-color: var(--header-primary-clr);
+  color: #fff;
 }
 
-.highlight_col .card .card-text{
-    font-size: 16px;
+.highlight_col .card:hover .highArrow {
+  background-color: #fff;
+  border: none;
+}
+.highlight_col .card:hover .highArrow i {
+  color: var(--header-primary-clr);
+}
+.highlight_col .card .card-title {
+  font-size: 19px;
 }
 
-.highlight_col .card a{
-    position: absolute;
-    bottom: 6%;
+.highlight_col .card .card-text {
+  font-size: 16px;
+}
+
+.highlight_col .card a {
+  position: absolute;
+  bottom: 6%;
 }
 /* heighlight sec end  */
 
 /* happy client start  */
-.happy_Story_sec .products_col .card{
-    height: 433px;
+.happy_Story_sec .products_col .card {
+  /* height: 433px; */
+  border-radius: 10px;
 }
-.happy_Story_sec .products_col .card .card-body{
-    background-color: var(--primary-color);
+.happy_Story_sec .products_col .card .card-img{
+    height: 260px;
+    width: 100%;
+    position: relative;
+}
+.happy_Story_sec .products_col .card img{
+    border-radius: 10px 10px 0 0 ;
+    object-fit: cover;
+}
+.happy_Story_sec .products_col .card .card-body {
+  background-color: var(--primary-color);
+  text-align: center;
+  color: #fff;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.happy_Story_sec .products_col .card .card-body h5 {
+  font-size: 18px;
+}
+
+.happy_Story_sec .products_col .card .card-body p {
+  font-size: 13px;
+}
+
+
+.dealer_cont{
     text-align: center;
-    color: #fff;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    }
+    background: lightgray;
+    padding: 10px;
+    border-radius: 10px;
+}
 
-    .happy_Story_sec .products_col .card .card-body h5{
-        font-size: 18px;
-        }
+/* dealer sec  */
+.dealer_Sec .dealer_cont .dealer_imgs{
+    height: 100px;
+    width: 80%;
+    position: relative;
+    margin: auto;
+}
 
-        .happy_Story_sec .products_col .card .card-body p{
-            font-size: 13px;
-            }
+.dealer_Sec .dealer_cont .dealer_imgs img{
+height: 100%;
+width: 100%;
+object-fit: cover;
+}
+
+
+/* catalogue start */
+.catalogue_sec{
+    background-color: #FAECB5;
+}
+
+.catalogue_sec .cataImg{
+    position: relative;
+    height: 330px;
+    width: 100%;
+}
+
+.catalogue_sec .cataImg img {
+height: 100%;
+width: 100%;
+object-fit: cover;
+}
+
+.catalogue_sec .catalogueConntentDiv{
+    margin: auto;
+}
+.catalogue_sec .catalogueConntentDiv h2{
+    color: var(--primary-color);
+}
+
+.catalogue_sec .catalogueConntentDiv .view_btn{
+background-color: var(--header-primary-clr);
+color: #fff;
+padding: 8px 35px;
+border-radius: 25px;
+font-size: 15px;
+border: none;
+}
+
+.catalogue_sec .catalogueConntentDiv .Catasec{
+    margin: 15px 0;
+}
+.catalogue_sec .catalogueConntentDiv .view_btn:hover{
+    color: var(--header-primary-clr);
+    border: 1px solid currentColor;
+    background-color: #fff;
+    margin: 0;
+}
+
+
+/* catalogue end */

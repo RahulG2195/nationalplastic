@@ -20,43 +20,61 @@ body {
   overflow-x: hidden;
 }
 
-p, h1, h2, h3,h4,h5,h6{
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   padding: 0;
   margin: 0;
-} 
+}
+
 a {
   color: inherit;
   text-decoration: none !important;
   color: #000;
 }
-a:hover{
+
+a:hover {
   text-decoration: none;
   color: #000;
 }
-p{
+
+p {
   font-size: 16px;
 }
-.common_section{
+
+.common_section {
   margin: 50px 0;
 }
-img{
+<<<<<<< HEAD
+=======
+/*img{
   border-radius: 10px;
 } */
+>>>>>>> 26fc3532aa7d5b21048411ef84f0b3f1c165ae85
 
-.carousel-item img{
+img {
+  border-radius: 10px;
+}
+
+*/ .carousel-item img {
   border-radius: 0;
 }
 
 /* section haeding part start */
-.section_header{
+.section_header {
   margin-top: 80px;
   /* max-width: 60%; why this max width is given?  */
   margin: 80px 0 35px 0;
-  /* max-width: 60%; why this max width is given?*/ 
+  /* max-width: 60%; why this max width is given?*/
   width: 100%;
   text-align: center;
 }
-.section_header h2{
+
+.section_header h2 {
   font-size: 40px;
   color: var(--header-secondary-clr);
   padding: 0 0 15px 0;
@@ -64,37 +82,46 @@ img{
 
 }
 
-/* <<<<<<< HEAD */
 /* section haeding part end */
-  .main_container{
-    min-height: 100vh;
-    width: 100%;
-    position: relative;    
+.main_container {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
 }
+
 /* ======= */
-.section_header h2 span{
+.section_header h2 span {
   font-weight: 700;
   color: var(--header-primary-clr);
 }
-.section_header p{
+
+.section_header p {
   padding: 0px 267px;
-    font-weight: 500;
-    font-size: 13px;
-    line-height: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: normal;
 }
 
 
-.section_header h3{
+.section_header h3 {
   color: var(--header-secondary-clr);
   font-size: 36px;
 }
 
-.section_header h2 span{
+.section_header h2 span {
   color: var(--header-primary-clr);
 }
-
-.medium{
-  font-size:12px !important;
-}
 /* section haeding part end */
+<<<<<<< HEAD
 /* >>>>>>> 70d9e029af5ce56576af0d6476cb82e536a83e0b */
+=======
+
+
+/* view all  */
+
+.view_all_sec{
+  text-align: end;
+    margin: 10px 0;
+    text-transform: uppercase;
+}
+>>>>>>> 26fc3532aa7d5b21048411ef84f0b3f1c165ae85

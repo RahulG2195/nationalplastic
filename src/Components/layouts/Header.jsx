@@ -47,7 +47,7 @@ export default function Header() {
             >
               <ul className="navbar-nav mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <Link className="nav-link active" aria-current="page" href="/">
+                  <Link className="nav-link" aria-current="page" href="/">
                     Home
                   </Link>
                 </li>
