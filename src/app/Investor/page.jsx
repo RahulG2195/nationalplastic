@@ -2,6 +2,7 @@ import InvestorBanner from "@/Components/Investors/InvestorBanner";
 import NationalFitnessUpper from "@/Components/Investors/NationalFinancesUpper";
 import NationalFitness from "@/Components/Investors/NationalFinances";
 import UnauditedFinancialResults from "@/Components/Investors/UnauditedFinancialResults";
+import SharePricesCard from "@/Components/Investors/SharePricesCard";
 import FinancialResults from "@/Components/Investors/FinancialResults";
 
 function Investor() {
@@ -37,6 +38,21 @@ function Investor() {
       desc: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.",
     },
   ];
+
+  const SharePrices = [
+    {
+      key: 1,
+      image: "/assets/images/investors/nsenational.png",
+      title: "Share price",
+      desc: "NSE Rs.0000",
+    },
+    {
+      key: 2, 
+      image: "/assets/images/investors/BombayStock.png",
+      title: "Share price",
+      desc: "NSE Rs.0000",
+    },
+  ];
   return (
     <>
       <InvestorBanner />
@@ -51,8 +67,25 @@ function Investor() {
         </div>
       </div>
       <NationalFitness />
-      <UnauditedFinancialResults/>
-      {/* <FinancialResults/> */}
+      <UnauditedFinancialResults />
+      <div className="container">
+        <div className="row NationalFitness-container">
+          <h2>
+            Share <span>Prices</span>
+          </h2>
+        </div>
+        <div className="row SharePrices-row">
+          {SharePrices.map((val) => (
+            <div className="col-md-6" key={val.key}>
+              <SharePricesCard
+                image={val.image}
+                title={val.title}
+                description={val.desc}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
     </>
   );
 }

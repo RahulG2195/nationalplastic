@@ -3,7 +3,6 @@ import Banner from "@/Components/Home/Banner";
 import CoupenBanner from "@/Components/Home/CoupenBanner";
 import Features from "@/Components/Home/Features";
 import TopPick from "@/Components/Home/TopPick";
-  import '../styles/home_prod.css';
 import ShopRoom from "@/Components/Home/ShopRoom";
 import Manufacture from "@/Components/Home/Manufacture";
 import Houseware from "@/Components/Home/Houseware";
@@ -12,9 +11,11 @@ import HappyStory from "@/Components/Home/HappyStory";
 import Dealers from "@/Components/Home/Dealers";
 import Blog from "@/Components/Home/Blog";
 import Catalogue from "@/Components/Home/Catalogue";
+import '../styles/home_prod.css';
 
 export default function Home() {
   return (
+    <>
     <main>
      <Banner />
      <Features/>
@@ -29,5 +30,7 @@ export default function Home() {
      <Blog/>
      <Catalogue/>
     </main>
+    </>
+
   )
 }

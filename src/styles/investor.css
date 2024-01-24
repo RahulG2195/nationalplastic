@@ -6,8 +6,18 @@
     position: absolute;
     top: 50%;
     left: 20px;
+    text-align: center;
 }
 
+.InvestorBannerText button{
+    cursor: pointer;
+    background-color: #262262;
+    color: #fff;
+    font-size: 12px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    margin: 20px;
+}
 .NationalFitnessUpp-contaner{
     background-color: #2E3192;
     color: #fff;
@@ -52,6 +62,7 @@
     text-align: center;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 .FinancialResults-2 h4{
     color: #fff;
@@ -97,4 +108,17 @@ padding: 20px;
    .results-data h5{
     font-weight: 600;
    }
+
+   .FinancialResults{
+    margin-top: 100px;
+   }
+   .share-pricei-title {
+    font-weight: 600;
+}
+
+.InvestorBannerText h2{
+    color: #C9070F;
+    font-weight: 700;
+    font-size: 38px; 
+}
     

@@ -16,8 +16,5 @@ const CSR = () => {
 
         </>
     )
-
-
-
 }
-export default CSR 
+export default CSR;
