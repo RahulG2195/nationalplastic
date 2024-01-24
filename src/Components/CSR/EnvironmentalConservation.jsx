@@ -3,9 +3,9 @@ import Card from "../../Components/Cards/Card";
 import './Environmental.css'
 
 const EnvironmentalConservation = () => {
-
-    return (
+     return (
         <>
+
 
             <div className="text-center ">
                 <div className=" title2 fs-1">Environmental<span class="fw-bold text-danger">  Conservation</span> </div>
@@ -15,7 +15,7 @@ const EnvironmentalConservation = () => {
             </div>
             <div class="container text-center mt-5 d-flex justify-content-center">
                 <div class="row CsrCard">
-                    <div class="col-md-4 my-3"><Card  imgsrc="/Assets/images/planting-mangroves-environment-conservation-habitat-restoration-earth-day/planting-mangroves-environment-conservation-habitat-restoration-earth-day.png" /></div>
+                    <div class="col-md-4 my-3"><Card imgsrc="/Assets/images/planting-mangroves-environment-conservation-habitat-restoration-earth-day/planting-mangroves-environment-conservation-habitat-restoration-earth-day.png" /></div>
                     <div class="col-md-4 my-3"><Card imgsrc="/Assets/images/cleaning-plastic-waste-river-bank-by-volunteer-helping-nature-protecting-environment/cleaning-plastic-waste-river-bank-by-volunteer-helping-nature-protecting-environment.png" /></div>
                     <div class="col-md-4 my-3"><Card imgsrc="/Assets\images\rag-pickers-search-recyclable-material-garbage-land-air-pollution-india\rag-pickers-search-recyclable-material-garbage-land-air-pollution-india.png" /></div>
                     <div class="col-md-4 my-3"><Card imgsrc="/Assets/images/we-all-need-play-our-part-nurturing-nature-closeup/we-all-need-play-our-part-nurturing-nature-closeup-shot-group-unrecognizable-people-holding-plant-growing-out-soil.png" /></div>

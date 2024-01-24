@@ -1,5 +1,5 @@
 "use client"
-// import './Slider.css'
+import './Slider.css'
 import React, { createContext } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay, Pagination, Scrollbar, A11y } from 'swiper/modules'; import 'swiper/swiper-bundle.css';

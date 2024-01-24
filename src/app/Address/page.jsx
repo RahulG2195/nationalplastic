@@ -4,8 +4,10 @@ import AddHeader from "@/Components/Address/Adress"
 const AddressPage = () => {
     return (
         <>
-            <AddHeader />
-            <AddBody />
+            <div className="main_conatiner">
+                <AddHeader />
+                <AddBody />
+            </div>
         </>
     )
 }
