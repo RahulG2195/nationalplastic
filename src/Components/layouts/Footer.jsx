@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import '../../styles/footer.css';
+import Link from 'next/link';
 
 export default function Footer() {
   return (
@@ -57,11 +58,46 @@ export default function Footer() {
             <div className="footer_heading">
               <h5>WE ACCEPT</h5>
             </div>
-              <div className="paymentImg">
-
+              <div className="paymentImg d-flex">
+                <div className="gatewayimg">
+                <Image
+                src="/assets/images/visa-payment-card1873.png"
+                alt='logo'
+               fill
+              />
+                </div>
+                <div className="gatewayimg">
+                <Image
+                src="/assets/images/mastercard.png"
+                alt='logo'
+                fill
+              />
+                </div>
+                <div className="gatewayimg">
+                <Image
+                src="/assets/images/Maestro.png"
+                alt='logo'
+                fill
+              />
+                </div>
+                <div className="gatewayimg">
+                <Image
+                src="/assets/images/Group 697.png"
+                alt='logo'
+                fill
+              />
+                </div>
               </div>
               <div className="footer_heading">
                 <h5>WE ARE ALSO ON</h5>
+              </div>
+              <div className="otherLogo">
+              <Image
+                src="/assets/images/indiamart.svg"
+                alt='logo'
+                fill
+              />
+
               </div>
           </div>
         </div>
@@ -80,12 +116,47 @@ export default function Footer() {
               fill
               />
             </div>
+            <div className="social_icons">
+              <Image
+              src="/assets/images/Group 37.svg"
+              alt='logo'
+              layout='responsive'
+              objectFit='cover'
+              width={100}
+              height={100}
+              />
+              <Image
+              src="/assets/images/Path 19.svg"
+              alt='logo'
+              layout='responsive'
+              objectFit='cover'
+              width={100}
+              height={100}
+              />
+              <Image
+              src="/assets/images/Path 20.svg"
+              alt='logo'
+              layout='responsive'
+              objectFit='cover'
+              width={100}
+              height={100}
+              />
+              <Image
+              src="/assets/images/Path 80.svg"
+              alt='logo'
+              layout='responsive'
+              objectFit='cover'
+              width={100}
+              height={100}
+              />
+            </div>
+            
           </div>
           <div className="footer_term d-flex justify-content-center">
-            <p>Terms and Conditions | </p>
-            <p> Privacy Policy | </p>
-            <p> Cookies Policy | </p>
-            <p> Refund Policy </p>
+            <Link href='#'><p>Terms and Conditions <span> | </span> </p></Link>
+            <Link href='#'><p> Privacy Policy <span> | </span> </p></Link>
+            <Link href='#'><p> Cookies Policy <span> | </span> </p></Link>
+            <Link href='#'><p> Refund Policy </p></Link>
           </div>
         </div>
       </div>

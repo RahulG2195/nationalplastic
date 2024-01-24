@@ -12,7 +12,7 @@ const Banner = () => {
             <div className="main_Container">
 
 
-                <div className="Img_cont" >
+                <div className="Img_cont position-relative" >
                     <Image
                         src="/Assets/images/Career-pg-banner.jpg-V2/Career-pg-banner.jpg-V2.png"
                         width={100}
@@ -21,7 +21,7 @@ const Banner = () => {
                         objectFit='cover'
                         alt="Picture of the author"
                     />
-                    <button type="button" class="btn btn-danger Btn px-5 py-2 mt-2">VIEW OPENIGS</button>
+                    <button type="button" class="CareerButton fw-bold">VIEW OPENIGS</button>
                 </div>
 
             </div>

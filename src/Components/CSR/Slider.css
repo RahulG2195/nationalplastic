@@ -1,0 +1,30 @@
+.CSRslider {
+    background-color: #FFF399;
+    position: absolute;
+    bottom: 0;
+    height: 60%;
+    width: 100%;
+}
+
+.Slider_container {
+
+    height: 150vh;
+}
+
+.Slider_container button {
+    position: absolute;
+    background-color: #f34e07;
+    border: none;
+    bottom: 8vh;
+    left: 45%;
+    border-radius: 50px;
+    color: #FFE000;
+    transition: all ease .5s;
+}
+
+.Slider_container .swipper {
+    position: absolute;
+    top: 10%;
+    left: 15%;
+
+}

@@ -14,7 +14,6 @@ import Blog from "@/Components/Home/Blog";
 import Catalogue from "@/Components/Home/Catalogue";
 
 export default function Home() {
- 
   return (
     <main>
      <Banner />

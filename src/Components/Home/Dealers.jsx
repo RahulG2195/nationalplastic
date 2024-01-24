@@ -1,6 +1,16 @@
+'use client'
 import Image from "next/image";
-import CatCards from "../CommonComp/catCards";
 import Link from "next/link";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  Navigation,
+  Autoplay,
+  Pagination,
+  Scrollbar,
+  A11y,
+} from "swiper/modules";
+import "swiper/swiper-bundle.css";
 export default function Dealers() {
  const DealerArr = [
     {
@@ -39,18 +49,18 @@ export default function Dealers() {
       title : 'Chennai',
       url : '#'
     },
-    // {
-    //   key : 7,
-    //   image : '/assets/images/HomepageImages/Others Cities Icons-07.png',
-    //   title : 'Delhi',
-    //   url : '#'
-    // },
-    // {
-    //   key : 8,
-    //   image : '/assets/images/HomepageImages/Others Cities Icons-09.png',
-    //   title : 'Hyderabad',
-    //   url : '#'
-    // },
+    {
+      key : 7,
+      image : '/assets/images/HomepageImages/Others Cities Icons-07.png',
+      title : 'Delhi',
+      url : '#'
+    },
+    {
+      key : 8,
+      image : '/assets/images/HomepageImages/Others Cities Icons-09.png',
+      title : 'Hyderabad',
+      url : '#'
+    },
   ];
   return (
     <section className="dealer_Sec common_section">
@@ -65,9 +75,25 @@ export default function Dealers() {
                 </div>
                 <div className="col-12 products_col">
                   <div className="row">
+                  <Swiper className='swipper' style={{ width: "100%", height: "100%" }}
+                    modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+                    spaceBetween={10}
+                    slidesPerView={6}
+                    loop={true}
+                    // navigation
+                    // pagination={{ clickable: true }}
+                    // scrollbar={{ draggable: true }}
+                    // onSwiper={(swiper) => console.log(swiper)}
+                    // onSlideChange={() => console.log('slide change')}
+                    autoplay={{
+                        delay: 2500,
+                        disableOnInteraction: false,
+                    }}
+                >
                   {
                   DealerArr.map((dealer) => (
-                      <div key={dealer.key} className="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+                    
+                      <SwiperSlide key={dealer.key} style={{ width: "100%", overflow: "hidden", height: "100%" }}>
                           <div className="dealer_cont">
                               <div className="dealer_imgs">
                                 <Image 
@@ -82,9 +108,10 @@ export default function Dealers() {
                               </div>
                                 <p>{dealer.title}</p>
                           </div>
-                      </div>
+                      </SwiperSlide>
                     ))
                     }
+                     </Swiper>
                   </div>
                 </div>
             </div>

@@ -1,5 +1,15 @@
+'use client'
 import BlogCard from "../CommonComp/BlogCard";
 import '../../styles/blog.css';
+import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  Navigation,
+  Autoplay,
+  Pagination,
+  Scrollbar,
+  A11y,
+} from "swiper/modules";
+import "swiper/swiper-bundle.css";
 
 export default function Blog() {
  const productArr = [
@@ -45,9 +55,26 @@ export default function Blog() {
                 </div>
                 <div className="col-12 products_col">
                   <div className="row">
+                  <Swiper
+                  className="swipper"
+                  style={{ width: "100%", height: "100%" }}
+                  modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+                  spaceBetween={15}
+                  slidesPerView={3}
+                  loop={true}
+                  navigation
+                  pagination={{ clickable: true }}
+                  // scrollbar={{ draggable: false }}
+                  // onSwiper={(swiper) => console.log(swiper)}
+                  // onSlideChange={() => console.log("slide change")}
+                  autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                  }}
+                >
                   {
                   productArr.map((product) => (
-                      <div key={product.key} className="col-md-4">
+                      <SwiperSlide key={product.key}>
                         <BlogCard
                           image={product.image}
                           title={product.title}
@@ -57,9 +84,10 @@ export default function Blog() {
                           duration={product.duration}
                           shortDesc={product.shortDesc}
                         />
-                      </div>
+                      </SwiperSlide>
                     ))
                     }
+                    </Swiper>
                   </div>
                 </div>
             </div>
