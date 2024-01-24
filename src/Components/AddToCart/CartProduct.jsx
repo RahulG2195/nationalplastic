@@ -1,18 +1,16 @@
 import Image from "next/image";
 import IncrementDecrement from "./IncrementDecrement";
-const CartProduct = ({ image, productName, productDesc, discountedPrice, productPrice }) => {
+const CartProduct = ({src, productName, productDesc, discountedPrice, productPrice }) => {
 
   return (
     <>
                   <div className="col-md-2">
                     <Image
-                      src={image}
-                      className="img-fluid d-block w-100" // Use w-100 to make the image fill the entire col-lg col-md-3 col-sm-12umn
-                      alt="Team Member"
+                      src= {src}
+                      classname="img-fluid d-block w-100"
+                      alt="ome banner 1"
                       width={100}
-                      height={100}
-                      layout="responsive"
-                      objectFit="cover"
+                      height={80}
                     />
                   </div>
                   <div className="col-md-10 card-Quantity-section">
@@ -42,28 +40,16 @@ const CartProduct = ({ image, productName, productDesc, discountedPrice, product
                           width={100}
                           height={80}
                         />
-                        <p>Coupon Applied</p>
+                        <p className="Coupontext">Coupon Applied</p>
                       </div>
                     </div>
                     <div className="InstallationCharges">
-                      <div className="CouponApplied">
-                        <Image
-                          src="/assets/images/AddTOCart/core-heart.png"
-                          classname="img-fluid d-block w-100"
-                          alt="ome banner 1"
-                          width={100}
-                          height={80}
-                        />
+                      <div className="CouponApplied SaveForLater">
+                      <i class="fa fa-heart-o" aria-hidden="true"></i>
                         <p>Save For Later</p>
                       </div>
-                      <div className="CouponApplied">
-                        <Image
-                          src="/assets/images/AddTOCart/Icon-core-trash.png"
-                          classname="img-fluid d-block w-100"
-                          alt="ome banner 1"
-                          width={100}
-                          height={80}
-                        />
+                      <div className="CouponApplied SaveForLater">
+                      <i class="fa fa-trash-o" aria-hidden="true"></i>
                         <p>Remove</p>
                       </div>
                     </div>

@@ -6,6 +6,15 @@ const IncrementDecrement = () => {
 
   const incNum = () => {
     setNum(Number + 1);
+    if (Number <= 0)
+    {
+      return (
+        ProductDetailArr.filter( arrayElement)
+      );
+    }
+    else{
+      return (alert("enter"));
+    }
   };
 
   const decNum = () => {

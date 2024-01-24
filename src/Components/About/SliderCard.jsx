@@ -9,7 +9,7 @@ import {
   Scrollbar,
   A11y,
 } from "swiper/modules";
-import "swiper/swiper-bundle.css";
+
 import AboutSlider from "./AboutSlider";
 
 function SliderCard() {
@@ -62,14 +62,14 @@ function SliderCard() {
         slidesPerView={3}
         // loop={true}
         navigation
-        pagination={{ clickable: true }}
+        // pagination={{ clickable: true }}
         // scrollbar={{ draggable: true }}
         // onSwiper={(swiper) => console.log(swiper)}
         // onSlideChange={() => console.log('slide change')}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
+        // autoplay={{
+        //   delay: 2500,
+        //   disableOnInteraction: false,
+        // }}
       >
         {SliderCardArr.map((val) => (
           <SwiperSlide key={val.key}>

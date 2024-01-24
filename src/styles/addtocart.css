@@ -47,7 +47,7 @@
     padding: 19px 4px;
 }
 .place-order{
-    background-color: gray; 
+    background-color: #F6F6F6; 
 }
 
 .locationPin .input-group input{
@@ -74,9 +74,24 @@
 
 .CouponApplied img{
     vertical-align: middle;
-    width: 30px;
+    width: 28px;
     height: auto;
-    padding: 10px 6px;
+    padding: 12px 8px;
+}
+
+.CouponApplied i{
+    vertical-align: middle;
+    margin: auto;
+}
+
+
+
+.CouponApplied .Coupontext{
+    color: #CC0008;
+}
+
+.InstallationCharges{
+    margin: 10px 0px;
 }
     
 .productPrice p span {
@@ -97,6 +112,13 @@
  .CouponApplied{
     margin: 0 20px;
  }
+ .SaveForLater{
+    margin: 0 0px;
+ }
+
+ .SaveForLater p{
+    margin-left: 4px;
+ }
 
  .form-control:focus{
 border: none !important;
@@ -106,3 +128,4 @@ box-shadow:none !important;
     border: none;
     background-color: #f8f9fa;
  }
+
