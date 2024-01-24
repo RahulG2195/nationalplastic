@@ -1,4 +1,5 @@
 import CatCards from "../CommonComp/catCards";
+
 export default function TopPick() {
  const productArr = [
     {

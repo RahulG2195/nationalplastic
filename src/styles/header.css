@@ -39,6 +39,10 @@ p, h1, h2, h3,h4,h5,h6{
     margin: 0 12px;
 }
 
+.navbar-expand-lg .navbar-nav .nav-link i{
+    font-size: 20px;
+}
+
 .navbar-brand img{
     height: 84px;
     width: 123px;
@@ -46,10 +50,29 @@ p, h1, h2, h3,h4,h5,h6{
 }
 
 .bulk_ord{
-    border-left: 2px solid;
-    border-right: 2px solid;
+    position: relative;
+    /* border-left: 2px solid;
+    border-right: 2px solid; */
 }
 
+.bulk_ord::after{
+    content: "";
+    position: absolute;
+    top: 5%;
+    right: 0%;
+    width: 2px;
+    height: 80%;
+    background-color: rgba(0,0,0,0.5);
+}
+.bulk_ord::before{
+    content: "";
+  position: absolute;
+ top: 5%;
+    left: 2%;
+    width: 2px;
+    height: 80%; /* Adjust the height as needed */
+  background-color: rgba(0,0,0,0.5); 
+}
 .bottom_nav p{
     color: var(--secondary-color);
     font-size: 14px;
