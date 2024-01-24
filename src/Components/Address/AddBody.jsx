@@ -1,10 +1,12 @@
+"use client"
+
 import FooterRow from "../FooterRow/FooterRow";
 import OrderSummaryCard from "../OrderSummaryCard/OrderCard";
 import PriceDetailsCard from "../PriceDetails/PriceDetailsCard";
 
 const AddBody = () => {
 
-
+   
     return (
         <>
             <div className="main_container mt-5 mx-0  position-relative">

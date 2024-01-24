@@ -7,9 +7,11 @@ import Image from 'next/image'
 
 
 const NewsBanner = () => {
-    return (
+  return (
 
-        <Image
+    <div className="mt-0">
+
+      <Image
         src="/Assets/images/Media_-News-banner/Media_-News-banner.png"
         width={100}
         height={80}
@@ -17,8 +19,8 @@ const NewsBanner = () => {
         objectFit='cover'
         alt="Picture of the author"
       />
-
-    )
+    </div>
+  )
 }
 
 export default NewsBanner

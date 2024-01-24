@@ -92,5 +92,9 @@ img{
 .section_header h2 span{
   color: var(--header-primary-clr);
 }
+
+.medium{
+  font-size:12px !important;
+}
 /* section haeding part end */
 /* >>>>>>> 70d9e029af5ce56576af0d6476cb82e536a83e0b */

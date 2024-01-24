@@ -20,7 +20,7 @@ const PriceDetailsCard = () => {
                             {priceDetails.map((detail, index) => (
                                 <div key={index} className={`d-flex justify-content-between mt-1 fw-semibold ${detail.className || ""}`}>
                                     <div className="text-secondary">{detail.label}</div>
-                                    <div>{detail.amount}</div>
+                                    <div className="medium">{detail.amount}</div>
                                 </div>
                             ))}
                             <div className="border-bottom border-secondary mt-2"></div>
@@ -30,7 +30,7 @@ const PriceDetailsCard = () => {
 
                         <div className="d-flex justify-content-between mt-3">
                             <div>Total Payable</div>
-                            <div className="medium">00,000</div>
+                            <div className="medium fw-semibold">00,000</div>
                         </div>
                         <div className="small my-2 text-success">Congratulations you've just saved Rs 0,000 on your order</div>
                         <div className="small text-center ">EMI starts with Rs 0,000</div>
