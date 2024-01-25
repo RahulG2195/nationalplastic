@@ -28,36 +28,36 @@ const AddBody = () => {
 
                             <div className="text-start fw-bold">Service Lift</div>
                             <div className="d-flex gap-5">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-                                    <label class="form-check-label" for="flexRadioDefault1">
+                                <div className="form-check">
+                                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                                    <label className="form-check-label" for="flexRadioDefault1">
                                         Available
                                     </label>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
-                                    <label class="form-check-label" for="flexRadioDefault2">
+                                <div className="form-check">
+                                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
+                                    <label className="form-check-label" for="flexRadioDefault2">
                                         Unavailable
                                     </label>
                                 </div>
                             </div>
 
-                            <div class="buying text-start mt-5 p-2 bg-white">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                <label class="form-check-label text-danger mx-2 fw-bold" for="flexCheckDefault">
+                            <div className="buying text-start mt-5 p-2 bg-white">
+                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <label className="form-check-label text-danger mx-2 fw-bold" for="flexCheckDefault">
                                     Buying for your Business?
                                 </label>
                             </div>
 
                             <form className="text-start mt-3">
-                                <div class="mb-3 d-flex flex-wrap gap-3">
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="name" />
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="email" />
+                                <div className="mb-3 d-flex flex-wrap gap-3">
+                                    <input type="email" className="form-control" id="exampleInputEmail1" placeholder="name" />
+                                    <input type="email" className="form-control" id="exampleInputEmail1" placeholder="email" />
                                 </div>
-                                <div class="mb-3">
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="mobile" />
+                                <div className="mb-3">
+                                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="mobile" />
                                 </div>
-                                <button type="submit" class="btn btn-danger px-5">Save</button>
+                                <button type="submit" className="btn btn-danger px-5">Save</button>
                             </form>
 
                         </div>
@@ -88,7 +88,7 @@ const AddBody = () => {
                                     <OrderSummaryCard imgSrc="https://picsum.photos/id/0/367/267" description="Lorem ipsum dolor sit amet." quantity="00" />
 
                                     <div className="d-flex justify-content-center">
-                                        <button type="button" class="btn border border-danger mt-2 ">View More . . . </button>
+                                        <button type="button" className="btn border border-danger mt-2 ">View More . . . </button>
                                     </div>
                                 </div>
                             </div>

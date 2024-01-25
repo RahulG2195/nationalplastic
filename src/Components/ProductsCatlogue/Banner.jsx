@@ -15,7 +15,7 @@ const CatlogueBanner = () => {
                         objectFit='cover'
                         alt="Picture of the author"
                     />
-                    <button type="button" class="fw-bold">Shop Now</button>
+                    <button type="button" className="fw-bold">Shop Now</button>
 
                 </div>
 

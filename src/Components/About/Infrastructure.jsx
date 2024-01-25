@@ -12,7 +12,7 @@ function Infrastructure() {
       </div>
       <div className="row infrastructure-row">
         <div className="col-md-6">
-            <div class="india-map-image">
+            <div className="india-map-image">
         <Image
             src="/assets/images/aboutIcons/map-image.png"
             classname="img-fluid d-block w-70"

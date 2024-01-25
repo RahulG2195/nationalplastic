@@ -17,7 +17,7 @@ function CatCards({image, title, url, style=""}) {
             </div>
             <div className={`prodname d-flex justify-content-between px-2 ${style}`}>
                 <Link href={url}><h4>{title}</h4></Link>
-                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                <i className="fa fa-arrow-right" aria-hidden="true"></i>
             </div>
         </div>
     </>

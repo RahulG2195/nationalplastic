@@ -50,7 +50,7 @@ export default function Highlight() {
                             <h5 className="card-title">{product.title}</h5>
                             <p className="card-text">{product.short_desc}</p>
                             <a href={product.url} className="btn btn-dark text-white rounded-circle highArrow">
-                            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                            <i className="fa fa-arrow-right" aria-hidden="true"></i>
                             </a>
                           </div>
                         </div>

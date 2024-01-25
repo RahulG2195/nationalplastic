@@ -3,13 +3,13 @@ const OrderSummaryCard = (props) => {
     return (
         <>
 
-            <div class="d-flex align-items-center gap-2 my-2">
-                <div class="orderImage">
-                    <img src={props.imgSrc} class="img-fluid rounded-start" alt="..." />
+            <div className="d-flex align-items-center gap-2 my-2">
+                <div className="orderImage">
+                    <img src={props.imgSrc} className="img-fluid rounded-start" alt="..." />
                 </div>
 
                 <div>
-                    <div class=" ml-3">
+                    <div className=" ml-3">
                         <div >{props.description}</div>
                         <div>Quantitiy : {props.quantity}</div>
                     </div>

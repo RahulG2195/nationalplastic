@@ -36,7 +36,7 @@ const PriceDetailsCard = () => {
                         <div className="small text-center ">EMI starts with Rs 0,000</div>
 
                         <div className="d-flex justify-content-center mt-2">
-                            <button type="submit" class="btn btn-danger px-5">Place Order</button>
+                            <button type="submit" className="btn btn-danger px-5">Place Order</button>
                         </div>
 
                     </div>
