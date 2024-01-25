@@ -16,6 +16,7 @@ const EventsAndActivities = () => {
                 </div>
             </div>
 
+<<<<<<< HEAD
             <div className="container text-center mt-5">
                 <div className="row">
                     <div className="col-md-4 my-3"><Card imgsrc="https://picsum.photos/539/354" /></div>
@@ -24,6 +25,16 @@ const EventsAndActivities = () => {
                     <div className="col-md-4 my-3"><Card imgsrc="https://picsum.photos/539/354" /></div>
                     <div className="col-md-4 my-3"><Card imgsrc="https://picsum.photos/539/354" /></div>
                     <div className="col-md-4 my-3"><Card imgsrc="https://picsum.photos/539/354" /></div>
+=======
+            <div class="container text-center mt-5">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 my-3"><Card imgsrc="https://picsum.photos/539/354" /></div>
+                    <div class="col-md-4 col-sm-6 my-3"><Card imgsrc="https://picsum.photos/539/354" /></div>
+                    <div class="col-md-4 col-sm-6 my-3"><Card imgsrc="https://picsum.photos/539/354" /></div>
+                    <div class="col-md-4 col-sm-6 my-3"><Card imgsrc="https://picsum.photos/539/354" /></div>
+                    <div class="col-md-4 col-sm-6 my-3"><Card imgsrc="https://picsum.photos/539/354" /></div>
+                    <div class="col-md-4 col-sm-6 my-3"><Card imgsrc="https://picsum.photos/539/354" /></div>
+>>>>>>> 5a91d9bee69df6670363c806bac3052cc358c16f
                 </div>
             </div>
 

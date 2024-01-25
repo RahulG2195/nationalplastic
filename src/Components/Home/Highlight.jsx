@@ -28,7 +28,7 @@ export default function Highlight() {
     <section className="top_pick_sec common_section">
         <div className="container">
             <div className="row">
-                <div className="section_header mx-auto text-center">
+                <div className="section_header mx-auto text-center"data-aos="zoom-in">
                     <h2><span>Specific </span> Product Highlight</h2>
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.</p>
                 </div>
@@ -36,7 +36,7 @@ export default function Highlight() {
                   <div className="row">
                   {
                   productArr.map((product) => (
-                      <div key={product.key} className="col-md-4">
+                      <div key={product.key} className="col-md-4" data-aos="slide-right">
                         <div className="card">
                           <Image
                           src={product.image}

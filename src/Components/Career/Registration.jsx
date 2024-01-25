@@ -34,7 +34,12 @@ const Registration = () => {
                                     <label className="form-label fw-bold">Mobile Number*</label>
                                     <input type="Number" className="form-control " id="MobileNumber" required />
                                 </div>
+<<<<<<< HEAD
                                 <div className="mb-3 col-md-4 d-flex align-items-end justify-content-center gap-5">
+=======
+                                
+                                <div class="mb-3 col-md-4 d-flex align-items-end justify-content-center gap-5">
+>>>>>>> 5a91d9bee69df6670363c806bac3052cc358c16f
 
                                         <button className="btn btn-danger px-4" type="submit">Submit</button>
                                         <button className="btn btn-danger px-4" type="submit">Reset</button>

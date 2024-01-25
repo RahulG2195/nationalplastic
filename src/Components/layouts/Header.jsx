@@ -65,6 +65,7 @@ export default function Header() {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   /> */}
+
                     <Link className="nav-link" href="/Investor" >
                     Investors
                     </Link>
@@ -93,6 +94,7 @@ export default function Header() {
                     </li>
                   </ul>
                 </li>
+                
                 <li className="nav-item">
                   <Link className="nav-link" href="/NewsAndMedia">
                     Media/News

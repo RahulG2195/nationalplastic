@@ -50,7 +50,7 @@ export default function HappyStory() {
     <section className="happy_Story_sec common_section">
       <div className="container">
         <div className="row">
-          <div className="section_header mx-auto text-center">
+          <div className="section_header mx-auto text-center"data-aos="zoom-in">
             <h2>
               <span>Happy </span> Stories
             </h2>
@@ -85,7 +85,7 @@ export default function HappyStory() {
                     //   height: "100%",
                     // }}
                   >
-                    <div className="card">
+                    <div className="card"data-aos="fade-up">
                       <div className="card-img">
                         <Image
                           src={product.image}

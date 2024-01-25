@@ -1,4 +1,4 @@
-.cta{
+.cta {
     background-color: #262262;
     /* margin: 200px; */
     text-align: center;
@@ -6,34 +6,39 @@
     color: #fff;
 }
 
-.row1, .row2{
+.row1,
+.row2 {
     padding: 70px 106px 0px;
 }
-.row3{
-    padding:70px 55px 70px;
+
+.row3 {
+    padding: 70px 55px 70px;
     margin: auto;
 }
-.about_icons{
+
+.about_icons {
     display: flex;
     justify-content: center;
 }
+
 .about_icons img {
     width: 75px;
     height: 65px;
     padding-right: 14px;
 }
 
-.about_text p,.about_text h5{
+.about_text p,
+.about_text h5 {
     color: #FAECB5;
     text-align: left;
 }
 
-.about_text p{
+.about_text p {
     font-size: 12px;
 }
 
 
-.vmcontainer{
+.vmcontainer {
     text-align: center;
     margin: 47px;
     background-color: #2622621F;
@@ -41,44 +46,48 @@
     border-radius: 10px;
 }
 
-.vmcontainer h2{
+.vmcontainer h2 {
     margin: 10px;
     color: #CC0008;
     font-weight: 700;
     font-size: 40px;
 
 }
-.vmcontainer img{
+
+.vmcontainer img {
     padding: 12px;
 }
-.infrastructure-row{
+
+.infrastructure-row {
     align-items: center;
 }
-.india-map-image{
+
+.india-map-image {
     width: 70%;
     position: relative;
-    /* text-align: center; */
     margin: 30px auto;
 }
-.india-map-text{
+
+.india-map-text {
     margin: auto;
     text-align: center;
     padding: 85px;
 }
-.india-map-text h2{
+
+.india-map-text h2 {
     font-weight: 700;
     font-size: 35px;
     color: #2E3192;
     padding: 20px;
 }
 
-.india-map-text p{
+.india-map-text p {
     padding: 20px;
     line-height: normal;
     font-weight: 400;
 }
 
-.india-map-text button{
+.india-map-text button {
     font-size: 14px;
     background-color: #CC0008;
     padding: 15px;
@@ -88,46 +97,80 @@
     font-weight: 500;
 }
 
-/* infrastructure component style */
-/* .infrastructure{
-    text-align: center;
-}
-.infrastructure h2{
-    color: var(--header-secondary-clr);
-    
-}
-.infrastructure h2 span{
-    color: var(--header-primary-clr);
-} */
-
 /* Team start */
-.team-header h2{
-font-weight: 700;
-color:#262262;
+.team-header h2 {
+    font-weight: 700;
+    color: #262262;
 }
 
-.team-header h3{
+.team-header h3 {
     color: #CC0008;
     font-weight: 600;
     padding: 10px;
 }
 
-.team-members{
+.team-members {
     margin: 40px auto;
 }
-.SharePrices-row{
+
+.SharePrices-row {
     padding: 0px 175px;
 }
-.about-slider-yellow{
+
+.about-slider-yellow {
     background-color: #FFE000;
     text-align: center;
+    border-radius: 10px;
+    position: relative;
 }
-.about-slider-yellow img{
-    width: 80px !important;
+.about-slider-yellow p{
+    font-size: 12px;
+    font-weight: 600;
+    padding: 12px;
+}
+
+.about-slider-yellow img {
+    /* width: 80px !important;
     border-radius: 50%;
     background-color: #fff;
-    padding: 20px;
+    padding: 20px; */
 }
-.my-slider{
+.about-slider-image {
+    width: 118px !important;
+    border-radius: 50%;
+    background-color: #fff;
+    padding: 18px;
+    margin: auto;
+    left: 0;
+    right: 0;
+}
+
+.about-slider-yellow button{
+background-color: #CC0008;
+color: #fff;
+border: none;
+border-radius: 6px;
+font-weight: 600;
+padding: 7px 30px;
+margin: 35px;
+}
+
+.my-slider {
     margin: 0px 100px;
+    position: relative;
 }
+.about-slider-yellow h2{
+    color: #CC0008;
+    padding-top: 95px;
+ }
+ .about-slider-image{
+    position: absolute;
+    top: -20%;
+ }
+ .about-slider-image img{
+    margin: auto;
+ }
+ .swiper{
+    overflow-y:clip !important;
+     overflow:visible !important;
+ }

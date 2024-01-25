@@ -4,6 +4,7 @@ import { Navigation, Autoplay, Pagination, Scrollbar, A11y } from 'swiper/module
 import 'swiper/swiper-bundle.css';
 import PreChairsCard from '../preChairsCard/preChairsCard';
 import Image from 'next/image';
+import FooterRow from '../FooterRow/FooterRow';
 
 const RecentlyViewed = () => {
     const RecentlyViewedData = [
@@ -80,51 +81,7 @@ const RecentlyViewed = () => {
 
             <div className="features d-flex justify-content-center gap-5 flex-wrap m-5 px-5">
 
-                <div className="shop d-flex justify-content-center feature " >
-                    <div className="icon">
-                        <img src="/Assets/images/shop/shop.png" alt="" />
-                    </div>
-                    <div className="FeatureText mx-2 ">
-                        <h5 className='fw-semibold'>50+</h5>
-                        <h6>Experienced Stores <br />across India</h6>
-                    </div>
-                </div>
-
-
-
-                <div className="shop d-flex justify-content-center feature " >
-                    <div className="icon">
-                        <img src="/Assets/images/Shipping-01/Shipping-01.png" alt="" />
-                    </div>
-                    <div className="FeatureText mx-2 ">
-                        <h5 className='fw-semibold'>350+</h5>
-                        <h6> Delivery Centres <br /> Across India</h6>
-                    </div>
-                </div>
-
-
-
-                <div className="shop d-flex justify-content-center feature " >
-                    <div className="icon">
-                        <img src="/Assets/images/reputation/reputation.png" alt="" />
-                    </div>
-                    <div className="FeatureText mx-2 ">
-                        <h5 className='fw-semibold'>20 lakh+</h5>
-                        <h6>Satisfied<br />Customer</h6>
-                    </div>
-                </div>
-
-
-
-                <div className="shop d-flex justify-content-center feature " >
-                    <div className="icon">
-                        <img src="/Assets/images/warranty/warranty.png" alt="" />
-                    </div>
-                    <div className="FeatureText mx-2 ">
-                        <h5 className='fw-semibold'>1 year*</h5>
-                        <h6>Guaranteed <br />Warranty</h6>
-                    </div>
-                </div>
+               <FooterRow/>
             </div>
 
 

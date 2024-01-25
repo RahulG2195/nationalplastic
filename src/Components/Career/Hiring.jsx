@@ -12,7 +12,11 @@ const Hiring = () => {
                     <div className=" mt-1 fw-normal">Current Openings</div>
                 </div>
 
+<<<<<<< HEAD
                 <div className'd-flex justify-content-evenly gap-5 position-relative mt-5'>
+=======
+                <div class='d-flex justify-content-evenly gap-5 my-5 height'>
+>>>>>>> 5a91d9bee69df6670363c806bac3052cc358c16f
 
 
                     <div className="HC1">

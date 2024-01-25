@@ -1,3 +1,4 @@
+import "swiper/swiper-bundle.css";
 import "../../styles/about.css";
 
 function AboutCTA() {
