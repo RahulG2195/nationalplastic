@@ -94,7 +94,7 @@ function ProdData() {
               </div>
             </div>
             <div className="bulk_order_div">
-                <Link href='' className=""><button className="btn btn-danger my-2">Bulk Order</button></Link>
+                <Link href='' className=""><button className="btn btn-danger px-5 my-2">Bulk Order</button></Link>
             </div>
             {/* <div className="row">
               <div className="col-md-6">

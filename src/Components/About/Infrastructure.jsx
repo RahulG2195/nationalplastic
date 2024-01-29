@@ -16,7 +16,7 @@ function Infrastructure() {
       </div>
       <div className="row infrastructure-row">
         <div className="col-md-6">
-<<<<<<< HEAD
+{/* <<<<<<< HEAD */}
             <div className="india-map-image">
         <Image
             src="/assets/images/aboutIcons/map-image.png"
@@ -27,7 +27,7 @@ function Infrastructure() {
             layout="responsive" 
             objectFit="cover"
           />
-=======
+{/* ======= */}
           <div class="india-map-image">
             <Image
               src="/assets/images/aboutIcons/map-image.png"
@@ -38,7 +38,7 @@ function Infrastructure() {
               layout="responsive"
               objectFit="cover"
             />
->>>>>>> 5a91d9bee69df6670363c806bac3052cc358c16f
+{/* >>>>>>> 5a91d9bee69df6670363c806bac3052cc358c16f */}
           </div>
         </div>
         <div className="col-md-6 india-map-text">
@@ -50,6 +50,7 @@ function Infrastructure() {
           <button>EXPLORE OUR LOCATIONS</button>
         </div>
       </div>
+    </div>
     </div>
   );
 }
