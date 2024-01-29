@@ -6,9 +6,9 @@ function CoupenBanner() {
   return (
     <>
       <section className="coupen_sec">
-        <div className="container"  data-aos="fade-up">
+        <div className="container">
           <div className="row coupen-row">
-            <div className="col-md-1"  data-aos="fade-right">
+            <div className="col-md-1">
               <Image
                 src="/assets/images/gift-box.png"
                 alt="gift image"
@@ -18,7 +18,7 @@ function CoupenBanner() {
                 objectFit="cover"
               />
             </div>
-            <div className="col-md-4"  data-aos="fade-left">
+            <div className="col-md-4">
               <div className="extra-isc">
                 <h4>GET EXTRA 20% OFF</h4>
                 <small>On Signing Up</small>

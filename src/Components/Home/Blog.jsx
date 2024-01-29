@@ -53,7 +53,7 @@ export default function Blog() {
             <h2><span>Blog</span></h2>
             <p>Lorem Ipsum</p>
           </div>
-          <div className="col-12 products_col"data-aos="slide-up">
+          <div className="col-12 products_col" data-aos="slide-up">
             <div className="row">
               <Swiper
                 className="swipper"
