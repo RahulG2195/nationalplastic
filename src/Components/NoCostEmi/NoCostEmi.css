@@ -1,0 +1,38 @@
+/* .Imgbottom {
+
+    height: 10vh;
+    width: 100vw;
+    background-color: #F3F3F3;
+
+
+} */
+
+.Imgbottom .img {
+    width: 3vw;
+    height: 4vh;
+}
+
+.Imgbottom .img img {
+    height: 100%;
+    width: 100%;
+}
+
+.Imgbottom img {
+    width: 4vw;
+}
+
+.Imgbottom .cont {
+    display: flex;
+    align-items: center;
+}
+
+.Imgbottom .text h5 {
+    font-size: 1.5vh;
+
+}
+
+.Imgbottom .text h6 {
+
+    font-size: 1.5vh;
+
+}
