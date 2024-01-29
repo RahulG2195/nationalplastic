@@ -66,10 +66,10 @@ function SliderCard() {
         // scrollbar={{ draggable: true }}
         // onSwiper={(swiper) => console.log(swiper)}
         // onSlideChange={() => console.log('slide change')}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
+        // autoplay={{
+        //   delay: 2500,
+        //   disableOnInteraction: false,
+        // }}
       >
         {SliderCardArr.map((val) => (
           <SwiperSlide key={val.key}>
