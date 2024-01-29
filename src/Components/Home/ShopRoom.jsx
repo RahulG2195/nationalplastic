@@ -49,7 +49,7 @@ export default function ShopRoom() {
     <section className="shop_room_sec common_section">
         <div className="container">
             <div className="row">
-                <div className="section_header mx-auto text-center">
+                <div className="section_header mx-auto text-center"data-aos="zoom-in">
                     <h2>Shop By <span>Rooms</span></h2>
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,</p>
                 </div>
@@ -57,7 +57,7 @@ export default function ShopRoom() {
                   <div className="row">
                   {
                   productArr.map((product) => (
-                      <div key={product.key} className="col-md-4 shop_col my-md-4 my-2">
+                      <div key={product.key} className="col-md-4 shop_col my-md-4 my-2"data-aos="fade-up">
                         <CatCards
                           image={product.image}
                           title={product.title}

@@ -4,7 +4,7 @@ const FinancialResults = ({ date, text, image }) => {
   return (
     <>
       <h5>{date}</h5>
-      <div class="download-btn">
+      <div className="download-btn">
         <div className="Download-p">
           <p>{text}</p>
         </div>

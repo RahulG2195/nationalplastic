@@ -6,9 +6,9 @@ function CoupenBanner() {
   return (
     <>
       <section className="coupen_sec">
-        <div className="container">
+        <div className="container"  data-aos="fade-up">
           <div className="row coupen-row">
-            <div className="col-md-1">
+            <div className="col-md-1"  data-aos="fade-right">
               <Image
                 src="/assets/images/gift-box.png"
                 alt="gift image"
@@ -18,7 +18,7 @@ function CoupenBanner() {
                 objectFit="cover"
               />
             </div>
-            <div className="col-md-4">
+            <div className="col-md-4"  data-aos="fade-left">
               <div className="extra-isc">
                 <h4>GET EXTRA 20% OFF</h4>
                 <small>On Signing Up</small>
@@ -50,7 +50,7 @@ function CoupenBanner() {
         <div className="container delivery_div">
           <div className="row">
             <div className="col-md-3">
-              <div className="divelerycol d-flex align-center">
+              <div className="divelerycol d-flex align-center"  data-aos="fade-down">
                     <div className="del_img">
                         <Image
                     src="/assets/images/smiley.png"
@@ -62,7 +62,7 @@ function CoupenBanner() {
                 <p>Happy Customers</p>
               </div>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-3" data-aos="fade-up">
               <div className="divelerycol d-flex align-center">
               <div className="del_img">
                 <Image
@@ -75,7 +75,7 @@ function CoupenBanner() {
                 <p>Free Shipping</p>
               </div>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-3"  data-aos="fade-down">
               <div className="divelerycol d-flex align-center">
               <div className="del_img">
                 <Image
@@ -88,7 +88,7 @@ function CoupenBanner() {
                 <p>Free Installation</p>
               </div>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-3" data-aos="fade-up">
               <div className="divelerycol d-flex align-center">
               <div className="del_img">
                 <Image

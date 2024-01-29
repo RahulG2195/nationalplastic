@@ -6,11 +6,13 @@ const CartProduct = ({src, productName, productDesc, discountedPrice, productPri
     <>
                   <div className="col-md-2">
                     <Image
-                      src= {src}
-                      classname="img-fluid d-block w-100"
-                      alt="ome banner 1"
+                      src={image}
+                      className="img-fluid d-block w-100" // Use w-100 to make the image fill the entire col-lg col-md-3 col-sm-12umn
+                      alt="Team Member"
                       width={100}
-                      height={80}
+                      height={100}
+                      layout="responsive"
+                      objectFit="cover"
                     />
                   </div>
                   <div className="col-md-10 card-Quantity-section">
@@ -40,16 +42,28 @@ const CartProduct = ({src, productName, productDesc, discountedPrice, productPri
                           width={100}
                           height={80}
                         />
-                        <p className="Coupontext">Coupon Applied</p>
+                        <p>Coupon Applied</p>
                       </div>
                     </div>
                     <div className="InstallationCharges">
-                      <div className="CouponApplied SaveForLater">
-                      <i class="fa fa-heart-o" aria-hidden="true"></i>
+                      <div className="CouponApplied">
+                        <Image
+                          src="/assets/images/AddTOCart/core-heart.png"
+                          classname="img-fluid d-block w-100"
+                          alt="ome banner 1"
+                          width={100}
+                          height={80}
+                        />
                         <p>Save For Later</p>
                       </div>
-                      <div className="CouponApplied SaveForLater">
-                      <i class="fa fa-trash-o" aria-hidden="true"></i>
+                      <div className="CouponApplied">
+                        <Image
+                          src="/assets/images/AddTOCart/Icon-core-trash.png"
+                          classname="img-fluid d-block w-100"
+                          alt="ome banner 1"
+                          width={100}
+                          height={80}
+                        />
                         <p>Remove</p>
                       </div>
                     </div>

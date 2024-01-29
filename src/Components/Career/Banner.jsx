@@ -21,7 +21,7 @@ const Banner = () => {
                         objectFit='cover'
                         alt="Picture of the author"
                     />
-                    <button type="button" class="CareerButton fw-bold">VIEW OPENIGS</button>
+                    <button type="button" className="CareerButton fw-bold">VIEW OPENIGS</button>
                 </div>
 
             </div>
