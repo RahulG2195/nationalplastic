@@ -60,16 +60,16 @@ function SliderCard() {
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
         spaceBetween={50}
         slidesPerView={3}
-        // loop={true}
+        loop={true}
         navigation
         // pagination={{ clickable: true }}
         // scrollbar={{ draggable: true }}
         // onSwiper={(swiper) => console.log(swiper)}
         // onSlideChange={() => console.log('slide change')}
-        // autoplay={{
-        //   delay: 2500,
-        //   disableOnInteraction: false,
-        // }}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
       >
         {SliderCardArr.map((val) => (
           <SwiperSlide key={val.key}>

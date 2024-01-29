@@ -21,6 +21,7 @@
 .NationalFitnessUpp-contaner{
     background-color: #2E3192;
     color: #fff;
+    margin-top: 40px;
 }
 .NationalFitnessUpp-text h2{
    color: #FFE000; 
@@ -122,3 +123,42 @@ padding: 20px;
     font-size: 38px; 
 }
     
+
+.investor-slider-image {
+    width: 95px !important;
+    margin: auto;
+    left: 0;
+    right: 0;
+}
+.investor-slider-image {
+    position: absolute;
+    top: -13%;
+ }
+ .investor-slider-image img{
+    margin: auto;
+ }
+
+ .investor-slider-yellow { 
+    background-image: url(/assets/images/investors/blueBG.png);
+    text-align: center;
+    border-radius: 10px;
+    position: relative;
+}
+.investor-slider-yellow p{
+    font-size: 12px;
+    font-weight: 600;
+    padding: 12px;
+}
+.investor-slider-yellow button{
+    background-color: #CC0008;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    padding: 7px 30px;
+    margin: 35px;
+    }
+.investor-slider-yellow h2{
+        color: #CC0008;
+        padding-top: 95px;
+     }

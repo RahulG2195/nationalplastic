@@ -49,13 +49,6 @@ p {
 .common_section {
   margin: 50px 0;
 }
-<<<<<<< HEAD
-=======
-/*img{
-  border-radius: 10px;
-} */
->>>>>>> 26fc3532aa7d5b21048411ef84f0b3f1c165ae85
-
 img {
   border-radius: 10px;
 }
@@ -112,12 +105,6 @@ img {
   color: var(--header-primary-clr);
 }
 
-/* section haeding part end */
-<<<<<<< HEAD
-/* >>>>>>> 70d9e029af5ce56576af0d6476cb82e536a83e0b */
-=======
-
-
 /* view all  */
 
 .view_all_sec {
@@ -125,4 +112,3 @@ img {
   margin: 10px 0;
   text-transform: uppercase;
 }
->>>>>>> 26fc3532aa7d5b21048411ef84f0b3f1c165ae85
