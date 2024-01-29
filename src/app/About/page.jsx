@@ -33,7 +33,7 @@ function About() {
       <SliderCard />
       <AboutCTA />
       <div className="container">
-        <div class="row">
+        <div className="row">
           {arr.map((val) => (
             <div class="col-md-6" key={val.key}>
               {" "}

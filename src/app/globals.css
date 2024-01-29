@@ -54,18 +54,7 @@ p {
 .common_section {
   margin: 50px 0;
 }
-/* <<<<<<< HEAD */
-/* ======= */
-/*img{
-  border-radius: 10px;
-} */
-/* >>>>>>> 26fc3532aa7d5b21048411ef84f0b3f1c165ae85 */
-
-img {
-  border-radius: 10px;
-}
-
-*/ .carousel-item img {
+ .carousel-item img {
   border-radius: 0;
 }
 

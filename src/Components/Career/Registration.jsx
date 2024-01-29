@@ -10,42 +10,46 @@ const Registration = () => {
 
                     <div className="formCont p-5">
                         <form>
-                            <div class="row">
+                            <div className="row">
 
-                                <div class="mb-3 col-md-4">
-                                    <label class="form-label fw-bold">Job Profile*</label>
-                                    <input type="text" class="form-control " id="JobProfile" required />
+                                <div className="mb-3 col-md-4">
+                                    <label className="form-label fw-bold">Job Profile*</label>
+                                    <input type="text" className="form-control " id="JobProfile" required />
                                 </div>
-                                <div class="mb-3 col-md-4">
-                                    <label class="form-label fw-bold">Full Name*</label>
-                                    <input type="text" class="form-control " id="FullName" required />
+                                <div className="mb-3 col-md-4">
+                                    <label className="form-label fw-bold">Full Name*</label>
+                                    <input type="text" className="form-control " id="FullName" required />
                                 </div>
-                                <div class="mb-3 col-md-4">
-                                    <label class="form-label fw-bold">Attach CV/Resume/Bio-data*</label>
-                                    <input type="file" class="form-control " id="FullName" required />
+                                <div className="mb-3 col-md-4">
+                                    <label className="form-label fw-bold">Attach CV/Resume/Bio-data*</label>
+                                    <input type="file" className="form-control " id="FullName" required />
                                 </div>
 
 
-                                <div class="mb-3 col-md-4">
-                                    <label class="form-label fw-bold">Email Address*</label>
-                                    <input type="Email" class="form-control " id="Email" required />
+                                <div className="mb-3 col-md-4">
+                                    <label className="form-label fw-bold">Email Address*</label>
+                                    <input type="Email" className="form-control " id="Email" required />
                                 </div>
-                                <div class="mb-3 col-md-4">
-                                    <label class="form-label fw-bold">Mobile Number*</label>
-                                    <input type="Number" class="form-control " id="MobileNumber" required />
+                                <div className="mb-3 col-md-4">
+                                    <label className="form-label fw-bold">Mobile Number*</label>
+                                    <input type="Number" className="form-control " id="MobileNumber" required />
                                 </div>
+<<<<<<< HEAD
+                                <div className="mb-3 col-md-4 d-flex align-items-end justify-content-center gap-5">
+=======
                                 
                                 <div class="mb-3 col-md-4 d-flex align-items-end justify-content-center gap-5">
+>>>>>>> 5a91d9bee69df6670363c806bac3052cc358c16f
 
-                                        <button class="btn btn-danger px-4" type="submit">Submit</button>
-                                        <button class="btn btn-danger px-4" type="submit">Reset</button>
+                                        <button className="btn btn-danger px-4" type="submit">Submit</button>
+                                        <button className="btn btn-danger px-4" type="submit">Reset</button>
 
                                 </div>
                             </div>
 
 
 
-                            {/* <button type="submit" class="btn btn-primary">Submit</button> */}
+                            {/* <button type="submit" className="btn btn-primary">Submit</button> */}
                         </form>
                     </div>
 

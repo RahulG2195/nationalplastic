@@ -5,7 +5,7 @@ const TogetherCard = (props) => {
     return (
         <>
 
-            <div class="card border border-0">
+            <div className="card border border-0">
 
                 <Image
                     src={props.imgSrc}
@@ -15,8 +15,8 @@ const TogetherCard = (props) => {
                     objectFit='cover'
                     alt="Picture of the author"
                 />
-                <div class="card-body d-flex gap-1 ">
-                    <div><i class="medium fa fa-inr fw-bold " aria-hidden="true"></i></div>
+                <div className="card-body d-flex gap-1 ">
+                    <div><i className="medium fa fa-inr fw-bold " aria-hidden="true"></i></div>
                     <div className='medium fw-bold '>{props.Price}</div>
                 </div>
             </div>

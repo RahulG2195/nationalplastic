@@ -28,6 +28,19 @@ const AddBody = () => {
                                 </div>
                             </div>
 
+<<<<<<< HEAD
+                            <div className="text-start fw-bold">Service Lift</div>
+                            <div className="d-flex gap-5">
+                                <div className="form-check">
+                                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                                    <label className="form-check-label" for="flexRadioDefault1">
+                                        Available
+                                    </label>
+                                </div>
+                                <div className="form-check">
+                                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
+                                    <label className="form-check-label" for="flexRadioDefault2">
+=======
                             <div className="text-start fw-bold medium mt-3">SERVICE LIFT</div>
                             <div className="d-flex gap-5 mt-2">
                                 <div class="form-check ">
@@ -39,27 +52,37 @@ const AddBody = () => {
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
                                     <label class="form-check-label medium fw-semibold" for="flexRadioDefault2">
+>>>>>>> 5a91d9bee69df6670363c806bac3052cc358c16f
                                         Unavailable
                                     </label>
                                 </div>
                             </div>
 
-                            <div class="buying text-start mt-5 p-2 bg-white">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                <label class="form-check-label text-danger mx-2 fw-bold" for="flexCheckDefault">
+                            <div className="buying text-start mt-5 p-2 bg-white">
+                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <label className="form-check-label text-danger mx-2 fw-bold" for="flexCheckDefault">
                                     Buying for your Business?
                                 </label>
                             </div>
 
                             <form className="text-start mt-3">
+<<<<<<< HEAD
+                                <div className="mb-3 d-flex flex-wrap gap-3">
+                                    <input type="email" className="form-control" id="exampleInputEmail1" placeholder="name" />
+                                    <input type="email" className="form-control" id="exampleInputEmail1" placeholder="email" />
+                                </div>
+                                <div className="mb-3">
+                                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="mobile" />
+=======
                                 <div class="mb-3 d-flex flex-wrap gap-3">
                                     <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Name" />
                                     <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" />
                                 </div>
                                 <div class="mb-3">
                                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Mobile" />
+>>>>>>> 5a91d9bee69df6670363c806bac3052cc358c16f
                                 </div>
-                                <button type="submit" class="btn btn-danger px-5">Save</button>
+                                <button type="submit" className="btn btn-danger px-5">Save</button>
                             </form>
 
                         </div>
@@ -90,7 +113,7 @@ const AddBody = () => {
                                     <OrderSummaryCard imgSrc="https://picsum.photos/id/0/367/267" description="Lorem ipsum dolor sit amet." quantity="00" />
 
                                     <div className="d-flex justify-content-center">
-                                        <button type="button" class="btn border border-danger mt-2 ">View More . . . </button>
+                                        <button type="button" className="btn border border-danger mt-2 ">View More . . . </button>
                                     </div>
                                 </div>
                             </div>
