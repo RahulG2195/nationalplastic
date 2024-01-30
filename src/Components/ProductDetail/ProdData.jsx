@@ -5,6 +5,7 @@ import NoCostEmi from "../NoCostEmi/NoCostEmi";
 import ProductDetailSlider from "../ProductDetailSlider/ProductDetailSlider";
 import MoreProduct from "./MoreProducts/MoreProduct";
 import RecentlyViewedDetails from "./RecentlyViewedDetails/RecentlyViewedDetails";
+import CustomerReview from "./CustomerReview/CustomerReview";
 // import RecentlyViewed from "../ProductsCatlogue/RecentlyViewed";
 
 function ProdData() {
@@ -16,72 +17,49 @@ function ProdData() {
           <div className="col-md-6">
             <ProductDetailSlider />
           </div>
-          <div id="thumb" className="owl-carousel product-thumb">
-            <div className="item">
-              <img src="" />
-            </div>
-            <div className="item">
-              <img src="" />
-            </div>
-            <div className="item">
-              <img src="" />
-            </div>
-            <div className="item">
-              <img src="" />
-            </div>
-            <div className="item">
-              <img src="" />
-            </div>
-            <div className="item">
-              <img src="" />
-            </div>
-            <div className="item">
-              <img src="" />
-            </div>
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="product-dtl">
-            <div className="product-info">
-              <div className="product-name">
-                <h2>Karnival Chair</h2>
-              </div>
-              <div className="reviews-counter">
-                <div className="mrp">
-                  <h6>
-                    <strong>MRP ₹0000</strong>
-                  </h6>
-                  <del> ₹0000</del>
+
+          <div className="col-md-6">
+            <div className="product-dtl">
+              <div className="product-info">
+                <div className="product-name">
+                  <h2>Karnival Chair</h2>
                 </div>
-                <div className="discount">
-                  <p>
-                    Save <span>₹</span> 600
-                  </p>
+                <div className="reviews-counter">
+                  <div className="mrp">
+                    <h6>
+                      <strong>MRP ₹0000</strong>
+                    </h6>
+                    <del> ₹0000</del>
+                  </div>
+                  <div className="discount">
+                    <p>
+                      Save <span>₹</span> 600
+                    </p>
+                  </div>
+                  <div className="inc">
+                    <small>(incl. of all taxes)</small>
+                  </div>
                 </div>
-                <div className="inc">
-                  <small>(incl. of all taxes)</small>
+                <div className="prod_type">
+                  <div className="prod_clr">
+                    <p>
+                      <strong>Color: </strong> Gold
+                    </p>
+                    <input type="radio" name="prod_clr" id="gold" value="gold" className="productDetailsRadio m-1" />
+                    <input type="radio" name="prod_clr" id="gold" value="white" className="productDetailsRadio m-1" />
+                  </div>
+                  <div className="prod_size">
+                    <p>
+                      <strong>Size: </strong> 0000
+                    </p>
+                    <input type="text" name="prod_size" id="size" value="0000" />
+                  </div>
                 </div>
               </div>
-              <div className="prod_type">
-                <div className="prod_clr">
-                  <p>
-                    <strong>Color: </strong> Gold
-                  </p>
-                  <input type="radio" name="prod_clr" id="gold" value="gold" />
-                  <input type="radio" name="prod_clr" id="gold" value="white" />
-                </div>
-                <div className="prod_size">
-                  <p>
-                    <strong>Size: </strong> 0000
-                  </p>
-                  <input type="text" name="prod_size" id="size" value="0000" />
-                </div>
+              <div className="bulk_order_div">
+                <Link href='' className=""><button className="btn btn-danger px-5 my-2">Bulk Order</button></Link>
               </div>
-            </div>
-            <div className="bulk_order_div">
-                <Link href='' className=""><button className="btn btn-danger my-2">Bulk Order</button></Link>
-            </div>
-            {/* <div className="row">
+              {/* <div className="row">
               <div className="col-md-6">
                 <label htmlFor="size">Size</label>
                 <select id="size" name="size" className="form-control">
@@ -200,7 +178,9 @@ function ProdData() {
           </a>
         </div>
       </div>
+
       <RecentlyViewedDetails />
+      <CustomerReview />
 
     </>
 
