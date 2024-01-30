@@ -129,6 +129,12 @@
     padding: 12px;
 }
 
+.about-slider-yellow img {
+    /* width: 80px !important;
+    border-radius: 50%;
+    background-color: #fff;
+    padding: 20px; */
+}
 .about-slider-image {
     width: 118px !important;
     border-radius: 50%;

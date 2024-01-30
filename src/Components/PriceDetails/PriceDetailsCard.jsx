@@ -49,15 +49,9 @@ const PriceDetailsCard = () => {
     </>
   );
 };
-// <<<<<<< HEAD
-// =======
-//                     <div>
-//                         <div className="fw-medium">Price Detail (2 items)</div>
-// =======
 // // =======
 //                     <div>
 //                         <div className="fw-semibold">Price Detail (2 items)</div>
-// >>>>>>> c4df2859d1335193856c01d00d9a142e4a75e962
 
 
 //                         <div className="mt-4">
@@ -74,16 +68,6 @@ const PriceDetailsCard = () => {
 
 //                         <div className="d-flex justify-content-between mt-3">
 //                             <div>Total Payable</div>
-// <<<<<<< HEAD
-//                             <div className="medium fw-semibold">00,000</div>
-//                         </div>
-//                         <div className="small my-2 text-success">Congratulations you've just saved Rs 0,000 on your order</div>
-//                         <div className="small text-center ">EMI starts with Rs 0,000</div>
-
-//                         <div className="d-flex justify-content-center mt-2">
-//                             <button type="submit" class="btn btn-danger px-5">Place Order</button>
-//                         </div>
-// =======
 //                             <div className="medium fw-bold">00,000</div>
 //                         </div>
 //                         <div className="small my-2 text-success fw-bold">Congratulations you've just saved Rs 0,000 on your order</div>
@@ -97,6 +81,7 @@ const PriceDetailsCard = () => {
 //                         <div className="d-flex justify-content-center mt-2">
 //                             <button type="submit" class="btn btn-danger px-5">Place Order</button>
 //                         </div>
+// >>>>>>> 5a91d9bee69df6670363c806bac3052cc358c16f
 
 //                     </div>
 

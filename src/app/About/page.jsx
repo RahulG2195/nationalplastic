@@ -36,7 +36,6 @@ function About() {
         <div className="row">
           {arr.map((val) => (
             <div class="col-md-6" key={val.key}>
-              {" "}
               <VMCard title={val.title} description={val.desc} />
             </div>
           ))}

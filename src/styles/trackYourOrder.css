@@ -1,0 +1,15 @@
+
+.headingTYO {
+    color: #2E3192;
+    font-weight: 800;
+}
+.TYODesc {
+    color: #CC0008;
+    line-height: 30px;
+}
+
+.TYOdiv{
+    margin: auto;
+    display: grid;
+    justify-content: center;
+}
