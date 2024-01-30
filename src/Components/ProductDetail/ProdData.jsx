@@ -1,35 +1,20 @@
 import Link from "next/link";
 import "../../styles/prod_detail.css";
 import Image from "next/image";
+import NoCostEmi from "../NoCostEmi/NoCostEmi";
+import ProductDetailSlider from "../ProductDetailSlider/ProductDetailSlider";
+import MoreProduct from "./MoreProducts/MoreProduct";
+import RecentlyViewedDetails from "./RecentlyViewedDetails/RecentlyViewedDetails";
+// import RecentlyViewed from "../ProductsCatlogue/RecentlyViewed";
 
 function ProdData() {
   return (
-    <div className="container">
-      <div className="heading-section">{/* <h2>Product Details</h2> */}</div>
-      <div className="row">
-        <div className="col-md-6">
-          <div id="slider" className="owl-carousel product-slider">
-            <div className="item">
-              <img src="" />
-            </div>
-            <div className="item">
-              <img src="" />
-            </div>
-            <div className="item">
-              <img src="" />
-            </div>
-            <div className="item">
-              <img src="" />
-            </div>
-            <div className="item">
-              <img src="" />
-            </div>
-            <div className="item">
-              <img src="" />
-            </div>
-            <div className="item">
-              <img src="" />
-            </div>
+    <>
+      <div className="px-4">
+        <div className="heading-section">{/* <h2>Product Details</h2> */}</div>
+        <div className="row">
+          <div className="col-md-6">
+            <ProductDetailSlider />
           </div>
           <div id="thumb" className="owl-carousel product-thumb">
             <div className="item">
@@ -94,7 +79,7 @@ function ProdData() {
               </div>
             </div>
             <div className="bulk_order_div">
-                <Link href='' className=""><button className="btn btn-danger px-5 my-2">Bulk Order</button></Link>
+                <Link href='' className=""><button className="btn btn-danger my-2">Bulk Order</button></Link>
             </div>
             {/* <div className="row">
               <div className="col-md-6">
@@ -115,86 +100,71 @@ function ProdData() {
                 </select>
               </div>
             </div> */}
-            <div className="product-count">
-              <label htmlFor="size">Quantity</label>
-              <form action="#" className="display-flex">
-                <div className="qtyminus">-</div>
-                <input
-                  type="text"
-                  name="quantity"
-                  defaultValue={1}
-                  className="qty"
-                />
-                <div className="qtyplus">+</div>
-              </form>
-              <a href="#" className="round-black-btn">
-                Add to Cart
-              </a>
-              <a href="#" className="round-black-btn">
-                Buy Now
-              </a>
-            </div>
-            <p><i className="fa fa-eye"></i> 210 customers are interviewing the product</p>
-            <div className="terms">
-              <Link href="#">Terms and Conditions</Link>
-              <ul>
+
+              <div className="product-count">
+                <label htmlFor="size">Quantity</label>
+                <form action="#" className="display-flex">
+                  <div className="qtyminus">-</div>
+                  <input
+                    type="text"
+                    name="quantity"
+                    defaultValue={1}
+                    className="qty"
+                  />
+                  <div className="qtyplus">+</div>
+                </form>
+                <a href="#" className="btn bg-danger text-white m-2 px-5 ">
+                  Add to Cart
+                </a>
+                <a href="#" className="btn bg-danger text-white m-2 px-5">
+                  Buy Now
+                </a>
+              </div>
+              <p className="eye"><i className="fa fa-eye"></i> 210 customers are interviewing the product</p>
+              <div className="terms fw-medium">
+                <Link href="#">Terms and Conditions</Link>
+                <ul>
                   <li>Lorem ipsum</li>
                   <li>Lorem ipsum</li>
                   <li>Lorem ipsum</li>
                 </ul>
-            </div>
-            <div className="freuently_bought">
-              <h6>Frequently Bought Together</h6>
-              <div className="combile_price d-flex">
-                <div className="relevent_img d-flex align-items-center">
-                    <Image src='/assets/images/Single Altis Image.png' width={100} height={100} layout="responsive" objectFit="cover" alt="img1"/>
-                    <span><i className="fa fa-plus"></i></span>
-                    <Image src='/assets/images/Single Altis Image.png' width={100} height={100} layout="responsive" objectFit="cover" alt="img1"/>
-                    <span><i className="fa fa-plus"></i></span>
-                    <Image src='/assets/images/Single Altis Image.png' width={100} height={100} layout="responsive" objectFit="cover" alt="img1"/>
-                </div>
-                <div className="com_price text-center">
-                  <p>Total Price: 0000/-</p>
-                  <button className="btn">Add selected to cart</button>
+              </div>
+              <div className="d-flex align-items-center gap-3 fw-semibold m-4">
+                Check Availability
+                <div className="d-flex align-items-center">
+                  <input className="p-2" type="text" placeholder="Enter Your Pin Code" />
+                  <a href="#" className="btn rounded-0 bg-danger text-white p-2">CheckNow</a>
                 </div>
               </div>
-             
+
+              <div className="freuently_bought">
+                <h6 className="m-3">Frequently Bought Together</h6>
+                <div className="combile_price d-flex">
+                  <div className="relevent_img d-flex gap-2 align-items-center">
+                    <Image src='/assets/images/Single Altis Image.png' width={100} height={100} layout="responsive" objectFit="cover" alt="img1" />
+                    <span><i className="fa fa-plus"></i></span>
+                    <Image src='/assets/images/Single Altis Image.png' width={100} height={100} layout="responsive" objectFit="cover" alt="img1" />
+                    <span><i className="fa fa-plus"></i></span>
+                    <Image src='/assets/images/Single Altis Image.png' width={100} height={100} layout="responsive" objectFit="cover" alt="img1" />
+                  </div>
+                  <div className="com_price text-top m-3">
+                    <p>Total Price: 0000/-</p>
+                    <button type="button" class="btn rounded-0 btn-outline-danger py-1 px-4 fw-semibold medium">Add selected to cart</button>
+                  </div>
+                </div>
+                <NoCostEmi />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="product-info-tabs">
-        <ul className="nav nav-tabs" id="myTab" role="tablist">
-          <li className="nav-item">
-            <a
-              className="nav-link active"
-              id="description-tab"
-              data-toggle="tab"
-              href="#description"
-              role="tab"
-              aria-controls="description"
-              aria-selected="true"
-            >
-              Description
-            </a>
-          </li>
-          <li className="nav-item">
-            <a
-              className="nav-link"
-              id="review-tab"
-              data-toggle="tab"
-              href="#review"
-              role="tab"
-              aria-controls="review"
-              aria-selected="false"
-            >
-              Reviews (0)
-            </a>
-          </li>
-        </ul>
-        <div className="tab-content" id="myTabContent">
+
+        <MoreProduct />
+
+
+
+        <div className="tab-content d-flex align-items-center px-5" id="myTabContent">
           <div
-            className="tab-pane fade show active"
+            className="tab-pane fade show active fw-bold"
             id="description"
             role="tabpanel"
             aria-labelledby="description-tab"
@@ -209,113 +179,31 @@ function ProdData() {
             perspiciatis unde omnis iste natus error sit voluptatem accusantium
             doloremque laudantium, totam rem aperiam.
           </div>
-          <div
-            className="tab-pane fade"
-            id="review"
-            role="tabpanel"
-            aria-labelledby="review-tab"
-          >
-            <div className="review-heading">REVIEWS</div>
-            <p className="mb-20">There are no reviews yet.</p>
-            <form className="review-form">
-              <div className="form-group">
-                <label>Your rating</label>
-                <div className="reviews-counter">
-                  <div className="rate">
-                    <input
-                      type="radio"
-                      id="star5"
-                      name="rate"
-                      defaultValue={5}
-                    />
-                    <label htmlFor="star5" title="text">
-                      5 stars
-                    </label>
-                    <input
-                      type="radio"
-                      id="star4"
-                      name="rate"
-                      defaultValue={4}
-                    />
-                    <label htmlFor="star4" title="text">
-                      4 stars
-                    </label>
-                    <input
-                      type="radio"
-                      id="star3"
-                      name="rate"
-                      defaultValue={3}
-                    />
-                    <label htmlFor="star3" title="text">
-                      3 stars
-                    </label>
-                    <input
-                      type="radio"
-                      id="star2"
-                      name="rate"
-                      defaultValue={2}
-                    />
-                    <label htmlFor="star2" title="text">
-                      2 stars
-                    </label>
-                    <input
-                      type="radio"
-                      id="star1"
-                      name="rate"
-                      defaultValue={1}
-                    />
-                    <label htmlFor="star1" title="text">
-                      1 star
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div className="form-group">
-                <label>Your message</label>
-                <textarea
-                  className="form-control"
-                  rows={10}
-                  defaultValue={""}
-                />
-              </div>
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      name=""
-                      className="form-control"
-                      placeholder="Name*"
-                    />
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      name=""
-                      className="form-control"
-                      placeholder="Email Id*"
-                    />
-                  </div>
-                </div>
-              </div>
-              <button className="round-black-btn">Submit Review</button>
-            </form>
+          <div className="imgCont">
+            <img src="/Assets/images/Image 5/Image 5.png" alt="" />
           </div>
+
+
+        </div>
+
+
+
+        {/* </div> */}
+        <div style={{ textAlign: "center", fontSize: 14, paddingBottom: 20 }}>
+          Get free icon packs for your next project at{" "}
+          <a
+            href="http://iiicons.in/"
+            target="_blank"
+            style={{ color: "#ff5e63", fontWeight: "bold" }}
+          >
+            www.iiicons.in
+          </a>
         </div>
       </div>
-      <div style={{ textAlign: "center", fontSize: 14, paddingBottom: 20 }}>
-        Get free icon packs for your next project at{" "}
-        <a
-          href="http://iiicons.in/"
-          target="_blank"
-          style={{ color: "#ff5e63", fontWeight: "bold" }}
-        >
-          www.iiicons.in
-        </a>
-      </div>
-    </div>
+      <RecentlyViewedDetails />
+
+    </>
+
   );
 }
 
