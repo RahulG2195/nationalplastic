@@ -23,9 +23,9 @@ function TrackYourOrder() {
 
         <div className="row">
           <div className="TOInnerDiv">
-          <div>
+          <div className="DataInnerDiv">
       <form action="#">
-        <div>
+        <div className="radioBtn">
         <p>Search By :</p>
         <input type="radio" id="" name="" value="Order Id/ No" />
         <label htmlFor="Order Id/ No">Order Id/ No</label>

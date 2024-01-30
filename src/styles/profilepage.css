@@ -1,0 +1,128 @@
+.profile-page-container {
+    margin: 50px auto;
+}
+
+.Left-Profile div .fa-user-circle {
+    display: inline-block;
+    border-radius: 50%;
+    /* margin: 20px; */
+    color: #B4B4B4;
+    background-color: #696969;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: 65px;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.Left-Profile-inner {
+    display: flex;
+    /* padding: 20px; */
+    background-color: #F7F7F7;
+}
+
+.Right-Profile,
+.Left-Profile {
+    padding: 20px;
+    background-color: #F7F7F7;
+}
+
+.profile-detail {
+    margin: auto 20px;
+}
+
+.EditAccount {
+    display: flex;
+    margin: 20px;
+}
+
+.fa-pencil-square-o:before {
+    content: "\f044";
+    margin: 10px;
+}
+
+.Left-Profile-inner2 {
+    margin-top: 30px;
+    background-color: #F7F7F7;
+}
+
+.Right-Profile h3 {
+    color: #262262;
+    font-weight: 700;
+}
+
+.user-data {
+    padding: 20px 0px;
+}
+
+.form-btn {
+    background-color: #CC0008;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 5px;
+    padding: 6px 20px;
+}
+
+.user-data div label {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+
+}
+
+
+
+/* Login Page CSS*/
+.form-btn-login {
+    background-color: #CC0008;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 5px;
+    /* padding: 6px 20px; */
+    width: 100%; 
+    border-radius: 5px;
+    margin: 6px auto;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.form-btn-login:hover{
+    background-color: gray;
+    color: #000;
+}
+.Login-Page-ImgForm{
+margin: 50px 200px;
+border: 1px solid;
+}
+
+.Login-Form{
+    margin: 20px auto;
+}
+.login-image
+{
+    padding: 0px;
+}
+
+.form-btn-login-div{
+    margin: 15px;
+}
+.Login-using-otp{
+    border: none;
+    background-color: white;
+    color: #cc0008;
+    /* font-size: 14px; */
+    text-align: right;
+    font-weight: 600;
+}
+.RegisterHere-p p{
+    font-size: 14px;
+}
+.RegisterHere-p{
+    text-align: center;
+}
+.RegisterHere{
+    color: #CC0008 ;
+    font-weight: 800;
+}

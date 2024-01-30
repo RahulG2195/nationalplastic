@@ -13,3 +13,31 @@
     display: grid;
     justify-content: center;
 }
+
+.TOInnerDiv{
+    padding: 50px;
+    margin: 40px auto;
+    background-color: #F7F7F7;
+}
+
+.TOInnerDiv .DataInnerDiv{
+    background-color: #FFFFFF;
+    padding: 50px;
+}
+
+.input-group-text{
+    background-color: #CC0008;
+    border-radius: 0px;
+    color: #fff;
+    font-weight: 600;
+    padding: 10px 32px;
+}
+
+.radioBtn{
+    display: flex;
+    padding: 17px 0px;
+}
+
+.radioBtn input{
+    margin: 0px 20px;
+}
