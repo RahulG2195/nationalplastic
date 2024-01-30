@@ -11,6 +11,17 @@
   color: #262262;
 
 }
+.bg-darkBlue{
+  background-color: #262262;
+
+}
+.bg-litepurple{
+  background-color: #26226240;
+}
+
+.bg-litepurple2{
+  background-color: #E5E4EC;
+}
 
 * {
   box-sizing: border-box;

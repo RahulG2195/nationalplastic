@@ -36,7 +36,7 @@ const RecentlyViewed = () => {
                     slidesPerView={4}
                     navigation
                     loop={true}
-                    pagination={{ clickable: true }}
+                    // pagination={{ clickable: true }}
                     autoplay={{
                         delay: 4000,
                         disableOnInteraction: false,
@@ -80,26 +80,6 @@ const RecentlyViewed = () => {
                     }
                 </Swiper>
             </div >
-
-            <div className="features d-flex justify-content-center gap-5 flex-wrap m-5 px-5">
-
-               <FooterRow/>
-            </div>
-
-
-            <div className="mt-5">
-                <Image
-                    className="mt-5"
-                    src={"/Assets/images/CTA-banner-2.jpg-v2/CTA-banner-2.jpg-v2.png"}
-                    width={100}
-                    height={80}
-                    layout='responsive'
-                    objectFit='cover'
-                    alt="Picture of the author"
-                />
-            </div>
-
-
 
         </>
     )

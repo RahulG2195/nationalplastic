@@ -5,6 +5,9 @@ import NoCostEmi from "../NoCostEmi/NoCostEmi";
 import ProductDetailSlider from "../ProductDetailSlider/ProductDetailSlider";
 import MoreProduct from "./MoreProducts/MoreProduct";
 import RecentlyViewedDetails from "./RecentlyViewedDetails/RecentlyViewedDetails";
+import CustomerReview from "./CustomerReview/CustomerReview";
+import Faqs from "../FAQs/Faqs";
+import FooterRow from "../FooterRow/FooterRow";
 // import RecentlyViewed from "../ProductsCatlogue/RecentlyViewed";
 
 function ProdData() {
@@ -177,7 +180,11 @@ function ProdData() {
           </a>
         </div>
       </div>
+
       <RecentlyViewedDetails />
+      <CustomerReview />
+      <Faqs/>
+      <FooterRow/>
 
     </>
 

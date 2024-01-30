@@ -4,6 +4,8 @@ import PremiumChairs from '@/Components/ProductsCatlogue/PremiumChairs'
 import PreChairsCards from '@/Components/ProductsCatlogue/PreChairCards'
 import BoughtTogether from '@/Components/ProductsCatlogue/BoughtTogether'
 import RecentlyViewed from '@/Components/ProductsCatlogue/RecentlyViewed'
+import FooterRow from '@/Components/FooterRow/FooterRow'
+import BottomCTABanner from '@/Components/ProductsCatlogue/bottomCTABanner'
 
 const ProductCatlogue = () => {
     return (
@@ -15,6 +17,8 @@ const ProductCatlogue = () => {
             < PreChairsCards />
             <BoughtTogether />
             < RecentlyViewed />
+            <FooterRow />
+            <BottomCTABanner />
 
         </>
     )

@@ -1,0 +1,33 @@
+.GQform {
+    margin:auto;
+    margin-top: 50px !important;
+    width: 70%;
+}
+
+.GQform .input-group-text {
+    background-color: #686AB0 !important;
+}
+
+.GQform input,
+.input-group-text,
+.text-area {
+    background-color: #4D50A2;
+    /* opacity: 4; */
+    border: none;
+    color: white;
+    height: 50px;
+}
+
+.GQform .text-area{
+    height: auto !important;
+}
+
+.GQform input::placeholder,
+.input-group-text::placeholder,
+.text-area::placeholder {
+    color: #DCDCDC;
+}
+
+.GQform button {
+    margin: 0 auto;
+}

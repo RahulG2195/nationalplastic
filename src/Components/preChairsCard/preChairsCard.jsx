@@ -5,9 +5,10 @@ const PreChairsCard = (props) => {
     return (
         <>
 
-            <div className='preCont mt-3 d-flex justify-content-center p-1 position-relative col-lg-12 col-md-12 col-sm-8 col-xs-12 my-4 '>
-                <div >
+            <div className='preCont cards mt-3  p-1 position-relative col-lg-12 col-md-12 col-sm-8 col-xs-12 my-4 '>
+                <div className='card-header'>
                     <img src={props.ChairImg} className="card-img-top" alt="..." />
+                    </div>
                     <div className="card-body">
                         <div className="PreFoot mt-2 ">
 
@@ -33,7 +34,7 @@ const PreChairsCard = (props) => {
                     </div>
                 </div>
 
-            </div>
+            {/* </div> */}
 
         </>
     )
