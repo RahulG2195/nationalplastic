@@ -6,8 +6,11 @@ import ProductDetailSlider from "../ProductDetailSlider/ProductDetailSlider";
 import MoreProduct from "./MoreProducts/MoreProduct";
 import RecentlyViewedDetails from "./RecentlyViewedDetails/RecentlyViewedDetails";
 import CustomerReview from "./CustomerReview/CustomerReview";
+<<<<<<< HEAD
 import Faqs from "../FAQs/Faqs";
 import FooterRow from "../FooterRow/FooterRow";
+=======
+>>>>>>> 22a365413d1a63b6dacc26d2310c95beca6a80d9
 // import RecentlyViewed from "../ProductsCatlogue/RecentlyViewed";
 
 function ProdData() {
@@ -183,8 +186,11 @@ function ProdData() {
 
       <RecentlyViewedDetails />
       <CustomerReview />
+<<<<<<< HEAD
       <Faqs/>
       <FooterRow/>
+=======
+>>>>>>> 22a365413d1a63b6dacc26d2310c95beca6a80d9
 
     </>
 

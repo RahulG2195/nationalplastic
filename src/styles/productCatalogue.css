@@ -1,0 +1,30 @@
+.productCatalogue {
+    border: 1px solid #cc0008;
+    margin: 20px 10px;
+    border-radius: 10px;
+}
+
+.catalogueButton {
+    border: none;
+    color: red;
+    text-decoration: underline;
+    background-color: #fff;
+}
+
+.productCatalogueData {
+    margin: auto;
+}
+.productCatalogueImage img{
+    padding: 35px;
+}
+
+.productCatalogueData button{
+    font-weight: 600;
+    font-size: 12px;
+    color: #CC0008;
+    padding: 10px 0;
+}
+.productCatalogueData h2{
+    font-weight: 600;
+    padding: 10px 0;}
+

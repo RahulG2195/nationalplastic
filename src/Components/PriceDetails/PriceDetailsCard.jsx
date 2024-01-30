@@ -73,15 +73,15 @@ const PriceDetailsCard = () => {
 //                         <div className="small my-2 text-success fw-bold">Congratulations you've just saved Rs 0,000 on your order</div>
 //                         <div className="small text-center ">EMI starts with Rs 0,000</div>
 
-<<<<<<< HEAD
+// <<<<<<< HEAD
                         <div className="d-flex justify-content-center mt-2">
                             <button type="submit" className="btn btn-danger px-5">Place Order</button>
                         </div>
-=======
+// =======
 //                         <div className="d-flex justify-content-center mt-2">
 //                             <button type="submit" class="btn btn-danger px-5">Place Order</button>
 //                         </div>
->>>>>>> 5a91d9bee69df6670363c806bac3052cc358c16f
+// >>>>>>> 5a91d9bee69df6670363c806bac3052cc358c16f
 
 //                     </div>
 
