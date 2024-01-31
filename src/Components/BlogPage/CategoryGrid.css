@@ -1,0 +1,15 @@
+.DTS {
+    
+    height: 400px;
+    width: 400px;
+    margin: auto;
+    background-color:#F6F6F6;
+}
+.DTSCaption{
+    height: 100px;
+    width: 400px;
+    text-align: justify;
+    overflow-y: scroll;
+    margin: auto;
+
+}

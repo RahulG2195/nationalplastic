@@ -7,6 +7,9 @@
   --header-secondary-clr: #262262;
   --header-font-size: 35px;
 }
+.fw-large{
+  font-size: 70px;
+}
 .darkBlue{
   color: #262262;
 

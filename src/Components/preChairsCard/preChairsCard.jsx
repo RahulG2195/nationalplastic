@@ -34,7 +34,6 @@ const PreChairsCard = (props) => {
                     </div>
                 </div>
 
-            {/* </div> */}
 
         </>
     )

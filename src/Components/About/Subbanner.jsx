@@ -4,7 +4,7 @@ function Subbanner() {
   return (
     <section>
       <div className="about_slider">
-      <div className="">
+        <div className="">
           <Image
             src="/assets/images/banner/About-Us-banner.png"
             classname="img-fluid d-block w-100"
@@ -14,9 +14,9 @@ function Subbanner() {
             layout="responsive"
             objectFit="cover"
           />
-      </div>
-      
         </div>
+
+      </div>
     </section>
   );
 }

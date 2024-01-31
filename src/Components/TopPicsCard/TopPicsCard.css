@@ -1,7 +1,15 @@
-.circularimg:hover{
-    transform: scale(1.1);
-    transition: all.5s;
 
+.circularimg{
+    overflow: hidden;
+}
+.circularimg .image:hover{
+    transform: scale(0.9);
+    transition: all .5s;
+
+}
+
+.main {
+    /* Define styles for the .main class */
 }
 
 @media (max-width: 991px){

@@ -1,7 +1,7 @@
 .GQform {
-    margin:auto;
-    margin-top: 50px !important;
+    margin:auto ;
     width: 70%;
+    background-color: #2E3192;
 }
 
 .GQform .input-group-text {
@@ -15,7 +15,7 @@
     /* opacity: 4; */
     border: none;
     color: white;
-    height: 50px;
+    /* height: 50px; */
 }
 
 .GQform .text-area{
@@ -30,4 +30,21 @@
 
 .GQform button {
     margin: 0 auto;
+}
+.m-auto{
+    align-self: center;
+}
+.sbmtButton{
+    position: absolute;
+    z-index: 99; 
+    top: 95%;
+    left: 20%;
+    background-color: white;
+    color: #2E3192;
+    font-weight: bold;
+    padding: 5px 20px;
+    border: none;
+    border-radius: 10px;
+    
+
 }

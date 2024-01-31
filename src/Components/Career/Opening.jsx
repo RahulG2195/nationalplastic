@@ -16,7 +16,7 @@ const Opening = () => {
                     <div className="Card-container mt-4 border-top">
                         <h5 className="px-3 my-4 text-body-secondary">Full Time</h5>
 
-<<<<<<< HEAD
+                        {/* <<<<<<< HEAD */}
                         <div className="container text-center">
                             <div className="row">
                                 <div className="col-md-4"><JobCard /></div>
@@ -28,21 +28,21 @@ const Opening = () => {
                                 <div className="col-md-4"><JobCard /></div>
                                 <div className="col-md-4"><JobCard /></div>
                                 <div className="col-md-4"><JobCard /></div>
-=======
-                        <div class="container text-center">
-                            <div class="row">
-                                {[...Array(9)].map((_, index) => (
-                                    <div class="col-md-4" key={index}>
-                                        <JobCard />
+                                {/* ======= */}
+                                <div class="container text-center">
+                                    <div class="row">
+                                        {[...Array(9)].map((_, index) => (
+                                            <div class="col-md-4" key={index}>
+                                                <JobCard />
+                                            </div>
+                                        ))}
+                                        {/* >>>>>>> 5a91d9bee69df6670363c806bac3052cc358c16f */}
                                     </div>
-                                ))}
->>>>>>> 5a91d9bee69df6670363c806bac3052cc358c16f
+                                </div>
                             </div>
                         </div>
+
                     </div>
-
-
-
                 </div>
             </div>
 
