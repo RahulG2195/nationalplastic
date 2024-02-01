@@ -4,14 +4,15 @@
     background-color: #2E3192;
     margin: auto;
     clip-path: polygon(0 1%, 100% 1%, 100% 74%, 0% 100%);
-   
+
 }
-.contact-btn{
+
+.contact-btn {
     display: flex;
     justify-content: center;
 }
 
-.contact-btn button{ 
+.contact-btn button {
     color: #CC0008;
     background-color: #fff;
     border: none;
@@ -21,21 +22,21 @@
     font-weight: 700;
 }
 
-.clip-path-element h1{
+.clip-path-element h1 {
     color: #FFE000;
     font-weight: 800;
     text-align: center;
     margin: 23px 0 0 0px;
 }
 
-.contactCTA{
+.contactCTA {
     margin: 40px 0;
     position: relative;
     background-color: #F6E35D;
 }
 
-.GTA{
-    position: absolute; 
+.GTA {
+    position: absolute;
     top: 10%;
     /* width: 100%; */
     bottom: 20%;
@@ -43,29 +44,127 @@
     right: 20%;
 }
 
-.GTA-inner{
-margin: auto;
+.GTA-inner {
+    margin: auto;
 }
 
-.GTA-inner h1{
+.GTA-inner h1 {
     font-size: 95px;
     color: #262262;
     font-weight: 800;
 }
-.cta-contact-btn{
+
+.cta-contact-btn {
     background-color: #CC0008;
     color: #fff;
 }
 
-.cta-form{
+.cta-form {
     padding: 22px;
     background-color: #FFFFFFF2;
 }
 
-.cta-form .form-control, .cta-form .form-select{
+.cta-form .form-control,
+.cta-form .form-select {
     background-color: #E0E0E0;
 }
 
-.RegisteredOfficeIcon{
-display: flex;
+.RegisteredOfficeIcon {
+    display: flex;
+    margin: 35px auto;
+    font-weight: 500;
+}
+
+.RegisteredOffice {
+    padding: 20px 10px 20px 60px;
+    border-radius: 15px;
+    left: 138px;
+    position: relative;
+    background-color: #F8F8F8;
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    top: -20%;
+}
+
+.RegisteredOffice div h1 {
+    font-weight: 800;
+    color: #262262;
+    line-height: 69px;
+}
+
+.RegisteredOffice .fa-map-marker:before,
+.RegisteredOffice .fa-phone:before,
+.RegisteredOffice .fa-envelope-open {
+    /* content: "\f041"; */
+    font-size: 37px;
+    padding: 10px 20px 10px 0px;
+    /* margin: auto; */
+    top: 20%;
+    position: relative;
+}
+
+.RegisteredOffice .fa-phone:before,
+.RegisteredOffice .fa-envelope-open {
+    font-size: 25px;
+}
+
+.location-image {
+    left: 43px;
+    width: 230px;
+    position: relative;
+    z-index: 999;
+    top: -35px;
+}
+
+.map-image img {
+    height: 70% !important;
+}
+
+.BranchOffices {
+    text-align: center;
+}
+
+.BranchOfficesCard {
+    border: 2px solid #CC0008;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 35px;
+    text-align: left;
+    height: 290px;
+}
+
+.BranchOfficesCardIcon {
+    display: flex;
+}
+
+.BranchOfficesCardIcon .fa-icons {
+    font-size: 25px;
+    padding: 12px;
+}
+
+.BranchOfficesCardIcon .fa-icons2 {
+    font-size: 20px;
+    padding: 12px;
+}
+
+.BranchOfficescards{
+    margin: 4% 12%;
+}
+
+.BranchOfficesCardIcon p{
+    margin: 7px;
+    font-weight: 500;
+}
+.BranchOfficesCardCont h5{
+    color:#262262;
+    font-weight: 600;
+}
+
+.BranchOffices h2{
+    color: #262262;
+    font-size: 44px;
+}
+
+.BranchOffices span{
+    color: #CC0008;
+    font-weight: 700;
 }

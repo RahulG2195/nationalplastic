@@ -50,7 +50,6 @@ function SliderCard() {
       image: "/assets/images/aboutIcons/group-chat.png",
       desc: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.",
     },
-    // Add more items as needed
   ];
 
   return (
@@ -62,9 +61,6 @@ function SliderCard() {
         slidesPerView={3}
         navigation
         pagination={{ clickable: true }}
-        // scrollbar={{ draggable: true }}
-        // onSwiper={(swiper) => console.log(swiper)}
-        // onSlideChange={() => console.log('slide change')}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
