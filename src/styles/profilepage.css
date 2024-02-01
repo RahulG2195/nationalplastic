@@ -126,3 +126,22 @@ border: 1px solid;
     color: #CC0008 ;
     font-weight: 800;
 }
+.ContinueWithgoogle{
+    display: flex;
+    text-align: center;
+    margin-top: 74px;
+}
+
+.ContinueWithgoogle .fa-google:before {
+    content: "\f1a0";
+    padding: 2px;
+    border: 2px solid red;
+    margin: 10px;
+}
+
+.ContinueWithgoogle .fa-facebook:before {
+    content: "\f09a";
+    padding: 2px;
+    border: 2px solid #0043ff;
+    margin: 0px;
+}

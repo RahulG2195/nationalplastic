@@ -1,0 +1,32 @@
+.error-text h1{
+    color: #262262;
+    font-weight: 700;
+    line-height: 56px;
+}
+.error-homepage-btn i{
+    margin-left: 12px;
+}
+.error-main-container{
+    text-align: center;
+    margin: auto;
+    padding: 100px 200px;
+}
+    
+ .error-homepage-btn{
+    width: auto;
+    margin: 20px auto;
+    color: #fff;
+    background-color: #CC0008;
+    border: none;
+    padding: 10px 27px;
+    font-weight: 700;
+    border-radius: 8px;
+}
+
+/* ThankYouCSS */
+.ThankYouImg img{
+    color: transparent;
+    width: 40% !important;
+    height: auto;
+    margin: 22px auto;
+}

@@ -71,9 +71,10 @@ function Login() {
                   <p>New to National Plastic? <span className="RegisterHere">Register Here</span></p>
                   </div>
 
-                  <div className="row ContinueWith">
+                  <div className="row ContinueWithgoogle">
                     <p>OR Continue With
-
+                    <i class="fa fa-google" aria-hidden="true"></i>
+                    <i class="fa fa-facebook" aria-hidden="true"></i>
                     </p>
                   </div>
                 </form>
