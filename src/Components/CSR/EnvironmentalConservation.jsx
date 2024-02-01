@@ -16,7 +16,7 @@ const EnvironmentalConservation = () => {
         <>
 
             <div className="text-center ">
-                <div className=" title2 fs-1">Environmental<span className="fw-bold text-danger">  Conservation</span> </div>
+                <div className="darkBlue fs-1">Environmental<span className="fw-bold text-danger">  Conservation</span> </div>
                 <div className=" mt-1 fw-normal">Join us in the pursuit of a cleaner world – our plastic furniture <br />
                     embodies style, comfort, and environmental responsibility.
                 </div>
