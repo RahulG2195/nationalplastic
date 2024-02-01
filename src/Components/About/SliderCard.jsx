@@ -60,11 +60,31 @@ function SliderCard() {
         spaceBetween={50}
         slidesPerView={3}
         navigation
+        loop={true}
         pagination={{ clickable: true }}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
         }}
+
+        breakpoints={{
+          200: {
+              slidesPerView: 1,
+              spaceBetween: 20,
+          },
+          640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+          },
+          768: {
+              slidesPerView: 3,
+              spaceBetween: 40,
+          },
+          1024: {
+              slidesPerView: 3,
+              spaceBetween: 50,
+          },
+      }}
       >
         {SliderCardArr.map((val) => (
           <SwiperSlide key={val.key}>
