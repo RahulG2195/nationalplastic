@@ -6,6 +6,7 @@ import SharePricesCard from "@/Components/Investors/SharePricesCard";
 // import FinancialResults from "@/Components/Investors/FinancialResults";
 import InvestorsSlider from "@/Components/Investors/InvestorsSlider";
 import AboutSlider from "@/Components/About/AboutSlider";
+import SliderCard from "@/Components/About/SliderCard";
 
 function Investor() {
   const NationalFitnessUppArr = [
@@ -59,7 +60,7 @@ function Investor() {
     <>
       <InvestorBanner /> 
       {/* <InvestorsSlider /> */}
-      <AboutSlider/>
+      <SliderCard/>
 
       {/* <NationalFitnessUpp/> */}
       <div className="container NationalFitnessUpp-contaner">

@@ -7,6 +7,7 @@ import VMCard from "@/Components/About/VMCard";
 import Infrastructure from "@/Components/About/Infrastructure";
 import Team from "@/Components/About/team";
 import AwardsCertificates from "@/Components/About/AwardsCertificates";
+import SliderCard from "@/Components/About/SliderCard";
 
 function About() {
 
@@ -77,7 +78,7 @@ function About() {
   return (
     <>
       <Subbanner />
-      <AboutSlider />
+      <SliderCard/>
       <AboutCTA />
       {/* Vission and Mission start */}
       <div className="container">
