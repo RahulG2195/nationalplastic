@@ -1,15 +1,20 @@
- .FeatureText{
-    color:var(--primary-color);   
-}
+ .FeatureText {
+     color: var(--primary-color);
+ }
 
-.FeatureText h6{
-    font-size: small;
-}
+ .FeatureText h6 {
+     font-size: small;
+ }
 
-.icon{
-    height: 8vh;
-}
-.feature img{
-    width: 100%;
-    height: 100%;
-}  
+ .icon {
+     height: 8vh;
+ }
+
+ .feature img {
+     width: 100%;
+     height: 100%;
+ }
+
+ @media (max-width:544px) {
+    
+ }
