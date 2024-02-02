@@ -5,6 +5,7 @@ import UnauditedFinancialResults from "@/Components/Investors/UnauditedFinancial
 import SharePricesCard from "@/Components/Investors/SharePricesCard";
 // import FinancialResults from "@/Components/Investors/FinancialResults";
 import InvestorsSlider from "@/Components/Investors/InvestorsSlider";
+import AboutSlider from "@/Components/About/AboutSlider";
 
 function Investor() {
   const NationalFitnessUppArr = [
@@ -57,7 +58,9 @@ function Investor() {
   return (
     <>
       <InvestorBanner /> 
-      <InvestorsSlider />
+      {/* <InvestorsSlider /> */}
+      <AboutSlider/>
+
       {/* <NationalFitnessUpp/> */}
       <div className="container NationalFitnessUpp-contaner">
         <div className="row">

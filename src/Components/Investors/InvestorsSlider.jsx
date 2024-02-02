@@ -12,11 +12,11 @@ const InvestorsSlider = () => {
                 <Swiper className='mt-5 swipper' style={{ width: "70vw", height: "100vh" }}
                     modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
                     spaceBetween={50}
-                    slidesPerView={1}
+                    slidesPerView={3}
                     loop={true}
                     navigation
                     pagination={{ clickable: true }}
-                    scrollbar={{ draggable: true }}
+                    // scrollbar={{ draggable: true }}
                     onSwiper={(swiper) => console.log(swiper)}
                     onSlideChange={() => console.log('slide change')}
                     autoplay={{
@@ -24,14 +24,19 @@ const InvestorsSlider = () => {
                         disableOnInteraction: false,
                     }}
                 >
-                    <SwiperSlide style={{ width: "100%", overflow: "hidden", height: "100%" }} ><img style={{ width: '' }} src="/assets/images/CSR-img-2/CSR-img-2.png" alt="" /></SwiperSlide>
-                    <SwiperSlide style={{ width: "100%", overflow: "hidden", height: "100%" }} ><img style={{ width: '' }} src="/assets/images/CSR-img-2/CSR-img-2.png" alt="" /></SwiperSlide>
-                    <SwiperSlide style={{ width: "100%", overflow: "hidden", height: "100%" }} ><img style={{ width: '' }} src="/assets/images/CSR-img-2/CSR-img-2.png" alt="" /></SwiperSlide>
-                    <SwiperSlide style={{ width: "100%", overflow: "hidden", height: "100%" }} ><img style={{ width: '' }} src="/assets/images/CSR-img-2/CSR-img-2.png" alt="" /></SwiperSlide>
-                </Swiper>
+                    <SwiperSlide style={{ width: "100%", overflow: "hidden", height: "100%" }} ><img style={{ width: '' }} />
                 <div>
-                    <button className='px-3 py-2'>View More</button>
+                    
                 </div>
+                 </SwiperSlide>
+                    <SwiperSlide style={{ width: "100%", overflow: "hidden", height: "100%" }} ><img style={{ width: '' }} />
+                    <h1>dvgfdgfdg</h1> </SwiperSlide>
+                    <SwiperSlide style={{ width: "100%", overflow: "hidden", height: "100%" }} ><img style={{ width: '' }} />
+                    <h1>dvgfdgfdg</h1> </SwiperSlide>
+                    <SwiperSlide style={{ width: "100%", overflow: "hidden", height: "100%" }} ><img style={{ width: '' }} />
+                    <h1>dvgfdgfdg</h1> </SwiperSlide>
+                </Swiper>
+                
             </div>
         </>
     )

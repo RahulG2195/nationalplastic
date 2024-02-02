@@ -9,7 +9,7 @@ const CSR = () => {
     <>
       <Banner />
       <HealthCare />
-      <Slider/>
+      <Slider />
       <EnvironmentalConservation />
     </>
   );
