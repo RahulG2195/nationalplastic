@@ -78,6 +78,13 @@ function About() {
   return (
     <>
       <Subbanner />
+      <div className="container">
+        <div className="row section_header">
+          <h2>
+            About<span> us</span>
+          </h2>
+        </div>
+      </div>
       <SliderCard/>
       <AboutCTA />
       {/* Vission and Mission start */}
