@@ -4,6 +4,7 @@
     background-color: #2E3192;
     margin: auto;
     clip-path: polygon(0 1%, 100% 1%, 100% 74%, 0% 100%);
+    margin-top: -2px;
 
 }
 

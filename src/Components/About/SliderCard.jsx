@@ -59,6 +59,7 @@ function SliderCard() {
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
         spaceBetween={50}
         slidesPerView={3}
+        loop={true}
         navigation
         pagination={{ clickable: true }}
         autoplay={{
