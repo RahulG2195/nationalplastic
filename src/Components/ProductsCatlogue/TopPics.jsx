@@ -21,7 +21,7 @@ const TopPics = () => {
         <>
             <div className="main_container mt-5">
                 <div className="text-center mt-5">
-                    <div className="fs-1 fw-bold text-danger"> Top Pics <span className="title2 fw-normal">For you</span> </div>
+                    <div className="fs-1 fw-bold text-danger"> Top Pics <span className="darkBlue fw-normal">For you</span> </div>
                     <div className="mt-1 fw-semibold">It is a long established fact that a reader will be distracted by the <br /> readable content of a page when looking at its layout.</div>
                 </div>
 

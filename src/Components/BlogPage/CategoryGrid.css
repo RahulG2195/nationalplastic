@@ -1,15 +1,22 @@
 .DTS {
     
-    height: 400px;
-    width: 400px;
+    height: 600px;
+    width: 600px;
     margin: auto;
     background-color:#F6F6F6;
 }
 .DTSCaption{
-    height: 100px;
-    width: 400px;
+    height: 150px;
+    width: 600px;
     text-align: justify;
     overflow-y: scroll;
     margin: auto;
 
+}
+.litegray{
+    color: #D4D4D4;
+}
+.BlogSvg{
+    height: 100px;
+    width: 344px;
 }

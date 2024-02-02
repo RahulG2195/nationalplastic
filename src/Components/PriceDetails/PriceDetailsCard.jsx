@@ -35,7 +35,7 @@ const PriceDetailsCard = () => {
           <div className="medium">00,000</div>
         </div>
         <div className="small my-2 text-success">
-          Congratulations you've just saved Rs 0,000 on your order
+          Congratulations youve just saved Rs 0,000 on your order
         </div>
         <div className="small text-center ">EMI starts with Rs 0,000</div>
 

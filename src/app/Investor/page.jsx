@@ -3,7 +3,10 @@ import NationalFitnessUpper from "@/Components/Investors/NationalFinancesUpper";
 import NationalFitness from "@/Components/Investors/NationalFinances";
 import UnauditedFinancialResults from "@/Components/Investors/UnauditedFinancialResults";
 import SharePricesCard from "@/Components/Investors/SharePricesCard";
-import FinancialResults from "@/Components/Investors/FinancialResults";
+// import FinancialResults from "@/Components/Investors/FinancialResults";
+import InvestorsSlider from "@/Components/Investors/InvestorsSlider";
+import AboutSlider from "@/Components/About/AboutSlider";
+import SliderCard from "@/Components/About/SliderCard";
 
 function Investor() {
   const NationalFitnessUppArr = [
@@ -55,7 +58,10 @@ function Investor() {
   ];
   return (
     <>
-      <InvestorBanner />
+      <InvestorBanner /> 
+      {/* <InvestorsSlider /> */}
+      <SliderCard/>
+
       {/* <NationalFitnessUpp/> */}
       <div className="container NationalFitnessUpp-contaner">
         <div className="row">
