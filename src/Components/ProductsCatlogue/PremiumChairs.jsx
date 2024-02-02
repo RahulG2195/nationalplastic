@@ -12,7 +12,7 @@ const PremiumChairs = () => {
         <>
             <div className=" mt-3">
                 <div className="text-center">
-                    <div className="fs-1 fw-bold text-danger">Premium <span className="title2 fw-normal">Chairs</span> </div>
+                    <div className="fs-1 fw-bold text-danger">Premium <span className="darkBlue fw-normal">Chairs</span> </div>
                     <div className="mt-1 fw-semibold">It is a long established fact that a reader will be distracted by the readable <br />
                         content of a page when looking at its layout. The point of using Lorem Ipsum <br />
                         is that it has a more-or-less normal distribution of letters, as opposed to using</div>

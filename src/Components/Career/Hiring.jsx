@@ -15,8 +15,7 @@ const Hiring = () => {
 {/* <<<<<<< HEAD */}
                 {/* <div className'd-flex justify-content-evenly gap-5 position-relative mt-5'> */}
 {/* // ======= */}
-                <div class='d-flex justify-content-evenly gap-5 my-5 height'>
-{/* >>>>>>> 5a91d9bee69df6670363c806bac3052cc358c16f */}
+                <div class='d-flex justify-content-evenly gap-5 my-5 Hiringheight'>
 
 
                     <div className="HC1">

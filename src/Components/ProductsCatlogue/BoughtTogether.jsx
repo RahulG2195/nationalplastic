@@ -21,7 +21,7 @@ const BoughtTogether = () => {
         <>
             <div className="mt-5">
                 <div className="text-center">
-                    <div className="fs-1 fw-bold text-danger">Frequently Bought <span className="title2 fw-normal">Together</span> </div>
+                    <div className="fs-1 fw-bold text-danger">Frequently Bought <span className="darkBlue fw-normal">Together</span> </div>
                     <div className="mt-1 fw-semibold">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has <br />
                         been the industry's standard dummy text ever since the 1500s,</div>
                 </div>
