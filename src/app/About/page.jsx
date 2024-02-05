@@ -89,14 +89,14 @@ function About() {
       <AboutCTA />
       {/* Vission and Mission start */}
       <div className="container">
-        <div class="row">
+        <div className="row">
           {arr.map((val) => (
-            <div class="col-md-6" key={val.key}>
+            <div className="col-md-6" key={val.key}>
               {" "}
               <VMCard title={val.title} description={val.desc} />
             </div>
           ))}
-          {/* <div class="col-md-6"> <VMCard  title={titleValue} description={descriptionValue}/> </div> */}
+          {/* <div className="col-md-6"> <VMCard  title={titleValue} description={descriptionValue}/> </div> */}
         </div>
       </div>
       {/* Vission and Mission end */}
@@ -111,18 +111,16 @@ function About() {
           <h2>Team</h2>
           <h3>Board Of Directors</h3>
         </div>
-        <div class="row team-members">
+        <div className="row team-members">
           {imgarr.map((val) => (
-            <div class="col" key={val.key}>
-              {" "}
+            <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6" key={val.key}> 
               <Team image={val.image} name={val.name} disignation={val.desig} />
             </div>
           ))}
         </div>
-        <div class="row team-members">
+        <div className="row team-members">
           {imgarr.map((val) => (
-            <div class="col" key={val.key}>
-              {" "}
+            <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6" key={val.key}> 
               <Team image={val.image} name={val.name} disignation={val.desig} />
             </div>
           ))}
@@ -132,46 +130,38 @@ function About() {
         <div className="row section_header team-header">
           <h3>Managing Committee</h3>
         </div>
-        <div class="row team-members">
+        <div className="row team-members">
           {imgarr.map((val) => (
-            <div class="col-3" key={val.key}>
-              {" "}
+            <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12" key={val.key}> 
               <Team image={val.image} name={val.name} disignation={val.desig} />
             </div>
           ))}
         </div>
-        <div class="row team-members">
+        <div className="row team-members">
           {imgarr.map((val) => (
-            <div class="col" key={val.key}>
-              {" "}
+            <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12" key={val.key}> 
               <Team image={val.image} name={val.name} disignation={val.desig} />
             </div>
           ))}
-        </div>
-        {/* Managing Committee end */}
-      </div>
-      {/* Team end */}
-      {/* Awards & Certificates start */}
-
-      {/* Awards & Certificates end */}
+        </div> 
+      </div> 
       <div className="container">
-      <div className="row section_header">
+      <div className="row section_header section_header_Certificates">
         <h2> Awards & <span>Certificates</span>
         </h2>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
       </div>
-      <div class="row team-members">
+      <div className="row team-members">
           {certificatesarr.map((val) => (
-            <div class="col-3" key={val.key}>
+            <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12" key={val.key}>
               {" "}
               <AwardsCertificates image={val.image}/>
             </div>
           ))}
         </div>
-        <div class="row team-members">
+        <div className="row team-members">
           {certificatesarr.map((val) => (
-            <div class="col-3" key={val.key}>
-              {" "}
+            <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12" key={val.key}>
               <AwardsCertificates image={val.image}/>
             </div>
           ))}

@@ -6,6 +6,10 @@
     color: #fff;
 }
 
+:root {
+    --swiper-theme-color: red;
+}
+
 .row1,
 .row2 {
     padding: 70px 106px 0px;
@@ -123,7 +127,8 @@
     border-radius: 10px;
     position: relative;
 }
-.about-slider-yellow p{
+
+.about-slider-yellow p {
     font-size: 12px;
     font-weight: 600;
     padding: 12px;
@@ -133,8 +138,8 @@
     /* width: 80px !important;
     border-radius: 50%;
     background-color: #fff;
-    padding: 20px;*/
-} 
+    padding: 20px;
+} */
 .about-slider-image {
     width: 118px !important;
     border-radius: 50%;
@@ -145,50 +150,65 @@
     right: 0;
 }
 
-.about-slider-yellow button{
-background-color: #CC0008;
-color: #fff;
-border: none;
-border-radius: 6px;
-font-weight: 600;
-padding: 7px 30px;
-margin: 35px;
+.about-slider-yellow button {
+    background-color: #CC0008;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    padding: 7px 30px;
+    margin: 35px;
 }
 
 .my-slider {
-    margin: 0px 100px;
+    margin: 0px auto;
     position: relative;
+    padding: 0 40px;
 }
-.about-slider-yellow h2{
+
+.swiper-button-prev,
+.swiper-rtl .swiper-button-next,
+.swiper-button-prev:after,
+.swiper-button-next:after {
+    color: #CC0008;
+}
+
+.about-slider-yellow h2 {
     color: #CC0008;
     padding-top: 95px;
- }
- .about-slider-image{
+}
+
+.about-slider-image {
     position: absolute;
     top: -20%;
- }
- .about-slider-image img{
-    margin: auto;
- }
- .swiper{
-    overflow-y:clip !important;
-     overflow:visible !important;
- }
- .TeamMemCard{
-    position: relative;
- }
+}
 
- .TeamMemNames {
+.about-slider-image img {
+    margin: auto;
+}
+
+.swiper {
+    overflow-y: clip !important;
+    overflow: visible !important;
+}
+
+.TeamMemCard {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.TeamMemNames {
     display: none;
     position: absolute;
-    bottom: 10%; 
+    bottom: 10%;
     text-align: center;
     left: 0;
     right: 0;
- }
- .TemMemImg:hover + .TeamMemNames {
+}
+
+.TemMemImg:hover+.TeamMemNames {
     display: block;
- }
+}
 
 
 

@@ -12,7 +12,7 @@ const PriceDetailsCard = () => {
 
   return (
     <>
-      <div>
+      <div className="PriceDetail">
         <div className="fw-medium">Price Detail (2 items)</div>
 
         <div className="mt-4">

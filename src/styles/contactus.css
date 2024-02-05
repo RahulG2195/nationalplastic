@@ -130,7 +130,7 @@
     padding: 30px;
     margin: 35px;
     text-align: left;
-    height: 290px;
+    height: auto;
 }
 
 .BranchOfficesCardIcon {
@@ -147,25 +147,423 @@
     padding: 12px;
 }
 
-.BranchOfficescards{
+.BranchOfficescards {
     margin: 4% 12%;
 }
 
-.BranchOfficesCardIcon p{
+.BranchOfficesCardIcon p {
     margin: 7px;
     font-weight: 500;
 }
-.BranchOfficesCardCont h5{
-    color:#262262;
+
+.BranchOfficesCardCont h5 {
+    color: #262262;
     font-weight: 600;
 }
 
-.BranchOffices h2{
+.BranchOffices h2 {
     color: #262262;
     font-size: 44px;
 }
 
-.BranchOffices span{
+.BranchOffices span {
     color: #CC0008;
     font-weight: 700;
+}
+
+
+.LocationSection{
+
+}
+
+/* RESPONSIVE */
+
+@media only screen and (min-width: 1502) {}
+
+@media only screen and (min-width: 1367px) and (max-width: 1501px) {}
+
+@media only screen and (min-width: 1201px) and (max-width: 1366px) {
+  
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1200px) {
+   
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1024px) {
+   
+}
+
+@media only screen and (min-width: 769px) and (max-width: 991px) {
+    
+}
+
+
+
+
+
+/* Mobile */
+@media only screen and (min-width: 601px) and (max-width: 768px) { 
+    .LocationSection{
+        margin-top: 105vh;
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 600px) { 
+    .LocationSection{
+        margin-top: 105vh;
+    }
+    .contactCTA img{
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 361px) and (max-width: 480px) {
+    .LocationSection{
+        margin-top: 105vh;
+    }
+    .contactCTA img{
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+
+    .LocationSection{
+        margin-top: 105vh;
+    }
+    .contactCTA img{
+        display: none;
+    }
+}
+
+/* Responsive */
+@media only screen and (min-width: 1502) {}
+
+@media only screen and (min-width: 1367px) and (max-width: 1501px) {}
+
+@media only screen and (min-width: 1201px) and (max-width: 1366px) {}
+
+@media only screen and (min-width: 1025px) and (max-width: 1200px) {
+    .BranchOfficescards {
+        margin: 4% 4%;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1024px) {
+    .BranchOfficescards {
+        margin: 4% 4%;
+    }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 991px)  {
+    .GTA {
+        position: absolute;
+        top: 4%;
+        /* width: 100%; */
+        bottom: 20%;
+        left: 5%;
+        right: 10%;
+    }
+    .LocationSection{
+        margin-top: 50px;
+    }
+    .contactCTA img{
+        height: 126vh !important;
+    }
+    .BranchOfficescards {
+        margin: 4% 1%;
+    }
+    .BranchOfficesCard { 
+        padding: 20px;
+        margin: 20px;
+        text-align: left;
+        height: auto;
+    }
+}
+
+/* Mobile: */
+@media only screen and (min-width: 601px) and (max-width: 768px) {
+    .contactCTA img {
+        /* display: none; */
+    }
+
+    .LocationSection .CTAOnLocation {
+        margin-top: 60vh;
+    }
+
+    .GTA-inner h1 {
+        font-size: 45px;
+        line-height: 43px;
+    }
+
+    .GTA-inner {
+        text-align: center;
+    }
+    .cta-form {
+        padding: 30px;
+    }
+
+
+    .location-image {
+        left: 133px;
+    width: 155px;
+    top: 30px;
+    }
+    .RegisteredOffice {
+        padding: 10px 56px;
+        border-radius: 10px;
+        left: 0px;
+        position: relative;
+        top: -23%;
+        margin: 120px;
+        z-index: 1;
+    }
+
+    .RegisteredOffice div h1 {
+        line-height: 40px;
+        text-align: center;
+    }
+
+    .cta-form form {
+        margin-top: 20px;
+    }
+
+    .map-image img {
+        /* display: none; */
+    }
+
+    .BranchOfficescards {
+        margin: 0;
+    }
+
+    .BranchOfficesCard {
+        border-radius: 10px;
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .BranchOfficesCardCont h5 {
+        margin: 20px 0px;
+    }
+
+    .BranchOffices h2 {
+        font-size: 40px;
+    }
+    .LocationSection{
+        position: relative;
+            }
+        
+            .map-image{
+                position: absolute;
+                top: 55vh;
+            }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 600px) {
+    .contactCTA img {
+        display: none;
+    }
+
+    .LocationSection .CTAOnLocation {
+        margin-top: 112vh;
+    }
+
+    .GTA-inner h1 {
+        font-size: 45px;
+        line-height: 43px;
+    }
+
+    .GTA-inner {
+        text-align: center;
+    }
+
+    .cta-form {
+        padding: 0px;
+    }
+
+    .location-image {
+        left: 379px;
+    width: 100px;
+    top: 5px;
+    }
+  
+    .RegisteredOffice {
+        padding: 10px 10px;
+        border-radius: 15px;
+        left: 0px;
+        position: relative;
+        top: -15%;
+        margin: 10px;
+    }
+
+    .RegisteredOffice div h1 {
+        line-height: 40px;
+        text-align: center;
+    }
+
+    .cta-form form {
+        margin-top: 20px;
+    }
+
+    .map-image img {
+        display: none;
+    }
+
+    .BranchOfficescards {
+        margin: 0;
+    }
+
+    .BranchOfficesCard {
+        border-radius: 10px;
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .BranchOfficesCardCont h5 {
+        margin: 20px 0px;
+    }
+
+    .BranchOffices h2 {
+        font-size: 40px;
+    }
+}
+
+@media only screen and (min-width: 361px) and (max-width: 480px) {
+    .contactCTA img {
+        display: none;
+    }
+
+    .LocationSection .CTAOnLocation {
+        margin-top: 112vh;
+    }
+
+    .GTA-inner h1 {
+        font-size: 45px;
+        line-height: 43px;
+    }
+
+    .GTA-inner {
+        text-align: center;
+    }
+
+    .cta-form {
+        padding: 0px;
+    }
+
+    .location-image {
+        left: 250px;
+        width: 100px;
+        top: -20px;
+    }
+
+    .RegisteredOffice {
+        padding: 10px 10px;
+        border-radius: 15px;
+        left: 0px;
+        position: relative;
+        top: -15%;
+        margin: 10px;
+    }
+
+    .RegisteredOffice div h1 {
+        line-height: 40px;
+        text-align: center;
+    }
+
+    .cta-form form {
+        margin-top: 20px;
+    }
+
+    .map-image img {
+        display: none;
+    }
+
+    .BranchOfficescards {
+        margin: 0;
+    }
+
+    .BranchOfficesCard {
+        border-radius: 10px;
+        padding: 15px;
+        margin: 10px;
+        height: 290px;
+    }
+
+    .BranchOfficesCardCont h5 {
+        margin: 20px 0px;
+    }
+
+    .BranchOffices h2 {
+        font-size: 40px;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    .contactCTA img {
+        display: none;
+    }
+
+    .LocationSection .CTAOnLocation {
+        margin-top: 112vh;
+    }
+
+    .GTA-inner h1 {
+        font-size: 45px;
+        line-height: 43px;
+    }
+
+    .GTA-inner {
+        text-align: center;
+    }
+
+    .cta-form {
+        padding: 0px;
+    }
+
+    .location-image {
+        left: 250px;
+        width: 100px;
+        top: -20px;
+    }
+
+    .RegisteredOffice {
+        padding: 10px 10px;
+        border-radius: 15px;
+        left: 0px;
+        position: relative;
+        top: -15%;
+        margin: 10px;
+    }
+
+    .RegisteredOffice div h1 {
+        line-height: 40px;
+        text-align: center;
+    }
+
+    .cta-form form {
+        margin-top: 20px;
+    }
+
+    .map-image img {
+        display: none;
+    }
+
+    .BranchOfficescards {
+        margin: 0;
+    }
+
+    .BranchOfficesCard {
+        border-radius: 10px;
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .BranchOfficesCardCont h5 {
+        margin: 20px 0px;
+    }
+
+    .BranchOffices h2 {
+        font-size: 40px;
+    }
 }

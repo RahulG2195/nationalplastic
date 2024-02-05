@@ -1,4 +1,5 @@
 import Image from "next/image";
+import "../../styles/contactus.css"
 
 const ContactUsCard = ({title, location, phone, email }) => {
     return (
