@@ -1,12 +1,12 @@
-import Image from "next/image"
-import './BulkOrders.css'
-import GetQuoteForm from "./GetQuoteForm"
+import Image from "next/image";
+import './BulkOrders.css';
+import GetQuoteForm from "./GetQuoteForm";
 
 const BulkOrders = () => {
     return (
         <>
             <div className="orders_main">
-                <div className=" d-flex flex-wrap justify-content-center ordersCont mt-5 position-relative">
+                <div className="d-flex flex-wrap justify-content-center ordersCont mt-5 position-relative">
 
                     <div className="text-center fw-bold mt-5 ordersLogo">
                         <div className="darkBlue fw-large mt-5">BULK
@@ -25,30 +25,36 @@ const BulkOrders = () => {
                             objectFit='cover'
                             alt="Picture of the author" />
                     </div>
-                    <div className="bottomForm">
-                        <div className="d-flex align-items-center">
-                            <div className="frmW">
+
+                    <div className="bottomForm ">
+                        <div className="d-flex justify-content-center ">
+                            <div className="frmW ">
                                 <GetQuoteForm className="sbmtButton" />
+
                                 <div className="getQformBottom"></div>
-                                
-                            </div>
-                            <div className="position-absolute bottomImgOfForm">
-                                  <img src="/Assets/svg/Group 871.svg" alt=""  />
+                                <div className="bottomImgOfForm position-absolute">
+                                    <Image
+                                        src="/Assets/svg/Group 871.svg"
+                                        width={100}
+                                        height={100}
+                                        layout='responsive'
+                                        objectFit='cover'
+                                        alt="Picture of the author" />
                                 </div>
+
+                            </div>
 
                             <div>
-                                <div className="text-center fw-bold  ">
+                                <div className="text-center fw-bold">
                                     <div className="mx-5 px-5 darkBlue fs-1 fw-large2 ">GET<span className=" text-danger"> QUOTE</span> </div>
                                 </div>
-                                <div className="shape"></div>
-
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </>
-    )
-}
-export default BulkOrders
+    );
+};
+
+export default BulkOrders;

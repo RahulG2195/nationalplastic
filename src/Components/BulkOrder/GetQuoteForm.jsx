@@ -3,7 +3,7 @@ const GetQuoteForm = (props) => {
 
     return (
         <>
-            <div className="GQform rounded p-4 py-5 mt-2">
+            <div className="GQform rounded p-4 py-5 mt-2 GQFormRes">
                 <form>
                     <div className="mb-4">
                         <input type="text" className="form-control" placeholder="Your Name" />
@@ -27,11 +27,11 @@ const GetQuoteForm = (props) => {
                     <div className="">
                         <textarea className="form-control text-area" rows="4" placeholder="Tell us your requirements"></textarea>
                     </div>
-                    <div className="small text-white mb-4">Please include details of product, quantity, type of service etc.*</div>
+                    <div className="small text-white mb-4 reqCaptRes">Please include details of product, quantity, type of service etc.*</div>
                     <div className="mb-4">
                         <input type="text" className="form-control" placeholder="City" />
                     </div>
-                    <div className='d-flex justify-content-center'>
+                    <div className='d-flex justify-content-center GQFormSubmitRes'>
                         <button type="submit" className={props.className ? props.className : "btn bg-white darkBlue fw-semibold px-4"}
                         >Submit</button>
                     </div>
