@@ -140,6 +140,7 @@
     background-color: #fff;
     padding: 20px; */
 }
+
 .about-slider-image {
     width: 118px !important;
     border-radius: 50%;
@@ -209,7 +210,8 @@
 .TemMemImg:hover+.TeamMemNames {
     display: block;
 }
-.AwardsCertificatesImg{
+
+.AwardsCertificatesImg {
     margin-bottom: 25px;
 }
 
@@ -224,14 +226,20 @@
         margin: 0px;
         padding: 18px;
     }
+
     .section_header p {
-        padding: 0px 150px; 
+        padding: 0px 150px;
         font-size: 18px;
     }
-    .section_header_Infra h2, .team-header h2, .section_header_Certificates h2{
+
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
         padding: 0 0 10px 0;
     }
-    .row1, .row2 {
+
+    .row1,
+    .row2 {
         padding: 30px 45px 0px;
     }
 }
@@ -241,14 +249,20 @@
         margin: 0px;
         padding: 18px;
     }
+
     .section_header p {
-        padding: 0px 150px; 
+        padding: 0px 150px;
         font-size: 18px;
     }
-    .section_header_Infra h2, .team-header h2, .section_header_Certificates h2{
+
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
         padding: 0 0 10px 0;
     }
-    .row1, .row2 {
+
+    .row1,
+    .row2 {
         padding: 30px 45px 0px;
     }
 }
@@ -260,41 +274,57 @@
     }
 
     .section_header p {
-        padding: 0px 150px; 
+        padding: 0px 150px;
         font-size: 18px;
     }
-    .section_header_Infra h2, .team-header h2, .section_header_Certificates h2{
+
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
         padding: 0 0 10px 0;
     }
-    .row1, .row2 {
+
+    .row1,
+    .row2 {
         padding: 30px 45px 0px;
     }
 }
 
 @media only screen and (min-width: 769px) and (max-width: 991px) {
-    .row1, .row2 {
+
+    .row1,
+    .row2 {
         padding: 45px 25px 0px;
     }
+
     .row3 {
         padding: 70px 30px 70px;
     }
+
     .vmcontainer {
         margin: 0px;
         padding: 18px;
     }
+
     .section_header p {
         padding: 0px;
         font-size: 18px;
     }
-.section_header_Infra h2, .team-header h2, .section_header_Certificates h2{
-    padding: 0 0 10px 0;
-}
-.india-map-text { 
-    padding: 30px;
-}
-.row1, .row2 {
-    padding: 30px 45px 0px;
-}
+
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
+        padding: 0 0 10px 0;
+    }
+
+    .india-map-text {
+        padding: 30px;
+    }
+
+    .row1,
+    .row2 {
+        padding: 30px 45px 0px;
+    }
 }
 
 
@@ -330,10 +360,14 @@
     .india-map-text {
         padding: 5px;
     }
-    .section_header_Infra h2, .team-header h2, .section_header_Certificates h2 {
+
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
         padding: 0 0 10px 0;
     }
-    .AwardsCertificatesImg{
+
+    .AwardsCertificatesImg {
         margin-bottom: 25px;
     }
 }
@@ -364,14 +398,17 @@
         font-size: 18px;
     }
 
-    .section_header_Infra h2, .team-header h2, .section_header_Certificates h2{
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
         padding: 0 0 10px 0;
     }
 
     .india-map-text {
         padding: 5px;
     }
-    .AwardsCertificatesImg{
+
+    .AwardsCertificatesImg {
         margin-bottom: 25px;
     }
 }
@@ -390,20 +427,27 @@
     .about_icons {
         padding: 10px;
     }
+
     .vmcontainer {
         margin: 20px;
         padding: 25px;
     }
+
     .section_header p {
         padding: 0px;
         font-size: 18px;
     }
+
     .india-map-text {
         padding: 5px;
     }
-    .section_header_Infra h2, .team-header h2, .section_header_Certificates h2{
+
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
         padding: 0 0 10px 0;
     }
+
     .AwardsCertificatesImg {
         margin-bottom: 25px;
     }
@@ -434,14 +478,17 @@
         padding: 0px;
         font-size: 18px;
     }
+
     .india-map-text {
         padding: 5px;
     }
-    .section_header_Infra h2 , .team-header h2, .section_header_Certificates h2{
+
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
         padding: 0 0 10px 0;
     }
-
     .AwardsCertificatesImg{
         margin-bottom: 25px;
     } 
-}
+} 
