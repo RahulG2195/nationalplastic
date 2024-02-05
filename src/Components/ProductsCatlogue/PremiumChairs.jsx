@@ -13,16 +13,17 @@ const PremiumChairs = () => {
             <div className=" mt-3">
                 <div className="text-center">
                     <div className="fs-1 fw-bold text-danger">Premium <span className="darkBlue fw-normal">Chairs</span> </div>
-                    <div className="mt-1 fw-semibold">It is a long established fact that a reader will be distracted by the readable <br />
-                        content of a page when looking at its layout. The point of using Lorem Ipsum <br />
-                        is that it has a more-or-less normal distribution of letters, as opposed to using</div>
+                    <div className="mt-1 subCptRes fw-semibold"><p>It is a long established fact that a reader will be distracted by the readable</p>
+                        <p>content of a page when looking at its layout. The point of using Lorem Ipsum </p>
+                        <p>is that it has a more-or-less normal distribution of letters, as opposed to using</p>
+                    </div>
                 </div>
 
 
-                <div className="px-5 mx-5 mt-5 d-flex justify-content-between">
+                <div className="px-5 mx-5 dropboxRes mt-5 d-flex justify-content-between">
                     <div>
                         <div className='text-body-secondary fw-semibold'>FILTER BY</div>
-                        <div className="d-flex gap-3 mt-2">
+                        <div className="d-flex flex-wrap gap-3 mt-2">
                             {filters.map((filter, index) => (
                                 <div key={index} className="dropdown arrow">
                                     <button className="btn bg-transperent dropdown-toggle rounded-pill fw-semibold" type="button" data-bs-toggle="dropdown" aria-expanded="false">

@@ -12,7 +12,7 @@ const MoreProduct = () => {
                 </div>
             </div>
             <div className="product-info-tabs">
-                <ul className="nav nav-tabs" id="myTab" role="tablist">
+                <ul className="nav nav-tabs justify-content-center" id="myTab" role="tablist">
                     <li className="nav-item">
                         <a
                             className="nav-link active"

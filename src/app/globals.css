@@ -137,4 +137,10 @@ p {
   margin: 10px 0;
   text-transform: uppercase;
 }
-/* >>>>>>> 26fc3532aa7d5b21048411ef84f0b3f1c165ae85 */
+
+@media (max-width:600px) {
+  .subCptRes p{
+      font-size: 10px !important;
+
+  }
+}

@@ -24,8 +24,10 @@ const RecentlyViewed = () => {
             <div className="mt-5">
                 <div className="text-center">
                     <div className="fs-1 fw-bold text-danger">Recently Viewed <span className="darkBlue fw-normal">Products</span> </div>
-                    <div className="mt-1 fw-semibold">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has <br />
-                        been the industry's standard dummy text ever since the 1500s,</div>
+                    <div className="mt-1 subCptRes fw-semibold">
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has </p>
+                        <p>been the industry's standard dummy text ever since the 1500s,</p>
+                    </div>
                 </div>
             </div>
 
@@ -67,7 +69,7 @@ const RecentlyViewed = () => {
                             <SwiperSlide key={index}>
 
 
-                                <PreChairsCard 
+                                <PreChairsCard
                                     ChairImg={chair.ChairImg}
                                     Title={chair.Title}
                                     Discription={chair.Discription}
