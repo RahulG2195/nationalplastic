@@ -178,7 +178,7 @@ function ContactUs() {
         </div>
 
         <div className="row LocationSection">
-          <div className="col-md-6 col-lg-6 col-xl-4  CTAOnLocation">
+          <div className="col-md-4">
             <div className="location-image">
               <Image
                 src="/assets/images/ContactUs/red-place-marker-white-background.png"
