@@ -1,0 +1,34 @@
+.DTS {
+
+    height: 600px;
+    width: 600px;
+    margin: auto;
+    background-color: #F6F6F6;
+}
+
+.DTSCaption {
+    height: 150px;
+    width: 600px;
+    text-align: justify;
+    overflow-y: scroll;
+    margin: auto;
+}
+
+.DetailCard {
+    overflow: visible !important;
+    width: 60%;
+}
+
+.DetailDTS {
+    width: 60%;
+    height: 80vh;
+    background-color: #F6F6F6;
+}
+
+.BottomCardsCptn {
+    width: 600px;
+    text-align: left;
+    margin: auto;
+
+
+}

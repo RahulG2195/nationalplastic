@@ -45,7 +45,7 @@ function AddToCart() {
       </div>
       <div className="container cartView">
         <div className="row">
-          <div className="col-md-8">
+          <div className="col-sm-12 col-md-8 col-lg-8 col-xl-8">
             <div className="row my-cart">
               <div className="col-md-4">
                 <h5>My Cart (0)</h5>
@@ -100,7 +100,7 @@ function AddToCart() {
             </div>
           </div>
 
-          <div className="col-md-4 place-order">
+          <div className="col-sm-12 col-md-4 col-lg-4 col-xl-4 place-order">
             <PriceDetailsCard/>
           </div>
         </div>

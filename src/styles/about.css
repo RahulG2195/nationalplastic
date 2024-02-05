@@ -6,6 +6,10 @@
     color: #fff;
 }
 
+:root {
+    --swiper-theme-color: red;
+}
+
 .row1,
 .row2 {
     padding: 70px 106px 0px;
@@ -123,18 +127,20 @@
     border-radius: 10px;
     position: relative;
 }
-.about-slider-yellow p{
+
+.about-slider-yellow p {
     font-size: 12px;
     font-weight: 600;
     padding: 12px;
 }
 
-.about-slider-yellow img{
+.about-slider-yellow img {
     /* width: 80px !important;
     border-radius: 50%;
     background-color: #fff;
     padding: 20px; */
 }
+
 .about-slider-image {
     width: 118px !important;
     border-radius: 50%;
@@ -145,52 +151,345 @@
     right: 0;
 }
 
-.about-slider-yellow button{
-background-color: #CC0008;
-color: #fff;
-border: none;
-border-radius: 6px;
-font-weight: 600;
-padding: 7px 30px;
-margin: 35px;
+.about-slider-yellow button {
+    background-color: #CC0008;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    padding: 7px 30px;
+    margin: 35px;
 }
 
 .my-slider {
-    margin: 0px 100px;
+    margin: 0px auto;
     position: relative;
+    padding: 0 40px;
 }
-.about-slider-yellow h2{
+
+.swiper-button-prev,
+.swiper-rtl .swiper-button-next,
+.swiper-button-prev:after,
+.swiper-button-next:after {
+    color: #CC0008;
+}
+
+.about-slider-yellow h2 {
     color: #CC0008;
     padding-top: 95px;
- }
- .about-slider-image{
+}
+
+.about-slider-image {
     position: absolute;
     top: -20%;
- }
- .about-slider-image img{
-    margin: auto;
- }
- .swiper{
-    overflow-y:clip !important;
-     overflow:visible !important;
- }
- .TeamMemCard{
-    position: relative;
- }
+}
 
- .TeamMemNames {
+.about-slider-image img {
+    margin: auto;
+}
+
+.swiper {
+    overflow-y: clip !important;
+    overflow: visible !important;
+}
+
+.TeamMemCard {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.TeamMemNames {
     display: none;
     position: absolute;
-    bottom: 10%; 
+    bottom: 10%;
     text-align: center;
     left: 0;
     right: 0;
- }
- .TemMemImg:hover + .TeamMemNames {
+}
+
+.TemMemImg:hover+.TeamMemNames {
     display: block;
- }
+}
+
+.AwardsCertificatesImg {
+    margin-bottom: 25px;
+}
+
+/* RESPONSIVE */
+
+@media only screen and (min-width: 1502) {}
+
+@media only screen and (min-width: 1367px) and (max-width: 1501px) {}
+
+@media only screen and (min-width: 1201px) and (max-width: 1366px) {
+    .vmcontainer {
+        margin: 0px;
+        padding: 18px;
+    }
+
+    .section_header p {
+        padding: 0px 150px;
+        font-size: 18px;
+    }
+
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
+        padding: 0 0 10px 0;
+    }
+
+    .row1,
+    .row2 {
+        padding: 30px 45px 0px;
+    }
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1200px) {
+    .vmcontainer {
+        margin: 0px;
+        padding: 18px;
+    }
+
+    .section_header p {
+        padding: 0px 150px;
+        font-size: 18px;
+    }
+
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
+        padding: 0 0 10px 0;
+    }
+
+    .row1,
+    .row2 {
+        padding: 30px 45px 0px;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1024px) {
+    .vmcontainer {
+        margin: 0px;
+        padding: 18px;
+    }
+
+    .section_header p {
+        padding: 0px 150px;
+        font-size: 18px;
+    }
+
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
+        padding: 0 0 10px 0;
+    }
+
+    .row1,
+    .row2 {
+        padding: 30px 45px 0px;
+    }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 991px) {
+
+    .row1,
+    .row2 {
+        padding: 45px 25px 0px;
+    }
+
+    .row3 {
+        padding: 70px 30px 70px;
+    }
+
+    .vmcontainer {
+        margin: 0px;
+        padding: 18px;
+    }
+
+    .section_header p {
+        padding: 0px;
+        font-size: 18px;
+    }
+
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
+        padding: 0 0 10px 0;
+    }
+
+    .india-map-text {
+        padding: 30px;
+    }
+
+    .row1,
+    .row2 {
+        padding: 30px 45px 0px;
+    }
+}
 
 
 
 
- 
+
+/* Mobile */
+@media only screen and (min-width: 601px) and (max-width: 768px) {
+
+    .row1,
+    .row2 {
+        padding: 30px 0px 0px;
+    }
+
+    .row3 {
+        padding: 70px 10px 70px;
+    }
+
+    .vmcontainer {
+        margin: 20px;
+        padding: 30px;
+    }
+
+    .about_icons {
+        padding: 10px;
+    }
+
+    .section_header p {
+        padding: 0px;
+        font-size: 18px;
+    }
+
+    .india-map-text {
+        padding: 5px;
+    }
+
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
+        padding: 0 0 10px 0;
+    }
+
+    .AwardsCertificatesImg {
+        margin-bottom: 25px;
+    }
+}
+
+
+@media only screen and (min-width: 481px) and (max-width: 600px) {
+
+    .row1,
+    .row2 {
+        padding: 30px 0px 0px;
+    }
+
+    .row3 {
+        padding: 70px 10px 70px;
+    }
+
+    .vmcontainer {
+        margin: 20px;
+        padding: 10px;
+    }
+
+    .about_icons {
+        padding: 10px;
+    }
+
+    .section_header p {
+        padding: 0px;
+        font-size: 18px;
+    }
+
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
+        padding: 0 0 10px 0;
+    }
+
+    .india-map-text {
+        padding: 5px;
+    }
+
+    .AwardsCertificatesImg {
+        margin-bottom: 25px;
+    }
+}
+
+@media only screen and (min-width: 361px) and (max-width: 480px) {
+
+    .row1,
+    .row2 {
+        padding: 30px 0px 0px;
+    }
+
+    .row3 {
+        padding: 70px 10px 70px;
+    }
+
+    .about_icons {
+        padding: 10px;
+    }
+
+    .vmcontainer {
+        margin: 20px;
+        padding: 25px;
+    }
+
+    .section_header p {
+        padding: 0px;
+        font-size: 18px;
+    }
+
+    .india-map-text {
+        padding: 5px;
+    }
+
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
+        padding: 0 0 10px 0;
+    }
+
+    .AwardsCertificatesImg {
+        margin-bottom: 25px;
+    }
+
+}
+
+@media only screen and (max-width: 360px) {
+
+    .row1,
+    .row2 {
+        padding: 30px 0px 0px;
+    }
+
+    .row3 {
+        padding: 70px 10px 70px;
+    }
+
+    .vmcontainer {
+        margin: 20px;
+        padding: 10px;
+    }
+
+    .about_icons {
+        padding: 10px;
+    }
+
+    .section_header p {
+        padding: 0px;
+        font-size: 18px;
+    }
+
+    .india-map-text {
+        padding: 5px;
+    }
+
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
+        padding: 0 0 10px 0;
+    }
+
+    .AwardsCertificatesImg {
+        margin-bottom: 25px;
+    }
+}

@@ -23,10 +23,10 @@
     content: url("/Assets/svg/Group 931.svg");
     position: absolute;
     right: 35%;
-    bottom:1%;
+    bottom:12%;
 
 }
-.height{
+.Hiringheight{
     height:100vh;
     position:relative !important;
 }

@@ -40,14 +40,15 @@
 }
 
 .cartView {
-    margin: 50px;
+    margin: 50px auto;
 }
 .my-cart{
     background-color: #F6F6F6; 
-    padding: 19px 4px;
+    padding: 19px 10px;
+    margin: 10px;
 }
 .place-order{
-    background-color: #F6F6F6; 
+    /* background-color: #F6F6F6;  */
 }
 
 .locationPin .input-group input{
@@ -128,4 +129,35 @@ box-shadow:none !important;
     border: none;
     background-color: #f8f9fa;
  }
+ 
+ .place-order .PriceDetail{ 
+    margin: 10px;
+    padding: 10px;
+    background-color: #F6F6F6;
+ }
+ @media only screen and (min-width: 1502) {}
+ @media only screen and (min-width: 1367px) and (max-width: 1501px) {} 
+ @media only screen and (min-width: 1201px) and (max-width: 1366px) {}
+ @media only screen and (min-width: 1025px) and (max-width: 1200px) {}
+ @media only screen and (min-width: 992px) and (max-width: 1024px) {}
+ @media only screen and (min-width: 769px) and (max-width: 991px) {
+    .CartQuantity .input-group {
+        width: 24% !important;
+     }
+ }
+ 
+ /* Mobile: */
+ @media only screen and (min-width: 601px) and (max-width: 768px) {
+    .card-Quantity-section{
+        margin-top: 20px;
+     }
+     .CartQuantity .input-group {
+        width: 24% !important;
+     }
+ }
+ @media only screen and (min-width: 481px) and (max-width: 600px) {}
+ @media only screen and (min-width: 361px) and (max-width: 480px) {}
+ @media only screen and (max-width: 360px) {}
+
+ 
 

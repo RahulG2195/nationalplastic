@@ -7,7 +7,7 @@ import { Navigation, Autoplay, Pagination, Scrollbar, A11y } from 'swiper/module
 const Slider = () => {
     return (
         <>
-            <div className="Slider_container position-relative">
+            <div className="Slider_container position-relative mb-5">
                 <div className=" CSRslider">
                 </div>
 

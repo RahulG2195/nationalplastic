@@ -15,33 +15,4 @@
     height: 100%;
     width: 100%;
 }
-@media (max-width:768px) {
-    .custReview{
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-    .custReviewContainer{
-        /* margin:0 10px !important; */
-        width: 100% !important;
-    }
-    .resVeiwBtn{
-        margin-bottom: 20px;
-    }
-
-    
-}
-@media (max-width:444px) {
-    .filterSortRes span{
-        font-size: 10px !important;
-
-    }
-    .filterSortRes i{
-        /* height: 20px;
-        width: 10px;
-        text-align: center; */
-        background-color:  transparent !important;
-    }
-
-    
-}
     
