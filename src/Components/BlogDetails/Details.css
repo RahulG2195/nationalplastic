@@ -1,0 +1,13 @@
+.Details_cont{
+    height:auto;
+}
+.comntArea{
+    height: 150px;
+}
+.blogCmnts input{
+    height: 50px;
+}
+.blogCmnts textarea, .blogCmnts input {
+    border-color: #707070;
+}
+

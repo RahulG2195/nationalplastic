@@ -133,8 +133,8 @@
     /* width: 80px !important;
     border-radius: 50%;
     background-color: #fff;
-    padding: 20px; */
-}
+    padding: 20px;
+} */
 .about-slider-image {
     width: 118px !important;
     border-radius: 50%;
@@ -174,3 +174,23 @@ margin: 35px;
     overflow-y:clip !important;
      overflow:visible !important;
  }
+ .TeamMemCard{
+    position: relative;
+ }
+
+ .TeamMemNames {
+    display: none;
+    position: absolute;
+    bottom: 10%; 
+    text-align: center;
+    left: 0;
+    right: 0;
+ }
+ .TemMemImg:hover + .TeamMemNames {
+    display: block;
+ }
+
+
+
+
+ 
