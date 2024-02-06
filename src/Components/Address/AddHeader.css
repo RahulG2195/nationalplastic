@@ -1,66 +1,21 @@
-.AddHeader {
+.ATCflow {
+    display: flex;
+    justify-content: center;
     background-color: #F6F6F6;
-    height: 10vh;
+    padding: 20px;
+    font-weight: 600;
 }
 
-.AddHeader {
-    color: var(--primary-color);
+.ATCflow p {
+    color: #262262;
 }
 
-.Addleft {
-    background-color: #f7f7f7;
-    min-height: 70vh;
+.ATCflow p span {
+    color: #C9070F;
 }
-
-
-.summary {
-    min-height: 35vh !important;
-    margin-bottom: 10vh !important;
-}
-
-.BGcolor {
-    background-color:#f7f7f7;
-    min-height: 35vh;
-    width: 100%;
-    gap: 50px;
-}
-
-.confirm {
-    color: var(--primary-color);
-    font-size: x-large;
-}
-
-.bordrBtm {
-    border-bottom: 1px solid #1E1F1E3D;
-
-}
-
-.customerAddress {
-    max-width: 40%;
-}
-
-.form-check-input:checked {
-    border-color: #dc3545;
-    /* color: red; */
-    background-color: #dc3545;
-
-}
-
-.form-check-input:focus {
-    box-shadow: none !important;
-
-}
-
-.buying .form-check-input:checked {
-    border-color:rgb(91, 210, 91) !important;
-    background-color:rgb(91, 210, 91) !important ;
-
-}
-.orderImage{
-    height: 40%;
-    width: 40%;
-}
-.orderImage img{
-    height: 100%;
-    width: 100%;
+@media (max-width:350px) {
+    .ATCflow p {
+        font-size: x-small !important;
+    }
+    
 }

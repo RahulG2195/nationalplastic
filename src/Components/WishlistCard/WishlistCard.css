@@ -93,3 +93,18 @@
 
 
 }
+
+@media (max-width:1000px) {
+    .moveTocartResp{
+        font-size: small !important;
+        padding: 5px !important;
+    }
+    
+}
+@media (max-width:364px) {
+    .moveTocartResp{
+        font-size: x-small !important;
+        padding: 5px !important;
+    }
+    
+}

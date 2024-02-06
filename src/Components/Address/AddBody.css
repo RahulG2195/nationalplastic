@@ -1,0 +1,58 @@
+/* AddBody.css */
+
+.main_container {
+    margin-top: 5rem; /* Adjust margin-top as needed */
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.Addleft {
+    background-color: #f7f7f7;
+    min-height: 70vh; /* Adjust min-height as needed */
+    padding: 1.5rem; /* Adjust padding as needed */
+}
+
+.bordrBtm {
+    border-bottom: 1px solid #1E1F1E3D; /* Adjust border color and style as needed */
+}
+
+.confirm {
+    color: var(--primary-color);
+    font-size: x-large; /* Adjust font size as needed */
+}
+
+.customerAddress {
+    max-width: 40%; /* Adjust max-width as needed */
+}
+
+.form-check-input:checked {
+    border-color: #dc3545;
+    background-color: #dc3545;
+}
+
+.form-check-input:focus {
+    box-shadow: none !important;
+}
+
+.buying .form-check-input:checked {
+    border-color: rgb(91, 210, 91) !important;
+    background-color: rgb(91, 210, 91) !important;
+}
+
+.summary {
+    min-height: 35vh !important; /* Adjust min-height as needed */
+    margin-bottom: 10vh !important; /* Adjust margin-bottom as needed */
+}
+
+.BGcolor {
+    background-color: #f7f7f7;
+    min-height: 35vh; /* Adjust min-height as needed */
+    width: 100%;
+}
+
+.AddRight {
+    text-align: start; /* Adjust text alignment as needed */
+}
+
+/* Add any additional styles based on your requirements */
