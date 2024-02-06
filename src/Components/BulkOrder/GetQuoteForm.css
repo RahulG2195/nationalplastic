@@ -12,10 +12,8 @@
 .input-group-text,
 .text-area {
     background-color: #4D50A2;
-    /* opacity: 4; */
     border: none;
     color: white;
-    /* height: 50px; */
 }
 
 .GQform .text-area{
@@ -47,4 +45,24 @@
     border-radius: 10px;
     
 
+}
+@media (max-width:600px) {
+    .GQFormRes{
+        padding: 10px !important;
+        margin: 0 !important;
+        width: 100%;
+        }
+
+        .GQFormRes input, .GQFormRes textarea {
+            font-size: x-small;
+        }
+        
+        .GQFormRes .reqCaptRes{
+            font-size:xx-small;
+
+        }
+        .GQFormSubmitRes button{
+            padding:5px 10px !important ;
+            font-size: small;
+        }
 }
