@@ -4,8 +4,8 @@ function TrackYourOrder() {
   return (
     <>
       <div className="container">
-        <div className="row">
-          <div className="col-md-6">
+        <div className="row TrackOrder">
+          <div className="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <Image
               src="/assets/images/catalogue/trackYourOrder.png"
               width={100}
@@ -14,7 +14,7 @@ function TrackYourOrder() {
               objectFit="cover"
             />
           </div>
-          <div className="col-md-6 TYOdiv">
+          <div className="col-sm-12 col-md-6 col-lg-6 col-xl-6 TYOdiv">
             <h1 className="headingTYO">Track Your Order</h1>
             <h4 className="TYODesc">Find out the exact location of your </h4>
             <h4 className="TYODesc"> product and get the relevant alerts.</h4>

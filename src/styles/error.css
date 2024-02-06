@@ -30,3 +30,9 @@
     height: auto;
     margin: 22px auto;
 }
+
+/* RESPONSIVE */
+
+.error-main-container{
+    padding: 100px 2px
+}
