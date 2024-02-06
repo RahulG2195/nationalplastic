@@ -1,3 +1,11 @@
-.chairCard{
+.chairCard {
     width: 50%;
+}
+
+@media (max-width:576px) {
+    .PreCardSm {
+        padding-left: 50px !important;
+        padding-right: 50px !important;
+    }
+
 }

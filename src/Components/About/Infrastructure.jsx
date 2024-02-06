@@ -4,7 +4,7 @@ import Image from "next/image";
 function Infrastructure() {
   return (
     <div className="container">
-      <div className="row section_header">
+      <div className="row section_header section_header_Infra ">
         <h2>
           Infra<span>structure</span>
         </h2>
@@ -15,7 +15,7 @@ function Infrastructure() {
         </p>
       </div>
       <div className="row infrastructure-row">
-        <div className="col-md-6">
+        <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
           {/* <<<<<<< HEAD */}
           <div className="india-map-image">
             <Image
@@ -29,7 +29,7 @@ function Infrastructure() {
             />
           </div>
           </div>
-          <div className="col-md-6 india-map-text">
+          <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 india-map-text">
             <h2>Lorem ipsum</h2>
             <p>
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam

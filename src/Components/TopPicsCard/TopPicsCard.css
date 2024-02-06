@@ -22,5 +22,13 @@
 
 }
 
+@media only screen and (min-width: 991px) and (max-width: 1256px) {
+    .GqRmbtnRes button{
+        font-size: x-small !important;
+        padding: 2px !important;
+    } 
+} 
+
+
 
     

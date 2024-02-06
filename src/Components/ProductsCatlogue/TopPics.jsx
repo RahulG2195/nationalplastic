@@ -22,7 +22,9 @@ const TopPics = () => {
             <div className="main_container mt-5">
                 <div className="text-center mt-5">
                     <div className="fs-1 fw-bold text-danger"> Top Pics <span className="darkBlue fw-normal">For you</span> </div>
-                    <div className="mt-1 fw-semibold">It is a long established fact that a reader will be distracted by the <br /> readable content of a page when looking at its layout.</div>
+                    <div className="mt-1 fw-semibold subCptRes">
+                        <p>It is a long established fact that a reader will be distracted by the </p> <p>readable content of a page when looking at its layout.</p>
+                    </div>
                 </div>
 
                 <div className='d-flex justify-content-center gap-2 flex-wrap'>

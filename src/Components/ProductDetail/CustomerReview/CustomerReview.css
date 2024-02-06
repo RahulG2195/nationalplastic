@@ -2,6 +2,9 @@
     height:'';
     width: 70%;
 }
+.custReviewContainer{
+    margin: 0 auto;
+}
 
 .custReviewLeft {
     height: 100%;

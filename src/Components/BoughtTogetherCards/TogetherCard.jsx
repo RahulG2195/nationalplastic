@@ -19,7 +19,7 @@ const TogetherCard = (props) => {
                 </div>
                 <div className="card-body d-flex gap-1 ">
                 {props.caption ? null : <div><i className="medium fa fa-inr fw-bold" aria-hidden="true"></i></div>}
-                     <div className='medium fw-bold '> {props.caption ?props.caption : props.Price}</div>
+                     <div className='medium fw-bold mb-2 '> {props.caption ?props.caption : props.Price}</div>
                 </div>
             </div>
         </>

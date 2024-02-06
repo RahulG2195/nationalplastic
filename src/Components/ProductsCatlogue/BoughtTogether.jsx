@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import 'swiper/swiper-bundle.css';
 import Image from "next/image";
+import './BoughtTogether.css'
 
 const BoughtTogether = () => {
     const togetherCardsData = [
@@ -22,8 +23,8 @@ const BoughtTogether = () => {
             <div className="mt-5">
                 <div className="text-center">
                     <div className="fs-1 fw-bold text-danger">Frequently Bought <span className="darkBlue fw-normal">Together</span> </div>
-                    <div className="mt-1 fw-semibold">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has <br />
-                        been the industry's standard dummy text ever since the 1500s,</div>
+                    <div className="mt-1 fw-semibold subCptRes"><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has</p><p>
+                        been the industry's standard dummy text ever since the 1500s,</p></div>
                 </div>
             </div>
 

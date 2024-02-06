@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import "../../styles/contactus.css";
+import "../../styles/contactus.css"; 
 import ContactUsCard from "@/Components/ContactUs/ContactUsCard";
 function ContactUs() {
   const RegisteredOfficeCardArr = [
@@ -177,7 +177,7 @@ function ContactUs() {
           </div>
         </div>
 
-        <div className="row">
+        <div className="row LocationSection">
           <div className="col-md-4">
             <div className="location-image">
               <Image
@@ -210,7 +210,7 @@ function ContactUs() {
               </div>
             </div>
           </div>
-          <div className="col-md-8 map-image" >
+          <div className="col-md-6 col-lg-6 col-xl-8 map-image" >
             <Image
               src="/assets/images/ContactUs/map.png"
               width={100}

@@ -1,23 +1,44 @@
-import TogetherCard from "../BoughtTogetherCards/TogetherCard"
-import DiningTableCard from "../DiningTableCard/DiningTableCard"
-import PopularCards from "../PopularPostsCards/PopularCards"
-import './Details.css'
+"use client"
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import 'swiper/swiper-bundle.css';
+import TogetherCard from "../BoughtTogetherCards/TogetherCard";
+import DiningTableCard from "../DiningTableCard/DiningTableCard";
+import PopularCards from "../PopularPostsCards/PopularCards";
+import './Details.css';
 
 const Details = () => {
-
     const togetherCardsData = [
-        { imgSrc: "/Assets/images/Magna/Magna.png", price: "00,000" },
-        { imgSrc: "/Assets/images/The-boss/The-boss.png", price: "00,000" },
-        { imgSrc: "/Assets/images/Top-selling-product/Top-selling-product.png", price: "00,000" },
-        { imgSrc: "/Assets/images/Magna/Magna.png", price: "00,000" },
-        { imgSrc: "/Assets/images/The-boss/The-boss.png", price: "00,000" },
-        { imgSrc: "/Assets/images/Top-selling-product/Top-selling-product.png", price: "00,000" },
-
+        {
+            imgSrc: "/Assets/images/Magna/Magna.png",
+            caption: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam "
+        },
+        {
+            imgSrc: "/Assets/images/The-boss/The-boss.png",
+            caption: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam "
+        },
+        {
+            imgSrc: "/Assets/images/Top-selling-product/Top-selling-product.png",
+            caption: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam "
+        },
+        {
+            imgSrc: "/Assets/images/Magna/Magna.png",
+            caption: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam "
+        },
+        {
+            imgSrc: "/Assets/images/The-boss/The-boss.png",
+            caption: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam "
+        },
+        {
+            imgSrc: "/Assets/images/Top-selling-product/Top-selling-product.png",
+            caption: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam "
+        },
     ];
+
     return (
         <>
-            <div class="row mx-4">
-                <div class="col-8 mt-5 ">
+            <div className="row mx-4">
+                <div className="col-md-8 mt-5">
                     <div className="text-center">
                         <p className="small litegray">December 10, 2023</p>
                         <p className="darkBlue fw-bold fs-2 mb-5">Dining Table Set</p>
@@ -27,41 +48,75 @@ const Details = () => {
                     <DiningTableCard BottomCardsCptn="BottomCardsCptn" />
                     <div className="border-bottom border-secondary w-75 my-4 m-auto"></div>
 
-                    <div class=" blogCmnts">
-                        <p className="darkBlue fw-bold fs-4 m-4">Leave a Comment  </p>
-                        <textarea class="form-control comntArea w-100" placeholder="Leave a comment here" id="floatingTextarea2"></textarea>
-                        <div className="d-flex gap-5 my-3">
-                            <input type="text" class="form-control" placeholder="Name" />
-                            <input type="email" class="form-control" placeholder="Email" />
+                    <div className="blogCmnts">
+                        <p className="darkBlue fw-bold fs-4 m-4">Leave a Comment</p>
+                        <textarea className="form-control comntArea w-100" placeholder="Leave a comment here" id="floatingTextarea2"></textarea>
+                        <div className="d-flex CmntNameRes gap-5 my-3">
+                            <input type="text" className="form-control" placeholder="Name" />
+                            <input type="email" className="form-control" placeholder="Email" />
                         </div>
                         <center>
-                            <button type="button" class="btn btn-danger commentBtn py-3 px-4 my-4 small">POST A COMMENT</button>
+                            <button type="button" className="btn btn-danger commentBtn py-3 px-4 my-4 small">POST A COMMENT</button>
                         </center>
                     </div>
-
                 </div>
 
-                <div className="col-4 mt-5 ">
-                    <div className=''>
+                <div className="col-md-4 mt-5">
+                    <div className='sticky-sidebar'>
                         <PopularCards StikyCard="DetailsPopularCard" />
                     </div>
                 </div>
-
             </div>
+
             <div className="text-center mt-5 pt-5 mb-4">
-                <div className="text-danger fw-bold fs-1">you Might<span className=" darkBlue fw-normal"> Also Like</span> </div>
-                <div className=" mt-1 fw-normal medium ">
+                <div className="text-danger fw-bold fs-1">You Might<span className="darkBlue fw-normal"> Also Like</span></div>
+                <div className="mt-1 fw-normal medium subCptRes">
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has</p>
                     <p>been the industry's standard dummy text ever since the 1500s,</p>
                 </div>
             </div>
-            <div className="d-flex justify-content-center mx-5 mb-5 px-5">
-                <TogetherCard imgSrc={"/Assets/images/Top-selling-product/Top-selling-product.png"} caption={" Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam "} />
-                <TogetherCard imgSrc={"/Assets/images/The-boss/The-boss.png"} caption={" Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam "} />
-                <TogetherCard imgSrc={"/Assets/images/Magna/Magna.png"} caption={" Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam "} />
-            </div>
 
+
+            <div className="d-flex justify-content-center mx-5 mb-5 py-5 px-5 DetailsTogetherSlide">
+                <Swiper
+                    modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+                    spaceBetween={50}
+                    slidesPerView={3}
+                    // navigation
+                    pagination={true}
+                    loop={true}
+                    autoplay={{
+                        delay: 4000,
+                        disableOnInteraction: false,
+                    }}
+                    breakpoints={{
+                        200: {
+                            slidesPerView: 1,
+                            spaceBetween: 20,
+                        },
+                        640: {
+                            slidesPerView: 2,
+                            spaceBetween: 20,
+                        },
+                        768: {
+                            slidesPerView: 3,
+                            spaceBetween: 40,
+                        },
+                        1024: {
+                            slidesPerView: 3,
+                            spaceBetween: 50,
+                        },
+                    }}
+                >
+                    {togetherCardsData.map((card, index) => (
+                        <SwiperSlide key={index}>
+                            <TogetherCard imgSrc={card.imgSrc} caption={card.caption} />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            </div>
         </>
-    )
-}
-export default Details 
+    );
+};
+
+export default Details;
