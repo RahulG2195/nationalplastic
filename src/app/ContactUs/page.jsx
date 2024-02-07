@@ -99,8 +99,7 @@ function ContactUs() {
 
             <div className=" row GTA">
               <div className="col-md-6 GTA-inner">
-                <h1>Get In</h1>
-                <h1>Touch</h1>
+                <h1>Get In Touch</h1>
               </div>
 
               <div className="col-md-6 cta-form">
@@ -178,7 +177,7 @@ function ContactUs() {
         </div>
 
         <div className="row LocationSection">
-          <div className="col-md-4">
+          <div className="col-md-6 col-lg-6 col-xl-4">
             <div className="location-image">
               <Image
                 src="/assets/images/ContactUs/red-place-marker-white-background.png"

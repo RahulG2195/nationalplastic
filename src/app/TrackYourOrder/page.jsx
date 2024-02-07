@@ -1,4 +1,4 @@
-import Image from "next/image"; 
+import Image from "next/image";
 import "../../styles/trackYourOrder.css";
 function TrackYourOrder() {
   return (
@@ -23,29 +23,29 @@ function TrackYourOrder() {
 
         <div className="row">
           <div className="TOInnerDiv">
-          <div className="DataInnerDiv">
-      <form action="#">
-        <div className="radioBtn">
-        <p>Search By :</p>
-        <input type="radio" id="" name="" value="Order Id/ No" />
-        <label htmlFor="Order Id/ No">Order Id/ No</label>
-        <input type="radio" id="" name="" value="Tracking ID/ AWB" />
-        <label htmlFor="Tracking ID/ AWB">Tracking ID/ AWB</label>
-        </div>
-        <div className="input-group mb-3">
-      <input
-        type="text"
-        className="form-control"
-        placeholder="Enter your Order Id/ No" 
-      />
-      <div className="input-group-append">
-        <span className="input-group-text" id="basic-addon2">Track Your Order</span>
-      </div>
-    </div>
-      </form>
-    </div>
-
-
+            <div className="DataInnerDiv">
+              <form action="#">
+                <div className="radioBtn">
+                  <p>Search By :</p>
+                  <input type="radio" id="" name="" value="Order Id/ No" />
+                  <label htmlFor="Order Id/ No">Order Id/ No</label>
+                  <input type="radio" id="" name="" value="Tracking ID/ AWB" />
+                  <label htmlFor="Tracking ID/ AWB">Tracking ID/ AWB</label>
+                </div>
+                <div className="input-group mb-3">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter your Order Id/ No"
+                  />
+                  <div className="input-group-append">
+                    <span className="input-group-text" id="basic-addon2">
+                      Track Your Order
+                    </span>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
