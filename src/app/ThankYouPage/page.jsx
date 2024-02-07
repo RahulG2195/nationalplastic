@@ -15,9 +15,9 @@ function ThankYouPage() {
         </div>
 
         <div className="row error-text">
-            <h1>Order Successful</h1>
-            <h5>Thankyou so much for your order</h5>
-            <button className="error-homepage-btn" >CHECK STATUS</button>
+          <h1>Order Successful</h1>
+          <h5>Thankyou so much for your order</h5>
+          <button className="error-homepage-btn">CHECK STATUS</button>
         </div>
       </div>
     </>

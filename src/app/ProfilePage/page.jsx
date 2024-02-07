@@ -1,4 +1,4 @@
-"use state"
+"use state";
 import FooterRow from "@/Components/FooterRow/FooterRow";
 import "../../styles/profilepage.css";
 import Wishlist from "../Wishlist/page";
@@ -82,7 +82,7 @@ function ProfilePage() {
 
           <div className="col-md-8">
             <div className="tab-content" id="nav-tabContent">
-{/* My orders */}
+              {/* My orders */}
               <div
                 className="tab-pane fade show active"
                 id="list-home"
@@ -174,111 +174,111 @@ function ProfilePage() {
                     </form>
                   </div>
                 </div>
-              </div> 
-{/* Address Book */}
+              </div>
+              {/* Address Book */}
               <div
                 className="tab-pane fade"
                 id="list-profile"
                 role="tabpanel"
                 aria-labelledby="list-profile-list"
-              > 
-                  <div className="Right-Profile">
-                    <h3>Address Book</h3>
-                    <hr />
+              >
+                <div className="Right-Profile">
+                  <h3>Address Book</h3>
+                  <hr />
 
-                    <div>
-                      <form>
-                        <div className="row user-data">
-                          <div className="col">
-                            <label htmlFor="">First name</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="First name"
-                            />
-                          </div>
-                          <div className="col">
-                            <label htmlFor="">Last name</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Last name"
-                            />
-                          </div>
+                  <div>
+                    <form>
+                      <div className="row user-data">
+                        <div className="col">
+                          <label htmlFor="">First name</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="First name"
+                          />
                         </div>
-                        <div className="row user-data">
-                          <div className="col">
-                            <label htmlFor="">E-mail Address</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="E-mail Address"
-                            />
-                          </div>
-                          <div className="col">
-                            <label htmlFor="">Mobile Number</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Mobile Number"
-                            />
-                          </div>
+                        <div className="col">
+                          <label htmlFor="">Last name</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Last name"
+                          />
                         </div>
-                        <div className="form-group row user-data">
-                          <div className="col-sm-10">
-                            <button type="submit" className="btn form-btn">
-                              Update
-                            </button>
-                          </div>
+                      </div>
+                      <div className="row user-data">
+                        <div className="col">
+                          <label htmlFor="">E-mail Address</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="E-mail Address"
+                          />
                         </div>
-                      </form>
-                    </div>
-                    <h3>Change Password</h3>
-                    <hr />
+                        <div className="col">
+                          <label htmlFor="">Mobile Number</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Mobile Number"
+                          />
+                        </div>
+                      </div>
+                      <div className="form-group row user-data">
+                        <div className="col-sm-10">
+                          <button type="submit" className="btn form-btn">
+                            Update
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <h3>Change Password</h3>
+                  <hr />
 
-                    <div>
-                      <form>
-                        <div className="row user-data">
-                          <div className="col">
-                            <label htmlFor="">Password</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="First name"
-                            />
-                          </div>
-                          <div className="col">
-                            <label htmlFor="">New Password</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Last name"
-                            />
-                          </div>
+                  <div>
+                    <form>
+                      <div className="row user-data">
+                        <div className="col">
+                          <label htmlFor="">Password</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="First name"
+                          />
                         </div>
+                        <div className="col">
+                          <label htmlFor="">New Password</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Last name"
+                          />
+                        </div>
+                      </div>
 
-                        <div className="form-group row">
-                          <div className="col-sm-10">
-                            <button type="submit" className="btn form-btn">
-                              Update Password
-                            </button>
-                          </div>
+                      <div className="form-group row">
+                        <div className="col-sm-10">
+                          <button type="submit" className="btn form-btn">
+                            Update Password
+                          </button>
                         </div>
-                      </form>
-                    </div>
+                      </div>
+                    </form>
                   </div>
                 </div>
-             
-{/* Wishlist */}
+              </div>
+
+              {/* Wishlist */}
               <div
                 className="tab-pane fade"
                 id="list-messages"
                 role="tabpanel"
                 aria-labelledby="list-messages-list"
               >
-                 <Wishlist />
-              </div> 
-{/* Help Desk */}
+                <Wishlist />
+              </div>
+              {/* Help Desk */}
               <div
                 className="tab-pane fade"
                 id="list-settings"
@@ -286,93 +286,91 @@ function ProfilePage() {
                 aria-labelledby="list-settings-list"
               >
                 <div className="Right-Profile">
-                    <h3>Help Desk</h3>
-                    <hr />
+                  <h3>Help Desk</h3>
+                  <hr />
 
-                    <div>
-                      <form>
-                        <div className="row user-data">
-                          <div className="col">
-                            <label htmlFor="">First name</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="First name"
-                            />
-                          </div>
-                          <div className="col">
-                            <label htmlFor="">Last name</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Last name"
-                            />
-                          </div>
+                  <div>
+                    <form>
+                      <div className="row user-data">
+                        <div className="col">
+                          <label htmlFor="">First name</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="First name"
+                          />
                         </div>
-                        <div className="row user-data">
-                          <div className="col">
-                            <label htmlFor="">E-mail Address</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="E-mail Address"
-                            />
-                          </div>
-                          <div className="col">
-                            <label htmlFor="">Mobile Number</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Mobile Number"
-                            />
-                          </div>
+                        <div className="col">
+                          <label htmlFor="">Last name</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Last name"
+                          />
                         </div>
-                        <div className="form-group row user-data">
-                          <div className="col-sm-10">
-                            <button type="submit" className="btn form-btn">
-                              Update
-                            </button>
-                          </div>
+                      </div>
+                      <div className="row user-data">
+                        <div className="col">
+                          <label htmlFor="">E-mail Address</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="E-mail Address"
+                          />
                         </div>
-                      </form>
-                    </div>
-                    <h3>Change Password</h3>
-                    <hr />
-
-                    <div>
-                      <form>
-                        <div className="row user-data">
-                          <div className="col">
-                            <label htmlFor="">Password</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="First name"
-                            />
-                          </div>
-                          <div className="col">
-                            <label htmlFor="">New Password</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Last name"
-                            />
-                          </div>
+                        <div className="col">
+                          <label htmlFor="">Mobile Number</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Mobile Number"
+                          />
                         </div>
-
-                        <div className="form-group row">
-                          <div className="col-sm-10">
-                            <button type="submit" className="btn form-btn">
-                              Update Password
-                            </button>
-                          </div>
+                      </div>
+                      <div className="form-group row user-data">
+                        <div className="col-sm-10">
+                          <button type="submit" className="btn form-btn">
+                            Update
+                          </button>
                         </div>
-                      </form>
-                    </div>
+                      </div>
+                    </form>
                   </div>
+                  <h3>Change Password</h3>
+                  <hr />
+
+                  <div>
+                    <form>
+                      <div className="row user-data">
+                        <div className="col">
+                          <label htmlFor="">Password</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="First name"
+                          />
+                        </div>
+                        <div className="col">
+                          <label htmlFor="">New Password</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Last name"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="form-group row">
+                        <div className="col-sm-10">
+                          <button type="submit" className="btn form-btn">
+                            Update Password
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
               </div>
-
-
             </div>
           </div>
         </div>

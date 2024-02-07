@@ -4,9 +4,9 @@ import Breadcrump from "../Breadcromp/page";
 function page() {
   return (
     <>
-    <div className="pd-wrap">
-        <Breadcrump/>
-      <ProdData/>
+      <div className="pd-wrap">
+        <Breadcrump />
+        <ProdData />
       </div>
     </>
   );

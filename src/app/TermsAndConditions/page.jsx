@@ -1,11 +1,10 @@
-import TC from '../../Components/TC/TC'
+import TC from "../../Components/TC/TC";
 
 const TermsAndConditions = () => {
-    return (
-        <>
-            <TC />
-
-        </>
-    )
-}
-export default TermsAndConditions
+  return (
+    <>
+      <TC />
+    </>
+  );
+};
+export default TermsAndConditions;

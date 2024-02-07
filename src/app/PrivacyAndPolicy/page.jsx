@@ -1,13 +1,10 @@
-import Privacy from '../../Components/PrivacyAndPolicy/Privacy'
+import Privacy from "../../Components/PrivacyAndPolicy/Privacy";
 
-
-const PrivacyAndPolicy = () =>{
-    return(
+const PrivacyAndPolicy = () => {
+  return (
     <>
-    
-    <Privacy/>
-
+      <Privacy />
     </>
-    )
-}
-export default PrivacyAndPolicy
+  );
+};
+export default PrivacyAndPolicy;
