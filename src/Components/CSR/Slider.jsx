@@ -12,7 +12,7 @@ const Slider = () => {
 
                 <Swiper className="mt-5 swipper my-swiper" style={{ width: "70%", height: "" }}
     
-                   modules={[Navigation, Pagination, A11y]}
+                   modules={[Navigation, Pagination, Autoplay, A11y]}
                    spaceBetween={50}
                    slidesPerView={1}
                    loop={true}
