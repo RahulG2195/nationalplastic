@@ -45,9 +45,6 @@ const Registration = () => {
                                 </div>
                             </div>
 
-
-
-                            {/* <button type="submit" className="btn btn-primary">Submit</button> */}
                         </form>
                     </div>
                 </div>

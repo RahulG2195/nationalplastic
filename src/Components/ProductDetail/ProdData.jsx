@@ -8,6 +8,7 @@ import RecentlyViewedDetails from "./RecentlyViewedDetails/RecentlyViewedDetails
 import CustomerReview from "./CustomerReview/CustomerReview";
 import Faqs from "../FAQs/Faqs";
 import FooterRow from "../FooterRow/FooterRow";
+import TabContent from "./MoreProducts/TabContent/TabContent";
 // import RecentlyViewed from "../ProductsCatlogue/RecentlyViewed";
 
 function ProdData() {
@@ -142,44 +143,8 @@ function ProdData() {
 
         <MoreProduct />
 
-
-
-        <div className="tab-content d-flex align-items-center px-5" id="myTabContent">
-          <div
-            className="tab-pane fade show active fw-bold mt-3"
-            id="description"
-            role="tabpanel"
-            aria-labelledby="description-tab"
-          >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum. Sed ut
-            perspiciatis unde omnis iste natus error sit voluptatem accusantium
-            doloremque laudantium, totam rem aperiam.
-          </div>
-          {/* <div className="imgCont">
-            <img src="/Assets/images/Image 5/Image 5.png" alt="" />
-          </div> */}
-
-
-        </div>
-
-
-
-        {/* </div> */}
-        <div style={{ textAlign: "center", fontSize: 14, paddingBottom: 20 }}>
-          Get free icon packs for your next project at{" "}
-          <a
-            href="http://iiicons.in/"
-            target="_blank"
-            style={{ color: "#ff5e63", fontWeight: "bold" }}
-          >
-            www.iiicons.in
-          </a>
+        <div className="listTabContent">
+          <TabContent />
         </div>
       </div>
 

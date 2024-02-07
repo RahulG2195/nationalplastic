@@ -5,7 +5,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import 'swiper/swiper-bundle.css';
 import Image from "next/image";
-import './BoughtTogether.css'
 
 const BoughtTogether = () => {
     const togetherCardsData = [

@@ -1,7 +1,6 @@
 import TopPicsCard from '../TopPicsCard/TopPicsCard';
 
 const TopPics = () => {
-    // Define an array of objects with imgSrc and imgText properties
     const topPicsData = [
         { imgSrc: "/assets/images/circular/Karnival-Chair.jpg-2/Karnival-Chair.jpg-2.png", imgText: "Karnival Chair" },
         { imgSrc: "/assets/images/circular/Atlantis-Chair.jpg-2/Atlantis-Chair.jpg-2.png", imgText: "Atlantis Chair" },

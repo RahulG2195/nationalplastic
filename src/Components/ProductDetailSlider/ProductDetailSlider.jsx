@@ -23,7 +23,6 @@ const ProductDetailSlider = () => {
                 }}
                 loop={true}
                 spaceBetween={10}
-                // navigation={true}
                 thumbs={{ swiper: thumbsSwiper }}
                 modules={[FreeMode, Navigation, Thumbs]}
                 className="mySwiper2"
@@ -48,7 +47,6 @@ const ProductDetailSlider = () => {
                 loop={true}
                 spaceBetween={20}
                 slidesPerView={4}
-                // navigation={true}
                 freeMode={true}
                 watchSlidesProgress={true}
                 modules={[FreeMode, Navigation, Thumbs]}

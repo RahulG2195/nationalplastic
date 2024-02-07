@@ -36,7 +36,6 @@
         position: absolute;
         bottom: 2%;
         font-size: 2vh;
-        /* left: 25%; */
     }
 
     .media .price p {
@@ -44,7 +43,6 @@
         display: inline-flex;
         font-size: 15px;
         padding-right: 10px;
-        /* position: absolute; */
         left: 35%;
 
     }
@@ -76,7 +74,6 @@
 
     .icon {
 
-        /* background-color: black; */
         height: 50px ;
         width: 50px ;
     }

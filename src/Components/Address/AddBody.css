@@ -9,21 +9,21 @@
 
 .Addleft {
     background-color: #f7f7f7;
-    min-height: 70vh; /* Adjust min-height as needed */
-    padding: 1.5rem; /* Adjust padding as needed */
+    min-height: 70vh; 
+    padding: 1.5rem; 
 }
 
 .bordrBtm {
-    border-bottom: 1px solid #1E1F1E3D; /* Adjust border color and style as needed */
+    border-bottom: 1px solid #1E1F1E3D; 
 }
 
 .confirm {
     color: var(--primary-color);
-    font-size: x-large; /* Adjust font size as needed */
+    font-size: x-large; 
 }
 
 .customerAddress {
-    max-width: 40%; /* Adjust max-width as needed */
+    max-width: 40%; 
 }
 
 .form-check-input:checked {
@@ -41,18 +41,17 @@
 }
 
 .summary {
-    min-height: 35vh !important; /* Adjust min-height as needed */
-    margin-bottom: 10vh !important; /* Adjust margin-bottom as needed */
+    min-height: 35vh !important; 
+    margin-bottom: 10vh !important; 
 }
 
 .BGcolor {
     background-color: #f7f7f7;
-    min-height: 35vh; /* Adjust min-height as needed */
+    min-height: 35vh; 
     width: 100%;
 }
 
 .AddRight {
-    text-align: start; /* Adjust text alignment as needed */
+    text-align: start; 
 }
 
-/* Add any additional styles based on your requirements */

@@ -15,7 +15,6 @@ const TogetherCard = (props) => {
                         objectFit='cover'
                         alt="Picture of the author"
                     />
-                    {/* <img src={props.imgSrc} alt="" /> */}
                 </div>
                 <div className="card-body d-flex gap-1 ">
                 {props.caption ? null : <div><i className="medium fa fa-inr fw-bold" aria-hidden="true"></i></div>}

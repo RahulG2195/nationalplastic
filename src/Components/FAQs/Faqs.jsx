@@ -52,10 +52,10 @@ const Faqs = () => {
                                 aria-controls={`panel${index + 1}-content`}
                                 id={`panel${index + 1}-header`}
                             >
-                                <Typography className='fw-bold'>{faq.question}</Typography>
+                                <Typography className='fw-semibold respFAQ'>{faq.question}</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <Typography>
+                                <Typography className='RespFAQans'>
                                     {faq.answer}
                                 </Typography>
                             </AccordionDetails>
