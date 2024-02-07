@@ -144,3 +144,13 @@ p {
 
   }
 }
+
+@media (max-width:600px) {
+  .TCTxt{
+      margin: 0;
+      padding: 10px;
+      font-size: small;
+      text-align: justify !important;
+  }
+  
+}

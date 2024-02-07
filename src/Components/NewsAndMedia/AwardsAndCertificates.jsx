@@ -10,9 +10,9 @@ const AwardsAndCertificates = () => {
 
             <div className="text-center">
                 <div className=" title2 fs-1"> Awards & <span className="fw-bold text-danger">Certificates</span> </div>
-                <div className=" mt-1 fw-normal">National has been awarded as per the number of one exporter of Plastic Furniture category for three <br />
-                    consecutive by year by The Plastic Export Promotion Council(Popularly known as PLEXCOCIL) <br />
-                    Sponsored by the Ministry of Commerce & Industry, Department of Commerce, Govermentof India.
+                <div className=" mt-1 fw-normal subCptRes"><p>National has been awarded as per the number of one exporter of Plastic Furniture category for three </p>
+                    <p>consecutive by year by The Plastic Export Promotion Council(Popularly known as PLEXCOCIL) </p>
+                    <p>Sponsored by the Ministry of Commerce & Industry, Department of Commerce, Govermentof India.</p>
                 </div>
             </div>
 

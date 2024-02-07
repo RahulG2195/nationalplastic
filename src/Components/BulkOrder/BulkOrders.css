@@ -1,7 +1,6 @@
 .orders_main {
-    min-height: 300vh;
-    /* height: auto; */
-    margin-bottom: 20px;
+    min-height: auto !important;
+    margin-bottom: 15%;
 }
 
 .ordersCont {
@@ -24,7 +23,7 @@
 
 .ordersLogo .fw-large {
     font-weight: 800;
-    margin-top: 100px !important;
+    /* margin-top: 100px !important; */
 
 }
 
@@ -36,10 +35,7 @@
 }
 
 .orders_main .bottomForm {
-
-    /* position: absolute; */
     top: 70%;
-    /* left: 10%; */
     width: 100%;
 
 }
@@ -47,26 +43,91 @@
 .frmW {
     width: 100%;
     position: relative;
+    top: -19%;
 
 }
 
 .getQformBottom {
     position: absolute;
     margin: 0 auto;
-    bottom: -45%;
+    bottom: -42%;
     width: 70%;
     height: 253px;
-    background-color:#2E3192;
+    background-color: #2E3192;
     left: 15%;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 
 }
 
-.bottomImgOfForm{
+.bottomImgOfForm {
     position: absolute;
-    bottom: -47%;
-    left:25%;
-    width: 60vw;
+    bottom: -44%;
+    left: 25%;
+    width: 57vw;
 }
 
+@media (max-width:1089px) {
+    .orders_main {
+        max-height: 273vh;
+        /* margin-bottom: 100% !important; */
+    }
+
+    .GQRespTxt {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+}
+
+@media (max-width:767px) {
+    .colResText {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+
+    /* .hide {
+        display: none !important;
+    } */
+
+    /* .show {
+        display: block !important;
+        position: absolute;
+        top: 52%;
+    } */
+}
+
+@media (max-width:993px) {
+    .GQFormRes {
+        width: 100%;
+    }
+
+    .getQformBottom {
+        display: none;
+    }
+
+    .sbmtButton {
+        position: static;
+    }
+
+    .bottomImgOfForm {
+        bottom: -45%;
+        width: 80vw;
+        left: 0 !important;
+        right: 0 !important;
+        margin: 0;
+        padding: 0;
+        align-self: center;
+    }
+}
+
+@media (max-width:768px) {
+    .bottomImgOfForm {
+        display: none !important;
+    }
+
+    /* .orders_main{
+        height: 50vh !important;
+    } */
+
+}

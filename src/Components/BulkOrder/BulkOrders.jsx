@@ -8,8 +8,8 @@ const BulkOrders = () => {
             <div className="orders_main">
                 <div className="d-flex flex-wrap justify-content-center ordersCont mt-5 position-relative">
 
-                    <div className="text-center fw-bold mt-5 ordersLogo">
-                        <div className="darkBlue fw-large mt-5">BULK
+                    <div className="text-center fw-bold ordersLogo">
+                        <div className="darkBlue fw-large">BULK
                             <div className="text-danger">ORDERS</div>
                         </div>
                         <p className="fw-normal mt-2">Tell us your requirement  </p>
@@ -26,31 +26,37 @@ const BulkOrders = () => {
                             alt="Picture of the author" />
                     </div>
 
-                    <div className="bottomForm ">
-                        <div className="d-flex justify-content-center ">
-                            <div className="frmW ">
-                                <GetQuoteForm className="sbmtButton" />
+                    <div className="bottomForm container text-center">
+                        <div className="row">
 
-                                <div className="getQformBottom"></div>
-                                <div className="bottomImgOfForm position-absolute">
-                                    <Image
-                                        src="/Assets/svg/Group 871.svg"
-                                        width={100}
-                                        height={100}
-                                        layout='responsive'
-                                        objectFit='cover'
-                                        alt="Picture of the author" />
+
+                            <div className="col-md-8">
+                                <div className="frmW">
+
+                                    <GetQuoteForm className="sbmtButton" />
+
+                                    <div className="getQformBottom"></div>
+                                    <div className="bottomImgOfForm position-absolute">
+                                        <Image
+                                            src="/Assets/svg/Group 871.svg"
+                                            width={100}
+                                            height={100}
+                                            layout='responsive'
+                                            objectFit='cover'
+                                            alt="Picture of the author"
+                                        />
+                                    </div>
                                 </div>
-
                             </div>
 
-                            <div>
+                            <div className="col-md-4 colResText">
                                 <div className="text-center fw-bold">
-                                    <div className="mx-5 px-5 darkBlue fs-1 fw-large2 ">GET<span className=" text-danger"> QUOTE</span> </div>
+                                    <div className="mx-5 px-5 darkBlue fs-1 fw-large2 GQRespTxt hide">GET<span className="text-danger"> QUOTE</span></div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </>

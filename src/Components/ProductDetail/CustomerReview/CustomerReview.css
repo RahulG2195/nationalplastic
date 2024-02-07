@@ -15,4 +15,18 @@
     height: 100%;
     width: 100%;
 }
+
+@media (max-width:767px) {
+    .custReviewContainer{
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100%;
+    }
+    .filterSortRes i {
+        background-color: transparent; 
+    }
+    .filterSortRes span{
+        font-size: small;
+    }
+}
     

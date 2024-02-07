@@ -11,8 +11,8 @@ const EventsAndActivities = () => {
 
             <div className="text-center">
                 <div className="title2 fs-1"> Events & <span className="fw-bold text-danger">Activities</span> </div>
-                <div className=" mt-1 fw-normal">join us in the pursuit of a cleaner world - our plastic furniture <br />
-                    embodies ,style, comfort and environmental responsibilities.
+                <div className=" mt-1 fw-normal subCptRes"><p>join us in the pursuit of a cleaner world - our plastic furniture </p>
+                    <p>embodies ,style, comfort and environmental responsibilities.</p>
                 </div>
             </div>
 

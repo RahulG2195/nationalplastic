@@ -1,24 +1,21 @@
-
 const OrderSummaryCard = (props) => {
     return (
         <>
-
             <div className="d-flex align-items-center gap-2 my-2">
                 <div className="orderImage">
-                    <img src={props.imgSrc} className="img-fluid rounded-start" alt="..." />
+                    <img src={props.imgSrc} className="img-fluid rounded-start" alt="..." style={{ maxWidth: "70px", maxHeight: "70px" }} />
                 </div>
 
                 <div>
-                    <div class=" ml-3">
-                        <div className="fw-semibold medium" >{props.description}</div>
-                        <div className="fw-bold medium">Quantitiy : {props.quantity}</div>
+                    <div className="ml-3">
+                        <div className="fw-semibold">{props.description}</div>
+                        <div className="fw-bold">Quantity: {props.quantity}</div>
                     </div>
                 </div>
-
             </div>
-            <div className=" border-bottom border-secondary"></div>
-
+            <div className="border-bottom border-secondary mb-2"></div>
         </>
-    )
-}
-export default OrderSummaryCard
+    );
+};
+
+export default OrderSummaryCard;

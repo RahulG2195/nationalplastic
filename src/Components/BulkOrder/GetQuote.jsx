@@ -30,7 +30,7 @@ const GetQuote = () => {
                         </div>
                     </div>
 
-                    <div className="col-lg-6 col-md-12">
+                    <div className="col-lg-6 col-md-12 mt-5">
                         <div className="text-center fw-bold">
                             <div className="darkBlue fs-1">GET <span className="text-danger">QUOTE</span></div>
                         </div>

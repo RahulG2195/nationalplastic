@@ -25,7 +25,7 @@ const WishlistCard = (props) => {
                                                 
                                             </div>
 
-                                            <button type="button" className="btn btn-danger">
+                                            <button type="button" className="btn btn-danger moveTocartResp">
                                                 MOVE TO CART
                                             </button>
                                             <div className="delete">

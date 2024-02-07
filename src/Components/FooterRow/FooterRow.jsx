@@ -1,4 +1,4 @@
-import './FooterRow.css'
+import './FooterRow.css';
 
 const FooterRow = () => {
     const featuresData = [
@@ -15,7 +15,7 @@ const FooterRow = () => {
         {
             iconSrc: "/Assets/images/reputation/reputation.png",
             count: "20 lakh+",
-            description: "Satisfied Customer",
+            description: "Satisfied Customers",
         },
         {
             iconSrc: "/Assets/images/warranty/warranty.png",
@@ -25,11 +25,10 @@ const FooterRow = () => {
     ];
 
     return (
-        <>
-
-            <div className="features d-flex justify-content-center gap-5 flex-wrap m-5 px-5">
+        <div className="features-container mt-3">
+            <div className="features row row-cols-sm-2 row-cols-md-4">
                 {featuresData.map((feature, index) => (
-                    <div key={index} className="shop d-flex justify-content-center feature">
+                    <div key={index} className="col feature">
                         <div className="icon">
                             <img src={feature.iconSrc} alt="" />
                         </div>
@@ -40,8 +39,8 @@ const FooterRow = () => {
                     </div>
                 ))}
             </div>
-        </>
-    )
-}
+        </div>
+    );
+};
 
-export default FooterRow
+export default FooterRow;

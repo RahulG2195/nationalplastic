@@ -28,3 +28,11 @@
 .medium {
     font-size: 1rem;
 }
+@media (max-width:576px) {
+    .preCont{
+        padding-left: 10% !important;
+        padding-right: 10% !important;
+
+    }
+    
+}
