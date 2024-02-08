@@ -6,14 +6,13 @@ import Hirirng_Card from '../Hiring_Cards/Hiring_card'
 const Hiring = () => {
     return (
         <>
-            <div className="main_container pb-5">
+            <div className="main_container pb-5 mb-5">
 
                 <div className="text-center fw-bold mt-5">
                     <div className=" title2 fs-1 ">Our Hiring<span className="fw-bold text-danger"> Process</span> </div>
                     <div className=" mt-1 fw-normal">Current Openings</div>
                 </div>
 
-                {/* <div className'd-flex justify-content-evenly gap-5 position-relative mt-5'> */}
 
                 <div class='d-flex justify-content-evenly gap-5 my-5 respHiringCards Hiringheight mb-5'>
 

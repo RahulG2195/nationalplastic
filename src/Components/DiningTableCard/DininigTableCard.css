@@ -13,23 +13,19 @@
     overflow-y: scroll;
     
     margin:0 20%;
-    /* padding-left: 100px !important;
-    padding-right:100px !important; */
+   
 }
 
 .DetailCard {
     overflow: visible !important;
-    /* width: 60%; */
 }
 
 .DetailDTS {
-    /* width: 60%; */
     height: 80vh;
     background-color: #F6F6F6;
 }
 
 .BottomCardsCptn {
-    /* width: 600px; */
     text-align: left;
     margin: auto;
 

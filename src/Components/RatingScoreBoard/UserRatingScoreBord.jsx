@@ -1,7 +1,6 @@
 import React from 'react';
 
 const UserRatingScoreBord = () => {
-    // Sample ratings data
     const ratingsData = [
         { stars: 5, progress: 100, count: '1,112' },
         { stars: 4, progress: 70, count: '1,112' },

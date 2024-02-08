@@ -82,7 +82,6 @@ const Details = () => {
                     modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
                     spaceBetween={50}
                     slidesPerView={3}
-                    // navigation
                     pagination={true}
                     loop={true}
                     autoplay={{

@@ -1,4 +1,3 @@
-/* AddBody.css */
 .PriceDetail {
     padding: 1rem;
   }
@@ -22,7 +21,6 @@
       font-size: 0.5rem; 
     }
     .placeOrderResp{
-        /* font-size: x-small; */
         padding: 5px !important;
     }
   }

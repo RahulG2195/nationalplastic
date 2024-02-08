@@ -1,6 +1,6 @@
 .HC2 {
     position: absolute;
-    top: 35%;
+    top: 40%;
 }
 
 .HC1 {
@@ -23,7 +23,7 @@
     content: url("/Assets/svg/Group 931.svg");
     position: absolute;
     right: 35%;
-    bottom: 12%;
+    bottom: -12%;
 
 }
 
@@ -37,12 +37,62 @@
     border: 1px solid black;
 }
 
+@media (max-width:1353px) {
+    .HC3::after {
+        bottom: 0%;
+        right: 25%;
+
+    }
+}
+
+@media (max-width:1182px) {
+    .HC3::after {
+        bottom: 13%;
+        right: 14%;
+
+    }
+}
+
+@media (max-width:1069px) {
+    .HC3::after {
+        bottom: 10%;
+        right: 15%;
+
+    }
+
+    .HC1::after {
+
+        content: url("/Assets/svg/Group 930.svg");
+        position: absolute;
+        left: 30%;
+    }
+
+    .HC2 {
+        position: absolute;
+        top: 45%;
+    }
+
+}
+
+
+@media (max-width:1029px) {
+    .HC3::after {
+        display: none !important;
+    }
+
+    .HC1::after {
+
+        display: none !important;
+    }
+} 
+
 @media (max-width:600px) {
     .HC1::after {
-        content: url("/Assets/images/icons8-resize-vertical-64.png");
+        display: block !important;
+        content: url("/Assets/images/icons8-resize-vertical-64.png") !important;
         position: absolute;
         top: 95%;
-        left:45% ;
+        left: 45%;
     }
 
     .HC3::after {
@@ -50,17 +100,19 @@
         display: none !important;
 
     }
+
     .HC2::after {
         content: url("/Assets/images/icons8-resize-vertical-64.png");
         position: absolute;
         top: 63%;
-        left:45% ;
+        left: 45%;
     }
+
     .HC2 {
         position: static;
     }
 
-    .respHiringCards{
+    .respHiringCards {
         flex-direction: column;
         justify-content: space-evenly !important;
         margin-top: 182px !important;

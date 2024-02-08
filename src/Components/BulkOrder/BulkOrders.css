@@ -8,7 +8,6 @@
 }
 
 .ordersimg-cont {
-    /* height: 20vh; */
     width: 800px;
 }
 
@@ -23,7 +22,6 @@
 
 .ordersLogo .fw-large {
     font-weight: 800;
-    /* margin-top: 100px !important; */
 
 }
 
@@ -70,7 +68,6 @@
 @media (max-width:1089px) {
     .orders_main {
         max-height: 273vh;
-        /* margin-bottom: 100% !important; */
     }
 
     .GQRespTxt {
@@ -85,17 +82,8 @@
         flex: 0 0 auto;
         width: 100%;
     }
-
-    /* .hide {
-        display: none !important;
-    } */
-
-    /* .show {
-        display: block !important;
-        position: absolute;
-        top: 52%;
-    } */
 }
+    
 
 @media (max-width:993px) {
     .GQFormRes {
@@ -126,8 +114,6 @@
         display: none !important;
     }
 
-    /* .orders_main{
-        height: 50vh !important;
-    } */
+    
 
 }

@@ -1,4 +1,3 @@
-/* @import '~@fortawesome/fontawesome-free/css/all.css'; */
 :root {
   --primary-color: #262262;
   --secondary-color: #FFE000;
@@ -76,12 +75,9 @@ p {
   border-radius: 0;
 }
 
-/* section haeding part start */
 .section_header {
   margin-top: 80px;
-  /* max-width: 60%; why this max width is given?  */
   margin: 80px 0 35px 0;
-  /* max-width: 60%; why this max width is given?*/
   width: 100%;
   text-align: center;
 }
@@ -94,14 +90,12 @@ p {
 
 }
 
-/* section haeding part end */
 .main_container {
   min-height: 100vh;
   width: 100%;
   position: relative;
 }
 
-/* ======= */
 .section_header h2 span {
   font-weight: 700;
   color: var(--header-primary-clr);
@@ -124,21 +118,13 @@ p {
   color: var(--header-primary-clr);
 }
 
-/* section haeding part end */
-/* <<<<<<< HEAD */
-/* >>>>>>> 70d9e029af5ce56576af0d6476cb82e536a83e0b */
-/* ======= */
-
-
-/* view all  */
-
 .view_all_sec {
   text-align: end;
   margin: 10px 0;
   text-transform: uppercase;
 }
 
-@media (max-width:600px) {
+@media (max-width:922px) {
   .subCptRes p{
       font-size: 10px !important;
 

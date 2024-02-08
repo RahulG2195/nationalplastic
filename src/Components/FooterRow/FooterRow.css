@@ -5,7 +5,7 @@
 .feature {
     display: flex;
     align-items: center;
-    margin-bottom: 20px; /* Add margin bottom for spacing */
+    margin-bottom: 20px; 
 }
 
 .icon img {
@@ -15,12 +15,12 @@
 
 .FeatureText h5 {
     margin-bottom: 5px;
-    font-size: 18px; /* Default font size */
+    font-size: 18px; 
 }
 
 .FeatureText h6 {
     margin-top: 0;
-    font-size: 14px; /* Default font size */
+    font-size: 14px; 
 }
 
 @media (max-width: 576px) {
@@ -34,14 +34,14 @@
     }
 
     .FeatureText h5 {
-        font-size: 16px; /* Decrease font size on smaller screens */
+        font-size: 16px; 
     }
 
     .FeatureText h6 {
-        font-size: 12px; /* Decrease font size on smaller screens */
+        font-size: 12px;
     }
 
     .feature {
-        margin-bottom: 10px; /* Add smaller margin bottom for spacing on smaller screens */
+        margin-bottom: 10px; 
     }
 }
