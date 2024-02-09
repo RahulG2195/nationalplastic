@@ -6,7 +6,7 @@ function Subbanner() {
       <div className="about_slider">
         <div className="">
           <Image
-            src="/assets/images/banner/About-Us-banner.png"
+            src="/Assets/images/banner/About-Us-banner.png"
             classname="img-fluid d-block w-100"
             alt="ome banner 1"
             width={100}

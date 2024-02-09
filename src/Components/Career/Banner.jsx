@@ -14,7 +14,7 @@ const Banner = () => {
 
                 <div className="Img_cont position-relative" >
                     <Image
-                        src="/assets/images/Career-pg-banner.jpg-V2/Career-pg-banner.jpg-V2.png"
+                        src="/Assets/images/Career-pg-banner.jpg-V2/Career-pg-banner.jpg-V2.png"
                         width={100}
                         height={80}
                         layout='responsive'

@@ -10,7 +10,7 @@ function CoupenBanner() {
           <div className="row coupen-row">
             <div className="col-md-1">
               <Image
-                src="/assets/images/gift-box.png"
+                src="/Assets/images/gift-box.png"
                 alt="gift image"
                 width={100}
                 height={100}
@@ -53,7 +53,7 @@ function CoupenBanner() {
               <div className="divelerycol d-flex align-center"  data-aos="fade-down">
                     <div className="del_img">
                         <Image
-                    src="/assets/images/smiley.png"
+                    src="/Assets/images/smiley.png"
                     alt="gift image"
                     width={33}
                     height={33}
@@ -66,7 +66,7 @@ function CoupenBanner() {
               <div className="divelerycol d-flex align-center">
               <div className="del_img">
                 <Image
-                  src="/assets/images/delivery-truck.png"
+                  src="/Assets/images/delivery-truck.png"
                   alt="gift image"
                   width={33}
                   height={33}
@@ -79,7 +79,7 @@ function CoupenBanner() {
               <div className="divelerycol d-flex align-center">
               <div className="del_img">
                 <Image
-                  src="/assets/images/settings.png"
+                  src="/Assets/images/settings.png"
                   alt="gift image"
                   width={33}
                   height={33}
@@ -92,7 +92,7 @@ function CoupenBanner() {
               <div className="divelerycol d-flex align-center">
               <div className="del_img">
                 <Image
-                  src="/assets/images/0.png"
+                  src="/Assets/images/0.png"
                   alt="gift image"
                   width={33}
                   height={33}

@@ -22,7 +22,7 @@ function AboutCTA() {
         </p>
         <div className="row row3 ">
           <div className="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-6 about_icons">
-            <img src="assets/images/aboutIcons/location.png" alt="Experienced" />
+            <img src="Assets/images/aboutIcons/location.png" alt="Experienced" />
             <div className="about_text">
               <h5>50+</h5>
               <p>Experienced Stores</p> 
@@ -30,7 +30,7 @@ function AboutCTA() {
             </div>
           </div>
           <div className="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-6 about_icons">
-            <img src="assets/images/aboutIcons/shipped.png" alt="Experienced" />
+            <img src="Assets/images/aboutIcons/shipped.png" alt="Experienced" />
             <div className="about_text">
               <h5>350+</h5>
               <p>Delivery Centres</p>
@@ -38,7 +38,7 @@ function AboutCTA() {
             </div>
           </div>
           <div className="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-12 about_icons">
-            <img src="assets/images/aboutIcons/reputation.png" alt="Experienced" />
+            <img src="Assets/images/aboutIcons/reputation.png" alt="Experienced" />
             <div className="about_text">
               <h5>20lack</h5>
               <p>Satisfied</p>

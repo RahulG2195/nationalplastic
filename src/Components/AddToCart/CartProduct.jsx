@@ -36,7 +36,7 @@ const CartProduct = ({src, productName, productDesc, discountedPrice, productPri
                       <p> Installation Charges : Rs 000 </p>
                       <div className="CouponApplied">
                         <Image
-                          src="/assets/images/AddTOCart/percentage.png"
+                          src="/Assets/images/AddTOCart/percentage.png"
                           classname="img-fluid d-block w-100"
                           alt="ome banner 1"
                           width={100}
@@ -48,7 +48,7 @@ const CartProduct = ({src, productName, productDesc, discountedPrice, productPri
                     <div className="InstallationCharges">
                       <div className="CouponApplied">
                         <Image
-                          src="/assets/images/AddTOCart/core-heart.png"
+                          src="/Assets/images/AddTOCart/core-heart.png"
                           classname="img-fluid d-block w-100"
                           alt="ome banner 1"
                           width={100}
@@ -58,7 +58,7 @@ const CartProduct = ({src, productName, productDesc, discountedPrice, productPri
                       </div>
                       <div className="CouponApplied">
                         <Image
-                          src="/assets/images/AddTOCart/Icon-core-trash.png"
+                          src="/Assets/images/AddTOCart/Icon-core-trash.png"
                           classname="img-fluid d-block w-100"
                           alt="ome banner 1"
                           width={100}

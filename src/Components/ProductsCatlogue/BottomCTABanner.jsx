@@ -5,7 +5,7 @@ const BottomCTABanner = () =>{
         <div className="mt-5">
                 <Image
                     className="mt-5"
-                    src={"/assets/images/CTA-banner-2.jpg-v2/CTA-banner-2.jpg-v2.png"}
+                    src={"/Assets/images/CTA-banner-2.jpg-v2/CTA-banner-2.jpg-v2.png"}
                     width={100}
                     height={80}
                     layout='responsive'

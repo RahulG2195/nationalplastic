@@ -45,13 +45,13 @@ function Investor() {
   const SharePrices = [
     {
       key: 1,
-      image: "/assets/images/investors/nsenational.png",
+      image: "/Assets/images/investors/nsenational.png",
       title: "Share price",
       desc: "NSE Rs.0000",
     },
     {
       key: 2, 
-      image: "/assets/images/investors/BombayStock.png",
+      image: "/Assets/images/investors/BombayStock.png",
       title: "Share price",
       desc: "NSE Rs.0000",
     },

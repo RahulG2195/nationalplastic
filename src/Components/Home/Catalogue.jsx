@@ -9,7 +9,7 @@ function Catalogue() {
                 <div className="col-md-5 houseDiv">
                     <div className="cataImg">
                         <Image
-                        src = "/assets/images/HomepageImages/Catalouge.jpg"
+                        src = "/Assets/images/HomepageImages/Catalouge.jpg"
                         data-aos="fade-right"
                         // width={100}
                         // height={100}

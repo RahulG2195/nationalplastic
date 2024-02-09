@@ -61,28 +61,28 @@ export default function Footer() {
               <div className="paymentImg d-flex">
                 <div className="gatewayimg">
                 <Image
-                src="/assets/images/visa-payment-card1873.png"
+                src="/Assets/images/visa-payment-card1873.png"
                 alt='logo'
                fill
               />
                 </div>
                 <div className="gatewayimg">
                 <Image
-                src="/assets/images/mastercard.png"
+                src="/Assets/images/mastercard.png"
                 alt='logo'
                 fill
               />
                 </div>
                 <div className="gatewayimg">
                 <Image
-                src="/assets/images/Maestro.png"
+                src="/Assets/images/Maestro.png"
                 alt='logo'
                 fill
               />
                 </div>
                 <div className="gatewayimg">
                 <Image
-                src="/assets/images/Group 697.png"
+                src="/Assets/images/Group 697.png"
                 alt='logo'
                 fill
               />
@@ -93,7 +93,7 @@ export default function Footer() {
               </div>
               <div className="otherLogo">
               <Image
-                src="/assets/images/indiamart.svg"
+                src="/Assets/images/indiamart.svg"
                 alt='logo'
                 fill
               />
@@ -111,14 +111,14 @@ export default function Footer() {
           <div className="footer_social">
             <div className="comp_logo">
               <Image
-              src="/assets/images/nation_logo.png"
+              src="/Assets/images/nation_logo.png"
               alt='logo'
               fill
               />
             </div>
             <div className="social_icons">
               <Image
-              src="/assets/images/Group 37.svg"
+              src="/Assets/images/Group 37.svg"
               alt='logo'
               layout='responsive'
               objectFit='cover'
@@ -126,7 +126,7 @@ export default function Footer() {
               height={100}
               />
               <Image
-              src="/assets/images/Path 19.svg"
+              src="/Assets/images/Path 19.svg"
               alt='logo'
               layout='responsive'
               objectFit='cover'
@@ -134,7 +134,7 @@ export default function Footer() {
               height={100}
               />
               <Image
-              src="/assets/images/Path 20.svg"
+              src="/Assets/images/Path 20.svg"
               alt='logo'
               layout='responsive'
               objectFit='cover'
@@ -142,7 +142,7 @@ export default function Footer() {
               height={100}
               />
               <Image
-              src="/assets/images/Path 80.svg"
+              src="/Assets/images/Path 80.svg"
               alt='logo'
               layout='responsive'
               objectFit='cover'

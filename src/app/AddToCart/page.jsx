@@ -14,7 +14,7 @@ function AddToCart() {
   const ProductDetailArr = [
     {
       key: 1,
-      image1: "/assets/images/AddTOCart/product-Chairs.png",
+      image1: "/Assets/images/AddTOCart/product-Chairs.png",
       productName: "Lorem ipsum dolor sit amet",
       productPrice: "10000",
       discountedPrice: "7000",
@@ -22,7 +22,7 @@ function AddToCart() {
     },
     {
       key: 2,
-      image1: "/assets/images/AddTOCart/product-Chairs.png",
+      image1: "/Assets/images/AddTOCart/product-Chairs.png",
       productName: "Lorem ipsum dolor sit amet 2",
       productPrice: "1000",
       discountedPrice: "700",
@@ -55,7 +55,7 @@ function AddToCart() {
                   <div className="locationIcon">
                     <div className="iconImage">
                       <Image
-                        src="/assets/images/AddTOCart/Icon-location.png"
+                        src="/Assets/images/AddTOCart/Icon-location.png"
                         classname="img-fluid d-block w-3"
                         alt="ome banner 1"
                         width={100}

@@ -8,7 +8,7 @@ function Login() {
           <div className="row Login-Page-ImgForm">
             <div className="col-md-6 login-image">
               <Image
-                src="/assets/images/catalogue/loginPage.png"
+                src="/Assets/images/catalogue/loginPage.png"
                 className="img-fluid d-block w-100" // Use w-100 to make the image fill the entire col-lg col-md-3 col-sm-12umn
                 alt="Team Member"
                 width={100}

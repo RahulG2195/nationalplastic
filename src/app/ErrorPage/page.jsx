@@ -6,7 +6,7 @@ function ErrorPage() {
       <div className="container error-main-container">
         <div className="row">
           <Image
-            src="/assets/images/404/404-error-page.jpg-V2.png"
+            src="/Assets/images/404/404-error-page.jpg-V2.png"
             width={100}
             height={100}
             layout="responsive"

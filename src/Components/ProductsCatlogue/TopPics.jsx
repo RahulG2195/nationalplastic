@@ -3,18 +3,18 @@ import TopPicsCard from '../TopPicsCard/TopPicsCard';
 const TopPics = () => {
     // Define an array of objects with imgSrc and imgText properties
     const topPicsData = [
-        { imgSrc: "/assets/images/circular/Karnival-Chair.jpg-2/Karnival-Chair.jpg-2.png", imgText: "Karnival Chair" },
-        { imgSrc: "/assets/images/circular/Atlantis-Chair.jpg-2/Atlantis-Chair.jpg-2.png", imgText: "Atlantis Chair" },
-        { imgSrc: "/assets/images/circular/Karen-Chair.jpg-2/Karen-Chair.jpg-2.png", imgText: "Karen Chair" },
-        { imgSrc: "/assets/images/circular/Orca-Chair 2/Orca-Chair 2.png", imgText: "Orca Chair" },
-        { imgSrc: "/assets/images/circular/Magna-Chair.jpg-2/Magna-Chair.jpg-2.png", imgText: "Magna Chair" },
-        { imgSrc: "/assets/images/circular/Saab-Chair.jpg-2/Saab-Chair.jpg-2.png", imgText: "Saab Chair" },
-        { imgSrc: "/assets/images/circular/Leisure-Chair.jpg-2/Leisure-Chair.jpg-2.png", imgText: "Leisure Chair" },
-        { imgSrc: "/assets/images/circular/Merc-Sofa-Chair.jpg-2/Merc-Sofa-Chair.jpg-2.png", imgText: "Merc Sofa Chair" },
-        { imgSrc: "/assets/images/circular/Omega-Chair.jpg-2/Omega-Chair.jpg-2.png", imgText: "Omega Chair" },
-        { imgSrc: "/assets/images/circular/Storm-Chair/Storm-Chair.png", imgText: "Storm Chair" },
-        { imgSrc: "/assets/images/circular/Solace-chair/Solace-chair.png", imgText: "Solace Chair" },
-        { imgSrc: "/assets/images/circular/Ghost-Chair/Ghost-Chair.png", imgText: "Ghost Chair" },
+        { imgSrc: "/Assets/images/circular/Karnival-Chair.jpg-2/Karnival-Chair.jpg-2.png", imgText: "Karnival Chair" },
+        { imgSrc: "/Assets/images/circular/Atlantis-Chair.jpg-2/Atlantis-Chair.jpg-2.png", imgText: "Atlantis Chair" },
+        { imgSrc: "/Assets/images/circular/Karen-Chair.jpg-2/Karen-Chair.jpg-2.png", imgText: "Karen Chair" },
+        { imgSrc: "/Assets/images/circular/Orca-Chair 2/Orca-Chair 2.png", imgText: "Orca Chair" },
+        { imgSrc: "/Assets/images/circular/Magna-Chair.jpg-2/Magna-Chair.jpg-2.png", imgText: "Magna Chair" },
+        { imgSrc: "/Assets/images/circular/Saab-Chair.jpg-2/Saab-Chair.jpg-2.png", imgText: "Saab Chair" },
+        { imgSrc: "/Assets/images/circular/Leisure-Chair.jpg-2/Leisure-Chair.jpg-2.png", imgText: "Leisure Chair" },
+        { imgSrc: "/Assets/images/circular/Merc-Sofa-Chair.jpg-2/Merc-Sofa-Chair.jpg-2.png", imgText: "Merc Sofa Chair" },
+        { imgSrc: "/Assets/images/circular/Omega-Chair.jpg-2/Omega-Chair.jpg-2.png", imgText: "Omega Chair" },
+        { imgSrc: "/Assets/images/circular/Storm-Chair/Storm-Chair.png", imgText: "Storm Chair" },
+        { imgSrc: "/Assets/images/circular/Solace-chair/Solace-chair.png", imgText: "Solace Chair" },
+        { imgSrc: "/Assets/images/circular/Ghost-Chair/Ghost-Chair.png", imgText: "Ghost Chair" },
     ];
 
     return (

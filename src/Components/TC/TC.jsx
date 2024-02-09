@@ -6,7 +6,7 @@ const TC = () => {
         <>
 
             <Image
-                src="/assets/images/Terms-and-Condition-pg-page-banner/Terms-and-Condition-pg-page-banner.png"
+                src="/Assets/images/Terms-and-Condition-pg-page-banner/Terms-and-Condition-pg-page-banner.png"
                 width={100}
                 height={80}
                 layout='responsive'

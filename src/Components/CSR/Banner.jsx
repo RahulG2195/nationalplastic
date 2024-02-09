@@ -6,7 +6,7 @@ const Banner = () => {
     return (
         <>
             <Image
-                src="/assets/images/CSR-Banner/CSR-Banner.png"
+                src="/Assets/images/CSR-Banner/CSR-Banner.png"
                 width={100}
                 height={80}
                 layout='responsive'

@@ -8,7 +8,7 @@ function InvestorBanner()
       <div className="InvestorBanner">
       <div className="">
           <Image
-            src="/assets/images/banner/Investor-pg-banner.png"
+            src="/Assets/images/banner/Investor-pg-banner.png"
             classname="img-fluid d-block w-100"
             alt="ome banner 1"
             width={100}

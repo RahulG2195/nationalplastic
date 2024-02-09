@@ -5,7 +5,7 @@ const BlogBanner = () => {
         <>
             <div className='position-relative'>
                 <Image
-                    src="/assets/images/Blog-section-banner/Blog-section-banner.png"
+                    src="/Assets/images/Blog-section-banner/Blog-section-banner.png"
                     width={100}
                     height={70}
                     layout='responsive'

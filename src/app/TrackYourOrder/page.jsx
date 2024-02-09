@@ -7,7 +7,7 @@ function TrackYourOrder() {
         <div className="row">
           <div className="col-md-6">
             <Image
-              src="/assets/images/catalogue/trackYourOrder.png"
+              src="/Assets/images/catalogue/trackYourOrder.png"
               width={100}
               height={100}
               layout="responsive"

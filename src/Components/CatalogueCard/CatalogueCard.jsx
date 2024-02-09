@@ -5,7 +5,7 @@ const CatalogueCard = ({ image, title, description }) => {
   return (
     <>
      <Image
-       //   src="/assets/images/catalogue/dummy.png"
+       //   src="/Assets/images/catalogue/dummy.png"
        src={image}
        width={100}
        height={100}

@@ -17,37 +17,37 @@ function SliderCard() {
     {
       key: 1,
       title: "Company Profile",
-      image: "/assets/images/aboutIcons/business-profile.png",
+      image: "/Assets/images/aboutIcons/business-profile.png",
       desc: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.",
     },
     {
       key: 2,
       title: "Infrastructure",
-      image: "/assets/images/aboutIcons/infrastructure.png",
+      image: "/Assets/images/aboutIcons/infrastructure.png",
       desc: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.",
     },
     {
       key: 3,
       title: "Team",
-      image: "/assets/images/aboutIcons/group-chat.png",
+      image: "/Assets/images/aboutIcons/group-chat.png",
       desc: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.",
     },
     {
       key: 4,
       title: "Company Profile",
-      image: "/assets/images/aboutIcons/business-profile.png",
+      image: "/Assets/images/aboutIcons/business-profile.png",
       desc: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.",
     },
     {
       key: 5,
       title: "Infrastructure",
-      image: "/assets/images/aboutIcons/infrastructure.png",
+      image: "/Assets/images/aboutIcons/infrastructure.png",
       desc: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.",
     },
     {
       key: 6,
       title: "Team",
-      image: "/assets/images/aboutIcons/group-chat.png",
+      image: "/Assets/images/aboutIcons/group-chat.png",
       desc: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.",
     },
   ];

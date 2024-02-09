@@ -15,7 +15,7 @@ export default function HappyStory() {
   const productArr = [
     {
       key: 1,
-      image: "/assets/images/HomepageImages/Image 10.png",
+      image: "/Assets/images/HomepageImages/Image 10.png",
       title: "Lorem Ipsum is simply dummy text",
       short_desc:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,when an unknown printer took a galley.",
@@ -23,7 +23,7 @@ export default function HappyStory() {
     },
     {
       key: 2,
-      image: "/assets/images/HomepageImages/Image 13.png",
+      image: "/Assets/images/HomepageImages/Image 13.png",
       title: "Lorem Ipsum is simply dummy text",
       short_desc:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,when an unknown printer took a galley.",
@@ -31,7 +31,7 @@ export default function HappyStory() {
     },
     {
       key: 3,
-      image: "/assets/images/HomepageImages/Image 12.png",
+      image: "/Assets/images/HomepageImages/Image 12.png",
       title: "Lorem Ipsum is simply dummy text",
       short_desc:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,when an unknown printer took a galley.",
@@ -39,7 +39,7 @@ export default function HappyStory() {
     },
     {
       key: 4,
-      image: "/assets/images/HomepageImages/Image 12.png",
+      image: "/Assets/images/HomepageImages/Image 12.png",
       title: "Lorem Ipsum is simply dummy text",
       short_desc:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,when an unknown printer took a galley.",

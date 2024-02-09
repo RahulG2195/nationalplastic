@@ -15,49 +15,49 @@ export default function Dealers() {
  const DealerArr = [
     {
       key : 1,
-      image : '/assets/images/HomepageImages/Others Cities Icons-01.png',
+      image : '/Assets/images/HomepageImages/Others Cities Icons-01.png',
       title : 'Ahmedabad',
       url : '#'
     },
     {
       key : 2,
-      image : '/assets/images/HomepageImages/Others Cities Icons-02.png',
+      image : '/Assets/images/HomepageImages/Others Cities Icons-02.png',
       title : 'Bangalore',
       url : '#'
     },
     {
       key : 3,
-      image : '/assets/images/HomepageImages/Others Cities Icons-03.png',
+      image : '/Assets/images/HomepageImages/Others Cities Icons-03.png',
       title : 'Jaipur',
       url : '#'
     },
     {
       key : 4,
-      image : '/assets/images/HomepageImages/Others Cities Icons-04.png',
+      image : '/Assets/images/HomepageImages/Others Cities Icons-04.png',
       title : 'Kolkata',
       url : '#'
     },
     {
       key : 5,
-      image : '/assets/images/HomepageImages/Others Cities Icons-05.png',
+      image : '/Assets/images/HomepageImages/Others Cities Icons-05.png',
       title : 'Mumbai',
       url : '#'
     },
     {
       key : 6,
-      image : '/assets/images/HomepageImages/Others Cities Icons-06.png',
+      image : '/Assets/images/HomepageImages/Others Cities Icons-06.png',
       title : 'Chennai',
       url : '#'
     },
     {
       key : 7,
-      image : '/assets/images/HomepageImages/Others Cities Icons-07.png',
+      image : '/Assets/images/HomepageImages/Others Cities Icons-07.png',
       title : 'Delhi',
       url : '#'
     },
     {
       key : 8,
-      image : '/assets/images/HomepageImages/Others Cities Icons-09.png',
+      image : '/Assets/images/HomepageImages/Others Cities Icons-09.png',
       title : 'Hyderabad',
       url : '#'
     },

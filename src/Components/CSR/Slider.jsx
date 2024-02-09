@@ -26,10 +26,10 @@ const Slider = () => {
                         disableOnInteraction: false,
                     }}
                 >
-                    <SwiperSlide style={{ width: "100%", overflow: "hidden", height: "100%" }} ><img style={{ width: '' }} src="/assets/images/CSR-img-2/CSR-img-2.png" alt="" /></SwiperSlide>
-                    <SwiperSlide style={{ width: "100%", overflow: "hidden", height: "100%" }} ><img style={{ width: '' }} src="/assets/images/CSR-img-2/CSR-img-2.png" alt="" /></SwiperSlide>
-                    <SwiperSlide style={{ width: "100%", overflow: "hidden", height: "100%" }} ><img style={{ width: '' }} src="/assets/images/CSR-img-2/CSR-img-2.png" alt="" /></SwiperSlide>
-                    <SwiperSlide style={{ width: "100%", overflow: "hidden", height: "100%" }} ><img style={{ width: '' }} src="/assets/images/CSR-img-2/CSR-img-2.png" alt="" /></SwiperSlide>
+                    <SwiperSlide style={{ width: "100%", overflow: "hidden", height: "100%" }} ><img style={{ width: '' }} src="/Assets/images/CSR-img-2/CSR-img-2.png" alt="" /></SwiperSlide>
+                    <SwiperSlide style={{ width: "100%", overflow: "hidden", height: "100%" }} ><img style={{ width: '' }} src="/Assets/images/CSR-img-2/CSR-img-2.png" alt="" /></SwiperSlide>
+                    <SwiperSlide style={{ width: "100%", overflow: "hidden", height: "100%" }} ><img style={{ width: '' }} src="/Assets/images/CSR-img-2/CSR-img-2.png" alt="" /></SwiperSlide>
+                    <SwiperSlide style={{ width: "100%", overflow: "hidden", height: "100%" }} ><img style={{ width: '' }} src="/Assets/images/CSR-img-2/CSR-img-2.png" alt="" /></SwiperSlide>
                 </Swiper>
                 <div>
                     <button className='px-3 py-2'>View More</button>

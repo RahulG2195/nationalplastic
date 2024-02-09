@@ -121,11 +121,11 @@ function ProdData() {
                 <div className="combile_price d-flex flex-wrap">
 
                   <div className="relevent_img d-flex gap-2 align-items-center">
-                    <Image src='/assets/images/Single Altis Image.png' width={100} height={100} layout="responsive" objectFit="cover" alt="img1" />
+                    <Image src='/Assets/images/Single Altis Image.png' width={100} height={100} layout="responsive" objectFit="cover" alt="img1" />
                     <span><i className="fa fa-plus"></i></span>
-                    <Image src="/assets/images/Single Altis Image.png" width={100} height={100} layout="responsive" objectFit="cover" alt="img1" />
+                    <Image src="/Assets/images/Single Altis Image.png" width={100} height={100} layout="responsive" objectFit="cover" alt="img1" />
                     <span><i className="fa fa-plus"></i></span>
-                    <Image src='/assets/images/Single Altis Image.png' width={100} height={100} layout="responsive" objectFit="cover" alt="img1" />
+                    <Image src='/Assets/images/Single Altis Image.png' width={100} height={100} layout="responsive" objectFit="cover" alt="img1" />
                   </div>
 
                   <div className="com_price text-top m-3">
@@ -162,7 +162,7 @@ function ProdData() {
             doloremque laudantium, totam rem aperiam.
           </div>
           {/* <div className="imgCont">
-            <img src="/assets/images/Image 5/Image 5.png" alt="" />
+            <img src="/Assets/images/Image 5/Image 5.png" alt="" />
           </div> */}
 
 

@@ -29,25 +29,25 @@ function About() {
   const imgarr = [
     {
       key: 1,
-      image: "/assets/images/team/user.png",
+      image: "/Assets/images/team/user.png",
       name: "Name1",
       desig: "ipsum dolor1",
     },
     {
       key: 2,
-      image: "/assets/images/team/user.png",
+      image: "/Assets/images/team/user.png",
       name: "Name2",
       desig: "ipsum dolor2",
     },
     {
       key: 3,
-      image: "/assets/images/team/user.png",
+      image: "/Assets/images/team/user.png",
       name: "Name3",
       desig: "ipsum dolor3",
     },
     {
       key: 4,
-      image: "/assets/images/team/user.png",
+      image: "/Assets/images/team/user.png",
       name: "Name4",
       desig: "ipsum dolor4",
     },
@@ -58,19 +58,19 @@ function About() {
   const certificatesarr = [
     {
       key: 1,
-      image: "/assets/images/team/user.png", 
+      image: "/Assets/images/team/user.png", 
     },
     {
       key: 2,
-      image: "/assets/images/team/user.png",
+      image: "/Assets/images/team/user.png",
     },
     {
       key: 3,
-      image: "/assets/images/team/user.png",
+      image: "/Assets/images/team/user.png",
     },
     {
       key: 4,
-      image: "/assets/images/team/user.png",
+      image: "/Assets/images/team/user.png",
     },
   ];
   // Array for Awards & Certificatesend

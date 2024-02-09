@@ -12,7 +12,7 @@ export default function Header() {
           <div className="container-fluid">
             <a className="navbar-brand" href="#">
               <Image
-                src="/assets/images/nation_logo.png"
+                src="/Assets/images/nation_logo.png"
                 className="img-fluid"
                 alt="Landscape picture"
                 width={800}

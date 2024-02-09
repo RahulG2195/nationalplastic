@@ -4,19 +4,19 @@ export default function TopPick() {
  const productArr = [
     {
       key : 1,
-      image : '/assets/images/HomepageImages/1st-section-kids-chair.jpg',
+      image : '/Assets/images/HomepageImages/1st-section-kids-chair.jpg',
       title : 'Event Chairs',
       url : '#'
     },
     {
       key : 2,
-      image : '/assets/images/HomepageImages/1st-section-kids-chair.jpg',
+      image : '/Assets/images/HomepageImages/1st-section-kids-chair.jpg',
       title : 'Premium Chairs',
       url : '#'
     },
     {
       key : 3,
-      image : '/assets/images/HomepageImages/1st-section-kids-chair.jpg',
+      image : '/Assets/images/HomepageImages/1st-section-kids-chair.jpg',
       title : 'Kids Chairs',
       url : '#'
     },

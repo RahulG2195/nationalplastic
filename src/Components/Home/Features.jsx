@@ -10,7 +10,7 @@ function Features() {
             <a href="">
               <div className="feature_img">
                 <Image
-                  src="/assets/images/feature/Offers-section-1.png"
+                  src="/Assets/images/feature/Offers-section-1.png"
                   classname="img-fluid d-block w-100"
                   alt=""
                   fill
@@ -22,7 +22,7 @@ function Features() {
             <a href="">
               <div className="feature_img">
                 <Image
-                  src="/assets/images/feature/Offers-section-2.png"
+                  src="/Assets/images/feature/Offers-section-2.png"
                   classname="img-fluid d-block w-100"
                   alt=""
                   fill
@@ -34,7 +34,7 @@ function Features() {
             <a href="">
               <div className="feature_img">
                 <Image
-                  src="/assets/images/feature/Offers-section-1.png"
+                  src="/Assets/images/feature/Offers-section-1.png"
                   classname="img-fluid d-block w-100"
                   alt=""
                   fill

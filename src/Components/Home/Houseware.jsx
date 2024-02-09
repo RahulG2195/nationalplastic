@@ -21,7 +21,7 @@ function Houseware() {
                 <div className="col-md-6 houseDiv"data-aos="zoom-in">
                     <div className="houseImg">
                         <Image
-                        src = "/assets/images/HomepageImages/CTA-banner.jpg-industry-image.png"
+                        src = "/Assets/images/HomepageImages/CTA-banner.jpg-industry-image.png"
                         // width={100}
                         // height={100}
                         // layout="responsive"

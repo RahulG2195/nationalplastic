@@ -3,7 +3,7 @@ const Privacy = () => {
     return (
         <>
             <Image
-                src="/assets/images/Privacy-policy-pg-page-banner/Privacy-policy-pg-page-banner.png"
+                src="/Assets/images/Privacy-policy-pg-page-banner/Privacy-policy-pg-page-banner.png"
                 width={100}
                 height={80}
                 layout='responsive'

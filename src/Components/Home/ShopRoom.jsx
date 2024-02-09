@@ -4,42 +4,42 @@ export default function ShopRoom() {
  const productArr = [
     {
       key : 1,
-      image : '/assets/images/HomepageImages/Living-Room.jpg',
+      image : '/Assets/images/HomepageImages/Living-Room.jpg',
       title : 'Seatings',
       url : '#',
       style : 'shop-room'
     },
     {
       key : 2,
-      image : '/assets/images/HomepageImages/Dining.jpg',
+      image : '/Assets/images/HomepageImages/Dining.jpg',
       title : 'Tables',
       url : '#',
       style : 'shop-room'
     },
     {
       key : 3,
-      image : '/assets/images/HomepageImages/Bedroom.jpg',
+      image : '/Assets/images/HomepageImages/Bedroom.jpg',
       title : 'Storage',
       url : '#',
       style : 'shop-room'
     },
     {
       key : 4,
-      image : '/assets/images/HomepageImages/Bedroom.jpg',
+      image : '/Assets/images/HomepageImages/Bedroom.jpg',
       title : 'Sets',
       url : '#',
       style : 'shop-room'
     },
     {
       key : 5,
-      image : '/assets/images/HomepageImages/Dining.jpg',
+      image : '/Assets/images/HomepageImages/Dining.jpg',
       title : 'Stools',
       url : '#',
       style : 'shop-room'
     },
     {
       key : 6,
-      image : '/assets/images/HomepageImages/Bedroom.jpg',
+      image : '/Assets/images/HomepageImages/Bedroom.jpg',
       title : 'Kids Chair',
       url : '#',
       style : 'shop-room'

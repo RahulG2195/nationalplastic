@@ -70,7 +70,7 @@ function ContactUs() {
       <div className="container-flude">
         <div className="row">
           <Image
-            src="/assets/images/ContactUs/Contact-Us-pg-banner.png"
+            src="/Assets/images/ContactUs/Contact-Us-pg-banner.png"
             width={100}
             height={100}
             layout="responsive"
@@ -90,7 +90,7 @@ function ContactUs() {
         <div className="row">
           <div className="contactCTA">
             <Image
-              src="/assets/images/ContactUs/call-center-headphone-keyboard-table.png"
+              src="/Assets/images/ContactUs/call-center-headphone-keyboard-table.png"
               width={100}
               height={100}
               layout="responsive"
@@ -181,7 +181,7 @@ function ContactUs() {
           <div className="col-md-4">
             <div className="location-image">
               <Image
-                src="/assets/images/ContactUs/red-place-marker-white-background.png"
+                src="/Assets/images/ContactUs/red-place-marker-white-background.png"
                 width={100}
                 height={100}
                 layout="responsive"
@@ -212,7 +212,7 @@ function ContactUs() {
           </div>
           <div className="col-md-8 map-image" >
             <Image
-              src="/assets/images/ContactUs/map.png"
+              src="/Assets/images/ContactUs/map.png"
               width={100}
               height={100}
               layout="responsive"

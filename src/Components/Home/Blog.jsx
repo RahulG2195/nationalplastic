@@ -15,7 +15,7 @@ export default function Blog() {
   const productArr = [
     {
       key: 1,
-      image: '/assets/images/HomepageImages/1st-section-kids-chair.jpg',
+      image: '/Assets/images/HomepageImages/1st-section-kids-chair.jpg',
       title: 'Dinning Table Set',
       url: '#',
       cat: 'Furniture',
@@ -25,7 +25,7 @@ export default function Blog() {
     },
     {
       key: 2,
-      image: '/assets/images/HomepageImages/1st-section-kids-chair.jpg',
+      image: '/Assets/images/HomepageImages/1st-section-kids-chair.jpg',
       title: 'Multipurpose storage',
       url: '#',
       cat: 'Furniture',
@@ -35,7 +35,7 @@ export default function Blog() {
     },
     {
       key: 3,
-      image: '/assets/images/HomepageImages/1st-section-kids-chair.jpg',
+      image: '/Assets/images/HomepageImages/1st-section-kids-chair.jpg',
       title: 'Kids Chairs',
       url: '#',
       cat: 'Furniture',

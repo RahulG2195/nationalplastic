@@ -13,7 +13,7 @@ const NewsBanner = () => {
     <>
 
       <Image
-        src="/assets/images/Media_-News-banner/Media_-News-banner.png"
+        src="/Assets/images/Media_-News-banner/Media_-News-banner.png"
         width={100}
         height={80}
         layout='responsive'

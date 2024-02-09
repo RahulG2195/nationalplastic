@@ -3,22 +3,22 @@ import './FooterRow.css'
 const FooterRow = () => {
     const featuresData = [
         {
-            iconSrc: "/assets/images/shop/shop.png",
+            iconSrc: "/Assets/images/shop/shop.png",
             count: "50+",
             description: "Experienced Stores across India",
         },
         {
-            iconSrc: "/assets/images/Shipping-01/Shipping-01.png",
+            iconSrc: "/Assets/images/Shipping-01/Shipping-01.png",
             count: "350+",
             description: "Delivery Centres Across India",
         },
         {
-            iconSrc: "/assets/images/reputation/reputation.png",
+            iconSrc: "/Assets/images/reputation/reputation.png",
             count: "20 lakh+",
             description: "Satisfied Customer",
         },
         {
-            iconSrc: "/assets/images/warranty/warranty.png",
+            iconSrc: "/Assets/images/warranty/warranty.png",
             count: "1 year*",
             description: "Guaranteed Warranty",
         },

@@ -6,25 +6,25 @@ function Catalogue() {
     const Cataloguearr = [
         {
           key: 1,
-          image: "/assets/images/catalogue/dummy.png",
+          image: "/Assets/images/catalogue/dummy.png",
           title: "Lorem ipsum",
           desc: "Updated on 10 oct, 2023",
         },
         {
           key: 2,
-          image: "/assets/images/catalogue/dummy.png",
+          image: "/Assets/images/catalogue/dummy.png",
           title: "Lorem ipsum",
           desc: "Updated on 10 oct, 2023",
         },
         {
           key: 3,
-          image: "/assets/images/catalogue/dummy.png",
+          image: "/Assets/images/catalogue/dummy.png",
           title: "Lorem ipsum",
           desc: "Updated on 10 oct, 2023",
         },
         {
           key: 4,
-          image: "/assets/images/catalogue/dummy.png",
+          image: "/Assets/images/catalogue/dummy.png",
           title: "Lorem ipsum",
           desc: "Updated on 10 oct, 2023",
         },
@@ -34,7 +34,7 @@ function Catalogue() {
       <div className="container">
         <div className="">
           <Image
-            src="/assets/images/banner/Catalouge-page-banner.png"
+            src="/Assets/images/banner/Catalouge-page-banner.png"
             classname="img-fluid d-block w-100"
             alt="ProdCatalouge image"
             width={100}

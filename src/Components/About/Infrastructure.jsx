@@ -19,7 +19,7 @@ function Infrastructure() {
           {/* <<<<<<< HEAD */}
           <div className="india-map-image">
             <Image
-              src="/assets/images/aboutIcons/map-image.png"
+              src="/Assets/images/aboutIcons/map-image.png"
               classname="img-fluid d-block w-70"
               alt="map image"
               width={100}

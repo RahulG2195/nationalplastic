@@ -6,7 +6,7 @@ function ThankYouPage() {
       <div className="container error-main-container">
         <div className="row ThankYouImg">
           <Image
-            src="/assets/images/404/successful.png"
+            src="/Assets/images/404/successful.png"
             width={100}
             height={100}
             layout="responsive"
