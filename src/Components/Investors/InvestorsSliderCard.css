@@ -1,0 +1,39 @@
+/* .bgimginvestors{
+    background-image:url("public/Assets/images/");
+    background-repeat: no-repeat;
+    background-size: cover;
+} */
+
+.InvestorSrNo {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    top: -10%;
+    left: 35%;
+}
+
+.bgimginvestors p {
+    position: absolute;
+    top: 24%;
+    left: 25%;
+    font-size: 1.5rem;
+    text-align: center;
+    width: 50%;
+    line-height: 1;
+}
+.bgimginvestors .image{
+    width: 300px;
+    height: 300px;
+
+}
+.bgimginvestors button {
+    position: absolute;
+    top: 55%;
+    left: 30%;
+}
+
+.investor-swiper {
+    overflow: hidden !important;
+    padding-left: 20px;
+    padding-right: 20px;
+}
