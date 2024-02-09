@@ -177,7 +177,7 @@ function ContactUs() {
           </div>
         </div>
 
-        <div className="row">
+        <div className="row LocationSection">
           <div className="col-md-4">
             <div className="location-image">
               <Image
