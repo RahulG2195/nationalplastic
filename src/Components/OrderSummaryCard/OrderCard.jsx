@@ -8,8 +8,8 @@ const OrderSummaryCard = (props) => {
 
                 <div>
                     <div className="ml-3">
-                        <div className="fw-semibold">{props.description}</div>
-                        <div className="fw-bold">Quantity: {props.quantity}</div>
+                        <div className="fw-semibold medium">{props.description}</div>
+                        <div className="fw-bold medium">Quantity: {props.quantity}</div>
                     </div>
                 </div>
             </div>

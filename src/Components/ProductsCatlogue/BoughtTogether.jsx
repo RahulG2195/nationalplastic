@@ -42,10 +42,15 @@ const BoughtTogether = () => {
 
 
                     breakpoints={{
+                        425: {
+                            slidesPerView: 2,
+                            spaceBetween: 20,
+                        },
                         200: {
                             slidesPerView: 1,
                             spaceBetween: 20,
                         },
+                       
                         640: {
                             slidesPerView: 2,
                             spaceBetween: 20,

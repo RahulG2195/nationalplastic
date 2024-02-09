@@ -13,6 +13,11 @@
   color: #262262;
 
 }
+
+.litegray {
+  color: #D4D4D4;
+}
+
 .bg-darkBlue{
   background-color: #262262;
 
@@ -36,6 +41,7 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
 }
+
 
 p,
 h1,
@@ -122,6 +128,23 @@ p {
   text-align: end;
   margin: 10px 0;
   text-transform: uppercase;
+}
+
+.subCptRes{
+ margin: auto;
+}
+
+@media (max-width:992px) {
+  .subCptRes{
+    width: 75% !important;
+    font-size: small;
+   }
+}
+@media (max-width:501px) {
+  .subCptRes{
+    width: 90% !important;
+    font-size: x-small;
+   }
 }
 
 @media (max-width:922px) {

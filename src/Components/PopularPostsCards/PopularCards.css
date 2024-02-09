@@ -1,25 +1,52 @@
-
-.recentPost{
-    margin-top:-5px ;
+.recentPost {
+    margin-top: -5px;
     width: 99%;
     height: 80px;
     background-color: #2E3192;
 }
- .posts{
+
+.posts {
     padding-bottom: 20px;
-    border-bottom:2px solid #D4D4D4 ;
+    border-bottom: 2px solid #D4D4D4;
 }
 
-.popularPostCard{
-    width: 400px;
-    height: 70px;
+.popularPostCard {
+    width: 300px;
+    height: 100px;
     background-color: #D4D4D4;
 }
-.Popularcaption{
+
+.Popularcaption {
     text-align: left !important;
 }
 
-.DetailsPopularCard{
-    position:sticky;
-    top:10%;
+.DetailsPopularCard {
+    position: sticky;
+    top: 10%;
+}
+
+@media (max-width:1172px) {
+    .Popularcaption p {
+        font-size: 10px !important;
+    }
+
+}
+
+@media (max-width:768px) {
+    .Popularcaption p {
+        font-size: medium !important;
+    }
+
+}
+
+@media (max-width:600px) {
+    .Popularcaption p {
+        font-size: x-small !important;
+    }
+
+    .popularPostCard {
+        min-width: 100px;
+        min-height: 100px;
+    }
+
 }

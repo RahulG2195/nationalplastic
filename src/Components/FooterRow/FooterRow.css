@@ -23,6 +23,16 @@
     font-size: 14px; 
 }
 
+@media (max-width:816px) {
+
+    .FeatureText h6 {
+        font-size: 12px;
+    }
+    .FeatureText h5 {
+        font-size: 12px;
+    }
+}
+
 @media (max-width: 576px) {
     .features-container {
         padding: 10px;
@@ -31,10 +41,6 @@
     .icon img {
         width: 30px;
         height: 30px;
-    }
-
-    .FeatureText h5 {
-        font-size: 16px; 
     }
 
     .FeatureText h6 {
