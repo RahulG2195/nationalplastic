@@ -374,6 +374,9 @@
     .AwardsCertificatesImg{
         margin-bottom: 25px;
     }
+    .about_icons {
+        justify-content: left;
+    }
 }
 
 @media only screen and (min-width: 361px) and (max-width: 480px) {
@@ -406,6 +409,9 @@
     }
     .AwardsCertificatesImg {
         margin-bottom: 25px;
+    }
+    .about_icons {
+        justify-content: left;
     }
 
 }
@@ -446,5 +452,8 @@
     } 
     .section_header h3{
         font-size: 30px;
+    }
+    .about_icons {
+        justify-content: left;
     }
 }
