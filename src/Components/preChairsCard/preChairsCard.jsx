@@ -1,5 +1,4 @@
 import './PreChairsCard.css'
-// import Image from 'next/image'
 
 const PreChairsCard = (props) => {
     return (
