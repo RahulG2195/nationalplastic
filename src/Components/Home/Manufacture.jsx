@@ -4,42 +4,42 @@ export default function Manufacture() {
  const productArr = [
     {
       key : 1,
-      image : '/Assets/images/HomepageImages/Chair.png',
+      image : '/Assets/images/Home-page/Chair.png',
       title : 'Seatings',
       url : '#',
       style : 'shop-room'
     },
     {
       key : 2,
-      image : '/Assets/images/HomepageImages/Chair.png',
+      image : '/Assets/images/Home-page/Chair.png',
       title : 'Tables',
       url : '#',
       style : 'shop-room'
     },
     {
       key : 3,
-      image : '/Assets/images/HomepageImages/Chair.png',
+      image : '/Assets/images/Home-page/Chair.png',
       title : 'Storage',
       url : '#',
       style : 'shop-room'
     },
     {
       key : 4,
-      image : '/Assets/images/HomepageImages/Chair.png',
+      image : '/Assets/images/Home-page/Chair.png',
       title : 'Sets',
       url : '#',
       style : 'shop-room'
     },
     {
       key : 5,
-      image : '/Assets/images/HomepageImages/Chair.png',
+      image : '/Assets/images/Home-page/Chair.png',
       title : 'Stools',
       url : '#',
       style : 'shop-room'
     },
     {
       key : 6,
-      image : '/Assets/images/HomepageImages/Chair.png',
+      image : '/Assets/images/Home-page/Chair.png',
       title : 'Kids Chair',
       url : '#',
       style : 'shop-room'
