@@ -4,7 +4,7 @@ import NationalFitness from "@/Components/Investors/NationalFinances";
 import UnauditedFinancialResults from "@/Components/Investors/UnauditedFinancialResults";
 import SharePricesCard from "@/Components/Investors/SharePricesCard";
 // import FinancialResults from "@/Components/Investors/FinancialResults";
-import InvestorsSlider from "@/Components/Investors/InvestorsSlider";
+// import InvestorsSlider from "@/Components/Investors/InvestorsSlider";
 import AboutSlider from "@/Components/About/AboutSlider";
 import SliderCard from "@/Components/About/SliderCard";
 

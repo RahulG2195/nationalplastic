@@ -1,5 +1,4 @@
 import Image from "next/image"
-import './Privacy.css'
 const Privacy = () => {
     return (
         <>
