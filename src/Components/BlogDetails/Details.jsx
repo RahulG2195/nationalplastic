@@ -6,12 +6,12 @@ import './Details.css'
 const Details = () => {
 
     const togetherCardsData = [
-        { imgSrc: "/Assets/images/Magna/Magna.png", price: "00,000" },
-        { imgSrc: "/Assets/images/The-boss/The-boss.png", price: "00,000" },
-        { imgSrc: "/Assets/images/Top-selling-product/Top-selling-product.png", price: "00,000" },
-        { imgSrc: "/Assets/images/Magna/Magna.png", price: "00,000" },
-        { imgSrc: "/Assets/images/The-boss/The-boss.png", price: "00,000" },
-        { imgSrc: "/Assets/images/Top-selling-product/Top-selling-product.png", price: "00,000" },
+        { imgSrc: "/assets/images/Magna/Magna.png", price: "00,000" },
+        { imgSrc: "/assets/images/The-boss/The-boss.png", price: "00,000" },
+        { imgSrc: "/assets/images/Top-selling-product/Top-selling-product.png", price: "00,000" },
+        { imgSrc: "/assets/images/Magna/Magna.png", price: "00,000" },
+        { imgSrc: "/assets/images/The-boss/The-boss.png", price: "00,000" },
+        { imgSrc: "/assets/images/Top-selling-product/Top-selling-product.png", price: "00,000" },
 
     ];
     return (
@@ -56,9 +56,9 @@ const Details = () => {
                 </div>
             </div>
             <div className="d-flex justify-content-center mx-5 mb-5 px-5">
-                <TogetherCard imgSrc={"/Assets/images/Top-selling-product/Top-selling-product.png"} caption={" Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam "} />
-                <TogetherCard imgSrc={"/Assets/images/The-boss/The-boss.png"} caption={" Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam "} />
-                <TogetherCard imgSrc={"/Assets/images/Magna/Magna.png"} caption={" Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam "} />
+                <TogetherCard imgSrc={"/assets/images/Top-selling-product/Top-selling-product.png"} caption={" Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam "} />
+                <TogetherCard imgSrc={"/assets/images/The-boss/The-boss.png"} caption={" Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam "} />
+                <TogetherCard imgSrc={"/assets/images/Magna/Magna.png"} caption={" Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam "} />
             </div>
 
         </>

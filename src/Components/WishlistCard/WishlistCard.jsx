@@ -29,7 +29,7 @@ const WishlistCard = (props) => {
                                                 MOVE TO CART
                                             </button>
                                             <div className="delete">
-                                                <img src="/Assets/svg/Icon core-trash.svg" alt="" />
+                                                <img src="/assets/svg/Icon core-trash.svg" alt="" />
                                             </div>
                                         </div>
                                     </div>

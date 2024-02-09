@@ -18,7 +18,7 @@ const BulkOrders = () => {
 
                     <div className="ordersimg-cont">
                         <Image
-                            src="/Assets/svg/Group 910.svg"
+                            src="/assets/svg/Group 910.svg"
                             width={100}
                             height={100}
                             layout='responsive'
@@ -33,7 +33,7 @@ const BulkOrders = () => {
                                 
                             </div>
                             <div className="position-absolute bottomImgOfForm">
-                                  <img src="/Assets/svg/Group 871.svg" alt=""  />
+                                  <img src="/assets/svg/Group 871.svg" alt=""  />
                                 </div>
 
                             <div>

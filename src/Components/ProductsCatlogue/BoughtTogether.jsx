@@ -9,12 +9,12 @@ import './BoughtTogether.css'
 
 const BoughtTogether = () => {
     const togetherCardsData = [
-        { imgSrc: "/Assets/images/Magna/Magna.png", price: "00,000" },
-        { imgSrc: "/Assets/images/The-boss/The-boss.png", price: "00,000" },
-        { imgSrc: "/Assets/images/Top-selling-product/Top-selling-product.png", price: "00,000" },
-        { imgSrc: "/Assets/images/Magna/Magna.png", price: "00,000" },
-        { imgSrc: "/Assets/images/The-boss/The-boss.png", price: "00,000" },
-        { imgSrc: "/Assets/images/Top-selling-product/Top-selling-product.png", price: "00,000" },
+        { imgSrc: "/assets/images/Magna/Magna.png", price: "00,000" },
+        { imgSrc: "/assets/images/The-boss/The-boss.png", price: "00,000" },
+        { imgSrc: "/assets/images/Top-selling-product/Top-selling-product.png", price: "00,000" },
+        { imgSrc: "/assets/images/Magna/Magna.png", price: "00,000" },
+        { imgSrc: "/assets/images/The-boss/The-boss.png", price: "00,000" },
+        { imgSrc: "/assets/images/Top-selling-product/Top-selling-product.png", price: "00,000" },
 
     ];
 
@@ -76,7 +76,7 @@ const BoughtTogether = () => {
             <div className="mt-5">
                 <Image
                 className="mt-5"
-                    src={"/Assets/images/CTA-banner-1.jpg-V2/CTA-banner-1.jpg-V2.png"}
+                    src={"/assets/images/CTA-banner-1.jpg-V2/CTA-banner-1.jpg-V2.png"}
                     width={100}
                     height={80}
                     layout='responsive'

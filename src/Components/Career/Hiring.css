@@ -9,7 +9,7 @@
 
 .HC1::after{
 
-    content: url("/Assets/svg/Group 930.svg");
+    content: url("/assets/svg/Group 930.svg");
     position: absolute;
     left: 50%;
 }
@@ -20,7 +20,7 @@
 
 .HC3::after{
     
-    content: url("/Assets/svg/Group 931.svg");
+    content: url("/assets/svg/Group 931.svg");
     position: absolute;
     right: 35%;
     bottom:12%;

@@ -19,19 +19,19 @@ const Hiring = () => {
 
 
                     <div className="HC1">
-                        <Hirirng_Card className="Card1" TitleclassName="Apply" IMGclassName="IMG1" ImgSrc="/Assets/svg/Group 929.svg" Title="APPLY" Text="Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        <Hirirng_Card className="Card1" TitleclassName="Apply" IMGclassName="IMG1" ImgSrc="/assets/svg/Group 929.svg" Title="APPLY" Text="Lorem ipsum dolor sit amet consectetur adipisicing elit.
                      Voluptas earum, ab atque mollitia molestias adipisci rerum accusantium laboriosam,
                       inventore fuga iste vel odio ad esse!" />
                     </div>
 
                     <div className="HC2">
-                        <Hirirng_Card className="Card2" TitleclassName="Interview" IMGclassName="IMG2" ImgSrc="/Assets/svg/Group 928.svg" Title="INTERVIEW" Text="Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        <Hirirng_Card className="Card2" TitleclassName="Interview" IMGclassName="IMG2" ImgSrc="/assets/svg/Group 928.svg" Title="INTERVIEW" Text="Lorem ipsum dolor sit amet consectetur adipisicing elit.
                      Voluptas earum, ab atque mollitia molestias adipisci rerum accusantium laboriosam,
                       inventore fuga iste vel odio ad esse!"  />
                     </div>
 
                     <div className="HC3">
-                        <Hirirng_Card className="Card3" TitleclassName="Recruitment" IMGclassName="IMG3" ImgSrc="/Assets/svg/Group 914.svg" Title="RECRUITMENT" Text="Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        <Hirirng_Card className="Card3" TitleclassName="Recruitment" IMGclassName="IMG3" ImgSrc="/assets/svg/Group 914.svg" Title="RECRUITMENT" Text="Lorem ipsum dolor sit amet consectetur adipisicing elit.
                      Voluptas earum, ab atque mollitia molestias adipisci rerum accusantium laboriosam,
                       inventore fuga iste vel odio ad esse!"  />
                     </div>

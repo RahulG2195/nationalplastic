@@ -45,7 +45,7 @@ const CategoryGrid = () => {
                         <div className=' BlogSvg mt-5 pt-5'>
                             <div>
                                 <Image
-                                    src="/Assets/svg/Group 725.svg"
+                                    src="/assets/svg/Group 725.svg"
                                     width={50}
                                     height={50}
                                     layout='responsive'

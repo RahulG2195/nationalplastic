@@ -29,7 +29,7 @@ const ProductDetailSlider = () => {
                 className="mySwiper2"
             >
                 <SwiperSlide>
-                    <img src="/Assets/images/Sub-category-prodcut/Sub-category-prodcut.png" />
+                    <img src="/assets/images/Sub-category-prodcut/Sub-category-prodcut.png" />
                 </SwiperSlide>
                 <SwiperSlide>
                     <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
@@ -55,10 +55,10 @@ const ProductDetailSlider = () => {
                 className="mySwiper mt-5"
             >
                 <SwiperSlide>
-                    <img src="/Assets/images/Sub-category-prodcut/Sub-category-prodcut.png" />
+                    <img src="/assets/images/Sub-category-prodcut/Sub-category-prodcut.png" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src="/Assets/images/karnival-chair-white-bg/karnival-chair-white-bg.png" />
+                    <img src="/assets/images/karnival-chair-white-bg/karnival-chair-white-bg.png" />
                 </SwiperSlide>
                 <SwiperSlide>
                     <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
