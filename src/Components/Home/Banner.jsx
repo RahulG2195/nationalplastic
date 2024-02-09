@@ -32,7 +32,7 @@ function Banner() {
         </div>
         <div className="carousel-item">
           <Image
-            src="/assets/images/banner/Header-banner-websize.png"
+            src='/assets/images/banner/Header-banner-websize.png'
             classname="img-fluid d-block w-100"
             alt="ome banner 3"
             width={100}
