@@ -233,11 +233,7 @@
     color: #c59b08;
 }
 
-/* .product-dtl p {
-	font-size: 14px;
-	line-height: 24px;
-	color: #7a7a7a;
-} */
+
 .product-dtl .form-control {
     font-size: 15px;
 }
@@ -353,6 +349,22 @@
     display: block;
 }
 
+
+
+@media (max-width:1089px) {
+    .ChkAvblityRes {
+        font-size: 10px !important;
+    }
+    .ChkAvblityRes .ChckBtnRes a{
+        font-size: 10px !important;
+
+    }
+    .ChkAvblityRes p{
+        font-size:medium !important;
+    }
+    
+}
+
 @media (max-width:600px) {
     .listTabContent{
         display: none;
@@ -367,7 +379,7 @@
 }
 
 
-@media (max-width:557px) {
+@media (max-width:425px) {
     .ProdbtnRes {
 
         padding: 5px 10px !important;
@@ -375,7 +387,7 @@
     }
 
     .bulkRes {
-        margin: 5% 0 0 25% !important;
+        /* margin: 5% 0 0 25% !important; */
         padding: 5px 20px !important;
 
     }
@@ -392,23 +404,36 @@
         height: fit-content !important;
     }
 
+    .prod_clr p{
+        font-size: 14px !important;
+    }
+    .prod_size {
+        font-size: 14px;
+    }
+    .prod_size input{
+        text-align: center;
+        width: 66% !important;
+    }
 
 }
 
 @media (max-width:405px) {
 
     .ChckBtnRes a {
-        margin-top: 15px;
         padding: 5px 12px !important;
-        font-size: medium;
-        /* height:fit-content !important; */
     }
 
     .reschkAvbl input {
-        /* width: 100% !important; */
         height: 10% !important;
         padding: 10px;
-
     }
 
+}
+
+@media (max-width:307px) {
+    .ChckBtnRes a {
+        margin-top: 5px !important;
+    }
+
+    
 }

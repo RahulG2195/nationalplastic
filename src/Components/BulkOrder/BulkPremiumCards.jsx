@@ -23,7 +23,7 @@ const BulkPremiumCards = () => {
             <div className="container mt-5">
                 <div className="row ">
                     {chairData.map((chair, index) => (
-                        <div key={index} className=" col-12 col-sm-6 col-md-6 col-lg-3 col-xsm-6">
+                        <div key={index} className="PreCardSm col-6 col-sm-6 col-xs-4 col-md-6 col-lg-3">
                             <PreChairsCard
                                 ChairImg={chair.ChairImg}
                                 Title={chair.Title}

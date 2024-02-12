@@ -1,7 +1,6 @@
-/* AddBody.css */
 
 .main_container {
-    margin-top: 5rem; /* Adjust margin-top as needed */
+    margin-top: 5rem; 
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -9,8 +8,7 @@
 
 .Addleft {
     background-color: #f7f7f7;
-    min-height: 70vh; 
-    padding: 1.5rem; 
+ 
 }
 
 .bordrBtm {
@@ -22,9 +20,6 @@
     font-size: x-large; 
 }
 
-.customerAddress {
-    max-width: 40%; 
-}
 
 .form-check-input:checked {
     border-color: #dc3545;
@@ -55,3 +50,20 @@
     text-align: start; 
 }
 
+@media (max-width:600px) {
+    .checkOutCptResp{
+        font-size: x-small !important;
+    }
+    
+    .liftOptionsResp{
+        font-size: small !important;
+
+    }
+    .SaveBtnResp{
+        padding: 5px 25px !important;
+    }
+    .viewMoreResp{
+        font-size: small;
+
+    }
+}

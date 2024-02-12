@@ -70,9 +70,9 @@ const Details = () => {
 
             <div className="text-center mt-5 pt-5 mb-4">
                 <div className="text-danger fw-bold fs-1">You Might<span className="darkBlue fw-normal"> Also Like</span></div>
-                <div className="mt-1 fw-normal medium subCptRes">
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has</p>
-                    <p>been the industry's standard dummy text ever since the 1500s,</p>
+                <div className="mt-1 fw-normal medium subCptRes w-50">
+                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                    been the industry's standard dummy text ever since the 1500s,</p> 
                 </div>
             </div>
 

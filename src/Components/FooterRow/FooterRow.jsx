@@ -26,9 +26,10 @@ const FooterRow = () => {
 
     return (
         <div className="features-container d-flex justify-content-center mt-3">
-            <div className="features row row-cols-sm-2 row-cols-md-4">
+            <div className="features row row-cols-sm-4 row-cols-md-4">
                 {featuresData.map((feature, index) => (
-                    <div key={index} className="col feature">
+                    <div key={index} className="col feature 
+                    justify-content-center">
                         <div className="icon">
                             <img src={feature.iconSrc} alt="" />
                         </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import "../../styles/TabContent.css";
+import "../../../styles/TabContent.css";
 
 const TabContent = () => {
     return (

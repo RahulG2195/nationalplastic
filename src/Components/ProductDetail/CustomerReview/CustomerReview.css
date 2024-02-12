@@ -28,5 +28,8 @@
     .filterSortRes span{
         font-size: small;
     }
+    .resVeiwBtn{
+        margin-bottom: 15px;
+    }
 }
     

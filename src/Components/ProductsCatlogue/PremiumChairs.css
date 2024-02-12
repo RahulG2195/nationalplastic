@@ -18,3 +18,16 @@
     
 }
 
+@media (max-width:788px) {
+    .dropdownbuttonResp{
+        padding: 3px !important;
+        font-size: small !important;
+    }
+    .dropboxRes{
+        justify-content: space-between !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding: 5px !important;
+    }
+    
+}

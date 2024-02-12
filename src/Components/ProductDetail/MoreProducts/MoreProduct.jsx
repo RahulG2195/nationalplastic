@@ -6,7 +6,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import TabContent from "./TabContent/TabContent";
+import TabContent from "../TabContent/TabContent";
 
 
 const MoreProduct = () => {
@@ -153,7 +153,7 @@ const MoreProduct = () => {
                         </AccordionSummary>
                         <AccordionDetails>
                             <div>
-                                <TabContent />
+                                <TabContent/>
                             </div>
                         </AccordionDetails>
                     </Accordion>

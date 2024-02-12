@@ -8,7 +8,7 @@ import RecentlyViewedDetails from "./RecentlyViewedDetails/RecentlyViewedDetails
 import CustomerReview from "./CustomerReview/CustomerReview";
 import Faqs from "../FAQs/Faqs";
 import FooterRow from "../FooterRow/FooterRow";
-import TabContent from "./MoreProducts/TabContent/TabContent";
+import TabContent from "./TabContent/TabContent";
 // import RecentlyViewed from "../ProductsCatlogue/RecentlyViewed";
 
 function ProdData() {
@@ -24,7 +24,7 @@ function ProdData() {
           <div className="col-md-6">
             <div className="product-dtl">
               <div className="product-info">
-                <div className="product-name">
+                <div className="product-name text-center">
                   <h2>Karnival Chair</h2>
                 </div>
 
@@ -38,7 +38,7 @@ function ProdData() {
 
                   <div className="d-flex flex-wrap align-items-center">
                     <div className="discount discRes"><p>Save <span>₹</span> 600</p></div>
-                    <div className="inc"><small>(incl. of all taxes)</small></div>
+                    <div className="inc small"><small>(incl. of all taxes)</small></div>
                   </div>
 
                 </div>
@@ -53,7 +53,7 @@ function ProdData() {
                   </div>
                   <div className="prod_size">
                     <div><strong>Size: </strong> 0000</div>
-                    <input type="text" name="prod_size" id="size" value="0000" />
+                    <input type="text" name="prod_size" id="size" placeholder="000" />
                   </div>
                 </div>
 
@@ -101,7 +101,7 @@ function ProdData() {
                 </a>
               </div>
               <p className="eye"><i className="fa fa-eye"></i> 210 customers are interviewing the product</p>
-              <div className="terms fw-medium">
+              <div className="terms fw-medium small">
                 <Link href="#">Terms and Conditions</Link>
                 <ul>
                   <li>Lorem ipsum</li>
@@ -109,7 +109,7 @@ function ProdData() {
                   <li>Lorem ipsum</li>
                 </ul>
               </div>
-              <div className="d-flex flex-wrap justify-content-center position-relative align-items-center m-4">
+              <div className="d-flex flex-wrap justify-content-center position-relative align-items-center m-4 ChkAvblityRes">
                 <p className="fw-semibold m-2">Check Availability</p>
                 <div className="d-flex flex-wrap justify-content-center align-items-center reschkAvbl">
                   <div><input className="p-2" type="text" placeholder="Enter Your Pin Code" /></div>
@@ -148,10 +148,6 @@ function ProdData() {
         </div>
       </div>
 
-      <RecentlyViewedDetails />
-      <CustomerReview />
-      <Faqs />
-      <FooterRow />
 
     </>
 
