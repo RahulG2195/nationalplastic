@@ -1,5 +1,13 @@
 import Image from "next/image";
 import CatCards from "../CommonComp/catCards";
+import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  Navigation,
+  Autoplay,
+  Pagination,
+  Scrollbar,
+  A11y,
+} from "swiper/modules";
 import Link from "next/link";
 export default function Highlight() {
   const productArr = [

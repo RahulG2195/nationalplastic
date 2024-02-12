@@ -4,9 +4,9 @@ import Link from "next/link"
 function Houseware() {
   return (
     <section className="houseware_sec common_section">
-        <div className="container-fluid"data-aos="fade-up">
+        <div className="container-fluid">
             <div className="row">
-                <div className="col-md-6 houseConntentDiv" data-aos="zoom-in">
+                <div className="col-md-6 houseConntentDiv" >
                     <h2>National Plastic for <span>Houseware</span></h2>
                     <p>Legacy Since 1952</p>
                     <div className="knowmoresec">
@@ -18,7 +18,7 @@ function Houseware() {
                         </Link> 
                     </div>
                 </div>
-                <div className="col-md-6 houseDiv"data-aos="zoom-in">
+                <div className="col-md-6 houseDiv">
                     <div className="houseImg">
                         <Image
                         src = "/assets/images/HomepageImages/CTA-banner.jpg-industry-image.png"

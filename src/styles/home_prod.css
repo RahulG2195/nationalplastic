@@ -27,14 +27,17 @@
 .houseware_sec {
   height: 430px;
 }
+
 .houseConntentDiv {
   background-color: var(--primary-color);
   color: #fff;
   padding: 75px 40px;
 }
+
 .houseConntentDiv h2 span {
   color: var(--secondary-color);
 }
+
 .houseConntentDiv h2 {
   font-size: 35px;
 }
@@ -44,15 +47,18 @@
   letter-spacing: 3px;
   font-weight: 200;
 }
+
 .houseDiv {
   padding: 0;
   margin: 0;
 }
+
 .houseImg {
   position: relative;
   height: 430px;
   width: 100%;
 }
+
 .houseImg img {
   object-fit: cover;
   /* height: 100%; */
@@ -62,6 +68,7 @@
 .house-know-more {
   position: relative;
 }
+
 .house-know-more::after {
   content: "";
   position: absolute;
@@ -86,6 +93,7 @@
   font-weight: 200;
   text-transform: uppercase;
 }
+
 /* house ware home setion end */
 
 /* heighlight sec start  */
@@ -97,6 +105,7 @@
 .highlight_col .card {
   cursor: pointer;
 }
+
 .highlight_col .card .card-body {
   background-color: #fcf5da;
 }
@@ -110,9 +119,11 @@
   background-color: #fff;
   border: none;
 }
+
 .highlight_col .card:hover .highArrow i {
   color: var(--header-primary-clr);
 }
+
 .highlight_col .card .card-title {
   font-size: 19px;
 }
@@ -125,6 +136,7 @@
   position: absolute;
   bottom: 6%;
 }
+
 /* heighlight sec end  */
 
 /* happy client start  */
@@ -132,15 +144,18 @@
   /* height: 433px; */
   border-radius: 10px;
 }
-.happy_Story_sec .products_col .card .card-img{
-    height: 260px;
-    width: 100%;
-    position: relative;
+
+.happy_Story_sec .products_col .card .card-img {
+  height: 260px;
+  width: 100%;
+  position: relative;
 }
-.happy_Story_sec .products_col .card img{
-    border-radius: 10px 10px 0 0 ;
-    object-fit: cover;
+
+.happy_Story_sec .products_col .card img {
+  border-radius: 10px 10px 0 0;
+  object-fit: cover;
 }
+
 .happy_Story_sec .products_col .card .card-body {
   background-color: var(--primary-color);
   text-align: center;
@@ -158,70 +173,144 @@
 }
 
 
-.dealer_cont{
-    text-align: center;
-    background: lightgray;
-    padding: 10px;
-    border-radius: 10px;
+.dealer_cont {
+  text-align: center;
+  background: lightgray;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 /* dealer sec  */
-.dealer_Sec .dealer_cont .dealer_imgs{
-    height: 100px;
-    width: 80%;
-    position: relative;
-    margin: auto;
+.dealer_Sec .dealer_cont .dealer_imgs {
+  height: 100px;
+  width: 80%;
+  position: relative;
+  margin: auto;
 }
 
-.dealer_Sec .dealer_cont .dealer_imgs img{
-height: 100%;
-width: 100%;
-object-fit: cover;
+.dealer_Sec .dealer_cont .dealer_imgs img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
 
 /* catalogue start */
-.catalogue_sec{
-    background-color: #FAECB5;
+.catalogue_sec {
+  background-color: #FAECB5;
 }
 
-.catalogue_sec .cataImg{
-    position: relative;
-    height: 330px;
-    width: 100%;
+.catalogue_sec .cataImg {
+  position: relative;
+  height: 330px;
+  width: 100%;
 }
 
 .catalogue_sec .cataImg img {
-height: 100%;
-width: 100%;
-object-fit: cover;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
-.catalogue_sec .catalogueConntentDiv{
-    margin: auto;
-}
-.catalogue_sec .catalogueConntentDiv h2{
-    color: var(--primary-color);
+.catalogue_sec .catalogueConntentDiv {
+  margin: 10px auto;
 }
 
-.catalogue_sec .catalogueConntentDiv .view_btn{
-background-color: var(--header-primary-clr);
-color: #fff;
-padding: 8px 35px;
-border-radius: 25px;
-font-size: 15px;
-border: none;
+.catalogue_sec .catalogueConntentDiv h2 {
+  color: var(--primary-color);
 }
 
-.catalogue_sec .catalogueConntentDiv .Catasec{
-    margin: 15px 0;
-}
-.catalogue_sec .catalogueConntentDiv .view_btn:hover{
-    color: var(--header-primary-clr);
-    border: 1px solid currentColor;
-    background-color: #fff;
-    margin: 0;
+.catalogue_sec .catalogueConntentDiv .view_btn {
+  background-color: var(--header-primary-clr);
+  color: #fff;
+  padding: 8px 35px;
+  border-radius: 25px;
+  font-size: 15px;
+  border: none;
 }
 
+.catalogue_sec .catalogueConntentDiv .Catasec {
+  margin: 15px 0;
+}
+
+.catalogue_sec .catalogueConntentDiv .view_btn:hover {
+  color: var(--header-primary-clr);
+  border: 1px solid currentColor;
+  background-color: #fff;
+  margin: 0;
+}
 
 /* catalogue end */
+
+/* RESPONSIVE */
+@media only screen and (min-width: 1502) {}
+
+@media only screen and (min-width: 1367px) and (max-width: 1501px) {}
+
+@media only screen and (min-width: 1201px) and (max-width: 1366px) {}
+
+@media only screen and (min-width: 1025px) and (max-width: 1200px) {
+  .highlight_col .card {
+    height: 430px;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1024px) {
+  .highlight_col .card {
+    height: 430px;
+  }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 991px) {
+  .highlight_col .card {
+    height: 385px;
+  }
+}
+
+/* Mobile: */
+@media only screen and (min-width: 601px) and (max-width: 768px) {
+  .catalogue_sec {
+    margin-top: 56px;
+  }
+  .houseImg {
+    display: none; 
+  }
+  .highlight_col .card {
+    height: 445px;
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 600px) {
+  .houseImg {
+    display: none; 
+      margin-top: 56px; 
+  }
+
+  .highlight_col .card {
+    height: 585px;
+  }
+  .catalogue_sec {
+    margin-top: 56px;
+}
+}
+
+@media only screen and (min-width: 361px) and (max-width: 480px) {
+  .houseImg {
+    display: none;
+  }
+  .highlight_col .card {
+    height: 555px; 
+  }
+  .catalogue_sec {
+    margin-top: 56px;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .houseImg {
+    display: none;
+  }
+ .catalogue_sec {
+    margin-top: 56px;
+  }
+}
