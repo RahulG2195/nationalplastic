@@ -59,7 +59,7 @@ function ProdData() {
 
               </div>
               <div className="bulk_order_div">
-                <Link href='' className=""><button className="btn btn-danger px-5 my-2 ProdbtnRes bulkRes">Bulk Order</button></Link>
+                <Link href='/BulkOrder' className=""><button className="btn btn-danger px-5 my-2 ProdbtnRes bulkRes">Bulk Order</button></Link>
               </div>
               {/* <div className="row">
               <div className="col-md-6">
@@ -93,16 +93,16 @@ function ProdData() {
                   />
                   <div className="qtyplus">+</div>
                 </form>
-                <a href="#" className="btn bg-danger text-white m-2 px-5 ProdbtnRes">
+                <Link href="/AddToCart" className="btn bg-danger text-white m-2 px-5 ProdbtnRes">
                   Add to Cart
-                </a>
-                <a href="#" className="btn bg-danger text-white m-2 px-5 ProdbtnRes">
+                </Link>
+                <Link href="/Address" className="btn bg-danger text-white m-2 px-5 ProdbtnRes">
                   Buy Now
-                </a>
+                </Link>
               </div>
               <p className="eye"><i className="fa fa-eye"></i> 210 customers are interviewing the product</p>
               <div className="terms fw-medium small">
-                <Link href="#">Terms and Conditions</Link>
+                <Link href="TearnsAndConditions">Terms and Conditions</Link>
                 <ul>
                   <li>Lorem ipsum</li>
                   <li>Lorem ipsum</li>

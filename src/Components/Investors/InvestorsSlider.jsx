@@ -61,7 +61,7 @@ function InvestorsSlider() {
 
   return (
     <>
-      <div className="investor-swiper">
+      <div className="investor-swiper ">
 
         <Swiper
           className="h-80 w-80  "

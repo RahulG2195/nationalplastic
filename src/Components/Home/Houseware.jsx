@@ -10,10 +10,10 @@ function Houseware() {
                     <h2>National Plastic for <span>Houseware</span></h2>
                     <p>Legacy Since 1952</p>
                     <div className="knowmoresec">
-                        <Link href='' className="house-know-more">
+                        <Link href='/About' className="house-know-more">
                             Know More
                         </Link>
-                        <Link href='' className="house-know-more">
+                        <Link href='/BulkOrder' className="house-know-more">
                             Bulk Order
                         </Link> 
                     </div>

@@ -10,7 +10,7 @@ const Slider = () => {
             <div className="Slider_container position-relative mb-5">
 
 
-                <Swiper className="mt-5 swipper my-swiper" style={{ width: "70%", height: "" }}
+                <Swiper className="mt-5 swipper my-swiper overflow-hidden" style={{ width: "60%", height: "" }}
     
                    modules={[Navigation, Pagination, Autoplay, A11y]}
                    spaceBetween={50}

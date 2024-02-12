@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import './PriceDetailsCard.css'
 const PriceDetailsCard = () => {
   const priceDetails = [
@@ -41,7 +42,7 @@ const PriceDetailsCard = () => {
         <div className="small text-center">EMI starts with Rs 0,000</div>
 
         <div className="d-flex justify-content-center mt-2">
-          <button type="submit" className="btn btn-danger px-5 placeOrderResp">Place Order</button>
+          <Link href="/ThankYouPage"> <button type="submit" className="btn btn-danger px-5 placeOrderResp">Place Order</button></Link>
         </div>
       </div>
     </>

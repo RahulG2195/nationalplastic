@@ -71,7 +71,7 @@
 
 }
 
-.tab-pane .main_container .features{
+.tab-pane .main_container .features {
     display: none !important;
 }
 
@@ -80,13 +80,13 @@
     border-color: #dc3545 !important;
 }
 
-.price .btn-danger{
+.price .btn-danger {
     font-size: 11px !important;
     font-weight: 600 !important;
 }
 
-.wishlist-container{
-background-color: yellow !important;
+.wishlist-container {
+    background-color: yellow !important;
 }
 
 /* Login Page CSS*/
@@ -111,140 +111,140 @@ background-color: yellow !important;
 
 .Login-Page-ImgForm {
     margin: 50px 200px;
-    border: 1px solid;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.Login-Form {
-    margin: 20px auto;
-}
-
-.login-image {
-    padding: 0px;
-}
-
-.form-btn-login-div {
-    margin: 15px;
-}
-
-.Login-using-otp {
-    display: none;
-    border: none;
-    background-color: white;
-    color: #cc0008;
-    /* font-size: 14px; */
-    text-align: right;
-    font-weight: 600;
-}
-
-.RegisterHere-p p {
-    font-size: 14px;
-}
-
-.RegisterHere-p {
-    text-align: center;
-}
-
-.RegisterHere {
-    color: #CC0008;
-    font-weight: 800;
-}
-
-.ContinueWithgoogle {
-    display: flex;
-    text-align: center;
-    margin-top: 74px;
-}
-
-.ContinueWithgoogle .fa-google:before {
-    content: "\f1a0";
-    padding: 2px;
-    border: 2px solid red;
-    margin: 10px;
-}
-
-.ContinueWithgoogle .fa-facebook:before {
-    content: "\f09a";
-    padding: 2px;
-    border: 2px solid #0043ff;
-    margin: 0px;
-}
-
-/* Responsive */
-@media only screen and (min-width: 1502) {}
-
-@media only screen and (min-width: 1367px) and (max-width: 1501px) {}
-
-@media only screen and (min-width: 1201px) and (max-width: 1366px) {}
-
-@media only screen and (min-width: 1025px) and (max-width: 1200px) {
-    .Login-Page-ImgForm {
-        margin: 50px 20px;
-    }
-}
-
-@media only screen and (min-width: 992px) and (max-width: 1024px) {
-    .Login-Page-ImgForm {
-        margin: 50px 20px;
-    }
-}
-
-@media only screen and (min-width: 769px) and (max-width: 991px) {
-    .Login-Page-ImgForm {
-        margin: 50px 20px;
-    }
-}
-
-/* Mobile: */
-@media only screen and (min-width: 601px) and (max-width: 768px) {
-    .Login-Page-ImgForm {
-        margin: 25px 20px;
-    }
-}
-
-@media only screen and (min-width: 481px) and (max-width: 600px) {
-    .Login-Page-ImgForm {
-        margin: 5px 5px;
-        border: none;
+    .Login-Form {
+        margin: 20px auto;
     }
 
     .login-image {
-        padding: 17px 82px;
-        height: auto;
+        padding: 0px;
     }
 
-    .login-image img {
-        border-radius: 50%;
+    .form-btn-login-div {
+        margin: 15px;
     }
-}
 
-@media only screen and (min-width: 361px) and (max-width: 480px) {
-    .Login-Page-ImgForm {
-        margin: 5px 5px;
+    .Login-using-otp {
+        display: none;
         border: none;
+        background-color: white;
+        color: #cc0008;
+        /* font-size: 14px; */
+        text-align: right;
+        font-weight: 600;
     }
 
-    .login-image {
-        padding: 17px 82px;
-        height: auto;
+    .RegisterHere-p p {
+        font-size: 14px;
     }
 
-    .login-image img {
-        border-radius: 50%;
-    }
-}
-
-@media only screen and (max-width: 360px) {
-    .Login-Page-ImgForm {
-        margin: 50px 5px;
-        border: none;
+    .RegisterHere-p {
+        text-align: center;
     }
 
-    .login-image {
-        padding: 17px 82px;
-        height: auto;
+    .RegisterHere {
+        color: #CC0008;
+        font-weight: 800;
     }
 
-    .login-image img {
-        border-radius: 50%;
+    .ContinueWithgoogle {
+        display: flex;
+        text-align: center;
+        margin-top: 74px;
     }
-}
+
+    .ContinueWithgoogle .fa-google:before {
+        content: "\f1a0";
+        padding: 2px;
+        border: 2px solid red;
+        margin: 10px;
+    }
+
+    .ContinueWithgoogle .fa-facebook:before {
+        content: "\f09a";
+        padding: 2px;
+        border: 2px solid #0043ff;
+        margin: 0px;
+    }
+
+    /* Responsive */
+    @media only screen and (min-width: 1502) {}
+
+    @media only screen and (min-width: 1367px) and (max-width: 1501px) {}
+
+    @media only screen and (min-width: 1201px) and (max-width: 1366px) {}
+
+    @media only screen and (min-width: 1025px) and (max-width: 1200px) {
+        .Login-Page-ImgForm {
+            margin: 50px 20px;
+        }
+    }
+
+    @media only screen and (min-width: 992px) and (max-width: 1024px) {
+        .Login-Page-ImgForm {
+            margin: 50px 20px;
+        }
+    }
+
+    @media only screen and (min-width: 769px) and (max-width: 991px) {
+        .Login-Page-ImgForm {
+            margin: 50px 20px;
+        }
+    }
+
+    /* Mobile: */
+    @media only screen and (min-width: 601px) and (max-width: 768px) {
+        .Login-Page-ImgForm {
+            margin: 25px 20px;
+        }
+    }
+
+    @media only screen and (min-width: 481px) and (max-width: 600px) {
+        .Login-Page-ImgForm {
+            margin: 5px 5px;
+            border: none;
+        }
+
+        .login-image {
+            padding: 17px 82px;
+            height: auto;
+        }
+
+        .login-image img {
+            border-radius: 50%;
+        }
+    }
+
+    @media only screen and (min-width: 361px) and (max-width: 480px) {
+        .Login-Page-ImgForm {
+            margin: 5px 5px;
+            border: none;
+        }
+
+        .login-image {
+            padding: 17px 82px;
+            height: auto;
+        }
+
+        .login-image img {
+            border-radius: 50%;
+        }
+    }
+
+    @media only screen and (max-width: 360px) {
+        .Login-Page-ImgForm {
+            margin: 50px 5px;
+            border: none;
+        }
+
+        .login-image {
+            padding: 17px 82px;
+            height: auto;
+        }
+
+        .login-image img {
+            border-radius: 50%;
+        }
+    }

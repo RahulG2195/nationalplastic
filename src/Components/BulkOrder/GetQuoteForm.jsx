@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import './GetQuoteForm.css'
 const GetQuoteForm = (props) => {
 
@@ -32,8 +33,8 @@ const GetQuoteForm = (props) => {
                         <input type="text" className="form-control" placeholder="City" />
                     </div>
                     <div className='d-flex justify-content-center GQFormSubmitRes'>
-                        <button type="submit" className={props.className ? props.className : "btn bg-white darkBlue fw-semibold px-4"}
-                        >Submit</button>
+                            <button type="submit" className={props.className ? props.className : "btn bg-white darkBlue fw-semibold px-4"}
+                            >Submit</button>
                     </div>
 
                 </form>

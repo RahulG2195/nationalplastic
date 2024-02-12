@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import "../../styles/coupen.css";
+import Link from "next/link";
 
 function CoupenBanner() {
   return (
@@ -37,9 +38,9 @@ function CoupenBanner() {
             </div>
             <div className="col-md-2">
               <div className="signup_div">
-                <a href="">
+                <Link href="/Login">
                   <button className="signup">Sign Up Now</button>
-                </a>
+                </Link>
                 <p>As in Life, T&C applied</p>
               </div>
             </div>
