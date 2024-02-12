@@ -1,10 +1,11 @@
 import Image from "next/image"
 import Link from "next/link"
 
+
 function CatCards({image, title, url, style=""}) {
   return (
     <>
-        <div className="cards">
+        <div className="cards TopPick-Card">
             <div className="card_img">
                 <Image 
                 src={image}

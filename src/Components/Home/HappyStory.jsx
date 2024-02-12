@@ -50,7 +50,7 @@ export default function HappyStory() {
     <section className="happy_Story_sec common_section">
       <div className="container">
         <div className="row">
-          <div className="section_header mx-auto text-center"data-aos="zoom-in">
+          <div className="section_header mx-auto text-center">
             <h2>
               <span>Happy </span> Stories
             </h2>
@@ -65,15 +65,34 @@ export default function HappyStory() {
                 spaceBetween={15}
                 slidesPerView={3}
                 loop={true}
-                navigation
+                // navigation
                 // pagination={{ clickable: true }}
                 // scrollbar={{ draggable: false }}
                 // onSwiper={(swiper) => console.log(swiper)}
                 // onSlideChange={() => console.log("slide change")}
+
                 autoplay={{
-                  delay: 2500,
+                  delay: 2600,
                   disableOnInteraction: false,
                 }}
+                breakpoints={{
+                  200: {
+                      slidesPerView: 1,
+                      spaceBetween: 20,
+                  },
+                  640: {
+                      slidesPerView: 2,
+                      spaceBetween: 20,
+                  },
+                  768: {
+                      slidesPerView: 3,
+                      spaceBetween: 40,
+                  },
+                  1024: {
+                      slidesPerView: 3,
+                      spaceBetween: 50,
+                  },
+              }}
               >
                 {productArr.map((product) => (
                   // <div key={product.key} className="col-md-4">
@@ -84,8 +103,9 @@ export default function HappyStory() {
                     //   overflow: "hidden",
                     //   height: "100%",
                     // }}
+                    
                   >
-                    <div className="card"data-aos="fade-up">
+                    <div className="card">
                       <div className="card-img">
                         <Image
                           src={product.image}

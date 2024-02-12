@@ -12,7 +12,6 @@ import Dealers from "@/Components/Home/Dealers";
 import Blog from "@/Components/Home/Blog";
 import Catalogue from "@/Components/Home/Catalogue";
 import '../styles/home_prod.css';
-
 import { React, useEffect } from 'react'
 import AOS from 'aos';
 import 'aos/dist/aos.css';

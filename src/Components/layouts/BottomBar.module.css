@@ -1,3 +1,4 @@
+/* BottomBar.module.css */
 .mainrow .col:hover {
     background-color: white;
     cursor: pointer;
@@ -23,7 +24,6 @@
     background-color: white;
     display: none;
     text-align: left;
-
 }
 
 .ulCont .dropHeading {
@@ -32,13 +32,11 @@
     position: sticky;
     top: -8%;
     background-color:white;
-    height:5vh ;
-
+    height:5vh;
 }
 
 .ulCont p {
     color: black !important;
-
 }
 
 .barImgCont {
@@ -54,8 +52,6 @@
     width: 100%;
 }
 
-
-
 .second .SecondDrop{
     display: none !important;
     left: 9.7%;
@@ -65,29 +61,11 @@
     display:block !important;
 }
 
-.innerUlCont {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 100%;
-  }
-  
-  .drawerHover:hover .innerUlCont {
-    display: block;
-  }
-  .innerUlCont {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 10px;
-    z-index: 999;
-  }
-  
-  .drawerHover:hover .innerUlCont {
-    display: block;
-  }
-    
+.Third .ThirdDrop{
+    display: none !important;
+    left: 19.35%;
+}
 
+.mainrow .Third:hover .ThirdDrop{
+    display:block !important;
+}
