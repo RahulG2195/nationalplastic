@@ -10,4 +10,31 @@
 .blogCmnts textarea, .blogCmnts input {
     border-color: #707070;
 }
+@media (max-width:380px) {
+    .DetailsTogetherSlide{
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+}
+@media (max-width:700px) {
+    .CmntNameRes{
+        flex-wrap: wrap ;
+        gap: 10px !important;
+    }
+    
+}
 
+@media (max-width:450px) {
+    .blogCmnts textarea{
+        height: 60px !important;
+        font-size: smaller !important;
+    }
+    
+    .blogCmnts input{
+        height: 40px !important;
+        font-size: smaller !important;
+
+    }
+    
+}

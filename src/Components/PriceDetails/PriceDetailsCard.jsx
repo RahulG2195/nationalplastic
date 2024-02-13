@@ -1,9 +1,11 @@
+import Link from 'next/link';
+import './PriceDetailsCard.css'
 const PriceDetailsCard = () => {
   const priceDetails = [
     { label: "MRP", amount: "00,000" },
     { label: "Discount", amount: "-RS 00,000", className: "text-success" },
     {
-      label: "Cupon (htyxhs5)",
+      label: "Coupon (htyxhs5)",
       amount: "-RS 00,000",
       className: "text-success",
     },
@@ -12,7 +14,7 @@ const PriceDetailsCard = () => {
 
   return (
     <>
-      <div>
+      <div className="PriceDetail">
         <div className="fw-medium">Price Detail (2 items)</div>
 
         <div className="mt-4">
@@ -34,23 +36,16 @@ const PriceDetailsCard = () => {
           <div className="medium">00,000</div>
         </div>
         <div className="small my-2 text-success">
-          Congratulations you've just saved Rs 0,000 on your order
+          Congratulations, you've just saved Rs 0,000 on your order
         </div>
-        <div className="small text-center ">EMI starts with Rs 0,000</div>
+        <div className="small text-center">EMI starts with Rs 0,000</div>
 
         <div className="d-flex justify-content-center mt-2">
-          <button type="submit" class="btn btn-danger px-5">
-            Place Order
-          </button>
+          <Link href="/ThankYouPage"> <button type="submit" className="btn btn-danger px-5 placeOrderResp">Place Order</button></Link>
         </div>
       </div>
     </>
   );
 };
-
-<div className="d-flex justify-content-center mt-2">
-  <button type="submit" className="btn btn-danger px-5">Place Order</button>
-</div>
-
 
 export default PriceDetailsCard;

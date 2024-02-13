@@ -15,6 +15,7 @@
     "@mui/material": "^5.15.6",
     "@popperjs/core": "^2.11.8",
     "aos": "^2.3.4",
+    "aws-cli": "^0.0.2",
     "bootstrap": "^5.3.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.7.1",

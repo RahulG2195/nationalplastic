@@ -1,7 +1,15 @@
 import CatCards from "../CommonComp/catCards";
-
+import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  Navigation,
+  Autoplay,
+  Pagination,
+  Scrollbar,
+  A11y,
+} from "swiper/modules";
+import Link from "next/link";
 export default function TopPick() {
- const productArr = [
+  const productArr = [
     {
       key : 1,
       image : '/Assets/images/Home-page/1st-section-kids-chair.jpg',
@@ -23,29 +31,66 @@ export default function TopPick() {
   ];
   return (
     <section className="top_pick_sec common_section">
-        <div className="container" data-aos="fade-up">
+      <div className="container" >
+        <div className="row">
+          <div className="section_header mx-auto text-center" >
+            <h2><span>Top Picks</span> For You</h2>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.</p>
+          </div>
+          <div className="col-12 products_col">
             <div className="row">
-                <div className="section_header mx-auto text-center"data-aos="zoom-in" >
-                    <h2><span>Top Picks</span> For You</h2>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.</p>
-                </div>
-                <div className="col-12 products_col">
-                  <div className="row">
-                  {
-                  productArr.map((product) => (
-                      <div key={product.key} className="col-md-4"  data-aos="fade-down">
-                        <CatCards
-                          image={product.image}
-                          title={product.title}
-                          url={product.url}
-                        />
-                      </div>
-                    ))
-                    }
+              <Swiper
+                className="swipper"
+                style={{ width: "100%", height: "100%" }}
+                modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+                spaceBetween={15}
+                // slidesPerView={3}
+                loop={true}
+                // navigation
+                // pagination={{ clickable: true }}
+                // scrollbar={{ draggable: false }}
+                // onSwiper={(swiper) => console.log(swiper)}
+                // onSlideChange={() => console.log("slide change")}
+                autoplay={{
+                  delay: 2500,
+                  disableOnInteraction: false,
+                }}
+                breakpoints={{
+                  200: {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                  },
+                  640: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                  },
+                  768: {
+                    slidesPerView: 3,
+                    spaceBetween: 40,
+                  },
+                  1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 50,
+                  },
+                }}
+              >
+                {productArr.map((product) => (
+
+                  <div className="col-md-4" >
+                    <SwiperSlide key={product.key} >
+                      <CatCards
+                        image={product.image}
+                        title={product.title}
+                        url={product.url}
+                      />
+                    </SwiperSlide>
                   </div>
-                </div>
+                ))}
+              </Swiper>
             </div>
+          </div>
         </div>
+      </div>
     </section>
   )
 }

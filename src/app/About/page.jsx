@@ -1,7 +1,5 @@
-// YourPage.js
-// import AboutCTA from './AboutCTA';
+
 import AboutCTA from "@/Components/About/AboutCTA";
-import AboutSlider from "@/Components/About/AboutSlider";
 import Subbanner from "@/Components/About/Subbanner";
 import VMCard from "@/Components/About/VMCard";
 import Infrastructure from "@/Components/About/Infrastructure";

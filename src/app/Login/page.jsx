@@ -20,7 +20,7 @@ function Login() {
             <div className="col-md-6">
               <div className="Login-Form">
                 <form>
-                  <h3>Login</h3>
+                  <h3 className="text-center mb-2">Login</h3>
                   <p>Track your order, create wishlist & more</p>
                   <div className="row mb-3 mt-3">
                     <label
@@ -53,14 +53,16 @@ function Login() {
                     </div>
                   </div>
                   <div className="">
-<div className="row">
-    <div className="col-md-6">
-        <a href="#">Forgot Password?</a>
-    </div>
-    <div className="col-md-6">
-        <button className="Login-using-otp">LOGIN USING OTP</button>
-    </div>
-</div>
+                    <div className="row">
+                      <div className="col-md-6">
+                        <a href="#">Forgot Password?</a>
+                      </div>
+                      <div className="col-md-6">
+                        <button className="Login-using-otp">
+                          LOGIN USING OTP
+                        </button>
+                      </div>
+                    </div>
                   </div>
                   <div className="form-btn-login-div">
                     <button type="submit" className="btn form-btn-login">
@@ -68,13 +70,17 @@ function Login() {
                     </button>
                   </div>
                   <div className="RegisterHere-p">
-                  <p>New to National Plastic? <span className="RegisterHere">Register Here</span></p>
+                    <p>
+                      New to National Plastic?{" "}
+                      <span className="RegisterHere">Register Here</span>
+                    </p>
                   </div>
 
                   <div className="row ContinueWithgoogle">
-                    <p>OR Continue With
-                    <i class="fa fa-google" aria-hidden="true"></i>
-                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                    <p>
+                      OR Continue With
+                      <i class="fa fa-google" aria-hidden="true"></i>
+                      <i class="fa fa-facebook" aria-hidden="true"></i>
                     </p>
                   </div>
                 </form>

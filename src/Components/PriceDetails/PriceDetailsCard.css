@@ -1,0 +1,33 @@
+.PriceDetail {
+    padding: 1rem;
+  }
+  
+  @media (max-width: 1396px) {
+    .PriceDetail {
+      font-size: 0.9rem; 
+    }
+  }
+  @media (max-width: 1200px) {
+    .PriceDetail {
+      font-size: 0.7rem; 
+    }
+    .placeOrderResp{
+        font-size: small;
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .PriceDetail {
+      font-size: 0.5rem; 
+    }
+    .placeOrderResp{
+        padding: 5px !important;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .PriceDetail {
+      font-size: 0.7rem; 
+    }
+  }
+  

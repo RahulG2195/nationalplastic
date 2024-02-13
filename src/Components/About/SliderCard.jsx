@@ -62,10 +62,10 @@ function SliderCard() {
         loop={true}
         navigation
         pagination={{ clickable: true }}
-        // autoplay={{
-        //   delay: 2500,
-        //   disableOnInteraction: false,
-        // }}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
         breakpoints={{
           200: {
               slidesPerView: 1,

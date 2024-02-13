@@ -9,6 +9,7 @@ function ErrorPage() {
             src="/Assets/images/404/404-error-page.jpg-V2.png"
             width={100}
             height={100}
+            alt="error img"
             layout="responsive"
             objectFit="cover"
           />

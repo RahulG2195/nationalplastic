@@ -1,0 +1,71 @@
+/* BottomBar.module.css */
+.mainrow .col:hover {
+    background-color: white;
+    cursor: pointer;
+}
+
+.mainrow .col:hover p {
+    color: #CC0008;
+}
+
+.mainrow .first:hover .ulCont {
+    display:block;
+    transition: all .5s;
+    text-align: left;
+}
+
+.ulCont {
+    height: 40vh;
+    overflow-y:scroll;
+    position: absolute;
+    z-index: 999;
+    left: 0;
+    top: 75%;
+    background-color: white;
+    display: none;
+    text-align: left;
+}
+
+.ulCont .dropHeading {
+    color: var(--primary-color) !important;
+    border-bottom: 1px solid #CC0008;
+    position: sticky;
+    top: -8%;
+    background-color:white;
+    height:5vh;
+}
+
+.ulCont p {
+    color: black !important;
+}
+
+.barImgCont {
+    position: sticky;
+    top: 9%;
+    height: 30vh;
+    width: 15vw;
+    border-radius: 20px;
+}
+
+.barImgCont img {
+    height: 100%;
+    width: 100%;
+}
+
+.second .SecondDrop{
+    display: none !important;
+    left: 9.7%;
+}
+
+.mainrow .second:hover .SecondDrop{
+    display:block !important;
+}
+
+.Third .ThirdDrop{
+    display: none !important;
+    left: 19.35%;
+}
+
+.mainrow .Third:hover .ThirdDrop{
+    display:block !important;
+}

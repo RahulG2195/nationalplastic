@@ -26,9 +26,7 @@ export default function Header() {
                 placeholder="Search"
                 aria-label="Search"
               />
-              {/* <button className="btn btn-outline-success" type="submit">
-                  Search
-                </button> */}
+            
             </form>
             <button
               className="navbar-toggler"
@@ -106,14 +104,14 @@ export default function Header() {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link bulk_ord" href="#">
+                  <Link className="nav-link bulk_ord" href="/BulkOrder">
                     Bulk Orders
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <Link className="nav-link" href="/ContactUs">
                     <i className="fa fa-phone"></i>
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" href="/Wishlist">
@@ -121,14 +119,14 @@ export default function Header() {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <Link className="nav-link" href="/Login">
                     <i className="fa fa-user"></i>
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <Link className="nav-link" href="/AddToCart">
                     <i className="fa fa-cart-arrow-down"></i>
-                  </a>
+                  </Link>
                 </li>
               </ul>
 

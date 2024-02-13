@@ -5,6 +5,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import AddIcon from '@mui/icons-material/Add';
+import './Faqs.css'
 
 const faqData = [
     {
@@ -52,10 +53,10 @@ const Faqs = () => {
                                 aria-controls={`panel${index + 1}-content`}
                                 id={`panel${index + 1}-header`}
                             >
-                                <Typography className='fw-bold'>{faq.question}</Typography>
+                                <Typography className='fw-semibold FAQresponsive'>{faq.question}</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <Typography>
+                                <Typography className='RespFAQans'>
                                     {faq.answer}
                                 </Typography>
                             </AccordionDetails>

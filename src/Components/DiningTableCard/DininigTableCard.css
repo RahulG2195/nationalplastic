@@ -1,34 +1,38 @@
 .DTS {
 
-    height: 600px;
-    width: 600px;
+    height: auto;
+    width: 50%;
     margin: auto;
-    background-color: #F6F6F6;
+    /* background-color:lightcoral; */
 }
 
 .DTSCaption {
     height: 150px;
-    width: 600px;
+    width:auto;
     text-align: justify;
     overflow-y: scroll;
-    margin: auto;
+    
+    margin:0 20%;
+   
 }
 
 .DetailCard {
     overflow: visible !important;
-    width: 60%;
 }
 
 .DetailDTS {
-    width: 60%;
     height: 80vh;
     background-color: #F6F6F6;
 }
 
 .BottomCardsCptn {
-    width: 600px;
     text-align: left;
     margin: auto;
 
 
+}
+@media (max-width:764px ) {
+    .DTSCaption{
+        margin: 30px ;
+    }
 }

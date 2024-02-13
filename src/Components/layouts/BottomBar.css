@@ -10,6 +10,7 @@
 .mainrow .first:hover .ulCont {
     display:block;
     transition: all .5s;
+    text-align: left;
 }
 
 .ulCont {
@@ -21,6 +22,7 @@
     top: 75%;
     background-color: white;
     display: none;
+    text-align: left;
 
 }
 
@@ -63,13 +65,29 @@
     display:block !important;
 }
 
-
-.Third .ThirdDrop{
-    display: none !important;
-    left: 19.35%;
-}
-
-.mainrow .Third:hover .ThirdDrop{
-    display:block !important;
-}
+.innerUlCont {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+  }
+  
+  .drawerHover:hover .innerUlCont {
+    display: block;
+  }
+  .innerUlCont {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 999;
+  }
+  
+  .drawerHover:hover .innerUlCont {
+    display: block;
+  }
+    
 

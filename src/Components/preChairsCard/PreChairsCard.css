@@ -28,3 +28,22 @@
 .medium {
     font-size: 1rem;
 }
+@media (max-width:576px) {
+    .preCont{
+      
+        font-size: x-small;
+        margin: 0 ;
+        padding: 0;
+    }
+    .DESCresp{
+        text-align: left !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .PreFoot .left {
+        font-size: small !important;
+    }
+    .priceResp{
+        font-size: x-small !important;
+    }
+}

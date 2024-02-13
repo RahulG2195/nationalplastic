@@ -23,10 +23,9 @@ const ProductDetailSlider = () => {
                 }}
                 loop={true}
                 spaceBetween={10}
-                // navigation={true}
                 thumbs={{ swiper: thumbsSwiper }}
                 modules={[FreeMode, Navigation, Thumbs]}
-                className="mySwiper2"
+                className="mySwiper2 topSliderRes"
             >
                 <SwiperSlide>
                     <img src="/Assets/images/Sub-category-prodcut/Sub-category-prodcut.png" />
@@ -46,9 +45,8 @@ const ProductDetailSlider = () => {
             <Swiper
                 onSwiper={setThumbsSwiper}
                 loop={true}
-                spaceBetween={20}
+                spaceBetween={10}
                 slidesPerView={4}
-                // navigation={true}
                 freeMode={true}
                 watchSlidesProgress={true}
                 modules={[FreeMode, Navigation, Thumbs]}

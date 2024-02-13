@@ -8,6 +8,7 @@ import RecentlyViewedDetails from "./RecentlyViewedDetails/RecentlyViewedDetails
 import CustomerReview from "./CustomerReview/CustomerReview";
 import Faqs from "../FAQs/Faqs";
 import FooterRow from "../FooterRow/FooterRow";
+import TabContent from "./TabContent/TabContent";
 // import RecentlyViewed from "../ProductsCatlogue/RecentlyViewed";
 
 function ProdData() {
@@ -23,7 +24,7 @@ function ProdData() {
           <div className="col-md-6">
             <div className="product-dtl">
               <div className="product-info">
-                <div className="product-name">
+                <div className="product-name text-center">
                   <h2>Karnival Chair</h2>
                 </div>
 
@@ -37,7 +38,7 @@ function ProdData() {
 
                   <div className="d-flex flex-wrap align-items-center">
                     <div className="discount discRes"><p>Save <span>₹</span> 600</p></div>
-                    <div className="inc"><small>(incl. of all taxes)</small></div>
+                    <div className="inc small"><small>(incl. of all taxes)</small></div>
                   </div>
 
                 </div>
@@ -52,13 +53,13 @@ function ProdData() {
                   </div>
                   <div className="prod_size">
                     <div><strong>Size: </strong> 0000</div>
-                    <input type="text" name="prod_size" id="size" value="0000" />
+                    <input type="text" name="prod_size" id="size" placeholder="000" />
                   </div>
                 </div>
 
               </div>
               <div className="bulk_order_div">
-                <Link href='' className=""><button className="btn btn-danger px-5 my-2 ProdbtnRes bulkRes">Bulk Order</button></Link>
+                <Link href='/BulkOrder' className=""><button className="btn btn-danger px-5 my-2 ProdbtnRes bulkRes">Bulk Order</button></Link>
               </div>
               {/* <div className="row">
               <div className="col-md-6">
@@ -92,23 +93,23 @@ function ProdData() {
                   />
                   <div className="qtyplus">+</div>
                 </form>
-                <a href="#" className="btn bg-danger text-white m-2 px-5 ProdbtnRes">
+                <Link href="/AddToCart" className="btn bg-danger text-white m-2 px-5 ProdbtnRes">
                   Add to Cart
-                </a>
-                <a href="#" className="btn bg-danger text-white m-2 px-5 ProdbtnRes">
+                </Link>
+                <Link href="/Address" className="btn bg-danger text-white m-2 px-5 ProdbtnRes">
                   Buy Now
-                </a>
+                </Link>
               </div>
               <p className="eye"><i className="fa fa-eye"></i> 210 customers are interviewing the product</p>
-              <div className="terms fw-medium">
-                <Link href="#">Terms and Conditions</Link>
+              <div className="terms fw-medium small">
+                <Link href="TearnsAndConditions">Terms and Conditions</Link>
                 <ul>
                   <li>Lorem ipsum</li>
                   <li>Lorem ipsum</li>
                   <li>Lorem ipsum</li>
                 </ul>
               </div>
-              <div className="d-flex flex-wrap justify-content-center position-relative align-items-center m-4">
+              <div className="d-flex flex-wrap justify-content-center position-relative align-items-center m-4 ChkAvblityRes">
                 <p className="fw-semibold m-2">Check Availability</p>
                 <div className="d-flex flex-wrap justify-content-center align-items-center reschkAvbl">
                   <div><input className="p-2" type="text" placeholder="Enter Your Pin Code" /></div>
@@ -142,51 +143,11 @@ function ProdData() {
 
         <MoreProduct />
 
-
-
-        <div className="tab-content d-flex align-items-center px-5" id="myTabContent">
-          <div
-            className="tab-pane fade show active fw-bold mt-3"
-            id="description"
-            role="tabpanel"
-            aria-labelledby="description-tab"
-          >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum. Sed ut
-            perspiciatis unde omnis iste natus error sit voluptatem accusantium
-            doloremque laudantium, totam rem aperiam.
-          </div>
-          {/* <div className="imgCont">
-            <img src="/Assets/images/Image 5/Image 5.png" alt="" />
-          </div> */}
-
-
-        </div>
-
-
-
-        {/* </div> */}
-        <div style={{ textAlign: "center", fontSize: 14, paddingBottom: 20 }}>
-          Get free icon packs for your next project at{" "}
-          <a
-            href="http://iiicons.in/"
-            target="_blank"
-            style={{ color: "#ff5e63", fontWeight: "bold" }}
-          >
-            www.iiicons.in
-          </a>
+        <div className="listTabContent">
+          <TabContent />
         </div>
       </div>
 
-      <RecentlyViewedDetails />
-      <CustomerReview />
-      <Faqs />
-      <FooterRow />
 
     </>
 

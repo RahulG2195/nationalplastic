@@ -1,0 +1,8 @@
+@media (max-width:600px) {
+    .FAQresponsive{
+        font-size: small !important;
+        font-weight: 600 !important;
+        margin-right: 20px;
+    }
+    
+}

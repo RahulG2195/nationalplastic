@@ -1,4 +1,3 @@
-/* @import '~@fortawesome/fontawesome-free/css/all.css'; */
 :root {
   --primary-color: #262262;
   --secondary-color: #FFE000;
@@ -14,6 +13,11 @@
   color: #262262;
 
 }
+
+.litegray {
+  color: #D4D4D4;
+}
+
 .bg-darkBlue{
   background-color: #262262;
 
@@ -37,6 +41,7 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
 }
+
 
 p,
 h1,
@@ -70,18 +75,15 @@ p {
   font-size: 10px;
 }
 .common_section {
-  margin: 50px 0;
+  margin: 100px 0;
 }
  .carousel-item img {
   border-radius: 0;
 }
 
-/* section haeding part start */
 .section_header {
-  margin-top: 80px;
-  /* max-width: 60%; why this max width is given?  */
+  /* margin-top: 80px; */
   margin: 80px 0 35px 0;
-  /* max-width: 60%; why this max width is given?*/
   width: 100%;
   text-align: center;
 }
@@ -94,14 +96,12 @@ p {
 
 }
 
-/* section haeding part end */
 .main_container {
   min-height: 100vh;
   width: 100%;
   position: relative;
 }
 
-/* ======= */
 .section_header h2 span {
   font-weight: 700;
   color: var(--header-primary-clr);
@@ -124,23 +124,168 @@ p {
   color: var(--header-primary-clr);
 }
 
-/* section haeding part end */
-/* <<<<<<< HEAD */
-/* >>>>>>> 70d9e029af5ce56576af0d6476cb82e536a83e0b */
-/* ======= */
-
-
-/* view all  */
-
 .view_all_sec {
   text-align: end;
   margin: 10px 0;
   text-transform: uppercase;
 }
+  .diamondDropdown {
+    display: none;
+    position: absolute;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
 
-@media (max-width:600px) {
+  .nav-link:hover + .diamondDropdown {
+    display: block;
+  }
+
+.subCptRes{
+ margin: auto;
+}
+
+@media (max-width:992px) {
+  .subCptRes{
+    width: 75% !important;
+    font-size: small;
+   }
+}
+@media (max-width:501px) {
+  .subCptRes{
+    width: 90% !important;
+    font-size: x-small;
+   }
+}
+
+@media (max-width:922px) {
   .subCptRes p{
       font-size: 10px !important;
 
   }
+}
+
+@media (max-width:600px) {
+  .TCTxt{
+      margin: 0;
+      padding: 10px;
+      font-size: small;
+      text-align: justify !important;
+  }
+  
+}
+
+
+/* RESPONSIVE */
+@media only screen and (min-width: 1502) {}
+@media only screen and (min-width: 1367px) and (max-width: 1501px) {} 
+@media only screen and (min-width: 1201px) and (max-width: 1366px) {}
+@media only screen and (min-width: 1025px) and (max-width: 1200px) {}
+@media only screen and (min-width: 992px) and (max-width: 1024px) {}
+@media only screen and (min-width: 769px) and (max-width: 991px) {
+  .TopPick-Card{
+    margin-bottom: 40px !important;
+  }
+  .section_header {
+    margin: 40px 0 35px 0;
+  }
+}
+
+/* Mobile: */
+@media only screen and (min-width: 601px) and (max-width: 768px) {
+  .common_section {
+    margin: 40px 0 0;
+}
+  .TopPick-Card{
+    margin-bottom: 40px !important;
+  }
+  .section_header p { 
+    font-size: 16px; 
+  }
+  .section_header {
+    margin: 40px 0 35px 0;
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 600px) {
+  .common_section {
+    margin: 40px 0 0;
+}
+  .featuresFour{
+    /* margin: auto 40px; */
+  }
+  .TopPick-Card{
+    margin-bottom: 80px !important;
+  }
+  .section_header p { 
+    font-size: 16px; 
+}
+.section_header {
+  /* margin-top: 80px; */
+  margin: 45px 0 35px 0;
+}
+
+}
+@media only screen and (min-width: 361px) and (max-width: 480px) {
+  .common_section {
+    margin: 40px 0 0;
+}
+.manufacturer_common_section{
+  margin: 10px 0;
+}
+  .featuresFour{
+    /* margin: auto 40px; */
+  }
+  .TopPick-Card{
+    margin-bottom: 80px !important;
+  }
+  .section_header p { 
+    font-size: 16px; 
+}
+.section_header h3 { 
+  font-size: 30px;
+}
+.section_header h2 {
+  padding: 0 0 12px 0;
+  font-size: 36px;
+}
+.section_header {
+  /* margin-top: 80px; */
+  margin: 20px 0 35px 0;
+}
+.Specific-product{ 
+  margin: 80px 0 35px 0;
+}
+}
+@media only screen and (max-width: 360px) {
+  .common_section {
+    margin: 40px 0 0;
+}
+.manufacturer_common_section{
+  margin: 10px 0;
+}
+  .featuresFour{
+    /* margin: auto 40px; */
+  }
+  .TopPick-Card{
+    margin-bottom: 80px !important;
+  }
+  .section_header p { 
+    font-size: 16px; 
+}
+.section_header h3 { 
+  font-size: 30px;
+}
+.section_header h2 { 
+  font-size: 36px;
+}
+.section_header {
+  /* margin-top: 80px; */
+  margin: 20px 0 35px 0;
+}
+.Specific-product{ 
+  margin: 80px 0 35px 0;
+}
+
+
 }

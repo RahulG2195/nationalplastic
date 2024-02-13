@@ -6,3 +6,17 @@
     background-color: #2E3192 !important;
     color: white !important;
 }
+@media (max-width:767px) {
+  .categoryRespBtn{
+    padding: 5px !important;
+
+  }
+  
+}
+@media (max-width:550px) {
+  .categoryRespBtn{
+    font-size: small !important;
+
+  }
+  
+}

@@ -49,28 +49,46 @@ export default function Blog() {
     <section className="top_pick_sec common_section">
       <div className="container">
         <div className="row">
-          <div className="section_header mx-auto text-center" data-aos="zoom-in">
+          <div className="section_header mx-auto text-center" >
             <h2><span>Blog</span></h2>
             <p>Lorem Ipsum</p>
           </div>
-          <div className="col-12 products_col" data-aos="slide-up">
+          <div className="col-12 products_col">
             <div className="row">
               <Swiper
                 className="swipper"
                 style={{ width: "100%", height: "100%" }}
                 modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
                 spaceBetween={15}
-                slidesPerView={3}
+                // slidesPerView={3}
                 loop={true}
-                navigation
-                pagination={{ clickable: true }}
+                // navigation
+                // pagination={{ clickable: true }}
                 // scrollbar={{ draggable: false }}
                 // onSwiper={(swiper) => console.log(swiper)}
                 // onSlideChange={() => console.log("slide change")}
                 autoplay={{
-                  delay: 2500,
+                  delay: 2600,
                   disableOnInteraction: false,
                 }}
+                breakpoints={{
+                  200: {
+                      slidesPerView: 1,
+                      spaceBetween: 20,
+                  },
+                  640: {
+                      slidesPerView: 2,
+                      spaceBetween: 20,
+                  },
+                  768: {
+                      slidesPerView: 3,
+                      spaceBetween: 40,
+                  },
+                  1024: {
+                      slidesPerView: 3,
+                      spaceBetween: 50,
+                  },
+              }}
               >
                 {
                   productArr.map((product) => (
