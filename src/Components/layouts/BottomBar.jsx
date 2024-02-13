@@ -122,7 +122,7 @@ function BottomBar() {
 
             </div>
             <div className='barImgCont'>
-              <img src="/Assets\images\HomepageImages\Blog-section-1.jpg" alt="" />
+              <img src="/Assets/images/HomepageImages/Blog-section-1.jpg" alt="" />
             </div>
           </div>
 
@@ -146,7 +146,7 @@ function BottomBar() {
 
             </div>
             <div className='barImgCont'>
-              <img src="/Assets\images\HomepageImages\Blog-section-1.jpg" alt="" />
+              <img src="/Assets/images/HomepageImages/Blog-section-1.jpg" alt="" />
             </div>
           </div>
 
@@ -173,7 +173,7 @@ function BottomBar() {
 
             </div>
             <div className='barImgCont'>
-              <img src="/Assets\images\HomepageImages\Blog-section-1.jpg" alt="" />
+              <img src="/Assets/images/HomepageImages/Blog-section-1.jpg" alt="" />
             </div>
           </div>
 
@@ -203,7 +203,7 @@ function BottomBar() {
               </div>  
             </div>
             <div className='barImgCont'>
-              <img src="/Assets\images\HomepageImages\Blog-section-1.jpg" alt="" />
+              <img src="/Assets/images/HomepageImages/Blog-section-1.jpg" alt="" />
             </div>
           </div>
 
@@ -236,7 +236,7 @@ function BottomBar() {
 
             </div>
             <div className='barImgCont'>
-              <img src="/Assets\images\HomepageImages\Blog-section-1.jpg" alt="" />
+              <img src="/Assets/images/HomepageImages/Blog-section-1.jpg" alt="" />
             </div>
           </div>
 
@@ -260,7 +260,7 @@ function BottomBar() {
               </div>  
             </div>
             <div className='barImgCont'>
-              <img src="/Assets\images\HomepageImages\Blog-section-1.jpg" alt="" />
+              <img src="/Assets/images/HomepageImages/Blog-section-1.jpg" alt="" />
             </div>
           </div>
         </div>
@@ -287,7 +287,7 @@ function BottomBar() {
         </div>
       </div>
       <div className='barImgCont'>
-        <img src="/Assets\images\HomepageImages\Blog-section-1.jpg" alt="" />
+        <img src="/Assets/images/HomepageImages/Blog-section-1.jpg" alt="" />
       </div>
     </div> 
   </div>
