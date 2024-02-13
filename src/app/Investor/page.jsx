@@ -6,7 +6,7 @@ import SharePricesCard from "@/Components/Investors/SharePricesCard";
 import InvestorsSlider from "@/Components/Investors/InvestorsSlider";
 import AboutSlider from "@/Components/About/AboutSlider";
 import SliderCard from "@/Components/About/SliderCard";
-import InvestorSliderCard from "@/Components/Investors/investorSliderCard";
+// import InvestorSliderCard from "@/Components/Investors/investorSliderCard";
 
 
 function Investor() {
