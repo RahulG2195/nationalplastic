@@ -293,8 +293,6 @@ function BottomBar() {
   </div>
 </div>
 
-      
-
       <div className="col">
         <p>Drawers & Racks</p>
       </div>
