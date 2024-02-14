@@ -1,12 +1,7 @@
 import './PremiumChairs.css'
 
 const PremiumChairs = () => {
-    const filters = [
-        { label: "Price", options: ["Action", "Another action", "Something else here"] },
-        { label: "Arm type", options: ["Action", "Another action", "Something else here"] },
-        { label: "Color", options: ["Action", "Another action", "Something else here"] },
-        { label: "Discount", options: ["Action", "Another action", "Something else here"] },
-    ];
+
 
     return (
         <>
@@ -16,46 +11,75 @@ const PremiumChairs = () => {
                     <div className="mt-1 fw-semibold subCptRes w-50"><p>It is a long established fact that a reader will be distracted by the readable
                         content of a page when looking at its layout. The point of using Lorem Ipsum
                         is that it has a more-or-less normal distribution of letters, as opposed to using</p>
+                    </div>
                 </div>
-            </div>
 
 
-            <div className="px-5 mx-5 dropboxRes mt-5 d-flex justify-content-between">
-                <div>
-                    <div className='text-body-secondary fw-semibold'>FILTER BY</div>
-                    <div className="d-flex flex-wrap gap-3 mt-2">
-                        {filters.map((filter, index) => (
-                            <div key={index} className="dropdown arrow">
-                                <button className="btn dropdownbuttonResp bg-transperent dropdown-toggle rounded-pill fw-semibold" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {filter.label}
-                                </button>
-                                <ul className="dropdown-menu">
-                                    {filter.options.map((option, optionIndex) => (
-                                        <li key={optionIndex}><a className="dropdown-item" href="#">{option}</a></li>
-                                    ))}
-                                </ul>
+                <div className="px-5 mx-5 dropboxRes mt-5 d-flex justify-content-between">
+                    <div>
+                        <div className='text-body-secondary fw-semibold'>FILTER BY</div>
+                        <div className="d-flex flex-wrap gap-3 mt-2">
+                            <div className="dropdown mt-2 arrow">
+                                <label htmlFor='Date' className='darkBlue fw-semibold dropdownbuttonResp' >
+                                    Price:
+                                </label>
+                                <select id='Date' name='Date' className="form-control border-primary darkBlue fw-semibold dropdownbuttonResp" >
+                                    <option>Low to high</option>
+                                    <option>High to low</option>
+                                    <option>default</option>
+                                </select>
                             </div>
-                        ))}
+                            <div className="dropdown mt-2 arrow">
+                                <label htmlFor='Date' className='darkBlue fw-semibold dropdownbuttonResp' >
+                                    Arm Type:
+                                </label>
+                                <select id='Date' name='Date' className="form-control border-primary darkBlue fw-semibold dropdownbuttonResp" >
+                                    <option>new to old </option>
+                                    <option>old to new</option>
+                                    <option>default</option>
+                                </select>
+                            </div>
+                            <div className="dropdown mt-2 arrow">
+                                <label htmlFor='Date' className='darkBlue fw-semibold dropdownbuttonResp' >
+                                    Color:
+                                </label>
+                                <select id='Date' name='Date' className="form-control border-primary darkBlue fw-semibold dropdownbuttonResp" >
+                                    <option> Black </option>
+                                    <option>Blue</option>
+                                    <option>Red</option>
+                                </select>
+                            </div>
+                            <div className="dropdown mt-2 arrow">
+                                <label htmlFor='Date' className='darkBlue fw-semibold dropdownbuttonResp' >
+                                    Discount:
+                                </label>
+                                <select id='Date' name='Date' className="form-control border-primary darkBlue fw-semibold dropdownbuttonResp" >
+                                    <option>new to old </option>
+                                    <option>old to new</option>
+                                    <option>default</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div>
+                        <div className='text-body-secondary fw-semibold'>SORT BY</div>
+                        <div className="dropdown mt-2 arrow">
+                            <label htmlFor='Date' className='darkBlue fw-semibold dropdownbuttonResp' >
+                                Date:
+                            </label>
+                            <select id='Date' name='Date' className="form-control border-primary darkBlue fw-semibold dropdownbuttonResp" >
+                                <option>new to old </option>
+                                <option>old to new</option>
+                                <option>default</option>
+                            </select>
+                        </div>
+
                     </div>
                 </div>
 
-                <div>
-                    <div className='text-body-secondary fw-semibold'>SORT BY</div>
-                    <div className="dropdown mt-2 arrow">
-                        <button className="btn dropdownbuttonResp bg-transperent dropdown-toggle rounded-pill fw-semibold" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Date: New to Old
-                        </button>
-                        <ul className="dropdown-menu" >
-                            <li><a className="dropdown-item" href="#">Action</a></li>
-                            <li><a className="dropdown-item" href="#">Another action</a></li>
-                            <li><a className="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-
-        </div >
+            </div >
         </>
     );
 }

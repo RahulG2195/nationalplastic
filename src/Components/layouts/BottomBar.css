@@ -54,11 +54,15 @@
     width: 100%;
 }
 
+.second{
+    position: relative;
+}
 
 
 .second .SecondDrop{
     display: none !important;
-    left: 9.7%;
+    /* left: 9.7%; */
+    position: absolute;
 }
 
 .mainrow .second:hover .SecondDrop{

@@ -93,7 +93,7 @@ function UnauditedFinancialResults() {
       <div className="container">
         <div className="row">
           <div className="col-md-2 ">
-            <div className="FinancialResults-2">
+            <div className="FinancialResults-2 FinancialResults-2-ufr">
               <h4>Unaudited Financial Results</h4>
             </div>
           </div>
