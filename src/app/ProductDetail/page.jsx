@@ -11,7 +11,6 @@ function page() {
       <div className="pd-wrap">
         <Breadcrump />
         <ProdData />
-
         <RecentlyViewedDetails />
         <CustomerReview />
         <Faqs />

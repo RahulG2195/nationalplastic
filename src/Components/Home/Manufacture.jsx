@@ -1,3 +1,4 @@
+import Link from "next/link";
 import CatCards from "../CommonComp/catCards";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
@@ -8,48 +9,48 @@ import {
   A11y,
 } from "swiper/modules";
 export default function Manufacture() {
- const productArr = [
+  const productArr = [
     {
-      key : 1,
-      image : '/assets/images/HomepageImages/Chair.png',
-      title : 'Seatings',
-      url : '#',
-      style : 'shop-room'
+      key: 1,
+      image: '/assets/images/HomepageImages/Chair.png',
+      title: 'Seatings',
+      url: '#',
+      style: 'shop-room'
     },
     {
-      key : 2,
-      image : '/assets/images/HomepageImages/Chair.png',
-      title : 'Tables',
-      url : '#',
-      style : 'shop-room'
+      key: 2,
+      image: '/assets/images/HomepageImages/Chair.png',
+      title: 'Tables',
+      url: '#',
+      style: 'shop-room'
     },
     {
-      key : 3,
-      image : '/assets/images/HomepageImages/Chair.png',
-      title : 'Storage',
-      url : '#',
-      style : 'shop-room'
+      key: 3,
+      image: '/assets/images/HomepageImages/Chair.png',
+      title: 'Storage',
+      url: '#',
+      style: 'shop-room'
     },
     {
-      key : 4,
-      image : '/assets/images/HomepageImages/Chair.png',
-      title : 'Sets',
-      url : '#',
-      style : 'shop-room'
+      key: 4,
+      image: '/assets/images/HomepageImages/Chair.png',
+      title: 'Sets',
+      url: '#',
+      style: 'shop-room'
     },
     {
-      key : 5,
-      image : '/assets/images/HomepageImages/Chair.png',
-      title : 'Stools',
-      url : '#',
-      style : 'shop-room'
+      key: 5,
+      image: '/assets/images/HomepageImages/Chair.png',
+      title: 'Stools',
+      url: '#',
+      style: 'shop-room'
     },
     {
-      key : 6,
-      image : '/assets/images/HomepageImages/Chair.png',
-      title : 'Kids Chair',
-      url : '#',
-      style : 'shop-room'
+      key: 6,
+      image: '/assets/images/HomepageImages/Chair.png',
+      title: 'Kids Chair',
+      url: '#',
+      style: 'shop-room'
     },
   ];
   return (

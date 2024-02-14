@@ -5,6 +5,7 @@ function BlogCard({image, title, url, cat, date, duration, shortDesc}) {
   return (
     <>
       <div className="cards blog_card">
+        <Link href="/BlogDetails">
             <div className="card_img">
                 <Image 
                 src={image}
@@ -16,6 +17,7 @@ function BlogCard({image, title, url, cat, date, duration, shortDesc}) {
                 />
             </div>
             <div className="blog_body card-body">
+                
                 <div className="cat_div">
                     <span className="badge cat_badge">{cat}</span>
                     <span className="date_time">{date}</span>
@@ -27,10 +29,11 @@ function BlogCard({image, title, url, cat, date, duration, shortDesc}) {
                     <h4>{title}</h4>
                     <p>{shortDesc}</p>
                     <div className="continue_div">
-                        <Link className="continue" href={url}>CONTINUE READING</Link>
+                        {/* <Link className="continue" href="/BlogDetails">CONTINUE READING</Link> */}
                     </div>
                 </div>
             </div>
+            </Link>
         </div>
     </>
   )

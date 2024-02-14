@@ -20,7 +20,7 @@ function Login() {
             <div className="col-md-6">
               <div className="Login-Form">
                 <form>
-                  <h3>Login</h3>
+                  <h3 className="text-center mb-2">Login</h3>
                   <p>Track your order, create wishlist & more</p>
                   <div className="row mb-3 mt-3">
                     <label
