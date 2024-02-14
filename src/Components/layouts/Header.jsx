@@ -19,7 +19,7 @@ export default function Header() {
                 height={500}
               />
             </a>
-            <form className="d-flex">
+            <form className="d-flex nav-search">
               <input
                 className="form-control me-2"
                 type="search"
