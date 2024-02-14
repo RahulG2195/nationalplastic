@@ -56,14 +56,13 @@ function BottomBar() {
         </div>
       </div>
 
-
-      <div className="col Third">
+      <div className="col second ">
       <p> <Link className="nav-link" href="/ProductCatlogue">Premium Chair</Link></p>
-        <div className='ulCont ThirdDrop mx-4 p-3'>
+        <div className='ulCont SecondDrop mx-4 p-3'>
           <p className='text-start fw-bold dropHeading '>Premium Chair</p>
           <div className='d-flex gap-5'>
             <div className='d-flex gap-5 scroll'>
-              <div>
+            <div>
                 <p><Link className="nav-link" href="/ProductDetail">Victoria</Link></p>
                 <p><Link className="nav-link" href="/ProductDetail">Orca</Link></p>
                 <p><Link className="nav-link" href="/ProductDetail">The Boss</Link></p>
@@ -98,7 +97,6 @@ function BottomBar() {
           </div>
 
         </div>
-
       </div>
 
       <div className="col second ">
