@@ -1,8 +1,9 @@
-import Image from "next/image";
-
+import Image from "next/image"; 
+import insertFormData from '../Config/API/register'
 import "../../styles/contactus.css"; 
 import ContactUsCard from "@/Components/ContactUs/ContactUsCard";
 function ContactUs() {
+ 
   const RegisteredOfficeCardArr = [
     {
       key: 1,
@@ -33,6 +34,7 @@ function ContactUs() {
       email: "info@nationalplastic.com",
     },
   ]
+  // console.log(insertFormData(RegisteredOfficeCardArr));
   
   // **************FactoryUnitsArr Array************
   const FactoryUnitsArr = [
