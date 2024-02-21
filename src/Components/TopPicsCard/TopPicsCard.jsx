@@ -2,12 +2,15 @@ import Image from "next/image";
 import './TopPicsCard.css'
 import Link from "next/link";
 
+
 const TopPicsCard = (props) => {
+
+
 
     return (
         <>
             <div className="main">
-                <Link href="/ProductDetail">
+                <Link href="/ProductDetail" id="nav-link">
 
                     <div className="circularCard d-flex flex-column align-items-center position-relative">
                         <div className="circularimg ">

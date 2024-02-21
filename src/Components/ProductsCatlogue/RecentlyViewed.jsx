@@ -5,18 +5,42 @@ import 'swiper/swiper-bundle.css';
 import PreChairsCard from '../preChairsCard/preChairsCard';
 import Image from 'next/image';
 import FooterRow from '../FooterRow/FooterRow';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const RecentlyViewed = () => {
-    const RecentlyViewedData = [
-        { ChairImg: "/Assets/images/New-launches-1/New-launches-1.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-        { ChairImg: "/Assets/images/New-launches-2/New-launches-2.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-        { ChairImg: "/Assets/images/New-launches-3/New-launches-3.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-        { ChairImg: "/Assets/images/New-launches-4/New-launches-4.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-        { ChairImg: "/Assets/images/New-launches-1/New-launches-1.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-        { ChairImg: "/Assets/images/New-launches-2/New-launches-2.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-        { ChairImg: "/Assets/images/New-launches-3/New-launches-3.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-        { ChairImg: "/Assets/images/New-launches-4/New-launches-4.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-    ];
+    // const RecentlyViewedData = [
+    //     { ChairImg: "/Assets/images/New-launches-1/New-launches-1.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
+    //     { ChairImg: "/Assets/images/New-launches-2/New-launches-2.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
+    //     { ChairImg: "/Assets/images/New-launches-3/New-launches-3.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
+    //     { ChairImg: "/Assets/images/New-launches-4/New-launches-4.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
+    //     { ChairImg: "/Assets/images/New-launches-1/New-launches-1.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
+    //     { ChairImg: "/Assets/images/New-launches-2/New-launches-2.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
+    //     { ChairImg: "/Assets/images/New-launches-3/New-launches-3.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
+    //     { ChairImg: "/Assets/images/New-launches-4/New-launches-4.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
+    // ];
+
+    const [RecentlyViewedData, setRecentlyViewedData] = useState([])
+
+    useEffect(() => {
+        const fetchdata = async () => {
+            try {
+
+                const response = await axios.get("http://localhost:3000/api/Products")
+                const filteredproducts = response.data.products.filter(item => item.categoryType === "premium chairs")
+
+                setRecentlyViewedData(filteredproducts)
+            }
+
+
+            catch (error) {
+                alert("Error fetching data", error)
+            }
+        };
+        fetchdata();
+    }, [])
+
+
     return (
         <>
 
@@ -69,17 +93,17 @@ const RecentlyViewed = () => {
                     }}
                 >
                     {
-                        RecentlyViewedData.map((chair, index) => (
-                            <SwiperSlide key={index}>
+                        RecentlyViewedData.map((chair) => (
+                            <SwiperSlide key={chair.product_id}>
 
 
                                 <PreChairsCard
-                                    ChairImg={chair.ChairImg}
-                                    Title={chair.Title}
-                                    Discription={chair.Discription}
-                                    Price={chair.Price}
-                                    orignalPrice={chair.orignalPrice}
-                                    Discount={chair.Discount} />
+                                    ChairImg={`/Assets/images/New-launches-1/${chair.image_name}`}
+                                    Title={chair.product_name}
+                                    Discription={chair.short_description}
+                                    Price={chair.price}
+                                    orignalPrice={chair.discount_price}
+                                    Discount={chair.discount_percentage} />
 
                             </SwiperSlide>
                         ))

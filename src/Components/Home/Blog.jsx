@@ -10,41 +10,52 @@ import {
   A11y,
 } from "swiper/modules";
 import "swiper/swiper-bundle.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Blog() {
-  const productArr = [
-    {
-      key: 1,
-      image: '/Assets/images/Home-page/1st-section-kids-chair.jpg',
-      title: 'Dinning Table Set',
-      url: '#',
-      cat: 'Furniture',
-      date: 'November 4, 2023',
-      duration: '5 minutes',
-      shortDesc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    },
-    {
-      key: 2,
-      image: '/Assets/images/Home-page/1st-section-kids-chair.jpg',
-      title: 'Multipurpose storage',
-      url: '#',
-      cat: 'Furniture',
-      date: 'November 4, 2023',
-      duration: '5 minutes',
-      shortDesc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    },
-    {
-      key: 3,
-      image: '/Assets/images/Home-page/1st-section-kids-chair.jpg',
-      title: 'Kids Chairs',
-      url: '#',
-      cat: 'Furniture',
-      date: 'November 4, 2023',
-      duration: '5 minutes',
-      shortDesc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    },
-  ];
+  // const productArr = [
+  //   {
+  //     key: 1,
+  //     image: '/Assets/images/Home-page/1st-section-kids-chair.jpg',
+  //     title: 'Dinning Table Set',
+  //     url: '#',
+  //     cat: 'Furniture',
+  //     date: 'November 4, 2023',
+  //     duration: '5 minutes',
+  //     shortDesc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+  //   },
+  //   {
+  //     key: 2,
+  //     image: '/Assets/images/Home-page/1st-section-kids-chair.jpg',
+  //     title: 'Multipurpose storage',
+  //     url: '#',
+  //     cat: 'Furniture',
+  //     date: 'November 4, 2023',
+  //     duration: '5 minutes',
+  //     shortDesc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+  //   },
+  //   {
+  //     key: 3,
+  //     image: '/Assets/images/Home-page/1st-section-kids-chair.jpg',
+  //     title: 'Kids Chairs',
+  //     url: '#',
+  //     cat: 'Furniture',
+  //     date: 'November 4, 2023',
+  //     duration: '5 minutes',
+  //     shortDesc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+  //   },
+  // ];
 
+  const [productArr, setProductArr] = useState([]);
+  useEffect(() => {
+    const fetchdata = async () => {
+      const response = await axios.get('http://localhost:3000/api/Products')
+      const filteredData = response.data.products.filter(item=>item.categoryType==='Blog')
+      setProductArr(filteredData)
+    }
+    fetchdata();
+  },[])
   return (
     <section className="top_pick_sec common_section">
       <div className="container">
@@ -73,34 +84,35 @@ export default function Blog() {
                 }}
                 breakpoints={{
                   200: {
-                      slidesPerView: 1,
-                      spaceBetween: 20,
+                    slidesPerView: 1,
+                    spaceBetween: 20,
                   },
                   640: {
-                      slidesPerView: 2,
-                      spaceBetween: 20,
+                    slidesPerView: 2,
+                    spaceBetween: 20,
                   },
                   768: {
-                      slidesPerView: 3,
-                      spaceBetween: 40,
+                    slidesPerView: 3,
+                    spaceBetween: 40,
                   },
                   1024: {
-                      slidesPerView: 3,
-                      spaceBetween: 50,
+                    slidesPerView: 3,
+                    spaceBetween: 50,
                   },
-              }}
+                }}
               >
                 {
                   productArr.map((product) => (
-                    <SwiperSlide key={product.key} >
+                    <SwiperSlide key={product.product_id} >
                       <BlogCard
-                        image={product.image}
-                        title={product.title}
+                        image={`/Assets/images/Home-page/${product.image_name}`}
+
+                        title={product.product_name}
                         url={product.url}
-                        cat={product.cat}
-                        date={product.date}
+                        cat={product.categoryType}
+                        date={product.createdOn}
                         duration={product.duration}
-                        shortDesc={product.shortDesc}
+                        shortDesc={product.short_description}
                       />
                     </SwiperSlide>
                   ))

@@ -6,6 +6,9 @@ import 'font-awesome/css/font-awesome.min.css'
 import Header from '@/Components/layouts/Header';
 import Footer from '@/Components/layouts/Footer';
 import './globals.css'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -31,6 +34,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Header/>
         {children}
+        <ToastContainer/>
         <Footer/>
       </body>
     </html>

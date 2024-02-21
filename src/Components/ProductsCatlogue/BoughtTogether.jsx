@@ -1,22 +1,37 @@
 "use client"
 import TogetherCard from "../BoughtTogetherCards/TogetherCard";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import 'swiper/swiper-bundle.css';
 import Image from "next/image";
+import axios from "axios";
 
 const BoughtTogether = () => {
-    const togetherCardsData = [
-        { imgSrc: "/Assets/images/Magna/Magna.png", price: "00,000" },
-        { imgSrc: "/Assets/images/The-boss/The-boss.png", price: "00,000" },
-        { imgSrc: "/Assets/images/Top-selling-product/Top-selling-product.png", price: "00,000" },
-        { imgSrc: "/Assets/images/Magna/Magna.png", price: "00,000" },
-        { imgSrc: "/Assets/images/The-boss/The-boss.png", price: "00,000" },
-        { imgSrc: "/Assets/images/Top-selling-product/Top-selling-product.png", price: "00,000" },
+    // const togetherCardsData = [
+    //     { imgSrc: "/Assets/images/Magna/Magna.png", price: "00,000" },
+    //     { imgSrc: "/Assets/images/The-boss/The-boss.png", price: "00,000" },
+    //     { imgSrc: "/Assets/images/Top-selling-product/Top-selling-product.png", price: "00,000" },
+    //     { imgSrc: "/Assets/images/Magna/Magna.png", price: "00,000" },
+    //     { imgSrc: "/Assets/images/The-boss/The-boss.png", price: "00,000" },
+    //     { imgSrc: "/Assets/images/Top-selling-product/Top-selling-product.png", price: "00,000" },
 
-    ];
+    // ];
 
+    const [togetherCardsData, setTogetherCardsData] = useState([])
+
+    useEffect(() => {
+      const fetchdata = async ()=>{
+        try {
+            const response = await axios.get("http://localhost:3000/api/Products")
+            setTogetherCardsData(response.data.products)
+        } catch (error) {
+            alert("error");
+        }
+      }
+        fetchdata();
+    }, [])
+    
     return (
         <>
             <div className="mt-5">
@@ -66,10 +81,11 @@ const BoughtTogether = () => {
                     }}
                 >
                     {
-                        togetherCardsData.map((card, index) => (
-                            <SwiperSlide key={index}>
+                        togetherCardsData.slice(0, 5).map((card) => (
+                            <SwiperSlide key={card.product_id}>
 
-                                <TogetherCard imgSrc={card.imgSrc} Price={card.price} />
+                                <TogetherCard imgSrc={`/Assets/images/New-launches-1/${card.image_name}`} 
+                                Price={card.price} />
                                 
                             </SwiperSlide>
                         ))

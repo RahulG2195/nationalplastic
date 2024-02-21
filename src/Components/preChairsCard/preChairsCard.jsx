@@ -1,10 +1,17 @@
 import Link from 'next/link'
 import './PreChairsCard.css'
 
+
+
 const PreChairsCard = (props) => {
+  
+    const handleAddWishlist = () => {
+        props.onaddToWishlist(props.Title, props.Discription, props.Price, props.orignalPrice, props.Discount, props.ChairImg)
+    }
+
     return (
         <>
-
+        
             <div className='preCont cards mt-3 p-1 position-relative  my-4 '>
                 <Link href="/ProductDetail">
                     <div className='card-header'>
@@ -15,8 +22,11 @@ const PreChairsCard = (props) => {
                     <div className="PreFoot mt-2 ">
 
                         <div className="class d-flex flex-wrap justify-content-between my-2 ">
-                        <Link href="/ProductDetail"><div className="left fw-bold text-danger">{props.Title}</div></Link>
-                            <div className="right "><i className="fa fa-heart-o" aria-hidden="true"></i></div>
+                            <Link href="/ProductDetail"><div className="left fw-bold text-danger">{props.Title}</div></Link>
+                            <div className="right "  onClick={handleAddWishlist}>
+                                <i className="fa fa-heart-o" aria-hidden="true"></i>
+
+                            </div>
                         </div>
 
                         <div className='text-center fw-medium my-2 DESCresp'>{props.Discription}</div>
@@ -25,7 +35,7 @@ const PreChairsCard = (props) => {
                             <div className='d-flex gap-2 align-items-center'>
                                 <div><i className="medium fa fa-inr fw-bold priceResp" aria-hidden="true"></i></div>
                                 <div className='medium fw-bold priceResp'>{props.Price}</div>
-                                <div className='small text-secondary'>{props.orignalPrice}</div>
+                                <div className='small text-secondary text text-decoration-line-through'>{props.orignalPrice}</div>
 
                             </div>
                             <div className='d-flex flex-wrap fw-semibold text-danger '>
