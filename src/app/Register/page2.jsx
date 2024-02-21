@@ -1,6 +1,4 @@
-//Register/page.jsx this 
 "use client"
-// Import the required modules
 import { useState } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
@@ -20,7 +18,7 @@ function Register() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        
+
         // Perform form validation
         const errors = {};
         if (!formData.firstName.trim()) {
@@ -45,18 +43,18 @@ function Register() {
         if (formData.password !== formData.confirmPassword) {
             errors.confirmPassword = 'Passwords do not match';
         }
-        
+
         if (Object.keys(errors).length === 0) {
             try {
-
                 // Check if email already exists
-                const { data } = await axios.get(`http://localhost:3000/api/Users?email=${formData.email}`);
-                if (data.length > 0) {
-                    setFormErrors({ email: 'Email already exists' });
+                const { data } = await axios.get(`http://localhost:3000/api/Users`);
+                const existingEmails = data.map(user => user.email);
+                if (existingEmails.includes(formData.email)) {
+                    alert("not allowed");
                 } else {
                     const response = await axios.post('http://localhost:3000/api/Users', formData);
                     console.log('Form submitted:', response);
-                }
+
                     // Clear form data on successful submission
                     setFormData({
                         firstName: '',
@@ -66,18 +64,20 @@ function Register() {
                         password: '',
                         confirmPassword: '',
                     });
-                    
+
                     // Display success message
                     setSuccessMessage('Registration successful!');
                 }
-             catch (error) {
+            } catch (error) {
                 console.error('Error submitting form:', error);
-                // Handle error, e.g., show error message to the user
+    if (error.response && error.response.status === 400) {
+        // If the email already exists, show an alert
+        window.alert("Email already exists!");
+    }
             }
-          }
-        // } else {
-        //     setFormErrors(errors);
-        // }
+        } else {
+            setFormErrors(errors);
+        }
     };
 
     const handleInputChange = (event) => {
@@ -86,15 +86,6 @@ function Register() {
             ...prev,
             [name]: value,
         }));
-        
-        // Real-time validation
-        if (name === 'phone') {
-            const phoneError = validatePhone(value);
-            setFormErrors(prevErrors => ({
-                ...prevErrors,
-                phone: phoneError,
-            }));
-        }
     };
 
     const isValidEmail = (email) => {
@@ -105,11 +96,6 @@ function Register() {
     const isValidPhone = (phone) => {
         const phonePattern = /^\d{10}$/;
         return phonePattern.test(phone);
-    };
-
-    const validatePhone = (phone) => {
-        const phonePattern = /^\d{10}$/;
-        return phonePattern.test(phone) ? '' : 'Invalid phone number';
     };
 
     return (
@@ -185,3 +171,4 @@ function Register() {
 }
 
 export default Register;
+

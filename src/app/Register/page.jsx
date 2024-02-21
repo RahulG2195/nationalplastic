@@ -18,7 +18,7 @@ function Register() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        
+
         // Perform form validation
         const errors = {};
         if (!formData.firstName.trim()) {
@@ -43,7 +43,7 @@ function Register() {
         if (formData.password !== formData.confirmPassword) {
             errors.confirmPassword = 'Passwords do not match';
         }
-        
+
         if (Object.keys(errors).length === 0) {
             try {
                 // Check if email already exists
@@ -54,7 +54,7 @@ function Register() {
                 } else {
                     const response = await axios.post('http://localhost:3000/api/Users', formData);
                     console.log('Form submitted:', response);
-                    
+
                     // Clear form data on successful submission
                     setFormData({
                         firstName: '',
@@ -64,7 +64,7 @@ function Register() {
                         password: '',
                         confirmPassword: '',
                     });
-                    
+
                     // Display success message
                     setSuccessMessage('Registration successful!');
                 }
@@ -81,12 +81,28 @@ function Register() {
     };
 
     const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value,
-        }));
-    };
+      const { name, value } = event.target;
+      let errorMessage = '';
+  
+      // Validate phone number
+      if (name === 'phone') {
+          const phoneNumber = value.replace(/\D/g, ''); // Remove non-digit characters
+          if (phoneNumber.length !== 10) {
+              errorMessage = 'Phone number must be 10 digits';
+          }
+      }
+  
+      // Update the form data state and the error message for the current input field
+      setFormData(prev => ({
+          ...prev,
+          [name]: value,
+      }));
+  
+      setFormErrors(prev => ({
+          ...prev,
+          [name]: errorMessage,
+      }));
+  };
 
     const isValidEmail = (email) => {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -171,3 +187,4 @@ function Register() {
 }
 
 export default Register;
+
