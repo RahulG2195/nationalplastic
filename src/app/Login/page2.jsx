@@ -1,21 +1,19 @@
-"use client";
-
-import { useState } from "react";
-import axios from "axios";
-import Image from "next/image";
-// import { useNavigate } from "react-router-dom";
-import { useRouter } from 'next/navigation'
-import "../../styles/profilepage.css";
-import { useEffect } from "react";
+"use client"; 
+import { useState } from 'react';
+import axios from 'axios';
+import Image from 'next/image';
+import { useNavigate } from "react-router-dom";
+import '../../styles/profilepage.css';
 
 function Login() {
-  const router = useRouter();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -34,42 +32,29 @@ function Login() {
 
     // Basic form validation
     if (!formData.email || !formData.password) {
-      setErrorMessage("Please enter both email and password.");
+      setErrorMessage('Please enter both email and password.');
       return;
     }
 
     try {
-      const { data } = await axios.get(`http://localhost:3000/api/Users`);
-      const existingEmails = data.map((user) => user.Email);
-      const existingpassword = data.map((user) => user.Password);
-      // console.log("existingEmails=" + existingEmails);
-      // console.log("formData.email=" + formData.email);
-      if (existingEmails.includes(formData.email)) {
-        if (existingpassword.includes(formData.password)) {
-          // alert("Login successful");
-          // navigate('/About');
-          router.push('/'); 
-          // router.push({
-          //   pathname: '/',
-          //   query: { email: formData.email }
-          // });
-        } else {
-          alert("Incorrect Password");
-        }
+      // Perform login logic
+      // Assuming your login API returns a success response if login is successful
+      const response = await axios.post('http://localhost:3000/api/login', {
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (response.data.success) {
+        // Redirect to the home page if login is successful
+        navigate('/home');
       } else {
-        alert("This Email is not registred");
+        setErrorMessage('Invalid email or password');
       }
     } catch (error) {
-      console.error("Error during login:", error);
-      setErrorMessage("An error occurred during login. Please try again.");
+      console.error('Error during login:', error);
+      setErrorMessage('An error occurred during login. Please try again.');
     }
   };
-
-  useEffect(() => {
-    if (window.location.pathname === "/About") {
-      window.location.reload();
-    }
-  }, []);
 
   return (
     <div className="container">
@@ -117,7 +102,7 @@ function Login() {
                 </label>
                 <div className="col-sm-12">
                   <input
-                    type={showPassword ? "text" : "password"}
+                    type={showPassword ? 'text' : 'password'}
                     className="form-control"
                     id="inputPassword3"
                     name="password"
@@ -131,7 +116,7 @@ function Login() {
                     className="btn btn-toggle-password"
                     onClick={togglePasswordVisibility}
                   >
-                    {showPassword ? "Hide" : "Show"} Password
+                    {showPassword ? 'Hide' : 'Show'} Password
                   </button>
                 </div>
               </div>
@@ -145,13 +130,13 @@ function Login() {
               )}
               <div className="RegisterHere-p">
                 <p>
-                  New to National Plastic?{" "}
+                  New to National Plastic?{' '}
                   <span className="RegisterHere">Register Here</span>
                 </p>
               </div>
               <div className="row ContinueWithgoogle">
                 <p>
-                  OR Continue With{" "}
+                  OR Continue With{' '}
                   <i className="fa fa-google" aria-hidden="true"></i>
                   <i className="fa fa-facebook" aria-hidden="true"></i>
                 </p>

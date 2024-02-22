@@ -6,6 +6,7 @@ import 'font-awesome/css/font-awesome.min.css'
 import Header from '@/Components/layouts/Header';
 import Footer from '@/Components/layouts/Footer';
 import './globals.css'
+import { BrowserRouter } from 'react-router-dom';
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -29,9 +30,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <BrowserRouter>
         <Header/>
         {children}
         <Footer/>
+        </BrowserRouter>
       </body>
     </html>
   )
