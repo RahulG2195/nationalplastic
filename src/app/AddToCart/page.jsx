@@ -1,37 +1,45 @@
-'use client'
+"use client"
 import Image from "next/image";
 import "../../styles/addtocart.css";
-const { main } = require("@popperjs/core");
 import CartProduct from "@/Components/AddToCart/CartProduct";
 import PriceDetailsCard from "@/Components/PriceDetails/PriceDetailsCard";
 import FooterRow from "@/Components/FooterRow/FooterRow";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function AddToCart() {
-// const [inputArr, setInputArr]= useState ([ProductDetailArr]);
+  const [productDetailArr, setProductDetailArr] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/Cart");
+        setProductDetailArr(response.data.mycart);
+        console.log(response.data);
+
+      } catch (error) {
+        console.error("Error fetching data", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const onRemoveSuccess = async (product_id) => {
+    console.log("wanted to remove",product_id)
+    try {
+      await axios.delete(`http://localhost:3000/api/Cart`, { data: { product_id } });
+      setProductDetailArr(prevItems => prevItems.filter(item => item.product_id !== product_id))
+
+    } catch (error) {
+      console.error("Error removing item:", error);
+      alert("Error removing item. Please try again later.");
+    }
+  };
 
 
-  const ProductDetailArr = [
-    {
-      key: 1,
-      image1: "/Assets/images/AddTOCart/product-Chairs.png",
-      productName: "Lorem ipsum dolor sit amet",
-      productPrice: "10000",
-      discountedPrice: "7000",
-      productDesc: "Lorem ipsum dolor sit amet, consetetur",
-    },
-    {
-      key: 2,
-      image1: "/Assets/images/AddTOCart/product-Chairs.png",
-      productName: "Lorem ipsum dolor sit amet 2",
-      productPrice: "1000",
-      discountedPrice: "700",
-      productDesc: "Lorem ipsum dolor sit amet, consetetur2",
-    },
-  ];
   return (
     <>
-      {/* <h1>THis is Add To Cart</h1> */}
       <div className="row">
         <div className="ATCflow">
           <p>
@@ -56,58 +64,59 @@ function AddToCart() {
                     <div className="iconImage">
                       <Image
                         src="/Assets/images/AddTOCart/Icon-location.png"
-                        classname="img-fluid d-block w-3"
+                        className="img-fluid d-block w-3"
                         alt="ome banner 1"
                         width={100}
                         height={80}
-                        // layout="responsive"
-                        // objectFit="cover"
                       />
                     </div>
                     <p>Deliver To</p>
                   </div>
                   <div className="locationPin">
-                    <div class="input-group mb-3">
+                    <div className="input-group mb-3">
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         placeholder="Enter Your Pin code"
                         aria-label="Recipient's username"
                         aria-describedby="basic-addon2"
                       />
-                      <div class="input-group-append">
+                      <div className="input-group-append">
                         <button>Check Now</button>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <hr/>
+              <hr />
 
               <div className="container">
-                {ProductDetailArr.map((val) => (
-                  <div className="row" key={val.key}>
+                {productDetailArr.map((val) => (
+                  <div className="row" key={val.product_id}>
                     <CartProduct
-                      src={val.image1}
-                      productName={val.productName}
-                      productPrice={val.productPrice}
-                      discountedPrice={val.discountedPrice}
-                      productDesc={val.productDesc}
+                      src={`/Assets/images/New-launches-1/${val.image_name}`}
+                      productId={val.product_id}
+                      productName={val.product_name}
+                      productPrice={val.price}
+                      discountedPrice={val.orignal_price}
+                      productDesc={val.description}
+                      onRemoveSuccess={() => onRemoveSuccess(val.product_id)
+                      }
                     />
                   </div>
                 ))}
               </div>
             </div>
           </div>
-
           <div className="col-sm-12 col-md-4 col-lg-4 col-xl-4 place-order">
-            <PriceDetailsCard/>
+            <PriceDetailsCard />
           </div>
         </div>
       </div>
 
-      <FooterRow/>
+      <FooterRow />
     </>
   );
 }
+
 export default AddToCart;

@@ -4,14 +4,18 @@ import './PreChairsCard.css'
 
 
 const PreChairsCard = (props) => {
-  
+
+   const handleAddToCart = () =>{
+        props.onAddToCart(props.id,props.Title, props.Discription, props.Price, props.orignalPrice, props.Discount, props.ChairImg)
+    }
+
     const handleAddWishlist = () => {
-        props.onaddToWishlist(props.Title, props.Discription, props.Price, props.orignalPrice, props.Discount, props.ChairImg)
+        props.onaddToWishlist(props.id,props.Title, props.Discription, props.Price, props.orignalPrice, props.Discount, props.ChairImg)
     }
 
     return (
         <>
-        
+
             <div className='preCont cards mt-3 p-1 position-relative  my-4 '>
                 <Link href="/ProductDetail">
                     <div className='card-header'>
@@ -23,9 +27,9 @@ const PreChairsCard = (props) => {
 
                         <div className="class d-flex flex-wrap justify-content-between my-2 ">
                             <Link href="/ProductDetail"><div className="left fw-bold text-danger">{props.Title}</div></Link>
-                            <div className="right "  onClick={handleAddWishlist}>
-                                <i className="fa fa-heart-o" aria-hidden="true"></i>
-
+                            <div className="right">
+                                <i onClick={handleAddToCart} className="fa fa-cart-arrow-down fa-lg" aria-hidden="true"></i>
+                                <i onClick={handleAddWishlist} className="fa fa-heart-o ms-3" aria-hidden="true"></i>
                             </div>
                         </div>
 
@@ -33,7 +37,7 @@ const PreChairsCard = (props) => {
 
                         <div className="rs d-flex flex-wrap  justify-content-between align-items-center ">
                             <div className='d-flex gap-2 align-items-center'>
-                                <div><i className="medium fa fa-inr fw-bold priceResp" aria-hidden="true"></i></div>
+                                <div> <i className="medium fa fa-inr fw-bold priceResp" aria-hidden="true"></i> </div>
                                 <div className='medium fw-bold priceResp'>{props.Price}</div>
                                 <div className='small text-secondary text text-decoration-line-through'>{props.orignalPrice}</div>
 

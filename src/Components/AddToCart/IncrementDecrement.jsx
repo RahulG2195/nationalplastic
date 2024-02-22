@@ -1,50 +1,38 @@
 "use client";
 import { useState } from "react";
 
-const IncrementDecrement = () => {
-  const [Number, setNum] = useState(0);
+const IncrementDecrement = ({ initialCount }) => {
+  const [count, setCount] = useState(initialCount);
 
-  const incNum = () => {
-    setNum(Number + 1);
-    if (Number <= 0)
-    {
-      return (
-        ProductDetailArr.filter( arrayElement)
-      );
-    }
-    else{
-      return (alert("enter"));
+  const increment = () => {
+    setCount(count + 1);
+  };
+
+  const decrement = () => {
+    if (count > 1) {
+      setCount(count - 1);
     }
   };
 
-  const decNum = () => {
-    setNum(Number - 1);
-  };
   return (
-    <>
-      <div class="input-group">
-        {/* Increment Decrement start */}
-        {/* <IncrementDecrement/> */}
+    <div className="input-group">
+      <span className="input-group-text">
+        <button onClick={decrement}>-</button>{" "}
+      </span>
 
-        <span class="input-group-text">
-          <button onClick={decNum}>-</button>{" "}
-        </span>
+      <input
+        type="text"
+        value={count}
+        className="form-control"
+        aria-label="Amount (to the nearest dollar)"
+        readOnly
+      />
 
-        <input
-          type="text"
-          value={Number}
-          class="form-control"
-          aria-label="Amount (to the nearest dollar)"
-          readonly
-        />
-
-        <span class="input-group-text">
-          <button onClick={incNum}> +</button>
-        </span>
-
-        {/* Increment Decrement end */}
-      </div>
-    </>
+      <span className="input-group-text">
+        <button onClick={increment}>+</button>
+      </span>
+    </div>
   );
 };
+
 export default IncrementDecrement;

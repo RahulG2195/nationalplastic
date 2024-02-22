@@ -19,20 +19,19 @@ export async function GET(request) {
         }));
     }
 }// route.js
-
 export async function POST(request) {
-    console.log(request)
     try {
-        const { ProductName, productDiscription, WishlistImg, Price, originalPrice, discount } = await request.json();
-        const updateProducts = await query({
-            query: "INSERT INTO Wishlist (ProductName, productDiscription, WishlistImg, Price, originalPrice, discount) VALUES (?, ?, ?, ?, ?, ?)",
-            values: [ProductName, productDiscription, WishlistImg, Price, originalPrice, discount]
+        const { product_id, ProductName, productDiscription, WishlistImg, Price, originalPrice, discount } = await request.json();
+        const updateWishlist = await query({
+            query: "INSERT INTO Wishlist (product_id, ProductName, productDiscription, WishlistImg, Price, originalPrice, discount) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            values: [product_id, ProductName, productDiscription, WishlistImg, Price, originalPrice, discount]
         });
 
-        const result = updateProducts.affectedRows;
+        const result = updateWishlist.affectedRows;
         let message = result ? "success" : "error";
         
-        const Wishlist = {
+        const WishlistItem = {
+            product_id: product_id,
             ProductName: ProductName,
             productDiscription: productDiscription,
             WishlistImg: WishlistImg,
@@ -44,7 +43,7 @@ export async function POST(request) {
         return new Response(JSON.stringify({
             message: message,
             status: 200,
-            Wishlist: Wishlist
+            Wishlist: WishlistItem
         }));
 
     } catch (error) {
@@ -54,6 +53,7 @@ export async function POST(request) {
         }));
     }
 }
+
 
 
 // export async function PUT(request) {

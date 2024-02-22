@@ -6,6 +6,9 @@ import axios from "axios";
 import { DotLoader } from "react-spinners";
 import 'react-toastify/dist/ReactToastify.css';
 import { Bounce, toast } from 'react-toastify';
+import {  useDispatch, useSelector } from "react-redux";
+import store from "@/redux/store";
+import { addToCart } from "@/redux/reducer/cartSlice";
 
 
 
@@ -14,21 +17,6 @@ const PreChairsCards = () => {
   const notify = () => {
     // console.log("Toast notification triggered");
     toast.success('ADDED TO WISHLIST', {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-        });
-};
-
-const notifyinfo = () => {
-  // console.log("Toast notification triggered");
-  toast.info('ALREADY IN WISHLIST', {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -38,11 +26,28 @@ const notifyinfo = () => {
       progress: undefined,
       theme: "dark",
       transition: Bounce,
-      });
-};
+    });
+  };
+
+  const notifyinfo = () => {
+    // console.log("Toast notification triggered");
+    toast.info('ALREADY IN WISHLIST', {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+  };
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [wishlistItems, setWishlistItems] = useState([]);
+  const items = useSelector(state => state.cart.items);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetchData();
@@ -74,18 +79,17 @@ const notifyinfo = () => {
   };
 
 
-
-  const handleAddToWishlist = async (product_name, short_description, price, discount_price, discount, ChairImg) => {
+  const handleAddToWishlist = async (product_id,product_name, short_description, price, discount_price, discount, ChairImg) => {
     try {
       const isProductAlreadyAdded = wishlistItems.some(item => item.ProductName === product_name);
       if (isProductAlreadyAdded) {
-        // alert("This product is already in your wishlist.");
         notifyinfo();
 
         return;
       }
 
       await axios.post(`http://localhost:3000/api/Wishlist`, {
+        product_id:product_id,
         ProductName: product_name,
         productDiscription: short_description,
         Price: price,
@@ -99,36 +103,60 @@ const notifyinfo = () => {
       console.error("Error:", error);
     }
   };
+
+  // const handleAddToCart = async(product_name, short_description, price, discount_price, discount, ChairImg)
+  const handleMoveToCart = (product_id, product_name, short_description, price, discount_price, discount, ChairImg) => {
+    console.log("in handle cart", product_id);
+    dispatch(addToCart({
+      product_id: product_id,
+      product_name: product_name,
+      description: short_description,
+      price: price,
+      original_price: discount_price,
+      image_name: ChairImg
+    }));
+  };
   return (
 
     <div className="container mt-5">
       {isLoading ? (
         <center className="spinner">
-          <DotLoader color={"#36D7B7"} loading={isLoading} />
+          <DotLoader color={"#36D7B7"} loading={isLoading} /> 
         </center >
       ) : (
         <div className="row ">
           {products.map((product) => (
             <div key={product.product_id} className="PreCardSm col-6 col-sm-6 col-xs-4 col-md-6 col-lg-3">
-              <PreChairsCard
-                ChairImg={`/Assets/images/New-launches-1/${product.image_name}`}
-                id={product.product_id}
-                Title={product.product_name}
-                Discription={product.short_description}
-                Price={product.price}
-                orignalPrice={product.discount_price}
-                Discount={product.discount_percentage}
-                onaddToWishlist={() => handleAddToWishlist
-                  (
+                <PreChairsCard
+                  ChairImg={`/Assets/images/New-launches-1/${product.image_name}`}
+                  id={product.product_id}
+                  Title={product.product_name}
+                  Discription={product.short_description}
+                  Price={product.price}
+                  orignalPrice={product.discount_price}
+                  Discount={product.discount_percentage}
+                  onaddToWishlist={() => handleAddToWishlist
+                    (
+                      product.product_id,
+                      product.product_name,
+                      product.short_description,
+                      product.price,
+                      product.discount_price,
+                      product.discount_percentage,
+                      product.image_name
+                    )
+                  }
+                  onAddToCart={() => handleMoveToCart(
+                    product.product_id,
                     product.product_name,
                     product.short_description,
                     product.price,
                     product.discount_price,
                     product.discount_percentage,
                     product.image_name
-                  )
-                }
-              />
+                  )}
+                
+                />
             </div>
           ))}
         </div>

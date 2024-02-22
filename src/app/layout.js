@@ -8,6 +8,8 @@ import Footer from '@/Components/layouts/Footer';
 import './globals.css'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+import { Provider } from 'react-redux';
+import store from '@/redux/store';
 
 
 
@@ -32,10 +34,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Provider store={store}>
         <Header/>
         {children}
         <ToastContainer/>
         <Footer/>
+        </Provider>
       </body>
     </html>
   )

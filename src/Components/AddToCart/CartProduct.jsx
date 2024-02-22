@@ -1,7 +1,29 @@
 import Image from "next/image";
 import IncrementDecrement from "./IncrementDecrement";
-const CartProduct = ({ src, productName, productDesc, discountedPrice, productPrice }) => {
+import { useEffect, useState } from "react";
+// import { useDispatch } from "react-redux";
+// import axios from "axios";
 
+const CartProduct = ({ src, productName, productDesc, discountedPrice, productPrice, productId, onRemoveSuccess }) => {
+  const [initialCount, setInitialCount] = useState(1); // Set initial count to 1 by default
+
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    const isProductInCart = cartItems.some(item => item.productId === productId);
+    // console.log("this is item ", item.productId)
+    if (isProductInCart) {
+      setInitialCount(initialCount + 1);
+    }
+  }, [cartItems, productId]); 
+  const handleRemove = async () => {
+    try {
+      onRemoveSuccess(productId);
+    } catch (error) {
+      alert("Cannot delete");
+      console.log(error);
+    }
+  };
   return (
     <>
       <div className="col-md-2">
@@ -18,17 +40,16 @@ const CartProduct = ({ src, productName, productDesc, discountedPrice, productPr
       
       <div className="col-md-10 card-Quantity-section">
         <h6> {productName} </h6>
-        <h6> consetetur sadipscing elitr,</h6>
         <p>{productDesc}</p>
         <div className="CartQuantity">
           <p>Quantity</p>
           {/* Increment Decrement start */}
-          <IncrementDecrement />
+          <IncrementDecrement initialCount={initialCount}/>
           {/* Increment Decrement end */}
           <div className="productPrice">
-            <p>{discountedPrice}</p>
+            <p>{productPrice}</p>
             <p>
-              <del> {productPrice}</del>
+              <del> {discountedPrice}</del>
               <span>30% Off</span>
             </p>
           </div>
@@ -58,7 +79,7 @@ const CartProduct = ({ src, productName, productDesc, discountedPrice, productPr
             />
             <p>Save For Later</p>
           </div>
-          <div className="CouponApplied">
+          <div onClick={handleRemove} className="CouponApplied">
             <Image
               src="/Assets/images/AddTOCart/Icon-core-trash.png"
               classname="img-fluid d-block w-100"

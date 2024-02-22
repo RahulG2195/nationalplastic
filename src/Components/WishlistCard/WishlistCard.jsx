@@ -1,21 +1,32 @@
 import React from 'react';
 import './WishlistCard.css'
-import axios from 'axios';
+
 
 const WishlistCard = (props) => {
+    const handleMoveToCart = () => {
+        props.onAddToCart(
+            props.id,
+            props.Title,
+            props.Discription,
+            props.Price,
+            props.orignalPrice,
+            props.Discount,
+            props.ChairImg
+        );
+    };
     const handleOnClick = async () => {
         console.log(props.id);
         try {
-            // const response = await axios.delete('http://localhost:3000/api/Wishlist', );
-          
-                props.onDeleteSuccess(props.id);
-                // console.log(props.id);
-            
+
+            props.onDeleteSuccess(props.id);
+
         } catch (error) {
             alert("cant delete")
             console.log(error)
         }
+
     }
+
 
     return (
         <div className="wishlist-card pt-2">
@@ -34,7 +45,7 @@ const WishlistCard = (props) => {
                         <div className='text-danger small'>{props.discount}%</div>
                     </div>
                     <div className="wishlist-buttons">
-                        <button type="button" className="btn btn-danger moveTocartResp ms-1 me-3">
+                        <button type="button" className="btn btn-danger moveTocartResp ms-1 me-3" onClick={handleMoveToCart}>
                             MOVE TO CART
                         </button>
                         <button type="button" className="btn btn-outline-danger delete delResp " onClick={handleOnClick}>

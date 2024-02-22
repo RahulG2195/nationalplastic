@@ -4,11 +4,15 @@ import WishlistCard from '../WishlistCard/WishlistCard'
 import FooterRow from '../FooterRow/FooterRow';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '@/redux/reducer/cartSlice';
 
 const WishlistPage1 = () => {
 
 
     const [wishlistItems, setWishlistitems] = useState([])
+    const items = useSelector(state => state.cart.items);
+    const dispatch = useDispatch();
 
 
     useEffect(() => {
@@ -46,15 +50,28 @@ const WishlistPage1 = () => {
     // };
 
     const handleDeleteSuccess = async (WishlistId) => {
-       
+
 
         try {
             const response = await axios.delete(`http://localhost:3000/api/Wishlist`, { data: { WishlistId } });
-            setWishlistitems(prevItems => prevItems.filter(item =>item.WishlistId  !== WishlistId))
-        } 
+            setWishlistitems(prevItems => prevItems.filter(item => item.WishlistId !== WishlistId))
+        }
         catch (error) {
             console.error("Error:", error);
         }
+    };
+
+    const handleAddToCart = async (product_id, ProductName, short_description, price, discount_price, discount, ChairImg) => {
+        
+        dispatch(addToCart({
+            product_id: product_id,
+            product_name: ProductName,
+            description: short_description,
+            price: price,
+            original_price: discount_price,
+            image_name: ChairImg,
+            discount: discount
+        }));
     };
 
     return (
@@ -74,7 +91,7 @@ const WishlistPage1 = () => {
 
                                 <WishlistCard
                                     key={item.WishlistId}
-                                    id={item.WishlistId}
+                                    id={item.product_id}
                                     WishlistImg={`/Assets/images/New-launches-1/${item.WishlistImg}`}
                                     productName={item.ProductName}
                                     producDiscription={item.productDiscription}
@@ -83,6 +100,15 @@ const WishlistPage1 = () => {
                                     discount={item.discount}
                                     onDeleteSuccess={() => handleDeleteSuccess(item.WishlistId)
                                     }
+                                    onAddToCart={() => handleAddToCart(
+                                        item.product_id,
+                                        item.ProductName,
+                                        item.productDiscription,
+                                        item.Price,
+                                        item.originalPrice,
+                                        item.discount,
+                                        item.WishlistImg
+                                    )}
                                 />
                             ))}
 
