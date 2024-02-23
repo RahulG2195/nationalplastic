@@ -1,59 +1,95 @@
 // reducers/cartSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import 'react-toastify/dist/ReactToastify.css';
+import { Bounce, toast } from 'react-toastify';
+
+const notify = () => {
+  // console.log("Toast notification triggered");
+  toast.success('ADDED TO CART', {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+  });
+};
+
+const notifyinfo = () => {
+  // console.log("Toast notification triggered");
+  toast.info('ALREADY IN CART', {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+  });
+};
 
 export const cartSlice = createSlice({
   name: 'cart',
   initialState: {
     items: [],
+    initialCount: 1,
   },
 
+
   reducers: {
-    // addItemToCart: (state, action) => {
-      // const { product_id } = action.payload;
-      // const isItemInCart = state.items.some(item => item.product_id === product_id);
-      // if (isItemInCart) {
-      //   alert("Already in Cart");
-      // } else {
-      //   state.items.push(action.payload);
-      //   alert("Added")
-      // }
-    // },
-    
-    
+    setInitialCount: (state, action) => {
+      state.initialCount = action.payload;
+    },
+
+    addItemToCart: (state, action) => {
+      const { product_id } = action.payload;
+      const isItemInCart = state.items.some(item => item.product_id === product_id);
+      if (!isItemInCart) {
+        state.items.push(action.payload);
+        // alert("Added");
+      } else {
+        // console.log(initialState)
+        // console.log("suggested ONe"+state)
+        // console.log("counter "+initialState.initialCount)
+        // console.log("suggested two"+state.initialCount)
+        // console.log("increasing count", initialState.initialCount);
+      }
+    },
+
     removeItemFromCart: (state, action) => {
       state.items = state.items.filter(item => item.id !== action.payload);
     },
   },
 });
 
-export const { addItemToCart } = cartSlice.actions;
+export const { addItemToCart, setInitialCount } = cartSlice.actions;
 
-export const addToCart = (item) => async (dispatch) => {
-  const ispresent = () => {
-    if (condition) {
-      
-    }
+export const addToCart = (item) => async (dispatch, getState) => {
+  const { initialCount, items } = getState().cart; // Access state through the second parameter
 
+  const check = await axios.get('http://localhost:3000/api/Cart');
+  const isalreadycheck = check.data.mycart.find(items => items.product_id === item.product_id);
 
-  }
+  if (!isalreadycheck) {
     try {
       const response = await axios.post('http://localhost:3000/api/Cart', item);
-      dispatch(addItemToCart(item)); 
-      // console.log("here is data",data);
+      dispatch(addItemToCart(item));
+      notify();
     } catch (error) {
       console.error('Error adding to cart:', error);
     }
+  } else {
+    // alert("nono");
+    notifyinfo();
+    dispatch(setInitialCount(initialCount + 1)); // Dispatching the setInitialCount action with the updated count
+    console.log(initialCount);
+  }
 };
-  
-
-// export const removeFromCart = (id) => async (dispatch) => {
-//   try {
-//     await axios.delete(`/api/cart/remove/${id}`);
-//     dispatch(removeItemFromCart(id));
-//   } catch (error) {
-//     console.error('Error removing from cart:', error);
-//   }
-// };
 
 export default cartSlice.reducer;

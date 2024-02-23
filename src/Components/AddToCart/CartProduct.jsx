@@ -1,21 +1,53 @@
 import Image from "next/image";
 import IncrementDecrement from "./IncrementDecrement";
 import { useEffect, useState } from "react";
-// import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart,initialCount } from "@/redux/reducer/cartSlice";
 // import axios from "axios";
 
 const CartProduct = ({ src, productName, productDesc, discountedPrice, productPrice, productId, onRemoveSuccess }) => {
   const [initialCount, setInitialCount] = useState(1); // Set initial count to 1 by default
+  const handleIncrement = () => {
+    setCount(count + 1);
+  };
 
-  const [cartItems, setCartItems] = useState([]);
+  // const dispatch = useDispatch();
+  // const [cartItems, setCartItems] = useState([]);
 
-  useEffect(() => {
-    const isProductInCart = cartItems.some(item => item.productId === productId);
-    // console.log("this is item ", item.productId)
-    if (isProductInCart) {
-      setInitialCount(initialCount + 1);
-    }
-  }, [cartItems, productId]); 
+  // const cartInitialCount = useSelector(state => state.cart.initialCount);
+
+  // useEffect(() => {
+  //   // Update the initialCount state with the value from the Redux store
+  //   setInitialCount(cartInitialCount);
+  // }, [cartInitialCount]); // Run this effect whenever cartInitialCount changes
+
+  // useEffect(() => {
+  //   // const isProductInCart = cartItems.some(item => item.productId === productId);
+  //   // console.log("this is item ", item.productId)
+    
+  //   // if (isProductInCart) {
+  //   //   setInitialCount(initialCount + 1);
+  //   // }
+  // }, [cartItems, productId]); 
+  
+  // const handleAddToCart = async () => {
+  //   try {
+  //     dispatch(addToCart({ product_id: productId }, initialCount));
+  //   } catch (error) {
+  //     console.error('Error adding to cart:', error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   // Update the count from the Redux store
+  //   setInitialCount(initialCount);
+  //   // console.log("in cart is ",initialCount+1);
+  // }, [initialCount]);
+
+
+
+
+
+  
   const handleRemove = async () => {
     try {
       onRemoveSuccess(productId);
@@ -44,7 +76,7 @@ const CartProduct = ({ src, productName, productDesc, discountedPrice, productPr
         <div className="CartQuantity">
           <p>Quantity</p>
           {/* Increment Decrement start */}
-          <IncrementDecrement initialCount={initialCount}/>
+          <IncrementDecrement initialCount={initialCount} onIncrement={handleIncrement}/>
           {/* Increment Decrement end */}
           <div className="productPrice">
             <p>{productPrice}</p>

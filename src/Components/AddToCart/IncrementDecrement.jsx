@@ -1,11 +1,12 @@
 "use client";
 import { useState } from "react";
 
-const IncrementDecrement = ({ initialCount }) => {
+const IncrementDecrement = ({ initialCount,onIncrement  }) => {
   const [count, setCount] = useState(initialCount);
 
   const increment = () => {
     setCount(count + 1);
+    onIncrement();
   };
 
   const decrement = () => {

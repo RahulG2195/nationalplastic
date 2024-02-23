@@ -12,6 +12,7 @@ const WishlistCard = (props) => {
             props.orignalPrice,
             props.Discount,
             props.ChairImg
+           
         );
     };
     const handleOnClick = async () => {

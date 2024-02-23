@@ -46,7 +46,7 @@ const PreChairsCards = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [wishlistItems, setWishlistItems] = useState([]);
-  const items = useSelector(state => state.cart.items);
+  // const items = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
 
   useEffect(() => {

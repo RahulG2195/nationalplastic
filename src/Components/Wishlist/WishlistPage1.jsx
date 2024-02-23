@@ -72,6 +72,7 @@ const WishlistPage1 = () => {
             image_name: ChairImg,
             discount: discount
         }));
+        
     };
 
     return (

@@ -9,13 +9,22 @@ import axios from "axios";
 
 function AddToCart() {
   const [productDetailArr, setProductDetailArr] = useState([]);
+  const [totalCount, setTotalCount] = useState(0)
+  const [totalPrice,setTotalPrice] = useState(0)
+  console.log(totalPrice)
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:3000/api/Cart");
+        
         setProductDetailArr(response.data.mycart);
-        console.log(response.data);
+        setTotalCount(response.data.mycart.length);
+        const Prices = response.data.mycart.reduce((total, item) => total + Number(item.price), 0);
+        setTotalPrice(Prices);
+
+        console.log("here is total",totalPrice)
 
       } catch (error) {
         console.error("Error fetching data", error);
@@ -25,8 +34,9 @@ function AddToCart() {
     fetchData();
   }, []);
 
+
   const onRemoveSuccess = async (product_id) => {
-    console.log("wanted to remove",product_id)
+    console.log("wanted to remove", product_id)
     try {
       await axios.delete(`http://localhost:3000/api/Cart`, { data: { product_id } });
       setProductDetailArr(prevItems => prevItems.filter(item => item.product_id !== product_id))
@@ -56,7 +66,7 @@ function AddToCart() {
           <div className="col-sm-12 col-md-8 col-lg-8 col-xl-8">
             <div className="row my-cart">
               <div className="col-md-4">
-                <h5>My Cart (0)</h5>
+                <h5>My Cart ({totalCount})</h5>
               </div>
               <div className="col-md-8 search-pin">
                 <div className="LocationIconPin">
@@ -98,7 +108,7 @@ function AddToCart() {
                       productId={val.product_id}
                       productName={val.product_name}
                       productPrice={val.price}
-                      discountedPrice={val.orignal_price}
+                      discountedPrice={val.original_price}
                       productDesc={val.description}
                       onRemoveSuccess={() => onRemoveSuccess(val.product_id)
                       }

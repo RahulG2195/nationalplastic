@@ -22,41 +22,39 @@ export async function GET(request) {
 
 // route.js
 
+
 export async function POST(request) {
+    console.log(request)
     try {
         const { product_id, quantity, product_name, description, price, original_price, image_name } = await request.json();
         
-        // Check if the product is already in the cart
-        const checkCartQuery = await query({
-            query: "SELECT * FROM mycart WHERE product_id = ?",
-            values: [product_id]
-        });
+        // Set default values to null for variables that might be undefined
+        const productId = product_id !== undefined ? product_id : null;
+        const quantityValue = quantity !== undefined ? quantity : null;
+        const productName = product_name !== undefined ? product_name : null;
+        const productDescription = description !== undefined ? description : null;
+        const productPrice = price !== undefined ? price : null;
+        const originalPrice = original_price !== undefined ? original_price : null;
+        const imageName = image_name !== undefined ? image_name : null;
 
-        if (checkCartQuery.length > 0) {
-            // Product already exists in the cart, return an error response
-            return new Response(JSON.stringify({
-                status: 400,
-                message: "Product already exists in the cart"
-            }));
-        }
-
-        // Product is not in the cart, proceed to insert it
         const updateProducts = await query({
             query: "INSERT INTO mycart (product_id, quantity, product_name, description, price, original_price, image_name) VALUES (?, ?, ?, ?, ?, ?, ?)",
-            values: [product_id, quantity, product_name, description, price, original_price, image_name]
+            values: [productId, quantityValue, productName, productDescription, productPrice, originalPrice, imageName]
         });
-
-        const result = updateProducts.affectedRows;
+        console.log(result)
+        const result = updateProducts.affectedRows; 
+        console.log(result)
+        // Corrected variable name
         let message = result ? "success" : "error";
 
         const mycart = {
-            product_id: product_id,
-            image_name: image_name,
-            product_name: product_name,
-            description: description,
-            price: price,
-            original_price: original_price,
-            quantity: quantity
+            product_id: productId,
+            image_name: imageName,
+            product_name: productName,
+            description: productDescription,
+            price: productPrice,
+            original_price: originalPrice,
+            quantity: quantityValue
         };
 
         return new Response(JSON.stringify({
@@ -72,7 +70,6 @@ export async function POST(request) {
         }));
     }
 }
-
 
 export async function DELETE(request) {
     console.log("first")
