@@ -11,6 +11,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Provider } from 'react-redux';
 import store from '@/redux/store';
 
+import { BrowserRouter } from 'react-router-dom';
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -34,13 +35,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+      <BrowserRouter>
         <Provider store={store}>
-        <Header/>
-        {children}
-        <ToastContainer/>
-        <Footer/>
+            <Header />
+            {children}
+            <ToastContainer />
+            <Footer />
         </Provider>
-      </body>
-    </html>
+      </BrowserRouter>
+    </body>
+    </html >
   )
 }
