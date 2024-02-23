@@ -1,3 +1,4 @@
+
 import React from "react";
 import PreChairsCard from "../preChairsCard/preChairsCard";
 import './PreChairCard.css'
