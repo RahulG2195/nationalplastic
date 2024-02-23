@@ -119,7 +119,9 @@ function AddToCart() {
             </div>
           </div>
           <div className="col-sm-12 col-md-4 col-lg-4 col-xl-4 place-order">
-            <PriceDetailsCard />
+            <PriceDetailsCard
+            cartPrice={totalPrice}
+            />
           </div>
         </div>
       </div>

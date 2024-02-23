@@ -17,7 +17,7 @@ const nextConfig = {
     //     'MYSQL_DATABASE': 'nationalplastic_db',
     //     'MYSQL_USER': 'root',
     //     'MYSQL_PASSWORD': 'W7301@aishwarya#',
-    // }
+    }
 }
 
 // Reference number, Number of Bedrooms, Number of Bathrooms, Numberof Employees,Number of Owners,Number of Shares - not reflecting in export
