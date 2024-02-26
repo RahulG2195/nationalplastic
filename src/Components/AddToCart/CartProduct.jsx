@@ -8,7 +8,7 @@ import { addToCart,initialCount } from "@/redux/reducer/cartSlice";
 const CartProduct = ({ src, productName, productDesc, discountedPrice, productPrice, productId, onRemoveSuccess }) => {
   const [initialCount, setInitialCount] = useState(1); // Set initial count to 1 by default
   const handleIncrement = () => {
-    setCount(count + 1);
+    setInitialCount(initialCount + 1);
   };
 
   // const dispatch = useDispatch();
@@ -44,10 +44,6 @@ const CartProduct = ({ src, productName, productDesc, discountedPrice, productPr
   // }, [initialCount]);
 
 
-
-
-
-  
   const handleRemove = async () => {
     try {
       onRemoveSuccess(productId);
