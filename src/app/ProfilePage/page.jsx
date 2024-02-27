@@ -44,8 +44,8 @@ function ProfilePage() {
                 </div>
                 <div className="profile-detail">
                 {/* <h5>{data.email}</h5> */}
-                  <p>Lorem ipsum.{data.email}</p>
-                  <button onClick={handleLogout}>Logout</button>
+                  <p className="fw-bold">{data.email}</p>
+                  {/* <button onClick={handleLogout}>Logout</button> */}
                 </div>
               </div>
               <hr />
@@ -101,7 +101,7 @@ function ProfilePage() {
                 </a>
               </div>
 
-              <div className="EditAccount">
+              <div onClick={handleLogout}  className="EditAccount">
                 <div>
                   <i className="fa fa-sign-out" aria-hidden="true"></i>
                 </div>

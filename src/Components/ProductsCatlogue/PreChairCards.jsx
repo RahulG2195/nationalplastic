@@ -105,16 +105,12 @@ const PreChairsCards = () => {
   };
 
   // const handleAddToCart = async(product_name, short_description, price, discount_price, discount, ChairImg)
-  const handleMoveToCart = (product_id, product_name, short_description, price, discount_price, discount, ChairImg) => {
-    console.log("in handle cart", product_id);
+  const handleMoveToCart = (product_id) => {
+    // console.log("in handle cart", product_id);
     dispatch(addToCart({
       product_id: product_id,
-      product_name: product_name,
-      description: short_description,
-      price: price,
-      original_price: discount_price,
-      image_name: ChairImg
     }));
+    console.log("this is product id in card ",product_id)
   };
   return (
 
@@ -135,6 +131,7 @@ const PreChairsCards = () => {
                   Price={product.price}
                   orignalPrice={product.discount_price}
                   Discount={product.discount_percentage}
+                  
                   onaddToWishlist={() => handleAddToWishlist
                     (
                       product.product_id,
@@ -148,12 +145,6 @@ const PreChairsCards = () => {
                   }
                   onAddToCart={() => handleMoveToCart(
                     product.product_id,
-                    product.product_name,
-                    product.short_description,
-                    product.price,
-                    product.discount_price,
-                    product.discount_percentage,
-                    product.image_name
                   )}
                 
                 />

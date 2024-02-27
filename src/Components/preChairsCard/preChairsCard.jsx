@@ -7,7 +7,7 @@ import './PreChairsCard.css'
 const PreChairsCard = (props) => {
 
    const handleAddToCart = () =>{
-        props.onAddToCart(props.id,props.Title, props.Discription, props.Price, props.orignalPrice, props.Discount, props.ChairImg)
+        props.onAddToCart(props.id)
     }
 
     const handleAddWishlist = () => {
@@ -50,9 +50,6 @@ const PreChairsCard = (props) => {
                     </div>
                 </div>
             </div>
-
-
-
         </>
     )
 }

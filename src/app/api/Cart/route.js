@@ -1,16 +1,27 @@
 import { query } from "@/lib/db";
-import { alignProperty } from "@mui/material/styles/cssUtils";
+
 
 export async function GET(request) {
     try {
+        // Get the product IDs from mycart table
         const mycart = await query({
-            query: "SELECT * FROM mycart",
+            query: "SELECT product_id FROM mycart",
             values: [],
         });
 
+        // Extract product IDs from the result
+        const productIds = mycart.map(row => row.product_id);
+
+        // Fetch product details for the retrieved product IDs
+        const products = await query({
+            query: `SELECT * FROM products WHERE product_id IN (${productIds.join(',')})`,
+            values: [],
+        });
+        console.log("here is product id in get ",productIds)
+
         return new Response(JSON.stringify({
             status: 200,
-            mycart: mycart
+            products: products
         }));
     } catch (error) {
         return new Response(JSON.stringify({
@@ -18,58 +29,37 @@ export async function GET(request) {
             message: "Internal Server Error"
         }));
     }
-}// route.js
-
-// route.js
+}
 
 
 export async function POST(request) {
-    console.log(request)
     try {
-        const { product_id, quantity, product_name, description, price, original_price, image_name } = await request.json();
-        
-        // Set default values to null for variables that might be undefined
-        const productId = product_id !== undefined ? product_id : null;
-        const quantityValue = quantity !== undefined ? quantity : null;
-        const productName = product_name !== undefined ? product_name : null;
-        const productDescription = description !== undefined ? description : null;
-        const productPrice = price !== undefined ? price : null;
-        const originalPrice = original_price !== undefined ? original_price : null;
-        const imageName = image_name !== undefined ? image_name : null;
+        const { product_id } = await request.json();
 
-        const updateProducts = await query({
-            query: "INSERT INTO mycart (product_id, quantity, product_name, description, price, original_price, image_name) VALUES (?, ?, ?, ?, ?, ?, ?)",
-            values: [productId, quantityValue, productName, productDescription, productPrice, originalPrice, imageName]
+        const insertResult = await query({
+            query: "INSERT INTO mycart (product_id) VALUES (?)",
+            values: [product_id]
         });
-        console.log(result)
-        const result = updateProducts.affectedRows; 
-        console.log(result)
-        // Corrected variable name
-        let message = result ? "success" : "error";
 
-        const mycart = {
-            product_id: productId,
-            image_name: imageName,
-            product_name: productName,
-            description: productDescription,
-            price: productPrice,
-            original_price: originalPrice,
-            quantity: quantityValue
-        };
-
-        return new Response(JSON.stringify({
-            message: message,
-            status: 200,
-            mycart: mycart
-        }));
-
+        if (insertResult.affectedRows === 1) {
+            return new Response(JSON.stringify({
+                status: 200,
+                message: "Product added to cart successfully"
+            }));
+        } else {
+            return new Response(JSON.stringify({
+                status: 500,
+                message: "Failed to add product to cart"
+            }));
+        }
     } catch (error) {
         return new Response(JSON.stringify({
             status: 500,
-            data: error.message
+            message: "Internal Server Error"
         }));
     }
 }
+
 
 export async function DELETE(request) {
     console.log("first")
@@ -93,6 +83,6 @@ export async function DELETE(request) {
             data: error.message
         }));
     }
-    console.log("at ur desire place ")
+ 
 }
 

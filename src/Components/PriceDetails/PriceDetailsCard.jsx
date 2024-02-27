@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import './PriceDetailsCard.css';
 
-const PriceDetailsCard = ({ cartPrice,totalDiscount,totalPay }) => {
+const PriceDetailsCard = ({ itemCount, cartPrice, totalDiscount, totalPay, InstallationCharges }) => {
   return (
     <>
       <div className="PriceDetail">
-        <div className="fw-medium">Price Detail (2 items)</div>
+        <div className="fw-medium">Price Detail ({itemCount ? itemCount : "0"} items)</div>
 
         <div className="mt-4">
           <div className={`d-flex justify-content-between mt-1 fw-semibold`}>
@@ -22,14 +22,14 @@ const PriceDetailsCard = ({ cartPrice,totalDiscount,totalPay }) => {
           </div>
           <div className={`d-flex justify-content-between mt-1 fw-semibold`}>
             <div className="text-secondary">Installation Charge</div>
-            <div>00,000</div>
+            <div>Rs {InstallationCharges ? InstallationCharges : "0000"}</div>
           </div>
           <div className="border-bottom border-secondary mt-2"></div>
         </div>
 
         <div className="d-flex justify-content-between mt-3">
           <div>Total Payable</div>
-          <div className="medium">Rs {totalPay?totalPay:"0000"}</div>
+          <div className="medium">Rs {totalPay ? totalPay : "0000"}</div>
         </div>
         <div className="small my-2 text-success">
           Congratulations, you've just saved RS {totalDiscount ? totalDiscount : "0000"} on your order
