@@ -9,22 +9,34 @@ import axios from "axios";
 
 function AddToCart() {
   const [productDetailArr, setProductDetailArr] = useState([]);
-  const [totalCount, setTotalCount] = useState(0)
-  const [totalPrice,setTotalPrice] = useState(0)
-  console.log(totalPrice)
+  const [totalCount, setTotalCount] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [discount, setDiscount] = useState(0);
+  const [totalPayble, setTotalPayble] = useState(0);
+  console.log("this is total", totalPayble)
+
 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:3000/api/Cart");
-        
         setProductDetailArr(response.data.mycart);
         setTotalCount(response.data.mycart.length);
+
         const Prices = response.data.mycart.reduce((total, item) => total + Number(item.price), 0);
         setTotalPrice(Prices);
 
-        console.log("here is total",totalPrice)
+        const discounts = response.data.mycart.reduce((total, item) => total + Number(item.original_price), 0);
+        setDiscount(discounts);
+
+        const totalamount = response.data.mycart.reduce((total, item) => {
+          const Installation = Number(item.InstallationCharges) || 0;
+          const price = Number(item.price) || 0;
+          return total + Installation + price;
+        }, 0);
+        setTotalPayble(totalamount);
+
 
       } catch (error) {
         console.error("Error fetching data", error);
@@ -32,7 +44,26 @@ function AddToCart() {
     };
 
     fetchData();
-  }, []);
+  }, [totalPrice]);
+
+  const handleCartChange = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/api/Cart");
+      const cartData = response.data.mycart;
+      const prices = cartData.reduce((total, item) => total + Number(item.price), 0);
+      setTotalPrice(prices);
+
+      const discounts = response.data.mycart.reduce((total, item) => total + Number(item.original_price), 0);
+      setDiscount(discounts);
+
+      const totalammount = response.data.mycart.reduce((total, item) => total + Number(item.original_price + item. InstallationCharges ), 0);
+      setTotalPayble(totalammount)
+
+    } catch (error) {
+      console.error("Error fetching data", error);
+    }
+  };
+
 
 
   const onRemoveSuccess = async (product_id) => {
@@ -40,6 +71,8 @@ function AddToCart() {
     try {
       await axios.delete(`http://localhost:3000/api/Cart`, { data: { product_id } });
       setProductDetailArr(prevItems => prevItems.filter(item => item.product_id !== product_id))
+
+      handleCartChange();
 
     } catch (error) {
       console.error("Error removing item:", error);
@@ -120,7 +153,9 @@ function AddToCart() {
           </div>
           <div className="col-sm-12 col-md-4 col-lg-4 col-xl-4 place-order">
             <PriceDetailsCard
-            cartPrice={totalPrice}
+              cartPrice={totalPrice}
+              totalDiscount={discount}
+              totalPay={totalPayble}
             />
           </div>
         </div>
