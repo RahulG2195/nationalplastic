@@ -46,53 +46,53 @@ export async function POST(request) {
     }
 }
 
-export async function PUT(request) {
-    try {
-        const { id, product_name } = await request.json();
-        const updateProducts = await query({
-            query: "UPDATE products SET product_name = ? WHERE id = ?",
-            values: [product_name, id],
-        });
-        const result = updateProducts.affectedRows;
-        let message = result ? "success" : "error";
-        const product = {
-            id: id,
-            product_name: product_name,
-        };
-        return new Response(JSON.stringify({
-            message: message,
-            status: 200,
-            product: product
-        }));
-    } catch (error) {
-        return new Response(JSON.stringify({
-            status: 500,
-            data: error.message
-        }));
-    }
-}
+// export async function PUT(request) {
+//     try {
+//         const { id, product_name } = await request.json();
+//         const updateProducts = await query({
+//             query: "UPDATE products SET product_name = ? WHERE id = ?",
+//             values: [product_name, id],
+//         });
+//         const result = updateProducts.affectedRows;
+//         let message = result ? "success" : "error";
+//         const product = {
+//             id: id,
+//             product_name: product_name,
+//         };
+//         return new Response(JSON.stringify({
+//             message: message,
+//             status: 200,
+//             product: product
+//         }));
+//     } catch (error) {
+//         return new Response(JSON.stringify({
+//             status: 500,
+//             data: error.message
+//         }));
+//     }
+// }
 
-export async function DELETE(request) {
-    try {
-        const { id } = await request.json();
-        const deleteProducts = await query({
-            query: "DELETE FROM products WHERE id = ?",
-            values: [id],
-        });
-        const result = deleteProducts.affectedRows;
-        let message = result ? "success" : "error";
-        const product = {
-            id: id,
-        };
-        return new Response(JSON.stringify({
-            message: message,
-            status: 200,
-            product: product
-        }));
-    } catch (error) {
-        return new Response(JSON.stringify({
-            status: 500,
-            data: error.message
-        }));
-    }
-}
+// export async function DELETE(request) {
+//     try {
+//         const { id } = await request.json();
+//         const deleteProducts = await query({
+//             query: "DELETE FROM products WHERE id = ?",
+//             values: [id],
+//         });
+//         const result = deleteProducts.affectedRows;
+//         let message = result ? "success" : "error";
+//         const product = {
+//             id: id,
+//         };
+//         return new Response(JSON.stringify({
+//             message: message,
+//             status: 200,
+//             product: product
+//         }));
+//     } catch (error) {
+//         return new Response(JSON.stringify({
+//             status: 500,
+//             data: error.message
+//         }));
+//     }
+// }

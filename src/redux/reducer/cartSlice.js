@@ -74,16 +74,19 @@ export const addToCart = (item) => async (dispatch, getState) => {
   const { initialCount, items } = getState().cart; // Access state through the second parameter
 
   const check = await axios.get('http://localhost:3000/api/Cart');
-  const isalreadycheck = check.data.mycart.find(items => items.product_id === item.product_id);
+  const isCartEmpty = !check.data.products || check.data.products.length === 0;
+  const isAlreadyInCart = !isCartEmpty && check.data.products.some(cartItem => cartItem.product_id === item.product_id);
 
-  if (!isalreadycheck) {
-    try {
-      const response = await axios.post('http://localhost:3000/api/Cart', item);
-      dispatch(addItemToCart(item));
-      notify();
-    } catch (error) {
-      console.error('Error adding to cart:', error);
-    }
+
+if (isCartEmpty || !isAlreadyInCart) {
+  try {
+    const response = await axios.post('http://localhost:3000/api/Cart', item);
+    dispatch(addItemToCart(item));
+    console.log(item, "this are items ");
+    notify();
+  } catch (error) {
+    console.error('Error adding to cart:', error);
+  }
   } else {
     // alert("nono");
     notifyinfo();
