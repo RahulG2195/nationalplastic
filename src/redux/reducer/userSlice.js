@@ -50,7 +50,7 @@ const authSlice = createSlice({
 
       // Update localStorage and state using useEffect for client-side synchronization
       
-        localStorage.setItem("data", JSON.stringify(action.meta.arg));
+        localStorage.setItem("userData", JSON.stringify(action.meta.arg));
         localStorage.setItem("isLoggedIn", true);
         state.isLoggedIn = true;
         state.userData = action.meta.arg;

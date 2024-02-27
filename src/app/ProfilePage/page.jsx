@@ -3,14 +3,29 @@ import FooterRow from "@/Components/FooterRow/FooterRow";
 import "../../styles/profilepage.css";
 import Wishlist from "../Wishlist/page";
 import { useEffect,useState } from "react";
-
+import { toast } from "react-hot-toast";
 function ProfilePage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [data, setData] = useState({});
+  async function handleLogout(e) {
+    e.preventDefault();
+    localStorage.clear();
+    // state.data = {};
+    // state.isLoggedIn = false;
+    toast.success("Logged out", {
+      position: "top", // Adjust position as needed
+     // Apply custom styling
+      // More options: https://react-hot-toast.com/api/toast
+    });
+    const isLoggedIn = false;
+    const storedData =  {};
 
+    setIsLoggedIn(isLoggedIn);
+    setData(storedData);
+  }
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? true : false;
-    const storedData = JSON.parse(localStorage.getItem("data")) || {};
+    const storedData = JSON.parse(localStorage.getItem("userData")) || {};
     console.log("storedData"+storedData);
     console.log(JSON.stringify(storedData));
 
@@ -30,6 +45,7 @@ function ProfilePage() {
                 <div className="profile-detail">
                 {/* <h5>{data.email}</h5> */}
                   <p>Lorem ipsum.{data.email}</p>
+                  <button onClick={handleLogout}>Logout</button>
                 </div>
               </div>
               <hr />
