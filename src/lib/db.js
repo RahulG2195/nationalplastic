@@ -15,6 +15,7 @@ try{
     return results;
 }
 catch(error){
+        console.log("error in connecting Database: " + error)
 throw Error(error.message);
 return {error};
 }

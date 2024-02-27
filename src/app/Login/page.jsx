@@ -7,8 +7,10 @@ import Image from "next/image";
 import { useRouter } from 'next/navigation'
 import "../../styles/profilepage.css";
 import { useEffect } from "react";
-
-function Login() {
+import { useDispatch } from 'react-redux';
+import {loginSlice}  from '@/redux/reducer/userSlice'
+ function Login() {
+  const   dispatch = useDispatch();
   const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
@@ -29,7 +31,7 @@ function Login() {
     setShowPassword((prevState) => !prevState);
   };
 
-  const handleSubmit = async (event) => {
+  const  handleSubmit = async (event) => {
     event.preventDefault();
 
     // Basic form validation
@@ -39,26 +41,41 @@ function Login() {
     }
 
     try {
-      const { data } = await axios.get(`http://localhost:3000/api/Users`);
-      const existingEmails = data.map((user) => user.Email);
-      const existingpassword = data.map((user) => user.Password);
-      // console.log("existingEmails=" + existingEmails);
-      // console.log("formData.email=" + formData.email);
-      if (existingEmails.includes(formData.email)) {
-        if (existingpassword.includes(formData.password)) {
-          // alert("Login successful");
-          // navigate('/About');
+      //Will be redirecting it to the userSlice
+      console.log("Please enterthe userSlice"+formData.email+" and userSlice"+formData.password   )
+      console.log(formData)
+      console.log("formData"+JSON.stringify(formData));
+      const data2 = "DInesh";
+      // const res = await axios.post(`http://localhost:3000/api/Users`,formData);
+      // const res = await axios.put(`http://localhost:3000/api/Users`,formData);
+      // console.log("DATA (PAGE)after successful login000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
+      // console.log("response  PAGE Data-="+res);
+      // console.log("response PAGE Data in json format"+JSON.stringify(res.data.email));
+
+      const response = await dispatch(loginSlice(formData));
+       console.log("response after waiting for  page login");
+      console.log(response);
+      
+      // const { data } = await axios.post(`http://localhost:3000/api/Users`);
+      // const existingEmails = data.map((user) => user.Email);
+      // const existingpassword = data.map((user) => user.Password);
+      // // console.log("existingEmails=" + existingEmails);
+      // // console.log("formData.email=" + formData.email);
+      // if (existingEmails.includes(formData.email)) {
+      //   if (existingpassword.includes(formData.password)) {
+      //     // alert("Login successful");
+      //     // navigate('/About');
           router.push('/'); 
           // router.push({
           //   pathname: '/',
           //   query: { email: formData.email }
           // });
-        } else {
-          alert("Incorrect Password");
-        }
-      } else {
-        alert("This Email is not registred");
-      }
+      //   } else {
+      //     alert("Incorrect Password");
+      //   }
+      // } else {
+      //   alert("This Email is not registred");
+      // }
     } catch (error) {
       console.error("Error during login:", error);
       setErrorMessage("An error occurred during login. Please try again.");
