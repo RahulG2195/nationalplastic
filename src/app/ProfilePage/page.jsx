@@ -1,8 +1,22 @@
-"use state";
+"use client";
 import FooterRow from "@/Components/FooterRow/FooterRow";
 import "../../styles/profilepage.css";
 import Wishlist from "../Wishlist/page";
+import { useEffect,useState } from "react";
+
 function ProfilePage() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? true : false;
+    const storedData = JSON.parse(localStorage.getItem("data")) || {};
+    console.log("storedData"+storedData);
+    console.log(JSON.stringify(storedData));
+
+    setIsLoggedIn(isLoggedIn);
+    setData(storedData);
+  }, []);
   return (
     <>
       <div className="container profile-page-container">
@@ -14,8 +28,8 @@ function ProfilePage() {
                   <i className="fa fa-user-circle" aria-hidden="true"></i>
                 </div>
                 <div className="profile-detail">
-                  <h5>Hello</h5>
-                  <p>Lorem ipsum.</p>
+                {/* <h5>{data.email}</h5> */}
+                  <p>Lorem ipsum.{data.email}</p>
                 </div>
               </div>
               <hr />
