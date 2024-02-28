@@ -1,24 +1,29 @@
 "use client"
 import Link from 'next/link'
 import './PreChairsCard.css'
-
-
+import { useEffect } from 'react'
 
 const PreChairsCard = (props) => {
 
-   const handleAddToCart = () =>{
+    const setid = () => {
+        localStorage.setItem('myId', props.id);
+    };
+
+    const handleAddToCart = () => {
         props.onAddToCart(props.id)
     }
 
     const handleAddWishlist = () => {
-        props.onaddToWishlist(props.id,props.Title, props.Discription, props.Price, props.orignalPrice, props.Discount, props.ChairImg)
+        props.onaddToWishlist(props.id, props.Title, props.Discription, props.Price, props.orignalPrice, props.Discount, props.ChairImg)
     }
 
     return (
         <>
 
             <div className='preCont cards mt-3 p-1 position-relative  my-4 '>
-                <Link href="/ProductDetail">
+                <Link onClick={setid} href={`/ProductDetail`}>
+                {/* <Link href={`/ProductDetail:id=${props.id}`}> */}
+
                     <div className='card-header'>
                         <img src={props.ChairImg} className="card-img-top" alt="..." />
                     </div>

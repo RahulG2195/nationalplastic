@@ -11,7 +11,9 @@ import 'swiper/css/thumbs';
 import './productDetSliderstyles.css';
 
 
-const ProductDetailSlider = () => {
+const ProductDetailSlider = (imageurl) => {
+
+    const getimageurl = imageurl.imageurl
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
     return (
@@ -28,18 +30,18 @@ const ProductDetailSlider = () => {
                 className="mySwiper2 topSliderRes"
             >
                 <SwiperSlide>
-                    <img src="/Assets/images/Sub-category-prodcut/Sub-category-prodcut.png" />
+                    <img src={`/Assets/images/New-launches-1/${getimageurl}`} alt="Product" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                    <img src={`/Assets/images/New-launches-1/${getimageurl}`} alt="Product" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                    <img src={`/Assets/images/New-launches-1/${getimageurl}`} alt="Product" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                    <img src={`/Assets/images/New-launches-1/${getimageurl}`} alt="Product" />
                 </SwiperSlide>
-            
+
             </Swiper>
 
             <Swiper
@@ -53,18 +55,18 @@ const ProductDetailSlider = () => {
                 className="mySwiper mt-5"
             >
                 <SwiperSlide>
-                    <img src="/Assets/images/Sub-category-prodcut/Sub-category-prodcut.png" />
+                    <img src={`/Assets/images/New-launches-1/${getimageurl}`} alt="Product" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src="/Assets/images/karnival-chair-white-bg/karnival-chair-white-bg.png" />
+                    <img src={`/Assets/images/New-launches-1/${getimageurl}`} alt="Product" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                    <img src={`/Assets/images/New-launches-1/${getimageurl}`} alt="Product" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                    <img src={`/Assets/images/New-launches-1/${getimageurl}`} alt="Product" />
                 </SwiperSlide>
-               
+
             </Swiper>
         </>
     )

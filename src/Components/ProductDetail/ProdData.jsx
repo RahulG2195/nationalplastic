@@ -1,3 +1,5 @@
+
+"use client"
 import Link from "next/link";
 import "../../styles/prod_detail.css";
 import Image from "next/image";
@@ -9,35 +11,75 @@ import CustomerReview from "./CustomerReview/CustomerReview";
 import Faqs from "../FAQs/Faqs";
 import FooterRow from "../FooterRow/FooterRow";
 import TabContent from "./TabContent/TabContent";
+import { useEffect, useState } from "react";
+import axios from "axios";
 // import RecentlyViewed from "../ProductsCatlogue/RecentlyViewed";
 
+
+
 function ProdData() {
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+
+  useEffect(() => {
+
+    const storedId = localStorage.getItem('myId');
+    console.log("this is store id ", storedId)
+
+    const fetchData = async () => {
+
+      try {
+        const response = await axios.get("http://localhost:3000/api/Products");
+        const filteredData = response.data.products.filter(item => item.product_id == storedId);
+        console.log("Product name =", filteredData);
+        setData(filteredData);
+        setIsLoading(false);
+      } catch (error) {
+        // alert("Error fetching data", error)
+      }
+    };
+
+
+    fetchData();
+
+  }, [])
+
+  const name = data.length > 0 ? data[0].product_name : null;
+  const price = data.length > 0 ? data[0].price : null;
+  const orignalPrice = data.length > 0 ? data[0].discount_price : null;
+  const image = data.length > 0 ? data[0].image_name : null;
+  const saving = price - orignalPrice;
   return (
     <>
       <div className="px-4">
         <div className="heading-section">{/* <h2>Product Details</h2> */}</div>
         <div className="row">
           <div className="col-md-6">
-            <ProductDetailSlider />
+            <ProductDetailSlider
+
+              imageurl={image}
+
+            />
           </div>
 
           <div className="col-md-6">
             <div className="product-dtl">
               <div className="product-info">
                 <div className="product-name text-center">
-                  <h2>Karnival Chair</h2>
+                  <h2>{name} CHAIR</h2>
                 </div>
 
                 <div className="reviews-counter d-flex flex-wrap gap-2">
                   <div className="mrp">
                     <h6>
-                      <strong>MRP ₹0000</strong>
+                      <strong>MRP ₹{price}</strong>
                     </h6>
-                    <del> ₹0000</del>
+                    <del> ₹{orignalPrice}</del>
                   </div>
 
                   <div className="d-flex flex-wrap align-items-center">
-                    <div className="discount discRes"><p>Save <span>₹</span> 600</p></div>
+                    <div className="discount discRes"><p>Save <span>₹</span> {saving}</p></div>
                     <div className="inc small"><small>(incl. of all taxes)</small></div>
                   </div>
 
@@ -143,9 +185,7 @@ function ProdData() {
 
         <MoreProduct />
 
-        <div className="listTabContent">
-          <TabContent />
-        </div>
+        
       </div>
 
 

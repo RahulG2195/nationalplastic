@@ -10,8 +10,8 @@ import BottomCTABanner from "@/Components/ProductsCatlogue/BottomCTABanner";
 const ProductCatlogue = () => {
   return (
     <>
-      <CatlogueBanner />
-      <TopPics />
+      {/* <CatlogueBanner /> */}
+      {/* <TopPics /> */}
       <PremiumChairs />
       <PreChairsCards />
       <BoughtTogether />

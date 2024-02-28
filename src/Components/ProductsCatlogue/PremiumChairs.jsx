@@ -20,36 +20,40 @@ const PremiumChairs = () => {
                         <div className='text-body-secondary fw-semibold'>FILTER BY</div>
                         <div className="d-flex flex-wrap gap-3 mt-2">
                             <div className="dropdown mt-2 arrow">
-                                <label htmlFor='Date' className='darkBlue fw-semibold dropdownbuttonResp' >
+                                {/* <label htmlFor='Date' className='darkBlue fw-semibold dropdownbuttonResp' >
                                     Price:
-                                </label>
-                                <select id='Date' name='Date' className="form-control border-primary darkBlue fw-semibold dropdownbuttonResp" >
+                                </label> */}
+                                <select id='Price' name='Price' className="form-control border-primary darkBlue fw-semibold dropdownbuttonResp" >
+                                    <option>Price</option>
                                     <option>Low to high</option>
                                     <option>High to low</option>
                                     <option>default</option>
                                 </select>
                             </div>
                             <div className="dropdown mt-2 arrow">
-                                <label htmlFor='Date' className='darkBlue fw-semibold dropdownbuttonResp' >
+                                {/* <label htmlFor='Date' className='darkBlue fw-semibold dropdownbuttonResp' >
                                     Arm Type:
-                                </label>
-                                <select id='Date' name='Date' className="form-control border-primary darkBlue fw-semibold dropdownbuttonResp" >
+                                </label> */}
+                                <select id='Arm_Type' name='Arm_Type' className="form-control border-primary darkBlue fw-semibold dropdownbuttonResp" >
+                                    <option> Arm type</option>
                                     <option>new to old </option>
                                     <option>old to new</option>
                                     <option>default</option>
                                 </select>
                             </div>
                             <div className="dropdown mt-2 arrow">
-                                <label htmlFor='Date' className='darkBlue fw-semibold dropdownbuttonResp' >
+                                {/* <label htmlFor='Date' className='darkBlue fw-semibold dropdownbuttonResp' >
                                     Color:
-                                </label>
+                                </label> */}
                                 <select id='Date' name='Date' className="form-control border-primary darkBlue fw-semibold dropdownbuttonResp" >
+                                    <option> Color </option>
+                                    <option> Black </option>
                                     <option> Black </option>
                                     <option>Blue</option>
                                     <option>Red</option>
                                 </select>
                             </div>
-                            <div className="dropdown mt-2 arrow">
+                            {/* <div className="dropdown mt-2 arrow">
                                 <label htmlFor='Date' className='darkBlue fw-semibold dropdownbuttonResp' >
                                     Discount:
                                 </label>
@@ -58,12 +62,12 @@ const PremiumChairs = () => {
                                     <option>old to new</option>
                                     <option>default</option>
                                 </select>
-                            </div>
+                            </div> */}
 
                         </div>
                     </div>
 
-                    <div>
+                    {/* <div>
                         <div className='text-body-secondary fw-semibold'>SORT BY</div>
                         <div className="dropdown mt-2 arrow">
                             <label htmlFor='Date' className='darkBlue fw-semibold dropdownbuttonResp' >
@@ -76,7 +80,7 @@ const PremiumChairs = () => {
                             </select>
                         </div>
 
-                    </div>
+                    </div> */}
                 </div>
 
             </div >

@@ -1,3 +1,4 @@
+"use client"
 import "../../../styles/MoreProducts.css"
 import * as React from 'react';
 import Accordion from '@mui/material/Accordion';
@@ -7,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import TabContent from "../TabContent/TabContent";
-
+import { useState } from "react";
 
 const MoreProduct = () => {
     const tabs = [
@@ -21,124 +22,45 @@ const MoreProduct = () => {
         { id: "disclaimer", title: "Disclaimer" }
     ];
 
+    const [activeTab, setActiveTab] = useState(tabs[0].id);
+
+    const handleTabChange = (tabId) => {
+        setActiveTab(tabId);
+    };
+
     return (
         <>
-
             <div className="text-center">
                 <div className="darkBlue fs-1 fw-bold"> More Product <span className="text-danger">Details</span> </div>
-                <div className=" mt-1 fw-normal subCptRes"><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has </p>
+                <div className=" mt-1 fw-normal subCptRes">
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has </p>
                     <p> been the industry's standard dummy text ever since the 1500s,</p>
                 </div>
             </div>
 
             <div className="product-info-tabs ">
                 <ul className="nav nav-tabs justify-content-center" id="myTab" role="tablist">
-                    <li className="nav-item">
-                        <a
-                            className="nav-link"
-                            id="description-tab"
-                            data-toggle="tab"
-                            href="#description"
-                            role="tab"
-                            aria-controls="description"
-                            aria-selected="true"
-                        >
-                            Description
-                        </a>
-                    </li>
-
-                    <li className="nav-item">
-                        <a
-                            className="nav-link"
-                            id="review-tab"
-                            data-toggle="tab"
-                            href="#review"
-                            role="tab"
-                            aria-controls="review"
-                            aria-selected="false"
-                        >
-                            Merchant Details
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a
-                            className="nav-link"
-                            id="review-tab"
-                            data-toggle="tab"
-                            href="#review"
-                            role="tab"
-                            aria-controls="review"
-                            aria-selected="false"
-                        >
-                            Care & Instruction
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a
-                            className="nav-link"
-                            id="review-tab"
-                            data-toggle="tab"
-                            href="#review"
-                            role="tab"
-                            aria-controls="review"
-                            aria-selected="false"
-                        >
-                            Delivery Instructions
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a
-                            className="nav-link"
-                            id="review-tab"
-                            data-toggle="tab"
-                            href="#review"
-                            role="tab"
-                            aria-controls="review"
-                            aria-selected="false"
-                        >
-                            Warranty
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a
-                            className="nav-link"
-                            id="review-tab"
-                            data-toggle="tab"
-                            href="#review"
-                            role="tab"
-                            aria-controls="review"
-                            aria-selected="false"
-                        >
-                            T & C
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a
-                            className="nav-link"
-                            id="review-tab"
-                            data-toggle="tab"
-                            href="#review"
-                            role="tab"
-                            aria-controls="review"
-                            aria-selected="false"
-                        >
-                            FAQ'S
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a
-                            className="nav-link"
-                            id="review-tab"
-                            data-toggle="tab"
-                            href="#review"
-                            role="tab"
-                            aria-controls="review"
-                            aria-selected="false"
-                        >
-                            Disclaimer
-                        </a>
-                    </li>
+                    {tabs.map((tab, index) => (
+                        <li className="nav-item" key={tab.id}>
+                            <a
+                                className={`nav-link ${activeTab === tab.id ? 'active' : ''}`}
+                                id={`${tab.id}-tab`}
+                                data-toggle="tab"
+                                href={`#${tab.id}`}
+                                role="tab"
+                                aria-controls={tab.id}
+                                aria-selected={activeTab === tab.id}
+                                onClick={() => handleTabChange(tab.id)}
+                            >
+                                {tab.title}
+                            </a>
+                        </li>
+                    ))}
                 </ul>
+            </div>
+
+            <div className="listTabContent">
+                <TabContent activeTab={activeTab} />
             </div>
 
             <div className="AccorProductInfo">
@@ -153,14 +75,14 @@ const MoreProduct = () => {
                         </AccordionSummary>
                         <AccordionDetails>
                             <div>
-                                <TabContent/>
+                            <TabContent activeTab={activeTab} />
                             </div>
                         </AccordionDetails>
                     </Accordion>
                 ))}
             </div>
-
         </>
     )
 }
-export default MoreProduct
+
+export default MoreProduct;

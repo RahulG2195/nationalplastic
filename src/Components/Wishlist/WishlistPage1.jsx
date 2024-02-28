@@ -75,53 +75,53 @@ const WishlistPage1 = () => {
         
     };
 
-    // return (
-    //     <>
+    return (
+        <>
 
-    //         <div className="main_container">
+            <div className="main_container">
 
-    //             <div className="d-flex justify-content-center" >
-    //                 <div className="WCcontainer border-0 ">
+                <div className="d-flex justify-content-center" >
+                    <div className="WCcontainer border-0 ">
 
-    //                     <h4 className='p-4 fw-bold'>Wishlist</h4>
+                        <h4 className='p-4 fw-bold'>Wishlist</h4>
 
-    //                     <div className="center">
+                        <div className="center">
 
-    //                         {wishlistItems.map((item) => (
-    //                             console.log(),
+                            {wishlistItems.map((item) => (
+                                console.log(),
 
-    //                             <WishlistCard
-    //                                 key={item.WishlistId}
-    //                                 id={item.product_id}
-    //                                 WishlistImg={`/Assets/images/New-launches-1/${item.WishlistImg}`}
-    //                                 productName={item.ProductName}
-    //                                 producDiscription={item.productDiscription}
-    //                                 Price={item.Price}
-    //                                 originalPrice={item.originalPrice}
-    //                                 discount={item.discount}
-    //                                 onDeleteSuccess={() => handleDeleteSuccess(item.WishlistId)
-    //                                 }
-    //                                 onAddToCart={() => handleAddToCart(
-    //                                     item.product_id,
-    //                                     item.ProductName,
-    //                                     item.productDiscription,
-    //                                     item.Price,
-    //                                     item.originalPrice,
-    //                                     item.discount,
-    //                                     item.WishlistImg
-    //                                 )}
-    //                             />
-    //                         ))}
+                                <WishlistCard
+                                    key={item.WishlistId}
+                                    id={item.product_id}
+                                    WishlistImg={`/Assets/images/New-launches-1/${item.WishlistImg}`}
+                                    productName={item.ProductName}
+                                    producDiscription={item.productDiscription}
+                                    Price={item.Price}
+                                    originalPrice={item.originalPrice}
+                                    discount={item.discount}
+                                    onDeleteSuccess={() => handleDeleteSuccess(item.WishlistId)
+                                    }
+                                    onAddToCart={() => handleAddToCart(
+                                        item.product_id,
+                                        item.ProductName,
+                                        item.productDiscription,
+                                        item.Price,
+                                        item.originalPrice,
+                                        item.discount,
+                                        item.WishlistImg
+                                    )}
+                                />
+                            ))}
 
-    //                     </div>
+                        </div>
 
-    //                 </div>
-    //             </div>
+                    </div>
+                </div>
 
-    //             <FooterRow />
+                <FooterRow />
 
-    //         </div>
-    //     </>
-    // )
+            </div>
+        </>
+    )
 }
 export default WishlistPage1
