@@ -16,36 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `wishlist`
+-- Table structure for table `mycart`
 --
 
-DROP TABLE IF EXISTS `wishlist`;
+DROP TABLE IF EXISTS `mycart`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `wishlist` (
-  `WishlistId` int NOT NULL AUTO_INCREMENT,
-  `ProductName` varchar(255) NOT NULL,
-  `productDiscription` varchar(255) NOT NULL,
-  `WishlistImg` varchar(255) NOT NULL,
-  `Price` decimal(10,2) NOT NULL,
-  `originalPrice` decimal(10,2) NOT NULL,
-  `discount` varchar(255) DEFAULT NULL,
-  `createdOn` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+CREATE TABLE `mycart` (
+  `cart_id` int NOT NULL AUTO_INCREMENT,
   `product_id` int DEFAULT NULL,
-  PRIMARY KEY (`WishlistId`),
-  KEY `fk_wishlist_product_id` (`product_id`),
-  CONSTRAINT `fk_wishlist_product_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`cart_id`),
+  KEY `product_id` (`product_id`),
+  CONSTRAINT `mycart_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=508 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `wishlist`
+-- Dumping data for table `mycart`
 --
 
-LOCK TABLES `wishlist` WRITE;
-/*!40000 ALTER TABLE `wishlist` DISABLE KEYS */;
-INSERT INTO `wishlist` VALUES (132,'MERC SOFA','Lorem ipsum dolor sit amet.','New-launches-1.png',9000.00,100.00,'15%','2024-02-22 05:15:02',9),(133,'KARNIVAL','Lorem ipsum dolor sit amet.','New-launches-1.png',2000.00,100.00,'11%','2024-02-22 09:16:30',2);
-/*!40000 ALTER TABLE `wishlist` ENABLE KEYS */;
+LOCK TABLES `mycart` WRITE;
+/*!40000 ALTER TABLE `mycart` DISABLE KEYS */;
+INSERT INTO `mycart` VALUES (503,1),(504,2),(505,3),(506,4),(507,9);
+/*!40000 ALTER TABLE `mycart` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -57,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-23 16:57:44
+-- Dump completed on 2024-02-28 10:22:42

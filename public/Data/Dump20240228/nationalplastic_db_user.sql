@@ -16,35 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `mycart`
+-- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `mycart`;
+DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `mycart` (
-  `cart_id` int NOT NULL AUTO_INCREMENT,
-  `product_id` int DEFAULT NULL,
-  `quantity` int DEFAULT NULL,
-  `product_name` varchar(255) DEFAULT NULL,
-  `description` text,
-  `price` decimal(10,2) DEFAULT NULL,
-  `original_price` decimal(10,2) DEFAULT NULL,
-  `image_name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`cart_id`),
-  KEY `product_id` (`product_id`),
-  CONSTRAINT `mycart_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=426 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `user` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `type` enum('admin','regular') DEFAULT 'regular',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `mycart`
+-- Dumping data for table `user`
 --
 
-LOCK TABLES `mycart` WRITE;
-/*!40000 ALTER TABLE `mycart` DISABLE KEYS */;
-INSERT INTO `mycart` VALUES (422,9,NULL,'MERC SOFA','Lorem ipsum dolor sit amet.',9000.00,100.00,'New-launches-1.png'),(423,2,NULL,'KARNIVAL','Lorem ipsum dolor sit amet.',2000.00,100.00,'New-launches-1.png'),(424,3,NULL,'Atlantis','Lorem ipsum dolor sit amet.',3000.00,100.00,'New-launches-1.png'),(425,4,NULL,'KAREN','Lorem ipsum dolor sit amet.',4000.00,100.00,'New-launches-1.png');
-/*!40000 ALTER TABLE `mycart` ENABLE KEYS */;
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'John Doe','password123','john@example.com','regular','2024-02-15 09:04:29','2024-02-15 09:04:29'),(2,'Siddhesh','password123','siddhesh@example.com','regular','2024-02-16 10:55:28','2024-02-16 10:55:28'),(3,'rahul','pass123','rahul@example.com','regular','2024-02-16 10:57:45','2024-02-16 10:57:45'),(4,'Aishu','pass123','aishu@example.com','regular','2024-02-16 10:59:27','2024-02-16 10:59:27'),(5,'Kaustibh','123','kau@example.com','regular','2024-02-16 11:00:55','2024-02-16 11:00:55');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-23 16:57:44
+-- Dump completed on 2024-02-28 10:22:42

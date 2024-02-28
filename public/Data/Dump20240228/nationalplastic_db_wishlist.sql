@@ -16,33 +16,36 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `bulkorderform`
+-- Table structure for table `wishlist`
 --
 
-DROP TABLE IF EXISTS `bulkorderform`;
+DROP TABLE IF EXISTS `wishlist`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `bulkorderform` (
-  `BulkOrderId` int NOT NULL AUTO_INCREMENT,
-  `fullName` varchar(255) NOT NULL,
-  `Email` varchar(255) NOT NULL,
+CREATE TABLE `wishlist` (
+  `WishlistId` int NOT NULL AUTO_INCREMENT,
   `ProductName` varchar(255) NOT NULL,
-  `Requirements` text,
-  `City` varchar(255) NOT NULL,
+  `productDiscription` varchar(255) NOT NULL,
+  `WishlistImg` varchar(255) NOT NULL,
+  `Price` decimal(10,2) NOT NULL,
+  `originalPrice` decimal(10,2) NOT NULL,
+  `discount` varchar(255) DEFAULT NULL,
   `createdOn` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `Mobile` int NOT NULL,
-  PRIMARY KEY (`BulkOrderId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `product_id` int DEFAULT NULL,
+  PRIMARY KEY (`WishlistId`),
+  KEY `fk_wishlist_product_id` (`product_id`),
+  CONSTRAINT `fk_wishlist_product_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=139 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `bulkorderform`
+-- Dumping data for table `wishlist`
 --
 
-LOCK TABLES `bulkorderform` WRITE;
-/*!40000 ALTER TABLE `bulkorderform` DISABLE KEYS */;
-INSERT INTO `bulkorderform` VALUES (1,'siddhesh dhamale ','webdeveloper@gmail.com','chair','wer','thane','2024-02-16 12:15:38',1234567890);
-/*!40000 ALTER TABLE `bulkorderform` ENABLE KEYS */;
+LOCK TABLES `wishlist` WRITE;
+/*!40000 ALTER TABLE `wishlist` DISABLE KEYS */;
+INSERT INTO `wishlist` VALUES (136,'SHAMIYANA','Lorem ipsum dolor sit amet.','New-launches-1.png',1000.00,900.00,'10%','2024-02-26 05:56:49',1),(137,'KARNIVAL','Lorem ipsum dolor sit amet.','New-launches-1.png',2000.00,100.00,'11%','2024-02-27 06:54:28',2),(138,'Atlantis','Lorem ipsum dolor sit amet.','New-launches-1.png',3000.00,100.00,'12%','2024-02-27 06:54:38',3);
+/*!40000 ALTER TABLE `wishlist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-23 16:57:44
+-- Dump completed on 2024-02-28 10:22:42
