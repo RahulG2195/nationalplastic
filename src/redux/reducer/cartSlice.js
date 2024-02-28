@@ -39,6 +39,7 @@ export const cartSlice = createSlice({
   initialState: {
     items: [],
     initialCount: 1,
+    price:0
   },
 
 

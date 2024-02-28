@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    // output:'export',
-    // eslint: {
-    //     ignoreDuringBuilds: true,
-    // },
+    output:'export',
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
 
     // env:{
     // 'MYSQL_HOST':'127.0.0.1',

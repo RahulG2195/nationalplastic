@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import './PriceDetailsCard.css';
 
-const PriceDetailsCard = ({ itemCount, cartPrice, totalDiscount, totalPay, InstallationCharges }) => {
+const PriceDetailsCard = ({ itemCount, cartPrice, totalDiscount, totalPay, InstallationCharges ,}) => {
   return (
     <>
       <div className="PriceDetail">

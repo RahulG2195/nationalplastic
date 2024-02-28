@@ -21,8 +21,7 @@ const PreChairsCard = (props) => {
         <>
 
             <div className='preCont cards mt-3 p-1 position-relative  my-4 '>
-                {/* <Link onClick={setid} href={`/ProductDetail`}> */}
-                <Link href={`/ProductDetail?id=${props.id}`}>
+                <Link onClick={setid} href={`/ProductDetail`}>
 
                     <div className='card-header'>
                         <img src={props.ChairImg} className="card-img-top" alt="..." />
