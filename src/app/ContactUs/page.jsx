@@ -1,9 +1,69 @@
+"use client";
+
 import Image from "next/image"; 
-import insertFormData from '../Config/API/register'
+// import insertFormData from '../Config/API/register'
 import "../../styles/contactus.css"; 
 import ContactUsCard from "@/Components/ContactUs/ContactUsCard";
+import { useState } from 'react';
+import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
 function ContactUs() {
- 
+  const [userInput, setUserInput] = useState({
+    name: "",
+    email: "",
+    message: "",
+    reason: "",
+    mobile: "",
+});
+const isValidEmail = (email) => {
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailPattern.test(email);
+};
+
+function handleInputChange(e) {
+    const {name, value} = e.target;
+    setUserInput({
+        ...userInput,
+        [name]: value
+    })
+} 
+// const notify = () => toast('Here is your toast.');
+async function onFormSubmit(e) {
+  // toast
+  e.preventDefault();
+  console.log("UserInput");
+  console.log(JSON.stringify(userInput));
+  try {
+    // const res = await axios.put(`http://localhost:3000/api/Users`, userInput);
+
+    const res = await axios.post(`http://localhost:3000/api/sendEmail`, userInput);
+    toast("Your Message has been submitted successfully.");
+    if (res.success) {
+      toast("Your Message has been submitted successfully. I'll get back to you at my earliest.");
+  }else{
+    toast.error("Your Message has failed. Please try again later.");
+  }
+  //     const response = axiosInstance.post("/contact", userInput);
+  //     toast.promise(response, {
+  //         loading: "Submitting your message...",
+  //         success: "Form submitted successfully",
+  //         error: "Failed to submit the form"
+  //     });
+  //     const contactResponse = await response;
+  //     console.log(contactResponse)
+  //     if(contactResponse?.data?.success) {
+  //         setUserInput({
+  //             name: "",
+  //             email: "",
+  //             message: "",
+  //         });
+      // }
+  } catch (err) {
+    console.log(err.message)
+    toast.error("Something went Wrong. please try again later.")
+  }
+
+}
   const RegisteredOfficeCardArr = [
     {
       key: 1,
@@ -70,6 +130,7 @@ function ContactUs() {
   return (
     <>
       <div className="container-flude">
+      <Toaster/>
         <div className="row">
           <Image
             src="/Assets/images/ContactUs/Contact-Us-pg-banner.png"
@@ -105,7 +166,9 @@ function ContactUs() {
               </div>
 
               <div className="col-md-6 cta-form">
-                <form>
+                <form 
+                onSubmit={onFormSubmit}
+                >
                   <h3>Send a message</h3>
                   <div className="mb-3">
                     <label htmlFor="name" className="form-label">
@@ -116,6 +179,9 @@ function ContactUs() {
                       className="form-control"
                       id="name"
                       placeholder="Enter your name"
+                      name="name" 
+                      onChange={handleInputChange}
+                      value={userInput.name}
                     />
                   </div>
                   <div className="mb-3">
@@ -127,6 +193,9 @@ function ContactUs() {
                       className="form-control"
                       id="email"
                       placeholder="Enter your email"
+                      name="email" 
+                      onChange={handleInputChange}
+                      value={userInput.email}
                     />
                   </div>
                   <div className="mb-3">
@@ -138,13 +207,22 @@ function ContactUs() {
                       className="form-control"
                       id="mobile"
                       placeholder="Enter your mobile number"
+                      name="mobile" 
+                      onChange={handleInputChange}
+                      value={userInput.mobile}
                     />
                   </div>
                   <div className="mb-3">
                     <label htmlFor="reason" className="form-label">
                       Reason
                     </label>
-                    <select className="form-select" id="reason">
+                    <select className="form-select" 
+                    id="reason"
+                    name="reason" 
+    onChange={handleInputChange} 
+    value={userInput.reason} 
+                    
+                    >
                       <option selected="">Choose...</option>
                       <option value="general">General Inquiry</option>
                       <option value="feedback">Feedback</option>
@@ -167,6 +245,10 @@ function ContactUs() {
                       rows={5}
                       placeholder="Enter your message"
                       defaultValue={""}
+                      name="message" 
+                      onChange={handleInputChange}
+                      value={userInput.message}
+                      
                     />
                   </div>
                   <button type="submit" className="btn cta-contact-btn">

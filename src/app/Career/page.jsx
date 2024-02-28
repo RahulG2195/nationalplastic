@@ -5,7 +5,7 @@ import Registration from '../../Components/Career/Registration'
 import Hiring from '@/Components/Career/Hiring'
 
 const Career = () => {
-
+    
     return (
 
         <>
