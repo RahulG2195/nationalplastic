@@ -5,7 +5,8 @@ import {useEffect} from 'react'
 // Note: Removed unnecessary import (`// import Cookies from "js-cookie";`)
 
 const initialState = {
-  isLoggedIn: localStorage.getItem("isLoggedIn") === "true" ? true : false,
+
+  isLoggedIn:false,
   userData: {
     email: "",
     password: "", // Password should not be persisted

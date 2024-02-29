@@ -4,14 +4,16 @@ import { useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 // import { useNavigate } from "react-router-dom";
+
 import { useRouter } from 'next/navigation'
 import "../../styles/profilepage.css";
 import { useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import {loginSlice}  from '@/redux/reducer/userSlice'
  function Login() {
+
   const   dispatch = useDispatch();
-  const router = useRouter();
+  const { push } = useRouter();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -65,7 +67,7 @@ import {loginSlice}  from '@/redux/reducer/userSlice'
       //   if (existingpassword.includes(formData.password)) {
       //     // alert("Login successful");
       //     // navigate('/About');
-          router.push('/'); 
+          push('/'); 
           // router.push({
           //   pathname: '/',
           //   query: { email: formData.email }
