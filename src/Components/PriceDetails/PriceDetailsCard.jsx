@@ -1,7 +1,19 @@
 import Link from 'next/link';
 import './PriceDetailsCard.css';
+import { useDispatch, useSelector } from 'react-redux';
+// import { setTotalPrice} from '@/redux/reducer/counterSlice';
+import { useEffect, useState } from 'react';
+const PriceDetailsCard = ({ itemCount, cartPrice, totalDiscount, totalPay, InstallationCharges }) => {
+  // const dispatch = useDispatch();
+  const ValueFromRedux = useSelector((state) => state.price.totalprice);
+  const [totalPrice, setTotalPrice] = useState(0); // Set initial value to 0
+  console.log(totalPrice)
+  console.log(ValueFromRedux)     
 
-const PriceDetailsCard = ({ itemCount, cartPrice, totalDiscount, totalPay, InstallationCharges ,}) => {
+  useEffect(() => {
+    setTotalPrice(ValueFromRedux);
+  console.log(totalPrice)
+  }, [ValueFromRedux]);
   return (
     <>
       <div className="PriceDetail">
@@ -10,7 +22,8 @@ const PriceDetailsCard = ({ itemCount, cartPrice, totalDiscount, totalPay, Insta
         <div className="mt-4">
           <div className={`d-flex justify-content-between mt-1 fw-semibold`}>
             <div className="text-secondary">MRP</div>
-            <div> RS {cartPrice ? cartPrice : "0000"}</div>
+            <div> RS {totalPrice ? totalPrice : 100}</div>
+
           </div>
           <div className={`d-flex justify-content-between mt-1 fw-semibold text-success`}>
             <div className="text-secondary">Discount</div>
@@ -32,7 +45,7 @@ const PriceDetailsCard = ({ itemCount, cartPrice, totalDiscount, totalPay, Insta
           <div className="medium">Rs {totalPay ? totalPay : "0000"}</div>
         </div>
         <div className="small my-2 text-success">
-          Congratulations, you've just saved RS {totalDiscount ? totalDiscount : "0000"} on your order
+          Congratulations, you have just saved RS {totalDiscount ? totalDiscount : "0000"} on your order
         </div>
         <div className="small text-center">EMI starts with Rs 0,000</div>
 
@@ -47,3 +60,22 @@ const PriceDetailsCard = ({ itemCount, cartPrice, totalDiscount, totalPay, Insta
 };
 
 export default PriceDetailsCard;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

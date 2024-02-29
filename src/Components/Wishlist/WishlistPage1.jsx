@@ -61,16 +61,10 @@ const WishlistPage1 = () => {
         }
     };
 
-    const handleAddToCart = async (product_id, ProductName, short_description, price, discount_price, discount, ChairImg) => {
+    const handleAddToCart = async (product_id) => {
         
         dispatch(addToCart({
             product_id: product_id,
-            product_name: ProductName,
-            description: short_description,
-            price: price,
-            original_price: discount_price,
-            image_name: ChairImg,
-            discount: discount
         }));
         
     };

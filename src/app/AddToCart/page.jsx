@@ -14,7 +14,7 @@ function AddToCart() {
   const [discount, setDiscount] = useState(0);
   const [totalPayble, setTotalPayble] = useState(0);
   const [installationCharges, setInstallationCharges] = useState(0);
-
+;
 
   useEffect(() => {
     const fetchData = async () => {
