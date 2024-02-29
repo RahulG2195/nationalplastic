@@ -49,6 +49,31 @@ function Login() {
           // alert("Login successful");
           // navigate('/About');
           router.push('/'); 
+      //Will be redirecting it to the userSlice
+      console.log("Please enterthe userSlice"+formData.email+" and userSlice"+formData.password   )
+      console.log(formData)
+      console.log("formData"+JSON.stringify(formData)); 
+      // const res = await axios.post(`http://localhost:3000/api/Users`,formData);
+      // const res = await axios.put(`http://localhost:3000/api/Users`,formData);
+      // console.log("DATA (PAGE)after successful login000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
+      // console.log("response  PAGE Data-="+res);
+      // console.log("response PAGE Data in json format"+JSON.stringify(res.data.email));
+
+      const response = await dispatch(loginSlice(formData));
+      //  console.log("response after waiting for  page login");
+      // console.log(response);
+      router.push('/');
+      // const { data } = await axios.post(`http://localhost:3000/api/Users`);
+      // const existingEmails = data.map((user) => user.Email);
+      // const existingpassword = data.map((user) => user.Password);
+      // // console.log("existingEmails=" + existingEmails);
+      // // console.log("formData.email=" + formData.email);
+      // if (existingEmails.includes(formData.email)) {
+      //   if (existingpassword.includes(formData.password)) {
+      //     // alert("Login successful");
+      //     // navigate('/About');
+          // router.push('/'); 
+// >>>>>>> Stashed changes
           // router.push({
           //   pathname: '/',
           //   query: { email: formData.email }

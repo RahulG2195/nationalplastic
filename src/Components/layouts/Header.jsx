@@ -1,9 +1,42 @@
-import Image from 'next/image'
+"use client";
+import Image from "next/image";
 import TopBar from "./TopBar";
 import BottomBar from "./BottomBar";
-import '../../styles/header.css';
-import Link from 'next/link';
+import "../../styles/header.css";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 export default function Header() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [data, setData] = useState({});
+
+  // const handleLogout = () => {
+
+  // }
+    // e.preventDefault();
+    // localStorage.clear();
+    // // state.data = {};
+    // // state.isLoggedIn = false;
+    // toast.success("Logged out", {
+    //   position: "top", // Adjust position as needed
+    //   // Apply custom styling
+    //   // More options: https://react-hot-toast.com/api/toast
+    // });
+    // const isLoggedIn = false;
+    // const storedData = {};
+
+    // setIsLoggedIn(isLoggedIn);
+    // setData(storedData);
+  // }
+  useEffect(() => {
+    const isLoggedIn =
+      localStorage.getItem("isLoggedIn") === "true" ? true : false;
+    const storedData = JSON.parse(localStorage.getItem("userData")) || {};
+    console.log("storedData" + storedData);
+    console.log(JSON.stringify(storedData));
+
+    setIsLoggedIn(isLoggedIn);
+    setData(storedData);
+  }, [isLoggedIn]);
   return (
     <>
       <div className="container-fluid header">
@@ -26,7 +59,6 @@ export default function Header() {
                 placeholder="Search"
                 aria-label="Search"
               />
-            
             </form>
             <button
               className="navbar-toggler"
@@ -64,10 +96,10 @@ export default function Header() {
                     aria-expanded="false"
                   /> */}
 
-                    <Link className="nav-link" href="/Investor" >
+                  <Link className="nav-link" href="/Investor">
                     Investors
-                    </Link>
-                  
+                  </Link>
+
                   <ul
                     className="dropdown-menu"
                     aria-labelledby="navbarDropdown"
@@ -92,7 +124,7 @@ export default function Header() {
                     </li>
                   </ul>
                 </li>
-                
+
                 <li className="nav-item">
                   <Link className="nav-link" href="/NewsAndMedia">
                     Media/News
@@ -118,18 +150,28 @@ export default function Header() {
                     <i className="fa fa-heart-o"></i>
                   </Link>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <Link className="nav-link" href="/Login">
                     <i className="fa fa-user"></i>
                   </Link>
-                </li>
+                  </li> */}
+
+                {isLoggedIn ? (
+                  <li className="nav-item">
+                    <Link href="/ProfilePage">Profile</Link>
+                  </li>
+                ) : (
+                  <li className="nav-item">
+                    <Link href="/Login">Login</Link>
+                  </li>
+                )}
+
                 <li className="nav-item">
                   <Link className="nav-link" href="/AddToCart">
                     <i className="fa fa-cart-arrow-down"></i>
                   </Link>
                 </li>
               </ul>
-
             </div>
           </div>
         </nav>

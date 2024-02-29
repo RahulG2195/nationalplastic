@@ -2,9 +2,11 @@
 import { useState } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation'
 import '../../styles/profilepage.css';
 
 function Register() {
+    const router = useRouter();
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -67,6 +69,7 @@ function Register() {
 
                     // Display success message
                     setSuccessMessage('Registration successful!');
+                    router.push('/Login');
                 }
             } catch (error) {
                 console.error('Error submitting form:', error);
