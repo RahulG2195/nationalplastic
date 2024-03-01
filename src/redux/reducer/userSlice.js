@@ -1,8 +1,15 @@
+// 'use server'
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import {useEffect} from 'react'
 // Note: Removed unnecessary import (`// import Cookies from "js-cookie";`)
+// import { useRouter } from 'next/navigation'
+
+ 
+import { permanentRedirect } from 'next/navigation'
+import { revalidateTag } from 'next/cache'
+
 
 const initialState = {
 
@@ -16,6 +23,7 @@ const initialState = {
 // **`use client` is not required here as the reducer is written in TypeScript and not JSX.**
 
 export const loginSlice = createAsyncThunk("/auth/login", async (data) => {
+
   try {
     console.log("data:", JSON.stringify(data));
     const res = await axios.put(`http://localhost:3000/api/Users`, data);
@@ -23,6 +31,7 @@ export const loginSlice = createAsyncThunk("/auth/login", async (data) => {
     toast.promise(res, {
       loading: "Wait! Authentication in progress...",
       success: (data) => {
+        
         return data?.data?.message;
       },
       error: "Failed to log in",
@@ -42,19 +51,14 @@ const authSlice = createSlice({
     builder.addCase(loginSlice.fulfilled, (state, action) => {
 
         console.log("inside Usefffect of authslice"+JSON.stringify(action?.meta?.arg))
-   
-
-
-
-
-
-
-      // Update localStorage and state using useEffect for client-side synchronization
-      
+  
         localStorage.setItem("userData", JSON.stringify(action.meta.arg));
         localStorage.setItem("isLoggedIn", true);
         state.isLoggedIn = true;
         state.userData = action.meta.arg;
+        // window.location.reload();
+        // permanentRedirect("/") 
+        // push('/'); 
    // Add action as a dependency to ensure effect runs only on action change
     });
   },

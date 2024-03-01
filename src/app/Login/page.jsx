@@ -8,12 +8,19 @@ import Image from "next/image";
 import { useRouter } from 'next/navigation'
 import "../../styles/profilepage.css";
 import { useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector } from 'react-redux';
 import {loginSlice}  from '@/redux/reducer/userSlice'
+import toast from "react-hot-toast";
  function Login() {
-
+ 
+  const ValueFromRedux = useSelector((state) => state.auth.isLoggedIn);
+  const [islogin, setislogin] = useState(false);
   const   dispatch = useDispatch();
   const { push } = useRouter();
+
+  useEffect(() => {
+    setislogin(ValueFromRedux);
+  }, [ValueFromRedux]);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -47,37 +54,36 @@ import {loginSlice}  from '@/redux/reducer/userSlice'
       console.log("Please enterthe userSlice"+formData.email+" and userSlice"+formData.password   )
       console.log(formData)
       console.log("formData"+JSON.stringify(formData));
-      const data2 = "DInesh";
-      // const res = await axios.post(`http://localhost:3000/api/Users`,formData);
-      // const res = await axios.put(`http://localhost:3000/api/Users`,formData);
-      // console.log("DATA (PAGE)after successful login000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
-      // console.log("response  PAGE Data-="+res);
-      // console.log("response PAGE Data in json format"+JSON.stringify(res.data.email));
+      // const data2 = "DInesh";
+    
+        // const response = await dispatch(loginSlice(formData));
+        const res = await axios.put(`http://localhost:3000/api/Users`, formData);
+      console.log("--------------------------------");
+      console.log(JSON.stringify(res));
+      console.log(JSON.stringify(res.data));
+      console.log(JSON.stringify(res.status));
 
-      const response = await dispatch(loginSlice(formData));
+
+        if(res.status === 200){
+          toast.success("Successfully logged in")
+              push('/') 
+        }
+    else{
+          toast.error(res.data.message)
+        }
+        // setTimeout(() => {
+        //   if(islogin  === true) {
+        //     
+        //   }else {
+        //     setErrorMessage("An error occurred during login. Please try again.");
+
+        //   }
+        // }, 3000);
+    
+  
        console.log("response after waiting for  page login");
-      console.log(response);
-      
-      // const { data } = await axios.post(`http://localhost:3000/api/Users`);
-      // const existingEmails = data.map((user) => user.Email);
-      // const existingpassword = data.map((user) => user.Password);
-      // // console.log("existingEmails=" + existingEmails);
-      // // console.log("formData.email=" + formData.email);
-      // if (existingEmails.includes(formData.email)) {
-      //   if (existingpassword.includes(formData.password)) {
-      //     // alert("Login successful");
-      //     // navigate('/About');
-          push('/'); 
-          // router.push({
-          //   pathname: '/',
-          //   query: { email: formData.email }
-          // });
-      //   } else {
-      //     alert("Incorrect Password");
-      //   }
-      // } else {
-      //   alert("This Email is not registred");
-      // }
+      // console.log(response);
+    
     } catch (error) {
       console.error("Error during login:", error);
       setErrorMessage("An error occurred during login. Please try again.");

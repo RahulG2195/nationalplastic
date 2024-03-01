@@ -3,6 +3,7 @@ import { query } from "@/lib/db"; // Assuming 'your-database-module' is the corr
 // import { Response } from 'your-response-library'; // Assuming 'your-response-library' is the correct library for handling responses
 
 // Define your API endpoint handler for GET request
+// import { useRouter } from 'next/navigation'
 
 
 export async function GET(request) {
@@ -95,6 +96,7 @@ export async function POST(request) {
 
 // Define your API endpoint handler for registration POST request
 export async function PUT(request) {
+    // const router = useRouter();
     try {
         const { email} = await request.json();
         console.log("putttttttttp request");
@@ -106,17 +108,18 @@ export async function PUT(request) {
             values: [email],
         });
         console.log("existing user")
-        console.log("existing user"+existingUser)
+        console.log("existing user"+existingUser.length)
         console.log("existing user"+typeof(existingUser))
         console.log("existing :"+JSON.stringify(existingUser))
         console.log("existing :"+JSON.stringify(existingUser[0].Email))
 
 
         if (existingUser.length > 0) {
-            return new Response(JSON.stringify({ existingUser }), { status: 200 });
-            // alert("no no no  !");
+            console.log("7777777")
+            return new Response(JSON.stringify({ message: "login successful" }), { status: 200 });
         }
     } catch (error) {
+
         return new Response(JSON.stringify({
             status: 500,
             message: error.message,

@@ -30,4 +30,24 @@ From cardProduct->
   //   setInitialCount(initialCount);
   //   // console.log("in cart is ",initialCount+1);
   // }, [initialCount]);
-  
+Form page.jsx
+     // const { data } = await axios.post(`http://localhost:3000/api/Users`);
+      // const existingEmails = data.map((user) => user.Email);
+      // const existingpassword = data.map((user) => user.Password);
+      // // console.log("existingEmails=" + existingEmails);
+      // // console.log("formData.email=" + formData.email);
+      // if (existingEmails.includes(formData.email)) {
+      //   if (existingpassword.includes(formData.password)) {
+      //     // alert("Login successful");
+      //     // navigate('/About');
+          // push('/'); 
+          // router.push({
+          //   pathname: '/',
+          //   query: { email: formData.email }
+          // });
+      //   } else {
+      //     alert("Incorrect Password");
+      //   }
+      // } else {
+      //   alert("This Email is not registred");
+      // }
