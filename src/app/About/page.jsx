@@ -107,7 +107,7 @@ function About() {
         {/* Board Of Directors start */}
         <div className="row section_header team-header">
           <h2>Team</h2>
-          <h3>Board Of Directors</h3>
+          <h3>Board Of Directorss</h3>
         </div>
         <div className="row team-members">
           {imgarr.map((val) => (
