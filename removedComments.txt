@@ -1,0 +1,53 @@
+From cardProduct->
+// const dispatch = useDispatch();
+  // const [cartItems, setCartItems] = useState([]);
+
+  // const cartInitialCount = useSelector(state => state.cart.initialCount);
+
+  // useEffect(() => {
+  //   // Update the initialCount state with the value from the Redux store
+  //   setInitialCount(cartInitialCount);
+  // }, [cartInitialCount]); // Run this effect whenever cartInitialCount changes
+
+  // useEffect(() => {
+  //   // const isProductInCart = cartItems.some(item => item.productId === productId);
+  //   // console.log("this is item ", item.productId)
+    
+  //   // if (isProductInCart) {
+  //   //   setInitialCount(initialCount + 1);
+  //   // }
+  // }, [cartItems, productId]); 
+  
+  // const handleAddToCart = async () => {
+  //   try {
+  //     dispatch(addToCart({ product_id: productId }, initialCount));
+  //   } catch (error) {
+  //     console.error('Error adding to cart:', error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   // Update the count from the Redux store
+  //   setInitialCount(initialCount);
+  //   // console.log("in cart is ",initialCount+1);
+  // }, [initialCount]);
+Form page.jsx
+     // const { data } = await axios.post(`http://localhost:3000/api/Users`);
+      // const existingEmails = data.map((user) => user.Email);
+      // const existingpassword = data.map((user) => user.Password);
+      // // console.log("existingEmails=" + existingEmails);
+      // // console.log("formData.email=" + formData.email);
+      // if (existingEmails.includes(formData.email)) {
+      //   if (existingpassword.includes(formData.password)) {
+      //     // alert("Login successful");
+      //     // navigate('/About');
+          // push('/'); 
+          // router.push({
+          //   pathname: '/',
+          //   query: { email: formData.email }
+          // });
+      //   } else {
+      //     alert("Incorrect Password");
+      //   }
+      // } else {
+      //   alert("This Email is not registred");
+      // }

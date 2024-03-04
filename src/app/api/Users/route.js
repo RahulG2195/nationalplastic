@@ -1,8 +1,10 @@
+// 'use client'
 // Import the required modules
 import { query } from "@/lib/db"; // Assuming 'your-database-module' is the correct path to your database module
 // import { Response } from 'your-response-library'; // Assuming 'your-response-library' is the correct library for handling responses
 
 // Define your API endpoint handler for GET request
+// import { useRouter } from 'next/navigation'
 
 
 export async function GET(request) {
@@ -95,8 +97,9 @@ export async function POST(request) {
 
 // Define your API endpoint handler for registration POST request
 export async function PUT(request) {
+    // const router = useRouter();
     try {
-        const { email} = await request.json();
+        const { email, password} = await request.json();
         console.log("putttttttttp request");
 
         console.log(email);
@@ -105,21 +108,44 @@ export async function PUT(request) {
             query: "SELECT * FROM customer_detail WHERE email = ?",
             values: [email],
         });
-        console.log("existing user")
-        console.log("existing user"+existingUser)
-        console.log("existing user"+typeof(existingUser))
-        console.log("existing :"+JSON.stringify(existingUser))
-        console.log("existing :"+JSON.stringify(existingUser[0].Email))
 
+        // const passwordChecker = ()=>{
+       console.log(existingUser)
+        // }
+       if (existingUser.length > 0) {
+        console.log("Nope All is well")
 
-        if (existingUser.length > 0) {
-            return new Response(JSON.stringify({ existingUser }), { status: 200 });
-            // alert("no no no  !");
+            // Check if the provided password matches the stored password
+            const storedPassword = existingUser[0].Password; 
+            // Adjust the property name as per your database schema
+
+            // Implement password comparison logic using a secure method (e.g., bcrypt)
+            // const passwordMatch = comparePasswords(password, storedPassword); // Implement comparePasswords function
+
+            if (password === storedPassword) {
+                // return new Response(JSON.stringify({ message: "Login successful" }), { status: 200 });
+                {
+                    return new Response(JSON.stringify({
+                        status: 200,
+                        message: "Operation successful",
+                    }));
+                }
+            } else {
+                throw new Error("Invalid password");
+            }
+        } else {
+            throw new Error("User not registered");
+            
         }
-    } catch (error) {
+        
+
+    } 
+    
+    catch (error) { 
         return new Response(JSON.stringify({
             status: 500,
             message: error.message,
         }));
     }
+
 }

@@ -14,7 +14,7 @@ function AddToCart() {
   const [discount, setDiscount] = useState(0);
   const [totalPayble, setTotalPayble] = useState(0);
   const [installationCharges, setInstallationCharges] = useState(0);
-
+;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +32,7 @@ function AddToCart() {
           image_name: item.image_name,
           description: item.short_description,
           InstallationCharges: item.InstallationCharges
-        }));
+        }),[]);
 
         // Calculate total price, discount, total payable, and installation charges
         const totalPrice = products.reduce((total, product) => total + parseFloat(product.discount_price), 0);
@@ -125,7 +125,9 @@ function AddToCart() {
       alert("Error removing item. Please try again later.");
     }
   };
-
+  const updatePriceInCard = (newPrice) => {
+    setTotalPrice(newPrice);
+  };
   return (
     <>
       <div className="row">

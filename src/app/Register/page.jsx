@@ -12,6 +12,7 @@ function Register() {
         phone: '',
         password: '',
         confirmPassword: '',
+        image: null,
     });
     const [formErrors, setFormErrors] = useState({});
     const [successMessage, setSuccessMessage] = useState('');
@@ -21,28 +22,27 @@ function Register() {
 
         // Perform form validation
         const errors = {};
-        if (!formData.firstName.trim()) {
-            errors.firstName = 'First name is required';
+        if (!isValidName(formData.firstName)) {
+            errors.firstName = 'Invalid first name';
         }
-        if (!formData.lastName.trim()) {
-            errors.lastName = 'Last name is required';
+        if (!isValidName(formData.lastName)) {
+            errors.lastName = 'Invalid last name';
         }
-        if (!formData.email.trim()) {
-            errors.email = 'Email is required';
-        } else if (!isValidEmail(formData.email)) {
+        if (!isValidEmail(formData.email)) {
             errors.email = 'Invalid email address';
         }
-        if (!formData.phone.trim()) {
-            errors.phone = 'Phone number is required';
-        } else if (!isValidPhone(formData.phone)) {
+        if (!isValidPhone(formData.phone)) {
             errors.phone = 'Invalid phone number';
         }
-        if (!formData.password.trim()) {
-            errors.password = 'Password is required';
+        if (!isValidPassword(formData.password)) {
+            errors.password = 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character';
         }
         if (formData.password !== formData.confirmPassword) {
             errors.confirmPassword = 'Passwords do not match';
         }
+        // if (!isValidImage(formData.image)) {
+        //     errors.image = 'Invalid image file format';
+        // }
 
         if (Object.keys(errors).length === 0) {
             try {
@@ -50,11 +50,10 @@ function Register() {
                 const { data } = await axios.get(`http://localhost:3000/api/Users`);
                 const existingEmails = data.map(user => user.email);
                 if (existingEmails.includes(formData.email)) {
-                    alert("not allowed");
-                } else {
+                    alert("Email already exists!"); 
+                } else { 
                     const response = await axios.post('http://localhost:3000/api/Users', formData);
                     console.log('Form submitted:', response);
-
                     // Clear form data on successful submission
                     setFormData({
                         firstName: '',
@@ -63,6 +62,7 @@ function Register() {
                         phone: '',
                         password: '',
                         confirmPassword: '',
+                        // image: null,
                     });
 
                     // Display success message
@@ -70,10 +70,6 @@ function Register() {
                 }
             } catch (error) {
                 console.error('Error submitting form:', error);
-    if (error.response && error.response.status === 400) {
-        // If the email already exists, show an alert
-        window.alert("Email already exists!");
-    }
             }
         } else {
             setFormErrors(errors);
@@ -81,28 +77,28 @@ function Register() {
     };
 
     const handleInputChange = (event) => {
-      const { name, value } = event.target;
-      let errorMessage = '';
-  
-      // Validate phone number
-      if (name === 'phone') {
-          const phoneNumber = value.replace(/\D/g, ''); // Remove non-digit characters
-          if (phoneNumber.length !== 10) {
-              errorMessage = 'Phone number must be 10 digits';
-          }
-      }
-  
-      // Update the form data state and the error message for the current input field
-      setFormData(prev => ({
-          ...prev,
-          [name]: value,
-      }));
-  
-      setFormErrors(prev => ({
-          ...prev,
-          [name]: errorMessage,
-      }));
-  };
+        const { name, value, files } = event.target;
+        let errorMessage = '';
+
+        // Validate phone number
+        if (name === 'phone') {
+            const phoneNumber = value.replace(/\D/g, ''); // Remove non-digit characters
+            if (phoneNumber.length !== 10) {
+                errorMessage = 'Phone number must be 10 digits';
+            }
+        }
+
+        // Update the form data state and the error message for the current input field
+        setFormData(prev => ({
+            ...prev,
+            [name]: name === 'image' ? files[0] : value,
+        }));
+
+        setFormErrors(prev => ({
+            ...prev,
+            [name]: errorMessage,
+        }));
+    };
 
     const isValidEmail = (email) => {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -113,6 +109,23 @@ function Register() {
         const phonePattern = /^\d{10}$/;
         return phonePattern.test(phone);
     };
+
+    const isValidName = (name) => {
+        const namePattern = /^[a-zA-Z]+$/;
+        return namePattern.test(name);
+    };
+
+    const isValidPassword = (password) => {
+        const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/;
+        return passwordPattern.test(password);
+    };
+
+    // const isValidImage = (file) => {
+    //     if (!file) return false;
+    //     const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    //     const fileExtension = file.name.split('.').pop().toLowerCase();
+    //     return allowedExtensions.includes(fileExtension);
+    // };
 
     return (
         <div className="container">
@@ -175,6 +188,13 @@ function Register() {
                                     {formErrors.confirmPassword && <div className="text-danger">{formErrors.confirmPassword}</div>}
                                 </div>
                             </div>
+                            {/* <div className="row mb-3 mt-3">
+                                <label htmlFor="inputImage" className="col-sm-2 col-form-label">Image:</label>
+                                <div className="col-sm-10">
+                                    <input type="file" className="form-control" id="inputImage" name="image" onChange={handleInputChange} accept="image/*" />
+                                    {formErrors.image && <div className="text-danger">{formErrors.image}</div>}
+                                </div>
+                            </div> */}
                             <div className="form-btn-login-div">
                                 <button type="submit" className="btn form-btn-login">Register</button>
                             </div>
