@@ -1,32 +1,26 @@
 "use client";
-
 import { useState } from "react";
 import axios from "axios";
 import Image from "next/image";
+// import { useNavigate } from 'next/router'; // Import useRouter from 'next/router'
+import { useRouter } from 'next/router';
+import "../../styles/profilepage.css";
+// import { useNavigate } from "next/navigation";
+import Link from "next/link";
 // import { useNavigate } from "react-router-dom";
 
-import { useRouter } from 'next/navigation'
-import "../../styles/profilepage.css";
-import { useEffect } from "react";
-import { useDispatch , useSelector } from 'react-redux';
-import {loginSlice}  from '@/redux/reducer/userSlice'
-import toast from "react-hot-toast";
- function Login() {
- 
-  const ValueFromRedux = useSelector((state) => state.auth.isLoggedIn);
-  const [islogin, setislogin] = useState(false);
-  const   dispatch = useDispatch();
-  const { push } = useRouter();
+function Login() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [login, setLogin] = useState(false);
+  // const router = useRouter(); // Use useRouter on the client-side only
+  // const navigate =useNavigate();
+  // const router = useRouter();
 
-  useEffect(() => {
-    setislogin(ValueFromRedux);
-  }, [ValueFromRedux]);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const [errorMessage, setErrorMessage] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -36,65 +30,31 @@ import toast from "react-hot-toast";
     }));
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword((prevState) => !prevState);
-  };
-
-  const  handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Basic form validation
     if (!formData.email || !formData.password) {
       setErrorMessage("Please enter both email and password.");
       return;
     }
 
     try {
-      //Will be redirecting it to the userSlice
-      console.log("Please enterthe userSlice"+formData.email+" and userSlice"+formData.password   )
-      console.log(formData)
-      console.log("formData"+JSON.stringify(formData));
-      // const data2 = "DInesh";
-    
-        // const response = await dispatch(loginSlice(formData));
-        const res = await axios.put(`http://localhost:3000/api/Users`, formData);
-      console.log("--------------------------------");
-      console.log(JSON.stringify(res));
-      console.log(JSON.stringify(res.data));
-      console.log(JSON.stringify(res.status));
-
-
-        if(res.status === 200){
-          toast.success("Successfully logged in")
-              push('/') 
-        }
-    else{
-          toast.error(res.data.message)
-        }
-        // setTimeout(() => {
-        //   if(islogin  === true) {
-        //     
-        //   }else {
-        //     setErrorMessage("An error occurred during login. Please try again.");
-
-        //   }
-        // }, 3000);
-    
-  
-       console.log("response after waiting for  page login");
-      // console.log(response);
-    
+      const res = await axios.put(`http://localhost:3000/api/Users`, formData);
+      console.log("this is status ", res.data.status);
+      if (res.data.status === 500) {
+        setErrorMessage(JSON.stringify(res.data.message));
+        alert("no no ");
+        // router.push('/'); // Redirect to home page after successful login
+      } else {
+        alert("Successfully logged in");
+        setLogin(true);
+        // push("/");
+      }
     } catch (error) {
       console.error("Error during login:", error);
       setErrorMessage("An error occurred during login. Please try again.");
     }
   };
-
-  useEffect(() => {
-    if (window.location.pathname === "/About") {
-      window.location.reload();
-    }
-  }, []);
 
   return (
     <div className="container">
@@ -149,12 +109,13 @@ import toast from "react-hot-toast";
                     value={formData.password}
                     onChange={handleInputChange}
                   />
-                </div>
-                <div className="col-sm-12">
                   <button
                     type="button"
                     className="btn btn-toggle-password"
-                    onClick={togglePasswordVisibility}
+                    onClick={() => setShowPassword((prevShow) => !prevShow)}
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
                   >
                     {showPassword ? "Hide" : "Show"} Password
                   </button>
@@ -162,7 +123,13 @@ import toast from "react-hot-toast";
               </div>
               <div className="form-btn-login-div">
                 <button type="submit" className="btn form-btn-login">
-                  LOG IN
+                  {/* LOG IN */}
+
+                  {login ? (
+                    <Link href="/">Home</Link>
+                  ) : (
+                    <Link href="/">Home</Link>
+                  )}
                 </button>
               </div>
               {errorMessage && (
@@ -190,4 +157,3 @@ import toast from "react-hot-toast";
 }
 
 export default Login;
-
