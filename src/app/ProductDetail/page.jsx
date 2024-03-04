@@ -5,11 +5,11 @@ import CustomerReview from "@/Components/ProductDetail/CustomerReview/CustomerRe
 import Faqs from "@/Components/FAQs/Faqs";
 import FooterRow from "@/Components/FooterRow/FooterRow";
 
+
 function page() {
   return (
     <>
       <div className="pd-wrap">
-        <Breadcrump />
         <ProdData />
         <RecentlyViewedDetails />
         <CustomerReview />

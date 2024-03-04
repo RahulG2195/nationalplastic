@@ -21,22 +21,26 @@ function AddToCart() {
       try {
         const response = await axios.get("http://localhost:3000/api/Cart");
         const cartData = response.data.products;
-        
+
         // Extracting relevant data from the cart data
         const products = cartData.map(item => ({
           product_id: item.product_id,
           product_name: item.product_name,
           price: item.price,
           discount_price: item.discount_price,
+          discount_percentage: item.discount_percentage,
           image_name: item.image_name,
           description: item.short_description,
           InstallationCharges: item.InstallationCharges
         }));
 
         // Calculate total price, discount, total payable, and installation charges
-        const totalPrice = products.reduce((total, product) => total + parseFloat(product.price), 0);
-        const discount = products.reduce((total, product) => total + parseFloat(product.discount_price), 0);
-        const totalPayble = products.reduce((total, product) => total + parseFloat(product.price) + parseFloat(product.InstallationCharges), 0);
+        const totalPrice = products.reduce((total, product) => total + parseFloat(product.discount_price), 0);
+        const discount = products.reduce((total, product) => {
+        const discountAmount = parseFloat(product.discount_price) - parseFloat(product.price);
+          return total + discountAmount;
+        }, 0).toFixed(2);
+         const totalPayble = products.reduce((total, product) => total + parseFloat(product.price) + parseFloat(product.InstallationCharges), 0);
         const installationCharges = products.reduce((total, product) => total + parseFloat(product.InstallationCharges), 0);
         const totalCount = products.length;
 
@@ -61,7 +65,7 @@ function AddToCart() {
       // Fetch updated cart data
       const response = await axios.get("http://localhost:3000/api/Cart");
       const cartData = response.data.products;
-  
+
       // Extracting relevant data from the cart data
       const products = cartData.map(item => ({
         product_id: item.product_id,
@@ -72,14 +76,14 @@ function AddToCart() {
         description: item.short_description,
         InstallationCharges: item.InstallationCharges
       }));
-  
+
       // Calculate total price, discount, total payable, and installation charges
       const totalPrice = products.reduce((total, product) => total + parseFloat(product.price), 0);
       const discount = products.reduce((total, product) => total + parseFloat(product.discount_price), 0);
       const totalPayble = products.reduce((total, product) => total + parseFloat(product.price) + parseFloat(product.InstallationCharges), 0);
       const installationCharges = products.reduce((total, product) => total + parseFloat(product.InstallationCharges), 0);
       const totalCount = products.length;
-  
+
       // Update state variables
       setProductDetailArr(products);
       setTotalPrice(totalPrice);
@@ -92,13 +96,15 @@ function AddToCart() {
     }
   };
 
-
+  const onAddToCart = async (product_id) => {
+    handleAddtoWishlist(product_id);
+  }
   const onRemoveSuccess = async (product_id) => {
     try {
       console.log("wanted to remove", product_id);
       // Remove the product from the database
       await axios.delete(`http://localhost:3000/api/Cart`, { data: { product_id } });
-  
+
       // If all products are removed, update the state to reflect empty cart
       if (productDetailArr.length === 1) {
         setProductDetailArr([]);
@@ -110,7 +116,7 @@ function AddToCart() {
       } else {
         // Remove the product from the state
         setProductDetailArr(prevItems => prevItems.filter(item => item.product_id !== product_id));
-  
+
         // Fetch updated cart data
         handleCartChange();
       }
@@ -171,21 +177,31 @@ function AddToCart() {
                 </div>
               </div>
               <hr />
+              <div>
+                {productDetailArr.length === 0 ? (
+                  <h2 className="text-secondary">No products in cart</h2>
+                ) : (
+                  <div className="container">
+                    {productDetailArr.map((val) => (
+                      <div className="row" key={val.product_id}>
+                        <CartProduct
+                          src={`/Assets/images/New-launches-1/${val.image_name}`}
+                          productId={val.product_id}
+                          productName={val.product_name}
+                          productPrice={val.price}
+                          discountedPrice={val.discount_price}
+                          productDesc={val.description}
+                          discPer={Math.floor((val.discount_price - val.price) / val.discount_price * 100)}
 
-              <div className="container">
-                {productDetailArr.map((val) => (
-                  <div className="row" key={val.product_id}>
-                    <CartProduct
-                      src={`/Assets/images/New-launches-1/${val.image_name}`}
-                      productId={val.product_id}
-                      productName={val.product_name}
-                      productPrice={val.price}
-                      discountedPrice={val.discount_price}
-                      productDesc={val.description}
-                      onRemoveSuccess={() => onRemoveSuccess(val.product_id)}
-                    />
+
+                          installationCharges={val.InstallationCharges}
+                          onRemoveSuccess={() => onRemoveSuccess(val.product_id)}
+                          onAddtowishlist={() => onAddtowishlist(val.product_id)}
+                        />
+                      </div>
+                    ))}
                   </div>
-                ))}
+                )}
               </div>
             </div>
           </div>

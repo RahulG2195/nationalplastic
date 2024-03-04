@@ -67,6 +67,9 @@ export default function ShopRoom() {
     fetchdata();
 
   }, [])
+  const sendCategory = (productName) => {
+    localStorage.setItem('category', productName);
+  };
 
   return (
     <section className="shop_room_sec common_section">
@@ -121,6 +124,9 @@ export default function ShopRoom() {
                         title={product.product_name}
                         url={"#"}
                         style={"shop-room"}
+                        onCategoryChange={() => sendCategory(
+                          product.product_name
+                        )}
                       />
                     </SwiperSlide>
                   </div>
