@@ -1,11 +1,20 @@
 import Image from "next/image"
 import Link from "next/link"
 
-function CatCards({ image, title, url, style = "" }) {
+function CatCards({ image, title,onCategoryChange,style = "" }) {
+
+const sendCategory = () =>{
+  console.log("Category clicked:", title);
+  if (onCategoryChange) {
+    onCategoryChange(title);
+    // localStorage.setItem('category', title);
+  }
+};
+
   return (
     <>
       <div className="cards">
-        <Link href="/ProductCatlogue">
+        <Link onClick={sendCategory} href='/ProductCatlogue' >
           <div className="card_img">
             <Image
               src={image}

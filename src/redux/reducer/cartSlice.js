@@ -5,10 +5,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Bounce, toast } from 'react-toastify';
 
 const notify = () => {
-  // console.log("Toast notification triggered");
   toast.success('ADDED TO CART', {
     position: "top-center",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -20,10 +19,9 @@ const notify = () => {
 };
 
 const notifyinfo = () => {
-  // console.log("Toast notification triggered");
   toast.info('ALREADY IN CART', {
     position: "top-center",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -56,10 +54,6 @@ export const cartSlice = createSlice({
         // alert("Added");
       } else {
         // console.log(initialState)
-        // console.log("suggested ONe"+state)
-        // console.log("counter "+initialState.initialCount)
-        // console.log("suggested two"+state.initialCount)
-        // console.log("increasing count", initialState.initialCount);
       }
     },
 
@@ -72,24 +66,23 @@ export const cartSlice = createSlice({
 export const { addItemToCart, setInitialCount } = cartSlice.actions;
 
 export const addToCart = (item) => async (dispatch, getState) => {
-  const { initialCount, items } = getState().cart; // Access state through the second parameter
+  const { initialCount, items } = getState().wishlist; // Access state through the second parameter
 
   const check = await axios.get('http://localhost:3000/api/Cart');
   const isCartEmpty = !check.data.products || check.data.products.length === 0;
-  const isAlreadyInCart = !isCartEmpty && check.data.products.some(cartItem => cartItem.product_id === item.product_id);
+  const isAlreadyInCart = !isCartEmpty && check.data.products.some(cartItem => cartItem.product_id == item.product_id);
 
 
-if (isCartEmpty || !isAlreadyInCart) {
-  try {
-    const response = await axios.post('http://localhost:3000/api/Cart', item);
-    dispatch(addItemToCart(item));
-    console.log(item, "this are items ");
-    notify();
-  } catch (error) {
-    console.error('Error adding to cart:', error);
-  }
+  if (isCartEmpty || !isAlreadyInCart) {
+    try {
+      const response = await axios.post('http://localhost:3000/api/Cart', item);
+      dispatch(addItemToCart(item));
+      // console.log(item, "this are items ");
+      notify();
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+    }
   } else {
-    // alert("nono");
     notifyinfo();
     dispatch(setInitialCount(initialCount + 1)); // Dispatching the setInitialCount action with the updated count
     console.log(initialCount);

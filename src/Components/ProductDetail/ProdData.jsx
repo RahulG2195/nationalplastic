@@ -1,7 +1,3 @@
-
-
-
-
 "use client"
 import Link from "next/link";
 import "../../styles/prod_detail.css";
@@ -16,6 +12,10 @@ import FooterRow from "../FooterRow/FooterRow";
 import TabContent from "./TabContent/TabContent";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/redux/reducer/cartSlice";
+import { Message } from "@mui/icons-material";
+import Breadcrump from "@/app/Breadcromp/page";
 // import RecentlyViewed from "../ProductsCatlogue/RecentlyViewed";
 
 
@@ -23,40 +23,72 @@ import axios from "axios";
 function ProdData() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [storedId, setStoredId] = useState(null)
+  const [productName, setProductname] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null);
+  const dispatch = useDispatch();
+
 
 
   useEffect(() => {
-
-    const storedId = localStorage.getItem('myId');
-    console.log("this is store id ", storedId)
-
     const fetchData = async () => {
-
       try {
+        const storedId = localStorage.getItem('myId');
+        const productName = localStorage.getItem('productName')
+        setStoredId(storedId);
+        setProductname(productName)
         const response = await axios.get("http://localhost:3000/api/Products");
-        const filteredData = response.data.products.filter(item => item.product_id == storedId);
-        console.log("Product name =", filteredData);
+        let filteredData;
+        if (productName) {
+          filteredData = response.data.products.filter(item => item.product_name.toLowerCase() === productName.toLowerCase());
+        } else if (storedId) {
+          filteredData = response.data.products.filter(item => item.product_id == storedId);
+        } else {
+          setErrorMessage("Sorry, this product is not available");
+          setIsLoading(false);
+        }
+
+        if (filteredData.length === 0) {
+          setErrorMessage("Sorry, this product is not available");
+          setIsLoading(false);
+          return;
+        }
+
         setData(filteredData);
         setIsLoading(false);
       } catch (error) {
-        // alert("Error fetching data", error)
+        console.error("Error fetching data", error);
       }
     };
 
-
     fetchData();
+  }, []);
 
-  }, [])
+  const handleMoveToCart = () => {
+    // Dispatch the addToCart action with storedId as the payload
+    dispatch(addToCart({ product_id: storedId }));
+  };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (errorMessage) {
+    return <center>{errorMessage}</center>;
+  }
 
   const name = data.length > 0 ? data[0].product_name : null;
   const price = data.length > 0 ? data[0].price : null;
   const orignalPrice = data.length > 0 ? data[0].discount_price : null;
   const image = data.length > 0 ? data[0].image_name : null;
-  const saving = price - orignalPrice;
+  const saving = (orignalPrice - price).toFixed(2);
+
   return (
     <>
+        {/* <Breadcrump productName = {name} /> */}
+
       <div className="px-4">
-        <div className="heading-section">{/* <h2>Product Details</h2> */}</div>
+        {/* <div className="heading-section"><h2>Product Details</h2></div> */}
         <div className="row">
           <div className="col-md-6">
             <ProductDetailSlider
@@ -70,7 +102,7 @@ function ProdData() {
             <div className="product-dtl">
               <div className="product-info">
                 <div className="product-name text-center">
-                  <h2>{name} CHAIR</h2>
+                  <h2>{name}</h2>
                 </div>
 
                 <div className="reviews-counter d-flex flex-wrap gap-2">
@@ -138,9 +170,9 @@ function ProdData() {
                   />
                   <div className="qtyplus">+</div>
                 </form>
-                <Link href="/AddToCart" className="btn bg-danger text-white m-2 px-5 ProdbtnRes">
+                <p onClick={handleMoveToCart} className="btn bg-danger text-white m-2 px-5 ProdbtnRes">
                   Add to Cart
-                </Link>
+                </p>
                 <Link href="/Address" className="btn bg-danger text-white m-2 px-5 ProdbtnRes">
                   Buy Now
                 </Link>
@@ -188,7 +220,6 @@ function ProdData() {
 
         <MoreProduct />
 
-        
       </div>
 
 

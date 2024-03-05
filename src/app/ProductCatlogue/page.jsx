@@ -12,7 +12,7 @@ const ProductCatlogue = () => {
     <>
       {/* <CatlogueBanner /> */}
       {/* <TopPics /> */}
-      <PremiumChairs />
+      {/* <PremiumChairs /> */}
       <PreChairsCards />
       <BoughtTogether />
       <RecentlyViewed />

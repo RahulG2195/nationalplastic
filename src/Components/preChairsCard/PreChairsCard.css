@@ -6,7 +6,14 @@
     border-radius: 20px;
     background-color: transparent !important;
 }
-
+.in-wishlist{
+    font-size: 10;
+  color: red ;
+  
+}
+.card-body .right i{
+    cursor: pointer;
+}
 .preCont:hover {
     box-shadow: rgba(0, 0, 0, 0.20) 1.95px 1.95px 2.6px;
     transition: all .5s;

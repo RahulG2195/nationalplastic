@@ -1,12 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     // output:'export',
-    eslint: {
-        ignoreDuringBuilds: true,
-    },
-    images: {
-        unoptimized: true, // Disables image optimization
-      },
+    // eslint: {
+    //     ignoreDuringBuilds: true,
+    // },
+    // // images:{
+    //     unoptimized:true,
+    // },
 
     // env:{
     // 'MYSQL_HOST':'127.0.0.1',

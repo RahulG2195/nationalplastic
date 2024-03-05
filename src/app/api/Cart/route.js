@@ -3,13 +3,11 @@ import { query } from "@/lib/db";
 
 export async function GET(request) {
     try {
-        // Get the product IDs from mycart table
         const mycart = await query({
             query: "SELECT product_id FROM mycart",
             values: [],
         });
 
-        // Extract product IDs from the result
         const productIds = mycart.map(row => row.product_id);
 
         // Fetch product details for the retrieved product IDs
@@ -17,7 +15,6 @@ export async function GET(request) {
             query: `SELECT * FROM products WHERE product_id IN (${productIds.join(',')})`,
             values: [],
         });
-        console.log("here is product id in get ",productIds)
 
         return new Response(JSON.stringify({
             status: 200,

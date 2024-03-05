@@ -31,22 +31,25 @@ export default function TopPick() {
   //     url : '#'
   //   },
   // ];
-  
+
 
   const [hometoppics, setHometoppics] = useState([]);
-  
+
   useEffect(() => {
-    const fetchdata = async ()  => {
+    const fetchdata = async () => {
       const response = await axios.get('http://localhost:3000/api/Products')
       const filteredData = response.data.products.filter(item => item.categoryType === "home_top_pics");
       console.log(response);
-      
+
       setHometoppics(filteredData)
-      
+
     }
     fetchdata();
   }, [])
-  
+
+  const sendCategory = (productName) => {
+    localStorage.setItem('category', productName);
+  };
 
 
   return (
@@ -101,9 +104,12 @@ export default function TopPick() {
                       <CatCards
                         image={`/Assets/images/Home-page/${product.image_name}`}
                         title={product.product_name}
-                        url={product.url}
+                        categoryType={product.categoryType}
+                        onCategoryChange={() => sendCategory(
+                          product.product_name
+                        )}
                       />
-                     
+
                     </SwiperSlide>
                   </div>
                 ))}

@@ -1,153 +1,211 @@
 "use client"
 import React, { useEffect, useState } from "react";
 import PreChairsCard from "../preChairsCard/preChairsCard";
-import './PreChairCard.css'
+import './PreChairCard.css';
 import axios from "axios";
 import { DotLoader } from "react-spinners";
 import 'react-toastify/dist/ReactToastify.css';
 import { Bounce, toast } from 'react-toastify';
-import {  useDispatch, useSelector } from "react-redux";
-import store from "@/redux/store";
+import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/reducer/cartSlice";
-
-
-
+import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
+import PremiumChairs from "./PremiumChairs";
 
 const PreChairsCards = () => {
-  const notify = () => {
-    // console.log("Toast notification triggered");
-    toast.success('ADDED TO WISHLIST', {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-      transition: Bounce,
-    });
-  };
+  // ... other code
 
-  const notifyinfo = () => {
-    // console.log("Toast notification triggered");
-    toast.info('ALREADY IN WISHLIST', {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-      transition: Bounce,
-    });
-  };
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [wishlistItems, setWishlistItems] = useState([]);
-  // const items = useSelector(state => state.cart.items);
+  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedArmType, setSelectedArmType] = useState(null);
+  const [selectedPriceSort, setSelectedPriceSort] = useState(null);
+  const [categoryType, setCategoryType] = useState();
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     fetchData();
-    fetchWishlistItems(); // Fetch wishlist items when the component mounts
-  }, []);
-
+  }, [
+    selectedColor,
+    selectedArmType,
+    selectedPriceSort,
+    categoryType, // Include categoryType in dependency array
+  ]);
 
   const fetchData = async () => {
     try {
+      const categoryTitle = localStorage.getItem('category');
+      setCategoryType(categoryTitle);
+
       const response = await axios.get("http://localhost:3000/api/Products");
-      const filteredData = response.data.products.filter(item => item.categoryType === "premium chairs");
 
-      setProducts(filteredData);
-      setIsLoading(false);
-    } catch (error) {
-      alert("Error fetching data", error)
-    }
-  };
+      const fetchedData = response.data; 
+      console.log("Fetched data:", fetchedData); 
 
+      if (fetchedData?.products) { 
+        let filteredData = fetchedData.products;
 
+        // Handle color filtering:
+        if (selectedColor) {
+          filteredData = filteredData.filter((item) =>
+            item.color && // Ensure color property exists before toLowerCase()
+            item.color.toLowerCase() === selectedColor.toLowerCase()
+          );
+          console.log("Filtered by color:", filteredData); // Log filtered data for debugging
+        }
 
-  const fetchWishlistItems = async () => {
-    try {
-      const response = await axios.get("http://localhost:3000/api/Wishlist");
-      setWishlistItems(response.data.Wishlist);
-    } catch (error) {
-      console.error("Error fetching wishlist items:", error);
-    }
-  };
+        // Handle arm type filtering:
+        if (selectedArmType) {
+          filteredData = filteredData.filter((item) =>
+            item.armType && // Ensure armType property exists before toLowerCase()
+            item.armType.toLowerCase() === selectedArmType.toLowerCase()
+          );
+          console.log("Filtered by arm type:", filteredData); // Log filtered data for debugging
+        }
 
+        // Handle price sorting:
+        if (selectedPriceSort) {
+          filteredData.sort((a, b) => {
+            if (selectedPriceSort === 'asc') {
+              return a.price - b.price;
+            } else if (selectedPriceSort === 'desc') {
+              return b.price - a.price;
+            }
+            return 0; // Maintain original order if invalid value is selected
+          });
+          console.log("Filtered by price:", filteredData); // Log filtered data for debugging
+        }
 
-  const handleAddToWishlist = async (product_id,product_name, short_description, price, discount_price, discount, ChairImg) => {
-    try {
-      const isProductAlreadyAdded = wishlistItems.some(item => item.ProductName === product_name);
-      if (isProductAlreadyAdded) {
-        notifyinfo();
+        // Handle category filtering:
+        if (categoryType) {
+          filteredData = filteredData.filter((item) =>
+            item.categoryType && // Ensure categoryType property exists before toLowerCase()
+            item.categoryType.toLowerCase() === categoryType.toLowerCase()
+          );
+          // console.log("Filtered by category:", filteredData); // Log filtered data for debugging
+        }
 
-        return;
+        setProducts(filteredData);
+      } else {
+        console.error("API response did not contain 'products' property"); // Handle missing data
       }
 
-      await axios.post(`http://localhost:3000/api/Wishlist`, {
-        product_id:product_id,
-        ProductName: product_name,
-        productDiscription: short_description,
-        Price: price,
-        originalPrice: discount_price,
-        discount: discount,
-        WishlistImg: ChairImg
-      });
-      notify();
-      fetchWishlistItems();
+      setIsLoading(false);
     } catch (error) {
-      console.error("Error:", error);
+      alert("Error fetching data", error);
     }
   };
 
-  // const handleAddToCart = async(product_name, short_description, price, discount_price, discount, ChairImg)
+  const handleAddToWishlist = (product_id) =>{
+    dispatch(addItemToWishlist({
+      product_id: product_id,
+    }));
+  }
   const handleMoveToCart = (product_id) => {
-    // console.log("in handle cart", product_id);
     dispatch(addToCart({
       product_id: product_id,
     }));
-    console.log("this is product id in card ",product_id)
   };
-  return (
 
+  const handleArmType = (event) => {
+    const selectedArmType = event.target.value;
+    setSelectedArmType(selectedArmType === 'all' ? null : selectedArmType);
+  };
+
+  const handleColor = (event) => {
+    const selectedColor = event.target.value;
+    setSelectedColor(selectedColor === 'all' ? null : selectedColor);
+  };
+
+  const handlePriceSort = (event) => {
+    const selectedPriceSort = event.target.value;
+    setSelectedPriceSort(selectedPriceSort === 'all' ? null : selectedPriceSort);
+  };
+
+  return (
     <div className="container mt-5">
+
+      <PremiumChairs cattitle={categoryType}/>
+
+      <div className="dropboxRes mt-5 d-flex justify-content-between">
+        <div>
+          <div className='text-body-secondary fw-semibold'>FILTER BY</div>
+          <div className="d-flex flex-wrap gap-3 mt-2">
+            <div className="dropdown mt-2 arrow">
+              <select id='Price' name='Price'
+                className="form-control border-primary darkBlue fw-semibold dropdownbuttonResp"
+                onChange={handlePriceSort}
+              >
+                <option value="all">Price</option>
+                <option value="asc">Low to high</option>
+                <option value="desc">High to low</option>
+              </select>
+            </div>
+            <div className="dropdown mt-2 arrow">
+
+              <select id='Arm_Type' name='Arm_Type'
+                className="form-control border-primary darkBlue fw-semibold dropdownbuttonResp"
+                onChange={handleArmType}
+              >
+                <option value="all">Arm type</option>
+                <option  >with arm tent</option>
+                <option >without arm tent</option>
+              </select>
+            </div>
+
+            <div className="dropdown mt-2 arrow">
+              <select
+                id="Color"
+                name="Color"
+                className="form-control border-primary darkBlue fw-semibold dropdownbuttonResp"
+                onChange={handleColor}
+              >
+                <option value="all">Color</option>
+                <option value="Black">Black</option>
+                <option value="Blue">Blue</option>
+                <option value="Red">Red</option>
+              </select>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
       {isLoading ? (
         <center className="spinner">
-          <DotLoader color={"#36D7B7"} loading={isLoading} /> 
-        </center >
-      ) : (
+          <DotLoader color={"#36D7B7"} loading={isLoading} />
+        </center >,
+        console.log("thisislength of products ",products.length )
+      ) : products.length === 0 ? (
+        <div className="text-center mt-5">
+          <h3  className="text-muted">
+            No products available</h3>
+        </div>
+      ) :
+      (
         <div className="row ">
           {products.map((product) => (
             <div key={product.product_id} className="PreCardSm col-6 col-sm-6 col-xs-4 col-md-6 col-lg-3">
-                <PreChairsCard
-                  ChairImg={`/Assets/images/New-launches-1/${product.image_name}`}
-                  id={product.product_id}
-                  Title={product.product_name}
-                  Discription={product.short_description}
-                  Price={product.price}
-                  orignalPrice={product.discount_price}
-                  Discount={product.discount_percentage}
-                  
-                  onaddToWishlist={() => handleAddToWishlist
-                    (
-                      product.product_id,
-                      product.product_name,
-                      product.short_description,
-                      product.price,
-                      product.discount_price,
-                      product.discount_percentage,
-                      product.image_name
-                    )
-                  }
-                  onAddToCart={() => handleMoveToCart(
+              <PreChairsCard
+                ChairImg={`/Assets/images/New-launches-1/${product.image_name}`}
+                id={product.product_id}
+                Title={product.product_name}
+                Discription={product.short_description}
+                Price={product.price}
+                orignalPrice={product.discount_price}
+                Discount={Math.floor((product.discount_price - product.price) / product.discount_price * 100)}
+
+                onaddToWishlist={() => handleAddToWishlist
+                  (
                     product.product_id,
-                  )}
-                
-                />
+    
+                  )
+                }
+                onAddToCart={() => handleMoveToCart(
+                  product.product_id,
+                )}
+
+              />
             </div>
           ))}
         </div>
