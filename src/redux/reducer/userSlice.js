@@ -20,6 +20,7 @@ export const loginSlice = createAsyncThunk("/auth/login", async (data) => {
       loading: "Wait! Authentication in progress...",
       success: (data) => {
         return data?.data?.message;
+      
       },
       error: "Failed to log in",
     });

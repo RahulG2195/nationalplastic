@@ -1,14 +1,16 @@
 // 'use client'
 // Import the required modules
+// import { useRouter } from 'next/router';
 import { query } from "@/lib/db"; // Assuming 'your-database-module' is the correct path to your database module
+// const router = useRouter();
+
 // import { Response } from 'your-response-library'; // Assuming 'your-response-library' is the correct library for handling responses
 
 // Define your API endpoint handler for GET request
 // import { useRouter } from 'next/navigation'
 
-
 export async function GET(request) {
-    try {
+    try {  
         const users = await query({
             query: "SELECT * FROM customer_detail",
             values: [],
@@ -36,7 +38,6 @@ export async function POST(request) {
             query: "SELECT * FROM customer_detail WHERE email = ?",
             values: [email],
         });
-
         if (existingUser.length > 0) {
             return new Response(JSON.stringify({ message: "Email already exists" }), { status: 400 });
             // alert("no no no  !");
@@ -50,7 +51,9 @@ export async function POST(request) {
 
         // Handle successful registration
         if (result.affectedRows > 0) {
+            // router.push('/Login');
             return new Response(JSON.stringify({ message: "Registration successful" }), { status: 200 });
+            // router.push('/Login')
         } else {
             return new Response(JSON.stringify({ message: "Failed to register user" }), { status: 500 });
         }

@@ -2,9 +2,11 @@
 import { useState } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import '../../styles/profilepage.css';
 
-function Register() {
+function Register() { 
+    const router = useRouter();
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -12,7 +14,7 @@ function Register() {
         phone: '',
         password: '',
         confirmPassword: '',
-        image: null,
+        // image: null,
     });
     const [formErrors, setFormErrors] = useState({});
     const [successMessage, setSuccessMessage] = useState('');
@@ -40,20 +42,17 @@ function Register() {
         if (formData.password !== formData.confirmPassword) {
             errors.confirmPassword = 'Passwords do not match';
         }
-        // if (!isValidImage(formData.image)) {
-        //     errors.image = 'Invalid image file format';
-        // }
 
         if (Object.keys(errors).length === 0) {
             try {
                 // Check if email already exists
                 const { data } = await axios.get(`http://localhost:3000/api/Users`);
-                const existingEmails = data.map(user => user.email);
+                const existingEmails = data.map(user => user.Email);
                 if (existingEmails.includes(formData.email)) {
                     alert("Email already exists!"); 
                 } else { 
                     const response = await axios.post('http://localhost:3000/api/Users', formData);
-                    console.log('Form submitted:', response);
+                    console.log('Form submitted:', response );
                     // Clear form data on successful submission
                     setFormData({
                         firstName: '',
@@ -66,7 +65,9 @@ function Register() {
                     });
 
                     // Display success message
-                    setSuccessMessage('Registration successful!');
+                    setSuccessMessage('Registration successful......!');
+                    router.push('/Login')
+
                 }
             } catch (error) {
                 console.error('Error submitting form:', error);
