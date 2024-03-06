@@ -107,7 +107,6 @@ export const cartSlice = createSlice({
         localStorage.setItem("products", JSON.stringify(state.products));
       }
     },
-    // state.total_price -= parseFloat(product.price);
     increaseQuantity: (state, action) => {
       const { product_id } = action.payload;
       console.log("increase quantit" + product_id);

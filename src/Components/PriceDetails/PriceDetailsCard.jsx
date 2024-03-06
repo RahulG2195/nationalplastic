@@ -11,15 +11,12 @@ const PriceDetailsCard = ({
   InstallationCharges,
 }) => {
   // const dispatch = useDispatch();
-  // const ValueFromRedux = useSelector((state) => state.price.totalprice);
-  const [totalPrice, setTotalPrice] = useState(0); // Set initial value to 0
-  // console.log(totalPrice)
-  // console.log(ValueFromRedux)
+  const priceFromState = useSelector((state) => state.cart.total_price || 0);
 
-  // useEffect(() => {
-  //   setTotalPrice(ValueFromRedux);
-  // console.log(totalPrice)
-  // }, [ValueFromRedux]);
+  const [totalPrice, setTotalPrice] = useState(priceFromState);
+  useEffect(() => {
+    setTotalPrice(priceFromState);
+  }, [priceFromState]);
   return (
     <>
       <div className="PriceDetail">
