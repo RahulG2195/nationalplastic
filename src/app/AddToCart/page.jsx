@@ -14,7 +14,7 @@ function AddToCart() {
   const [discount, setDiscount] = useState(0);
   const [totalPayble, setTotalPayble] = useState(0);
   const [installationCharges, setInstallationCharges] = useState(0);
-;
+  ;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +32,7 @@ function AddToCart() {
           image_name: item.image_name,
           description: item.short_description,
           InstallationCharges: item.InstallationCharges
-        }),[]);
+        }), []);
 
         // Calculate total price, discount, total payable, and installation charges
         const totalPrice = products.reduce((total, product) => total + parseFloat(product.discount_price), 0);
@@ -101,7 +101,7 @@ function AddToCart() {
   }
   const onRemoveSuccess = async (product_id) => {
     try {
-      console.log("wanted to remove", product_id);
+      // console.log("wanted to remove", product_id);
       // Remove the product from the database
       await axios.delete(`http://localhost:3000/api/Cart`, { data: { product_id } });
 
@@ -154,7 +154,7 @@ function AddToCart() {
                     <div className="iconImage">
                       <Image
                         src="/Assets/images/AddTOCart/Icon-location.png"
-                        className="img-fluid d-block w-3"
+                        classname="img-fluid d-block w-3"
                         alt="ome banner 1"
                         width={100}
                         height={80}

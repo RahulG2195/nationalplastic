@@ -102,7 +102,7 @@ function ProdData() {
             <div className="product-dtl">
               <div className="product-info">
                 <div className="product-name text-center">
-                  <h2>{name}</h2>
+                  <h2 className="fw-bold">{name}</h2>
                 </div>
 
                 <div className="reviews-counter d-flex flex-wrap gap-2">
@@ -126,7 +126,7 @@ function ProdData() {
                       <strong>Color: </strong> Gold
                     </p>
                     <input type="radio" name="prod_clr" id="gold" value="gold" className="productDetailsRadio m-1" />
-                    <input type="radio" name="prod_clr" id="gold" value="white" className="productDetailsRadio m-1" />
+                    <input type="radio" name="prod_clr" id="blue" value="white" className="productDetailsRadio m-1" />
                   </div>
                   <div className="prod_size">
                     <div><strong>Size: </strong> 0000</div>

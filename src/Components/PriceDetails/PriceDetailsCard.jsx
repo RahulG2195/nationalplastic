@@ -5,15 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 const PriceDetailsCard = ({ itemCount, cartPrice, totalDiscount, totalPay, InstallationCharges }) => {
   // const dispatch = useDispatch();
-  const ValueFromRedux = useSelector((state) => state.price.totalprice);
+  // const ValueFromRedux = useSelector((state) => state.price.totalprice);
   const [totalPrice, setTotalPrice] = useState(0); // Set initial value to 0
   console.log(totalPrice)
-  console.log(ValueFromRedux)     
+  // console.log(ValueFromRedux)     
 
-  useEffect(() => {
-    setTotalPrice(ValueFromRedux);
-  console.log(totalPrice)
-  }, [ValueFromRedux]);
+  // useEffect(() => {
+  //   setTotalPrice(ValueFromRedux);
+  // console.log(totalPrice)
+  // }, [ValueFromRedux]);
   return (
     <>
       <div className="PriceDetail">
@@ -22,7 +22,7 @@ const PriceDetailsCard = ({ itemCount, cartPrice, totalDiscount, totalPay, Insta
         <div className="mt-4">
           <div className={`d-flex justify-content-between mt-1 fw-semibold`}>
             <div className="text-secondary">MRP</div>
-            <div> RS {totalPrice ? totalPrice : 100}</div>
+            <div> RS {cartPrice ? cartPrice : "0000"}</div>
 
           </div>
           <div className={`d-flex justify-content-between mt-1 fw-semibold text-success`}>
