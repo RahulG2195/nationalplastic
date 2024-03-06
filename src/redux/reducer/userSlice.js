@@ -20,7 +20,6 @@ export const loginSlice = createAsyncThunk("/auth/login", async (data) => {
       loading: "Wait! Authentication in progress...",
       success: (data) => {
         return data?.data?.message;
-      
       },
       error: "Failed to log in",
     });
@@ -38,8 +37,10 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(loginSlice.fulfilled, (state, action) => {
-      console.log("inside Usefffect of authslice" + JSON.stringify(action?.meta?.arg));
-      
+      console.log(
+        "inside Usefffect of authslice" + JSON.stringify(action?.meta?.arg)
+      );
+
       // Update state with user data and login status
       state.isLoggedIn = true;
       state.userData = action.meta.arg;
