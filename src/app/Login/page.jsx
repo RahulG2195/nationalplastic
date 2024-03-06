@@ -7,9 +7,12 @@ import Image from "next/image";
 import "../../styles/profilepage.css";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { authSliceReducer } from "@/redux/reducer/userSlice";
 // import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [login, setLogin] = useState(false);
@@ -49,6 +52,7 @@ function Login() {
         alert("Successfully logged in");
         setLogin(true);
         // push("/");
+        dispatch(authSliceReducer(formData));
       }
     } catch (error) {
       console.error("Error during login:", error);

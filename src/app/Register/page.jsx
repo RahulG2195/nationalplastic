@@ -12,8 +12,9 @@ function Register() {
         lastName: '',
         email: '',
         phone: '',
+        address: '',
         password: '',
-        confirmPassword: '',
+        // confirmPassword: '',
         // image: null,
     });
     const [formErrors, setFormErrors] = useState({});
@@ -35,6 +36,10 @@ function Register() {
         }
         if (!isValidPhone(formData.phone)) {
             errors.phone = 'Invalid phone number';
+        }
+        
+        if (!isValidAddress(formData.address)) {
+            errors.address = 'Invalid address';
         }
         if (!isValidPassword(formData.password)) {
             errors.password = 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character';
@@ -59,8 +64,9 @@ function Register() {
                         lastName: '',
                         email: '',
                         phone: '',
+                        address: '',
                         password: '',
-                        confirmPassword: '',
+                        // confirmPassword: '',
                         // image: null,
                     });
 
@@ -110,6 +116,10 @@ function Register() {
         const phonePattern = /^\d{10}$/;
         return phonePattern.test(phone);
     };
+const isValidAddress = (address) => {
+    const AddressPattern = /^[a-zA-Z0-9\s\-,'. ()]+$/;
+    return AddressPattern.test(address);
+}
 
     const isValidName = (name) => {
         const namePattern = /^[a-zA-Z]+$/;
@@ -173,6 +183,13 @@ function Register() {
                                 <div className="col-sm-10">
                                     <input type="text" className="form-control" id="inputPhone" name="phone" value={formData.phone} onChange={handleInputChange} />
                                     {formErrors.phone && <div className="text-danger">{formErrors.phone}</div>}
+                                </div>
+                            </div>
+                            <div className="row mb-3 mt-3">
+                                <label htmlFor="inputAddress" className="col-sm-2 col-form-label">Address:</label>
+                                <div className="col-sm-10">
+                                    <input type="text" className="form-control" id="inputAddress" name="address" value={formData.adress} onChange={handleInputChange} />
+                                    {formErrors.address && <div className="text-danger">{formErrors.address}</div>}
                                 </div>
                             </div>
                             <div className="row mb-3 mt-3">
