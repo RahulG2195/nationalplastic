@@ -6,7 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import Link from "next/link";
 // import axios from "axios";
-import { increaseQuantity, decreaseQuantity } from "@/redux/reducer/cartSlice";
+import {
+  increaseQuantity,
+  decreaseQuantity,
+  removeItemFromCart,
+} from "@/redux/reducer/cartSlice";
 
 const CartProduct = ({
   src,
@@ -50,6 +54,7 @@ const CartProduct = ({
 
   const handleRemove = async () => {
     try {
+      dispatch(removeItemFromCart({ product_id: productId }));
       onRemoveSuccess(productId);
     } catch (error) {
       alert("Cannot delete");

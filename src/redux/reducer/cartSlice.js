@@ -82,11 +82,32 @@ export const cartSlice = createSlice({
 
     removeItemFromCart: (state, action) => {
       const { product_id } = action.payload;
-      state.products = state.products.filter(
-        (product) => product.product_id !== product_id
+
+      // Find the index of the product to be removed
+      const productIndex = state.products.findIndex(
+        (product) => product.product_id === product_id
       );
-      localStorage.setItem("products", JSON.stringify(state.products));
+
+      if (productIndex !== -1) {
+        const removedProduct = state.products[productIndex];
+        const updatedProducts = [...state.products];
+
+        // Remove the product from the cart
+        updatedProducts.splice(productIndex, 1);
+
+        // Update total_price
+        state.total_price -= parseFloat(
+          removedProduct.price * removedProduct.quantity
+        );
+
+        // Update state with the new products array
+        state.products = updatedProducts;
+
+        // Update localStorage
+        localStorage.setItem("products", JSON.stringify(state.products));
+      }
     },
+    // state.total_price -= parseFloat(product.price);
     increaseQuantity: (state, action) => {
       const { product_id } = action.payload;
       console.log("increase quantit" + product_id);
@@ -145,6 +166,7 @@ export const {
   setInitialCount,
   increaseQuantity,
   decreaseQuantity,
+  removeItemFromCart,
 } = cartSlice.actions;
 
 export const addToCart = (item) => async (dispatch, getState) => {
