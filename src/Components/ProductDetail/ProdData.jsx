@@ -21,8 +21,9 @@ import { addToCart } from "@/redux/reducer/cartSlice";
 function ProdData() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [storedId, setStoredId] = useState(null)
-  const [productName, setProductname] = useState(null)
+  const [productId, setProductId] = useState(null);
+  // const [productName, setProductName] = useState('');
+  const [filteredData, setFilteredData] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const dispatch = useDispatch();
 
@@ -30,18 +31,16 @@ function ProdData() {
     const fetchData = async () => {
       try {
         const storedId = localStorage.getItem('myId');
-        const productName = localStorage.getItem('productName')
-        setStoredId(storedId);
-        setProductname(productName)
+        const productName = localStorage.getItem('productName');
+        setProductId(storedId);
+
         const response = await axios.get("http://localhost:3000/api/Products");
         let filteredData = [];
         if (productName) {
           filteredData = response.data.products.filter(item => item.product_name.toLowerCase() === productName.toLowerCase());
-        } else if (storedId) {
-          filteredData = response.data.products.filter(item => item.product_id == storedId);
-        } else {
-          setErrorMessage("Sorry, this product is not available");
-          setIsLoading(false);
+          localStorage.clear();
+        } else if(storedId)  {
+          filteredData = response.data.products.filter(item => item.product_id ==  storedId );
         }
         if (filteredData.length === 0) {
           setErrorMessage("Sorry, this product is not available");
@@ -186,7 +185,7 @@ function ProdData() {
                   />
                   <div className="qtyplus">+</div>
                 </form>
-                <p onClick={handleMoveToCart} className="btn bg-danger text-white m-2 px-5 ProdbtnRes">
+                <p onClick={() => handleMoveToCart(productId)} className="btn bg-danger text-white m-2 px-5 ProdbtnRes">
                   Add to Cart
                 </p>
                 <Link
