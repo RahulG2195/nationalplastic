@@ -2,17 +2,20 @@
 import { useState } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import '../../styles/profilepage.css';
 
-function Register() {
+function Register() { 
+    const router = useRouter();
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
         email: '',
         phone: '',
+        address: '',
         password: '',
-        confirmPassword: '',
-        image: null,
+        // confirmPassword: '',
+        // image: null,
     });
     const [formErrors, setFormErrors] = useState({});
     const [successMessage, setSuccessMessage] = useState('');
@@ -34,39 +37,43 @@ function Register() {
         if (!isValidPhone(formData.phone)) {
             errors.phone = 'Invalid phone number';
         }
+        
+        if (!isValidAddress(formData.address)) {
+            errors.address = 'Invalid address';
+        }
         if (!isValidPassword(formData.password)) {
             errors.password = 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character';
         }
         if (formData.password !== formData.confirmPassword) {
             errors.confirmPassword = 'Passwords do not match';
         }
-        // if (!isValidImage(formData.image)) {
-        //     errors.image = 'Invalid image file format';
-        // }
 
         if (Object.keys(errors).length === 0) {
             try {
                 // Check if email already exists
                 const { data } = await axios.get(`http://localhost:3000/api/Users`);
-                const existingEmails = data.map(user => user.email);
+                const existingEmails = data.map(user => user.Email);
                 if (existingEmails.includes(formData.email)) {
                     alert("Email already exists!"); 
                 } else { 
                     const response = await axios.post('http://localhost:3000/api/Users', formData);
-                    console.log('Form submitted:', response);
+                    console.log('Form submitted:', response );
                     // Clear form data on successful submission
                     setFormData({
                         firstName: '',
                         lastName: '',
                         email: '',
                         phone: '',
+                        address: '',
                         password: '',
-                        confirmPassword: '',
+                        // confirmPassword: '',
                         // image: null,
                     });
 
                     // Display success message
-                    setSuccessMessage('Registration successful!');
+                    setSuccessMessage('Registration successful......!');
+                    router.push('/Login')
+
                 }
             } catch (error) {
                 console.error('Error submitting form:', error);
@@ -109,6 +116,10 @@ function Register() {
         const phonePattern = /^\d{10}$/;
         return phonePattern.test(phone);
     };
+const isValidAddress = (address) => {
+    const AddressPattern = /^[a-zA-Z0-9\s\-,'. ()]+$/;
+    return AddressPattern.test(address);
+}
 
     const isValidName = (name) => {
         const namePattern = /^[a-zA-Z]+$/;
@@ -172,6 +183,13 @@ function Register() {
                                 <div className="col-sm-10">
                                     <input type="text" className="form-control" id="inputPhone" name="phone" value={formData.phone} onChange={handleInputChange} />
                                     {formErrors.phone && <div className="text-danger">{formErrors.phone}</div>}
+                                </div>
+                            </div>
+                            <div className="row mb-3 mt-3">
+                                <label htmlFor="inputAddress" className="col-sm-2 col-form-label">Address:</label>
+                                <div className="col-sm-10">
+                                    <input type="text" className="form-control" id="inputAddress" name="address" value={formData.adress} onChange={handleInputChange} />
+                                    {formErrors.address && <div className="text-danger">{formErrors.address}</div>}
                                 </div>
                             </div>
                             <div className="row mb-3 mt-3">

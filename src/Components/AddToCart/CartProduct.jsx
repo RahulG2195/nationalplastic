@@ -6,55 +6,47 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import Link from "next/link";
 // import axios from "axios";
+import { increaseQuantity, decreaseQuantity } from "@/redux/reducer/cartSlice";
 
-const CartProduct = ({ src, productName, productDesc, discountedPrice, productPrice, discPer, installationCharges, productId, onRemoveSuccess }) => {
-  const [initialCount, setInitialCount] = useState(1); // Set initial count to 1 by default
+const CartProduct = ({
+  src,
+  productName,
+  productDesc,
+  discountedPrice,
+  productPrice,
+  discPer,
+  installationCharges,
+  productId,
+  onRemoveSuccess,
+}) => {
+  const [initialCount, setInitialCount] = useState(1);
+  // Set initial count to 1 by default
+  // const dispatch = useDispatch();
+
   const handleIncrement = () => {
     setInitialCount(initialCount + 1);
+    dispatch(increaseQuantity({ product_id: productId }));
+    const data = localStorage.getItem("products");
+    console.log("LOcalSTorage has these data: " + JSON.stringify(data));
   };
-
-  // const dispatch = useDispatch();
-  // const [cartItems, setCartItems] = useState([]);
-
-  // const cartInitialCount = useSelector(state => state.cart.initialCount);
-
-  // useEffect(() => {
-  //   // Update the initialCount state with the value from the Redux store
-  //   setInitialCount(cartInitialCount);
-  // }, [cartInitialCount]); // Run this effect whenever cartInitialCount changes
-
-  // useEffect(() => {
-  //   // const isProductInCart = cartItems.some(item => item.productId === productId);
-  //   // console.log("this is item ", item.productId)
-
-  //   // if (isProductInCart) {
-  //   //   setInitialCount(initialCount + 1);
-  //   // }
-  // }, [cartItems, productId]); 
-
-  // const handleAddToCart = async () => {
-  //   try {
-  //     dispatch(addToCart({ product_id: productId }, initialCount));
-  //   } catch (error) {
-  //     console.error('Error adding to cart:', error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   // Update the count from the Redux store
-  //   setInitialCount(initialCount);
-  //   // console.log("in cart is ",initialCount+1);
-  // }, [initialCount]);
+  const handleDecrement = () => {
+    if (initialCount > 0) {
+      setInitialCount(initialCount - 1);
+      dispatch(decreaseQuantity({ product_id: productId }));
+    }
+  };
 
   const dispatch = useDispatch();
 
   const handleAddtoWishlist = (product_id) => {
-    console.log("want to cart tp wish", product_id)
+    console.log("want to cart tp wish", product_id);
 
-    dispatch(addItemToWishlist({
-      product_id: product_id,
-
-    }));
-  }
+    dispatch(
+      addItemToWishlist({
+        product_id: product_id,
+      })
+    );
+  };
 
   const handleRemove = async () => {
     try {
@@ -66,7 +58,7 @@ const CartProduct = ({ src, productName, productDesc, discountedPrice, productPr
   };
 
   const setid = () => {
-    localStorage.setItem('myId', productId);
+    localStorage.setItem("myId", productId);
   };
 
   return (
@@ -93,7 +85,11 @@ const CartProduct = ({ src, productName, productDesc, discountedPrice, productPr
         <div className="CartQuantity">
           <p>Quantity</p>
           {/* Increment Decrement start */}
-          <IncrementDecrement initialCount={initialCount} onIncrement={handleIncrement} />
+          <IncrementDecrement
+            initialCount={initialCount}
+            onIncrement={handleIncrement}
+            onDecrement={handleDecrement}
+          />
           {/* Increment Decrement end */}
           <div className="productPrice">
             <p>{productPrice}</p>
@@ -118,7 +114,10 @@ const CartProduct = ({ src, productName, productDesc, discountedPrice, productPr
         </div>
 
         <div className="InstallationCharges">
-          <div onClick={() => handleAddtoWishlist(productId)} className="CouponApplied">
+          <div
+            onClick={() => handleAddtoWishlist(productId)}
+            className="CouponApplied"
+          >
             <Image
               src="/Assets/images/AddTOCart/core-heart.png"
               classname="img-fluid d-block w-100"
@@ -138,7 +137,6 @@ const CartProduct = ({ src, productName, productDesc, discountedPrice, productPr
             />
             <p>Remove</p>
           </div>
-
         </div>
       </div>
       <hr />

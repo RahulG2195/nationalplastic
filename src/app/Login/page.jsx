@@ -3,17 +3,20 @@ import { useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 // import { useNavigate } from 'next/router'; // Import useRouter from 'next/router'
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import "../../styles/profilepage.css";
-// import { useNavigate } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { authSliceReducer } from "@/redux/reducer/userSlice";
 // import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [login, setLogin] = useState(false);
-  // const router = useRouter(); // Use useRouter on the client-side only
+  const router = useRouter(); // Use useRouter on the client-side only
   // const navigate =useNavigate();
   // const router = useRouter();
 
@@ -49,6 +52,7 @@ function Login() {
         alert("Successfully logged in");
         setLogin(true);
         // push("/");
+        dispatch(authSliceReducer(formData));
       }
     } catch (error) {
       console.error("Error during login:", error);
@@ -126,9 +130,10 @@ function Login() {
                   {/* LOG IN */}
 
                   {login ? (
-                    <Link href="/">Home</Link>
+                    // <Link href="/">Home</Link>
+                    router.push('/')
                   ) : (
-                    <Link href="/">Home</Link>
+                    <Link href="/">Login</Link>
                   )}
                 </button>
               </div>
