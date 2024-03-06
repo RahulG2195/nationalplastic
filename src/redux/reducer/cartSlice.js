@@ -45,7 +45,9 @@ export const cartSlice = createSlice({
     },
 
     addItemToCart: (state, action) => {
-      console.log("state: " + state);
+      console.log(
+        "state:-----------------NopeNOtHereWhenAddedFromWishLisT " + state
+      );
       console.log("action: " + action);
       console.log("state: " + JSON.stringify(state));
       console.log("actionPayload: " + JSON.stringify(action.payload));
@@ -65,18 +67,25 @@ export const cartSlice = createSlice({
         state.products.push(action.payload);
         console.log("Actionpayload);" + action.payload);
         console.log("state.items);" + state.product);
-
+        state.total_price += parseFloat(price) * quantity;
         localStorage.setItem("products", JSON.stringify(action.payload));
 
         // alert("Added");
       } else {
-        alert("Its from the Slicer");
-        // console.log(initialState)
+        const existingProduct = state.products.find(
+          (product) => product.product_id === product_id
+        );
+        existingProduct.quantity += quantity;
+        state.total_price += parseFloat(price) * quantity; // Update total price
       }
     },
 
     removeItemFromCart: (state, action) => {
-      state.items = state.items.filter((item) => item.id !== action.payload);
+      const { product_id } = action.payload;
+      state.products = state.products.filter(
+        (product) => product.product_id !== product_id
+      );
+      localStorage.setItem("products", JSON.stringify(state.products));
     },
     increaseQuantity: (state, action) => {
       const { product_id } = action.payload;
@@ -99,7 +108,8 @@ export const cartSlice = createSlice({
         // Update total_price if necessary
         state.total_price += parseFloat(existingProduct.price);
         // Notify user about the increase
-        notifyinfo(); // Call info notification
+        // notifyinfo(); // Call info notification
+        localStorage.setItem("products", JSON.stringify(state.products));
       }
     },
     decreaseQuantity: (state, action) => {
@@ -123,7 +133,8 @@ export const cartSlice = createSlice({
         // Update total_price if necessary
         state.total_price -= parseFloat(existingProduct.price);
         // Notify user about the increase
-        notifyinfo(); // Call info notification
+        // notifyinfo(); // Call info notification
+        localStorage.setItem("products", JSON.stringify(state.products));
       }
     },
   },
@@ -151,6 +162,7 @@ export const addToCart = (item) => async (dispatch, getState) => {
     try {
       const response = await axios.post("http://localhost:3000/api/Cart", item);
       dispatch(addItemToCart(item));
+
       // console.log(item, "this are items ");
       // notify();
     } catch (error) {
@@ -158,7 +170,8 @@ export const addToCart = (item) => async (dispatch, getState) => {
     }
   } else {
     notifyinfo();
-    dispatch(setInitialCount(initialCount + 1)); // Dispatching the setInitialCount action with the updated count
+
+    dispatch(increaseQuantity(initialCount + 1)); // Dispatching the setInitialCount action with the updated count
     console.log(initialCount);
   }
 };
