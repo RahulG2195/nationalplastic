@@ -11,16 +11,10 @@ import { addToCart } from '@/redux/reducer/cartSlice';
 const Search = (props) => {
     const [inWishlist, setInWishlist] = useState(false);
     const [products, setProducts] = useState([]);
-    // console.log("here are products",products)
     const [discounts, setDiscounts] = useState([]);
     const dispatch = useDispatch();
 
     const query = props.searchParams.query;
-    // console.log("length of searched result found is ",products.length)
-    // console.log("this is search result",query);
-    //    const Discount={Math.floor((products.discount_price - products.price) / products.discount_price * 100)}
-
-
 
     //   useEffect(() => {
     //     const fetchWishlistItems = async () => {
