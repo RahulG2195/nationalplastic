@@ -4,6 +4,8 @@ import "../../styles/profilepage.css";
 import Wishlist from "../Wishlist/page";
 import { useEffect,useState } from "react";
 import { toast } from "react-hot-toast";
+import axios from "axios";
+
 function ProfilePage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [data, setData] = useState({});
@@ -17,8 +19,8 @@ function ProfilePage() {
      // Apply custom styling
       // More options: https://react-hot-toast.com/api/toast
     });
-    const isLoggedIn = false;
-    const storedData =  {};
+    // const isLoggedIn = false;
+    // const storedData =  {};
 
     setIsLoggedIn(isLoggedIn);
     setData(storedData);
@@ -32,6 +34,31 @@ function ProfilePage() {
     setIsLoggedIn(isLoggedIn);
     setData(storedData);
   }, []);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const email = localStorage.getItem("userData");
+        const data = JSON.parse(email);
+        const useremail = data.email
+        console.log("gettttttt",useremail)
+        // if (!email) {
+        //   throw new Error("Email not found in local storage");
+        // }
+        // const datares = await axios.get('http://localhost:3000/api/Users');
+        const response = await axios.patch('http://localhost:3000/api/Users',useremail);
+        setUserData(response.data);
+        console.log("rrrrrrrrrrrrrrrrrrrrr:::::::::::::::: ",response);
+        setIsLoading(false);
+      } catch (error) {
+        // console.error("Error fetching user data:", error);
+        // setIsLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, []); // Empty dependency array ensures that this effect runs only once
+
   return (
     <>
       <div className="container profile-page-container">
