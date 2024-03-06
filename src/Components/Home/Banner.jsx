@@ -11,7 +11,7 @@ function Banner() {
         <div className="carousel-item active">
           <Image
             src='/Assets/images/banner/Header-banner-websize.png'
-            classname="img-fluid d-block w-100"
+            className="img-fluid d-block w-100"
             alt="ome banner 1"
             width={100}
             height={80}
@@ -22,7 +22,7 @@ function Banner() {
         <div className="carousel-item">
           <Image
             src='/Assets/images/banner/Header-banner-websize.png'
-            classname="img-fluid d-block w-100"
+            className="img-fluid d-block w-100"
             alt="ome banner 2"
             width={100}
             height={80}
@@ -33,7 +33,7 @@ function Banner() {
         <div className="carousel-item">
           <Image
             src='/Assets/images/banner/Header-banner-websize.png'
-            classname="img-fluid d-block w-100"
+            className="img-fluid d-block w-100"
             alt="ome banner 3"
             width={100}
             height={70}

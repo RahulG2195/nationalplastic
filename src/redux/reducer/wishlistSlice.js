@@ -66,7 +66,7 @@ export const wishlistSlice = createSlice({
 export const { addToWishlist } = wishlistSlice.actions;
 
 export const addItemToWishlist = (item) => async (dispatch, getState) => {
-  console.log("ininininin");
+  // console.log("ininininin")
 
   const { items } = getState().wishlist; // Access state through the second parameter
 

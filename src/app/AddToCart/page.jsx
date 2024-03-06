@@ -151,7 +151,7 @@ function AddToCart() {
   };
   const onRemoveSuccess = async (product_id) => {
     try {
-      console.log("wanted to remove", product_id);
+      // console.log("wanted to remove", product_id);
       // Remove the product from the database
       await axios.delete(`http://localhost:3000/api/Cart`, {
         data: { product_id },
@@ -208,7 +208,7 @@ function AddToCart() {
                     <div className="iconImage">
                       <Image
                         src="/Assets/images/AddTOCart/Icon-location.png"
-                        className="img-fluid d-block w-3"
+                        classname="img-fluid d-block w-3"
                         alt="ome banner 1"
                         width={100}
                         height={80}

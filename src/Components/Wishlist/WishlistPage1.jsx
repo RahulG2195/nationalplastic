@@ -16,7 +16,18 @@ const WishlistPage1 = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:3000/api/Wishlist");
-        const wishlistData = response.data.products;
+        // const wishlistData = response.data.products;
+                const wishlistData = response.data.products.map(item => {
+                    // Calculate discount percentage
+                    const discountPercentage = item.discount_price && item.price
+                        ? Math.floor(((item.discount_price - item.price) / item.discount_price) * 100)
+                        : 0;
+                    return {
+                        ...item,
+                        discount_percentage: discountPercentage
+                    };
+                });
+
         setWishlistItems(wishlistData);
         setIsLoading(false);
       } catch (error) {

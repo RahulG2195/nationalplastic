@@ -6,26 +6,24 @@ import '../../styles/header.css';
 import Link from 'next/link';
 import { useState } from 'react';
 import axios from 'axios';
+import { useRouter } from 'next/navigation'
+
 
 
 export default function Header() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   // const [suggestions, setSuggestions] = useState([]);
-  // console.log("suggestions are here ", suggestions)
-  console.log("here is searched result", searchResults)
-
-
-
-  // console.log("here is result ", searchResults)
-
+  // console.log("here is searched result1", searchTerm)
+  // console.log("here is searched")
+  const router = useRouter()
 
   const handleSearchChange = async (e) => {
     setSearchTerm(e.target.value);
-    
+
     if (!searchTerm) {
       // setSuggestions([]);
-      setSearchResults([]) 
+      setSearchResults([])
       return;
     }
     try {
@@ -35,18 +33,17 @@ export default function Header() {
       console.error('Error fetching suggestions:', error);
     } finally {
       // setIsLoading(false);
-       // Set loading state to false regardless of success or error
+     
     }
   };
 
 
-  const handleSearchSubmit = async (e) => {
+  const handleSearchSubmit = async (e, query) => {
     e.preventDefault();
-    setSearchResults([]); // Clear search results before fetching new results
+    setSearchResults([]); 
     try {
-      const response = await axios.get(`http://localhost:3000/api/search?query=${searchTerm}`);
-      setSearchResults(response.data.products);
-
+      router.push(`/Search?query=${searchTerm}`)
+      
     } catch (error) {
       console.error('Error searching products:', error);
     }
@@ -55,12 +52,6 @@ export default function Header() {
 
   return (
     <>
-      {/* {searchResults.map((product) => (
-        <div key={product.id}>
-          <p>{product.product_name}</p>
-          Add other product details here
-        </div>
-      ))} */}
 
       <div className="container-fluid header">
         <TopBar />
@@ -87,7 +78,7 @@ export default function Header() {
               />
 
             </form>
-            
+
             <button
               className="navbar-toggler"
               type="button"
@@ -197,18 +188,6 @@ export default function Header() {
         <BottomBar />
       </div>
 
-       {/* Conditionally render search results only if they exist and search term is not empty */}
-       {/* {searchResults.length > 0 && !!searchTerm && (
-        <div id="suggestions-list">
-          <ul>
-            {searchResults.map((product) => (
-              <li className="text-danger" key={product.id}>
-                {product.product_name}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )} */}
     </>
   );
 }
