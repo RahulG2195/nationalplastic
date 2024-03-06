@@ -1,11 +1,11 @@
 // reducers/wishlistSlice.js
-import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-import 'react-toastify/dist/ReactToastify.css';
-import { Bounce, toast } from 'react-toastify';
+import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
+import { Bounce, toast } from "react-toastify";
 
 const notify = () => {
-  toast.success('added to wishlist', {
+  toast.success("added to wishlist", {
     position: "top-center",
     autoClose: 2000,
     hideProgressBar: false,
@@ -19,7 +19,7 @@ const notify = () => {
 };
 
 const notifyInfo = () => {
-  toast.info('already in wishlist', {
+  toast.info("already in wishlist", {
     position: "top-center",
     autoClose: 2000,
     hideProgressBar: false,
@@ -33,7 +33,7 @@ const notifyInfo = () => {
 };
 
 export const wishlistSlice = createSlice({
-  name: 'wishlist',
+  name: "wishlist",
   initialState: {
     items: [],
   },
@@ -43,9 +43,11 @@ export const wishlistSlice = createSlice({
     },
     addToWishlist: (state, action) => {
       const newItem = action.payload;
-      console.log("want to add this in wish",newItem.product_id)
+      console.log("want to add this in wish", newItem.product_id);
 
-      const isItemAlreadyAdded = state.items.some(item => item.product_id === newItem.product_id);
+      const isItemAlreadyAdded = state.items.some(
+        (item) => item.product_id === newItem.product_id
+      );
       if (!isItemAlreadyAdded) {
         state.items.push(newItem);
         // notify('Added to wishlist');
@@ -54,40 +56,45 @@ export const wishlistSlice = createSlice({
       }
     },
     removeItemFromWishlist: (state, action) => {
-        state.items = state.items.filter(item => item.product_id !== action.payload);
-      },
+      state.items = state.items.filter(
+        (item) => item.product_id !== action.payload
+      );
+    },
   },
 });
 
-export const {  addToWishlist } = wishlistSlice.actions;
-
+export const { addToWishlist } = wishlistSlice.actions;
 
 export const addItemToWishlist = (item) => async (dispatch, getState) => {
-  console.log("ininininin")
+  console.log("ininininin");
 
-    const { items } = getState().wishlist; // Access state through the second parameter
-   
-  
-    const check = await axios.get('http://localhost:3000/api/Wishlist');
-    const isWishlistEmpty = !check.data.products || check.data.products.length === 0;
-    const isItemAlreadyAdded = !isWishlistEmpty && check.data.products.some(cartItem => cartItem.product_id == item.product_id);
-  
-  console.log("i want to post ")
+  const { items } = getState().wishlist; // Access state through the second parameter
+
+  const check = await axios.get("http://localhost:3000/api/Wishlist");
+  const isWishlistEmpty =
+    !check.data.products || check.data.products.length === 0;
+  const isItemAlreadyAdded =
+    !isWishlistEmpty &&
+    check.data.products.some(
+      (cartItem) => cartItem.product_id == item.product_id
+    );
+
+  console.log("i want to post ");
   if (isWishlistEmpty || !isItemAlreadyAdded) {
     try {
-      const response = await axios.post('http://localhost:3000/api/Wishlist', item);
+      const response = await axios.post(
+        "http://localhost:3000/api/Wishlist",
+        item
+      );
       dispatch(addToWishlist(item));
       // console.log(item, "this are items ");
       notify();
     } catch (error) {
-      console.error('Error adding to cart:', error);
+      console.error("Error adding to cart:", error);
     }
-    } else {
-        notifyInfo();
-      
-    }
-  };
-
-
+  } else {
+    notifyInfo();
+  }
+};
 
 export default wishlistSlice.reducer;

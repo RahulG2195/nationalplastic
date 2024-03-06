@@ -6,14 +6,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import Link from "next/link";
 // import axios from "axios";
+import { increaseQuantity } from "@/redux/reducer/cartSlice";
 
-const CartProduct = ({ src, productName, productDesc, discountedPrice, productPrice, discPer, installationCharges, productId, onRemoveSuccess }) => {
-  const [initialCount, setInitialCount] = useState(1); // Set initial count to 1 by default
+const CartProduct = ({
+  src,
+  productName,
+  productDesc,
+  discountedPrice,
+  productPrice,
+  discPer,
+  installationCharges,
+  productId,
+  onRemoveSuccess,
+}) => {
+  const [initialCount, setInitialCount] = useState(1);
+  // Set initial count to 1 by default
+  // const dispatch = useDispatch();
+
   const handleIncrement = () => {
     setInitialCount(initialCount + 1);
+    dispatch(increaseQuantity({ product_id: productId }));
   };
 
-  // const dispatch = useDispatch();
   // const [cartItems, setCartItems] = useState([]);
 
   // const cartInitialCount = useSelector(state => state.cart.initialCount);
@@ -30,7 +44,7 @@ const CartProduct = ({ src, productName, productDesc, discountedPrice, productPr
   //   // if (isProductInCart) {
   //   //   setInitialCount(initialCount + 1);
   //   // }
-  // }, [cartItems, productId]); 
+  // }, [cartItems, productId]);
 
   // const handleAddToCart = async () => {
   //   try {
@@ -48,13 +62,14 @@ const CartProduct = ({ src, productName, productDesc, discountedPrice, productPr
   const dispatch = useDispatch();
 
   const handleAddtoWishlist = (product_id) => {
-    console.log("want to cart tp wish", product_id)
+    console.log("want to cart tp wish", product_id);
 
-    dispatch(addItemToWishlist({
-      product_id: product_id,
-
-    }));
-  }
+    dispatch(
+      addItemToWishlist({
+        product_id: product_id,
+      })
+    );
+  };
 
   const handleRemove = async () => {
     try {
@@ -66,7 +81,7 @@ const CartProduct = ({ src, productName, productDesc, discountedPrice, productPr
   };
 
   const setid = () => {
-    localStorage.setItem('myId', productId);
+    localStorage.setItem("myId", productId);
   };
 
   return (
@@ -93,7 +108,10 @@ const CartProduct = ({ src, productName, productDesc, discountedPrice, productPr
         <div className="CartQuantity">
           <p>Quantity</p>
           {/* Increment Decrement start */}
-          <IncrementDecrement initialCount={initialCount} onIncrement={handleIncrement} />
+          <IncrementDecrement
+            initialCount={initialCount}
+            onIncrement={handleIncrement}
+          />
           {/* Increment Decrement end */}
           <div className="productPrice">
             <p>{productPrice}</p>
@@ -118,7 +136,10 @@ const CartProduct = ({ src, productName, productDesc, discountedPrice, productPr
         </div>
 
         <div className="InstallationCharges">
-          <div onClick={() => handleAddtoWishlist(productId)} className="CouponApplied">
+          <div
+            onClick={() => handleAddtoWishlist(productId)}
+            className="CouponApplied"
+          >
             <Image
               src="/Assets/images/AddTOCart/core-heart.png"
               classname="img-fluid d-block w-100"
@@ -138,7 +159,6 @@ const CartProduct = ({ src, productName, productDesc, discountedPrice, productPr
             />
             <p>Remove</p>
           </div>
-
         </div>
       </div>
       <hr />

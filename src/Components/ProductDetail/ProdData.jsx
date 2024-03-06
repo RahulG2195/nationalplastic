@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Link from "next/link";
 import "../../styles/prod_detail.css";
 import Image from "next/image";
@@ -18,31 +18,32 @@ import { Message } from "@mui/icons-material";
 import Breadcrump from "@/app/Breadcromp/page";
 // import RecentlyViewed from "../ProductsCatlogue/RecentlyViewed";
 
-
-
 function ProdData() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [storedId, setStoredId] = useState(null)
-  const [productName, setProductname] = useState(null)
+  const [storedId, setStoredId] = useState(null);
+  const [productName, setProductname] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const dispatch = useDispatch();
-
-
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const storedId = localStorage.getItem('myId');
-        const productName = localStorage.getItem('productName')
+        const storedId = localStorage.getItem("myId");
+        const productName = localStorage.getItem("productName");
         setStoredId(storedId);
-        setProductname(productName)
+        setProductname(productName);
         const response = await axios.get("http://localhost:3000/api/Products");
         let filteredData;
         if (productName) {
-          filteredData = response.data.products.filter(item => item.product_name.toLowerCase() === productName.toLowerCase());
+          filteredData = response.data.products.filter(
+            (item) =>
+              item.product_name.toLowerCase() === productName.toLowerCase()
+          );
         } else if (storedId) {
-          filteredData = response.data.products.filter(item => item.product_id == storedId);
+          filteredData = response.data.products.filter(
+            (item) => item.product_id == storedId
+          );
         } else {
           setErrorMessage("Sorry, this product is not available");
           setIsLoading(false);
@@ -85,17 +86,13 @@ function ProdData() {
 
   return (
     <>
-        {/* <Breadcrump productName = {name} /> */}
+      {/* <Breadcrump productName = {name} /> */}
 
       <div className="px-4">
         {/* <div className="heading-section"><h2>Product Details</h2></div> */}
         <div className="row">
           <div className="col-md-6">
-            <ProductDetailSlider
-
-              imageurl={image}
-
-            />
+            <ProductDetailSlider imageurl={image} />
           </div>
 
           <div className="col-md-6">
@@ -114,10 +111,15 @@ function ProdData() {
                   </div>
 
                   <div className="d-flex flex-wrap align-items-center">
-                    <div className="discount discRes"><p>Save <span>₹</span> {saving}</p></div>
-                    <div className="inc small"><small>(incl. of all taxes)</small></div>
+                    <div className="discount discRes">
+                      <p>
+                        Save <span>₹</span> {saving}
+                      </p>
+                    </div>
+                    <div className="inc small">
+                      <small>(incl. of all taxes)</small>
+                    </div>
                   </div>
-
                 </div>
 
                 <div className="prod_type mt-4">
@@ -125,18 +127,40 @@ function ProdData() {
                     <p>
                       <strong>Color: </strong> Gold
                     </p>
-                    <input type="radio" name="prod_clr" id="gold" value="gold" className="productDetailsRadio m-1" />
-                    <input type="radio" name="prod_clr" id="gold" value="white" className="productDetailsRadio m-1" />
+                    <input
+                      type="radio"
+                      name="prod_clr"
+                      id="gold"
+                      value="gold"
+                      className="productDetailsRadio m-1"
+                    />
+                    <input
+                      type="radio"
+                      name="prod_clr"
+                      id="gold"
+                      value="white"
+                      className="productDetailsRadio m-1"
+                    />
                   </div>
                   <div className="prod_size">
-                    <div><strong>Size: </strong> 0000</div>
-                    <input type="text" name="prod_size" id="size" placeholder="000" />
+                    <div>
+                      <strong>Size: </strong> 0000
+                    </div>
+                    <input
+                      type="text"
+                      name="prod_size"
+                      id="size"
+                      placeholder="000"
+                    />
                   </div>
                 </div>
-
               </div>
               <div className="bulk_order_div">
-                <Link href='/BulkOrder' className=""><button className="btn btn-danger px-5 my-2 ProdbtnRes bulkRes">Bulk Order</button></Link>
+                <Link href="/BulkOrder" className="">
+                  <button className="btn btn-danger px-5 my-2 ProdbtnRes bulkRes">
+                    Bulk Order
+                  </button>
+                </Link>
               </div>
               {/* <div className="row">
               <div className="col-md-6">
@@ -170,14 +194,23 @@ function ProdData() {
                   />
                   <div className="qtyplus">+</div>
                 </form>
-                <p onClick={handleMoveToCart} className="btn bg-danger text-white m-2 px-5 ProdbtnRes">
+                <p
+                  onClick={handleMoveToCart}
+                  className="btn bg-danger text-white m-2 px-5 ProdbtnRes"
+                >
                   Add to Cart
                 </p>
-                <Link href="/Address" className="btn bg-danger text-white m-2 px-5 ProdbtnRes">
+                <Link
+                  href="/Address"
+                  className="btn bg-danger text-white m-2 px-5 ProdbtnRes"
+                >
                   Buy Now
                 </Link>
               </div>
-              <p className="eye"><i className="fa fa-eye"></i> 210 customers are interviewing the product</p>
+              <p className="eye">
+                <i className="fa fa-eye"></i> 210 customers are interviewing the
+                product
+              </p>
               <div className="terms fw-medium small">
                 <Link href="TearnsAndConditions">Terms and Conditions</Link>
                 <ul>
@@ -189,28 +222,69 @@ function ProdData() {
               <div className="d-flex flex-wrap justify-content-center position-relative align-items-center m-4 ChkAvblityRes">
                 <p className="fw-semibold m-2">Check Availability</p>
                 <div className="d-flex flex-wrap justify-content-center align-items-center reschkAvbl">
-                  <div><input className="p-2" type="text" placeholder="Enter Your Pin Code" /></div>
-                  <div className="ChckBtnRes"><a href="#" className="btn rounded-0 bg-danger text-white p-2">CheckNow</a></div>
+                  <div>
+                    <input
+                      className="p-2"
+                      type="text"
+                      placeholder="Enter Your Pin Code"
+                    />
+                  </div>
+                  <div className="ChckBtnRes">
+                    <a
+                      href="#"
+                      className="btn rounded-0 bg-danger text-white p-2"
+                    >
+                      CheckNow
+                    </a>
+                  </div>
                 </div>
               </div>
 
               <div className="freuently_bought mb-2">
                 <h6 className="m-3">Frequently Bought Together</h6>
                 <div className="combile_price d-flex flex-wrap">
-
                   <div className="relevent_img d-flex gap-2 align-items-center">
-                    <Image src='/Assets/images/Single Altis Image.png' width={100} height={100} layout="responsive" objectFit="cover" alt="img1" />
-                    <span><i className="fa fa-plus"></i></span>
-                    <Image src="/Assets/images/Single Altis Image.png" width={100} height={100} layout="responsive" objectFit="cover" alt="img1" />
-                    <span><i className="fa fa-plus"></i></span>
-                    <Image src='/Assets/images/Single Altis Image.png' width={100} height={100} layout="responsive" objectFit="cover" alt="img1" />
+                    <Image
+                      src="/Assets/images/Single Altis Image.png"
+                      width={100}
+                      height={100}
+                      layout="responsive"
+                      objectFit="cover"
+                      alt="img1"
+                    />
+                    <span>
+                      <i className="fa fa-plus"></i>
+                    </span>
+                    <Image
+                      src="/Assets/images/Single Altis Image.png"
+                      width={100}
+                      height={100}
+                      layout="responsive"
+                      objectFit="cover"
+                      alt="img1"
+                    />
+                    <span>
+                      <i className="fa fa-plus"></i>
+                    </span>
+                    <Image
+                      src="/Assets/images/Single Altis Image.png"
+                      width={100}
+                      height={100}
+                      layout="responsive"
+                      objectFit="cover"
+                      alt="img1"
+                    />
                   </div>
 
                   <div className="com_price text-top m-3">
                     <p>Total Price: 0000/-</p>
-                    <button type="button" class="btn rounded-0 btn-outline-danger py-1 px-4 fw-semibold medium">Add selected to cart</button>
+                    <button
+                      type="button"
+                      class="btn rounded-0 btn-outline-danger py-1 px-4 fw-semibold medium"
+                    >
+                      Add selected to cart
+                    </button>
                   </div>
-
                 </div>
                 <NoCostEmi />
               </div>
@@ -219,12 +293,8 @@ function ProdData() {
         </div>
 
         <MoreProduct />
-
       </div>
-
-
     </>
-
   );
 }
 
