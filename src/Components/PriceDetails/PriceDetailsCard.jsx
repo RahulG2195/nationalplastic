@@ -12,11 +12,18 @@ const PriceDetailsCard = ({
 }) => {
   // const dispatch = useDispatch();
   const priceFromState = useSelector((state) => state.cart.total_price || 0);
+  const MRPvalue = useSelector((state) => state.cart.discount_price || 0);
 
   const [totalPrice, setTotalPrice] = useState(priceFromState);
+  const [MRPPrice, setMRPPrice] = useState(MRPvalue);
+  const [DiscountCard, setDiscountCard] = useState(0);
   useEffect(() => {
-    setTotalPrice(priceFromState);
-  }, [priceFromState]);
+    setTotalPrice(priceFromState.toFixed(2));
+    setMRPPrice(MRPvalue.toFixed(2));
+
+    const discount = MRPvalue - priceFromState;
+    setDiscountCard(discount > 0 ? discount.toFixed(2) : 0);
+  }, [priceFromState, MRPvalue, DiscountCard]);
   return (
     <>
       <div className="PriceDetail">
@@ -27,13 +34,13 @@ const PriceDetailsCard = ({
         <div className="mt-4">
           <div className={`d-flex justify-content-between mt-1 fw-semibold`}>
             <div className="text-secondary">MRP</div>
-            <div> RS {totalPrice}</div>
+            <div> RS {MRPPrice}</div>
           </div>
           <div
             className={`d-flex justify-content-between mt-1 fw-semibold text-success`}
           >
             <div className="text-secondary">Discount</div>
-            <div> RS {totalDiscount ? totalDiscount : "0000"}</div>
+            <div> RS {DiscountCard ? DiscountCard : "0000"}</div>
           </div>
           <div
             className={`d-flex justify-content-between mt-1 fw-semibold text-success`}
@@ -50,7 +57,7 @@ const PriceDetailsCard = ({
 
         <div className="d-flex justify-content-between mt-3">
           <div>Total Payable</div>
-          <div className="medium">Rs {totalPay ? totalPay : "0000"}</div>
+          <div className="medium">Rs {totalPrice ? totalPrice : "0000"}</div>
         </div>
         <div className="small my-2 text-success">
           Congratulations, you have just saved RS{" "}

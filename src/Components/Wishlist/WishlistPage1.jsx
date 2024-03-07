@@ -57,9 +57,16 @@ const WishlistPage1 = () => {
     }
   };
 
-  const handleAddToCart = (productId, price) => {
+  const handleAddToCart = (productId, price, discount_price) => {
     // Dispatch addToCart action to add item to cart
-    dispatch(addToCart({ product_id: productId, price: price, quantity: 1 }));
+    dispatch(
+      addToCart({
+        product_id: productId,
+        price: price,
+        discount_price: discount_price,
+        quantity: 1,
+      })
+    );
   };
 
   return (
@@ -88,7 +95,11 @@ const WishlistPage1 = () => {
                         handleDeleteSuccess(item.product_id)
                       }
                       onAddToCart={() =>
-                        handleAddToCart(item.product_id, item.price)
+                        handleAddToCart(
+                          item.product_id,
+                          item.price,
+                          item.discount_price
+                        )
                       }
                     />
                   )

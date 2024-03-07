@@ -36,7 +36,8 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState: {
     products: [], // Initially empty array for products
-    total_price: 0,
+    total_price: 0, //price after discount and calculation
+    discount_price: 0, //original price
   },
 
   reducers: {
@@ -55,7 +56,7 @@ export const cartSlice = createSlice({
       );
       console.log("actiion: " + JSON.stringify(action));
 
-      const { product_id, quantity, price } = action.payload;
+      const { product_id, quantity, price, discount_price } = action.payload;
       console.log("product added successfully before adding" + action.payload);
       console.log(
         "product added successfully before adding" +
@@ -67,17 +68,24 @@ export const cartSlice = createSlice({
       );
       if (!isItemInCart) {
         state.products.push(action.payload);
-        console.log("Actionpayload);" + action.payload);
-        console.log("state.items);" + state.product);
+        console.log("stateTotalPrice: " + discount_price);
+        console.log(
+          "stateTotalPrice:---- " + parseFloat(discount_price) * quantity
+        );
+        console.log("Actionpayload;" + action.payload);
+        console.log("state.items;" + state.product);
         state.total_price += parseFloat(price) * quantity;
+        state.discount_price += parseFloat(discount_price) * quantity;
         localStorage.setItem("products", JSON.stringify(action.payload));
 
         // alert("Added");
       } else {
+        console.log("NoMahnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn!");
         const existingProduct = state.products.find(
           (product) => product.product_id === product_id
         );
         existingProduct.quantity += quantity;
+        state.discount_price += parseFloat(discount_price) * quantity;
         state.total_price += parseFloat(price) * quantity; // Update total price
       }
     },
@@ -99,6 +107,9 @@ export const cartSlice = createSlice({
         // Update total_price
         state.total_price -= parseFloat(
           removedProduct.price * removedProduct.quantity
+        );
+        state.discount_price -= parseFloat(
+          removedProduct.discount_price * removedProduct.quantity
         );
 
         // Update state with the new products array
@@ -126,8 +137,10 @@ export const cartSlice = createSlice({
         console.log(
           "After Updates  " + JSON.stringify(existingProduct.quantity)
         );
-        // Update total_price if necessary
+        // Update total__price if necessary
         state.total_price += parseFloat(existingProduct.price);
+        state.discount_price += parseFloat(existingProduct.discount_price);
+
         // Notify user about the increase
         // notifyinfo(); // Call info notification
         localStorage.setItem("products", JSON.stringify(state.products));
@@ -151,8 +164,9 @@ export const cartSlice = createSlice({
         console.log(
           "After Updates  " + JSON.stringify(existingProduct.quantity)
         );
-        // Update total_price if necessary
+        // Update total__price if necessary
         state.total_price -= parseFloat(existingProduct.price);
+        state.discount_price -= parseFloat(existingProduct.discount_price);
         // Notify user about the increase
         // notifyinfo(); // Call info notification
         localStorage.setItem("products", JSON.stringify(state.products));
