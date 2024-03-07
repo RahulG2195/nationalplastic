@@ -50,7 +50,9 @@ export const cartSlice = createSlice({
       );
       console.log("action: " + action);
       console.log("state: " + JSON.stringify(state));
-      console.log("actionPayload: " + JSON.stringify(action.payload));
+      console.log(
+        "actionPayload inside additemtocart: " + JSON.stringify(action.payload)
+      );
       console.log("actiion: " + JSON.stringify(action));
 
       const { product_id, quantity, price } = action.payload;
@@ -79,7 +81,6 @@ export const cartSlice = createSlice({
         state.total_price += parseFloat(price) * quantity; // Update total price
       }
     },
-
     removeItemFromCart: (state, action) => {
       const { product_id } = action.payload;
 
@@ -170,7 +171,8 @@ export const {
 
 export const addToCart = (item) => async (dispatch, getState) => {
   const { initialCount, items } = getState().wishlist; // Access state through the second parameter
-
+  console.log("addToCart" + JSON.stringify(item));
+  console.log("addToCart" + JSON.stringify(item));
   const check = await axios.get("http://localhost:3000/api/Cart");
   const isCartEmpty = !check.data.products || check.data.products.length === 0;
   const isAlreadyInCart =
@@ -182,10 +184,15 @@ export const addToCart = (item) => async (dispatch, getState) => {
   if (isCartEmpty || !isAlreadyInCart) {
     try {
       const response = await axios.post("http://localhost:3000/api/Cart", item);
+      console.log("response From slicer" + response.status);
+      console.log("response From slicer" + response.data);
+      console.log("response From slicer" + response.body);
+
+      notify();
+
       dispatch(addItemToCart(item));
 
       // console.log(item, "this are items ");
-      // notify();
     } catch (error) {
       console.error("Error adding to cart:", error);
     }

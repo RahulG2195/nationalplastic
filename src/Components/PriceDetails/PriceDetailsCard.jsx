@@ -27,8 +27,7 @@ const PriceDetailsCard = ({
         <div className="mt-4">
           <div className={`d-flex justify-content-between mt-1 fw-semibold`}>
             <div className="text-secondary">MRP</div>
-            <div> RS {cartPrice ? cartPrice : "0000"}</div>
-
+            <div> RS {totalPrice}</div>
           </div>
           <div
             className={`d-flex justify-content-between mt-1 fw-semibold text-success`}
