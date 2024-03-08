@@ -7,26 +7,11 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 
 function ProfilePage() {
-  const [formData, setFormData] = useState({
-    email: "",
-    phone: "",
-    address: "",
-  });
-
-  const [formErrors, setFormErrors] = useState({
-    email: "",
-    phone: "",
-    address: "",
-  });
+  
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [data, setData] = useState({});
   const [phone, setPhone] = useState(null);
   const [messages, setMessages] = useState([]);
-  const [editedData, setEditedData] = useState({
-    Email: "",
-    Phone: "",
-    Address: "",
-  });
 
   async function handleLogout(e) {
     e.preventDefault();
@@ -35,6 +20,7 @@ function ProfilePage() {
     window.location.reload();
     toast.success("Logged out", {
       position: "top",
+      
     });
 
     // Update state variables to reflect logged out state
@@ -82,67 +68,12 @@ function ProfilePage() {
     fetchUserData();
   }, []);
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-
-
-    setEditedData((prevData) => ({
-      ...prevData,
-      [name]: value,
-  }));
-
-    console.log("name0000000000000/////////////////////////////", editedData);
-    let errorMessage = "";
-
-    // Validate phone number
-    if (name === "phone") {
-      const phoneNumber = value.replace(/\D/g, ""); // Remove non-digit characters
-      if (phoneNumber.length !== 10) {
-        errorMessage = "Phone number must be 10 digits";
-      }
-    }
-
-    // Update the form data state and the error message for the current input field
-    setFormData((prev) => ({
-      ...prev,
-      // [name]: name === 'image' ? files[0] : value,
-    }));
-
-    setFormErrors((prev) => ({
-      ...prev,
-      [name]: errorMessage,
-    }));
-  };
-
   const handleEdit = async (e) => {
     e.preventDefault();
-    console.log("[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]",editedData)
 
     try {
-      // Gather form data from the event target
-      const formData = new FormData(e.target);
-      console.log(".........formData", formData);
-      const email = formData.get("email");
-      const phone = formData.get("phone");
-      const address = formData.get("address");
-
-      // Validate the form data
-      // if (!email || !phone || !address) {
-      //   toast.error("Please provide all required information");
-      //   return;
-      // }
-
-      // Construct the data object to be sent to the API
-      const userData = {
-        Email: email,
-        Phone: phone,
-        Address: address,
-      };
       // Send updated data to userProfile API
-      const response = await axios.put(
-        "http://localhost:3000/api/UserProfile",
-        userData
-      );
+      const response = await axios.put("http://localhost:3000/api/UserProfile", data);
       // Handle success response
       console.log("Updated data:", response.data);
       toast.success("Data updated successfully");
@@ -222,6 +153,7 @@ function ProfilePage() {
 
               <div onClick={handleLogout} className="EditAccount">
                 <div>
+         
                   <i className="fa fa-sign-out" aria-hidden="true"></i>
                 </div>
                 <p>Logout</p>
@@ -260,68 +192,61 @@ function ProfilePage() {
                         <div>You are not loggedin</div>
                       )
                     } */}
-
-                      {Array.isArray(messages) && messages.length > 0 ? (
-                        messages.map((message, index) => (
-                          <form key={index} onSubmit={handleEdit}>
-                            <div className="row user-data">
-                              <div className="col">
-                                <label htmlFor="">Name</label>
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  placeholder={`${message.FirstName} ${message.LasttName}`}
-                                  readOnly
-                                />
-                              </div>
-                            </div>
-                            <div className="row user-data">
-                              <div className="col">
-                                <label htmlFor="email">E-mail Address</label>
-                                <input
-                                  // name="email"
-                                  type="text"
-                                  className="form-control"
-                                  placeholder={message.Email}
-                                  name="Email"
-                                  onChange={handleInputChange}
-                                />
-                              </div>
-                              <div className="col">
-                                <label htmlFor="">Mobile Number</label>
-                                <input
-                                // name="phone"
-                                  type="text"
-                                  className="form-control"
-                                  placeholder={message.Phone}
-                                  name="Phone"
-                                  onChange={handleInputChange}
-                                />
-                              </div>
-                              <div className="col">
-                                <label htmlFor="">Address</label>
-                                <input
-                                // name="address"
-                                  type="text"
-                                  className="form-control"
-                                  placeholder={message.Address}
-                                  onChange={handleInputChange}
-                                  name="Address"
-                                />
-                              </div>
-                            </div>
-                            <div className="form-group row user-data">
-                              <div className="col-sm-10">
-                                <button type="submit" className="btn form-btn">
-                                  Update
-                                </button>
-                              </div>
-                            </div>
-                          </form>
-                        ))
-                      ) : (
-                        <div className="text-danger">You are not loggedin</div>
-                      )}
+                    
+                    {Array.isArray(messages) && messages.length > 0 ? (messages.map((message, index) => (
+                    <form key={index} onSubmit={handleEdit}>
+                      <div className="row user-data">
+                        <div className="col">
+                          <label htmlFor="">Name</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder={`${message.FirstName} ${message.LasttName}`}
+                            readOnly 
+                          />
+                        </div>
+                      </div>
+                      <div className="row user-data">
+                        <div className="col">
+                          <label htmlFor="email">E-mail Address</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder={message.Email}
+                            
+                          />
+                        </div>
+                        <div className="col">
+                          <label htmlFor="">Mobile Number</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder={message.Phone}
+                            
+                          />
+                        </div>
+                        <div className="col">
+                          <label htmlFor="">Address</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder={message.Address} 
+                          />
+                        </div>
+                      </div>
+                      <div className="form-group row user-data">
+                        <div className="col-sm-10">
+                          <button type="submit" className="btn form-btn">
+                            Update
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+  ))
+  ) : (
+    <div className="text-danger">You are not loggedin</div>
+  )
+}
                     </div>
                   </div>
                   <h3>Change Password</h3>

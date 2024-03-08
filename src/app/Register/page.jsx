@@ -131,13 +131,6 @@ const isValidAddress = (address) => {
         return passwordPattern.test(password);
     };
 
-    // const isValidImage = (file) => {
-    //     if (!file) return false;
-    //     const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-    //     const fileExtension = file.name.split('.').pop().toLowerCase();
-    //     return allowedExtensions.includes(fileExtension);
-    // };
-
     return (
         <div className="container">
             <div className="row Login-Page-ImgForm">
