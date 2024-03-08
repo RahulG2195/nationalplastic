@@ -125,7 +125,7 @@ function ProfilePage() {
       const email = formData.get("email");
       const phone = formData.get("phone");
       const address = formData.get("address");
-
+      console.log("email========================", email)
       // Validate the form data
       // if (!email || !phone || !address) {
       //   toast.error("Please provide all required information");
@@ -139,12 +139,14 @@ function ProfilePage() {
         Address: address,
       };
       // Send updated data to userProfile API
-      const response = await axios.put(
+      const response = await axios.post(
         "http://localhost:3000/api/UserProfile",
         userData
       );
+      console.log("userData============",userData)
+      console.log('Form submitted:', response );
       // Handle success response
-      console.log("Updated data:", response.data);
+      // console.log("Updated data:", response.data);
       toast.success("Data updated successfully");
     } catch (error) {
       // Handle error

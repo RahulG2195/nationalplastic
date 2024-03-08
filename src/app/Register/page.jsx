@@ -58,7 +58,7 @@ function Register() {
                 } else { 
                     const response = await axios.post('http://localhost:3000/api/Users', formData);
                     console.log('Form submitted:', response );
-                    // Clear form data on successful submission
+                    // Clear form data on successful submission 
                     setFormData({
                         firstName: '',
                         lastName: '',
