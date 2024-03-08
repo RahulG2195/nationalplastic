@@ -51,3 +51,10 @@ Form page.jsx
       // } else {
       //   alert("This Email is not registred");
       // }
+
+
+                function getProductQuantity(product_id, products) {
+            const product = products.find((p) => p.product_id === product_id);
+            return product ? product.quantity : 0;
+          }
+          const getQuantity = getProductQuantity(product.product_id, products);

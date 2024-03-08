@@ -6,7 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import Link from "next/link";
 // import axios from "axios";
-import { increaseQuantity } from "@/redux/reducer/cartSlice";
+import {
+  increaseQuantity,
+  decreaseQuantity,
+  removeItemFromCart,
+} from "@/redux/reducer/cartSlice";
 
 const CartProduct = ({
   src,
@@ -26,38 +30,15 @@ const CartProduct = ({
   const handleIncrement = () => {
     setInitialCount(initialCount + 1);
     dispatch(increaseQuantity({ product_id: productId }));
+    const data = localStorage.getItem("products");
+    console.log("LOcalSTorage has these data: " + JSON.stringify(data));
   };
-
-  // const [cartItems, setCartItems] = useState([]);
-
-  // const cartInitialCount = useSelector(state => state.cart.initialCount);
-
-  // useEffect(() => {
-  //   // Update the initialCount state with the value from the Redux store
-  //   setInitialCount(cartInitialCount);
-  // }, [cartInitialCount]); // Run this effect whenever cartInitialCount changes
-
-  // useEffect(() => {
-  //   // const isProductInCart = cartItems.some(item => item.productId === productId);
-  //   // console.log("this is item ", item.productId)
-
-  //   // if (isProductInCart) {
-  //   //   setInitialCount(initialCount + 1);
-  //   // }
-  // }, [cartItems, productId]);
-
-  // const handleAddToCart = async () => {
-  //   try {
-  //     dispatch(addToCart({ product_id: productId }, initialCount));
-  //   } catch (error) {
-  //     console.error('Error adding to cart:', error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   // Update the count from the Redux store
-  //   setInitialCount(initialCount);
-  //   // console.log("in cart is ",initialCount+1);
-  // }, [initialCount]);
+  const handleDecrement = () => {
+    if (initialCount > 0) {
+      setInitialCount(initialCount - 1);
+      dispatch(decreaseQuantity({ product_id: productId }));
+    }
+  };
 
   const dispatch = useDispatch();
 
@@ -73,6 +54,7 @@ const CartProduct = ({
 
   const handleRemove = async () => {
     try {
+      dispatch(removeItemFromCart({ product_id: productId }));
       onRemoveSuccess(productId);
     } catch (error) {
       alert("Cannot delete");
@@ -90,7 +72,7 @@ const CartProduct = ({
         <Link onClick={setid} href={`/ProductDetail`}>
           <Image
             src={src}
-            className="img-fluid d-block w-100" // Use w-100 to make the image fill the entire col-lg col-md-3 col-sm-12umn
+            classname="img-fluid d-block w-100" // Use w-100 to make the image fill the entire col-lg col-md-3 col-sm-12umn
             alt="Team Member"
             width={100}
             height={100}
@@ -111,6 +93,7 @@ const CartProduct = ({
           <IncrementDecrement
             initialCount={initialCount}
             onIncrement={handleIncrement}
+            onDecrement={handleDecrement}
           />
           {/* Increment Decrement end */}
           <div className="productPrice">

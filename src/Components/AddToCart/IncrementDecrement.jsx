@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
+import { increaseQuantity, decreaseQuantity } from "@/redux/reducer/cartSlice";
 
-const IncrementDecrement = ({ initialCount,onIncrement  }) => {
+const IncrementDecrement = ({ initialCount, onIncrement, onDecrement }) => {
   const [count, setCount] = useState(initialCount);
 
   const increment = () => {
@@ -12,6 +13,7 @@ const IncrementDecrement = ({ initialCount,onIncrement  }) => {
   const decrement = () => {
     if (count > 1) {
       setCount(count - 1);
+      onDecrement();
     }
   };
 

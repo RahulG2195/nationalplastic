@@ -7,13 +7,13 @@ import "react-toastify/dist/ReactToastify.css";
 const WishlistCard = (props) => {
   const handleMoveToCart = () => {
     props.onAddToCart(
-      props.id,
-      props.Title,
-      props.Discription,
-      props.Price,
-      props.orignalPrice,
-      props.Discount,
-      props.ChairImg
+      props.id
+      // props.Title,
+      // props.Discription,
+      // props.Price,
+      // props.orignalPrice,
+      // props.Discount
+      // props.ChairImg
     );
   };
   const handleOnClick = async () => {

@@ -11,7 +11,7 @@ const FinancialResults = ({ date, text, image }) => {
         <div className="Download-img">
           <Image
             src={image}
-            classname=" d-block w-70"
+            className=" d-block w-70"
             alt="map image"
             width={100}
             height={100}

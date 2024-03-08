@@ -16,7 +16,22 @@ const WishlistPage1 = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:3000/api/Wishlist");
-        const wishlistData = response.data.products;
+        // const wishlistData = response.data.products;
+        const wishlistData = response.data.products.map((item) => {
+          // Calculate discount percentage
+          const discountPercentage =
+            item.discount_price && item.price
+              ? Math.floor(
+                  ((item.discount_price - item.price) / item.discount_price) *
+                    100
+                )
+              : 0;
+          return {
+            ...item,
+            discount_percentage: discountPercentage,
+          };
+        });
+
         setWishlistItems(wishlistData);
         setIsLoading(false);
       } catch (error) {
@@ -42,9 +57,16 @@ const WishlistPage1 = () => {
     }
   };
 
-  const handleAddToCart = (productId) => {
+  const handleAddToCart = (productId, price, discount_price) => {
     // Dispatch addToCart action to add item to cart
-    dispatch(addToCart({ product_id: productId }));
+    dispatch(
+      addToCart({
+        product_id: productId,
+        price: price,
+        discount_price: discount_price,
+        quantity: 1,
+      })
+    );
   };
 
   return (
@@ -72,7 +94,13 @@ const WishlistPage1 = () => {
                       onDeleteSuccess={() =>
                         handleDeleteSuccess(item.product_id)
                       }
-                      onAddToCart={() => handleAddToCart(item.product_id)}
+                      onAddToCart={() =>
+                        handleAddToCart(
+                          item.product_id,
+                          item.price,
+                          item.discount_price
+                        )
+                      }
                     />
                   )
                 )
