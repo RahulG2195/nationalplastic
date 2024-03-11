@@ -9,7 +9,7 @@ const createLocalStorageIfNeeded = (key, value) => {
     try {
       localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
-      console.error("Error creating local storage:", error);
+      // console.error("Error creating local storage:", error);
     }
   }
 };
@@ -52,9 +52,9 @@ const initialState = createInitialStateFromLocalStorage();
 // ... rest of your code
 export const authSliceReducer = createAsyncThunk("/auth/login", async (data) => {
   try {
-    console.log("slice data######## :", JSON.stringify(data));
-    console.log("slice data######## :", data.email);
-    console.log("slice data######## :", data.password);
+    // console.log("slice data######## :", JSON.stringify(data));
+    // console.log("slice data######## :", data.email);
+    // console.log("slice data######## :", data.password);
     
 
     localStorage.setItem("userData", JSON.stringify(data));
@@ -82,7 +82,7 @@ const authSlice = createSlice({
       localStorage.setItem("userData", JSON.stringify(data));
       localStorage.setItem("isLoggedIn", true);
       state.isLoggedIn = true;
-      console.log("state.isLoggedIn"+ state.isLoggedIn)
+      // console.log("state.isLoggedIn"+ state.isLoggedIn)
       state.userData = action.meta.arg;
     });
   },
