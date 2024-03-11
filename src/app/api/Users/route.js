@@ -30,34 +30,28 @@ export async function GET(request) {
   }
 }
 
-export async function PATCH(request) {
-  try {
-    // You can access the request body using request.body
-    const { data } = request.body;
-    console.log(
-      "#################################################################"
-    );
-    console.log("Data receiveddddddddddddddddddddddddddddddddddddddd:", data);
+// export async function PATCH(request) {
+//     try {
+//       // You can access the request body using request.body
+//     //   const { data } = request.body;
 
-    // Example query to fetch users from the database
-    const users = await query({
-      query: "SELECT * FROM Customer",
-      values: [],
-    });
+//       // Example query to fetch users from the database
+//       const users = await query({
+//         query: "SELECT * FROM Customer",
+//         values: [],
+//       });
 
-    let responseData = JSON.stringify(users);
-    return new Response(responseData, {
-      status: 200,
-    });
-  } catch (error) {
-    return new Response(
-      JSON.stringify({
-        status: 500,
-        message: error.message,
-      })
-    );
-  }
-}
+//       let responseData = JSON.stringify(users);
+//       return new Response(responseData, {
+//         status: 200,
+//       });
+//     } catch (error) {
+//       return new Response(JSON.stringify({
+//         status: 500,
+//         message: error.message,
+//       }));
+//     }
+//   }
 
 // Define your API endpoint handler for registration POST request
 export async function POST(request) {
@@ -112,8 +106,8 @@ export async function POST(request) {
 export async function PUT(request) {
   // const router = useRouter();
   try {
-    const { email, password } = await request.json();
-    console.log("putttttttttp request");
+    const { email, password, getProfile } = await request.json();
+    console.log("putttttttttp request" + email + password + getProfile);
 
     console.log(email);
     // Check if the email already exists in the database
@@ -121,6 +115,7 @@ export async function PUT(request) {
       query: "SELECT * FROM Customer WHERE email = ?",
       values: [email],
     });
+    console.log("existingUser:", existingUser);
 
     // const passwordChecker = ()=>{
     console.log(existingUser);
@@ -134,10 +129,19 @@ export async function PUT(request) {
 
       // Implement password comparison logic using a secure method (e.g., bcrypt)
       // const passwordMatch = comparePasswords(password, storedPassword); // Implement comparePasswords function
-
+      if (getProfile && existingUser.length > 0) {
+        console.log("Not Found");
+        return new Response(
+          JSON.stringify({
+            status: 200,
+            message: existingUser,
+          })
+        );
+      }
       if (password === storedPassword) {
         // return new Response(JSON.stringify({ message: "Login successful" }), { status: 200 });
         {
+          // console.log("its data")
           return new Response(
             JSON.stringify({
               status: 200,

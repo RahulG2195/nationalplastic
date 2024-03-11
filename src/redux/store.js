@@ -15,4 +15,5 @@ const store = configureStore({
   price: counterReducer,
 });
 
+
 export default store;

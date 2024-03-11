@@ -1,58 +1,64 @@
-"use client"
-import Image from 'next/image'
+"use client";
+import Image from "next/image";
 import TopBar from "./TopBar";
 import BottomBar from "./BottomBar";
-import '../../styles/header.css';
-import Link from 'next/link';
-import { useState } from 'react';
-import axios from 'axios';
-import { useRouter } from 'next/navigation'
-
-
+import "../../styles/header.css";
+import Link from "next/link";
+import { useState } from "react";
+import axios from "axios";
 
 export default function Header() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   // const [suggestions, setSuggestions] = useState([]);
-  // console.log("here is searched result1", searchTerm)
-  // console.log("here is searched")
-  const router = useRouter()
+  // console.log("suggestions are here ", suggestions)
+  console.log("here is searched result", searchResults);
 
+  // console.log("here is result ", searchResults)
+  const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
   const handleSearchChange = async (e) => {
     setSearchTerm(e.target.value);
 
     if (!searchTerm) {
       // setSuggestions([]);
-      setSearchResults([])
+      setSearchResults([]);
       return;
     }
     try {
       // const response = await axios.get(`/api/search?query=${searchTerm}`);
       // setSuggestions(response.data.products);
     } catch (error) {
-      console.error('Error fetching suggestions:', error);
+      console.error("Error fetching suggestions:", error);
     } finally {
       // setIsLoading(false);
-     
+      // Set loading state to false regardless of success or error
     }
   };
 
-
-  const handleSearchSubmit = async (e, query) => {
+  // Search Function
+  const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    setSearchResults([]); 
+    setSearchResults([]); // Clear search results before fetching new results
     try {
-      router.push(`/Search?query=${searchTerm}`)
-      
+      const response = await axios.get(
+        `http://localhost:3000/api/search?query=${searchTerm}`
+      );
+      setSearchResults(response.data.products);
     } catch (error) {
-      console.error('Error searching products:', error);
+      console.error("Error searching products:", error);
     }
   };
 
+  //
 
   return (
     <>
-
+      {/* {searchResults.map((product) => (
+        <div key={product.id}>
+          <p>{product.product_name}</p>
+          Add other product details here
+        </div>
+      ))} */}
       <div className="container-fluid header">
         <TopBar />
         <nav className="navbar navbar-expand-lg main_header">
@@ -66,8 +72,7 @@ export default function Header() {
                 height={500}
               />
             </a>
-            <form onSubmit={handleSearchSubmit}
-              className="d-flex nav-search">
+            <form onSubmit={handleSearchSubmit} className="d-flex nav-search">
               <input
                 className="form-control me-2"
                 type="search"
@@ -76,7 +81,6 @@ export default function Header() {
                 value={searchTerm}
                 onChange={handleSearchChange}
               />
-
             </form>
 
             <button
@@ -114,11 +118,9 @@ export default function Header() {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   /> */}
-
-                  <Link className="nav-link" href="/Investor" >
+                  <Link className="nav-link" href="/Investor">
                     Investors
                   </Link>
-
                   <ul
                     className="dropdown-menu"
                     aria-labelledby="navbarDropdown"
@@ -143,7 +145,6 @@ export default function Header() {
                     </li>
                   </ul>
                 </li>
-
                 <li className="nav-item">
                   <Link className="nav-link" href="/NewsAndMedia">
                     Media/News
@@ -170,24 +171,39 @@ export default function Header() {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" href="/Login">
-                    <i className="fa fa-user"></i>
-                  </Link>
+                  {isLoggedIn ? (
+                    <Link className="nav-link" href="/ProfilePage">
+                      <i className="">Profile</i>
+                    </Link>
+                  ) : (
+                    <Link className="nav-link" href="/Login">
+                      <i className="fa fa-user"></i>
+                    </Link> 
+                  )}
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" href="/AddToCart">
                     <i className="fa fa-cart-arrow-down"></i>
-
                   </Link>
                 </li>
               </ul>
-
             </div>
           </div>
         </nav>
         <BottomBar />
       </div>
-
+      {/* Conditionally render search results only if they exist and search term is not empty */}
+      {/* {searchResults.length > 0 && !!searchTerm && (
+        <div id="suggestions-list">
+          <ul>
+            {searchResults.map((product) => (
+              <li className="text-danger" key={product.id}>
+                {product.product_name}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )} */}
     </>
   );
 }
