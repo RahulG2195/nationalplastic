@@ -102,18 +102,18 @@ export default function Header() {
               <ul className="navbar-nav mb-2 mb-lg-0">
                 <li className="nav-item brdr">
                   {/* <div className='border'></div> */}
-                  <Link className="nav-link" aria-current="page" href="/" onClick={handleShow}>
+                  <Link className="nav-link" aria-current="page" href="/" onClick={isClicked ? handleShow : null}>
                     Home
                   </Link>
                   {/* <div className='border'></div> */}
                 </li>
                 <li className="nav-item brdr" >
-                  <Link className="nav-link" href="/About" onClick={handleShow}>
+                  <Link className="nav-link" href="/About" onClick={isClicked ? handleShow : null}>
                     About Us
                   </Link>
                 </li>
                 <li className="nav-item brdr">
-                  <Link className="nav-link" href="/Investor" onClick={handleShow}>
+                  <Link className="nav-link" href="/Investor" onClick={isClicked ? handleShow : null}>
                     Investors
                   </Link>
                 </li>
@@ -123,37 +123,37 @@ export default function Header() {
                     />
                 </li>
                 <li className="nav-item brdr">
-                  <Link className="nav-link" href="/NewsAndMedia" onClick={handleShow}>
+                  <Link className="nav-link" href="/NewsAndMedia" onClick={isClicked ? handleShow : null}>
                     Media/News
                   </Link>
                 </li>
                 <li className="nav-item brdr">
-                  <Link className="nav-link" href="/CSR" onClick={handleShow}>
+                  <Link className="nav-link" href="/CSR" onClick={isClicked ? handleShow : null}>
                     CSR
                   </Link>
                 </li>
                 <li className="nav-item brdr">
-                  <Link className="nav-link bulk_ord" href="/BulkOrder" onClick={handleShow}>
+                  <Link className="nav-link bulk_ord" href="/BulkOrder" onClick={isClicked ? handleShow : null}>
                     Bulk Orders
                   </Link>
                 </li>
                 <li className="nav-item brdr ">
-                  <Link className="nav-link" href="/ContactUs" onClick={handleShow}>
+                  <Link className="nav-link" href="/ContactUs" onClick={isClicked ? handleShow : null}>
                     <i className="fa fa-phone"></i>
                   </Link>
                 </li>
                 <li className="nav-item brdr">
-                  <Link className="nav-link" href="/Wishlist" onClick={handleShow}>
+                  <Link className="nav-link" href="/Wishlist" onClick={isClicked ? handleShow : null}>
                     <i className="fa fa-heart-o"></i>
                   </Link>
                 </li>
                 <li className="nav-item brdr">
-                  <Link className="nav-link" href="/Login" onClick={handleShow}>
+                  <Link className="nav-link" href="/Login" onClick={isClicked ? handleShow : null}>
                     <i className="fa fa-user"></i>
                   </Link>
                 </li>
                 <li className="nav-item brdr">
-                  <Link className="nav-link" href="/AddToCart" onClick={handleShow}> 
+                  <Link className="nav-link" href="/AddToCart" onClick={isClicked ? handleShow : null}> 
                     <i className="fa fa-cart-arrow-down"></i>
                   </Link>
                 </li>
@@ -163,18 +163,6 @@ export default function Header() {
         </nav>
         <BottomBar />
       </div>
-      {/* Conditionally render search results only if they exist and search term is not empty */}
-      {/* {searchResults.length > 0 && !!searchTerm && (
-        <div id="suggestions-list">
-          <ul>
-            {searchResults.map((product) => (
-              <li className="text-danger" key={product.id}>
-                {product.product_name}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )} */}
     </>
   );
 }
