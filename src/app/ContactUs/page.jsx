@@ -117,30 +117,32 @@ function ContactUs() {
     formData.append("file", userInput.file); // Ensure only the first file is appended
 
     //TryCatch For the Email Message
-    try {
-      for (const [key, value] of formData.entries()) {
-        console.log(`${key}: ${value}`);
-        const res = await axios.post(
-          `http://localhost:3000/api/sendEmail`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data", // Set content type for FormData
-            },
-          }
-        );
-        if (res.status === 200) {
-          notify();
-        } else {
-          notifyError();
-        }
-      }
 
-      // console.log("sending Mail " ,formData);
-    } catch (err) {
-      console.log(err);
+    const res = await axios.post(
+      `http://localhost:3000/api/sendEmail`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data", // Set content type for FormData
+        },
+      }
+    );
+    if (res.status === 200) {
+      setUserInput({
+        name: "",
+        email: "",
+        message: "",
+        reason: "",
+        mobile: "",
+        file: null,
+      });
+      notify();
+    } else {
+      notifyError();
     }
+    // console.log("sending Mail " ,formData);
   }
+
   const RegisteredOfficeCardArr = [
     {
       key: 1,

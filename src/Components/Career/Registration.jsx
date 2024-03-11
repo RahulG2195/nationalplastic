@@ -2,8 +2,38 @@
 import "./Registration.css";
 import { useState } from "react";
 import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
-
+import { Bounce, toast } from "react-toastify";
+import {
+  isValidName,
+  isValidMobile,
+  // isValidFile,
+} from "@/utils/validation";
+const notify = () => {
+  toast.success("Mail Sended SucessFully", {
+    position: "top-center",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+  });
+};
+const notifyError = () => {
+  toast.error("Failed To send Mail", {
+    position: "top-center",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+  });
+};
 const Registration = () => {
   const [userInput, setUserInput] = useState({
     JobProfile: "",
@@ -32,11 +62,34 @@ const Registration = () => {
       setUserInput({ ...userInput, [name]: value });
     }
   }
+  async function handleImageUpload(e) {
+    e.preventDefault();
+    const uploadedImage = e.target.files[0];
+    if (uploadedImage) {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(uploadedImage);
+      fileReader.addEventListener("load", function () {
+        setUserInput({
+          ...userInput,
+          file: uploadedImage,
+        });
+      });
+    }
+  }
   async function onFormSubmit(e) {
     // toast
     e.preventDefault();
     console.log("UserInput");
     console.log(JSON.stringify(userInput));
+    if (!isValidName(userInput.JobProfile)) {
+      toast.error("Please enter a valid name.");
+      return;
+    }
+
+    if (!isValidMobile(userInput.MobileNumber)) {
+      toast.error("Please enter a valid mobile number.");
+      return;
+    }
     const formData = new FormData();
     for (let key in userInput) {
       formData.append(key, userInput[key]);
@@ -45,7 +98,7 @@ const Registration = () => {
       // const res = await axios.put(`http://localhost:3000/api/Users`, userInput);
       console.log(userInput);
       const res = await axios.post(
-        `http://localhost:3000/api/sendEmail`,
+        `http://localhost:3000/api/sendResume`,
         formData,
         {
           headers: {
@@ -53,18 +106,27 @@ const Registration = () => {
           },
         }
       );
-      toast("Your Message has been submitted successfully.");
-      if (res.success) {
-        toast(
-          "Your Message has been submitted successfully. I'll get back to you at my earliest."
-        );
+      // toast("Your Message has been submitted successfully.");
+      if (res.status === 200) {
+        resetButton();
+        notify();
       } else {
-        toast.error("Your Message has failed. Please try again later.");
+        notifyError();
       }
     } catch (err) {
       console.log(err.message);
       toast.error("Something went Wrong. please try again later.");
     }
+  }
+  async function resetButton() {
+    setUserInput({
+      JobProfile: "",
+      email: "",
+      FullName: "",
+      resume: null,
+      MobileNumber: "",
+      file: null,
+    });
   }
 
   return (
@@ -72,7 +134,7 @@ const Registration = () => {
       <div className=" d-flex justify-content-center">
         <div className="formBody mt-5">
           <div className="RegformCont p-5">
-            <form onSubmit={onFormSubmit}>
+            <form onSubmit={onFormSubmit} onReset={resetButton}>
               <div className="row">
                 <div className="mb-3 col-md-4">
                   <label className="form-label fw-bold">Job Profile*</label>
@@ -104,10 +166,11 @@ const Registration = () => {
                   </label>
                   <input
                     type="file"
-                    className="form-control "
-                    id="resume"
-                    name="resume"
-                    onChange={handleInputChange}
+                    className="form-control"
+                    id="file"
+                    placeholder="Maximum Size: 50mb"
+                    name="file"
+                    onChange={handleImageUpload}
                     value={userInput.resume}
                   />
                 </div>
@@ -141,7 +204,7 @@ const Registration = () => {
                     <button className="btn btn-danger px-4" type="submit">
                       Submit
                     </button>
-                    <button className="btn btn-danger px-4" type="submit">
+                    <button className="btn btn-danger px-4" type="reset">
                       Reset
                     </button>
                   </div>
