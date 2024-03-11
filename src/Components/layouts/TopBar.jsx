@@ -1,3 +1,4 @@
+import '../../styles/header.css';
 
 function TopBar() {
   return (

@@ -4,15 +4,19 @@ import TopBar from "./TopBar";
 import BottomBar from "./BottomBar";
 import '../../styles/header.css';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation'
-
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import ProductsAccr from '../ProductsAccor/ProductsAccr';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 
 export default function Header() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [isClicked, setIsClicked] = useState(false); // State to track click
+
   // const [suggestions, setSuggestions] = useState([]);
   // console.log("here is searched result1", searchTerm)
   // console.log("here is searched")
@@ -33,45 +37,48 @@ export default function Header() {
       console.error('Error fetching suggestions:', error);
     } finally {
       // setIsLoading(false);
-     
+
     }
   };
 
 
   const handleSearchSubmit = async (e, query) => {
     e.preventDefault();
-    setSearchResults([]); 
+    setSearchResults([]);
     try {
       router.push(`/Search?query=${searchTerm}`)
-      
+
     } catch (error) {
       console.error('Error searching products:', error);
     }
   };
 
+  const handleShow = (e) => {
+    setIsClicked(!isClicked);
+  };
+  
 
   return (
     <>
-
-      <div className="container-fluid header">
+      <div className="container-fluid  header menbg">
         <TopBar />
-        <nav className="navbar navbar-expand-lg main_header">
-          <div className="container-fluid">
-            <a className="navbar-brand" href="#">
+        <nav className="navbar navbar-expand-lg main_header px-5">
+          <div className="container-fluid ">
+            <div className="navbar-brand">
               <Image
                 src="/Assets/images/nation_logo.png"
                 className="img-fluid"
                 alt="Landscape picture"
-                width={800}
-                height={500}
+                width={100}
+                height={100}
               />
-            </a>
+            </div>
             <form onSubmit={handleSearchSubmit}
               className="d-flex nav-search">
               <input
-                className="form-control me-2"
+                className="form-control text-center HeadSearch fw-semibold"
                 type="search"
-                placeholder="Search"
+                placeholder="Search 5000+ products"
                 aria-label="Search"
                 value={searchTerm}
                 onChange={handleSearchChange}
@@ -80,102 +87,74 @@ export default function Header() {
             </form>
 
             <button
-              className="navbar-toggler"
+              onClick={handleShow}
+              id="navei"
+              className="navbar-toggler "
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent"
-              aria-expanded="false"
+              aria-expanded="true"
               aria-label="Toggle navigation"
             >
               <span className="navbar-toggler-icon" />
             </button>
-            <div
-              className="collapse navbar-collapse"
-              id="navbarSupportedContent"
-            >
+            <div className= {`${isClicked ? ' collapse navbar-collapse show menubg' : 'menuhide '}`} id="navbarSupportedContent">
               <ul className="navbar-nav mb-2 mb-lg-0">
-                <li className="nav-item">
-                  <Link className="nav-link" aria-current="page" href="/">
+                <li className="nav-item brdr">
+                  {/* <div className='border'></div> */}
+                  <Link className="nav-link" aria-current="page" href="/" onClick={handleShow}>
                     Home
                   </Link>
+                  {/* <div className='border'></div> */}
                 </li>
-                <li className="nav-item">
-                  <Link className="nav-link" href="/About">
+                <li className="nav-item brdr" >
+                  <Link className="nav-link" href="/About" onClick={handleShow}>
                     About Us
                   </Link>
                 </li>
-                <li className="nav-item dropdown">
-                  {/* <a 
-                    className="nav-link dropdown-toggle"
-                    href="/Investor"
-                    id="navbarDropdown"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  /> */}
-
-                  <Link className="nav-link" href="/Investor" >
+                <li className="nav-item brdr">
+                  <Link className="nav-link" href="/Investor" onClick={handleShow}>
                     Investors
                   </Link>
-
-                  <ul
-                    className="dropdown-menu"
-                    aria-labelledby="navbarDropdown"
-                  >
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Action
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Another action
-                      </a>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Something else here
-                      </a>
-                    </li>
-                  </ul>
                 </li>
-
-                <li className="nav-item">
-                  <Link className="nav-link" href="/NewsAndMedia">
+                <li className="nav-item brdr accr">
+                    <ProductsAccr
+                    handleShow={handleShow}
+                    />
+                </li>
+                <li className="nav-item brdr">
+                  <Link className="nav-link" href="/NewsAndMedia" onClick={handleShow}>
                     Media/News
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link className="nav-link" href="/CSR">
+                <li className="nav-item brdr">
+                  <Link className="nav-link" href="/CSR" onClick={handleShow}>
                     CSR
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link className="nav-link bulk_ord" href="/BulkOrder">
+                <li className="nav-item brdr">
+                  <Link className="nav-link bulk_ord" href="/BulkOrder" onClick={handleShow}>
                     Bulk Orders
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link className="nav-link" href="/ContactUs">
+                <li className="nav-item brdr ">
+                  <Link className="nav-link" href="/ContactUs" onClick={handleShow}>
                     <i className="fa fa-phone"></i>
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link className="nav-link" href="/Wishlist">
+                <li className="nav-item brdr">
+                  <Link className="nav-link" href="/Wishlist" onClick={handleShow}>
                     <i className="fa fa-heart-o"></i>
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link className="nav-link" href="/Login">
+                <li className="nav-item brdr">
+                  <Link className="nav-link" href="/Login" onClick={handleShow}>
                     <i className="fa fa-user"></i>
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link className="nav-link" href="/AddToCart">
+                <li className="nav-item brdr">
+                  <Link className="nav-link" href="/AddToCart" onClick={handleShow}> 
                     <i className="fa fa-cart-arrow-down"></i>
 
                   </Link>

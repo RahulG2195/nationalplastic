@@ -7,93 +7,64 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { addItemToWishlist } from '@/redux/reducer/wishlistSlice';
 import { addToCart } from '@/redux/reducer/cartSlice';
+import InfiniteScroll from 'react-infinite-scroll-component'; 
 
 const Search = (props) => {
-    const [inWishlist, setInWishlist] = useState(false);
     const [products, setProducts] = useState([]);
     const [discounts, setDiscounts] = useState([]);
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
+    const [allproducts, setAllproducts] = useState([])
+    const query = props.searchParams.query;
     const dispatch = useDispatch();
 
-    const query = props.searchParams.query;
-
-    //   useEffect(() => {
-    //     const fetchWishlistItems = async () => {
-    //         try {
-    //             const response = await axios.get("http://localhost:3000/api/Wishlist");
-    //             const wishlistItems = response.data.products.map(product => product.product_id);
-                
-    //             // Update products with inWishlist property
-    //             const updatedProducts = products.map(product => ({
-    //                 ...product,
-    //                 inWishlist: wishlistItems.includes(product.product_id)
-    //             }));
-    
-    //             setProducts(updatedProducts);
-    //         } catch (error) {
-    //             console.error("Error fetching wishlist items:", error);
-    //         }
-    //     };
-    //     fetchWishlistItems();
-
-    // }, [inWishlist]);
 
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-
-                const response = await axios.get(`http://localhost:3000/api/search?query=${query}`);
-                // console.log("responce in search page  ", response)
-                setProducts(response.data.products);
-
-                const calculatedDiscounts = response.data.products.map((product) => {
-                    const discountPercentage =
-                        product.discount_price && product.price
-                            ? Math.floor((product.discount_price - product.price) / product.discount_price * 100)
-                            : 0;
-                    return discountPercentage;
-                });
-                setDiscounts(calculatedDiscounts);
-
-            } catch (error) {
-                console.error('Error searching products:', error);
-            }
-        };
-        fetchData();
-        // fetchWishlistItems();
-
+        setPage(1);
+        setProducts([]);
+        setDiscounts([]);
     }, [query]);
 
-    // useEffect(() => {
-    //     const fetchWishlistItems = async () => {
-    //         try {
-    //             const response = await axios.get("http://localhost:3000/api/Wishlist");
-    //             const wishlistItems = response.data.products.map(product => product.product_id);
-                
-    //             const updatedProducts = products.map(product => ({
-    //                 ...product,
-    //                 inWishlist: wishlistItems.includes(product.product_id)
-    //             }));
-    
-    //             setProducts(updatedProducts);
-    //         } catch (error) {
-    //             console.error("Error fetching wishlist items:", error);
-    //         }
-    //     };
-    //     // Run this effect only once when the component mounts
-    //     fetchWishlistItems();
-    // }, []); //
+    useEffect(() => {
+        fetchData();
+    }, [query, page]);
 
-  
+    const fetchData = async () => {
+        try {
+
+            if (query.trim() === '') {
+                return;
+            }
+
+            const response = await axios.get(`http://localhost:3000/api/search?query=${query}&page=${page}`);
+            const newProducts = response.data.products;
+            const all = response.data.allproducts;
+
+            setAllproducts(all)
+            setProducts(prevProducts => [...prevProducts, ...newProducts]);
+            setHasMore(newProducts.length > 0); // Check if there are more products to load
+            const calculatedDiscounts = newProducts.map((product) => {
+                const discountPercentage =
+                    product.discount_price && product.price
+                        ? Math.floor((product.discount_price - product.price) / product.discount_price * 100)
+                        : 0;
+                return discountPercentage;
+            });
+            setDiscounts(prevDiscounts => [...prevDiscounts, ...calculatedDiscounts]); // Append new discounts
+        } catch (error) {
+            console.error('Error searching products:', error);
+        }
+    };
+
     const setid = (id) => {
         localStorage.setItem('myId', id);
-        // console.log("id is the the het----------",id)
     };
 
     const handleAddToCart = (id) => {
         dispatch(addToCart({
             product_id: id,
-          }));
+        }));
     };
 
     const handleAddWishlist = (id) => {
@@ -101,13 +72,16 @@ const Search = (props) => {
             product_id: id,
         }));
         setInWishlist(true);
-
     };
 
+    // const loadMore = () => {
+    //     setPage(prevPage => prevPage + 1); // Load next page of products
+    // };
 
     return (
         <>
-            <p className='darkBlue fw-bold my-4 mx-2'>{products.length} products found</p>
+            <p className='darkBlue fw-bold my-4 mx-2'>{allproducts.length} products found</p>
+           
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                 {products.map((product, index) => (
                     <div key={product.id} className="col">
@@ -151,6 +125,13 @@ const Search = (props) => {
                 ))}
             </div>
 
+            <InfiniteScroll
+                dataLength={products.length}
+                next={() => setPage(page + 1)}
+                hasMore={hasMore}
+                loader={<h4>Loading...</h4>}
+                endMessage={<p>No more products to load</p>}
+            />
         </>
     )
 }
