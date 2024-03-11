@@ -58,7 +58,7 @@ function Register() {
                 } else { 
                     const response = await axios.post('http://localhost:3000/api/Users', formData);
                     console.log('Form submitted:', response );
-                    // Clear form data on successful submission
+                    // Clear form data on successful submission 
                     setFormData({
                         firstName: '',
                         lastName: '',
@@ -130,13 +130,6 @@ const isValidAddress = (address) => {
         const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/;
         return passwordPattern.test(password);
     };
-
-    // const isValidImage = (file) => {
-    //     if (!file) return false;
-    //     const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-    //     const fileExtension = file.name.split('.').pop().toLowerCase();
-    //     return allowedExtensions.includes(fileExtension);
-    // };
 
     return (
         <div className="container">

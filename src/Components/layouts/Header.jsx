@@ -1,5 +1,5 @@
-"use client"
-import Image from 'next/image'
+"use client";
+import Image from "next/image";
 import TopBar from "./TopBar";
 import BottomBar from "./BottomBar";
 import '../../styles/header.css';
@@ -13,43 +13,43 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 
 export default function Header() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isClicked, setIsClicked] = useState(false); // State to track click
 
   // const [suggestions, setSuggestions] = useState([]);
-  // console.log("here is searched result1", searchTerm)
-  // console.log("here is searched")
-  const router = useRouter()
+  // console.log("suggestions are here ", suggestions)
+  console.log("here is searched result", searchResults);
 
+  // console.log("here is result ", searchResults)
+  const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
   const handleSearchChange = async (e) => {
     setSearchTerm(e.target.value);
 
     if (!searchTerm) {
       // setSuggestions([]);
-      setSearchResults([])
+      setSearchResults([]);
       return;
     }
     try {
       // const response = await axios.get(`/api/search?query=${searchTerm}`);
       // setSuggestions(response.data.products);
     } catch (error) {
-      console.error('Error fetching suggestions:', error);
+      console.error("Error fetching suggestions:", error);
     } finally {
       // setIsLoading(false);
-
-    }
+  }
   };
 
-
-  const handleSearchSubmit = async (e, query) => {
+  // Search Function
+  const handleSearchSubmit = async (e) => {
     e.preventDefault();
     setSearchResults([]);
     try {
       router.push(`/Search?query=${searchTerm}`)
 
     } catch (error) {
-      console.error('Error searching products:', error);
+      console.error("Error searching products:", error);
     }
   };
 
@@ -83,7 +83,6 @@ export default function Header() {
                 value={searchTerm}
                 onChange={handleSearchChange}
               />
-
             </form>
 
             <button
@@ -156,17 +155,26 @@ export default function Header() {
                 <li className="nav-item brdr">
                   <Link className="nav-link" href="/AddToCart" onClick={handleShow}> 
                     <i className="fa fa-cart-arrow-down"></i>
-
                   </Link>
                 </li>
               </ul>
-
             </div>
           </div>
         </nav>
         <BottomBar />
       </div>
-
+      {/* Conditionally render search results only if they exist and search term is not empty */}
+      {/* {searchResults.length > 0 && !!searchTerm && (
+        <div id="suggestions-list">
+          <ul>
+            {searchResults.map((product) => (
+              <li className="text-danger" key={product.id}>
+                {product.product_name}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )} */}
     </>
   );
 }

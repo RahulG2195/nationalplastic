@@ -3,6 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 
+
 const createLocalStorageIfNeeded = (key, value) => {
   if (typeof window !== "undefined" && localStorage !== null) {
     try {
@@ -47,6 +48,7 @@ const createInitialStateFromLocalStorage = () => {
 
 const initialState = createInitialStateFromLocalStorage();
 
+
 // ... rest of your code
 export const authSliceReducer = createAsyncThunk("/auth/login", async (data) => {
   try {
@@ -57,11 +59,12 @@ export const authSliceReducer = createAsyncThunk("/auth/login", async (data) => 
 
     localStorage.setItem("userData", JSON.stringify(data));
       localStorage.setItem("isLoggedIn", true);
+      
 
-      console.log("state.isLoggedIn1111111"+ state.isLoggedIn);
+      // console.log("state.isLoggedIn1111111"+ state.isLoggedIn);
       state.isLoggedIn = true;
       // alert(state);
-      console.log("state.isLoggedIn22222"+ state.isLoggedIn);
+      // console.log("state.isLoggedIn22222"+ state.isLoggedIn);
       state.userData = data;
   } catch (error) {
     toast.error(error?.response?.data?.message);

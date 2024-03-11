@@ -8,8 +8,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { addItemToCart } from "@/redux/reducer/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 function AddToCart() {
+  // const cartState = useSelector((state) => state.cart);
   const [productDetailArr, setProductDetailArr] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -51,6 +53,7 @@ function AddToCart() {
               product_id: product.product_id,
               quantity: 1, // Explicitly set quantity to 1
               price: product.price,
+              discount_price: product.discount_price,
             })
           );
         });

@@ -46,7 +46,7 @@ function Login() {
       console.log("this is status ", res.data.status);
       if (res.data.status === 500) {
         setErrorMessage(JSON.stringify(res.data.message));
-        alert("no no ");
+        alert("Failed to loggedin");
         // router.push('/'); // Redirect to home page after successful login
       } else {
         alert("Successfully logged in");
@@ -133,7 +133,7 @@ function Login() {
                     // <Link href="/">Home</Link>
                     router.push('/')
                   ) : (
-                    <Link href="/">Login</Link>
+                    <Link href="/Login">Login</Link>
                   )}
                 </button>
               </div>
