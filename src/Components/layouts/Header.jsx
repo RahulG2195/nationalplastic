@@ -6,10 +6,13 @@ import "../../styles/header.css";
 import Link from "next/link";
 import { useState } from "react";
 import axios from "axios";
+import ProductsAccr from "../ProductsAccor/ProductsAccr";
 
 export default function Header() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [isClicked, setIsClicked] = useState(false); // State to track click
+
   // const [suggestions, setSuggestions] = useState([]);
   // console.log("suggestions are here ", suggestions)
   console.log("here is searched result", searchResults);
@@ -47,6 +50,10 @@ export default function Header() {
     } catch (error) {
       console.error("Error searching products:", error);
     }
+  };
+
+  const handleShow = (e) => {
+    setIsClicked(!isClicked);
   };
 
   //
@@ -170,7 +177,7 @@ export default function Header() {
                 </li>
                 <li className="nav-item brdr">
                 {isLoggedIn ? (
-                    <Link className="nav-link" href="/ProfilePage" onClick={isClicked ? handleShow : null}>
+                    <Link className="nav-link" href="/ProfilePage" >
                       <i className="">Profile</i>
                     </Link>
                   ) : (

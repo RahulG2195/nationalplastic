@@ -51,8 +51,15 @@ function Login() {
       } else {
         alert("Successfully logged in");
         setLogin(true);
+        const userData = res.data.message
+        console.log("FromDInesh "+userData)
+        localStorage.setItem("userData", JSON.stringify(userData));
         // push("/");
-        dispatch(authSliceReducer(formData));
+        // dispatch(authSliceReducer(formData));
+        ////////////Dinesh
+        // dispatch(authSliceReducer(formData));
+
+
       }
     } catch (error) {
       console.error("Error during login:", error);
