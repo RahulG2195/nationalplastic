@@ -27,7 +27,7 @@ export async function POST(req, res) {
     console.log(`open ${path} to see the uploaded file`);
 
     // Extract other form fields
-    const { name, email, message, reason, mobile } = Object.fromEntries(
+    const { FullName, email, JobProfile, MobileNumber } = Object.fromEntries(
       data.entries()
     );
 
@@ -42,13 +42,13 @@ export async function POST(req, res) {
 
     // Create HTML email content dynamically for personalization
     const HtmlFormat = `
-      <p>Hello ${name},</p>
+      <p>Hello ${FullName},</p>
       <p>You have contacted us with the following details:</p>
-      <p>Reason for Contact: ${reason}</p>
-      <p>Message: ${message}</p>
-      <p>Contact Number: ${mobile}</p>
+      <p>Reason for Contact: JOB </p> 
+      <p>Message: JOB CANDIDATE </p>
+      <p>Contact Number: ${MobileNumber}</p>
       <p>Regards,</p>
-      <p>${name}.</p>
+      <p>${FullName}</p>
     `;
 
     // Attach the file content as base64 encoded string if file exists
@@ -56,7 +56,7 @@ export async function POST(req, res) {
     const info = await transporter.sendMail({
       from: "webDevs2024@gmail.com", // Consider using a more descriptive sender address
       to: email,
-      subject: reason, // Using the reason as the subject
+      subject: JobProfile, // Using the reason as the subject
       html: HtmlFormat,
       attachments: [
         {

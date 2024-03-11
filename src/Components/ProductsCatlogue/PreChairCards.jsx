@@ -5,21 +5,22 @@ import './PreChairCard.css';
 import axios from "axios";
 import { DotLoader } from "react-spinners";
 import 'react-toastify/dist/ReactToastify.css';
-import { Bounce, toast } from 'react-toastify';
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/reducer/cartSlice";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import PremiumChairs from "./PremiumChairs";
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const PreChairsCards = () => {
-  // ... other code
-
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedArmType, setSelectedArmType] = useState(null);
   const [selectedPriceSort, setSelectedPriceSort] = useState(null);
   const [categoryType, setCategoryType] = useState();
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [length , setlength] = useState([])
 
   const dispatch = useDispatch();
 
@@ -29,7 +30,8 @@ const PreChairsCards = () => {
     selectedColor,
     selectedArmType,
     selectedPriceSort,
-    categoryType, // Include categoryType in dependency array
+    categoryType,
+    page,
   ]);
 
   const fetchData = async () => {
@@ -37,33 +39,27 @@ const PreChairsCards = () => {
       const categoryTitle = localStorage.getItem('category');
       setCategoryType(categoryTitle);
 
-      const response = await axios.get("http://localhost:3000/api/Products");
+      const response = await axios.get(`http://localhost:3000/api/Products`);
+      console.log("API Response:", response.data); // Log API response
 
-      const fetchedData = response.data; 
-      console.log("Fetched data:", fetchedData); 
+      const fetchedData = response.data;
+      console.log("Fetched data:", fetchedData);
 
-      if (fetchedData?.products) { 
+      if (fetchedData?.products) {
         let filteredData = fetchedData.products;
 
-        // Handle color filtering:
         if (selectedColor) {
           filteredData = filteredData.filter((item) =>
-            item.color && // Ensure color property exists before toLowerCase()
-            item.color.toLowerCase() === selectedColor.toLowerCase()
+            item.color && item.color.toLowerCase() === selectedColor.toLowerCase()
           );
-          console.log("Filtered by color:", filteredData); // Log filtered data for debugging
         }
 
-        // Handle arm type filtering:
         if (selectedArmType) {
           filteredData = filteredData.filter((item) =>
-            item.armType && // Ensure armType property exists before toLowerCase()
-            item.armType.toLowerCase() === selectedArmType.toLowerCase()
+            item.armType && item.armType.toLowerCase() === selectedArmType.toLowerCase()
           );
-          console.log("Filtered by arm type:", filteredData); // Log filtered data for debugging
         }
 
-        // Handle price sorting:
         if (selectedPriceSort) {
           filteredData.sort((a, b) => {
             if (selectedPriceSort === 'asc') {
@@ -71,36 +67,41 @@ const PreChairsCards = () => {
             } else if (selectedPriceSort === 'desc') {
               return b.price - a.price;
             }
-            return 0; // Maintain original order if invalid value is selected
+            return 0;
           });
-          console.log("Filtered by price:", filteredData); // Log filtered data for debugging
         }
 
-        // Handle category filtering:
         if (categoryType) {
           filteredData = filteredData.filter((item) =>
-            item.categoryType && // Ensure categoryType property exists before toLowerCase()
-            item.categoryType.toLowerCase() === categoryType.toLowerCase()
+            item.categoryType && item.categoryType.toLowerCase() === categoryType.toLowerCase()
           );
-          // console.log("Filtered by category:", filteredData); // Log filtered data for debugging
         }
 
-        setProducts(filteredData);
+        if (page === 1) {
+          setProducts(filteredData);
+          setlength(filteredData)
+        } else {
+          setProducts(prevProducts => [...prevProducts, ...filteredData]);
+        }
+
+        setHasMore(filteredData.length > 0);
       } else {
-        console.error("API response did not contain 'products' property"); // Handle missing data
+        console.error("API response did not contain 'products' property");
       }
 
       setIsLoading(false);
     } catch (error) {
-      alert("Error fetching data", error);
+      console.error("Error fetching data", error);
+      setIsLoading(false);
     }
   };
 
-  const handleAddToWishlist = (product_id) =>{
+  const handleAddToWishlist = (product_id) => {
     dispatch(addItemToWishlist({
       product_id: product_id,
     }));
-  }
+  };
+
   const handleMoveToCart = (product_id) => {
     dispatch(addToCart({
       product_id: product_id,
@@ -124,8 +125,7 @@ const PreChairsCards = () => {
 
   return (
     <div className="container mt-5">
-
-      <PremiumChairs cattitle={categoryType}/>
+      <PremiumChairs cattitle={categoryType} />
 
       <div className="dropboxRes mt-5 d-flex justify-content-between">
         <div>
@@ -142,17 +142,15 @@ const PreChairsCards = () => {
               </select>
             </div>
             <div className="dropdown mt-2 arrow">
-
               <select id='Arm_Type' name='Arm_Type'
                 className="form-control border-primary darkBlue fw-semibold dropdownbuttonResp"
                 onChange={handleArmType}
               >
                 <option value="all">Arm type</option>
-                <option  >with arm tent</option>
-                <option >without arm tent</option>
+                <option>with arm tent</option>
+                <option>without arm tent</option>
               </select>
             </div>
-
             <div className="dropdown mt-2 arrow">
               <select
                 id="Color"
@@ -166,7 +164,6 @@ const PreChairsCards = () => {
                 <option value="Red">Red</option>
               </select>
             </div>
-
           </div>
         </div>
       </div>
@@ -174,41 +171,43 @@ const PreChairsCards = () => {
       {isLoading ? (
         <center className="spinner">
           <DotLoader color={"#36D7B7"} loading={isLoading} />
-        </center >,
-        console.log("thisislength of products ",products.length )
+        </center>
       ) : products.length === 0 ? (
         <div className="text-center mt-5">
-          <h3  className="text-muted">
-            No products available</h3>
+          <h3 className="text-muted">
+            No products available
+          </h3>
         </div>
-      ) :
-      (
-        <div className="row ">
-          {products.map((product) => (
-            <div key={product.product_id} className="PreCardSm col-6 col-sm-6 col-xs-4 col-md-6 col-lg-3">
-              <PreChairsCard
-                ChairImg={`/Assets/images/New-launches-1/${product.image_name}`}
-                id={product.product_id}
-                Title={product.product_name}
-                Discription={product.short_description}
-                Price={product.price}
-                orignalPrice={product.discount_price}
-                Discount={Math.floor((product.discount_price - product.price) / product.discount_price * 100)}
-
-                onaddToWishlist={() => handleAddToWishlist
-                  (
-                    product.product_id,
-    
-                  )
-                }
-                onAddToCart={() => handleMoveToCart(
-                  product.product_id,
-                )}
-
-              />
+      ) : (
+        <>
+          {/* <InfiniteScroll
+            dataLength={products.length}
+            next={() => setPage(page + 1)}
+            hasMore={hasMore}
+            loader={<h4>Loading...</h4>}
+            endMessage={<p>No more products to load</p>}
+          > */}
+            <div className="row">
+              {products.map((product) => (
+                <div key={product.product_id} className="PreCardSm col-6 col-sm-6 col-xs-4 col-md-6 col-lg-3">
+                  <PreChairsCard
+                    ChairImg={`/Assets/images/New-launches-1/${product.image_name}`}
+                    id={product.product_id}
+                    Title={product.product_name}
+                    Discription={product.short_description}
+                    Price={product.price}
+                    orignalPrice={product.discount_price}
+                    Discount={Math.floor((product.discount_price - product.price) / product.discount_price * 100)}
+                    onaddToWishlist={() => handleAddToWishlist(product.product_id)}
+                    onAddToCart={() => handleMoveToCart(product.product_id)}
+                  />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          {/* </InfiniteScroll> */}
+
+
+        </>
       )}
     </div>
   );
