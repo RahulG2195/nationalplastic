@@ -1,60 +1,56 @@
-From cardProduct->
-// const dispatch = useDispatch();
-  // const [cartItems, setCartItems] = useState([]);
+import nodemailer from "nodemailer";
+import { NextResponse } from "next/server";
 
-  // const cartInitialCount = useSelector(state => state.cart.initialCount);
+// import { NextApiRequest, NextApiResponse } from "next";
+export async function POST(req) {
+  console.log("INside-------------------------- handler" + JSON.stringify(req));
+  console.log(
+    "INside-------------------------- handler" + JSON.stringify(req.body)
+  );
+  console.log(
+    "INside-------------------------- handler" + JSON.stringify(req.data)
+  );
 
-  // useEffect(() => {
-  //   // Update the initialCount state with the value from the Redux store
-  //   setInitialCount(cartInitialCount);
-  // }, [cartInitialCount]); // Run this effect whenever cartInitialCount changes
+  const data = await req.json();
+  // console.log("Data: " + JSON.stringify(data));
+  // console.log("Data: " + data.file ? "BRoh yes" : "NO ");
 
-  // useEffect(() => {
-  //   // const isProductInCart = cartItems.some(item => item.productId === productId);
-  //   // console.log("this is item ", item.productId)
-    
-  //   // if (isProductInCart) {
-  //   //   setInitialCount(initialCount + 1);
-  //   // }
-  // }, [cartItems, productId]); 
-  
-  // const handleAddToCart = async () => {
-  //   try {
-  //     dispatch(addToCart({ product_id: productId }, initialCount));
-  //   } catch (error) {
-  //     console.error('Error adding to cart:', error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   // Update the count from the Redux store
-  //   setInitialCount(initialCount);
-  //   // console.log("in cart is ",initialCount+1);
-  // }, [initialCount]);
-Form page.jsx
-     // const { data } = await axios.post(`http://localhost:3000/api/Users`);
-      // const existingEmails = data.map((user) => user.Email);
-      // const existingpassword = data.map((user) => user.Password);
-      // // console.log("existingEmails=" + existingEmails);
-      // // console.log("formData.email=" + formData.email);
-      // if (existingEmails.includes(formData.email)) {
-      //   if (existingpassword.includes(formData.password)) {
-      //     // alert("Login successful");
-      //     // navigate('/About');
-          // push('/'); 
-          // router.push({
-          //   pathname: '/',
-          //   query: { email: formData.email }
-          // });
-      //   } else {
-      //     alert("Incorrect Password");
-      //   }
-      // } else {
-      //   alert("This Email is not registred");
-      // }
-
-
-                function getProductQuantity(product_id, products) {
-            const product = products.find((p) => p.product_id === product_id);
-            return product ? product.quantity : 0;
-          }
-          const getQuantity = getProductQuantity(product.product_id, products);
+  const { name, email, message, reason, mobile, file } = data;
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "webDevs2024@gmail.com",
+      pass: "kppr tbup pqne eirr", // Replace with your Gmail app password (not your account password)
+    },
+  });
+  const HtmlFormat = `<p>Hello,</p>
+  <p>${name} has contacted.</p>
+  <p>Reason for Contact: ${reason}</p>
+  <p>Message: ${message}</p>
+  <p>Contact Number: ${mobile} </p>
+  <p> Regards, </p>
+  <p> Web Developer </p>
+  `;
+  try {
+    console.log("BEfore mailing" + file.name);
+    const info = await transporter.sendMail({
+      from: "webDevs2024@gmail.com",
+      to: email,
+      subject: reason,
+      html: HtmlFormat,
+      attachments: [{ filename: Filename, content: file }],
+    });
+    // console.log("INFO:", info);
+    return NextResponse.json({
+      message: "sended email",
+      success: true,
+      status: 200,
+    });
+  } catch (e) {
+    return NextResponse.json({
+      message: "Failed email",
+      success: false,
+      status: 404,
+    });
+  }
+}

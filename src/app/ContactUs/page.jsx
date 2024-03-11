@@ -1,12 +1,48 @@
 "use client";
 
-import Image from "next/image"; 
-// import insertFormData from '../Config/API/register'
-import "../../styles/contactus.css"; 
+import Image from "next/image";
+
+import "../../styles/contactus.css";
 import ContactUsCard from "@/Components/ContactUs/ContactUsCard";
-import { useState } from 'react';
+import { useState } from "react";
 import axios from "axios";
-import toast, { Toaster } from 'react-hot-toast';
+import { Bounce, toast } from "react-toastify";
+
+const notify = () => {
+  toast.success("Mail Sended SucessFully", {
+    position: "top-center",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+  });
+};
+const notifyError = () => {
+  toast.error("Failed To send Mail", {
+    position: "top-center",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+  });
+};
+
+import {
+  isValidName,
+  isValidEmail,
+  isValidMessage,
+  isValidReason,
+  isValidMobile,
+  // isValidFile,
+} from "@/utils/validation";
 function ContactUs() {
   const [userInput, setUserInput] = useState({
     name: "",
@@ -14,126 +50,171 @@ function ContactUs() {
     message: "",
     reason: "",
     mobile: "",
-});
-const isValidEmail = (email) => {
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailPattern.test(email);
-};
+    file: null,
+  });
 
-function handleInputChange(e) {
-    const {name, value} = e.target;
-    setUserInput({
-        ...userInput,
-        [name]: value
-    })
-} 
-// const notify = () => toast('Here is your toast.');
-async function onFormSubmit(e) {
-  // toast
-  e.preventDefault();
-  console.log("UserInput");
-  console.log(JSON.stringify(userInput));
-  try {
-    // const res = await axios.put(`http://localhost:3000/api/Users`, userInput);
-
-    const res = await axios.post(`http://localhost:3000/api/sendEmail`, userInput);
-    toast("Your Message has been submitted successfully.");
-    if (res.success) {
-      toast("Your Message has been submitted successfully. I'll get back to you at my earliest.");
-  }else{
-    toast.error("Your Message has failed. Please try again later.");
+  async function handleInputChange(event) {
+    const { name, value } = event.target;
+    {
+      setUserInput({ ...userInput, [name]: value });
+    }
   }
-  //     const response = axiosInstance.post("/contact", userInput);
-  //     toast.promise(response, {
-  //         loading: "Submitting your message...",
-  //         success: "Form submitted successfully",
-  //         error: "Failed to submit the form"
-  //     });
-  //     const contactResponse = await response;
-  //     console.log(contactResponse)
-  //     if(contactResponse?.data?.success) {
-  //         setUserInput({
-  //             name: "",
-  //             email: "",
-  //             message: "",
-  //         });
-      // }
-  } catch (err) {
-    console.log(err.message)
-    toast.error("Something went Wrong. please try again later.")
+  async function handleImageUpload(e) {
+    e.preventDefault();
+    const uploadedImage = e.target.files[0];
+    if (uploadedImage) {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(uploadedImage);
+      fileReader.addEventListener("load", function () {
+        setUserInput({
+          ...userInput,
+          file: uploadedImage,
+        });
+      });
+    }
   }
 
-}
+  async function onFormSubmit(e) {
+    e.preventDefault();
+
+    if (!isValidName(userInput.name)) {
+      toast.error("Please enter a valid name.");
+      return;
+    }
+    if (!isValidEmail(userInput.email)) {
+      toast.error("Please enter a valid email.");
+      return;
+    }
+    if (!isValidMessage(userInput.message)) {
+      toast.error("Please enter a message.");
+      return;
+    }
+    if (!isValidReason(userInput.reason)) {
+      toast.error("Please select a reason.");
+      return;
+    }
+    if (!isValidMobile(userInput.mobile)) {
+      toast.error("Please enter a valid mobile number.");
+      return;
+    }
+    // if (!isValidFile(userInput.file)) {
+    //   toast.error("Please upload a valid file.");
+    //   return;
+    // }
+    // if (!userInput.file) {
+    //   toast.error("Please select a file to upload.");
+    //   return;
+    // }
+    console.log("--" + userInput.file);
+    //Try catch For the File Upload :Multer
+    console.log("Try    catch");
+    const formData = new FormData();
+    formData.append("name", userInput.name);
+    formData.append("email", userInput.email);
+    formData.append("message", userInput.message);
+    formData.append("reason", userInput.reason);
+    formData.append("mobile", userInput.mobile);
+    formData.append("file", userInput.file); // Ensure only the first file is appended
+
+    //TryCatch For the Email Message
+
+    const res = await axios.post(
+      `http://localhost:3000/api/sendEmail`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data", // Set content type for FormData
+        },
+      }
+    );
+    if (res.status === 200) {
+      setUserInput({
+        name: "",
+        email: "",
+        message: "",
+        reason: "",
+        mobile: "",
+        file: null,
+      });
+      notify();
+    } else {
+      notifyError();
+    }
+    // console.log("sending Mail " ,formData);
+  }
+
   const RegisteredOfficeCardArr = [
     {
       key: 1,
-      title:"North - Regional Offices",
+      title: "North - Regional Offices",
       location: "D-92, Meerut Road, Indl Area, Ghaziabad, U.P. India",
       phone: "+91-9219220368, +91- 9213090354",
       email: "info@nationalplastic.com",
     },
     {
       key: 2,
-      title:"South - Regional Offices",
-      location: "21, New Timber Yard Layout, Off. Mysore Road, Near Satellite Bus Stand & Big Bazar, Banglore- 560 026",
+      title: "South - Regional Offices",
+      location:
+        "21, New Timber Yard Layout, Off. Mysore Road, Near Satellite Bus Stand & Big Bazar, Banglore- 560 026",
       phone: "080-26742855",
       email: "info@nationalplastic.com",
     },
     {
       key: 3,
-      title:"Punjab - Branch Office",
+      title: "Punjab - Branch Office",
       location: "D-92, Meerut Road, Indl Area, Ghaziabad, U.P. India",
       phone: "+91-9219220368, +91- 9213090354",
       email: "info@nationalplastic.com",
     },
     {
       key: 4,
-      title:"Kerala - Branch Office",
+      title: "Kerala - Branch Office",
       location: "D-92, Meerut Road, Indl Area, Ghaziabad, U.P. India",
       phone: "+91-9219220368, +91- 9213090354",
       email: "info@nationalplastic.com",
     },
-  ]
-  // console.log(insertFormData(RegisteredOfficeCardArr));
-  
+  ];
+
   // **************FactoryUnitsArr Array************
   const FactoryUnitsArr = [
     {
       key: 1,
-      title:"Silvassa",
-      location: "Plot No. 263, Village Dadra, Silvassa Union Territory of Dadra Nagarhaveli, (Near Dadra 66 KVA Sub-station, 6 KM from Vapi)",
+      title: "Silvassa",
+      location:
+        "Plot No. 263, Village Dadra, Silvassa Union Territory of Dadra Nagarhaveli, (Near Dadra 66 KVA Sub-station, 6 KM from Vapi)",
       phone: "+91-9219220368, +91- 9213090354",
       email: "info@nationalplastic.com",
     },
     {
       key: 2,
-      title:"Patna",
+      title: "Patna",
       location: "Plot No. B-1 to B-7, Industrial Area, Fatuha, Patna.",
       phone: "+91-9219220368, +91- 9213090354",
       email: "info@nationalplastic.com",
     },
     {
       key: 3,
-      title:"Nellore",
-      location: "SY. No. 283, 297, 298, APIIC Indl. Park, Menakur, Village Naidupeth Mandal, SPSR, Nellore - 524126.",
+      title: "Nellore",
+      location:
+        "SY. No. 283, 297, 298, APIIC Indl. Park, Menakur, Village Naidupeth Mandal, SPSR, Nellore - 524126.",
       phone: "+91-9219220368, +91- 9213090354",
       email: "info@nationalplastic.com",
     },
     {
       key: 4,
-      title:"Lorem ipsum",
+      title: "Lorem ipsum",
       location: "D-92, Meerut Road, Indl Area, Ghaziabad, U.P. India",
       phone: "+91-9219220368, +91- 9213090354",
       email: "info@nationalplastic.com",
     },
-  ]
+  ];
   return (
     <>
       <div className="container-flude">
-      <Toaster/>
         <div className="row">
           <Image
             src="/Assets/images/ContactUs/Contact-Us-pg-banner.png"
+            alt="Contact Us Page Banner"
             width={100}
             height={100}
             layout="responsive"
@@ -154,6 +235,7 @@ async function onFormSubmit(e) {
           <div className="contactCTA">
             <Image
               src="/Assets/images/ContactUs/call-center-headphone-keyboard-table.png"
+              alt="Contact Us Page Banner"
               width={100}
               height={100}
               layout="responsive"
@@ -166,9 +248,7 @@ async function onFormSubmit(e) {
               </div>
 
               <div className="col-md-6 cta-form">
-                <form 
-                onSubmit={onFormSubmit}
-                >
+                <form onSubmit={onFormSubmit}>
                   <h3>Send a message</h3>
                   <div className="mb-3">
                     <label htmlFor="name" className="form-label">
@@ -179,7 +259,7 @@ async function onFormSubmit(e) {
                       className="form-control"
                       id="name"
                       placeholder="Enter your name"
-                      name="name" 
+                      name="name"
                       onChange={handleInputChange}
                       value={userInput.name}
                     />
@@ -193,7 +273,7 @@ async function onFormSubmit(e) {
                       className="form-control"
                       id="email"
                       placeholder="Enter your email"
-                      name="email" 
+                      name="email"
                       onChange={handleInputChange}
                       value={userInput.email}
                     />
@@ -207,7 +287,7 @@ async function onFormSubmit(e) {
                       className="form-control"
                       id="mobile"
                       placeholder="Enter your mobile number"
-                      name="mobile" 
+                      name="mobile"
                       onChange={handleInputChange}
                       value={userInput.mobile}
                     />
@@ -216,12 +296,12 @@ async function onFormSubmit(e) {
                     <label htmlFor="reason" className="form-label">
                       Reason
                     </label>
-                    <select className="form-select" 
-                    id="reason"
-                    name="reason" 
-    onChange={handleInputChange} 
-    value={userInput.reason} 
-                    
+                    <select
+                      className="form-select"
+                      id="reason"
+                      name="reason"
+                      onChange={handleInputChange}
+                      value={userInput.reason}
                     >
                       <option selected="">Choose...</option>
                       <option value="general">General Inquiry</option>
@@ -233,7 +313,16 @@ async function onFormSubmit(e) {
                     <label htmlFor="file" className="form-label">
                       Upload File
                     </label>
-                    <input type="file" className="form-control" id="file" />
+                    <input
+                      type="file"
+                      className="form-control"
+                      id="file"
+                      placeholder="Maximum Size: 50mb"
+                      name="file"
+                      onChange={handleImageUpload}
+                      // value={userInput.file}
+                      accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                    />
                   </div>
                   <div className="mb-3">
                     <label htmlFor="message" className="form-label">
@@ -245,10 +334,9 @@ async function onFormSubmit(e) {
                       rows={5}
                       placeholder="Enter your message"
                       defaultValue={""}
-                      name="message" 
+                      name="message"
                       onChange={handleInputChange}
                       value={userInput.message}
-                      
                     />
                   </div>
                   <button type="submit" className="btn cta-contact-btn">
@@ -265,6 +353,7 @@ async function onFormSubmit(e) {
             <div className="location-image">
               <Image
                 src="/Assets/images/ContactUs/red-place-marker-white-background.png"
+                alt="Contact Us Page Banner"
                 width={100}
                 height={100}
                 layout="responsive"
@@ -293,9 +382,10 @@ async function onFormSubmit(e) {
               </div>
             </div>
           </div>
-          <div className="col-md-6 col-lg-6 col-xl-8 map-image" >
+          <div className="col-md-6 col-lg-6 col-xl-8 map-image">
             <Image
               src="/Assets/images/ContactUs/map.png"
+              alt="Contact Us Page Banner"
               width={100}
               height={100}
               layout="responsive"
@@ -305,29 +395,43 @@ async function onFormSubmit(e) {
         </div>
       </div>
 
-{/* Branch Offices */}
-<div className="container BranchOffices">
-    <h2>Branch <span>Offices</span></h2>
-<div className="row BranchOfficescards">
-{RegisteredOfficeCardArr.map((val) => (
-    <div className="col-md-6" key={val.key}> 
-              <ContactUsCard title={val.title} location={val.location} phone={val.phone} email={val.email} />
+      {/* Branch Offices */}
+      <div className="container BranchOffices">
+        <h2>
+          Branch <span>Offices</span>
+        </h2>
+        <div className="row BranchOfficescards">
+          {RegisteredOfficeCardArr.map((val) => (
+            <div className="col-md-6" key={val.key}>
+              <ContactUsCard
+                title={val.title}
+                location={val.location}
+                phone={val.phone}
+                email={val.email}
+              />
             </div>
           ))}
-    </div>
-</div>
-{/* Factory Units */}
+        </div>
+      </div>
+      {/* Factory Units */}
 
-<div className="container BranchOffices">
-    <h2>Factory <span>Units</span></h2>
-<div className="row BranchOfficescards">
-{FactoryUnitsArr.map((val) => (
-    <div className="col-md-6" key={val.key}> 
-              <ContactUsCard title={val.title} location={val.location} phone={val.phone} email={val.email} />
+      <div className="container BranchOffices">
+        <h2>
+          Factory <span>Units</span>
+        </h2>
+        <div className="row BranchOfficescards">
+          {FactoryUnitsArr.map((val) => (
+            <div className="col-md-6" key={val.key}>
+              <ContactUsCard
+                title={val.title}
+                location={val.location}
+                phone={val.phone}
+                email={val.email}
+              />
             </div>
           ))}
-    </div>
-</div>
+        </div>
+      </div>
     </>
   );
 }
