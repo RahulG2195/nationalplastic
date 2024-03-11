@@ -59,6 +59,20 @@ function ContactUs() {
       setUserInput({ ...userInput, [name]: value });
     }
   }
+  async function handleImageUpload(e) {
+    e.preventDefault();
+    const uploadedImage = e.target.files[0];
+    if (uploadedImage) {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(uploadedImage);
+      fileReader.addEventListener("load", function () {
+        setUserInput({
+          ...userInput,
+          file: uploadedImage,
+        });
+      });
+    }
+  }
 
   async function onFormSubmit(e) {
     e.preventDefault();
@@ -87,10 +101,10 @@ function ContactUs() {
     //   toast.error("Please upload a valid file.");
     //   return;
     // }
-    if (!userInput.file) {
-      toast.error("Please select a file to upload.");
-      return;
-    }
+    // if (!userInput.file) {
+    //   toast.error("Please select a file to upload.");
+    //   return;
+    // }
     console.log("--" + userInput.file);
     //Try catch For the File Upload :Multer
     console.log("Try    catch");
@@ -100,7 +114,7 @@ function ContactUs() {
     formData.append("message", userInput.message);
     formData.append("reason", userInput.reason);
     formData.append("mobile", userInput.mobile);
-    formData.append("file", userInput.file[0]); // Ensure only the first file is appended
+    formData.append("file", userInput.file); // Ensure only the first file is appended
 
     //TryCatch For the Email Message
     try {
@@ -303,9 +317,7 @@ function ContactUs() {
                       id="file"
                       placeholder="Maximum Size: 50mb"
                       name="file"
-                      onChange={(e) =>
-                        setUserInput({ ...userInput, file: e.target.files[0] })
-                      }
+                      onChange={handleImageUpload}
                       // value={userInput.file}
                       accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
                     />
