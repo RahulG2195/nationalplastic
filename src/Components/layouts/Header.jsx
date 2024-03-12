@@ -16,7 +16,7 @@ export default function Header() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isClicked, setIsClicked] = useState(false); // State to track click
-
+  const router = useRouter();
   // const [suggestions, setSuggestions] = useState([]);
   // console.log("suggestions are here ", suggestions)
   console.log("here is searched result", searchResults);
@@ -38,7 +38,7 @@ export default function Header() {
       console.error("Error fetching suggestions:", error);
     } finally {
       // setIsLoading(false);
-  }
+    }
   };
 
   // Search Function
@@ -56,7 +56,7 @@ export default function Header() {
   const handleShow = (e) => {
     setIsClicked(!isClicked);
   };
-  
+
 
   return (
     <>
@@ -98,7 +98,7 @@ export default function Header() {
             >
               <span className="navbar-toggler-icon" />
             </button>
-            <div className= {`${isClicked ? ' collapse navbar-collapse show menubg' : 'menuhide '}`} id="navbarSupportedContent">
+            <div className={`${isClicked ? ' collapse navbar-collapse show menubg' : 'menuhide '}`} id="navbarSupportedContent">
               <ul className="navbar-nav mb-2 mb-lg-0">
                 <li className="nav-item brdr">
                   {/* <div className='border'></div> */}
@@ -118,9 +118,9 @@ export default function Header() {
                   </Link>
                 </li>
                 <li className="nav-item brdr accr">
-                    <ProductsAccr
+                  <ProductsAccr
                     handleShow={handleShow}
-                    />
+                  />
                 </li>
                 <li className="nav-item brdr">
                   <Link className="nav-link" href="/NewsAndMedia" onClick={isClicked ? handleShow : null}>
@@ -148,12 +148,18 @@ export default function Header() {
                   </Link>
                 </li>
                 <li className="nav-item brdr">
-                  <Link className="nav-link" href="/Login" onClick={isClicked ? handleShow : null}>
-                    <i className="fa fa-user"></i>
-                  </Link>
+                  {isLoggedIn ? (
+                    <Link className="nav-link" href="/ProfilePage" >
+                      <i className="">Profile</i>
+                    </Link>
+                  ) : (
+                    <Link className="nav-link" href="/Login" onClick={isClicked ? handleShow : null}>
+                      <i className="fa fa-user"></i>
+                    </Link>
+                  )}
                 </li>
                 <li className="nav-item brdr">
-                  <Link className="nav-link" href="/AddToCart" onClick={isClicked ? handleShow : null}> 
+                  <Link className="nav-link" href="/AddToCart" onClick={isClicked ? handleShow : null}>
                     <i className="fa fa-cart-arrow-down"></i>
                   </Link>
                 </li>

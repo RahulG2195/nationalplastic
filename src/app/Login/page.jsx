@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { authSliceReducer } from "@/redux/reducer/userSlice";
+import { json } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -16,6 +17,8 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [login, setLogin] = useState(false);
+  const[message,setMessages ]= useState([]);
+  
   const router = useRouter(); // Use useRouter on the client-side only
   // const navigate =useNavigate();
   // const router = useRouter();
@@ -41,9 +44,13 @@ function Login() {
       return;
     }
 
+
+
     try {
-      const res = await axios.put(`http://localhost:3000/api/Users`, formData);
-      console.log("this is status ", res.data.status);
+
+
+      const res = await axios.put(`http://localhost:3000/api/Users`, formData);      
+
       if (res.data.status === 500) {
         setErrorMessage(JSON.stringify(res.data.message));
         alert("Failed to loggedin");
@@ -51,14 +58,19 @@ function Login() {
       } else {
         alert("Successfully logged in");
         setLogin(true);
+        const userData = res.data.message
+        console.log("FromDInesh "+userData)
+        localStorage.setItem("userData", JSON.stringify(userData));
+        
         // push("/");
-        dispatch(authSliceReducer(formData));
+        // dispatch(authSliceReducer(formData));
       }
     } catch (error) {
       console.error("Error during login:", error);
       setErrorMessage("An error occurred during login. Please try again.");
     }
   };
+
 
   return (
     <div className="container">

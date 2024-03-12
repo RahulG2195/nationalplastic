@@ -77,6 +77,12 @@ const ProductsAccr = ({handleShow}) => {
     // Add more categories and products here
   ];
 
+    const [expanded, setExpanded] = React.useState(false);
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
   return (
     <div >
       <Accordion style={{ backgroundColor: '#FFE000' }}>
@@ -90,11 +96,11 @@ const ProductsAccr = ({handleShow}) => {
         <AccordionDetails>
           <div>
             {accordionData.map((categoryItem, index) => (
-              <Accordion key={index} style={{ backgroundColor: '#F1EF99' }}>
+              <Accordion  expanded={expanded === `panel${index+1}`} onChange={handleChange(`panel${index+1}`)} key={index} style={{ backgroundColor: '#F1EF99' }}>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
-                  aria-controls={`panel${index + 1}-content`}
-                  id={`panel${index + 1}-header`}
+                  aria-controls={`panel${index + 1}bh-content`}
+                  id={`panel${index + 1}bh-header`}
                 >
                   <Typography>{categoryItem.category}</Typography>
                 </AccordionSummary>
