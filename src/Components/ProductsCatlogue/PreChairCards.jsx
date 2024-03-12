@@ -99,12 +99,16 @@ const PreChairsCards = () => {
   const handleAddToWishlist = (product_id) => {
     dispatch(addItemToWishlist({
       product_id: product_id,
+      // customer_id:cid,
     }));
   };
+
+  // const cid = localStorage.getItem('')
 
   const handleMoveToCart = (product_id) => {
     dispatch(addToCart({
       product_id: product_id,
+      customer_id: cid,
     }));
   };
 
