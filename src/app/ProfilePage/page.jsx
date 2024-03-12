@@ -7,6 +7,8 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 
 function ProfilePage() {
+  const[idd, setIdd] = useState(null)
+
   const [formData, setFormData] = useState({
     email: "",
     phone: "",
@@ -22,12 +24,16 @@ function ProfilePage() {
   const [data, setData] = useState({});
   // const [phone, setPhone] = useState(null);
   const [messages, setMessages] = useState([]);
+  let iid =  messages.length > 0 ? messages[0].customer_id : null;
+  console.log("ssssssssssssssssssssssss",iid)
   const [editedData, setEditedData] = useState({
+    Id: "",
     Email: "",
     Phone: "",
     Address: "",
   });
 
+console.log("eeeeeeeeeeeeeeddddddddddiiiiiiiittttttt",iid)
   async function handleLogout(e) {
     e.preventDefault();
     localStorage.clear();
@@ -46,15 +52,14 @@ function ProfilePage() {
   useEffect(() => {
     const isLoggedIn =
       localStorage.getItem("isLoggedIn") === "true" ? true : false;
-    const storedData = JSON.parse(localStorage.getItem("userData")) || {};
-
+    const storedData = JSON.parse(localStorage.getItem("userData")) || {}; 
 // Retrieve data from local storage
 const userDataString = localStorage.getItem('userData');
 // Convert the retrieved data from string to JSON object
 const userDataID = JSON.parse(userDataString); 
 console.log("ggggggggggggggggggggggggggggggggggggggggggggggggggggggggg g userDataString",JSON.stringify(userDataString)); // Example: Accessing the email property
 console.log("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg userDataID",JSON.stringify(userDataID.customer_id));  
-console.log("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg userDataID",(userDataID.customer_id)); 
+console.log("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg storedData",storedData); 
 console.log("userDataID....", isLoggedIn);
 
 // Example: Accessing the email property
@@ -95,10 +100,10 @@ console.log("userDataID....", isLoggedIn);
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
-
     setEditedData((prevData) => ({
       ...prevData,
       [name]: value,
+      Id:iid
   }));
   
     // console.log("name0000000000000/////////////////////////////", editedData);
@@ -143,7 +148,7 @@ console.log("userDataID....", isLoggedIn);
 
       // Construct the data object to be sent to the API
       const userData = {
-        // Cid: message.customer_id,
+        // Id: id,
         Email: email,
         Phone: phone,
         Address: address,
@@ -151,9 +156,9 @@ console.log("userDataID....", isLoggedIn);
       // Send updated data to userProfile API
       console.log("userData======222222222222222======",userData)
       const response = await axios.post('http://localhost:3000/api/UserProfile',editedData);
-      // console.log('Form submitted:', response );
+      console.log('Form submitted editedData:', editedData );
       // Handle success response
-      // console.log("Updated data:", response.data);
+      console.log("Updated data:", response.data);
       toast.success("Data updated successfully");
     } catch (error) {
       // Handle error
@@ -270,9 +275,17 @@ console.log("userDataID....", isLoggedIn);
                     } */}
 
                       {Array.isArray(messages) && messages.length > 0 ? (
+
                         messages.map((message, index) => (
                           <form key={index} onSubmit={handleEdit}>
                             <div className="row user-data">
+                                <input
+                                  type="hidden"
+                                  className="form-control"
+                                  name="Id"
+                                  readOnly
+                                />
+
                               <div className="col">
                                 <label htmlFor="">Name</label>
                                 <input

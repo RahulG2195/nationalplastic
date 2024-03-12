@@ -22,10 +22,10 @@ export async function GET(request) {
 
 export async function POST(request) {
     try {
-    const { Email, Phone, Address} = await request.json();
+    const {Id, Email, Phone, Address} = await request.json();
     const result = await query({
-        query: "UPDATE Customer SET Phone = ?, Address = ?, Email = ? WHERE customer_id = 1;",
-        values: [Phone, Address, Email]
+        query: "UPDATE Customer SET Phone = ?, Address = ?, Email = ? WHERE customer_id = ?;",
+        values: [Phone, Address, Email, Id]
     });
 
         if (result.affectedRows > 0) {
