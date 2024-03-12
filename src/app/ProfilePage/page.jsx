@@ -48,6 +48,17 @@ function ProfilePage() {
       localStorage.getItem("isLoggedIn") === "true" ? true : false;
     const storedData = JSON.parse(localStorage.getItem("userData")) || {};
 
+// Retrieve data from local storage
+const userDataString = localStorage.getItem('userData');
+// Convert the retrieved data from string to JSON object
+const userDataID = JSON.parse(userDataString); 
+console.log("ggggggggggggggggggggggggggggggggggggggggggggggggggggggggg g userDataString",JSON.stringify(userDataString)); // Example: Accessing the email property
+console.log("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg userDataID",JSON.stringify(userDataID.customer_id));  
+console.log("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg userDataID",(userDataID.customer_id)); 
+console.log("userDataID....", isLoggedIn);
+
+// Example: Accessing the email property
+
     setIsLoggedIn(isLoggedIn);
     setData(storedData);
   }, []);
@@ -57,6 +68,7 @@ function ProfilePage() {
       try {
         const email = localStorage.getItem("userData");
         const data = JSON.parse(email);
+        // const id = JSON.parse(customer_id);
         const useremail = data.email;
 
         const formData = {
@@ -128,12 +140,7 @@ function ProfilePage() {
       //   toast.error("Please provide all required information");
       //   return;
       // }
-// Retrieve data from local storage
-const userDataString = localStorage.getItem('userData');
-// Convert the retrieved data from string to JSON object
-const userDataID = JSON.parse(userDataString);
-// Now you can access the properties of userData
-console.log("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",userDataID.customer_id); // Example: Accessing the email property
+
       // Construct the data object to be sent to the API
       const userData = {
         // Cid: message.customer_id,

@@ -57,7 +57,7 @@ function Login() {
         // push("/");
         // dispatch(authSliceReducer(formData));
         ////////////Dinesh
-        // dispatch(authSliceReducer(formData));
+        dispatch(authSliceReducer(formData));
 
 
       }
