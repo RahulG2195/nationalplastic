@@ -3,6 +3,8 @@
 // import { useRouter } from 'next/router';
 import { query } from "@/lib/db"; // Assuming 'your-database-module' is the correct path to your database module
 // const router = useRouter();
+import axios from "axios";
+import { NextRequest, NextResponse } from "next/server";
 
 // import { Response } from 'your-response-library'; // Assuming 'your-response-library' is the correct library for handling responses
 
@@ -54,6 +56,7 @@ export async function GET(request) {
 //   }
 
 // Define your API endpoint handler for registration POST request
+
 export async function POST(request) {
   try {
     // Extract data from the request JSON
@@ -106,6 +109,9 @@ export async function POST(request) {
 export async function PUT(request) {
   // const router = useRouter();
   try {
+    // console.log("FROM put " + request);
+    // console.log("FROM put " + JSON.stringify(request));
+
     const { email, password, getProfile } = await request.json();
     console.log("putttttttttp request" + email + password + getProfile);
 
@@ -116,6 +122,7 @@ export async function PUT(request) {
       values: [email],
     });
     console.log("existingUser:", existingUser);
+    //For reseting the password
 
     // const passwordChecker = ()=>{
     console.log(existingUser);
