@@ -21,16 +21,11 @@ export async function GET(request) {
 }
 
 export async function POST(request) {
-
     try {
-    //     const result = await query({
-    //         query: "INSERT INTO Customer (FirstName, LasttName, Email, Phone, Address, Password) VALUES (?, ?, ?, ?, ?, ?)",
-    // values: ['Dinesh', 'nadar', 'd@gmail.com', '7779997777', "kalyan", "passwordd@123"],
-    //     });
-    const { email, phone, address} = await request.json();
+    const { Email, Phone, Address} = await request.json();
     const result = await query({
         query: "UPDATE Customer SET Phone = ?, Address = ?, Email = ? WHERE customer_id = 1;",
-        values: [phone, address, email]
+        values: [Phone, Address, Email]
     });
 
         if (result.affectedRows > 0) {

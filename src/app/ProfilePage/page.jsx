@@ -20,7 +20,7 @@ function ProfilePage() {
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [data, setData] = useState({});
-  const [phone, setPhone] = useState(null);
+  // const [phone, setPhone] = useState(null);
   const [messages, setMessages] = useState([]);
   const [editedData, setEditedData] = useState({
     Email: "",
@@ -48,6 +48,17 @@ function ProfilePage() {
       localStorage.getItem("isLoggedIn") === "true" ? true : false;
     const storedData = JSON.parse(localStorage.getItem("userData")) || {};
 
+// Retrieve data from local storage
+const userDataString = localStorage.getItem('userData');
+// Convert the retrieved data from string to JSON object
+const userDataID = JSON.parse(userDataString); 
+console.log("ggggggggggggggggggggggggggggggggggggggggggggggggggggggggg g userDataString",JSON.stringify(userDataString)); // Example: Accessing the email property
+console.log("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg userDataID",JSON.stringify(userDataID.customer_id));  
+console.log("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg userDataID",(userDataID.customer_id)); 
+console.log("userDataID....", isLoggedIn);
+
+// Example: Accessing the email property
+
     setIsLoggedIn(isLoggedIn);
     setData(storedData);
   }, []);
@@ -57,6 +68,7 @@ function ProfilePage() {
       try {
         const email = localStorage.getItem("userData");
         const data = JSON.parse(email);
+        // const id = JSON.parse(customer_id);
         const useremail = data.email;
 
         const formData = {
@@ -64,9 +76,7 @@ function ProfilePage() {
           getProfile: true,
         };
 
-        const response = await axios.put(
-          "http://localhost:3000/api/Users",
-          formData
+        const response = await axios.put("http://localhost:3000/api/Users", formData
         );
 
         const responseData = response.data;
@@ -90,8 +100,8 @@ function ProfilePage() {
       ...prevData,
       [name]: value,
   }));
-
-    console.log("name0000000000000/////////////////////////////", editedData);
+  
+    // console.log("name0000000000000/////////////////////////////", editedData);
     let errorMessage = "";
 
     // Validate phone number
@@ -116,7 +126,6 @@ function ProfilePage() {
 
   const handleEdit = async (e) => {
     e.preventDefault();
-    console.log("[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]",editedData)
 
     try {
       // Gather form data from the event target
@@ -125,7 +134,7 @@ function ProfilePage() {
       const email = formData.get("email");
       const phone = formData.get("phone");
       const address = formData.get("address");
-      console.log("email========================", email)
+      // console.log("email========================", email)
       // Validate the form data
       // if (!email || !phone || !address) {
       //   toast.error("Please provide all required information");
@@ -134,17 +143,15 @@ function ProfilePage() {
 
       // Construct the data object to be sent to the API
       const userData = {
+        // Cid: message.customer_id,
         Email: email,
         Phone: phone,
         Address: address,
       };
       // Send updated data to userProfile API
-      const response = await axios.post(
-        "http://localhost:3000/api/UserProfile",
-        userData
-      );
-      console.log("userData============",userData)
-      console.log('Form submitted:', response );
+      console.log("userData======222222222222222======",userData)
+      const response = await axios.post('http://localhost:3000/api/UserProfile',editedData);
+      // console.log('Form submitted:', response );
       // Handle success response
       // console.log("Updated data:", response.data);
       toast.success("Data updated successfully");
@@ -243,7 +250,6 @@ function ProfilePage() {
                 <div className="Right-Profile">
                   <h3>My Account</h3>
                   <hr />
-
                   <div>
                     <div>
                       {/* {Array.isArray(messages) && messages.length > 0 ? (messages.map((message, index) => (
