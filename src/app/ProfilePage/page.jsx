@@ -25,19 +25,19 @@ function ProfilePage() {
   // const [phone, setPhone] = useState(null);
   const [messages, setMessages] = useState([]);
   let iid =  messages.length > 0 ? messages[0].customer_id : null;
-  console.log("ssssssssssssssssssssssss",iid)
+  // console.log("ssssssssssssssssssssssss",iid)
   const [editedData, setEditedData] = useState({
     Id: "",
-    Email: "",
+    // Email: "",
     Phone: "",
     Address: "",
   });
 
-console.log("eeeeeeeeeeeeeeddddddddddiiiiiiiittttttt",iid)
+// console.log("eeeeeeeeeeeeeeddddddddddiiiiiiiittttttt",iid)
   async function handleLogout(e) {
     e.preventDefault();
-    localStorage.clear();
-    setMessages("");
+    localStorage.clear(); 
+    setMessages(null); 
     window.location.reload();
     toast.success("Logged out", {
       position: "top",
@@ -57,10 +57,10 @@ console.log("eeeeeeeeeeeeeeddddddddddiiiiiiiittttttt",iid)
 const userDataString = localStorage.getItem('userData');
 // Convert the retrieved data from string to JSON object
 const userDataID = JSON.parse(userDataString); 
-console.log("ggggggggggggggggggggggggggggggggggggggggggggggggggggggggg g userDataString",JSON.stringify(userDataString)); // Example: Accessing the email property
-console.log("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg userDataID",JSON.stringify(userDataID.customer_id));  
-console.log("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg storedData",storedData); 
-console.log("userDataID....", isLoggedIn);
+// console.log("ggggggggggggggggggggggggggggggggggggggggggggggggggggggggg g userDataString",JSON.stringify(userDataString)); // Example: Accessing the email property
+// console.log("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg userDataID",JSON.stringify(userDataID.customer_id));  
+// console.log("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg storedData",storedData); 
+// console.log("userDataID....", isLoggedIn);
 
 // Example: Accessing the email property
 
@@ -75,6 +75,7 @@ console.log("userDataID....", isLoggedIn);
         const data = JSON.parse(email);
         // const id = JSON.parse(customer_id);
         const useremail = data.email;
+// console.log("oLIne no 77 from profilePagebject")
 
         const formData = {
           email: useremail,
@@ -83,6 +84,9 @@ console.log("userDataID....", isLoggedIn);
 
         const response = await axios.put("http://localhost:3000/api/Users", formData
         );
+        console.log("After response")
+        console.log(response.data)
+        console.log("JOSNDATA "+JSON.stringify(response.data))
 
         const responseData = response.data;
         const messageArray = responseData.message;
@@ -156,10 +160,15 @@ console.log("userDataID....", isLoggedIn);
       // Send updated data to userProfile API
       console.log("userData======222222222222222======",userData)
       const response = await axios.post('http://localhost:3000/api/UserProfile',editedData);
+
       console.log('Form submitted editedData:', editedData );
       // Handle success response
       console.log("Updated data:", response.data);
       toast.success("Data updated successfully");
+      console.log("LIne 165:::")
+      if( response.status == 200){
+        fetchUserData()
+      }
     } catch (error) {
       // Handle error
       console.error("Error updating data:", error);
@@ -275,7 +284,6 @@ console.log("userDataID....", isLoggedIn);
                     } */}
 
                       {Array.isArray(messages) && messages.length > 0 ? (
-
                         messages.map((message, index) => (
                           <form key={index} onSubmit={handleEdit}>
                             <div className="row user-data">
@@ -306,6 +314,7 @@ console.log("userDataID....", isLoggedIn);
                                   placeholder={message.Email}
                                   name="Email"
                                   onChange={handleInputChange}
+                                  readOnly
                                 />
                               </div>
                               <div className="col">
@@ -349,7 +358,9 @@ console.log("userDataID....", isLoggedIn);
                   <hr />
 
                   <div>
-                    <form>
+                  {Array.isArray(messages) && messages.length > 0 ? (
+                    messages.map((message, index) => (
+                    <form >
                       <div className="row user-data">
                         <div className="col">
                           <label htmlFor="">Password</label>
@@ -360,11 +371,11 @@ console.log("userDataID....", isLoggedIn);
                           />
                         </div>
                         <div className="col">
-                          <label htmlFor="">Canform Password</label>
+                          <label htmlFor="">confirm password</label>
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Canform Password"
+                            placeholder="confirm password"
                           />
                         </div>
                       </div>
@@ -377,6 +388,10 @@ console.log("userDataID....", isLoggedIn);
                         </div>
                       </div>
                     </form>
+ ))
+ ) : (
+   <div className="text-danger">You are.##############</div>
+ )}
                   </div>
                 </div>
               </div>

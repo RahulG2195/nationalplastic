@@ -65,8 +65,6 @@ function Login() {
         dispatch(authSliceReducer(formData));
         ////////////Dinesh
         // dispatch(authSliceReducer(formData));
-
->>>>>>> 42ea5b9896068ef854796d66a9a76a22ceb6bc5d
       }
     } catch (error) {
       console.error("Error during login:", error);

@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useState } from "react";
 import axios from "axios";
 import ProductsAccr from "../ProductsAccor/ProductsAccr";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -34,10 +35,7 @@ export default function Header() {
       console.error("Error fetching suggestions:", error);
     } finally {
       // setIsLoading(false);
-<<<<<<< HEAD
-=======
       // Set loading state to false regardless of success or error
->>>>>>> 42ea5b9896068ef854796d66a9a76a22ceb6bc5d
     }
   };
 
@@ -59,10 +57,7 @@ export default function Header() {
     setIsClicked(!isClicked);
   };
 
-<<<<<<< HEAD
-=======
   //
->>>>>>> 42ea5b9896068ef854796d66a9a76a22ceb6bc5d
 
   return (
     <>
@@ -107,14 +102,10 @@ export default function Header() {
             >
               <span className="navbar-toggler-icon" />
             </button>
-<<<<<<< HEAD
-            <div className={`${isClicked ? ' collapse navbar-collapse show menubg' : 'menuhide '}`} id="navbarSupportedContent">
-=======
             <div
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
             >
->>>>>>> 42ea5b9896068ef854796d66a9a76a22ceb6bc5d
               <ul className="navbar-nav mb-2 mb-lg-0">
                 <li className="nav-item brdr">
                   {/* <div className='border'></div> */}
@@ -186,22 +177,14 @@ export default function Header() {
                   </Link>
                 </li>
                 <li className="nav-item brdr">
-<<<<<<< HEAD
-                  {isLoggedIn ? (
-=======
                 {isLoggedIn ? (
->>>>>>> 42ea5b9896068ef854796d66a9a76a22ceb6bc5d
                     <Link className="nav-link" href="/ProfilePage" >
                       <i className="">Profile</i>
                     </Link>
                   ) : (
                     <Link className="nav-link" href="/Login" onClick={isClicked ? handleShow : null}>
                       <i className="fa fa-user"></i>
-<<<<<<< HEAD
-                    </Link>
-=======
                     </Link> 
->>>>>>> 42ea5b9896068ef854796d66a9a76a22ceb6bc5d
                   )}
                 </li>
                 <li className="nav-item brdr">
