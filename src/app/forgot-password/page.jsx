@@ -4,6 +4,34 @@ import "./forgotPasswordPage.css"; // Import CSS file for styling
 import { isValidEmail } from "@/utils/validation";
 import axios from "axios";
 import crypto from "crypto";
+import { Bounce, toast } from "react-toastify";
+
+const notify = () => {
+  toast.success("Mail Sended SucessFully", {
+    position: "top-center",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+  });
+};
+const notifyError = () => {
+  toast.error("Failed To send Mail", {
+    position: "top-center",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+  });
+};
 const ResetPasswordPage = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -53,12 +81,14 @@ const ResetPasswordPage = () => {
       );
       console.log("response: ");
       if (response.status === 200) {
+        notify();
         console.log("success from forgot-Passwords");
         // localStorage.setItem("resetToken", resetToken);
         localStorage.setItem("resetEmail", formData.email);
       }
       console.log(response);
     } else {
+      notifyError();
       console.log("Inside Email Send failed with error");
       alert(res.messsage);
     }

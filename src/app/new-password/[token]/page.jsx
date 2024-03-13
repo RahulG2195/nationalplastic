@@ -5,6 +5,34 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "../PasswordPage.css";
 import { useParams } from "next/navigation";
+import { Bounce, toast } from "react-toastify";
+
+const notify = () => {
+  toast.success("Password Changed SucessFully", {
+    position: "top-center",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+  });
+};
+const notifyError = () => {
+  toast.error("Process Failed Try Again!", {
+    position: "top-center",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+  });
+};
 const PasswordToken = () => {
   //   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -80,13 +108,17 @@ const PasswordToken = () => {
           formDataToSend
         );
         console.log(res);
+        notify();
+        localStorage.clear();
         // return res.status(400).json({ error: "Token expired" });
       } else {
-        console.log("Everthing okay");
+        notifyError();
+
         //   router.push("/forgot-password");
       }
       console.log("FormData from token: ", formData);
     } catch (error) {
+      notifyError();
       console.error("Error submitting form:", error);
     }
   };
