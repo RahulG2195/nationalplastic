@@ -9,8 +9,9 @@ export async function POST(request, res) {
     const email = data.get("email");
     const resetToken = data.get("resetToken");
     console.log("Inside MAil ResetToken: ", resetToken);
-    const url = "`http://localhost:3000/new-password?resetToken=${resetToken}`";
-    console.log("Inside MAil URL: ", url);
+    // http://localhost:3000/new-password/1?resetToken=YOUR_TOKEN_VALUE
+    const url = "http://localhost:3000/new-password/1?resetToken=" + resetToken;
+
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -24,7 +25,7 @@ export async function POST(request, res) {
     <p>Hello,</p>
     <p>You have requested to reset your password.</p>
     <p>Please follow the link below to reset your password:</p>
-    <p><a href="${url}">${url}</a></p>
+    <p><a href="${url}">Reset Password</a></p>
     <p>If you didn't request a password reset, you can ignore this email.</p>
     <p>Regards,</p>
     <p>Your Team</p>

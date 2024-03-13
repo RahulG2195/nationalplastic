@@ -35,7 +35,7 @@ const ResetPasswordPage = () => {
     };
     const formDataToSend = new FormData();
     formDataToSend.append("email", formData.email);
-    // console.log("Reset password email sent to:", formData);
+    // Checks Email valid or not
     const res = await axios.post(
       `http://localhost:3000/api/forgotPassword`,
       formDataToSend
@@ -51,6 +51,12 @@ const ResetPasswordPage = () => {
         `http://localhost:3000/api/mail`,
         formDataToSend
       );
+      console.log("response: ");
+      if (response.status === 200) {
+        console.log("success from forgot-Passwords");
+        // localStorage.setItem("resetToken", resetToken);
+        localStorage.setItem("resetEmail", formData.email);
+      }
       console.log(response);
     } else {
       console.log("Inside Email Send failed with error");

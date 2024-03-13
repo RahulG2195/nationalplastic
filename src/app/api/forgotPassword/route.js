@@ -20,3 +20,34 @@ export async function POST(request) {
     });
   }
 }
+export async function PUT(request) {
+  const data = await request.formData();
+  const Password = data.get("password");
+  const resetEmail = data.get("resetEmail" || "email");
+
+  try {
+    const result = await query({
+      query: "UPDATE Customer SET Password = ?  WHERE Email = ?;",
+      values: [Password, resetEmail],
+    });
+    console.log("FROM TRY catch" + result);
+
+    if (result.affectedRows > 0) {
+      return new Response(JSON.stringify({ message: "Changed Password" }), {
+        status: 200,
+      });
+    } else {
+      return new Response(
+        JSON.stringify({ message: "Failed to register user" }),
+        { status: 500 }
+      );
+    }
+  } catch (error) {
+    return new Response(
+      JSON.stringify({
+        status: 500,
+        message: error.message,
+      })
+    );
+  }
+}
