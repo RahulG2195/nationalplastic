@@ -1,6 +1,6 @@
 "use client"
 import Link from 'next/link';
-import "@/Components/preChairsCard/preChairsCard.css";
+// import "@/Components/preChairsCard/preChairsCard.css";
 import { useEffect, useState } from 'react';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import axios from 'axios';
