@@ -32,9 +32,9 @@ export default function RootLayout({ children }) {
     import("jquery/dist/jquery.min.js");
   }, []);
 
-  useEffect(() => {
-    typeof document !== undefined ? require('bootstrap/dist/js/bootstrap') : null
-  }, [])
+  // useEffect(() => {
+  //   typeof document !== undefined ? require('bootstrap/dist/js/bootstrap') : null
+  // }, [])
   return (
     <html lang="en">
       <body className={inter.className}>
