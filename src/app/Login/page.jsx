@@ -35,6 +35,12 @@ function Login() {
       [name]: value,
     }));
   };
+  const handleResetPassword = async (event) => {
+    router.push("/reset-password");
+  };
+  const handleRegisterClick = async (event) => {
+    router.push("/Register");
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -58,13 +64,15 @@ function Login() {
       } else {
         alert("Successfully logged in");
         setLogin(true);
-        // const userData = res.data.message
-        // console.log("FromDInesh "+userData)
+        const userData = res.data.message
+        console.log("FromDInesh "+userData)
         // localStorage.setItem("userData", JSON.stringify(userData));
         // push("/");
-        dispatch(authSliceReducer(formData));
-        ////////////Dinesh
         // dispatch(authSliceReducer(formData));
+        ////////////Dinesh
+        dispatch(authSliceReducer(formData));
+
+
       }
     } catch (error) {
       console.error("Error during login:", error);
@@ -144,7 +152,7 @@ function Login() {
 
                   {login ? (
                     // <Link href="/">Home</Link>
-                    router.push('/')
+                    router.push("/")
                   ) : (
                     <Link href="/Login">Login</Link>
                   )}
@@ -155,8 +163,29 @@ function Login() {
               )}
               <div className="RegisterHere-p">
                 <p>
-                  New to National Plastic?{" "}
-                  <span className="RegisterHere">Register Here</span>
+                  New to National Plastic{" ? "}
+                  <span
+                    style={{ textDecoration: "none", cursor: "pointer" }}
+                    onMouseOver={(e) =>
+                      (e.target.style.textDecoration = "underline")
+                    }
+                    onMouseOut={(e) => (e.target.style.textDecoration = "none")}
+                    onClick={handleRegisterClick}
+                  >
+                    Register Here
+                  </span>
+                </p>
+                <p onClick={handleResetPassword}>
+                  Forgot Password{" ? "}
+                  <span
+                    style={{ textDecoration: "none", cursor: "pointer" }}
+                    onMouseOver={(e) =>
+                      (e.target.style.textDecoration = "underline")
+                    }
+                    onMouseOut={(e) => (e.target.style.textDecoration = "none")}
+                  >
+                    Reset Password
+                  </span>
                 </p>
               </div>
               <div className="row ContinueWithgoogle">

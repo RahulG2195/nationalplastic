@@ -43,7 +43,7 @@ export const wishlistSlice = createSlice({
     },
     addToWishlist: (state, action) => {
       const newItem = action.payload;
-      console.log("want to add this in wish", newItem.product_id);
+      console.log("want to add this in wish", newItem);
 
       const isItemAlreadyAdded = state.items.some(
         (item) => item.product_id === newItem.product_id
@@ -66,7 +66,7 @@ export const wishlistSlice = createSlice({
 export const { addToWishlist } = wishlistSlice.actions;
 
 export const addItemToWishlist = (item) => async (dispatch, getState) => {
-  // console.log("ininininin")
+  console.log("ininininin",item)
 
   const { items } = getState().wishlist; // Access state through the second parameter
 

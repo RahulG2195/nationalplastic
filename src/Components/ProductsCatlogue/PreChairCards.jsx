@@ -11,6 +11,8 @@ import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import PremiumChairs from "./PremiumChairs";
 import InfiniteScroll from 'react-infinite-scroll-component';
 
+
+
 const PreChairsCards = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -21,10 +23,32 @@ const PreChairsCards = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [length , setlength] = useState([])
+  
+const [customerId, setCustomerId] = useState([]);
+
+// const data = localStorage.getItem('userData')
+//     const parseddata = JSON.parse(data);
+//     const cid = parseddata[0].customer_id;
+//    setCustomerId(cid),
+//    console.log(customerId>0 ? customerId);
+
 
   const dispatch = useDispatch();
+  // useEffect(() => {
+  //   if (customerId) {
+  //     console.log(customerId);
+  //   }
+  // }, [customerId]);
+
+  // useEffect(() => {
+  //   const data = localStorage.getItem('userData');
+  //   const parseddata = JSON.parse(data);
+  //   const cid = parseddata[0].customer_id;
+  //   setCustomerId(cid);
+  // }, [customerId]);
 
   useEffect(() => {
+
     fetchData();
   }, [
     selectedColor,
@@ -97,18 +121,20 @@ const PreChairsCards = () => {
   };
 
   const handleAddToWishlist = (product_id) => {
+    const cid = 1;
     dispatch(addItemToWishlist({
       product_id: product_id,
-      // customer_id:cid,
+      customer_id:cid,
     }));
   };
 
   // const cid = localStorage.getItem('')
 
   const handleMoveToCart = (product_id) => {
+    const cid = 1;
     dispatch(addToCart({
       product_id: product_id,
-      customer_id: cid,
+      customer_id:cid,
     }));
   };
 

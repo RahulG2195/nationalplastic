@@ -3,8 +3,8 @@ import { query } from "@/lib/db";
 export async function GET(request) {
   try {
     const mycart = await query({
-      query: "SELECT product_id FROM mycart",
-      values: [],
+      query: "SELECT product_id FROM mycart WHERE user_id = ?",
+      values: [1],
     });
 
     const productIds = mycart.map((row) => row.product_id);
@@ -35,11 +35,11 @@ export async function GET(request) {
 
 export async function POST(request) {
   try {
-    const { product_id } = await request.json();
+    const { product_id,customer_id } = await request.json();
 
     const insertResult = await query({
-      query: "INSERT INTO mycart (product_id) VALUES (?)",
-      values: [product_id],
+      query: "INSERT INTO mycart (product_id, user_id) VALUES (?, ?)",
+      values: [product_id,customer_id],
     });
 
     if (insertResult.affectedRows === 1) {
