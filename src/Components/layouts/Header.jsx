@@ -133,34 +133,35 @@ export default function Header() {
                   </Link>
                 </li>
                 <li className="nav-item brdr">
-                  <Link className="nav-link bulk_ord" href="/BulkOrder" onClick={isClicked ? handleShow : null}>
+                  <Link className="nav-link bulk_ord px-4" href="/BulkOrder" onClick={isClicked ? handleShow : null}>
                     Bulk Orders
                   </Link>
                 </li>
                 <li className="nav-item brdr ">
                   <Link className="nav-link" href="/ContactUs" onClick={isClicked ? handleShow : null}>
-                    <i className="fa fa-phone"></i>
+                    <img src="/Assets/svg/Path 2.svg" alt="" />
                   </Link>
                 </li>
                 <li className="nav-item brdr">
                   <Link className="nav-link" href="/Wishlist" onClick={isClicked ? handleShow : null}>
-                    <i className="fa fa-heart-o"></i>
+                  <img src="/Assets/svg/Path 3.svg" alt="" />
                   </Link>
                 </li>
                 <li className="nav-item brdr">
                   {isLoggedIn ? (
-                    <Link className="nav-link" href="/ProfilePage" onClick={isClicked ? handleShow : null} >
-                      <i className="">Profile</i>
+                    <Link className="nav-link position-relative profile" href="/ProfilePage" onClick={isClicked ? handleShow : null} >
+                    <img src="/Assets/svg/Group 4.svg" alt="" />
+                    <p className="Homeemail">email@gmail.com</p>
                     </Link>
                   ) : (
                     <Link className="nav-link" href="/Login" onClick={isClicked ? handleShow : null}>
-                      <i className="fa fa-user"></i>
+                     <img src="/Assets/svg/Group 4.svg" alt="" />
                     </Link>
                   )}
                 </li>
                 <li className="nav-item brdr">
-                  <Link className="nav-link" href="/AddToCart" onClick={isClicked ? handleShow : null}>
-                    <i className="fa fa-cart-arrow-down"></i>
+                  <Link className="nav-link position-relative" href="/AddToCart" onClick={isClicked ? handleShow : null}>
+                  <img src="/Assets/svg/Group 5.svg" alt="" /><div className="cartCount text-center medium">4</div>
                   </Link>
                 </li>
               </ul>

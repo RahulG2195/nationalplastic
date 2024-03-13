@@ -14,6 +14,29 @@ h6 {
     padding: 0;
     margin: 0;
 }
+.bottom_nav{
+    align-items: center !important;
+}
+
+.profile:hover .Homeemail {
+    display: block;
+   
+}
+
+.Homeemail {
+    position: absolute;
+    color: black;
+    opacity: 0.8;
+    left: -100%;
+    top: -50%;
+    display: none;
+    transition: all 0.5s;
+}
+
+.HeadSearch::placeholder{
+    color: #1E1F1E;
+    opacity: 80%;
+}
 
 .HeadSearch:focus {
     background-color: transparent !important;
@@ -68,23 +91,26 @@ h6 {
 
     .navbar-brand {
         margin: 0 !important;
-        padding: 10px  !important;
+        padding: 0 !important;
 
     }
 
     #navei {
-       padding: 5px !important;
-      
+        padding: 5px !important;
+
     }
-    .navbar-toggler-icon{
+
+    .navbar-toggler-icon {
         width: 20px !important;
         height: 20px !important;
     }
-    .top_nav .col p{
+
+    .top_nav .col p {
         font-size: 10px !important;
-       
+
     }
 }
+
 @media (max-width:390px) {
     .HeadSearch {
         padding: 0 !important;
@@ -180,10 +206,22 @@ h6 {
     font-size: 20px;
 }
 
+.cartCount {
+    position: absolute;
+    background-color: #FE0000;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    top: 0px;
+    right: 0px;
+}
+
 .navbar-brand img {
-    height: 84px;
+    height: 80px;
     width: 123px;
     object-fit: contain;
+    /* margin-top: 10px ;
+    margin-bottom: 10px ; */
 }
 
 .bulk_ord {
@@ -197,10 +235,11 @@ h6 {
     position: absolute;
     top: 5%;
     right: 0%;
-    width: 2px;
+    width: 1px;
     height: 80%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #1E1F23;
 }
+
 
 .bulk_ord::before {
     content: "";
@@ -209,8 +248,7 @@ h6 {
     left: 2%;
     width: 2px;
     height: 80%;
-    /* Adjust the height as needed */
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #1E1F23;
 }
 
 .bottom_nav p {

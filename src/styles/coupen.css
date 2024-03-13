@@ -1,12 +1,25 @@
-.extra-isc h4{
+.container.text-center {
+    display: flex;
+  }
+  
+  .coupen-row {
+    display: inline-flex; /* Ensure all children display in a single row */
+  }
+  
+  .coupen-row > * {
+    flex: 0 0 auto; /* Ensure each child takes up only the necessary space */
+  }
+  
+.extra-isc h{
   color: #2e3192;
   font-weight: 800;
-    font-size: 34px;
+    font-size: 31px;
   position: relative;
+  font-weight: 900 !important;
 }
 .extra-isc small{
-    text-align: right;
-    position: absolute;
+    text-align: left !important;
+    /* position: absolute; */
     left: 35%;
     font-size: 12px;
     font-weight: 500;
@@ -29,8 +42,8 @@
 
 .offers h5{
     color: #CC0008;
-    font-size: 22px;
-    font-weight: 600;
+    font-size: 25px;
+    font-weight: 800;
 
 }
 
@@ -54,9 +67,7 @@ font-size: 13px;
     cursor: pointer;
     color: #262262;
 }
-.signup_div{
-    text-align: center;
-}
+
 .signup{
     background: #CC0008;
     color: #fff;
