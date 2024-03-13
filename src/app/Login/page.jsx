@@ -60,19 +60,13 @@ function Login() {
         setLogin(true);
         const userData = res.data.message
         console.log("FromDInesh "+userData)
-        localStorage.setItem("userData", JSON.stringify(userData));
-<<<<<<< HEAD
-        
-        // push("/");
-        // dispatch(authSliceReducer(formData));
-=======
+        // localStorage.setItem("userData", JSON.stringify(userData));
         // push("/");
         // dispatch(authSliceReducer(formData));
         ////////////Dinesh
         dispatch(authSliceReducer(formData));
 
 
->>>>>>> 42ea5b9896068ef854796d66a9a76a22ceb6bc5d
       }
     } catch (error) {
       console.error("Error during login:", error);

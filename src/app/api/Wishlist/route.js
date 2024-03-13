@@ -5,10 +5,9 @@ export async function GET(request) {
     try {
         // Get the product IDs from the wishlist table
         const wishlist = await query({
-            query: "SELECT product_id FROM wishlist",
-            values: [],
+            query: "SELECT product_id FROM wishlist WHERE user_id = ?",
+            values: [1]
         });
-
         const productIds = wishlist.map(row => row.product_id);
 
         // If there are no product IDs in the wishlist, return an empty response
@@ -44,8 +43,8 @@ export async function GET(request) {
 
 export async function POST(request) {
     try {
-        const { product_id } = await request.json();
-        console.log("this is id i want to post ",product_id)
+        const { product_id, customer_id } = await request.json();
+        console.log("this is id i want to post ", product_id)
 
         // Check if the product_id is provided
         if (!product_id) {
@@ -56,8 +55,8 @@ export async function POST(request) {
         }
 
         const insertResult = await query({
-            query: "INSERT INTO wishlist (product_id) VALUES (?)",
-            values: [product_id]
+            query: "INSERT INTO wishlist (product_id, user_id) VALUES (?, ?)",
+            values: [product_id, customer_id]
         });
 
         if (insertResult.affectedRows === 1) {

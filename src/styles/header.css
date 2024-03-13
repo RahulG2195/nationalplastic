@@ -25,17 +25,18 @@ h6 {
 }
 
 .HeadSearch {
-    padding: 10px 30px 10px 40px;
+    padding: 0px 0px 0px 40px;
+    padding-bottom: 0;
     background-image: url('/Assets/images/search-svgrepo-com.svg');
     background-repeat: no-repeat;
     background-position: 20px center;
     background-size: 24px 24px;
     background-color: transparent !important;
-    border-bottom: 1px solid black !important;
+    border-bottom: 2px solid black !important;
     border: none;
     border-radius: 0;
     color: #1E1F1E;
-    opacity: 80;
+    opacity: 90;
 }
 
 @media (max-width:1341px) {

@@ -2,11 +2,15 @@
 import Image from "next/image";
 import TopBar from "./TopBar";
 import BottomBar from "./BottomBar";
-import "../../styles/header.css";
-import Link from "next/link";
-import { useState } from "react";
-import axios from "axios";
-import ProductsAccr from "../ProductsAccor/ProductsAccr";
+import '../../styles/header.css';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useRouter } from 'next/navigation'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import ProductsAccr from '../ProductsAccor/ProductsAccr';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+
 
 export default function Header() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -34,22 +38,16 @@ export default function Header() {
       console.error("Error fetching suggestions:", error);
     } finally {
       // setIsLoading(false);
-<<<<<<< HEAD
-=======
-      // Set loading state to false regardless of success or error
->>>>>>> 42ea5b9896068ef854796d66a9a76a22ceb6bc5d
     }
   };
 
   // Search Function
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    setSearchResults([]); // Clear search results before fetching new results
+    setSearchResults([]);
     try {
-      const response = await axios.get(
-        `http://localhost:3000/api/search?query=${searchTerm}`
-      );
-      setSearchResults(response.data.products);
+      router.push(`/Search?query=${searchTerm}`)
+
     } catch (error) {
       console.error("Error searching products:", error);
     }
@@ -59,37 +57,28 @@ export default function Header() {
     setIsClicked(!isClicked);
   };
 
-<<<<<<< HEAD
-=======
-  //
->>>>>>> 42ea5b9896068ef854796d66a9a76a22ceb6bc5d
 
   return (
     <>
-      {/* {searchResults.map((product) => (
-        <div key={product.id}>
-          <p>{product.product_name}</p>
-          Add other product details here
-        </div>
-      ))} */}
-      <div className="container-fluid header">
+      <div className="container-fluid  header menbg">
         <TopBar />
-        <nav className="navbar navbar-expand-lg main_header">
-          <div className="container-fluid">
-            <a className="navbar-brand" href="#">
+        <nav className="navbar navbar-expand-lg main_header px-5">
+          <div className="container-fluid ">
+            <div className="navbar-brand">
               <Image
                 src="/Assets/images/nation_logo.png"
                 className="img-fluid"
                 alt="Landscape picture"
-                width={800}
-                height={500}
+                width={100}
+                height={100}
               />
-            </a>
-            <form onSubmit={handleSearchSubmit} className="d-flex nav-search">
+            </div>
+            <form onSubmit={handleSearchSubmit}
+              className="d-flex nav-search">
               <input
-                className="form-control me-2"
+                className="form-control text-center HeadSearch fw-semibold"
                 type="search"
-                placeholder="Search"
+                placeholder="Search 5000+ products"
                 aria-label="Search"
                 value={searchTerm}
                 onChange={handleSearchChange}
@@ -97,30 +86,26 @@ export default function Header() {
             </form>
 
             <button
-              className="navbar-toggler"
+              onClick={handleShow}
+              id="navei"
+              className="navbar-toggler "
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent"
-              aria-expanded="false"
+              aria-expanded="true"
               aria-label="Toggle navigation"
             >
               <span className="navbar-toggler-icon" />
             </button>
-<<<<<<< HEAD
             <div className={`${isClicked ? ' collapse navbar-collapse show menubg' : 'menuhide '}`} id="navbarSupportedContent">
-=======
-            <div
-              className="collapse navbar-collapse"
-              id="navbarSupportedContent"
-            >
->>>>>>> 42ea5b9896068ef854796d66a9a76a22ceb6bc5d
               <ul className="navbar-nav mb-2 mb-lg-0">
                 <li className="nav-item brdr">
                   {/* <div className='border'></div> */}
                   <Link className="nav-link" aria-current="page" href="/" onClick={isClicked ? handleShow : null}>
                     Home
                   </Link>
+                  {/* <div className='border'></div> */}
                 </li>
                 <li className="nav-item brdr" >
                   <Link className="nav-link" href="/About" onClick={isClicked ? handleShow : null}>
@@ -131,29 +116,6 @@ export default function Header() {
                   <Link className="nav-link" href="/Investor" onClick={isClicked ? handleShow : null}>
                     Investors
                   </Link>
-                   <ul
-                    className="dropdown-menu"
-                    aria-labelledby="navbarDropdown"
-                  >
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Action
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Another action
-                      </a>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Something else here
-                      </a>
-                    </li>
-                  </ul>
                 </li>
                 <li className="nav-item brdr accr">
                   <ProductsAccr
@@ -186,22 +148,14 @@ export default function Header() {
                   </Link>
                 </li>
                 <li className="nav-item brdr">
-<<<<<<< HEAD
                   {isLoggedIn ? (
-=======
-                {isLoggedIn ? (
->>>>>>> 42ea5b9896068ef854796d66a9a76a22ceb6bc5d
-                    <Link className="nav-link" href="/ProfilePage" >
+                    <Link className="nav-link" href="/ProfilePage" onClick={isClicked ? handleShow : null} >
                       <i className="">Profile</i>
                     </Link>
                   ) : (
                     <Link className="nav-link" href="/Login" onClick={isClicked ? handleShow : null}>
                       <i className="fa fa-user"></i>
-<<<<<<< HEAD
                     </Link>
-=======
-                    </Link> 
->>>>>>> 42ea5b9896068ef854796d66a9a76a22ceb6bc5d
                   )}
                 </li>
                 <li className="nav-item brdr">
@@ -215,7 +169,6 @@ export default function Header() {
         </nav>
         <BottomBar />
       </div>
-      
     </>
   );
 }
