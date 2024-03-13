@@ -182,13 +182,23 @@ export default function Header() {
                   </Link>
                 </li>
                 <li className="nav-item brdr">
-                  <Link
-                    className="nav-link"
-                    href="/Login"
-                    onClick={isClicked ? handleShow : null}
-                  >
-                    <i className="fa fa-user"></i>
-                  </Link>
+                  {isLoggedIn ? (
+                    <Link
+                      className="nav-link"
+                      href="/ProfilePage"
+                      onClick={isClicked ? handleShow : null}
+                    >
+                      <i className="">Profile</i>
+                    </Link>
+                  ) : (
+                    <Link
+                      className="nav-link"
+                      href="/Login"
+                      onClick={isClicked ? handleShow : null}
+                    >
+                      <i className="fa fa-user"></i>
+                    </Link>
+                  )}
                 </li>
                 <li className="nav-item brdr">
                   <Link
