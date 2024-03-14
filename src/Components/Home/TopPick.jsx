@@ -2,6 +2,7 @@
 export const dynamic = "force";
 import CatCards from "../CommonComp/catCards";
 import { Swiper, SwiperSlide } from "swiper/react";
+import axios from 'axios';
 import {
   Navigation,
   Autoplay,
