@@ -2,7 +2,7 @@
 export const dynamic = "force";
 import CatCards from "../CommonComp/catCards";
 import { Swiper, SwiperSlide } from "swiper/react";
-import axios from 'axios';
+import axios from "axios";
 import {
   Navigation,
   Autoplay,
@@ -12,7 +12,7 @@ import {
 } from "swiper/modules";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 export default function TopPick() {
   // const productArr = [
   //   {
