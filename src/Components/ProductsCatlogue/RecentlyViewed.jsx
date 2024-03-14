@@ -8,7 +8,7 @@ import {
   A11y,
 } from "swiper/modules";
 import "swiper/swiper-bundle.css";
-import PreChairsCard from "../preChairsCard/PreChairsCard";
+import PreChairsCard from "../PreChairsCard/PreChairsCard.jsx";
 import Image from "next/image";
 import axios from "axios";
 import { useEffect, useState } from "react";
