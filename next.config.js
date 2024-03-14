@@ -11,9 +11,9 @@ const nextConfig = {
 
     // env:{
     // 'MYSQL_HOST':'127.0.0.1',
-    // 'MYSQL_DATABASE':'nationalplastic_db',
-    // 'MYSQL_USER':'root',
-    // 'MYSQL_PASSWORD':'Dinesh_02',
+    // 'MYSQL_DATABASE':'digitallab_nationalplastic_db',
+    // 'MYSQL_USER':'digitallab_nationalplastic',
+    // 'MYSQL_PASSWORD':'jr!S^3P}HtOX',
     // 'MYSQL_PORT':'3306',
     // env: {
     //     'MYSQL_HOST': '127.0.0.1',
@@ -24,9 +24,9 @@ const nextConfig = {
     // }
     env: {
         'MYSQL_HOST': 'localhost',
-        'MYSQL_DATABASE': 'nationalplastic_db',
-        'MYSQL_USER': 'root',
-        'MYSQL_PASSWORD': 'National@123#',
+        'MYSQL_DATABASE': 'digitallab_nationalplastic_db',
+        'MYSQL_USER': 'digitallab_nationalplastic',
+        'MYSQL_PASSWORD': 'jr!S^3P}HtOX',
         'MYSQL_PORT': '3306',
     }
 
