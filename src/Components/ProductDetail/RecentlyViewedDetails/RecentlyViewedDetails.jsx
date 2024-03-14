@@ -1,18 +1,14 @@
-"use client"
+"use client";
 import RecentlyViewed from "@/Components/ProductsCatlogue/RecentlyViewed";
-import PreChairsCard from "@/Components/preChairsCard/preChairsCard";
+import PreChairsCard from "@/Components/preChairsCard/PreChairsCard";
 // import "@/Components/preChairsCard/preChairsCard.css";
 
-
 const RecentlyViewedDetails = () => {
-
-    return (
-        <>
-          <RecentlyViewed/>
-        </>
-    )
-}
-
-
+  return (
+    <>
+      <RecentlyViewed />
+    </>
+  );
+};
 
 export default RecentlyViewedDetails;

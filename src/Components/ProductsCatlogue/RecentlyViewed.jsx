@@ -1,18 +1,22 @@
-"use client"
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Autoplay, Pagination, Scrollbar, A11y } from 'swiper/modules';
-import 'swiper/swiper-bundle.css';
-import PreChairsCard from '../preChairsCard/preChairsCard';
-import Image from 'next/image';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { addToCart } from '@/redux/reducer/cartSlice';
-import { useDispatch } from 'react-redux';
-import 'react-toastify/dist/ReactToastify.css';
-import { Bounce, toast } from 'react-toastify';
-import { useRef } from 'react';
-
-
+"use client";
+import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  Navigation,
+  Autoplay,
+  Pagination,
+  Scrollbar,
+  A11y,
+} from "swiper/modules";
+import "swiper/swiper-bundle.css";
+import PreChairsCard from "../preChairsCard/PreChairsCard";
+import Image from "next/image";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { addToCart } from "@/redux/reducer/cartSlice";
+import { useDispatch } from "react-redux";
+import "react-toastify/dist/ReactToastify.css";
+import { Bounce, toast } from "react-toastify";
+import { useRef } from "react";
 
 const RecentlyViewed = () => {
   // const RecentlyViewedData = [
@@ -54,32 +58,27 @@ const RecentlyViewed = () => {
   //       transition: Bounce,
   //     });
   //   };
-  const [RecentlyViewedData, setRecentlyViewedData] = useState([])
+  const [RecentlyViewedData, setRecentlyViewedData] = useState([]);
   const [wishlistItems, setWishlistItems] = useState([]);
   const [autoplay, setAutoplay] = useState(true);
   const dispatch = useDispatch();
   const swiperRef = useRef(null);
 
-
-
-
   useEffect(() => {
     const fetchdata = async () => {
       try {
+        const response = await axios.get("http://localhost:3000/api/Products");
+        const filteredproducts = response.data.products.filter(
+          (item) => item.categoryType === "premium chairs"
+        );
 
-        const response = await axios.get("http://localhost:3000/api/Products")
-        const filteredproducts = response.data.products.filter(item => item.categoryType === "premium chairs")
-
-        setRecentlyViewedData(filteredproducts)
-      }
-
-
-      catch (error) {
-        alert("Error fetching data", error)
+        setRecentlyViewedData(filteredproducts);
+      } catch (error) {
+        alert("Error fetching data", error);
       }
     };
     fetchdata();
-  }, [])
+  }, []);
 
   const fetchWishlistItems = async () => {
     try {
@@ -90,10 +89,19 @@ const RecentlyViewed = () => {
     }
   };
 
-
-  const handleAddToWishlist = async (product_id, product_name, short_description, price, discount_price, discount, ChairImg) => {
+  const handleAddToWishlist = async (
+    product_id,
+    product_name,
+    short_description,
+    price,
+    discount_price,
+    discount,
+    ChairImg
+  ) => {
     try {
-      const isProductAlreadyAdded = wishlistItems.some(item => item.ProductName === product_name);
+      const isProductAlreadyAdded = wishlistItems.some(
+        (item) => item.ProductName === product_name
+      );
       if (isProductAlreadyAdded) {
         notifyinfo();
 
@@ -107,7 +115,7 @@ const RecentlyViewed = () => {
         Price: price,
         originalPrice: discount_price,
         discount: discount,
-        WishlistImg: ChairImg
+        WishlistImg: ChairImg,
       });
       notify();
       fetchWishlistItems();
@@ -119,28 +127,36 @@ const RecentlyViewed = () => {
   // const handleAddToCart = async(product_name, short_description, price, discount_price, discount, ChairImg)
   const handleMoveToCart = (product_id) => {
     // console.log("in handle cart", product_id);
-    dispatch(addToCart({
-      product_id: product_id,
-    }));
-    console.log("this is product id in card ", product_id)
+    dispatch(
+      addToCart({
+        product_id: product_id,
+      })
+    );
+    console.log("this is product id in card ", product_id);
   };
 
   return (
     <>
-
       <div className="mt-5">
         <div className="text-center">
-          <div className="fs-1 fw-bold text-danger">Recently Viewed <span className="darkBlue fw-normal">Products</span> </div>
+          <div className="fs-1 fw-bold text-danger">
+            Recently Viewed <span className="darkBlue fw-normal">Products</span>{" "}
+          </div>
           <div className="mt-1 subCptRes fw-semibold">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has </p>
-            <p>been the industry's standard dummy text ever since the 1500s,</p>
+            <p>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has{" "}
+            </p>
+            <p>been the industriesstandard dummy text ever since the 1500s,</p>
           </div>
         </div>
       </div>
 
-      <div className="container my-5"
+      <div
+        className="container my-5"
         onMouseEnter={() => setAutoplay(false)}
-        onMouseLeave={() => setAutoplay(true)}>
+        onMouseLeave={() => setAutoplay(true)}
+      >
         <Swiper
           ref={swiperRef}
           modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
@@ -150,11 +166,7 @@ const RecentlyViewed = () => {
           loop={true}
           // pagination={{ clickable: true }}
           autoplay={autoplay ? { delay: 4000 } : false}
-
-
-
           breakpoints={{
-
             425: {
               slidesPerView: 2,
               spaceBetween: 20,
@@ -177,43 +189,34 @@ const RecentlyViewed = () => {
             },
           }}
         >
-          {
-            RecentlyViewedData.map((chair) => (
-              <SwiperSlide key={chair.product_id}>
-
-
-                <PreChairsCard
-                  ChairImg={`/Assets/images/New-launches-1/${chair.image_name}`}
-                  id={chair.product_id}
-                  Title={chair.product_name}
-                  Discription={chair.short_description}
-                  Price={chair.price}
-                  orignalPrice={chair.discount_price}
-                  Discount={chair.discount_percentage}
-
-                  onaddToWishlist={() => handleAddToWishlist
-                    (
-                      chair.product_id,
-                      chair.product_name,
-                      chair.short_description,
-                      chair.price,
-                      chair.discount_price,
-                      chair.discount_percentage,
-                      chair.image_name
-                    )
-                  }
-                  onAddToCart={() => handleMoveToCart(
+          {RecentlyViewedData.map((chair) => (
+            <SwiperSlide key={chair.product_id}>
+              <PreChairsCard
+                ChairImg={`/Assets/images/New-launches-1/${chair.image_name}`}
+                id={chair.product_id}
+                Title={chair.product_name}
+                Discription={chair.short_description}
+                Price={chair.price}
+                orignalPrice={chair.discount_price}
+                Discount={chair.discount_percentage}
+                onaddToWishlist={() =>
+                  handleAddToWishlist(
                     chair.product_id,
-                  )}
-                />
-
-              </SwiperSlide>
-            ))
-          }
+                    chair.product_name,
+                    chair.short_description,
+                    chair.price,
+                    chair.discount_price,
+                    chair.discount_percentage,
+                    chair.image_name
+                  )
+                }
+                onAddToCart={() => handleMoveToCart(chair.product_id)}
+              />
+            </SwiperSlide>
+          ))}
         </Swiper>
-      </div >
-
+      </div>
     </>
-  )
-}
+  );
+};
 export default RecentlyViewed;

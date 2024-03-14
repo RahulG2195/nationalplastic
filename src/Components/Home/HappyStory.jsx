@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Image from "next/image";
 import CatCards from "../CommonComp/catCards";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -18,7 +18,7 @@ export default function HappyStory() {
       image: "/Assets/images/Home-page/Image 10.png",
       title: "Lorem Ipsum is simply dummy text",
       short_desc:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,when an unknown printer took a galley.",
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industriesstandard dummy text ever since the 1500s,when an unknown printer took a galley.",
       url: "#",
     },
     {
@@ -26,7 +26,7 @@ export default function HappyStory() {
       image: "/Assets/images/Home-page/Image 13.png",
       title: "Lorem Ipsum is simply dummy text",
       short_desc:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,when an unknown printer took a galley.",
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industriesstandard dummy text ever since the 1500s,when an unknown printer took a galley.",
       url: "#",
     },
     {
@@ -34,7 +34,7 @@ export default function HappyStory() {
       image: "/Assets/images/Home-page/Image 12.png",
       title: "Lorem Ipsum is simply dummy text",
       short_desc:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,when an unknown printer took a galley.",
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industriesstandard dummy text ever since the 1500s,when an unknown printer took a galley.",
       url: "#",
     },
     {
@@ -42,7 +42,7 @@ export default function HappyStory() {
       image: "/Assets/images/Home-page/Image 12.png",
       title: "Lorem Ipsum is simply dummy text",
       short_desc:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,when an unknown printer took a galley.",
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industriesstandard dummy text ever since the 1500s,when an unknown printer took a galley.",
       url: "#",
     },
   ];
@@ -77,22 +77,22 @@ export default function HappyStory() {
                 }}
                 breakpoints={{
                   200: {
-                      slidesPerView: 1,
-                      spaceBetween: 20,
+                    slidesPerView: 1,
+                    spaceBetween: 20,
                   },
                   640: {
-                      slidesPerView: 2,
-                      spaceBetween: 20,
+                    slidesPerView: 2,
+                    spaceBetween: 20,
                   },
                   768: {
-                      slidesPerView: 3,
-                      spaceBetween: 40,
+                    slidesPerView: 3,
+                    spaceBetween: 40,
                   },
                   1024: {
-                      slidesPerView: 3,
-                      spaceBetween: 50,
+                    slidesPerView: 3,
+                    spaceBetween: 50,
                   },
-              }}
+                }}
               >
                 {productArr.map((product) => (
                   // <div key={product.key} className="col-md-4">
@@ -103,7 +103,6 @@ export default function HappyStory() {
                     //   overflow: "hidden",
                     //   height: "100%",
                     // }}
-                    
                   >
                     <div className="card">
                       <div className="card-img">

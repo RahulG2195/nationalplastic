@@ -1,8 +1,6 @@
-
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-
 
 const createLocalStorageIfNeeded = (key, value) => {
   if (typeof window !== "undefined" && localStorage !== null) {
@@ -48,29 +46,23 @@ const createInitialStateFromLocalStorage = () => {
 
 const initialState = createInitialStateFromLocalStorage();
 
-
 // ... rest of your code
-export const authSliceReducer = createAsyncThunk("/auth/login", async (data) => {
-  try {
-    // console.log("slice data######## :", JSON.stringify(data));
-    // console.log("slice data######## :", data.email);
-    // console.log("slice data######## :", data.password);
-    
+export const authSliceReducer = createAsyncThunk(
+  "/auth/login",
+  async (data) => {
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem("userData", JSON.stringify(data));
+        localStorage.setItem("isLoggedIn", true);
 
-    localStorage.setItem("userData", JSON.stringify(data));
-      localStorage.setItem("isLoggedIn", true);
-      
-
-      // console.log("state.isLoggedIn1111111"+ state.isLoggedIn);
-      state.isLoggedIn = true;
-      // alert(state);
-      // console.log("state.isLoggedIn22222"+ state.isLoggedIn);
-      state.userData = data;
-  } catch (error) {
-    toast.error(error?.response?.data?.message);
-    throw error;
+        return data;
+      } catch (error) {
+        toast.error(error?.response?.data?.message);
+        throw error;
+      }
+    }
   }
-});
+);
 
 const authSlice = createSlice({
   name: "auth",
@@ -78,7 +70,6 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(authSliceReducer.fulfilled, (state, action) => {
-
       localStorage.setItem("userData", JSON.stringify(data));
       localStorage.setItem("isLoggedIn", true);
       state.isLoggedIn = true;
@@ -88,7 +79,4 @@ const authSlice = createSlice({
   },
 });
 
-
-
 export default authSlice.reducer;
-
