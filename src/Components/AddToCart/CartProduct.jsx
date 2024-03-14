@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import IncrementDecrement from "./IncrementDecrement";
 import { useEffect, useState } from "react";

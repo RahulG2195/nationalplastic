@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-// import PreChairsCard from "../PreChairsCard/PreChairsCard";
 import "./PreChairCards.css";
 import axios from "axios";
 import { DotLoader } from "react-spinners";
@@ -10,6 +9,7 @@ import { addToCart } from "@/redux/reducer/cartSlice";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import PremiumChairs from "./PremiumChairs";
 import InfiniteScroll from "react-infinite-scroll-component";
+import PreChairsCard from "../PreChairsCard/PreChairsCard";
 
 const PreChairsCards = () => {
   const [products, setProducts] = useState([]);
@@ -196,7 +196,7 @@ const PreChairsCards = () => {
             endMessage={<p>No more products to load</p>}
           > */}
           <div className="row">
-            {/* {products.map((product) => (
+            {products.map((product) => (
               <div
                 key={product.product_id}
                 className="PreCardSm col-6 col-sm-6 col-xs-4 col-md-6 col-lg-3"
@@ -219,7 +219,7 @@ const PreChairsCards = () => {
                   onAddToCart={() => handleMoveToCart(product.product_id)}
                 />
               </div>
-            ))} */}
+            ))}
           </div>
           {/* </InfiniteScroll> */}
         </>
