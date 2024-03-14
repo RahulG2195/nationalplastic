@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import PreChairsCard from "../PreChairsCard/PreChairsCard";
+// import PreChairsCard from "../PreChairsCard/PreChairsCard";
 import "./PreChairCards.css";
 import axios from "axios";
 import { DotLoader } from "react-spinners";
