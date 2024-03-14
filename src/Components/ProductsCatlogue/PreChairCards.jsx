@@ -11,7 +11,7 @@ import PremiumChairs from "./PremiumChairs";
 import InfiniteScroll from "react-infinite-scroll-component";
 import PreChairsCard from "../PreChairsCard/PreChairsCard";
 
-const PreChairsCards = () => {
+const PreChairCards = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedColor, setSelectedColor] = useState(null);
@@ -228,5 +228,5 @@ const PreChairsCards = () => {
   );
 };
 
-export default PreChairsCards;
+export default PreChairCards;
 //commented for prechairs cards
