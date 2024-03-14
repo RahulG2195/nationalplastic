@@ -32,5 +32,5 @@ const nextConfig = {
 };
 
 // Reference number, Number of Bedrooms, Number of Bathrooms, Numberof Employees,Number of Owners,Number of Shares - not reflecting in export
-export default nextConfig;
-//changed during final Deployment phase
+module.exports = nextConfig;
+//changed during
