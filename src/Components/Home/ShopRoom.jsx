@@ -73,14 +73,16 @@ export default function ShopRoom() {
 
   return (
     <section className="shop_room_sec common_section">
-      <div className="container">
+      <div className="px-4">
         <div className="row">
-          <div className="section_header mx-auto text-center">
-            <h2>Shop By <span>Rooms</span></h2>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,</p>
+          <div className="text-center mb-5">
+            <div className="darkBlue fs-1 fw-medium">Shop By <span className="fs-1 lh-small fw-bolder text-danger ">Rooms</span> </div>
+            <div className="mt-1 fw-medium subCptRes w-50"><p>ILorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+            </p>
+            </div>
           </div>
-          <div className="col-12 products_col">
-            <div className="row">
+          <div className="col-12 products_col ">
+            <div className="row mt-3">
               <Swiper
                 className="swipper"
                 style={{ width: "100%", height: "100%" }}
@@ -119,6 +121,16 @@ export default function ShopRoom() {
                 {productArr.map((product) => (
                   <div className="col-md-4 shop_col my-md-4 my-2">
                     <SwiperSlide key={product.product_id} >
+                      <CatCards
+                      className="shadow"
+                        image={`/Assets/images/Home-page/${product.image_name}`}
+                        title={product.product_name}
+                        url={"#"}
+                        style={"shop-room"}
+                        onCategoryChange={() => sendCategory(
+                          product.product_name
+                        )}
+                      />
                       <CatCards
                         image={`/Assets/images/Home-page/${product.image_name}`}
                         title={product.product_name}

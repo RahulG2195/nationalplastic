@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 
-function CatCards({ image, title,onCategoryChange,style = "" }) {
+function CatCards({ image, className, title,onCategoryChange,style = "" }) {
 
 const sendCategory = () =>{
   console.log("Category clicked:", title);
@@ -17,6 +17,7 @@ const sendCategory = () =>{
         <Link onClick={sendCategory} href='/ProductCatlogue' >
           <div className="card_img">
             <Image
+            className={className}
               src={image}
               alt="product card images"
               width={100}
@@ -25,8 +26,8 @@ const sendCategory = () =>{
               objectFit="cover"
             />
           </div>
-          <div className={`prodname d-flex justify-content-between px-2 ${style}`}>
-            <h4>{title}</h4>
+          <div className={`prodname d-flex gap-5 px-2 my-5 ${style}`}>
+            <h4 className="text-danger">{title}</h4>
             <i className="fa fa-arrow-right" aria-hidden="true"></i>
           </div>
         </Link>

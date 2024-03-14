@@ -55,33 +55,35 @@ export default function Manufacture() {
   //     style : 'shop-room'
   //   },
   // ];
-  
-  
+
+
   const [Household, setHousehold] = useState([]);
-  
+
   useEffect(() => {
-    const fetchdata = async ()  => {
+    const fetchdata = async () => {
       const response = await axios.get('http://localhost:3000/api/Products')
       const filteredData = response.data.products.filter(item => item.categoryType === "home_top_pics");
       console.log(response);
-      
+
       setHousehold(filteredData)
-      
+
     }
     fetchdata();
   }, [])
+
   return (
     <section className="shop_room_sec common_section manufacturer_common_section ">
-        <div className="container ">
+      <div className="px-4 ">
+        <div className="row">
+          <div className="text-center mb-5 ">
+            <div className="fs-1 lh-small fw-bolder text-danger ">Indias Largest Manufacturer <p className="darkBlue fs-1 fw-medium">Of Household Products</p> </div>
+            <div className="mt-1 fw-medium subCptRes w-50"><p>ILorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+            </p>
+            </div>
+          </div>
+          <div className="col-12 products_col">
             <div className="row">
-                <div className="section_header mx-auto text-center" >
-                    <h2><span>Indias Largest Manufacturer</span></h2>
-                    <h3> Of Household Products</h3>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,</p>
-                </div>
-                <div className="col-12 products_col">
-                  <div className="row">
-                  <Swiper
+              <Swiper
                 className="swipper"
                 style={{ width: "100%", height: "100%" }}
                 modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
@@ -99,40 +101,48 @@ export default function Manufacture() {
                 }}
                 breakpoints={{
                   200: {
-                      slidesPerView: 1,
-                      spaceBetween: 20,
+                    slidesPerView: 1,
+                    spaceBetween: 20,
                   },
                   640: {
-                      slidesPerView: 2,
-                      spaceBetween: 20,
+                    slidesPerView: 2,
+                    spaceBetween: 20,
                   },
                   768: {
-                      slidesPerView: 3,
-                      spaceBetween: 40,
+                    slidesPerView: 3,
+                    spaceBetween: 40,
                   },
                   1024: {
-                      slidesPerView: 3,
-                      spaceBetween: 50,
+                    slidesPerView: 3,
+                    spaceBetween: 50,
                   },
-              }}
+                }}
               >
-                  { Household.map((product) => ( 
-                      <div className="col-xs-12 col-sm-6 col-md-4   shop_col my-md-4 my-2 " >
-                        <SwiperSlide key={product.key} >
+                {Household.map((product) => (
+                  <div className="col-xs-12 col-sm-6 col-md-4 shop_col my-md-4 my-2" >
+                    <SwiperSlide key={product.key} >
+                      <CatCards
+                        image={`/Assets/images/Home-page/${product.image_name}`}
+                        title={product.product_name}
+                        url={product.url}
+                        style={"shop-room"}
+                      />
+                      <div className="mt-5">
                         <CatCards
                           image={`/Assets/images/Home-page/${product.image_name}`}
                           title={product.product_name}
                           url={product.url}
                           style={"shop-room"}
                         />
-                        </SwiperSlide>
-                      </div> 
-                    ))}
-                    </Swiper>
+                      </div>
+                    </SwiperSlide>
                   </div>
-                </div>
+                ))}
+              </Swiper>
             </div>
+          </div>
         </div>
+      </div>
     </section>
   )
 }

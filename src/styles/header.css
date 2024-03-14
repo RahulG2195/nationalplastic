@@ -137,6 +137,9 @@ h6 {
         left: 100%;
         width: 100% !important;
     }
+    .bulk_ord{
+        padding-left: 0% !important;
+    }
 
     .bulk_ord::after {
         display: none;

@@ -6,9 +6,9 @@ function Houseware() {
     <section className="houseware_sec common_section">
         <div className="container-fluid">
             <div className="row">
-                <div className="col-md-6 houseConntentDiv" >
-                    <h2>National Plastic for <span>Houseware</span></h2>
-                    <p>Legacy Since 1952</p>
+                <div className="col-md-8 houseConntentDiv" >
+                    <h2 className="fw-bold">National Plastic for <span>Houseware</span></h2>
+                    <p style={{ letterSpacing: '0.5em' }}>Legacy Since 1952</p>
                     <div className="knowmoresec">
                         <Link href='/About' className="house-know-more">
                             Know More
@@ -18,7 +18,7 @@ function Houseware() {
                         </Link> 
                     </div>
                 </div>
-                <div className="col-md-6 houseDiv">
+                <div className="col-md-4 houseDiv">
                     <div className="houseImg">
                         <Image
                         src = "/Assets/images/Home-page/CTA-banner.jpg-industry-image.png"

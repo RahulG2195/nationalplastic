@@ -51,9 +51,11 @@ export default function Highlight() {
     <section className="top_pick_sec common_section">
       <div className="container">
         <div className="row">
-          <div className="section_header mx-auto text-center" data-aos="zoom-in">
-            <h2><span>Specific </span> Product Highlight</h2>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.</p>
+          <div className="text-center mb-5">
+            <div className="darkBlue fs-1 fw-medium">Specific <span className="fs-1 lh-small fw-bolder text-danger "> Product Highlight</span> </div>
+            <div className="mt-1 fw-medium subCptRes w-50"><p>ILorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+            </p>
+            </div>
           </div>
           <div className="container mt-5">
             {/* {isLoading ? (
@@ -61,41 +63,41 @@ export default function Highlight() {
                 <SyncLoader color={"#36D7B7"} loading={isLoading} />
               </center >
             ) : ( */}
-              <div className="col-12 highlight_col">
-                <div className="row">
-                  {
-                    productArr.map((product) => (
-                      <div key={product.key} className="col-md-4" data-aos="slide-right">
-                        <Link href="/ProductCatlogue">
-                          <div className="card">
+            <div className="col-18 highlight_col">
+              <div className="row">
+                {
+                  productArr.map((product) => (
+                    <div key={product.key} className="col-md-4" data-aos="slide-right">
+                      <Link href="/ProductCatlogue">
+                        <div className="card">
 
-                            <Image
-                              src={`/Assets/images/Home-page/${product.image_name}`}
-                              alt={product.image}
-                              width={100}
-                              height={100}
-                              layout="responsive"
-                              objectFit="cover"
-                            />
-                            <div className="card-body">
-                              <h5 className="card-title">{product.product_name}</h5>
-                              <p className="card-text">{product.short_description}</p>
-                              <div className="btn btn-dark text-white rounded-circle highArrow">
-                                <i className="fa fa-arrow-right" aria-hidden="true"></i>
-                              </div>
+                          <Image
+                            src={`/Assets/images/Home-page/${product.image_name}`}
+                            alt={product.image}
+                            width={100}
+                            height={100}
+                            layout="responsive"
+                            objectFit="cover"
+                          />
+                          <div className="card-body">
+                            <h5 className="card-title">{product.product_name}</h5>
+                            <p className="card-text pb-5 mb-5">{product.short_description}</p>
+                            <div className="btn btn-dark text-white rounded-circle highArrow mt-5">
+                              <i className="fa fa-arrow-right" aria-hidden="true"></i>
                             </div>
                           </div>
-                        </Link>
+                        </div>
+                      </Link>
 
-                      </div>
-                    ))
-                  }
-                </div>
+                    </div>
+                  ))
+                }
               </div>
+            </div>
             {/* )} */}
           </div>
         </div>
-        </div>
+      </div>
     </section >
   )
 }
