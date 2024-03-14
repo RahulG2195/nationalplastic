@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import "@/Components/PreChairsCard/PreChairsCard.jsx";
+// import "@/Components/PreChairsCard/PreChairsCard.jsx";
 import { useEffect, useState } from "react";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import axios from "axios";

@@ -196,7 +196,7 @@ const PreChairsCards = () => {
             endMessage={<p>No more products to load</p>}
           > */}
           <div className="row">
-            {products.map((product) => (
+            {/* {products.map((product) => (
               <div
                 key={product.product_id}
                 className="PreCardSm col-6 col-sm-6 col-xs-4 col-md-6 col-lg-3"
@@ -219,7 +219,7 @@ const PreChairsCards = () => {
                   onAddToCart={() => handleMoveToCart(product.product_id)}
                 />
               </div>
-            ))}
+            ))} */}
           </div>
           {/* </InfiniteScroll> */}
         </>
@@ -229,3 +229,4 @@ const PreChairsCards = () => {
 };
 
 export default PreChairsCards;
+//commented for prechairs cards
