@@ -8,7 +8,7 @@ import {
   A11y,
 } from "swiper/modules";
 import Link from "next/link";
-
+import axios from "axios";
 export default async function TopPick() {
   // Fetch data on the server-side using getStaticProps
   const { hometoppics } = await getStaticProps();
