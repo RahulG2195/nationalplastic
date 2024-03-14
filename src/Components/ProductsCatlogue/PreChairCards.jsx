@@ -9,7 +9,7 @@ import { addToCart } from "@/redux/reducer/cartSlice";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import PremiumChairs from "./PremiumChairs";
 import InfiniteScroll from "react-infinite-scroll-component";
-import PreChairsCard from "../PreChairsCard/PreChairsCard";
+import PreChairsCard from "../PreChairsCard/PreChairsCard.jsx";
 
 const PreChairsCards = () => {
   const [products, setProducts] = useState([]);
