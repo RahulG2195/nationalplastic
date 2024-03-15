@@ -8,8 +8,8 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/reducer/cartSlice";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import PremiumChairs from "./PremiumChairs";
-import InfiniteScroll from "react-infinite-scroll-component";
-import PreChairsCard from "../PreChairsCard/PreChairsCard";
+// import InfiniteScroll from "react-infinite-scroll-component";
+import PreChairsCard from "@/Components/preChairsCard/preChairsCard";
 
 const PreChairCards = () => {
   const [products, setProducts] = useState([]);
@@ -18,9 +18,9 @@ const PreChairCards = () => {
   const [selectedArmType, setSelectedArmType] = useState(null);
   const [selectedPriceSort, setSelectedPriceSort] = useState(null);
   const [categoryType, setCategoryType] = useState();
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-  const [length, setlength] = useState([]);
+  // const [page, setPage] = useState(1);
+  // const [hasMore, setHasMore] = useState(true);
+  // const [length, setlength] = useState([]);
 
   const dispatch = useDispatch();
 
