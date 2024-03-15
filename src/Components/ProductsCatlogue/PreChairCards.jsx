@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import PreChairsCard from "@/Components/PreChairsCard/PreChairsCard";
 import "./PreChairCards.css";
 import axios from "axios";
 import { DotLoader } from "react-spinners";
@@ -9,6 +8,8 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/reducer/cartSlice";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import PremiumChairs from "./PremiumChairs";
+import PreChairsCard from "@/Components/PreChairsCard/PreChairsCard";
+
 // import InfiniteScroll from "react-infinite-scroll-component";
 
 const PreChairsCards = () => {
@@ -302,7 +303,7 @@ const PreChairsCards = () => {
                 className="PreCardSm col-6 col-sm-6 col-xs-4 col-md-6 col-lg-3"
               >
                 <PreChairsCard
-                  ChairImg={`/Assets/images/New-launches-1/${product.ChairImg}`}
+                  ChairImg={product.Title}
                   id={product.Title}
                   Title={product.Title}
                   Discription={product.Title}
