@@ -12,26 +12,26 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import axios from "axios";
 export default function TopPick() {
-  // const productArr = [
-  //   {
-  //     key : 1,
-  //     image : '/Assets/images/Home-page/1st-section-kids-chair.jpg',
-  //     title : 'Event Chairs',
-  //     url : '#'
-  //   },
-  //   {
-  //     key : 2,
-  //     image : '/Assets/images/Home-page/1st-section-kids-chair.jpg',
-  //     title : 'Premium Chairs',
-  //     url : '#'
-  //   },
-  //   {
-  //     key : 3,
-  //     image : '/Assets/images/Home-page/1st-section-kids-chair.jpg',
-  //     title : 'Kids Chairs',
-  //     url : '#'
-  //   },
-  // ];
+  const productArr = [
+    {
+      key: 1,
+      image: "/Assets/images/Home-page/1st-section-kids-chair.jpg",
+      title: "Event Chairs",
+      url: "#",
+    },
+    {
+      key: 2,
+      image: "/Assets/images/Home-page/1st-section-kids-chair.jpg",
+      title: "Premium Chairs",
+      url: "#",
+    },
+    {
+      key: 3,
+      image: "/Assets/images/Home-page/1st-section-kids-chair.jpg",
+      title: "Kids Chairs",
+      url: "#",
+    },
+  ];
 
   const [hometoppics, setHometoppics] = useState([]);
 
@@ -105,16 +105,14 @@ export default function TopPick() {
                   },
                 }}
               >
-                {hometoppics.map((product) => (
-                  <div className="col-md-4" key={product.product_id}>
-                    <SwiperSlide key={product.product_id}>
+                {productArr.map((product) => (
+                  <div className="col-md-4" key={product.key}>
+                    <SwiperSlide key={product.key}>
                       <CatCards
-                        image={`/Assets/images/Home-page/${product.image_name}`}
-                        title={product.product_name}
-                        categoryType={product.categoryType}
-                        onCategoryChange={() =>
-                          sendCategory(product.product_name)
-                        }
+                        image={`/Assets/images/Home-page/${product.image}`}
+                        title={product.title}
+                        categoryType={product.title}
+                        onCategoryChange={() => sendCategory(product.title)}
                       />
                     </SwiperSlide>
                   </div>
