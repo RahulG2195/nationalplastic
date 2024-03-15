@@ -37,7 +37,7 @@ const ResetPasswordPage = () => {
     formDataToSend.append("email", formData.email);
     // Checks Email valid or not
     const res = await axios.post(
-      `http://localhost:3000/api/forgotPassword`,
+      `https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/forgotPassword`,
       formDataToSend
     );
     //Generating Token and sending Email to the user
@@ -48,7 +48,7 @@ const ResetPasswordPage = () => {
       formDataToSend.append("resetToken", resetToken); // Ensure only the first file is appended
       console.log("resetTOken" + resetToken);
       const response = await axios.post(
-        `http://localhost:3000/api/mail`,
+        `https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/mail`,
         formDataToSend
       );
       console.log("response: ");

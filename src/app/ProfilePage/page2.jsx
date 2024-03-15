@@ -7,7 +7,6 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 
 function ProfilePage() {
-  
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [data, setData] = useState({});
   const [phone, setPhone] = useState(null);
@@ -20,7 +19,6 @@ function ProfilePage() {
     window.location.reload();
     toast.success("Logged out", {
       position: "top",
-      
     });
 
     // Update state variables to reflect logged out state
@@ -51,7 +49,7 @@ function ProfilePage() {
         };
 
         const response = await axios.put(
-          "http://localhost:3000/api/Users",
+          "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Users",
           formData
         );
 
@@ -73,7 +71,10 @@ function ProfilePage() {
 
     try {
       // Send updated data to userProfile API
-      const response = await axios.put("http://localhost:3000/api/UserProfile", data);
+      const response = await axios.put(
+        "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/UserProfile",
+        data
+      );
       // Handle success response
       console.log("Updated data:", response.data);
       toast.success("Data updated successfully");
@@ -153,7 +154,6 @@ function ProfilePage() {
 
               <div onClick={handleLogout} className="EditAccount">
                 <div>
-         
                   <i className="fa fa-sign-out" aria-hidden="true"></i>
                 </div>
                 <p>Logout</p>
@@ -192,61 +192,59 @@ function ProfilePage() {
                         <div>You are not loggedin</div>
                       )
                     } */}
-                    
-                    {Array.isArray(messages) && messages.length > 0 ? (messages.map((message, index) => (
-                    <form key={index} onSubmit={handleEdit}>
-                      <div className="row user-data">
-                        <div className="col">
-                          <label htmlFor="">Name</label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            placeholder={`${message.FirstName} ${message.LasttName}`}
-                            readOnly 
-                          />
-                        </div>
-                      </div>
-                      <div className="row user-data">
-                        <div className="col">
-                          <label htmlFor="email">E-mail Address</label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            placeholder={message.Email}
-                            
-                          />
-                        </div>
-                        <div className="col">
-                          <label htmlFor="">Mobile Number</label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            placeholder={message.Phone}
-                            
-                          />
-                        </div>
-                        <div className="col">
-                          <label htmlFor="">Address</label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            placeholder={message.Address} 
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group row user-data">
-                        <div className="col-sm-10">
-                          <button type="submit" className="btn form-btn">
-                            Update
-                          </button>
-                        </div>
-                      </div>
-                    </form>
-  ))
-  ) : (
-    <div className="text-danger">You are not loggedin</div>
-  )
-}
+
+                      {Array.isArray(messages) && messages.length > 0 ? (
+                        messages.map((message, index) => (
+                          <form key={index} onSubmit={handleEdit}>
+                            <div className="row user-data">
+                              <div className="col">
+                                <label htmlFor="">Name</label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  placeholder={`${message.FirstName} ${message.LasttName}`}
+                                  readOnly
+                                />
+                              </div>
+                            </div>
+                            <div className="row user-data">
+                              <div className="col">
+                                <label htmlFor="email">E-mail Address</label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  placeholder={message.Email}
+                                />
+                              </div>
+                              <div className="col">
+                                <label htmlFor="">Mobile Number</label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  placeholder={message.Phone}
+                                />
+                              </div>
+                              <div className="col">
+                                <label htmlFor="">Address</label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  placeholder={message.Address}
+                                />
+                              </div>
+                            </div>
+                            <div className="form-group row user-data">
+                              <div className="col-sm-10">
+                                <button type="submit" className="btn form-btn">
+                                  Update
+                                </button>
+                              </div>
+                            </div>
+                          </form>
+                        ))
+                      ) : (
+                        <div className="text-danger">You are not loggedin</div>
+                      )}
                     </div>
                   </div>
                   <h3>Change Password</h3>

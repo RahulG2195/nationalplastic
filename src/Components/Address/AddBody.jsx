@@ -21,7 +21,9 @@ const AddBody = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/Cart");
+        const response = await axios.get(
+          "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Cart"
+        );
         const cartData = response.data.products;
 
         // Extracting relevant data from the cart data

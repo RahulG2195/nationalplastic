@@ -33,7 +33,9 @@ const PreChairsCards = () => {
       const categoryTitle = localStorage.getItem("category");
       setCategoryType(categoryTitle);
 
-      const response = await axios.get(`http://localhost:3000/api/Products`);
+      const response = await axios.get(
+        `https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Products`
+      );
       console.log("API Response:", response.data); // Log API response
 
       const fetchedData = response.data;

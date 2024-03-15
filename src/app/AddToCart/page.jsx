@@ -23,7 +23,9 @@ function AddToCart() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/Cart");
+        const response = await axios.get(
+          "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Cart"
+        );
         const cartData = response.data.products;
 
         // Extracting relevant data from the cart data
@@ -101,7 +103,9 @@ function AddToCart() {
   const handleCartChange = async () => {
     try {
       // Fetch updated cart data
-      const response = await axios.get("http://localhost:3000/api/Cart");
+      const response = await axios.get(
+        "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Cart"
+      );
       const cartData = response.data.products;
 
       // Extracting relevant data from the cart data
@@ -156,9 +160,12 @@ function AddToCart() {
     try {
       // console.log("wanted to remove", product_id);
       // Remove the product from the database
-      await axios.delete(`http://localhost:3000/api/Cart`, {
-        data: { product_id },
-      });
+      await axios.delete(
+        `https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Cart`,
+        {
+          data: { product_id },
+        }
+      );
 
       // If all products are removed, update the state to reflect empty cart
       if (productDetailArr.length === 1) {

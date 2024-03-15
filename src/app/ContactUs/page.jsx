@@ -119,7 +119,7 @@ function ContactUs() {
     //TryCatch For the Email Message
 
     const res = await axios.post(
-      `http://localhost:3000/api/sendEmail`,
+      `https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/sendEmail`,
       formData,
       {
         headers: {

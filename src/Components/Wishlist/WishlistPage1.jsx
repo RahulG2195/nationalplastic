@@ -15,7 +15,9 @@ const WishlistPage1 = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/Wishlist");
+        const response = await axios.get(
+          "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Wishlist"
+        );
         // const wishlistData = response.data.products;
         const wishlistData = response.data.products.map((item) => {
           // Calculate discount percentage
@@ -46,7 +48,7 @@ const WishlistPage1 = () => {
   const handleDeleteSuccess = async (product_id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/api/Wishlist`,
+        `https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Wishlist`,
         { data: { product_id } }
       );
       setWishlistItems((prevItems) =>

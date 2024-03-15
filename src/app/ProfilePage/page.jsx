@@ -65,7 +65,7 @@ function ProfilePage() {
         };
 
         const response = await axios.put(
-          "http://localhost:3000/api/Users",
+          "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Users",
           formData
         );
 
@@ -85,11 +85,10 @@ function ProfilePage() {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
-
     setEditedData((prevData) => ({
       ...prevData,
       [name]: value,
-  }));
+    }));
 
     console.log("name0000000000000/////////////////////////////", editedData);
     let errorMessage = "";
@@ -116,7 +115,7 @@ function ProfilePage() {
 
   const handleEdit = async (e) => {
     e.preventDefault();
-    console.log("[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]",editedData)
+    console.log("[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]", editedData);
 
     try {
       // Gather form data from the event target
@@ -125,7 +124,7 @@ function ProfilePage() {
       const email = formData.get("email");
       const phone = formData.get("phone");
       const address = formData.get("address");
-      console.log("email========================", email)
+      console.log("email========================", email);
       // Validate the form data
       // if (!email || !phone || !address) {
       //   toast.error("Please provide all required information");
@@ -140,11 +139,11 @@ function ProfilePage() {
       };
       // Send updated data to userProfile API
       const response = await axios.post(
-        "http://localhost:3000/api/UserProfile",
+        "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/UserProfile",
         userData
       );
-      console.log("userData============",userData)
-      console.log('Form submitted:', response );
+      console.log("userData============", userData);
+      console.log("Form submitted:", response);
       // Handle success response
       // console.log("Updated data:", response.data);
       toast.success("Data updated successfully");
@@ -292,7 +291,7 @@ function ProfilePage() {
                               <div className="col">
                                 <label htmlFor="">Mobile Number</label>
                                 <input
-                                // name="phone"
+                                  // name="phone"
                                   type="text"
                                   className="form-control"
                                   placeholder={message.Phone}
@@ -303,7 +302,7 @@ function ProfilePage() {
                               <div className="col">
                                 <label htmlFor="">Address</label>
                                 <input
-                                // name="address"
+                                  // name="address"
                                   type="text"
                                   className="form-control"
                                   placeholder={message.Address}

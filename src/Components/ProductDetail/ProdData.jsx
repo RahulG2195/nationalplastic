@@ -30,17 +30,24 @@ function ProdData() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const storedId = localStorage.getItem('myId');
-        const productName = localStorage.getItem('productName');
+        const storedId = localStorage.getItem("myId");
+        const productName = localStorage.getItem("productName");
         setProductId(storedId);
 
-        const response = await axios.get("http://localhost:3000/api/Products");
+        const response = await axios.get(
+          "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Products"
+        );
         let filteredData = [];
         if (productName) {
-          filteredData = response.data.products.filter(item => item.product_name.toLowerCase() === productName.toLowerCase());
+          filteredData = response.data.products.filter(
+            (item) =>
+              item.product_name.toLowerCase() === productName.toLowerCase()
+          );
           localStorage.clear();
-        } else if(storedId)  {
-          filteredData = response.data.products.filter(item => item.product_id ==  storedId );
+        } else if (storedId) {
+          filteredData = response.data.products.filter(
+            (item) => item.product_id == storedId
+          );
         }
         if (filteredData.length === 0) {
           setErrorMessage("Sorry, this product is not available");
@@ -185,7 +192,10 @@ function ProdData() {
                   />
                   <div className="qtyplus">+</div>
                 </form>
-                <p onClick={() => handleMoveToCart(productId)} className="btn bg-danger text-white m-2 px-5 ProdbtnRes">
+                <p
+                  onClick={() => handleMoveToCart(productId)}
+                  className="btn bg-danger text-white m-2 px-5 ProdbtnRes"
+                >
                   Add to Cart
                 </p>
                 <Link

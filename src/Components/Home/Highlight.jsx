@@ -1,7 +1,13 @@
 import Image from "next/image";
 import CatCards from "../CommonComp/catCards";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay, Pagination, Scrollbar, A11y, } from "swiper/modules";
+import {
+  Navigation,
+  Autoplay,
+  Pagination,
+  Scrollbar,
+  A11y,
+} from "swiper/modules";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -35,25 +41,36 @@ export default function Highlight() {
   const [productArr, setProductArr] = useState([]);
   // const [isLoading, setIsLoading] = useState(true);
 
-
   useEffect(() => {
     const fetchdata = async () => {
-      const response = await axios.get('http://localhost:3000/api/Products')
-      const filteredData = response.data.products.filter(item => item.categoryType === 'highlights')
-      setProductArr(filteredData)
+      const response = await axios.get(
+        "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Products"
+      );
+      const filteredData = response.data.products.filter(
+        (item) => item.categoryType === "highlights"
+      );
+      setProductArr(filteredData);
       // setIsLoading(false);
-
-    }
-    fetchdata()
-  }, [])
+    };
+    fetchdata();
+  }, []);
 
   return (
     <section className="top_pick_sec common_section">
       <div className="container">
         <div className="row">
-          <div className="section_header mx-auto text-center" data-aos="zoom-in">
-            <h2><span>Specific </span> Product Highlight</h2>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.</p>
+          <div
+            className="section_header mx-auto text-center"
+            data-aos="zoom-in"
+          >
+            <h2>
+              <span>Specific </span> Product Highlight
+            </h2>
+            <p>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industrys standard dummy text
+              ever since the 1500s.
+            </p>
           </div>
           <div className="container mt-5">
             {/* {isLoading ? (
@@ -61,41 +78,46 @@ export default function Highlight() {
                 <SyncLoader color={"#36D7B7"} loading={isLoading} />
               </center >
             ) : ( */}
-              <div className="col-12 highlight_col">
-                <div className="row">
-                  {
-                    productArr.map((product) => (
-                      <div key={product.key} className="col-md-4" data-aos="slide-right">
-                        <Link href="/ProductCatlogue">
-                          <div className="card">
-
-                            <Image
-                              src={`/Assets/images/Home-page/${product.image_name}`}
-                              alt={product.image}
-                              width={100}
-                              height={100}
-                              layout="responsive"
-                              objectFit="cover"
-                            />
-                            <div className="card-body">
-                              <h5 className="card-title">{product.product_name}</h5>
-                              <p className="card-text">{product.short_description}</p>
-                              <div className="btn btn-dark text-white rounded-circle highArrow">
-                                <i className="fa fa-arrow-right" aria-hidden="true"></i>
-                              </div>
-                            </div>
+            <div className="col-12 highlight_col">
+              <div className="row">
+                {productArr.map((product) => (
+                  <div
+                    key={product.key}
+                    className="col-md-4"
+                    data-aos="slide-right"
+                  >
+                    <Link href="/ProductCatlogue">
+                      <div className="card">
+                        <Image
+                          src={`/Assets/images/Home-page/${product.image_name}`}
+                          alt={product.image}
+                          width={100}
+                          height={100}
+                          layout="responsive"
+                          objectFit="cover"
+                        />
+                        <div className="card-body">
+                          <h5 className="card-title">{product.product_name}</h5>
+                          <p className="card-text">
+                            {product.short_description}
+                          </p>
+                          <div className="btn btn-dark text-white rounded-circle highArrow">
+                            <i
+                              className="fa fa-arrow-right"
+                              aria-hidden="true"
+                            ></i>
                           </div>
-                        </Link>
-
+                        </div>
                       </div>
-                    ))
-                  }
-                </div>
+                    </Link>
+                  </div>
+                ))}
               </div>
+            </div>
             {/* )} */}
           </div>
         </div>
-        </div>
-    </section >
-  )
+      </div>
+    </section>
+  );
 }

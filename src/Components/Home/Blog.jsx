@@ -1,6 +1,6 @@
-'use client'
+"use client";
 import BlogCard from "../CommonComp/BlogCard";
-import '../../styles/blog.css';
+import "../../styles/blog.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   Navigation,
@@ -50,18 +50,24 @@ export default function Blog() {
   const [productArr, setProductArr] = useState([]);
   useEffect(() => {
     const fetchdata = async () => {
-      const response = await axios.get('http://localhost:3000/api/Products')
-      const filteredData = response.data.products.filter(item=>item.categoryType==='Blog')
-      setProductArr(filteredData)
-    }
+      const response = await axios.get(
+        "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Products"
+      );
+      const filteredData = response.data.products.filter(
+        (item) => item.categoryType === "Blog"
+      );
+      setProductArr(filteredData);
+    };
     fetchdata();
-  },[])
+  }, []);
   return (
     <section className="top_pick_sec common_section">
       <div className="container">
         <div className="row">
-          <div className="section_header mx-auto text-center" >
-            <h2><span>Blog</span></h2>
+          <div className="section_header mx-auto text-center">
+            <h2>
+              <span>Blog</span>
+            </h2>
             <p>Lorem Ipsum</p>
           </div>
           <div className="col-12 products_col">
@@ -101,27 +107,24 @@ export default function Blog() {
                   },
                 }}
               >
-                {
-                  productArr.map((product) => (
-                    <SwiperSlide key={product.product_id} >
-                      <BlogCard
-                        image={`/Assets/images/Home-page/${product.image_name}`}
-
-                        title={product.product_name}
-                        url={product.url}
-                        cat={product.categoryType}
-                        date={product.createdOn}
-                        duration={product.duration}
-                        shortDesc={product.short_description}
-                      />
-                    </SwiperSlide>
-                  ))
-                }
+                {productArr.map((product) => (
+                  <SwiperSlide key={product.product_id}>
+                    <BlogCard
+                      image={`/Assets/images/Home-page/${product.image_name}`}
+                      title={product.product_name}
+                      url={product.url}
+                      cat={product.categoryType}
+                      date={product.createdOn}
+                      duration={product.duration}
+                      shortDesc={product.short_description}
+                    />
+                  </SwiperSlide>
+                ))}
               </Swiper>
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

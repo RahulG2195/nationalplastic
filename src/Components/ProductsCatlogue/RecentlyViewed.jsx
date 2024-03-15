@@ -67,7 +67,9 @@ const RecentlyViewed = () => {
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/Products");
+        const response = await axios.get(
+          "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Products"
+        );
         const filteredproducts = response.data.products.filter(
           (item) => item.categoryType === "premium chairs"
         );
@@ -82,7 +84,9 @@ const RecentlyViewed = () => {
 
   const fetchWishlistItems = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/Wishlist");
+      const response = await axios.get(
+        "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Wishlist"
+      );
       setWishlistItems(response.data.Wishlist);
     } catch (error) {
       console.error("Error fetching wishlist items:", error);
@@ -108,15 +112,18 @@ const RecentlyViewed = () => {
         return;
       }
 
-      await axios.post(`http://localhost:3000/api/Wishlist`, {
-        product_id: product_id,
-        ProductName: product_name,
-        productDiscription: short_description,
-        Price: price,
-        originalPrice: discount_price,
-        discount: discount,
-        WishlistImg: ChairImg,
-      });
+      await axios.post(
+        `https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Wishlist`,
+        {
+          product_id: product_id,
+          ProductName: product_name,
+          productDiscription: short_description,
+          Price: price,
+          originalPrice: discount_price,
+          discount: discount,
+          WishlistImg: ChairImg,
+        }
+      );
       notify();
       fetchWishlistItems();
     } catch (error) {

@@ -1,19 +1,18 @@
-"use client"; 
-import { useState } from 'react';
-import axios from 'axios';
-import Image from 'next/image';
+"use client";
+import { useState } from "react";
+import axios from "axios";
+import Image from "next/image";
 import { useNavigate } from "react-router-dom";
-import '../../styles/profilepage.css';
+import "../../styles/profilepage.css";
 
 function Login() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -32,27 +31,30 @@ function Login() {
 
     // Basic form validation
     if (!formData.email || !formData.password) {
-      setErrorMessage('Please enter both email and password.');
+      setErrorMessage("Please enter both email and password.");
       return;
     }
 
     try {
       // Perform login logic
       // Assuming your login API returns a success response if login is successful
-      const response = await axios.post('http://localhost:3000/api/login', {
-        email: formData.email,
-        password: formData.password,
-      });
+      const response = await axios.post(
+        "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/login",
+        {
+          email: formData.email,
+          password: formData.password,
+        }
+      );
 
       if (response.data.success) {
         // Redirect to the home page if login is successful
-        navigate('/home');
+        navigate("/home");
       } else {
-        setErrorMessage('Invalid email or password');
+        setErrorMessage("Invalid email or password");
       }
     } catch (error) {
-      console.error('Error during login:', error);
-      setErrorMessage('An error occurred during login. Please try again.');
+      console.error("Error during login:", error);
+      setErrorMessage("An error occurred during login. Please try again.");
     }
   };
 
@@ -102,7 +104,7 @@ function Login() {
                 </label>
                 <div className="col-sm-12">
                   <input
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     className="form-control"
                     id="inputPassword3"
                     name="password"
@@ -116,7 +118,7 @@ function Login() {
                     className="btn btn-toggle-password"
                     onClick={togglePasswordVisibility}
                   >
-                    {showPassword ? 'Hide' : 'Show'} Password
+                    {showPassword ? "Hide" : "Show"} Password
                   </button>
                 </div>
               </div>
@@ -130,13 +132,13 @@ function Login() {
               )}
               <div className="RegisterHere-p">
                 <p>
-                  New to National Plastic?{' '}
+                  New to National Plastic?{" "}
                   <span className="RegisterHere">Register Here</span>
                 </p>
               </div>
               <div className="row ContinueWithgoogle">
                 <p>
-                  OR Continue With{' '}
+                  OR Continue With{" "}
                   <i className="fa fa-google" aria-hidden="true"></i>
                   <i className="fa fa-facebook" aria-hidden="true"></i>
                 </p>
@@ -150,4 +152,3 @@ function Login() {
 }
 
 export default Login;
-
