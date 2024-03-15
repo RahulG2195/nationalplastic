@@ -26,7 +26,7 @@ const PreChairCards = () => {
 
   useEffect(() => {
     fetchData();
-  }, [selectedColor, selectedArmType, selectedPriceSort, categoryType, page]);
+  }, [selectedColor, selectedArmType, selectedPriceSort, categoryType]);
 
   const fetchData = async () => {
     try {

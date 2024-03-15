@@ -18,16 +18,16 @@ const nextConfig = {
   // env: {
   //     'MYSQL_HOST': '127.0.0.1',
   //     'MYSQL_PORT': '3306',
-  //     'MYSQL_DATABASE': 'nationalplastic_db',
+  //     'MYSQL_DATABASE': '',
   //     'MYSQL_USER': 'root',
-  //     'MYSQL_PASSWORD': 'W7301@aishwarya#',
+  //     'MYSQL_PASSWORD': 'W7301@nationalplastic_dbaishwarya#',
   // }
   env: {
-    'MYSQL_HOST': 'national-dev.c7iguky0mk7c.ap-south-1.rds.amazonaws.com',
+    'MYSQL_HOST': '127.0.0.1',
     'MYSQL_DATABASE': 'nationalplastic_db',
-    'MYSQL_USER': 'admin',
-    'MYSQL_PASSWORD': 'National2024',
-    'MYSQL_PORT': "3306",
+    'MYSQL_USER': 'root',
+    'MYSQL_PASSWORD':'National@123#',
+    MYSQL_PORT: "3306",
   },
 };
 
