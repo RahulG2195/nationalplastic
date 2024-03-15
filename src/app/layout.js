@@ -19,6 +19,8 @@ const BrowserRouter = dynamic(
   { ssr: false }
 );
 
+// Other routes and middleware...
+
 export default function RootLayout({ children }) {
   useEffect(() => {
     import("bootstrap/dist/js/bootstrap.bundle.min.js");
