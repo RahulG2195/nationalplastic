@@ -1,36 +1,66 @@
-"use client";
+"use client"
 import React, { useEffect, useState } from "react";
-import "./PreChairCards.css";
+import PreChairsCard from "../preChairsCard/preChairsCard";
+import '../ProductsCatlogue/PremiumChairs.css';
 import axios from "axios";
 import { DotLoader } from "react-spinners";
-import "react-toastify/dist/ReactToastify.css";
+import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/reducer/cartSlice";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import PremiumChairs from "./PremiumChairs";
-// import InfiniteScroll from "react-infinite-scroll-component";
-import PreChairsCard from "@/Components/preChairsCard/preChairsCard";
+import InfiniteScroll from 'react-infinite-scroll-component';
 
-const PreChairCards = () => {
+
+
+const PreChairsCards = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedArmType, setSelectedArmType] = useState(null);
   const [selectedPriceSort, setSelectedPriceSort] = useState(null);
   const [categoryType, setCategoryType] = useState();
-  // const [page, setPage] = useState(1);
-  // const [hasMore, setHasMore] = useState(true);
-  // const [length, setlength] = useState([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [length , setlength] = useState([])
+  
+const [customerId, setCustomerId] = useState([]);
+
+// const data = localStorage.getItem('userData')
+//     const parseddata = JSON.parse(data);
+//     const cid = parseddata[0].customer_id;
+//    setCustomerId(cid),
+//    console.log(customerId>0 ? customerId);
+
 
   const dispatch = useDispatch();
+  // useEffect(() => {
+  //   if (customerId) {
+  //     console.log(customerId);
+  //   }
+  // }, [customerId]);
+
+  // useEffect(() => {
+  //   const data = localStorage.getItem('userData');
+  //   const parseddata = JSON.parse(data);
+  //   const cid = parseddata[0].customer_id;
+  //   setCustomerId(cid);
+  // }, [customerId]);
 
   useEffect(() => {
+
     fetchData();
-  }, [selectedColor, selectedArmType, selectedPriceSort, categoryType]);
+  }, [
+    selectedColor,
+    selectedArmType,
+    selectedPriceSort,
+    categoryType,
+    page,
+  ]);
 
   const fetchData = async () => {
     try {
-      const categoryTitle = localStorage.getItem("category");
+      const categoryTitle = localStorage.getItem('category');
       setCategoryType(categoryTitle);
 
       const response = await axios.get(`http://localhost:3000/api/Products`);
@@ -43,26 +73,22 @@ const PreChairCards = () => {
         let filteredData = fetchedData.products;
 
         if (selectedColor) {
-          filteredData = filteredData.filter(
-            (item) =>
-              item.color &&
-              item.color.toLowerCase() === selectedColor.toLowerCase()
+          filteredData = filteredData.filter((item) =>
+            item.color && item.color.toLowerCase() === selectedColor.toLowerCase()
           );
         }
 
         if (selectedArmType) {
-          filteredData = filteredData.filter(
-            (item) =>
-              item.armType &&
-              item.armType.toLowerCase() === selectedArmType.toLowerCase()
+          filteredData = filteredData.filter((item) =>
+            item.armType && item.armType.toLowerCase() === selectedArmType.toLowerCase()
           );
         }
 
         if (selectedPriceSort) {
           filteredData.sort((a, b) => {
-            if (selectedPriceSort === "asc") {
+            if (selectedPriceSort === 'asc') {
               return a.price - b.price;
-            } else if (selectedPriceSort === "desc") {
+            } else if (selectedPriceSort === 'desc') {
               return b.price - a.price;
             }
             return 0;
@@ -70,18 +96,16 @@ const PreChairCards = () => {
         }
 
         if (categoryType) {
-          filteredData = filteredData.filter(
-            (item) =>
-              item.categoryType &&
-              item.categoryType.toLowerCase() === categoryType.toLowerCase()
+          filteredData = filteredData.filter((item) =>
+            item.categoryType && item.categoryType.toLowerCase() === categoryType.toLowerCase()
           );
         }
 
         if (page === 1) {
           setProducts(filteredData);
-          setlength(filteredData);
+          setlength(filteredData)
         } else {
-          setProducts((prevProducts) => [...prevProducts, ...filteredData]);
+          setProducts(prevProducts => [...prevProducts, ...filteredData]);
         }
 
         setHasMore(filteredData.length > 0);
@@ -97,36 +121,36 @@ const PreChairCards = () => {
   };
 
   const handleAddToWishlist = (product_id) => {
-    dispatch(
-      addItemToWishlist({
-        product_id: product_id,
-      })
-    );
+    const cid = 1;
+    dispatch(addItemToWishlist({
+      product_id: product_id,
+      customer_id:cid,
+    }));
   };
 
+  // const cid = localStorage.getItem('')
+
   const handleMoveToCart = (product_id) => {
-    dispatch(
-      addToCart({
-        product_id: product_id,
-      })
-    );
+    const cid = 1;
+    dispatch(addToCart({
+      product_id: product_id,
+      customer_id:cid,
+    }));
   };
 
   const handleArmType = (event) => {
     const selectedArmType = event.target.value;
-    setSelectedArmType(selectedArmType === "all" ? null : selectedArmType);
+    setSelectedArmType(selectedArmType === 'all' ? null : selectedArmType);
   };
 
   const handleColor = (event) => {
     const selectedColor = event.target.value;
-    setSelectedColor(selectedColor === "all" ? null : selectedColor);
+    setSelectedColor(selectedColor === 'all' ? null : selectedColor);
   };
 
   const handlePriceSort = (event) => {
     const selectedPriceSort = event.target.value;
-    setSelectedPriceSort(
-      selectedPriceSort === "all" ? null : selectedPriceSort
-    );
+    setSelectedPriceSort(selectedPriceSort === 'all' ? null : selectedPriceSort);
   };
 
   return (
@@ -135,12 +159,10 @@ const PreChairCards = () => {
 
       <div className="dropboxRes mt-5 d-flex justify-content-between">
         <div>
-          <div className="text-body-secondary fw-semibold">FILTER BY</div>
+          <div className='text-body-secondary fw-semibold'>FILTER BY</div>
           <div className="d-flex flex-wrap gap-3 mt-2">
             <div className="dropdown mt-2 arrow">
-              <select
-                id="Price"
-                name="Price"
+              <select id='Price' name='Price'
                 className="form-control border-primary darkBlue fw-semibold dropdownbuttonResp"
                 onChange={handlePriceSort}
               >
@@ -150,9 +172,7 @@ const PreChairCards = () => {
               </select>
             </div>
             <div className="dropdown mt-2 arrow">
-              <select
-                id="Arm_Type"
-                name="Arm_Type"
+              <select id='Arm_Type' name='Arm_Type'
                 className="form-control border-primary darkBlue fw-semibold dropdownbuttonResp"
                 onChange={handleArmType}
               >
@@ -184,7 +204,9 @@ const PreChairCards = () => {
         </center>
       ) : products.length === 0 ? (
         <div className="text-center mt-5">
-          <h3 className="text-muted">No products available</h3>
+          <h3 className="text-muted">
+            No products available
+          </h3>
         </div>
       ) : (
         <>
@@ -195,38 +217,30 @@ const PreChairCards = () => {
             loader={<h4>Loading...</h4>}
             endMessage={<p>No more products to load</p>}
           > */}
-          <div className="row">
-            {products.map((product) => (
-              <div
-                key={product.product_id}
-                className="PreCardSm col-6 col-sm-6 col-xs-4 col-md-6 col-lg-3"
-              >
-                <PreChairsCard
-                  ChairImg={`/Assets/images/New-launches-1/${product.image_name}`}
-                  id={product.product_id}
-                  Title={product.product_name}
-                  Discription={product.short_description}
-                  Price={product.price}
-                  orignalPrice={product.discount_price}
-                  Discount={Math.floor(
-                    ((product.discount_price - product.price) /
-                      product.discount_price) *
-                      100
-                  )}
-                  onaddToWishlist={() =>
-                    handleAddToWishlist(product.product_id)
-                  }
-                  onAddToCart={() => handleMoveToCart(product.product_id)}
-                />
-              </div>
-            ))}
-          </div>
+            <div className="row">
+              {products.map((product) => (
+                <div key={product.product_id} className="PreCardSm col-6 col-sm-6 col-xs-4 col-md-6 col-lg-3">
+                  <PreChairsCard
+                    ChairImg={`/Assets/images/New-launches-1/${product.image_name}`}
+                    id={product.product_id}
+                    Title={product.product_name}
+                    Discription={product.short_description}
+                    Price={product.price}
+                    orignalPrice={product.discount_price}
+                    Discount={Math.floor((product.discount_price - product.price) / product.discount_price * 100)}
+                    onaddToWishlist={() => handleAddToWishlist(product.product_id)}
+                    onAddToCart={() => handleMoveToCart(product.product_id)}
+                  />
+                </div>
+              ))}
+            </div>
           {/* </InfiniteScroll> */}
+
+
         </>
       )}
     </div>
   );
 };
 
-export default PreChairCards;
-//commented for prechairs cards
+export default PreChairsCards;
