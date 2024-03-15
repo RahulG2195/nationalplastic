@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Banner from "@/Components/Home/Banner";
 import CoupenBanner from "@/Components/Home/CoupenBanner";
 import Features from "@/Components/Home/Features";
@@ -11,11 +11,21 @@ import HappyStory from "@/Components/Home/HappyStory";
 import Dealers from "@/Components/Home/Dealers";
 import Blog from "@/Components/Home/Blog";
 import Catalogue from "@/Components/Home/Catalogue";
-import '../styles/home_prod.css';
-import { React, useEffect } from 'react'
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import "../styles/home_prod.css";
+import { React, useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import express from "express";
+import cors from "cors";
+const app = express();
 
+// Allow requests from your Next.js domain
+app.use(
+  cors({
+    origin:
+      "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/",
+  })
+);
 
 export default function Home() {
   // alert(pool)
@@ -23,11 +33,11 @@ export default function Home() {
     AOS.init({
       duration: 700,
       once: false,
-    })
-  }, [])
+    });
+  }, []);
   return (
     <>
-      <main >
+      <main>
         <Banner />
         <Features />
         <CoupenBanner />
@@ -42,6 +52,5 @@ export default function Home() {
         <Catalogue />
       </main>
     </>
-
-  )
+  );
 }
