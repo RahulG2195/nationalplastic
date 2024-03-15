@@ -50,6 +50,7 @@
     "react-toastify": "^10.0.4",
     "swiper": "^11.0.5",
     "trace": "^3.1.1",
+    "typescript": "^5.4.2",
     "ui": "^0.2.4"
   },
   "devDependencies": {
