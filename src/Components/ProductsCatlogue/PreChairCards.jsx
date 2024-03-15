@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import "./PreChairCards.css";
 import axios from "axios";
 import { DotLoader } from "react-spinners";
-import "react-toastify/dist/ReactToastify.css";
+// import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/reducer/cartSlice";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import PremiumChairs from "./PremiumChairs";
-import PreChairsCard from "@/Components/PreChairsCard/PreChairsCard";
+import PreChairsCard from "../../Components/preChairsCard/preChairsCard";
 
 // import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -19,9 +19,9 @@ const PreChairsCards = () => {
   const [selectedArmType, setSelectedArmType] = useState(null);
   const [selectedPriceSort, setSelectedPriceSort] = useState(null);
   const [categoryType, setCategoryType] = useState();
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-  const [length, setlength] = useState([]);
+  // const [page, setPage] = useState(1);
+  // const [hasMore, setHasMore] = useState(true);
+  // const [length, setlength] = useState([]);
 
   const dispatch = useDispatch();
   const chairData = [
@@ -309,9 +309,7 @@ const PreChairsCards = () => {
                   Discription={product.Title}
                   Price={product.Title}
                   orignalPrice={product.Title}
-                  Discount={Math.floor(
-                    ((product.Title - product.Title) / product.Title) * 100
-                  )}
+                  Discount={Math.floor(10.0)}
                   onaddToWishlist={() => handleAddToWishlist(product.Title)}
                   onAddToCart={() => handleMoveToCart(product.Title)}
                 />
