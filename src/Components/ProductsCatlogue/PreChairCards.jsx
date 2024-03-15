@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-// import PreChairsCard from "../PreChairsCard/PreChairsCard";
+import PreChairsCard from "../PreChairsCard/PreChairsCard";
 import "./PreChairCards.css";
 import axios from "axios";
 import { DotLoader } from "react-spinners";
@@ -23,6 +23,104 @@ const PreChairsCards = () => {
   const [length, setlength] = useState([]);
 
   const dispatch = useDispatch();
+  const chairData = [
+    {
+      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      Title: "SHAMIYANA",
+      Discription: "Lorem ipsum dolor sit amet.",
+      Price: "00,000",
+      orignalPrice: "00,000",
+      Discount: "20%",
+    },
+    {
+      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      Title: "SHAMIYANA",
+      Discription: "Lorem ipsum dolor sit amet.",
+      Price: "00,000",
+      orignalPrice: "00,000",
+      Discount: "20%",
+    },
+    {
+      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      Title: "SHAMIYANA",
+      Discription: "Lorem ipsum dolor sit amet.",
+      Price: "00,000",
+      orignalPrice: "00,000",
+      Discount: "20%",
+    },
+    {
+      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      Title: "SHAMIYANA",
+      Discription: "Lorem ipsum dolor sit amet.",
+      Price: "00,000",
+      orignalPrice: "00,000",
+      Discount: "20%",
+    },
+    {
+      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      Title: "SHAMIYANA",
+      Discription: "Lorem ipsum dolor sit amet.",
+      Price: "00,000",
+      orignalPrice: "00,000",
+      Discount: "20%",
+    },
+    {
+      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      Title: "SHAMIYANA",
+      Discription: "Lorem ipsum dolor sit amet.",
+      Price: "00,000",
+      orignalPrice: "00,000",
+      Discount: "20%",
+    },
+    {
+      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      Title: "SHAMIYANA",
+      Discription: "Lorem ipsum dolor sit amet.",
+      Price: "00,000",
+      orignalPrice: "00,000",
+      Discount: "20%",
+    },
+    {
+      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      Title: "SHAMIYANA",
+      Discription: "Lorem ipsum dolor sit amet.",
+      Price: "00,000",
+      orignalPrice: "00,000",
+      Discount: "20%",
+    },
+    {
+      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      Title: "SHAMIYANA",
+      Discription: "Lorem ipsum dolor sit amet.",
+      Price: "00,000",
+      orignalPrice: "00,000",
+      Discount: "20%",
+    },
+    {
+      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      Title: "SHAMIYANA",
+      Discription: "Lorem ipsum dolor sit amet.",
+      Price: "00,000",
+      orignalPrice: "00,000",
+      Discount: "20%",
+    },
+    {
+      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      Title: "SHAMIYANA",
+      Discription: "Lorem ipsum dolor sit amet.",
+      Price: "00,000",
+      orignalPrice: "00,000",
+      Discount: "20%",
+    },
+    {
+      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      Title: "SHAMIYANA",
+      Discription: "Lorem ipsum dolor sit amet.",
+      Price: "00,000",
+      orignalPrice: "00,000",
+      Discount: "20%",
+    },
+  ];
 
   useEffect(() => {
     fetchData();
@@ -198,30 +296,26 @@ const PreChairsCards = () => {
             endMessage={<p>No more products to load</p>}
           > */}
           <div className="row">
-            {/* {products.map((product) => (
+            {chairData.map((product) => (
               <div
-                key={product.product_id}
+                key={product.Title}
                 className="PreCardSm col-6 col-sm-6 col-xs-4 col-md-6 col-lg-3"
               >
                 <PreChairsCard
-                  ChairImg={`/Assets/images/New-launches-1/${product.image_name}`}
-                  id={product.product_id}
-                  Title={product.product_name}
-                  Discription={product.short_description}
-                  Price={product.price}
-                  orignalPrice={product.discount_price}
+                  ChairImg={`/Assets/images/New-launches-1/${product.ChairImg}`}
+                  id={product.Title}
+                  Title={product.Title}
+                  Discription={product.Title}
+                  Price={product.Title}
+                  orignalPrice={product.Title}
                   Discount={Math.floor(
-                    ((product.discount_price - product.price) /
-                      product.discount_price) *
-                      100
+                    ((product.Title - product.Title) / product.Title) * 100
                   )}
-                  onaddToWishlist={() =>
-                    handleAddToWishlist(product.product_id)
-                  }
-                  onAddToCart={() => handleMoveToCart(product.product_id)}
+                  onaddToWishlist={() => handleAddToWishlist(product.Title)}
+                  onAddToCart={() => handleMoveToCart(product.Title)}
                 />
               </div>
-            ))} */}
+            ))}
           </div>
           {/* </InfiniteScroll> */}
         </>
