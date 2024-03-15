@@ -27,7 +27,7 @@ const nextConfig = {
     'MYSQL_DATABASE': 'nationalplastic_db',
     'MYSQL_USER': 'admin',
     'MYSQL_PASSWORD': 'National2024',
-    MYSQL_PORT: "3306",
+    'MYSQL_PORT': "3306",
   },
 };
 
