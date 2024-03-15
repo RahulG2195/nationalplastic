@@ -8,15 +8,15 @@ import {
   A11y,
 } from "swiper/modules";
 import "swiper/swiper-bundle.css";
-import PreChairsCard from "../PreChairsCard/PreChairsCard.jsx";
-import Image from "next/image";
+// import Image from "next/image";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { addToCart } from "@/redux/reducer/cartSlice";
 import { useDispatch } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
-import { Bounce, toast } from "react-toastify";
+// import { Bounce, toast } from "react-toastify";
 import { useRef } from "react";
+import PreChairsCard from "@/Components/preChairsCard/preChairsCard"
 
 const RecentlyViewed = () => {
   // const RecentlyViewedData = [
