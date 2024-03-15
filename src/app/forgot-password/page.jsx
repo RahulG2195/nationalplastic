@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./forgotPasswordPage.css"; // Import CSS file for styling
 import { isValidEmail } from "@/utils/validation";
 import axios from "axios";
-import crypto from "crypto";
+// import crypto from "crypto";
 const ResetPasswordPage = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -24,8 +24,8 @@ const ResetPasswordPage = () => {
     }
 
     const generatePasswordResetToken = () => {
-      const randomBytes = crypto.randomBytes(64);
-      const token = randomBytes.toString("hex");
+      // const randomBytes = crypto.randomBytes(64);
+      const token = "dtstdicposopddfkdsnjefn"
 
       // 3. (Optional) Add timestamp for expiry
       const expiry = Date.now() + 5 * 60 * 1000; // One hour from now (milliseconds)
