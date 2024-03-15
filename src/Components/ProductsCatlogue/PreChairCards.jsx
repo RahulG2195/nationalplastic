@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import PreChairsCard from "../PreChairsCard/PreChairsCard";
+import PreChairsCard from "@/Components/PreChairsCard/PreChairsCard";
 import "./PreChairCards.css";
 import axios from "axios";
 import { DotLoader } from "react-spinners";
@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/reducer/cartSlice";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import PremiumChairs from "./PremiumChairs";
-import InfiniteScroll from "react-infinite-scroll-component";
+// import InfiniteScroll from "react-infinite-scroll-component";
 
 const PreChairsCards = () => {
   const [products, setProducts] = useState([]);
