@@ -130,13 +130,16 @@ export default function Manufacture() {
                     className="col-xs-12 col-sm-6 col-md-4   shop_col my-md-4 my-2 "
                     key={product.key}
                   >
-                    <SwiperSlide key={product.key}>
+                    <SwiperSlide key={product.product_id} >
                       <CatCards
-                        image={`/Assets/images/Home-page/${product.image}`}
-                        title={product.title}
-                        url={product.title}
-                        style={"shop-room"}
+                        image={`/Assets/images/Home-page/${product.image_name}`}
+                        title={product.product_name}
+                        categoryType={product.categoryType}
+                        onCategoryChange={() => sendCategory(
+                          product.product_name
+                        )}
                       />
+
                     </SwiperSlide>
                   </div>
                 ))}

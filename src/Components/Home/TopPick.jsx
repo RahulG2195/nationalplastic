@@ -107,13 +107,16 @@ export default function TopPick() {
               >
                 {hometoppics.map((product) => (
                   <div className="col-md-4" key={product.key}>
-                    <SwiperSlide key={product.key}>
+                   <SwiperSlide key={product.product_id} >
                       <CatCards
-                        image={`/Assets/images/Home-page/${product.image}`}
-                        title={product.title}
-                        categoryType={product.title}
-                        onCategoryChange={() => sendCategory(product.title)}
+                        image={`/Assets/images/Home-page/${product.image_name}`}
+                        title={product.product_name}
+                        categoryType={product.categoryType}
+                        onCategoryChange={() => sendCategory(
+                          product.product_name
+                        )}
                       />
+
                     </SwiperSlide>
                   </div>
                 ))}
