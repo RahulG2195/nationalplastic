@@ -187,9 +187,11 @@ export const addToCart = (item) => async (dispatch, getState) => {
   const { initialCount, items } = getState().wishlist; // Access state through the second parameter
   console.log("addToCart" + JSON.stringify(item));
   console.log("addToCart" + JSON.stringify(item));
+
   const check = await axios.get(
     "http://13.234.238.29:3000/api/Cart"
   );
+  
   const isCartEmpty = !check.data.products || check.data.products.length === 0;
   const isAlreadyInCart =
     !isCartEmpty &&

@@ -15,19 +15,27 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 export default function Header() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [isClicked, setIsClicked] = useState(false); // State to track click
+  const [isClicked, setIsClicked] = useState(false); 
+  const [count, setCount] = useState(0)
   const router = useRouter();
-  // const [suggestions, setSuggestions] = useState([]);
-  // console.log("suggestions are here ", suggestions)
-  console.log("here is searched result", searchResults);
 
-  // console.log("here is result ", searchResults)
   const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
+
+
+
+  useEffect(async () => {
+    const check = await axios.get(
+      "http://13.234.238.29:3000/api/Cart"
+    );
+    setCount(check.length)
+  }, [])
+
+
+
   const handleSearchChange = async (e) => {
     setSearchTerm(e.target.value);
 
     if (!searchTerm) {
-      // setSuggestions([]);
       setSearchResults([]);
       return;
     }
@@ -161,7 +169,7 @@ export default function Header() {
                 </li>
                 <li className="nav-item brdr">
                   <Link className="nav-link position-relative" href="/AddToCart" onClick={isClicked ? handleShow : null}>
-                  <img src="/Assets/svg/Group 5.svg" alt="" /><div className="cartCount text-center medium">4</div>
+                  <img src="/Assets/svg/Group 5.svg" alt="" /><div className="cartCount text-center medium">{count}</div>
                   </Link>
                 </li>
               </ul>
