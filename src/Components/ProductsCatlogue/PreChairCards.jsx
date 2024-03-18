@@ -20,9 +20,9 @@ const PreChairsCards = () => {
   const [selectedArmType, setSelectedArmType] = useState(null);
   const [selectedPriceSort, setSelectedPriceSort] = useState(null);
   const [categoryType, setCategoryType] = useState();
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-  const [length , setlength] = useState([])
+  // const [page, setPage] = useState(1);
+  // const [hasMore, setHasMore] = useState(true);
+  // const [length , setlength] = useState([])
   
 const [customerId, setCustomerId] = useState([]);
 
