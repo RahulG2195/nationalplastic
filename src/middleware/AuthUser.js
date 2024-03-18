@@ -6,7 +6,7 @@ const app = express();
 app.use(
   cors({
     origin:
-      "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/",
+      "https://localhost:3000/",
   })
 );
 

@@ -54,14 +54,14 @@ function Register() {
       try {
         // Check if email already exists
         const { data } = await axios.get(
-          `https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Users`
+          `http://13.234.238.29:3000/api/Users`
         );
         const existingEmails = data.map((user) => user.Email);
         if (existingEmails.includes(formData.email)) {
           alert("Email already exists!");
         } else {
           const response = await axios.post(
-            "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Users",
+            "http://13.234.238.29:3000/api/Users",
             formData
           );
           console.log("Form submitted:", response);

@@ -35,7 +35,7 @@ const Search = (props) => {
       }
 
       const response = await axios.get(
-        `https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/search?query=${query}&page=${page}`
+        `http://13.234.238.29:3000/api/search?query=${query}&page=${page}`
       );
       const newProducts = response.data.products;
       const all = response.data.allproducts;

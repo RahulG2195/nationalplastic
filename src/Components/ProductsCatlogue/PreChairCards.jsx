@@ -24,104 +24,104 @@ const PreChairsCards = () => {
   // const [length, setlength] = useState([]);
 
   const dispatch = useDispatch();
-  const chairData = [
-    {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
-      Title: "SHAMIYANA",
-      Discription: "Lorem ipsum dolor sit amet.",
-      Price: "00,000",
-      orignalPrice: "00,000",
-      Discount: "20%",
-    },
-    {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
-      Title: "SHAMIYANA",
-      Discription: "Lorem ipsum dolor sit amet.",
-      Price: "00,000",
-      orignalPrice: "00,000",
-      Discount: "20%",
-    },
-    {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
-      Title: "SHAMIYANA",
-      Discription: "Lorem ipsum dolor sit amet.",
-      Price: "00,000",
-      orignalPrice: "00,000",
-      Discount: "20%",
-    },
-    {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
-      Title: "SHAMIYANA",
-      Discription: "Lorem ipsum dolor sit amet.",
-      Price: "00,000",
-      orignalPrice: "00,000",
-      Discount: "20%",
-    },
-    {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
-      Title: "SHAMIYANA",
-      Discription: "Lorem ipsum dolor sit amet.",
-      Price: "00,000",
-      orignalPrice: "00,000",
-      Discount: "20%",
-    },
-    {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
-      Title: "SHAMIYANA",
-      Discription: "Lorem ipsum dolor sit amet.",
-      Price: "00,000",
-      orignalPrice: "00,000",
-      Discount: "20%",
-    },
-    {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
-      Title: "SHAMIYANA",
-      Discription: "Lorem ipsum dolor sit amet.",
-      Price: "00,000",
-      orignalPrice: "00,000",
-      Discount: "20%",
-    },
-    {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
-      Title: "SHAMIYANA",
-      Discription: "Lorem ipsum dolor sit amet.",
-      Price: "00,000",
-      orignalPrice: "00,000",
-      Discount: "20%",
-    },
-    {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
-      Title: "SHAMIYANA",
-      Discription: "Lorem ipsum dolor sit amet.",
-      Price: "00,000",
-      orignalPrice: "00,000",
-      Discount: "20%",
-    },
-    {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
-      Title: "SHAMIYANA",
-      Discription: "Lorem ipsum dolor sit amet.",
-      Price: "00,000",
-      orignalPrice: "00,000",
-      Discount: "20%",
-    },
-    {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
-      Title: "SHAMIYANA",
-      Discription: "Lorem ipsum dolor sit amet.",
-      Price: "00,000",
-      orignalPrice: "00,000",
-      Discount: "20%",
-    },
-    {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
-      Title: "SHAMIYANA",
-      Discription: "Lorem ipsum dolor sit amet.",
-      Price: "00,000",
-      orignalPrice: "00,000",
-      Discount: "20%",
-    },
-  ];
+  // const chairData = [
+  //   {
+  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     Title: "SHAMIYANA",
+  //     Discription: "Lorem ipsum dolor sit amet.",
+  //     Price: "00,000",
+  //     orignalPrice: "00,000",
+  //     Discount: "20%",
+  //   },
+  //   {
+  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     Title: "SHAMIYANA",
+  //     Discription: "Lorem ipsum dolor sit amet.",
+  //     Price: "00,000",
+  //     orignalPrice: "00,000",
+  //     Discount: "20%",
+  //   },
+  //   {
+  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     Title: "SHAMIYANA",
+  //     Discription: "Lorem ipsum dolor sit amet.",
+  //     Price: "00,000",
+  //     orignalPrice: "00,000",
+  //     Discount: "20%",
+  //   },
+  //   {
+  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     Title: "SHAMIYANA",
+  //     Discription: "Lorem ipsum dolor sit amet.",
+  //     Price: "00,000",
+  //     orignalPrice: "00,000",
+  //     Discount: "20%",
+  //   },
+  //   {
+  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     Title: "SHAMIYANA",
+  //     Discription: "Lorem ipsum dolor sit amet.",
+  //     Price: "00,000",
+  //     orignalPrice: "00,000",
+  //     Discount: "20%",
+  //   },
+  //   {
+  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     Title: "SHAMIYANA",
+  //     Discription: "Lorem ipsum dolor sit amet.",
+  //     Price: "00,000",
+  //     orignalPrice: "00,000",
+  //     Discount: "20%",
+  //   },
+  //   {
+  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     Title: "SHAMIYANA",
+  //     Discription: "Lorem ipsum dolor sit amet.",
+  //     Price: "00,000",
+  //     orignalPrice: "00,000",
+  //     Discount: "20%",
+  //   },
+  //   {
+  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     Title: "SHAMIYANA",
+  //     Discription: "Lorem ipsum dolor sit amet.",
+  //     Price: "00,000",
+  //     orignalPrice: "00,000",
+  //     Discount: "20%",
+  //   },
+  //   {
+  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     Title: "SHAMIYANA",
+  //     Discription: "Lorem ipsum dolor sit amet.",
+  //     Price: "00,000",
+  //     orignalPrice: "00,000",
+  //     Discount: "20%",
+  //   },
+  //   {
+  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     Title: "SHAMIYANA",
+  //     Discription: "Lorem ipsum dolor sit amet.",
+  //     Price: "00,000",
+  //     orignalPrice: "00,000",
+  //     Discount: "20%",
+  //   },
+  //   {
+  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     Title: "SHAMIYANA",
+  //     Discription: "Lorem ipsum dolor sit amet.",
+  //     Price: "00,000",
+  //     orignalPrice: "00,000",
+  //     Discount: "20%",
+  //   },
+  //   {
+  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     Title: "SHAMIYANA",
+  //     Discription: "Lorem ipsum dolor sit amet.",
+  //     Price: "00,000",
+  //     orignalPrice: "00,000",
+  //     Discount: "20%",
+  //   },
+  // ];
 
   useEffect(() => {
     fetchData();
@@ -133,7 +133,7 @@ const PreChairsCards = () => {
       setCategoryType(categoryTitle);
 
       const response = await axios.get(
-        `https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Products`
+        `http://13.234.238.29:3000/api/Products`
       );
       console.log("API Response:", response.data); // Log API response
 
@@ -177,18 +177,18 @@ const PreChairsCards = () => {
               item.categoryType.toLowerCase() === categoryType.toLowerCase()
           );
         }
+        setProducts(filteredData);
 
-        if (page === 1) {
-          setProducts(filteredData);
-          setlength(filteredData);
-        } else {
-          setProducts((prevProducts) => [...prevProducts, ...filteredData]);
-        }
 
-        setHasMore(filteredData.length > 0);
-      } else {
-        console.error("API response did not contain 'products' property");
+        // if (page === 1) {
+        //   setlength(filteredData);
+        // } 
+
+        // setHasMore(filteredData.length > 0);
       }
+      // else {
+      //   setProducts(filteredData);
+      // }
 
       setIsLoading(false);
     } catch (error) {
@@ -297,21 +297,18 @@ const PreChairsCards = () => {
             endMessage={<p>No more products to load</p>}
           > */}
           <div className="row">
-            {chairData.map((product) => (
-              <div
-                key={product.Title}
-                className="PreCardSm col-6 col-sm-6 col-xs-4 col-md-6 col-lg-3"
-              >
+            {products.map((product) => (
+              <div key={product.product_id} className="PreCardSm col-6 col-sm-6 col-xs-4 col-md-6 col-lg-3">
                 <PreChairsCard
-                  ChairImg={product.Title}
-                  id={product.Title}
-                  Title={product.Title}
-                  Discription={product.Title}
-                  Price={product.Title}
-                  orignalPrice={product.Title}
-                  Discount={Math.floor(10.0)}
-                  onaddToWishlist={() => handleAddToWishlist(product.Title)}
-                  onAddToCart={() => handleMoveToCart(product.Title)}
+                  ChairImg={`/Assets/images/New-launches-1/${product.image_name}`}
+                  id={product.product_id}
+                  Title={product.product_name}
+                  Discription={product.short_description}
+                  Price={product.price}
+                  orignalPrice={product.discount_price}
+                  Discount={Math.floor((product.discount_price - product.price) / product.discount_price * 100)}
+                  onaddToWishlist={() => handleAddToWishlist(product.product_id)}
+                  onAddToCart={() => handleMoveToCart(product.product_id)}
                 />
               </div>
             ))}

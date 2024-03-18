@@ -22,7 +22,7 @@ const AddBody = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Cart"
+          "http://13.234.238.29:3000/api/Cart"
         );
         const cartData = response.data.products;
 

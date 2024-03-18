@@ -188,7 +188,7 @@ export const addToCart = (item) => async (dispatch, getState) => {
   console.log("addToCart" + JSON.stringify(item));
   console.log("addToCart" + JSON.stringify(item));
   const check = await axios.get(
-    "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Cart"
+    "http://13.234.238.29:3000/api/Cart"
   );
   const isCartEmpty = !check.data.products || check.data.products.length === 0;
   const isAlreadyInCart =
@@ -200,7 +200,7 @@ export const addToCart = (item) => async (dispatch, getState) => {
   if (isCartEmpty || !isAlreadyInCart) {
     try {
       const response = await axios.post(
-        "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Cart",
+        "http://13.234.238.29:3000/api/Cart",
         item
       );
       console.log("response From slicer" + response.status);

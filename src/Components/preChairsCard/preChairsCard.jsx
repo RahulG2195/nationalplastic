@@ -12,7 +12,7 @@ const PreChairsCard = (props) => {
     const fetchWishlistItems = async () => {
       try {
         const response = await axios.get(
-          "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Wishlist"
+          "http://13.234.238.29:3000/api/Wishlist"
         );
         const wishlistItems = response.data.products.map(
           (product) => product.product_id

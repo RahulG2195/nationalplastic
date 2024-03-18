@@ -95,10 +95,10 @@ const Registration = () => {
       formData.append(key, userInput[key]);
     }
     try {
-      // const res = await axios.put(`https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Users`, userInput);
+      // const res = await axios.put(`http://13.234.238.29:3000/api/Users`, userInput);
       console.log(userInput);
       const res = await axios.post(
-        `https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/sendResume`,
+        `http://13.234.238.29:3000/api/sendResume`,
         formData,
         {
           headers: {

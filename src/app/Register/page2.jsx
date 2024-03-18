@@ -15,7 +15,7 @@ function ProfilePage() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Users"
+        "http://13.234.238.29:3000/api/Users"
       );
       setUserData(response.data);
     } catch (error) {
@@ -42,7 +42,7 @@ function ProfilePage() {
     try {
       // Update user data in the database
       const response = await axios.put(
-        "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Users",
+        "http://13.234.238.29:3000/api/Users",
         userData
       );
       console.log("Data updated:", response.data);
