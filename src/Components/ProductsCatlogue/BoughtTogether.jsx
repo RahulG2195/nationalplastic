@@ -30,7 +30,7 @@ const BoughtTogether = () => {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          "http://13.234.238.29:3000/api/Products"
+          "http://13.234.238.29:3001/api/Products"
         );
         setTogetherCardsData(response.data.products);
       } catch (error) {

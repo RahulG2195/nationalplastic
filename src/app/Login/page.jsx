@@ -49,7 +49,7 @@ function Login() {
 
     try {
       const res = await axios.put(
-        `http://13.234.238.29:3000/api/Users`,
+        `http://13.234.238.29:3001/api/Users`,
         formData
       );
       console.log("this is status ", res.data.status);

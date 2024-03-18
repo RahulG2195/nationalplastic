@@ -15,7 +15,7 @@ function ProfilePage() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "http://13.234.238.29:3000/api/Users"
+        "http://13.234.238.29:3001/api/Users"
       );
       setUserData(response.data);
     } catch (error) {
@@ -42,7 +42,7 @@ function ProfilePage() {
     try {
       // Update user data in the database
       const response = await axios.put(
-        "http://13.234.238.29:3000/api/Users",
+        "http://13.234.238.29:3001/api/Users",
         userData
       );
       console.log("Data updated:", response.data);

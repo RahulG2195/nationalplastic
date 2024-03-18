@@ -71,7 +71,7 @@ export const addItemToWishlist = (item) => async (dispatch, getState) => {
   const { items } = getState().wishlist; // Access state through the second parameter
 
   const check = await axios.get(
-    "http://13.234.238.29:3000/api/Wishlist"
+    "http://13.234.238.29:3001/api/Wishlist"
   );
   const isWishlistEmpty =
     !check.data.products || check.data.products.length === 0;
@@ -85,7 +85,7 @@ export const addItemToWishlist = (item) => async (dispatch, getState) => {
   if (isWishlistEmpty || !isItemAlreadyAdded) {
     try {
       const response = await axios.post(
-        "http://13.234.238.29:3000/api/Wishlist",
+        "http://13.234.238.29:3001/api/Wishlist",
         item
       );
       dispatch(addToWishlist(item));

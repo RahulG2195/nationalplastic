@@ -25,7 +25,7 @@ export default function Header() {
 
   useEffect(async () => {
     const check = await axios.get(
-      "http://13.234.238.29:3000/api/Cart"
+      "http://13.234.238.29:3001/api/Cart"
     );
     setCount(check.length)
   }, [])

@@ -133,7 +133,7 @@ const PreChairsCards = () => {
       setCategoryType(categoryTitle);
 
       const response = await axios.get(
-        `http://13.234.238.29:3000/api/Products`
+        `http://13.234.238.29:3001/api/Products`
       );
       console.log("API Response:", response.data); // Log API response
 
