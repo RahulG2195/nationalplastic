@@ -23,10 +23,10 @@ const nextConfig = {
   //     'MYSQL_PASSWORD': 'W7301@aishwarya#',
   // }
   env: {
-    MYSQL_HOST: "localhost",
-    MYSQL_DATABASE: "nationalplastic_db",
+    MYSQL_HOST: "127.0.0.1",
+    MYSQL_DATABASE: "nationalplastic_db1",
     MYSQL_USER: "root",
-    MYSQL_PASSWORD: "National2024",
+    MYSQL_PASSWORD: "National@123#",
     MYSQL_PORT: "3306",
   },
 };

@@ -159,17 +159,18 @@ function Register() {
                 <div className="alert alert-success">{successMessage}</div>
               )}
               <div className="row mb-3 mt-3">
-                <label
+                {/* <label
                   htmlFor="inputFirstName"
                   className="col-sm-2 col-form-label"
                 >
                   First Name:
-                </label>
-                <div className="col-sm-10">
+                </label> */}
+                <div className="col-sm-12">
                   <input
                     type="text"
                     className="form-control"
                     id="inputFirstName"
+                    placeholder="Enter Your First Name"
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleInputChange}
@@ -180,18 +181,19 @@ function Register() {
                 </div>
               </div>
               <div className="row mb-3 mt-3">
-                <label
+                {/* <label
                   htmlFor="inputLastName"
-                  className="col-sm-2 col-form-label"
+                  className="col-sm-12 col-form-label"
                 >
                   Last Name:
-                </label>
-                <div className="col-sm-10">
+                </label> */}
+                <div className="col-sm-12">
                   <input
                     type="text"
                     className="form-control"
                     id="inputLastName"
                     name="lastName"
+                    placeholder="Enter Your Last Name"
                     value={formData.lastName}
                     onChange={handleInputChange}
                   />
@@ -201,14 +203,15 @@ function Register() {
                 </div>
               </div>
               <div className="row mb-3 mt-3">
-                <label htmlFor="inputEmail" className="col-sm-2 col-form-label">
+                {/* <label htmlFor="inputEmail" className="col-sm-2 col-form-label">
                   Email:
-                </label>
-                <div className="col-sm-10">
+                </label> */}
+                <div className="col-sm-12">
                   <input
                     type="email"
                     className="form-control"
                     id="inputEmail"
+                    placeholder="Enter Your Email"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
@@ -219,15 +222,16 @@ function Register() {
                 </div>
               </div>
               <div className="row mb-3 mt-3">
-                <label htmlFor="inputPhone" className="col-sm-2 col-form-label">
+                {/* <label htmlFor="inputPhone" className="col-sm-2 col-form-label">
                   Phone:
-                </label>
-                <div className="col-sm-10">
+                </label> */}
+                <div className="col-sm-12">
                   <input
                     type="text"
                     className="form-control"
                     id="inputPhone"
                     name="phone"
+                    placeholder="Enter Your Phone"
                     value={formData.phone}
                     onChange={handleInputChange}
                   />
@@ -237,18 +241,19 @@ function Register() {
                 </div>
               </div>
               <div className="row mb-3 mt-3">
-                <label
+                {/* <label
                   htmlFor="inputAddress"
                   className="col-sm-2 col-form-label"
                 >
                   Address:
-                </label>
-                <div className="col-sm-10">
+                </label> */}
+                <div className="col-sm-12">
                   <input
                     type="text"
                     className="form-control"
                     id="inputAddress"
                     name="address"
+                    placeholder="Enter Your Address"
                     value={formData.adress}
                     onChange={handleInputChange}
                   />
@@ -258,18 +263,19 @@ function Register() {
                 </div>
               </div>
               <div className="row mb-3 mt-3">
-                <label
+                {/* <label
                   htmlFor="inputPassword"
                   className="col-sm-2 col-form-label"
                 >
                   Password:
-                </label>
+                </label> */}
                 <div className="col-sm-10">
                   <input
                     type="password"
                     className="form-control"
                     id="inputPassword"
                     name="password"
+                    placeholder="Enter Your Password"
                     value={formData.password}
                     onChange={handleInputChange}
                   />
@@ -279,18 +285,19 @@ function Register() {
                 </div>
               </div>
               <div className="row mb-3 mt-3">
-                <label
+                {/* <label
                   htmlFor="inputConfirmPassword"
                   className="col-sm-2 col-form-label"
                 >
                   Confirm Password:
-                </label>
+                </label> */}
                 <div className="col-sm-10">
                   <input
                     type="password"
                     className="form-control"
                     id="inputConfirmPassword"
                     name="confirmPassword"
+                    placeholder="Enter Your ConfirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleInputChange}
                   />

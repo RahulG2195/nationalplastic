@@ -3,6 +3,45 @@ import Link from "next/link";
 import "./GetQuoteForm.css";
 import { useState } from "react";
 import axios from "axios";
+import { Bounce, toast } from "react-toastify";
+
+const notify = () => {
+  toast.success("Mail Sended SucessFully", {
+    position: "top-center",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+  });
+};
+
+const notifyError = () => {
+  toast.error("Failed To send Mail", {
+    position: "top-center",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+  });
+};
+
+import {
+  isValidName,
+  isValidEmail,
+  isValidMessage,
+  isValidReason,
+  isValidMobile,
+  // isValidFile,
+} from "@/utils/validation";
+
 const GetQuoteForm = (props) => {
   const [formData, setFromData] = useState({
     fullName: "",
