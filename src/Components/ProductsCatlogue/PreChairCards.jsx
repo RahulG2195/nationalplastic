@@ -133,7 +133,7 @@ const PreChairsCards = () => {
       setCategoryType(categoryTitle);
 
       const response = await axios.get(
-        `http://13.234.238.29:3000/api/Products`
+        `http://localhost:3000/api/Products`
       );
       console.log("API Response:", response.data); // Log API response
 
@@ -186,9 +186,9 @@ const PreChairsCards = () => {
 
         // setHasMore(filteredData.length > 0);
       }
-      // else {
-      //   setProducts(filteredData);
-      // }
+      else {
+        setProducts(filteredData);
+      }
 
       setIsLoading(false);
     } catch (error) {
