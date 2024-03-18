@@ -7,6 +7,10 @@
     padding: 8px;
 }
 
+.CouponApplied:hover{
+
+    cursor: pointer;
+}
 .iconImage img {
     display: flex;
     height: auto;

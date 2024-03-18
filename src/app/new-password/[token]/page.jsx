@@ -5,6 +5,34 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "../PasswordPage.css";
 import { useParams } from "next/navigation";
+import { Bounce, toast } from "react-toastify";
+
+const notify = () => {
+  toast.success("Password Changed SucessFully", {
+    position: "top-center",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+  });
+};
+const notifyError = () => {
+  toast.error("Process Failed Try Again!", {
+    position: "top-center",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+  });
+};
 const PasswordToken = () => {
   //   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -60,14 +88,7 @@ const PasswordToken = () => {
       const storedValue = valueAfterColon;
       console.log(storedValue);
       const expiry = parseInt(storedValue);
-      //   setFormData(formData.resetToken, expiry)
-      //   console.log(Date.now());
-      //   console.log(expiry);
-      //   console.log(typeof Date.now());
-      //   console.log(typeof expiry);
-      //   console.log(Date.now() > expiry);
-      //   console.log(Date.now() < expiry);
-      //   console.log(Date.now() < 1710314741895);
+
       const formDataToSend = new FormData();
       formDataToSend.append("resetEmail", formData.email);
       formDataToSend.append("password", formData.password);
@@ -76,17 +97,21 @@ const PasswordToken = () => {
       if (Date.now() < expiry) {
         console.log("yes  here");
         const res = await axios.put(
-          `http://13.234.238.29:3000/api/forgotPassword`,
+          `http://localhost:3000/api/forgotPassword`,
           formDataToSend
         );
         console.log(res);
+        notify();
+        localStorage.clear();
         // return res.status(400).json({ error: "Token expired" });
       } else {
         console.log("Everthing okay");
+        notifyError();
         //   router.push("/forgot-password");
       }
       console.log("FormData from token: ", formData);
     } catch (error) {
+      notifyError();
       console.error("Error submitting form:", error);
     }
   };

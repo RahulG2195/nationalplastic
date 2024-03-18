@@ -58,15 +58,11 @@ export default function TopPick() {
     <section className="top_pick_sec common_section">
       <div className="container">
         <div className="row">
-          <div className="section_header mx-auto text-center">
-            <h2>
-              <span>Top Picks</span> For You
-            </h2>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industrys standard dummy text
-              ever since the 1500s.
+        <div className="text-center mb-5 ">
+            <div className="fs-1 fw-bold text-danger">Top Picks <span className="darkBlue fw-normal">For You</span> </div>
+            <div className="mt-1 fw-medium subCptRes w-50"><p>ILorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
             </p>
+            </div>
           </div>
           <div className="col-12 products_col">
             <div className="row">
@@ -107,14 +103,11 @@ export default function TopPick() {
               >
                 {hometoppics.map((product) => (
                   <div className="col-md-4" key={product.key}>
-                   <SwiperSlide key={product.product_id} >
+                    <SwiperSlide key={product.product_id} >
                       <CatCards
                         image={`/Assets/images/Home-page/${product.image_name}`}
                         title={product.product_name}
-                        categoryType={product.categoryType}
-                        onCategoryChange={() => sendCategory(
-                          product.product_name
-                        )}
+                        url={product.url}
                       />
 
                     </SwiperSlide>
