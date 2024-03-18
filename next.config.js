@@ -2,9 +2,9 @@
 const nextConfig = {
   reactStrictMode: false,
   // output:'export',
-  eslint: {
-      ignoreDuringBuilds: true,
-  },
+  // eslint: {
+  //     ignoreDuringBuilds: true,
+  // },
   // // images:{
   //     unoptimized:true,
   // },

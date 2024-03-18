@@ -5,7 +5,7 @@ export async function GET(request) {
     const parsedUrl = parse(request.url, true);
     const queryParams = parsedUrl.query;
     // const category = queryParams.query.toLowerCase();
-    console.log("44444444444444444444444444444444444444444444",queryParams.query)
+    // console.log("44444444444444444444444444444444444444444444",queryParams.query)
 
     try {
         const products = await query({

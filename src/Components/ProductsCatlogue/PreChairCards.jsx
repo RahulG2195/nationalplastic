@@ -177,6 +177,7 @@ const PreChairsCards = () => {
               item.categoryType.toLowerCase() === categoryType.toLowerCase()
           );
         }
+
         setProducts(filteredData);
 
 
@@ -186,9 +187,9 @@ const PreChairsCards = () => {
 
         // setHasMore(filteredData.length > 0);
       }
-      // else {
-      //   setProducts(filteredData);
-      // }
+      else {
+        setProducts(filteredData);
+      }
 
       setIsLoading(false);
     } catch (error) {
