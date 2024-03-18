@@ -16,7 +16,7 @@ const WishlistPage1 = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://13.234.238.29:3002/api/Wishlist"
+          "http://13.234.238.29:3000/api/Wishlist"
         );
         // const wishlistData = response.data.products;
         const wishlistData = response.data.products.map((item) => {
@@ -48,7 +48,7 @@ const WishlistPage1 = () => {
   const handleDeleteSuccess = async (product_id) => {
     try {
       const response = await axios.delete(
-        `http://13.234.238.29:3002/api/Wishlist`,
+        `http://13.234.238.29:3000/api/Wishlist`,
         { data: { product_id } }
       );
       setWishlistItems((prevItems) =>

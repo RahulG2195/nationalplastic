@@ -35,7 +35,7 @@ const Search = (props) => {
       }
 
       const response = await axios.get(
-        `http://13.234.238.29:3002/api/search?query=${query}&page=${page}`
+        `http://13.234.238.29:3000/api/search?query=${query}&page=${page}`
       );
       const newProducts = response.data.products;
       const all = response.data.allproducts;

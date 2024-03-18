@@ -24,7 +24,7 @@ function AddToCart() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://13.234.238.29:3002/api/Cart"
+          "http://13.234.238.29:3000/api/Cart"
         );
         const cartData = response.data.products;
 
@@ -104,7 +104,7 @@ function AddToCart() {
     try {
       // Fetch updated cart data
       const response = await axios.get(
-        "http://13.234.238.29:3002/api/Cart"
+        "http://13.234.238.29:3000/api/Cart"
       );
       const cartData = response.data.products;
 
@@ -161,7 +161,7 @@ function AddToCart() {
       // console.log("wanted to remove", product_id);
       // Remove the product from the database
       await axios.delete(
-        `http://13.234.238.29:3002/api/Cart`,
+        `http://13.234.238.29:3000/api/Cart`,
         {
           data: { product_id },
         }
