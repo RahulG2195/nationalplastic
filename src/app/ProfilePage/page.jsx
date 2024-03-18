@@ -65,7 +65,7 @@ function ProfilePage() {
         };
 
         const response = await axios.put(
-          "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Users",
+          "http://localhost:3000/api/Users",
           formData
         );
 
@@ -139,7 +139,7 @@ function ProfilePage() {
       };
       // Send updated data to userProfile API
       const response = await axios.post(
-        "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/UserProfile",
+        "http://localhost:3000/api/UserProfile",
         userData
       );
       console.log("userData============", userData);

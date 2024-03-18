@@ -68,7 +68,7 @@ const RecentlyViewed = () => {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Products"
+          "http://localhost:3000/api/Products"
         );
         const filteredproducts = response.data.products.filter(
           (item) => item.categoryType === "premium chairs"
@@ -85,7 +85,7 @@ const RecentlyViewed = () => {
   const fetchWishlistItems = async () => {
     try {
       const response = await axios.get(
-        "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Wishlist"
+        "http://localhost:3000/api/Wishlist"
       );
       setWishlistItems(response.data.Wishlist);
     } catch (error) {
@@ -113,7 +113,7 @@ const RecentlyViewed = () => {
       }
 
       await axios.post(
-        `https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Wishlist`,
+        `http://localhost:3000/api/Wishlist`,
         {
           product_id: product_id,
           ProductName: product_name,

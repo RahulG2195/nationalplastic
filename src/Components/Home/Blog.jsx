@@ -51,7 +51,7 @@ export default function Blog() {
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get(
-        "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Products"
+        "http://localhost:3000/api/Products"
       );
       const filteredData = response.data.products.filter(
         (item) => item.categoryType === "Blog"

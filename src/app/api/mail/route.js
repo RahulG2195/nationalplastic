@@ -9,9 +9,9 @@ export async function POST(request, res) {
     const email = data.get("email");
     const resetToken = data.get("resetToken");
     console.log("Inside MAil ResetToken: ", resetToken);
-    // https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/new-password/1?resetToken=YOUR_TOKEN_VALUE
+    // https://localhost:3000/new-password/1?resetToken=YOUR_TOKEN_VALUE
     const url =
-      "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/new-password/1?resetToken=" +
+      "https://localhost:3000/new-password/1?resetToken=" +
       resetToken;
 
     const transporter = nodemailer.createTransport({

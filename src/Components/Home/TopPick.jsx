@@ -38,7 +38,7 @@ export default function TopPick() {
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get(
-        "https://65f3c3d8ec00e6036ff3d2eb--incandescent-sfogliatella-3ba504.netlify.app/api/Products"
+        "http://localhost:3000/api/Products"
       );
       const filteredData = response.data.products.filter(
         (item) => item.categoryType === "home_top_pics"
@@ -105,7 +105,7 @@ export default function TopPick() {
                   },
                 }}
               >
-                {productArr.map((product) => (
+                {hometoppics.map((product) => (
                   <div className="col-md-4" key={product.key}>
                     <SwiperSlide key={product.key}>
                       <CatCards
