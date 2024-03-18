@@ -2,9 +2,9 @@ import '../../styles/header.css';
 
 function TopBar() {
   return (
-      <div className="row p-3 top_nav">
+      <div className="row p-2 top_nav">
           <div className="col">
-            <p className=''>50+ National Plastic Stores across India. Come, Visit Us!</p>
+            <p className='medium'>50+ National Plastic Stores across India. Come, Visit Us!</p>
           </div>
         </div>
   )

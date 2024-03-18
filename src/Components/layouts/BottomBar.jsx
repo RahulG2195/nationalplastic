@@ -11,8 +11,8 @@ function BottomBar() {
 
 
   return (
-    <div className="row px-4 py-1 d-flex align-items-center bottom_nav position-relative mainrow">
-      <div className="col first ">
+    <div className="row px-4 py-2 d-flex align-items-center bottom_nav position-relative mainrow">
+      <div className="col first">
         <p>Premium Event Chair</p>
         <div className='ulCont mx-4 p-3'>
           <p className='text-start fw-bold dropHeading '>Premium Event Chair</p>
