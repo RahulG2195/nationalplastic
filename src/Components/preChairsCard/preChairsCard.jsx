@@ -12,7 +12,7 @@ const PreChairsCard = (props) => {
     const fetchWishlistItems = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/Wishlist"
+          "http://13.234.238.29:3000/api/Wishlist"
         );
         const wishlistItems = response.data.products.map(
           (product) => product.product_id
