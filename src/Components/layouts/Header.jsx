@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation'
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+// import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import ProductsAccr from '../ProductsAccor/ProductsAccr';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
