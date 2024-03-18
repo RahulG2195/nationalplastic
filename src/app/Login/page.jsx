@@ -74,7 +74,7 @@ function Login() {
       <div className="row Login-Page-ImgForm">
         <div className="col-md-6 login-image">
           <Image
-            src="/assets/images/catalogue/loginPage.png"
+            src="/Assets/images/catalogue/loginPage.png"
             className="img-fluid d-block w-100"
             alt="Team Member"
             width={100}
