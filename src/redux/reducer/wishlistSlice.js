@@ -70,9 +70,14 @@ export const addItemToWishlist = (item) => async (dispatch, getState) => {
 
   const { items } = getState().wishlist; // Access state through the second parameter
 
-  const check = await axios.get(
-    "http://localhost:3000/api/Wishlist"
-  );
+  const userDataString = localStorage.getItem("userData");
+  const userData = JSON.parse(userDataString);
+  const customerId = userData.customer_id;
+
+  const check = await axios.post("http://localhost:3000/api/wishListUser", {
+    customer_id: customerId,
+  });
+
   const isWishlistEmpty =
     !check.data.products || check.data.products.length === 0;
   const isItemAlreadyAdded =
@@ -84,10 +89,18 @@ export const addItemToWishlist = (item) => async (dispatch, getState) => {
   console.log("i want to post ");
   if (isWishlistEmpty || !isItemAlreadyAdded) {
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/Wishlist",
-        item
+      const response = await axios.put(
+        "http://localhost:3000/api/wishListUser",
+        {
+          customer_id: customerId,
+          product_id: item.product_id,
+        }
       );
+      console.log("response from slicer of wishslist: " + response);
+      console.log("response from slicer of wishlist: " + response.data);
+      console.log("response from slicer of wishlist: " + response.message);
+      console.log("response from slicer of wishlist: " + response.status);
+
       dispatch(addToWishlist(item));
       // console.log(item, "this are items ");
       notify();

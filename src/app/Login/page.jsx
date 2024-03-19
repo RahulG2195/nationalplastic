@@ -48,10 +48,7 @@ function Login() {
     }
 
     try {
-      const res = await axios.put(
-        `http://localhost:3000/api/Users`,
-        formData
-      );
+      const res = await axios.put(`http://localhost:3000/api/Users`, formData);
       console.log("this is status ", res.data.status);
       if (res.data.status === 500) {
         setErrorMessage(JSON.stringify(res.data.message));
@@ -59,6 +56,9 @@ function Login() {
         // router.push('/'); // Redirect to home page after successful login
       } else {
         alert("Successfully logged in");
+        // const response = await axios.put("http://localhost:3000/api/Users", formData
+        // );
+
         setLogin(true);
         // push("/");
         dispatch(authSliceReducer(formData));
@@ -141,6 +141,8 @@ function Login() {
                   {login ? (
                     // <Link href="/">Home</Link>
                     router.push("/")
+                    // window.location.reload("/")
+
                   ) : (
                     <Link href="/Login">Login</Link>
                   )}

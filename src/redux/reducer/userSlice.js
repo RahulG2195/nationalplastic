@@ -18,7 +18,7 @@ const createInitialStateFromLocalStorage = () => {
       isLoggedIn: JSON.parse(localStorage.getItem("isLoggedIn")) || false,
       userData: JSON.parse(localStorage.getItem("userData")) || {
         email: "",
-        password: "", // Password should not be persisted
+        customer_id: "", // customer_id should not be persisted
       },
     };
 
@@ -38,7 +38,7 @@ const createInitialStateFromLocalStorage = () => {
       isLoggedIn: false,
       userData: {
         email: "",
-        password: "",
+        customer_id: "",
       },
     };
   }

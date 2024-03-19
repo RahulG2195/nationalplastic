@@ -7,7 +7,7 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 
 function ProfilePage() {
-  const[idd, setIdd] = useState(null)
+  const [idd, setIdd] = useState(null);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -24,8 +24,19 @@ function ProfilePage() {
   const [data, setData] = useState({});
   // const [phone, setPhone] = useState(null);
   const [messages, setMessages] = useState([]);
-  let iid =  messages.length > 0 ? messages[0].customer_id : null;
-  // console.log("ssssssssssssssssssssssss",iid)
+  const cust_id =  messages.length > 0 ? messages[0].customer_id : null;
+  const email_id = messages.length > 0 ? messages[0].Email : null;
+
+  const UpdateData = {
+    email: email_id,
+    customer_id: cust_id
+  };
+  localStorage.setItem("userId", JSON.stringify(UpdateData));
+
+  console.log("UpdateDataaaaaaaaaaaaaaaaaaaaaaaaaaaa", UpdateData)
+
+
+  console.log("ssssssssssssssssssssssss",cust_id , email_id)
   const [editedData, setEditedData] = useState({
     Id: "",
     // Email: "",
@@ -33,11 +44,11 @@ function ProfilePage() {
     Address: "",
   });
 
-// console.log("eeeeeeeeeeeeeeddddddddddiiiiiiiittttttt",iid)
+  // console.log("eeeeeeeeeeeeeeddddddddddiiiiiiiittttttt",cust_id)
   async function handleLogout(e) {
     e.preventDefault();
-    localStorage.clear(); 
-    setMessages(null); 
+    localStorage.clear();
+    setMessages(null);
     window.location.reload();
     toast.success("Logged out", {
       position: "top",
@@ -52,17 +63,17 @@ function ProfilePage() {
   useEffect(() => {
     const isLoggedIn =
       localStorage.getItem("isLoggedIn") === "true" ? true : false;
-    const storedData = JSON.parse(localStorage.getItem("userData")) || {}; 
-// Retrieve data from local storage
-const userDataString = localStorage.getItem('userData');
-// Convert the retrieved data from string to JSON object
-const userDataID = JSON.parse(userDataString); 
-// console.log("ggggggggggggggggggggggggggggggggggggggggggggggggggggggggg g userDataString",JSON.stringify(userDataString)); // Example: Accessing the email property
-// console.log("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg userDataID",JSON.stringify(userDataID.customer_id));  
-// console.log("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg storedData",storedData); 
-// console.log("userDataID....", isLoggedIn);
+    const storedData = JSON.parse(localStorage.getItem("userData")) || {};
+    // Retrieve data from local storage
+    const userDataString = localStorage.getItem("userData");
+    // Convert the retrieved data from string to JSON object
+    const userDataID = JSON.parse(userDataString);
+    // console.log("ggggggggggggggggggggggggggggggggggggggggggggggggggggggggg g userDataString",JSON.stringify(userDataString)); // Example: Accessing the email property
+    // console.log("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg userDataID",JSON.stringify(userDataID.customer_id));
+    // console.log("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg storedData",storedData);
+    // console.log("userDataID....", isLoggedIn);
 
-// Example: Accessing the email property
+    // Example: Accessing the email property
 
     setIsLoggedIn(isLoggedIn);
     setData(storedData);
@@ -82,11 +93,26 @@ const userDataID = JSON.parse(userDataString);
           getProfile: true,
         };
 
-        const response = await axios.put("http://localhost:3000/api/Users", formData
+        const response = await axios.put(
+          "http://localhost:3000/api/Users",
+          formData
         );
-        console.log("After response")
-        console.log(response.data)
-        console.log("JSONDATA "+JSON.stringify(response.data))
+        console.log("After -------------------response");
+        console.log(response.data);
+        console.log("JSONDATA " + JSON.stringify(response.data));
+        const userData = response.data.message[0]; // Directly access response.data.message
+        console.log("JSONDATA " + JSON.stringify(userData));
+        const { customer_id, Email } = userData; // Destructure from userData, not from JSON.stringify
+        // console.log("-", customer_id);
+        // console.log("-", Email);
+        const UpdateData = {
+          email: Email,
+          customer_id: customer_id,
+        };
+        localStorage.setItem("userData", JSON.stringify(UpdateData));
+
+        // Email
+        // localStorage.setItem("userData", true);
 
         const responseData = response.data;
         const messageArray = responseData.message;
@@ -107,7 +133,7 @@ const userDataID = JSON.parse(userDataString);
     setEditedData((prevData) => ({
       ...prevData,
       [name]: value,
-      Id:iid
+      Id:cust_id
   }));
   
     // console.log("name0000000000000/////////////////////////////", editedData);
@@ -158,16 +184,19 @@ const userDataID = JSON.parse(userDataString);
         Address: address,
       };
       // Send updated data to userProfile API
-      console.log("userData======222222222222222======",userData)
-      const response = await axios.post('http://localhost:3000/api/UserProfile',editedData);
+      console.log("userData======222222222222222======", userData);
+      const response = await axios.post(
+        "http://localhost:3000/api/UserProfile",
+        editedData
+      );
 
-      console.log('Form submitted editedData:', editedData );
+      console.log("Form submitted editedData:", editedData);
       // Handle success response
       console.log("Updated data:", response.data);
       toast.success("Data updated successfully");
-      console.log("LIne 165:::")
-      if( response.status == 200){
-        fetchUserData()
+      console.log("LIne 165:::");
+      if (response.status == 200) {
+        fetchUserData();
       }
     } catch (error) {
       // Handle error
@@ -287,12 +316,12 @@ const userDataID = JSON.parse(userDataString);
                         messages.map((message, index) => (
                           <form key={index} onSubmit={handleEdit}>
                             <div className="row user-data">
-                                <input
-                                  type="hidden"
-                                  className="form-control"
-                                  name="Id"
-                                  readOnly
-                                />
+                              <input
+                                type="hidden"
+                                className="form-control"
+                                name="Id"
+                                readOnly
+                              />
 
                               <div className="col">
                                 <label htmlFor="">Name</label>
@@ -320,7 +349,7 @@ const userDataID = JSON.parse(userDataString);
                               <div className="col">
                                 <label htmlFor="">Mobile Number</label>
                                 <input
-                                // name="phone"
+                                  // name="phone"
                                   type="text"
                                   className="form-control"
                                   placeholder={message.Phone}
@@ -331,7 +360,7 @@ const userDataID = JSON.parse(userDataString);
                               <div className="col">
                                 <label htmlFor="">Address</label>
                                 <input
-                                // name="address"
+                                  // name="address"
                                   type="text"
                                   className="form-control"
                                   placeholder={message.Address}
@@ -358,40 +387,40 @@ const userDataID = JSON.parse(userDataString);
                   <hr />
 
                   <div>
-                  {Array.isArray(messages) && messages.length > 0 ? (
-                    messages.map((message, index) => (
-                    <form key={index}>
-                      <div className="row user-data">
-                        <div className="col">
-                          <label htmlFor="">Password</label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Password"
-                          />
-                        </div>
-                        <div className="col">
-                          <label htmlFor="">confirm password</label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            placeholder="confirm password"
-                          />
-                        </div>
-                      </div>
+                    {Array.isArray(messages) && messages.length > 0 ? (
+                      messages.map((message, index) => (
+                        <form key={index}>
+                          <div className="row user-data">
+                            <div className="col">
+                              <label htmlFor="">Password</label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Password"
+                              />
+                            </div>
+                            <div className="col">
+                              <label htmlFor="">confirm password</label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="confirm password"
+                              />
+                            </div>
+                          </div>
 
-                      <div className="form-group row">
-                        <div className="col-sm-10">
-                          <button type="submit" className="btn form-btn">
-                            Update Password
-                          </button>
-                        </div>
-                      </div>
-                    </form>
- ))
- ) : (
-   <div className="text-danger">You are.##############</div>
- )}
+                          <div className="form-group row">
+                            <div className="col-sm-10">
+                              <button type="submit" className="btn form-btn">
+                                Update Password
+                              </button>
+                            </div>
+                          </div>
+                        </form>
+                      ))
+                    ) : (
+                      <div className="text-danger">You are.##############</div>
+                    )}
                   </div>
                 </div>
               </div>
