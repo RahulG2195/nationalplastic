@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation'
 // import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import ProductsAccr from '../ProductsAccor/ProductsAccr';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import { useDispatch } from "react-redux";
 
 
 export default function Header() {
@@ -18,7 +19,7 @@ export default function Header() {
   const [isClicked, setIsClicked] = useState(false); 
   const [count, setCount] = useState(0)
   const router = useRouter();
-
+  const dispatch = useDispatch
   const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
 
 
@@ -27,10 +28,10 @@ export default function Header() {
     const check = await axios.get(
       "http://localhost:3000/api/Cart"
     );
-    const data = check.products 
+    const data = check.data.products.length; 
     console.log("count for the home page is ",data)
-    // setCount(check.length)
-  }, [])
+    setCount(data)
+  }, [dispatch])
 
 
 

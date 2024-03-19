@@ -174,7 +174,7 @@ const PreChairsCards = () => {
           filteredData = filteredData.filter(
             (item) =>
               item.categoryType &&
-              item.categoryType.toLowerCase() === categoryType.toLowerCase()
+              item.categoryType.toLowerCase() == categoryType.toLowerCase()
           );
         }
 
