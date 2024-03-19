@@ -67,9 +67,7 @@ const RecentlyViewed = () => {
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/api/Products"
-        );
+        const response = await axios.get("http://localhost:3000/api/Products");
         const filteredproducts = response.data.products.filter(
           (item) => item.categoryType === "premium chairs"
         );
@@ -84,8 +82,15 @@ const RecentlyViewed = () => {
 
   const fetchWishlistItems = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:3000/api/Wishlist"
+      const userDataString = localStorage.getItem("userData");
+      const userData = JSON.parse(userDataString);
+      const customerId = userData.customer_id;
+
+      const response = await axios.post(
+        "http://localhost:3000/api/wishListUser",
+        {
+          customer_id: customerId,
+        }
       );
       setWishlistItems(response.data.Wishlist);
     } catch (error) {
@@ -112,18 +117,15 @@ const RecentlyViewed = () => {
         return;
       }
 
-      await axios.post(
-        `http://localhost:3000/api/Wishlist`,
-        {
-          product_id: product_id,
-          ProductName: product_name,
-          productDiscription: short_description,
-          Price: price,
-          originalPrice: discount_price,
-          discount: discount,
-          WishlistImg: ChairImg,
-        }
-      );
+      await axios.post(`http://localhost:3000/api/Wishlist`, {
+        product_id: product_id,
+        ProductName: product_name,
+        productDiscription: short_description,
+        Price: price,
+        originalPrice: discount_price,
+        discount: discount,
+        WishlistImg: ChairImg,
+      });
       notify();
       fetchWishlistItems();
     } catch (error) {

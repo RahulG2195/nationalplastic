@@ -11,8 +11,15 @@ const PreChairsCard = (props) => {
   useEffect(() => {
     const fetchWishlistItems = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/api/Wishlist"
+        const userDataString = localStorage.getItem("userData");
+        const userData = JSON.parse(userDataString);
+        const customerId = userData.customer_id;
+
+        const response = await axios.post(
+          "http://localhost:3000/api/wishListUser",
+          {
+            customer_id: customerId,
+          }
         );
         const wishlistItems = response.data.products.map(
           (product) => product.product_id
