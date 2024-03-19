@@ -189,7 +189,7 @@ export const addToCart = (item) => async (dispatch, getState) => {
   console.log("addToCart" + JSON.stringify(item));
 
   const check = await axios.get(
-    "http://13.234.238.29:3000/api/Cart"
+    "http://localhost:3000/api/Cart"
   );
   
   const isCartEmpty = !check.data.products || check.data.products.length === 0;
@@ -202,7 +202,7 @@ export const addToCart = (item) => async (dispatch, getState) => {
   if (isCartEmpty || !isAlreadyInCart) {
     try {
       const response = await axios.post(
-        "http://13.234.238.29:3000/api/Cart",
+        "http://localhost:3000/api/Cart",
         item
       );
       console.log("response From slicer" + response.status);
