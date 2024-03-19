@@ -7,6 +7,8 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 
 function ProfilePage() {
+  const[idd, setIdd] = useState(null)
+
   const [formData, setFormData] = useState({
     email: "",
     phone: "",
@@ -20,18 +22,22 @@ function ProfilePage() {
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [data, setData] = useState({});
-  const [phone, setPhone] = useState(null);
+  // const [phone, setPhone] = useState(null);
   const [messages, setMessages] = useState([]);
+  let iid =  messages.length > 0 ? messages[0].customer_id : null;
+  // console.log("ssssssssssssssssssssssss",iid)
   const [editedData, setEditedData] = useState({
-    Email: "",
+    Id: "",
+    // Email: "",
     Phone: "",
     Address: "",
   });
 
+// console.log("eeeeeeeeeeeeeeddddddddddiiiiiiiittttttt",iid)
   async function handleLogout(e) {
     e.preventDefault();
-    localStorage.clear();
-    setMessages("");
+    localStorage.clear(); 
+    setMessages(null); 
     window.location.reload();
     toast.success("Logged out", {
       position: "top",
@@ -46,7 +52,17 @@ function ProfilePage() {
   useEffect(() => {
     const isLoggedIn =
       localStorage.getItem("isLoggedIn") === "true" ? true : false;
-    const storedData = JSON.parse(localStorage.getItem("userData")) || {};
+    const storedData = JSON.parse(localStorage.getItem("userData")) || {}; 
+// Retrieve data from local storage
+const userDataString = localStorage.getItem('userData');
+// Convert the retrieved data from string to JSON object
+const userDataID = JSON.parse(userDataString); 
+// console.log("ggggggggggggggggggggggggggggggggggggggggggggggggggggggggg g userDataString",JSON.stringify(userDataString)); // Example: Accessing the email property
+// console.log("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg userDataID",JSON.stringify(userDataID.customer_id));  
+// console.log("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg storedData",storedData); 
+// console.log("userDataID....", isLoggedIn);
+
+// Example: Accessing the email property
 
     setIsLoggedIn(isLoggedIn);
     setData(storedData);
@@ -57,17 +73,20 @@ function ProfilePage() {
       try {
         const email = localStorage.getItem("userData");
         const data = JSON.parse(email);
+        // const id = JSON.parse(customer_id);
         const useremail = data.email;
+// console.log("oLIne no 77 from profilePagebject")
 
         const formData = {
           email: useremail,
           getProfile: true,
         };
 
-        const response = await axios.put(
-          "http://localhost:3000/api/Users",
-          formData
+        const response = await axios.put("http://localhost:3000/api/Users", formData
         );
+        console.log("After response")
+        console.log(response.data)
+        console.log("JSONDATA "+JSON.stringify(response.data))
 
         const responseData = response.data;
         const messageArray = responseData.message;
@@ -88,9 +107,10 @@ function ProfilePage() {
     setEditedData((prevData) => ({
       ...prevData,
       [name]: value,
-    }));
-
-    console.log("name0000000000000/////////////////////////////", editedData);
+      Id:iid
+  }));
+  
+    // console.log("name0000000000000/////////////////////////////", editedData);
     let errorMessage = "";
 
     // Validate phone number
@@ -115,7 +135,6 @@ function ProfilePage() {
 
   const handleEdit = async (e) => {
     e.preventDefault();
-    console.log("[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]", editedData);
 
     try {
       // Gather form data from the event target
@@ -124,7 +143,7 @@ function ProfilePage() {
       const email = formData.get("email");
       const phone = formData.get("phone");
       const address = formData.get("address");
-      console.log("email========================", email);
+      // console.log("email========================", email)
       // Validate the form data
       // if (!email || !phone || !address) {
       //   toast.error("Please provide all required information");
@@ -133,20 +152,23 @@ function ProfilePage() {
 
       // Construct the data object to be sent to the API
       const userData = {
+        // Id: id,
         Email: email,
         Phone: phone,
         Address: address,
       };
       // Send updated data to userProfile API
-      const response = await axios.post(
-        "http://localhost:3000/api/UserProfile",
-        userData
-      );
-      console.log("userData============", userData);
-      console.log("Form submitted:", response);
+      console.log("userData======222222222222222======",userData)
+      const response = await axios.post('http://localhost:3000/api/UserProfile',editedData);
+
+      console.log('Form submitted editedData:', editedData );
       // Handle success response
-      // console.log("Updated data:", response.data);
+      console.log("Updated data:", response.data);
       toast.success("Data updated successfully");
+      console.log("LIne 165:::")
+      if( response.status == 200){
+        fetchUserData()
+      }
     } catch (error) {
       // Handle error
       console.error("Error updating data:", error);
@@ -242,7 +264,6 @@ function ProfilePage() {
                 <div className="Right-Profile">
                   <h3>My Account</h3>
                   <hr />
-
                   <div>
                     <div>
                       {/* {Array.isArray(messages) && messages.length > 0 ? (messages.map((message, index) => (
@@ -266,6 +287,13 @@ function ProfilePage() {
                         messages.map((message, index) => (
                           <form key={index} onSubmit={handleEdit}>
                             <div className="row user-data">
+                                <input
+                                  type="hidden"
+                                  className="form-control"
+                                  name="Id"
+                                  readOnly
+                                />
+
                               <div className="col">
                                 <label htmlFor="">Name</label>
                                 <input
@@ -286,12 +314,13 @@ function ProfilePage() {
                                   placeholder={message.Email}
                                   name="Email"
                                   onChange={handleInputChange}
+                                  readOnly
                                 />
                               </div>
                               <div className="col">
                                 <label htmlFor="">Mobile Number</label>
                                 <input
-                                  // name="phone"
+                                // name="phone"
                                   type="text"
                                   className="form-control"
                                   placeholder={message.Phone}
@@ -302,7 +331,7 @@ function ProfilePage() {
                               <div className="col">
                                 <label htmlFor="">Address</label>
                                 <input
-                                  // name="address"
+                                // name="address"
                                   type="text"
                                   className="form-control"
                                   placeholder={message.Address}
@@ -329,7 +358,9 @@ function ProfilePage() {
                   <hr />
 
                   <div>
-                    <form>
+                  {Array.isArray(messages) && messages.length > 0 ? (
+                    messages.map((message, index) => (
+                    <form >
                       <div className="row user-data">
                         <div className="col">
                           <label htmlFor="">Password</label>
@@ -340,11 +371,11 @@ function ProfilePage() {
                           />
                         </div>
                         <div className="col">
-                          <label htmlFor="">Canform Password</label>
+                          <label htmlFor="">confirm password</label>
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Canform Password"
+                            placeholder="confirm password"
                           />
                         </div>
                       </div>
@@ -357,6 +388,10 @@ function ProfilePage() {
                         </div>
                       </div>
                     </form>
+ ))
+ ) : (
+   <div className="text-danger">You are.##############</div>
+ )}
                   </div>
                 </div>
               </div>
