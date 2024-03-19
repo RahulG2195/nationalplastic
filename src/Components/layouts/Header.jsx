@@ -21,6 +21,7 @@ export default function Header() {
   const router = useRouter();
   const dispatch = useDispatch
   const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
+  console.log("AAAAAAAAAAAAAAAAAAAAA",isLoggedIn )
 
 
 
