@@ -5,10 +5,10 @@ function CatCards({ image, title,onCategoryChange,style = "" }) {
 
 const sendCategory = () =>{
   console.log("Category clicked:", title);
-  if (onCategoryChange) {
-    onCategoryChange(title);
-    // localStorage.setItem('category', title);
-  }
+  // if (onCategoryChange) {
+  //   onCategoryChange(title);
+    localStorage.setItem('category', title);
+  // }
 };
 
   return (
