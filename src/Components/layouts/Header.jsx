@@ -21,7 +21,10 @@ export default function Header() {
   const router = useRouter();
   const dispatch = useDispatch
   const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
-  console.log("AAAAAAAAAAAAAAAAAAAAA",isLoggedIn )
+  // console.log("AAAAAAAAAAAAAAAAAAAAA",isLoggedIn )
+
+  const email = localStorage.getItem("userData");
+        const data = JSON.parse(email); 
 
 
 
@@ -163,7 +166,7 @@ export default function Header() {
                   {isLoggedIn ? (
                     <Link className="nav-link position-relative profile" href="/ProfilePage" onClick={isClicked ? handleShow : null} >
                     <img src="/Assets/svg/Group 4.svg" alt="" />
-                    <p className="Homeemail">email@gmail.com</p>
+                    <p className="Homeemail">{data.email}</p>
                     </Link>
                   ) : (
                     <Link className="nav-link" href="/Login" onClick={isClicked ? handleShow : null}>

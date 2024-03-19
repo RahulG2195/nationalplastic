@@ -141,6 +141,8 @@ function Login() {
                   {login ? (
                     // <Link href="/">Home</Link>
                     router.push("/")
+                    // window.location.reload("/")
+
                   ) : (
                     <Link href="/Login">Login</Link>
                   )}

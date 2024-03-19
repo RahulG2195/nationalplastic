@@ -24,8 +24,19 @@ function ProfilePage() {
   const [data, setData] = useState({});
   // const [phone, setPhone] = useState(null);
   const [messages, setMessages] = useState([]);
-  let iid =  messages.length > 0 ? messages[0].customer_id : null;
-  // console.log("ssssssssssssssssssssssss",iid)
+  const cust_id =  messages.length > 0 ? messages[0].customer_id : null;
+  const email_id =  messages.length > 0 ? messages[0].Email : null;
+
+  const UpdateData = {
+    email: email_id,
+    customer_id: cust_id
+  };
+  localStorage.setItem("userId", JSON.stringify(UpdateData));
+
+  console.log("UpdateDataaaaaaaaaaaaaaaaaaaaaaaaaaaa", UpdateData)
+
+
+  console.log("ssssssssssssssssssssssss",cust_id , email_id)
   const [editedData, setEditedData] = useState({
     Id: "",
     // Email: "",
@@ -33,7 +44,7 @@ function ProfilePage() {
     Address: "",
   });
 
-// console.log("eeeeeeeeeeeeeeddddddddddiiiiiiiittttttt",iid)
+// console.log("eeeeeeeeeeeeeeddddddddddiiiiiiiittttttt",cust_id)
   async function handleLogout(e) {
     e.preventDefault();
     localStorage.clear(); 
@@ -56,14 +67,9 @@ function ProfilePage() {
 // Retrieve data from local storage
 const userDataString = localStorage.getItem('userData');
 // Convert the retrieved data from string to JSON object
-const userDataID = JSON.parse(userDataString); 
-// console.log("ggggggggggggggggggggggggggggggggggggggggggggggggggggggggg g userDataString",JSON.stringify(userDataString)); // Example: Accessing the email property
-// console.log("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg userDataID",JSON.stringify(userDataID.customer_id));  
-// console.log("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg storedData",storedData); 
+const userDataID = JSON.parse(userDataString);  
 // console.log("userDataID....", isLoggedIn);
-
 // Example: Accessing the email property
-
     setIsLoggedIn(isLoggedIn);
     setData(storedData);
   }, []);
@@ -75,13 +81,10 @@ const userDataID = JSON.parse(userDataString);
         const data = JSON.parse(email);
         // const id = JSON.parse(customer_id);
         const useremail = data.email;
-// console.log("oLIne no 77 from profilePagebject")
-
         const formData = {
           email: useremail,
           getProfile: true,
         };
-
         const response = await axios.put("http://localhost:3000/api/Users", formData
         );
         console.log("After response")
@@ -107,7 +110,7 @@ const userDataID = JSON.parse(userDataString);
     setEditedData((prevData) => ({
       ...prevData,
       [name]: value,
-      Id:iid
+      Id:cust_id
   }));
   
     // console.log("name0000000000000/////////////////////////////", editedData);
