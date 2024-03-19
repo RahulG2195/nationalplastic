@@ -8,7 +8,7 @@ export async function GET(request) {
     });
 
     const productIds = mycart.map((row) => row.product_id);
-
+    console.log("productIds------", productIds);
     // Fetch product details for the retrieved product IDs
     const products = await query({
       query: `SELECT * FROM products WHERE product_id IN (${productIds.join(
