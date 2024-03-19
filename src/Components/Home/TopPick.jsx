@@ -60,7 +60,7 @@ export default function TopPick() {
         <div className="row">
         <div className="text-center mb-5 ">
             <div className="fs-1 fw-bold text-danger">Top Picks <span className="darkBlue fw-normal">For You</span> </div>
-            <div className="mt-1 fw-medium subCptRes w-50"><p>ILorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+            <div className="mt-1 fw-medium subCptRes w-50"><p>ILorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,
             </p>
             </div>
           </div>

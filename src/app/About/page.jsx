@@ -147,7 +147,7 @@ function About() {
         <div className="row section_header section_header_Certificates">
           <h2> Awards & <span>Certificates</span>
           </h2>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,</p>
         </div>
         <div className="row team-members">
           {certificatesarr.map((val) => (
