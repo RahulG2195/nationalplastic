@@ -28,7 +28,9 @@ export default function Header() {
     const check = await axios.get(
       "http://localhost:3000/api/Cart"
     );
-    setCount(check.length)
+    const data = check.products 
+    console.log("count for the home page is ",data)
+    // setCount(check.length)
   }, [])
 
 

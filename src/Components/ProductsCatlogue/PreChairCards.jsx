@@ -177,6 +177,7 @@ const PreChairsCards = () => {
               item.categoryType.toLowerCase() === categoryType.toLowerCase()
           );
         }
+
         setProducts(filteredData);
 
 
