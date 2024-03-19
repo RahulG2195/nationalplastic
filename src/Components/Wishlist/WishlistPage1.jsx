@@ -13,12 +13,24 @@ const WishlistPage1 = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const userDataString = localStorage.getItem("userData");
+    const userData = JSON.parse(userDataString);
+    const customerId = userData.customer_id;
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/api/Wishlist"
+        const response = await axios.post(
+          "http://localhost:3000/api/wishListUser",
+          { customer_id: customerId }
         );
         // const wishlistData = response.data.products;
+        console.log(
+          "response from wishlistpage after useEffect ",
+          response.data
+        );
+        console.log(
+          "response from wishlistpage after useEffect ",
+          response.data.products
+        );
         const wishlistData = response.data.products.map((item) => {
           // Calculate discount percentage
           const discountPercentage =
@@ -47,10 +59,29 @@ const WishlistPage1 = () => {
 
   const handleDeleteSuccess = async (product_id) => {
     try {
+      const userDataString = localStorage.getItem("userData");
+      const userData = JSON.parse(userDataString);
+      // const product_id = await JSON.parse(product_id);
+      console.log("product_id: " + product_id);
+      console.log("product_id: " + typeof product_id);
+
+      const customerId = userData.customer_id;
+      const formData = new FormData();
+      formData.append("customer_id", customerId);
+      formData.append("product_id", product_id);
+      console.log("YYYYYYYYYYYYYYYYYYYYYYYyy" + formData);
+      for (const entry of formData.entries()) {
+        console.log("Entryyyyyyyyy" + entry);
+      }
       const response = await axios.delete(
-        `http://localhost:3000/api/Wishlist`,
-        { data: { product_id } }
+        "http://localhost:3000/api/wishListUser",
+        { data: formData }
       );
+
+      console.log(response);
+      console.log(response.data);
+      console.log(response.body);
+
       setWishlistItems((prevItems) =>
         prevItems.filter((item) => item.product_id !== product_id)
       );

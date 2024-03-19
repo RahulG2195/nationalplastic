@@ -63,7 +63,6 @@ export async function POST(request) {
     const { firstName, lastName, email, phone, address, password } =
       await request.json();
 
-
     // Check if the email already exists in the database
     const existingUser = await query({
       query: "SELECT * FROM Customer WHERE Email = ?",
