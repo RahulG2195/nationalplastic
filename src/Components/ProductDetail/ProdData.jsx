@@ -17,6 +17,7 @@ import { addToCart } from "@/redux/reducer/cartSlice";
 // import { Message } from "@mui/icons-material";
 // import Breadcrump from "@/app/Breadcromp/page";
 // import RecentlyViewed from "../ProductsCatlogue/RecentlyViewed";
+import { useParams } from "next/navigation";
 
 function ProdData() {
   const [data, setData] = useState([]);
@@ -26,12 +27,16 @@ function ProdData() {
   const [filteredData, setFilteredData] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const dispatch = useDispatch();
+  const router = useParams();
+  const id = router.productId
+  console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",id)
 
   useEffect(() => {
     const fetchData = async () => {
+
       try {
-        const storedId = localStorage.getItem("myId");
-        const productName = localStorage.getItem("productName");
+        const storedId =id;
+        const productName = id;
         setProductId(storedId);
 
         const response = await axios.get(

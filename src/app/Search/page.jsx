@@ -63,9 +63,9 @@ const Search = (props) => {
     }
   };
 
-  const setid = (id) => {
-    localStorage.setItem("myId", id);
-  };
+//   const setid = (id) => {
+//     localStorage.setItem("myId", id);
+//   };
 
   const handleAddToCart = (id) => {
     dispatch(
@@ -99,8 +99,8 @@ const Search = (props) => {
           <div key={product.id} className="col">
             <div className="preCont cards p-1 position-relative">
               <Link
-                onClick={() => setid(product.product_id)}
-                href={`/ProductDetail`}
+                // onClick={() => setid(product.product_id)}
+                href={`/ProductDetail/${product.product_id}`}
               >
                 <div className="card-header">
                   <img
@@ -114,8 +114,8 @@ const Search = (props) => {
                 <div className="PreFoot mt-2 ">
                   <div className="class d-flex justify-content-between my-2 ">
                     <Link
-                      onClick={() => setid(product.product_id)}
-                      href="/ProductDetail"
+                    //   onClick={() => setid(product.product_id)}
+                      href={`/ProductDetail/${product.product_id}`}
                     >
                       <div className="left fw-bold text-danger">
                         {product.product_name}
@@ -176,7 +176,7 @@ const Search = (props) => {
         dataLength={products.length}
         next={() => setPage(page + 1)}
         hasMore={hasMore}
-        loader={<h4>Loading...</h4>}
+        // loader={<h4>Loading...</h4>}
         endMessage={<p>No more products to load</p>}
       />
     </>
