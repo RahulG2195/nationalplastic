@@ -1,12 +1,22 @@
+"use client"
+import { useEffect, useState } from 'react'
 import './BottomBar.css'
 import './BottomBar.module.css'
 import Link from 'next/link'
 
 function BottomBar() {
+const [name , setName] = useState('')
+// const[prdctDetail ,SetprdctDetail] = useState()
+
+useEffect(() => {
+  console.log("nameenamee", name)
+ 
+}, [name])
 
   const handleonClick = (e) => {
-    console.log("this product is clicked", e.target.text)
-    localStorage.setItem('productName', e.target.text);
+    const title = e.target.text
+    setName(e.target.innerText);
+    // SetprdctDetail(`/ProductDetail/${name}`)
   }
 
 
@@ -19,15 +29,15 @@ function BottomBar() {
           <div className='d-flex gap-5'>
             <div className='d-flex gap-5 scroll p-3'>
               <div>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">karen</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">ICE, GLASS </Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">GHOST CHAIR </Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Peral, Crown, Marble</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Kia, Karen, Karnival</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Shagun</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Vivha, Shamiyana, Bada Shagun</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Leon , Cambridge</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Harrier</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>karen</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>ICE, GLASS </Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>GHOST CHAIR </Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Peral, Crown, Marble</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Kia, Karen, Karnival</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Shagun</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Vivha, Shamiyana, Bada Shagun</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Leon , Cambridge</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Harrier</Link></p>
               </div>
             </div>
             <div className='barImgCont'>
@@ -46,12 +56,12 @@ function BottomBar() {
           <div className='d-flex gap-5'>
             <div className='d-flex gap-5 scroll p-3'>
               <div>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Alto</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">ReAlto</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Vista</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Apollo / Volvo / Vento</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">UNO from Silvassa</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Seltos</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Alto</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>ReAlto</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Vista</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Apollo / Volvo / Vento</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>UNO from Silvassa</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Seltos</Link></p>
               </div>
 
             </div>
@@ -70,31 +80,31 @@ function BottomBar() {
           <div className='d-flex gap-5'>
             <div className='d-flex gap-5 scroll p-3'>
               <div>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Victoria</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Orca</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">The Boss</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">STAR /QUEEN</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Rover</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Ferrari .S.</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Magna, Saab</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Relax</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Victoria</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Orca</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>The Boss</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>STAR /QUEEN</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Rover</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Ferrari .S.</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Magna, Saab</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Relax</Link></p>
               </div>
               <div>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Solace</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Altis</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Atlantis</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Bentley</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">BOSS</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Storm, Phantom</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Thunder, Wonder, Aspire, Thunder</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Leisure</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Solace</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Altis</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Atlantis</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Bentley</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>BOSS</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Storm, Phantom</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Thunder, Wonder, Aspire, Thunder</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Leisure</Link></p>
               </div>
               <div>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Spinex</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Hector</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Merc</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Milano, Linea</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Omega</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Spinex</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Hector</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Merc</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Milano, Linea</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Omega</Link></p>
               </div>
 
             </div>
@@ -113,16 +123,16 @@ function BottomBar() {
           <div className='d-flex gap-5'>
             <div className='d-flex gap-5 scroll p-3'>
               <div>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Delhi, Agra, Shimla, Jaisalmer</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Ajanta</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Florish</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Cretaa</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Galaxy</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Pune </Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Delhi, Agra, Shimla, Jaisalmer</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Ajanta</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Florish</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Cretaa</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Galaxy</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Pune </Link></p>
               </div>
 
               <div>
-                <p><Link className="nav-link" href="/ProductDetail">GETZ/ BEST/ZEST</Link></p>
+                <p><Link className="nav-link" href={`/ProductDetail/${name}`}>GETZ/ BEST/ZEST</Link></p>
               </div>
 
             </div>
@@ -142,11 +152,11 @@ function BottomBar() {
           <div className='d-flex gap-5'>
             <div className='d-flex gap-5 scroll p-3'>
               <div>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Planet Small</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Planet Big</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Planet Power Small</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Planet Power Medium</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Planet Power Big</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Planet Small</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Planet Big</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Planet Power Small</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Planet Power Medium</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Planet Power Big</Link></p>
               </div>
 
             </div>
@@ -167,13 +177,13 @@ function BottomBar() {
           <div className='d-flex gap-5'>
             <div className='d-flex scroll p-3'>
               <div>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Flora, Wave, Poo</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Yoyo rocker</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Bubbly</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Sleeper/Dolphin</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Polo</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Babylon</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Beatle With Tray</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Flora, Wave, Poo</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Yoyo rocker</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Bubbly</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Sleeper/Dolphin</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Polo</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Babylon</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Beatle With Tray</Link></p>
               </div>
 
             </div>
@@ -191,20 +201,20 @@ function BottomBar() {
           <div className='d-flex gap-3'>
             <div className='d-flex gap-3 scroll p-3'>
               <div>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Cheeta</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Jaguar</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Puma</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Tiger</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Matisse</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Sigma Steppe Stool</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Hippo</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Panda Stool</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Cheeta</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Jaguar</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Puma</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Tiger</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Matisse</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Sigma Steppe Stool</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Hippo</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Panda Stool</Link></p>
               </div>
 
               <div>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Otter Stool</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Decor Panda Stool</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Decor Otter Stool</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Otter Stool</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Decor Panda Stool</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Decor Otter Stool</Link></p>
               </div>
             </div>
             <div className='barImgCont'>
@@ -222,21 +232,21 @@ function BottomBar() {
           <div className='d-flex gap-3'>
             <div className='d-flex gap-3 scroll p-3'>
               <div>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Jaipur Dinning</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Party Round</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Patiala Centre Trolley</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Rajkot Centre Trolley</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Spectra</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Regal</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Jaipur RoMa Dinning</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Party Round RoMa</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Jaipur Dinning</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Party Round</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Patiala Centre Trolley</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Rajkot Centre Trolley</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Spectra</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Regal</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Jaipur RoMa Dinning</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Party Round RoMa</Link></p>
               </div>
 
               <div>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Java Centre Table</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">JODHPUR (ROUND FOLDING)</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">UDAIPUR (RECTANGULAR)</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Rave Center Table</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Java Centre Table</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>JODHPUR (ROUND FOLDING)</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>UDAIPUR (RECTANGULAR)</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Rave Center Table</Link></p>
               </div>
 
             </div>
@@ -255,13 +265,13 @@ function BottomBar() {
           <div className='d-flex gap-3'>
             <div className='d-flex gap1 scroll p-3'>
               <div>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Tote Box 15 Ltrs Without Wheels</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Tote Box 15 Ltrs With Wheels</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Tote Box 35 Ltrs Without Wheels</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Tote Box 35 Ltrs With Wheels</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Tote Box 60 Ltrs Without Wheels</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Tote Box 60 Ltrs With Wheels</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Under the bed-40 ltr</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Tote Box 15 Ltrs Without Wheels</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Tote Box 15 Ltrs With Wheels</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Tote Box 35 Ltrs Without Wheels</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Tote Box 35 Ltrs With Wheels</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Tote Box 60 Ltrs Without Wheels</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Tote Box 60 Ltrs With Wheels</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Under the bed-40 ltr</Link></p>
               </div>
             </div>
             <div className='barImgCont'>
@@ -278,15 +288,15 @@ function BottomBar() {
           <div className='d-flex gap-3'>
             <div className='d-flex gap-1 scroll p-3'>
               <div>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Drawer 3 Tier 130</Link></p>
-                <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Drawer 3 Tier 190</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Drawer 3 Tier 130</Link></p>
+                <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Drawer 3 Tier 190</Link></p>
                 <div className="drawerHover">
                   <p className="drawer250">Drawer 3 Tier 250</p>
                   <div className="innerUlCont">
                     <p className='text-start fw-bold dropHeading '>Inner Dropdown</p>
-                    <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Option 1</Link></p>
-                    <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Option 2</Link></p>
-                    <p><Link onClick={handleonClick} className="nav-link" href="/ProductDetail">Option 3</Link></p>
+                    <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Option 1</Link></p>
+                    <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Option 2</Link></p>
+                    <p><Link onClickCapture={handleonClick} className="nav-link" href={`/ProductDetail/${name}`}>Option 3</Link></p>
                   </div>
                 </div>
               </div>
