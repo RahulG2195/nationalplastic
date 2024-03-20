@@ -89,6 +89,10 @@ export async function PUT(request) {
         try {
           // const { product_id, customer_id } = await request.json();
           // const user_id = customer_id;
+          // console.log("quantity", typeof quantity);
+          console.log("user_id", typeof user_id);
+          console.log("product_id", typeof product_id);
+
           console.log("userid and pass", product_id, customer_id);
           const insertResult = await query({
             query:
@@ -152,6 +156,46 @@ export async function DELETE(request) {
         status: 500,
         data: error.message,
       })
+    );
+  }
+}
+
+export async function PATCH(request) {
+  try {
+    const { customer_id, product_id, quantity } = await request.json();
+    const user_id = customer_id; // Assuming customer_id is the same as user_id
+    console.log("quantity", typeof quantity);
+    console.log("user_id", typeof user_id);
+    console.log("product_id", typeof product_id);
+
+    const updateResult = await query({
+      query:
+        "UPDATE mycart SET quantity = quantity + ? WHERE product_id = ? AND user_id = ?",
+      values: [quantity, product_id, user_id],
+    });
+    console.log("-", updateResult);
+
+    if (updateResult.affectedRows === 1) {
+      return new Response(
+        JSON.stringify({ message: "Product quantity updated successfully" }),
+        { status: 200 }
+      );
+    } else if (updateResult.affectedRows === 0) {
+      return new Response(
+        JSON.stringify({ message: "User or product not found" }),
+        { status: 404 }
+      );
+    } else {
+      return new Response(
+        JSON.stringify({ message: "Failed to update product quantity" }),
+        { status: 500 }
+      );
+    }
+  } catch (error) {
+    console.error(error);
+    return new Response(
+      JSON.stringify({ message: "Error updating product quantity" }),
+      { status: 500 }
     );
   }
 }
