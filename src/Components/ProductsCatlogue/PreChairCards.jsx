@@ -132,9 +132,7 @@ const PreChairsCards = () => {
       const categoryTitle = localStorage.getItem("category");
       setCategoryType(categoryTitle);
 
-      const response = await axios.get(
-        `http://localhost:3000/api/Products`
-      );
+      const response = await axios.get(`http://localhost:3000/api/Products`);
       console.log("API Response:", response.data); // Log API response
 
       const fetchedData = response.data;
@@ -180,14 +178,12 @@ const PreChairsCards = () => {
 
         setProducts(filteredData);
 
-
         // if (page === 1) {
         //   setlength(filteredData);
-        // } 
+        // }
 
         // setHasMore(filteredData.length > 0);
-      }
-      else {
+      } else {
         setProducts(filteredData);
       }
 
@@ -299,7 +295,10 @@ const PreChairsCards = () => {
           > */}
           <div className="row">
             {products.map((product) => (
-              <div key={product.product_id} className="PreCardSm col-6 col-sm-6 col-xs-4 col-md-6 col-lg-3">
+              <div
+                key={product.product_id}
+                className="PreCardSm col-6 col-sm-6 col-xs-4 col-md-6 col-lg-3"
+              >
                 <PreChairsCard
                   ChairImg={`/Assets/images/New-launches-1/${product.image_name}`}
                   id={product.product_id}
@@ -307,8 +306,14 @@ const PreChairsCards = () => {
                   Discription={product.short_description}
                   Price={product.price}
                   orignalPrice={product.discount_price}
-                  Discount={Math.floor((product.discount_price - product.price) / product.discount_price * 100)}
-                  onaddToWishlist={() => handleAddToWishlist(product.product_id)}
+                  Discount={Math.floor(
+                    ((product.discount_price - product.price) /
+                      product.discount_price) *
+                      100
+                  )}
+                  onaddToWishlist={() =>
+                    handleAddToWishlist(product.product_id)
+                  }
                   onAddToCart={() => handleMoveToCart(product.product_id)}
                 />
               </div>
