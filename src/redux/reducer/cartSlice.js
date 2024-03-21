@@ -127,8 +127,11 @@ export const cartSlice = createSlice({
         localStorage.setItem("products", JSON.stringify(state.products));
       }
     },
-    increaseQuantity: (state, action) => {
+    increaseQuantity: async (state, action) => {
       const { product_id } = action.payload;
+      const userDataString = localStorage.getItem("userData");
+      const userData = JSON.parse(userDataString);
+      const customerId = userData.customer_id;
       console.log("increase quantit" + product_id);
       // Find the existing product in the cart
       const existingProduct = state.products.find(
@@ -148,15 +151,27 @@ export const cartSlice = createSlice({
         // Update total__price if necessary
         state.total_price += parseFloat(existingProduct.price);
         state.discount_price += parseFloat(existingProduct.discount_price);
-
         // Notify user about the increase
         // notifyinfo(); // Call info notification
+        const response = await axios.patch(
+          "http://localhost:3000/api/UserCart",
+          {
+            customer_id: customerId,
+            product_id: product_id,
+            quantity: 1,
+          }
+        );
+        console.log("response---------------------------------", response);
         localStorage.setItem("products", JSON.stringify(state.products));
       }
     },
-    decreaseQuantity: (state, action) => {
+    decreaseQuantity: async (state, action) => {
       const { product_id } = action.payload;
       console.log("increase quantit" + product_id);
+      const userDataString = localStorage.getItem("userData");
+      b;
+      const userData = JSON.parse(userDataString);
+      const customerId = userData.customer_id;
       // Find the existing product in the cart
       const existingProduct = state.products.find(
         (product) => product.product_id === product_id
@@ -177,6 +192,14 @@ export const cartSlice = createSlice({
         state.discount_price -= parseFloat(existingProduct.discount_price);
         // Notify user about the increase
         // notifyinfo(); // Call info notification
+        const response = await axios.patch(
+          "http://localhost:3000/api/UserCart",
+          {
+            customer_id: customerId,
+            product_id: product_id,
+            quantity: -1,
+          }
+        );
         localStorage.setItem("products", JSON.stringify(state.products));
       }
     },

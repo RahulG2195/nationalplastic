@@ -49,6 +49,7 @@ function AddToCart() {
             image_name: item.image_name,
             description: item.short_description,
             InstallationCharges: item.InstallationCharges,
+            quantity: item.cart_quantity,
           }),
           []
         );
@@ -56,10 +57,13 @@ function AddToCart() {
         products.forEach((product) => {
           console.log("products forEach: " + product.product_id);
           console.log("products forEach: " + product.price);
+          console.log("products forEach: " + JSON.stringify(product));
+          // console.log("products forEach: " + product.cart_ quantity);
+
           dispatch(
             addItemToCart({
               product_id: product.product_id,
-              quantity: 1, // Explicitly set quantity to 1
+              quantity: product.quantity, // Explicitly set quantity to 1
               price: product.price,
               discount_price: product.discount_price,
             })
@@ -127,6 +131,7 @@ function AddToCart() {
         image_name: item.image_name,
         description: item.short_description,
         InstallationCharges: item.InstallationCharges,
+        quantity: item.cart_quantity,
       }));
 
       // Calculate total price, discount, total payable, and installation charges
@@ -274,6 +279,7 @@ function AddToCart() {
                               100
                           )}
                           installationCharges={val.InstallationCharges}
+                          quantity={val.quantity}
                           onRemoveSuccess={() =>
                             onRemoveSuccess(val.product_id)
                           }

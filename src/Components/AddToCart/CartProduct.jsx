@@ -22,8 +22,9 @@ const CartProduct = ({
   installationCharges,
   productId,
   onRemoveSuccess,
+  quantity,
 }) => {
-  const [initialCount, setInitialCount] = useState(1);
+  const [initialCount, setInitialCount] = useState(quantity);
   // Set initial count to 1 by default
   // const dispatch = useDispatch();
 
