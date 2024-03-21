@@ -8,7 +8,7 @@ import {
   A11y,
 } from "swiper/modules";
 import "swiper/swiper-bundle.css";
-// import PreChairsCard from "../PreChairsCard/PreChairsCard.jsx";
+import PreChairsCard from "../PreChairsCard/PreChairsCard.jsx";
 import Image from "next/image";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -200,9 +200,9 @@ const RecentlyViewed = () => {
         >
           {RecentlyViewedData.map((chair) => (
             <SwiperSlide key={chair.product_id}>
-              {/* <PreChairsCard
+              <PreChairsCard
                 ChairImg={`/Assets/images/New-launches-1/${chair.image_name}`}
-                id={chair.product_id}
+                id={chair.seo_url}
                 Title={chair.product_name}
                 Discription={chair.short_description}
                 Price={chair.price}
@@ -220,7 +220,7 @@ const RecentlyViewed = () => {
                   )
                 }
                 onAddToCart={() => handleMoveToCart(chair.product_id)}
-              /> */}
+              />
             </SwiperSlide>
           ))}
         </Swiper>

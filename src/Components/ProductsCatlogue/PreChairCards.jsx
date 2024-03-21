@@ -302,7 +302,7 @@ const PreChairsCards = () => {
               >
                 <PreChairsCard
                   ChairImg={`/Assets/images/New-launches-1/${product.image_name}`}
-                  id={product.product_id}
+                  id={product.seo_url}
                   Title={product.product_name}
                   Discription={product.short_description}
                   Price={product.price}

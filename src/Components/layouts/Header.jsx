@@ -24,25 +24,16 @@ export default function Header() {
   console.log("AAAAAAAAAAAAAAAAAAAAA", isLoggedIn);
 
   useEffect(async () => {
-    const check = await axios.get(
-      "http://localhost:3000/api/Cart"
+    const check = await axios.post(
+      "http://localhost:3000/api/UserCart"
     );
-<<<<<<< HEAD
-    // const data = check.data.products.length; 
-    // console.log("count for the home page is ",data)
-    // setCount(data)
-=======
     if (data > 0) {
       // const data = check.data.products.length;
     const data = check.data.products.length; 
     console.log("count for the home page is ",data)
     setCount(data)
     }
->>>>>>> 1c2eafe3156bf35118e08379776dabd8a6e9c883
   }, [dispatch])
-
-
-
 
   const handleSearchChange = async (e) => {
     setSearchTerm(e.target.value);
