@@ -22,8 +22,9 @@ const CartProduct = ({
   installationCharges,
   productId,
   onRemoveSuccess,
+  quantity,
 }) => {
-  const [initialCount, setInitialCount] = useState(1);
+  const [initialCount, setInitialCount] = useState(quantity);
   // Set initial count to 1 by default
   // const dispatch = useDispatch();
 
@@ -54,8 +55,12 @@ const CartProduct = ({
 
   const handleRemove = async () => {
     try {
-      dispatch(removeItemFromCart({ product_id: productId }));
-      onRemoveSuccess(productId);
+      dispatch(
+        removeItemFromCart({
+          product_id: productId,
+        })
+      );
+      // onRemoveSuccess(productId);
     } catch (error) {
       alert("Cannot delete");
       console.log(error);

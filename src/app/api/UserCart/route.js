@@ -15,10 +15,13 @@ export async function POST(request) {
     console.log("productIds------", productIds);
     // Fetch product details for the retrieved product IDs
     const products = await query({
-      query: `SELECT * FROM products WHERE product_id IN (${productIds.join(
-        ","
-      )})`,
-      values: [],
+      query: `
+          SELECT p.*, mc.quantity AS cart_quantity
+          FROM products p
+          LEFT JOIN mycart mc ON p.product_id = mc.product_id AND mc.user_id = ?
+          WHERE p.product_id IN (${productIds.join(",")})
+      `,
+      values: [user_id],
     });
 
     return new Response(
@@ -133,7 +136,7 @@ export async function PUT(request) {
 }
 
 export async function DELETE(request) {
-  console.log("first");
+  // console.log("first");
   try {
     const { product_id, customer_id } = await request.json();
     const user_id = customer_id; // Log received product_id
