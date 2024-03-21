@@ -21,10 +21,16 @@ function AddToCart() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const userDataString = localStorage.getItem("userData");
+    const userData = JSON.parse(userDataString);
+    const customerId = userData.customer_id;
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/api/Cart"
+        const response = await axios.post(
+          "http://localhost:3000/api/UserCart",
+          {
+            customer_id: customerId,
+          }
         );
         const cartData = response.data.products;
 
@@ -103,8 +109,12 @@ function AddToCart() {
   const handleCartChange = async () => {
     try {
       // Fetch updated cart data
+      const userDataString = localStorage.getItem("userData");
+      const userData = JSON.parse(userDataString);
+      const customerId = userData.customer_id;
       const response = await axios.get(
-        "http://localhost:3000/api/Cart"
+        "http://localhost:3000/api/UserCart",
+        customerId
       );
       const cartData = response.data.products;
 
@@ -160,12 +170,13 @@ function AddToCart() {
     try {
       // console.log("wanted to remove", product_id);
       // Remove the product from the database
-      await axios.delete(
-        `http://localhost:3000/api/Cart`,
-        {
-          data: { product_id },
-        }
-      );
+      const userDataString = localStorage.getItem("userData");
+      const userData = JSON.parse(userDataString);
+      const customerId = userData.customer_id;
+      await axios.delete(`http://localhost:3000/api/UserCart`, {
+        product_id: product_id,
+        customerId: customerId,
+      });
 
       // If all products are removed, update the state to reflect empty cart
       if (productDetailArr.length === 1) {

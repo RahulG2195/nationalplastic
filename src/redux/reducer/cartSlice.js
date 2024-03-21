@@ -89,8 +89,16 @@ export const cartSlice = createSlice({
         state.total_price += parseFloat(price) * quantity; // Update total price
       }
     },
-    removeItemFromCart: (state, action) => {
+    removeItemFromCart: async (state, action) => {
       const { product_id } = action.payload;
+      const userDataString = localStorage.getItem("userData");
+      const userData = JSON.parse(userDataString);
+      const customerId = userData.customer_id;
+      const response = await axios.put("http://localhost:3000/api/UserCart", {
+        customer_id: customerId,
+        product_id: product_id,
+      });
+      console.log("Delete Rsponse " + response);
 
       // Find the index of the product to be removed
       const productIndex = state.products.findIndex(
@@ -186,43 +194,18 @@ export const {
 export const addToCart = (item) => async (dispatch, getState) => {
   const { initialCount, items } = getState().wishlist; // Access state through the second parameter
   console.log("addToCart" + JSON.stringify(item));
-  console.log("addToCart" + JSON.stringify(item));
-
-  const check = await axios.get(
-    "http://localhost:3000/api/Cart"
-  );
-  
-  const isCartEmpty = !check.data.products || check.data.products.length === 0;
-  const isAlreadyInCart =
-    !isCartEmpty &&
-    check.data.products.some(
-      (cartItem) => cartItem.product_id == item.product_id
-    );
-
-  if (isCartEmpty || !isAlreadyInCart) {
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/api/Cart",
-        item
-      );
-      console.log("response From slicer" + response.status);
-      console.log("response From slicer" + response.data);
-      console.log("response From slicer" + response.body);
-
-      notify();
-
-      dispatch(addItemToCart(item));
-
-      // console.log(item, "this are items ");
-    } catch (error) {
-      console.error("Error adding to cart:", error);
-    }
-  } else {
-    notifyinfo();
-
-    dispatch(increaseQuantity(initialCount + 1)); // Dispatching the setInitialCount action with the updated count
-    console.log(initialCount);
-  }
+  const userDataString = localStorage.getItem("userData");
+  const userData = JSON.parse(userDataString);
+  const customerId = userData.customer_id;
+  const response = await axios.put("http://localhost:3000/api/UserCart", {
+    customer_id: customerId,
+    product_id: item.product_id,
+  });
+  console.log("response From slicer" + response.status);
+  console.log("response From slicer" + response.data);
+  console.log("response From slicer" + response.body);
+  notify();
+  dispatch(addItemToCart(item));
 };
 
 export default cartSlice.reducer;
