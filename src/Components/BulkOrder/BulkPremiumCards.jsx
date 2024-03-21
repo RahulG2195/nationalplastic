@@ -1,4 +1,4 @@
-import PreChairsCard from "../PreChairsCard/PreChairsCard.jsx";
+import PreChairsCard from "@/Components/preChairsCard/preChairsCard.jsx";
 
 const BulkPremiumCards = () => {
   const chairData = [
