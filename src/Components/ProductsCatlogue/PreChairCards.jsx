@@ -133,7 +133,7 @@ const PreChairsCards = () => {
       setCategoryType(categoryTitle);
 
       const response = await axios.get(
-        `http://localhost:3000/api/ProductsCat?query=${categoryTitle}`
+        `http://13.234.238.29:3000/api/ProductsCat?query=${categoryTitle}`
       );
       console.log("API Response:", response.data); // Log API response
 
@@ -302,7 +302,7 @@ const PreChairsCards = () => {
               >
                 <PreChairsCard
                   ChairImg={`/Assets/images/New-launches-1/${product.image_name}`}
-                  id={product.product_id}
+                  id={product.seo_url}
                   Title={product.product_name}
                   Discription={product.short_description}
                   Price={product.price}

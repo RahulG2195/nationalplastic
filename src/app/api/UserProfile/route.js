@@ -4,7 +4,7 @@ export async function GET(request) {
 
     try {
         const users = await query({
-            query: "SELECT * FROM Customer",
+            query: "SELECT * FROM customer",
             values: [],
         });
 
@@ -24,7 +24,7 @@ export async function POST(request) {
     try {
     const {Id, Phone, Address} = await request.json();
     const result = await query({
-        query: "UPDATE Customer SET Phone = ?, Address = ? WHERE customer_id = ?;",
+        query: "UPDATE customer SET Phone = ?, Address = ? WHERE customer_id = ?;",
         values: [Phone, Address, Id]
     });
 

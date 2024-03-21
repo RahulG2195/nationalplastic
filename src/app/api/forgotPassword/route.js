@@ -6,7 +6,7 @@ export async function POST(request) {
   const data = await request.formData();
   const email = data.get("email");
   const existingUser = await query({
-    query: "SELECT * FROM Customer WHERE email = ?",
+    query: "SELECT * FROM customer WHERE email = ?",
     values: [email],
   });
   if (existingUser.length > 0) {
@@ -27,7 +27,7 @@ export async function PUT(request) {
 
   try {
     const result = await query({
-      query: "UPDATE Customer SET Password = ?  WHERE Email = ?;",
+      query: "UPDATE customer SET Password = ?  WHERE Email = ?;",
       values: [Password, resetEmail],
     });
     console.log("FROM TRY catch" + result);

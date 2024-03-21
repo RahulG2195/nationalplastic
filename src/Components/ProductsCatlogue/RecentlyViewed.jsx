@@ -8,7 +8,7 @@ import {
   A11y,
 } from "swiper/modules";
 import "swiper/swiper-bundle.css";
-// import PreChairsCard from "../PreChairsCard/PreChairsCard.jsx";
+import PreChairsCard from "@/Components/preChairsCard/preChairsCard.jsx";
 import Image from "next/image";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -67,7 +67,7 @@ const RecentlyViewed = () => {
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/Products");
+        const response = await axios.get("http://13.234.238.29:3000/api/Products");
         const filteredproducts = response.data.products.filter(
           (item) => item.categoryType === "premium chairs"
         );
@@ -87,7 +87,7 @@ const RecentlyViewed = () => {
       const customerId = userData.customer_id;
 
       const response = await axios.post(
-        "http://localhost:3000/api/wishListUser",
+        "http://13.234.238.29:3000/api/wishListUser",
         {
           customer_id: customerId,
         }
@@ -117,7 +117,7 @@ const RecentlyViewed = () => {
         return;
       }
 
-      await axios.post(`http://localhost:3000/api/Wishlist`, {
+      await axios.post(`http://13.234.238.29:3000/api/Wishlist`, {
         product_id: product_id,
         ProductName: product_name,
         productDiscription: short_description,
@@ -200,9 +200,9 @@ const RecentlyViewed = () => {
         >
           {RecentlyViewedData.map((chair) => (
             <SwiperSlide key={chair.product_id}>
-              {/* <PreChairsCard
+              <PreChairsCard
                 ChairImg={`/Assets/images/New-launches-1/${chair.image_name}`}
-                id={chair.product_id}
+                id={chair.seo_url}
                 Title={chair.product_name}
                 Discription={chair.short_description}
                 Price={chair.price}
@@ -220,7 +220,7 @@ const RecentlyViewed = () => {
                   )
                 }
                 onAddToCart={() => handleMoveToCart(chair.product_id)}
-              /> */}
+              />
             </SwiperSlide>
           ))}
         </Swiper>

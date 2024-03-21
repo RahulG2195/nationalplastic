@@ -35,7 +35,7 @@ function BottomBar() {
     const fetchData = async () => {
       try {
 
-        const res = await axios.get("http://localhost:3000/api/Products");
+        const res = await axios.get("http://13.234.238.29:3000/api/Products");
         const allproducts = res.data.products
         setPreEventChair(allproducts.filter(products => products.category_id == 13));
         setWithoutArm(allproducts.filter(products => products.category_id == 14));
