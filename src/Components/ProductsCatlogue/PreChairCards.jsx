@@ -132,7 +132,9 @@ const PreChairsCards = () => {
       const categoryTitle = localStorage.getItem("category");
       setCategoryType(categoryTitle);
 
-      const response = await axios.get(`http://localhost:3000/api/Products`);
+      const response = await axios.get(
+        `http://localhost:3000/api/ProductsCat?query=${categoryTitle}`
+      );
       console.log("API Response:", response.data); // Log API response
 
       const fetchedData = response.data;
@@ -275,7 +277,6 @@ const PreChairsCards = () => {
           </div>
         </div>
       </div>
-
       {isLoading ? (
         <center className="spinner">
           <DotLoader color={"#36D7B7"} loading={isLoading} />

@@ -49,15 +49,16 @@ function ProdData() {
 
         const response = await axios.get("http://localhost:3000/api/Products");
         let filteredData = [];
-        if (productName) {
+        // if (productName) {
+        //   filteredData = response.data.products.filter(
+        //     (item) =>
+        //       item.product_name.toLowerCase() === productName.toLowerCase()
+        //   );
+        //   localStorage.clear();
+        // }
+          if (storedId || productName ) {
           filteredData = response.data.products.filter(
-            (item) =>
-              item.product_name.toLowerCase() === productName.toLowerCase()
-          );
-          localStorage.clear();
-        } else if (storedId) {
-          filteredData = response.data.products.filter(
-            (item) => item.product_id == storedId
+            (item) => item.product_id == storedId || item.seo_url.toLowerCase() === productName.toLowerCase()
           );
         }
         if (filteredData.length === 0) {

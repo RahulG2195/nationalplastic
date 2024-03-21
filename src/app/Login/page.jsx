@@ -1,14 +1,15 @@
 "use client";
-import { useState } from "react";
+// import { useState } from "react";
 import axios from "axios";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 // import { useNavigate } from 'next/router'; // Import useRouter from 'next/router'
 // import { useRouter } from 'next/router';
 import "../../styles/profilepage.css";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import { authSliceReducer } from "@/redux/reducer/userSlice";
+import { setUserData } from "@/redux/reducer/userSlice";
 // import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -19,7 +20,7 @@ function Login() {
   const router = useRouter(); // Use useRouter on the client-side only
   // const navigate =useNavigate();
   // const router = useRouter();
-
+  
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -48,26 +49,43 @@ function Login() {
     }
 
     try {
+      // console.log("formDataaaaaaa++++++++++",formData)
       const res = await axios.put(`http://localhost:3000/api/Users`, formData);
-      console.log("this is status ", res.data.status);
+      // console.log("formDataaaaaaa++++++++++ formData.email on login page",formData.email)
+      // console.log("this is statussssssssssssssssss  login page", res.data);
+      // console.log("this is statussssssssssssssssss  login page", res.data.email);
+      const userData = res.data.message[0];
+      // console.log(" login page userData res",userData) // Directly access response.data.message
+      const {customer_id} = userData; 
+      // console.log("csID",customer_id)
+
       if (res.data.status === 500) {
         setErrorMessage(JSON.stringify(res.data.message));
         alert("Failed to loggedin");
         // router.push('/'); // Redirect to home page after successful login
       } else {
         alert("Successfully logged in");
+        
         // const response = await axios.put("http://localhost:3000/api/Users", formData
         // );
 
         setLogin(true);
+        // let cust_id2 = await getUserId(formData.email)
         // push("/");
-        dispatch(authSliceReducer(formData));
+        dispatch(setUserData({
+          email: formData.email,
+        customer_id: customer_id
+        }));
       }
     } catch (error) {
       console.error("Error during login:", error);
       setErrorMessage("An error occurred during login. Please try again.");
     }
   };
+
+
+
+  
 
   return (
     <div className="container">
@@ -140,7 +158,8 @@ function Login() {
 
                   {login ? (
                     // <Link href="/">Home</Link>
-                    router.push("/")
+                    // router.push("/"),
+                    window.location.href="/"
                     // window.location.reload("/")
 
                   ) : (
