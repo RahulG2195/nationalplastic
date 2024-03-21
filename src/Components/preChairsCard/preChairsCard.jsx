@@ -33,9 +33,9 @@ const PreChairsCard = (props) => {
     fetchWishlistItems();
   }, [props.id, inWishlist]);
 
-  const setid = () => {
-    localStorage.setItem("myId", props.id);
-  };
+  // const setid = () => {
+  //   localStorage.setItem("myId", props.id);
+  // };
 
   const handleAddToCart = () => {
     props.onAddToCart(props.id);
@@ -49,7 +49,7 @@ const PreChairsCard = (props) => {
   return (
     <>
       <div className="preCont cards mt-3 p-1 position-relative  my-4 ">
-        <Link onClick={setid} href={`/ProductDetail`}>
+        <Link href={`/ProductDetail/${props.id}`}>
           {/* <Link href={`/ProductDetail?id=${props.id}`}> */}
 
           <div className="card-header">
@@ -59,7 +59,7 @@ const PreChairsCard = (props) => {
         <div className="card-body">
           <div className="PreFoot mt-2 ">
             <div className="class d-flex flex-wrap justify-content-between my-2 ">
-              <Link onClick={setid} href="/ProductDetail">
+              <Link  href={`/ProductDetail/${props.id}`}>
                 <div className="left fw-bold text-danger">{props.Title}</div>
               </Link>
               <div className="right">
