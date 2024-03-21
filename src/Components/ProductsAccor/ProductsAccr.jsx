@@ -108,7 +108,7 @@ const ProductsAccr = ({handleShow}) => {
                   <div>
                     {categoryItem.products.map((product, subIndex) => (
                       <p key={subIndex}>
-                        <Link className="nav-link" href="/ProductDetail" 
+                        <Link className="nav-link" href={`/ProductDetail/${product.seo_url}`} 
                          onClick={() => { handleOnClick(product); handleShow(); }}>{product}</Link>
                       </p>
                     ))}
