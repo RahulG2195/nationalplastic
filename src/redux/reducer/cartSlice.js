@@ -93,13 +93,15 @@ export const cartSlice = createSlice({
       const { product_id } = action.payload;
       const userDataString = localStorage.getItem("userData");
       const userData = JSON.parse(userDataString);
-      const customerId = userData.customer_id;
-      const response = await axios.put("http://localhost:3000/api/UserCart", {
-        customer_id: customerId,
-        product_id: product_id,
-      });
-      console.log("Delete Rsponse " + response);
-
+      const customer_id = userData.customer_id;
+      const response = await axios.delete(
+        "http://localhost:3000/api/UserCart",
+        {
+          customer_id: customer_id,
+          product_id: product_id,
+        }
+      );
+      console.log("Delete Response " + JSON.stringify(response));
       // Find the index of the product to be removed
       const productIndex = state.products.findIndex(
         (product) => product.product_id === product_id

@@ -136,7 +136,7 @@ export async function PUT(request) {
 }
 
 export async function DELETE(request) {
-  console.log("first");
+  // console.log("first");
   try {
     const { product_id, customer_id } = await request.json();
     const user_id = customer_id; // Log received product_id

@@ -26,22 +26,28 @@ function ProdData() {
   // const [productName, setProductName] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [count, setCount] = useState(1);
+
   const dispatch = useDispatch();
   const router = useParams();
-  const id = router.productId
-  console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",id)
+  const id = router.productId;
+  console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr", id);
+  const increment = () => {
+    setCount(count + 1);
+  };
+
+  const decrement = () => {
+    setCount(count - 1);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
-
       try {
-        const storedId =id;
+        const storedId = id;
         const productName = id;
         setProductId(storedId);
 
-        const response = await axios.get(
-          "http://localhost:3000/api/Products"
-        );
+        const response = await axios.get("http://localhost:3000/api/Products");
         let filteredData = [];
         if (productName) {
           filteredData = response.data.products.filter(
@@ -188,14 +194,18 @@ function ProdData() {
               <div className="product-count">
                 <label htmlFor="size">Quantity</label>
                 <form action="#" className="display-flex">
-                  <div className="qtyminus">-</div>
+                  <button onClick={decrement} className="qtyminus">
+                    -
+                  </button>
                   <input
                     type="text"
                     name="quantity"
-                    defaultValue={1}
+                    defaultValue={count}
                     className="qty"
                   />
-                  <div className="qtyplus">+</div>
+                  <button onClick={increment} className="qtyplus">
+                    +
+                  </button>
                 </form>
                 <p
                   onClick={() => handleMoveToCart(productId)}

@@ -55,8 +55,12 @@ const CartProduct = ({
 
   const handleRemove = async () => {
     try {
-      dispatch(removeItemFromCart({ product_id: productId }));
-      onRemoveSuccess(productId);
+      dispatch(
+        removeItemFromCart({
+          product_id: productId,
+        })
+      );
+      // onRemoveSuccess(productId);
     } catch (error) {
       alert("Cannot delete");
       console.log(error);
