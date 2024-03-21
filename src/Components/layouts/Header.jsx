@@ -201,7 +201,7 @@ export default function Header() {
                       onClick={isClicked ? handleShow : null}
                     >
                       <img src="/Assets/svg/Group 4.svg" alt="" />
-                      <p className="Homeemail">email@gmail.com</p>
+                      <p className="Homeemail">{data.email}</p>
                     </Link>
                   ) : (
                     <Link
