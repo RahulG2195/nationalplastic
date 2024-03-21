@@ -14,7 +14,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request) {
   try {
     const users = await query({
-      query: "SELECT * FROM Customer",
+      query: "SELECT * FROM customer",
       values: [],
     });
 
@@ -65,7 +65,7 @@ export async function POST(request) {
 
     // Check if the email already exists in the database
     const existingUser = await query({
-      query: "SELECT * FROM Customer WHERE Email = ?",
+      query: "SELECT * FROM customer WHERE Email = ?",
       values: [email],
     });
 
@@ -79,7 +79,7 @@ export async function POST(request) {
     // Execute database query to insert new user
     const result = await query({
       query:
-        "INSERT INTO Customer (FirstName, LasttName, Email, Phone, Address, Password) VALUES (?, ?, ?, ?, ?, ?)",
+        "INSERT INTO customer (FirstName, LasttName, Email, Phone, Address, Password) VALUES (?, ?, ?, ?, ?, ?)",
       values: [firstName, lastName, email, phone, address, password],
     });
 
@@ -118,7 +118,7 @@ export async function PUT(request) {
     console.log(email);
     // Check if the email already exists in the database
     const existingUser = await query({
-      query: "SELECT * FROM Customer WHERE email = ?",
+      query: "SELECT * FROM customer WHERE email = ?",
       values: [email],
     });
     console.log("existingUser:", existingUser);

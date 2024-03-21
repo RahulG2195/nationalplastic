@@ -3,7 +3,7 @@ import { query } from "@/lib/db";
 export async function GET(request) {
     try {
         const bulkOrderForm = await query({
-            query: "SELECT * FROM BulkOrderForm",
+            query: "SELECT * FROM bulkorderform",
             values: [],
         });
 
@@ -35,7 +35,7 @@ export async function POST(request) {
 
         // Execute database query
         const updateBulkOrderForm = await query({
-            query: "INSERT INTO BulkOrderForm (fullName, Email, ProductName, Mobile, Requirements, City) VALUES (?, ?, ?, ?, ?, ?)",
+            query: "INSERT INTO bulkorderform (fullName, Email, ProductName, Mobile, Requirements, City) VALUES (?, ?, ?, ?, ?, ?)",
             values: [fullName, Email, ProductName, Mobile, Requirements, city],
         });
 
@@ -78,7 +78,7 @@ export async function PUT(request) {
 
         // Execute database query
         const updateBulkOrderForm = await query({
-            query: "UPDATE BulkOrderForm SET fullName = ?, Email = ?, ProductName = ?, Mobile = ?, Requirements = ?, City = ? WHERE id = ?",
+            query: "UPDATE bulkorderform SET fullName = ?, Email = ?, ProductName = ?, Mobile = ?, Requirements = ?, City = ? WHERE id = ?",
             values: [fullName, Email, ProductName, Mobile, Requirements, city, id],
         });
 
@@ -113,7 +113,7 @@ export async function DELETE(request) {
 
         // Execute database query
         const deleteBulkOrderForm = await query({
-            query: "DELETE FROM BulkOrderForm WHERE id = ?",
+            query: "DELETE FROM bulkorderform WHERE id = ?",
             values: [id],
         });
 
