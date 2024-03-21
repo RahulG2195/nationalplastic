@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 
 
 export default function Header() {
+  
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isClicked, setIsClicked] = useState(false); 
@@ -32,10 +33,14 @@ export default function Header() {
     const check = await axios.get(
       "http://localhost:3000/api/Cart"
     );
+    if (data > 0) {
+      // const data = check.data.products.length;
     const data = check.data.products.length; 
     console.log("count for the home page is ",data)
     setCount(data)
+    }
   }, [dispatch])
+
 
 
 

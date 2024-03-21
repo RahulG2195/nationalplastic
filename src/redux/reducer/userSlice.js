@@ -1,82 +1,32 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { toast } from "react-hot-toast";
-import axios from "axios";
+import { createSlice} from '@reduxjs/toolkit';
+// import axios from "axios";
+// import "react-toastify/dist/ReactToastify.css";
 
-const createLocalStorageIfNeeded = (key, value) => {
-  if (typeof window !== "undefined" && localStorage !== null) {
-    try {
-      localStorage.setItem(key, JSON.stringify(value));
-    } catch (error) {
-      // console.error("Error creating local storage:", error);
-    }
-  }
-};
+export const userSlice = createSlice({
+  name: 'userData',
+  initialState:{
+  isLoggedIn: false,
+  email:"",
+  customer_id:"",
+  },
 
-const createInitialStateFromLocalStorage = () => {
-  try {
-    const initialState = {
-      isLoggedIn: JSON.parse(localStorage.getItem("isLoggedIn")) || false,
-      userData: JSON.parse(localStorage.getItem("userData")) || {
-        email: "",
-        customer_id: "", // customer_id should not be persisted
-      },
-    };
+  reducers: {
+    setUserData: (state, action)=> {
 
-    // Create local storage if not found
-    if (
-      !localStorage.getItem("isLoggedIn") ||
-      !localStorage.getItem("userData")
-    ) {
-      createLocalStorageIfNeeded("isLoggedIn", false);
-      createLocalStorageIfNeeded("userData", initialState.userData);
-    }
-
-    return initialState;
-  } catch (error) {
-    // console.error("Error retrieving initial state from local storage:", error);
-    return {
-      isLoggedIn: false,
-      userData: {
-        email: "",
-        customer_id: "",
-      },
-    };
-  }
-};
-
-const initialState = createInitialStateFromLocalStorage();
-
-// ... rest of your code
-export const authSliceReducer = createAsyncThunk(
-  "/auth/login",
-  async (data) => {
-    if (typeof window !== "undefined") {
-      try {
-        localStorage.setItem("userData", JSON.stringify(data));
-        localStorage.setItem("isLoggedIn", true);
-
-        return data;
-      } catch (error) {
-        toast.error(error?.response?.data?.message);
-        throw error;
-      }
-    }
-  }
-);
-
-const authSlice = createSlice({
-  name: "auth",
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(authSliceReducer.fulfilled, (state, action) => {
-      localStorage.setItem("userData", JSON.stringify(data));
-      localStorage.setItem("isLoggedIn", true);
-      state.isLoggedIn = true;
-      // console.log("state.isLoggedIn"+ state.isLoggedIn)
-      state.userData = action.meta.arg;
-    });
+      action.payload.email
+      // console.log("stateeeeeeeeeeee");
+      // console.log("actionnnnnnnnnnn", action);
+      // console.log("actionnnnnnnnnnn action.payload", action.payload);
+      state.isLoggedIn= true
+      state.email = action.payload.email
+      state.customer_id = action.payload.customer_id
+      localStorage.setItem("userData",JSON.stringify(action.payload))
+      localStorage.setItem("isLoggedIn",true)
+      // alert();
+    },
   },
 });
+// });
+export const { setUserData } = userSlice.actions;
 
-export default authSlice.reducer;
+export default userSlice.reducer;

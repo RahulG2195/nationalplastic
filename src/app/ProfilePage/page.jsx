@@ -5,10 +5,31 @@ import Wishlist from "../Wishlist/page";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import axios from "axios";
+import { useRouter } from 'next/router';
+
 
 function ProfilePage() {
-  const [idd, setIdd] = useState(null);
+  
+  useEffect(() => {
+  localStorage.getItem("isLoggedIn") === "true" ? true : window.location.href = 'Login'
+    const isLoggedIn =
+      localStorage.getItem("isLoggedIn") === "true" ? true : window.location.href = 'Login'
+    
+      // console.log("isLoggedIn+++++", isLoggedIn)
+    const storedData = JSON.parse(localStorage.getItem("userData")) || {};
+    // Retrieve data from local storage
+    const userDataString = localStorage.getItem("userData");
+    // Convert the retrieved data from string to JSON object
+    const userDataID = JSON.parse(userDataString);
+    // console.log("userDataID....", isLoggedIn);
 
+    // Example: Accessing the email property
+
+    // setIsLoggedIn(isLoggedIn);
+    setData(storedData);
+  }, []);
+
+  const [idd, setIdd] = useState(null);
   const [formData, setFormData] = useState({
     email: "",
     phone: "",
@@ -20,12 +41,13 @@ function ProfilePage() {
     phone: "",
     address: "",
   });
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [data, setData] = useState({});
   // const [phone, setPhone] = useState(null);
   const [messages, setMessages] = useState([]);
   const cust_id =  messages.length > 0 ? messages[0].customer_id : null;
   const email_id = messages.length > 0 ? messages[0].Email : null;
+  // console.log(" messages.length=========", messages.length)
 
   const UpdateData = {
     email: email_id,
@@ -33,10 +55,11 @@ function ProfilePage() {
   };
   localStorage.setItem("userId", JSON.stringify(UpdateData));
 
-  console.log("UpdateDataaaaaaaaaaaaaaaaaaaaaaaaaaaa", UpdateData)
+  // console.log("UpdateDataaaaaaaaaaaaaaaaaaaaaaaaaaaa Profile page", UpdateData)
 
 
-  console.log("ssssssssssssssssssssssss",cust_id , email_id)
+  // console.log("ssssssssssssssssssssssss",cust_id , email_id)
+
   const [editedData, setEditedData] = useState({
     Id: "",
     // Email: "",
@@ -45,39 +68,6 @@ function ProfilePage() {
   });
 
   // console.log("eeeeeeeeeeeeeeddddddddddiiiiiiiittttttt",cust_id)
-  async function handleLogout(e) {
-    e.preventDefault();
-    localStorage.clear();
-    setMessages(null);
-    window.location.reload();
-    toast.success("Logged out", {
-      position: "top",
-    });
-
-    // Update state variables to reflect logged out state
-    setIsLoggedIn(false);
-    setData({}); // Clear user data
-    setPhone(null); // Clear phone number
-  }
-
-  useEffect(() => {
-    const isLoggedIn =
-      localStorage.getItem("isLoggedIn") === "true" ? true : false;
-    const storedData = JSON.parse(localStorage.getItem("userData")) || {};
-    // Retrieve data from local storage
-    const userDataString = localStorage.getItem("userData");
-    // Convert the retrieved data from string to JSON object
-    const userDataID = JSON.parse(userDataString);
-    // console.log("ggggggggggggggggggggggggggggggggggggggggggggggggggggggggg g userDataString",JSON.stringify(userDataString)); // Example: Accessing the email property
-    // console.log("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg userDataID",JSON.stringify(userDataID.customer_id));
-    // console.log("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg storedData",storedData);
-    // console.log("userDataID....", isLoggedIn);
-
-    // Example: Accessing the email property
-
-    setIsLoggedIn(isLoggedIn);
-    setData(storedData);
-  }, []);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -97,11 +87,11 @@ function ProfilePage() {
           "http://localhost:3000/api/Users",
           formData
         );
-        console.log("After -------------------response");
-        console.log(response.data);
-        console.log("JSONDATA " + JSON.stringify(response.data));
+        // console.log("After -------------------response on profile page", formData);
+        // console.log(response.data);
+        // console.log("JSONDATA " + JSON.stringify(response.data));
         const userData = response.data.message[0]; // Directly access response.data.message
-        console.log("JSONDATA " + JSON.stringify(userData));
+        // console.log("JSONDATA " + JSON.stringify(userData));
         const { customer_id, Email } = userData; // Destructure from userData, not from JSON.stringify
         // console.log("-", customer_id);
         // console.log("-", Email);
@@ -165,7 +155,7 @@ function ProfilePage() {
     try {
       // Gather form data from the event target
       const formData = new FormData(e.target);
-      console.log(".........formData", formData);
+      // console.log(".........formData", formData);
       const email = formData.get("email");
       const phone = formData.get("phone");
       const address = formData.get("address");
@@ -184,17 +174,17 @@ function ProfilePage() {
         Address: address,
       };
       // Send updated data to userProfile API
-      console.log("userData======222222222222222======", userData);
+      // console.log("userData======222222222222222======", userData);
       const response = await axios.post(
         "http://localhost:3000/api/UserProfile",
         editedData
       );
 
-      console.log("Form submitted editedData:", editedData);
+      // console.log("Form submitted editedData:", editedData);
       // Handle success response
-      console.log("Updated data:", response.data);
+      // console.log("Updated data:", response.data);
       toast.success("Data updated successfully");
-      console.log("LIne 165:::");
+      // console.log("LIne 165:::");
       if (response.status == 200) {
         fetchUserData();
       }
@@ -204,6 +194,24 @@ function ProfilePage() {
       toast.error("Error updating data. Please try again.");
     }
   };
+
+  async function handleLogout(e) {
+    e.preventDefault();
+  
+    // Confirmation prompt (optional, can be replaced with a custom component)
+    if (window.confirm("Are you sure you want to log out?")) {
+      // Clear localStorage (remove `isLoggedIn` key only for better control)
+      localStorage.removeItem('isLoggedIn');
+  
+      // Update state variables
+      // setIsLoggedIn(false);
+      setData({}); // Clear user data
+  
+      // Redirect after logout (optional)
+      // router.push('/login'); // Use Next.js router for navigation
+      window.location.href = '/'
+    }
+  }
 
   return (
     <>
@@ -312,7 +320,7 @@ function ProfilePage() {
                       )
                     } */}
 
-                      {Array.isArray(messages) && messages.length > 0 ? (
+                      {Array.isArray(messages) || messages.length > 0 && messages != null ? (
                         messages.map((message, index) => (
                           <form key={index} onSubmit={handleEdit}>
                             <div className="row user-data">
@@ -387,7 +395,7 @@ function ProfilePage() {
                   <hr />
 
                   <div>
-                    {Array.isArray(messages) && messages.length > 0 ? (
+                    {(Array.isArray(messages) && messages.length > 0 || messages !== null) ? (
                       messages.map((message, index) => (
                         <form key={index}>
                           <div className="row user-data">
