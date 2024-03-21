@@ -198,9 +198,9 @@ const RecentlyViewed = () => {
             },
           }}
         >
-          {/* {RecentlyViewedData.map((chair) => (
+          {RecentlyViewedData.map((chair) => (
             <SwiperSlide key={chair.product_id}>
-              <PreChairsCard
+              {/* <PreChairsCard
                 ChairImg={`/Assets/images/New-launches-1/${chair.image_name}`}
                 id={chair.product_id}
                 Title={chair.product_name}
@@ -220,9 +220,9 @@ const RecentlyViewed = () => {
                   )
                 }
                 onAddToCart={() => handleMoveToCart(chair.product_id)}
-              />
+              /> */}
             </SwiperSlide>
-          ))} */}
+          ))}
         </Swiper>
       </div>
     </>
