@@ -22,24 +22,22 @@ const CartProduct = ({
   installationCharges,
   productId,
   onRemoveSuccess,
+  quantity,
 }) => {
-  const [initialCount, setInitialCount] = useState(1);
+  const [initialCount, setInitialCount] = useState(quantity);
   // Set initial count to 1 by default
   // const dispatch = useDispatch();
 
-  const handleIncrement = () => {
+  const handleIncrement = async () => {
+    await dispatch(increaseQuantity({ product_id: productId }));
     setInitialCount(initialCount + 1);
-    dispatch(increaseQuantity({ product_id: productId }));
-    const data = localStorage.getItem("products");
-    console.log("LOcalSTorage has these data: " + JSON.stringify(data));
   };
-  const handleDecrement = () => {
+  const handleDecrement = async () => {
     if (initialCount > 0) {
-      setInitialCount(initialCount - 1);
-      dispatch(decreaseQuantity({ product_id: productId }));
+      await dispatch(decreaseQuantity({ product_id: productId }));
+      setInitialCount(initialCount - 1); // Decrement by 1
     }
   };
-
   const dispatch = useDispatch();
 
   const handleAddtoWishlist = (product_id) => {
@@ -54,8 +52,12 @@ const CartProduct = ({
 
   const handleRemove = async () => {
     try {
-      dispatch(removeItemFromCart({ product_id: productId }));
-      onRemoveSuccess(productId);
+      dispatch(
+        removeItemFromCart({
+          product_id: productId,
+        })
+      );
+      // onRemoveSuccess(productId);
     } catch (error) {
       alert("Cannot delete");
       console.log(error);

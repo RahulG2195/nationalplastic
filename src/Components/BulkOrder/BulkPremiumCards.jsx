@@ -1,4 +1,4 @@
-// import PreChairsCard from "../PreChairsCard/PreChairsCard.jsx";
+import PreChairsCard from "@/Components/preChairsCard/preChairsCard.jsx";
 
 const BulkPremiumCards = () => {
   const chairData = [
@@ -109,14 +109,15 @@ const BulkPremiumCards = () => {
               key={index}
               className="PreCardSm col-6 col-sm-6 col-xs-4 col-md-6 col-lg-3"
             >
-              {/* <PreChairsCard
+              <PreChairsCard
+               id={chair.seo_url}
                 ChairImg={chair.ChairImg}
                 Title={chair.Title}
                 Discription={chair.Discription}
                 Price={chair.Price}
                 orignalPrice={chair.orignalPrice}
                 Discount={chair.Discount}
-              /> */}
+              />
             </div>
           ))}
         </div>

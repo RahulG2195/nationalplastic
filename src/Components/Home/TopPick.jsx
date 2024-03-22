@@ -12,33 +12,33 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import axios from "axios";
 export default function TopPick() {
-  const productArr = [
-    {
-      key: 1,
-      image: "/Assets/images/Home-page/1st-section-kids-chair.jpg",
-      title: "Event Chairs",
-      url: "#",
-    },
-    {
-      key: 2,
-      image: "/Assets/images/Home-page/1st-section-kids-chair.jpg",
-      title: "Premium Chairs",
-      url: "#",
-    },
-    {
-      key: 3,
-      image: "/Assets/images/Home-page/1st-section-kids-chair.jpg",
-      title: "Kids Chairs",
-      url: "#",
-    },
-  ];
+  // const productArr = [
+  //   {
+  //     key: 1,
+  //     image: "/Assets/images/Home-page/1st-section-kids-chair.jpg",
+  //     title: "Event Chairs",
+  //     url: "#",
+  //   },
+  //   {
+  //     key: 2,
+  //     image: "/Assets/images/Home-page/1st-section-kids-chair.jpg",
+  //     title: "Premium Chairs",
+  //     url: "#",
+  //   },
+  //   {
+  //     key: 3,
+  //     image: "/Assets/images/Home-page/1st-section-kids-chair.jpg",
+  //     title: "Kids Chairs",
+  //     url: "#",
+  //   },
+  // ];
 
   const [hometoppics, setHometoppics] = useState([]);
 
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get(
-        "http://localhost:3000/api/Products"
+        "http://13.234.238.29:3000/api/Products"
       );
       const filteredData = response.data.products.filter(
         (item) => item.categoryType === "home_top_pics"

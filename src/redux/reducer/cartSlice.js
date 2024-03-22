@@ -93,13 +93,15 @@ export const cartSlice = createSlice({
       const { product_id } = action.payload;
       const userDataString = localStorage.getItem("userData");
       const userData = JSON.parse(userDataString);
-      const customerId = userData.customer_id;
-      const response = await axios.put("http://localhost:3000/api/UserCart", {
-        customer_id: customerId,
-        product_id: product_id,
-      });
-      console.log("Delete Rsponse " + response);
-
+      const customer_id = userData.customer_id;
+      const response = await axios.delete(
+        "http://13.234.238.29:3000/api/UserCart",
+        {
+          customer_id: customer_id,
+          product_id: product_id,
+        }
+      );
+      console.log("Delete Response " + JSON.stringify(response));
       // Find the index of the product to be removed
       const productIndex = state.products.findIndex(
         (product) => product.product_id === product_id
@@ -129,56 +131,110 @@ export const cartSlice = createSlice({
     },
     increaseQuantity: (state, action) => {
       const { product_id } = action.payload;
-      console.log("increase quantit" + product_id);
+
       // Find the existing product in the cart
-      const existingProduct = state.products.find(
+      const existingProductIndex = state.products.findIndex(
         (product) => product.product_id === product_id
       );
-      if (existingProduct) {
+
+      if (existingProductIndex !== -1) {
+        const existingProduct = state.products[existingProductIndex];
+
         console.log("Its should be coming anyways " + existingProduct.quantity);
         console.log(
           "Its should be coming anyways " + JSON.stringify(existingProduct)
         );
-        // If product exists, increase its quantity
-        existingProduct.quantity += 1;
-        console.log("After Updates " + JSON.stringify(state.products));
-        console.log(
-          "After Updates  " + JSON.stringify(existingProduct.quantity)
-        );
-        // Update total__price if necessary
-        state.total_price += parseFloat(existingProduct.price);
-        state.discount_price += parseFloat(existingProduct.discount_price);
 
-        // Notify user about the increase
-        // notifyinfo(); // Call info notification
-        localStorage.setItem("products", JSON.stringify(state.products));
+        // Create a new product object with updated quantity
+        const updatedProduct = {
+          ...existingProduct, // Spread operator to copy existing product properties
+          quantity: existingProduct.quantity + 1,
+        };
+
+        // Update the state with the new product object
+        const newState = {
+          ...state,
+          products: [
+            ...state.products.slice(0, existingProductIndex),
+            updatedProduct,
+            ...state.products.slice(existingProductIndex + 1),
+          ],
+          total_price: state.total_price + parseFloat(existingProduct.price),
+          discount_price:
+            state.discount_price + parseFloat(existingProduct.discount_price),
+        };
+
+        // Update localStorage (assuming you're using it for persistence)
+        localStorage.setItem("products", JSON.stringify(newState.products));
+        const userDataString = localStorage.getItem("userData");
+        const userData = JSON.parse(userDataString);
+        const customerId = userData.customer_id;
+        const response = axios.patch("http://13.234.238.29:3000/api/UserCart", {
+          customer_id: customerId,
+          product_id: product_id,
+          quantity: 1,
+        });
+
+        // Return the new state (assuming you're using a state management library)
+        return newState;
       }
+
+      // Handle the case where the product is not found
+      return state;
     },
     decreaseQuantity: (state, action) => {
       const { product_id } = action.payload;
-      console.log("increase quantit" + product_id);
+
       // Find the existing product in the cart
-      const existingProduct = state.products.find(
+      const existingProductIndex = state.products.findIndex(
         (product) => product.product_id === product_id
       );
-      if (existingProduct) {
-        console.log("Its should be coming anyways " + existingProduct.quantity);
-        console.log(
-          "Its should be coming anyways " + JSON.stringify(existingProduct)
-        );
-        // If product exists, increase its quantity
-        existingProduct.quantity -= 1;
-        console.log("After Updates " + JSON.stringify(state.products));
-        console.log(
-          "After Updates  " + JSON.stringify(existingProduct.quantity)
-        );
-        // Update total__price if necessary
-        state.total_price -= parseFloat(existingProduct.price);
-        state.discount_price -= parseFloat(existingProduct.discount_price);
-        // Notify user about the increase
-        // notifyinfo(); // Call info notification
-        localStorage.setItem("products", JSON.stringify(state.products));
+
+      if (existingProductIndex !== -1) {
+        const existingProduct = state.products[existingProductIndex];
+
+        // Check if quantity is already 0, avoid negative quantities
+        if (existingProduct.quantity === 0) {
+          // Notify user about minimum quantity reached (optional)
+          // notifyError('Minimum quantity reached');
+          return state;
+        }
+
+        const updatedProduct = {
+          ...existingProduct,
+          quantity: existingProduct.quantity - 1,
+        };
+
+        // Update the state with the new product object
+        const newState = {
+          ...state,
+          products: [
+            ...state.products.slice(0, existingProductIndex),
+            updatedProduct,
+            ...state.products.slice(existingProductIndex + 1),
+          ],
+          total_price: state.total_price - parseFloat(existingProduct.price),
+          discount_price:
+            state.discount_price - parseFloat(existingProduct.discount_price),
+        };
+
+        // Update localStorage (assuming you're using it for persistence)
+        localStorage.setItem("products", JSON.stringify(newState.products));
+        const userDataString = localStorage.getItem("userData");
+        const userData = JSON.parse(userDataString);
+        const customerId = userData.customer_id;
+        const response = axios.patch("http://13.234.238.29:3000/api/UserCart", {
+          customer_id: customerId,
+          product_id: product_id,
+          quantity: -1,
+        });
+
+        // Return the new state (assuming you're using a state management library)
+        return newState;
       }
+
+      // Handle the case where the product is not found
+      return state;
     },
   },
 });
@@ -197,7 +253,7 @@ export const addToCart = (item) => async (dispatch, getState) => {
   const userDataString = localStorage.getItem("userData");
   const userData = JSON.parse(userDataString);
   const customerId = userData.customer_id;
-  const response = await axios.put("http://localhost:3000/api/UserCart", {
+  const response = await axios.put("http://13.234.238.29:3000/api/UserCart", {
     customer_id: customerId,
     product_id: item.product_id,
   });

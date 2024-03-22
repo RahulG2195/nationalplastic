@@ -13,7 +13,6 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { useDispatch } from "react-redux";
 
 export default function Header() {
-  
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
@@ -23,17 +22,18 @@ export default function Header() {
   const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
   console.log("AAAAAAAAAAAAAAAAAAAAA", isLoggedIn);
 
-  // useEffect(async () => {
-  //   const check = await axios.get(
-  //     "http://localhost:3000/api/UserCart"
-  //   );
-  //   if (data > 0) {
-  //     // const data = check.data.products.length;
-  //   const data = check.data.products.length; 
-  //   console.log("count for the home page is ",data)
-  //   setCount(data)
-  //   }
-  // }, [dispatch])
+  useEffect(async () => {
+    const userDataString = localStorage.getItem("userData");
+    const userData = JSON.parse(userDataString);
+    const customerId = userData.customer_id;
+
+    const check = await axios.post("http://13.234.238.29:3000/api/UserCart", {
+      customer_id: customerId,
+    });
+    const data = check.data.products.length;
+    console.log("count for the home page is ", data);
+    setCount(data);
+  }, [dispatch]);
 
   const handleSearchChange = async (e) => {
     setSearchTerm(e.target.value);
@@ -201,7 +201,7 @@ export default function Header() {
                       onClick={isClicked ? handleShow : null}
                     >
                       <img src="/Assets/svg/Group 4.svg" alt="" />
-                      <p className="Homeemail">email@gmail.com</p>
+                      <p className="Homeemail">{data.email}</p>
                     </Link>
                   ) : (
                     <Link
