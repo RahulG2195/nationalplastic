@@ -6,7 +6,7 @@ export async function POST(request) {
   try {
     // Assuming you're passing customer_id as part of the request query
     const { customer_id } = await request.json();
-    console.log("CustomerINsidePost: " + customer_id);
+    console.log("Customer: " + customer_id);
     const user_id = customer_id;
     console.log("User: " + user_id);
     // Get the product IDs from the wishlist table for a specific customer
