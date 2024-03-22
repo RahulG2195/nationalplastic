@@ -9,14 +9,10 @@ import { useRouter } from "next/router";
 
 function ProfilePage() {
   useEffect(() => {
-<<<<<<< HEAD
     localStorage.getItem("isLoggedIn") === "true"
       ? true
       : (window.location.href = "Login");
-=======
-  localStorage.getItem("isLoggedIn") === "true" ? true : window.location.href = 'Login'
 
->>>>>>> 73a97fc4d4adade283636c8ff5d8c0758825d438
     const isLoggedIn =
       localStorage.getItem("isLoggedIn") === "true"
         ? true
