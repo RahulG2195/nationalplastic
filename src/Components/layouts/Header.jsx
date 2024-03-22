@@ -30,9 +30,17 @@ export default function Header() {
     const check = await axios.post("http://13.234.238.29:3000/api/UserCart", {
       customer_id: customerId,
     });
-    const data = check.data.products.length;
-    console.log("count for the home page is ", data);
-    setCount(data);
+    if (
+      check &&
+      check.data &&
+      check.data.products &&
+      Array.isArray(check.data.products)
+    ) {
+      length = check.data.products.length;
+      setCount(length);
+    } else {
+      length = 0;
+    }
   }, [dispatch]);
 
   const handleSearchChange = async (e) => {
@@ -201,7 +209,7 @@ export default function Header() {
                       onClick={isClicked ? handleShow : null}
                     >
                       <img src="/Assets/svg/Group 4.svg" alt="" />
-                      <p className="Homeemail">{data.email}</p>
+                      {/* <p className="Homeemail">{data.email}</p> */}
                     </Link>
                   ) : (
                     <Link

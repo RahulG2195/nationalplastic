@@ -55,5 +55,33 @@ export async function POST(req) {
   }
 }
 
-
+Chnages on friday rechange before pull/push
 -----------
+ -- replace
+
+
+-------------
+
+
+
+
+    ----------------Chnages------------------------
+     const [customerId, setCustomerId] = useState(null); // Default value
+  const [data, setData] = useState(null); // Default value
+  console.log("AAAAAAAAAAAAAAAAAAAAA", isLoggedIn);
+
+  useEffect(async () => {
+    const userDataString = localStorage.getItem("userData");
+
+    if (userDataString) {
+      const userData = JSON.parse(userDataString);
+      setCustomerId(userData.customer_id);
+      const check = await axios.post("http://13.234.238.29:3000/api/UserCart", {
+        customer_id: customerId,
+      });
+      const value = check.data.products.length;
+      console.log("count for the home page is ", data);
+      setData(value);
+      setCount(value);
+    }
+  }, [dispatch]);

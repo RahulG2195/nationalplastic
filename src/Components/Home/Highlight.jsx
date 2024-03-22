@@ -59,10 +59,20 @@ export default function Highlight() {
     <section className="top_pick_sec common_section">
       <div className="container">
         <div className="row">
-        <div className="text-center mb-5">
-            <div className="darkBlue fs-1 fw-medium">Specific <span className="fs-1 lh-small fw-bolder text-danger "> Product Highlight</span> </div>
-            <div className="mt-1 fw-medium subCptRes w-50"><p>ILorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,
-            </p>
+          <div className="text-center mb-5">
+            <div className="darkBlue fs-1 fw-medium">
+              Specific{" "}
+              <span className="fs-1 lh-small fw-bolder text-danger ">
+                {" "}
+                Product Highlight
+              </span>{" "}
+            </div>
+            <div className="mt-1 fw-medium subCptRes w-50">
+              <p>
+                ILorem Ipsum is simply dummy text of the printing and
+                typesetting industry. Lorem Ipsum has been the industrys
+                standard dummy text ever since the 1500s,
+              </p>
             </div>
           </div>
           <div className="container mt-5">

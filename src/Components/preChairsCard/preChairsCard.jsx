@@ -59,7 +59,7 @@ const PreChairsCard = (props) => {
         <div className="card-body">
           <div className="PreFoot mt-2 ">
             <div className="class d-flex flex-wrap justify-content-between my-2 ">
-              <Link  href={`/ProductDetail/${props.id}`}>
+              <Link href={`/ProductDetail/${props.id}`}>
                 <div className="left fw-bold text-danger">{props.Title}</div>
               </Link>
               <div className="right">

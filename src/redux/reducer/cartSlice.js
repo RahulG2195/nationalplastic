@@ -46,16 +46,6 @@ export const cartSlice = createSlice({
     },
 
     addItemToCart: (state, action) => {
-      console.log(
-        "state:-----------------NopeNOtHereWhenAddedFromWishLisT " + state
-      );
-      console.log("action: " + action);
-      console.log("state: " + JSON.stringify(state));
-      console.log(
-        "actionPayload inside additemtocart: " + JSON.stringify(action.payload)
-      );
-      console.log("actiion: " + JSON.stringify(action));
-
       const { product_id, quantity, price, discount_price } = action.payload;
       console.log("product added successfully before adding" + action.payload);
       console.log(
@@ -66,6 +56,7 @@ export const cartSlice = createSlice({
       const isItemInCart = state.products.some(
         (product) => product.product_id === product_id
       );
+      console.log("isItemInCart", isItemInCart);
       if (!isItemInCart) {
         state.products.push(action.payload);
         console.log("stateTotalPrice: " + discount_price);
@@ -89,46 +80,47 @@ export const cartSlice = createSlice({
         state.total_price += parseFloat(price) * quantity; // Update total price
       }
     },
-    removeItemFromCart: async (state, action) => {
+    removeItemFromCart: (state, action) => {
       const { product_id } = action.payload;
-      const userDataString = localStorage.getItem("userData");
-      const userData = JSON.parse(userDataString);
-      const customer_id = userData.customer_id;
-      const response = await axios.delete(
-        "http://13.234.238.29:3000/api/UserCart",
-        {
-          customer_id: customer_id,
-          product_id: product_id,
-        }
-      );
-      console.log("Delete Response " + JSON.stringify(response));
-      // Find the index of the product to be removed
-      const productIndex = state.products.findIndex(
+
+      // Find the existing product in the cart
+      const existingProductIndex = state.products.findIndex(
         (product) => product.product_id === product_id
       );
 
-      if (productIndex !== -1) {
-        const removedProduct = state.products[productIndex];
-        const updatedProducts = [...state.products];
+      if (existingProductIndex !== -1) {
+        const existingProduct = state.products[existingProductIndex];
 
-        // Remove the product from the cart
-        updatedProducts.splice(productIndex, 1);
+        // Create a new state without the product
+        const newState = {
+          ...state,
+          products: [
+            ...state.products.slice(0, existingProductIndex),
+            ...state.products.slice(existingProductIndex + 1),
+          ],
+          total_price:
+            state.total_price -
+            parseFloat(existingProduct.price) * existingProduct.quantity,
+          discount_price:
+            state.discount_price -
+            parseFloat(existingProduct.discount_price) *
+              existingProduct.quantity,
+        };
 
-        // Update total_price
-        state.total_price -= parseFloat(
-          removedProduct.price * removedProduct.quantity
-        );
-        state.discount_price -= parseFloat(
-          removedProduct.discount_price * removedProduct.quantity
-        );
+        // Update localStorage (assuming you're using it for persistence)
+        localStorage.setItem("products", JSON.stringify(newState.products));
+        const userDataString = localStorage.getItem("userData");
+        const userData = JSON.parse(userDataString);
+        const customerId = userData.customer_id;
 
-        // Update state with the new products array
-        state.products = updatedProducts;
-
-        // Update localStorage
-        localStorage.setItem("products", JSON.stringify(state.products));
+        // Return the new state (assuming you're using a state management library)
+        return newState;
       }
+
+      // Handle the case where the product is not found
+      return state;
     },
+
     increaseQuantity: (state, action) => {
       const { product_id } = action.payload;
 
@@ -174,6 +166,7 @@ export const cartSlice = createSlice({
           product_id: product_id,
           quantity: 1,
         });
+        console.log("response after - ", response);
 
         // Return the new state (assuming you're using a state management library)
         return newState;
@@ -228,6 +221,7 @@ export const cartSlice = createSlice({
           product_id: product_id,
           quantity: -1,
         });
+        console.log("response after - ", response);
 
         // Return the new state (assuming you're using a state management library)
         return newState;

@@ -9,7 +9,6 @@ const nextConfig = {
   //     unoptimized:true,
   // },
 
-  
   env: {
     MYSQL_HOST: "localhost",
     MYSQL_DATABASE: "nationalplastic_db",
