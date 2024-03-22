@@ -11,7 +11,7 @@ export async function GET(request) {
 
     try {
         const products = await query({
-            query: "SELECT * FROM products where LOWER(categoryType) = LOWER(?)",
+            query: "SELECT * FROM products where LOWER(category_id) = LOWER(?)",
             values: [`${queryParams}`],
         });
 

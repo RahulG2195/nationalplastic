@@ -9,6 +9,8 @@ import { addToCart } from "@/redux/reducer/cartSlice";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import PremiumChairs from "./PremiumChairs";
 import PreChairsCard from "../../Components/preChairsCard/preChairsCard";
+import { useParams } from "next/navigation";
+
 
 // import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -22,6 +24,8 @@ const PreChairsCards = () => {
   // const [page, setPage] = useState(1);
   // const [hasMore, setHasMore] = useState(true);
   // const [length, setlength] = useState([]);
+  const router = useParams();
+  const cat_id = router.productCatId;
 
   const dispatch = useDispatch();
   // const chairData = [
@@ -133,7 +137,7 @@ const PreChairsCards = () => {
       setCategoryType(categoryTitle);
 
       const response = await axios.get(
-        `http://13.234.238.29:3000/api/ProductsCat?query=${categoryTitle}`
+        `http://localhost:3000/api/ProductsCat?query=${cat_id}`
       );
       console.log("API Response:", response.data); // Log API response
 
@@ -170,13 +174,13 @@ const PreChairsCards = () => {
           });
         }
 
-        if (categoryType) {
-          filteredData = filteredData.filter(
-            (item) =>
-              item.categoryType &&
-              item.categoryType.toLowerCase() == categoryType.toLowerCase()
-          );
-        }
+        // if (categoryType) {
+        //   filteredData = filteredData.filter(
+        //     (item) =>
+        //       item.categoryType &&
+        //       item.categoryType.toLowerCase() == categoryType.toLowerCase()
+        //   );
+        // }
 
         setProducts(filteredData);
 

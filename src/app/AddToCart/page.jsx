@@ -27,7 +27,7 @@ function AddToCart() {
     const fetchData = async () => {
       try {
         const response = await axios.post(
-          "http://13.234.238.29:3000/api/UserCart",
+          "http://localhost:3000/api/UserCart",
           {
             customer_id: customerId,
           }
@@ -117,7 +117,7 @@ function AddToCart() {
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
       const response = await axios.get(
-        "http://13.234.238.29:3000/api/UserCart",
+        "http://localhost:3000/api/UserCart",
         customerId
       );
       const cartData = response.data.products;
@@ -178,7 +178,7 @@ function AddToCart() {
       const userDataString = localStorage.getItem("userData");
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
-      await axios.delete(`http://13.234.238.29:3000/api/UserCart`, {
+      await axios.delete(`http://localhost:3000/api/UserCart`, {
         product_id: product_id,
         customerId: customerId,
       });

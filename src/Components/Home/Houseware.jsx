@@ -3,10 +3,10 @@ import Link from "next/link"
 
 function Houseware() {
   return (
-    <section className="houseware_sec common_section">
+    <section className="houseware_sec common_section position-relative ">
         <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-6 houseConntentDiv" >
+            <div className="row py-5">
+                <div className="col-md-7 houseConntentDiv" >
                     <h2>National Plastic for <span>Houseware</span></h2>
                     <p>Legacy Since 1952</p>
                     <div className="knowmoresec">
@@ -18,7 +18,7 @@ function Houseware() {
                         </Link> 
                     </div>
                 </div>
-                <div className="col-md-6 houseDiv">
+                <div className="col-md-5 houseDiv">
                     <div className="houseImg">
                         <Image
                         src = "/Assets/images/Home-page/CTA-banner.jpg-industry-image.png"

@@ -1,6 +1,8 @@
 "use client";
 import Image from "next/image";
 import CatCards from "../CommonComp/catCards";
+import '../../styles/home_prod.css'
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   Navigation,
@@ -48,24 +50,22 @@ export default function HappyStory() {
   ];
   return (
     <section className="happy_Story_sec common_section">
-      <div className="container">
+      <div className="">
         <div className="row">
-          <div className="section_header mx-auto text-center">
-            <h2>
-              <span>Happy </span> Stories
-            </h2>
-            <p>Their Words, Our Pride (carousel will be here)</p>
+        <div className="text-center my-5 pt-5">
+            <div className="darkBlue fs-1 fw-medium">Happy <span className="fs-1 lh-small fw-bolder text-danger ">Stories</span> </div>
+            <div className="mt-1 fw-medium subCptRes w-50"><p>Their Words, Our Pride</p></div>
           </div>
-          <div className="col-12 products_col">
-            <div className="row">
+          <div className="col-18 products_col justify-content-center">
+            <div className="row ">
               <Swiper
-                className="swipper"
-                style={{ width: "100%", height: "100%" }}
-                modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-                spaceBetween={15}
+                className="swipper px-5"
+                style={{ width: "75%", height: "100%" , overflow: "hidden",}}
+                modules={[Navigation, Pagination, Scrollbar, A11y, ]}
+                spaceBetween={0}
                 slidesPerView={3}
                 loop={true}
-                // navigation
+                navigation={{ clickable: true }}            
                 // pagination={{ clickable: true }}
                 // scrollbar={{ draggable: false }}
                 // onSwiper={(swiper) => console.log(swiper)}
@@ -82,41 +82,43 @@ export default function HappyStory() {
                   },
                   640: {
                     slidesPerView: 2,
-                    spaceBetween: 20,
+                    spaceBetween: 0,
                   },
                   768: {
                     slidesPerView: 3,
-                    spaceBetween: 40,
+                    spaceBetween: 0,
                   },
                   1024: {
                     slidesPerView: 3,
-                    spaceBetween: 50,
+                    spaceBetween: 0,
                   },
                 }}
               >
                 {productArr.map((product) => (
                   // <div key={product.key} className="col-md-4">
                   <SwiperSlide
+                  className="px-3"
                     key={product.key}
-                    // style={{
-                    //   width: "100%",
-                    //   overflow: "hidden",
-                    //   height: "100%",
-                    // }}
+                    style={{
+                      // width: "100%",
+                      overflow: "hidden",
+                      // height: "100%",
+                    }}
                   >
-                    <div className="card">
-                      <div className="card-img">
+                    <div className="card rounded-5 w-100 h-100">
+                      <div className="card-img rounded-5">
                         <Image
+                        className="rounded-top-5"
                           src={product.image}
                           alt={product.image}
-                          // width={100}
-                          // height={100}
-                          // layout="responsive"
-                          // objectFit="cover"
-                          fill
+                          width={100}
+                          height={50}
+                          layout="responsive"
+                          objectFit="cover"
+                          // fill
                         />
                       </div>
-                      <div className="card-body">
+                      <div className="card-body rounded-bottom-5 ">
                         <h5 className="card-title">{product.title}</h5>
                         <p className="card-text">{product.short_desc}</p>
                       </div>
