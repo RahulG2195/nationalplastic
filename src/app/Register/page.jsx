@@ -53,9 +53,7 @@ function Register() {
     if (Object.keys(errors).length === 0) {
       try {
         // Check if email already exists
-        const { data } = await axios.get(
-          `http://13.234.238.29:3000/api/Users`
-        );
+        const { data } = await axios.get(`http://13.234.238.29:3000/api/Users`);
         const existingEmails = data.map((user) => user.Email);
         if (existingEmails.includes(formData.email)) {
           alert("Email already exists!");

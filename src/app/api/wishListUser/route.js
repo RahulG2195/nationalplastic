@@ -6,10 +6,11 @@ export async function POST(request) {
   try {
     // Assuming you're passing customer_id as part of the request query
     const { customer_id } = await request.json();
-    console.log("Customer: " + customer_id);
+    console.log("CustomerINsidePost: " + customer_id);
     const user_id = customer_id;
-
+    console.log("User: " + user_id);
     // Get the product IDs from the wishlist table for a specific customer
+    // alert();
     const wishlist = await query({
       query: "SELECT product_id FROM wishlist WHERE user_id = ?",
       values: [user_id],

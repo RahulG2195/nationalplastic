@@ -68,12 +68,12 @@ export const { addToWishlist } = wishlistSlice.actions;
 export const addItemToWishlist = (item) => async (dispatch, getState) => {
   // console.log("ininininin")
 
-  const { items } = getState().wishlist; // Access state through the second parameter
+  const { items } = getState().wishlist; // Access state through tshe second parameter
 
   const userDataString = localStorage.getItem("userData");
   const userData = JSON.parse(userDataString);
   const customerId = userData.customer_id;
-
+  console.log("Customer Id: " + customerId);
   const check = await axios.post("http://13.234.238.29:3000/api/wishListUser", {
     customer_id: customerId,
   });

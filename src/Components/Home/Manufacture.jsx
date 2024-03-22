@@ -84,10 +84,17 @@ export default function Manufacture() {
     <section className="shop_room_sec common_section manufacturer_common_section ">
       <div className="px-4">
         <div className="row">
-        <div className="text-center mb-5 ">
-            <div className="fs-1 lh-small fw-bolder text-danger ">Indias Largest Manufacturer <p className="darkBlue fs-1 fw-medium">Of Household Products</p> </div>
-            <div className="mt-1 fw-medium subCptRes w-50"><p>ILorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,
-            </p>
+          <div className="text-center mb-5 ">
+            <div className="fs-1 lh-small fw-bolder text-danger ">
+              Indias Largest Manufacturer{" "}
+              <p className="darkBlue fs-1 fw-medium">Of Household Products</p>{" "}
+            </div>
+            <div className="mt-1 fw-medium subCptRes w-50">
+              <p>
+                ILorem Ipsum is simply dummy text of the printing and
+                typesetting industry. Lorem Ipsum has been the industrys
+                standard dummy text ever since the 1500s,
+              </p>
             </div>
           </div>
           <div className="col-12 products_col">

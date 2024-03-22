@@ -63,10 +63,16 @@ export default function TopPick() {
     <section className="top_pick_sec common_section">
       <div className="container">
         <div className="row">
-        <div className="text-center mb-5 ">
-            <div className="fs-1 fw-bold text-danger">Top Picks <span className="darkBlue fw-normal">For You</span> </div>
-            <div className="mt-1 fw-medium subCptRes w-50"><p>ILorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,
-            </p>
+          <div className="text-center mb-5 ">
+            <div className="fs-1 fw-bold text-danger">
+              Top Picks <span className="darkBlue fw-normal">For You</span>{" "}
+            </div>
+            <div className="mt-1 fw-medium subCptRes w-50">
+              <p>
+                ILorem Ipsum is simply dummy text of the printing and
+                typesetting industry. Lorem Ipsum has been the industrys
+                standard dummy text ever since the 1500s,
+              </p>
             </div>
           </div>
           <div className="col-12 px-5 products_col mt-4">
@@ -115,7 +121,6 @@ export default function TopPick() {
                         title={product.category_name}
                         url={product.url}
                       />
-
                     </SwiperSlide>
                   </div>
                 ))}

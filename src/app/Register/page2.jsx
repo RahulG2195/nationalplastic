@@ -14,9 +14,7 @@ function ProfilePage() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        "http://13.234.238.29:3000/api/Users"
-      );
+      const response = await axios.get("http://13.234.238.29:3000/api/Users");
       setUserData(response.data);
     } catch (error) {
       console.error("Error fetching user data:", error);

@@ -63,9 +63,9 @@ const Search = (props) => {
     }
   };
 
-//   const setid = (id) => {
-//     localStorage.setItem("myId", id);
-//   };
+  //   const setid = (id) => {
+  //     localStorage.setItem("myId", id);
+  //   };
 
   const handleAddToCart = (id) => {
     dispatch(
@@ -114,7 +114,7 @@ const Search = (props) => {
                 <div className="PreFoot mt-2 ">
                   <div className="class d-flex justify-content-between my-2 ">
                     <Link
-                    //   onClick={() => setid(product.product_id)}
+                      //   onClick={() => setid(product.product_id)}
                       href={`/ProductDetail/${product.product_id}`}
                     >
                       <div className="left fw-bold text-danger">

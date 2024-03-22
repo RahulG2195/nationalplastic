@@ -20,7 +20,7 @@ function Login() {
   const router = useRouter(); // Use useRouter on the client-side only
   // const navigate =useNavigate();
   // const router = useRouter();
-  
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -50,14 +50,17 @@ function Login() {
 
     try {
       // console.log("formDataaaaaaa++++++++++",formData)
-      const res = await axios.put(`http://13.234.238.29:3000/api/Users`, formData);
+      const res = await axios.put(
+        `http://13.234.238.29:3000/api/Users`,
+        formData
+      );
       // console.log("formDataaaaaaa++++++++++ formData.email on login page",formData.email)
       // console.log("this is statussssssssssssssssss  login page", res.data);
       // console.log("this is statussssssssssssssssss  login page", res.data.email);
       const userData = res.data.message[0];
       // console.log(" login page userData res",userData) // Directly access response.data.message
-      const {customer_id} = userData; 
-      // console.log("csID",customer_id)
+      const { customer_id } = userData;
+      console.log("csID Login page..........", customer_id);
 
       if (res.data.status === 500) {
         setErrorMessage(JSON.stringify(res.data.message));
@@ -65,27 +68,25 @@ function Login() {
         // router.push('/'); // Redirect to home page after successful login
       } else {
         alert("Successfully logged in");
-        
+
         // const response = await axios.put("http://13.234.238.29:3000/api/Users", formData
         // );
 
         setLogin(true);
         // let cust_id2 = await getUserId(formData.email)
         // push("/");
-        dispatch(setUserData({
-          email: formData.email,
-        customer_id: customer_id
-        }));
+        dispatch(
+          setUserData({
+            email: formData.email,
+            customer_id: customer_id,
+          })
+        );
       }
     } catch (error) {
       console.error("Error during login:", error);
       setErrorMessage("An error occurred during login. Please try again.");
     }
   };
-
-
-
-  
 
   return (
     <div className="container">
@@ -159,10 +160,10 @@ function Login() {
                   {login ? (
                     // <Link href="/">Home</Link>
                     // router.push("/"),
-                    window.location.href="/"
+                    (window.location.href = "/")
+                  ) : (
                     // window.location.reload("/")
 
-                  ) : (
                     <Link href="/Login">Login</Link>
                   )}
                 </button>

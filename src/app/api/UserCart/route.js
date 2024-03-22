@@ -138,8 +138,10 @@ export async function PUT(request) {
 export async function DELETE(request) {
   // console.log("first");
   try {
-    const { product_id, customer_id } = await request.json();
-    const user_id = customer_id; // Log received product_id
+    const data = await request.formData();
+    const product_id = data.get("product_id"); // Log received product_id
+    const user_id = data.get("customer_id"); // Log received product_id
+
     const deleteWishlist = await query({
       query: "DELETE FROM mycart WHERE product_id = ? AND user_id = ?",
       values: [product_id, user_id],
