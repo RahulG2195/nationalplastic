@@ -23,20 +23,17 @@ export default function Header() {
   const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
   console.log("AAAAAAAAAAAAAAAAAAAAA", isLoggedIn);
 
-  useEffect(async () => {
-    const check = await axios.get(
-      "http://localhost:3000/api/Cart"
-    );
-    if (data > 0) {
-      // const data = check.data.products.length;
-    const data = check.data.products.length; 
-    console.log("count for the home page is ",data)
-    setCount(data)
-    }
-  }, [dispatch])
-
-
-
+  // useEffect(async () => {
+  //   const check = await axios.get(
+  //     "http://localhost:3000/api/UserCart"
+  //   );
+  //   if (data > 0) {
+  //     // const data = check.data.products.length;
+  //   const data = check.data.products.length; 
+  //   console.log("count for the home page is ",data)
+  //   setCount(data)
+  //   }
+  // }, [dispatch])
 
   const handleSearchChange = async (e) => {
     setSearchTerm(e.target.value);

@@ -12,6 +12,7 @@ function ProfilePage() {
   
   useEffect(() => {
   localStorage.getItem("isLoggedIn") === "true" ? true : window.location.href = 'Login'
+
     const isLoggedIn =
       localStorage.getItem("isLoggedIn") === "true" ? true : window.location.href = 'Login'
     

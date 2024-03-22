@@ -57,7 +57,7 @@ function Login() {
       const userData = res.data.message[0];
       // console.log(" login page userData res",userData) // Directly access response.data.message
       const {customer_id} = userData; 
-      // console.log("csID",customer_id)
+      console.log("csID Login page..........",customer_id)
 
       if (res.data.status === 500) {
         setErrorMessage(JSON.stringify(res.data.message));
