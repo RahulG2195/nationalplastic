@@ -52,11 +52,11 @@ function ProfilePage() {
   const email_id = messages.length > 0 ? messages[0].Email : null;
   // console.log(" messages.length=========", messages.length)
 
-  const UpdateData = {
-    email: email_id,
-    customer_id: cust_id,
-  };
-  localStorage.setItem("userId", JSON.stringify(UpdateData));
+  // const UpdateData = {
+  //   email: email_id,
+  //   customer_id: cust_id,
+  // };
+  // localStorage.setItem("userId", JSON.stringify(UpdateData));
 
   // console.log("UpdateDataaaaaaaaaaaaaaaaaaaaaaaaaaaa Profile page", UpdateData)
 
@@ -204,6 +204,11 @@ function ProfilePage() {
     if (window.confirm("Are you sure you want to log out?")) {
       // Clear localStorage (remove `isLoggedIn` key only for better control)
       localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("products");
+      localStorage.removeItem("userData");
+      localStorage.removeItem("userId");
+
+
 
       // Update state variables
       // setIsLoggedIn(false);

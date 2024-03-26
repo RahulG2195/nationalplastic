@@ -22,8 +22,8 @@ function AddToCart() {
 
   useEffect(() => {
     const userDataString = localStorage.getItem("userData");
-    const userData = JSON.parse(userDataString);
-    const customerId = userData.customer_id;
+    const userData = JSON.parse(userDataString) || {};
+    const customerId = userData.customer_id || {};
     const fetchData = async () => {
       try {
         const response = await axios.post(

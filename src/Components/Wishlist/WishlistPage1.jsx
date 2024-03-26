@@ -14,8 +14,8 @@ const WishlistPage1 = () => {
 
   useEffect(() => {
     const userDataString = localStorage.getItem("userData");
-    const userData = JSON.parse(userDataString);
-    const customerId = userData.customer_id;
+    const userData = JSON.parse(userDataString) || {};
+    const customerId = userData.customer_id || {};
     // console.log("wishlistID ", customerId);
     const fetchData = async () => {
       try {
