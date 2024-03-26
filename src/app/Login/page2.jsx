@@ -38,7 +38,7 @@ function Login() {
     try {
       // Perform login logic
       // Assuming your login API returns a success response if login is successful
-      const response = await axios.post("http://13.234.238.29:3000/api/login", {
+      const response = await axios.post("http://localhost:3000/api/login", {
         email: formData.email,
         password: formData.password,
       });

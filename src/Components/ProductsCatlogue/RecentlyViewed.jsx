@@ -66,7 +66,7 @@ const RecentlyViewed = () => {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          "http://13.234.238.29:3000/api/Products"
+          "http://localhost:3000/api/Products"
         );
         const filteredproducts = response.data.products.filter(
           (item) => item.categoryType === "premium chairs"
@@ -87,7 +87,7 @@ const RecentlyViewed = () => {
       const customerId = userData.customer_id;
 
       const response = await axios.post(
-        "http://13.234.238.29:3000/api/wishListUser",
+        "http://localhost:3000/api/wishListUser",
         {
           customer_id: customerId,
         }

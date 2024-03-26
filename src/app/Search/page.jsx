@@ -35,7 +35,7 @@ const Search = (props) => {
       }
 
       const response = await axios.get(
-        `http://13.234.238.29:3000/api/search?query=${query}&page=${page}`
+        `http://localhost:3000/api/search?query=${query}&page=${page}`
       );
       const newProducts = response.data.products;
       const all = response.data.allproducts;
@@ -66,11 +66,42 @@ const Search = (props) => {
   //   const setid = (id) => {
   //     localStorage.setItem("myId", id);
   //   };
+  const fetchPrice = async  (id) => {
+    try {
+      const response = await fetch('http://localhost:3000/api/ProductsCat', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ product_id: id })
+      });
+      console.log(response);
 
-  const handleAddToCart = (id) => {
+      if (!response.ok) {
+          throw new Error('Failed to fetch product data');
+      }
+
+      const data = await response.json();
+      console.log(" data ", data)
+    
+
+      return data;
+  } catch (error) {
+      console.error('Error fetching product data:', error);
+      throw error;
+  }
+  }
+  const handleAddToCart = async (id) => {
+    const data = await fetchPrice(id)
+    console.log(data)
+    const price = data.price;
+    const discountPrice = data.discount_price;
     dispatch(
       addToCart({
         product_id: id,
+        price: price,
+        discount_price: discountPrice,
+        quantity: 1,
       })
     );
   };
