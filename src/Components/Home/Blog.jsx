@@ -51,7 +51,7 @@ export default function Blog() {
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get(
-        "http://13.234.238.29:3000/api/Products"
+        "http://localhost:3000/api/Products"
       );
       const filteredData = response.data.products.filter(
         (item) => item.categoryType === "Blog"
@@ -65,20 +65,20 @@ export default function Blog() {
       <div className="px-4">
         <div className="row">
           <div className="text-center highlightCont my-5">
-            <div className="fs-1 lh-small fw-bolder text-danger "> Blog</div>
+            <div className="fs-1 lh-small fw-bolder text-danger ">Blog</div>
             <div className="mt-1 fw-bold subCptRes w-50"><p>Lorem Ipsum</p></div>
           </div>
           <div className="col-12 products_col">
             <div className="row">
               <Swiper
-                className="swipper px-5"
+                className="swipper swpr px-5 py-5"
                 style={{ width: "100%", height: "100%" }}
                 modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
                 spaceBetween={15}
                 slidesPerView={2}
-                loop={true}
-                // navigation={{ clickable: true }}
-                // pagination={{ clickable: true }}
+                // loop={true}
+                navigation={{ clickable: true }} 
+                pagination={{ clickable: true }}
                 // scrollbar={{ draggable: false }}
                 // onSwiper={(swiper) => console.log(swiper)}
                 // onSlideChange={() => console.log("slide change")}
@@ -112,7 +112,7 @@ export default function Blog() {
                       title={product.product_name}
                       url={product.url}
                       cat={product.categoryType}
-                      date={product.createdOn}
+                      date= {product.createdOn && new Date(product.createdOn).toLocaleDateString(undefined, { month: 'long', year: 'numeric' })}
                       duration={product.duration}
                       shortDesc={product.short_description}
                     />

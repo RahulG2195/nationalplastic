@@ -4,12 +4,12 @@ import "../../styles/about.css";
 function AboutCTA() {
   return (
     <section className="about_section my-5">
-      <div className="container cta">
-        <h2 className="row1">
+      <div className="container cta py-3">
+        <h3 className="row1 fw-bold my-3">
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
           nonumy eirmod.
-        </h2>
-        <p className="row2">
+        </h3>
+        <p className="row2 medium text-secondary-2">
           ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
           eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
           diam voluptua. At vero eos et accusam et justo duo dolores et ea

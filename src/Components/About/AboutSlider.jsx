@@ -17,8 +17,8 @@ const AboutSlider = ({ image, title, description }) => {
             objectFit="cover"
           />
         </div>
-        <h2>{title}</h2>
-        <p>{description}</p>
+        <h2 className="fw-bold ">{title}</h2>
+        <p className="fw-medium">{description}</p>
         <button>READ MORE</button>
       </div>
     </>

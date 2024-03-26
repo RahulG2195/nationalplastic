@@ -1,102 +1,88 @@
-import React from 'react';
+"use client"
+import React, { useState, useEffect } from 'react';
 import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Link from 'next/link';
+import axios from 'axios'; // Don't forget to import axios
 
-const ProductsAccr = ({handleShow}) => {
+const ProductsAccr = ({ handleShow }) => {
+
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get("http://localhost:3000/api/Products");
+        const allproducts = res.data.products;
+        const categoryIds = [13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
+
+        const categoryData = categoryIds.map(categoryId => {
+          return {
+            categoryId: categoryId,
+            category: getCategoryName(categoryId),
+            products: allproducts.filter(product => product.category_id === categoryId)
+          };
+        });
+
+        setCategories(categoryData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const getCategoryName = (categoryId) => {
+    // Implement your logic to get category names based on category ID
+    // This is just a placeholder function
+    switch (categoryId) {
+      case 13:
+        return 'Premium Event Chairs';
+      case 14:
+        return 'Without Arm Tents';
+      // Add more cases for other categories as needed
+      default:
+        return 'Unknown Category';
+    }
+  };
 
   const handleOnClick = (productName) => {
     console.log("this product is clicked", productName);
     localStorage.setItem('productName', productName);
-  }
+  };
 
-  const accordionData = [
-    {
-      category: 'Premium Event Chairs',
-      products: [
-        'Karen', 'ICE, GLASS', 'GHOST CHAIR', 'Peral, Crown, Marble', 'Kia, Karen, Karnival', 'Shagun', 'Vivha, Shamiyana, Bada Shagun', 'Leon , Cambridge', 'Harrier'
-      ]
-    },
-    {
-      category: 'Without Arm Tents',
-      products: ['Alto', 'ReAlto', 'Vista', 'Apollo / Volvo / Vento', 'UNO from Silvassa', 'Seltos']
-    },
-    {
-      category: 'Premium Chair',
-      products: ['Victoria', 'Orca', 'The Boss', 'Star/Queen', 'Rover', 'Ferrari .S.', 'Magna, Saab', 'Relax',
-      'Solace', 'Altis', 'Atlantis', 'Bentley', 'BOSS',
-      'Storm, Phantom', 'Thunder, Wonder, Aspire, Thunder', 'Leisure',
-      'Spinex', 'Hector', 'Merc', 'Milano, Linea', 'Omega']
-    },
-    {
-        category:'Popular Chair',
-        products:[ 'Delhi, Agra, Shimla, Jaisalmer', 'Ajanta', 'Florish', 'Cretaa', 'Galaxy', 'Pune', 'GETZ/ BEST/ZEST']
-    },
-    {
-        category:'Cabinet',
-        products:['Planet Small','Planet Big','Planet Power Small','Planet Power Medium','Planet Power Big']
-    },
-    {
-        category:' Baby Chair',
-        products:[
-            'Flora, Wave, Poo',
-            'Yoyo rocker',
-            'Bubbly',
-            'Sleeper/Dolphin',
-            'Polo',
-            'Babylon',
-          'Beatle With Tray'
-          ]
-
-    },
-    
-    {
-        category:'Stool',
-        products:['Cheeta', 'Jaguar', 'Puma', 'Tiger', 'Matisse', 'Sigma Steppe Stool', 'Hippo', 'Panda Stool','Otter Stool', 'Decor Panda Stool', 'Decor Otter Stool']
-    },
-    {
-        category:'Table',
-        products: ['Jaipur Dinning', 'Party Round', 'Patiala Centre Trolley', 'Rajkot Centre Trolley', 'Spectra', 'Regal', 'Jaipur RoMa Dinning', 'Party Round RoMa']
-    },
-    {
-        category:'Box',
-        products:["Tote Box 15 Ltrs Without Wheels",
-         "Tote Box 15 Ltrs With Wheels", 
-         "Tote Box 35 Ltrs Without Wheels", 
-         "Tote Box 35 Ltrs With Wheels", 
-         "Tote Box 60 Ltrs Without Wheels", 
-         "Tote Box 60 Ltrs With Wheels",
-          "Under the bed-40 ltr"]
-    },
-    {
-        category:'Drawer',
-        products: ['Drawer 3 Tier 130','Drawer 3 Tier 199','Drawer 3 Tier 190','Drawer 3 Tier 250']
-    },
-
-
-    // Add more categories and products here
-  ];
-
-    const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
   return (
-    <div >
+    <div>
       <Accordion style={{ backgroundColor: '#FFE000' }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls={`panel0-content`}
           id={`panel0-header`}
         >
-          <Typography>Products</Typography>
+          <Typography className='m-0 '>
+
+            <li className="">
+              <p className="medium fw-bold ">Products</p>
+            </li>
+
+          </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <div>
-            {accordionData.map((categoryItem, index) => (
-              <Accordion  expanded={expanded === `panel${index+1}`} onChange={handleChange(`panel${index+1}`)} key={index} style={{ backgroundColor: '#F1EF99' }}>
+            {categories.map((categoryItem, index) => (
+              <Accordion
+                expanded={expanded === `panel${index + 1}`}
+                onChange={handleChange(`panel${index + 1}`)}
+                key={index}
+                style={{ backgroundColor: '#F1EF99' }}
+              >
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls={`panel${index + 1}bh-content`}
@@ -108,8 +94,13 @@ const ProductsAccr = ({handleShow}) => {
                   <div>
                     {categoryItem.products.map((product, subIndex) => (
                       <p key={subIndex}>
-                        <Link className="nav-link" href={`/ProductDetail/${product.seo_url}`} 
-                         onClick={() => { handleOnClick(product); handleShow(); }}>{product}</Link>
+                        <Link
+                          className="nav-link"
+                          href={`/ProductDetail/${product.seo_url}`}
+                          onClick={() => { handleOnClick(product); handleShow(); }}
+                        >
+                          {product.product_name}
+                        </Link>
                       </p>
                     ))}
                   </div>
@@ -120,7 +111,7 @@ const ProductsAccr = ({handleShow}) => {
         </AccordionDetails>
       </Accordion>
     </div>
-  )
-}
+  );
+};
 
 export default ProductsAccr;

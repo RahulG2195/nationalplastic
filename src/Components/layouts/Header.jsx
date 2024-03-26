@@ -20,14 +20,13 @@ export default function Header() {
   const router = useRouter();
   const dispatch = useDispatch;
   const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
-  console.log("AAAAAAAAAAAAAAAAAAAAA", isLoggedIn);
 
   useEffect(async () => {
     const userDataString = localStorage.getItem("userData");
     const userData = JSON.parse(userDataString);
     const customerId = userData.customer_id;
 
-    const check = await axios.post("http://13.234.238.29:3000/api/UserCart", {
+    const check = await axios.post("http://localhost:3000/api/UserCart", {
       customer_id: customerId,
     });
     if (check && check.data && check.data.products && Array.isArray(check.data.products)) {
@@ -78,6 +77,7 @@ export default function Header() {
         <nav className="navbar navbar-expand-lg main_header px-5">
           <div className="container-fluid ">
             <div className="navbar-brand">
+              <Link href='/#/'>
               <Image
                 src="/Assets/images/nation_logo.png"
                 className="img-fluid"
@@ -85,6 +85,7 @@ export default function Header() {
                 width={100}
                 height={100}
               />
+              </Link>
             </div>
             <form onSubmit={handleSearchSubmit} className="d-flex nav-search">
               <input

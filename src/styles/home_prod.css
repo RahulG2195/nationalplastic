@@ -246,12 +246,20 @@
 .manfTitle h4{
   color: #CC0008 !important;
 }
-
-@media (max-width:769px) {
-  .highlightCont{
-    margin-top: 150px;
+@media (max-width:400px) {
+  .respswpr h5{
+    font-size: 15px !important;
+  }
+  .respswpr p{
+    font-size: 10px !important;
   }
 }
+@media (max-width:475px) {
+.swpr{
+  padding: 0 !important;
+}  
+}
+
 
 @media (max-width: 576px) {
 
@@ -262,7 +270,18 @@
     display: block !important;
   }
   
+}
 
+@media (max-width:769px) {
+  .highlightCont{
+    margin-top: 150px;
+  }
+}
+
+@media (max-width:990px) and (min-width : 640px) {
+  .respCatTitle{
+    font-size: medium !important;
+  }
 }
 
 @media only screen and (min-width: 1367px) and (max-width: 1501px) {}

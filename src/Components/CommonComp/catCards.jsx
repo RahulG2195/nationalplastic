@@ -1,6 +1,9 @@
 import Image from "next/image"
 import Link from "next/link"
 import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
+import '../../styles/home_prod.css'
+
+
 function CatCards({ image, title,onCategoryChange,style,catid }) {
 
 const sendCategory = () =>{
@@ -26,7 +29,7 @@ const sendCategory = () =>{
             />
           </div>
           <div className={`prodname ${style ? style : 'py-3 d-flex justify-content-between px-2'}`}>
-            <h4 className="fw-bold">{title}</h4>
+            <h4 className="fw-bold respCatTitle">{title}</h4>
           <ArrowForwardOutlinedIcon className="fw-bold" />
           </div>
         </Link>

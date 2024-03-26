@@ -59,12 +59,17 @@ export default function HappyStory() {
           <div className="col-18 products_col justify-content-center">
             <div className="row ">
               <Swiper
-                className="swipper px-5"
-                style={{ width: "75%", height: "100%" , overflow: "hidden",}}
+               style={{
+                '--swiper-navigation-color': '#787978',
+                '--swiper-pagination-color': '#787978',
+                 width: "75%", height: "100%" 
+              }}
+                className="swipper px-5 swpr "
+                // style={{ width: "75%", height: "100%" }}
                 modules={[Navigation, Pagination, Scrollbar, A11y, ]}
                 spaceBetween={0}
                 slidesPerView={3}
-                loop={true}
+                // loop={true}
                 navigation={{ clickable: true }}            
                 // pagination={{ clickable: true }}
                 // scrollbar={{ draggable: false }}
@@ -80,12 +85,12 @@ export default function HappyStory() {
                     slidesPerView: 1,
                     spaceBetween: 20,
                   },
-                  640: {
+                  715: {
                     slidesPerView: 2,
                     spaceBetween: 0,
                   },
-                  768: {
-                    slidesPerView: 3,
+                  1018: {
+                    slidesPerView: 2,
                     spaceBetween: 0,
                   },
                   1024: {
@@ -99,14 +104,10 @@ export default function HappyStory() {
                   <SwiperSlide
                   className="px-3"
                     key={product.key}
-                    style={{
-                      // width: "100%",
-                      overflow: "hidden",
-                      // height: "100%",
-                    }}
+                  
                   >
                     <div className="card rounded-5 w-100 h-100">
-                      <div className="card-img rounded-5">
+                      <div className="card-img rounded-5" >
                         <Image
                         className="rounded-top-5"
                           src={product.image}
@@ -118,7 +119,7 @@ export default function HappyStory() {
                           // fill
                         />
                       </div>
-                      <div className="card-body rounded-bottom-5 ">
+                      <div className="respswpr card-body rounded-bottom-5 ">
                         <h5 className="card-title">{product.title}</h5>
                         <p className="card-text">{product.short_desc}</p>
                       </div>

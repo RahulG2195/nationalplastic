@@ -38,7 +38,7 @@ export default function TopPick() {
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get(
-        "http://13.234.238.29:3000/api/Category"
+        "http://localhost:3000/api/Category"
       );
       console.log("response of the category ", response.data.categories)
       const filteredData = response.data.categories.filter(
@@ -55,9 +55,9 @@ export default function TopPick() {
   }, []);
  
 
-  const sendCategory = (productName) => {
-    localStorage.setItem("category", productName);
-  };
+  // const sendCategory = (productName) => {
+  //   localStorage.setItem("category", productName);
+  // };
 
   return (
     <section className="top_pick_sec common_section">
@@ -85,7 +85,7 @@ export default function TopPick() {
                 // slidesPerView={3}
                 loop={true}
                 // navigation
-                // pagination={{ clickable: true }}
+                pagination={{ clickable: true }}
                 // scrollbar={{ draggable: false }}
                 // onSwiper={(swiper) => console.log(swiper)}
                 // onSlideChange={() => console.log("slide change")}

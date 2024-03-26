@@ -24,7 +24,7 @@ function Catalogue() {
                     <p className="fw-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                     <div className="Catasec">
                         <Link href='/Catalogue' className="catalogue-know-more">
-                            <button className="btn view_btn py-3 px-5 fs-5">View More</button>
+                            <button className="btn view_btn py-2 px-3 fs-5">View More</button>
                         </Link>
                     </div>
                 </div>

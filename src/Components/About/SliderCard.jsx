@@ -55,17 +55,17 @@ function SliderCard() {
   return (
     <>
       <Swiper
-        className="my-slider"
+        className="my-slider pb-5"
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
         spaceBetween={50}
         slidesPerView={3}
         loop={true}
         navigation
         pagination={{ clickable: true }}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
+        // autoplay={{
+        //   delay: 2500,
+        //   disableOnInteraction: false,
+        // }}
         breakpoints={{
           200: {
               slidesPerView: 1,
@@ -85,14 +85,15 @@ function SliderCard() {
           },
       }}
       >
-        {SliderCardArr.map((val) => (
+        {SliderCardArr.map((val, index) => (
           <SwiperSlide key={val.key}>
-            {/* Use AboutSlider as the content of each slide */}
+      <div className={`slide-content ${index % 2 === 0 ? 'odd' : 'even'}`}>
             <AboutSlider
               image={val.image}
               title={val.title}
               description={val.desc}
             />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>

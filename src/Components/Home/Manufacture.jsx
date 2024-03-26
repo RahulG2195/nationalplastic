@@ -63,20 +63,21 @@ export default function Manufacture() {
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get(
-        "http://13.234.238.29:3000/api/Category"
+        "http://localhost:3000/api/Category"
       );
       console.log("response of the category ", response.data.categories)
       const filteredData = response.data.categories.filter(
         (item) =>
-          item.category_id === 24||
-          item.category_id === 25||
-          item.category_id === 26||
-          item.category_id === 27||
-          item.category_id === 28||
+          item.category_id === 24 ||
+          item.category_id === 25 ||
+          item.category_id === 26 ||
+          item.category_id === 27 ||
+          item.category_id === 28 ||
           item.category_id === 29
       );
 
       setHousehold(filteredData);
+
     };
     fetchdata();
   }, []);
@@ -107,7 +108,7 @@ export default function Manufacture() {
                 // slidesPerView={3}
                 loop={true}
                 // navigation
-                // pagination={{ clickable: true }}
+                pagination={{ clickable: true }}
                 // scrollbar={{ draggable: false }}
                 // onSwiper={(swiper) => console.log(swiper)}
                 // onSlideChange={() => console.log("slide change")}
@@ -135,20 +136,24 @@ export default function Manufacture() {
                 }}
               >
                 {Household.map((product) => (
-
-                  <div
-                    key={product.key}
-                  >
+                  <div key={product.key}>
                     <SwiperSlide key={product.category_id} >
                       <CatCards
-                      catid={product.category_id}
-                      style="manfTitle"
+                          catid={
+                            product.category_name && product.category_name.toLowerCase().includes("baby chair")
+                              ? 18 
+                              : product.category_name && product.category_name.toLowerCase().includes("seatings")
+                              ? 15
+                              : product.category_id 
+                          }
+                        style="manfTitle"
                         image={`/Assets/images/Home-page/${product.image_name}`}
                         title={product.category_name}
                         categoryType={product.categoryType}
                         onCategoryChange={() => sendCategory(
                           product.product_name
-                        )}
+                        )
+                        }
                       />
 
                     </SwiperSlide>
@@ -158,22 +163,30 @@ export default function Manufacture() {
 
 
               {Household.map((product) => (
-                  <div
-                    className="col-xs-12 col-sm-6 px-5 col-md-4 shop_col my-md-4 my-2 hideswiper"
-                    key={product.key}
-                  >
-                      <CatCards
-                        style="manfTitle pt-4 px-4 d-flex gap-5  justify-content-arround"
-                        image={`/Assets/images/Home-page/${product.image_name}`}
-                        title={product.category_name}
-                        categoryType={product.categoryType}
-                        onCategoryChange={() => sendCategory(
-                          product.product_name
-                        )}
-                      />
+                <div
+                  className="col-xs-12 col-sm-6 px-5 col-md-4 shop_col my-md-4 my-2 hideswiper"
+                  key={product.key}
+                >
+                  <CatCards
+                    catid={
+                      product.category_name && product.category_name.toLowerCase().includes("baby chair")
+                        ? 18 
+                        : product.category_name && product.category_name.toLowerCase().includes("seatings")
+                        ? 15
+                        : product.category_id 
+                    }
+                    
+                    style="manfTitle pt-4 px-4 d-flex gap-5  justify-content-arround"
+                    image={`/Assets/images/Home-page/${product.image_name}`}
+                    title={product.category_name}
+                    categoryType={product.categoryType}
+                    onCategoryChange={() => sendCategory(
+                      product.product_name
+                    )}
+                  />
 
-                  </div>
-                ))}
+                </div>
+              ))}
 
 
             </div>

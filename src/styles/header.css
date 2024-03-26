@@ -164,6 +164,9 @@
       .accr {
           display: block !important;
       }
+      .cartCount{
+        left: 14px;
+      }
   }
   
   .accr {

@@ -19,17 +19,17 @@ function BlogCard({image, title, url, cat, date, duration, shortDesc}) {
             <div className="blog_body card-body">
                 
                 <div className="cat_div">
-                    <span className="badge cat_badge">{cat}</span>
-                    <span className="date_time">{date}</span>
+                    <span className="badge cat_badge px-4">{cat}</span>
+                    <span className="date_time small fw-semibold">{date}</span>
                 </div>
                 <div className="read_time">
-                    <span className="readTimeSpan">Read time : {duration}</span>
+                    <span className="readTimeSpan medium text-secondary fw-semibold ">Read time : {duration}</span>
                 </div>
-                <div className="blog_data">
-                    <h4>{title}</h4>
-                    <p>{shortDesc}</p>
-                    <div className="continue_div">
-                        {/* <Link className="continue" href="/BlogDetails">CONTINUE READING</Link> */}
+                <div className="blog_data mt-3">
+                    <span className="fw-bolder darkBlue fs-5 mt-5 ">{title}</span>
+                    <p className="fw-semibold text-secondary mt-4">{shortDesc}</p>
+                    <div className="pt-4 fs-6 ">
+                        <Link className="small darkBlue fw-bold " href="/BlogDetails">CONTINUE READING</Link>
                     </div>
                 </div>
             </div>
