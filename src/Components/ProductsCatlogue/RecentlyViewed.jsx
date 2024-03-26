@@ -66,7 +66,7 @@ const RecentlyViewed = () => {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/Products"
+          "http://13.234.238.29:3000/api/Products"
         );
         const filteredproducts = response.data.products.filter(
           (item) => item.categoryType === "premium chairs"
@@ -87,7 +87,7 @@ const RecentlyViewed = () => {
       const customerId = userData.customer_id;
 
       const response = await axios.post(
-        "http://localhost:3000/api/wishListUser",
+        "http://13.234.238.29:3000/api/wishListUser",
         {
           customer_id: customerId,
         }
@@ -120,13 +120,43 @@ const RecentlyViewed = () => {
       console.error("Error:", error);
     }
   };
+  const fetchPrice = async  (id) => {
+    try {
+      const response = await fetch('http://13.234.238.29:3000/api/ProductsCat', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ product_id: id })
+      });
+      console.log(response);
+
+      if (!response.ok) {
+          throw new Error('Failed to fetch product data');
+      }
+
+      const data = await response.json();
+      console.log(" data ", data)
+    
+
+      return data;
+  } catch (error) {
+      console.error('Error fetching product data:', error);
+      throw error;
+  }
+  }
 
   // const handleAddToCart = async(product_name, short_description, price, discount_price, discount, ChairImg)
-  const handleMoveToCart = (product_id) => {
-    // console.log("in handle cart", product_id);
+  const handleMoveToCart =async (product_id) => {
+    const data = await fetchPrice(product_id)
+    const price = data.price;
+    const discountPrice = data.discount_price;
     dispatch(
       addToCart({
         product_id: product_id,
+        price: price,
+        discount_price: discountPrice,
+        quantity: 1,
       })
     );
     console.log("this is product id in card ", product_id);
