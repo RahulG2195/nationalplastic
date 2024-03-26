@@ -47,7 +47,7 @@ function ProdData() {
         const productName = id;
         setProductId(storedId);
 
-        const response = await axios.get("http://13.234.238.29:3000/api/Products");
+        const response = await axios.get("http://localhost:3000/api/Products");
         let filteredData = [];
         // if (productName) {
         //   filteredData = response.data.products.filter(

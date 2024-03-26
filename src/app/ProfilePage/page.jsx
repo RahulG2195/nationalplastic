@@ -85,7 +85,7 @@ function ProfilePage() {
         };
 
         const response = await axios.put(
-          "http://13.234.238.29:3000/api/Users",
+          "http://localhost:3000/api/Users",
           formData
         );
         // console.log("After -------------------response on profile page", formData);
@@ -109,7 +109,7 @@ function ProfilePage() {
         const messageArray = responseData.message;
         setMessages(messageArray);
 
-        setIsLoading(false);
+        // setIsLoading(false);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -177,7 +177,7 @@ function ProfilePage() {
       // Send updated data to userProfile API
       // console.log("userData======222222222222222======", userData);
       const response = await axios.post(
-        "http://13.234.238.29:3000/api/UserProfile",
+        "http://localhost:3000/api/UserProfile",
         editedData
       );
 

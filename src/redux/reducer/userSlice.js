@@ -15,8 +15,8 @@ export const userSlice = createSlice({
 
       action.payload.email
       // console.log("stateeeeeeeeeeee");
-      // console.log("actionnnnnnnnnnn", action);
-      console.log("actionnnnnnnnnnn action.payload", action.payload);
+      // console.log("actionnnnnnnnnnn####################3", action);
+      // console.log("actionnnnnnnnnnn action.payload***********************", action.payload);
       state.isLoggedIn= true
       state.email = action.payload.email
       state.customer_id = action.payload.customer_id

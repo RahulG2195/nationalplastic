@@ -8,15 +8,23 @@ const nextConfig = {
   // // images:{
   //     unoptimized:true,
   // },
-
-  
+  //local
   env: {
+    // MYSQL_HOST: "127.0.0.1 ",
     MYSQL_HOST: "localhost",
     MYSQL_DATABASE: "nationalplastic_db",
     MYSQL_USER: "root",
-    MYSQL_PASSWORD: "National2024",
+    MYSQL_PASSWORD: "National@123#",
     MYSQL_PORT: "3306",
   },
+  //live
+  // env: {
+  //   MYSQL_HOST: "localhost",
+  //   MYSQL_DATABASE: "nationalplastic_db",
+  //   MYSQL_USER: "root",
+  //   MYSQL_PASSWORD: "National2024",
+  //   MYSQL_PORT: "3306",
+  // },
 };
 
 // Reference number, Number of Bedrooms, Number of Bathrooms, Numberof Employees,Number of Owners,Number of Shares - not reflecting in export
