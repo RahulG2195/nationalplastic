@@ -2,6 +2,7 @@
 import Link from "next/link";
 import CatCards from "../CommonComp/catCards";
 import { Swiper, SwiperSlide } from "swiper/react";
+import "../../styles/home_prod.css";
 import {
   Navigation,
   Autoplay,
@@ -62,12 +63,18 @@ export default function Manufacture() {
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get(
-        "http://localhost:3000/api/Products"
+        "http://13.234.238.29:3000/api/Category"
       );
-      const filteredData = response.data.products.filter(
-        (item) => item.categoryType === "home_top_pics"
+      console.log("response of the category ", response.data.categories);
+      const filteredData = response.data.categories.filter(
+        (item) =>
+          item.category_id === 24 ||
+          item.category_id === 25 ||
+          item.category_id === 26 ||
+          item.category_id === 27 ||
+          item.category_id === 28 ||
+          item.category_id === 29
       );
-      console.log(response);
 
       setHousehold(filteredData);
     };
@@ -75,18 +82,25 @@ export default function Manufacture() {
   }, []);
   return (
     <section className="shop_room_sec common_section manufacturer_common_section ">
-      <div className="container ">
+      <div className="px-4">
         <div className="row">
-        <div className="text-center mb-5 ">
-            <div className="fs-1 lh-small fw-bolder text-danger ">Indias Largest Manufacturer <p className="darkBlue fs-1 fw-medium">Of Household Products</p> </div>
-            <div className="mt-1 fw-medium subCptRes w-50"><p>ILorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,
-            </p>
+          <div className="text-center mb-5 ">
+            <div className="fs-1 lh-small fw-bolder text-danger ">
+              Indias Largest Manufacturer{" "}
+              <p className="darkBlue fs-1 fw-medium">Of Household Products</p>{" "}
+            </div>
+            <div className="mt-1 fw-medium subCptRes w-50">
+              <p>
+                ILorem Ipsum is simply dummy text of the printing and
+                typesetting industry. Lorem Ipsum has been the industrys
+                standard dummy text ever since the 1500s,
+              </p>
             </div>
           </div>
           <div className="col-12 products_col">
             <div className="row">
               <Swiper
-                className="swipper"
+                className="swipper show_swipper"
                 style={{ width: "100%", height: "100%" }}
                 modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
                 spaceBetween={15}
@@ -121,24 +135,37 @@ export default function Manufacture() {
                 }}
               >
                 {Household.map((product) => (
-                  <div
-                    className="col-xs-12 col-sm-6 col-md-4   shop_col my-md-4 my-2 "
-                    key={product.key}
-                  >
-                    <SwiperSlide key={product.product_id} >
+                  <div key={product.key}>
+                    <SwiperSlide key={product.category_id}>
                       <CatCards
+                        catid={product.category_id}
+                        style="manfTitle"
                         image={`/Assets/images/Home-page/${product.image_name}`}
-                        title={product.product_name}
+                        title={product.category_name}
                         categoryType={product.categoryType}
-                        onCategoryChange={() => sendCategory(
-                          product.product_name
-                        )}
+                        onCategoryChange={() =>
+                          sendCategory(product.product_name)
+                        }
                       />
-
                     </SwiperSlide>
                   </div>
                 ))}
               </Swiper>
+
+              {Household.map((product) => (
+                <div
+                  className="col-xs-12 col-sm-6 px-5 col-md-4 shop_col my-md-4 my-2 hideswiper"
+                  key={product.key}
+                >
+                  <CatCards
+                    style="manfTitle pt-4 px-4 d-flex gap-5  justify-content-arround"
+                    image={`/Assets/images/Home-page/${product.image_name}`}
+                    title={product.category_name}
+                    categoryType={product.categoryType}
+                    onCategoryChange={() => sendCategory(product.product_name)}
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </div>

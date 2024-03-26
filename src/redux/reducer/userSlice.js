@@ -1,19 +1,18 @@
-import { createSlice} from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 // import axios from "axios";
 // import "react-toastify/dist/ReactToastify.css";
 
 export const userSlice = createSlice({
-  name: 'userData',
-  initialState:{
-  isLoggedIn: false,
-  email:"",
-  customer_id:"",
+  name: "userData",
+  initialState: {
+    isLoggedIn: false,
+    email: "",
+    customer_id: "",
   },
 
   reducers: {
-    setUserData: (state, action)=> {
-
-      action.payload.email
+    setUserData: (state, action) => {
+      action.payload.email;
       // console.log("stateeeeeeeeeeee");
       // console.log("actionnnnnnnnnnn####################3", action);
       // console.log("actionnnnnnnnnnn action.payload***********************", action.payload);

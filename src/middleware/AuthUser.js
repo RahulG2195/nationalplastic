@@ -6,7 +6,7 @@ const app = express();
 app.use(
   cors({
     origin:
-      "https://localhost:3000/",
+      "https://13.234.238.29:3000/",
   })
 );
 

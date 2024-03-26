@@ -50,18 +50,10 @@ const CartProduct = ({
     );
   };
 
-  const handleRemove = async () => {
-    try {
-      dispatch(
-        removeItemFromCart({
-          product_id: productId,
-        })
-      );
-      // onRemoveSuccess(productId);
-    } catch (error) {
-      alert("Cannot delete");
-      console.log(error);
-    }
+  const handleRemove = async (product_id) => {
+    onRemoveSuccess(productId);
+    await dispatch(removeItemFromCart({ product_id: product_id }));
+    console.log(product_id);
   };
 
   const setid = () => {
@@ -134,7 +126,10 @@ const CartProduct = ({
             />
             <p>Save For Later</p>
           </div>
-          <div onClick={handleRemove} className="CouponApplied">
+          <div
+            onClick={() => handleRemove(productId)}
+            className="CouponApplied"
+          >
             <Image
               src="/Assets/images/AddTOCart/Icon-core-trash.png"
               classname="img-fluid d-block w-100"

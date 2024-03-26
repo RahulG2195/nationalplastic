@@ -9,6 +9,7 @@ import { addToCart } from "@/redux/reducer/cartSlice";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import PremiumChairs from "./PremiumChairs";
 import PreChairsCard from "../../Components/preChairsCard/preChairsCard";
+import { useParams } from "next/navigation";
 
 // import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -22,6 +23,8 @@ const PreChairsCards = () => {
   // const [page, setPage] = useState(1);
   // const [hasMore, setHasMore] = useState(true);
   // const [length, setlength] = useState([]);
+  const router = useParams();
+  const cat_id = router.productCatId;
 
   const dispatch = useDispatch();
   // const chairData = [
@@ -133,7 +136,7 @@ const PreChairsCards = () => {
       setCategoryType(categoryTitle);
 
       const response = await axios.get(
-        `http://localhost:3000/api/ProductsCat?query=${categoryTitle}`
+        `http://13.234.238.29:3000/api/ProductsCat?query=${cat_id}`
       );
       console.log("API Response:", response.data); // Log API response
 
@@ -170,13 +173,13 @@ const PreChairsCards = () => {
           });
         }
 
-        if (categoryType) {
-          filteredData = filteredData.filter(
-            (item) =>
-              item.categoryType &&
-              item.categoryType.toLowerCase() == categoryType.toLowerCase()
-          );
-        }
+        // if (categoryType) {
+        //   filteredData = filteredData.filter(
+        //     (item) =>
+        //       item.categoryType &&
+        //       item.categoryType.toLowerCase() == categoryType.toLowerCase()
+        //   );
+        // }
 
         setProducts(filteredData);
 
@@ -203,11 +206,42 @@ const PreChairsCards = () => {
       })
     );
   };
+  const fetchPrice = async  (id) => {
+    try {
+      const response = await fetch('http://13.234.238.29:3000/api/ProductsCat', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ product_id: id })
+      });
+      console.log(response);
 
-  const handleMoveToCart = (product_id) => {
+      if (!response.ok) {
+          throw new Error('Failed to fetch product data');
+      }
+
+      const data = await response.json();
+      console.log(" data ", data)
+    
+
+      return data;
+  } catch (error) {
+      console.error('Error fetching product data:', error);
+      throw error;
+  }
+  }
+
+  const handleMoveToCart = async (product_id) => {
+    const data = await fetchPrice(product_id)
+    const price = data.price;
+    const discountPrice = data.discount_price;
     dispatch(
       addToCart({
         product_id: product_id,
+        price: price,
+        discount_price: discountPrice,
+        quantity: 1,
       })
     );
   };

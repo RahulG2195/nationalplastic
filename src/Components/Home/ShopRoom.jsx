@@ -1,5 +1,6 @@
 import CatCards from "../CommonComp/catCards";
 import { Swiper, SwiperSlide } from "swiper/react";
+import "../../styles/home_prod.css";
 import {
   Navigation,
   Autoplay,
@@ -17,10 +18,17 @@ export default function ShopRoom() {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/Products"
+          "http://13.234.238.29:3000/api/Category"
         );
-        const filteredData = response.data.products.filter(
-          (item) => item.categoryType === "shop_by_room"
+        console.log("response of the category ", response.data.categories);
+        const filteredData = response.data.categories.filter(
+          (item) =>
+            item.category_id === 30 ||
+            item.category_id === 31 ||
+            item.category_id === 32 ||
+            item.category_id === 33 ||
+            item.category_id === 34 ||
+            item.category_id === 35
         );
         setProductArr(filteredData);
       } catch (error) {
@@ -35,16 +43,23 @@ export default function ShopRoom() {
     <section className="shop_room_sec common_section">
       <div className="container">
         <div className="row">
-        <div className="text-center mb-5">
-            <div className="darkBlue fs-1 fw-medium">Shop By <span className="fs-1 lh-small fw-bolder text-danger ">Rooms</span> </div>
-            <div className="mt-1 fw-medium subCptRes w-50"><p>ILorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,
-            </p>
+          <div className="text-center mb-5">
+            <div className="darkBlue fs-1 fw-medium">
+              Shop By{" "}
+              <span className="fs-1 lh-small fw-bold text-danger ">Rooms</span>{" "}
+            </div>
+            <div className="mt-1 fw-medium subCptRes w-50">
+              <p>
+                ILorem Ipsum is simply dummy text of the printing and
+                typesetting industry. Lorem Ipsum has been the industrys
+                standard dummy text ever since the 1500s,
+              </p>
             </div>
           </div>
           <div className="col-12 products_col">
             <div className="row">
               <Swiper
-                className="swipper"
+                className="swipper show_swipper"
                 style={{ width: "100%", height: "100%" }}
                 modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
                 spaceBetween={15}
@@ -77,18 +92,35 @@ export default function ShopRoom() {
                     className="col-md-4 shop_col my-md-4 my-2"
                     key={product.product_id}
                   >
-                    <SwiperSlide key={product.product_id}>
+                    <SwiperSlide key={product.category_id}>
                       <CatCards
+                        catid={product.category_id}
                         image={`/Assets/images/Home-page/${product.image_name}`}
-                        title={product.product_name}
+                        title={product.category_name}
                         url="#"
                         style={"shop-room"}
-                        key={product.product_id}
+                        key={product.category_id}
                       />
                     </SwiperSlide>
                   </div>
                 ))}
               </Swiper>
+
+              {productArr.map((product) => (
+                <div
+                  className="col-xs-12 col-sm-6 col-md-4 shop_col my-md-4 my-2 hideswiper"
+                  key={product.key}
+                >
+                  <CatCards
+                    catid={product.category_id}
+                    style="manfTitle pt-4 px-4 d-flex gap-5  justify-content-arround"
+                    image={`/Assets/images/Home-page/${product.image_name}`}
+                    title={product.category_name}
+                    categoryType={product.categoryType}
+                    onCategoryChange={() => sendCategory(product.product_name)}
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </div>

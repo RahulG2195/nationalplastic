@@ -19,12 +19,12 @@ function Catalogue() {
                         />
                     </div>
                 </div>
-                <div className="col-md-7 catalogueConntentDiv" >
-                    <h2>Catalogue</h2>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                <div className="col-md-6 catalogueConntentDiv ms-4" >
+                    <h2 className="fs-1 fw-bold mt-5  mb-3">Catalogue</h2>
+                    <p className="fw-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                     <div className="Catasec">
                         <Link href='/Catalogue' className="catalogue-know-more">
-                            <button className="btn view_btn">View More</button>
+                            <button className="btn view_btn py-3 px-5 fs-5">View More</button>
                         </Link>
                     </div>
                 </div>

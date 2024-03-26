@@ -3,8 +3,8 @@ import "../../styles/feature.css";
 
 function Features() {
   return (
-    <section className="feature_sec common_section">
-      <div className="container feature">
+    <section className="px-4 feature_sec common_section">
+      <div className=" feature">
         <div className="row">
           <div className="col-sm-12 col-md-4 features">
             <div>
@@ -18,7 +18,7 @@ function Features() {
                     height={100}
                     layout="responsive"
                     objectFit="cover"
-                  /> 
+                  />
                 </a>
               </div>
               <div className="discounts_div com-dic">
@@ -61,8 +61,8 @@ function Features() {
               <a href="">
                 <div className="feature_img">
                   <Image
-                  src="/Assets/images/feature/Offers-section-1.png"
-                  className="img-fluid d-block w-100" // Use w-100 to make the image fill the entire col-lg col-md-3 col-sm-12umn
+                    src="/Assets/images/feature/Offers-section-3.png"
+                    className="img-fluid d-block w-100" // Use w-100 to make the image fill the entire col-lg col-md-3 col-sm-12umn
                     alt="Team Member"
                     width={100}
                     height={100}

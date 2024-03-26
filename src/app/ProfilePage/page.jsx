@@ -5,18 +5,20 @@ import Wishlist from "../Wishlist/page";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-import { useRouter } from 'next/router';
-
+import { useRouter } from "next/router";
 
 function ProfilePage() {
-  
   useEffect(() => {
-  localStorage.getItem("isLoggedIn") === "true" ? true : window.location.href = 'Login'
+    localStorage.getItem("isLoggedIn") === "true"
+      ? true
+      : (window.location.href = "Login");
 
     const isLoggedIn =
-      localStorage.getItem("isLoggedIn") === "true" ? true : window.location.href = 'Login'
-    
-      // console.log("isLoggedIn+++++", isLoggedIn)
+      localStorage.getItem("isLoggedIn") === "true"
+        ? true
+        : (window.location.href = "Login");
+
+    // console.log("isLoggedIn+++++", isLoggedIn)
     const storedData = JSON.parse(localStorage.getItem("userData")) || {};
     // Retrieve data from local storage
     const userDataString = localStorage.getItem("userData");
@@ -46,18 +48,17 @@ function ProfilePage() {
   const [data, setData] = useState({});
   // const [phone, setPhone] = useState(null);
   const [messages, setMessages] = useState([]);
-  const cust_id =  messages.length > 0 ? messages[0].customer_id : null;
+  const cust_id = messages.length > 0 ? messages[0].customer_id : null;
   const email_id = messages.length > 0 ? messages[0].Email : null;
   // console.log(" messages.length=========", messages.length)
 
   const UpdateData = {
     email: email_id,
-    customer_id: cust_id
+    customer_id: cust_id,
   };
   localStorage.setItem("userId", JSON.stringify(UpdateData));
 
   // console.log("UpdateDataaaaaaaaaaaaaaaaaaaaaaaaaaaa Profile page", UpdateData)
-
 
   // console.log("ssssssssssssssssssssssss",cust_id , email_id)
 
@@ -77,7 +78,7 @@ function ProfilePage() {
         const data = JSON.parse(email);
         // const id = JSON.parse(customer_id);
         const useremail = data.email;
-// console.log("oLIne no 77 from profilePagebject")
+        // console.log("oLIne no 77 from profilePagebject")
 
         const formData = {
           email: useremail,
@@ -85,7 +86,7 @@ function ProfilePage() {
         };
 
         const response = await axios.put(
-          "http://localhost:3000/api/Users",
+          "http://13.234.238.29:3000/api/Users",
           formData
         );
         // console.log("After -------------------response on profile page", formData);
@@ -124,9 +125,9 @@ function ProfilePage() {
     setEditedData((prevData) => ({
       ...prevData,
       [name]: value,
-      Id:cust_id
-  }));
-  
+      Id: cust_id,
+    }));
+
     // console.log("name0000000000000/////////////////////////////", editedData);
     let errorMessage = "";
 
@@ -177,7 +178,7 @@ function ProfilePage() {
       // Send updated data to userProfile API
       // console.log("userData======222222222222222======", userData);
       const response = await axios.post(
-        "http://localhost:3000/api/UserProfile",
+        "http://13.234.238.29:3000/api/UserProfile",
         editedData
       );
 
@@ -198,19 +199,19 @@ function ProfilePage() {
 
   async function handleLogout(e) {
     e.preventDefault();
-  
+
     // Confirmation prompt (optional, can be replaced with a custom component)
     if (window.confirm("Are you sure you want to log out?")) {
       // Clear localStorage (remove `isLoggedIn` key only for better control)
-      localStorage.removeItem('isLoggedIn');
-  
+      localStorage.removeItem("isLoggedIn");
+
       // Update state variables
       // setIsLoggedIn(false);
       setData({}); // Clear user data
-  
+
       // Redirect after logout (optional)
       // router.push('/login'); // Use Next.js router for navigation
-      window.location.href = '/'
+      window.location.href = "/";
     }
   }
 
@@ -321,7 +322,8 @@ function ProfilePage() {
                       )
                     } */}
 
-                      {Array.isArray(messages) || messages.length > 0 && messages != null ? (
+                      {Array.isArray(messages) ||
+                      (messages.length > 0 && messages != null) ? (
                         messages.map((message, index) => (
                           <form key={index} onSubmit={handleEdit}>
                             <div className="row user-data">
@@ -396,7 +398,8 @@ function ProfilePage() {
                   <hr />
 
                   <div>
-                    {(Array.isArray(messages) && messages.length > 0 || messages !== null) ? (
+                    {(Array.isArray(messages) && messages.length > 0) ||
+                    messages !== null ? (
                       messages.map((message, index) => (
                         <form key={index}>
                           <div className="row user-data">

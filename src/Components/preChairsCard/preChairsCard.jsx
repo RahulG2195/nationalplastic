@@ -16,7 +16,7 @@ const PreChairsCard = (props) => {
         const customerId = userData.customer_id;
 
         const response = await axios.post(
-          "http://localhost:3000/api/wishListUser",
+          "http://13.234.238.29:3000/api/wishListUser",
           {
             customer_id: customerId,
           }
@@ -59,7 +59,7 @@ const PreChairsCard = (props) => {
         <div className="card-body">
           <div className="PreFoot mt-2 ">
             <div className="class d-flex flex-wrap justify-content-between my-2 ">
-              <Link  href={`/ProductDetail/${props.id}`}>
+              <Link href={`/ProductDetail/${props.id}`}>
                 <div className="left fw-bold text-danger">{props.Title}</div>
               </Link>
               <div className="right">

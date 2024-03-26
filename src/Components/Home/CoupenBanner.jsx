@@ -65,63 +65,64 @@ function CoupenBanner() {
         </div>
       {/* </section> */}
 
+     
       <div className="delivery_inst_Sec">
-        <div className="container delivery_div">
-          <div className="row featuresFour d-flex justify-content-center">
-            <div className="col-6 col-md-4 col-lg-3 col-xl-3">
+        {/* <div className=" "> */}
+          <div className="d-flex justify-content-center gap-2 flex-wrap featuresFour">
+            <div className="px-4">
               <div className="divelerycol d-flex align-items-center">
                 <div className="del_img">
                   <Image
                     src="/Assets/images/smiley.png"
                     alt="gift image"
-                    width={33}
-                    height={33}
+                    width={25}
+                    height={25}
                   />
                 </div>
                 <p>Happy Customers</p>
               </div>
             </div>
-            <div className="col-6 col-md-4 col-xs-6 col-lg-3 col-xl-3">
+            <div className="px-4">
               <div className="divelerycol d-flex align-items-center">
                 <div className="del_img">
                   <Image
                     src="/Assets/images/delivery-truck.png"
                     alt="gift image"
-                    width={33}
-                    height={33}
+                    width={25}
+                    height={25}
                   />
                 </div>
                 <p>Free Shipping</p>
               </div>
             </div>
-            <div className="col-6 col-md-4 col-lg-3 col-xl-3">
+            <div className="px-4">
               <div className="divelerycol d-flex align-items-center">
                 <div className="del_img">
                   <Image
                     src="/Assets/images/settings.png"
                     alt="gift image"
-                    width={33}
-                    height={33}
+                    width={25}
+                    height={25}
                   />
                 </div>
                 <p>Free Installation</p>
               </div>
             </div>
-            <div className="col-6 col-md-4 col-lg-3 col-xl-3">
+            <div className="px-4">
               <div className="divelerycol d-flex align-items-center">
                 <div className="del_img">
                   <Image
                     src="/Assets/images/0.png"
                     alt="gift image"
-                    width={33}
-                    height={33}
+                    width={25}
+                    height={25}
                   />
                 </div>
                 <p>No Cost EMIs</p>
               </div>
             </div>
           </div>
-        </div>
+        {/* </div> */}
       </div>
 
     </>

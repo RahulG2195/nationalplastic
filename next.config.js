@@ -11,15 +11,15 @@ const nextConfig = {
   //local
   env: {
     // MYSQL_HOST: "127.0.0.1 ",
-    MYSQL_HOST: "localhost",
+    MYSQL_HOST: "13.234.238.29",
     MYSQL_DATABASE: "nationalplastic_db",
     MYSQL_USER: "root",
-    MYSQL_PASSWORD: "National@123#",
+    MYSQL_PASSWORD: "National2024",
     MYSQL_PORT: "3306",
   },
   //live
   // env: {
-  //   MYSQL_HOST: "localhost",
+  //   MYSQL_HOST: "13.234.238.29",
   //   MYSQL_DATABASE: "nationalplastic_db",
   //   MYSQL_USER: "root",
   //   MYSQL_PASSWORD: "National2024",

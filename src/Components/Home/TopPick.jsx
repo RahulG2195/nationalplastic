@@ -34,14 +34,18 @@ export default function TopPick() {
   // ];
 
   const [hometoppics, setHometoppics] = useState([]);
-
+  console.log("here are categories", hometoppics);
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get(
-        "http://localhost:3000/api/Products"
+        "http://13.234.238.29:3000/api/Category"
       );
-      const filteredData = response.data.products.filter(
-        (item) => item.categoryType === "home_top_pics"
+      console.log("response of the category ", response.data.categories);
+      const filteredData = response.data.categories.filter(
+        (item) =>
+          item.category_id === 15 ||
+          item.category_id === 13 ||
+          item.category_id === 18
       );
       console.log(response);
 
@@ -58,13 +62,19 @@ export default function TopPick() {
     <section className="top_pick_sec common_section">
       <div className="container">
         <div className="row">
-        <div className="text-center mb-5 ">
-            <div className="fs-1 fw-bold text-danger">Top Picks <span className="darkBlue fw-normal">For You</span> </div>
-            <div className="mt-1 fw-medium subCptRes w-50"><p>ILorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,
-            </p>
+          <div className="text-center mb-5 ">
+            <div className="fs-1 fw-bold text-danger">
+              Top Picks <span className="darkBlue fw-normal">For You</span>{" "}
+            </div>
+            <div className="mt-1 fw-medium subCptRes w-50">
+              <p>
+                ILorem Ipsum is simply dummy text of the printing and
+                typesetting industry. Lorem Ipsum has been the industrys
+                standard dummy text ever since the 1500s,
+              </p>
             </div>
           </div>
-          <div className="col-12 products_col">
+          <div className="col-12 px-5 products_col mt-4">
             <div className="row">
               <Swiper
                 className="swipper"
@@ -103,13 +113,13 @@ export default function TopPick() {
               >
                 {hometoppics.map((product) => (
                   <div className="col-md-4" key={product.key}>
-                    <SwiperSlide key={product.product_id} >
+                    <SwiperSlide key={product.category_id}>
                       <CatCards
+                        catid={product.category_id}
                         image={`/Assets/images/Home-page/${product.image_name}`}
-                        title={product.product_name}
+                        title={product.category_name}
                         url={product.url}
                       />
-
                     </SwiperSlide>
                   </div>
                 ))}

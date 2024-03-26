@@ -25,7 +25,7 @@ export default function Header() {
 
   // useEffect(async () => {
   //   const check = await axios.get(
-  //     "http://localhost:3000/api/UserCart"
+  //     "http://13.234.238.29:3000/api/UserCart"
   //   );
   //   if (data > 0) {
   //     // const data = check.data.products.length;

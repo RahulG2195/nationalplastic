@@ -6,10 +6,10 @@ import PriceDetailsCard from "@/Components/PriceDetails/PriceDetailsCard";
 import FooterRow from "@/Components/FooterRow/FooterRow";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { addItemToCart } from "@/redux/reducer/cartSlice";
+import { addItemToCart, removeItemFromCart } from "@/redux/reducer/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 // import { useSelector } from "react-redux";
-
+import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 function AddToCart() {
   // const cartState = useSelector((state) => state.cart);
   const [productDetailArr, setProductDetailArr] = useState([]);
@@ -27,7 +27,7 @@ function AddToCart() {
     const fetchData = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/UserCart",
+          "http://13.234.238.29:3000/api/UserCart",
           {
             customer_id: customerId,
           }
@@ -116,12 +116,15 @@ function AddToCart() {
       const userDataString = localStorage.getItem("userData");
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
-      const response = await axios.get(
-        "http://localhost:3000/api/UserCart",
-        customerId
+      const response = await axios.post(
+        "http://13.234.238.29:3000/api/UserCart",
+        {
+          customer_id: customerId,
+        }
       );
+      console.log("response", response);
       const cartData = response.data.products;
-
+      console.log("cartdata: ", cartData);
       // Extracting relevant data from the cart data
       const products = cartData.map((item) => ({
         product_id: item.product_id,
@@ -169,7 +172,11 @@ function AddToCart() {
   };
 
   const onAddToCart = async (product_id) => {
-    handleAddtoWishlist(product_id);
+    dispatch(
+      addItemToWishlist({
+        product_id: product_id,
+      })
+    );
   };
   const onRemoveSuccess = async (product_id) => {
     try {
@@ -178,10 +185,19 @@ function AddToCart() {
       const userDataString = localStorage.getItem("userData");
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
-      await axios.delete(`http://localhost:3000/api/UserCart`, {
-        product_id: product_id,
-        customerId: customerId,
-      });
+      const formData = new FormData();
+      formData.append("customer_id", customerId);
+      formData.append("product_id", product_id);
+      const response = await axios.delete(
+        "http://13.234.238.29:3000/api/UserCart",
+        {
+          data: formData,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("response", response);
 
       // If all products are removed, update the state to reflect empty cart
       if (productDetailArr.length === 1) {
@@ -191,6 +207,7 @@ function AddToCart() {
         setTotalPayble(0);
         setInstallationCharges(0);
         setTotalCount(0);
+        handleCartChange();
       } else {
         // Remove the product from the state
         setProductDetailArr((prevItems) =>

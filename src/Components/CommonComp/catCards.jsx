@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
-
-function CatCards({ image, title,onCategoryChange,style = "" }) {
+import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
+function CatCards({ image, title,onCategoryChange,style,catid }) {
 
 const sendCategory = () =>{
   console.log("Category clicked:", title);
@@ -14,7 +14,7 @@ const sendCategory = () =>{
   return (
     <>
       <div className="cards">
-        <Link onClick={sendCategory} href='/ProductCatlogue' >
+        <Link onClick={sendCategory} href={`/ProductCatlogue/${catid}`} >
           <div className="card_img">
             <Image
               src={image}
@@ -25,9 +25,9 @@ const sendCategory = () =>{
               objectFit="cover"
             />
           </div>
-          <div className={`prodname d-flex justify-content-between px-2 ${style}`}>
-            <h4>{title}</h4>
-            <i className="fa fa-arrow-right" aria-hidden="true"></i>
+          <div className={`prodname ${style ? style : 'py-3 d-flex justify-content-between px-2'}`}>
+            <h4 className="fw-bold">{title}</h4>
+          <ArrowForwardOutlinedIcon className="fw-bold" />
           </div>
         </Link>
       </div>

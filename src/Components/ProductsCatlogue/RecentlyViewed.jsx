@@ -17,7 +17,7 @@ import { useDispatch } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 import { Bounce, toast } from "react-toastify";
 import { useRef } from "react";
-
+import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 const RecentlyViewed = () => {
   // const RecentlyViewedData = [
   //     { ChairImg: "/Assets/images/New-launches-1/New-launches-1.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
@@ -31,33 +31,31 @@ const RecentlyViewed = () => {
   // ];
 
   // const notify = () => {
-  //     toast.success('ADDED TO WISHLIST', {
-  //       position: "top-center",
-  //       autoClose: 2000,
-  //       hideProgressBar: false,
-  //       closeOnClick: true,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //       theme: "dark",
-  //       transition: Bounce,
-  //     });
-  //   };
-
-  //   const notifyinfo = () => {
-  //     // console.log("Toast notification triggered");
-  //     toast.info('ALREADY IN WISHLIST', {
-  //       position: "top-center",
-  //       autoClose: 2000,
-  //       hideProgressBar: false,
-  //       closeOnClick: true,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //       theme: "dark",
-  //       transition: Bounce,
-  //     });
-  //   };
+  //   toast.success("ADDED TO WISHLIST", {
+  //     position: "top-center",
+  //     autoClose: 2000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "dark",
+  //     transition: Bounce,
+  //   });
+  // };
+  const notifyinfo = () => {
+    toast.success("Already in WISHLIST", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+  };
   const [RecentlyViewedData, setRecentlyViewedData] = useState([]);
   const [wishlistItems, setWishlistItems] = useState([]);
   const [autoplay, setAutoplay] = useState(true);
@@ -67,7 +65,9 @@ const RecentlyViewed = () => {
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/Products");
+        const response = await axios.get(
+          "http://13.234.238.29:3000/api/Products"
+        );
         const filteredproducts = response.data.products.filter(
           (item) => item.categoryType === "premium chairs"
         );
@@ -87,7 +87,7 @@ const RecentlyViewed = () => {
       const customerId = userData.customer_id;
 
       const response = await axios.post(
-        "http://localhost:3000/api/wishListUser",
+        "http://13.234.238.29:3000/api/wishListUser",
         {
           customer_id: customerId,
         }
@@ -108,37 +108,55 @@ const RecentlyViewed = () => {
     ChairImg
   ) => {
     try {
-      const isProductAlreadyAdded = wishlistItems.some(
-        (item) => item.ProductName === product_name
+      dispatch(
+        addItemToWishlist({
+          product_id: product_id,
+        })
       );
-      if (isProductAlreadyAdded) {
-        notifyinfo();
-
-        return;
-      }
-
-      await axios.post(`http://localhost:3000/api/Wishlist`, {
-        product_id: product_id,
-        ProductName: product_name,
-        productDiscription: short_description,
-        Price: price,
-        originalPrice: discount_price,
-        discount: discount,
-        WishlistImg: ChairImg,
-      });
       notify();
       fetchWishlistItems();
     } catch (error) {
+      notifyinfo();
       console.error("Error:", error);
     }
   };
+  const fetchPrice = async  (id) => {
+    try {
+      const response = await fetch('http://13.234.238.29:3000/api/ProductsCat', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ product_id: id })
+      });
+      console.log(response);
+
+      if (!response.ok) {
+          throw new Error('Failed to fetch product data');
+      }
+
+      const data = await response.json();
+      console.log(" data ", data)
+    
+
+      return data;
+  } catch (error) {
+      console.error('Error fetching product data:', error);
+      throw error;
+  }
+  }
 
   // const handleAddToCart = async(product_name, short_description, price, discount_price, discount, ChairImg)
-  const handleMoveToCart = (product_id) => {
-    // console.log("in handle cart", product_id);
+  const handleMoveToCart =async (product_id) => {
+    const data = await fetchPrice(product_id)
+    const price = data.price;
+    const discountPrice = data.discount_price;
     dispatch(
       addToCart({
         product_id: product_id,
+        price: price,
+        discount_price: discountPrice,
+        quantity: 1,
       })
     );
     console.log("this is product id in card ", product_id);

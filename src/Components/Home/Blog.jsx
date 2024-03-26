@@ -51,7 +51,7 @@ export default function Blog() {
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get(
-        "http://localhost:3000/api/Products"
+        "http://13.234.238.29:3000/api/Products"
       );
       const filteredData = response.data.products.filter(
         (item) => item.categoryType === "Blog"
@@ -62,24 +62,24 @@ export default function Blog() {
   }, []);
   return (
     <section className="top_pick_sec common_section">
-      <div className="container">
+      <div className="px-4">
         <div className="row">
-          <div className="section_header mx-auto text-center">
-            <h2>
-              <span>Blog</span>
-            </h2>
-            <p>Lorem Ipsum</p>
+          <div className="text-center highlightCont my-5">
+            <div className="fs-1 lh-small fw-bolder text-danger "> Blog</div>
+            <div className="mt-1 fw-bold subCptRes w-50">
+              <p>Lorem Ipsum</p>
+            </div>
           </div>
           <div className="col-12 products_col">
             <div className="row">
               <Swiper
-                className="swipper"
+                className="swipper px-5"
                 style={{ width: "100%", height: "100%" }}
                 modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
                 spaceBetween={15}
-                // slidesPerView={3}
+                slidesPerView={2}
                 loop={true}
-                // navigation
+                // navigation={{ clickable: true }}
                 // pagination={{ clickable: true }}
                 // scrollbar={{ draggable: false }}
                 // onSwiper={(swiper) => console.log(swiper)}
@@ -98,11 +98,11 @@ export default function Blog() {
                     spaceBetween: 20,
                   },
                   768: {
-                    slidesPerView: 3,
+                    slidesPerView: 2,
                     spaceBetween: 40,
                   },
                   1024: {
-                    slidesPerView: 3,
+                    slidesPerView: 2,
                     spaceBetween: 50,
                   },
                 }}
