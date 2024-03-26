@@ -47,10 +47,9 @@ export const cartSlice = createSlice({
 
     addItemToCart: (state, action) => {
       const { product_id, quantity, price, discount_price } = action.payload;
-      console.log("product added successfully before adding" + action.payload);
       console.log(
-        "product added successfully before adding" +
-          JSON.stringify(state.products)
+        "product added successfully before adding " +
+          JSON.stringify(action.payload)
       );
 
       const isItemInCart = state.products.some(
@@ -58,6 +57,7 @@ export const cartSlice = createSlice({
       );
       console.log("isItemInCart", isItemInCart);
       if (!isItemInCart) {
+        console.log("Inside ! ");
         state.products.push(action.payload);
         console.log("stateTotalPrice: " + discount_price);
         console.log(
@@ -247,6 +247,7 @@ export const addToCart = (item) => async (dispatch, getState) => {
   const userDataString = localStorage.getItem("userData");
   const userData = JSON.parse(userDataString);
   const customerId = userData.customer_id;
+  console.log("userData" + customerId);
   const response = await axios.put("http://13.234.238.29:3000/api/UserCart", {
     customer_id: customerId,
     product_id: item.product_id,

@@ -98,6 +98,7 @@ const WishlistPage1 = () => {
         product_id: productId,
         price: price,
         discount_price: discount_price,
+        quantity: 1,
       })
     );
   };

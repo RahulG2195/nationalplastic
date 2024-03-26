@@ -1,6 +1,6 @@
 import CatCards from "../CommonComp/catCards";
 import { Swiper, SwiperSlide } from "swiper/react";
-import '../../styles/home_prod.css'
+import "../../styles/home_prod.css";
 import {
   Navigation,
   Autoplay,
@@ -20,7 +20,7 @@ export default function ShopRoom() {
         const response = await axios.get(
           "http://13.234.238.29:3000/api/Category"
         );
-        console.log("response of the category ", response.data.categories)
+        console.log("response of the category ", response.data.categories);
         const filteredData = response.data.categories.filter(
           (item) =>
             item.category_id === 30 ||
@@ -44,9 +44,16 @@ export default function ShopRoom() {
       <div className="container">
         <div className="row">
           <div className="text-center mb-5">
-            <div className="darkBlue fs-1 fw-medium">Shop By <span className="fs-1 lh-small fw-bold text-danger ">Rooms</span> </div>
-            <div className="mt-1 fw-medium subCptRes w-50"><p>ILorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,
-            </p>
+            <div className="darkBlue fs-1 fw-medium">
+              Shop By{" "}
+              <span className="fs-1 lh-small fw-bold text-danger ">Rooms</span>{" "}
+            </div>
+            <div className="mt-1 fw-medium subCptRes w-50">
+              <p>
+                ILorem Ipsum is simply dummy text of the printing and
+                typesetting industry. Lorem Ipsum has been the industrys
+                standard dummy text ever since the 1500s,
+              </p>
             </div>
           </div>
           <div className="col-12 products_col">
@@ -110,11 +117,8 @@ export default function ShopRoom() {
                     image={`/Assets/images/Home-page/${product.image_name}`}
                     title={product.category_name}
                     categoryType={product.categoryType}
-                    onCategoryChange={() => sendCategory(
-                      product.product_name
-                    )}
+                    onCategoryChange={() => sendCategory(product.product_name)}
                   />
-
                 </div>
               ))}
             </div>

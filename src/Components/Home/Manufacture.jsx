@@ -2,7 +2,7 @@
 import Link from "next/link";
 import CatCards from "../CommonComp/catCards";
 import { Swiper, SwiperSlide } from "swiper/react";
-import '../../styles/home_prod.css'
+import "../../styles/home_prod.css";
 import {
   Navigation,
   Autoplay,
@@ -65,14 +65,14 @@ export default function Manufacture() {
       const response = await axios.get(
         "http://13.234.238.29:3000/api/Category"
       );
-      console.log("response of the category ", response.data.categories)
+      console.log("response of the category ", response.data.categories);
       const filteredData = response.data.categories.filter(
         (item) =>
-          item.category_id === 24||
-          item.category_id === 25||
-          item.category_id === 26||
-          item.category_id === 27||
-          item.category_id === 28||
+          item.category_id === 24 ||
+          item.category_id === 25 ||
+          item.category_id === 26 ||
+          item.category_id === 27 ||
+          item.category_id === 28 ||
           item.category_id === 29
       );
 
@@ -135,47 +135,37 @@ export default function Manufacture() {
                 }}
               >
                 {Household.map((product) => (
-
-                  <div
-                    key={product.key}
-                  >
-                    <SwiperSlide key={product.category_id} >
+                  <div key={product.key}>
+                    <SwiperSlide key={product.category_id}>
                       <CatCards
-                      catid={product.category_id}
-                      style="manfTitle"
+                        catid={product.category_id}
+                        style="manfTitle"
                         image={`/Assets/images/Home-page/${product.image_name}`}
                         title={product.category_name}
                         categoryType={product.categoryType}
-                        onCategoryChange={() => sendCategory(
-                          product.product_name
-                        )}
+                        onCategoryChange={() =>
+                          sendCategory(product.product_name)
+                        }
                       />
-
                     </SwiperSlide>
                   </div>
                 ))}
               </Swiper>
 
-
               {Household.map((product) => (
-                  <div
-                    className="col-xs-12 col-sm-6 px-5 col-md-4 shop_col my-md-4 my-2 hideswiper"
-                    key={product.key}
-                  >
-                      <CatCards
-                        style="manfTitle pt-4 px-4 d-flex gap-5  justify-content-arround"
-                        image={`/Assets/images/Home-page/${product.image_name}`}
-                        title={product.category_name}
-                        categoryType={product.categoryType}
-                        onCategoryChange={() => sendCategory(
-                          product.product_name
-                        )}
-                      />
-
-                  </div>
-                ))}
-
-
+                <div
+                  className="col-xs-12 col-sm-6 px-5 col-md-4 shop_col my-md-4 my-2 hideswiper"
+                  key={product.key}
+                >
+                  <CatCards
+                    style="manfTitle pt-4 px-4 d-flex gap-5  justify-content-arround"
+                    image={`/Assets/images/Home-page/${product.image_name}`}
+                    title={product.category_name}
+                    categoryType={product.categoryType}
+                    onCategoryChange={() => sendCategory(product.product_name)}
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </div>

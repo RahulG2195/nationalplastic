@@ -34,17 +34,17 @@ export default function TopPick() {
   // ];
 
   const [hometoppics, setHometoppics] = useState([]);
-  console.log("here are categories",hometoppics)
+  console.log("here are categories", hometoppics);
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get(
         "http://13.234.238.29:3000/api/Category"
       );
-      console.log("response of the category ", response.data.categories)
+      console.log("response of the category ", response.data.categories);
       const filteredData = response.data.categories.filter(
         (item) =>
-          item.category_id === 15||
-          item.category_id === 13||
+          item.category_id === 15 ||
+          item.category_id === 13 ||
           item.category_id === 18
       );
       console.log(response);
@@ -53,7 +53,6 @@ export default function TopPick() {
     };
     fetchdata();
   }, []);
- 
 
   const sendCategory = (productName) => {
     localStorage.setItem("category", productName);
@@ -114,7 +113,7 @@ export default function TopPick() {
               >
                 {hometoppics.map((product) => (
                   <div className="col-md-4" key={product.key}>
-                    <SwiperSlide key={product.category_id} >
+                    <SwiperSlide key={product.category_id}>
                       <CatCards
                         catid={product.category_id}
                         image={`/Assets/images/Home-page/${product.image_name}`}

@@ -11,7 +11,6 @@ import PremiumChairs from "./PremiumChairs";
 import PreChairsCard from "../../Components/preChairsCard/preChairsCard";
 import { useParams } from "next/navigation";
 
-
 // import InfiniteScroll from "react-infinite-scroll-component";
 
 const PreChairsCards = () => {

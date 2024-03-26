@@ -55,10 +55,8 @@ function BottomBar() {
         setBox(allproducts.filter((products) => products.category_id == 21));
         setDrawer(allproducts.filter((products) => products.category_id == 22));
 
-        console.log(preEventChair)
-        
-      }
-      catch {
+        console.log(preEventChair);
+      } catch {
         console.error("Error fetching data:");
       }
     };
