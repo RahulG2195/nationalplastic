@@ -66,6 +66,7 @@ function AddToCart() {
               quantity: product.quantity, // Explicitly set quantity to 1
               price: product.price,
               discount_price: product.discount_price,
+              from:false
             })
           );
         });
