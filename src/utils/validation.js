@@ -22,3 +22,13 @@ export const isValidMobile = (mobile) => {
   const mobilePattern = /^\d{10}$/; // Change the pattern as per your requirement
   return mobilePattern.test(mobile);
 };
+
+export const isLoggedIn = () => {
+   const value = localStorage.getItem("isLoggedIn") || false;
+    if(value){
+      return true;
+    }else{
+    return false
+    }
+};
+
