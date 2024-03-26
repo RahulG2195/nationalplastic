@@ -23,17 +23,22 @@ export default function Header() {
 
   useEffect(async () => {
     const userDataString = localStorage.getItem("userData");
-    const userData = JSON.parse(userDataString);
-    const customerId = userData.customer_id;
+    const userData = JSON.parse(userDataString) || {};
+    const customerId = userData.customer_id || {};
 
-    const check = await axios.post("http://localhost:3000/api/UserCart", {
+    const check = await axios.post("http://13.234.238.29:3000//api/UserCart", {
       customer_id: customerId,
     });
-    if (check && check.data && check.data.products && Array.isArray(check.data.products)) {
+    if (
+      check &&
+      check.data &&
+      check.data.products &&
+      Array.isArray(check.data.products)
+    ) {
       length = check.data.products.length;
       setCount(length);
     } else {
-      length = 0; 
+      length = 0;
     }
     // setCount(data);
   }, [dispatch]);
@@ -206,7 +211,7 @@ export default function Header() {
                       onClick={isClicked ? handleShow : null}
                     >
                       <img src="/Assets/svg/Group 4.svg" alt="" />
-                      <p className="Homeemail">{'data.email'}</p>
+                      <p className="Homeemail">{"data.email"}</p>
                     </Link>
                   ) : (
                     <Link

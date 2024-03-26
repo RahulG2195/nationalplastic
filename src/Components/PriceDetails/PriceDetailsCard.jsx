@@ -57,7 +57,9 @@ const PriceDetailsCard = ({
 
         <div className="d-flex justify-content-between mt-3">
           <div>Total Payable</div>
-          <div className="fw-bold">Rs {totalPrice ? totalPrice : "0000"}</div>
+          <div className="fw-bold">
+            Rs {totalPrice ? totalPrice - InstallationCharges : "0000"}
+          </div>
         </div>
         <div className="small my-2 text-success">
           Congratulations, you have just saved RS{" "}

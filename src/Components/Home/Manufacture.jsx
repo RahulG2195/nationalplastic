@@ -2,7 +2,7 @@
 import Link from "next/link";
 import CatCards from "../CommonComp/catCards";
 import { Swiper, SwiperSlide } from "swiper/react";
-import '../../styles/home_prod.css'
+import "../../styles/home_prod.css";
 import {
   Navigation,
   Autoplay,
@@ -63,11 +63,16 @@ export default function Manufacture() {
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get(
-        "http://localhost:3000/api/Category"
+        "http://13.234.238.29:3000//api/Category"
       );
-      console.log("response of the category ", response.data.categories)
+      console.log("response of the category ", response.data.categories);
       const filteredData = response.data.categories.filter(
         (item) =>
+          item.category_id === 24 ||
+          item.category_id === 25 ||
+          item.category_id === 26 ||
+          item.category_id === 27 ||
+          item.category_id === 28 ||
           item.category_id === 24 ||
           item.category_id === 25 ||
           item.category_id === 26 ||
@@ -155,12 +160,10 @@ export default function Manufacture() {
                         )
                         }
                       />
-
                     </SwiperSlide>
                   </div>
                 ))}
               </Swiper>
-
 
               {Household.map((product) => (
                 <div

@@ -14,11 +14,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/reducer/cartSlice";
+import { Bounce, toast } from "react-toastify";
+
 // import { Message } from "@mui/icons-material";
 // import Breadcrump from "@/app/Breadcromp/page";
 // import RecentlyViewed from "../ProductsCatlogue/RecentlyViewed";
 import { useParams } from "next/navigation";
-
+import {isLoggedIn} from "@/utils/validation"
 function ProdData() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -28,6 +30,19 @@ function ProdData() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [count, setCount] = useState(1);
 
+  const notify = () => {
+    toast.error("Login To Add to CART", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+  };
   const dispatch = useDispatch();
   const router = useParams();
   const id = router.productId;
@@ -35,9 +50,11 @@ function ProdData() {
     setCount(count + 1);
   };
 
+
   const decrement = () => {
     setCount(count - 1);
   };
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,7 +64,7 @@ function ProdData() {
         setProductId(storedId);
 
         const response = await axios.get(
-          "http://localhost:3000/api/Products"
+          "http://13.234.238.29:3000//api/Products"
         );
         let filteredData = [];
         // if (productName) {
@@ -79,9 +96,55 @@ function ProdData() {
     fetchData();
   }, []);
 
-  const handleMoveToCart = (storedId) => {
-    dispatch(addToCart({ product_id: storedId }));
+
+  const fetchPrice = async  (storedId) => {
+    console.log("Fetching price",storedId)
+    try {
+      const response = await fetch('http://13.234.238.29:3000/api/ProductsCat', {
+          method: 'PUT',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ seo_url: storedId })
+      });
+      console.log(response);
+
+      if (!response.ok) {
+          throw new Error('Failed to fetch product data');
+      }
+
+      const data = await response.json();
+      console.log(" data ", data)
+    
+
+      return data;
+  } catch (error) {
+      console.error('Error fetching product data:', error);
+      throw error;
+  }
+  }
+
+  const handleMoveToCart = async (storedId) => {
+    const res = await isLoggedIn()
+    console.log("res         ",res)
+    if(!res){
+      notify()
+    }else{
+    
+    const data = await fetchPrice(storedId)
+    console.log(data)
+    const price = data.price;
+    const discountPrice = data.discount_price;
+    const product_id = data.product_id;
+   
+  
+    
+    dispatch(addToCart({ product_id: product_id, price: price,
+      discount_price: discountPrice,
+      quantity: 1, }));
+    }
   };
+
 
   if (isLoading) {
     return <div>Loading...</div>;

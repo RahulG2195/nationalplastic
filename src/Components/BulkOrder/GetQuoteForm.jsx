@@ -56,7 +56,7 @@ const GetQuoteForm = (props) => {
     try {
       console.log("Form Data:", formData); // Log formData for debugging
       const response = await axios.post(
-        "http://localhost:3000/api/BulkOrderForm",
+        "http://13.234.238.29:3000//api/BulkOrderForm",
         formData
       );
       alert("Success! Form data submitted."); // Show success message

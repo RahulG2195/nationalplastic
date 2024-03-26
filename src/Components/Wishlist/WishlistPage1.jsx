@@ -14,13 +14,13 @@ const WishlistPage1 = () => {
 
   useEffect(() => {
     const userDataString = localStorage.getItem("userData");
-    const userData = JSON.parse(userDataString);
-    const customerId = userData.customer_id;
+    const userData = JSON.parse(userDataString) || {};
+    const customerId = userData.customer_id || {};
     // console.log("wishlistID ", customerId);
     const fetchData = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/wishListUser",
+          "http://13.234.238.29:3000//api/wishListUser",
           { customer_id: customerId }
         );
         // const wishlistData = response.data.products;
@@ -75,7 +75,7 @@ const WishlistPage1 = () => {
         console.log("Entryyyyyyyyy" + entry);
       }
       const response = await axios.delete(
-        "http://localhost:3000/api/wishListUser",
+        "http://13.234.238.29:3000//api/wishListUser",
         { data: formData }
       );
 
@@ -98,6 +98,7 @@ const WishlistPage1 = () => {
         product_id: productId,
         price: price,
         discount_price: discount_price,
+        quantity: 1,
       })
     );
   };
