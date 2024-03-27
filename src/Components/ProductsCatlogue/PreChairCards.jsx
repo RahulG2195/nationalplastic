@@ -10,6 +10,22 @@ import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import PremiumChairs from "./PremiumChairs";
 import PreChairsCard from "../../Components/preChairsCard/preChairsCard";
 import { useParams } from "next/navigation";
+import { Bounce, toast } from "react-toastify";
+import { isLoggedIn } from "@/utils/validation";
+
+const notify = () => {
+  toast.error("Login To Add to CART", {
+    position: "top-center",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+  });
+};
 
 // import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -206,44 +222,60 @@ const PreChairsCards = () => {
       })
     );
   };
-  const fetchPrice = async  (id) => {
+  const fetchPrice = async (id) => {
     try {
-      const response = await fetch('http://localhost:3000/api/ProductsCat', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ product_id: id })
+      const response = await fetch("http://localhost:3000/api/ProductsCat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ product_id: id }),
       });
       console.log(response);
 
       if (!response.ok) {
-          throw new Error('Failed to fetch product data');
+        throw new Error("Failed to fetch product data");
       }
 
       const data = await response.json();
-      console.log(" data ", data)
-    
+      console.log(" data ", data);
 
       return data;
-  } catch (error) {
-      console.error('Error fetching product data:', error);
+    } catch (error) {
+      console.error("Error fetching product data:", error);
       throw error;
-  }
-  }
+    }
+  };
 
   const handleMoveToCart = async (product_id) => {
-    const data = await fetchPrice(product_id)
-    const price = data.price;
-    const discountPrice = data.discount_price;
-    dispatch(
-      addToCart({
-        product_id: product_id,
-        price: price,
-        discount_price: discountPrice,
-        quantity: 1,
-      })
-    );
+    const isLoggedInResult = await isLoggedIn();
+    console.log("state", isLoggedInResult);
+    console.log("state", typeof isLoggedInResult);
+
+    switch (isLoggedInResult) {
+      case false:
+        console.log("User not logged in. Notifying...");
+        notify();
+        break;
+      case true:
+        const data = await fetchPrice(product_id);
+        const price = data.price;
+        const discountPrice = data.discount_price;
+        dispatch(
+          addToCart({
+            product_id: product_id,
+            price: price,
+            discount_price: discountPrice,
+            quantity: 1,
+          })
+        );
+        break;
+      default:
+        console.warn(
+          "Unexpected login state. Please handle appropriately.",
+          isLoggedInResult
+        );
+    }
   };
 
   const handleArmType = (event) => {
