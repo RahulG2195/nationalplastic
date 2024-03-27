@@ -10,6 +10,7 @@ import { addToCart } from "@/redux/reducer/cartSlice";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { isLoggedIn } from "@/utils/validation";
 import { Bounce, toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const notify = () => {
   toast.error("Login To Add to CART", {
@@ -24,8 +25,22 @@ const notify = () => {
     transition: Bounce,
   });
 };
+const notifyError = () => {
+  toast.error("Login To Add To WishList", {
+    position: "top-center",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+  });
+};
 
 const Search = (props) => {
+  const router = useRouter();
   const [products, setProducts] = useState([]);
   const [discounts, setDiscounts] = useState([]);
   const [page, setPage] = useState(1);
@@ -115,6 +130,8 @@ const Search = (props) => {
       case false:
         console.log("User not logged in. Notifying...");
         notify();
+        router.push("/login");
+
         break;
       case true:
         const data = await fetchPrice(id);
@@ -139,13 +156,21 @@ const Search = (props) => {
     }
   };
 
-  const handleAddWishlist = (id) => {
-    dispatch(
-      addItemToWishlist({
-        product_id: id,
-      })
-    );
-    setInWishlist(true);
+  const handleAddWishlist = async (id) => {
+    const isLoggedInResult = await isLoggedIn();
+    console.log("state", isLoggedInResult);
+    console.log("state", typeof isLoggedInResult);
+    if (!isLoggedInResult) {
+      notifyError();
+      router.push("/Login");
+    } else {
+      dispatch(
+        addItemToWishlist({
+          product_id: id,
+        })
+      );
+    }
+    // setInWishlist(true);
   };
 
   // const loadMore = () => {

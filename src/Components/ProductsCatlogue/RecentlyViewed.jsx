@@ -19,7 +19,6 @@ import { Bounce, toast } from "react-toastify";
 import { useRef } from "react";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import { isLoggedIn } from "@/utils/validation";
-import { Bounce, toast } from "react-toastify";
 const notify = () => {
   toast.error("Login To Add to CART", {
     position: "top-center",
