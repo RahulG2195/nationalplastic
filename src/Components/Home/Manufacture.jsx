@@ -63,7 +63,7 @@ export default function Manufacture() {
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get(
-        "http://13.234.238.29:3000//api/Category"
+        "http://localhost:3000/api/Category"
       );
       console.log("response of the category ", response.data.categories);
       const filteredData = response.data.categories.filter(
@@ -144,13 +144,14 @@ export default function Manufacture() {
                   <div key={product.key}>
                     <SwiperSlide key={product.category_id} >
                       <CatCards
-                          catid={
-                            product.category_name && product.category_name.toLowerCase().includes("baby chair")
-                              ? 18 
-                              : product.category_name && product.category_name.toLowerCase().includes("seatings")
+                        catid={
+                          product.category_name && product.category_name.toLowerCase().includes("baby chair")
+                            ? 18
+                            : product.category_name && product.category_name.toLowerCase().includes("seatings")
                               ? 15
-                              : product.category_id 
-                          }
+                              : product.category_id
+                        }
+                        manfacthover='manfact'
                         style="manfTitle"
                         image={`/Assets/images/Home-page/${product.image_name}`}
                         title={product.category_name}
@@ -171,14 +172,15 @@ export default function Manufacture() {
                   key={product.key}
                 >
                   <CatCards
+                    manfacthover='manfact'
                     catid={
                       product.category_name && product.category_name.toLowerCase().includes("baby chair")
-                        ? 18 
+                        ? 18
                         : product.category_name && product.category_name.toLowerCase().includes("seatings")
-                        ? 15
-                        : product.category_id 
+                          ? 15
+                          : product.category_id
                     }
-                    
+
                     style="manfTitle pt-4 px-4 d-flex gap-5  justify-content-arround"
                     image={`/Assets/images/Home-page/${product.image_name}`}
                     title={product.category_name}

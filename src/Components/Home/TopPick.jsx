@@ -38,7 +38,7 @@ export default function TopPick() {
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get(
-        "http://13.234.238.29:3000//api/Category"
+        "http://localhost:3000/api/Category"
       );
       console.log("response of the category ", response.data.categories);
       const filteredData = response.data.categories.filter(
@@ -115,6 +115,7 @@ export default function TopPick() {
                   <div className="col-md-4" key={product.key}>
                     <SwiperSlide key={product.category_id}>
                       <CatCards
+                        hovereffect={'TopPickHover'}
                         catid={product.category_id}
                         image={`/Assets/images/Home-page/${product.image_name}`}
                         title={product.category_name}

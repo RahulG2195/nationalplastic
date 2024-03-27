@@ -30,7 +30,7 @@ function BottomBar() {
     // console.log("nameenamee", name)
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://13.234.238.29:3000//api/Products");
+        const res = await axios.get("http://localhost:3000/api/Products");
         const allproducts = res.data.products;
         setPreEventChair(
           allproducts.filter((products) => products.category_id == 13)
@@ -50,8 +50,8 @@ function BottomBar() {
         setBabychair(
           allproducts.filter((products) => products.category_id == 18)
         );
-        setStool(allproducts.filter((products) => products.category_id == 19));
-        setTable(allproducts.filter((products) => products.category_id == 20));
+        setStool(allproducts.filter((products) => products.category_id == 28));
+        setTable(allproducts.filter((products) => products.category_id == 25));
         setBox(allproducts.filter((products) => products.category_id == 21));
         setDrawer(allproducts.filter((products) => products.category_id == 22));
 

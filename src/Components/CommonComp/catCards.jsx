@@ -4,7 +4,7 @@ import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 import '../../styles/home_prod.css'
 
 
-function CatCards({ image, title,onCategoryChange,style,catid }) {
+function CatCards({ image, title,onCategoryChange,style,catid, hovereffect, manfacthover,hoverglow }) {
 
 const sendCategory = () =>{
   console.log("Category clicked:", title);
@@ -16,9 +16,9 @@ const sendCategory = () =>{
 
   return (
     <>
-      <div className="cards">
+      <div className={`cards  `}>
         <Link onClick={sendCategory} href={`/ProductCatlogue/${catid}`} >
-          <div className="card_img">
+          <div className={`"card_img" ${hovereffect} ${manfacthover} ${hoverglow} `}>
             <Image
               src={image}
               alt="product card images"
@@ -28,7 +28,7 @@ const sendCategory = () =>{
               objectFit="cover"
             />
           </div>
-          <div className={`prodname ${style ? style : 'py-3 d-flex justify-content-between px-2'}`}>
+          <div className={`prodname ${style ? style : 'py-3 d-flex justify-content-between px-2'} `}>
             <h4 className="fw-bold respCatTitle">{title}</h4>
           <ArrowForwardOutlinedIcon className="fw-bold" />
           </div>
