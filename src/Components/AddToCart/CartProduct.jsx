@@ -2,7 +2,6 @@ import Image from "next/image";
 import IncrementDecrement from "./IncrementDecrement";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { addToCart, initialCount } from "@/redux/reducer/cartSlice";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import Link from "next/link";
 // import axios from "axios";

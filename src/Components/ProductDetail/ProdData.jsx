@@ -20,7 +20,8 @@ import { Bounce, toast } from "react-toastify";
 // import Breadcrump from "@/app/Breadcromp/page";
 // import RecentlyViewed from "../ProductsCatlogue/RecentlyViewed";
 import { useParams } from "next/navigation";
-import {isLoggedIn} from "@/utils/validation"
+import { isLoggedIn } from "@/utils/validation";
+
 function ProdData() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -50,11 +51,9 @@ function ProdData() {
     setCount(count + 1);
   };
 
-
   const decrement = () => {
     setCount(count - 1);
   };
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,9 +62,7 @@ function ProdData() {
         const productName = id;
         setProductId(storedId);
 
-        const response = await axios.get(
-          "http://localhost:3000/api/Products"
-        );
+        const response = await axios.get("http://13.234.238.29:3000/api/Products");
         let filteredData = [];
         // if (productName) {
         //   filteredData = response.data.products.filter(
@@ -96,55 +93,68 @@ function ProdData() {
     fetchData();
   }, []);
 
-
-  const fetchPrice = async  (storedId) => {
-    console.log("Fetching price",storedId)
+  const fetchPrice = async (storedId) => {
+    console.log("Fetching price", storedId);
     try {
-      const response = await fetch('http://localhost:3000api/ProductsCat', {
-          method: 'PUT',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ seo_url: storedId })
+      const response = await fetch("http://13.234.238.29:3000/api/ProductsCat", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ seo_url: storedId }),
       });
       console.log(response);
 
       if (!response.ok) {
-          throw new Error('Failed to fetch product data');
+        throw new Error("Failed to fetch product data");
       }
 
       const data = await response.json();
-      console.log(" data ", data)
-    
+      console.log(" data ", data);
 
       return data;
-  } catch (error) {
-      console.error('Error fetching product data:', error);
+    } catch (error) {
+      console.error("Error fetching product data:", error);
       throw error;
-  }
-  }
-
-  const handleMoveToCart = async (storedId) => {
-    const res = await isLoggedIn()
-    console.log("res         ",res)
-    if(!res){
-      notify()
-    }else{
-    
-    const data = await fetchPrice(storedId)
-    console.log(data)
-    const price = data.price;
-    const discountPrice = data.discount_price;
-    const product_id = data.product_id;
-   
-  
-    
-    dispatch(addToCart({ product_id: product_id, price: price,
-      discount_price: discountPrice,
-      quantity: 1, }));
     }
   };
 
+  const handleMoveToCart = async (storedId) => {
+    const isLoggedInResult = await isLoggedIn();
+    console.log("state", isLoggedInResult);
+    console.log("state", typeof isLoggedInResult);
+
+    switch (isLoggedInResult) {
+      case false:
+        console.log("User not logged in. Notifying...");
+        notify();
+        break;
+      case true:
+        console.log("User logged in. Fetching price...");
+        const data = await fetchPrice(storedId);
+        console.log(data);
+
+        const price = data.price;
+        const discount_price = data.discount_price;
+        const product_id = data.product_id;
+
+        dispatch(
+          addToCart({
+            product_id,
+            price,
+            discount_price,
+            quantity: 1,
+          })
+        );
+        break;
+      default:
+        console.warn(
+          "Unexpected login state. Please handle appropriately.",
+          isLoggedInResult
+        );
+      // Consider additional actions for unexpected login states
+    }
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
