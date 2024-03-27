@@ -74,7 +74,7 @@ export const addItemToWishlist = (item) => async (dispatch, getState) => {
   const userData = JSON.parse(userDataString);
   const customerId = userData.customer_id;
   console.log("Customer Id: " + customerId);
-  const check = await axios.post("http://13.234.238.29:3000//api/wishListUser", {
+  const check = await axios.post("http://localhost:3000/api/wishListUser", {
     customer_id: customerId,
   });
 
@@ -90,7 +90,7 @@ export const addItemToWishlist = (item) => async (dispatch, getState) => {
   if (isWishlistEmpty || !isItemAlreadyAdded) {
     try {
       const response = await axios.put(
-        "http://13.234.238.29:3000//api/wishListUser",
+        "http://localhost:3000/api/wishListUser",
         {
           customer_id: customerId,
           product_id: item.product_id,

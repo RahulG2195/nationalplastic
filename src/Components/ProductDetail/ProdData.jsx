@@ -64,7 +64,7 @@ function ProdData() {
         setProductId(storedId);
 
         const response = await axios.get(
-          "http://13.234.238.29:3000//api/Products"
+          "http://localhost:3000/api/Products"
         );
         let filteredData = [];
         // if (productName) {
@@ -100,7 +100,7 @@ function ProdData() {
   const fetchPrice = async  (storedId) => {
     console.log("Fetching price",storedId)
     try {
-      const response = await fetch('http://13.234.238.29:3000/api/ProductsCat', {
+      const response = await fetch('http://localhost:3000/api/ProductsCat', {
           method: 'PUT',
           headers: {
               'Content-Type': 'application/json'
@@ -125,26 +125,38 @@ function ProdData() {
   }
 
   const handleMoveToCart = async (storedId) => {
-    const res = await isLoggedIn()
-    console.log("res         ",res)
-    if(!res){
-      notify()
-    }else{
-    
-    const data = await fetchPrice(storedId)
-    console.log(data)
-    const price = data.price;
-    const discountPrice = data.discount_price;
-    const product_id = data.product_id;
-   
+    const isLoggedInResult = await isLoggedIn();
+    console.log("state", isLoggedInResult)
+    console.log("state",typeof isLoggedInResult)
+
   
-    
-    dispatch(addToCart({ product_id: product_id, price: price,
-      discount_price: discountPrice,
-      quantity: 1, }));
+    switch (isLoggedInResult) {
+      case false:
+        console.log("User not logged in. Notifying...");
+        notify();
+        break;
+      case true:
+        console.log("User logged in. Fetching price...");
+        const data = await fetchPrice(storedId);
+        console.log(data);
+  
+        const price = data.price;
+        const discount_price = data.discount_price;
+        const product_id = data.product_id;
+  
+        dispatch(addToCart({
+          product_id,
+          price,
+          discount_price,
+          quantity: 1,
+        }));
+        break;
+      default:
+        console.warn("Unexpected login state. Please handle appropriately.",isLoggedInResult);
+        // Consider additional actions for unexpected login states
     }
   };
-
+  
 
   if (isLoading) {
     return <div>Loading...</div>;

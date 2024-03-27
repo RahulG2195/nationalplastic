@@ -24,11 +24,14 @@ export const isValidMobile = (mobile) => {
 };
 
 export const isLoggedIn = () => {
-   const value = localStorage.getItem("isLoggedIn") || false;
-    if(value){
-      return true;
-    }else{
-    return false
-    }
-};
 
+  const storedValue = localStorage.getItem("isLoggedIn") || false;
+
+ 
+  if (storedValue !== null) {
+    
+    return storedValue === 'true'; 
+  }
+
+  return false;
+};
