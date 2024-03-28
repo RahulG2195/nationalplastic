@@ -21,6 +21,7 @@ import { Bounce, toast } from "react-toastify";
 // import RecentlyViewed from "../ProductsCatlogue/RecentlyViewed";
 import { useParams } from "next/navigation";
 import {isLoggedIn} from "@/utils/validation"
+import Breadcrump from "../Breadcrump/Breadcrump";
 function ProdData() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -64,7 +65,7 @@ function ProdData() {
         setProductId(storedId);
 
         const response = await axios.get(
-          "http://13.234.238.29:3000//api/Products"
+          "http://localhost:3000//api/Products"
         );
         let filteredData = [];
         // if (productName) {
@@ -100,7 +101,7 @@ function ProdData() {
   const fetchPrice = async  (storedId) => {
     console.log("Fetching price",storedId)
     try {
-      const response = await fetch('http://13.234.238.29:3000/api/ProductsCat', {
+      const response = await fetch('http://localhost:3000/api/ProductsCat', {
           method: 'PUT',
           headers: {
               'Content-Type': 'application/json'
@@ -163,10 +164,12 @@ function ProdData() {
   return (
     <>
       {/* <Breadcrump productName = {name} /> */}
-
-      <div className="px-4">
+      <div className="container">
         {/* <div className="heading-section"><h2>Product Details</h2></div> */}
         <div className="row">
+          <div className="col-12">
+            <Breadcrump />
+          </div>
           <div className="col-md-6">
             <ProductDetailSlider imageurl={image} />
           </div>

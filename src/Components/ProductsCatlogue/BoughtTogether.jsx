@@ -30,7 +30,7 @@ const BoughtTogether = () => {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          "http://13.234.238.29:3000//api/Products"
+          "http://localhost:3000//api/Products"
         );
         setTogetherCardsData(response.data.products);
       } catch (error) {
@@ -39,7 +39,6 @@ const BoughtTogether = () => {
     };
     fetchdata();
   }, []);
-
   return (
     <>
       <div className="mt-5">
@@ -65,7 +64,7 @@ const BoughtTogether = () => {
           slidesPerView={3}
           navigation
           loop={true}
-          pagination={{ clickable: true }}
+          // pagination={{ clickable: true }}
           autoplay={{
             delay: 4000,
             disableOnInteraction: false,
@@ -99,15 +98,16 @@ const BoughtTogether = () => {
               <TogetherCard
                 imgSrc={`/Assets/images/New-launches-1/${card.image_name}`}
                 Price={card.price}
+                prod_name={card.product_name}
               />
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
 
-      <div className="mt-5">
+      <div className="mt-md-5 mt-2">
         <Image
-          className="mt-5"
+          className="mt-md-5 mt-2"
           src={"/Assets/images/CTA-banner-1.jpg-V2/CTA-banner-1.jpg-V2.png"}
           width={100}
           height={80}

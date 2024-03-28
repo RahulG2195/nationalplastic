@@ -66,7 +66,7 @@ const RecentlyViewed = () => {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          "http://13.234.238.29:3000//api/Products"
+          "http://localhost:3000//api/Products"
         );
         const filteredproducts = response.data.products.filter(
           (item) => item.categoryType === "premium chairs"
@@ -87,7 +87,7 @@ const RecentlyViewed = () => {
       const customerId = userData.customer_id;
 
       const response = await axios.post(
-        "http://13.234.238.29:3000//api/wishListUser",
+        "http://localhost:3000//api/wishListUser",
         {
           customer_id: customerId,
         }
@@ -122,7 +122,7 @@ const RecentlyViewed = () => {
   };
   const fetchPrice = async  (id) => {
     try {
-      const response = await fetch('http://13.234.238.29:3000/api/ProductsCat', {
+      const response = await fetch('http://localhost:3000/api/ProductsCat', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'
@@ -187,12 +187,12 @@ const RecentlyViewed = () => {
         <Swiper
           ref={swiperRef}
           modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-          spaceBetween={50}
-          slidesPerView={4}
+          spaceBetween={15}
+          slidesPerView={5}
           navigation
           loop={true}
           // pagination={{ clickable: true }}
-          autoplay={autoplay ? { delay: 4000 } : false}
+          autoplay={autoplay ?   { delay: 4000 } : false}
           breakpoints={{
             425: {
               slidesPerView: 2,
@@ -211,8 +211,8 @@ const RecentlyViewed = () => {
               spaceBetween: 40,
             },
             1024: {
-              slidesPerView: 4,
-              spaceBetween: 50,
+              slidesPerView: 5,
+              spaceBetween: 15,
             },
           }}
         >
@@ -222,7 +222,7 @@ const RecentlyViewed = () => {
                 ChairImg={`/Assets/images/New-launches-1/${chair.image_name}`}
                 id={chair.seo_url}
                 Title={chair.product_name}
-                Discription={chair.short_description}
+                // Discription={chair.short_description}
                 Price={chair.price}
                 orignalPrice={chair.discount_price}
                 Discount={chair.discount_percentage}
@@ -238,6 +238,7 @@ const RecentlyViewed = () => {
                   )
                 }
                 onAddToCart={() => handleMoveToCart(chair.product_id)}
+                recentClass="reventHoverView"
               />
             </SwiperSlide>
           ))}
