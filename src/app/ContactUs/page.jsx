@@ -119,7 +119,11 @@ function ContactUs() {
     //TryCatch For the Email Message
 
     const res = await axios.post(
-      `http://localhost:3000//api/sendEmail`,
+<<<<<<< HEAD
+      `http://13.234.238.29:3000//api/sendEmail`,
+=======
+      `http://13.234.238.29:3000/api/sendEmail`,
+>>>>>>> 2eea476dbe8b7eebdab94af42368a5c5542a1324
       formData,
       {
         headers: {

@@ -4,30 +4,29 @@ const app = express();
 
 // Allow requests from your Next.js domain
 app.use(
-  cors({
-    origin:
-      "https://localhost:3000/",
-  })
+    cors({
+        origin: "http://13.234.238.29:3000/",
+    })
 );
 
 // Other routes and middleware...
 
-const AuthUser = async (req) => {
-  const token = req.headers.get("Authentication")?.split(" ")[1];
-  if (!token) {
-    console.log("No Token");
-    return false;
-  }
-  console.log(token);
+const AuthUser = async(req) => {
+    const token = req.headers.get("Authentication") ? .split(" ")[1];
+    if (!token) {
+        console.log("No Token");
+        return false;
+    }
+    console.log(token);
 
-  try {
-    // const extractAuthUserInfo = jwt.verify(token, process.env.TOKEN_SECRET_KEY);
-    // console.log("extract :", extractAuthUserInfo);
-    // if (extractAuthUserInfo) return extractAuthUserInfo;
-  } catch (error) {
-    console.log(error);
-    return false;
-  }
+    try {
+        // const extractAuthUserInfo = jwt.verify(token, process.env.TOKEN_SECRET_KEY);
+        // console.log("extract :", extractAuthUserInfo);
+        // if (extractAuthUserInfo) return extractAuthUserInfo;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
 };
 
 export default AuthUser;

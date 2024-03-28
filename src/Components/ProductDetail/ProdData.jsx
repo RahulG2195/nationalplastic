@@ -10,6 +10,7 @@ import MoreProduct from "./MoreProducts/MoreProduct";
 // import Faqs from "../FAQs/Faqs";
 // import FooterRow from "../FooterRow/FooterRow";
 // import TabContent from "./TabContent/TabContent";
+import IncrementDecrement from "@/Components/AddToCart/IncrementDecrement";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -29,7 +30,7 @@ function ProdData() {
   // const [productName, setProductName] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [count, setCount] = useState(1);
+  const [initialCount, setInitialCount] = useState(1);
 
   const notify = () => {
     toast.error("Login To Add to CART", {
@@ -47,15 +48,20 @@ function ProdData() {
   const dispatch = useDispatch();
   const router = useParams();
   const id = router.productId;
-  const increment = () => {
-    setCount(count + 1);
+
+  // const increment = () => {
+  //   setCount(count + 1);
+  // };
+  const handleIncrement = async () => {
+    // await dispatch(increaseQuantity({ product_id: productId }));
+    setInitialCount(initialCount + 1);
   };
-
-
-  const decrement = () => {
-    setCount(count - 1);
+  const handleDecrement = async () => {
+    if (initialCount > 0) {
+      // await dispatch(decreaseQuantity({ product_id: productId }));
+      setInitialCount(initialCount - 1); // Decrement by 1
+    }
   };
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,7 +71,7 @@ function ProdData() {
         setProductId(storedId);
 
         const response = await axios.get(
-          "http://localhost:3000//api/Products"
+          "http://13.234.238.29:3000//api/Products"
         );
         let filteredData = [];
         // if (productName) {
@@ -97,55 +103,69 @@ function ProdData() {
     fetchData();
   }, []);
 
-
-  const fetchPrice = async  (storedId) => {
-    console.log("Fetching price",storedId)
+  const fetchPrice = async (storedId) => {
+    console.log("Fetching price", storedId);
     try {
-      const response = await fetch('http://localhost:3000/api/ProductsCat', {
+      const response = await fetch('http://13.234.238.29:3000/api/ProductsCat', {
           method: 'PUT',
           headers: {
-              'Content-Type': 'application/json'
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify({ seo_url: storedId })
-      });
+          body: JSON.stringify({ seo_url: storedId }),
+        }
+      );
       console.log(response);
 
       if (!response.ok) {
-          throw new Error('Failed to fetch product data');
+        throw new Error("Failed to fetch product data");
       }
 
       const data = await response.json();
-      console.log(" data ", data)
-    
+      console.log(" data ", data);
 
       return data;
-  } catch (error) {
-      console.error('Error fetching product data:', error);
+    } catch (error) {
+      console.error("Error fetching product data:", error);
       throw error;
-  }
-  }
-
-  const handleMoveToCart = async (storedId) => {
-    const res = await isLoggedIn()
-    console.log("res         ",res)
-    if(!res){
-      notify()
-    }else{
-    
-    const data = await fetchPrice(storedId)
-    console.log(data)
-    const price = data.price;
-    const discountPrice = data.discount_price;
-    const product_id = data.product_id;
-   
-  
-    
-    dispatch(addToCart({ product_id: product_id, price: price,
-      discount_price: discountPrice,
-      quantity: 1, }));
     }
   };
 
+  const handleMoveToCart = async (storedId, quantity) => {
+    const isLoggedInResult = await isLoggedIn();
+    console.log("state", isLoggedInResult);
+    console.log("state", typeof isLoggedInResult);
+
+    switch (isLoggedInResult) {
+      case false:
+        console.log("User not logged in. Notifying...");
+        notify();
+        break;
+      case true:
+        console.log("User logged in. Fetching price...");
+        const data = await fetchPrice(storedId);
+        console.log(data);
+
+        const price = data.price;
+        const discount_price = data.discount_price;
+        const product_id = data.product_id;
+        console.log(" discount_price", quantity);
+        dispatch(
+          addToCart({
+            product_id,
+            price,
+            discount_price,
+            quantity: quantity,
+          })
+        );
+        break;
+      default:
+        console.warn(
+          "Unexpected login state. Please handle appropriately.",
+          isLoggedInResult
+        );
+      // Consider additional actions for unexpected login states
+    }
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -261,24 +281,15 @@ function ProdData() {
               </div>
             </div> */}
 
-              <div className="product-count">
+              <div className="product-ccount">
                 <label htmlFor="size">Quantity</label>
-                <form action="#" className="display-flex">
-                  <button onClick={decrement} className="qtyminus">
-                    -
-                  </button>
-                  <input
-                    type="text"
-                    name="quantity"
-                    defaultValue={count}
-                    className="qty"
-                  />
-                  <button onClick={increment} className="qtyplus">
-                    +
-                  </button>
-                </form>
+                <IncrementDecrement
+                  initialCount={initialCount}
+                  onIncrement={handleIncrement}
+                  onDecrement={handleDecrement}
+                />
                 <p
-                  onClick={() => handleMoveToCart(productId)}
+                  onClick={() => handleMoveToCart(productId, initialCount)}
                   className="btn bg-danger text-white m-2 px-5 ProdbtnRes"
                 >
                   Add to Cart

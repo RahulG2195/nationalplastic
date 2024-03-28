@@ -2,7 +2,6 @@ import Image from "next/image";
 import IncrementDecrement from "./IncrementDecrement";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { addToCart, initialCount } from "@/redux/reducer/cartSlice";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import Link from "next/link";
 // import axios from "axios";
@@ -11,6 +10,23 @@ import {
   decreaseQuantity,
   removeItemFromCart,
 } from "@/redux/reducer/cartSlice";
+import { isLoggedIn } from "@/utils/validation";
+import { Bounce, toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+
+const notifyError = () => {
+  toast.error("Login To Add To WishList", {
+    position: "top-center",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+  });
+};
 
 const CartProduct = ({
   src,
@@ -24,6 +40,8 @@ const CartProduct = ({
   onRemoveSuccess,
   quantity,
 }) => {
+  const router = useRouter();
+
   const [initialCount, setInitialCount] = useState(quantity);
   // Set initial count to 1 by default
   // const dispatch = useDispatch();
@@ -40,14 +58,21 @@ const CartProduct = ({
   };
   const dispatch = useDispatch();
 
-  const handleAddtoWishlist = (product_id) => {
+  const handleAddtoWishlist = async (product_id) => {
     console.log("want to cart tp wish", product_id);
-
-    dispatch(
-      addItemToWishlist({
-        product_id: product_id,
-      })
-    );
+    const isLoggedInResult = await isLoggedIn();
+    console.log("state", isLoggedInResult);
+    console.log("state", typeof isLoggedInResult);
+    if (!isLoggedInResult) {
+      notifyError();
+      router.push("/Login");
+    } else {
+      dispatch(
+        addItemToWishlist({
+          product_id: product_id,
+        })
+      );
+    }
   };
 
   const handleRemove = async (product_id) => {

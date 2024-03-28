@@ -43,7 +43,7 @@ export default function Highlight() {
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get(
-        "http://localhost:3000//api/Products"
+        "http://13.234.238.29:3000//api/Products"
       );
       const filteredData = response.data.products.filter(
         (item) => item.categoryType === "highlights"
@@ -85,8 +85,9 @@ export default function Highlight() {
                 {productArr.map((product) => (
                   <div key={product.key} className="mt-5 pt-5 pb-5">
                     <Link href="/ProductCatlogue">
-                      <div className="card">
+                      <div className="card highlightcard">
                         <Image
+                          className="imagetop"
                           src={`/Assets/images/Home-page/${product.image_name}`}
                           alt={product.image}
                           width={50}
@@ -94,7 +95,7 @@ export default function Highlight() {
                           layout="responsive"
                           objectFit="cover"
                         />
-                        <div className="card-body">
+                        <div className="card-body cardbtm">
                           <h5 className="card-title">{product.product_name}</h5>
                           <p className="card-text  mb-5">
                             {product.short_description}

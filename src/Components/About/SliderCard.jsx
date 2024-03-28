@@ -53,11 +53,12 @@ function SliderCard() {
   ];
 
   return (
-    <>
+    < >
+    <div className="container  ">
       <Swiper
-        className="my-slider pb-5"
+        className=" pb-5 "
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-        spaceBetween={50}
+        spaceBetween={5}
         slidesPerView={3}
         loop={true}
         navigation
@@ -87,7 +88,7 @@ function SliderCard() {
       >
         {SliderCardArr.map((val, index) => (
           <SwiperSlide key={val.key}>
-      <div className={`slide-content ${index % 2 === 0 ? 'odd' : 'even'}`}>
+      <div className={`slide-content  ${index % 2 === 0 ? 'odd' : 'even'} `}>
             <AboutSlider
               image={val.image}
               title={val.title}
@@ -97,6 +98,7 @@ function SliderCard() {
           </SwiperSlide>
         ))}
       </Swiper>
+      </div>
     </>
   );
 }

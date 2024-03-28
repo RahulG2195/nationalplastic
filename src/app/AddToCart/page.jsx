@@ -27,7 +27,11 @@ function AddToCart() {
     const fetchData = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:3000//api/UserCart",
+<<<<<<< HEAD
+          "http://13.234.238.29:3000//api/UserCart",
+=======
+          "http://13.234.238.29:3000/api/UserCart",
+>>>>>>> 2eea476dbe8b7eebdab94af42368a5c5542a1324
           {
             customer_id: customerId,
           }
@@ -66,7 +70,7 @@ function AddToCart() {
               quantity: product.quantity, // Explicitly set quantity to 1
               price: product.price,
               discount_price: product.discount_price,
-              from:false
+              from: false,
             })
           );
         });
@@ -118,7 +122,11 @@ function AddToCart() {
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
       const response = await axios.post(
-        "http://localhost:3000//api/UserCart",
+<<<<<<< HEAD
+        "http://13.234.238.29:3000//api/UserCart",
+=======
+        "http://13.234.238.29:3000/api/UserCart",
+>>>>>>> 2eea476dbe8b7eebdab94af42368a5c5542a1324
         {
           customer_id: customerId,
         }
@@ -190,7 +198,11 @@ function AddToCart() {
       formData.append("customer_id", customerId);
       formData.append("product_id", product_id);
       const response = await axios.delete(
-        "http://localhost:3000//api/UserCart",
+<<<<<<< HEAD
+        "http://13.234.238.29:3000//api/UserCart",
+=======
+        "http://13.234.238.29:3000/api/UserCart",
+>>>>>>> 2eea476dbe8b7eebdab94af42368a5c5542a1324
         {
           data: formData,
           headers: {

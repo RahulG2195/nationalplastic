@@ -134,6 +134,13 @@
     font-weight: 600;
     padding: 12px;
 }
+.backblue{
+    background-color: #E5E4EC;
+    top: 22%;
+    left: 5%;
+    width: 90%;
+    height: 65% !important;
+}
 
 /* .about-slider-yellow img {
     width: 80px !important;
@@ -205,8 +212,8 @@
 }
 
 .swiper {
-    overflow-y: clip !important;
-    overflow: visible !important;
+    overflow-x: clip !important;
+    overflow-y: visible !important;
 }
 
 .TeamMemCard {

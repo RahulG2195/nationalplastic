@@ -83,8 +83,11 @@ function About() {
           </h2>
         </div>
       </div>
+      <div className="position-relative px-5">
+      <div className=" h-100 position-absolute backblue "></div>
       <SliderCard />
       <AboutCTA />
+      </div>
       {/* Vission and Mission start */}
       <div className="container">
         <div className="row">

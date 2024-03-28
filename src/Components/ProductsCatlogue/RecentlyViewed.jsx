@@ -18,6 +18,21 @@ import "react-toastify/dist/ReactToastify.css";
 import { Bounce, toast } from "react-toastify";
 import { useRef } from "react";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
+import { isLoggedIn } from "@/utils/validation";
+import { useRouter } from "next/navigation";
+const notify = () => {
+  toast.error("Login To Add to CART", {
+    position: "top-center",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+  });
+};
 const RecentlyViewed = () => {
   // const RecentlyViewedData = [
   //     { ChairImg: "/Assets/images/New-launches-1/New-launches-1.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
@@ -56,17 +71,31 @@ const RecentlyViewed = () => {
       transition: Bounce,
     });
   };
+  const notifyError = () => {
+    toast.error("Login To Add To WishList", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+  };
   const [RecentlyViewedData, setRecentlyViewedData] = useState([]);
   const [wishlistItems, setWishlistItems] = useState([]);
   const [autoplay, setAutoplay] = useState(true);
   const dispatch = useDispatch();
   const swiperRef = useRef(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000//api/Products"
+          "http://13.234.238.29:3000//api/Products"
         );
         const filteredproducts = response.data.products.filter(
           (item) => item.categoryType === "premium chairs"
@@ -87,7 +116,7 @@ const RecentlyViewed = () => {
       const customerId = userData.customer_id;
 
       const response = await axios.post(
-        "http://localhost:3000//api/wishListUser",
+        "http://13.234.238.29:3000//api/wishListUser",
         {
           customer_id: customerId,
         }
@@ -108,57 +137,83 @@ const RecentlyViewed = () => {
     ChairImg
   ) => {
     try {
-      dispatch(
-        addItemToWishlist({
-          product_id: product_id,
-        })
-      );
-      notify();
-      fetchWishlistItems();
+      const isLoggedInResult = await isLoggedIn();
+      console.log("state", isLoggedInResult);
+      console.log("state", typeof isLoggedInResult);
+      if (!isLoggedInResult) {
+        notifyError();
+        router.push("/Login");
+      } else {
+        dispatch(
+          addItemToWishlist({
+            product_id: product_id,
+          })
+        );
+        notify();
+        fetchWishlistItems();
+      }
     } catch (error) {
       notifyinfo();
       console.error("Error:", error);
     }
   };
-  const fetchPrice = async  (id) => {
+  const fetchPrice = async (id) => {
     try {
-      const response = await fetch('http://localhost:3000/api/ProductsCat', {
+      const response = await fetch('http://13.234.238.29:3000/api/ProductsCat', {
           method: 'POST',
           headers: {
-              'Content-Type': 'application/json'
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify({ product_id: id })
-      });
+          body: JSON.stringify({ product_id: id }),
+        }
+      );
       console.log(response);
 
       if (!response.ok) {
-          throw new Error('Failed to fetch product data');
+        throw new Error("Failed to fetch product data");
       }
 
       const data = await response.json();
-      console.log(" data ", data)
-    
+      console.log(" data ", data);
 
       return data;
-  } catch (error) {
-      console.error('Error fetching product data:', error);
+    } catch (error) {
+      console.error("Error fetching product data:", error);
       throw error;
-  }
-  }
+    }
+  };
 
   // const handleAddToCart = async(product_name, short_description, price, discount_price, discount, ChairImg)
-  const handleMoveToCart =async (product_id) => {
-    const data = await fetchPrice(product_id)
-    const price = data.price;
-    const discountPrice = data.discount_price;
-    dispatch(
-      addToCart({
-        product_id: product_id,
-        price: price,
-        discount_price: discountPrice,
-        quantity: 1,
-      })
-    );
+  const handleMoveToCart = async (product_id) => {
+    const isLoggedInResult = await isLoggedIn();
+    console.log("state", isLoggedInResult);
+    console.log("state", typeof isLoggedInResult);
+
+    switch (isLoggedInResult) {
+      case false:
+        console.log("User not logged in. Notifying...");
+        notify();
+        break;
+      case true:
+        const data = await fetchPrice(product_id);
+        const price = data.price;
+        const discountPrice = data.discount_price;
+        dispatch(
+          addToCart({
+            product_id: product_id,
+            price: price,
+            discount_price: discountPrice,
+            quantity: 1,
+          })
+        );
+        break;
+      default:
+        console.warn(
+          "Unexpected login state. Please handle appropriately.",
+          isLoggedInResult
+        );
+      // Consider additional actions for unexpected login states
+    }
     console.log("this is product id in card ", product_id);
   };
 
