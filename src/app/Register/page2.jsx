@@ -14,7 +14,11 @@ function ProfilePage() {
 
   const fetchData = async () => {
     try {
+<<<<<<< HEAD
+      const response = await axios.get("http://13.234.238.29:3000//api/Users");
+=======
       const response = await axios.get("http://13.234.238.29:3000/api/Users");
+>>>>>>> 2eea476dbe8b7eebdab94af42368a5c5542a1324
       setUserData(response.data);
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -40,7 +44,11 @@ function ProfilePage() {
     try {
       // Update user data in the database
       const response = await axios.put(
+<<<<<<< HEAD
+        "http://13.234.238.29:3000//api/Users",
+=======
         "http://13.234.238.29:3000/api/Users",
+>>>>>>> 2eea476dbe8b7eebdab94af42368a5c5542a1324
         userData
       );
       console.log("Data updated:", response.data);

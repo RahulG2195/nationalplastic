@@ -63,7 +63,7 @@ export default function Manufacture() {
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get(
-        "http://13.234.238.29:3000/api/Category"
+        "http://13.234.238.29:3000//api/Category"
       );
       console.log("response of the category ", response.data.categories);
       const filteredData = response.data.categories.filter(
@@ -82,7 +82,6 @@ export default function Manufacture() {
       );
 
       setHousehold(filteredData);
-
     };
     fetchdata();
   }, []);
@@ -142,23 +141,28 @@ export default function Manufacture() {
               >
                 {Household.map((product) => (
                   <div key={product.key}>
-                    <SwiperSlide key={product.category_id} >
+                    <SwiperSlide key={product.category_id}>
                       <CatCards
                         catid={
-                          product.category_name && product.category_name.toLowerCase().includes("baby chair")
+                          product.category_name &&
+                          product.category_name
+                            .toLowerCase()
+                            .includes("baby chair")
                             ? 18
-                            : product.category_name && product.category_name.toLowerCase().includes("seatings")
-                              ? 15
-                              : product.category_id
+                            : product.category_name &&
+                              product.category_name
+                                .toLowerCase()
+                                .includes("seatings")
+                            ? 15
+                            : product.category_id
                         }
-                        manfacthover='manfact'
+                        manfacthover="manfact"
                         style="manfTitle"
                         image={`/Assets/images/Home-page/${product.image_name}`}
                         title={product.category_name}
                         categoryType={product.categoryType}
-                        onCategoryChange={() => sendCategory(
-                          product.product_name
-                        )
+                        onCategoryChange={() =>
+                          sendCategory(product.product_name)
                         }
                       />
                     </SwiperSlide>
@@ -172,28 +176,26 @@ export default function Manufacture() {
                   key={product.key}
                 >
                   <CatCards
-                    manfacthover='manfact'
+                    manfacthover="manfact"
                     catid={
-                      product.category_name && product.category_name.toLowerCase().includes("baby chair")
+                      product.category_name &&
+                      product.category_name.toLowerCase().includes("baby chair")
                         ? 18
-                        : product.category_name && product.category_name.toLowerCase().includes("seatings")
-                          ? 15
-                          : product.category_id
+                        : product.category_name &&
+                          product.category_name
+                            .toLowerCase()
+                            .includes("seatings")
+                        ? 15
+                        : product.category_id
                     }
-
                     style="manfTitle pt-4 px-4 d-flex gap-5  justify-content-arround"
                     image={`/Assets/images/Home-page/${product.image_name}`}
                     title={product.category_name}
                     categoryType={product.categoryType}
-                    onCategoryChange={() => sendCategory(
-                      product.product_name
-                    )}
+                    onCategoryChange={() => sendCategory(product.product_name)}
                   />
-
                 </div>
               ))}
-
-
             </div>
           </div>
         </div>

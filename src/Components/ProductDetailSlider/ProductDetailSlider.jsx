@@ -52,7 +52,7 @@ const ProductDetailSlider = (imageurl) => {
                 freeMode={true}
                 watchSlidesProgress={true}
                 modules={[FreeMode, Navigation, Thumbs]}
-                className="mySwiper mt-5"
+                className="mySwiper mt-4"
             >
                 <SwiperSlide>
                     <img src={`/Assets/images/New-launches-1/${getimageurl}`} alt="Product" />

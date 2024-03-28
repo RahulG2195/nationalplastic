@@ -16,7 +16,7 @@ const PreChairsCard = (props) => {
         const customerId = userData.customer_id;
 
         const response = await axios.post(
-          "http://13.234.238.29:3000/api/wishListUser",
+          "http://13.234.238.29:3000//api/wishListUser",
           {
             customer_id: customerId,
           }
@@ -48,7 +48,7 @@ const PreChairsCard = (props) => {
 
   return (
     <>
-      <div className="preCont cards mt-3 p-1 position-relative  my-4 ">
+      <div className={`preCont cards mt-3 position-relative  my-4 ${props.recentClass ? props.recentClass : ''}`}>
         <Link href={`/ProductDetail/${props.id}`}>
           {/* <Link href={`/ProductDetail?id=${props.id}`}> */}
 
@@ -57,10 +57,10 @@ const PreChairsCard = (props) => {
           </div>
         </Link>
         <div className="card-body">
-          <div className="PreFoot mt-2 ">
-            <div className="class d-flex flex-wrap justify-content-between my-2 ">
+          <div className="PreFoot pt-2 ">
+            <div className="class d-flex flex-wrap justify-content-between py-2 ">
               <Link href={`/ProductDetail/${props.id}`}>
-                <div className="left fw-bold text-danger">{props.Title}</div>
+                <div className="left fw-bold text-danger one-line-ellipsis">{props.Title}</div>
               </Link>
               <div className="right">
                 <i onClick={handleAddToCart}>
@@ -79,10 +79,13 @@ const PreChairsCard = (props) => {
                 ></i>
               </div>
             </div>
-
-            <div className="text-left fw-medium my-2 DESCresp">
-              {props.Discription}
-            </div>
+            {/* show disc only when its available  */}
+                {
+                  props.Discription && <div className="text-left fw-medium my-2 DESCresp one-line-ellipsis1">
+                  {props.Discription}
+                </div>
+                }
+            
 
             <div className="rs d-flex flex-wrap  justify-content-between align-items-center ">
               <div className="d-flex gap-2 align-items-center">

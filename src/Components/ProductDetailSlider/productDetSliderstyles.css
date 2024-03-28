@@ -11,7 +11,6 @@
     text-align: center;
     font-size: 18px;
     background: #fff;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,22 +23,25 @@
     object-fit: cover;
 }
 
-
-
 .swiper-slide {
     background-size: cover;
     background-position: center;
 }
 
 .mySwiper2 {
-    height: 60%;
-    width: 80%;
+    max-height: 450px;
+    max-width: 100%;
+}
+
+.mySwiper2 img {
+    object-fit: contain;
+    border-radius: 0;
 }
 
 .mySwiper {
-    height: 16%;
+    height: 10%;
     box-sizing: border-box;
-    padding: 10px 0;
+    padding: 10px 25px;
     width: 60%;
 }
 
@@ -61,9 +63,7 @@
 }
 
 @media (max-width:1024px) {
-
     .mySwiper {
-     
         width: 100%;
     }
 }

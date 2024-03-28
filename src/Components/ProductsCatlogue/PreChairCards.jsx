@@ -12,6 +12,7 @@ import PreChairsCard from "../../Components/preChairsCard/preChairsCard";
 import { useParams } from "next/navigation";
 import { Bounce, toast } from "react-toastify";
 import { isLoggedIn } from "@/utils/validation";
+import { useRouter } from "next/navigation";
 
 const notify = () => {
   toast.error("Login To Add to CART", {
@@ -41,6 +42,7 @@ const PreChairsCards = () => {
   // const [length, setlength] = useState([]);
   const router = useParams();
   const cat_id = router.productCatId;
+  const route = useRouter();
 
   const dispatch = useDispatch();
   // const chairData = [
@@ -152,7 +154,7 @@ const PreChairsCards = () => {
       setCategoryType(categoryTitle);
 
       const response = await axios.get(
-        `http://13.234.238.29:3000/api/ProductsCat?query=${cat_id}`
+        `http://13.234.238.29:3000//api/ProductsCat?query=${cat_id}`
       );
       console.log("API Response:", response.data); // Log API response
 
@@ -215,22 +217,31 @@ const PreChairsCards = () => {
     }
   };
 
-  const handleAddToWishlist = (product_id) => {
-    dispatch(
-      addItemToWishlist({
-        product_id: product_id,
-      })
-    );
+  const handleAddToWishlist = async (product_id) => {
+    const isLoggedInResult = await isLoggedIn();
+    console.log("state", isLoggedInResult);
+    console.log("state", typeof isLoggedInResult);
+    if (!isLoggedInResult) {
+      notify();
+      route.push("/Login");
+    } else {
+      dispatch(
+        addItemToWishlist({
+          product_id: product_id,
+        })
+      );
+    }
   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch("http://13.234.238.29:3000/api/ProductsCat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ product_id: id }),
-      });
+      const response = await fetch('http://13.234.238.29:3000/api/ProductsCat', {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ product_id: id }),
+        }
+      );
       console.log(response);
 
       if (!response.ok) {

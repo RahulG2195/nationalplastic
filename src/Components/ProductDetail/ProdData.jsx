@@ -10,6 +10,7 @@ import MoreProduct from "./MoreProducts/MoreProduct";
 // import Faqs from "../FAQs/Faqs";
 // import FooterRow from "../FooterRow/FooterRow";
 // import TabContent from "./TabContent/TabContent";
+import IncrementDecrement from "@/Components/AddToCart/IncrementDecrement";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -20,8 +21,8 @@ import { Bounce, toast } from "react-toastify";
 // import Breadcrump from "@/app/Breadcromp/page";
 // import RecentlyViewed from "../ProductsCatlogue/RecentlyViewed";
 import { useParams } from "next/navigation";
-import { isLoggedIn } from "@/utils/validation";
-
+import {isLoggedIn} from "@/utils/validation"
+import Breadcrump from "../Breadcrump/Breadcrump";
 function ProdData() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -29,7 +30,7 @@ function ProdData() {
   // const [productName, setProductName] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [count, setCount] = useState(1);
+  const [initialCount, setInitialCount] = useState(1);
 
   const notify = () => {
     toast.error("Login To Add to CART", {
@@ -47,12 +48,19 @@ function ProdData() {
   const dispatch = useDispatch();
   const router = useParams();
   const id = router.productId;
-  const increment = () => {
-    setCount(count + 1);
-  };
 
-  const decrement = () => {
-    setCount(count - 1);
+  // const increment = () => {
+  //   setCount(count + 1);
+  // };
+  const handleIncrement = async () => {
+    // await dispatch(increaseQuantity({ product_id: productId }));
+    setInitialCount(initialCount + 1);
+  };
+  const handleDecrement = async () => {
+    if (initialCount > 0) {
+      // await dispatch(decreaseQuantity({ product_id: productId }));
+      setInitialCount(initialCount - 1); // Decrement by 1
+    }
   };
 
   useEffect(() => {
@@ -62,7 +70,9 @@ function ProdData() {
         const productName = id;
         setProductId(storedId);
 
-        const response = await axios.get("http://13.234.238.29:3000/api/Products");
+        const response = await axios.get(
+          "http://13.234.238.29:3000//api/Products"
+        );
         let filteredData = [];
         // if (productName) {
         //   filteredData = response.data.products.filter(
@@ -96,13 +106,14 @@ function ProdData() {
   const fetchPrice = async (storedId) => {
     console.log("Fetching price", storedId);
     try {
-      const response = await fetch("http://13.234.238.29:3000/api/ProductsCat", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ seo_url: storedId }),
-      });
+      const response = await fetch('http://13.234.238.29:3000/api/ProductsCat', {
+          method: 'PUT',
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ seo_url: storedId }),
+        }
+      );
       console.log(response);
 
       if (!response.ok) {
@@ -119,7 +130,7 @@ function ProdData() {
     }
   };
 
-  const handleMoveToCart = async (storedId) => {
+  const handleMoveToCart = async (storedId, quantity) => {
     const isLoggedInResult = await isLoggedIn();
     console.log("state", isLoggedInResult);
     console.log("state", typeof isLoggedInResult);
@@ -137,13 +148,13 @@ function ProdData() {
         const price = data.price;
         const discount_price = data.discount_price;
         const product_id = data.product_id;
-
+        console.log(" discount_price", quantity);
         dispatch(
           addToCart({
             product_id,
             price,
             discount_price,
-            quantity: 1,
+            quantity: quantity,
           })
         );
         break;
@@ -173,10 +184,12 @@ function ProdData() {
   return (
     <>
       {/* <Breadcrump productName = {name} /> */}
-
-      <div className="px-4">
+      <div className="container">
         {/* <div className="heading-section"><h2>Product Details</h2></div> */}
         <div className="row">
+          <div className="col-12">
+            <Breadcrump />
+          </div>
           <div className="col-md-6">
             <ProductDetailSlider imageurl={image} />
           </div>
@@ -268,24 +281,15 @@ function ProdData() {
               </div>
             </div> */}
 
-              <div className="product-count">
+              <div className="product-ccount">
                 <label htmlFor="size">Quantity</label>
-                <form action="#" className="display-flex">
-                  <button onClick={decrement} className="qtyminus">
-                    -
-                  </button>
-                  <input
-                    type="text"
-                    name="quantity"
-                    defaultValue={count}
-                    className="qty"
-                  />
-                  <button onClick={increment} className="qtyplus">
-                    +
-                  </button>
-                </form>
+                <IncrementDecrement
+                  initialCount={initialCount}
+                  onIncrement={handleIncrement}
+                  onDecrement={handleDecrement}
+                />
                 <p
-                  onClick={() => handleMoveToCart(productId)}
+                  onClick={() => handleMoveToCart(productId, initialCount)}
                   className="btn bg-danger text-white m-2 px-5 ProdbtnRes"
                 >
                   Add to Cart

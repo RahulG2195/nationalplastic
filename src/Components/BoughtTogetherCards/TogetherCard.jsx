@@ -5,8 +5,9 @@ const TogetherCard = (props) => {
     return (
         <>
 
-            <div className="card border border-0">
-                <div className="card-header">
+            <div className="card bought_card border border-0">
+                <div className="card-headers">
+                <div class="overlay"></div>
                     <Image
                         src={props.imgSrc}
                         width={25}
@@ -15,11 +16,15 @@ const TogetherCard = (props) => {
                         objectFit='cover'
                         alt="Picture of the author"
                     />
+                    <div className="prod_name">
+                    <h5>{props.prod_name}</h5>
                 </div>
-                <div className="card-body d-flex gap-1 ">
+                </div>
+                <div className="card-body d-flex gap-1">
                 {props.caption ? null : <div><i className="medium fa fa-inr fw-bold" aria-hidden="true"></i></div>}
-                     <div className='medium fw-bold mb-2 '> {props.caption ?props.caption : props.Price}</div>
+                     <div className='medium fw-bold mb-2 brought_price'> {props.caption ?props.caption : props.Price}</div>
                 </div>
+                
             </div>
         </>
     )

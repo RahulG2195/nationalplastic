@@ -7,9 +7,31 @@
     background-color: transparent !important;
 }
 
+.preCont .PreFoot {
+    padding: 0 13px 8px 13px;
+}
+
 .preCont:hover {
-    box-shadow: rgba(0, 0, 0, 0.20) 1.95px 1.95px 2.6px;
+    box-shadow: rgba(0, 0, 0, 0.20) 4.95px 5.95px 2.6px;
     transition: all .5s;
+}
+
+.one-line-ellipsis {
+    white-space: nowrap;
+    /* Prevent wrapping */
+    overflow: hidden;
+    /* Hide overflow */
+    text-overflow: ellipsis;
+    width: 14ch;
+}
+
+.one-line-ellipsis1 {
+    white-space: nowrap;
+    /* Prevent wrapping */
+    overflow: hidden;
+    /* Hide overflow */
+    text-overflow: ellipsis;
+    width: 100%;
 }
 
 .pre img {
@@ -28,14 +50,14 @@
 .medium {
     font-size: 1rem;
 }
+
 @media (max-width:576px) {
-    .preCont{
-      
+    .preCont {
         font-size: x-small;
-        margin: 0 ;
+        margin: 0;
         padding: 0;
     }
-    .DESCresp{
+    .DESCresp {
         text-align: left !important;
         margin: 0 !important;
         padding: 0 !important;
@@ -43,7 +65,7 @@
     .PreFoot .left {
         font-size: small !important;
     }
-    .priceResp{
+    .priceResp {
         font-size: x-small !important;
     }
 }

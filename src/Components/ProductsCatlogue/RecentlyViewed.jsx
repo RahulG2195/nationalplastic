@@ -19,6 +19,7 @@ import { Bounce, toast } from "react-toastify";
 import { useRef } from "react";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import { isLoggedIn } from "@/utils/validation";
+import { useRouter } from "next/navigation";
 const notify = () => {
   toast.error("Login To Add to CART", {
     position: "top-center",
@@ -70,16 +71,32 @@ const RecentlyViewed = () => {
       transition: Bounce,
     });
   };
+  const notifyError = () => {
+    toast.error("Login To Add To WishList", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+  };
   const [RecentlyViewedData, setRecentlyViewedData] = useState([]);
   const [wishlistItems, setWishlistItems] = useState([]);
   const [autoplay, setAutoplay] = useState(true);
   const dispatch = useDispatch();
   const swiperRef = useRef(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const response = await axios.get("http://13.234.238.29:3000/api/Products");
+        const response = await axios.get(
+          "http://13.234.238.29:3000//api/Products"
+        );
         const filteredproducts = response.data.products.filter(
           (item) => item.categoryType === "premium chairs"
         );
@@ -99,7 +116,7 @@ const RecentlyViewed = () => {
       const customerId = userData.customer_id;
 
       const response = await axios.post(
-        "http://13.234.238.29:3000/api/wishListUser",
+        "http://13.234.238.29:3000//api/wishListUser",
         {
           customer_id: customerId,
         }
@@ -120,13 +137,21 @@ const RecentlyViewed = () => {
     ChairImg
   ) => {
     try {
-      dispatch(
-        addItemToWishlist({
-          product_id: product_id,
-        })
-      );
-      notify();
-      fetchWishlistItems();
+      const isLoggedInResult = await isLoggedIn();
+      console.log("state", isLoggedInResult);
+      console.log("state", typeof isLoggedInResult);
+      if (!isLoggedInResult) {
+        notifyError();
+        router.push("/Login");
+      } else {
+        dispatch(
+          addItemToWishlist({
+            product_id: product_id,
+          })
+        );
+        notify();
+        fetchWishlistItems();
+      }
     } catch (error) {
       notifyinfo();
       console.error("Error:", error);
@@ -134,13 +159,14 @@ const RecentlyViewed = () => {
   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch("http://13.234.238.29:3000/api/ProductsCat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ product_id: id }),
-      });
+      const response = await fetch('http://13.234.238.29:3000/api/ProductsCat', {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ product_id: id }),
+        }
+      );
       console.log(response);
 
       if (!response.ok) {
@@ -216,12 +242,12 @@ const RecentlyViewed = () => {
         <Swiper
           ref={swiperRef}
           modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-          spaceBetween={50}
-          slidesPerView={4}
+          spaceBetween={15}
+          slidesPerView={5}
           navigation
           loop={true}
           // pagination={{ clickable: true }}
-          autoplay={autoplay ? { delay: 4000 } : false}
+          autoplay={autoplay ?   { delay: 4000 } : false}
           breakpoints={{
             425: {
               slidesPerView: 2,
@@ -240,8 +266,8 @@ const RecentlyViewed = () => {
               spaceBetween: 40,
             },
             1024: {
-              slidesPerView: 4,
-              spaceBetween: 50,
+              slidesPerView: 5,
+              spaceBetween: 15,
             },
           }}
         >
@@ -251,7 +277,7 @@ const RecentlyViewed = () => {
                 ChairImg={`/Assets/images/New-launches-1/${chair.image_name}`}
                 id={chair.seo_url}
                 Title={chair.product_name}
-                Discription={chair.short_description}
+                // Discription={chair.short_description}
                 Price={chair.price}
                 orignalPrice={chair.discount_price}
                 Discount={chair.discount_percentage}
@@ -267,6 +293,7 @@ const RecentlyViewed = () => {
                   )
                 }
                 onAddToCart={() => handleMoveToCart(chair.product_id)}
+                recentClass="reventHoverView"
               />
             </SwiperSlide>
           ))}

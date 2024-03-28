@@ -86,7 +86,11 @@ function ProfilePage() {
         };
 
         const response = await axios.put(
+<<<<<<< HEAD
+          "http://13.234.238.29:3000//api/Users",
+=======
           "http://13.234.238.29:3000/api/Users",
+>>>>>>> 2eea476dbe8b7eebdab94af42368a5c5542a1324
           formData
         );
         // console.log("After -------------------response on profile page", formData);
@@ -178,7 +182,11 @@ function ProfilePage() {
       // Send updated data to userProfile API
       // console.log("userData======222222222222222======", userData);
       const response = await axios.post(
+<<<<<<< HEAD
+        "http://13.234.238.29:3000//api/UserProfile",
+=======
         "http://13.234.238.29:3000/api/UserProfile",
+>>>>>>> 2eea476dbe8b7eebdab94af42368a5c5542a1324
         editedData
       );
 
@@ -207,8 +215,6 @@ function ProfilePage() {
       localStorage.removeItem("products");
       localStorage.removeItem("userData");
       localStorage.removeItem("userId");
-
-
 
       // Update state variables
       // setIsLoggedIn(false);

@@ -66,7 +66,11 @@ const Search = (props) => {
       }
 
       const response = await axios.get(
+<<<<<<< HEAD
+        `http://13.234.238.29:3000//api/search?query=${query}&page=${page}`
+=======
         `http://13.234.238.29:3000/api/search?query=${query}&page=${page}`
+>>>>>>> 2eea476dbe8b7eebdab94af42368a5c5542a1324
       );
       const newProducts = response.data.products;
       const all = response.data.allproducts;
@@ -99,13 +103,21 @@ const Search = (props) => {
   //   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch("http://13.234.238.29:3000/api/ProductsCat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ product_id: id }),
-      });
+<<<<<<< HEAD
+      const response = await fetch('http://13.234.238.29:3000/api/ProductsCat', {
+          method: 'POST',
+=======
+      const response = await fetch(
+        "http://13.234.238.29:3000/api/ProductsCat",
+        {
+          method: "POST",
+>>>>>>> 2eea476dbe8b7eebdab94af42368a5c5542a1324
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ product_id: id }),
+        }
+      );
       console.log(response);
 
       if (!response.ok) {
