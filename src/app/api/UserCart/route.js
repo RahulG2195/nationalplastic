@@ -43,7 +43,7 @@ export async function POST(request) {
 export async function PUT(request) {
   try {
     try {
-      const { product_id, customer_id } = await request.json();
+      const { product_id, customer_id, quantity } = await request.json();
       const user_id = customer_id;
       const insertResult = await query({
         query:
@@ -56,8 +56,9 @@ export async function PUT(request) {
           console.log("userid - and pass", product_id, customer_id);
 
           const insertResult = await query({
-            query: "INSERT INTO mycart (product_id,user_id) VALUES (?,?)",
-            values: [product_id, user_id],
+            query:
+              "INSERT INTO mycart (product_id,user_id,quantity) VALUES (?,?,?)",
+            values: [product_id, user_id, quantity],
           });
 
           console.log("insertResult", insertResult);

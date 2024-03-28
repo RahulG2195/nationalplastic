@@ -56,11 +56,11 @@ export const cartSlice = createSlice({
         "product added successfully before adding " +
           JSON.stringify(action.payload)
       );
+      console.log("isItemInCart  ", quantity);
 
       const isItemInCart = state.products.some(
         (product) => product.product_id === product_id
       );
-      console.log("isItemInCart", isItemInCart);
       if (!isItemInCart) {
         console.log("Inside ! ");
         state.products.push(action.payload);
@@ -253,10 +253,10 @@ export const addToCart = (item) => async (dispatch, getState) => {
   const userDataString = localStorage.getItem("userData");
   const userData = JSON.parse(userDataString);
   const customerId = userData.customer_id;
-  console.log("userData" + customerId);
   const response = await axios.put("http://13.234.238.29:3000/api/UserCart", {
     customer_id: customerId,
     product_id: item.product_id,
+    quantity: item.quantity,
   });
   console.log("response From slicer" + response.status);
   console.log("response From slicer" + response.data);
