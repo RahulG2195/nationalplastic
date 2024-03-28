@@ -99,13 +99,16 @@ const Search = (props) => {
   //   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch("http://13.234.238.29:3000/api/ProductsCat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ product_id: id }),
-      });
+      const response = await fetch(
+        "http://13.234.238.29:3000/api/ProductsCat",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ product_id: id }),
+        }
+      );
       console.log(response);
 
       if (!response.ok) {

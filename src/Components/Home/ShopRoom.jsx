@@ -64,7 +64,7 @@ export default function ShopRoom() {
                 modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
                 spaceBetween={15}
                 loop={true}
-                pagination={{ clickable: true }} 
+                pagination={{ clickable: true }}
                 autoplay={{
                   delay: 2700,
                   disableOnInteraction: false,
@@ -96,7 +96,8 @@ export default function ShopRoom() {
                     <SwiperSlide key={product.category_id}>
                       <CatCards
                         catid={
-                          product.category_name && product.category_name.toLowerCase().includes("baby")
+                          product.category_name &&
+                          product.category_name.toLowerCase().includes("baby")
                             ? 18
                             : product.category_id
                         }
@@ -117,9 +118,10 @@ export default function ShopRoom() {
                   key={product.key}
                 >
                   <CatCards
-                  hoverglow='yellowGlow'
-                     catid={
-                      product.category_name && product.category_name.toLowerCase().includes("baby ")
+                    hoverglow="yellowGlow"
+                    catid={
+                      product.category_name &&
+                      product.category_name.toLowerCase().includes("baby ")
                         ? 18
                         : product.category_id
                     }

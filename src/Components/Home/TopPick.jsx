@@ -115,7 +115,7 @@ export default function TopPick() {
                   <div className="col-md-4" key={product.key}>
                     <SwiperSlide key={product.category_id}>
                       <CatCards
-                        hovereffect={'TopPickHover'}
+                        hovereffect={"TopPickHover"}
                         catid={product.category_id}
                         image={`/Assets/images/Home-page/${product.image_name}`}
                         title={product.category_name}

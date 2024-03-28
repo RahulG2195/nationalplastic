@@ -66,7 +66,9 @@ export default function Blog() {
         <div className="row">
           <div className="text-center highlightCont my-5">
             <div className="fs-1 lh-small fw-bolder text-danger ">Blog</div>
-            <div className="mt-1 fw-bold subCptRes w-50"><p>Lorem Ipsum</p></div>
+            <div className="mt-1 fw-bold subCptRes w-50">
+              <p>Lorem Ipsum</p>
+            </div>
           </div>
           <div className="col-12 products_col">
             <div className="row">
@@ -77,7 +79,7 @@ export default function Blog() {
                 spaceBetween={15}
                 slidesPerView={2}
                 // loop={true}
-                navigation={{ clickable: true }} 
+                navigation={{ clickable: true }}
                 pagination={{ clickable: true }}
                 // scrollbar={{ draggable: false }}
                 // onSwiper={(swiper) => console.log(swiper)}
@@ -112,7 +114,13 @@ export default function Blog() {
                       title={product.product_name}
                       url={product.url}
                       cat={product.categoryType}
-                      date= {product.createdOn && new Date(product.createdOn).toLocaleDateString(undefined, { month: 'long', year: 'numeric' })}
+                      date={
+                        product.createdOn &&
+                        new Date(product.createdOn).toLocaleDateString(
+                          undefined,
+                          { month: "long", year: "numeric" }
+                        )
+                      }
                       duration={product.duration}
                       shortDesc={product.short_description}
                     />

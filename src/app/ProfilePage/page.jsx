@@ -208,8 +208,6 @@ function ProfilePage() {
       localStorage.removeItem("userData");
       localStorage.removeItem("userId");
 
-
-
       // Update state variables
       // setIsLoggedIn(false);
       setData({}); // Clear user data

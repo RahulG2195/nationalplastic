@@ -87,7 +87,7 @@ export default function Highlight() {
                     <Link href="/ProductCatlogue">
                       <div className="card highlightcard">
                         <Image
-                        className="imagetop"
+                          className="imagetop"
                           src={`/Assets/images/Home-page/${product.image_name}`}
                           alt={product.image}
                           width={50}

@@ -1,4 +1,3 @@
-
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
@@ -46,7 +45,13 @@ export const cartSlice = createSlice({
     },
 
     addItemToCart: (state, action) => {
-      const { product_id, quantity , price, discount_price, from = true } = action.payload;
+      const {
+        product_id,
+        quantity,
+        price,
+        discount_price,
+        from = true,
+      } = action.payload;
       console.log(
         "product added successfully before adding " +
           JSON.stringify(action.payload)
@@ -56,7 +61,7 @@ export const cartSlice = createSlice({
         (product) => product.product_id === product_id
       );
       console.log("isItemInCart", isItemInCart);
-      if (!isItemInCart ) {
+      if (!isItemInCart) {
         console.log("Inside ! ");
         state.products.push(action.payload);
         console.log("stateTotalPrice: " + discount_price);
@@ -70,8 +75,8 @@ export const cartSlice = createSlice({
         localStorage.setItem("products", JSON.stringify(action.payload));
 
         // alert("Added");
-      }else if (from) {
-        console.log(from)
+      } else if (from) {
+        console.log(from);
         console.log("NoMahnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn!");
         const existingProduct = state.products.find(
           (product) => product.product_id === product_id

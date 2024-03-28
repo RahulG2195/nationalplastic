@@ -5,8 +5,7 @@ const app = express();
 // Allow requests from your Next.js domain
 app.use(
   cors({
-    origin:
-      "https://localhost:3000/",
+    origin: "http://13.234.238.29:3000/",
   })
 );
 
