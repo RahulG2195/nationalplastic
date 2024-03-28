@@ -18,13 +18,17 @@
 
 .ordersLogo {
     line-height: 1;
+    margin-top: 150px;
+    margin-left: 0px;
 }
 
 .ordersLogo .fw-large {
     font-weight: 800;
 
 }
-
+.getbottomform{
+    width: 500px;
+}
 .fw-large2 {
     font-weight: 800 !important;
     font-size: 70px !important;
@@ -92,10 +96,6 @@
 
     .getQformBottom {
         display: none;
-    }
-
-    .sbmtButton {
-        position: static;
     }
 
     .bottomImgOfForm {

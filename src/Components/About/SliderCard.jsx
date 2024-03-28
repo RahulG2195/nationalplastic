@@ -54,7 +54,7 @@ function SliderCard() {
 
   return (
     < >
-    <div className="container  ">
+    <div className="container p0 ">
       <Swiper
         className=" pb-5 "
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}

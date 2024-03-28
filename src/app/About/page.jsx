@@ -83,16 +83,16 @@ function About() {
           </h2>
         </div>
       </div>
-      <div className="position-relative px-5">
+      <div className="position-relative aboutsliderCont px-5">
       <div className=" h-100 position-absolute backblue "></div>
       <SliderCard />
       <AboutCTA />
       </div>
       {/* Vission and Mission start */}
-      <div className="container">
-        <div className="row">
+      <div className="container p0  mx-auto">
+        <div className="row px-5 mx-5 vmcont">
           {arr.map((val) => (
-            <div className="col-md-6" key={val.key}>
+            <div className=" col-md-6" key={val.key}>
               {" "}
               <VMCard title={val.title} description={val.desc} />
             </div>
@@ -147,11 +147,18 @@ function About() {
         </div>
       </div>
       <div className="container">
-        <div className="row section_header section_header_Certificates">
-          <h2> Awards & <span>Certificates</span>
-          </h2>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,</p>
-        </div>
+      <div className="text-center mb-5 ">
+            <div className="fs-1 darkBlue fw-normal">
+              Awards & <span className="fw-bold text-danger">Certificates</span>{" "}
+            </div>
+            <div className="mt-1 fw-medium subCptRes w-50">
+              <p>
+                ILorem Ipsum is simply dummy text of the printing and
+                typesetting industry. Lorem Ipsum has been the industrys
+                standard dummy text ever since the 1500s,
+              </p>
+            </div>
+          </div>
         <div className="row team-members">
           {certificatesarr.map((val) => (
             <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6" key={val.key}>

@@ -61,12 +61,12 @@ function InvestorsSlider() {
 
   return (
     <>
-      <div className="investor-swiper ">
+      <div className="investor-swiper mt-0">
 
         <Swiper
-          className="h-80 w-80  "
+          className="h-80 w-80 mx-5 "
           modules={[Navigation, A11y,]}
-          spaceBetween={50}
+          spaceBetween={0 }
           slidesPerView={3}
           navigation
           loop={true}
@@ -78,30 +78,30 @@ function InvestorsSlider() {
 
             425: {
               slidesPerView: 2,
-              spaceBetween: 20,
+              spaceBetween: 0,
             },
             200: {
               slidesPerView: 1,
-              spaceBetween: 20,
+              spaceBetween: 0,
             },
             640: {
               slidesPerView: 3,
-              spaceBetween: 20,
+              spaceBetween: 0,
             },
             600: {
               slidesPerView: 3,
-              spaceBetween: 40,
+              spaceBetween: 0,
             },
             1200: {
               slidesPerView: 4,
-              spaceBetween: 50,
+              spaceBetween: 0,
             },
           }}
 
         >
 
           {SliderCardArr.map((val) => (
-            <SwiperSlide key={val.key}>
+            <SwiperSlide key={val.key} >
               {/* Use AboutSlider as the content of each slide */}
               <InvestorSliderCard
                 bgimage={val.image}

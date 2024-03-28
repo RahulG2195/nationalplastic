@@ -13,7 +13,7 @@ const TopPicsCard = (props) => {
                 <Link href="/ProductDetail" id="nav-link">
 
                     <div className="circularCard d-flex flex-column align-items-center position-relative">
-                        <div className="circularimg ">
+                        <div className="circularimg mb-3">
 
                             <Image
                                 className="image"

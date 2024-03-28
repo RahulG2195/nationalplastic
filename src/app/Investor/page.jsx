@@ -64,8 +64,8 @@ function Investor() {
       {/* <SliderCard/> */}
 
       {/* <NationalFitnessUpp/> */}
-      <div className="container NationalFitnessUpp-contaner">
-        <div className="row">
+      <div className="container NationalFitnessUpp-contaner p-0">
+        <div className="row px-5">
           {NationalFitnessUppArr.map((val) => (
             <div className="col-md-4" key={val.key}>
               <NationalFitnessUpper title={val.title} description={val.desc} />
@@ -75,15 +75,15 @@ function Investor() {
       </div>
       <NationalFitness />
       <UnauditedFinancialResults />
-      <div className="container">
-        <div className="row NationalFitness-container">
+      <div>
+        <div className=" NationalFitness-container">
           <h2>
             Share <span>Prices</span>
           </h2>
         </div>
-        <div className="row SharePrices-row">
+        <div className="d-flex gap-3 justify-content-center flex-wrap SharePrices-row pb-5">
           {SharePrices.map((val) => (
-            <div className="col-md-6" key={val.key}>
+            <div className="" key={val.key}>
               <SharePricesCard
                 image={val.image}
                 title={val.title}

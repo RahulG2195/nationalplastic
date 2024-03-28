@@ -9,7 +9,7 @@ const InvestorSliderCard = (props) => {
 
   return (
     <>
-      <div className="h-100 w-100 bgimginvestors position-relative mt-5">
+      <div className=" bgimginvestors position-relative mb-5">
 
         <Image
           src={props.bgimage}
@@ -22,7 +22,7 @@ const InvestorSliderCard = (props) => {
         />
         <div className={props.isEven ? 'even-image' : 'odd-image' }>
           <p className="darkBlue fw-bold ">{props.title}</p>
-          <button className="ReadmoreButtonInvestors btn-danger"> Read More</button>
+          <button className="ReadmoreButtonInvestors btn-danger">Read More</button>
         </div>
 
       </div>

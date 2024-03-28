@@ -91,15 +91,16 @@ function UnauditedFinancialResults() {
   return (
     <>
       <div className="container">
+
         <div className="row">
-          <div className="col-md-2 ">
-            <div className="FinancialResults-2 FinancialResults-2-ufr">
-              <h4>Unaudited Financial Results</h4>
+          <div className="col-md-4 colred">
+            <div className="FinancialResults-2 FinancialResults-2-ufr bg-danger mt-5 px-5 py-2 rounded-1 text-center">
+              <h4 className="fw-bold my-5 text-center mx-1">Unaudited Financial Results</h4>
             </div>
           </div>
           {/* *******Q1 June******** */}
 
-          <div className="col-md-10 FinancialResults-10">
+          <div className="col-md-8 FinancialResults-10 px-5">
             <div>
               <h2>Financial Results</h2>
               <h4>Q1 June</h4>
@@ -118,6 +119,7 @@ function UnauditedFinancialResults() {
             </div>
             {/* *******Q2 September******** */}
             <div>
+              <hr />
               <h2>Financial Results</h2>
               <h4>Q2 September</h4>
 
@@ -135,6 +137,7 @@ function UnauditedFinancialResults() {
             </div>
             {/* ******* Q3 December******** */}
             <div>
+              <hr />
               <h2>Financial Results</h2>
               <h4>Q3 December</h4>
               <div className="row">
@@ -155,13 +158,13 @@ function UnauditedFinancialResults() {
 
         {/* ****Audited Financial Results***** */}
         <div className="row FinancialResults">
-          <div className="col-md-2 ">
-            <div className="FinancialResults-2">
-              <h4>Audited Financial Results</h4>
+          <div className="col-md-4 colred">
+            <div className="FinancialResults-2 FinancialResults-2-ufr bg-danger mt-5 px-5 py-2 rounded-1 text-center">
+              <h4 className="fw-bold my-5 text-center">Audited Financial Results</h4>
             </div>
           </div>
 
-          <div className="col-md-10 FinancialResults-10">
+          <div className="col-md-8 FinancialResults-10 px-5">
             <div>
               <h2>Financial Results</h2> 
 
@@ -182,13 +185,13 @@ function UnauditedFinancialResults() {
 
         {/* ****Annual Report***** */}
         <div className="row FinancialResults">
-          <div className="col-md-2 ">
-            <div className="FinancialResults-2">
-              <h4>Annual Report</h4>
+          <div className="col-md-4 colred">
+            <div className="FinancialResults-2 FinancialResults-2-ufr bg-danger mt-5 px-5 py-2 rounded-1 text-center">
+              <h4 className="fw-bold my-5 text-center">Annual Report</h4>
             </div>
           </div>
 
-          <div className="col-md-10 FinancialResults-10">
+          <div className="col-md-8 FinancialResults-10 px-5">
             <div> 
 
               <div className="row">
@@ -208,13 +211,13 @@ function UnauditedFinancialResults() {
 
         {/* ****Annual Return***** */}
         <div className="row FinancialResults">
-          <div className="col-md-2 ">
-            <div className="FinancialResults-2">
-              <h4>Annual Return</h4>
+          <div className="col-md-4 colred">
+            <div className="FinancialResults-2 FinancialResults-2-ufr bg-danger mt-5 px-5 py-2 rounded-1 text-center">
+              <h4 className="fw-bold my-5 text-center">Annual Return</h4>
             </div>
           </div>
 
-          <div className="col-md-10 FinancialResults-10">
+          <div className="col-md-8 FinancialResults-10 px-5">
             <div> 
 
               <div className="row">

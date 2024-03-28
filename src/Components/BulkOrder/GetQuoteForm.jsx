@@ -77,7 +77,7 @@ const GetQuoteForm = (props) => {
 
   return (
     <>
-      <div className="GQform rounded p-4 py-5 mt-2 GQFormRes">
+      <div className={`GQform rounded p-4 py-5 mt-2 GQFormRes rounded-4 ${props.bottomclass} `}>
         <form onSubmit={handleOnSubmit}>
           <div className="mb-4">
             <input
@@ -147,10 +147,7 @@ const GetQuoteForm = (props) => {
             <button
               type="submit"
               value="submit"
-              className={
-                props.className
-                  ? props.className
-                  : "btn bg-white darkBlue fw-semibold px-4"
+              className={props.className? props.className: "btn bg-white darkBlue fw-semibold px-4"
               }
             >
               Submit

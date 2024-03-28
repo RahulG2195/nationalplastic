@@ -44,9 +44,9 @@
 
 .vmcontainer {
     text-align: center;
-    margin: 47px;
+    /* margin: 47px; */
     background-color: #2622621F;
-    padding: 50px;
+    /* padding: 50px; */
     border-radius: 10px;
 }
 
@@ -141,6 +141,10 @@
     width: 90%;
     height: 65% !important;
 }
+
+
+
+
 
 /* .about-slider-yellow img {
     width: 80px !important;
@@ -239,6 +243,58 @@
 
 /* RESPONSIVE */
 
+@media (max-width:992px) {
+    .aboutsliderCont{
+        padding: 0 !important;
+    }
+    .about_section{
+        padding: 0 !important;
+        width: 100% !important;
+    }
+    .cta{
+        padding: 2px !important;
+        font-size: small;
+    }
+    .p0{
+        padding: 0 !important;
+    }
+    .p0 .row{
+        padding: 0 !important;
+    }
+    .ctatitle{
+        font-size: 14px;
+    }
+    .vmcont{
+        font-size: 10px;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .backblue{
+        display: none;
+    }
+    .about_text h5,.about_text p{
+        font-size: 10px !important;
+    }
+    .about_icons img{
+        width: 50px ;
+        height:50px ;
+    }
+    
+}
+
+
+@media (max-width:768px) {
+    .india-map-text{
+        width: 100% !important;
+    }
+    .btntextInfra{
+    font-size: 10px !important;
+    padding: 15px !important;
+    }
+    .infraTextrsp{
+        font-size: 10px !important;
+    }
+}
 @media only screen and (min-width: 1502) {}
 
 @media only screen and (min-width: 1367px) and (max-width: 1501px) {}

@@ -33,7 +33,7 @@ const BulkOrders = () => {
                             <div className="col-md-8">
                                 <div className="frmW">
 
-                                    <GetQuoteForm className="sbmtButton" />
+                                    <GetQuoteForm className="sbmtButton" bottomclass="getbottomform " />
 
                                     <div className="getQformBottom"></div>
                                     <div className="bottomImgOfForm position-absolute">

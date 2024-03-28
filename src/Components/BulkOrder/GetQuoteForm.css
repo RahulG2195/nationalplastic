@@ -65,4 +65,12 @@
             padding:5px 10px !important ;
             font-size: small;
         }
+        .sbmtButton{
+            position: absolute;
+            top: 87%;
+            left: 41%;
+        }
+        .getbottomform{
+            padding-bottom: 50px !important;
+        }
 }

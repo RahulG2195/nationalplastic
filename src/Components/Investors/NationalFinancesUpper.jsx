@@ -3,9 +3,9 @@ import "../../styles/investor.css";
 
 const NationalFitnessUpper = ({title, description}) => {
   return (
-        <div className="NationalFitnessUpp-text">
+        <div className="NationalFitnessUpp-text  py-5 mx-5">
           <h2>{title}</h2>
-          <p>{description}</p>
+          <p className="text-center m-0 medium ">{description}</p>
         </div>
       
   );

@@ -14,7 +14,7 @@
 .bgimginvestors .odd-image p {
     position: absolute;
     top: 37%;
-    left: 21%;
+    left: 23%;
     font-size: x-large;
     text-align: center;
     width: 50%;
@@ -34,7 +34,7 @@
 .bgimginvestors .even-image p {
     position: absolute;
     top: 20%;
-    left: 21%;
+    left: 23%;
     font-size: x-large;
     width: 50%;
     line-height: 1;
@@ -77,6 +77,9 @@
         left: 29% !important;
         font-size: small !important;
 
+    }
+    .investor-swiper .mx-5{
+        margin: 0 !important;
     }
 
 }
