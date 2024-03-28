@@ -10,23 +10,6 @@ import { addItemToCart, removeItemFromCart } from "@/redux/reducer/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 // import { useSelector } from "react-redux";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
-import { isLoggedIn } from "@/utils/validation";
-import { Bounce, toast } from "react-toastify";
-import { useRouter } from "next/navigation";
-
-const notifyError = () => {
-  toast.error("Login To Add To WishList", {
-    position: "top-center",
-    autoClose: 2000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-    transition: Bounce,
-  });
-};
 function AddToCart() {
   // const cartState = useSelector((state) => state.cart);
   const [productDetailArr, setProductDetailArr] = useState([]);
@@ -36,7 +19,6 @@ function AddToCart() {
   const [totalPayble, setTotalPayble] = useState(0);
   const [installationCharges, setInstallationCharges] = useState(0);
   const dispatch = useDispatch();
-  const router = useRouter();
 
   useEffect(() => {
     const userDataString = localStorage.getItem("userData");
@@ -191,19 +173,11 @@ function AddToCart() {
   };
 
   const onAddToCart = async (product_id) => {
-    const isLoggedInResult = await isLoggedIn();
-    console.log("state", isLoggedInResult);
-    console.log("state", typeof isLoggedInResult);
-    if (!isLoggedInResult) {
-      notifyError();
-      router.push("/Login");
-    } else {
-      dispatch(
-        addItemToWishlist({
-          product_id: product_id,
-        })
-      );
-    }
+    dispatch(
+      addItemToWishlist({
+        product_id: product_id,
+      })
+    );
   };
   const onRemoveSuccess = async (product_id) => {
     try {
