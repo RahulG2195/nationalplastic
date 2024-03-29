@@ -99,7 +99,6 @@ const Search = (props) => {
   //   };
   const fetchPrice = async (id) => {
     try {
-
       const response = await fetch(
         "http://13.234.238.29:3000/api/ProductsCat",
         {

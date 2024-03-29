@@ -147,7 +147,10 @@ const GetQuoteForm = (props) => {
             <button
               type="submit"
               value="submit"
-              className={props.className? props.className: "btn bg-white darkBlue fw-semibold px-4"
+              className={
+                props.className
+                  ? props.className
+                  : "btn bg-white darkBlue fw-semibold px-4"
               }
             >
               Submit

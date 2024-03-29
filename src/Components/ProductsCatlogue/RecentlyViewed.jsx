@@ -159,8 +159,10 @@ const RecentlyViewed = () => {
   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch('http://13.234.238.29:3000api/ProductsCat', {
-          method: 'POST',
+      const response = await fetch(
+        "http://13.234.238.29:3000/api/ProductsCat",
+        {
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
@@ -247,7 +249,7 @@ const RecentlyViewed = () => {
           navigation
           loop={true}
           // pagination={{ clickable: true }}
-          autoplay={autoplay ?   { delay: 4000 } : false}
+          autoplay={autoplay ? { delay: 4000 } : false}
           breakpoints={{
             425: {
               slidesPerView: 2,

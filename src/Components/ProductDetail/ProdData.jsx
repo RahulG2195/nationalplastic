@@ -21,7 +21,7 @@ import { Bounce, toast } from "react-toastify";
 // import Breadcrump from "@/app/Breadcromp/page";
 // import RecentlyViewed from "../ProductsCatlogue/RecentlyViewed";
 import { useParams } from "next/navigation";
-import {isLoggedIn} from "@/utils/validation"
+import { isLoggedIn } from "@/utils/validation";
 import Breadcrump from "../Breadcrump/Breadcrump";
 function ProdData() {
   const [data, setData] = useState([]);
@@ -106,8 +106,10 @@ function ProdData() {
   const fetchPrice = async (storedId) => {
     console.log("Fetching price", storedId);
     try {
-      const response = await fetch('http://13.234.238.29:3000api/ProductsCat', {
-          method: 'PUT',
+      const response = await fetch(
+        "http://13.234.238.29:3000/api/ProductsCat",
+        {
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
