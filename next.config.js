@@ -1,21 +1,21 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: false,
-    // output:'export',
-    // eslint: {
-    //     ignoreDuringBuilds: true,
-    // },
-    // // images:{
-    //     unoptimized:true,
-    // },
+  reactStrictMode: false,
+  // output:'export',
+  // eslint: {
+  //     ignoreDuringBuilds: true,
+  // },
+  // // images:{
+  //     unoptimized:true,
+  // },
 
-    env: {
-        MYSQL_HOST: "13.234.238.29",
-        MYSQL_DATABASE: "nationalplastic_db",
-        MYSQL_USER: "root",
-        MYSQL_PASSWORD: "",
-        MYSQL_PORT: "3306",
-    },
+  env: {
+    MYSQL_HOST: "13.234.238.29",
+    MYSQL_DATABASE: "nationalplastic_db",
+    MYSQL_USER: "root",
+    MYSQL_PASSWORD: "National2024",
+    MYSQL_PORT: "3306",
+  },
 };
 
 // Reference number, Number of Bedrooms, Number of Bathrooms, Numberof Employees,Number of Owners,Number of Shares - not reflecting in export
