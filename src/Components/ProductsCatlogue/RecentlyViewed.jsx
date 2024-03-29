@@ -95,7 +95,7 @@ const RecentlyViewed = () => {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          "http://13.234.238.29:3000//api/Products"
+          "http://13.234.238.29:3000/api/Products"
         );
         const filteredproducts = response.data.products.filter(
           (item) => item.categoryType === "premium chairs"
@@ -116,7 +116,7 @@ const RecentlyViewed = () => {
       const customerId = userData.customer_id;
 
       const response = await axios.post(
-        "http://13.234.238.29:3000//api/wishListUser",
+        "http://13.234.238.29:3000/api/wishListUser",
         {
           customer_id: customerId,
         }
@@ -159,8 +159,10 @@ const RecentlyViewed = () => {
   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch('http://13.234.238.29:3000/api/ProductsCat', {
-          method: 'POST',
+      const response = await fetch(
+        "http://13.234.238.29:3000/api/ProductsCat",
+        {
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
@@ -247,7 +249,7 @@ const RecentlyViewed = () => {
           navigation
           loop={true}
           // pagination={{ clickable: true }}
-          autoplay={autoplay ?   { delay: 4000 } : false}
+          autoplay={autoplay ? { delay: 4000 } : false}
           breakpoints={{
             425: {
               slidesPerView: 2,
