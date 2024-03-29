@@ -49,11 +49,7 @@ function ProfilePage() {
         };
 
         const response = await axios.put(
-<<<<<<< HEAD
-          "http://13.234.238.29:3000//api/Users",
-=======
           "http://13.234.238.29:3000/api/Users",
->>>>>>> 2eea476dbe8b7eebdab94af42368a5c5542a1324
           formData
         );
 
@@ -76,11 +72,7 @@ function ProfilePage() {
     try {
       // Send updated data to userProfile API
       const response = await axios.put(
-<<<<<<< HEAD
-        "http://13.234.238.29:3000//api/UserProfile",
-=======
         "http://13.234.238.29:3000/api/UserProfile",
->>>>>>> 2eea476dbe8b7eebdab94af42368a5c5542a1324
         data
       );
       // Handle success response

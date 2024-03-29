@@ -12,7 +12,7 @@ app.use(
 // Other routes and middleware...
 
 const AuthUser = async(req) => {
-    const token = req.headers.get("Authentication") ? .split(" ")[1];
+    const token = req.headers.get("Authentication") ?.split(" ")[1];
     if (!token) {
         console.log("No Token");
         return false;

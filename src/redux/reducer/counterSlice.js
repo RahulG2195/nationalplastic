@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const counterSlice = createSlice({
     name: "counter",
@@ -25,7 +26,7 @@ export const priceCalculator = async(data) => {
     );
     try {
         console.log("data:", JSON.stringify(data));
-        const res = await axios.put(`http://13.234.238.29:3000/api/Users`, data);
+        const res = await axios.put(`http://13.234.238.29:3000api/Users`, data);
         console.log(
             "----------------------------PC------2------------------------------"
         );
@@ -35,7 +36,7 @@ export const priceCalculator = async(data) => {
 
         return res.data; // Change this line
     } catch (error) {
-        toast.error(error ? .response ? .data ? .message);
+        toast.error(error ?.response ?.data ?.message);
     }
 };
 

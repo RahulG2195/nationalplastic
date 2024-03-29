@@ -27,11 +27,7 @@ function AddToCart() {
     const fetchData = async () => {
       try {
         const response = await axios.post(
-<<<<<<< HEAD
-          "http://13.234.238.29:3000//api/UserCart",
-=======
-          "http://13.234.238.29:3000/api/UserCart",
->>>>>>> 2eea476dbe8b7eebdab94af42368a5c5542a1324
+          "http://13.234.238.29:3000api/UserCart",
           {
             customer_id: customerId,
           }
@@ -42,6 +38,15 @@ function AddToCart() {
         console.log(
           "-------------------------------------------------------- --" +
             JSON.stringify(cartData)
+        );
+        console.log(
+          "-------------------------------------------------------- --" +
+            typeof cartData
+        );
+        const isArray = Array.isArray(cartData)
+        console.log(
+          "-------------------------------------------------------- --" +
+          isArray
         );
         const products = cartData.map(
           (item) => ({
@@ -122,11 +127,7 @@ function AddToCart() {
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
       const response = await axios.post(
-<<<<<<< HEAD
-        "http://13.234.238.29:3000//api/UserCart",
-=======
-        "http://13.234.238.29:3000/api/UserCart",
->>>>>>> 2eea476dbe8b7eebdab94af42368a5c5542a1324
+        "http://13.234.238.29:3000api/UserCart",
         {
           customer_id: customerId,
         }
@@ -198,11 +199,7 @@ function AddToCart() {
       formData.append("customer_id", customerId);
       formData.append("product_id", product_id);
       const response = await axios.delete(
-<<<<<<< HEAD
-        "http://13.234.238.29:3000//api/UserCart",
-=======
-        "http://13.234.238.29:3000/api/UserCart",
->>>>>>> 2eea476dbe8b7eebdab94af42368a5c5542a1324
+        "http://13.234.238.29:3000api/UserCart",
         {
           data: formData,
           headers: {

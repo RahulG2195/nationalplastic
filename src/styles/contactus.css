@@ -5,6 +5,8 @@
     margin: auto;
     clip-path: polygon(0 1%, 100% 1%, 100% 74%, 0% 100%);
     margin-top: -2px;
+    box-shadow: black;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Add your shadow here */
 
 }
 
@@ -89,11 +91,11 @@
 .RegisteredOffice {
     padding: 20px 10px 20px 60px;
     border-radius: 15px;
-    left: 138px;
+    left: 176px;
     position: relative;
     background-color: #F8F8F8;
     box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
-    top: -20%;
+    top: -30%;
 }
 
 .RegisteredOffice div h1 {
@@ -119,11 +121,15 @@
 }
 
 .location-image {
-    left: 43px;
-    width: 230px;
+    left: 37px;
+    width: 335px;
     position: relative;
     z-index: 999;
-    top: -35px;
+    top: -136px;
+}
+
+.ROtitle h1{
+    font-size: 50px;
 }
 
 .map-image img {

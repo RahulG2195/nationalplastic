@@ -53,10 +53,10 @@
     position: absolute;
     margin: 0 auto;
     bottom: -42%;
-    width: 70%;
+    /* width: 70%; */
     height: 253px;
     background-color: #2E3192;
-    left: 15%;
+    left: 0%;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 

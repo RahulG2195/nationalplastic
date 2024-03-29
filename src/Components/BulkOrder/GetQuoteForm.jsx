@@ -56,7 +56,7 @@ const GetQuoteForm = (props) => {
     try {
       console.log("Form Data:", formData); // Log formData for debugging
       const response = await axios.post(
-        "http://13.234.238.29:3000//api/BulkOrderForm",
+        "http://13.234.238.29:3000/api/BulkOrderForm",
         formData
       );
       alert("Success! Form data submitted."); // Show success message
@@ -77,7 +77,7 @@ const GetQuoteForm = (props) => {
 
   return (
     <>
-      <div className={`GQform rounded p-4 py-5 mt-2 GQFormRes rounded-4 ${props.bottomclass} `}>
+      <div className={`GQform rounded p-5 py-5 mt-2 GQFormRes rounded-4 ${props.bottomclass} `}>
         <form onSubmit={handleOnSubmit}>
           <div className="mb-4">
             <input

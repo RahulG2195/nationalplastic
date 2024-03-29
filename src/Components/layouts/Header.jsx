@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import ProductsAccr from "../ProductsAccor/ProductsAccr";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 export default function Header() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -26,7 +27,7 @@ export default function Header() {
     const userData = JSON.parse(userDataString) || {};
     const customerId = userData.customer_id || {};
 
-    const check = await axios.post("http://13.234.238.29:3000//api/UserCart", {
+    const check = await axios.post("http://13.234.238.29:3000/api/UserCart", {
       customer_id: customerId,
     });
     if (
@@ -124,7 +125,7 @@ export default function Header() {
               }`}
               id="navbarSupportedContent"
             >
-              <ul className="navbar-nav mb-2 mb-lg-0">
+              <ul className="navbar-nav homeNav mb-2 mb-lg-0">
                 <li className="nav-item brdr">
                   {/* <div className='border'></div> */}
                   <Link
@@ -138,13 +139,13 @@ export default function Header() {
                   {/* <div className='border'></div> */}
                 </li>
                 <li className="nav-item brdr">
-                  <Link
+                  <NavLink
                     className="nav-link"
                     href="/About"
                     onClick={isClicked ? handleShow : null}
                   >
                     About Us
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className="nav-item brdr">
                   <Link
@@ -225,7 +226,7 @@ export default function Header() {
                 </li>
                 <li className="nav-item brdr">
                   <Link
-                    className="nav-link position-relative"
+                    className="nav-link AddToCartNav-link  position-relative"
                     href="/AddToCart"
                     onClick={isClicked ? handleShow : null}
                   >

@@ -16,7 +16,7 @@ const ProductsAccr = ({ handleShow }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://13.234.238.29:3000//api/Products");
+        const res = await axios.get("http://13.234.238.29:3000/api/Products");
         const allproducts = res.data.products;
         const categoryIds = [13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
 
@@ -66,7 +66,7 @@ const ProductsAccr = ({ handleShow }) => {
 
   return (
     <div>
-      <Accordion style={{ backgroundColor: "#FFE000" }}>
+      <Accordion className="prdctAccr" style={{ backgroundColor: "#FFE000" }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls={`panel0-content`}

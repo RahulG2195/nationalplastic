@@ -3,13 +3,18 @@
     cursor: pointer;
 }
 
+
+
+.column p:hover{
+    color: #CC0008 !important;
+    /* transition: all 0.3s ; */
+}
 .mainrow .col:hover p {
     color: #CC0008;
 }
 
 .mainrow .first:hover .ulCont {
     display: block;
-    transition: all .5s;
     text-align: left;
 }
 
@@ -21,14 +26,12 @@
 
 .ulCont {
     height: 40vh;
-    overflow-y: scroll;
     position: absolute;
     z-index: 999;
-    /* left: 0 !important; */
-    /* top: 100% !important; */
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     display: none;
     text-align: left;
+    transition: all 0.5s;
 
 }
 
@@ -49,8 +52,8 @@
 }
 
 .barImgCont {
-    position: sticky;
-    top: 9%;
+    /* position: sticky; */
+    /* top: 9%; */
     height: 30vh;
     width: 30vh;
     border-radius: 20px;
@@ -65,73 +68,94 @@
     position: relative;
 }
 
+
 .Stool .SecondDrop {
-    right: -20%!important;
+    right: -35% !important;
     top: 100% !important;
     width: max-content !important;
     padding: 5% !important;
     position: absolute;
+    transition: all 0.5s ease; 
 }
+
 .mainrow .Stool:hover .SecondDrop {
     display: block !important;
+    top: 90%; /* adjust position on hover */
+    opacity: 1; /* adjust opacity on hover */
 }
 
 .Table .SecondDrop {
-    right:-20%!important;
+    right: -20% !important;
     top: 100% !important;
     width: max-content !important;
     padding: 5% !important;
     position: absolute;
 }
+
 .mainrow .Table:hover .SecondDrop {
     display: block !important;
 }
 
 .Box .SecondDrop {
-    right:-20% !important;
+    right: -20% !important;
     top: 100% !important;
     width: max-content !important;
     padding: 5% !important;
     position: absolute;
 }
+
 .mainrow .Box:hover .SecondDrop {
     display: block !important;
+    top: 100% !important;
+
 }
+
 .Drawer .SecondDrop {
-    right:-20%!important;
+    right: -20% !important;
     top: 100% !important;
     width: max-content !important;
     padding: 5% !important;
     position: absolute;
 }
+
 .mainrow .Drawer:hover .SecondDrop {
     display: block !important;
 }
 
+.SecondDrop{
+    transition: all 0.3s;
+    border-radius: 10px;
+}
 
 .second .SecondDrop {
+    display: none !important;
     left: -25% !important;
-    top: 100% !important;
     width: max-content !important;
     padding: 5% !important;
     position: absolute;
+    transition: all 0.5s;
+    opacity: 1;
+ 
 }
 
-.mainrow .second:hover .SecondDrop {
+.second:hover .SecondDrop {
     display: block !important;
-}
+    top: 100% !important;
+    opacity: 1; 
+    transition: all 0.5s;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;}
 
-.innerUlCont {
+/* .innerUlCont {
     display: none;
     position: absolute;
-    /* top: 100%; */
-    /* left: 0; */
-}
+    top: 100%; 
+     left: 0;
+} */
 
-.drawerHover:hover .innerUlCont {
+/* .drawerHover:hover .innerUlCont {
     display: block;
-}
-
+} */
+/* 
 .innerUlCont {
     display: none;
     position: absolute;
@@ -145,10 +169,17 @@
 
 .drawerHover:hover .innerUlCont {
     display: block;
-}
+} */
+
+/* .second:hover .secondHover {
+    transition: all 5s;
+    top: 100% !important;
+} */
+
+
 @media (max-width:992px) {
-    .mainrow{
+    .mainrow {
         display: none !important;
     }
-    
+
 }

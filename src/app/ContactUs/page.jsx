@@ -119,11 +119,7 @@ function ContactUs() {
     //TryCatch For the Email Message
 
     const res = await axios.post(
-<<<<<<< HEAD
-      `http://13.234.238.29:3000//api/sendEmail`,
-=======
-      `http://13.234.238.29:3000/api/sendEmail`,
->>>>>>> 2eea476dbe8b7eebdab94af42368a5c5542a1324
+      `http://13.234.238.29:3000api/sendEmail`,
       formData,
       {
         headers: {
@@ -226,7 +222,7 @@ function ContactUs() {
           />
         </div>
         <div className="row">
-          <div class="clip-path-element">
+          <div class="clip-path-element ">
             <h1>CONTACT US</h1>
             <div className="contact-btn">
               <button>Branch Offices</button>
@@ -352,9 +348,9 @@ function ContactUs() {
           </div>
         </div>
 
-        <div className="row LocationSection">
-          <div className="col-md-6 col-lg-6 col-xl-4">
-            <div className="location-image">
+        <div className="row LocationSection mt-5 pt-5">
+          <div className="">
+            <div className="location-image col-md-4 col-lg-6 col-xl-4">
               <Image
                 src="/Assets/images/ContactUs/red-place-marker-white-background.png"
                 alt="Contact Us Page Banner"
@@ -364,8 +360,8 @@ function ContactUs() {
                 objectFit="cover"
               />
             </div>
-            <div className="RegisteredOffice">
-              <div>
+            <div className="RegisteredOffice px-5 py-5 col-md-4 col-lg-6 col-xl-4">
+              <div className="ROtitle">
                 <h1>Registered</h1>
                 <h1>Office</h1>
               </div>
