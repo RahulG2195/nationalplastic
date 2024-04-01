@@ -43,10 +43,10 @@ function AddToCart() {
           "-------------------------------------------------------- --" +
             typeof cartData
         );
-        const isArray = Array.isArray(cartData)
+        const isArray = Array.isArray(cartData);
         console.log(
           "-------------------------------------------------------- --" +
-          isArray
+            isArray
         );
         const products = cartData.map(
           (item) => ({

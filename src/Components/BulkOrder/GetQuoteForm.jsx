@@ -77,7 +77,9 @@ const GetQuoteForm = (props) => {
 
   return (
     <>
-      <div className={`GQform rounded p-5 py-5 mt-2 GQFormRes rounded-4 ${props.bottomclass} `}>
+      <div
+        className={`GQform rounded p-5 py-5 mt-2 GQFormRes rounded-4 ${props.bottomclass} `}
+      >
         <form onSubmit={handleOnSubmit}>
           <div className="mb-4">
             <input
