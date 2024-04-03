@@ -9,7 +9,7 @@ function BottomBar() {
   const [name, setName] = useState("");
   const [seourl, setSeourl] = useState();
   const [preEventChair, setPreEventChair] = useState([]);
-  console.log("urlurlurlurl",preEventChair)
+  console.log("urlurlurlurl", preEventChair);
   const [withountArm, setWithoutArm] = useState([]);
   const [prechair, setPrechair] = useState([]);
   const [Popularchair, setPopularchair] = useState([]);
@@ -31,7 +31,7 @@ function BottomBar() {
     // console.log("nameenamee", name)
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/Products");
+        const res = await axios.get("http://13.234.238.29:3000/api/Products");
         const allproducts = res.data.products;
         setPreEventChair(
           allproducts.filter((products) => products.category_id == 13)
@@ -65,11 +65,10 @@ function BottomBar() {
     fetchData();
   }, [name]);
 
-  const sendCategory = (e) =>{
+  const sendCategory = (e) => {
     const title = e.target.innerText;
     console.log("Category clicked:", title);
-      localStorage.setItem('category', title);
-   
+    localStorage.setItem("category", title);
   };
 
   const chunkArray = (arr, size) => {
@@ -83,7 +82,9 @@ function BottomBar() {
   return (
     <div className=" px-5  d-flex align-items-center bottom_nav position-relative mainrow">
       <div className="col second px-3 py-2">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/13`}><p className="">Premium Event Chairs</p></Link>
+        <Link onClick={sendCategory} href={`/ProductCatlogue/13`}>
+          <p className="">Premium Event Chairs</p>
+        </Link>
         <div className="ulCont SecondDrop mx-4 secondHover p-3 ">
           <p className="text-start fw-bold dropHeading p-3">
             Premium Event Chairs
@@ -112,7 +113,10 @@ function BottomBar() {
       </div>
 
       <div className="col second py-2">
-      <Link onClick={sendCategory} href={`/ProductCatlogue/14`}> <p>Without Arm Tent</p></Link>
+        <Link onClick={sendCategory} href={`/ProductCatlogue/14`}>
+          {" "}
+          <p>Without Arm Tent</p>
+        </Link>
         <div className="ulCont SecondDrop mx-4 p-3">
           <p className="text-start fw-bold dropHeading ">Without Arm Tent</p>
           <div className="d-flex flex-row gap-5">
@@ -139,7 +143,9 @@ function BottomBar() {
       </div>
 
       <div className="col second  py-2">
-      <Link onClick={sendCategory} href={`/ProductCatlogue/15`}><p>Premium Chairs</p></Link>
+        <Link onClick={sendCategory} href={`/ProductCatlogue/15`}>
+          <p>Premium Chairs</p>
+        </Link>
         <div className="ulCont SecondDrop mx-4 px-3">
           <p className="text-start fw-bold dropHeading ">Premium Chairs</p>
           <div className="d-flex flex-row gap-5">
@@ -166,7 +172,9 @@ function BottomBar() {
       </div>
 
       <div className="col second py-2 ">
-      <Link onClick={sendCategory} href={`/ProductCatlogue/16`}><p>Popular Chairs</p></Link>
+        <Link onClick={sendCategory} href={`/ProductCatlogue/16`}>
+          <p>Popular Chairs</p>
+        </Link>
         <div className="ulCont SecondDrop mx-4 p-3">
           <p className="text-start fw-bold dropHeading ">Popular Chairs</p>
           <div className="d-flex flex-row gap-5">
@@ -193,7 +201,9 @@ function BottomBar() {
       </div>
 
       <div className="col second py-2 ">
-      <Link onClick={sendCategory} href={`/ProductCatlogue/17`}><p>Cabinet</p></Link>
+        <Link onClick={sendCategory} href={`/ProductCatlogue/17`}>
+          <p>Cabinet</p>
+        </Link>
         <div className="ulCont SecondDrop mx-4 p-3">
           <p className="text-start fw-bold dropHeading ">Cabinet</p>
           <div className="d-flex flex-row gap-5">
@@ -220,7 +230,9 @@ function BottomBar() {
       </div>
 
       <div className="col second py-2 ">
-      <Link onClick={sendCategory} href={`/ProductCatlogue/18`}><p>Baby Chairs</p></Link>
+        <Link onClick={sendCategory} href={`/ProductCatlogue/18`}>
+          <p>Baby Chairs</p>
+        </Link>
         <div className="ulCont SecondDrop mx-4 p-3">
           <p className="text-start fw-bold dropHeading ">Baby Chairs</p>
           <div className="d-flex flex-row gap-5">
@@ -247,7 +259,9 @@ function BottomBar() {
       </div>
 
       <div className="col Stool position-relative py-2">
-      <Link onClick={sendCategory} href={`/ProductCatlogue/28`}><p> Stool</p></Link>
+        <Link onClick={sendCategory} href={`/ProductCatlogue/28`}>
+          <p> Stool</p>
+        </Link>
         <div className="ulCont SecondDrop mx-4 ">
           <p className="text-start fw-bold dropHeading ">Stool</p>
           <div className="d-flex flex-row gap-5">
@@ -274,7 +288,9 @@ function BottomBar() {
       </div>
 
       <div className="col Table position-relative py-2">
-      <Link onClick={sendCategory} href={`/ProductCatlogue/25`}><p>Table</p></Link>
+        <Link onClick={sendCategory} href={`/ProductCatlogue/25`}>
+          <p>Table</p>
+        </Link>
         <div className="ulCont SecondDrop mx-4 p-3">
           <p className="text-start fw-bold dropHeading ">Table</p>
           <div className="d-flex flex-row gap-5">
@@ -301,7 +317,9 @@ function BottomBar() {
       </div>
 
       <div className="col Box position-relative py-2">
-      <Link onClick={sendCategory} href={`/ProductCatlogue/21`}><p>Box</p></Link>
+        <Link onClick={sendCategory} href={`/ProductCatlogue/21`}>
+          <p>Box</p>
+        </Link>
         <div className="ulCont SecondDrop mx-4 p-3">
           <p className="text-start fw-bold dropHeading ">Box</p>
           <div className="d-flex flex-row gap-5">
@@ -328,7 +346,9 @@ function BottomBar() {
       </div>
 
       <div className="col Drawer position-relative py-2">
-      <Link onClick={sendCategory} href={`/ProductCatlogue/22`}><p>Drawer</p></Link>
+        <Link onClick={sendCategory} href={`/ProductCatlogue/22`}>
+          <p>Drawer</p>
+        </Link>
         <div className="ulCont SecondDrop mx-4 p-3">
           <p className="text-start fw-bold dropHeading ">Drawer</p>
           <div className="d-flex flex-row gap-5">

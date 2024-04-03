@@ -50,9 +50,7 @@ const AddBody = () => {
     );
     const userData = response.data.message[0];
     const { Address } = userData;
-    const addressString = JSON.stringify(Address);
-    const addressWithoutQuotes = addressString.replace(/^"|"$/g, "");
-    setAddress(addressWithoutQuotes);
+    setAddress(JSON.stringify(Address));
   };
 
   useEffect(() => {
@@ -61,15 +59,6 @@ const AddBody = () => {
     const DummyData = localStorage.getItem("temp");
     const Dummies = JSON.parse(DummyData) || {};
 
-<<<<<<< HEAD
-        const response = await axios.post(
-          "http://localhost:3000/api/wishListUser",
-          {
-            customer_id: customerId,
-          }
-        );
-        const cartData = response.data.products;
-=======
     const customerId = userData.customer_id || {};
 
     const fetchData = async () => {
@@ -89,7 +78,6 @@ const AddBody = () => {
           getAdress();
           cartData = response.data.products;
         }
->>>>>>> 2b3ef0e7ab4a4b4696f1d3983fb8a806da83a0fa
 
         // Extracting relevant data from the cart data
         console.log(
@@ -323,23 +311,16 @@ const AddBody = () => {
                   <p className="text-start fw-semibold confirm bordrBtm p-3">
                     Order Summary
                   </p>
-                  <div>
-                    {productDetailArr.length === 0 ? (
-                      <h2 className="text-secondary">No products in cart</h2>
-                    ) : (
-                      <div className="container">
-                        {productDetailArr.map((val) => (
-                          <div className="row" key={val.product_id}>
-                            <OrderSummaryCard
-                              imgSrc={`/Assets/images/New-launches-1/${val.image_name}`}
-                              description={val.product_name}
-                              quantity={val.quantity}
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                  <OrderSummaryCard
+                    imgSrc="https://picsum.photos/id/0/367/267"
+                    description="Lorem ipsum dolor sit amet."
+                    quantity="00"
+                  />
+                  <OrderSummaryCard
+                    imgSrc="https://picsum.photos/id/0/367/267"
+                    description="Lorem ipsum dolor sit amet."
+                    quantity="00"
+                  />
                   <div className="d-flex justify-content-center">
                     <button
                       type="button"

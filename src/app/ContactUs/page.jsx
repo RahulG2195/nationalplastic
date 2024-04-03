@@ -118,7 +118,7 @@ function ContactUs() {
     //TryCatch For the Email Message
 
     const res = await axios.post(
-      `http://localhost:3000/api/sendEmail`,
+      `http://13.234.238.29:3000/api/sendEmail`,
       formData,
       {
         headers: {
@@ -339,9 +339,12 @@ function ContactUs() {
                     />
                   </div>
                   <div className="d-flex justify-content-center">
-                  <button type="submit" className="btn cta-contact-btn py-3 px-5 medium">
-                    Submit Your Request
-                  </button>
+                    <button
+                      type="submit"
+                      className="btn cta-contact-btn py-3 px-5 medium"
+                    >
+                      Submit Your Request
+                    </button>
                   </div>
                 </form>
               </div>

@@ -6,7 +6,7 @@ import axios from "axios";
 import { Bounce, toast } from "react-toastify";
 
 const notify = (props) => {
-    console.log('name ' + prodName);
+  console.log("name " + prodName);
   toast.success("Mail Sended SucessFully", {
     position: "top-center",
     autoClose: 2000,
@@ -57,7 +57,7 @@ const GetQuoteCustomForm = (props) => {
     try {
       console.log("Form Data:", formData); // Log formData for debugging
       const response = await axios.post(
-        "http://localhost:3000/api/BulkOrderForm",
+        "http://13.234.238.29:3000/api/BulkOrderForm",
         formData
       );
       alert("Success! Form data submitted."); // Show success message
@@ -78,15 +78,17 @@ const GetQuoteCustomForm = (props) => {
 
   return (
     <>
-      <div className={`GQform GQformprodpage rounded p-5 py-5 mt-2 GQFormRes rounded-4 ${props.bottomclass} `}>
-      {/* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
+      <div
+        className={`GQform GQformprodpage rounded p-5 py-5 mt-2 GQFormRes rounded-4 ${props.bottomclass} `}
+      >
+        {/* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
         <form onSubmit={handleOnSubmit}>
           <div className="mb-4">
             <input
               type="text"
               name="fullName"
               onChange={handleOnChange}
-            //   value={prodName}
+              //   value={prodName}
               className="form-control"
               placeholder="Your Name"
             />
@@ -109,7 +111,6 @@ const GetQuoteCustomForm = (props) => {
               onChange={handleOnChange}
               className="form-control"
               placeholder={props.prodName}
-              
             />
           </div>
 
@@ -155,7 +156,8 @@ const GetQuoteCustomForm = (props) => {
                 props.className
                   ? props.className
                   : "btn bg-white darkBlue fw-semibold px-4"
-              }>
+              }
+            >
               Submit
             </button>
           </div>

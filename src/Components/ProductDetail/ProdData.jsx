@@ -72,7 +72,7 @@ function ProdData() {
         setProductId(storedId);
 
         const response = await axios.get(
-          "http://localhost:3000/api/Products"
+          "http://13.234.238.29:3000/api/Products"
         );
         let filteredData = [];
         // if (productName) {
@@ -108,7 +108,7 @@ function ProdData() {
     console.log("Fetching price", storedId);
     try {
       const response = await fetch(
-        "http://localhost:3000/api/ProductsCat",
+        "http://13.234.238.29:3000/api/ProductsCat",
         {
           method: "PUT",
           headers: {
@@ -259,11 +259,15 @@ function ProdData() {
               </div>
               <div className="bulk_order_div">
                 {/* <Link href="/BulkOrder" className=""> */}
-                  <button className="btn btn-danger px-5 my-2 ProdbtnRes bulkRes  " data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Bulk Order
-                  </button>
+                <button
+                  className="btn btn-danger px-5 my-2 ProdbtnRes bulkRes  "
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  Bulk Order
+                </button>
                 {/* </Link> */}
-              </div> 
+              </div>
               <div className="product-ccount">
                 <label htmlFor="size">Quantity</label>
                 <IncrementDecrement
@@ -373,26 +377,36 @@ function ProdData() {
         <MoreProduct />
       </div>
 
-
       <div>
-      {/* <!-- Modal --> */}
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content modal-content-mypopup">
-      {/* <div class="modal-header">
+        {/* <!-- Modal --> */}
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content modal-content-mypopup">
+              {/* <div class="modal-header">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div> */}
-      <div class="modal-body">
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        <GetQuoteCustomForm prodName={name}/>
-      </div>
-      {/* <div class="modal-footer">
+              <div class="modal-body">
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+                <GetQuoteCustomForm prodName={name} />
+              </div>
+              {/* <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
       </div> */}
-    </div>
-  </div>
-</div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
