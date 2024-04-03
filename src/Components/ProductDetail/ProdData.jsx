@@ -156,7 +156,7 @@ function ProdData() {
             product_id,
             price,
             discount_price,
-            quantity: quantity,
+            quantity: quantity || 1,
           })
         );
         break;
@@ -299,7 +299,7 @@ function ProdData() {
                 <Link
                   href="/Address"
                   className="btn bg-danger text-white m-2 px-5 ProdbtnRes"
-                  // onClick={() => handleMoveToCart(productId)}
+                  onClick={() => handleMoveToCart(productId)}
                 >
                   Buy Now
                 </Link>
