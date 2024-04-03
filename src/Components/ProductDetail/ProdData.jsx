@@ -70,9 +70,7 @@ function ProdData() {
         const productName = id;
         setProductId(storedId);
 
-        const response = await axios.get(
-          "http://13.234.238.29:3000/api/Products"
-        );
+        const response = await axios.get("http://localhost:3000/api/Products");
         let filteredData = [];
         // if (productName) {
         //   filteredData = response.data.products.filter(
@@ -106,16 +104,13 @@ function ProdData() {
   const fetchPrice = async (storedId) => {
     console.log("Fetching price", storedId);
     try {
-      const response = await fetch(
-        "http://13.234.238.29:3000/api/ProductsCat",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ seo_url: storedId }),
-        }
-      );
+      const response = await fetch("http://localhost:3000/api/ProductsCat", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ seo_url: storedId }),
+      });
       console.log(response);
 
       if (!response.ok) {
@@ -299,6 +294,7 @@ function ProdData() {
                 <Link
                   href="/Address"
                   className="btn bg-danger text-white m-2 px-5 ProdbtnRes"
+                  // onClick={() => handleMoveToCart(productId)}
                 >
                   Buy Now
                 </Link>

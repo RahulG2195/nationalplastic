@@ -50,10 +50,7 @@ function Login() {
 
     try {
       // console.log("formDataaaaaaa++++++++++",formData)
-      const res = await axios.put(
-        `http://13.234.238.29:3000/api/Users`,
-        formData
-      );
+      const res = await axios.put(`http://localhost:3000/api/Users`, formData);
       // console.log("formDataaaaaaa++++++++++ formData.email on login page",formData.email)
       // console.log("this is statussssssssssssssssss  login page", res.data);
       // console.log("this is statussssssssssssssssss  login page", res.data.email);
@@ -69,7 +66,7 @@ function Login() {
       } else {
         alert("Successfully logged in");
 
-        // const response = await axios.put("http://13.234.238.29:3000/api/Users", formData
+        // const response = await axios.put("http://localhost:3000/api/Users", formData
         // );
 
         setLogin(true);
