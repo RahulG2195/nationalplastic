@@ -280,6 +280,7 @@ function ProdData() {
                 <Link
                   href="/Address"
                   className="btn bg-danger text-white m-2 px-5 ProdbtnRes"
+                  // onClick={() => handleMoveToCart(productId)}
                 >
                   Buy Now
                 </Link>

@@ -328,6 +328,7 @@ function AddToCart() {
               totalDiscount={discount}
               totalPay={totalPayble}
               InstallationCharges={installationCharges}
+              redirect={true}
             />
           </div>
         </div>

@@ -17,14 +17,51 @@ const AddBody = () => {
   const [totalPayble, setTotalPayble] = useState(0);
   const [installationCharges, setInstallationCharges] = useState(0);
   const dispatch = useDispatch();
+  const [address, setAddress] = useState("");
+  const [editable, setEditable] = useState(false);
+
+  const handleEdit = () => {
+    setEditable(!editable);
+  };
+
+  const handleChange = (event) => {
+    setAddress(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    // Here you can perform any action with the submitted address, like sending it to an API
+    console.log("Submitted Address:", address);
+    setEditable(false);
+    // Reset the address input after submission
+    setAddress("");
+  };
+  const getAdress = async () => {
+    const email = localStorage.getItem("userData");
+    const data = JSON.parse(email);
+    const useremail = data.email;
+    const formData = {
+      email: useremail,
+      getProfile: true,
+    };
+
+    const response = await axios.put(
+      "http://13.234.238.29:3000/api/Users",
+      formData
+    );
+    const userData = response.data.message[0];
+    const { Address } = userData;
+    const addressString = JSON.stringify(Address);
+    const addressWithoutQuotes = addressString.replace(/^"|"$/g, "");
+    setAddress(addressWithoutQuotes);
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const userDataString = localStorage.getItem("userData");
-        const userData = JSON.parse(userDataString);
-        const customerId = userData.customer_id;
+    const userDataString = localStorage.getItem("userData");
+    const userData = JSON.parse(userDataString) || {};
+    const DummyData = localStorage.getItem("temp");
+    const Dummies = JSON.parse(DummyData) || {};
 
+<<<<<<< HEAD
         const response = await axios.post(
           "http://localhost:3000/api/wishListUser",
           {
@@ -32,11 +69,45 @@ const AddBody = () => {
           }
         );
         const cartData = response.data.products;
+=======
+    const customerId = userData.customer_id || {};
+
+    const fetchData = async () => {
+      let cartData;
+      try {
+        if (!Dummies) {
+          console.log("Dummies ", Dummies);
+          console.log("Dummies ", JSON.stringify(Dummies));
+          cartData = Dummies;
+        } else {
+          const response = await axios.post(
+            "http://13.234.238.29:3000/api/UserCart",
+            {
+              customer_id: customerId,
+            }
+          );
+          getAdress();
+          cartData = response.data.products;
+        }
+>>>>>>> 2b3ef0e7ab4a4b4696f1d3983fb8a806da83a0fa
 
         // Extracting relevant data from the cart data
         console.log(
           "-------------------------------------------------------- --" +
+            typeof cartData
+        );
+        console.log(
+          "-------------------------------------------------------- --" +
+            cartData
+        );
+        console.log(
+          "-------------------------------------------------------- --" +
             JSON.stringify(cartData)
+        );
+        const isArray = Array.isArray(cartData);
+        console.log(
+          "--------------------------------------------------------",
+          isArray
         );
         const products = cartData.map(
           (item) => ({
@@ -48,6 +119,7 @@ const AddBody = () => {
             image_name: item.image_name,
             description: item.short_description,
             InstallationCharges: item.InstallationCharges,
+            quantity: item.cart_quantity,
           }),
           []
         );
@@ -55,11 +127,16 @@ const AddBody = () => {
         products.forEach((product) => {
           console.log("products forEach: " + product.product_id);
           console.log("products forEach: " + product.price);
+          console.log("products forEach: " + JSON.stringify(product));
+          // console.log("products forEach: " + product.cart_ quantity);
+
           dispatch(
             addItemToCart({
               product_id: product.product_id,
-              quantity: 1, // Explicitly set quantity to 1
+              quantity: product.quantity, // Explicitly set quantity to 1
               price: product.price,
+              discount_price: product.discount_price,
+              from: false,
             })
           );
         });
@@ -103,6 +180,7 @@ const AddBody = () => {
 
     fetchData();
   }, []);
+
   return (
     <>
       <div className="main_container  position-relative">
@@ -115,17 +193,42 @@ const AddBody = () => {
                 </p>
                 <div className="d-flex align-items-center justify-content-between mt-4">
                   <div className="medium fw-bold">SHIPPING ADDRESS</div>
-                  <div className="text-danger fw-bold">change</div>
+                  <div
+                    onClick={handleEdit}
+                    className="text-danger fw-bold mb onHOverFocus"
+                  >
+                    Change Address
+                  </div>
                 </div>
                 <div className="text-start customerAddress">
-                  <div className="fw-bold mt-3">Janhavi</div>
-                  <div className="medium fw-semibold checkOutCptResp">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Beatae, ipsa!
-                  </div>
-                  <div className="my-3 medium fw-bold">
+                  {editable ? (
+                    <div className="medium fw-semibold checkOutCptResp flex">
+                      <input
+                        type="text"
+                        value={address}
+                        onChange={handleChange}
+                        className="form-control"
+                        placeholder={address}
+                      />
+                      <button onClick={handleSubmit} className="sizing">
+                        Submit{" "}
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="medium fw-semibold checkOutCptResp flex">
+                      <input
+                        type="text"
+                        value={address}
+                        onChange={handleChange}
+                        className="form-control"
+                        placeholder={address}
+                        readOnly={true}
+                      />
+                    </div>
+                  )}
+                  {/* <div className="my-3 medium fw-bold">
                     Mobile : <span>0000000000</span>{" "}
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="text-start fw-bold mt-3">Service Lift</div>
@@ -220,16 +323,23 @@ const AddBody = () => {
                   <p className="text-start fw-semibold confirm bordrBtm p-3">
                     Order Summary
                   </p>
-                  <OrderSummaryCard
-                    imgSrc="https://picsum.photos/id/0/367/267"
-                    description="Lorem ipsum dolor sit amet."
-                    quantity="00"
-                  />
-                  <OrderSummaryCard
-                    imgSrc="https://picsum.photos/id/0/367/267"
-                    description="Lorem ipsum dolor sit amet."
-                    quantity="00"
-                  />
+                  <div>
+                    {productDetailArr.length === 0 ? (
+                      <h2 className="text-secondary">No products in cart</h2>
+                    ) : (
+                      <div className="container">
+                        {productDetailArr.map((val) => (
+                          <div className="row" key={val.product_id}>
+                            <OrderSummaryCard
+                              imgSrc={`/Assets/images/New-launches-1/${val.image_name}`}
+                              description={val.product_name}
+                              quantity={val.quantity}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                   <div className="d-flex justify-content-center">
                     <button
                       type="button"
