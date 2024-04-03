@@ -18,7 +18,7 @@ const IncrementDecrement = ({ initialCount, onIncrement, onDecrement }) => {
   };
 
   return (
-    <div className="input-group">
+    <div className="countContainer input-group">
       <span className="input-group-text">
         <button onClick={decrement}>-</button>{" "}
       </span>

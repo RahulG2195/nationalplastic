@@ -5,7 +5,8 @@ import { useState } from "react";
 import axios from "axios";
 import { Bounce, toast } from "react-toastify";
 
-const notify = () => {
+const notify = (props) => {
+    console.log('name ' + prodName);
   toast.success("Mail Sended SucessFully", {
     position: "top-center",
     autoClose: 2000,
@@ -42,7 +43,7 @@ import {
   // isValidFile,
 } from "@/utils/validation";
 
-const GetQuoteForm = (props) => {
+const GetQuoteCustomForm = (props) => {
   const [formData, setFromData] = useState({
     fullName: "",
     Email: "",
@@ -77,13 +78,15 @@ const GetQuoteForm = (props) => {
 
   return (
     <>
-      <div className={`GQform rounded p-5 py-5 mt-2 GQFormRes rounded-4 ${props.bottomclass} `}>
+      <div className={`GQform GQformprodpage rounded p-5 py-5 mt-2 GQFormRes rounded-4 ${props.bottomclass} `}>
+      {/* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
         <form onSubmit={handleOnSubmit}>
           <div className="mb-4">
             <input
               type="text"
               name="fullName"
               onChange={handleOnChange}
+            //   value={prodName}
               className="form-control"
               placeholder="Your Name"
             />
@@ -105,7 +108,8 @@ const GetQuoteForm = (props) => {
               name="ProductName"
               onChange={handleOnChange}
               className="form-control"
-              placeholder="Enter Product Name"
+              placeholder={props.prodName}
+              
             />
           </div>
 
@@ -151,8 +155,7 @@ const GetQuoteForm = (props) => {
                 props.className
                   ? props.className
                   : "btn bg-white darkBlue fw-semibold px-4"
-              }
-            >
+              }>
               Submit
             </button>
           </div>
@@ -161,4 +164,4 @@ const GetQuoteForm = (props) => {
     </>
   );
 };
-export default GetQuoteForm;
+export default GetQuoteCustomForm;

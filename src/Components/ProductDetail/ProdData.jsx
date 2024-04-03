@@ -23,6 +23,7 @@ import { Bounce, toast } from "react-toastify";
 import { useParams } from "next/navigation";
 import { isLoggedIn } from "@/utils/validation";
 import Breadcrump from "../Breadcrump/Breadcrump";
+import GetQuoteCustomForm from "../BulkOrder/GetQuoteCustomForm";
 function ProdData() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -71,7 +72,7 @@ function ProdData() {
         setProductId(storedId);
 
         const response = await axios.get(
-          "http://13.234.238.29:3000/api/Products"
+          "http://localhost:3000/api/Products"
         );
         let filteredData = [];
         // if (productName) {
@@ -107,7 +108,7 @@ function ProdData() {
     console.log("Fetching price", storedId);
     try {
       const response = await fetch(
-        "http://13.234.238.29:3000/api/ProductsCat",
+        "http://localhost:3000/api/ProductsCat",
         {
           method: "PUT",
           headers: {
@@ -257,32 +258,12 @@ function ProdData() {
                 </div>
               </div>
               <div className="bulk_order_div">
-                <Link href="/BulkOrder" className="">
-                  <button className="btn btn-danger px-5 my-2 ProdbtnRes bulkRes">
+                {/* <Link href="/BulkOrder" className=""> */}
+                  <button className="btn btn-danger px-5 my-2 ProdbtnRes bulkRes  " data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Bulk Order
                   </button>
-                </Link>
-              </div>
-              {/* <div className="row">
-              <div className="col-md-6">
-                <label htmlFor="size">Size</label>
-                <select id="size" name="size" className="form-control">
-                  <option>S</option>
-                  <option>M</option>
-                  <option>L</option>
-                  <option>XL</option>
-                </select>
-              </div>
-              <div className="col-md-6">
-                <label htmlFor="color">Color</label>
-                <select id="color" name="color" className="form-control">
-                  <option>Blue</option>
-                  <option>Green</option>
-                  <option>Red</option>
-                </select>
-              </div>
-            </div> */}
-
+                {/* </Link> */}
+              </div> 
               <div className="product-ccount">
                 <label htmlFor="size">Quantity</label>
                 <IncrementDecrement
@@ -389,6 +370,28 @@ function ProdData() {
         </div>
 
         <MoreProduct />
+      </div>
+
+
+      <div>
+      {/* <!-- Modal --> */}
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content modal-content-mypopup">
+      {/* <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div> */}
+      <div class="modal-body">
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <GetQuoteCustomForm prodName={name}/>
+      </div>
+      {/* <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> */}
+    </div>
+  </div>
+</div>
       </div>
     </>
   );

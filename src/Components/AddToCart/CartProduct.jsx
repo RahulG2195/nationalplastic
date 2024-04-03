@@ -87,7 +87,7 @@ const CartProduct = ({
 
   return (
     <>
-      <div className="col-md-2">
+      <div className="col-md-4">
         <Link onClick={setid} href={`/ProductDetail`}>
           <Image
             src={src}
@@ -101,34 +101,42 @@ const CartProduct = ({
         </Link>
       </div>
 
-      <div className="col-md-10 card-Quantity-section">
+      <div className="col-md-8 card-Quantity-section">
         <Link onClick={setid} href={`/ProductDetail`}>
           <h6> {productName} </h6>
         </Link>
         <p>{productDesc}</p>
-        <div className="CartQuantity">
-          <p>Quantity</p>
-          {/* Increment Decrement start */}
-          <IncrementDecrement
-            initialCount={initialCount}
-            onIncrement={handleIncrement}
-            onDecrement={handleDecrement}
-          />
+
+        <div className="CartQuantity d-flex flex-wrap">
+   
+            <p>Quantity</p>
+            {/* Increment Decrement start */}
+        
+            <IncrementDecrement
+              initialCount={initialCount}
+              onIncrement={handleIncrement}
+              onDecrement={handleDecrement}
+            />
+      
+      
+      
+      
           {/* Increment Decrement end */}
           <div className="productPrice">
-            <p>{productPrice}</p>
+            <p className="fw-bold">{productPrice}</p>
             <p>
-              <del> {discountedPrice}</del>
+              <del className="fw-semibold"> {discountedPrice}</del>
               <span>{discPer}%</span>
             </p>
           </div>
+
         </div>
-        <div className="InstallationCharges">
-          <p> Installation Charges : Rs{installationCharges}</p>
+        <div className="InstallationCharges align-items-center">
+          <p className="text-secondary me-2"> Installation Charges : Rs {installationCharges}</p>
           <div className="CouponApplied">
             <Image
               src="/Assets/images/AddTOCart/percentage.png"
-              classname="img-fluid d-block w-100"
+              classname="img-fluid d-block "
               alt="ome banner 1"
               width={100}
               height={80}
@@ -140,7 +148,7 @@ const CartProduct = ({
         <div className="InstallationCharges">
           <div
             onClick={() => handleAddtoWishlist(productId)}
-            className="CouponApplied"
+            className="CouponApplied mx-3"
           >
             <Image
               src="/Assets/images/AddTOCart/core-heart.png"
@@ -153,7 +161,7 @@ const CartProduct = ({
           </div>
           <div
             onClick={() => handleRemove(productId)}
-            className="CouponApplied"
+            className="CouponApplied "
           >
             <Image
               src="/Assets/images/AddTOCart/Icon-core-trash.png"

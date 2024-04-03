@@ -27,7 +27,7 @@ function AddToCart() {
     const fetchData = async () => {
       try {
         const response = await axios.post(
-          "http://13.234.238.29:3000/api/UserCart",
+          "http://localhost:3000/api/UserCart",
           {
             customer_id: customerId,
           }
@@ -43,10 +43,10 @@ function AddToCart() {
           "-------------------------------------------------------- --" +
             typeof cartData
         );
-        const isArray = Array.isArray(cartData);
+        const isArray = Array.isArray(cartData)
         console.log(
           "-------------------------------------------------------- --" +
-            isArray
+          isArray
         );
         const products = cartData.map(
           (item) => ({
@@ -127,7 +127,7 @@ function AddToCart() {
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
       const response = await axios.post(
-        "http://13.234.238.29:3000/api/UserCart",
+        "http://localhost:3000/api/UserCart",
         {
           customer_id: customerId,
         }
@@ -199,7 +199,7 @@ function AddToCart() {
       formData.append("customer_id", customerId);
       formData.append("product_id", product_id);
       const response = await axios.delete(
-        "http://13.234.238.29:3000/api/UserCart",
+        "http://localhost:3000/api/UserCart",
         {
           data: formData,
           headers: {
@@ -250,13 +250,13 @@ function AddToCart() {
       </div>
       <div className="container cartView">
         <div className="row">
-          <div className="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+          <div className="col-md-8">
             <div className="row my-cart">
-              <div className="col-md-4">
+              <div className="col-md-4 py-3">
                 <h5>My Cart ({totalCount})</h5>
               </div>
               <div className="col-md-8 search-pin">
-                <div className="LocationIconPin">
+                {/* <div className="LocationIconPin">
                   <div className="locationIcon">
                     <div className="iconImage">
                       <Image
@@ -283,7 +283,7 @@ function AddToCart() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
               <hr />
               <div>

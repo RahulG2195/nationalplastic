@@ -30,6 +30,7 @@
     font-weight: 800;
     text-align: center;
     margin: 23px 0 0 0px;
+    font-size: 45px !important;
 }
 
 .contactCTA {
@@ -95,7 +96,7 @@
     position: relative;
     background-color: #F8F8F8;
     box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
-    top: -30%;
+    /* top: -30%; */
 }
 
 .RegisteredOffice div h1 {
@@ -121,19 +122,27 @@
 }
 
 .location-image {
-    left: 37px;
+    left: 4%;
     width: 335px;
-    position: relative;
+    position: absolute;
     z-index: 999;
-    top: -136px;
+    top: -53%;
 }
 
 .ROtitle h1{
     font-size: 50px;
 }
 
+.map-image{
+    position: absolute;
+    height: 600px;
+
+    right: 0;
+    z-index: -1;
+    top: -20%;
+}
 .map-image img {
-    height: 70% !important;
+    height: 100% !important;
 }
 
 .BranchOffices {
@@ -187,12 +196,60 @@
     font-weight: 700;
 }
 
+.cta-form label, .cta-form ::placeholder{
+    font-size: 12px;
+}
 .cta-form form h3{
     color: #cc0008;
 text-align: center;
 font-weight: 600;
 }
 
+@media (max-width:349px) {
+    .BranchOfficesCard p{
+        font-size: 12px !important;
+    }
+}
+
+
+@media (max-width:412px) {
+    .location-image {
+        left: -1%;
+        width: 176px !important;
+        position: absolute;
+        z-index: 999;
+        top: 49%;
+    }
+    
+    
+}
+
+@media (max-width:601px) {
+    .RegisteredOffice {
+        padding: 10px 20px;
+        border-radius: 15px;
+        left: 0px;
+        /* position: relative; */
+        /* top: -15%; */
+        margin-top: 733px;
+    }
+    .RegisteredOffice .ROtitle h1{
+     
+        font-size: 40px;
+    }
+    .GTA{
+        left: 0;
+        right: 0;
+    }
+    .location-image {
+        left: -1%;
+        width: 205px;
+        position: absolute;
+        z-index: 999;
+        top: 49%;
+    }
+    
+}
 /* Responsive */
 @media only screen and (min-width: 1502) {
     .contactCTA img { 
@@ -288,12 +345,12 @@ font-weight: 600;
         padding: 30px;
     }
 
-    .location-image {
+    /* .location-image {
     left: 133px;
     width: 155px;
     top: 30px;
-    }
-    .RegisteredOffice {
+    } */
+    /* .RegisteredOffice {
         padding: 10px 56px;
         border-radius: 10px;
         left: 0px;
@@ -301,7 +358,7 @@ font-weight: 600;
         top: -23%;
         margin: 120px;
         z-index: 1;
-    }
+    } */
 
     .RegisteredOffice div h1 {
         line-height: 40px;
@@ -364,20 +421,12 @@ font-weight: 600;
         padding: 0px;
     }
 
-    .location-image {
-        left: 379px;
+    /* .location-image {
+    left: 379px;
     width: 100px;
     top: 5px;
-    }
+    } */
   
-    .RegisteredOffice {
-        padding: 10px 20px;
-        border-radius: 15px;
-        left: 0px;
-        position: relative;
-        top: -15%;
-        margin: 16px;
-    }
 
     .RegisteredOffice div h1 {
         line-height: 40px;
@@ -437,11 +486,11 @@ font-weight: 600;
         padding: 0px;
     }
 
-    .location-image {
+    /* .location-image {
         left: 304px;
         width: 100px;
         top: -5px;
-    }
+    } */
 
     .cta-form form h3{
         color: #cc0008;
@@ -449,14 +498,14 @@ font-weight: 600;
     font-weight: 600;
     }
 
-    .RegisteredOffice {
+    /* .RegisteredOffice {
         padding: 10px 10px;
         border-radius: 15px;
         left: 0px;
         position: relative;
         top: -15%;
-        margin: 10px;
-    }
+        margin-top: 100%;
+    } */
 
     .RegisteredOffice div h1 {
         line-height: 40px;
@@ -479,11 +528,11 @@ font-weight: 600;
         border-radius: 10px;
         padding: 15px;
         margin: 10px;
-        height: 290px;
+        /* height: 290px; */
     }
 
     .BranchOfficesCardCont h5 {
-        margin: 20px 0px;
+        /* margin: 20px 0px; */
     }
 
     .BranchOffices h2 {
@@ -521,20 +570,20 @@ font-weight: 600;
         padding: 0px;
     }
 
-    .location-image {
+    /* .location-image {
         left: 250px;
         width: 100px;
         top: -20px;
-    }
+    } */
 
-    .RegisteredOffice {
+    /* .RegisteredOffice {
         padding: 10px 10px;
         border-radius: 15px;
         left: 0px;
         position: relative;
         top: -15%;
-        margin: 10px;
-    }
+        margin-top: 100%;
+    } */
 
     .RegisteredOffice div h1 {
         line-height: 40px;

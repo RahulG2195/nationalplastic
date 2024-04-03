@@ -4,6 +4,13 @@
     background-color: #2E3192;
 }
 
+.GQformprodpage{
+    width: 100% !important;
+    }
+    .modal-content-mypopup{
+        background-color: #2e3192 !important;
+    }
+
 .GQform .input-group-text {
     background-color: #686AB0 !important;
 }

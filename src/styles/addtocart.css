@@ -6,6 +6,15 @@
 .locationIcon{
     padding: 8px;
 }
+.cAimage img{
+
+
+
+}
+.CouponApplied p{
+
+    line-height: 1 !important;
+}
 
 .CouponApplied:hover{
 
@@ -51,9 +60,7 @@
     padding: 19px 10px;
     margin: 10px;
 }
-.place-order{
-    /* background-color: #F6F6F6;  */
-}
+
 
 .locationPin .input-group input{
     font-size: 12px;
@@ -70,18 +77,18 @@
 }
 
 .CartQuantity .input-group{
-    width: 20% !important;
+    width: 120px !important;
     margin: 0px 10px;
 }
 .CartQuantity{
     display: flex;
 }
 
-.CouponApplied img{
+.CouponApplied img {
     vertical-align: middle;
-    width: 28px;
-    height: auto;
-    padding: 12px 8px;
+    width: 18px;
+    height: 14px;
+    margin-right: 5px;
 }
 
 .CouponApplied i{
@@ -114,9 +121,9 @@
     font-weight: 600;
     line-height: 3;
 }
- .CouponApplied{
+ /* .CouponApplied{
     margin: 0 20px;
- }
+ } */
  .SaveForLater{
     margin: 0 0px;
  }
@@ -148,9 +155,9 @@ box-shadow:none !important;
  @media only screen and (min-width: 1025px) and (max-width: 1200px) {}
  @media only screen and (min-width: 992px) and (max-width: 1024px) {}
  @media only screen and (min-width: 769px) and (max-width: 991px) {
-    .CartQuantity .input-group {
+    /* .CartQuantity .input-group {
         width: 24% !important;
-     }
+     } */
  }
  
  /* Mobile: */
@@ -158,9 +165,9 @@ box-shadow:none !important;
     .card-Quantity-section{
         margin-top: 20px;
      }
-     .CartQuantity .input-group {
+     /* .CartQuantity .input-group {
         width: 24% !important;
-     }
+     } */
  }
  @media only screen and (min-width: 481px) and (max-width: 600px) {
     .card-Quantity-section {
@@ -178,5 +185,12 @@ box-shadow:none !important;
     }
  }
 
+ @media (max-width:796px) {
+
+    .InstallationCharges > p{
+      line-height: 1;
+      font-size: 10px;
+    }
+ }
  
 
