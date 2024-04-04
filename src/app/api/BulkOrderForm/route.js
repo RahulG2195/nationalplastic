@@ -28,6 +28,9 @@ export async function POST(request) {
   try {
     const { fullName, Email, ProductName, Mobile, Requirements, city } =
       await request.json();
+    console.log("FROM FORM DATA ", request);
+    console.log("FROM FORM DATA ", JSON.stringify(request));
+    console.log("FROM FORM DATA ", fullName);
 
     // Validate required fields
     if (

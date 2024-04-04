@@ -8,8 +8,6 @@ export async function POST(request, res) {
     const data = await request.formData();
     const email = data.get("email");
     const resetToken = data.get("resetToken");
-    //console.log("Inside MAil ResetToken: ", resetToken);
-    // http://localhost:3000/new-password/1?resetToken=YOUR_TOKEN_VALUE
     const url = "http://localhost:3000/new-password/1?resetToken=" + resetToken;
 
     const transporter = nodemailer.createTransport({

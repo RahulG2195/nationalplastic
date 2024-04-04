@@ -55,16 +55,22 @@ const GetQuoteCustomForm = (props) => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     try {
-      //console.log("Form Data:", formData); // Log formData for debugging
+      await axios.post("http://localhost:3000/api/BulkOrderForm", formData);
+      notify();
+    } catch (error) {
+      console.error("Error:", error);
+      notifyError();
+    }
+    try {
       const response = await axios.post(
-        "http://localhost:3000/api/BulkOrderForm",
+        "http://localhost:3000/api/bulkOrderEmail",
         formData
       );
-      alert("Success! Form data submitted."); // Show success message
-      //console.log("Response:", response.data); // Log response from the server
+      console.log("Response:", response.data);
+      console.log("Response:", JSON.stringify(response.data));
     } catch (error) {
-      console.error("Error:", error); // Log any errors
-      alert("Error occurred while submitting the form."); // Show error message
+      console.error("Error:", error);
+      notifyError();
     }
   };
 
