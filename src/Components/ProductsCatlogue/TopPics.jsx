@@ -25,7 +25,7 @@ const TopPics = () => {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          "  http://localhost:3000/api/Category"
+          "  http://13.234.238.29:3000/api/Category"
         );
 
         setCategories(response.data.categories);

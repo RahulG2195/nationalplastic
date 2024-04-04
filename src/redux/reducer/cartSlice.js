@@ -168,11 +168,14 @@ export const cartSlice = createSlice({
         const userDataString = localStorage.getItem("userData");
         const userData = JSON.parse(userDataString);
         const customerId = userData.customer_id;
-        const response = axios.patch("  http://localhost:3000/api/UserCart", {
-          customer_id: customerId,
-          product_id: product_id,
-          quantity: 1,
-        });
+        const response = axios.patch(
+          "  http://13.234.238.29:3000/api/UserCart",
+          {
+            customer_id: customerId,
+            product_id: product_id,
+            quantity: 1,
+          }
+        );
         console.log("response after - ", response);
 
         // Return the new state (assuming you're using a state management library)
@@ -223,11 +226,14 @@ export const cartSlice = createSlice({
         const userDataString = localStorage.getItem("userData");
         const userData = JSON.parse(userDataString);
         const customerId = userData.customer_id;
-        const response = axios.patch("  http://localhost:3000/api/UserCart", {
-          customer_id: customerId,
-          product_id: product_id,
-          quantity: -1,
-        });
+        const response = axios.patch(
+          "  http://13.234.238.29:3000/api/UserCart",
+          {
+            customer_id: customerId,
+            product_id: product_id,
+            quantity: -1,
+          }
+        );
         console.log("response after - ", response);
 
         // Return the new state (assuming you're using a state management library)
@@ -254,7 +260,7 @@ export const addToCart = (item) => async (dispatch, getState) => {
   const userDataString = localStorage.getItem("userData");
   const userData = JSON.parse(userDataString);
   const customerId = userData.customer_id;
-  const response = await axios.put("  http://localhost:3000/api/UserCart", {
+  const response = await axios.put("  http://13.234.238.29:3000/api/UserCart", {
     customer_id: customerId,
     product_id: item.product_id,
     quantity: item.quantity,
