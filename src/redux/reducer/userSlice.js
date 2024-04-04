@@ -21,7 +21,7 @@ export const userSlice = createSlice({
       state.customer_id = action.payload.customer_id;
       localStorage.setItem("userData", JSON.stringify(action.payload));
       localStorage.setItem("isLoggedIn", true);
-      alert();
+      // alert();
     },
   },
 });

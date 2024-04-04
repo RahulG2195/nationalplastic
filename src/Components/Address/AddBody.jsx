@@ -329,16 +329,23 @@ const AddBody = () => {
                   <p className="text-start fw-semibold confirm bordrBtm p-3">
                     Order Summary
                   </p>
-                  <OrderSummaryCard
-                    imgSrc="https://picsum.photos/id/0/367/267"
-                    description="Lorem ipsum dolor sit amet."
-                    quantity="00"
-                  />
-                  <OrderSummaryCard
-                    imgSrc="https://picsum.photos/id/0/367/267"
-                    description="Lorem ipsum dolor sit amet."
-                    quantity="00"
-                  />
+                  <div>
+                    {productDetailArr.length === 0 ? (
+                      <h2 className="text-secondary">No products in cart</h2>
+                    ) : (
+                      <div className="container">
+                        {productDetailArr.map((val) => (
+                          <div className="row" key={val.product_id}>
+                            <OrderSummaryCard
+                              imgSrc={`/Assets/images/New-launches-1/${val.image_name}`}
+                              description={val.product_name}
+                              quantity={val.quantity}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                   <div className="d-flex justify-content-center">
                     <button
                       type="button"
