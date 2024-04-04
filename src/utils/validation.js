@@ -8,6 +8,13 @@ export const isValidEmail = (email) => {
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailPattern.test(email);
 };
+export const isValidProduct = (name) => {
+  // Allow comma (",") as a separator
+  const namePattern = /^[A-Za-z\s,]+$/;
+
+  // Check if the name string consists only of letters, spaces, and commas
+  return namePattern.test(name);
+};
 
 export const isValidMessage = (message) => {
   return message.trim() !== "";
@@ -24,13 +31,10 @@ export const isValidMobile = (mobile) => {
 };
 
 export const isLoggedIn = () => {
-
   const storedValue = localStorage.getItem("isLoggedIn") || false;
 
- 
   if (storedValue !== null) {
-    
-    return storedValue === 'true'; 
+    return storedValue === "true";
   }
 
   return false;

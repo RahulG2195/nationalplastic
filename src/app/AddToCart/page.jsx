@@ -27,7 +27,7 @@ function AddToCart() {
     const fetchData = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/UserCart",
+          "http://13.234.238.29:3000/api/UserCart",
           {
             customer_id: customerId,
           }
@@ -128,9 +128,12 @@ function AddToCart() {
       const userDataString = localStorage.getItem("userData");
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
-      const response = await axios.post("http://localhost:3000/api/UserCart", {
-        customer_id: customerId,
-      });
+      const response = await axios.post(
+        "http://13.234.238.29:3000/api/UserCart",
+        {
+          customer_id: customerId,
+        }
+      );
       //console.log("response", response);
       const cartData = response.data.products;
       //console.log("cartdata: ", cartData);
@@ -200,7 +203,7 @@ function AddToCart() {
       formData.append("customer_id", customerId);
       formData.append("product_id", product_id);
       const response = await axios.delete(
-        "http://localhost:3000/api/UserCart",
+        "http://13.234.238.29:3000/api/UserCart",
         {
           data: formData,
           headers: {

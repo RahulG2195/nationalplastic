@@ -22,15 +22,15 @@ const counterSlice = createSlice({
 const calc = () => {};
 export const priceCalculator = async (data) => {
   //console.log(
-    "----------------------------PC------1------------------------------"
-  );
+  //   "----------------------------PC------1------------------------------"
+  // );
   try {
     //console.log("data:", JSON.stringify(data));
-    const res = await axios.put(`http://localhost:3000/api/Users`, data);
+    const res = await axios.put(`http://13.234.238.29:3000/api/Users`, data);
     //console.log(
-      "----------------------------PC------2------------------------------"
-    );
-    //console.log(res);
+    //   "----------------------------PC------2------------------------------"
+    // );
+    // //console.log(res);
     //console.log("FROM pricecalculator" + JSON.stringify(res.data));
     //console.log(res);
 

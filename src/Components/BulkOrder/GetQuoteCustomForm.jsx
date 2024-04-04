@@ -37,9 +37,9 @@ const notifyError = () => {
 import {
   isValidName,
   isValidEmail,
-  isValidMessage,
   isValidReason,
   isValidMobile,
+  isValidProduct,
   // isValidFile,
 } from "@/utils/validation";
 
@@ -52,10 +52,41 @@ const GetQuoteCustomForm = (props) => {
     Requirements: "",
     city: "",
   });
+  const validation = (userInput) => {
+    if (!isValidName(userInput.city)) {
+      toast.error("Please enter a valid  city name.");
+      return;
+    }
+    if (!isValidName(userInput.fullName)) {
+      toast.error("Please enter a valid  city name.");
+      return;
+    }
+    if (!isValidReason(userInput.Requirements)) {
+      toast.error("Please enter a valid Reason.");
+      return;
+    }
+    if (!isValidEmail(userInput.Email)) {
+      toast.error("Please enter a valid email.");
+      return;
+    }
+    if (!isValidProduct(userInput.ProductName)) {
+      toast.error("Please enter a message.");
+      return;
+    }
+    if (!isValidMobile(userInput.Mobile)) {
+      toast.error("Please enter a valid mobile number.");
+      return;
+    } else {
+      return true;
+    }
+  };
   const handleOnSubmit = async (e) => {
     e.preventDefault();
+    const isValid = await validation(formData);
+    if (!isValid) return;
+
     try {
-      await axios.post("http://localhost:3000/api/BulkOrderForm", formData);
+      await axios.post("http://13.234.238.29:3000/api/BulkOrderForm", formData);
       notify();
     } catch (error) {
       console.error("Error:", error);
@@ -63,11 +94,11 @@ const GetQuoteCustomForm = (props) => {
     }
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/bulkOrderEmail",
+        "http://13.234.238.29:3000/api/bulkOrderEmail",
         formData
       );
-      console.log("Response:", response.data);
-      console.log("Response:", JSON.stringify(response.data));
+      // console.log("Response:", response.data);
+      // console.log("Response:", JSON.stringify(response.data));
     } catch (error) {
       console.error("Error:", error);
       notifyError();
