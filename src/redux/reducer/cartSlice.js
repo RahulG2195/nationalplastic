@@ -50,6 +50,7 @@ export const cartSlice = createSlice({
         quantity,
         price,
         discount_price,
+        color = "Gold",
         from = true,
       } = action.payload;
       console.log(
@@ -257,6 +258,7 @@ export const addToCart = (item) => async (dispatch, getState) => {
     customer_id: customerId,
     product_id: item.product_id,
     quantity: item.quantity,
+    color: item.color || "Gold",
   });
   console.log("response From slicer" + response.status);
   console.log("response From slicer" + response.data);

@@ -39,6 +39,7 @@ const CartProduct = ({
   productId,
   onRemoveSuccess,
   quantity,
+  color,
 }) => {
   const router = useRouter();
 
@@ -103,24 +104,23 @@ const CartProduct = ({
 
       <div className="col-md-8 card-Quantity-section">
         <Link onClick={setid} href={`/ProductDetail`}>
-          <h6> {productName} </h6>
+          <div style={{ display: "flex" }}>
+            <h6 style={{ marginRight: "7px" }}>{productName}</h6>
+          </div>
+          <h11>color:{color}</h11>
         </Link>
         <p>{productDesc}</p>
 
         <div className="CartQuantity d-flex flex-wrap">
-   
-            <p>Quantity</p>
-            {/* Increment Decrement start */}
-        
-            <IncrementDecrement
-              initialCount={initialCount}
-              onIncrement={handleIncrement}
-              onDecrement={handleDecrement}
-            />
-      
-      
-      
-      
+          <p>Quantity</p>
+          {/* Increment Decrement start */}
+
+          <IncrementDecrement
+            initialCount={initialCount}
+            onIncrement={handleIncrement}
+            onDecrement={handleDecrement}
+          />
+
           {/* Increment Decrement end */}
           <div className="productPrice">
             <p className="fw-bold">{productPrice}</p>
@@ -129,10 +129,12 @@ const CartProduct = ({
               <span>{discPer}%</span>
             </p>
           </div>
-
         </div>
         <div className="InstallationCharges align-items-center">
-          <p className="text-secondary me-2"> Installation Charges : Rs {installationCharges}</p>
+          <p className="text-secondary me-2">
+            {" "}
+            Installation Charges : Rs {installationCharges}
+          </p>
           <div className="CouponApplied">
             <Image
               src="/Assets/images/AddTOCart/percentage.png"

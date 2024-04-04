@@ -20,6 +20,7 @@ const AddBody = () => {
   const [address, setAddress] = useState("");
   const [FirstName, setFirstName] = useState("");
   const [Phone, setPhone] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   const [editable, setEditable] = useState(false);
 
@@ -153,13 +154,18 @@ const AddBody = () => {
         setTotalPayble(totalPayble);
         setInstallationCharges(installationCharges);
         setTotalCount(totalCount);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data", error);
+        setIsLoading(false);
       }
     };
 
     fetchData();
   }, []);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>

@@ -32,6 +32,7 @@ function ProdData() {
   const [filteredData, setFilteredData] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [initialCount, setInitialCount] = useState(1);
+  const [selectedColor, setSelectedColor] = useState("GOLD");
 
   const notify = () => {
     toast.error("Login To Add to CART", {
@@ -53,6 +54,9 @@ function ProdData() {
   // const increment = () => {
   //   setCount(count + 1);
   // };
+  const handleColorChange = (event) => {
+    setSelectedColor(event.target.value);
+  };
   const handleIncrement = async () => {
     // await dispatch(increaseQuantity({ product_id: productId }));
     setInitialCount(initialCount + 1);
@@ -130,7 +134,7 @@ function ProdData() {
     }
   };
 
-  const handleMoveToCart = async (storedId, quantity) => {
+  const handleMoveToCart = async (storedId, quantity, selectedColor) => {
     const isLoggedInResult = await isLoggedIn();
     console.log("state", isLoggedInResult);
     console.log("state", typeof isLoggedInResult);
@@ -155,6 +159,7 @@ function ProdData() {
             price,
             discount_price,
             quantity: quantity || 1,
+            color: selectedColor,
           })
         );
         break;
@@ -224,22 +229,46 @@ function ProdData() {
                 <div className="prod_type mt-4">
                   <div className="prod_clr">
                     <p>
-                      <strong>Color: </strong> Gold
+                      <strong>Color: </strong> {selectedColor}
                     </p>
                     <input
                       type="radio"
                       name="prod_clr"
                       id="gold"
                       value="gold"
+                      checked={selectedColor === "gold"}
+                      onChange={handleColorChange}
+                      className="productDetailsRadio m-1"
+                    />
+                    {/* <label htmlFor="gold">Gold</label> */}
+                    <input
+                      type="radio"
+                      name="prod_clr"
+                      id="white"
+                      value="white"
+                      checked={selectedColor === "white"}
+                      onChange={handleColorChange}
                       className="productDetailsRadio m-1"
                     />
                     <input
                       type="radio"
                       name="prod_clr"
-                      id="gold"
-                      value="white"
+                      id="RED"
+                      value="RED"
+                      checked={selectedColor === "RED"}
+                      onChange={handleColorChange}
                       className="productDetailsRadio m-1"
                     />
+                    <input
+                      type="radio"
+                      name="prod_clr"
+                      id="BLUE"
+                      value="BLUE"
+                      checked={selectedColor === "BLUE"}
+                      onChange={handleColorChange}
+                      className="productDetailsRadio m-1"
+                    />
+                    {/* <label htmlFor="white">White</label> */}
                   </div>
                   <div className="prod_size">
                     <div>
@@ -273,7 +302,9 @@ function ProdData() {
                   onDecrement={handleDecrement}
                 />
                 <p
-                  onClick={() => handleMoveToCart(productId, initialCount)}
+                  onClick={() =>
+                    handleMoveToCart(productId, initialCount, selectedColor)
+                  }
                   className="btn bg-danger text-white m-2 px-5 ProdbtnRes"
                 >
                   Add to Cart
@@ -298,7 +329,7 @@ function ProdData() {
                   <li>Lorem ipsum</li>
                 </ul>
               </div>
-              <div className="d-flex flex-wrap justify-content-center position-relative align-items-center m-4 ChkAvblityRes">
+              {/* <div className=" d-flex flex-wrap justify-content-center position-relative align-items-center m-4 ChkAvblityRes">
                 <p className="fw-semibold m-2">Check Availability</p>
                 <div className="d-flex flex-wrap justify-content-center align-items-center reschkAvbl">
                   <div>
@@ -317,9 +348,9 @@ function ProdData() {
                     </a>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
-              <div className="freuently_bought mb-2">
+              {/* <div className="freuently_bought mb-2">
                 <h6 className="m-3">Frequently Bought Together</h6>
                 <div className="combile_price d-flex flex-wrap">
                   <div className="relevent_img d-flex gap-2 align-items-center">
@@ -366,7 +397,7 @@ function ProdData() {
                   </div>
                 </div>
                 <NoCostEmi />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
