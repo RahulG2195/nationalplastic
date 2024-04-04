@@ -111,8 +111,10 @@ function ProdData() {
   const fetchPrice = async (storedId) => {
     console.log("Fetching price", storedId);
     try {
-      const response = await fetch('http://13.234.238.29:3000/api/ProductsCat', {
-          method: 'PUT',
+      const response = await fetch(
+        "http://13.234.238.29:3000/api/ProductsCat",
+        {
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
@@ -303,13 +305,11 @@ function ProdData() {
                   onDecrement={handleDecrement}
                 />
                 <p
-                  onClick={() =>
-                    handleMoveToCart(productId, initialCount, selectedColor)
-                  }
+                  onClick={() => handleMoveToCart(productId, initialCount)}
                   className="btn bg-danger text-white m-2 px-5 ProdbtnRes"
                 >
                   Add to Cart
-                </button>
+                </p>
                 <Link
                   href="/Address"
                   className="btn bg-danger text-white m-2 px-5 ProdbtnRes"
