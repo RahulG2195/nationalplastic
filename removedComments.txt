@@ -1,0 +1,87 @@
+import nodemailer from "nodemailer";
+import { NextResponse } from "next/server";
+
+// import { NextApiRequest, NextApiResponse } from "next";
+export async function POST(req) {
+  console.log("INside-------------------------- handler" + JSON.stringify(req));
+  console.log(
+    "INside-------------------------- handler" + JSON.stringify(req.body)
+  );
+  console.log(
+    "INside-------------------------- handler" + JSON.stringify(req.data)
+  );
+
+  const data = await req.json();
+  // console.log("Data: " + JSON.stringify(data));
+  // console.log("Data: " + data.file ? "BRoh yes" : "NO ");
+
+  const { name, email, message, reason, mobile, file } = data;
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "webDevs2024@gmail.com",
+      pass: "kppr tbup pqne eirr", // Replace with your Gmail app password (not your account password)
+    },
+  });
+  const HtmlFormat = `<p>Hello,</p>
+  <p>${name} has contacted.</p>
+  <p>Reason for Contact: ${reason}</p>
+  <p>Message: ${message}</p>
+  <p>Contact Number: ${mobile} </p>
+  <p> Regards, </p>
+  <p> Web Developer </p>
+  `;
+  try {
+    console.log("BEfore mailing" + file.name);
+    const info = await transporter.sendMail({
+      from: "webDevs2024@gmail.com",
+      to: email,
+      subject: reason,
+      html: HtmlFormat,
+      attachments: [{ filename: Filename, content: file }],
+    });
+    // console.log("INFO:", info);
+    return NextResponse.json({
+      message: "sended email",
+      success: true,
+      status: 200,
+    });
+  } catch (e) {
+    return NextResponse.json({
+      message: "Failed email",
+      success: false,
+      status: 404,
+    });
+  }
+}
+
+Chnages on friday rechange before pull/push
+-----------
+ -- replace
+
+
+-------------
+
+
+
+
+    ----------------Chnages------------------------
+     const [customerId, setCustomerId] = useState(null); // Default value
+  const [data, setData] = useState(null); // Default value
+  console.log("AAAAAAAAAAAAAAAAAAAAA", isLoggedIn);
+
+  useEffect(async () => {
+    const userDataString = localStorage.getItem("userData");
+
+    if (userDataString) {
+      const userData = JSON.parse(userDataString);
+      setCustomerId(userData.customer_id);
+      const check = await axios.post("http://13.234.238.29:3000/api/UserCart", {
+        customer_id: customerId,
+      });
+      const value = check.data.products.length;
+      console.log("count for the home page is ", data);
+      setData(value);
+      setCount(value);
+    }
+  }, [dispatch]);

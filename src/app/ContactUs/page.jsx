@@ -118,7 +118,7 @@ function ContactUs() {
     //TryCatch For the Email Message
 
     const res = await axios.post(
-      `  http://13.234.238.29:3000/api/sendEmail`,
+      `http://13.234.238.29:3000/api/sendEmail`,
       formData,
       {
         headers: {
@@ -401,7 +401,7 @@ function ContactUs() {
 
       {/* Branch Offices */}
       <div className="container BranchOffices pt-5 mt-5">
-        <h2>
+        <h2 className="fs-1">
           Branch <span>Offices</span>
         </h2>
         <div className="row BranchOfficescards">
@@ -419,7 +419,7 @@ function ContactUs() {
       </div>
       {/* Factory Units */}
 
-      <div className="container BranchOffices">
+      <div className="container BranchOffices py-5">
         <h2>
           Factory <span>Units</span>
         </h2>

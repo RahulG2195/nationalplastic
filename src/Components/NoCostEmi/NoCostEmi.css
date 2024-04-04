@@ -1,5 +1,3 @@
-
-
 .Imgbottom .img {
     width: 3vw;
     height: 4vh;
@@ -20,34 +18,27 @@
 }
 
 .Imgbottom .text h5 {
-    font-size: 1.5vh;
-
+    font-size: 16px;
 }
 
 .Imgbottom .text h6 {
-
-    font-size: 1.5vh;
-
+    font-size: 16px;
 }
 
 @media (max-width:600px) {
     .Imgbottom .cont .text {
         font-size: smaller !important;
     }
-
     .Imgbottom {
         gap: 10px !important;
         margin-left: 10%;
     }
-
-    .Imgbottom .Banks img{
-        height:15px;
+    .Imgbottom .Banks img {
+        height: 15px;
         width: 30px;
-
     }
-    .Imgbottom .Banks .kotak{
+    .Imgbottom .Banks .kotak {
         height: 30px !important;
         width: 30px;
     }
-
 }

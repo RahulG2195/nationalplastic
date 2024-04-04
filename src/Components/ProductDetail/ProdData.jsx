@@ -76,7 +76,7 @@ function ProdData() {
         setProductId(storedId);
 
         const response = await axios.get(
-          "  http://13.234.238.29:3000/api/Products"
+          "http://13.234.238.29:3000//api/Products"
         );
         let filteredData = [];
         // if (productName) {
@@ -111,10 +111,8 @@ function ProdData() {
   const fetchPrice = async (storedId) => {
     console.log("Fetching price", storedId);
     try {
-      const response = await fetch(
-        "  http://13.234.238.29:3000/api/ProductsCat",
-        {
-          method: "PUT",
+      const response = await fetch('http://13.234.238.29:3000/api/ProductsCat', {
+          method: 'PUT',
           headers: {
             "Content-Type": "application/json",
           },
@@ -205,7 +203,7 @@ function ProdData() {
           <div className="col-md-6">
             <div className="product-dtl">
               <div className="product-info">
-                <div className="product-name text-center">
+                <div className="product-name">
                   <h2>{name}</h2>
                 </div>
 
@@ -281,7 +279,7 @@ function ProdData() {
                       type="text"
                       name="prod_size"
                       id="size"
-                      placeholder="000"
+                      placeholder="Ex: 111"
                     />
                   </div>
                 </div>
@@ -311,7 +309,7 @@ function ProdData() {
                   className="btn bg-danger text-white m-2 px-5 ProdbtnRes"
                 >
                   Add to Cart
-                </p>
+                </button>
                 <Link
                   href="/Address"
                   className="btn bg-danger text-white m-2 px-5 ProdbtnRes"
@@ -324,7 +322,7 @@ function ProdData() {
                 <i className="fa fa-eye"></i> 210 customers are interviewing the
                 product
               </p>
-              <div className="terms fw-medium small">
+              <div className="terms fw-medium term_and_condition">
                 <Link href="TearnsAndConditions">Terms and Conditions</Link>
                 <ul>
                   <li>Lorem ipsum</li>
@@ -345,7 +343,7 @@ function ProdData() {
                   <div className="ChckBtnRes">
                     <a
                       href="#"
-                      className="btn rounded-0 bg-danger text-white p-2"
+                      className="btn rounded-0 text-white p-2"
                     >
                       CheckNow
                     </a>
@@ -389,7 +387,7 @@ function ProdData() {
                     />
                   </div>
 
-                  <div className="com_price text-top m-3">
+                  <div className="com_price text-top m-3 text-center">
                     <p>Total Price: 0000/-</p>
                     <button
                       type="button"

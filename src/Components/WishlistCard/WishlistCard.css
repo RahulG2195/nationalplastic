@@ -46,6 +46,26 @@
     margin-left: 0.5rem;
 }
 
+.moveTocartResp{
+    background-color: #FE0000;
+    color: #fff;
+
+}
+
+.moveTocartResp:hover{
+    color: #FE0000;
+    border: 1px solid currentColor;
+    background-color: #fff;
+}
+
+.og_price span{
+    font-size: 14px;
+    padding-left: 10px;
+}
+
+.actions_btn{
+    display: flex;
+}
 
 /* Mobile styles */
 @media (max-width: 600px) {

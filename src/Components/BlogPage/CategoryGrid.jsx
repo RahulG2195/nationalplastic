@@ -29,7 +29,7 @@ const CategoryGrid = () => {
                     <div className="content-container">
                         {productData.map((product, index) => (
                             <div key={index} className="mt-5">
-                                <p className="small text-danger">{product.category}</p>
+                                <p className="small text-danger fw-semibold">{product.category}</p>
                                 <p className="darkBlue fw-bold fs-3">{product.title}</p>
                                 <p className="small litegray">{product.date}</p>
                                 <DiningTableCard />

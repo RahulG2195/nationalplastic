@@ -123,10 +123,10 @@ const CartProduct = ({
 
           {/* Increment Decrement end */}
           <div className="productPrice">
-            <p className="fw-bold">{productPrice}</p>
+            <p className="fw-bold">RS {productPrice}</p>
             <p>
               <del className="fw-semibold"> {discountedPrice}</del>
-              <span>{discPer}%</span>
+              <span>{discPer}% Off</span>
             </p>
           </div>
         </div>
@@ -143,11 +143,11 @@ const CartProduct = ({
               width={100}
               height={80}
             />
-            <p>Coupon Applied</p>
+            <p className="text-danger">Coupon Applied</p>
           </div>
         </div>
 
-        <div className="InstallationCharges">
+        <div className="InstallationCharges align-items-center my-5">
           <div
             onClick={() => handleAddtoWishlist(productId)}
             className="CouponApplied mx-3"

@@ -43,7 +43,7 @@ export default function Header() {
     const userData = JSON.parse(userDataString) || {};
     const customerId = userData.customer_id || {};
 
-    const check = await axios.post("  http://13.234.238.29:3000/api/UserCart", {
+    const check = await axios.post("http://13.234.238.29:3000//api/UserCart", {
       customer_id: customerId,
     });
     if (
@@ -155,13 +155,13 @@ export default function Header() {
                   {/* <div className='border'></div> */}
                 </li>
                 <li className="nav-item brdr">
-                  <NavLink
+                  <Link
                     className="nav-link"
                     href="/About"
                     onClick={isClicked ? handleShow : null}
                   >
                     About Us
-                  </NavLink>
+                  </Link>
                 </li>
                 <li className="nav-item brdr">
                   <Link

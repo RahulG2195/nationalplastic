@@ -18,18 +18,18 @@ function CoupenBanner() {
                 layout="responsive"
                 objectFit="cover"
               />
-              <div className="d-flex gap-4 dSup">
+              <div className="d-flex dSup">
                 <div className="">
-                  <p className="coupen_code">
-                    <strong className="diwali">DIWALI20</strong>
+                  <p className="coupen_code px-3 py-2">
+                    <strong className="diwali fw-bolder">DIWALI20</strong>
                   </p>
                 </div>
                 <div className="">
                   <div className="signup_div">
                     <Link href="/Login">
-                      <button className="signup">Sign Up Now</button>
+                      <button className="signup px-4  fw-medium">SIGN UP NOW</button>
                     </Link>
-                    <p className="ltc">As in Life, T&C applied</p>
+                    <p className="ltc text-center fw-medium">As in Life, T&C applied</p>
                   </div>
                 </div>
               </div>
@@ -66,9 +66,9 @@ function CoupenBanner() {
       {/* </section> */}
 
      
-      <div className="delivery_inst_Sec">
+      <div className="delivery_inst_Sec mt-4">
         {/* <div className=" "> */}
-          <div className="d-flex justify-content-center gap-2 flex-wrap featuresFour">
+          <div className="d-flex justify-content-center gap-4 flex-wrap featuresFour">
             <div className="px-4">
               <div className="divelerycol d-flex align-items-center">
                 <div className="del_img">

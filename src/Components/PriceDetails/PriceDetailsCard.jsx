@@ -51,7 +51,7 @@ const PriceDetailsCard = ({
             <div>-RS 00,000</div>
           </div>
           <div className={`d-flex justify-content-between mt-1 fw-semibold`}>
-            <div className="text-secondary">Installation Charge</div>
+            <div className="text-secondary ">Installation Charge</div>
             <div>Rs {InstallationCharges ? InstallationCharges : "0000"}</div>
           </div>
           <div className="border-bottom border-secondary mt-2"></div>

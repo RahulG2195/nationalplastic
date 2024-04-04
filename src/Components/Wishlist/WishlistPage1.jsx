@@ -20,7 +20,7 @@ const WishlistPage1 = () => {
     const fetchData = async () => {
       try {
         const response = await axios.post(
-          "  http://13.234.238.29:3000/api/wishListUser",
+          "http://13.234.238.29:3000/api/wishListUser",
           { customer_id: customerId }
         );
         // const wishlistData = response.data.products;
@@ -75,7 +75,7 @@ const WishlistPage1 = () => {
         console.log("Entryyyyyyyyy" + entry);
       }
       const response = await axios.delete(
-        "  http://13.234.238.29:3000/api/wishListUser",
+        "http://13.234.238.29:3000/api/wishListUser",
         { data: formData }
       );
 
@@ -104,14 +104,12 @@ const WishlistPage1 = () => {
   };
 
   return (
-    <div className="main_container">
+    <div className="main_container mt-md-5 mt-3">
       <div className="d-flex justify-content-center">
         <div className="WCcontainer border-0">
           <h4 className="p-4 fw-bold">Wishlist</h4>
-          <div className="center">
-            {wishlistItems.length === 0 ? (
-              <h2 className="text-secondary">No products in </h2>
-            ) : (
+          <div className="table-wishlist">
+            {wishlistItems.length > 0 ? (
               wishlistItems.map(
                 (item) => (
                   console.log("here is item", item),
@@ -139,6 +137,10 @@ const WishlistPage1 = () => {
                   )
                 )
               )
+            ) : (
+              <h4 className="text-secondary text-center mx-auto">
+                Wishlist is empty{" "}
+              </h4>
             )}
           </div>
         </div>

@@ -58,6 +58,7 @@ function Catalogue() {
                       height={100}
                       layout="responsive"
                       objectFit="cover"
+                      alt='img'
                     />
                   </div>
                   <div className="col-md-8 productCatalogueData">

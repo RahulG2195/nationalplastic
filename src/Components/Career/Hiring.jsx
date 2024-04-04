@@ -9,7 +9,7 @@ const Hiring = () => {
             <div className="main_container pb-5 mb-5">
 
                 <div className="text-center fw-bold mt-5">
-                    <div className=" title2 fs-1 ">Our Hiring<span className="fw-bold text-danger"> Process</span> </div>
+                    <div className=" title2 fs-1 darkBlue">Our Hiring<span className="fw-bold text-danger"> Process</span> </div>
                     <div className=" mt-1 fw-normal">Current Openings</div>
                 </div>
 
