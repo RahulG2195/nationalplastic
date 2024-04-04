@@ -18,6 +18,9 @@ const AddBody = () => {
   const [installationCharges, setInstallationCharges] = useState(0);
   const dispatch = useDispatch();
   const [address, setAddress] = useState("");
+  const [FirstName, setFirstName] = useState("");
+  const [Phone, setPhone] = useState("");
+
   const [editable, setEditable] = useState(false);
 
   const handleEdit = () => {
@@ -45,14 +48,19 @@ const AddBody = () => {
     };
 
     const response = await axios.put(
-      "http://13.234.238.29:3000/api/Users",
+      "  http://localhost:3000/api/Users",
       formData
     );
     const userData = response.data.message[0];
-    const { Address } = userData;
+    console.log("userData", userData);
+    console.log("userData", JSON.stringify(userData));
+
+    const { Address, FirstName, Phone } = userData;
     const addressString = JSON.stringify(Address);
     const addressWithoutQuotes = addressString.replace(/^"|"$/g, "");
     setAddress(addressWithoutQuotes);
+    setFirstName(FirstName);
+    setPhone(Phone);
   };
 
   useEffect(() => {
@@ -72,7 +80,7 @@ const AddBody = () => {
           cartData = Dummies;
         } else {
           const response = await axios.post(
-            "http://13.234.238.29:3000/api/UserCart",
+            "  http://localhost:3000/api/UserCart",
             {
               customer_id: customerId,
             }
@@ -198,9 +206,14 @@ const AddBody = () => {
                       />
                     </div>
                   )}
-                  {/* <div className="my-3 medium fw-bold">
-                    Mobile : <span>0000000000</span>{" "}
-                  </div> */}
+                  <div className="my-3 medium fw-bold">
+                    <div className="text-start fw-bold mt-3">
+                      {FirstName !== undefined ? FirstName : null}
+                    </div>
+                    <div className="text-start fw-bold mt-3">
+                      {Phone !== undefined ? Phone : null}
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="text-start fw-bold mt-3">Service Lift</div>
