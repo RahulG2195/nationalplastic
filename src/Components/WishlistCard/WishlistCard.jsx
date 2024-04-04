@@ -3,6 +3,7 @@ import "./WishlistCard.css";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Image from "next/image";
 
 const WishlistCard = (props) => {
   const handleMoveToCart = () => {
@@ -62,10 +63,14 @@ const WishlistCard = (props) => {
     <div className="wishlist-card pt-2">
       <div className="wishlist-image">
         <Link onClick={setid} href={`/ProductDetail`}>
-          <img
+          <Image
             src={props.WishlistImg}
             className="img-fluid rounded-start"
             alt="Card Image"
+            height={100}
+            width={100}
+            layout="responsive"
+            objectFit="cover"
           />
         </Link>
       </div>
@@ -80,12 +85,14 @@ const WishlistCard = (props) => {
         </div>
         <div className="">
           <div className="price m-1 fw-bold WishpriceRsp">
-            <div>{props.Price}</div>
-            <div className=" text-body-tertiary text-decoration-line-through">
-              {props.originalPrice}
+            <div>₹{props.Price}</div>
+            <div className=" text-body-tertiary og_price">
+              <del>₹{props.originalPrice}</del>
+              <span className="text-danger small">{props.discount}%</span>
             </div>
-            <div className="text-danger small">{props.discount}%</div>
           </div>
+        </div>
+        <div className="actions_btn">
           <div className="wishlist-buttons">
             <button
               type="button"
@@ -96,7 +103,7 @@ const WishlistCard = (props) => {
             </button>
             <button
               type="button"
-              className="btn btn-outline-danger delete delResp "
+              className="btn"
               onClick={handleOnClick}
             >
               <img src="/Assets/svg/Icon core-trash.svg" alt="" />

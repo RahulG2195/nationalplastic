@@ -6,9 +6,9 @@ const NoCostEmi = () => {
             <div className="Imgbottom d-flex align-items-center mt-3 gap-5">
 
                 <div className="cont">
-                    <div className="img">
+                    {/* <div className="img">
                         <img src="/Assets/svg/Path 52.svg" alt="" />
-                    </div>
+                    </div> */}
                     <div className="text">
                         <h5 className="fw-semibold">NO COST EMI</h5>
                         <h6>on leading banks</h6>

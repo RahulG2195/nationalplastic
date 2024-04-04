@@ -67,3 +67,17 @@
         width: 100%;
     }
 }
+
+@media (max-width: 600px) {
+    .mySwiper2 {
+        max-height: 250px;
+        max-width: 100%;
+    }
+    .mySwiper2 img {
+        object-fit: contain;
+        border-radius: 0;
+    }
+    .product-ccount .input-group {
+        width: 32%;
+    }
+}

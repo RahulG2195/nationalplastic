@@ -1,10 +1,11 @@
 .product-info-tabs li {
-    margin: 1%;
+    /* margin: 1%; */
 }
 
 .product-info-tabs .nav-tabs .nav-item a:active {
     font-weight: 700;
 }
+
 .product-info-tabs {
     margin-top: 25px;
 }
@@ -41,9 +42,11 @@
     line-height: 24px;
     color: #7a7a7a;
 }
-.AccorProductInfo{
+
+.AccorProductInfo {
     display: none;
 }
+
 .product-info-tabs {
     display: block;
 }
@@ -52,9 +55,7 @@
     .product-info-tabs {
         display: none;
     }
-    .AccorProductInfo{
+    .AccorProductInfo {
         display: block;
     }
-    
 }
-

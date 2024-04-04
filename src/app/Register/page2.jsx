@@ -14,7 +14,15 @@ function ProfilePage() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://13.234.238.29:3000/api/Users");
+<<<<<<< HEAD
+<<<<<<< HEAD
+      const response = await axios.get("http://localhost:3000//api/Users");
+=======
+      const response = await axios.get("http://localhost:3000/api/Users");
+>>>>>>> 2eea476dbe8b7eebdab94af42368a5c5542a1324
+=======
+      const response = await axios.get("http://localhost:3000/api/Users");
+>>>>>>> f6c1faf5a2f60216cb450d23a5d8e3069a005d70
       setUserData(response.data);
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -40,7 +48,15 @@ function ProfilePage() {
     try {
       // Update user data in the database
       const response = await axios.put(
-        "http://13.234.238.29:3000/api/Users",
+<<<<<<< HEAD
+<<<<<<< HEAD
+        "http://localhost:3000//api/Users",
+=======
+        "http://localhost:3000/api/Users",
+>>>>>>> 2eea476dbe8b7eebdab94af42368a5c5542a1324
+=======
+        "http://localhost:3000/api/Users",
+>>>>>>> f6c1faf5a2f60216cb450d23a5d8e3069a005d70
         userData
       );
       console.log("Data updated:", response.data);

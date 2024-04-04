@@ -2,13 +2,18 @@
 // import cors from "cors";
 // const app = express();
 
+// Allow requests from your Next.js domain
+app.use(
+    cors({
+        origin: "http://localhost:3000/",
+    })
+);
 // // Allow requests from your Next.js domain
 // app.use(
 //   cors({
-//     origin: "http://13.234.238.29:3000/",
+//     origin: "http://localhost:3000/",
 //   })
-// );
-
+// );=
 // // Other routes and middleware...
 
 // // const AuthUser = async(req) => {

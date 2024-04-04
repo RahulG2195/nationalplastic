@@ -30,6 +30,7 @@ const MoreProduct = () => {
 
   return (
     <>
+    <section className="mt-md-5 mt-2">
       <div className="text-center">
         <div className="darkBlue fs-1 fw-bold">
           {" "}
@@ -81,7 +82,7 @@ const MoreProduct = () => {
               aria-controls={`panel${index + 1}-content`}
               id={`panel${index + 1}-header`}
             >
-              <div className="fw-bold">{tab.title}</div>
+              <div className="fw-bolds">{tab.title}</div>
             </AccordionSummary>
             <AccordionDetails>
               <div>
@@ -91,6 +92,7 @@ const MoreProduct = () => {
           </Accordion>
         ))}
       </div>
+      </section>
     </>
   );
 };
