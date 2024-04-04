@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-
 import "../../styles/contactus.css";
 import ContactUsCard from "@/Components/ContactUs/ContactUsCard";
 import { useState } from "react";
@@ -222,17 +221,17 @@ function ContactUs() {
           />
         </div>
         <div className="row">
-          <div class="clip-path-element ">
+          <div class="clip-path-element">
             <h1>CONTACT US</h1>
-            <div className="contact-btn">
+            <div className="contact-btn pb-5">
               <button>Branch Offices</button>
               <button>Factory Units</button>
             </div>
           </div>
         </div>
 
-        <div className="row">
-          <div className="contactCTA">
+        <div className="row position-relative pb-5 ">
+          <div className="contactCTA pb-5">
             <Image
               src="/Assets/images/ContactUs/call-center-headphone-keyboard-table.png"
               alt="Contact Us Page Banner"
@@ -247,9 +246,9 @@ function ContactUs() {
                 <h1>Get In Touch</h1>
               </div>
 
-              <div className="col-md-6 cta-form">
+              <div className="col-md-6 cta-form px-5 py-5">
                 <form onSubmit={onFormSubmit}>
-                  <h3>Send a message</h3>
+                  <h3 className="fw-bold">Send a message</h3>
                   <div className="mb-3">
                     <label htmlFor="name" className="form-label">
                       Name
@@ -258,7 +257,7 @@ function ContactUs() {
                       type="text"
                       className="form-control"
                       id="name"
-                      placeholder="Enter your name"
+                      // placeholder="Enter your name"
                       name="name"
                       onChange={handleInputChange}
                       value={userInput.name}
@@ -272,7 +271,7 @@ function ContactUs() {
                       type="email"
                       className="form-control"
                       id="email"
-                      placeholder="Enter your email"
+                      // placeholder="Enter your email"
                       name="email"
                       onChange={handleInputChange}
                       value={userInput.email}
@@ -286,7 +285,7 @@ function ContactUs() {
                       type="tel"
                       className="form-control"
                       id="mobile"
-                      placeholder="Enter your mobile number"
+                      // placeholder="Enter your mobile number"
                       name="mobile"
                       onChange={handleInputChange}
                       value={userInput.mobile}
@@ -332,25 +331,30 @@ function ContactUs() {
                       className="form-control"
                       id="message"
                       rows={5}
-                      placeholder="Enter your message"
+                      // placeholder="Enter your message"
                       defaultValue={""}
                       name="message"
                       onChange={handleInputChange}
                       value={userInput.message}
                     />
                   </div>
-                  <button type="submit" className="btn cta-contact-btn">
-                    Submit Your Request
-                  </button>
+                  <div className="d-flex justify-content-center">
+                    <button
+                      type="submit"
+                      className="btn cta-contact-btn py-3 px-5 medium"
+                    >
+                      Submit Your Request
+                    </button>
+                  </div>
                 </form>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="row LocationSection mt-5 pt-5">
-          <div className="">
-            <div className="location-image col-md-4 col-lg-6 col-xl-4">
+        <div className="row LocationSection mt-5 pt-5 my-5 py-5 position-relative">
+          <div className="position-relative">
+            <div className="location-image ">
               <Image
                 src="/Assets/images/ContactUs/red-place-marker-white-background.png"
                 alt="Contact Us Page Banner"
@@ -360,8 +364,8 @@ function ContactUs() {
                 objectFit="cover"
               />
             </div>
-            <div className="RegisteredOffice px-5 py-5 col-md-4 col-lg-6 col-xl-4">
-              <div className="ROtitle">
+            <div className="RegisteredOffice py-5 ps-5 col-md-8 col-lg-8 col-xl-4 ">
+              <div className="ROtitle px-5">
                 <h1>Registered</h1>
                 <h1>Office</h1>
               </div>
@@ -382,12 +386,12 @@ function ContactUs() {
               </div>
             </div>
           </div>
-          <div className="col-md-6 col-lg-6 col-xl-8 map-image">
+          <div className="col-md-8 col-lg-8 col-xl-8 map-image">
             <Image
               src="/Assets/images/ContactUs/map.png"
               alt="Contact Us Page Banner"
               width={100}
-              height={100}
+              height={50}
               layout="responsive"
               objectFit="cover"
             />
@@ -396,7 +400,7 @@ function ContactUs() {
       </div>
 
       {/* Branch Offices */}
-      <div className="container BranchOffices">
+      <div className="container BranchOffices pt-5 mt-5">
         <h2>
           Branch <span>Offices</span>
         </h2>

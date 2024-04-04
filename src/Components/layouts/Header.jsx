@@ -12,29 +12,16 @@ import ProductsAccr from "../ProductsAccor/ProductsAccr";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+
 export default function Header() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
-  const counts = useSelector((state) => state.cart || 0);
-
-  // const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0);
   const router = useRouter();
   const dispatch = useDispatch;
   const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
-  const productCount = useSelector((state) => {
-    const cart = state.cart || {}; // Handle missing or empty cart
-    return cart.products?.reduce((acc, product) => acc + product.quantity, 0);
-  });
 
-  // Use useState to manage local product count and update function
-  const [count, setCount] = useState(productCount); // Initialize with initial value
-
-  // Use useEffect to keep local count in sync with Redux state
-  useEffect(() => {
-    setCount(productCount); // Update localCount whenever productCount changes
-  }, [productCount]);
   useEffect(async () => {
     const userDataString = localStorage.getItem("userData");
     const userData = JSON.parse(userDataString) || {};

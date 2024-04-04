@@ -9,8 +9,10 @@ const PriceDetailsCard = ({
   totalDiscount,
   totalPay,
   InstallationCharges,
+  redirect,
 }) => {
   // const dispatch = useDispatch();
+
   const priceFromState = useSelector((state) => state.cart.total_price || 0);
   const MRPvalue = useSelector((state) => state.cart.discount_price || 0);
 
@@ -71,14 +73,25 @@ const PriceDetailsCard = ({
         <div className="small text-center">EMI starts with Rs 0,000</div>
 
         <div className="d-flex justify-content-center mt-2">
-          <Link href="/ThankYouPage">
-            <button
-              type="submit"
-              className="btn btn-danger px-5 placeOrderResp"
-            >
-              Place Order
-            </button>
-          </Link>
+          {redirect ? (
+            <Link href="/Address">
+              <button
+                type="submit"
+                className="btn btn-danger px-5 placeOrderResp"
+              >
+                Checkout
+              </button>
+            </Link>
+          ) : (
+            <Link href="/ThankYouPage">
+              <button
+                type="submit"
+                className="btn btn-danger px-5 placeOrderResp"
+              >
+                Place Order
+              </button>
+            </Link>
+          )}
         </div>
       </div>
     </>

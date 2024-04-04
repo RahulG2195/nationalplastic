@@ -247,13 +247,13 @@ function AddToCart() {
       </div>
       <div className="container cartView">
         <div className="row">
-          <div className="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+          <div className="col-md-8">
             <div className="row my-cart">
-              <div className="col-md-4">
+              <div className="col-md-4 py-3">
                 <h5>My Cart ({totalCount})</h5>
               </div>
               <div className="col-md-8 search-pin">
-                <div className="LocationIconPin">
+                {/* <div className="LocationIconPin">
                   <div className="locationIcon">
                     <div className="iconImage">
                       <Image
@@ -280,7 +280,7 @@ function AddToCart() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
               <hr />
               <div>
@@ -325,6 +325,7 @@ function AddToCart() {
               totalDiscount={discount}
               totalPay={totalPayble}
               InstallationCharges={installationCharges}
+              redirect={true}
             />
           </div>
         </div>
