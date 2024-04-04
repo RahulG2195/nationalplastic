@@ -401,7 +401,7 @@ function ContactUs() {
 
       {/* Branch Offices */}
       <div className="container BranchOffices pt-5 mt-5">
-        <h2>
+        <h2 className="fs-1">
           Branch <span>Offices</span>
         </h2>
         <div className="row BranchOfficescards">
@@ -419,7 +419,7 @@ function ContactUs() {
       </div>
       {/* Factory Units */}
 
-      <div className="container BranchOffices">
+      <div className="container BranchOffices py-5">
         <h2>
           Factory <span>Units</span>
         </h2>

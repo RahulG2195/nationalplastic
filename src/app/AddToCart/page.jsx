@@ -249,11 +249,11 @@ function AddToCart() {
         </div>
       </div>
       <div className="container cartView">
-        <div className="row">
+        <div className="row r1">
           <div className="col-md-8">
             <div className="row my-cart">
               <div className="col-md-4 py-3">
-                <h5>My Cart ({totalCount})</h5>
+                <h5>My Cart ( {totalCount} )</h5>
               </div>
               <div className="col-md-8 search-pin">
                 {/* <div className="LocationIconPin">
@@ -290,7 +290,7 @@ function AddToCart() {
                 {productDetailArr.length === 0 ? (
                   <h2 className="text-secondary">No products in cart</h2>
                 ) : (
-                  <div className="container">
+                  <div className="container RowCont">
                     {productDetailArr.map((val) => (
                       <div className="row" key={val.product_id}>
                         <CartProduct

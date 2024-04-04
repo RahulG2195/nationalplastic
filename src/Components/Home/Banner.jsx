@@ -4,7 +4,7 @@ function Banner() {
   return (
     <div
       id="carouselExampleControls"
-      className="carousel slide"
+      className="carousel slide "
       data-bs-ride="carousel"
     >
       <div className="carousel-inner">

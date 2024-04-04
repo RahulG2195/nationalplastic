@@ -12,6 +12,7 @@ import axios from "axios"; // Don't forget to import axios
 
 const ProductsAccr = ({ handleShow }) => {
   const [categories, setCategories] = useState([]);
+  console.log("fghjkl",categories)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,9 +29,11 @@ const ProductsAccr = ({ handleShow }) => {
               (product) => product.category_id === categoryId
             ),
           };
+         
         });
-
+        
         setCategories(categoryData);
+        console.log(categoryData)
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -47,7 +50,22 @@ const ProductsAccr = ({ handleShow }) => {
         return "Premium Event Chairs";
       case 14:
         return "Without Arm Tents";
-      // Add more cases for other categories as needed
+      case 15:
+        return "Premium Chairs"
+      case 16:
+        return "Popular Chairs"
+      case 17:
+        return "Cabinet"
+      case 18:
+        return "Baby Chairs"
+      case 19:
+        return "Stool"
+      case 20:
+        return "Table"
+      case 21:
+        return "Box"
+      case 22:
+        return "Drawer"
       default:
         return "Unknown Category";
     }
@@ -92,7 +110,7 @@ const ProductsAccr = ({ handleShow }) => {
                   aria-controls={`panel${index + 1}bh-content`}
                   id={`panel${index + 1}bh-header`}
                 >
-                  <Typography>{categoryItem.category}</Typography>
+                  <Typography className="fw-semibold fs-6">{categoryItem.category}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <div>

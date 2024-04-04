@@ -97,7 +97,7 @@ export default function Highlight() {
                         />
                         <div className="card-body cardbtm">
                           <h5 className="card-title">{product.product_name}</h5>
-                          <p className="card-text  mb-5">
+                          <p className="card-text  mb-5 pb-4">
                             {product.short_description}
                           </p>
                           <div className="btn btn-dark text-white rounded-circle highArrow mt-5">

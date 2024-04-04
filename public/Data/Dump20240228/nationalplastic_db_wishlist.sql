@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
--- Host: 13.234.238.29    Database: nationalplastic_db
+-- Host: localhost    Database: nationalplastic_db
 -- ------------------------------------------------------
 -- Server version	8.0.36
 
@@ -44,7 +44,7 @@ CREATE TABLE `wishlist` (
 
 LOCK TABLES `wishlist` WRITE;
 /*!40000 ALTER TABLE `wishlist` DISABLE KEYS */;
-INSERT INTO `wishlist` VALUES (136,'SHAMIYANA','Lorem ipsum dolor sit amet.','New-launches-1.png',1000.00,900.00,'10%','2024-02-26 05:56:49',1),(137,'KARNIVAL','Lorem ipsum dolor sit amet.','New-launches-1.png',2000.00,100.00,'11%','2024-02-27 06:54:28',2),(138,'Atlantis','Lorem ipsum dolor sit amet.','New-launches-1.png',3000.00,100.00,'12%','2024-02-27 06:54:38',3);
+INSERT INTO `wishlist` VALUES (136,'SHAMIYANA','Lorem ipsum dolor sit amet.','New-launches-1.png',1000.00,900.00,'10%','2024-02-26 05:56:49',1),(137,'KARNIVAL','Lorem ipsum dolor sit amet.','New-launches-1.png',2000.00,100.00,'11%','2024-02-27 06:54:28',2),(138,'Atlantis','Lorem ipsum dolor sit amet.','New-launches-1.png',3001.00,100.00,'12%','2024-02-27 06:54:38',3);
 /*!40000 ALTER TABLE `wishlist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

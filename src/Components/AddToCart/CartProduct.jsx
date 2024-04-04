@@ -103,7 +103,7 @@ const CartProduct = ({
 
       <div className="col-md-8 card-Quantity-section">
         <Link onClick={setid} href={`/ProductDetail`}>
-          <h6> {productName} </h6>
+          <h6 className="fw-bold"> {productName} </h6>
         </Link>
         <p>{productDesc}</p>
 
@@ -123,17 +123,17 @@ const CartProduct = ({
       
           {/* Increment Decrement end */}
           <div className="productPrice">
-            <p className="fw-bold">{productPrice}</p>
+            <p className="fw-bold">RS {productPrice}</p>
             <p>
               <del className="fw-semibold"> {discountedPrice}</del>
-              <span>{discPer}%</span>
+              <span>{discPer}% Off</span>
             </p>
           </div>
 
         </div>
-        <div className="InstallationCharges align-items-center">
-          <p className="text-secondary me-2"> Installation Charges : Rs {installationCharges}</p>
-          <div className="CouponApplied">
+        <div className="InstallationCharges align-items-center mb-3 mt-4">
+          <p className="text-secondary me-3 IC lh-1"> Installation Charges : Rs {installationCharges}</p>
+          <div className="CouponApplied Icmargin align-items-center ms-3">
             <Image
               src="/Assets/images/AddTOCart/percentage.png"
               classname="img-fluid d-block "
@@ -141,11 +141,11 @@ const CartProduct = ({
               width={100}
               height={80}
             />
-            <p>Coupon Applied</p>
+            <p className="text-danger">Coupon Applied</p>
           </div>
         </div>
 
-        <div className="InstallationCharges">
+        <div className="InstallationCharges align-items-center my-5">
           <div
             onClick={() => handleAddtoWishlist(productId)}
             className="CouponApplied mx-3"

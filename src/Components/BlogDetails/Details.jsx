@@ -109,7 +109,7 @@ const Details = () => {
       <div className="d-flex justify-content-center mx-5 mb-5 py-5 px-5 DetailsTogetherSlide">
         <Swiper
           modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-          spaceBetween={50}
+          spaceBetween={10}
           slidesPerView={3}
           pagination={true}
           loop={true}
@@ -120,19 +120,19 @@ const Details = () => {
           breakpoints={{
             200: {
               slidesPerView: 1,
-              spaceBetween: 20,
+              spaceBetween: 10,
             },
             640: {
               slidesPerView: 2,
-              spaceBetween: 20,
+              spaceBetween: 10,
             },
             768: {
               slidesPerView: 3,
-              spaceBetween: 40,
+              spaceBetween: 10,
             },
             1024: {
               slidesPerView: 3,
-              spaceBetween: 50,
+              spaceBetween: 10,
             },
           }}
         >

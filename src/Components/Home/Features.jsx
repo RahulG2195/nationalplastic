@@ -4,7 +4,7 @@ import "../../styles/feature.css";
 function Features() {
   return (
     <section className="px-4 feature_sec common_section">
-      <div className=" feature">
+      <div className=" feature pt-4">
         <div className="row">
           <div className="col-sm-12 col-md-4 features">
             <div>

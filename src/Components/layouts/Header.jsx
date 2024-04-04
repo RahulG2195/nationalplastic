@@ -139,13 +139,13 @@ export default function Header() {
                   {/* <div className='border'></div> */}
                 </li>
                 <li className="nav-item brdr">
-                  <NavLink
+                  <Link
                     className="nav-link"
                     href="/About"
                     onClick={isClicked ? handleShow : null}
                   >
                     About Us
-                  </NavLink>
+                  </Link>
                 </li>
                 <li className="nav-item brdr">
                   <Link
