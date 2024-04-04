@@ -68,12 +68,12 @@ const Search = (props) => {
       const response = await axios.get(
 <<<<<<< HEAD
 <<<<<<< HEAD
-        `http://localhost:3000//api/search?query=${query}&page=${page}`
+        `http://13.234.238.29:3000//api/search?query=${query}&page=${page}`
 =======
-        `http://localhost:3000/api/search?query=${query}&page=${page}`
+        `http://13.234.238.29:3000/api/search?query=${query}&page=${page}`
 >>>>>>> 2eea476dbe8b7eebdab94af42368a5c5542a1324
 =======
-        `http://localhost:3000/api/search?query=${query}&page=${page}`
+        `http://13.234.238.29:3000/api/search?query=${query}&page=${page}`
 >>>>>>> f6c1faf5a2f60216cb450d23a5d8e3069a005d70
       );
       const newProducts = response.data.products;
@@ -109,13 +109,13 @@ const Search = (props) => {
     try {
 <<<<<<< HEAD
 <<<<<<< HEAD
-      const response = await fetch('http://localhost:3000/api/ProductsCat', {
+      const response = await fetch('http://13.234.238.29:3000/api/ProductsCat', {
           method: 'POST',
 =======
 =======
 >>>>>>> f6c1faf5a2f60216cb450d23a5d8e3069a005d70
       const response = await fetch(
-        "http://localhost:3000/api/ProductsCat",
+        "http://13.234.238.29:3000/api/ProductsCat",
         {
           method: "POST",
           headers: {

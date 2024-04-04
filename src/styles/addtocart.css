@@ -6,11 +6,10 @@
 .locationIcon{
     padding: 8px;
 }
-.cAimage img{
-
-
-
-}
+/* .CartQuantity .{
+    
+    line-height: ;
+} */
 .CouponApplied p{
 
     line-height: 1 !important;
@@ -161,6 +160,27 @@ box-shadow:none !important;
  }
  
  /* Mobile: */
+ @media (max-width:768px) {
+    
+    .RowCont{
+        padding: 0 !important;
+    }
+    
+ }
+
+ @media (max-width:400px) {
+    .cartView, .my-cart{
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .InstallationCharges .Icmargin{
+        margin: 0 !important;
+    }
+    .ATCflow p{
+        font-size: 12px !important;
+    }
+    
+ }
  @media only screen and (min-width: 601px) and (max-width: 768px) {
     .card-Quantity-section{
         margin-top: 20px;

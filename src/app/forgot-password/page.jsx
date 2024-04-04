@@ -71,7 +71,7 @@ const ResetPasswordPage = () => {
     const formDataToSend = new FormData();
     formDataToSend.append("email", formData.email);
     // Checks Email valid or not
-    const res = await axios.post(`http://localhost:3000//api/forgotPassword`,
+    const res = await axios.post(`http://13.234.238.29:3000//api/forgotPassword`,
       formDataToSend
     );
     //Generating Token and sending Email to the user
@@ -81,7 +81,7 @@ const ResetPasswordPage = () => {
       console.log("resetToken ----------", resetToken);
       formDataToSend.append("resetToken", resetToken); // Ensure only the first file is appended
       console.log("resetTOken" + resetToken);
-      const response = await axios.post( `http://localhost:3000//api/mail`, formDataToSend
+      const response = await axios.post( `http://13.234.238.29:3000//api/mail`, formDataToSend
       );
       console.log("response: ");
       if (response.status === 200) {

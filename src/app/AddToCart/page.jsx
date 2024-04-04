@@ -27,7 +27,7 @@ function AddToCart() {
     const fetchData = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/UserCart",
+          "http://13.234.238.29:3000/api/UserCart",
           {
             customer_id: customerId,
           }
@@ -126,7 +126,7 @@ function AddToCart() {
       const userDataString = localStorage.getItem("userData");
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
-      const response = await axios.post("http://localhost:3000//api/UserCart",{
+      const response = await axios.post("http://13.234.238.29:3000//api/UserCart",{
           customer_id: customerId,
         }
       );
@@ -196,7 +196,7 @@ function AddToCart() {
       const formData = new FormData();
       formData.append("customer_id", customerId);
       formData.append("product_id", product_id);
-      const response = await axios.delete("http://localhost:3000//api/UserCart",
+      const response = await axios.delete("http://13.234.238.29:3000//api/UserCart",
         {
           data: formData,
           headers: {
@@ -246,11 +246,11 @@ function AddToCart() {
         </div>
       </div>
       <div className="container cartView">
-        <div className="row">
+        <div className="row r1">
           <div className="col-md-8">
             <div className="row my-cart">
               <div className="col-md-4 py-3">
-                <h5>My Cart ({totalCount})</h5>
+                <h5>My Cart ( {totalCount} )</h5>
               </div>
               <div className="col-md-8 search-pin">
                 {/* <div className="LocationIconPin">
@@ -287,7 +287,7 @@ function AddToCart() {
                 {productDetailArr.length === 0 ? (
                   <h2 className="text-secondary">No products in cart</h2>
                 ) : (
-                  <div className="container">
+                  <div className="container RowCont">
                     {productDetailArr.map((val) => (
                       <div className="row" key={val.product_id}>
                         <CartProduct

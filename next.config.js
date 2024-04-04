@@ -2,18 +2,18 @@
 const nextConfig = {
   reactStrictMode: false,
   // output:'export',
-  // eslint: {
-  //     ignoreDuringBuilds: true,
-  // },
+  eslint: {
+      ignoreDuringBuilds: true,
+  },
   // // images:{
   //     unoptimized:true,
   // },
 
   env: {
     MYSQL_HOST: "localhost",
-    MYSQL_DATABASE: "nationalplastic",
+    MYSQL_DATABASE: "nationalplastic_db",
     MYSQL_USER: "root",
-    MYSQL_PASSWORD: "Webfarm2024",
+    MYSQL_PASSWORD: "National@123#",
     MYSQL_PORT: "3306",
   },
 };

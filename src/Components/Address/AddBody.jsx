@@ -19,7 +19,9 @@ const AddBody = () => {
   const dispatch = useDispatch();
   const [address, setAddress] = useState("");
   const [editable, setEditable] = useState(false);
-
+  const [name, setName] = useState("")
+  const[number,setNumber] = useState("")
+ 
   const handleEdit = () => {
     setEditable(!editable);
   };
@@ -45,7 +47,7 @@ const AddBody = () => {
     };
 
     const response = await axios.put(
-      "http://localhost:3000/api/Users",
+      "http://13.234.238.29:3000/api/Users",
       formData
     );
     const userData = response.data.message[0];
@@ -53,6 +55,10 @@ const AddBody = () => {
     const addressString = JSON.stringify(Address);
     const addressWithoutQuotes = addressString.replace(/^"|"$/g, "");
     setAddress(addressWithoutQuotes);
+    setName(response.data.message[0].FirstName)
+    setNumber(response.data.message[0].Phone)
+
+
   };
 
   useEffect(() => {
@@ -72,7 +78,7 @@ const AddBody = () => {
           cartData = Dummies;
         } else {
           const response = await axios.post(
-            "http://localhost:3000/api/UserCart",
+            "http://13.234.238.29:3000/api/UserCart",
             {
               customer_id: customerId,
             }
@@ -156,8 +162,8 @@ const AddBody = () => {
   return (
     <>
       <div className="main_container  position-relative">
-        <div className="container text-center">
-          <div className="row gap-5">
+        <div className="container text-center mb-5 pb-5">
+          <div className="row gap-5 ">
             <div className="col-md-8 px-5 Addleft">
               <div className="bordrBtm ">
                 <p className="text-start fw-semibold confirm bordrBtm p-3">
@@ -172,6 +178,9 @@ const AddBody = () => {
                     Change Address
                   </div>
                 </div>
+                <div>
+                  <p className="fw-bold text-start py-1">{name}</p>
+                </div>
                 <div className="text-start customerAddress">
                   {editable ? (
                     <div className="medium fw-semibold checkOutCptResp flex">
@@ -182,30 +191,30 @@ const AddBody = () => {
                         className="form-control"
                         placeholder={address}
                       />
-                      <button onClick={handleSubmit} className="sizing">
+                      <button onClick={handleSubmit} className="sizing rounded-2 fw-semibold bg-success text-white border-0">
                         Submit{" "}
                       </button>
                     </div>
                   ) : (
                     <div className="medium fw-semibold checkOutCptResp flex">
-                      <input
+                      <span
                         type="text"
                         value={address}
                         onChange={handleChange}
-                        className="form-control"
+                        className="fw-semibold"
                         placeholder={address}
                         readOnly={true}
-                      />
+                      >{address}</span>
                     </div>
                   )}
-                  {/* <div className="my-3 medium fw-bold">
-                    Mobile : <span>0000000000</span>{" "}
-                  </div> */}
+                  <div className="my-3 medium fw-bold">
+                    Mobile :  <span>{number}</span>{" "}
+                  </div>
                 </div>
               </div>
               <div className="text-start fw-bold mt-3">Service Lift</div>
               <div className="d-flex align-items-center gap-5 liftOptionsResp">
-                <div className="form-check">
+                <div className="form-check py-3">
                   <input
                     className="form-check-input border-black"
                     type="radio"
@@ -234,7 +243,7 @@ const AddBody = () => {
                   </label>
                 </div>
               </div>
-              <div className="buying text-start mt-4 p-2 bg-white">
+              <div className="buying text-start mt-4 p-3 bg-white">
                 <input
                   className="form-check-input border-black"
                   type="checkbox"
@@ -242,7 +251,7 @@ const AddBody = () => {
                   id="flexCheckDefault"
                 />
                 <label
-                  className="form-check-label text-danger mx-2 fw-bold medium"
+                  className="form-check-label text-danger mx-2 fw-bold "
                   htmlFor="flexCheckDefault"
                 >
                   Buying for your Business?
@@ -275,6 +284,7 @@ const AddBody = () => {
                 >
                   Save
                 </button>
+                <p className="small fw-semibold py-2">Note : After placing an order, GSTIN cannot be changed. Registration state must match either with the billing or the shipping state.</p>
               </form>
             </div>
 
@@ -295,23 +305,16 @@ const AddBody = () => {
                   <p className="text-start fw-semibold confirm bordrBtm p-3">
                     Order Summary
                   </p>
-                  <div>
-                    {productDetailArr.length === 0 ? (
-                      <h2 className="text-secondary">No products in cart</h2>
-                    ) : (
-                      <div className="container">
-                        {productDetailArr.map((val) => (
-                          <div className="row" key={val.product_id}>
-                            <OrderSummaryCard
-                              imgSrc={`/Assets/images/New-launches-1/${val.image_name}`}
-                              description={val.product_name}
-                              quantity={val.quantity}
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                  <OrderSummaryCard
+                    imgSrc="https://picsum.photos/id/0/367/267"
+                    description="Lorem ipsum dolor sit amet."
+                    quantity="00"
+                  />
+                  <OrderSummaryCard
+                    imgSrc="https://picsum.photos/id/0/367/267"
+                    description="Lorem ipsum dolor sit amet."
+                    quantity="00"
+                  />
                   <div className="d-flex justify-content-center">
                     <button
                       type="button"
@@ -324,8 +327,9 @@ const AddBody = () => {
               </div>
             </div>
           </div>
-          <FooterRow />
+         
         </div>
+        <div className="my-3"> <FooterRow /></div>
       </div>
     </>
   );

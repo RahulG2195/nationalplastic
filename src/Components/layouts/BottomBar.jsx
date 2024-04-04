@@ -31,7 +31,7 @@ function BottomBar() {
     // console.log("nameenamee", name)
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:3000//api/Products");
+        const res = await axios.get("http://13.234.238.29:3000//api/Products");
         const allproducts = res.data.products;
         setPreEventChair(
           allproducts.filter((products) => products.category_id == 13)
@@ -258,10 +258,8 @@ function BottomBar() {
         </div>
       </div>
 
-      <div className="col Stool position-relative py-2">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/28`}>
-          <p> Stool</p>
-        </Link>
+      <div className="col drp Stool position-relative py-2">
+      <Link onClick={sendCategory} href={`/ProductCatlogue/28`}><p> Stool</p></Link>
         <div className="ulCont SecondDrop mx-4 ">
           <p className="text-start fw-bold dropHeading ">Stool</p>
           <div className="d-flex flex-row gap-5">
@@ -287,10 +285,8 @@ function BottomBar() {
         </div>
       </div>
 
-      <div className="col Table position-relative py-2">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/25`}>
-          <p>Table</p>
-        </Link>
+      <div className="col drp Table position-relative py-2">
+      <Link onClick={sendCategory} href={`/ProductCatlogue/25`}><p>Table</p></Link>
         <div className="ulCont SecondDrop mx-4 p-3">
           <p className="text-start fw-bold dropHeading ">Table</p>
           <div className="d-flex flex-row gap-5">
@@ -316,10 +312,8 @@ function BottomBar() {
         </div>
       </div>
 
-      <div className="col Box position-relative py-2">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/21`}>
-          <p>Box</p>
-        </Link>
+      <div className="col drp Box position-relative py-2">
+      <Link onClick={sendCategory} href={`/ProductCatlogue/21`}><p>Box</p></Link>
         <div className="ulCont SecondDrop mx-4 p-3">
           <p className="text-start fw-bold dropHeading ">Box</p>
           <div className="d-flex flex-row gap-5">
@@ -345,10 +339,8 @@ function BottomBar() {
         </div>
       </div>
 
-      <div className="col Drawer position-relative py-2">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/22`}>
-          <p>Drawer</p>
-        </Link>
+      <div className="col drp Drawer position-relative py-2">
+      <Link onClick={sendCategory} href={`/ProductCatlogue/22`}><p>Drawer</p></Link>
         <div className="ulCont SecondDrop mx-4 p-3">
           <p className="text-start fw-bold dropHeading ">Drawer</p>
           <div className="d-flex flex-row gap-5">

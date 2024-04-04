@@ -61,6 +61,9 @@
   .viewMoreResp {
     font-size: small;
   }
+  .Addleft{
+    padding: 5px !important;
+  }
 }
 
 .flex {

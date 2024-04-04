@@ -86,7 +86,7 @@ function ProfilePage() {
         };
 
         const response = await axios.put(
-          "http://localhost:3000/api/Users",
+          "http://13.234.238.29:3000/api/Users",
           formData
         );
         // console.log("After -------------------response on profile page", formData);
@@ -178,7 +178,7 @@ console.log('event' + e.target);
       // Send updated data to userProfile API
       // console.log("userData======222222222222222======", userData);
       const response = await axios.post(
-        "http://localhost:3000/api/UserProfile",
+        "http://13.234.238.29:3000/api/UserProfile",
         editedData
       );
 
@@ -220,7 +220,7 @@ console.log('event' + e.target);
 
   return (
     <>
-      <div className="container profile-page-container">
+      <div className="container profile-page-container mb-5">
         <div className="row">
           <div className="col-md-4">
             <div className="Left-Profile">
@@ -229,6 +229,7 @@ console.log('event' + e.target);
                   <i className="fa fa-user-circle" aria-hidden="true"></i>
                 </div>
                 <div className="profile-detail">
+                  <p className="fw-semibold darkBlue">Hello,</p>
                   <p className="fw-bold">{data.email}</p>
                 </div>
               </div>
@@ -237,14 +238,14 @@ console.log('event' + e.target);
                 <div>
                   <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </div>
-                <p>Edit Account</p>
+                <p className="fw-semibold">Edit Account</p>
               </div>
             </div>
 
             <div className="Left-Profile-inner2">
               <div className="list-group" id="list-tab" role="tablist">
                 <a
-                  className="list-group-item list-group-item-action active"
+                  className="list-group-item list-group-item-action active fw-semibold "
                   id="list-home-list"
                   data-bs-toggle="list"
                   href="#list-home"
@@ -254,7 +255,7 @@ console.log('event' + e.target);
                   My orders
                 </a>
                 <a
-                  className="list-group-item list-group-item-action"
+                  className="list-group-item list-group-item-action fw-semibold"
                   id="list-profile-list"
                   data-bs-toggle="list"
                   href="#list-profile"
@@ -264,7 +265,7 @@ console.log('event' + e.target);
                   Address Book
                 </a>
                 <a
-                  className="list-group-item list-group-item-action"
+                  className="list-group-item list-group-item-action fw-semibold"
                   id="list-messages-list"
                   data-bs-toggle="list"
                   href="#list-messages"
@@ -274,7 +275,7 @@ console.log('event' + e.target);
                   Wishlist
                 </a>
                 <a
-                  className="list-group-item list-group-item-action"
+                  className="list-group-item list-group-item-action fw-semibold"
                   id="list-settings-list"
                   data-bs-toggle="list"
                   href="#list-settings"
@@ -289,7 +290,7 @@ console.log('event' + e.target);
                 <div>
                   <i className="fa fa-sign-out" aria-hidden="true"></i>
                 </div>
-                <p>Logout</p>
+                <p className="fw-semibold">Logout</p>
               </div>
             </div>
           </div>
@@ -304,7 +305,7 @@ console.log('event' + e.target);
                 aria-labelledby="list-home-list"
               >
                 <div className="Right-Profile">
-                  <h3>My Account</h3>
+                  <h3 className="fs-4 fw-semibold ">My Account</h3>
                   <hr />
                   <div>
                     <div>
@@ -326,7 +327,7 @@ console.log('event' + e.target);
                     } */}
 
                       {Array.isArray(messages) ||
-                      (messages.length > 0 && messages != null) ? (
+                        (messages.length > 0 && messages != null) ? (
                         messages.map((message, index) => (
                           <form key={index} onSubmit={handleEdit}>
                             <div className="row user-data">
@@ -341,7 +342,7 @@ console.log('event' + e.target);
                                 <label htmlFor="">Name</label>
                                 <input
                                   type="text"
-                                  className="form-control"
+                                  className="form-control fw-semibold"
                                   placeholder={`${message.FirstName} ${message.LasttName}`}
                                   readOnly
                                 />
@@ -353,7 +354,7 @@ console.log('event' + e.target);
                                 <input
                                   // name="email"
                                   type="text"
-                                  className="form-control"
+                                  className="form-control  fw-semibold"
                                   placeholder={message.Email}
                                   name="Email"
                                   onChange={handleInputChange}
@@ -365,8 +366,8 @@ console.log('event' + e.target);
                                 <input
                                   // name="phone"
                                   type="text"
-                                  className="form-control"
-                                  value={message.Phone}
+                                  className="form-control  fw-semibold"
+                                  placeholder={message.Phone}
                                   name="Phone"
                                   onChange={handleInputChange}
                                 />
@@ -376,7 +377,7 @@ console.log('event' + e.target);
                                 <input
                                   // name="address"
                                   type="text"
-                                  className="form-control"
+                                  className="form-control fw-semibold"
                                   placeholder={message.Address}
                                   onChange={handleInputChange}
                                   name="Address"
@@ -402,7 +403,7 @@ console.log('event' + e.target);
 
                   <div>
                     {(Array.isArray(messages) && messages.length > 0) ||
-                    messages !== null ? (
+                      messages !== null ? (
                       messages.map((message, index) => (
                         <form key={index}>
                           <div className="row user-data">
@@ -410,7 +411,7 @@ console.log('event' + e.target);
                               <label htmlFor="">Password</label>
                               <input
                                 type="text"
-                                className="form-control"
+                                className="form-control fw-semibold"
                                 placeholder="Password"
                               />
                             </div>
@@ -418,7 +419,7 @@ console.log('event' + e.target);
                               <label htmlFor="">confirm password</label>
                               <input
                                 type="text"
-                                className="form-control"
+                                className="form-control fw-semibold"
                                 placeholder="confirm password"
                               />
                             </div>
@@ -457,7 +458,7 @@ console.log('event' + e.target);
                           <label htmlFor="">First name</label>
                           <input
                             type="text"
-                            className="form-control"
+                            className="form-control fw-semibold"
                             placeholder="First name"
                           />
                         </div>
@@ -465,7 +466,7 @@ console.log('event' + e.target);
                           <label htmlFor="">Last name</label>
                           <input
                             type="text"
-                            className="form-control"
+                            className="form-control fw-semibold"
                             placeholder="Last name"
                           />
                         </div>
@@ -475,7 +476,7 @@ console.log('event' + e.target);
                           <label htmlFor="">E-mail Address</label>
                           <input
                             type="text"
-                            className="form-control"
+                            className="form-control fw-semibold"
                             placeholder="E-mail Address"
                           />
                         </div>
@@ -483,7 +484,7 @@ console.log('event' + e.target);
                           <label htmlFor="">Mobile Number</label>
                           <input
                             type="text"
-                            className="form-control"
+                            className="form-control fw-semibold"
                             placeholder="Mobile Number"
                           />
                         </div>
@@ -507,7 +508,7 @@ console.log('event' + e.target);
                           <label htmlFor="">Password</label>
                           <input
                             type="text"
-                            className="form-control"
+                            className="form-control fw-semibold"
                             placeholder="First name"
                           />
                         </div>
@@ -515,7 +516,7 @@ console.log('event' + e.target);
                           <label htmlFor="">New Password</label>
                           <input
                             type="text"
-                            className="form-control"
+                            className="form-control fw-semibold"
                             placeholder="Last name"
                           />
                         </div>
@@ -560,7 +561,7 @@ console.log('event' + e.target);
                           <label htmlFor="">First name</label>
                           <input
                             type="text"
-                            className="form-control"
+                            className="form-control fw-semibold"
                             placeholder="First name"
                           />
                         </div>
@@ -568,7 +569,7 @@ console.log('event' + e.target);
                           <label htmlFor="">Last name</label>
                           <input
                             type="text"
-                            className="form-control"
+                            className="form-control fw-semibold"
                             placeholder="Last name"
                           />
                         </div>
@@ -578,7 +579,7 @@ console.log('event' + e.target);
                           <label htmlFor="">E-mail Address</label>
                           <input
                             type="text"
-                            className="form-control"
+                            className="form-control fw-semibold"
                             placeholder="E-mail Address"
                           />
                         </div>
@@ -610,7 +611,7 @@ console.log('event' + e.target);
                           <label htmlFor="">Password</label>
                           <input
                             type="text"
-                            className="form-control"
+                            className="form-control  fw-semibold"
                             placeholder="First name"
                           />
                         </div>
@@ -618,7 +619,7 @@ console.log('event' + e.target);
                           <label htmlFor="">New Password</label>
                           <input
                             type="text"
-                            className="form-control"
+                            className="form-control fw-semibold"
                             placeholder="Last name"
                           />
                         </div>
@@ -640,7 +641,9 @@ console.log('event' + e.target);
         </div>
       </div>
 
-      <FooterRow />
+      <div className="my-5">
+        <FooterRow />
+      </div>
     </>
   );
 }
