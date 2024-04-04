@@ -59,6 +59,7 @@ function AddToCart() {
             description: item.short_description,
             InstallationCharges: item.InstallationCharges,
             quantity: item.cart_quantity,
+            seo_url:item.seo_url,
             color: item.color,
           }),
           []
@@ -109,6 +110,7 @@ function AddToCart() {
 
         // Update state variables
         setProductDetailArr(products);
+        console.log("fdghjjjjjjjjjjjjjjjjjjjjjj",products)
         setTotalPrice(totalPrice);
         setDiscount(discount);
         setTotalPayble(totalPayble);
@@ -147,6 +149,7 @@ function AddToCart() {
         description: item.short_description,
         InstallationCharges: item.InstallationCharges,
         quantity: item.cart_quantity,
+       seo_url:item.seo_url,
         color: item.color,
       }));
       console.log("products:-------------------- ", products);
@@ -304,6 +307,7 @@ function AddToCart() {
                           productPrice={val.price}
                           discountedPrice={val.discount_price}
                           productDesc={val.description}
+                          seourl={val.seo_url}
                           discPer={Math.floor(
                             ((val.discount_price - val.price) /
                               val.discount_price) *
