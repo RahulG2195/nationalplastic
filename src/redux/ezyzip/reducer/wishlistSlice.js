@@ -43,7 +43,7 @@ export const wishlistSlice = createSlice({
     },
     addToWishlist: (state, action) => {
       const newItem = action.payload;
-      console.log("want to add this in wish", newItem.product_id);
+      //console.log("want to add this in wish", newItem.product_id);
 
       const isItemAlreadyAdded = state.items.some(
         (item) => item.product_id === newItem.product_id
@@ -66,15 +66,15 @@ export const wishlistSlice = createSlice({
 export const { addToWishlist } = wishlistSlice.actions;
 
 export const addItemToWishlist = (item) => async (dispatch, getState) => {
-  // console.log("ininininin")
+  // //console.log("ininininin")
 
   const { items } = getState().wishlist; // Access state through tshe second parameter
 
   const userDataString = localStorage.getItem("userData");
   const userData = JSON.parse(userDataString);
   const customerId = userData.customer_id;
-  console.log("Customer Id: " + customerId);
-  const check = await axios.post("http://13.234.238.29:3000/api/wishListUser", {
+  //console.log("Customer Id: " + customerId);
+  const check = await axios.post("http://localhost:3000/api/wishListUser", {
     customer_id: customerId,
   });
 
@@ -86,23 +86,23 @@ export const addItemToWishlist = (item) => async (dispatch, getState) => {
       (cartItem) => cartItem.product_id == item.product_id
     );
 
-  console.log("i want to post ");
+  //console.log("i want to post ");
   if (isWishlistEmpty || !isItemAlreadyAdded) {
     try {
       const response = await axios.put(
-        "http://13.234.238.29:3000/api/wishListUser",
+        "http://localhost:3000/api/wishListUser",
         {
           customer_id: customerId,
           product_id: item.product_id,
         }
       );
-      console.log("response from slicer of wishslist: " + response);
-      console.log("response from slicer of wishlist: " + response.data);
-      console.log("response from slicer of wishlist: " + response.message);
-      console.log("response from slicer of wishlist: " + response.status);
+      //console.log("response from slicer of wishslist: " + response);
+      //console.log("response from slicer of wishlist: " + response.data);
+      //console.log("response from slicer of wishlist: " + response.message);
+      //console.log("response from slicer of wishlist: " + response.status);
 
       dispatch(addToWishlist(item));
-      // console.log(item, "this are items ");
+      // //console.log(item, "this are items ");
       notify();
     } catch (error) {
       console.error("Error adding to cart:", error);

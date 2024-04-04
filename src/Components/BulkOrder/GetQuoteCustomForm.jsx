@@ -6,7 +6,7 @@ import axios from "axios";
 import { Bounce, toast } from "react-toastify";
 
 const notify = (props) => {
-  console.log("name " + prodName);
+  //console.log("name " + prodName);
   toast.success("Mail Sended SucessFully", {
     position: "top-center",
     autoClose: 2000,
@@ -55,13 +55,13 @@ const GetQuoteCustomForm = (props) => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("Form Data:", formData); // Log formData for debugging
+      //console.log("Form Data:", formData); // Log formData for debugging
       const response = await axios.post(
-        "http://13.234.238.29:3000/api/BulkOrderForm",
+        "http://localhost:3000/api/BulkOrderForm",
         formData
       );
       alert("Success! Form data submitted."); // Show success message
-      console.log("Response:", response.data); // Log response from the server
+      //console.log("Response:", response.data); // Log response from the server
     } catch (error) {
       console.error("Error:", error); // Log any errors
       alert("Error occurred while submitting the form."); // Show error message

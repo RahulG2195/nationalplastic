@@ -36,7 +36,7 @@ const AddBody = () => {
 
   const handleSubmit = () => {
     // Here you can perform any action with the submitted address, like sending it to an API
-    console.log("Submitted Address:", address);
+    //console.log("Submitted Address:", address);
     setEditable(false);
     // Reset the address input after submission
     setAddress("");
@@ -51,12 +51,12 @@ const AddBody = () => {
     };
 
     const response = await axios.put(
-      "http://13.234.238.29:3000/api/Users",
+      "http://localhost:3000/api/Users",
       formData
     );
     const userData = response.data.message[0];
-    console.log("userData", userData);
-    console.log("userData", JSON.stringify(userData));
+    //console.log("userData", userData);
+    //console.log("userData", JSON.stringify(userData));
 
     const { Address, FirstName, Phone } = userData;
     const addressString = JSON.stringify(Address);
@@ -78,12 +78,12 @@ const AddBody = () => {
       let cartData;
       try {
         if (!Dummies) {
-          console.log("Dummies ", Dummies);
-          console.log("Dummies ", JSON.stringify(Dummies));
+          //console.log("Dummies ", Dummies);
+          //console.log("Dummies ", JSON.stringify(Dummies));
           cartData = Dummies;
         } else {
           const response = await axios.post(
-            "http://13.234.238.29:3000/api/UserCart",
+            "http://localhost:3000/api/UserCart",
             {
               customer_id: customerId,
             }
@@ -108,10 +108,10 @@ const AddBody = () => {
         );
 
         products.forEach((product) => {
-          console.log("products forEach: " + product.product_id);
-          console.log("products forEach: " + product.price);
-          console.log("products forEach: " + JSON.stringify(product));
-          // console.log("products forEach: " + product.cart_ quantity);
+          //console.log("products forEach: " + product.product_id);
+          //console.log("products forEach: " + product.price);
+          //console.log("products forEach: " + JSON.stringify(product));
+          // //console.log("products forEach: " + product.cart_ quantity);
 
           dispatch(
             addItemToCart({

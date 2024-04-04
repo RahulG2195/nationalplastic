@@ -47,9 +47,9 @@ const PasswordToken = () => {
     .find((param) => param.startsWith("resetToken="));
   //   const params = useParams();
   formData.resetToken = resetTokenParam.split("=")[1];
-  console.log("Entire Query Object:", formData.resetToken);
+  //console.log("Entire Query Object:", formData.resetToken);
   useEffect(() => {
-    console.log();
+    //console.log();
     const storedResetEmail = localStorage.getItem("resetEmail");
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -58,7 +58,7 @@ const PasswordToken = () => {
   }, []);
 
   const isValidPassword = (password) => {
-    console.log("isValidPAssword" + password);
+    //console.log("isValidPAssword" + password);
     const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).+$/;
     return passwordPattern.test(password);
   };
@@ -78,15 +78,15 @@ const PasswordToken = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      console.log("INvalid");
+      //console.log("INvalid");
 
-      console.log(formData.password);
-      console.log(formData.email);
+      //console.log(formData.password);
+      //console.log(formData.email);
       const inputString = formData.resetToken;
 
       const [_, valueAfterColon] = inputString.split(":");
       const storedValue = valueAfterColon;
-      console.log(storedValue);
+      //console.log(storedValue);
       const expiry = parseInt(storedValue);
 
       const formDataToSend = new FormData();
@@ -95,21 +95,21 @@ const PasswordToken = () => {
       //   formDataToSend.append("email", formData.email);
 
       if (Date.now() < expiry) {
-        console.log("yes  here");
+        //console.log("yes  here");
         const res = await axios.put(
-          `http://13.234.238.29:3000/api/forgotPassword`,
+          `http://localhost:3000/api/forgotPassword`,
           formDataToSend
         );
-        console.log(res);
+        //console.log(res);
         notify();
         localStorage.clear();
         // return res.status(400).json({ error: "Token expired" });
       } else {
-        console.log("Everthing okay");
+        //console.log("Everthing okay");
         notifyError();
         //   router.push("/forgot-password");
       }
-      console.log("FormData from token: ", formData);
+      //console.log("FormData from token: ", formData);
     } catch (error) {
       notifyError();
       console.error("Error submitting form:", error);

@@ -48,7 +48,7 @@ const WishlistCard = (props) => {
       toast.dismiss(); // Close the toast after deletion
     } catch (error) {
       alert("Can't delete");
-      console.log(error);
+      //console.log(error);
     }
   };
   const handleCancel = () => {
@@ -101,11 +101,7 @@ const WishlistCard = (props) => {
             >
               MOVE TO CART
             </button>
-            <button
-              type="button"
-              className="btn"
-              onClick={handleOnClick}
-            >
+            <button type="button" className="btn" onClick={handleOnClick}>
               <img src="/Assets/svg/Icon core-trash.svg" alt="" />
             </button>
           </div>

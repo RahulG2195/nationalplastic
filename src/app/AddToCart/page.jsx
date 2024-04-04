@@ -27,27 +27,27 @@ function AddToCart() {
     const fetchData = async () => {
       try {
         const response = await axios.post(
-          "http://13.234.238.29:3000/api/UserCart",
+          "http://localhost:3000/api/UserCart",
           {
             customer_id: customerId,
           }
         );
         const cartData = response.data.products;
 
-        // Extracting relevant data from the cart data
-        console.log(
-          "-------------------------------------------------------- --" +
-            JSON.stringify(cartData)
-        );
-        console.log(
-          "-------------------------------------------------------- --" +
-            typeof cartData
-        );
-        const isArray = Array.isArray(cartData);
-        console.log(
-          "-------------------------------------------------------- --" +
-            isArray
-        );
+        // // Extracting relevant data from the cart data
+        // //console.log(
+        //   "-------------------------------------------------------- --" +
+        //     JSON.stringify(cartData)
+        // );
+        // //console.log(
+        //   "-------------------------------------------------------- --" +
+        //     typeof cartData
+        // );
+        // const isArray = Array.isArray(cartData);
+        // //console.log(
+        //   "-------------------------------------------------------- --" +
+        //     isArray
+        // );
         const products = cartData.map(
           (item) => ({
             product_id: item.product_id,
@@ -65,10 +65,10 @@ function AddToCart() {
         );
 
         products.forEach((product) => {
-          console.log("products forEach: " + product.product_id);
-          console.log("products forEach: " + product.price);
-          console.log("products forEach: " + JSON.stringify(product));
-          // console.log("products forEach: " + product.cart_ quantity);
+          //console.log("products forEach: " + product.product_id);
+          //console.log("products forEach: " + product.price);
+          //console.log("products forEach: " + JSON.stringify(product));
+          // //console.log("products forEach: " + product.cart_ quantity);
 
           dispatch(
             addItemToCart({
@@ -128,15 +128,12 @@ function AddToCart() {
       const userDataString = localStorage.getItem("userData");
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
-      const response = await axios.post(
-        "http://13.234.238.29:3000/api/UserCart",
-        {
-          customer_id: customerId,
-        }
-      );
-      console.log("response", response);
+      const response = await axios.post("http://localhost:3000/api/UserCart", {
+        customer_id: customerId,
+      });
+      //console.log("response", response);
       const cartData = response.data.products;
-      console.log("cartdata: ", cartData);
+      //console.log("cartdata: ", cartData);
       // Extracting relevant data from the cart data
       const products = cartData.map((item) => ({
         product_id: item.product_id,
@@ -149,7 +146,7 @@ function AddToCart() {
         quantity: item.cart_quantity,
         color: item.color,
       }));
-      console.log("products:-------------------- ", products);
+      //console.log("products:-------------------- ", products);
 
       // Calculate total price, discount, total payable, and installation charges
       const totalPrice = products.reduce(
@@ -194,7 +191,7 @@ function AddToCart() {
   };
   const onRemoveSuccess = async (product_id) => {
     try {
-      // console.log("wanted to remove", product_id);
+      // //console.log("wanted to remove", product_id);
       // Remove the product from the database
       const userDataString = localStorage.getItem("userData");
       const userData = JSON.parse(userDataString);
@@ -203,7 +200,7 @@ function AddToCart() {
       formData.append("customer_id", customerId);
       formData.append("product_id", product_id);
       const response = await axios.delete(
-        "http://13.234.238.29:3000/api/UserCart",
+        "http://localhost:3000/api/UserCart",
         {
           data: formData,
           headers: {
@@ -211,7 +208,7 @@ function AddToCart() {
           },
         }
       );
-      console.log("response", response);
+      //console.log("response", response);
 
       // If all products are removed, update the state to reflect empty cart
       if (productDetailArr.length === 1) {

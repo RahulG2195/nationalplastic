@@ -3,17 +3,17 @@ import { NextResponse } from "next/server";
 
 // import { NextApiRequest, NextApiResponse } from "next";
 export async function POST(req) {
-  console.log("INside-------------------------- handler" + JSON.stringify(req));
-  console.log(
+  //console.log("INside-------------------------- handler" + JSON.stringify(req));
+  //console.log(
     "INside-------------------------- handler" + JSON.stringify(req.body)
   );
-  console.log(
+  //console.log(
     "INside-------------------------- handler" + JSON.stringify(req.data)
   );
 
   const data = await req.json();
-  // console.log("Data: " + JSON.stringify(data));
-  // console.log("Data: " + data.file ? "BRoh yes" : "NO ");
+  // //console.log("Data: " + JSON.stringify(data));
+  // //console.log("Data: " + data.file ? "BRoh yes" : "NO ");
 
   const { name, email, message, reason, mobile, file } = data;
   const transporter = nodemailer.createTransport({
@@ -32,7 +32,7 @@ export async function POST(req) {
   <p> Web Developer </p>
   `;
   try {
-    console.log("BEfore mailing" + file.name);
+    //console.log("BEfore mailing" + file.name);
     const info = await transporter.sendMail({
       from: "webDevs2024@gmail.com",
       to: email,
@@ -40,7 +40,7 @@ export async function POST(req) {
       html: HtmlFormat,
       attachments: [{ filename: Filename, content: file }],
     });
-    // console.log("INFO:", info);
+    // //console.log("INFO:", info);
     return NextResponse.json({
       message: "sended email",
       success: true,
@@ -68,7 +68,7 @@ Chnages on friday rechange before pull/push
     ----------------Chnages------------------------
      const [customerId, setCustomerId] = useState(null); // Default value
   const [data, setData] = useState(null); // Default value
-  console.log("AAAAAAAAAAAAAAAAAAAAA", isLoggedIn);
+  //console.log("AAAAAAAAAAAAAAAAAAAAA", isLoggedIn);
 
   useEffect(async () => {
     const userDataString = localStorage.getItem("userData");
@@ -76,11 +76,11 @@ Chnages on friday rechange before pull/push
     if (userDataString) {
       const userData = JSON.parse(userDataString);
       setCustomerId(userData.customer_id);
-      const check = await axios.post("http://13.234.238.29:3000/api/UserCart", {
+      const check = await axios.post("http://localhost:3000/api/UserCart", {
         customer_id: customerId,
       });
       const value = check.data.products.length;
-      console.log("count for the home page is ", data);
+      //console.log("count for the home page is ", data);
       setData(value);
       setCount(value);
     }

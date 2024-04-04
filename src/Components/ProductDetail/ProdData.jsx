@@ -75,9 +75,7 @@ function ProdData() {
         const productName = id;
         setProductId(storedId);
 
-        const response = await axios.get(
-          "http://13.234.238.29:3000//api/Products"
-        );
+        const response = await axios.get("http://localhost:3000/api/Products");
         let filteredData = [];
         // if (productName) {
         //   filteredData = response.data.products.filter(
@@ -109,26 +107,23 @@ function ProdData() {
   }, []);
 
   const fetchPrice = async (storedId) => {
-    console.log("Fetching price", storedId);
+    //console.log("Fetching price", storedId);
     try {
-      const response = await fetch(
-        "http://13.234.238.29:3000/api/ProductsCat",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ seo_url: storedId }),
-        }
-      );
-      console.log(response);
+      const response = await fetch("http://localhost:3000/api/ProductsCat", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ seo_url: storedId }),
+      });
+      //console.log(response);
 
       if (!response.ok) {
         throw new Error("Failed to fetch product data");
       }
 
       const data = await response.json();
-      console.log(" data ", data);
+      //console.log(" data ", data);
 
       return data;
     } catch (error) {
@@ -139,23 +134,23 @@ function ProdData() {
 
   const handleMoveToCart = async (storedId, quantity, selectedColor) => {
     const isLoggedInResult = await isLoggedIn();
-    console.log("state", isLoggedInResult);
-    console.log("state", typeof isLoggedInResult);
+    //console.log("state", isLoggedInResult);
+    //console.log("state", typeof isLoggedInResult);
 
     switch (isLoggedInResult) {
       case false:
-        console.log("User not logged in. Notifying...");
+        //console.log("User not logged in. Notifying...");
         notify();
         break;
       case true:
-        console.log("User logged in. Fetching price...");
+        //console.log("User logged in. Fetching price...");
         const data = await fetchPrice(storedId);
-        console.log(data);
+        //console.log(data);
 
         const price = data.price;
         const discount_price = data.discount_price;
         const product_id = data.product_id;
-        console.log(" discount_price", quantity);
+        //console.log(" discount_price", quantity);
         dispatch(
           addToCart({
             product_id,

@@ -49,7 +49,7 @@ function ProfilePage() {
         };
 
         const response = await axios.put(
-          "http://13.234.238.29:3000/api/Users",
+          "http://localhost:3000/api/Users",
           formData
         );
 
@@ -72,11 +72,11 @@ function ProfilePage() {
     try {
       // Send updated data to userProfile API
       const response = await axios.put(
-        "http://13.234.238.29:3000/api/UserProfile",
+        "http://localhost:3000/api/UserProfile",
         data
       );
       // Handle success response
-      console.log("Updated data:", response.data);
+      //console.log("Updated data:", response.data);
       toast.success("Data updated successfully");
     } catch (error) {
       // Handle error

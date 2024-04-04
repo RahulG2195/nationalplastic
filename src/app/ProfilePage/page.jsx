@@ -18,13 +18,13 @@ function ProfilePage() {
         ? true
         : (window.location.href = "Login");
 
-    // console.log("isLoggedIn+++++", isLoggedIn)
+    // //console.log("isLoggedIn+++++", isLoggedIn)
     const storedData = JSON.parse(localStorage.getItem("userData")) || {};
     // Retrieve data from local storage
     const userDataString = localStorage.getItem("userData");
     // Convert the retrieved data from string to JSON object
     const userDataID = JSON.parse(userDataString);
-    // console.log("userDataID....", isLoggedIn);
+    // //console.log("userDataID....", isLoggedIn);
 
     // Example: Accessing the email property
 
@@ -50,7 +50,7 @@ function ProfilePage() {
   const [messages, setMessages] = useState([]);
   const cust_id = messages.length > 0 ? messages[0].customer_id : null;
   const email_id = messages.length > 0 ? messages[0].Email : null;
-  // console.log(" messages.length=========", messages.length)
+  // //console.log(" messages.length=========", messages.length)
 
   // const UpdateData = {
   //   email: email_id,
@@ -58,9 +58,9 @@ function ProfilePage() {
   // };
   // localStorage.setItem("userId", JSON.stringify(UpdateData));
 
-  // console.log("UpdateDataaaaaaaaaaaaaaaaaaaaaaaaaaaa Profile page", UpdateData)
+  // //console.log("UpdateDataaaaaaaaaaaaaaaaaaaaaaaaaaaa Profile page", UpdateData)
 
-  // console.log("ssssssssssssssssssssssss",cust_id , email_id)
+  // //console.log("ssssssssssssssssssssssss",cust_id , email_id)
 
   const [editedData, setEditedData] = useState({
     Id: "",
@@ -69,7 +69,7 @@ function ProfilePage() {
     Address: "",
   });
 
-  // console.log("eeeeeeeeeeeeeeddddddddddiiiiiiiittttttt",cust_id)
+  // //console.log("eeeeeeeeeeeeeeddddddddddiiiiiiiittttttt",cust_id)
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -78,7 +78,7 @@ function ProfilePage() {
         const data = JSON.parse(email);
         // const id = JSON.parse(customer_id);
         const useremail = data.email;
-        // console.log("oLIne no 77 from profilePagebject")
+        // //console.log("oLIne no 77 from profilePagebject")
 
         const formData = {
           email: useremail,
@@ -86,17 +86,17 @@ function ProfilePage() {
         };
 
         const response = await axios.put(
-          "http://13.234.238.29:3000/api/Users",
+          "http://localhost:3000/api/Users",
           formData
         );
-        // console.log("After -------------------response on profile page", formData);
-        // console.log(response.data);
-        // console.log("JSONDATA " + JSON.stringify(response.data));
+        // //console.log("After -------------------response on profile page", formData);
+        // //console.log(response.data);
+        // //console.log("JSONDATA " + JSON.stringify(response.data));
         const userData = response.data.message[0]; // Directly access response.data.message
-        // console.log("JSONDATA " + JSON.stringify(userData));
+        // //console.log("JSONDATA " + JSON.stringify(userData));
         const { customer_id, Email } = userData; // Destructure from userData, not from JSON.stringify
-        // console.log("-", customer_id);
-        // console.log("-", Email);
+        // //console.log("-", customer_id);
+        // //console.log("-", Email);
         const UpdateData = {
           email: Email,
           customer_id: customer_id,
@@ -128,7 +128,7 @@ function ProfilePage() {
       Id: cust_id,
     }));
 
-    // console.log("name0000000000000/////////////////////////////", editedData);
+    // //console.log("name0000000000000/////////////////////////////", editedData);
     let errorMessage = "";
 
     // Validate phone number
@@ -153,15 +153,15 @@ function ProfilePage() {
 
   const handleEdit = async (e) => {
     e.preventDefault();
-    console.log("event" + e.target);
+    //console.log("event" + e.target);
     try {
       // Gather form data from the event target
       const formData = new FormData(e.target);
-      console.log(".........formData", formData);
+      //console.log(".........formData", formData);
       const email = formData.get("email");
       const phone = formData.get("phone");
       const address = formData.get("address");
-      // console.log("email========================", email)
+      // //console.log("email========================", email)
       // Validate the form data
       // if (!email || !phone || !address) {
       //   toast.error("Please provide all required information");
@@ -176,17 +176,17 @@ function ProfilePage() {
         Address: address,
       };
       // Send updated data to userProfile API
-      // console.log("userData======222222222222222======", userData);
+      // //console.log("userData======222222222222222======", userData);
       const response = await axios.post(
-        "http://13.234.238.29:3000/api/UserProfile",
+        "http://localhost:3000/api/UserProfile",
         editedData
       );
 
-      // console.log("Form submitted editedData:", editedData);
+      // //console.log("Form submitted editedData:", editedData);
       // Handle success response
-      // console.log("Updated data:", response.data);
+      // //console.log("Updated data:", response.data);
       toast.success("Data updated successfully");
-      // console.log("LIne 165:::");
+      // //console.log("LIne 165:::");
       if (response.status == 200) {
         fetchUserData();
       }

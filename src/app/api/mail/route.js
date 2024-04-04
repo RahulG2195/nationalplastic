@@ -8,10 +8,9 @@ export async function POST(request, res) {
     const data = await request.formData();
     const email = data.get("email");
     const resetToken = data.get("resetToken");
-    console.log("Inside MAil ResetToken: ", resetToken);
-    // http://13.234.238.29:3000/new-password/1?resetToken=YOUR_TOKEN_VALUE
-    const url =
-      "http://13.234.238.29:3000/new-password/1?resetToken=" + resetToken;
+    //console.log("Inside MAil ResetToken: ", resetToken);
+    // http://localhost:3000/new-password/1?resetToken=YOUR_TOKEN_VALUE
+    const url = "http://localhost:3000/new-password/1?resetToken=" + resetToken;
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -41,7 +40,7 @@ export async function POST(request, res) {
       html: HtmlFormat,
     });
 
-    console.log("Email sent successfully!", info);
+    //console.log("Email sent successfully!", info);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error sending email:", error);

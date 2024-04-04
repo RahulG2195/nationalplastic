@@ -34,20 +34,18 @@ export default function TopPick() {
   // ];
 
   const [hometoppics, setHometoppics] = useState([]);
-  console.log("here are categories", hometoppics);
+  //console.log("here are categories", hometoppics);
   useEffect(() => {
     const fetchdata = async () => {
-      const response = await axios.get(
-        "http://13.234.238.29:3000//api/Category"
-      );
-      console.log("response of the category ", response.data.categories);
+      const response = await axios.get("http://localhost:3000/api/Category");
+      //console.log("response of the category ", response.data.categories);
       const filteredData = response.data.categories.filter(
         (item) =>
           item.category_id === 15 ||
           item.category_id === 13 ||
           item.category_id === 18
       );
-      console.log(response);
+      //console.log(response);
 
       setHometoppics(filteredData);
     };
@@ -86,8 +84,8 @@ export default function TopPick() {
                 // navigation
                 pagination={{ clickable: true }}
                 // scrollbar={{ draggable: false }}
-                // onSwiper={(swiper) => console.log(swiper)}
-                // onSlideChange={() => console.log("slide change")}
+                // onSwiper={(swiper) => //console.log(swiper)}
+                // onSlideChange={() => //console.log("slide change")}
                 autoplay={{
                   delay: 2500,
                   disableOnInteraction: false,

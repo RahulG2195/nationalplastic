@@ -8,9 +8,9 @@ const counterSlice = createSlice({
   },
   reducers: {
     increment: (state, actions) => {
-      console.log(actions.payload);
-      console.log(actions.type);
-      console.log(actions.meta);
+      //console.log(actions.payload);
+      //console.log(actions.type);
+      //console.log(actions.meta);
 
       state.value++;
     },
@@ -21,18 +21,18 @@ const counterSlice = createSlice({
 });
 const calc = () => {};
 export const priceCalculator = async (data) => {
-  console.log(
+  //console.log(
     "----------------------------PC------1------------------------------"
   );
   try {
-    console.log("data:", JSON.stringify(data));
-    const res = await axios.put(`http://13.234.238.29:3000/api/Users`, data);
-    console.log(
+    //console.log("data:", JSON.stringify(data));
+    const res = await axios.put(`http://localhost:3000/api/Users`, data);
+    //console.log(
       "----------------------------PC------2------------------------------"
     );
-    console.log(res);
-    console.log("FROM pricecalculator" + JSON.stringify(res.data));
-    console.log(res);
+    //console.log(res);
+    //console.log("FROM pricecalculator" + JSON.stringify(res.data));
+    //console.log(res);
 
     return res.data; // Change this line
   } catch (error) {

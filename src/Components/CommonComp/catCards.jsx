@@ -1,24 +1,33 @@
-import Image from "next/image"
-import Link from "next/link"
-import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
-import '../../styles/home_prod.css'
+import Image from "next/image";
+import Link from "next/link";
+import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
+import "../../styles/home_prod.css";
 
-
-function CatCards({ image, title,onCategoryChange,style,catid, hovereffect, manfacthover,hoverglow }) {
-
-const sendCategory = () =>{
-  console.log("Category clicked:", title);
-  // if (onCategoryChange) {
-  //   onCategoryChange(title);
-    localStorage.setItem('category', title);
-  // }
-};
+function CatCards({
+  image,
+  title,
+  onCategoryChange,
+  style,
+  catid,
+  hovereffect,
+  manfacthover,
+  hoverglow,
+}) {
+  const sendCategory = () => {
+    //console.log("Category clicked:", title);
+    // if (onCategoryChange) {
+    //   onCategoryChange(title);
+    localStorage.setItem("category", title);
+    // }
+  };
 
   return (
     <>
       <div className={`cards  `}>
-        <Link onClick={sendCategory} href={`/ProductCatlogue/${catid}`} >
-          <div className={`"card_img" ${hovereffect} ${manfacthover} ${hoverglow} `}>
+        <Link onClick={sendCategory} href={`/ProductCatlogue/${catid}`}>
+          <div
+            className={`"card_img" ${hovereffect} ${manfacthover} ${hoverglow} `}
+          >
             <Image
               src={image}
               alt="product card images"
@@ -28,9 +37,13 @@ const sendCategory = () =>{
               objectFit="cover"
             />
           </div>
-          <div className={`prodname ${style ? style : 'py-3 d-flex justify-content-between px-2'} `}>
+          <div
+            className={`prodname ${
+              style ? style : "py-3 d-flex justify-content-between px-2"
+            } `}
+          >
             <h4 className="fw-bold respCatTitle">{title}</h4>
-          <ArrowForwardOutlinedIcon className="fw-bold" />
+            <ArrowForwardOutlinedIcon className="fw-bold" />
           </div>
         </Link>
       </div>
@@ -53,7 +66,7 @@ const sendCategory = () =>{
         </Link>
       </div> */}
     </>
-  )
+  );
 }
 
-export default CatCards 
+export default CatCards;

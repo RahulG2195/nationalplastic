@@ -60,10 +60,10 @@ const CartProduct = ({
   const dispatch = useDispatch();
 
   const handleAddtoWishlist = async (product_id) => {
-    console.log("want to cart tp wish", product_id);
+    //console.log("want to cart tp wish", product_id);
     const isLoggedInResult = await isLoggedIn();
-    console.log("state", isLoggedInResult);
-    console.log("state", typeof isLoggedInResult);
+    //console.log("state", isLoggedInResult);
+    //console.log("state", typeof isLoggedInResult);
     if (!isLoggedInResult) {
       notifyError();
       router.push("/Login");
@@ -79,7 +79,7 @@ const CartProduct = ({
   const handleRemove = async (product_id) => {
     onRemoveSuccess(productId);
     await dispatch(removeItemFromCart({ product_id: product_id }));
-    console.log(product_id);
+    //console.log(product_id);
   };
 
   const setid = () => {

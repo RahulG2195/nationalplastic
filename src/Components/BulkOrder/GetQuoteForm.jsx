@@ -54,12 +54,12 @@ const GetQuoteForm = (props) => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("Form Data:", formData); // Log formData for debugging
+      //console.log("Form Data:", formData); // Log formData for debugging
       const response = await axios.post(
-        "http://13.234.238.29:3000/api/BulkOrderForm",
+        "http://localhost:3000/api/BulkOrderForm",
         formData
       );
-      console.log("Response:", response.data); // Log response from the server
+      //console.log("Response:", response.data); // Log response from the server
       alert("Success! Form data submitted."); // Show success message
     } catch (error) {
       console.error("Error:", error); // Log any errors

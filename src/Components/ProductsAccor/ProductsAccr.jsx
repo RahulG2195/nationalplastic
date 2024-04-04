@@ -12,12 +12,12 @@ import axios from "axios"; // Don't forget to import axios
 
 const ProductsAccr = ({ handleShow }) => {
   const [categories, setCategories] = useState([]);
-  console.log("fghjkl", categories);
+  //console.log("fghjkl", categories);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://13.234.238.29:3000//api/Products");
+        const res = await axios.get("http://localhost:3000/api/Products");
         const allproducts = res.data.products;
         const categoryIds = [13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
 
@@ -32,7 +32,7 @@ const ProductsAccr = ({ handleShow }) => {
         });
 
         setCategories(categoryData);
-        console.log(categoryData);
+        //console.log(categoryData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -71,7 +71,7 @@ const ProductsAccr = ({ handleShow }) => {
   };
 
   const handleOnClick = (productName) => {
-    console.log("this product is clicked", productName);
+    //console.log("this product is clicked", productName);
     localStorage.setItem("productName", productName);
   };
 

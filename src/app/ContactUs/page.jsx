@@ -104,9 +104,9 @@ function ContactUs() {
     //   toast.error("Please select a file to upload.");
     //   return;
     // }
-    console.log("--" + userInput.file);
+    //console.log("--" + userInput.file);
     //Try catch For the File Upload :Multer
-    console.log("Try    catch");
+    //console.log("Try    catch");
     const formData = new FormData();
     formData.append("name", userInput.name);
     formData.append("email", userInput.email);
@@ -118,7 +118,7 @@ function ContactUs() {
     //TryCatch For the Email Message
 
     const res = await axios.post(
-      `http://13.234.238.29:3000/api/sendEmail`,
+      `http://localhost:3000/api/sendEmail`,
       formData,
       {
         headers: {
@@ -139,7 +139,7 @@ function ContactUs() {
     } else {
       notifyError();
     }
-    // console.log("sending Mail " ,formData);
+    // //console.log("sending Mail " ,formData);
   }
 
   const RegisteredOfficeCardArr = [

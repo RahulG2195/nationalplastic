@@ -62,10 +62,8 @@ export default function Manufacture() {
 
   useEffect(() => {
     const fetchdata = async () => {
-      const response = await axios.get(
-        "http://13.234.238.29:3000/api/Category"
-      );
-      console.log("response of the category ", response.data.categories);
+      const response = await axios.get("http://localhost:3000/api/Category");
+      //console.log("response of the category ", response.data.categories);
       const filteredData = response.data.categories.filter(
         (item) =>
           item.category_id === 24 ||
@@ -114,8 +112,8 @@ export default function Manufacture() {
                 // navigation
                 pagination={{ clickable: true }}
                 // scrollbar={{ draggable: false }}
-                // onSwiper={(swiper) => console.log(swiper)}
-                // onSlideChange={() => console.log("slide change")}
+                // onSwiper={(swiper) => //console.log(swiper)}
+                // onSlideChange={() => //console.log("slide change")}
                 autoplay={{
                   delay: 2400,
                   disableOnInteraction: false,

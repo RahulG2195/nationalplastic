@@ -1,25 +1,22 @@
 import mysql from "mysql2/promise";
 
-export async function query({query, values = []}){
-
-    const dbconnection = await mysql.createConnection({
+export async function query({ query, values = [] }) {
+  const dbconnection = await mysql.createConnection({
     Host: process.env.MYSQL_HOST,
     database: process.env.MYSQL_DATABASE,
     user: process.env.MYSQL_USER,
-    password:process.env.MYSQL_PASSWORD,
-    port:process.env.MYSQL_PORT,
-});
-try{
-    const[results] = await dbconnection.execute(query,values);
+    password: process.env.MYSQL_PASSWORD,
+    port: process.env.MYSQL_PORT,
+  });
+  try {
+    const [results] = await dbconnection.execute(query, values);
     dbconnection.end();
     return results;
-}
-catch(error){
-        console.log("error in connecting Database: " + error)
-throw Error(error.message);
-return {error};
-}
-
+  } catch (error) {
+    //console.log("error in connecting Database: " + error)
+    throw Error(error.message);
+    return { error };
+  }
 }
 // // db.js file
 // import mysql from "mysql2/promise";
