@@ -39,7 +39,9 @@ const CartProduct = ({
   productId,
   onRemoveSuccess,
   quantity,
+  seourl,
   color,
+
 }) => {
   const router = useRouter();
 
@@ -89,7 +91,7 @@ const CartProduct = ({
   return (
     <>
       <div className="col-md-4">
-        <Link onClick={setid} href={`/ProductDetail`}>
+        <Link onClick={setid} href={`/ProductDetail/${seourl}`}>
           <Image
             src={src}
             classname="img-fluid d-block w-100" // Use w-100 to make the image fill the entire col-lg col-md-3 col-sm-12umn
@@ -103,7 +105,7 @@ const CartProduct = ({
       </div>
 
       <div className="col-md-8 card-Quantity-section">
-        <Link onClick={setid} href={`/ProductDetail`}>
+<Link onClick={setid} href={`/ProductDetail/${seourl}`}>
           <div style={{ display: "flex" }}>
             <h6 style={{ marginRight: "7px" }}>{productName}</h6>
           </div>
