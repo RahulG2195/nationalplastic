@@ -3,17 +3,17 @@ const nextConfig = {
   reactStrictMode: false,
   // output:'export',
   eslint: {
-      ignoreDuringBuilds: true,
+    ignoreDuringBuilds: true,
   },
   // // images:{
   //     unoptimized:true,
   // },
 
   env: {
-    MYSQL_HOST: "localhost",
+    MYSQL_HOST: "13.234.238.29",
     MYSQL_DATABASE: "nationalplastic_db",
     MYSQL_USER: "root",
-    MYSQL_PASSWORD: "National@123#",
+    MYSQL_PASSWORD: "National2024",
     MYSQL_PORT: "3306",
   },
 };
