@@ -95,7 +95,7 @@ const RecentlyViewed = () => {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          "http://13.234.238.29:3000//api/Products"
+          "http://13.234.238.29:3000/api/Products"
         );
         const filteredproducts = response.data.products.filter(
           (item) => item.categoryType === "premium chairs"
@@ -116,7 +116,7 @@ const RecentlyViewed = () => {
       const customerId = userData.customer_id;
 
       const response = await axios.post(
-        "http://13.234.238.29:3000//api/wishListUser",
+        "http://13.234.238.29:3000/api/wishListUser",
         {
           customer_id: customerId,
         }
@@ -138,8 +138,8 @@ const RecentlyViewed = () => {
   ) => {
     try {
       const isLoggedInResult = await isLoggedIn();
-      console.log("state", isLoggedInResult);
-      console.log("state", typeof isLoggedInResult);
+      //console.log("state", isLoggedInResult);
+      //console.log("state", typeof isLoggedInResult);
       if (!isLoggedInResult) {
         notifyError();
         router.push("/Login");
@@ -159,22 +159,24 @@ const RecentlyViewed = () => {
   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch('http://13.234.238.29:3000/api/ProductsCat', {
-          method: 'POST',
+      const response = await fetch(
+        "http://13.234.238.29:3000/api/ProductsCat",
+        {
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ product_id: id }),
         }
       );
-      console.log(response);
+      //console.log(response);
 
       if (!response.ok) {
         throw new Error("Failed to fetch product data");
       }
 
       const data = await response.json();
-      console.log(" data ", data);
+      //console.log(" data ", data);
 
       return data;
     } catch (error) {
@@ -186,12 +188,12 @@ const RecentlyViewed = () => {
   // const handleAddToCart = async(product_name, short_description, price, discount_price, discount, ChairImg)
   const handleMoveToCart = async (product_id) => {
     const isLoggedInResult = await isLoggedIn();
-    console.log("state", isLoggedInResult);
-    console.log("state", typeof isLoggedInResult);
+    //console.log("state", isLoggedInResult);
+    //console.log("state", typeof isLoggedInResult);
 
     switch (isLoggedInResult) {
       case false:
-        console.log("User not logged in. Notifying...");
+        //console.log("User not logged in. Notifying...");
         notify();
         break;
       case true:
@@ -214,7 +216,7 @@ const RecentlyViewed = () => {
         );
       // Consider additional actions for unexpected login states
     }
-    console.log("this is product id in card ", product_id);
+    //console.log("this is product id in card ", product_id);
   };
 
   return (

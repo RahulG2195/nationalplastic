@@ -154,12 +154,12 @@ const PreChairsCards = () => {
       setCategoryType(categoryTitle);
 
       const response = await axios.get(
-        `http://13.234.238.29:3000//api/ProductsCat?query=${cat_id}`
+        `http://13.234.238.29:3000/api/ProductsCat?query=${cat_id}`
       );
-      console.log("API Response:", response.data); // Log API response
+      //console.log("API Response:", response.data); // Log API response
 
       const fetchedData = response.data;
-      console.log("Fetched data:", fetchedData);
+      //console.log("Fetched data:", fetchedData);
 
       if (fetchedData?.products) {
         let filteredData = fetchedData.products;
@@ -219,8 +219,8 @@ const PreChairsCards = () => {
 
   const handleAddToWishlist = async (product_id) => {
     const isLoggedInResult = await isLoggedIn();
-    console.log("state", isLoggedInResult);
-    console.log("state", typeof isLoggedInResult);
+    //console.log("state", isLoggedInResult);
+    //console.log("state", typeof isLoggedInResult);
     if (!isLoggedInResult) {
       notify();
       route.push("/Login");
@@ -234,22 +234,24 @@ const PreChairsCards = () => {
   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch('http://13.234.238.29:3000/api/ProductsCat', {
-          method: 'POST',
+      const response = await fetch(
+        "http://13.234.238.29:3000/api/ProductsCat",
+        {
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ product_id: id }),
         }
       );
-      console.log(response);
+      //console.log(response);
 
       if (!response.ok) {
         throw new Error("Failed to fetch product data");
       }
 
       const data = await response.json();
-      console.log(" data ", data);
+      //console.log(" data ", data);
 
       return data;
     } catch (error) {
@@ -260,12 +262,12 @@ const PreChairsCards = () => {
 
   const handleMoveToCart = async (product_id) => {
     const isLoggedInResult = await isLoggedIn();
-    console.log("state", isLoggedInResult);
-    console.log("state", typeof isLoggedInResult);
+    //console.log("state", isLoggedInResult);
+    //console.log("state", typeof isLoggedInResult);
 
     switch (isLoggedInResult) {
       case false:
-        console.log("User not logged in. Notifying...");
+        //console.log("User not logged in. Notifying...");
         notify();
         break;
       case true:

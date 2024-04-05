@@ -20,18 +20,18 @@ const WishlistPage1 = () => {
     const fetchData = async () => {
       try {
         const response = await axios.post(
-          "http://13.234.238.29:3000//api/wishListUser",
+          "http://13.234.238.29:3000/api/wishListUser",
           { customer_id: customerId }
         );
         // const wishlistData = response.data.products;
-        console.log(
-          "response from wishlistpage after useEffect ",
-          response.data
-        );
-        console.log(
-          "response from wishlistpage after useEffect ",
-          response.data.products
-        );
+        // console.log(
+        //   "response from wishlistpage after useEffect ",
+        //   response.data
+        // );
+        // console.log(
+        //   "response from wishlistpage after useEffect ",
+        //   response.data.products
+        // );
         const wishlistData = response.data.products.map((item) => {
           // Calculate discount percentage
           const discountPercentage =
@@ -75,7 +75,7 @@ const WishlistPage1 = () => {
         console.log("Entryyyyyyyyy" + entry);
       }
       const response = await axios.delete(
-        "http://13.234.238.29:3000//api/wishListUser",
+        "http://13.234.238.29:3000/api/wishListUser",
         { data: formData }
       );
 
@@ -109,9 +109,8 @@ const WishlistPage1 = () => {
         <div className="WCcontainer border-0">
           <h4 className="p-4 fw-bold">Wishlist</h4>
           <div className="table-wishlist">
-            
-              {wishlistItems.length > 0 ? (
-                wishlistItems.map(
+            {wishlistItems.length > 0 ? (
+              wishlistItems.map(
                 (item) => (
                   console.log("here is item", item),
                   (
@@ -139,7 +138,9 @@ const WishlistPage1 = () => {
                 )
               )
             ) : (
-              <h4 className="text-secondary text-center mx-auto">Wishlist is empty </h4>
+              <h4 className="text-secondary text-center mx-auto">
+                Wishlist is empty{" "}
+              </h4>
             )}
           </div>
         </div>

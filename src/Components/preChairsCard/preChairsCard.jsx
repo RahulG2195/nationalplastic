@@ -16,7 +16,7 @@ const PreChairsCard = (props) => {
         const customerId = userData.customer_id;
 
         const response = await axios.post(
-          "http://13.234.238.29:3000//api/wishListUser",
+          "http://13.234.238.29:3000/api/wishListUser",
           {
             customer_id: customerId,
           }

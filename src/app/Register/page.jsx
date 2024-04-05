@@ -62,7 +62,7 @@ function Register() {
             "http://13.234.238.29:3000/api/Users",
             formData
           );
-          console.log("Form submitted:", response);
+          //console.log("Form submitted:", response);
           // Clear form data on successful submission
           setFormData({
             firstName: "",

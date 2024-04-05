@@ -3,7 +3,7 @@ import { query } from "@/lib/db";
 export async function POST(request) {
   try {
     const { customer_id } = await request.json();
-    console.log("Customer: " + customer_id);
+    //console.log("Customer: " + customer_id);
     const user_id = customer_id;
 
     const mycart = await query({
@@ -12,7 +12,7 @@ export async function POST(request) {
     });
 
     const productIds = mycart.map((row) => row.product_id);
-    console.log("productIds------", productIds);
+    //console.log("productIds------", productIds);
     // Fetch product details for the retrieved product IDs
     const products = await query({
       query: `
@@ -23,6 +23,7 @@ export async function POST(request) {
       `,
       values: [user_id],
     });
+    //console.log("productIds------", products);
 
     return new Response(
       JSON.stringify({
@@ -43,7 +44,7 @@ export async function POST(request) {
 export async function PUT(request) {
   try {
     try {
-      const { product_id, customer_id, quantity } = await request.json();
+      const { product_id, customer_id, quantity, color } = await request.json();
       const user_id = customer_id;
       const insertResult = await query({
         query:
@@ -53,15 +54,15 @@ export async function PUT(request) {
       if (insertResult[0].count === 0) {
         // product count is zero
         try {
-          console.log("userid - and pass", product_id, customer_id);
+          //console.log("userid - and pass", product_id, customer_id);
 
           const insertResult = await query({
             query:
-              "INSERT INTO mycart (product_id,user_id,quantity) VALUES (?,?,?)",
-            values: [product_id, user_id, quantity],
+              "INSERT INTO mycart (product_id, user_id, quantity, color) VALUES (?, ?, ?, ?)",
+            values: [product_id, user_id, quantity, color],
           });
 
-          console.log("insertResult", insertResult);
+          //console.log("insertResult", insertResult);
           if (insertResult.affectedRows === 1) {
             return new Response(
               JSON.stringify({
@@ -85,24 +86,26 @@ export async function PUT(request) {
             })
           );
         }
-        console.log("yes", insertResult[0].count);
+        //console.log("yes", insertResult[0].count);
       } else {
-        console.log("Cools", insertResult[0]);
+        //console.log("Cools", insertResult[0]);
 
-        console.log("Cools", insertResult[0].count);
+        //console.log("Cools", insertResult[0].count);
         try {
           // const { product_id, customer_id } = await request.json();
           // const user_id = customer_id;
-          // console.log("quantity", typeof quantity);
-          console.log("user_id", typeof user_id);
-          console.log("product_id", typeof product_id);
+          // //console.log("quantity", typeof quantity);
+          //console.log("user_id", typeof user_id);
+          //console.log("product_id", typeof product_id);
+          //console.log("product_id", color);
 
-          console.log("userid and pass", product_id, customer_id);
+          //console.log("userid and pass", product_id, customer_id);
           const insertResult = await query({
             query:
-              "UPDATE mycart SET quantity = quantity + 1 WHERE product_id = ? AND user_id = ?",
-            values: [product_id, user_id],
+              "UPDATE mycart SET quantity = quantity + 1, color = ? WHERE product_id = ? AND user_id = ?",
+            values: [color, product_id, user_id],
           });
+
           if (insertResult.affectedRows === 1) {
             return new Response(
               JSON.stringify({
@@ -128,16 +131,16 @@ export async function PUT(request) {
         }
       }
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   } catch (err) {
-    console.log(err);
+    //console.log(err);
     //Add the Logic to increase the quantity of the product
   }
 }
 
 export async function DELETE(request) {
-  // console.log("first");
+  // //console.log("first");
   try {
     const data = await request.formData();
     const product_id = data.get("product_id"); // Log received product_id
@@ -147,7 +150,7 @@ export async function DELETE(request) {
       query: "DELETE FROM mycart WHERE product_id = ? AND user_id = ?",
       values: [product_id, user_id],
     });
-    console.log("Affected Rows:", deleteWishlist.affectedRows); // Log affected rows
+    //console.log("Affected Rows:", deleteWishlist.affectedRows); // Log affected rows
     const message = deleteWishlist.affectedRows ? "success" : "error";
     return new Response(
       JSON.stringify({
@@ -170,16 +173,16 @@ export async function PATCH(request) {
   try {
     const { customer_id, product_id, quantity } = await request.json();
     const user_id = customer_id; // Assuming customer_id is the same as user_id
-    console.log("quantity", typeof quantity);
-    console.log("user_id", typeof user_id);
-    console.log("product_id", typeof product_id);
+    //console.log("quantity", typeof quantity);
+    //console.log("user_id", typeof user_id);
+    //console.log("product_id", typeof product_id);
 
     const updateResult = await query({
       query:
         "UPDATE mycart SET quantity = quantity + ? WHERE product_id = ? AND user_id = ?",
       values: [quantity, product_id, user_id],
     });
-    console.log("-", updateResult);
+    //console.log("-", updateResult);
 
     if (updateResult.affectedRows === 1) {
       return new Response(

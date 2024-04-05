@@ -104,9 +104,9 @@ function ContactUs() {
     //   toast.error("Please select a file to upload.");
     //   return;
     // }
-    console.log("--" + userInput.file);
+    //console.log("--" + userInput.file);
     //Try catch For the File Upload :Multer
-    console.log("Try    catch");
+    //console.log("Try    catch");
     const formData = new FormData();
     formData.append("name", userInput.name);
     formData.append("email", userInput.email);
@@ -139,7 +139,7 @@ function ContactUs() {
     } else {
       notifyError();
     }
-    // console.log("sending Mail " ,formData);
+    // //console.log("sending Mail " ,formData);
   }
 
   const RegisteredOfficeCardArr = [

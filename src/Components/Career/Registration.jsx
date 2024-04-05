@@ -50,7 +50,7 @@ const Registration = () => {
   //   function handleInputChange(e) {
   //     const { name, value, files } = e.target;
   //     const file = files ? files[0] : " ";
-  // console.log(file);
+  // //console.log(file);
   //     setUserInput({
   //       ...userInput,
   //       [name]: file || value,
@@ -79,8 +79,8 @@ const Registration = () => {
   async function onFormSubmit(e) {
     // toast
     e.preventDefault();
-    console.log("UserInput");
-    console.log(JSON.stringify(userInput));
+    //console.log("UserInput");
+    //console.log(JSON.stringify(userInput));
     if (!isValidName(userInput.JobProfile)) {
       toast.error("Please enter a valid name.");
       return;
@@ -96,7 +96,7 @@ const Registration = () => {
     }
     try {
       // const res = await axios.put(`http://13.234.238.29:3000/api/Users`, userInput);
-      console.log(userInput);
+      //console.log(userInput);
       const res = await axios.post(
         `http://13.234.238.29:3000/api/sendResume`,
         formData,
@@ -114,7 +114,7 @@ const Registration = () => {
         notifyError();
       }
     } catch (err) {
-      console.log(err.message);
+      //console.log(err.message);
       toast.error("Something went Wrong. please try again later.");
     }
   }

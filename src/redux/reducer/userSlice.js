@@ -13,15 +13,15 @@ export const userSlice = createSlice({
   reducers: {
     setUserData: (state, action) => {
       action.payload.email;
-      // console.log("stateeeeeeeeeeee");
-      // console.log("actionnnnnnnnnnn", action);
-      console.log("actionnnnnnnnnnn action.payload", action.payload);
+      // //console.log("stateeeeeeeeeeee");
+      // //console.log("actionnnnnnnnnnn", action);
+      //console.log("actionnnnnnnnnnn action.payload", action.payload);
       state.isLoggedIn = true;
       state.email = action.payload.email;
       state.customer_id = action.payload.customer_id;
       localStorage.setItem("userData", JSON.stringify(action.payload));
       localStorage.setItem("isLoggedIn", true);
-      alert();
+      // alert();
     },
   },
 });

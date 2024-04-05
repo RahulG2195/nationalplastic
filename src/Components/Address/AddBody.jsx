@@ -18,10 +18,14 @@ const AddBody = () => {
   const [installationCharges, setInstallationCharges] = useState(0);
   const dispatch = useDispatch();
   const [address, setAddress] = useState("");
+  const [FirstName, setFirstName] = useState("");
+  const [Phone, setPhone] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
   const [editable, setEditable] = useState(false);
-  const [name, setName] = useState("")
-  const[number,setNumber] = useState("")
- 
+  const [name, setName] = useState("");
+  const [number, setNumber] = useState("");
+
   const handleEdit = () => {
     setEditable(!editable);
   };
@@ -32,7 +36,7 @@ const AddBody = () => {
 
   const handleSubmit = () => {
     // Here you can perform any action with the submitted address, like sending it to an API
-    console.log("Submitted Address:", address);
+    //console.log("Submitted Address:", address);
     setEditable(false);
     // Reset the address input after submission
     setAddress("");
@@ -51,14 +55,15 @@ const AddBody = () => {
       formData
     );
     const userData = response.data.message[0];
-    const { Address } = userData;
+    //console.log("userData", userData);
+    //console.log("userData", JSON.stringify(userData));
+
+    const { Address, FirstName, Phone } = userData;
     const addressString = JSON.stringify(Address);
     const addressWithoutQuotes = addressString.replace(/^"|"$/g, "");
     setAddress(addressWithoutQuotes);
-    setName(response.data.message[0].FirstName)
-    setNumber(response.data.message[0].Phone)
-
-
+    setFirstName(FirstName);
+    setPhone(Phone);
   };
 
   useEffect(() => {
@@ -73,8 +78,8 @@ const AddBody = () => {
       let cartData;
       try {
         if (!Dummies) {
-          console.log("Dummies ", Dummies);
-          console.log("Dummies ", JSON.stringify(Dummies));
+          //console.log("Dummies ", Dummies);
+          //console.log("Dummies ", JSON.stringify(Dummies));
           cartData = Dummies;
         } else {
           const response = await axios.post(
@@ -103,10 +108,10 @@ const AddBody = () => {
         );
 
         products.forEach((product) => {
-          console.log("products forEach: " + product.product_id);
-          console.log("products forEach: " + product.price);
-          console.log("products forEach: " + JSON.stringify(product));
-          // console.log("products forEach: " + product.cart_ quantity);
+          //console.log("products forEach: " + product.product_id);
+          //console.log("products forEach: " + product.price);
+          //console.log("products forEach: " + JSON.stringify(product));
+          // //console.log("products forEach: " + product.cart_ quantity);
 
           dispatch(
             addItemToCart({
@@ -151,13 +156,18 @@ const AddBody = () => {
         setTotalPayble(totalPayble);
         setInstallationCharges(installationCharges);
         setTotalCount(totalCount);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data", error);
+        setIsLoading(false);
       }
     };
 
     fetchData();
   }, []);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -191,7 +201,10 @@ const AddBody = () => {
                         className="form-control"
                         placeholder={address}
                       />
-                      <button onClick={handleSubmit} className="sizing rounded-2 fw-semibold bg-success text-white border-0">
+                      <button
+                        onClick={handleSubmit}
+                        className="sizing rounded-2 fw-semibold bg-success text-white border-0"
+                      >
                         Submit{" "}
                       </button>
                     </div>
@@ -204,11 +217,18 @@ const AddBody = () => {
                         className="fw-semibold"
                         placeholder={address}
                         readOnly={true}
-                      >{address}</span>
+                      >
+                        {address}
+                      </span>
                     </div>
                   )}
                   <div className="my-3 medium fw-bold">
-                    Mobile :  <span>{number}</span>{" "}
+                    <div className="text-start fw-bold mt-3">
+                      {FirstName !== undefined ? FirstName : null}
+                    </div>
+                    <div className="text-start fw-bold mt-3">
+                      {Phone !== undefined ? Phone : null}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -284,7 +304,11 @@ const AddBody = () => {
                 >
                   Save
                 </button>
-                <p className="small fw-semibold py-2">Note : After placing an order, GSTIN cannot be changed. Registration state must match either with the billing or the shipping state.</p>
+                <p className="small fw-semibold py-2">
+                  Note : After placing an order, GSTIN cannot be changed.
+                  Registration state must match either with the billing or the
+                  shipping state.
+                </p>
               </form>
             </div>
 
@@ -305,16 +329,23 @@ const AddBody = () => {
                   <p className="text-start fw-semibold confirm bordrBtm p-3">
                     Order Summary
                   </p>
-                  <OrderSummaryCard
-                    imgSrc="https://picsum.photos/id/0/367/267"
-                    description="Lorem ipsum dolor sit amet."
-                    quantity="00"
-                  />
-                  <OrderSummaryCard
-                    imgSrc="https://picsum.photos/id/0/367/267"
-                    description="Lorem ipsum dolor sit amet."
-                    quantity="00"
-                  />
+                  <div>
+                    {productDetailArr.length === 0 ? (
+                      <h2 className="text-secondary">No products in cart</h2>
+                    ) : (
+                      <div className="container">
+                        {productDetailArr.map((val) => (
+                          <div className="row" key={val.product_id}>
+                            <OrderSummaryCard
+                              imgSrc={`/Assets/images/New-launches-1/${val.image_name}`}
+                              description={val.product_name}
+                              quantity={val.quantity}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                   <div className="d-flex justify-content-center">
                     <button
                       type="button"
@@ -327,9 +358,11 @@ const AddBody = () => {
               </div>
             </div>
           </div>
-         
         </div>
-        <div className="my-3"> <FooterRow /></div>
+        <div className="my-3">
+          {" "}
+          <FooterRow />
+        </div>
       </div>
     </>
   );

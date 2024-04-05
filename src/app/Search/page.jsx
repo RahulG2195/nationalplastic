@@ -66,15 +66,7 @@ const Search = (props) => {
       }
 
       const response = await axios.get(
-<<<<<<< HEAD
-<<<<<<< HEAD
-        `http://13.234.238.29:3000//api/search?query=${query}&page=${page}`
-=======
         `http://13.234.238.29:3000/api/search?query=${query}&page=${page}`
->>>>>>> 2eea476dbe8b7eebdab94af42368a5c5542a1324
-=======
-        `http://13.234.238.29:3000/api/search?query=${query}&page=${page}`
->>>>>>> f6c1faf5a2f60216cb450d23a5d8e3069a005d70
       );
       const newProducts = response.data.products;
       const all = response.data.allproducts;
@@ -107,13 +99,6 @@ const Search = (props) => {
   //   };
   const fetchPrice = async (id) => {
     try {
-<<<<<<< HEAD
-<<<<<<< HEAD
-      const response = await fetch('http://13.234.238.29:3000/api/ProductsCat', {
-          method: 'POST',
-=======
-=======
->>>>>>> f6c1faf5a2f60216cb450d23a5d8e3069a005d70
       const response = await fetch(
         "http://13.234.238.29:3000/api/ProductsCat",
         {
@@ -124,14 +109,14 @@ const Search = (props) => {
           body: JSON.stringify({ product_id: id }),
         }
       );
-      console.log(response);
+      //console.log(response);
 
       if (!response.ok) {
         throw new Error("Failed to fetch product data");
       }
 
       const data = await response.json();
-      console.log(" data ", data);
+      //console.log(" data ", data);
 
       return data;
     } catch (error) {
@@ -141,19 +126,19 @@ const Search = (props) => {
   };
   const handleAddToCart = async (id) => {
     const isLoggedInResult = await isLoggedIn();
-    console.log("state", isLoggedInResult);
-    console.log("state", typeof isLoggedInResult);
+    //console.log("state", isLoggedInResult);
+    //console.log("state", typeof isLoggedInResult);
 
     switch (isLoggedInResult) {
       case false:
-        console.log("User not logged in. Notifying...");
+        //console.log("User not logged in. Notifying...");
         notify();
         router.push("/login");
 
         break;
       case true:
         const data = await fetchPrice(id);
-        console.log(data);
+        //console.log(data);
         const price = data.price;
         const discountPrice = data.discount_price;
         dispatch(
@@ -176,8 +161,8 @@ const Search = (props) => {
 
   const handleAddWishlist = async (id) => {
     const isLoggedInResult = await isLoggedIn();
-    console.log("state", isLoggedInResult);
-    console.log("state", typeof isLoggedInResult);
+    //console.log("state", isLoggedInResult);
+    //console.log("state", typeof isLoggedInResult);
     if (!isLoggedInResult) {
       notifyError();
       router.push("/Login");

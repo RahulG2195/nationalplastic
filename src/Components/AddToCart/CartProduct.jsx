@@ -39,6 +39,9 @@ const CartProduct = ({
   productId,
   onRemoveSuccess,
   quantity,
+  seourl,
+  color,
+
 }) => {
   const router = useRouter();
 
@@ -59,10 +62,10 @@ const CartProduct = ({
   const dispatch = useDispatch();
 
   const handleAddtoWishlist = async (product_id) => {
-    console.log("want to cart tp wish", product_id);
+    //console.log("want to cart tp wish", product_id);
     const isLoggedInResult = await isLoggedIn();
-    console.log("state", isLoggedInResult);
-    console.log("state", typeof isLoggedInResult);
+    //console.log("state", isLoggedInResult);
+    //console.log("state", typeof isLoggedInResult);
     if (!isLoggedInResult) {
       notifyError();
       router.push("/Login");
@@ -78,7 +81,7 @@ const CartProduct = ({
   const handleRemove = async (product_id) => {
     onRemoveSuccess(productId);
     await dispatch(removeItemFromCart({ product_id: product_id }));
-    console.log(product_id);
+    //console.log(product_id);
   };
 
   const setid = () => {
@@ -88,7 +91,7 @@ const CartProduct = ({
   return (
     <>
       <div className="col-md-4">
-        <Link onClick={setid} href={`/ProductDetail`}>
+        <Link onClick={setid} href={`/ProductDetail/${seourl}`}>
           <Image
             src={src}
             classname="img-fluid d-block w-100" // Use w-100 to make the image fill the entire col-lg col-md-3 col-sm-12umn
@@ -102,25 +105,24 @@ const CartProduct = ({
       </div>
 
       <div className="col-md-8 card-Quantity-section">
-        <Link onClick={setid} href={`/ProductDetail`}>
-          <h6 className="fw-bold"> {productName} </h6>
+<Link onClick={setid} href={`/ProductDetail/${seourl}`}>
+          <div style={{ display: "flex" }}>
+            <h6 style={{ marginRight: "7px" }}>{productName}</h6>
+          </div>
+          <h11>color:{color}</h11>
         </Link>
         <p>{productDesc}</p>
 
         <div className="CartQuantity d-flex flex-wrap">
-   
-            <p>Quantity</p>
-            {/* Increment Decrement start */}
-        
-            <IncrementDecrement
-              initialCount={initialCount}
-              onIncrement={handleIncrement}
-              onDecrement={handleDecrement}
-            />
-      
-      
-      
-      
+          <p>Quantity</p>
+          {/* Increment Decrement start */}
+
+          <IncrementDecrement
+            initialCount={initialCount}
+            onIncrement={handleIncrement}
+            onDecrement={handleDecrement}
+          />
+
           {/* Increment Decrement end */}
           <div className="productPrice">
             <p className="fw-bold">RS {productPrice}</p>
@@ -129,11 +131,13 @@ const CartProduct = ({
               <span>{discPer}% Off</span>
             </p>
           </div>
-
         </div>
-        <div className="InstallationCharges align-items-center mb-3 mt-4">
-          <p className="text-secondary me-3 IC lh-1"> Installation Charges : Rs {installationCharges}</p>
-          <div className="CouponApplied Icmargin align-items-center ms-3">
+        <div className="InstallationCharges align-items-center">
+          <p className="text-secondary me-2">
+            {" "}
+            Installation Charges : Rs {installationCharges}
+          </p>
+          <div className="CouponApplied">
             <Image
               src="/Assets/images/AddTOCart/percentage.png"
               classname="img-fluid d-block "

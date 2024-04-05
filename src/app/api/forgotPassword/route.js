@@ -10,7 +10,7 @@ export async function POST(request) {
     values: [email],
   });
   if (existingUser.length > 0) {
-    console.log("Email");
+    //console.log("Email");
 
     return NextResponse.json({ success: true, message: "Valid Email" });
   } else {
@@ -30,7 +30,7 @@ export async function PUT(request) {
       query: "UPDATE customer SET Password = ?  WHERE Email = ?;",
       values: [Password, resetEmail],
     });
-    console.log("FROM TRY catch" + result);
+    //console.log("FROM TRY catch" + result);
 
     if (result.affectedRows > 0) {
       return new Response(JSON.stringify({ message: "Changed Password" }), {

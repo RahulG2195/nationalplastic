@@ -34,20 +34,20 @@ function AddToCart() {
         );
         const cartData = response.data.products;
 
-        // Extracting relevant data from the cart data
-        console.log(
-          "-------------------------------------------------------- --" +
-            JSON.stringify(cartData)
-        );
-        console.log(
-          "-------------------------------------------------------- --" +
-            typeof cartData
-        );
-        const isArray = Array.isArray(cartData);
-        console.log(
-          "-------------------------------------------------------- --" +
-            isArray
-        );
+        // // Extracting relevant data from the cart data
+        // //console.log(
+        //   "-------------------------------------------------------- --" +
+        //     JSON.stringify(cartData)
+        // );
+        // //console.log(
+        //   "-------------------------------------------------------- --" +
+        //     typeof cartData
+        // );
+        // const isArray = Array.isArray(cartData);
+        // //console.log(
+        //   "-------------------------------------------------------- --" +
+        //     isArray
+        // );
         const products = cartData.map(
           (item) => ({
             product_id: item.product_id,
@@ -59,15 +59,17 @@ function AddToCart() {
             description: item.short_description,
             InstallationCharges: item.InstallationCharges,
             quantity: item.cart_quantity,
+            seo_url:item.seo_url,
+            color: item.color,
           }),
           []
         );
 
         products.forEach((product) => {
-          console.log("products forEach: " + product.product_id);
-          console.log("products forEach: " + product.price);
-          console.log("products forEach: " + JSON.stringify(product));
-          // console.log("products forEach: " + product.cart_ quantity);
+          //console.log("products forEach: " + product.product_id);
+          //console.log("products forEach: " + product.price);
+          //console.log("products forEach: " + JSON.stringify(product));
+          // //console.log("products forEach: " + product.cart_ quantity);
 
           dispatch(
             addItemToCart({
@@ -75,6 +77,7 @@ function AddToCart() {
               quantity: product.quantity, // Explicitly set quantity to 1
               price: product.price,
               discount_price: product.discount_price,
+              color: product.color,
               from: false,
             })
           );
@@ -107,6 +110,7 @@ function AddToCart() {
 
         // Update state variables
         setProductDetailArr(products);
+        console.log("fdghjjjjjjjjjjjjjjjjjjjjjj",products)
         setTotalPrice(totalPrice);
         setDiscount(discount);
         setTotalPayble(totalPayble);
@@ -126,13 +130,15 @@ function AddToCart() {
       const userDataString = localStorage.getItem("userData");
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
-      const response = await axios.post("http://13.234.238.29:3000//api/UserCart",{
+      const response = await axios.post(
+        "http://13.234.238.29:3000/api/UserCart",
+        {
           customer_id: customerId,
         }
       );
-      console.log("response", response);
+      //console.log("response", response);
       const cartData = response.data.products;
-      console.log("cartdata: ", cartData);
+      //console.log("cartdata: ", cartData);
       // Extracting relevant data from the cart data
       const products = cartData.map((item) => ({
         product_id: item.product_id,
@@ -143,7 +149,10 @@ function AddToCart() {
         description: item.short_description,
         InstallationCharges: item.InstallationCharges,
         quantity: item.cart_quantity,
+       seo_url:item.seo_url,
+        color: item.color,
       }));
+      //console.log("products:-------------------- ", products);
 
       // Calculate total price, discount, total payable, and installation charges
       const totalPrice = products.reduce(
@@ -188,7 +197,7 @@ function AddToCart() {
   };
   const onRemoveSuccess = async (product_id) => {
     try {
-      // console.log("wanted to remove", product_id);
+      // //console.log("wanted to remove", product_id);
       // Remove the product from the database
       const userDataString = localStorage.getItem("userData");
       const userData = JSON.parse(userDataString);
@@ -196,7 +205,8 @@ function AddToCart() {
       const formData = new FormData();
       formData.append("customer_id", customerId);
       formData.append("product_id", product_id);
-      const response = await axios.delete("http://13.234.238.29:3000//api/UserCart",
+      const response = await axios.delete(
+        "http://13.234.238.29:3000/api/UserCart",
         {
           data: formData,
           headers: {
@@ -204,7 +214,7 @@ function AddToCart() {
           },
         }
       );
-      console.log("response", response);
+      //console.log("response", response);
 
       // If all products are removed, update the state to reflect empty cart
       if (productDetailArr.length === 1) {
@@ -297,11 +307,13 @@ function AddToCart() {
                           productPrice={val.price}
                           discountedPrice={val.discount_price}
                           productDesc={val.description}
+                          seourl={val.seo_url}
                           discPer={Math.floor(
                             ((val.discount_price - val.price) /
                               val.discount_price) *
                               100
                           )}
+                          color={val.color}
                           installationCharges={val.InstallationCharges}
                           quantity={val.quantity}
                           onRemoveSuccess={() =>

@@ -12,12 +12,12 @@ import axios from "axios"; // Don't forget to import axios
 
 const ProductsAccr = ({ handleShow }) => {
   const [categories, setCategories] = useState([]);
-  console.log("fghjkl",categories)
+  //console.log("fghjkl", categories);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://13.234.238.29:3000//api/Products");
+        const res = await axios.get("http://13.234.238.29:3000/api/Products");
         const allproducts = res.data.products;
         const categoryIds = [13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
 
@@ -29,11 +29,10 @@ const ProductsAccr = ({ handleShow }) => {
               (product) => product.category_id === categoryId
             ),
           };
-         
         });
-        
+
         setCategories(categoryData);
-        console.log(categoryData)
+        //console.log(categoryData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -51,28 +50,28 @@ const ProductsAccr = ({ handleShow }) => {
       case 14:
         return "Without Arm Tents";
       case 15:
-        return "Premium Chairs"
+        return "Premium Chairs";
       case 16:
-        return "Popular Chairs"
+        return "Popular Chairs";
       case 17:
-        return "Cabinet"
+        return "Cabinet";
       case 18:
-        return "Baby Chairs"
+        return "Baby Chairs";
       case 19:
-        return "Stool"
+        return "Stool";
       case 20:
-        return "Table"
+        return "Table";
       case 21:
-        return "Box"
+        return "Box";
       case 22:
-        return "Drawer"
+        return "Drawer";
       default:
         return "Unknown Category";
     }
   };
 
   const handleOnClick = (productName) => {
-    console.log("this product is clicked", productName);
+    //console.log("this product is clicked", productName);
     localStorage.setItem("productName", productName);
   };
 
@@ -110,7 +109,9 @@ const ProductsAccr = ({ handleShow }) => {
                   aria-controls={`panel${index + 1}bh-content`}
                   id={`panel${index + 1}bh-header`}
                 >
-                  <Typography className="fw-semibold fs-6">{categoryItem.category}</Typography>
+                  <Typography className="fw-semibold fs-6">
+                    {categoryItem.category}
+                  </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <div>

@@ -24,7 +24,7 @@
 
 //     const path = `./uploads/${file.name}`;
 //     await writeFile(path, buffer);
-//     console.log(`open ${path} to see the uploaded file`);
+//     //console.log(`open ${path} to see the uploaded file`);
 
 //     // Extract other form fields
 //     const { name, email, message, reason, mobile } = Object.fromEntries(
@@ -66,7 +66,7 @@
 //       ], // Attachments array with conditional file attachment
 //     });
 
-//     console.log("Email sent successfully!", info);
+//     //console.log("Email sent successfully!", info);
 //     return NextResponse.json({ success: true });
 //   } catch (error) {
 //     console.error("Error sending email:", error);

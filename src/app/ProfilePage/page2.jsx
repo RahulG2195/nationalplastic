@@ -76,7 +76,7 @@ function ProfilePage() {
         data
       );
       // Handle success response
-      console.log("Updated data:", response.data);
+      //console.log("Updated data:", response.data);
       toast.success("Data updated successfully");
     } catch (error) {
       // Handle error

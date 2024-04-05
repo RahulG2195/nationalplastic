@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import CatCards from "../CommonComp/catCards";
-import '../../styles/home_prod.css'
+import "../../styles/home_prod.css";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
@@ -52,29 +52,37 @@ export default function HappyStory() {
     <section className="happy_Story_sec common_section">
       <div className="">
         <div className="row">
-        <div className="text-center my-5 pt-5">
-            <div className="darkBlue fs-1 fw-medium">Happy <span className="fs-1 lh-small fw-bolder text-danger ">Stories</span> </div>
-            <div className="mt-1 fw-medium subCptRes w-50"><p>Their Words, Our Pride</p></div>
+          <div className="text-center my-5 pt-5">
+            <div className="darkBlue fs-1 fw-medium">
+              Happy{" "}
+              <span className="fs-1 lh-small fw-bolder text-danger ">
+                Stories
+              </span>{" "}
+            </div>
+            <div className="mt-1 fw-medium subCptRes w-50">
+              <p>Their Words, Our Pride</p>
+            </div>
           </div>
           <div className="col-18 products_col justify-content-center">
             <div className="row ">
               <Swiper
-               style={{
-                '--swiper-navigation-color': '#787978',
-                '--swiper-pagination-color': '#787978',
-                 width: "75%", height: "100%" 
-              }}
+                style={{
+                  "--swiper-navigation-color": "#787978",
+                  "--swiper-pagination-color": "#787978",
+                  width: "75%",
+                  height: "100%",
+                }}
                 className="swipper px-5 swpr "
                 // style={{ width: "75%", height: "100%" }}
-                modules={[Navigation, Pagination, Scrollbar, A11y, ]}
+                modules={[Navigation, Pagination, Scrollbar, A11y]}
                 spaceBetween={0}
                 slidesPerView={3}
                 // loop={true}
-                navigation={{ clickable: true }}            
+                navigation={{ clickable: true }}
                 // pagination={{ clickable: true }}
                 // scrollbar={{ draggable: false }}
-                // onSwiper={(swiper) => console.log(swiper)}
-                // onSlideChange={() => console.log("slide change")}
+                // onSwiper={(swiper) => //console.log(swiper)}
+                // onSlideChange={() => //console.log("slide change")}
 
                 autoplay={{
                   delay: 2600,
@@ -101,15 +109,11 @@ export default function HappyStory() {
               >
                 {productArr.map((product) => (
                   // <div key={product.key} className="col-md-4">
-                  <SwiperSlide
-                  className="px-3"
-                    key={product.key}
-                  
-                  >
+                  <SwiperSlide className="px-3" key={product.key}>
                     <div className="card rounded-5 w-100 h-100">
-                      <div className="card-img rounded-5" >
+                      <div className="card-img rounded-5">
                         <Image
-                        className="rounded-top-5"
+                          className="rounded-top-5"
                           src={product.image}
                           alt={product.image}
                           width={100}

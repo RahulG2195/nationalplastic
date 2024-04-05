@@ -28,45 +28,62 @@ export async function GET(request) {
 
 export async function POST(request) {
   try {
-      const { product_id } = await request.json();
-      const result = await query({
-          query: "SELECT price, discount_price FROM nationalplastic_db.products WHERE product_id = ?;",
-          values: [product_id]
-      });
+    const { product_id } = await request.json();
+    const result = await query({
+      query:
+        "SELECT price, discount_price FROM nationalplastic_db.products WHERE product_id = ?;",
+      values: [product_id],
+    });
 
-      if (result.length > 0) {
-          const { price, discount_price } = result[0];
-          return new Response(JSON.stringify({ price, discount_price }), { status: 200 });
-      } else {
-          return new Response(JSON.stringify({ message: "Product not found" }), { status: 404 });
-      }
+    if (result.length > 0) {
+      const { price, discount_price } = result[0];
+      return new Response(JSON.stringify({ price, discount_price }), {
+        status: 200,
+      });
+    } else {
+      return new Response(JSON.stringify({ message: "Product not found" }), {
+        status: 404,
+      });
+    }
   } catch (error) {
-      return new Response(JSON.stringify({
-          status: 500,
-          message: error.message,
-      }), { status: 500 });
+    return new Response(
+      JSON.stringify({
+        status: 500,
+        message: error.message,
+      }),
+      { status: 500 }
+    );
   }
 }
 export async function PUT(request) {
   try {
-      const { seo_url } = await request.json();
-      console.log("-",seo_url)
-      const result = await query({
-          query: "SELECT price, discount_price, product_id FROM nationalplastic_db.products WHERE seo_url = ?;",
-          values: [seo_url]
-      });
-      console.log("-",result);
+    const { seo_url } = await request.json();
+    //console.log("-",seo_url)
+    const result = await query({
+      query:
+        "SELECT price, discount_price, product_id FROM nationalplastic_db.products WHERE seo_url = ?;",
+      values: [seo_url],
+    });
+    //console.log("-",result);
 
-      if (result.length > 0) {
-          const { price, discount_price,product_id } = result[0];
-          return new Response(JSON.stringify({ price, discount_price,product_id }), { status: 200 });
-      } else {
-          return new Response(JSON.stringify({ message: "Product not found" }), { status: 404 });
-      }
+    if (result.length > 0) {
+      const { price, discount_price, product_id } = result[0];
+      return new Response(
+        JSON.stringify({ price, discount_price, product_id }),
+        { status: 200 }
+      );
+    } else {
+      return new Response(JSON.stringify({ message: "Product not found" }), {
+        status: 404,
+      });
+    }
   } catch (error) {
-      return new Response(JSON.stringify({
-          status: 500,
-          message: error.message,
-      }), { status: 500 });
+    return new Response(
+      JSON.stringify({
+        status: 500,
+        message: error.message,
+      }),
+      { status: 500 }
+    );
   }
 }

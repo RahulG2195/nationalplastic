@@ -36,9 +36,9 @@ const notifyError = () => {
 import {
   isValidName,
   isValidEmail,
-  isValidMessage,
   isValidReason,
   isValidMobile,
+  isValidProduct,
   // isValidFile,
 } from "@/utils/validation";
 
@@ -51,19 +51,56 @@ const GetQuoteForm = (props) => {
     Requirements: "",
     city: "",
   });
+  const validation = (userInput) => {
+    if (!isValidName(userInput.city)) {
+      toast.error("Please enter a valid  city name.");
+      return;
+    }
+    if (!isValidName(userInput.fullName)) {
+      toast.error("Please enter a valid  city name.");
+      return;
+    }
+    if (!isValidReason(userInput.Requirements)) {
+      toast.error("Please enter a valid Reason.");
+      return;
+    }
+    if (!isValidEmail(userInput.Email)) {
+      toast.error("Please enter a valid email.");
+      return;
+    }
+    if (!isValidProduct(userInput.ProductName)) {
+      toast.error("Please enter a message.");
+      return;
+    }
+    if (!isValidMobile(userInput.Mobile)) {
+      toast.error("Please enter a valid mobile number.");
+      return;
+    } else {
+      return true;
+    }
+  };
   const handleOnSubmit = async (e) => {
     e.preventDefault();
+    const isValid = await validation(formData);
+    if (!isValid) return;
+
     try {
-      console.log("Form Data:", formData); // Log formData for debugging
+      await axios.post("http://13.234.238.29:3000/api/BulkOrderForm", formData);
+      notify();
+    } catch (error) {
+      console.error("Error:", error);
+      notifyError();
+    }
+    try {
       const response = await axios.post(
-        "http://13.234.238.29:3000/api/BulkOrderForm",
+        "http://13.234.238.29:3000/api/bulkOrderEmail",
         formData
       );
-      alert("Success! Form data submitted."); // Show success message
-      console.log("Response:", response.data); // Log response from the server
+      // console.log("Response:", response.data);
+      // console.log("Response:", JSON.stringify(response.data));
     } catch (error) {
-      console.error("Error:", error); // Log any errors
-      alert("Error occurred while submitting the form."); // Show error message
+      console.error("Error:", error);
+      notifyError();
     }
   };
 

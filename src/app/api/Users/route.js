@@ -109,26 +109,26 @@ export async function POST(request) {
 export async function PUT(request) {
   // const router = useRouter();
   try {
-    // console.log("FROM put " + request);
-    // console.log("FROM put " + JSON.stringify(request));
+    // //console.log("FROM put " + request);
+    // //console.log("FROM put " + JSON.stringify(request));
 
     const { email, password, getProfile } = await request.json();
-    console.log("putttttttttp request" + email + password + getProfile);
+    //console.log("putttttttttp request" + email + password + getProfile);
 
-    console.log(email);
+    //console.log(email);
     // Check if the email already exists in the database
     const existingUser = await query({
       query: "SELECT * FROM customer WHERE email = ?",
       values: [email],
     });
-    console.log("existingUser:", existingUser);
+    //console.log("existingUser:", existingUser);
     //For reseting the password
 
     // const passwordChecker = ()=>{
-    console.log(existingUser);
+    //console.log(existingUser);
     // }
     if (existingUser.length > 0) {
-      console.log("Nope All is well");
+      //console.log("Nope All is well");
 
       // Check if the provided password matches the stored password
       const storedPassword = existingUser[0].Password;
@@ -137,7 +137,7 @@ export async function PUT(request) {
       // Implement password comparison logic using a secure method (e.g., bcrypt)
       // const passwordMatch = comparePasswords(password, storedPassword); // Implement comparePasswords function
       if (getProfile && existingUser.length > 0) {
-        console.log("Not Found");
+        //console.log("Not Found");
         return new Response(
           JSON.stringify({
             status: 200,
@@ -148,7 +148,7 @@ export async function PUT(request) {
       if (password === storedPassword) {
         // return new Response(JSON.stringify({ message: "Login successful" }), { status: 200 });
         {
-          // console.log("its data")
+          // //console.log("its data")
           return new Response(
             JSON.stringify({
               status: 200,
