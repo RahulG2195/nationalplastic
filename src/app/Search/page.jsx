@@ -46,8 +46,8 @@ const Search = (props) => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [allproducts, setAllproducts] = useState([]);
-  const query = props.searchParams.query;
   const dispatch = useDispatch();
+  const [query, setQuery] = useState(router.query);
 
   useEffect(() => {
     setPage(1);
@@ -61,6 +61,7 @@ const Search = (props) => {
 
   const fetchData = async () => {
     try {
+      setQuery(router.query || props.searchParams.query);
       console.log("query", query);
       if (query.trim() === "") {
         return;
