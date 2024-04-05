@@ -83,8 +83,10 @@ export default function Header() {
     setSearchResults([]);
     try {
       const searchTerm2 = e.target.querySelector(".HeadSearch").value;
+      console.log("searchTerm2", searchTerm2);
+      console.log("header", searchTerm);
 
-      router.push(`/Search?query=${searchTerm2}`);
+      router.push(`/Search?query=${searchTerm}`);
     } catch (error) {
       console.error("Error searching products:", error);
     }

@@ -10,7 +10,7 @@ import { addToCart } from "@/redux/reducer/cartSlice";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { isLoggedIn } from "@/utils/validation";
 import { Bounce, toast } from "react-toastify";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const notify = () => {
   toast.error("Login To Add to CART", {
@@ -46,8 +46,9 @@ const Search = (props) => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [allproducts, setAllproducts] = useState([]);
-  const query = props.searchParams.query;
   const dispatch = useDispatch();
+  const [query, setQuery] = useState(props.searchParams.query);
+  const params = useSearchParams();
 
   useEffect(() => {
     setPage(1);
@@ -61,6 +62,11 @@ const Search = (props) => {
 
   const fetchData = async () => {
     try {
+      console.log("query", query);
+      const value = params.get("query");
+      setQuery(value);
+
+      console.log("query", query);
       if (query.trim() === "") {
         return;
       }
@@ -68,8 +74,13 @@ const Search = (props) => {
       const response = await axios.get(
         `http://localhost:3000/api/search?query=${query}&page=${page}`
       );
+      console.log("response", response);
+      console.log("response", response.data.products);
+
       const newProducts = response.data.products;
       const all = response.data.allproducts;
+      console.log(all);
+      console.log(all.length);
 
       setAllproducts(all);
       setProducts((prevProducts) => [...prevProducts, ...newProducts]);
@@ -99,16 +110,13 @@ const Search = (props) => {
   //   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch(
-        "http://localhost:3000/api/ProductsCat",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ product_id: id }),
-        }
-      );
+      const response = await fetch("http://thatsyourwebsite.com/api/ProductsCat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ product_id: id }),
+      });
       //console.log(response);
 
       if (!response.ok) {

@@ -5,6 +5,8 @@ export async function GET(request) {
   try {
     const parsedUrl = parse(request.url, true);
     const queryParams = parsedUrl.query;
+    console.log("from routes", queryParams);
+    console.log("from routes", parsedUrl);
 
     // //console.log("Query parameters:", queryParams);
 
@@ -31,6 +33,8 @@ export async function GET(request) {
         "SELECT * FROM products WHERE LOWER(product_name) REGEXP ? OR LOWER(categoryType) REGEXP ? OR LOWER(short_description) REGEXP ?",
       values: [`${searchTerm}`, `${searchTerm}`, `${searchTerm}`],
     });
+    console.log("Products: from toutes query", allproducts);
+    console.log("Products: from toutes query", products);
 
     // Return the search results
     return new Response(

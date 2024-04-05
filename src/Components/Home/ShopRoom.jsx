@@ -17,9 +17,13 @@ export default function ShopRoom() {
   useEffect(() => {
     const fetchdata = async () => {
       try {
+<<<<<<< HEAD
         const response = await axios.get(
           "http://localhost:3000/api/Category"
         );
+=======
+        const response = await axios.get("http://thatsyourwebsite.com/api/Category");
+>>>>>>> 271095530290e032a144c3ce637a4fd37c98ddb7
         //console.log("response of the category ", response.data.categories);
         const filteredData = response.data.categories.filter(
           (item) =>
