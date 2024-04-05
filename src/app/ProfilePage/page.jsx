@@ -86,7 +86,7 @@ function ProfilePage() {
         };
 
         const response = await axios.put(
-          "http://localhost:3000/api/Users",
+          "http://13.234.238.29/api/Users",
           formData
         );
         // //console.log("After -------------------response on profile page", formData);
@@ -178,7 +178,7 @@ function ProfilePage() {
       // Send updated data to userProfile API
       // //console.log("userData======222222222222222======", userData);
       const response = await axios.post(
-        "http://localhost:3000/api/UserProfile",
+        "http://13.234.238.29/api/UserProfile",
         editedData
       );
 
