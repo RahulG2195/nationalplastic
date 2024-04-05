@@ -154,7 +154,7 @@ const PreChairsCards = () => {
       setCategoryType(categoryTitle);
 
       const response = await axios.get(
-        `http://localhost:3000/api/ProductsCat?query=${cat_id}`
+        `http://thatsyourwebsite.com/api/ProductsCat?query=${cat_id}`
       );
       //console.log("API Response:", response.data); // Log API response
 

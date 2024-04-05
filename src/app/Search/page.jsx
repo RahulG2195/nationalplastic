@@ -72,7 +72,7 @@ const Search = (props) => {
       }
 
       const response = await axios.get(
-        `http://localhost:3000/api/search?query=${query}&page=${page}`
+        `http://thatsyourwebsite.com/api/search?query=${query}&page=${page}`
       );
       console.log("response", response);
       console.log("response", response.data.products);

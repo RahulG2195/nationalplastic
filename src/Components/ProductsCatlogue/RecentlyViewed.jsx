@@ -114,7 +114,7 @@ const RecentlyViewed = () => {
       const customerId = userData.customer_id;
 
       const response = await axios.post(
-        "http://localhost:3000/api/wishListUser",
+        "http://thatsyourwebsite.com/api/wishListUser",
         {
           customer_id: customerId,
         }
