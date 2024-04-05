@@ -61,15 +61,21 @@ const Search = (props) => {
 
   const fetchData = async () => {
     try {
+      console.log("query", query);
       if (query.trim() === "") {
         return;
       }
 
       const response = await axios.get(
-        `http://13.234.238.29:3000/api/search?query=${query}&page=${page}`
+        `http://13.234.238.29/api/search?query=${query}&page=${page}`
       );
+      console.log("response", response);
+      console.log("response", response.data.products);
+
       const newProducts = response.data.products;
       const all = response.data.allproducts;
+      console.log(all);
+      console.log(all.length);
 
       setAllproducts(all);
       setProducts((prevProducts) => [...prevProducts, ...newProducts]);
@@ -99,16 +105,13 @@ const Search = (props) => {
   //   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch(
-        "http://13.234.238.29:3000/api/ProductsCat",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ product_id: id }),
-        }
-      );
+      const response = await fetch("http://13.234.238.29/api/ProductsCat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ product_id: id }),
+      });
       //console.log(response);
 
       if (!response.ok) {

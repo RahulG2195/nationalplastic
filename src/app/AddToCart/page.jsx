@@ -26,12 +26,9 @@ function AddToCart() {
     const customerId = userData.customer_id || {};
     const fetchData = async () => {
       try {
-        const response = await axios.post(
-          "http://13.234.238.29:3000/api/UserCart",
-          {
-            customer_id: customerId,
-          }
-        );
+        const response = await axios.post("http://13.234.238.29/api/UserCart", {
+          customer_id: customerId,
+        });
         const cartData = response.data.products;
 
         // // Extracting relevant data from the cart data
@@ -59,7 +56,7 @@ function AddToCart() {
             description: item.short_description,
             InstallationCharges: item.InstallationCharges,
             quantity: item.cart_quantity,
-            seo_url:item.seo_url,
+            seo_url: item.seo_url,
             color: item.color,
           }),
           []
@@ -110,7 +107,7 @@ function AddToCart() {
 
         // Update state variables
         setProductDetailArr(products);
-        console.log("fdghjjjjjjjjjjjjjjjjjjjjjj",products)
+        console.log("fdghjjjjjjjjjjjjjjjjjjjjjj", products);
         setTotalPrice(totalPrice);
         setDiscount(discount);
         setTotalPayble(totalPayble);
@@ -130,12 +127,9 @@ function AddToCart() {
       const userDataString = localStorage.getItem("userData");
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
-      const response = await axios.post(
-        "http://13.234.238.29:3000/api/UserCart",
-        {
-          customer_id: customerId,
-        }
-      );
+      const response = await axios.post("http://13.234.238.29/api/UserCart", {
+        customer_id: customerId,
+      });
       //console.log("response", response);
       const cartData = response.data.products;
       //console.log("cartdata: ", cartData);
@@ -149,7 +143,7 @@ function AddToCart() {
         description: item.short_description,
         InstallationCharges: item.InstallationCharges,
         quantity: item.cart_quantity,
-       seo_url:item.seo_url,
+        seo_url: item.seo_url,
         color: item.color,
       }));
       //console.log("products:-------------------- ", products);
@@ -205,15 +199,12 @@ function AddToCart() {
       const formData = new FormData();
       formData.append("customer_id", customerId);
       formData.append("product_id", product_id);
-      const response = await axios.delete(
-        "http://13.234.238.29:3000/api/UserCart",
-        {
-          data: formData,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axios.delete("http://13.234.238.29/api/UserCart", {
+        data: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       //console.log("response", response);
 
       // If all products are removed, update the state to reflect empty cart
