@@ -82,7 +82,9 @@ export default function Header() {
     e.preventDefault();
     setSearchResults([]);
     try {
-      router.push(`/Search?query=${searchTerm}`);
+      const searchTerm2 = e.target.querySelector(".HeadSearch").value;
+
+      router.push(`/Search?query=${searchTerm2}`);
     } catch (error) {
       console.error("Error searching products:", error);
     }
