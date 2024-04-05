@@ -10,7 +10,7 @@ export async function POST(request, res) {
     // console.log("-----", fullName);
     // console.log(JSON.stringify(fullName));
 
-    // const url = "http://13.234.238.29:3000/new-password/1?resetToken=" + resetToken;
+    // const url = "http://localhost:3000/new-password/1?resetToken=" + resetToken;
 
     const transporter = nodemailer.createTransport({
       service: "gmail",

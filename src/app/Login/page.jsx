@@ -51,7 +51,7 @@ function Login() {
     try {
       // //console.log("formDataaaaaaa++++++++++",formData)
       const res = await axios.put(
-        `http://13.234.238.29:3000/api/Users`,
+        `http://localhost:3000/api/Users`,
         formData
       );
       // //console.log("formDataaaaaaa++++++++++ formData.email on login page",formData.email)

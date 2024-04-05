@@ -51,7 +51,7 @@ const AddBody = () => {
     };
 
     const response = await axios.put(
-      "http://13.234.238.29:3000/api/Users",
+      "http://localhost:3000/api/Users",
       formData
     );
     const userData = response.data.message[0];
@@ -83,7 +83,7 @@ const AddBody = () => {
           cartData = Dummies;
         } else {
           const response = await axios.post(
-            "http://13.234.238.29:3000/api/UserCart",
+            "http://localhost:3000/api/UserCart",
             {
               customer_id: customerId,
             }

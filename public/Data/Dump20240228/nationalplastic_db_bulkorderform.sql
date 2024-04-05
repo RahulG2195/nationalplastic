@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
--- Host: 13.234.238.29    Database: nationalplastic_db
+-- Host: localhost    Database: nationalplastic_db
 -- ------------------------------------------------------
 -- Server version	8.0.36
 
