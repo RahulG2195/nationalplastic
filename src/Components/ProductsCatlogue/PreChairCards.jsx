@@ -154,7 +154,7 @@ const PreChairsCards = () => {
       setCategoryType(categoryTitle);
 
       const response = await axios.get(
-        `http://13.234.238.29/api/ProductsCat?query=${cat_id}`
+        `http://localhost:3000/api/ProductsCat?query=${cat_id}`
       );
       //console.log("API Response:", response.data); // Log API response
 
@@ -235,7 +235,7 @@ const PreChairsCards = () => {
   const fetchPrice = async (id) => {
     try {
       const response = await fetch(
-        "http://13.234.238.29/api/ProductsCat",
+        "http://localhost:3000/api/ProductsCat",
         {
           method: "POST",
           headers: {
@@ -312,7 +312,7 @@ const PreChairsCards = () => {
     <div className="container mt-5">
       <PremiumChairs cattitle={categoryType} />
 
-      <div className="dropboxRes mt-5 d-flex justify-content-between">
+      <div className="dropboxRes my-md-5 my-3 d-flex justify-content-between">
         <div>
           <div className="text-body-secondary fw-semibold">FILTER BY</div>
           <div className="d-flex flex-wrap gap-3 mt-2">

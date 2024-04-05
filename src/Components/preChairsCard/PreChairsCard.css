@@ -4,11 +4,13 @@
     /* margin: 10px; */
     /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
     border-radius: 20px;
-    background-color: transparent !important;
+    background-color: #fff;
+    border: 1px solid lightgray;
+   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.20);
 }
 
 .preCont .PreFoot {
-    padding: 0 13px 8px 13px;
+    padding: 0 13px 13px 13px;
 }
 
 .preCont:hover {
@@ -47,8 +49,16 @@
     font-size: medium;
 }
 
+.PreFoot svg, .PreFoot i{
+    cursor: pointer;
+}
 .medium {
     font-size: 1rem;
+}
+
+.card-header img{
+    border-radius: 20px 20px 0 0;
+    border-bottom: 1px solid lightgray;
 }
 
 @media (max-width:576px) {
