@@ -10,7 +10,7 @@ import { addToCart } from "@/redux/reducer/cartSlice";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { isLoggedIn } from "@/utils/validation";
 import { Bounce, toast } from "react-toastify";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const notify = () => {
   toast.error("Login To Add to CART", {
@@ -47,7 +47,8 @@ const Search = (props) => {
   const [hasMore, setHasMore] = useState(true);
   const [allproducts, setAllproducts] = useState([]);
   const dispatch = useDispatch();
-  const [query, setQuery] = useState(router.query);
+  const [query, setQuery] = useState(props.searchParams.query);
+  const params = useSearchParams();
 
   useEffect(() => {
     setPage(1);
@@ -61,7 +62,10 @@ const Search = (props) => {
 
   const fetchData = async () => {
     try {
-      setQuery(router.query || props.searchParams.query);
+      console.log("query", query);
+      const value = params.get("query");
+      setQuery(value);
+
       console.log("query", query);
       if (query.trim() === "") {
         return;
