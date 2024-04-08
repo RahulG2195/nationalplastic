@@ -10,10 +10,22 @@ export async function GET(request) {
       values: [`${queryParams}`],
     });
 
+    const color = await query({
+      query: "SELECT DISTINCT color, category_id FROM products WHERE LOWER(category_id) = LOWER(?)",
+      values: [`${queryParams}`],
+    });
+
+    const armType = await query({
+      query: "SELECT DISTINCT armType, category_id FROM products WHERE LOWER(category_id) = LOWER(?)",
+      values: [`${queryParams}`],
+    })
+
     return new Response(
       JSON.stringify({
         status: 200,
         products: products,
+        color: color,
+        armType: armType,
       })
     );
   } catch (error) {

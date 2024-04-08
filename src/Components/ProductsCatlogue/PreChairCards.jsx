@@ -37,6 +37,10 @@ const PreChairsCards = () => {
   const [selectedArmType, setSelectedArmType] = useState(null);
   const [selectedPriceSort, setSelectedPriceSort] = useState(null);
   const [categoryType, setCategoryType] = useState();
+
+  const [FetchClr, setFetchClr] = useState([]);
+  const [FetchType, setFetchType] = useState([]);
+
   // const [page, setPage] = useState(1);
   // const [hasMore, setHasMore] = useState(true);
   // const [length, setlength] = useState([]);
@@ -154,12 +158,15 @@ const PreChairsCards = () => {
       setCategoryType(categoryTitle);
 
       const response = await axios.get(
-        `http://thatsyourwebsite.com/api/ProductsCat?query=${cat_id}`
+        `http://localhost:3000/api/ProductsCat?query=${cat_id}`
       );
       //console.log("API Response:", response.data); // Log API response
 
       const fetchedData = response.data;
-      //console.log("Fetched data:", fetchedData);
+
+      setFetchClr(fetchedData.color);
+      setFetchType(fetchedData.armType);
+      // console.log("Fetched data:", fetchedData);
 
       if (fetchedData?.products) {
         let filteredData = fetchedData.products;
@@ -234,7 +241,7 @@ const PreChairsCards = () => {
   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch("http://thatsyourwebsite.com/api/ProductsCat", {
+      const response = await fetch("http://localhost:3000/api/ProductsCat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -333,8 +340,12 @@ const PreChairsCards = () => {
                 onChange={handleArmType}
               >
                 <option value="all">Arm type</option>
-                <option>with arm tent</option>
-                <option>without arm tent</option>
+                {
+                  FetchType.map(val => (
+                    <option key={val.category_id} value={val.armType}>{val.armType}</option>
+
+                  ))
+                }
               </select>
             </div>
             <div className="dropdown mt-2 arrow">
@@ -345,9 +356,12 @@ const PreChairsCards = () => {
                 onChange={handleColor}
               >
                 <option value="all">Color</option>
-                <option value="Black">Black</option>
-                <option value="Blue">Blue</option>
-                <option value="Red">Red</option>
+                {
+                  FetchClr.map(val => (
+                    <option key={val.category_id} value={val.color}>{val.color}</option>
+
+                  ))
+                }
               </select>
             </div>
           </div>

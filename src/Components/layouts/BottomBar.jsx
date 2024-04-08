@@ -4,6 +4,7 @@ import "./BottomBar.css";
 import "./BottomBar.module.css";
 import Link from "next/link";
 import axios from "axios";
+import Image from "next/image";
 
 function BottomBar() {
   const [name, setName] = useState("");
@@ -20,6 +21,11 @@ function BottomBar() {
   const [box, setBox] = useState([]);
   const [drawer, setDrawer] = useState([]);
 
+  // state for navbar loop 
+  const [navbar, setNavbar] = useState([]);
+  const [AllProd, SetAllProd] = useState([]);
+  const [getImg, SetGetImg] = useState('Blog-section-1.jpg');
+
   // const preEventChair = [
   //   { label: "karen", seoUrl: "karen" },
   //   { label: "ICE, GLASS", seoUrl: "ice-glass" },
@@ -31,9 +37,17 @@ function BottomBar() {
     // //console.log("nameenamee", name)
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://thatsyourwebsite.com/api/Products");
+        const res = await axios.get("http://localhost:3000/api/Products");
         const allproducts = res.data.products;
-        setPreEventChair(
+
+        // start -- fetch category which want to display on navbar
+        const nav = await axios.get("http://localhost:3000/api/NavCategory");
+        const navshow = nav.data.navshow;
+        SetAllProd(allproducts)
+        setNavbar(navshow);
+        // end --
+
+        /* setPreEventChair(
           allproducts.filter((products) => products.category_id == 13)
         );
         setWithoutArm(
@@ -54,7 +68,7 @@ function BottomBar() {
         setStool(allproducts.filter((products) => products.category_id == 28));
         setTable(allproducts.filter((products) => products.category_id == 25));
         setBox(allproducts.filter((products) => products.category_id == 21));
-        setDrawer(allproducts.filter((products) => products.category_id == 22));
+        setDrawer(allproducts.filter((products) => products.category_id == 22)); */
 
         //console.log(preEventChair);
       } catch {
@@ -79,300 +93,69 @@ function BottomBar() {
     return chunkedArray;
   };
 
+
+  const ChangeImage = (prod_name) => {
+
+   const img_name =  AllProd.filter((products) => products.product_name == prod_name);
+    img_name.map(val => {
+      SetGetImg(val.image_name);
+    })
+  }
+  // console.log('img' + getImg);
   return (
     <div className=" px-5  d-flex align-items-center bottom_nav position-relative mainrow">
-      <div className="col second px-3 py-2">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/13`}>
-          <p className="">Premium Event Chairs</p>
-        </Link>
-        <div className="ulCont SecondDrop mx-4 secondHover p-3 ">
-          <p className="text-start fw-bold dropHeading p-3">
-            Premium Event Chairs
-          </p>
-          <div className="d-flex flex-row gap-5 px-3">
-            {chunkArray(preEventChair, 6).map((chunk, columnIndex) => (
-              <div key={columnIndex} className="column pt-3">
-                {chunk.map((product, index) => (
-                  <p className="p-3 fw-semibold" key={index}>
-                    <Link
-                      onClick={() => handleOnClick(product.seo_url)}
-                      className="nav-link"
-                      href={`/ProductDetail/${product.seo_url}`}
-                    >
-                      {product.product_name}
-                    </Link>
-                  </p>
-                ))}
-              </div>
-            ))}
-            <div className="barImgCont py-3">
-              <img src="/Assets\images\Home-page\Blog-section-1.jpg" alt="" />
-            </div>
-          </div>
-        </div>
-      </div>
+      {
 
-      <div className="col second py-2">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/14`}>
-          {" "}
-          <p>Without Arm Tent</p>
-        </Link>
-        <div className="ulCont SecondDrop mx-4 p-3">
-          <p className="text-start fw-bold dropHeading p-3">Without Arm Tent</p>
-          <div className="d-flex flex-row gap-5">
-            {chunkArray(withountArm, 6).map((chunk, columnIndex) => (
-              <div key={columnIndex} className="column pt-3">
-                {chunk.map((product, index) => (
-                  <p className="p-3 fw-semibold" key={index}>
-                    <Link
-                      onClick={() => handleOnClick(product.seo_url)}
-                      className="nav-link"
-                      href={`/ProductDetail/${product.seo_url}`}
-                    >
-                      {product.product_name}
-                    </Link>
-                  </p>
-                ))}
-              </div>
-            ))}
-            <div className="barImgCont py-3">
-              <img src="/Assets\images\Home-page\Blog-section-1.jpg" alt="" />
-            </div>
-          </div>
-        </div>
-      </div>
+        navbar.map(val => (
 
-      <div className="col second  py-2">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/15`}>
-          <p>Premium Chairs</p>
-        </Link>
-        <div className="ulCont SecondDrop mx-4 px-3">
-          <p className="text-start fw-bold dropHeading p-3">Premium Chairs</p>
-          <div className="d-flex flex-row gap-5">
-            {chunkArray(prechair, 6).map((chunk, columnIndex) => (
-              <div key={columnIndex} className="column pt-3">
-                {chunk.map((product, index) => (
-                  <p className="p-3 fw-semibold" key={index}>
-                    <Link
-                      onClick={() => handleOnClick(product.seo_url)}
-                      className="nav-link "
-                      href={`/ProductDetail/${product.seo_url}`}
-                    >
-                      {product.product_name}
-                    </Link>
-                  </p>
-                ))}
-              </div>
-            ))}
-            <div className="barImgCont py-3">
-              <img src="/Assets\images\Home-page\Blog-section-1.jpg" alt="" />
-            </div>
-          </div>
-        </div>
-      </div>
+          <div key={val.category_id} className={`col  px-3 py-2 ${(val.category_name == 'Stools' || val.category_name == 'Tables' || val.category_name == 'Drawer' || val.category_name == 'Box') ? val.category_name + ' position-relative' : 'second'}`}>
 
-      <div className="col second py-2 ">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/16`}>
-          <p>Popular Chairs</p>
-        </Link>
-        <div className="ulCont SecondDrop mx-4 p-3">
-          <p className="text-start fw-bold dropHeading p-3">Popular Chairs</p>
-          <div className="d-flex flex-row gap-5">
-            {chunkArray(Popularchair, 6).map((chunk, columnIndex) => (
-              <div key={columnIndex} className="column pt-3">
-                {chunk.map((product, index) => (
-                  <p className="p-3 fw-semibold" key={index}>
-                    <Link
-                      onClick={() => handleOnClick(product.seo_url)}
-                      className="nav-link"
-                      href={`/ProductDetail/${product.seo_url}`}
-                    >
-                      {product.product_name}
-                    </Link>
-                  </p>
-                ))}
-              </div>
-            ))}
-            <div className="barImgCont py-3">
-              <img src="/Assets\images\Home-page\Blog-section-1.jpg" alt="" />
-            </div>
-          </div>
-        </div>
-      </div>
+            <Link onClick={sendCategory} href={`/ProductCatlogue/${val.category_id}`}>
+              <p className="">{val.category_name}</p>
+            </Link>
 
-      <div className="col second py-2 ">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/17`}>
-          <p>Cabinet</p>
-        </Link>
-        <div className="ulCont SecondDrop mx-4 p-3">
-          <p className="text-start fw-bold dropHeading p-3">Cabinet</p>
-          <div className="d-flex flex-row gap-5">
-            {chunkArray(cabinet, 6).map((chunk, columnIndex) => (
-              <div key={columnIndex} className="column  pt-3">
-                {chunk.map((product, index) => (
-                  <p className="p-3 fw-semibold" key={index}>
-                    <Link
-                      onClick={() => handleOnClick(product.seo_url)}
-                      className="nav-link"
-                      href={`/ProductDetail/${product.seo_url}`}
-                    >
-                      {product.product_name}
-                    </Link>
-                  </p>
-                ))}
+            <div className="ulCont SecondDrop mx-4 secondHover p-3 ">
+              <p className="text-start fw-bold dropHeading p-3">
+                {val.category_name}
+              </p>
+              <div className="d-flex flex-row gap-5 px-3">
+                {
+                  chunkArray(AllProd.filter((products) => products.category_id == val.category_id), 6).map((chunk, columnIndex) => (
+                  <div key={columnIndex} className="column pt-3">
+                    {
+                      chunk.map((product, index) => (
+                      <p className="p-3 fw-semibold" key={index} onMouseOver={() => ChangeImage(product.product_name)} >
+                        <Link
+                          onClick={() => handleOnClick(product.seo_url)}
+                          className="nav-link"
+                          href={`/ProductDetail/${product.seo_url}`}
+                        >
+                          {product.product_name}
+                        </Link>
+                      </p>
+                    ))
+                    }
+                  </div>
+                ))
+                }
+                <div className="barImgCont py-3">
+                  <Image 
+                    src={`/Assets/images/New-launches-1/${getImg}`}
+                    alt=''
+                    height={100}
+                    width={100}
+                    layout="responsive"
+                    objectFit="contain"
+                  />
+                  {/* <img src={`/Assets/images/Home-page/${getImg}`} alt={product.product_name} /> */}
+                </div>
               </div>
-            ))}
-            <div className="barImgCont py-3">
-              <img src="/Assets\images\Home-page\Blog-section-1.jpg" alt="" />
             </div>
           </div>
-        </div>
-      </div>
+        ))
+      }
 
-      <div className="col second py-2 ">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/18`}>
-          <p>Baby Chairs</p>
-        </Link>
-        <div className="ulCont SecondDrop mx-4 p-3">
-          <p className="text-start fw-bold dropHeading p-3">Baby Chairs</p>
-          <div className="d-flex flex-row gap-5">
-            {chunkArray(babychair, 6).map((chunk, columnIndex) => (
-              <div key={columnIndex} className="column pt-3">
-                {chunk.map((product, index) => (
-                  <p className="p-3 fw-semibold" key={index}>
-                    <Link
-                      onClick={() => handleOnClick(product.seo_url)}
-                      className="nav-link"
-                      href={`/ProductDetail/${product.seo_url}`}
-                    >
-                      {product.product_name}
-                    </Link>
-                  </p>
-                ))}
-              </div>
-            ))}
-            <div className="barImgCont py-3">
-              <img src="/Assets\images\Home-page\Blog-section-1.jpg" alt="" />
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div className="col drp Stool position-relative py-2">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/28`}>
-          <p> Stool</p>
-        </Link>
-        <div className="ulCont SecondDrop mx-4 ">
-          <p className="text-start fw-bold dropHeading p-3">Stool</p>
-          <div className="d-flex flex-row gap-5">
-            {chunkArray(stool, 6).map((chunk, columnIndex) => (
-              <div key={columnIndex} className="column pt-3">
-                {chunk.map((product, index) => (
-                  <p className="p-3 fw-semibold" key={index}>
-                    <Link
-                      onClick={() => handleOnClick(product.seo_url)}
-                      className="nav-link"
-                      href={`/ProductDetail/${product.seo_url}`}
-                    >
-                      {product.product_name}
-                    </Link>
-                  </p>
-                ))}
-              </div>
-            ))}
-            <div className="barImgCont py-3">
-              <img src="/Assets\images\Home-page\Blog-section-1.jpg" alt="" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="col drp Table position-relative py-2">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/25`}>
-          <p>Table</p>
-        </Link>
-        <div className="ulCont SecondDrop mx-4 p-3">
-          <p className="text-start fw-bold dropHeading p-3">Table</p>
-          <div className="d-flex flex-row gap-5">
-            {chunkArray(table, 6).map((chunk, columnIndex) => (
-              <div key={columnIndex} className="column pt-3">
-                {chunk.map((product, index) => (
-                  <p className="p-3 fw-semibold" key={index}>
-                    <Link
-                      onClick={() => handleOnClick(product.seo_url)}
-                      className="nav-link"
-                      href={`/ProductDetail/${product.seo_url}`}
-                    >
-                      {product.product_name}
-                    </Link>
-                  </p>
-                ))}
-              </div>
-            ))}
-            <div className="barImgCont py-3">
-              <img src="/Assets\images\Home-page\Blog-section-1.jpg" alt="" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="col drp Box position-relative py-2">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/21`}>
-          <p>Box</p>
-        </Link>
-        <div className="ulCont SecondDrop mx-4 p-3">
-          <p className="text-start fw-bold dropHeading p-3">Box</p>
-          <div className="d-flex flex-row gap-5">
-            {chunkArray(box, 6).map((chunk, columnIndex) => (
-              <div key={columnIndex} className="column pt-3">
-                {chunk.map((product, index) => (
-                  <p className="p-3 fw-semibold" key={index}>
-                    <Link
-                      onClick={() => handleOnClick(product.seo_url)}
-                      className="nav-link"
-                      href={`/ProductDetail/${product.seo_url}`}
-                    >
-                      {product.product_name}
-                    </Link>
-                  </p>
-                ))}
-              </div>
-            ))}
-            <div className="barImgCont py-3">
-              <img src="/Assets\images\Home-page\Blog-section-1.jpg" alt="" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="col drp Drawer position-relative py-2">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/22`}>
-          <p>Drawer</p>
-        </Link>
-        <div className="ulCont SecondDrop mx-4 p-3">
-          <p className="text-start fw-bold dropHeading p-3">Drawer</p>
-          <div className="d-flex flex-row gap-5">
-            {chunkArray(drawer, 6).map((chunk, columnIndex) => (
-              <div key={columnIndex} className="column pt-3">
-                {chunk.map((product, index) => (
-                  <p className="p-3 fw-semibold" key={index}>
-                    <Link
-                      onClick={() => handleOnClick(product.seo_url)}
-                      className="nav-link"
-                      href={`/ProductDetail/${product.seo_url}`}
-                    >
-                      {product.product_name}
-                    </Link>
-                  </p>
-                ))}
-              </div>
-            ))}
-            <div className="barImgCont py-3">
-              <img src="/Assets\images\Home-page\Blog-section-1.jpg" alt="" />
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* <div className="col">
         <p>Drawers & Racks</p>

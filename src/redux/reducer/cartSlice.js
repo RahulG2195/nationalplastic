@@ -168,7 +168,7 @@ export const cartSlice = createSlice({
         const userDataString = localStorage.getItem("userData");
         const userData = JSON.parse(userDataString);
         const customerId = userData.customer_id;
-        const response = axios.patch("http://thatsyourwebsite.com/api/UserCart", {
+        const response = axios.patch("http://localhost:3000/api/UserCart", {
           customer_id: customerId,
           product_id: product_id,
           quantity: 1,
@@ -223,7 +223,7 @@ export const cartSlice = createSlice({
         const userDataString = localStorage.getItem("userData");
         const userData = JSON.parse(userDataString);
         const customerId = userData.customer_id;
-        const response = axios.patch("http://thatsyourwebsite.com/api/UserCart", {
+        const response = axios.patch("http://localhost:3000/api/UserCart", {
           customer_id: customerId,
           product_id: product_id,
           quantity: -1,
@@ -254,7 +254,7 @@ export const addToCart = (item) => async (dispatch, getState) => {
   const userDataString = localStorage.getItem("userData");
   const userData = JSON.parse(userDataString);
   const customerId = userData.customer_id;
-  const response = await axios.put("http://thatsyourwebsite.com/api/UserCart", {
+  const response = await axios.put("http://localhost:3000/api/UserCart", {
     customer_id: customerId,
     product_id: item.product_id,
     quantity: item.quantity,

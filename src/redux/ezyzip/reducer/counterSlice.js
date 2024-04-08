@@ -26,7 +26,7 @@ export const priceCalculator = async (data) => {
   // );
   try {
     //console.log("data:", JSON.stringify(data));
-    const res = await axios.put(`http://thatsyourwebsite.com/api/Users`, data);
+    const res = await axios.put(`http://localhost:3000/api/Users`, data);
     //console.log(
     //   "----------------------------PC------2------------------------------"
     // );

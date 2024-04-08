@@ -43,7 +43,7 @@ export default function Header() {
     const userData = JSON.parse(userDataString) || {};
     const customerId = userData.customer_id || {};
 
-    const check = await axios.post("http://thatsyourwebsite.com/api/UserCart", {
+    const check = await axios.post("http://localhost:3000/api/UserCart", {
       customer_id: customerId,
     });
     if (
@@ -106,10 +106,12 @@ export default function Header() {
               <Link href="/#/">
                 <Image
                   src="/Assets/images/nation_logo.png"
-                  className="img-fluid"
+                  className="Image-fluid"
                   alt="Landscape picture"
-                  width={100}
-                  height={100}
+                  height={100} 
+                  width={100} 
+                  layout="responsive" 
+                  objectFit="contain"
                 />
               </Link>
             </div>
@@ -212,7 +214,7 @@ export default function Header() {
                     href="/ContactUs"
                     onClick={isClicked ? handleShow : null}
                   >
-                    <img src="/Assets/svg/Path 2.svg" alt="location" />
+                    <Image height={100} width={100} layout="responsive" objectFit="contain" src="/Assets/svg/Path 2.svg" alt="location" />
                   </Link>
                 </li>
                 <li className="nav-item brdr">
@@ -221,7 +223,7 @@ export default function Header() {
                     href="/Wishlist"
                     onClick={isClicked ? handleShow : null}
                   >
-                    <img src="/Assets/svg/Path 3.svg" alt="location" />
+                    <Image height={100} width={100} layout="responsive" objectFit="contain" src="/Assets/svg/Path 3.svg" alt="location" />
                   </Link>
                 </li>
                 <li className="nav-item brdr">
@@ -231,7 +233,7 @@ export default function Header() {
                       href="/ProfilePage"
                       onClick={isClicked ? handleShow : null}
                     >
-                      <img src="/Assets/svg/Group 4.svg" alt="location" />
+                      <Image height={100} width={100} layout="responsive" objectFit="contain" src="/Assets/svg/Group 4.svg" alt="location" />
                       <p className="Homeemail">{"data.email"}</p>
                     </Link>
                   ) : (
@@ -240,7 +242,7 @@ export default function Header() {
                       href="/Login"
                       onClick={isClicked ? handleShow : null}
                     >
-                      <img src="/Assets/svg/Group 4.svg" alt="group" />
+                      <Image height={100} width={100} layout="responsive" objectFit="contain" src="/Assets/svg/Group 4.svg" alt="group" />
                     </Link>
                   )}
                 </li>
@@ -250,7 +252,7 @@ export default function Header() {
                     href="/AddToCart"
                     onClick={isClicked ? handleShow : null}
                   >
-                    <img src="/Assets/svg/Group 5.svg" alt="counter" />
+                    <Image height={100} width={100} layout="responsive" objectFit="contain" src="/Assets/svg/Group 5.svg" alt="counter" />
                     <div className="cartCount text-center medium">{count}</div>
                   </Link>
                 </li>
