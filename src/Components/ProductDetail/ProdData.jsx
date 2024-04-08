@@ -15,6 +15,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/reducer/cartSlice";
+import { addToCartD } from "@/redux/reducer/tempSlice";
+
 import { Bounce, toast } from "react-toastify";
 
 // import { Message } from "@mui/icons-material";
@@ -75,7 +77,7 @@ function ProdData() {
         const productName = id;
         setProductId(storedId);
 
-        const response = await axios.get("http://thatsyourwebsite.com/api/Products");
+        const response = await axios.get("http://localhost:3000/api/Products");
         let filteredData = [];
         // if (productName) {
         //   filteredData = response.data.products.filter(
@@ -109,7 +111,7 @@ function ProdData() {
   const fetchPrice = async (storedId) => {
     //console.log("Fetching price", storedId);
     try {
-      const response = await fetch("http://thatsyourwebsite.com/api/ProductsCat", {
+      const response = await fetch("http://localhost:3000/api/ProductsCat", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -132,25 +134,28 @@ function ProdData() {
     }
   };
 
-  const handleMoveToCart = async (storedId, quantity, selectedColor) => {
+  const handleMoveToCart = async (storedId, quantity) => {
     const isLoggedInResult = await isLoggedIn();
     //console.log("state", isLoggedInResult);
     //console.log("state", typeof isLoggedInResult);
+    const data = await fetchPrice(storedId);
+    //console.log(data);
 
+    const price = data.price;
+    const discount_price = data.discount_price;
+    const product_id = data.product_id;
     switch (isLoggedInResult) {
       case false:
-        //console.log("User not logged in. Notifying...");
-        notify();
-        break;
+        dispatch(
+          addToCartD({
+            product_id,
+            price,
+            discount_price,
+            quantity: quantity || 1,
+            color: selectedColor,
+          })
+        );
       case true:
-        //console.log("User logged in. Fetching price...");
-        const data = await fetchPrice(storedId);
-        //console.log(data);
-
-        const price = data.price;
-        const discount_price = data.discount_price;
-        const product_id = data.product_id;
-        //console.log(" discount_price", quantity);
         dispatch(
           addToCart({
             product_id,

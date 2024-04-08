@@ -24,7 +24,7 @@ const TopPics = () => {
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const response = await axios.get("http://thatsyourwebsite.com/api/Category");
+        const response = await axios.get("http://localhost:3000/api/Category");
 
         setCategories(response.data.categories);
       } catch (error) {

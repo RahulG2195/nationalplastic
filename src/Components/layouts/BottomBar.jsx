@@ -31,7 +31,7 @@ function BottomBar() {
     // //console.log("nameenamee", name)
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://thatsyourwebsite.com/api/Products");
+        const res = await axios.get("http://localhost:3000/api/Products");
         const allproducts = res.data.products;
         setPreEventChair(
           allproducts.filter((products) => products.category_id == 13)

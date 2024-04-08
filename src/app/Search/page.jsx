@@ -72,7 +72,7 @@ const Search = (props) => {
       }
 
       const response = await axios.get(
-        `http://thatsyourwebsite.com/api/search?query=${query}&page=${page}`
+        `http://localhost:3000/api/search?query=${query}&page=${page}`
       );
       console.log("response", response);
       console.log("response", response.data.products);
@@ -110,7 +110,7 @@ const Search = (props) => {
   //   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch("http://thatsyourwebsite.com/api/ProductsCat", {
+      const response = await fetch("http://localhost:3000/api/ProductsCat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

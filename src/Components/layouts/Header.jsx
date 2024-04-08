@@ -23,10 +23,21 @@ export default function Header() {
   const dispatch = useDispatch;
   const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
   // const counts = useSelector((state) => state.cart || 0);
-
   // const [count, setCount] = useState(0);
+  function check() {}
   const productCount = useSelector((state) => {
-    const cart = state.cart || {}; // Handle missing or empty cart
+    let who;
+    if (!isLoggedIn) {
+      who = "temp";
+    } else {
+      who = "cart";
+    }
+    console.log("productCount");
+    console.log("productCount", who);
+
+    console.log(state[who]);
+    const cart = state[who] || {};
+    console.log("cart", cart); // Handle missing or empty cart
     return cart.products?.reduce((acc, product) => acc + product.quantity, 0);
   });
 
@@ -43,7 +54,7 @@ export default function Header() {
     const userData = JSON.parse(userDataString) || {};
     const customerId = userData.customer_id || {};
 
-    const check = await axios.post("http://thatsyourwebsite.com/api/UserCart", {
+    const check = await axios.post("http://localhost:3000/api/UserCart", {
       customer_id: customerId,
     });
     if (
