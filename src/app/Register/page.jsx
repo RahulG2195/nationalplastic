@@ -19,6 +19,12 @@ function Register() {
   });
   const [formErrors, setFormErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
+  const mailUpdate = async () => {
+    const response = await axios.post(
+      "http://thatsyourwebsite.com/api/RegisterEmail",
+      formData
+    );
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -53,17 +59,20 @@ function Register() {
     if (Object.keys(errors).length === 0) {
       try {
         // Check if email already exists
-        const { data } = await axios.get(`http://localhost:3000/api/Users`);
+        const { data } = await axios.get(
+          `http://thatsyourwebsite.com/api/Users`
+        );
         const existingEmails = data.map((user) => user.Email);
         if (existingEmails.includes(formData.email)) {
           alert("Email already exists!");
         } else {
           const response = await axios.post(
-            "http://localhost:3000/api/Users",
+            "http://thatsyourwebsite.com/api/Users",
             formData
           );
           //console.log("Form submitted:", response);
           // Clear form data on successful submission
+          mailUpdate(formData);
           setFormData({
             firstName: "",
             lastName: "",
