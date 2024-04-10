@@ -10,8 +10,11 @@ import { addItemToCart, removeItemFromCart } from "@/redux/reducer/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 // import { useSelector } from "react-redux";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
+import { addToCartD } from "@/redux/reducer/tempSlice";
+import { prod } from "../ConstantURL";
 function AddToCart() {
-  // const cartState = useSelector((state) => state.cart);
+  const cartStates = useSelector((state) => state.temp);
+  console.log(cartStates);
   const [productDetailArr, setProductDetailArr] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -44,16 +47,16 @@ function AddToCart() {
         fetchData(cartData);
         fetchData(cartData);
       } else {
+        //Logic to Store Temporary Data
         console.log("^^^^^^^^^^^^^^^^^TEMP^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
         const tempData = localStorage.getItem("temp");
         const userData = JSON.parse(tempData) || {};
         console.log("Hurray 1st Part done succesfully ", userData);
         console.log("CD41", userData);
-        // console.log("CD411", typeof userData.quantity);
-
         const productIds = userData.map((userData) => userData.product_id);
         console.log("CD411", JSON.stringify(productIds));
         console.log("CD411", productIds.length);
+        // If else to send request to API depending upon No of Product count
         if (productIds.length === 1) {
           const response = await axios.post(
             "http://localhost:3000/api/tempData",
@@ -65,16 +68,19 @@ function AddToCart() {
           const quan = userData[0].quantity;
           console.log(quan);
           console.log(userData);
+          console.log("()() ", Array.isArray(products));
 
           let obj = products[0];
 
           obj.quantity = quan;
+          console.log("-=-", obj);
+          const objToArray = new Array(obj);
+          console.log(objToArray);
 
-          console.log(obj);
+          console.log("9009", objToArray);
+          console.log("()() ", Array.isArray(objToArray));
 
-          console.log("90", products);
-
-          fetchData(obj);
+          fetchData(objToArray);
         } else if (productIds.length > 1) {
           // Send request with multiple product IDs
           const response = await axios.post(
@@ -84,22 +90,37 @@ function AddToCart() {
             }
           );
           // const product = response.data.products;
+          console.log("Response Where product count is 1", response);
+
           const products = response.data.products;
+          console.log("()() ", Array.isArray(products));
 
           // Loop through each product in the array
           products.forEach((product) => {
             // Retrieve quantity from localStorage based on product_id
-            const quantity = localStorage.getItem(
-              `quantity_${product.product_id}`
+            console.log(
+              "Retrieving quantity from localStorage",
+              product.product_id
+            );
+            console.log(
+              "Retrieving quantity from localStorage",
+              product.product_id
             );
 
+            const quantity = localStorage.getItem(
+              `${product.product_id}.quantity`
+            );
+            console.log("-", `${product.product_id}.quantity`);
+            console.log("-", `${product.product_id}.quantity`);
+            console.log("---", quantity);
+
             // If quantity exists in localStorage, update the product object
-            if (quantity !== null) {
-              product.quantity = parseInt(quantity); // Convert to integer if needed
-            }
+            // if (quantity !== null) {
+            product.quantity = 22; // Convert to integer if needed
+            // }
           });
 
-          console.log("()() ", products.quantity);
+          console.log("(after foreach) ", products);
 
           // fetchData(product);
         }
@@ -107,6 +128,11 @@ function AddToCart() {
     };
 
     const fetchData = async (cartData) => {
+      console.log("cd fetch", cartData);
+      cartData.forEach((item, index) => {
+        console.log(`Item ${index}:`, item);
+      });
+      console.log("Length of cartData:", cartData.length);
       try {
         const products = cartData.map(
           (item) => ({
@@ -118,19 +144,19 @@ function AddToCart() {
             image_name: item.image_name,
             description: item.short_description,
             InstallationCharges: item.InstallationCharges,
-            quantity: item.cart_quantity,
+            quantity: item.quantity || 1,
             seo_url: item.seo_url,
             color: item.color,
           }),
           []
         );
+        console.log("Response From line Number 132", products);
 
         // products.forEach((product) => {
-        //   const discount = product.discount
         //   dispatch(
-        //     addItemToCart({
+        //     addToCartD({
         //       product_id: product.product_id,
-        //       quantity: product.quantity, // Explicitly set quantity to 1
+        //       quantity: product.quantity || 1, // Explicitly set quantity to 1
         //       price: product.price,
         //       discount_price: product.discount_price,
         //       color: product.color,
@@ -138,7 +164,7 @@ function AddToCart() {
         //     })
         //   );
         // });
-
+        console.log("Response From line Number 132", products);
         // Calculate total price, discount, total payable, and installation charges
         const totalPrice = products.reduce(
           (total, product) => total + parseFloat(product.discount_price),

@@ -6,6 +6,8 @@ import { DotLoader } from "react-spinners";
 // import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/reducer/cartSlice";
+import { addToCartD } from "@/redux/reducer/tempSlice";
+
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import PremiumChairs from "./PremiumChairs";
 import PreChairsCard from "../../Components/preChairsCard/preChairsCard";
@@ -264,18 +266,25 @@ const PreChairsCards = () => {
 
     switch (isLoggedInResult) {
       case false:
-        //console.log("User not logged in. Notifying...");
-        notify();
-        break;
-      case true:
         const data = await fetchPrice(product_id);
         const price = data.price;
-        const discountPrice = data.discount_price;
+        const discount_price = data.discount_price;
+
+        dispatch(
+          addToCartD({
+            product_id,
+            price,
+            discount_price,
+            quantity: 1,
+          })
+        );
+        break;
+      case true:
         dispatch(
           addToCart({
             product_id: product_id,
             price: price,
-            discount_price: discountPrice,
+            discount_price: discount_price,
             quantity: 1,
           })
         );

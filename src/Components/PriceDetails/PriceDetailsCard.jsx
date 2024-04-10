@@ -13,8 +13,12 @@ const PriceDetailsCard = ({
 }) => {
   // const dispatch = useDispatch();
 
-  const priceFromState = useSelector((state) => state.cart.total_price || 0);
-  const MRPvalue = useSelector((state) => state.cart.discount_price || 0);
+  const priceFromState = useSelector(
+    (state) => state.cart.total_price || state.temp.total_price || 0
+  );
+  const MRPvalue = useSelector(
+    (state) => state.cart.discount_price || state.temp.discount_price || 0
+  );
 
   const [totalPrice, setTotalPrice] = useState(priceFromState);
   const [MRPPrice, setMRPPrice] = useState(MRPvalue);

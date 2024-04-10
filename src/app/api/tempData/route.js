@@ -38,7 +38,7 @@ export async function POST(request) {
       query: `SELECT * FROM products WHERE product_id IN (${placeholders})`,
       values: product_ids,
     });
-    console.log("--", products);
+    // console.log("--", products);
 
     return new Response(
       JSON.stringify({

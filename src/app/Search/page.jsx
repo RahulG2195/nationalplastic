@@ -7,6 +7,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import { addToCart } from "@/redux/reducer/cartSlice";
+import { addToCartD } from "@/redux/reducer/tempSlice";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { isLoggedIn } from "@/utils/validation";
 import { Bounce, toast } from "react-toastify";
@@ -134,26 +135,29 @@ const Search = (props) => {
   };
   const handleAddToCart = async (id) => {
     const isLoggedInResult = await isLoggedIn();
-    //console.log("state", isLoggedInResult);
-    //console.log("state", typeof isLoggedInResult);
+    const data = await fetchPrice(id);
+    const price = data.price;
+    const discount_price = data.discount_price;
 
     switch (isLoggedInResult) {
       case false:
         //console.log("User not logged in. Notifying...");
-        notify();
-        router.push("/login");
+        dispatch(
+          addToCartD({
+            product_id: id,
+            price,
+            discount_price,
+            quantity: quantity || 1,
+          })
+        );
 
         break;
       case true:
-        const data = await fetchPrice(id);
-        //console.log(data);
-        const price = data.price;
-        const discountPrice = data.discount_price;
         dispatch(
           addToCart({
             product_id: id,
             price: price,
-            discount_price: discountPrice,
+            discount_price: discount_price,
             quantity: 1,
           })
         );

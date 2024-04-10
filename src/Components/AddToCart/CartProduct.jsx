@@ -41,8 +41,9 @@ const CartProduct = ({
   quantity,
   seourl,
   color,
-
 }) => {
+  console.log("Cart Product");
+  console.log("Cart Product", productName, productDesc, productPrice, quantity);
   const router = useRouter();
 
   const [initialCount, setInitialCount] = useState(quantity);
@@ -105,7 +106,7 @@ const CartProduct = ({
       </div>
 
       <div className="col-md-8 card-Quantity-section">
-<Link onClick={setid} href={`/ProductDetail/${seourl}`}>
+        <Link onClick={setid} href={`/ProductDetail/${seourl}`}>
           <div style={{ display: "flex" }}>
             <h6 style={{ marginRight: "7px" }}>{productName}</h6>
           </div>

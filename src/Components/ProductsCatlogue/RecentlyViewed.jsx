@@ -13,6 +13,8 @@ import Image from "next/image";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { addToCart } from "@/redux/reducer/cartSlice";
+import { addToCartD } from "@/redux/reducer/tempSlice";
+
 import { useDispatch } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 import { Bounce, toast } from "react-toastify";
@@ -183,23 +185,27 @@ const RecentlyViewed = () => {
   // const handleAddToCart = async(product_name, short_description, price, discount_price, discount, ChairImg)
   const handleMoveToCart = async (product_id) => {
     const isLoggedInResult = await isLoggedIn();
-    //console.log("state", isLoggedInResult);
-    //console.log("state", typeof isLoggedInResult);
-
+    const data = await fetchPrice(product_id);
+    const price = data.price;
+    const discount_price = data.discount_price;
+    // const product_id = data.product_id;
     switch (isLoggedInResult) {
       case false:
         //console.log("User not logged in. Notifying...");
-        notify();
-        break;
+        dispatch(
+          addToCartD({
+            product_id,
+            price,
+            discount_price,
+            quantity: quantity || 1,
+          })
+        );
       case true:
-        const data = await fetchPrice(product_id);
-        const price = data.price;
-        const discountPrice = data.discount_price;
         dispatch(
           addToCart({
             product_id: product_id,
             price: price,
-            discount_price: discountPrice,
+            discount_price: discount_price,
             quantity: 1,
           })
         );
