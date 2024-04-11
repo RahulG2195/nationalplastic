@@ -1,6 +1,6 @@
 import PreChairsCard from "@/Components/preChairsCard/preChairsCard.jsx";
 
-const BulkPremiumCards = () => {
+const BulkPremiumCards = ({proddata}) => {
   const chairData = [
     {
       ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
@@ -104,19 +104,19 @@ const BulkPremiumCards = () => {
     <>
       <div className="container mt-5">
         <div className="row ">
-          {chairData.map((chair, index) => (
+          {proddata.map(chair => (
             <div
-              key={index}
+              key={chair.product_id}
               className="PreCardSm col-6 col-sm-6 col-xs-4 col-md-6 col-lg-3"
             >
               <PreChairsCard
-               id={chair.seo_url}
-                ChairImg={chair.ChairImg}
-                Title={chair.Title}
-                Discription={chair.Discription}
-                Price={chair.Price}
-                orignalPrice={chair.orignalPrice}
-                Discount={chair.Discount}
+                id={chair.product_id}
+                ChairImg={`/Assets/images/New-launches-1/${chair.image_name}`}
+                Title={chair.product_name}
+                Discription={chair.short_description}
+                Price={chair.price}
+                orignalPrice={chair.discount_price}
+                Discount={chair.discount_percentage}
               />
             </div>
           ))}

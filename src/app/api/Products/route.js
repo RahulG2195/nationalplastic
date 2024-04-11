@@ -7,9 +7,15 @@ export async function GET(request) {
             values: [],
         });
 
+        const limitProd = await query({
+            query: "SELECT * FROM products limit 12",
+            values: [],
+        });
+
         return new Response(JSON.stringify({
             status: 200,
-            products: products
+            products: products,
+            limitProd: limitProd,
         }));
 
     } catch (error) {

@@ -72,7 +72,7 @@ const Search = (props) => {
       }
 
       const response = await axios.get(
-        `http://thatsyourwebsite.com/api/search?query=${query}&page=${page}`
+        `http://localhost:3000/api/search?query=${query}&page=${page}`
       );
       console.log("response", response);
       console.log("response", response.data.products);
@@ -89,10 +89,10 @@ const Search = (props) => {
         const discountPercentage =
           product.discount_price && product.price
             ? Math.floor(
-                ((product.discount_price - product.price) /
-                  product.discount_price) *
-                  100
-              )
+              ((product.discount_price - product.price) /
+                product.discount_price) *
+              100
+            )
             : 0;
         return discountPercentage;
       });
@@ -110,7 +110,7 @@ const Search = (props) => {
   //   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch("http://thatsyourwebsite.com/api/ProductsCat", {
+      const response = await fetch("http://localhost:3000/api/ProductsCat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -190,95 +190,96 @@ const Search = (props) => {
 
   return (
     <>
-      <p className="darkBlue fw-bold my-4 mx-2">
-        {allproducts.length} products found
-      </p>
+      <div className="container">
+        <p className="darkBlue fw-bold my-4 mx-2">
+          {allproducts.length} products found
+        </p>
 
-      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-        {products.map((product, index) => (
-          <div key={product.id} className="col">
-            <div className="preCont cards p-1 position-relative">
-              <Link
-                // onClick={() => setid(product.product_id)}
-                href={`/ProductDetail/${product.product_id}`}
-              >
-                <div className="card-header">
-                  <img
-                    src={`/Assets/images/New-launches-1/${product.image_name}`}
-                    className="card-img-top"
-                    alt="..."
-                  />
-                </div>
-              </Link>
-              <div className="card-body">
-                <div className="PreFoot mt-2 ">
-                  <div className="class d-flex justify-content-between my-2 ">
-                    <Link
-                      //   onClick={() => setid(product.product_id)}
-                      href={`/ProductDetail/${product.product_id}`}
-                    >
-                      <div className="left fw-bold text-danger">
-                        {product.product_name}
-                      </div>
-                    </Link>
-                    <div className="right">
-                      <i onClick={() => handleAddToCart(product.product_id)}>
-                        {" "}
-                        <ShoppingCartOutlinedIcon />{" "}
-                      </i>
-                      <i
-                        onClick={() => handleAddWishlist(product.product_id)}
-                        className={` ${
-                          product.inWishlist
-                            ? "fa fa-heart"
-                            : "fa fa-heart-o ms-3"
-                        }`}
-                        style={
-                          product.inWishlist
-                            ? { fontSize: "20px", color: "#DC3545" }
-                            : {}
-                        }
-                        aria-hidden="true"
-                      ></i>
-                    </div>
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+          {products.map((product, index) => (
+            <div key={product.id} className="col">
+              <div className="preCont cards p-1 position-relative">
+                <Link
+                  // onClick={() => setid(product.product_id)}
+                  href={`/ProductDetail/${product.product_id}`}
+                >
+                  <div className="card-header">
+                    <img
+                      src={`/Assets/images/New-launches-1/${product.image_name}`}
+                      className="card-img-top"
+                      alt="..."
+                    />
                   </div>
-                  <div className="text-left fw-medium my-2 DESCresp">
-                    {product.short_description}
-                  </div>
-                  <div className="rs d-flex justify-content-between align-items-center ">
-                    <div className="d-flex gap-2 align-items-center">
-                      <div>
-                        {" "}
+                </Link>
+                <div className="card-body">
+                  <div className="PreFoot mt-2 ">
+                    <div className="class d-flex justify-content-between my-2 ">
+                      <Link
+                        //   onClick={() => setid(product.product_id)}
+                        href={`/ProductDetail/${product.product_id}`}
+                      >
+                        <div className="left fw-bold text-danger">
+                          {product.product_name}
+                        </div>
+                      </Link>
+                      <div className="right">
+                        <i onClick={() => handleAddToCart(product.product_id)}>
+                          {" "}
+                          <ShoppingCartOutlinedIcon />{" "}
+                        </i>
                         <i
-                          className="medium fa fa-inr fw-bold priceResp"
+                          onClick={() => handleAddWishlist(product.product_id)}
+                          className={` ${product.inWishlist
+                              ? "fa fa-heart"
+                              : "fa fa-heart-o ms-3"
+                            }`}
+                          style={
+                            product.inWishlist
+                              ? { fontSize: "20px", color: "#DC3545" }
+                              : {}
+                          }
                           aria-hidden="true"
-                        ></i>{" "}
-                      </div>
-                      <div className="medium fw-bold priceResp">
-                        {product.price}
-                      </div>
-                      <div className="small text-secondary text text-decoration-line-through">
-                        {product.discount_price}
+                        ></i>
                       </div>
                     </div>
-                    <div className="d-flex fw-semibold text-danger ">
-                      <div>{discounts[index]}%</div>
+                    <div className="text-left fw-medium my-2 DESCresp">
+                      {product.short_description}
+                    </div>
+                    <div className="rs d-flex justify-content-between align-items-center ">
+                      <div className="d-flex gap-2 align-items-center">
+                        <div>
+                          {" "}
+                          <i
+                            className="medium fa fa-inr fw-bold priceResp"
+                            aria-hidden="true"
+                          ></i>{" "}
+                        </div>
+                        <div className="medium fw-bold priceResp">
+                          {product.price}
+                        </div>
+                        <div className="small text-secondary text text-decoration-line-through">
+                          {product.discount_price}
+                        </div>
+                      </div>
+                      <div className="d-flex fw-semibold text-danger ">
+                        <div>{discounts[index]}%</div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      <InfiniteScroll
-        dataLength={products.length}
-        next={() => setPage(page + 1)}
-        hasMore={hasMore}
-        // loader={<h4>Loading...</h4>}
-        endMessage={<p>No more products to load</p>}
-      />
+        <InfiniteScroll
+          dataLength={products.length}
+          next={() => setPage(page + 1)}
+          hasMore={hasMore}
+          // loader={<h4>Loading...</h4>}
+          endMessage={<p>No more products to load</p>}
+        />
+      </div>
     </>
   );
 };

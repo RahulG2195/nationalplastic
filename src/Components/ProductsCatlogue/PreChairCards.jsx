@@ -158,7 +158,7 @@ const PreChairsCards = () => {
       setCategoryType(categoryTitle);
 
       const response = await axios.get(
-        `http://thatsyourwebsite.com/api/ProductsCat?query=${cat_id}`
+        `http://localhost:3000/api/ProductsCat?query=${cat_id}`
       );
       //console.log("API Response:", response.data); // Log API response
 
@@ -241,7 +241,7 @@ const PreChairsCards = () => {
   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch("http://thatsyourwebsite.com/api/ProductsCat", {
+      const response = await fetch("http://localhost:3000/api/ProductsCat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

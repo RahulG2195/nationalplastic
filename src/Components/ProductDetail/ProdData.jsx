@@ -75,7 +75,7 @@ function ProdData() {
         const productName = id;
         setProductId(storedId);
 
-        const response = await axios.get("http://thatsyourwebsite.com/api/Products");
+        const response = await axios.get("http://localhost:3000/api/Products");
         let filteredData = [];
         // if (productName) {
         //   filteredData = response.data.products.filter(
@@ -109,7 +109,7 @@ function ProdData() {
   const fetchPrice = async (storedId) => {
     //console.log("Fetching price", storedId);
     try {
-      const response = await fetch("http://thatsyourwebsite.com/api/ProductsCat", {
+      const response = await fetch("http://localhost:3000/api/ProductsCat", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

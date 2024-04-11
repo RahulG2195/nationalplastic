@@ -37,11 +37,11 @@ function BottomBar() {
     // //console.log("nameenamee", name)
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://thatsyourwebsite.com/api/Products");
+        const res = await axios.get("http://localhost:3000/api/Products");
         const allproducts = res.data.products;
 
         // start -- fetch category which want to display on navbar
-        const nav = await axios.get("http://thatsyourwebsite.com/api/NavCategory");
+        const nav = await axios.get("http://localhost:3000/api/NavCategory");
         const navshow = nav.data.navshow;
         SetAllProd(allproducts)
         setNavbar(navshow);
@@ -126,7 +126,7 @@ function BottomBar() {
                       chunk.map((product, index) => (
                       <p className="p-3 fw-semibold" key={index} onMouseOver={() => ChangeImage(product.product_name)} >
                         <Link
-                          onClick={() => handleOnClick(product.seo_url)}
+                          // onClick={() => handleOnClick(product.seo_url)}
                           className="nav-link"
                           href={`/ProductDetail/${product.seo_url}`}
                         >

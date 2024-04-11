@@ -95,10 +95,10 @@ const Registration = () => {
       formData.append(key, userInput[key]);
     }
     try {
-      // const res = await axios.put(`http://thatsyourwebsite.com/api/Users`, userInput);
+      // const res = await axios.put(`http://localhost:3000/api/Users`, userInput);
       //console.log(userInput);
       const res = await axios.post(
-        `http://thatsyourwebsite.com/api/sendResume`,
+        `http://localhost:3000/api/sendResume`,
         formData,
         {
           headers: {

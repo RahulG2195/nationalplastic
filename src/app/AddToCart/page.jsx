@@ -26,9 +26,12 @@ function AddToCart() {
     const customerId = userData.customer_id || {};
     const fetchData = async () => {
       try {
-        const response = await axios.post("http://thatsyourwebsite.com/api/UserCart", {
-          customer_id: customerId,
-        });
+        const response = await axios.post(
+          "http://localhost:3000/api/UserCart",
+          {
+            customer_id: customerId,
+          }
+        );
         const cartData = response.data.products;
 
         // // Extracting relevant data from the cart data
@@ -127,9 +130,12 @@ function AddToCart() {
       const userDataString = localStorage.getItem("userData");
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
-      const response = await axios.post("http://thatsyourwebsite.com/api/UserCart", {
-        customer_id: customerId,
-      });
+      const response = await axios.post(
+        "http://localhost:3000/api/UserCart",
+        {
+          customer_id: customerId,
+        }
+      );
       //console.log("response", response);
       const cartData = response.data.products;
       //console.log("cartdata: ", cartData);
@@ -199,12 +205,15 @@ function AddToCart() {
       const formData = new FormData();
       formData.append("customer_id", customerId);
       formData.append("product_id", product_id);
-      const response = await axios.delete("http://thatsyourwebsite.com/api/UserCart", {
-        data: formData,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.delete(
+        "http://localhost:3000/api/UserCart",
+        {
+          data: formData,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       //console.log("response", response);
 
       // If all products are removed, update the state to reflect empty cart

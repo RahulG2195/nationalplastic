@@ -8,7 +8,7 @@ export async function POST(request, res) {
     const data = await request.formData();
     const email = data.get("email");
     const resetToken = data.get("resetToken");
-    const url = "http://thatsyourwebsite.com/new-password/1?resetToken=" + resetToken;
+    const url = "http://localhost:3000/new-password/1?resetToken=" + resetToken;
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
