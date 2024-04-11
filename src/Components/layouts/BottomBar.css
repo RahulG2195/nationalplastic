@@ -87,7 +87,7 @@
 }
 
 
-.Stool .SecondDrop {
+.Stools .SecondDrop {
     right: -35% !important;
     top: 100% !important;
     width: max-content !important;
@@ -96,13 +96,13 @@
     transition: all 0.5s ease; 
 }
 
-.mainrow .Stool:hover .SecondDrop {
+.mainrow .Stools:hover .SecondDrop {
     display: block !important;
     top: 90%; /* adjust position on hover */
     opacity: 1; /* adjust opacity on hover */
 }
 
-.Table .SecondDrop {
+.Tables .SecondDrop {
     right: -20% !important;
     top: 100% !important;
     width: max-content !important;
@@ -110,12 +110,12 @@
     position: absolute;
 }
 
-.mainrow .Table:hover .SecondDrop {
+.mainrow .Tables:hover .SecondDrop {
     display: block !important;
 }
 
 .Box .SecondDrop {
-    right: -20% !important;
+    right: -30% !important;
     top: 100% !important;
     width: max-content !important;
     padding: 5% !important;

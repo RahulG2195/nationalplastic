@@ -60,7 +60,7 @@ export default function Blog() {
   }, []);
   return (
     <section className="top_pick_sec common_section">
-      <div className="px-4">
+      <div className="container">
         <div className="row">
           <div className="text-center highlightCont my-5">
             <div className="fs-1 lh-small fw-bolder text-danger ">Blog</div>
@@ -78,7 +78,7 @@ export default function Blog() {
                 slidesPerView={2}
                 // loop={true}
                 navigation={{ clickable: true }}
-                pagination={{ clickable: true }}
+                // pagination={{ clickable: true }}
                 // scrollbar={{ draggable: false }}
                 // onSwiper={(swiper) => //console.log(swiper)}
                 // onSlideChange={() => //console.log("slide change")}

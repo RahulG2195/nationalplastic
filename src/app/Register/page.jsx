@@ -22,6 +22,7 @@ function Register() {
   const mailUpdate = async () => {
     const response = await axios.post(
       "http://localhost:3000/api/RegisterEmail",
+      "http://localhost:3000/api/RegisterEmail",
       formData
     );
   };
@@ -65,6 +66,7 @@ function Register() {
           alert("Email already exists!");
         } else {
           const response = await axios.post(
+            "http://localhost:3000/api/Users",
             "http://localhost:3000/api/Users",
             formData
           );

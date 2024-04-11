@@ -98,7 +98,7 @@ const RecentlyViewed = () => {
       try {
         const response = await axios.get("http://localhost:3000/api/Products");
         const filteredproducts = response.data.products.filter(
-          (item) => item.categoryType === "premium chairs"
+          (item) => item.category_id === 17
         );
 
         setRecentlyViewedData(filteredproducts);

@@ -20,7 +20,9 @@
 
 .highlightcard:hover{
   border-top-left-radius: 20%;
+  border-bottom-right-radius: 30%;
   transition: all 0.5s ;
+  border: none;
 }
 
 .highlightcard:hover .imagetop{

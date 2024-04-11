@@ -3,7 +3,16 @@ import TopPicsCard from '../TopPicsCard/TopPicsCard';
 import GetQuoteForm from './GetQuoteForm';
 import './GetQuote.css';
 
-const GetQuote = () => {
+const GetQuote = ({proddata}) => {
+    const chunkArray = (arr, size) => {
+        const chunkedArray = [];
+        for (let i = 0; i < arr.length; i += size) {
+          chunkedArray.push(arr.slice(i, i + size));
+        }
+        return chunkedArray;
+      };
+
+    //   console.log('quotes' + proddata);
     const imageData = [
         { imgSrc: "/Assets/images/circular/Karnival-Chair.jpg-2/Karnival-Chair.jpg-2.png", imgText: "" },
         { imgSrc: "/Assets/images/circular/Karnival-Chair.jpg-2/Karnival-Chair.jpg-2.png", imgText: "" },
@@ -15,7 +24,7 @@ const GetQuote = () => {
         { imgSrc: "/Assets/images/circular/Karnival-Chair.jpg-2/Karnival-Chair.jpg-2.png", imgText: "" },
         { imgSrc: "/Assets/images/circular/Karnival-Chair.jpg-2/Karnival-Chair.jpg-2.png", imgText: "" },
     ];
-
+    //   console.log('datas' + chunkArray(proddata, 9));
     return (
         <>
             <div className="main_container">
@@ -29,7 +38,8 @@ const GetQuote = () => {
                             ))}
                         </div>
                     </div>
-
+                    
+                    {/* multi prod form  */}
                     <div className="col-lg-6 col-md-12 mt-5">
                         <div className="text-center fw-bold">
                             <div className="darkBlue fs-1">GET <span className="text-danger">QUOTE</span></div>
