@@ -3,7 +3,6 @@ import { query } from "@/lib/db";
 export async function POST(request) {
   try {
     const { customer_id } = await request.json();
-    //console.log("Customer: " + customer_id);
     const user_id = customer_id;
 
     const mycart = await query({
@@ -12,7 +11,9 @@ export async function POST(request) {
     });
 
     const productIds = mycart.map((row) => row.product_id);
-    //console.log("productIds------", productIds);
+
+    console.log("productIds:", productIds); // Add this line to log productIds
+
     // Fetch product details for the retrieved product IDs
     const products = await query({
       query: `
@@ -23,7 +24,8 @@ export async function POST(request) {
       `,
       values: [user_id],
     });
-    //console.log("productIds------", products);
+
+    console.log("products:", products); // Add this line to log products
 
     return new Response(
       JSON.stringify({
@@ -35,11 +37,12 @@ export async function POST(request) {
     return new Response(
       JSON.stringify({
         status: 500,
-        message: "Invalid UserID",
+        message: error.message,
       })
     );
   }
 }
+
 //Add Product based on the UserID
 export async function PUT(request) {
   try {
@@ -51,6 +54,7 @@ export async function PUT(request) {
           "SELECT count(*) as count FROM mycart where product_id = ? and user_id = ?",
         values: [product_id, user_id],
       });
+      console.log(insertResult);
       if (insertResult[0].count === 0) {
         // product count is zero
         try {

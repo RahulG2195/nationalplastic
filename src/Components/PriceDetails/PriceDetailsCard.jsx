@@ -40,13 +40,21 @@ const PriceDetailsCard = ({
         <div className="mt-4">
           <div className={`d-flex justify-content-between mt-1 fw-semibold`}>
             <div className="text-secondary">MRP</div>
-            <div> RS {MRPPrice}</div>
+            <div> RS {cartPrice ? cartPrice : MRPPrice}</div>
           </div>
           <div
             className={`d-flex justify-content-between mt-1 fw-semibold text-success`}
           >
             <div className="text-secondary">Discount</div>
-            <div> RS {DiscountCard ? DiscountCard : "0000"}</div>
+            <div>
+              {" "}
+              RS{" "}
+              {totalDiscount
+                ? totalDiscount
+                : DiscountCard
+                ? DiscountCard
+                : "0000"}
+            </div>
           </div>
           <div
             className={`d-flex justify-content-between mt-1 fw-semibold text-success`}
@@ -65,7 +73,9 @@ const PriceDetailsCard = ({
           <div>Total Payable</div>
           <div className="fw-bold">
             Rs{" "}
-            {totalPrice
+            {totalPay
+              ? totalPay
+              : totalPrice
               ? parseFloat(totalPrice) + parseFloat(InstallationCharges)
               : "0000"}
           </div>

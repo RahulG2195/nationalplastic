@@ -200,6 +200,7 @@ const RecentlyViewed = () => {
             quantity: quantity || 1,
           })
         );
+        break;
       case true:
         dispatch(
           addToCart({

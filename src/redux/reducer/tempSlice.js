@@ -1,38 +1,10 @@
 // reducers/tempSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 import "react-toastify/dist/ReactToastify.css";
-import { Bounce, toast } from "react-toastify";
-
-const notify = () => {
-  toast.success("ADDED TO CART", {
-    position: "top-center",
-    autoClose: 2000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-    transition: Bounce,
-  });
-};
-
-const notifyinfo = () => {
-  toast.info("ALREADY IN CART", {
-    position: "top-center",
-    autoClose: 2000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-    transition: Bounce,
-  });
-};
+import { notify, notifyError } from "@/utils/notify.js";
 
 export const tempSlice = createSlice({
-  name: "cart",
+  name: "temp",
   initialState: {
     products: [], // Initially empty array for products
     total_price: 0, //price after discount and calculation
@@ -45,32 +17,30 @@ export const tempSlice = createSlice({
     },
 
     addItemToCartD: (state, action) => {
-      console.log(
-        "state:-----------------NopeNOtHereWhenAddedFromWishLisT " + state
-      );
-      console.log("action: " + action);
-      console.log("state: " + JSON.stringify(state));
-      console.log(
-        "actionPayload inside addItemToCartD: " + JSON.stringify(action.payload)
-      );
-      console.log("actiion: " + JSON.stringify(action));
-
       const {
         product_id,
         quantity,
         price,
         discount_price,
         color = "Gold",
+        from = true,
       } = action.payload;
-      console.log("product added successfully before adding" + action.payload);
       console.log(
-        "product added successfully before adding" +
-          JSON.stringify(state.products)
+        "product added before adding" + JSON.stringify(action.payload)
       );
+      console.log(" -/-" + JSON.stringify(state.products));
 
-      const isItemInCart = state.products.some(
-        (product) => product.product_id === product_id
-      );
+      const tempData = localStorage.getItem("temp");
+      const tempProd = JSON.parse(tempData) || {};
+      console.log("getting LS_data products to get p_id ", tempProd);
+      const productIds = Array.isArray(tempProd)
+        ? tempProd.map((tempProd) => tempProd.product_id)
+        : [];
+
+      const isItemInCart = productIds.includes(product_id);
+
+      console.log("f or t", isItemInCart);
+
       if (!isItemInCart) {
         state.products.push(action.payload);
         console.log("stateTotalPrice: " + discount_price);
@@ -78,58 +48,79 @@ export const tempSlice = createSlice({
           "stateTotalPrice:---- " + parseFloat(discount_price) * quantity
         );
         console.log("Actionpayload;" + action.payload);
-        console.log("state.items;" + state.product);
+        console.log("state.items;" + state);
+        console.log("state.items;" + JSON.stringify(state));
+
         state.total_price += parseFloat(price) * quantity;
         state.discount_price += parseFloat(discount_price) * quantity;
         // Get the existing array from localStorage
         let existingArray = JSON.parse(localStorage.getItem("temp")) || [];
-
         // Append the payload to the existing array
         existingArray.push(action.payload);
-
         // Store the updated array back into localStorage
         localStorage.setItem("temp", JSON.stringify(existingArray));
 
-        // alert("Added");
-      } else {
+        console.log("flase or true", from);
+
+        notify("product Added Successfully");
+      } else if (from) {
         console.log("NoMahnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn!");
         const existingProduct = state.products.find(
           (product) => product.product_id === product_id
         );
         existingProduct.quantity += quantity;
         state.discount_price += parseFloat(discount_price) * quantity;
-        state.total_price += parseFloat(price) * quantity; // Update total price
+        state.total_price += parseFloat(price) * quantity;
+        // Update total price
+        notify("products Added Successfully");
       }
     },
     removeItemFromCartD: (state, action) => {
+      console.log("gggggggggggggggggg");
+      console.log("Removing", action.payload);
+      console.log("JSON", JSON.stringify(action.payload));
+
       const { product_id } = action.payload;
 
-      // Find the index of the product to be removed
-      const productIndex = state.products.findIndex(
+      // Find the existing product in the cart
+      const existingProductIndex = state.products.findIndex(
         (product) => product.product_id === product_id
       );
+      console.log("Removing ", existingProductIndex);
 
-      if (productIndex !== -1) {
-        const removedProduct = state.products[productIndex];
-        const updatedProducts = [...state.products];
+      if (existingProductIndex !== -1) {
+        const existingProduct = state.products[existingProductIndex];
+        console.log("Removing ", existingProduct);
 
-        // Remove the product from the cart
-        updatedProducts.splice(productIndex, 1);
+        // Create a new state without the product
+        const newState = {
+          ...state,
+          products: [
+            ...state.products.slice(0, existingProductIndex),
+            ...state.products.slice(existingProductIndex + 1),
+          ],
+          total_price:
+            state.total_price -
+            parseFloat(existingProduct.price) * existingProduct.quantity,
+          discount_price:
+            state.discount_price -
+            parseFloat(existingProduct.discount_price) *
+              existingProduct.quantity,
+        };
+        console.log("Removing ", newState);
 
-        // Update total_price
-        state.total_price -= parseFloat(
-          removedProduct.price * removedProduct.quantity
-        );
-        state.discount_price -= parseFloat(
-          removedProduct.discount_price * removedProduct.quantity
-        );
+        // Update localStorage (assuming you're using it for persistence)
+        localStorage.setItem("temp", JSON.stringify(newState.products));
+        // const userDataString = localStorage.getItem("userData");
+        // const userData = JSON.parse(userDataString);
+        // const customerId = userData.customer_id;
 
-        // Update state with the new products array
-        state.products = updatedProducts;
-
-        // Update localStorage
-        localStorage.setItem("temp", JSON.stringify(state.products));
+        // Return the new state (assuming you're using a state management library)
+        return newState;
       }
+
+      // Handle the case where the product is not found
+      return state;
     },
     increaseQuantityD: (state, action) => {
       const { product_id } = action.payload;

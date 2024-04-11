@@ -49,27 +49,27 @@ export default function Header() {
     setCount(productCount); // Update localCount whenever productCount changes
   }, [productCount]);
 
-  useEffect(async () => {
-    const userDataString = localStorage.getItem("userData");
-    const userData = JSON.parse(userDataString) || {};
-    const customerId = userData.customer_id || {};
+  // useEffect(async () => {
+  //   const userDataString = localStorage.getItem("userData");
+  //   const userData = JSON.parse(userDataString) || {};
+  //   const customerId = userData.customer_id || {};
 
-    const check = await axios.post("http://localhost:3000/api/UserCart", {
-      customer_id: customerId,
-    });
-    if (
-      check &&
-      check.data &&
-      check.data.products &&
-      Array.isArray(check.data.products)
-    ) {
-      length = check.data.products.length;
-      setCount(length);
-    } else {
-      length = 0;
-    }
-    // setCount(data);
-  }, [dispatch]);
+  //   const check = await axios.post("http://localhost:3000/api/UserCart", {
+  //     customer_id: customerId,
+  //   });
+  //   if (
+  //     check &&
+  //     check.data &&
+  //     check.data.products &&
+  //     Array.isArray(check.data.products)
+  //   ) {
+  //     length = check.data.products.length;
+  //     setCount(length);
+  //   } else {
+  //     length = 0;
+  //   }
+  //   // setCount(data);
+  // }, [dispatch]);
 
   const handleSearchChange = async (e) => {
     setSearchTerm(e.target.value);

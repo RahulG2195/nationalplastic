@@ -155,6 +155,7 @@ function ProdData() {
             color: selectedColor,
           })
         );
+        break;
       case true:
         dispatch(
           addToCart({

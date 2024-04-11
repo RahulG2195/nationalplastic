@@ -263,13 +263,11 @@ const PreChairsCards = () => {
     const isLoggedInResult = await isLoggedIn();
     //console.log("state", isLoggedInResult);
     //console.log("state", typeof isLoggedInResult);
-
+    const data = await fetchPrice(product_id);
+    const price = data.price;
+    const discount_price = data.discount_price;
     switch (isLoggedInResult) {
       case false:
-        const data = await fetchPrice(product_id);
-        const price = data.price;
-        const discount_price = data.discount_price;
-
         dispatch(
           addToCartD({
             product_id,

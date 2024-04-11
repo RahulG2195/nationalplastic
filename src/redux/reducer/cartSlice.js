@@ -250,19 +250,20 @@ export const {
 
 export const addToCart = (item) => async (dispatch, getState) => {
   const { initialCount, items } = getState().wishlist; // Access state through the second parameter
-  //console.log("addToCart" + JSON.stringify(item));
+  console.log("addToCart" + JSON.stringify(item));
+  // console.log("initialCount" +)
   const userDataString = localStorage.getItem("userData");
   const userData = JSON.parse(userDataString);
-  const customerId = userData.customer_id;
+  const customerId = userData.customer_id || null;
   const response = await axios.put("http://localhost:3000/api/UserCart", {
     customer_id: customerId,
     product_id: item.product_id,
     quantity: item.quantity,
     color: item.color || "Gold",
   });
-  //console.log("response From slicer" + response.status);
-  //console.log("response From slicer" + response.data);
-  //console.log("response From slicer" + response.body);
+  console.log("response From slicer" + response.status);
+  console.log("response From slicer" + response.data);
+  console.log("response From slicer" + response.body);
   notify();
   dispatch(addItemToCart(item));
 };

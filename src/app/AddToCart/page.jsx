@@ -10,8 +10,9 @@ import { addItemToCart, removeItemFromCart } from "@/redux/reducer/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 // import { useSelector } from "react-redux";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
-import { addToCartD } from "@/redux/reducer/tempSlice";
+import { addItemToCartD, removeItemFromCartD } from "@/redux/reducer/tempSlice";
 import { prod } from "../ConstantURL";
+import { isLoggedIn } from "@/utils/validation";
 function AddToCart() {
   const cartStates = useSelector((state) => state.temp);
   console.log(cartStates);
@@ -24,12 +25,16 @@ function AddToCart() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log(
+      "useEffect called----------------------------------------------------------------"
+    );
     const userDataString = localStorage.getItem("userData");
     const userData = JSON.parse(userDataString) || {};
     const customerId = userData.customer_id || null;
     let cartData;
     const tempOrUserData = async () => {
       if (customerId) {
+        console.log("If loggedIn user");
         const response = await axios.post(
           "http://localhost:3000/api/UserCart",
           {
@@ -37,25 +42,17 @@ function AddToCart() {
           }
         );
         cartData = response.data.products;
-        console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-        const tempData = localStorage.getItem("products");
-        const userData = JSON.parse(tempData) || {};
-        console.log("Hurray 1st Part done succesfully ", userData);
-        console.log("CD41", cartData);
-        console.log("CD411", typeof cartData);
-
-        fetchData(cartData);
         fetchData(cartData);
       } else {
         //Logic to Store Temporary Data
         console.log("^^^^^^^^^^^^^^^^^TEMP^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
         const tempData = localStorage.getItem("temp");
         const userData = JSON.parse(tempData) || {};
-        console.log("Hurray 1st Part done succesfully ", userData);
-        console.log("CD41", userData);
-        const productIds = userData.map((userData) => userData.product_id);
-        console.log("CD411", JSON.stringify(productIds));
-        console.log("CD411", productIds.length);
+        console.log("getting LS_data products to get p_id ", userData);
+        const productIds = Array.isArray(userData)
+          ? userData.map((userData) => userData.product_id)
+          : [];
+
         // If else to send request to API depending upon No of Product count
         if (productIds.length === 1) {
           const response = await axios.post(
@@ -94,45 +91,47 @@ function AddToCart() {
 
           const products = response.data.products;
           console.log("()() ", Array.isArray(products));
+          console.log("LocalStorage", userData);
+          console.log("products: ", products);
 
           // Loop through each product in the array
-          products.forEach((product) => {
-            // Retrieve quantity from localStorage based on product_id
-            console.log(
-              "Retrieving quantity from localStorage",
-              product.product_id
-            );
-            console.log(
-              "Retrieving quantity from localStorage",
-              product.product_id
+          products.forEach((product, index) => {
+            // Getting the corresponding user data for the current product
+            const userDataForProduct = userData.find(
+              (item) => item.id === product.id
             );
 
-            const quantity = localStorage.getItem(
-              `${product.product_id}.quantity`
-            );
-            console.log("-", `${product.product_id}.quantity`);
-            console.log("-", `${product.product_id}.quantity`);
-            console.log("---", quantity);
+            // If userData is found for the current product
+            if (userDataForProduct) {
+              // Assigning the quantity from userData to the current product object
+              product.quantity = userDataForProduct.quantity;
 
-            // If quantity exists in localStorage, update the product object
-            // if (quantity !== null) {
-            product.quantity = 22; // Convert to integer if needed
-            // }
+              // Logging the updated product object
+              console.log("-=-", product);
+            }
           });
 
+          // Creating an array to hold the product objects
+          const productsArray = products.map((product) => ({ ...product }));
+
+          // Logging the array of product objects
+          console.log(productsArray);
+
+          // Checking if productsArray is an array
+          console.log("()() ", Array.isArray(productsArray));
           console.log("(after foreach) ", products);
 
-          // fetchData(product);
+          fetchData(products);
         }
       }
     };
 
     const fetchData = async (cartData) => {
-      console.log("cd fetch", cartData);
-      cartData.forEach((item, index) => {
-        console.log(`Item ${index}:`, item);
-      });
-      console.log("Length of cartData:", cartData.length);
+      // console.log("cd fetch", cartData);
+      // cartData.forEach((item, index) => {
+      //   console.log(`Item ${index}:`, item);
+      // });
+      // console.log("Length of cartData:", cartData.length);
       try {
         const products = cartData.map(
           (item) => ({
@@ -151,20 +150,21 @@ function AddToCart() {
           []
         );
         console.log("Response From line Number 132", products);
+        // state.products.push(action.payload);
 
-        // products.forEach((product) => {
-        //   dispatch(
-        //     addToCartD({
-        //       product_id: product.product_id,
-        //       quantity: product.quantity || 1, // Explicitly set quantity to 1
-        //       price: product.price,
-        //       discount_price: product.discount_price,
-        //       color: product.color,
-        //       from: false,
-        //     })
-        //   );
-        // });
-        console.log("Response From line Number 132", products);
+        products.forEach((product) => {
+          dispatch(
+            addItemToCartD({
+              product_id: product.product_id,
+              quantity: product.quantity || 1, // Explicitly set quantity to 1
+              price: product.price,
+              discount_price: product.discount_price,
+              color: product.color,
+              from: false,
+            })
+          );
+        });
+        // console.log("Response From line Number 132", products);
         // Calculate total price, discount, total payable, and installation charges
         const totalPrice = products.reduce(
           (total, product) => total + parseFloat(product.discount_price),
@@ -274,8 +274,6 @@ function AddToCart() {
   };
   const onRemoveSuccess = async (product_id) => {
     try {
-      // //console.log("wanted to remove", product_id);
-      // Remove the product from the database
       const userDataString = localStorage.getItem("userData");
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
@@ -291,8 +289,6 @@ function AddToCart() {
           },
         }
       );
-      //console.log("response", response);
-
       // If all products are removed, update the state to reflect empty cart
       if (productDetailArr.length === 1) {
         setProductDetailArr([]);
@@ -393,9 +389,17 @@ function AddToCart() {
                           color={val.color}
                           installationCharges={val.InstallationCharges}
                           quantity={val.quantity}
-                          onRemoveSuccess={() =>
-                            onRemoveSuccess(val.product_id)
-                          }
+                          onRemoveSuccess={() => {
+                            if (isLoggedIn()) {
+                              console.log("Removing", isLoggedIn);
+                              onRemoveSuccess(val.product_id);
+                            } else {
+                              console.log("Removing", isLoggedIn);
+                              console.log("Removing", val.product_id);
+
+                              dispatch(removeItemFromCartD(val.product_id));
+                            }
+                          }}
                           onAddtowishlist={() =>
                             onAddtowishlist(val.product_id)
                           }

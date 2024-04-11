@@ -1,4 +1,6 @@
 // validationUtils.js
+import { initializeLocalStorage } from "@/redux/reducer/userSlice.js";
+
 export const isValidName = (name) => {
   const namePattern = /^[A-Za-z\s]+$/;
   return namePattern.test(name);
@@ -31,11 +33,15 @@ export const isValidMobile = (mobile) => {
 };
 
 export const isLoggedIn = () => {
-  const storedValue = localStorage.getItem("isLoggedIn") || false;
+  try {
+    const storedValue = localStorage.getItem("isLoggedIn") || false;
 
-  if (storedValue !== null) {
-    return storedValue === "true";
+    if (storedValue !== null) {
+      return storedValue === "true";
+    }
+
+    return false;
+  } catch (err) {
+    initializeLocalStorage();
   }
-
-  return false;
 };

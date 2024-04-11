@@ -141,7 +141,6 @@ const Search = (props) => {
 
     switch (isLoggedInResult) {
       case false:
-        //console.log("User not logged in. Notifying...");
         dispatch(
           addToCartD({
             product_id: id,
@@ -150,7 +149,6 @@ const Search = (props) => {
             quantity: quantity || 1,
           })
         );
-
         break;
       case true:
         dispatch(
