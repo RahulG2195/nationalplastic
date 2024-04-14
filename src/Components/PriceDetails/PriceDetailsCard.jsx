@@ -11,7 +11,21 @@ const PriceDetailsCard = ({
   InstallationCharges,
   redirect,
 }) => {
-  // const dispatch = useDispatch();
+  const userState = useSelector((state) => state.userData.isLoggedIn);
+  const productCount = useSelector((state) => {
+    let who;
+    if (!userState) {
+      who = "temp";
+    } else {
+      who = "cart";
+    }
+    const cart = state[who] || {};
+    return cart.products?.length || 0;
+  });
+  const [count, setCount] = useState(productCount);
+  useEffect(() => {
+    setCount(productCount); // Update localCount whenever productCount changes
+  }, [productCount]);
   console.log("pdc", itemCount);
   const priceFromState = useSelector(
     (state) => state.cart.total_price || state.temp.total_price || 0
@@ -19,7 +33,8 @@ const PriceDetailsCard = ({
   const MRPvalue = useSelector(
     (state) => state.cart.discount_price || state.temp.discount_price || 0
   );
-
+  const [discount, setdiscount] = useState(MRPvalue - priceFromState);
+  console.log("dis", discount);
   const [totalPrice, setTotalPrice] = useState(priceFromState);
   const [MRPPrice, setMRPPrice] = useState(MRPvalue);
   const [DiscountToPoint, setDiscountToPoint] = useState(
@@ -30,7 +45,7 @@ const PriceDetailsCard = ({
   useEffect(() => {
     setTotalPrice(priceFromState.toFixed(2));
     setMRPPrice(MRPvalue.toFixed(2));
-    setDiscountToPoint(totalDiscount.toFixed(2));
+    setdiscount(MRPPrice - totalPrice);
     console.log(DiscountToPoint);
     const discount = MRPvalue - priceFromState;
     setDiscountCard(discount > 0 ? discount.toFixed(2) : 0);
@@ -39,7 +54,7 @@ const PriceDetailsCard = ({
     <>
       <div className="PriceDetail">
         <div className="fw-medium">
-          Price Detail ({itemCount ? itemCount : "0"} items)
+          Price Detail ({count ? count : "0"} items)
         </div>
 
         <div className="mt-4">
@@ -51,7 +66,7 @@ const PriceDetailsCard = ({
             className={`d-flex justify-content-between mt-1 fw-semibold text-success`}
           >
             <div className="text-secondary">Discount</div>
-            <div> RS {totalDiscount ? DiscountToPoint : "0000"}</div>
+            <div> RS {totalDiscount ? discount : "0000"}</div>
           </div>
           <div
             className={`d-flex justify-content-between mt-1 fw-semibold text-success`}
@@ -79,7 +94,7 @@ const PriceDetailsCard = ({
         </div>
         <div className="small my-2 text-success">
           Congratulations, you have just saved RS{" "}
-          {totalDiscount ? DiscountToPoint : "0000"} on your order
+          {totalDiscount ? discount : "0000"} on your order
         </div>
         <div className="small text-center">EMI starts with Rs 10,000</div>
 

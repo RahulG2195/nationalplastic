@@ -15,6 +15,20 @@ import { prod } from "../ConstantURL";
 import { isLoggedIn } from "@/utils/validation";
 function AddToCart() {
   const tempCartStates = useSelector((state) => state.temp);
+  const userState = useSelector((state) => state.userData.isLoggedIn);
+  const productCount = useSelector((state) => {
+    let who;
+    if (!userState) {
+      who = "temp";
+    } else {
+      who = "cart";
+    }
+    const cart = state[who] || {};
+    return cart.products?.length || 0;
+  });
+
+  // Use useState to manage local product count and update function
+  const [count, setCount] = useState(productCount);
   const [productDetailArr, setProductDetailArr] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -22,9 +36,13 @@ function AddToCart() {
   const [totalPayble, setTotalPayble] = useState(0);
   const [installationCharges, setInstallationCharges] = useState(0);
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    setCount(productCount); // Update localCount whenever productCount changes
+  }, [productCount]);
   useEffect(() => {
     console.log("useEffect called inside addtocart page");
+    // console.log();
+
     const userDataString = localStorage.getItem("userData");
     const userData = JSON.parse(userDataString) || {};
     const customerId = userData.customer_id || null;
@@ -260,45 +278,64 @@ function AddToCart() {
     );
   };
   const onRemoveSuccess = async (product_id) => {
-    try {
-      const userDataString = localStorage.getItem("userData");
-      const userData = JSON.parse(userDataString);
-      const customerId = userData.customer_id;
-      const formData = new FormData();
-      formData.append("customer_id", customerId);
-      formData.append("product_id", product_id);
-      const response = await axios.delete(
-        "http://localhost:3000/api/UserCart",
-        {
-          data: formData,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+    console.log("271");
+
+    if (!userState) {
+      console.log("271");
+
+      setProductDetailArr((prevItems) =>
+        prevItems.filter((item) => item.product_id !== product_id)
       );
-      // If all products are removed, update the state to reflect empty cart
-      if (productDetailArr.length === 1) {
-        console.log("nopes for product", installationCharges);
+      console.log(JSON.stringify(productDetailArr));
+      console.log(productDetailArr);
 
-        setProductDetailArr([]);
-        setTotalPrice(0);
-        setDiscount(0);
-        setTotalPayble(0);
-        setInstallationCharges(0);
-        setTotalCount(0);
-        handleCartChange();
-      } else {
-        // Remove the product from the state
-        setProductDetailArr((prevItems) =>
-          prevItems.filter((item) => item.product_id !== product_id)
+      // setCount(ProductDetailArr.length);
+      // handleCartChange();
+      console.log("271");
+      console.log(productDetailArr);
+    } else {
+      try {
+        console.log("271");
+
+        const userDataString = localStorage.getItem("userData");
+        const userData = JSON.parse(userDataString);
+        const customerId = userData.customer_id;
+        const formData = new FormData();
+        formData.append("customer_id", customerId);
+        formData.append("product_id", product_id);
+        const response = await axios.delete(
+          "http://localhost:3000/api/UserCart",
+          {
+            data: formData,
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
         );
+        // If all products are removed, update the state to reflect empty cart
+        if (productDetailArr.length === 1) {
+          console.log("nopes for product", installationCharges);
 
-        // Fetch updated cart data
-        handleCartChange();
+          setProductDetailArr([]);
+          setTotalPrice(0);
+          setDiscount(0);
+          setTotalPayble(0);
+          setInstallationCharges(0);
+          setTotalCount(0);
+          handleCartChange();
+        } else {
+          // Remove the product from the state
+          setProductDetailArr((prevItems) =>
+            prevItems.filter((item) => item.product_id !== product_id)
+          );
+
+          // Fetch updated cart data
+          handleCartChange();
+        }
+      } catch (error) {
+        console.error("Error removing item:", error);
+        alert("Error removing item. Please try again later.");
       }
-    } catch (error) {
-      console.error("Error removing item:", error);
-      alert("Error removing item. Please try again later.");
     }
   };
   const updatePriceInCard = (newPrice) => {
@@ -322,7 +359,7 @@ function AddToCart() {
           <div className="col-md-8">
             <div className="row my-cart">
               <div className="col-md-4 py-3">
-                <h5>My Cart ( {totalCount} )</h5>
+                <h5>My Cart ( {count} )</h5>
               </div>
               <div className="col-md-8 search-pin">
                 {/* <div className="LocationIconPin">
@@ -385,6 +422,7 @@ function AddToCart() {
                             } else {
                               console.log("Removing", isLoggedIn);
                               console.log("Removing", val.product_id);
+                              onRemoveSuccess(val.product_id);
 
                               dispatch(removeItemFromCartD(val.product_id));
                             }
