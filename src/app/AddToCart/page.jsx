@@ -14,8 +14,7 @@ import { addItemToCartD, removeItemFromCartD } from "@/redux/reducer/tempSlice";
 import { prod } from "../ConstantURL";
 import { isLoggedIn } from "@/utils/validation";
 function AddToCart() {
-  const cartStates = useSelector((state) => state.temp);
-  console.log(cartStates);
+  const tempCartStates = useSelector((state) => state.temp);
   const [productDetailArr, setProductDetailArr] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -25,9 +24,7 @@ function AddToCart() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(
-      "useEffect called----------------------------------------------------------------"
-    );
+    console.log("useEffect called inside addtocart page");
     const userDataString = localStorage.getItem("userData");
     const userData = JSON.parse(userDataString) || {};
     const customerId = userData.customer_id || null;
@@ -46,15 +43,16 @@ function AddToCart() {
       } else {
         //Logic to Store Temporary Data
         console.log("^^^^^^^^^^^^^^^^^TEMP^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-        const tempData = localStorage.getItem("temp");
-        const userData = JSON.parse(tempData) || {};
-        console.log("getting LS_data products to get p_id ", userData);
-        const productIds = Array.isArray(userData)
-          ? userData.map((userData) => userData.product_id)
+        const tempData = tempCartStates || {};
+        console.log("getting LS_data products to get p_id ", tempData);
+        const productIds = tempData.products
+          ? tempData.products.map((product) => product.product_id)
           : [];
+        console.log("p_id ", productIds);
 
         // If else to send request to API depending upon No of Product count
         if (productIds.length === 1) {
+          console.log("54");
           const response = await axios.post(
             "http://localhost:3000/api/tempData",
             {
@@ -62,21 +60,11 @@ function AddToCart() {
             }
           );
           const products = response.data.products;
-          const quan = userData[0].quantity;
-          console.log(quan);
-          console.log(userData);
-          console.log("()() ", Array.isArray(products));
-
+          const quan = tempData.products[0].quantity;
           let obj = products[0];
-
           obj.quantity = quan;
-          console.log("-=-", obj);
           const objToArray = new Array(obj);
-          console.log(objToArray);
-
-          console.log("9009", objToArray);
-          console.log("()() ", Array.isArray(objToArray));
-
+          //Single product detail with updated quantity
           fetchData(objToArray);
         } else if (productIds.length > 1) {
           // Send request with multiple product IDs
@@ -88,24 +76,22 @@ function AddToCart() {
           );
           // const product = response.data.products;
           console.log("Response Where product count is 1", response);
-
           const products = response.data.products;
           console.log("()() ", Array.isArray(products));
-          console.log("LocalStorage", userData);
+          console.log("LocalStorage", tempData);
           console.log("products: ", products);
-
           // Loop through each product in the array
           products.forEach((product, index) => {
+            console.log("userDataForProduct");
             // Getting the corresponding user data for the current product
-            const userDataForProduct = userData.find(
+            const userDataForProduct = tempData.find(
               (item) => item.id === product.id
             );
-
-            // If userData is found for the current product
+            console.log(userDataForProduct);
+            // If tempData is found for the current product
             if (userDataForProduct) {
-              // Assigning the quantity from userData to the current product object
+              // Assigning the quantity from tempData to the current product object
               product.quantity = userDataForProduct.quantity;
-
               // Logging the updated product object
               console.log("-=-", product);
             }
@@ -120,7 +106,7 @@ function AddToCart() {
           // Checking if productsArray is an array
           console.log("()() ", Array.isArray(productsArray));
           console.log("(after foreach) ", products);
-
+          //Mutiple product detail with updated quantity
           fetchData(products);
         }
       }
@@ -131,7 +117,7 @@ function AddToCart() {
       // cartData.forEach((item, index) => {
       //   console.log(`Item ${index}:`, item);
       // });
-      // console.log("Length of cartData:", cartData.length);
+      console.log("Length of cartData:", cartData);
       try {
         const products = cartData.map(
           (item) => ({
@@ -152,47 +138,49 @@ function AddToCart() {
         console.log("Response From line Number 132", products);
         // state.products.push(action.payload);
 
-        products.forEach((product) => {
-          dispatch(
-            addItemToCartD({
-              product_id: product.product_id,
-              quantity: product.quantity || 1, // Explicitly set quantity to 1
-              price: product.price,
-              discount_price: product.discount_price,
-              color: product.color,
-              from: false,
-            })
-          );
-        });
+        // products.forEach((product) => {
+        //   dispatch(
+        //     addItemToCartD({
+        //       product_id: product.product_id,
+        //       quantity: product.quantity || 1, // Explicitly set quantity to 1
+        //       price: product.price,
+        //       discount_price: product.discount_price,
+        //       color: product.color,
+        //       from: false,
+        //     })
+        //   );
+        // });
         // console.log("Response From line Number 132", products);
         // Calculate total price, discount, total payable, and installation charges
-        const totalPrice = products.reduce(
-          (total, product) => total + parseFloat(product.discount_price),
-          0
-        );
-        const discount = products
-          .reduce((total, product) => {
-            const discountAmount =
-              parseFloat(product.discount_price) - parseFloat(product.price);
-            return total + discountAmount;
-          }, 0)
-          .toFixed(2);
-        const totalPayble = products.reduce(
-          (total, product) =>
-            total +
-            parseFloat(product.price) +
-            parseFloat(product.InstallationCharges),
-          0
-        );
-        const installationCharges = products.reduce(
-          (total, product) => total + parseFloat(product.InstallationCharges),
-          0
-        );
+        // Calculate total payable amount, total discount, and total price without discount
+        const { totalPayable, totalDiscount, totalPriceWithoutDiscount } =
+          products.reduce(
+            (totals, product) => {
+              const productTotal =
+                parseFloat(product.price) * parseFloat(product.quantity);
+              const discountedProductTotal = product.discount_price
+                ? parseFloat(product.discount_price) *
+                  parseFloat(product.quantity)
+                : productTotal;
+
+              totals.totalPriceWithoutDiscount += productTotal;
+              totals.totalPayable += discountedProductTotal;
+              totals.totalDiscount += productTotal - discountedProductTotal;
+
+              return totals;
+            },
+            { totalPayable: 0, totalDiscount: 0, totalPriceWithoutDiscount: 0 }
+          );
+
+        console.log("Total payable amount:", totalPayable);
+        console.log("Total discount:", totalDiscount);
+        console.log("Total price without discount:", totalPriceWithoutDiscount);
+
         const totalCount = products.length;
         // Update state variables
         setProductDetailArr(products);
         console.log("fdghjjjjjjjjjjjjjjjjjjjjjj", products);
-        setTotalPrice(totalPrice);
+        setTotalPrice(totalPriceWithoutDiscount);
         setDiscount(discount);
         setTotalPayble(totalPayble);
         setInstallationCharges(installationCharges);
@@ -215,7 +203,7 @@ function AddToCart() {
       });
       //console.log("response", response);
       const cartData = response.data.products;
-      //console.log("cartdata: ", cartData);
+      console.log("cartdata: ", cartData);
       // Extracting relevant data from the cart data
       const products = cartData.map((item) => ({
         product_id: item.product_id,
@@ -232,26 +220,39 @@ function AddToCart() {
       //console.log("products:-------------------- ", products);
 
       // Calculate total price, discount, total payable, and installation charges
-      const totalPrice = products.reduce(
-        (total, product) => total + parseFloat(product.price),
-        0
+
+      // Calculate product totals
+      // log;
+      const productTotals = products.map(
+        (product) => product.price * product.discount_price * product.quantity
       );
-      const discount = products.reduce(
-        (total, product) => total + parseFloat(product.discount_price),
-        0
-      );
-      const totalPayble = products.reduce(
-        (total, product) =>
-          total +
-          parseFloat(product.price) +
-          parseFloat(product.InstallationCharges),
-        0
-      );
+      console.log(productTotals);
+
+      // Calculate total amount of all products
+      const totalPrice = productTotals.reduce((acc, curr) => acc + curr, 0);
+      console.log(totalPrice);
+      // Calculate total discount (consider using discount_price if available)
+      const discount = products.reduce((acc, curr) => {
+        // Use discount_price if available, otherwise use regular price for discount calculation
+        const discountPerItem = curr.discount_price
+          ? curr.price - curr.discount_price
+          : 0;
+        return acc + discountPerItem * curr.quantity;
+      }, 0);
+      console.log(discount);
+      // Calculate total payable amount (consider discount)
+      const totalPayble = totalPrice - discount;
+      console.log(totalPayble);
+
+      // Calculate total installation charge
       const installationCharges = products.reduce(
-        (total, product) => total + parseFloat(product.InstallationCharges),
+        (acc, curr) => acc + curr.InstallationCharges * curr.quantity,
         0
       );
+      console.log(installationCharges);
+
       const totalCount = products.length;
+      console.log(totalCount);
 
       // Update state variables
       setProductDetailArr(products);

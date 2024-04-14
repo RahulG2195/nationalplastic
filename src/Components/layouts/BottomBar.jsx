@@ -21,10 +21,10 @@ function BottomBar() {
   const [box, setBox] = useState([]);
   const [drawer, setDrawer] = useState([]);
 
-  // state for navbar loop 
+  // state for navbar loop
   const [navbar, setNavbar] = useState([]);
   const [AllProd, SetAllProd] = useState([]);
-  const [getImg, SetGetImg] = useState('Blog-section-1.jpg');
+  const [getImg, SetGetImg] = useState("Blog-section-1.jpg");
 
   // const preEventChair = [
   //   { label: "karen", seoUrl: "karen" },
@@ -42,8 +42,9 @@ function BottomBar() {
 
         // start -- fetch category which want to display on navbar
         const nav = await axios.get("http://localhost:3000/api/NavCategory");
+        console.log("nav ", nav);
         const navshow = nav.data.navshow;
-        SetAllProd(allproducts)
+        SetAllProd(allproducts);
         setNavbar(navshow);
         // end --
 
@@ -93,69 +94,80 @@ function BottomBar() {
     return chunkedArray;
   };
 
-
   const ChangeImage = (prod_name) => {
-
-   const img_name =  AllProd.filter((products) => products.product_name == prod_name);
-    img_name.map(val => {
+    const img_name = AllProd.filter(
+      (products) => products.product_name == prod_name
+    );
+    img_name.map((val) => {
       SetGetImg(val.image_name);
-    })
-  }
+    });
+  };
   // console.log('img' + getImg);
   return (
     <div className=" px-5  d-flex align-items-center bottom_nav position-relative mainrow">
-      {
+      {navbar.map((val) => (
+        <div
+          key={val.category_id}
+          className={`col  px-3 py-2 ${
+            val.category_name == "Stools" ||
+            val.category_name == "Tables" ||
+            val.category_name == "Drawer" ||
+            val.category_name == "Box"
+              ? val.category_name + " position-relative"
+              : "second"
+          }`}
+        >
+          <Link
+            onClick={sendCategory}
+            href={`/ProductCatlogue/${val.category_id}`}
+          >
+            <p className="">{val.category_name}</p>
+          </Link>
 
-        navbar.map(val => (
-
-          <div key={val.category_id} className={`col  px-3 py-2 ${(val.category_name == 'Stools' || val.category_name == 'Tables' || val.category_name == 'Drawer' || val.category_name == 'Box') ? val.category_name + ' position-relative' : 'second'}`}>
-
-            <Link onClick={sendCategory} href={`/ProductCatlogue/${val.category_id}`}>
-              <p className="">{val.category_name}</p>
-            </Link>
-
-            <div className="ulCont SecondDrop mx-4 secondHover p-3 ">
-              <p className="text-start fw-bold dropHeading p-3">
-                {val.category_name}
-              </p>
-              <div className="d-flex flex-row gap-5 px-3">
-                {
-                  chunkArray(AllProd.filter((products) => products.category_id == val.category_id), 6).map((chunk, columnIndex) => (
-                  <div key={columnIndex} className="column pt-3">
-                    {
-                      chunk.map((product, index) => (
-                      <p className="p-3 fw-semibold" key={index} onMouseOver={() => ChangeImage(product.product_name)} >
-                        <Link
-                          // onClick={() => handleOnClick(product.seo_url)}
-                          className="nav-link"
-                          href={`/ProductDetail/${product.seo_url}`}
-                        >
-                          {product.product_name}
-                        </Link>
-                      </p>
-                    ))
-                    }
-                  </div>
-                ))
-                }
-                <div className="barImgCont py-3">
-                  <Image 
-                    src={`/Assets/images/New-launches-1/${getImg}`}
-                    alt=''
-                    height={100}
-                    width={100}
-                    layout="responsive"
-                    objectFit="contain"
-                  />
-                  {/* <img src={`/Assets/images/Home-page/${getImg}`} alt={product.product_name} /> */}
+          <div className="ulCont SecondDrop mx-4 secondHover p-3 ">
+            <p className="text-start fw-bold dropHeading p-3">
+              {val.category_name}
+            </p>
+            <div className="d-flex flex-row gap-5 px-3">
+              {chunkArray(
+                AllProd.filter(
+                  (products) => products.category_id == val.category_id
+                ),
+                6
+              ).map((chunk, columnIndex) => (
+                <div key={columnIndex} className="column pt-3">
+                  {chunk.map((product, index) => (
+                    <p
+                      className="p-3 fw-semibold"
+                      key={index}
+                      onMouseOver={() => ChangeImage(product.product_name)}
+                    >
+                      <Link
+                        // onClick={() => handleOnClick(product.seo_url)}
+                        className="nav-link"
+                        href={`/ProductDetail/${product.seo_url}`}
+                      >
+                        {product.product_name}
+                      </Link>
+                    </p>
+                  ))}
                 </div>
+              ))}
+              <div className="barImgCont py-3">
+                <Image
+                  src={`/Assets/images/New-launches-1/${getImg}`}
+                  alt=""
+                  height={100}
+                  width={100}
+                  layout="responsive"
+                  objectFit="contain"
+                />
+                {/* <img src={`/Assets/images/Home-page/${getImg}`} alt={product.product_name} /> */}
               </div>
             </div>
           </div>
-        ))
-      }
-
-
+        </div>
+      ))}
 
       {/* <div className="col">
         <p>Drawers & Racks</p>

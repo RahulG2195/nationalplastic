@@ -9,7 +9,8 @@ import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { Provider } from "react-redux";
-import store from "@/redux/store";
+import { PersistGate } from "redux-persist/integration/react";
+import store, { persistor } from "@/redux/store";
 import dynamic from "next/dynamic";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -31,10 +32,12 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <BrowserRouter>
           <Provider store={store}>
-            <Header />
-            {children}
-            <ToastContainer />
-            <Footer />
+            <PersistGate loading={null} persistor={persistor}>
+              <Header />
+              {children}
+              <ToastContainer />
+              <Footer />
+            </PersistGate>
           </Provider>
         </BrowserRouter>
       </body>

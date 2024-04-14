@@ -65,12 +65,6 @@ export const cartSlice = createSlice({
       if (!isItemInCart) {
         //console.log("Inside ! ");
         state.products.push(action.payload);
-        //console.log("stateTotalPrice: " + discount_price);
-        // //console.log(
-        //   "stateTotalPrice:---- " + parseFloat(discount_price) * quantity
-        // );
-        //console.log("Actionpayload;" + action.payload);
-        //console.log("state.items;" + state.product);
         state.total_price += parseFloat(price) * quantity;
         state.discount_price += parseFloat(discount_price) * quantity;
         localStorage.setItem("products", JSON.stringify(action.payload));
@@ -79,12 +73,29 @@ export const cartSlice = createSlice({
       } else if (from) {
         //console.log(from);
         //console.log("NoMahnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn!");
+        const updatedProducts = state.products.map((product) => {
+          if (product.product_id === product_id) {
+            return {
+              ...product,
+              quantity: product.quantity + quantity,
+            };
+          }
+          return product;
+        });
+
         const existingProduct = state.products.find(
           (product) => product.product_id === product_id
         );
-        existingProduct.quantity += quantity;
-        state.discount_price += parseFloat(discount_price) * quantity;
-        state.total_price += parseFloat(price) * quantity; // Update total price
+
+        const updatedState = {
+          ...state,
+          products: updatedProducts,
+          discount_price:
+            state.discount_price + parseFloat(discount_price) * quantity,
+          total_price: state.total_price + parseFloat(price) * quantity,
+        };
+        // Update total price
+        return updatedState;
       }
     },
     removeItemFromCart: (state, action) => {
@@ -173,7 +184,7 @@ export const cartSlice = createSlice({
           product_id: product_id,
           quantity: 1,
         });
-        //console.log("response after - ", response);
+        console.log("response after - ", response);
 
         // Return the new state (assuming you're using a state management library)
         return newState;
@@ -183,6 +194,7 @@ export const cartSlice = createSlice({
       return state;
     },
     decreaseQuantity: (state, action) => {
+      console.log("decreaseQuantity");
       const { product_id } = action.payload;
 
       // Find the existing product in the cart
@@ -204,6 +216,7 @@ export const cartSlice = createSlice({
           ...existingProduct,
           quantity: existingProduct.quantity - 1,
         };
+        console.log("State updating ---------------------");
 
         // Update the state with the new product object
         const newState = {
@@ -228,7 +241,7 @@ export const cartSlice = createSlice({
           product_id: product_id,
           quantity: -1,
         });
-        //console.log("response after - ", response);
+        console.log("response after - ", response);
 
         // Return the new state (assuming you're using a state management library)
         return newState;

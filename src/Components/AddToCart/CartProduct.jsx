@@ -10,10 +10,14 @@ import {
   decreaseQuantity,
   removeItemFromCart,
 } from "@/redux/reducer/cartSlice";
+import {
+  increaseQuantityD,
+  decreaseQuantityD,
+  removeItemFromCartD,
+} from "@/redux/reducer/tempSlice";
 import { isLoggedIn } from "@/utils/validation";
 import { Bounce, toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-
 const notifyError = () => {
   toast.error("Login To Add To WishList", {
     position: "top-center",
@@ -51,10 +55,24 @@ const CartProduct = ({
   // const dispatch = useDispatch();
 
   const handleIncrement = async () => {
-    await dispatch(increaseQuantity({ product_id: productId }));
-    setInitialCount(initialCount + 1);
+    console.log("decrease+Quantity");
+    const isLoggedInResult = await isLoggedIn();
+    //console.log("state", isLoggedInResult);
+    //console.log("state", typeof isLoggedInResult);
+    if (!isLoggedInResult) {
+      console.log("state", isLoggedInResult);
+      console.log("state", productId);
+
+      await dispatch(increaseQuantityD({ product_id: productId }));
+      setInitialCount(initialCount + 1);
+    } else {
+      await dispatch(increaseQuantity({ product_id: productId }));
+      setInitialCount(initialCount + 1);
+    }
   };
   const handleDecrement = async () => {
+    console.log("decreaseQuantity");
+
     if (initialCount > 0) {
       await dispatch(decreaseQuantity({ product_id: productId }));
       setInitialCount(initialCount - 1); // Decrement by 1

@@ -12,7 +12,7 @@ const PriceDetailsCard = ({
   redirect,
 }) => {
   // const dispatch = useDispatch();
-
+  console.log("pdc", itemCount);
   const priceFromState = useSelector(
     (state) => state.cart.total_price || state.temp.total_price || 0
   );
@@ -82,7 +82,8 @@ const PriceDetailsCard = ({
         </div>
         <div className="small my-2 text-success">
           Congratulations, you have just saved RS{" "}
-          {totalDiscount ? totalDiscount : "0000"} on your order
+          {totalDiscount ? totalDiscount : DiscountCard ? DiscountCard : "0000"}{" "}
+          on your order
         </div>
         <div className="small text-center">EMI starts with Rs 0,000</div>
 

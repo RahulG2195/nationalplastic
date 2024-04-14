@@ -50,9 +50,9 @@ const userData = (value) => {
 export const userSlice = createSlice({
   name: "userData",
   initialState: {
-    isLoggedIn: isLoggedInResult,
-    email: userData("email"),
-    customer_id: userData("customer_id"),
+    isLoggedIn: false,
+    email: null,
+    customer_id: null,
   },
 
   reducers: {
