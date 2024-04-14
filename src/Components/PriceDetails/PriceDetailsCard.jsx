@@ -22,14 +22,19 @@ const PriceDetailsCard = ({
 
   const [totalPrice, setTotalPrice] = useState(priceFromState);
   const [MRPPrice, setMRPPrice] = useState(MRPvalue);
+  const [DiscountToPoint, setDiscountToPoint] = useState(
+    totalDiscount * itemCount
+  );
+
   const [DiscountCard, setDiscountCard] = useState(0);
   useEffect(() => {
     setTotalPrice(priceFromState.toFixed(2));
     setMRPPrice(MRPvalue.toFixed(2));
-
+    setDiscountToPoint(totalDiscount.toFixed(2));
+    console.log(DiscountToPoint);
     const discount = MRPvalue - priceFromState;
     setDiscountCard(discount > 0 ? discount.toFixed(2) : 0);
-  }, [priceFromState, MRPvalue, DiscountCard]);
+  }, [priceFromState, MRPvalue, DiscountCard, totalDiscount]);
   return (
     <>
       <div className="PriceDetail">
@@ -40,27 +45,19 @@ const PriceDetailsCard = ({
         <div className="mt-4">
           <div className={`d-flex justify-content-between mt-1 fw-semibold`}>
             <div className="text-secondary">MRP</div>
-            <div> RS {cartPrice ? cartPrice : MRPPrice}</div>
+            <div> RS {MRPPrice ? MRPPrice : "0000.00"}</div>
           </div>
           <div
             className={`d-flex justify-content-between mt-1 fw-semibold text-success`}
           >
             <div className="text-secondary">Discount</div>
-            <div>
-              {" "}
-              RS{" "}
-              {totalDiscount
-                ? totalDiscount
-                : DiscountCard
-                ? DiscountCard
-                : "0000"}
-            </div>
+            <div> RS {totalDiscount ? DiscountToPoint : "0000"}</div>
           </div>
           <div
             className={`d-flex justify-content-between mt-1 fw-semibold text-success`}
           >
             <div className="text-secondary">Coupon (htyxhs5)</div>
-            <div>-RS 00,000</div>
+            <div>RS 0000.00</div>
           </div>
           <div className={`d-flex justify-content-between mt-1 fw-semibold`}>
             <div className="text-secondary ">Installation Charge</div>
@@ -82,10 +79,9 @@ const PriceDetailsCard = ({
         </div>
         <div className="small my-2 text-success">
           Congratulations, you have just saved RS{" "}
-          {totalDiscount ? totalDiscount : DiscountCard ? DiscountCard : "0000"}{" "}
-          on your order
+          {totalDiscount ? DiscountToPoint : "0000"} on your order
         </div>
-        <div className="small text-center">EMI starts with Rs 0,000</div>
+        <div className="small text-center">EMI starts with Rs 10,000</div>
 
         <div className="d-flex justify-content-center mt-2">
           {redirect ? (

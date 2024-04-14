@@ -32,12 +32,7 @@ export default function Header() {
     } else {
       who = "cart";
     }
-    console.log("productCount");
-    console.log("productCount", who);
-
-    console.log(state[who]);
     const cart = state[who] || {};
-    console.log("cart", cart); // Handle missing or empty cart
     return cart.products?.reduce((acc, product) => acc + product.quantity, 0);
   });
 

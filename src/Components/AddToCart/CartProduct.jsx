@@ -72,10 +72,19 @@ const CartProduct = ({
   };
   const handleDecrement = async () => {
     console.log("decreaseQuantity");
+    const isLoggedInResult = await isLoggedIn();
 
     if (initialCount > 0) {
-      await dispatch(decreaseQuantity({ product_id: productId }));
-      setInitialCount(initialCount - 1); // Decrement by 1
+      if (!isLoggedInResult) {
+        console.log("state", isLoggedInResult);
+        console.log("state", productId);
+        dispatch(decreaseQuantityD({ product_id: productId }));
+        setInitialCount(initialCount - 1);
+      } else {
+        dispatch(decreaseQuantity({ product_id: productId }));
+        setInitialCount(initialCount - 1);
+      }
+      // Decrement by 1
     }
   };
   const dispatch = useDispatch();
@@ -98,8 +107,15 @@ const CartProduct = ({
   };
 
   const handleRemove = async (product_id) => {
-    onRemoveSuccess(productId);
-    await dispatch(removeItemFromCart({ product_id: product_id }));
+    const isLoggedInResult = await isLoggedIn();
+    if (!isLoggedInResult) {
+      onRemoveSuccess(productId);
+      dispatch(removeItemFromCartD({ product_id: product_id }));
+    } else {
+      onRemoveSuccess(productId);
+      dispatch(removeItemFromCart({ product_id: product_id }));
+    }
+
     //console.log(product_id);
   };
 

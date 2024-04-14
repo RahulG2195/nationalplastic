@@ -42,14 +42,10 @@ function AddToCart() {
         fetchData(cartData);
       } else {
         //Logic to Store Temporary Data
-        console.log("^^^^^^^^^^^^^^^^^TEMP^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
         const tempData = tempCartStates || {};
-        console.log("getting LS_data products to get p_id ", tempData);
         const productIds = tempData.products
           ? tempData.products.map((product) => product.product_id)
           : [];
-        console.log("p_id ", productIds);
-
         // If else to send request to API depending upon No of Product count
         if (productIds.length === 1) {
           console.log("54");
@@ -77,37 +73,31 @@ function AddToCart() {
           // const product = response.data.products;
           console.log("Response Where product count is 1", response);
           const products = response.data.products;
-          console.log("()() ", Array.isArray(products));
-          console.log("LocalStorage", tempData);
-          console.log("products: ", products);
-          // Loop through each product in the array
-          products.forEach((product, index) => {
-            console.log("userDataForProduct");
-            // Getting the corresponding user data for the current product
-            const userDataForProduct = tempData.find(
-              (item) => item.id === product.id
+          const tempProducts = tempData.products;
+          // console.log();
+          // Iterate through products and tempProducts to update quantity
+          // console.log(tempProduct);
+
+          console.log(tempProducts);
+
+          products.forEach((product) => {
+            const tempProduct = tempProducts.find(
+              (tempProd) => tempProd.product_id === product.product_id
             );
-            console.log(userDataForProduct);
-            // If tempData is found for the current product
-            if (userDataForProduct) {
-              // Assigning the quantity from tempData to the current product object
-              product.quantity = userDataForProduct.quantity;
-              // Logging the updated product object
-              console.log("-=-", product);
+            console.log(tempProduct);
+            if (tempProduct) {
+              // Update quantity if corresponding tempProduct is found
+              product.quantity = tempProduct.quantity;
             }
           });
 
-          // Creating an array to hold the product objects
-          const productsArray = products.map((product) => ({ ...product }));
+          // If you need to convert the updated products into an array
+          const updatedProductsArray = Object.values(products);
 
-          // Logging the array of product objects
-          console.log(productsArray);
+          // Now, updatedProductsArray contains products with updated quantities
 
-          // Checking if productsArray is an array
-          console.log("()() ", Array.isArray(productsArray));
-          console.log("(after foreach) ", products);
           //Mutiple product detail with updated quantity
-          fetchData(products);
+          fetchData(updatedProductsArray);
         }
       }
     };
@@ -165,7 +155,8 @@ function AddToCart() {
 
               totals.totalPriceWithoutDiscount += productTotal;
               totals.totalPayable += discountedProductTotal;
-              totals.totalDiscount += productTotal - discountedProductTotal;
+              totals.totalDiscount +=
+                parseFloat(productTotal) - parseFloat(discountedProductTotal);
 
               return totals;
             },
@@ -181,9 +172,9 @@ function AddToCart() {
         setProductDetailArr(products);
         console.log("fdghjjjjjjjjjjjjjjjjjjjjjj", products);
         setTotalPrice(totalPriceWithoutDiscount);
-        setDiscount(discount);
+        setDiscount(totalDiscount);
         setTotalPayble(totalPayble);
-        setInstallationCharges(installationCharges);
+        setInstallationCharges(40);
         setTotalCount(totalCount);
       } catch (error) {
         console.error("Error fetching data", error);
@@ -218,9 +209,7 @@ function AddToCart() {
         color: item.color,
       }));
       //console.log("products:-------------------- ", products);
-
       // Calculate total price, discount, total payable, and installation charges
-
       // Calculate product totals
       // log;
       const productTotals = products.map(
@@ -250,10 +239,8 @@ function AddToCart() {
         0
       );
       console.log(installationCharges);
-
       const totalCount = products.length;
       console.log(totalCount);
-
       // Update state variables
       setProductDetailArr(products);
       setTotalPrice(totalPrice);
@@ -265,7 +252,6 @@ function AddToCart() {
       console.error("Error fetching data", error);
     }
   };
-
   const onAddToCart = async (product_id) => {
     dispatch(
       addItemToWishlist({
@@ -292,6 +278,8 @@ function AddToCart() {
       );
       // If all products are removed, update the state to reflect empty cart
       if (productDetailArr.length === 1) {
+        console.log("nopes for product", installationCharges);
+
         setProductDetailArr([]);
         setTotalPrice(0);
         setDiscount(0);
@@ -424,12 +412,10 @@ function AddToCart() {
           </div>
         </div>
       </div>
-
       <FooterRow />
     </>
   );
 }
-
 export default AddToCart;
 //console.log("products forEach: " + product.product_id);
 //console.log("products forEach: " + product.price);

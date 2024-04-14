@@ -81,22 +81,17 @@ export const tempSlice = createSlice({
       console.log("gggggggggggggggggg");
       console.log("Removing", action.payload);
       console.log("JSON", JSON.stringify(action.payload));
-
       const { product_id } = action.payload;
 
       // Find the existing product in the cart
       const existingProductIndex = state.products.findIndex(
         (product) => product.product_id === product_id
       );
-      console.log("Removing ", existingProductIndex);
 
       if (existingProductIndex !== -1) {
         const existingProduct = state.products[existingProductIndex];
-        console.log("Removing ", existingProduct);
 
         // Create a new state without the product
-        console.log("State updating ---------------------");
-
         const newState = {
           ...state,
           products: [
@@ -111,14 +106,9 @@ export const tempSlice = createSlice({
             parseFloat(existingProduct.discount_price) *
               existingProduct.quantity,
         };
-        console.log("Removing ", newState);
-        console.log("State updating ---------------------", state.total_price);
 
         // Update localStorage (assuming you're using it for persistence)
-        localStorage.setItem("temp", JSON.stringify(newState.products));
-        // const userDataString = localStorage.getItem("userData");
-        // const userData = JSON.parse(userDataString);
-        // const customerId = userData.customer_id;
+        localStorage.setItem("products", JSON.stringify(newState.products));
 
         // Return the new state (assuming you're using a state management library)
         return newState;
@@ -128,64 +118,34 @@ export const tempSlice = createSlice({
       return state;
     },
     increaseQuantityD: (state, action) => {
-      console.log("decrease+Quantity");
-
       const { product_id } = action.payload;
-      console.log("increase quantit" + product_id);
-      // Find the existing product in the cart
       const existingProduct = state.products.find(
         (product) => product.product_id === product_id
       );
       if (existingProduct) {
-        console.log("Its should be coming anyways " + existingProduct.quantity);
-        console.log(
-          "Its should be coming anyways " + JSON.stringify(existingProduct)
-        );
         // If product exists, increase its quantity
         existingProduct.quantity += 1;
-        console.log("After Updates " + JSON.stringify(state.products));
-        console.log(
-          "After Updates  " + JSON.stringify(existingProduct.quantity)
-        );
         // Update total__price if necessary
-        console.log("State updating ---------------------");
         state.total_price += parseFloat(existingProduct.price);
-        console.log("State updating ---------------------", state.total_price);
 
         state.discount_price += parseFloat(existingProduct.discount_price);
 
-        // Notify user about the increase
-        // notifyinfo(); // Call info notification
         localStorage.setItem("temp", JSON.stringify(state.products));
       }
     },
     decreaseQuantityD: (state, action) => {
       const { product_id } = action.payload;
-      console.log("increase quantit" + product_id);
-      // Find the existing product in the cart
       const existingProduct = state.products.find(
         (product) => product.product_id === product_id
       );
       if (existingProduct) {
-        console.log("Its should be coming anyways " + existingProduct.quantity);
-        console.log(
-          "Its should be coming anyways " + JSON.stringify(existingProduct)
-        );
         // If product exists, increase its quantity
         existingProduct.quantity -= 1;
-        console.log("After Updates " + JSON.stringify(state.products));
-        console.log(
-          "After Updates  " + JSON.stringify(existingProduct.quantity)
-        );
         // Update total__price if necessary
-        console.log("State updating ---------------------");
-
         state.total_price -= parseFloat(existingProduct.price);
-        console.log("State updating ---------------------", state.total_price);
 
         state.discount_price -= parseFloat(existingProduct.discount_price);
-        // Notify user about the increase
-        // notifyinfo(); // Call info notification
+
         localStorage.setItem("temp", JSON.stringify(state.products));
       }
     },
