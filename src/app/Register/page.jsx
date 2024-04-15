@@ -3,10 +3,12 @@ import { useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import "../../styles/profilepage.css";
 
+import "../../styles/profilepage.css";
+import { encryptPassword } from "@/utils/encrypt.js";
 function Register() {
   const router = useRouter();
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -21,7 +23,6 @@ function Register() {
   const [successMessage, setSuccessMessage] = useState("");
   const mailUpdate = async () => {
     const response = await axios.post(
-      "http://thatsyourwebsite.com/api/RegisterEmail",
       "http://thatsyourwebsite.com/api/RegisterEmail",
       formData
     );
@@ -67,14 +68,24 @@ function Register() {
         if (existingEmails.includes(formData.email)) {
           alert("Email already exists!");
         } else {
-          const response = await axios.post(
+          const securePass = await encryptPassword(formData.password);
+          if (!securePass) {
+            console.error("Error in encryption");
+            return;
+          }
+          // Store the hash in the database
+          console.log(securePass);
+          const formDataWithEncryptedPassword = { ...formData };
+          formDataWithEncryptedPassword.password = securePass;
+
+          const response = axios.post(
             "http://thatsyourwebsite.com/api/Users",
-            "http://thatsyourwebsite.com/api/Users",
-            formData
+            formDataWithEncryptedPassword
           );
-          //console.log("Form submitted:", response);
+          console.log("Form submitted:", response);
           // Clear form data on successful submission
           mailUpdate(formData);
+
           setFormData({
             firstName: "",
             lastName: "",

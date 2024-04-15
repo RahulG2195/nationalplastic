@@ -42,28 +42,32 @@ const AddBody = () => {
     setAddress("");
   };
   const getAdress = async () => {
-    const email = localStorage.getItem("userData");
-    const data = JSON.parse(email);
-    const useremail = data.email;
-    const formData = {
-      email: useremail,
-      getProfile: true,
-    };
+    try {
+      const email = localStorage.getItem("userData");
+      const data = JSON.parse(email);
+      const useremail = data.email;
+      const formData = {
+        email: useremail,
+        getProfile: true,
+      };
 
-    const response = await axios.put(
-      "http://thatsyourwebsite.com/api/Users",
-      formData
-    );
-    const userData = response.data.message[0];
-    //console.log("userData", userData);
-    //console.log("userData", JSON.stringify(userData));
+      const response = await axios.put(
+        "http://thatsyourwebsite.com/api/Users",
+        formData
+      );
+      const userData = response.data.message[0];
+      //console.log("userData", userData);
+      //console.log("userData", JSON.stringify(userData));
 
-    const { Address, FirstName, Phone } = userData;
-    const addressString = JSON.stringify(Address);
-    const addressWithoutQuotes = addressString.replace(/^"|"$/g, "");
-    setAddress(addressWithoutQuotes);
-    setFirstName(FirstName);
-    setPhone(Phone);
+      const { Address, FirstName, Phone } = userData;
+      const addressString = JSON.stringify(Address);
+      const addressWithoutQuotes = addressString.replace(/^"|"$/g, "");
+      setAddress(addressWithoutQuotes);
+      setFirstName(FirstName);
+      setPhone(Phone);
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
   useEffect(() => {

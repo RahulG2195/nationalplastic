@@ -13,7 +13,7 @@ import MoreProduct from "./MoreProducts/MoreProduct";
 import IncrementDecrement from "@/Components/AddToCart/IncrementDecrement";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/redux/reducer/cartSlice";
 import { addToCartD } from "@/redux/reducer/tempSlice";
 
@@ -28,6 +28,8 @@ import Breadcrump from "../Breadcrump/Breadcrump";
 import GetQuoteCustomForm from "../BulkOrder/GetQuoteCustomForm";
 function ProdData() {
   const [data, setData] = useState([]);
+  const userState = useSelector((state) => state.userData.isLoggedIn);
+
   const [isLoading, setIsLoading] = useState(true);
   const [productId, setProductId] = useState(null);
   // const [productName, setProductName] = useState('');
@@ -37,7 +39,7 @@ function ProdData() {
   const [selectedColor, setSelectedColor] = useState("GOLD");
 
   const notify = () => {
-    toast.error("Login To Add to CART", {
+    toast.error("Login To Buy now", {
       position: "top-center",
       autoClose: 2000,
       hideProgressBar: false,
@@ -140,7 +142,6 @@ function ProdData() {
   };
 
   const handleMoveToCart = async (storedId, quantity) => {
-    const isLoggedInResult = await isLoggedIn();
     //console.log("state", isLoggedInResult);
     //console.log("state", typeof isLoggedInResult);
     const data = await fetchPrice(storedId);
@@ -149,7 +150,7 @@ function ProdData() {
     const price = data.price;
     const discount_price = data.discount_price;
     const product_id = data.product_id;
-    switch (isLoggedInResult) {
+    switch (userState) {
       case false:
         dispatch(
           addToCartD({
@@ -160,6 +161,7 @@ function ProdData() {
             color: selectedColor,
           })
         );
+        console.log(userState);
         break;
       case true:
         dispatch(
@@ -317,8 +319,10 @@ function ProdData() {
                   Add to Cart
                 </p>
                 <Link
-                  href="/Address"
-                  className="btn bg-danger text-white m-2 px-5 ProdbtnRes"
+                  href={userState ? "/Address" : "#"}
+                  className={`btn bg-danger text-white m-2 px-5 ProdbtnRes ${
+                    !userState ? "disabled-button" : ""
+                  }`}
                   onClick={() => handleMoveToCart(productId)}
                 >
                   Buy Now

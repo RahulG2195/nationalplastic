@@ -257,17 +257,27 @@ function ProfilePage() {
                   role="tab"
                   aria-controls="list-home"
                 >
-                  My orders
+                  My Profile
                 </a>
                 <a
                   className="list-group-item list-group-item-action fw-semibold"
-                  id="list-profile-list"
+                  id="list-order-list"
                   data-bs-toggle="list"
-                  href="#list-profile"
+                  href="#list-order"
                   role="tab"
-                  aria-controls="list-profile"
+                  aria-controls="list-order"
                 >
-                  Address Book
+                  Order List
+                </a>
+                <a
+                  className="list-group-item list-group-item-action fw-semibold"
+                  id="list-Password-list"
+                  data-bs-toggle="list"
+                  href="#list-Password"
+                  role="tab"
+                  aria-controls="list-Password"
+                >
+                  Change Password
                 </a>
                 <a
                   className="list-group-item list-group-item-action fw-semibold"
@@ -411,7 +421,7 @@ function ProfilePage() {
                       )}
                     </div>
                   </div>
-                  <h3>Change Password</h3>
+                  <h3>Add Secondary Address</h3>
                   <hr />
 
                   <div>
@@ -421,19 +431,12 @@ function ProfilePage() {
                         <form key={index}>
                           <div className="row user-data">
                             <div className="col">
-                              <label htmlFor="">Password</label>
+                              <label htmlFor="">Secondary Address</label>
                               <input
+                                required
                                 type="text"
                                 className="form-control fw-semibold"
-                                placeholder="Password"
-                              />
-                            </div>
-                            <div className="col">
-                              <label htmlFor="">confirm password</label>
-                              <input
-                                type="text"
-                                className="form-control fw-semibold"
-                                placeholder="confirm password"
+                                placeholder="Address"
                               />
                             </div>
                           </div>
@@ -441,7 +444,7 @@ function ProfilePage() {
                           <div className="form-group row">
                             <div className="col-sm-10">
                               <button type="submit" className="btn form-btn">
-                                Update
+                                Add
                               </button>
                             </div>
                           </div>
@@ -454,7 +457,7 @@ function ProfilePage() {
                 </div>
               </div>
               {/* Address Book */}
-              <div
+              {/* <div
                 className="tab-pane fade"
                 id="list-profile"
                 role="tabpanel"
@@ -545,7 +548,7 @@ function ProfilePage() {
                     </form>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/* Wishlist */}
               <div
@@ -567,26 +570,50 @@ function ProfilePage() {
                   <h3>Help Desk</h3>
                   <hr />
 
-                  <h3>Give a call </h3>
+                  <h3>Give a call : 0000000000000 </h3>
+                  <hr />
+                </div>
+              </div>
+              <div
+                className="tab-pane fade"
+                id="list-order"
+                role="tabpanel"
+                aria-labelledby="list-settings-list"
+              >
+                <div className="Right-Profile">
+                  <h3>Order List </h3>
                   <hr />
 
+                  <h3>No Order Placed </h3>
+                  <hr />
+                </div>
+              </div>
+              <div
+                className="tab-pane fade"
+                id="list-Password"
+                role="tabpanel"
+                aria-labelledby="list-settings-list"
+              >
+                <div className="Right-Profile">
+                  <h3>Change Password</h3>
+                  <hr />
                   <div>
                     <form>
                       <div className="row user-data">
                         <div className="col">
-                          <label htmlFor="">Password</label>
+                          <label htmlFor="">Old Password</label>
                           <input
-                            type="text"
-                            className="form-control  fw-semibold"
-                            placeholder="First name"
+                            type="password"
+                            required
+                            className="form-control fw-semibold"
                           />
                         </div>
                         <div className="col">
                           <label htmlFor="">New Password</label>
                           <input
-                            type="text"
+                            type="password"
+                            required
                             className="form-control fw-semibold"
-                            placeholder="Last name"
                           />
                         </div>
                       </div>
