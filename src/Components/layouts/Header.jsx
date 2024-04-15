@@ -51,7 +51,7 @@ export default function Header() {
   //   const userData = JSON.parse(userDataString) || {};
   //   const customerId = userData.customer_id || {};
 
-  //   const check = await axios.post("http://thatsyourwebsite.com//api/UserCart", {
+  //   const check = await axios.post("http://thatsyourwebsite.com/api/UserCart", {
   //     customer_id: customerId,
   //   });
   //   if (

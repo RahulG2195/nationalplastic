@@ -169,7 +169,7 @@ export const cartSlice = createSlice({
         const userData = JSON.parse(userDataString);
         const customerId = userData.customer_id;
         const response = axios.patch(
-          "http://thatsyourwebsite.com//api/UserCart",
+          "http://thatsyourwebsite.com/api/UserCart",
           {
             customer_id: customerId,
             product_id: product_id,
@@ -227,7 +227,7 @@ export const cartSlice = createSlice({
         const userData = JSON.parse(userDataString);
         const customerId = userData.customer_id;
         const response = axios.patch(
-          "http://thatsyourwebsite.com//api/UserCart",
+          "http://thatsyourwebsite.com/api/UserCart",
           {
             customer_id: customerId,
             product_id: product_id,
@@ -260,15 +260,12 @@ export const addToCart = (item) => async (dispatch, getState) => {
   const userDataString = localStorage.getItem("userData");
   const userData = JSON.parse(userDataString);
   const customerId = userData.customer_id;
-  const response = await axios.put(
-    "http://thatsyourwebsite.com//api/UserCart",
-    {
-      customer_id: customerId,
-      product_id: item.product_id,
-      quantity: item.quantity,
-      color: item.color || "Gold",
-    }
-  );
+  const response = await axios.put("http://thatsyourwebsite.com/api/UserCart", {
+    customer_id: customerId,
+    product_id: item.product_id,
+    quantity: item.quantity,
+    color: item.color || "Gold",
+  });
   //console.log("response From slicer" + response.status);
   //console.log("response From slicer" + response.data);
   //console.log("response From slicer" + response.body);

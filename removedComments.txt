@@ -76,7 +76,7 @@ Chnages on friday rechange before pull/push
     if (userDataString) {
       const userData = JSON.parse(userDataString);
       setCustomerId(userData.customer_id);
-      const check = await axios.post("http://thatsyourwebsite.com//api/UserCart", {
+      const check = await axios.post("http://thatsyourwebsite.com/api/UserCart", {
         customer_id: customerId,
       });
       const value = check.data.products.length;

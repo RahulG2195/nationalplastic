@@ -78,7 +78,7 @@ function ProdData() {
         setProductId(storedId);
 
         const response = await axios.get(
-          "http://thatsyourwebsite.com//api/Products"
+          "http://thatsyourwebsite.com/api/Products"
         );
         let filteredData = [];
         // if (productName) {
@@ -114,7 +114,7 @@ function ProdData() {
     //console.log("Fetching price", storedId);
     try {
       const response = await fetch(
-        "http://thatsyourwebsite.com//api/ProductsCat",
+        "http://thatsyourwebsite.com/api/ProductsCat",
         {
           method: "PUT",
           headers: {

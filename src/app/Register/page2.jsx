@@ -14,9 +14,7 @@ function ProfilePage() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        "http://thatsyourwebsite.com//api/Users"
-      );
+      const response = await axios.get("http://thatsyourwebsite.com/api/Users");
       setUserData(response.data);
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -42,7 +40,7 @@ function ProfilePage() {
     try {
       // Update user data in the database
       const response = await axios.put(
-        "http://thatsyourwebsite.com//api/Users",
+        "http://thatsyourwebsite.com/api/Users",
         userData
       );
       //console.log("Data updated:", response.data);

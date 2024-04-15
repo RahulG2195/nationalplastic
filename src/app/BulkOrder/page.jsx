@@ -13,7 +13,7 @@ const BulkOrder = () => {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          "http://thatsyourwebsite.com//api/Products"
+          "http://thatsyourwebsite.com/api/Products"
         );
         setProdData(response.data.limitProd);
       } catch (error) {

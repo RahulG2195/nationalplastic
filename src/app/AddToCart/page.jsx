@@ -51,7 +51,7 @@ function AddToCart() {
       if (customerId) {
         console.log("If loggedIn user");
         const response = await axios.post(
-          "http://thatsyourwebsite.com//api/UserCart",
+          "http://thatsyourwebsite.com/api/UserCart",
           {
             customer_id: customerId,
           }
@@ -69,7 +69,7 @@ function AddToCart() {
         if (productIds.length === 1) {
           console.log("54");
           const response = await axios.post(
-            "http://thatsyourwebsite.com//api/tempData",
+            "http://thatsyourwebsite.com/api/tempData",
             {
               product_id: productIds[0],
             }
@@ -84,7 +84,7 @@ function AddToCart() {
         } else if (productIds.length > 1) {
           // Send request with multiple product IDs
           const response = await axios.post(
-            "http://thatsyourwebsite.com//api/tempData",
+            "http://thatsyourwebsite.com/api/tempData",
             {
               product_ids: productIds,
             }
@@ -209,7 +209,7 @@ function AddToCart() {
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
       const response = await axios.post(
-        "http://thatsyourwebsite.com//api/UserCart",
+        "http://thatsyourwebsite.com/api/UserCart",
         {
           customer_id: customerId,
         }
@@ -308,7 +308,7 @@ function AddToCart() {
         formData.append("customer_id", customerId);
         formData.append("product_id", product_id);
         const response = await axios.delete(
-          "http://thatsyourwebsite.com//api/UserCart",
+          "http://thatsyourwebsite.com/api/UserCart",
           {
             data: formData,
             headers: {

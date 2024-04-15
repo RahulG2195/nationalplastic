@@ -118,7 +118,7 @@ function ContactUs() {
     //TryCatch For the Email Message
 
     const res = await axios.post(
-      `http://thatsyourwebsite.com//api/sendEmail`,
+      `http://thatsyourwebsite.com/api/sendEmail`,
       formData,
       {
         headers: {
