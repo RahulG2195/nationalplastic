@@ -25,15 +25,17 @@ export default function Header() {
   // const counts = useSelector((state) => state.cart || 0);
   // const [count, setCount] = useState(0);
   function check() {}
+  const userState = useSelector((state) => state.userData.isLoggedIn);
   const productCount = useSelector((state) => {
     let who;
-    if (!isLoggedIn) {
+    if (!userState) {
       who = "temp";
     } else {
       who = "cart";
     }
     const cart = state[who] || {};
-    return cart.products?.reduce((acc, product) => acc + product.quantity, 0);
+    // return cart.products?.reduce((acc, product) => acc + product.quantity, 0);
+    return cart.products?.length || 0;
   });
 
   // Use useState to manage local product count and update function

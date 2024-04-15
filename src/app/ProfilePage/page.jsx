@@ -207,7 +207,7 @@ function ProfilePage() {
       localStorage.removeItem("products");
       localStorage.removeItem("userData");
       localStorage.removeItem("userId");
-
+      localStorage.clear();
       // Update state variables
       // setIsLoggedIn(false);
       setData({}); // Clear user data

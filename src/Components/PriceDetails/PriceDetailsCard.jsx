@@ -12,6 +12,7 @@ const PriceDetailsCard = ({
   redirect,
 }) => {
   const userState = useSelector((state) => state.userData.isLoggedIn);
+  const [InstallationCharge, setInstallationCharge] = useState(40);
   const productCount = useSelector((state) => {
     let who;
     if (!userState) {
@@ -24,7 +25,9 @@ const PriceDetailsCard = ({
   });
   const [count, setCount] = useState(productCount);
   useEffect(() => {
-    setCount(productCount); // Update localCount whenever productCount changes
+    setCount(productCount);
+    setInstallationCharge(productCount * 40);
+    // Update localCount whenever productCount changes
   }, [productCount]);
   console.log("pdc", itemCount);
   const priceFromState = useSelector(
@@ -45,9 +48,9 @@ const PriceDetailsCard = ({
   useEffect(() => {
     setTotalPrice(priceFromState.toFixed(2));
     setMRPPrice(MRPvalue.toFixed(2));
-    setdiscount(MRPPrice - totalPrice);
+    setdiscount(Math.round((MRPvalue - priceFromState) * 100) / 100);
     console.log(DiscountToPoint);
-    const discount = MRPvalue - priceFromState;
+    const discount = Math.round((MRPvalue - priceFromState) * 100) / 100;
     setDiscountCard(discount > 0 ? discount.toFixed(2) : 0);
   }, [priceFromState, MRPvalue, DiscountCard, totalDiscount]);
   return (
@@ -76,7 +79,7 @@ const PriceDetailsCard = ({
           </div>
           <div className={`d-flex justify-content-between mt-1 fw-semibold`}>
             <div className="text-secondary ">Installation Charge</div>
-            <div>Rs {InstallationCharges ? InstallationCharges : "0000"}</div>
+            <div>Rs {InstallationCharge ? InstallationCharge : "0000"}</div>
           </div>
           <div className="border-bottom border-secondary mt-2"></div>
         </div>
@@ -88,7 +91,7 @@ const PriceDetailsCard = ({
             {totalPay
               ? totalPay
               : totalPrice
-              ? parseFloat(totalPrice) + parseFloat(InstallationCharges)
+              ? parseFloat(totalPrice) + parseFloat(InstallationCharge)
               : "0000"}
           </div>
         </div>

@@ -57,6 +57,7 @@ function AddToCart() {
           }
         );
         cartData = response.data.products;
+        console.log(cartData);
         fetchData(cartData);
       } else {
         //Logic to Store Temporary Data
@@ -137,7 +138,7 @@ function AddToCart() {
             image_name: item.image_name,
             description: item.short_description,
             InstallationCharges: item.InstallationCharges,
-            quantity: item.quantity || 1,
+            quantity: item.cart_quantity || item.quantity || 1,
             seo_url: item.seo_url,
             color: item.color,
           }),
