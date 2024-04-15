@@ -147,18 +147,18 @@ function AddToCart() {
         console.log("Response From line Number 132", products);
         // state.products.push(action.payload);
 
-        // products.forEach((product) => {
-        //   dispatch(
-        //     addItemToCartD({
-        //       product_id: product.product_id,
-        //       quantity: product.quantity || 1, // Explicitly set quantity to 1
-        //       price: product.price,
-        //       discount_price: product.discount_price,
-        //       color: product.color,
-        //       from: false,
-        //     })
-        //   );
-        // });
+        products.forEach((product) => {
+          dispatch(
+            addItemToCart({
+              product_id: product.product_id,
+              quantity: product.quantity || 1, // Explicitly set quantity to 1
+              price: product.price,
+              discount_price: product.discount_price,
+              color: product.color,
+              from: false,
+            })
+          );
+        });
         // console.log("Response From line Number 132", products);
         // Calculate total price, discount, total payable, and installation charges
         // Calculate total payable amount, total discount, and total price without discount
