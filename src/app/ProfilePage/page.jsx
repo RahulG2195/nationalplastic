@@ -31,6 +31,11 @@ function ProfilePage() {
     // setIsLoggedIn(isLoggedIn);
     setData(storedData);
   }, []);
+  const [editable, setEditable] = useState(false);
+
+  const allowEdit = () => {
+    setEditable(!editable);
+  };
 
   const [idd, setIdd] = useState(null);
   const [formData, setFormData] = useState({
@@ -234,7 +239,7 @@ function ProfilePage() {
                 </div>
               </div>
               <hr />
-              <div className="EditAccount">
+              <div className="EditAccount " onClick={allowEdit}>
                 <div>
                   <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </div>
@@ -368,8 +373,10 @@ function ProfilePage() {
                                   type="text"
                                   className="form-control  fw-semibold"
                                   placeholder={message.Phone}
+                                  defaultValue={message.Phone}
                                   name="Phone"
                                   onChange={handleInputChange}
+                                  readOnly={!editable}
                                 />
                               </div>
                               <div className="col">
@@ -379,14 +386,20 @@ function ProfilePage() {
                                   type="text"
                                   className="form-control fw-semibold"
                                   placeholder={message.Address}
+                                  defaultValue={message.Address}
                                   onChange={handleInputChange}
                                   name="Address"
+                                  readOnly={!editable}
                                 />
                               </div>
                             </div>
                             <div className="form-group row user-data">
                               <div className="col-sm-10">
-                                <button type="submit" className="btn form-btn">
+                                <button
+                                  type="submit"
+                                  className="btn form-btn"
+                                  hidden={!editable}
+                                >
                                   Update
                                 </button>
                               </div>
@@ -428,7 +441,7 @@ function ProfilePage() {
                           <div className="form-group row">
                             <div className="col-sm-10">
                               <button type="submit" className="btn form-btn">
-                                Update Password
+                                Update
                               </button>
                             </div>
                           </div>
@@ -554,54 +567,7 @@ function ProfilePage() {
                   <h3>Help Desk</h3>
                   <hr />
 
-                  <div>
-                    <form>
-                      <div className="row user-data">
-                        <div className="col">
-                          <label htmlFor="">First name</label>
-                          <input
-                            type="text"
-                            className="form-control fw-semibold"
-                            placeholder="First name"
-                          />
-                        </div>
-                        <div className="col">
-                          <label htmlFor="">Last name</label>
-                          <input
-                            type="text"
-                            className="form-control fw-semibold"
-                            placeholder="Last name"
-                          />
-                        </div>
-                      </div>
-                      <div className="row user-data">
-                        <div className="col">
-                          <label htmlFor="">E-mail Address</label>
-                          <input
-                            type="text"
-                            className="form-control fw-semibold"
-                            placeholder="E-mail Address"
-                          />
-                        </div>
-                        <div className="col">
-                          <label htmlFor="">Mobile Number</label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Mobile Number"
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group row user-data">
-                        <div className="col-sm-10">
-                          <button type="submit" className="btn form-btn">
-                            Update
-                          </button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <h3>Change Password</h3>
+                  <h3>Give a call </h3>
                   <hr />
 
                   <div>

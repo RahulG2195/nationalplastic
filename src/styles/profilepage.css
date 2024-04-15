@@ -6,7 +6,7 @@
     display: inline-block;
     border-radius: 50%;
     /* margin: 20px; */
-    color: #B4B4B4;
+    color: #b4b4b4;
     background-color: #696969;
     font: normal normal normal 14px/1 FontAwesome;
     font-size: 65px;
@@ -18,13 +18,13 @@
 .Left-Profile-inner {
     display: flex;
     /* padding: 20px; */
-    background-color: #F7F7F7;
+    background-color: #f7f7f7;
 }
 
 .Right-Profile,
 .Left-Profile {
     padding: 20px;
-    background-color: #F7F7F7;
+    background-color: #f7f7f7;
     border: 1px solid lightgrey;
 }
 
@@ -37,6 +37,13 @@
     margin: 20px;
 }
 
+.EditAccount:hover {
+    /* Example styles to apply when the EditAccount element is focused */
+    outline: 2px solid blue;
+    /* Example: Adds a blue outline */
+    /* Add your additional styles here */
+}
+
 .fa-pencil-square-o:before {
     content: "\f044";
     margin: 10px;
@@ -44,7 +51,7 @@
 
 .Left-Profile-inner2 {
     margin-top: 30px;
-    background-color: #F7F7F7;
+    background-color: #f7f7f7;
 }
 
 .Right-Profile h3 {
@@ -57,7 +64,7 @@
 }
 
 .form-btn {
-    background-color: #CC0008;
+    background-color: #cc0008;
     border: none;
     color: #fff;
     font-weight: 600;
@@ -93,7 +100,7 @@
 /* Login Page CSS*/
 
 .form-btn-login {
-    background-color: #CC0008;
+    background-color: #cc0008;
     border: none;
     color: #fff;
     font-weight: 600;
@@ -160,7 +167,7 @@
 }
 
 .RegisterHere {
-    color: #CC0008;
+    color: #cc0008;
     font-weight: 800;
 }
 
