@@ -87,7 +87,7 @@ const AddBody = () => {
           cartData = Dummies;
         } else {
           const response = await axios.post(
-            "http://thatsyourwebsite.com/api/UserCart",
+            "http://localhost:3000/api/UserCart",
             {
               customer_id: customerId,
             }

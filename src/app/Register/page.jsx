@@ -61,9 +61,7 @@ function Register() {
     if (Object.keys(errors).length === 0) {
       try {
         // Check if email already exists
-        const { data } = await axios.get(
-          `http://thatsyourwebsite.com/api/Users`
-        );
+        const { data } = await axios.get(`http://localhost:3000/api/Users`);
         const existingEmails = data.map((user) => user.Email);
         if (existingEmails.includes(formData.email)) {
           alert("Email already exists!");
@@ -174,7 +172,7 @@ function Register() {
         <div className="col-md-6">
           <div className="Login-Form">
             <form onSubmit={handleSubmit}>
-              <h3 className="text-center mb-2">Register</h3>
+              <h3 className="text-center mb-2">Registration</h3>
               {successMessage && (
                 <div className="alert alert-success">{successMessage}</div>
               )}

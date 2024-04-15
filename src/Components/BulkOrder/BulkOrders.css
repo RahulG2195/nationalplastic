@@ -24,61 +24,64 @@
 
 .ordersLogo .fw-large {
     font-weight: 800;
-
 }
-.getbottomform{
+
+.getbottomform {
     width: 500px;
 }
+
 .fw-large2 {
     font-weight: 800 !important;
     font-size: 70px !important;
     line-height: 1 !important;
-
 }
 
 .orders_main .bottomForm {
     top: 70%;
     width: 100%;
-
 }
 
 .frmW {
     width: 100%;
     position: relative;
     top: -19%;
-
 }
 
 .getQformBottom {
     position: absolute;
     margin: 0 auto;
-    bottom: -42%;
+    bottom: -36%;
     /* width: 70%; */
     height: 253px;
     background-color: #2E3192;
     left: 0%;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-
 }
 
 .bottomImgOfForm {
     position: absolute;
-    bottom: -44%;
+    bottom: -38%;
     left: 25%;
-    width: 57vw;
+    width: 49vw;
+}
+
+.bulkForm input,
+.input-group-text,
+.text-area {
+    background-color: #4D50A2;
+    border: 1px solid lightgray;
+    color: white;
 }
 
 @media (max-width:1089px) {
     .orders_main {
         max-height: 273vh;
     }
-
     .GQRespTxt {
         margin: 0 !important;
         padding: 0 !important;
     }
-
 }
 
 @media (max-width:767px) {
@@ -87,17 +90,14 @@
         width: 100%;
     }
 }
-    
 
 @media (max-width:993px) {
     .GQFormRes {
         width: 100%;
     }
-
     .getQformBottom {
         display: none;
     }
-
     .bottomImgOfForm {
         bottom: -45%;
         width: 80vw;
@@ -113,7 +113,4 @@
     .bottomImgOfForm {
         display: none !important;
     }
-
-    
-
 }

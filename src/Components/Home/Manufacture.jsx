@@ -63,7 +63,7 @@ export default function Manufacture() {
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get(
-        "http://thatsyourwebsite.com/api/Category"
+        "http://localhost:3000/api/Category"
       );
       //console.log("response of the category ", response.data.categories);
       const filteredData = response.data.categories.filter(
@@ -90,8 +90,8 @@ export default function Manufacture() {
       <div className="px-4">
         <div className="row">
           <div className="text-center mb-5 ">
-            <div className="fs-1 lh-small fw-bolder text-danger ">
-              Indias Largest Manufacturer{" "}
+            <div className="fs-1 lh-small fw-bolder manuf_head">
+              India's Largest Manufacturer
               <p className="darkBlue fs-1 fw-medium">Of Household Products</p>{" "}
             </div>
             <div className="mt-1 fw-medium subCptRes w-50">

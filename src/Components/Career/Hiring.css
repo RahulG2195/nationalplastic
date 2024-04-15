@@ -8,7 +8,6 @@
 }
 
 .HC1::after {
-
     content: url("/Assets/svg/Group 930.svg");
     position: absolute;
     left: 50%;
@@ -18,13 +17,15 @@
     position: relative;
 }
 
-.HC3::after {
+.hirecont {
+    margin-bottom: 80px;
+}
 
+.HC3::after {
     content: url("/Assets/svg/Group 931.svg");
     position: absolute;
     right: 35%;
-    bottom: -1%;
-
+    bottom: -17%;
 }
 
 .Hiringheight {
@@ -41,7 +42,6 @@
     .HC3::after {
         bottom: 0%;
         right: 25%;
-
     }
 }
 
@@ -49,7 +49,6 @@
     .HC3::after {
         bottom: 13%;
         right: 14%;
-
     }
 }
 
@@ -57,34 +56,26 @@
     .HC3::after {
         bottom: 10%;
         right: 15%;
-
     }
-
     .HC1::after {
-
         content: url("/Assets/svg/Group 930.svg");
         position: absolute;
         left: 30%;
     }
-
     .HC2 {
         position: absolute;
         top: 45%;
     }
-
 }
-
 
 @media (max-width:1029px) {
     .HC3::after {
         display: none !important;
     }
-
     .HC1::after {
-
         display: none !important;
     }
-} 
+}
 
 @media (max-width:600px) {
     .HC1::after {
@@ -94,24 +85,18 @@
         top: 95%;
         left: 45%;
     }
-
     .HC3::after {
-
         display: none !important;
-
     }
-
     .HC2::after {
         content: url("/Assets/images/icons8-resize-vertical-64.png");
         position: absolute;
         top: 63%;
         left: 45%;
     }
-
     .HC2 {
         position: static;
     }
-
     .respHiringCards {
         flex-direction: column;
         justify-content: space-evenly !important;
@@ -119,7 +104,4 @@
         margin-bottom: 17px;
         padding-bottom: 100px;
     }
-
-
-
 }

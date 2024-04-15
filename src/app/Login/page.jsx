@@ -51,7 +51,7 @@ function Login() {
     try {
       // //console.log("formDataaaaaaa++++++++++",formData)
       const res = await axios.put(
-        `http://thatsyourwebsite.com/api/Users`,
+        `http://localhost:3000/api/Users`,
         formData
       );
       // //console.log("formDataaaaaaa++++++++++ formData.email on login page",formData.email)
@@ -99,10 +99,10 @@ function Login() {
             objectFit="cover"
           />
         </div>
-        <div className="col-md-6">
+        <div className="col-md-6 bg-white">
           <div className="Login-Form">
-            <form onSubmit={handleSubmit}>
-              <h3 className="text-center mb-2">Login</h3>
+            <form onSubmit={handleSubmit} className="loginForm">
+              <h4 className="text-left loginText mb-2">Login</h4>
               <p>Track your order, create wishlist & more</p>
               <div className="row mb-3 mt-3">
                 <label
@@ -122,6 +122,7 @@ function Login() {
                   />
                 </div>
               </div>
+
               <div className="row mb-3 mt-3">
                 <label
                   htmlFor="inputPassword3"
@@ -129,25 +130,26 @@ function Login() {
                 >
                   Password
                 </label>
+
                 <div className="col-sm-12">
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    className="form-control"
-                    id="inputPassword3"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                  />
-                  <button
-                    type="button"
-                    className="btn btn-toggle-password"
-                    onClick={() => setShowPassword((prevShow) => !prevShow)}
-                    aria-label={
-                      showPassword ? "Hide password" : "Show password"
-                    }
-                  >
-                    {showPassword ? "Hide" : "Show"} Password
-                  </button>
+                  <div class="password-container">
+                    <input type={showPassword ? "text" : "password"} id="password" className="password-field form-control" placeholder="Enter Password" name="password" value={formData.password}
+                      onChange={handleInputChange} />
+                    <i class={`fa ${showPassword ? "fa-eye-slash" : "fa-eye"}`} id="togglePassword" onClick={() => setShowPassword((prevShow) => !prevShow)}></i>
+                  </div>
+                  <p onClick={handleResetPassword} className="pt-2 d-flex justify-content-between">
+                    Forgot Password{" ? "}
+                    <span
+                      style={{ textDecoration: "none", cursor: "pointer" }}
+                      onMouseOver={(e) =>
+                        (e.target.style.textDecoration = "underline")
+                      }
+                      onMouseOut={(e) => (e.target.style.textDecoration = "none")}
+                      className="text-danger text-bold text-uppercase"
+                    >
+                      Reset Password
+                    </span>
+                  </p>
                 </div>
               </div>
               <div className="form-btn-login-div">
@@ -161,7 +163,7 @@ function Login() {
                   ) : (
                     // window.location.reload("/")
 
-                    <Link href="/Login">Login</Link>
+                    <Link href="/Login" className="login_link">Login</Link>
                   )}
                 </button>
               </div>
@@ -178,28 +180,18 @@ function Login() {
                     }
                     onMouseOut={(e) => (e.target.style.textDecoration = "none")}
                     onClick={handleRegisterClick}
+                    className="text-danger text-bold"
                   >
                     Register Here
                   </span>
                 </p>
-                <p onClick={handleResetPassword}>
-                  Forgot Password{" ? "}
-                  <span
-                    style={{ textDecoration: "none", cursor: "pointer" }}
-                    onMouseOver={(e) =>
-                      (e.target.style.textDecoration = "underline")
-                    }
-                    onMouseOut={(e) => (e.target.style.textDecoration = "none")}
-                  >
-                    Reset Password
-                  </span>
-                </p>
+
               </div>
               <div className="row ContinueWithgoogle">
-                <p>
-                  OR Continue With{" "}
-                  <i className="fa fa-google" aria-hidden="true"></i>
-                  <i className="fa fa-facebook" aria-hidden="true"></i>
+                <p className="d-flex justify-content-center">
+                  OR Continue With
+                  <Image src="/Assets/images/search.png" width={20} height={20} alt="google" className="mx-2" />
+                  <Image src="/Assets/images/facebook.png" width={20} height={20} alt="google" />
                 </p>
               </div>
             </form>

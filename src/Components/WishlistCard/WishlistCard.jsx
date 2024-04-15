@@ -38,7 +38,7 @@ const WishlistCard = (props) => {
         closeOnClick: false,
         draggable: false,
         closeButton: false,
-        onClose: () => {}, // Do nothing on close
+        onClose: () => { }, // Do nothing on close
       }
     );
   };
@@ -60,7 +60,7 @@ const WishlistCard = (props) => {
   };
 
   return (
-    <div className="wishlist-card pt-2">
+    <div className="wishlist-card">
       <div className="wishlist-image">
         <Link onClick={setid} href={`/ProductDetail`}>
           <Image

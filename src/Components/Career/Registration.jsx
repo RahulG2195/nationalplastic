@@ -96,7 +96,7 @@ const Registration = () => {
     }
     try {
       const res = await axios.post(
-        `http://thatsyourwebsite.com/api/sendResume`,
+        `http://localhost:3000/api/sendResume`,
         formData,
         {
           headers: {

@@ -6,7 +6,7 @@ import Hirirng_Card from '../Hiring_Cards/Hiring_card'
 const Hiring = () => {
     return (
         <>
-            <div className="main_container pb-5 mb-5">
+            <div className="main_container hirecont pb-5">
 
                 <div className="text-center fw-bold mt-5">
                     <div className=" title2 fs-1 darkBlue">Our Hiring<span className="fw-bold text-danger"> Process</span> </div>

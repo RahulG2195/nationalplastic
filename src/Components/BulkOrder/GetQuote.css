@@ -1,9 +1,23 @@
-.Qt_cont{
-    width:90% ;
-    margin:0 7%;
-
+.Qt_cont {
+    width: 90%;
+    margin: 0 7%;
 }
 
-.GQformprodpage{
-width: 100%;
+.form_title {
+    font-size: 3rem;
+    font-weight: 800;
+}
+
+.GQformprodpage {
+    width: 100%;
+}
+
+.round_prod {
+    margin: 80px 0 0 0;
+}
+
+.form_submit:hover {
+    background: transparent !important;
+    border: 2px solid #fff;
+    color: #fff;
 }

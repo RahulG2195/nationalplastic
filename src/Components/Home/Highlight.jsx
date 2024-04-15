@@ -43,7 +43,7 @@ export default function Highlight() {
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get(
-        "http://thatsyourwebsite.com/api/Products"
+        "http://localhost:3000/api/Products"
       );
       const filteredData = response.data.products.filter(
         (item) => item.categoryType === "highlights"
@@ -60,11 +60,10 @@ export default function Highlight() {
         <div className="row">
           <div className="text-center highlightCont">
             <div className="darkBlue fs-1 fw-medium">
-              Specific{" "}
+              Specific
               <span className="fs-1 lh-small fw-bolder text-danger ">
-                {" "}
                 Product Highlight
-              </span>{" "}
+              </span>
             </div>
             <div className="mt-1 fw-medium subCptRes w-50">
               <p>
@@ -83,7 +82,7 @@ export default function Highlight() {
             <div className=" highlight_col mb-5">
               <div className="d-flex justify-content-center gap-4 flex-wrap">
                 {productArr.map((product) => (
-                  <div key={product.key} className="mt-5 pt-5 pb-5">
+                  <div key={product.key} className="my-2">
                     <Link href="/ProductCatlogue">
                       <div className="card highlightcard">
                         <Image
@@ -97,7 +96,7 @@ export default function Highlight() {
                         />
                         <div className="card-body cardbtm">
                           <h5 className="card-title">{product.product_name}</h5>
-                          <p className="card-text  mb-5 pb-4">
+                          <p className="card-text mb-5 pb-4">
                             {product.short_description}
                           </p>
                           <div className="btn btn-dark text-white rounded-circle highArrow mt-5">

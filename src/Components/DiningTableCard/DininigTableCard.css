@@ -1,5 +1,4 @@
 .DTS {
-
     height: auto;
     width: 50%;
     margin: auto;
@@ -7,13 +6,11 @@
 }
 
 .DTSCaption {
-    height: 150px;
-    width:auto;
+    /* height: 150px; */
+    width: auto;
     text-align: justify;
-    overflow-y: scroll;
-    
-    margin:0 20%;
-   
+    /* overflow-y: scroll; */
+    margin: 0 20%;
 }
 
 .DetailCard {
@@ -28,11 +25,10 @@
 .BottomCardsCptn {
     text-align: left;
     margin: auto;
-
-
 }
-@media (max-width:764px ) {
-    .DTSCaption{
-        margin: 30px ;
+
+@media (max-width:764px) {
+    .DTSCaption {
+        margin: 30px;
     }
 }
