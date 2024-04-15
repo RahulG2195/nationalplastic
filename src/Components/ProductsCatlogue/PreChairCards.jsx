@@ -160,7 +160,7 @@ const PreChairsCards = () => {
       setCategoryType(categoryTitle);
 
       const response = await axios.get(
-        `http://localhost:3000/api/ProductsCat?query=${cat_id}`
+        `http://thatsyourwebsite.com//api/ProductsCat?query=${cat_id}`
       );
       //console.log("API Response:", response.data); // Log API response
 
@@ -243,13 +243,16 @@ const PreChairsCards = () => {
   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch("http://localhost:3000/api/ProductsCat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ product_id: id }),
-      });
+      const response = await fetch(
+        "http://thatsyourwebsite.com//api/ProductsCat",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ product_id: id }),
+        }
+      );
       //console.log(response);
 
       if (!response.ok) {
@@ -347,12 +350,11 @@ const PreChairsCards = () => {
                 onChange={handleArmType}
               >
                 <option value="all">Arm type</option>
-                {
-                  FetchType.map(val => (
-                    <option key={val.category_id} value={val.armType}>{val.armType}</option>
-
-                  ))
-                }
+                {FetchType.map((val) => (
+                  <option key={val.category_id} value={val.armType}>
+                    {val.armType}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="dropdown mt-2 arrow">
@@ -363,12 +365,11 @@ const PreChairsCards = () => {
                 onChange={handleColor}
               >
                 <option value="all">Color</option>
-                {
-                  FetchClr.map(val => (
-                    <option key={val.category_id} value={val.color}>{val.color}</option>
-
-                  ))
-                }
+                {FetchClr.map((val) => (
+                  <option key={val.category_id} value={val.color}>
+                    {val.color}
+                  </option>
+                ))}
               </select>
             </div>
           </div>

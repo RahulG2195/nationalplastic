@@ -96,7 +96,9 @@ const RecentlyViewed = () => {
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/Products");
+        const response = await axios.get(
+          "http://thatsyourwebsite.com//api/Products"
+        );
         const filteredproducts = response.data.products.filter(
           (item) => item.category_id === 17
         );
@@ -116,7 +118,7 @@ const RecentlyViewed = () => {
       const customerId = userData.customer_id;
 
       const response = await axios.post(
-        "http://localhost:3000/api/wishListUser",
+        "http://thatsyourwebsite.com//api/wishListUser",
         {
           customer_id: customerId,
         }
@@ -159,13 +161,16 @@ const RecentlyViewed = () => {
   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch("http://localhost:3000/api/ProductsCat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ product_id: id }),
-      });
+      const response = await fetch(
+        "http://thatsyourwebsite.com//api/ProductsCat",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ product_id: id }),
+        }
+      );
       //console.log(response);
 
       if (!response.ok) {

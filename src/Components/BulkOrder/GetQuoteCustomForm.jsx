@@ -86,7 +86,10 @@ const GetQuoteCustomForm = (props) => {
     if (!isValid) return;
 
     try {
-      await axios.post("http://localhost:3000/api/BulkOrderForm", formData);
+      await axios.post(
+        "http://thatsyourwebsite.com//api/BulkOrderForm",
+        formData
+      );
       notify();
     } catch (error) {
       console.error("Error:", error);
@@ -94,7 +97,7 @@ const GetQuoteCustomForm = (props) => {
     }
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/bulkOrderEmail",
+        "http://thatsyourwebsite.com//api/bulkOrderEmail",
         formData
       );
       // console.log("Response:", response.data);

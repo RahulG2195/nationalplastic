@@ -73,7 +73,7 @@ const Search = (props) => {
       }
 
       const response = await axios.get(
-        `http://localhost:3000/api/search?query=${query}&page=${page}`
+        `http://thatsyourwebsite.com//api/search?query=${query}&page=${page}`
       );
       console.log("response", response);
       console.log("response", response.data.products);
@@ -90,10 +90,10 @@ const Search = (props) => {
         const discountPercentage =
           product.discount_price && product.price
             ? Math.floor(
-              ((product.discount_price - product.price) /
-                product.discount_price) *
-              100
-            )
+                ((product.discount_price - product.price) /
+                  product.discount_price) *
+                  100
+              )
             : 0;
         return discountPercentage;
       });
@@ -111,13 +111,16 @@ const Search = (props) => {
   //   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch("http://localhost:3000/api/ProductsCat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ product_id: id }),
-      });
+      const response = await fetch(
+        "http://thatsyourwebsite.com//api/ProductsCat",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ product_id: id }),
+        }
+      );
       //console.log(response);
 
       if (!response.ok) {
@@ -231,10 +234,11 @@ const Search = (props) => {
                         </i>
                         <i
                           onClick={() => handleAddWishlist(product.product_id)}
-                          className={` ${product.inWishlist
+                          className={` ${
+                            product.inWishlist
                               ? "fa fa-heart"
                               : "fa fa-heart-o ms-3"
-                            }`}
+                          }`}
                           style={
                             product.inWishlist
                               ? { fontSize: "20px", color: "#DC3545" }
