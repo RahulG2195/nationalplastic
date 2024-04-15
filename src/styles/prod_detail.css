@@ -95,6 +95,10 @@
     color: #2E3192;
 }
 
+.product-ccount {
+    padding: 15px 0;
+}
+
 .product-price-discount {
     font-size: 22px;
     font-weight: 400;

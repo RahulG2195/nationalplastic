@@ -51,6 +51,10 @@
     display: block;
 }
 
+.prod_desc_sec {
+    background-color: #fff;
+}
+
 @media (max-width:600px) {
     .product-info-tabs {
         display: none;

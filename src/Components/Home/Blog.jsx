@@ -51,7 +51,7 @@ export default function Blog() {
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get(
-        "http://thatsyourwebsite.com/api/Products"
+        "http://localhost:3000/api/Products"
       );
       const filteredData = response.data.products.filter(
         (item) => item.categoryType === "Blog"
@@ -64,7 +64,7 @@ export default function Blog() {
     <section className="top_pick_sec common_section">
       <div className="container">
         <div className="row">
-          <div className="text-center highlightCont my-5">
+          <div className="text-center highlightCont my-3">
             <div className="fs-1 lh-small fw-bolder text-danger ">Blog</div>
             <div className="mt-1 fw-bold subCptRes w-50">
               <p>Lorem Ipsum</p>

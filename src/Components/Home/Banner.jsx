@@ -48,7 +48,7 @@ function Banner() {
         data-bs-target="#carouselExampleControls"
         data-bs-slide="prev"
       >
-        <span className="carousel-control-prev-icon" aria-hidden="true" />
+        <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
         <span className="visually-hidden">Previous</span>
       </button>
       <button
@@ -57,7 +57,8 @@ function Banner() {
         data-bs-target="#carouselExampleControls"
         data-bs-slide="next"
       >
-        <span className="carousel-control-next-icon" aria-hidden="true" />
+        {/* <span className="carousel-control-next-icon" aria-hidden="true" /> */}
+        <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
         <span className="visually-hidden">Next</span>
       </button>
     </div>

@@ -41,7 +41,7 @@ const Faqs = () => {
       <div className="mt-5 ">
         <div className="text-center">
           <div className="fs-1 fw-bold darkBlue">
-            FAQ<span className="text-danger">S</span>{" "}
+            FAQ'<span className="text-danger">S</span>{" "}
           </div>
         </div>
       </div>
@@ -49,7 +49,7 @@ const Faqs = () => {
       <div className="d-flex flex-column align-items-center">
         {faqData.map((faq, index) => (
           <div key={index} className="mt-2">
-            <Accordion className="py-4">
+            <Accordion className="py-2">
               <AccordionSummary
                 expandIcon={
                   <div className="border border-2 border-black rounded-circle text-black fw-bold">

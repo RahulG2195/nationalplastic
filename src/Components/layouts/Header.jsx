@@ -51,7 +51,7 @@ export default function Header() {
   //   const userData = JSON.parse(userDataString) || {};
   //   const customerId = userData.customer_id || {};
 
-  //   const check = await axios.post("http://thatsyourwebsite.com/api/UserCart", {
+  //   const check = await axios.post("http://localhost:3000/api/UserCart", {
   //     customer_id: customerId,
   //   });
   //   if (
@@ -108,7 +108,7 @@ export default function Header() {
     <>
       <div className="container-fluid  header menbg">
         <TopBar />
-        <nav className="navbar navbar-expand-lg main_header px-5">
+        <nav className="navbar navbar-expand-lg main_header px-3">
           <div className="container-fluid ">
             <div className="navbar-brand">
               <Link href="/#/">

@@ -50,9 +50,9 @@ export default function HappyStory() {
   ];
   return (
     <section className="happy_Story_sec common_section">
-      <div className="">
+      <div className="container">
         <div className="row">
-          <div className="text-center my-5 pt-5">
+          <div className="text-center mb-5">
             <div className="darkBlue fs-1 fw-medium">
               Happy{" "}
               <span className="fs-1 lh-small fw-bolder text-danger ">
@@ -63,13 +63,13 @@ export default function HappyStory() {
               <p>Their Words, Our Pride</p>
             </div>
           </div>
-          <div className="col-18 products_col justify-content-center">
+          <div className="col-12 products_col justify-content-center">
             <div className="row ">
               <Swiper
                 style={{
                   "--swiper-navigation-color": "#787978",
                   "--swiper-pagination-color": "#787978",
-                  width: "75%",
+                  // width: "75%",
                   height: "100%",
                 }}
                 className="swipper px-5 swpr "

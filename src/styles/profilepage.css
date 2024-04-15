@@ -106,9 +106,17 @@
     font-size: 20px;
 }
 
+.form-btn-login a {
+    color: #fff;
+}
+
 .form-btn-login:hover {
-    background-color: gray;
-    color: #000;
+    background-color: white;
+    border: 1px solid var(--header-primary-clr);
+}
+
+.form-btn-login:hover .login_link {
+    color: var(--header-primary-clr) !important;
 }
 
 .Login-Page-ImgForm {
@@ -118,10 +126,15 @@
 
 .Login-Form {
     margin: 20px auto;
+    padding: 0 20px;
 }
 
 .login-image {
     padding: 0px;
+}
+
+.loginForm p {
+    font-size: 14px;
 }
 
 .form-btn-login-div {
@@ -169,6 +182,27 @@
     padding: 2px;
     border: 2px solid #0043ff;
     margin: 0px;
+}
+
+.password-container {
+    position: relative;
+}
+
+.password-field {
+    padding-right: 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.fa-eye,
+.fa-eye-slash {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #ccc;
 }
 
 

@@ -86,7 +86,7 @@ const GetQuoteForm = (props) => {
 
     try {
       await axios.post(
-        "http://thatsyourwebsite.com/api/BulkOrderForm",
+        "http://localhost:3000/api/BulkOrderForm",
         formData
       );
       notify();
@@ -96,7 +96,7 @@ const GetQuoteForm = (props) => {
     }
     try {
       const response = await axios.post(
-        "http://thatsyourwebsite.com/api/bulkOrderEmail",
+        "http://localhost:3000/api/bulkOrderEmail",
         formData
       );
       // console.log("Response:", response.data);
@@ -118,7 +118,7 @@ const GetQuoteForm = (props) => {
   return (
     <>
       <div
-        className={`GQform rounded p-5 py-5 mt-2 GQFormRes rounded-4 ${props.bottomclass} `}
+        className={`GQform rounded p-5 py-5 mt-2 GQFormRes rounded-4 bulkForm ${props.bottomclass} `}
       >
         <form onSubmit={handleOnSubmit}>
           <div className="mb-4">
@@ -185,6 +185,15 @@ const GetQuoteForm = (props) => {
               placeholder="City"
             />
           </div>
+          <div className="mb-4">
+            <input
+              type="text"
+              name="organisation"
+              onChange={handleOnChange}
+              className="form-control"
+              placeholder="organisation"
+            />
+          </div>
           <div className="d-flex justify-content-center GQFormSubmitRes">
             <button
               type="submit"
@@ -192,7 +201,7 @@ const GetQuoteForm = (props) => {
               className={
                 props.className
                   ? props.className
-                  : "btn bg-white darkBlue fw-semibold px-4"
+                  : "btn bg-white darkBlue form_submit fw-semibold px-4"
               }
             >
               Submit

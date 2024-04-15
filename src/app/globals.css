@@ -82,7 +82,7 @@ p {
 }
 
 .common_section {
-    margin: 100px 0;
+    margin: 70px 0;
 }
 
 .carousel-item img {
@@ -99,7 +99,7 @@ p {
 .section_header h2 {
     font-size: 40px;
     color: var(--header-secondary-clr);
-    padding: 0 0 55px 0;
+    padding: 0 0 10px 0;
     text-transform: capitalize;
 }
 
@@ -225,6 +225,16 @@ p {
 
 .subCptRes {
     margin: auto;
+}
+
+.fa-arrow-circle-left,
+.fa-arrow-circle-right {
+    font-size: 30px;
+}
+
+.loginText {
+    font-weight: 500;
+    font-size: 23px;
 }
 
 @media (max-width:992px) {
@@ -379,23 +389,35 @@ p {
 }
 
 .dropdown {
-    position: relative; /* Make the dropdown container relative for positioning */
-  }
-  
-  .dropdown-menu {
-    position: absolute; /* Make the menu absolute relative to the dropdown */
-    display: flex; /* Use flexbox for layout */
-    flex-direction: column; /* Stack items vertically */
-    background-color: #fff; /* Set background color */
-    border: 1px solid #ddd; /* Add a border */
-    min-width: 150px; /* Set a minimum width for the menu */
-    max-width: calc(100vw - 20px); /* Set max-width to viewport width minus 20px padding */
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Add a shadow */
-    right: 0; /* Position the menu to the right by default */
-  }
-  
-  /* Flip the menu to the left if it overflows the viewport on the right side */
-  .dropdown-menu.dropdown-menu-end {
+    position: relative;
+    /* Make the dropdown container relative for positioning */
+}
+
+.dropdown-menu {
+    position: absolute;
+    /* Make the menu absolute relative to the dropdown */
+    display: flex;
+    /* Use flexbox for layout */
+    flex-direction: column;
+    /* Stack items vertically */
+    background-color: #fff;
+    /* Set background color */
+    border: 1px solid #ddd;
+    /* Add a border */
+    min-width: 150px;
+    /* Set a minimum width for the menu */
+    max-width: calc(100vw - 20px);
+    /* Set max-width to viewport width minus 20px padding */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    /* Add a shadow */
+    right: 0;
+    /* Position the menu to the right by default */
+}
+
+
+/* Flip the menu to the left if it overflows the viewport on the right side */
+
+.dropdown-menu.dropdown-menu-end {
     right: auto;
     left: 0;
-  }
+}

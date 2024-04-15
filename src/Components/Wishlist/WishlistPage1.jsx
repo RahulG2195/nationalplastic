@@ -20,7 +20,7 @@ const WishlistPage1 = () => {
     const fetchData = async () => {
       try {
         const response = await axios.post(
-          "http://thatsyourwebsite.com/api/wishListUser",
+          "http://localhost:3000/api/wishListUser",
           { customer_id: customerId }
         );
         // const wishlistData = response.data.products;
@@ -75,7 +75,7 @@ const WishlistPage1 = () => {
         console.log("Entryyyyyyyyy" + entry);
       }
       const response = await axios.delete(
-        "http://thatsyourwebsite.com/api/wishListUser",
+        "http://localhost:3000/api/wishListUser",
         { data: formData }
       );
 

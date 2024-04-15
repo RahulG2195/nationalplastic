@@ -1,4 +1,5 @@
 /* Common styles for both mobile and desktop */
+
 .wishlist-card {
     border: 1px solid #dee2e6;
     border-radius: 0.25rem;
@@ -23,7 +24,7 @@
 }
 
 .wishlist-details h5,
-.wishlist-details p{
+.wishlist-details p {
     font-size: medium;
 }
 
@@ -46,28 +47,29 @@
     margin-left: 0.5rem;
 }
 
-.moveTocartResp{
+.moveTocartResp {
     background-color: #FE0000;
     color: #fff;
-
 }
 
-.moveTocartResp:hover{
+.moveTocartResp:hover {
     color: #FE0000;
     border: 1px solid currentColor;
     background-color: #fff;
 }
 
-.og_price span{
+.og_price span {
     font-size: 14px;
     padding-left: 10px;
 }
 
-.actions_btn{
+.actions_btn {
     display: flex;
 }
 
+
 /* Mobile styles */
+
 @media (max-width: 600px) {
     .wishlist-card {
         display: flex;
@@ -76,95 +78,80 @@
         max-width: 500px;
         margin: auto;
     }
-
     .wishlist-image {
         flex: 0 0 auto;
     }
-
     .wishlist-details {
         flex-direction: column;
         align-items: center;
     }
-
     .wishCptResp {
         width: 100% !important;
         text-align: center;
     }
-
     .WishpriceRsp {
         display: flex;
         gap: 10px;
         margin-bottom: 19px !important;
         margin-top: 10px !important;
     }
-
     .wishlist-buttons {
         gap: 10px;
     }
-
 }
 
 @media (max-width:1080px) {
     .moveTocartResp {
         font-size: small !important;
     }
-
     .WishpriceRsp {
         font-size: small !important;
     }
-
     .wishCptResp h5,
     .wishCptResp p {
         font-size: small !important;
-
     }
-
     .delResp {
         padding: 2px !important;
     }
-
 }
 
 @media (max-width:925px) {
     .moveTocartResp {
         font-size: x-small !important;
     }
-    .wishlist-details{
+    .wishlist-details {
         flex: 1 !important;
-   }
+    }
 }
 
 @media (max-width:867px) {
     .moveTocartResp {
         padding: 5px !important;
     }
-
     .wishlist-details {
         padding-left: 0 !important;
     }
-
-
 }
 
 @media (min-width:1261px) {
-
     .WishpriceRsp {
         margin-left: 10% !important;
     }
 }
 
+
 /* Desktop styles */
-@media (min-width: 4px) {
+
+@media (min-width: 480px) {
     .wishlist-card {
         display: flex;
         align-items: center !important;
     }
-
     .wishlist-image {
         flex: 0 0 auto;
         margin-right: 1rem;
     }
-
     .wishlist-buttons {
         margin-left: auto;
     }

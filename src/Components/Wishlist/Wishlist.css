@@ -1,12 +1,11 @@
-.WCcontainer{
-    height:max-content;
+.WCcontainer {
+    height: max-content;
     width: 90vw;
-    background-color:#F6F6F6;
-    
+    background-color: #fff;
 }
-.WCcontainer h4{
-    color:#262262 ;
+
+.WCcontainer h4 {
+    color: #262262;
     font: normal normal bold;
     border-bottom: 1px solid #1E1F1E99;
-
 }

@@ -78,7 +78,7 @@ function ProdData() {
         setProductId(storedId);
 
         const response = await axios.get(
-          "http://thatsyourwebsite.com/api/Products"
+          "http://localhost:3000/api/Products"
         );
         let filteredData = [];
         // if (productName) {
@@ -114,7 +114,7 @@ function ProdData() {
     //console.log("Fetching price", storedId);
     try {
       const response = await fetch(
-        "http://thatsyourwebsite.com/api/ProductsCat",
+        "http://localhost:3000/api/ProductsCat",
         {
           method: "PUT",
           headers: {
@@ -312,13 +312,13 @@ function ProdData() {
                 />
                 <p
                   onClick={() => handleMoveToCart(productId, initialCount)}
-                  className="btn bg-danger text-white m-2 px-5 ProdbtnRes"
+                  className="btn m-2 px-5 ProdbtnRes"
                 >
                   Add to Cart
                 </p>
                 <Link
                   href="/Address"
-                  className="btn bg-danger text-white m-2 px-5 ProdbtnRes"
+                  className="btn m-2 px-5 ProdbtnRes"
                   onClick={() => handleMoveToCart(productId)}
                 >
                   Buy Now
@@ -409,8 +409,8 @@ function ProdData() {
           </div>
         </div>
 
-        <MoreProduct />
       </div>
+        <MoreProduct />
 
       <div>
         {/* <!-- Modal --> */}

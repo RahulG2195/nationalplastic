@@ -3,14 +3,14 @@ import TopPicsCard from '../TopPicsCard/TopPicsCard';
 import GetQuoteForm from './GetQuoteForm';
 import './GetQuote.css';
 
-const GetQuote = ({proddata}) => {
+const GetQuote = ({ proddata }) => {
     const chunkArray = (arr, size) => {
         const chunkedArray = [];
         for (let i = 0; i < arr.length; i += size) {
-          chunkedArray.push(arr.slice(i, i + size));
+            chunkedArray.push(arr.slice(i, i + size));
         }
         return chunkedArray;
-      };
+    };
 
     //   console.log('quotes' + proddata);
     const imageData = [
@@ -29,7 +29,7 @@ const GetQuote = ({proddata}) => {
         <>
             <div className="main_container">
                 <div className="row Qt_cont mt-5">
-                    <div className="col-lg-6 col-md-12">
+                    <div className="col-lg-6 col-md-12 round_prod">
                         <div className="row">
                             {imageData.map((data, index) => (
                                 <div key={index} className="col-lg-4 col-md-4 col-sm-4 col-xs-6 mt-5">
@@ -38,11 +38,11 @@ const GetQuote = ({proddata}) => {
                             ))}
                         </div>
                     </div>
-                    
+
                     {/* multi prod form  */}
                     <div className="col-lg-6 col-md-12 mt-5">
                         <div className="text-center fw-bold">
-                            <div className="darkBlue fs-1">GET <span className="text-danger">QUOTE</span></div>
+                            <div className="form_title">GET <span className="text-danger">QUOTE</span></div>
                         </div>
                         <GetQuoteForm />
                     </div>

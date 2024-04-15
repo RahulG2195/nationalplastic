@@ -37,14 +37,13 @@ function BottomBar() {
     // //console.log("nameenamee", name)
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://thatsyourwebsite.com/api/Products");
+        const res = await axios.get("http://localhost:3000/api/Products");
         const allproducts = res.data.products;
 
         // start -- fetch category which want to display on navbar
         const nav = await axios.get(
-          "http://thatsyourwebsite.com/api/NavCategory"
+          "http://localhost:3000/api/NavCategory"
         );
-        console.log("nav ", nav);
         const navshow = nav.data.navshow;
         SetAllProd(allproducts);
         setNavbar(navshow);
@@ -106,11 +105,11 @@ function BottomBar() {
   };
   // console.log('img' + getImg);
   return (
-    <div className=" px-5  d-flex align-items-center bottom_nav position-relative mainrow">
+    <div className=" px-5 d-flex align-items-center bottom_nav position-relative mainrow">
       {navbar.map((val) => (
         <div
           key={val.category_id}
-          className={`col  px-3 py-2 ${
+          className={`px-2 py-2 ${
             val.category_name == "Stools" ||
             val.category_name == "Tables" ||
             val.category_name == "Drawer" ||

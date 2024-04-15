@@ -1,15 +1,16 @@
 .GQform {
-    margin:auto ;
+    margin: auto;
     width: 70%;
     background-color: #2E3192;
 }
 
-.GQformprodpage{
+.GQformprodpage {
     width: 100% !important;
-    }
-    .modal-content-mypopup{
-        background-color: #2e3192 !important;
-    }
+}
+
+.modal-content-mypopup {
+    background-color: #2e3192 !important;
+}
 
 .GQform .input-group-text {
     background-color: #686AB0 !important;
@@ -18,12 +19,12 @@
 .GQform input,
 .input-group-text,
 .text-area {
-    background-color: #4D50A2;
-    border: none;
+    /* background-color: #4D50A2; */
+    border: 1px solid lightgray;
     color: white;
 }
 
-.GQform .text-area{
+.GQform .text-area {
     height: auto !important;
 }
 
@@ -36,48 +37,48 @@
 .GQform button {
     margin: 0 auto;
 }
-.m-auto{
+
+.m-auto {
     align-self: center;
 }
-.sbmtButton{
+
+.sbmtButton {
     position: absolute;
-    z-index: 99; 
+    z-index: 99;
     top: 95%;
-    left: 20%;
+    left: 14%;
     background-color: white;
     color: #2E3192;
     font-weight: bold;
-    padding: 5px 20px;
+    padding: 8px 25px;
+    font-size: 18px;
     border: none;
     border-radius: 10px;
-    
-
 }
+
 @media (max-width:600px) {
-    .GQFormRes{
+    .GQFormRes {
         padding: 10px !important;
         margin: 0 !important;
         width: 100%;
-        }
-
-        .GQFormRes input, .GQFormRes textarea {
-            font-size: x-small;
-        }
-        
-        .GQFormRes .reqCaptRes{
-            font-size:xx-small;
-
-        }
-        .GQFormSubmitRes button{
-            padding:5px 10px !important ;
-            font-size: small;
-        }
-        .sbmtButton{
-            position: absolute;
-            top: 87%;
-            left: 41%;
-        }
-        .getbottomform{
-            padding-bottom: 50px !important;
-        }
+    }
+    .GQFormRes input,
+    .GQFormRes textarea {
+        font-size: x-small;
+    }
+    .GQFormRes .reqCaptRes {
+        font-size: xx-small;
+    }
+    .GQFormSubmitRes button {
+        padding: 5px 10px !important;
+        font-size: small;
+    }
+    .sbmtButton {
+        position: absolute;
+        top: 87%;
+        left: 41%;
+    }
+    .getbottomform {
+        padding-bottom: 50px !important;
+    }
 }
