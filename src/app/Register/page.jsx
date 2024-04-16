@@ -23,7 +23,7 @@ function Register() {
   const [successMessage, setSuccessMessage] = useState("");
   const mailUpdate = async () => {
     const response = await axios.post(
-      "http://thatsyourwebsite.com/api/RegisterEmail",
+      "http://localhost:3000/api/RegisterEmail",
       formData
     );
   };
@@ -66,19 +66,19 @@ function Register() {
         if (existingEmails.includes(formData.email)) {
           alert("Email already exists!");
         } else {
-          const securePass = await encryptPassword(formData.password);
-          if (!securePass) {
-            console.error("Error in encryption");
-            return;
-          }
-          // Store the hash in the database
-          console.log(securePass);
-          const formDataWithEncryptedPassword = { ...formData };
-          formDataWithEncryptedPassword.password = securePass;
+          // const securePass = await encryptPassword(formData.password);
+          // if (!securePass) {
+          //   console.error("Error in encryption");
+          //   return;
+          // }
+          // // Store the hash in the database
+          // console.log(securePass);
+          // const formDataWithEncryptedPassword = { ...formData };
+          // formDataWithEncryptedPassword.password = securePass;
 
           const response = axios.post(
-            "http://thatsyourwebsite.com/api/Users",
-            formDataWithEncryptedPassword
+            "http://localhost:3000/api/Users",
+            formData
           );
           console.log("Form submitted:", response);
           // Clear form data on successful submission

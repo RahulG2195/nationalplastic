@@ -1,6 +1,7 @@
 import { query } from "@/lib/db"; // Assuming 'your-database-module' is the correct path to your database module
 // const router = useRouter();
 import { NextRequest, NextResponse } from "next/server";
+import bcrypt from "bcryptjs";
 
 export async function POST(request) {
   const data = await request.formData();
@@ -24,11 +25,12 @@ export async function PUT(request) {
   const data = await request.formData();
   const Password = data.get("password");
   const resetEmail = data.get("resetEmail" || "email");
+  const hashedPassword = await bcrypt.hash(Password, 12);
 
   try {
     const result = await query({
       query: "UPDATE customer SET Password = ?  WHERE Email = ?;",
-      values: [Password, resetEmail],
+      values: [hashedPassword, resetEmail],
     });
     //console.log("FROM TRY catch" + result);
 

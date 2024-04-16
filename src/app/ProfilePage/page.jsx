@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { notify, notifyError } from "@/utils/notify.js";
+import { useSelector } from "react-redux";
 
 function ProfilePage() {
   useEffect(() => {
@@ -31,7 +33,36 @@ function ProfilePage() {
     // setIsLoggedIn(isLoggedIn);
     setData(storedData);
   }, []);
+  const userEmail = useSelector((state) => state.userData.email);
+
   const [editable, setEditable] = useState(false);
+  const [adress2, setAdress2] = useState("");
+
+  const handleInputAddressChange = (event) => {
+    setAdress2(event.target.value);
+  };
+
+  const updateAddressTwo = async (event) => {
+    event.preventDefault();
+    const data = {
+      Adress2: adress2,
+      Id: cust_id,
+    };
+    console.log("Address2:", adress2);
+    const response = await axios.put(
+      "http://localhost:3000/api/UserProfile",
+      data
+    );
+    const status = response.statusCode || response.status;
+    if (status === 200) {
+      notify("Updated address");
+    } else {
+      notifyError(response.message);
+    }
+    console.log(response.body);
+
+    setAdress2("");
+  };
 
   const allowEdit = () => {
     setEditable(!editable);
@@ -49,72 +80,40 @@ function ProfilePage() {
     phone: "",
     address: "",
   });
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [data, setData] = useState({});
-  // const [phone, setPhone] = useState(null);
   const [messages, setMessages] = useState([]);
   const cust_id = messages.length > 0 ? messages[0].customer_id : null;
   const email_id = messages.length > 0 ? messages[0].Email : null;
-  // //console.log(" messages.length=========", messages.length)
-
-  // const UpdateData = {
-  //   email: email_id,
-  //   customer_id: cust_id,
-  // };
-  // localStorage.setItem("userId", JSON.stringify(UpdateData));
-
-  // //console.log("UpdateDataaaaaaaaaaaaaaaaaaaaaaaaaaaa Profile page", UpdateData)
-
-  // //console.log("ssssssssssssssssssssssss",cust_id , email_id)
 
   const [editedData, setEditedData] = useState({
     Id: "",
-    // Email: "",
     Phone: "",
     Address: "",
   });
 
-  // //console.log("eeeeeeeeeeeeeeddddddddddiiiiiiiittttttt",cust_id)
-
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const email = localStorage.getItem("userData");
-        const data = JSON.parse(email);
-        // const id = JSON.parse(customer_id);
-        const useremail = data.email;
-        // //console.log("oLIne no 77 from profilePagebject")
-
+        console.log("mahn");
         const formData = {
-          email: useremail,
+          email: userEmail,
           getProfile: true,
         };
+        console.log("Error fetching user data:", formData);
 
-        const response = await axios.put(
-          "http://localhost:3000/api/Users",
-          formData
-        );
-        // //console.log("After -------------------response on profile page", formData);
-        // //console.log(response.data);
-        // //console.log("JSONDATA " + JSON.stringify(response.data));
+        const response = await axios.put("/api/Users", formData);
+        console.log("Error fetching user data:", response);
+
         const userData = response.data.message[0]; // Directly access response.data.message
-        // //console.log("JSONDATA " + JSON.stringify(userData));
         const { customer_id, Email } = userData; // Destructure from userData, not from JSON.stringify
-        // //console.log("-", customer_id);
-        // //console.log("-", Email);
         const UpdateData = {
           email: Email,
           customer_id: customer_id,
         };
         localStorage.setItem("userData", JSON.stringify(UpdateData));
-
-        // Email
-        // localStorage.setItem("userData", true);
-
         const responseData = response.data;
         const messageArray = responseData.message;
         setMessages(messageArray);
-
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -133,7 +132,6 @@ function ProfilePage() {
       Id: cust_id,
     }));
 
-    // //console.log("name0000000000000/////////////////////////////", editedData);
     let errorMessage = "";
 
     // Validate phone number
@@ -166,37 +164,21 @@ function ProfilePage() {
       const email = formData.get("email");
       const phone = formData.get("phone");
       const address = formData.get("address");
-      // //console.log("email========================", email)
-      // Validate the form data
-      // if (!email || !phone || !address) {
-      //   toast.error("Please provide all required information");
-      //   return;
-      // }
 
-      // Construct the data object to be sent to the API
       const userData = {
-        // Id: id,
         Email: email,
         Phone: phone,
         Address: address,
       };
-      // Send updated data to userProfile API
-      // //console.log("userData======222222222222222======", userData);
       const response = await axios.post(
         "http://localhost:3000/api/UserProfile",
         editedData
       );
-
-      // //console.log("Form submitted editedData:", editedData);
-      // Handle success response
-      // //console.log("Updated data:", response.data);
       toast.success("Data updated successfully");
-      // //console.log("LIne 165:::");
       if (response.status == 200) {
         fetchUserData();
       }
     } catch (error) {
-      // Handle error
       console.error("Error updating data:", error);
       toast.error("Error updating data. Please try again.");
     }
@@ -204,21 +186,9 @@ function ProfilePage() {
 
   async function handleLogout(e) {
     e.preventDefault();
-
-    // Confirmation prompt (optional, can be replaced with a custom component)
     if (window.confirm("Are you sure you want to log out?")) {
-      // Clear localStorage (remove `isLoggedIn` key only for better control)
-      localStorage.removeItem("isLoggedIn");
-      localStorage.removeItem("products");
-      localStorage.removeItem("userData");
-      localStorage.removeItem("userId");
       localStorage.clear();
-      // Update state variables
-      // setIsLoggedIn(false);
       setData({}); // Clear user data
-
-      // Redirect after logout (optional)
-      // router.push('/login'); // Use Next.js router for navigation
       window.location.href = "/";
     }
   }
@@ -428,7 +398,7 @@ function ProfilePage() {
                     {(Array.isArray(messages) && messages.length > 0) ||
                     messages !== null ? (
                       messages.map((message, index) => (
-                        <form key={index}>
+                        <form key={index} onSubmit={updateAddressTwo}>
                           <div className="row user-data">
                             <div className="col">
                               <label htmlFor="">Secondary Address</label>
@@ -436,7 +406,13 @@ function ProfilePage() {
                                 required
                                 type="text"
                                 className="form-control fw-semibold"
-                                placeholder="Address"
+                                placeholder={
+                                  message.Adress2 || "Please enter Address"
+                                }
+                                defaultValue={
+                                  message.Adress2 || "Please enter Address"
+                                }
+                                onChange={handleInputAddressChange}
                               />
                             </div>
                           </div>
@@ -444,7 +420,7 @@ function ProfilePage() {
                           <div className="form-group row">
                             <div className="col-sm-10">
                               <button type="submit" className="btn form-btn">
-                                Add
+                                {message.Adress2 ? "Update" : "Add"}
                               </button>
                             </div>
                           </div>

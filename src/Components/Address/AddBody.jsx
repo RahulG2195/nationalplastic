@@ -52,7 +52,7 @@ const AddBody = () => {
       };
 
       const response = await axios.put(
-        "http://thatsyourwebsite.com/api/Users",
+        "http://localhost:3000/api/Users",
         formData
       );
       const userData = response.data.message[0];
@@ -351,14 +351,14 @@ const AddBody = () => {
                       </div>
                     )}
                   </div>
-                  <div className="d-flex justify-content-center">
+                  {/* <div className="d-flex justify-content-center">
                     <button
                       type="button"
                       className="btn border Darkblue fw-semibold border-danger mt-2 viewMoreResp"
                     >
                       View More . . .{" "}
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
