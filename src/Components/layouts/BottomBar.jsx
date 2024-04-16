@@ -37,12 +37,12 @@ function BottomBar() {
     // //console.log("nameenamee", name)
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/Products");
+        const res = await axios.get("http://thatsyourwebsite.com/api/Products");
         const allproducts = res.data.products;
 
         // start -- fetch category which want to display on navbar
         const nav = await axios.get(
-          "http://localhost:3000/api/NavCategory"
+          "http://thatsyourwebsite.com/api/NavCategory"
         );
         const navshow = nav.data.navshow;
         SetAllProd(allproducts);

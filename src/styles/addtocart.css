@@ -55,12 +55,32 @@
     margin: 50px auto;
 }
 .my-cart{
-    background-color: #F6F6F6; 
+    background-color: #fff;
+    box-shadow: 0 0 12px 2px lightgrey;
+    border-radius: 5px;
     padding: 19px 10px;
     margin: 10px;
 }
 
+.coupenDiv{
+    background-color: #fff;
+    box-shadow: 0 0 12px 2px lightgrey;
+    border-radius: 5px;
+    padding: 19px 10px;
+    margin: 10px;
+}
 
+.coupon_btn{
+    background-color: #C9070F;
+    color: #fff;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.coupon_btn:focus-visible{
+    border: 1px solid lightgray;
+    outline: 1px;
+}
 .locationPin .input-group input{
     font-size: 12px;
     width: 140px;
@@ -142,8 +162,10 @@ box-shadow:none !important;
  
  .place-order .PriceDetail{ 
     margin: 10px;
-    padding: 10px;
-    background-color: #F6F6F6;
+    padding: 25px;
+    background-color: #fff;
+    box-shadow: 0 0 12px 2px lightgrey;
+    border-radius: 5px;
  }
 
 

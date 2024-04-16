@@ -13,7 +13,7 @@ const nextConfig = {
         MYSQL_HOST: "localhost",
         MYSQL_DATABASE: "nationalplastic_db",
         MYSQL_USER: "root",
-        MYSQL_PASSWORD: "",
+        MYSQL_PASSWORD: "National2024",
         MYSQL_PORT: "3306",
     },
 };

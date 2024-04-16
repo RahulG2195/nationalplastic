@@ -87,7 +87,7 @@ const AddBody = () => {
           cartData = Dummies;
         } else {
           const response = await axios.post(
-            "http://localhost:3000/api/UserCart",
+            "http://thatsyourwebsite.com/api/UserCart",
             {
               customer_id: customerId,
             }
@@ -179,7 +179,7 @@ const AddBody = () => {
       <div className="main_container  position-relative">
         <div className="container text-center mb-5 pb-5">
           <div className="row gap-5 ">
-            <div className="col-md-8 px-5 Addleft">
+            <div className="col-md-8 p-lg-4 p-md-3 p-2 Addleft">
               <div className="bordrBtm ">
                 <p className="text-start fw-semibold confirm bordrBtm p-3">
                   Confirm Order
@@ -198,19 +198,21 @@ const AddBody = () => {
                 </div>
                 <div className="text-start customerAddress">
                   {editable ? (
-                    <div className="medium fw-semibold checkOutCptResp flex">
-                      <input
-                        type="text"
-                        value={address}
+                    <div className="medium fw-semibold checkOutCptResp block">
+                      <textarea
+                        // type="text"
+                        // value={address}
                         onChange={handleChange}
                         className="form-control"
                         placeholder={address}
-                      />
+                      >
+                      {address}
+                      </textarea>
                       <button
                         onClick={handleSubmit}
-                        className="sizing rounded-2 fw-semibold bg-success text-white border-0"
+                        className="sizing rounded-2 fw-semibold btn btn-danger text-white border-0 my-3 py-2 px-4 text-center"
                       >
-                        Submit{" "}
+                       Save
                       </button>
                     </div>
                   ) : (
@@ -245,6 +247,7 @@ const AddBody = () => {
                     type="radio"
                     name="flexRadioDefault"
                     id="flexRadioDefault1"
+                    checked
                   />
                   <label
                     className="form-check-label "
@@ -336,7 +339,7 @@ const AddBody = () => {
                   </p>
                   <div>
                     {productDetailArr.length === 0 ? (
-                      <h2 className="text-secondary">No products in cart</h2>
+                      <h5 className="text-secondary text-center p-2">No products in cart</h5>
                     ) : (
                       <div className="container">
                         {productDetailArr.map((val) => (
@@ -351,14 +354,14 @@ const AddBody = () => {
                       </div>
                     )}
                   </div>
-                  <div className="d-flex justify-content-center">
+                  {/* <div className="d-flex justify-content-center">
                     <button
                       type="button"
                       className="btn border Darkblue fw-semibold border-danger mt-2 viewMoreResp"
                     >
                       View More . . .{" "}
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

@@ -51,7 +51,7 @@ export default function Blog() {
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get(
-        "http://localhost:3000/api/Products"
+        "http://thatsyourwebsite.com/api/Products"
       );
       const filteredData = response.data.products.filter(
         (item) => item.categoryType === "Blog"

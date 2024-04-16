@@ -51,7 +51,7 @@ function AddToCart() {
       if (customerId) {
         console.log("If loggedIn user");
         const response = await axios.post(
-          "http://localhost:3000/api/UserCart",
+          "http://thatsyourwebsite.com/api/UserCart",
           {
             customer_id: customerId,
           }
@@ -69,7 +69,7 @@ function AddToCart() {
         if (productIds.length === 1) {
           console.log("54");
           const response = await axios.post(
-            "http://localhost:3000/api/tempData",
+            "http://thatsyourwebsite.com/api/tempData",
             {
               product_id: productIds[0],
             }
@@ -84,7 +84,7 @@ function AddToCart() {
         } else if (productIds.length > 1) {
           // Send request with multiple product IDs
           const response = await axios.post(
-            "http://localhost:3000/api/tempData",
+            "http://thatsyourwebsite.com/api/tempData",
             {
               product_ids: productIds,
             }
@@ -169,7 +169,7 @@ function AddToCart() {
                 parseFloat(product.price) * parseFloat(product.quantity);
               const discountedProductTotal = product.discount_price
                 ? parseFloat(product.discount_price) *
-                  parseFloat(product.quantity)
+                parseFloat(product.quantity)
                 : productTotal;
 
               totals.totalPriceWithoutDiscount += productTotal;
@@ -209,7 +209,7 @@ function AddToCart() {
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
       const response = await axios.post(
-        "http://localhost:3000/api/UserCart",
+        "http://thatsyourwebsite.com/api/UserCart",
         {
           customer_id: customerId,
         }
@@ -308,7 +308,7 @@ function AddToCart() {
         formData.append("customer_id", customerId);
         formData.append("product_id", product_id);
         const response = await axios.delete(
-          "http://localhost:3000/api/UserCart",
+          "http://thatsyourwebsite.com/api/UserCart",
           {
             data: formData,
             headers: {
@@ -363,10 +363,10 @@ function AddToCart() {
           <div className="col-md-8">
             <div className="row my-cart">
               <div className="col-md-4 py-3">
-                <h5>My Cart ( {count} )</h5>
+                <h5>My Cart ( {count} Items)</h5>
               </div>
-              <div className="col-md-8 search-pin">
-                {/* <div className="LocationIconPin">
+              {/* <div className="col-md-8 search-pin">
+                <div className="LocationIconPin">
                   <div className="locationIcon">
                     <div className="iconImage">
                       <Image
@@ -393,12 +393,12 @@ function AddToCart() {
                       </div>
                     </div>
                   </div>
-                </div> */}
-              </div>
+                </div>
+              </div> */}
               <hr />
-              <div>
+              <div className="cartList">
                 {productDetailArr.length === 0 ? (
-                  <h2 className="text-secondary">No products in cart</h2>
+                  <h5 className="text-secondary text-center py-2">No products in cart</h5>
                 ) : (
                   <div className="container RowCont">
                     {productDetailArr.map((val) => (
@@ -414,7 +414,7 @@ function AddToCart() {
                           discPer={Math.floor(
                             ((val.discount_price - val.price) /
                               val.discount_price) *
-                              100
+                            100
                           )}
                           color={val.color}
                           installationCharges={val.InstallationCharges}
@@ -443,6 +443,17 @@ function AddToCart() {
             </div>
           </div>
           <div className="col-sm-12 col-md-4 col-lg-4 col-xl-4 place-order">
+            <div className="coupenDiv p-4">
+              <h6 className="pb-2">Have a coupon Code?</h6>
+              <form>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="" aria-label="coupon code" aria-describedby="basic-addon2" />
+                    <div class="input-group-append">
+                      <span class="input-group-text coupon_btn" id="basic-addon2">Apply</span>
+                    </div>
+                </div>
+              </form>
+            </div>
             <PriceDetailsCard
               itemCount={totalCount}
               cartPrice={totalPrice}
