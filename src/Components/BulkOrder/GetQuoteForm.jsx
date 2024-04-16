@@ -86,7 +86,7 @@ const GetQuoteForm = (props) => {
 
     try {
       await axios.post(
-        "http://thatsyourwebsite.com/api/BulkOrderForm",
+        "/api/BulkOrderForm",
         formData
       );
       notify();
@@ -96,7 +96,7 @@ const GetQuoteForm = (props) => {
     }
     try {
       const response = await axios.post(
-        "http://thatsyourwebsite.com/api/bulkOrderEmail",
+        "/api/bulkOrderEmail",
         formData
       );
       // console.log("Response:", response.data);

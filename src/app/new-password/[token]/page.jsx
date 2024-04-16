@@ -97,7 +97,7 @@ const PasswordToken = () => {
       if (Date.now() < expiry) {
         //console.log("yes  here");
         const res = await axios.put(
-          `http://thatsyourwebsite.com/api/forgotPassword`,
+          `/api/forgotPassword`,
           formDataToSend
         );
         //console.log(res);

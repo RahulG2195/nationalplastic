@@ -25,7 +25,7 @@ const TopPics = () => {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          "http://thatsyourwebsite.com/api/Category"
+          "/api/Category"
         );
 
         setCategories(response.data.categories);

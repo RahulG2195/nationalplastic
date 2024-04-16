@@ -51,7 +51,7 @@ function Login() {
     try {
       // //console.log("formDataaaaaaa++++++++++",formData)
       const res = await axios.put(
-        `http://thatsyourwebsite.com/api/Users`,
+        `/api/Users`,
         formData
       );
       // //console.log("formDataaaaaaa++++++++++ formData.email on login page",formData.email)

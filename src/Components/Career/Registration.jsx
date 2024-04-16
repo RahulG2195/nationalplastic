@@ -96,7 +96,7 @@ const Registration = () => {
     }
     try {
       const res = await axios.post(
-        `http://thatsyourwebsite.com/api/sendResume`,
+        `/api/sendResume`,
         formData,
         {
           headers: {

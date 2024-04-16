@@ -5,13 +5,13 @@
 // Allow requests from your Next.js domain
 app.use(
     cors({
-        origin: "http://thatsyourwebsite.com/",
+        origin: "/",
     })
 );
 // // Allow requests from your Next.js domain
 // app.use(
 //   cors({
-//     origin: "http://thatsyourwebsite.com/",
+//     origin: "/",
 //   })
 // );=
 // // Other routes and middleware...

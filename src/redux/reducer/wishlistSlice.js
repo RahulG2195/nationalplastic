@@ -74,7 +74,7 @@ export const addItemToWishlist = (item) => async(dispatch, getState) => {
     const customerId = userData.customer_id;
     //console.log("Customer Id: " + customerId);
     const check = await axios.post(
-        "http://thatsyourwebsite.com/api/wishListUser", {
+        "/api/wishListUser", {
             customer_id: customerId,
         }
     );
@@ -89,7 +89,7 @@ export const addItemToWishlist = (item) => async(dispatch, getState) => {
     if (isWishlistEmpty || !isItemAlreadyAdded) {
         try {
             const response = await axios.put(
-                "http://thatsyourwebsite.com/api/wishListUser", {
+                "/api/wishListUser", {
                     customer_id: customerId,
                     product_id: item.product_id,
                 }

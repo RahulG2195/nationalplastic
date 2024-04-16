@@ -49,7 +49,7 @@ function ProfilePage() {
         };
 
         const response = await axios.put(
-          "http://thatsyourwebsite.com/api/Users",
+          "/api/Users",
           formData
         );
 
@@ -72,7 +72,7 @@ function ProfilePage() {
     try {
       // Send updated data to userProfile API
       const response = await axios.put(
-        "http://thatsyourwebsite.com/api/UserProfile",
+        "/api/UserProfile",
         data
       );
       // Handle success response

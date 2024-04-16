@@ -92,7 +92,7 @@ function ProfilePage() {
         };
 
         const response = await axios.put(
-          "http://thatsyourwebsite.com/api/Users",
+          "/api/Users",
           formData
         );
         // //console.log("After -------------------response on profile page", formData);
@@ -184,7 +184,7 @@ function ProfilePage() {
       // Send updated data to userProfile API
       // //console.log("userData======222222222222222======", userData);
       const response = await axios.post(
-        "http://thatsyourwebsite.com/api/UserProfile",
+        "/api/UserProfile",
         editedData
       );
 

@@ -52,7 +52,7 @@ const AddBody = () => {
       };
 
       const response = await axios.put(
-        "http://thatsyourwebsite.com/api/Users",
+        "/api/Users",
         formData
       );
       const userData = response.data.message[0];
@@ -87,7 +87,7 @@ const AddBody = () => {
           cartData = Dummies;
         } else {
           const response = await axios.post(
-            "http://thatsyourwebsite.com/api/UserCart",
+            "/api/UserCart",
             {
               customer_id: customerId,
             }
