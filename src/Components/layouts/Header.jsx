@@ -26,6 +26,8 @@ export default function Header() {
   // const [count, setCount] = useState(0);
   function check() {}
   const userState = useSelector((state) => state.userData.isLoggedIn);
+  const userEmail = useSelector((state) => state.userData.email);
+
   const productCount = useSelector((state) => {
     let who;
     if (!userState) {
@@ -263,7 +265,7 @@ export default function Header() {
                         src="/Assets/svg/Group 4.svg"
                         alt="location"
                       />
-                      <p className="Homeemail">{"data.email"}</p>
+                      <p className="Homeemail">{userEmail}</p>
                     </Link>
                   ) : (
                     <Link

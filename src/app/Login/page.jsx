@@ -50,10 +50,7 @@ function Login() {
 
     try {
       // //console.log("formDataaaaaaa++++++++++",formData)
-      const res = await axios.put(
-        `/api/Users`,
-        formData
-      );
+      const res = await axios.put(`/api/Users`, formData);
       // //console.log("formDataaaaaaa++++++++++ formData.email on login page",formData.email)
       // //console.log("this is statussssssssssssssssss  login page", res.data);
       // //console.log("this is statussssssssssssssssss  login page", res.data.email);
@@ -133,18 +130,34 @@ function Login() {
 
                 <div className="col-sm-12">
                   <div class="password-container">
-                    <input type={showPassword ? "text" : "password"} id="password" className="password-field form-control" placeholder="Enter Password" name="password" value={formData.password}
-                      onChange={handleInputChange} />
-                    <i class={`fa ${showPassword ? "fa-eye-slash" : "fa-eye"}`} id="togglePassword" onClick={() => setShowPassword((prevShow) => !prevShow)}></i>
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      id="password"
+                      className="password-field form-control"
+                      placeholder="Enter Password"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleInputChange}
+                    />
+                    <i
+                      class={`fa ${showPassword ? "fa-eye-slash" : "fa-eye"}`}
+                      id="togglePassword"
+                      onClick={() => setShowPassword((prevShow) => !prevShow)}
+                    ></i>
                   </div>
-                  <p onClick={handleResetPassword} className="pt-2 d-flex justify-content-between">
+                  <p
+                    onClick={handleResetPassword}
+                    className="pt-2 d-flex justify-content-between"
+                  >
                     Forgot Password{" ? "}
                     <span
                       style={{ textDecoration: "none", cursor: "pointer" }}
                       onMouseOver={(e) =>
                         (e.target.style.textDecoration = "underline")
                       }
-                      onMouseOut={(e) => (e.target.style.textDecoration = "none")}
+                      onMouseOut={(e) =>
+                        (e.target.style.textDecoration = "none")
+                      }
                       className="text-danger text-bold text-uppercase"
                     >
                       Reset Password
@@ -163,7 +176,9 @@ function Login() {
                   ) : (
                     // window.location.reload("/")
 
-                    <Link href="/Login" className="login_link">Login</Link>
+                    <Link href="/Login" className="login_link">
+                      Login
+                    </Link>
                   )}
                 </button>
               </div>
@@ -185,13 +200,23 @@ function Login() {
                     Register Here
                   </span>
                 </p>
-
               </div>
               <div className="row ContinueWithgoogle">
                 <p className="d-flex justify-content-center">
                   OR Continue With
-                  <Image src="/Assets/images/search.png" width={20} height={20} alt="google" className="mx-2" />
-                  <Image src="/Assets/images/facebook.png" width={20} height={20} alt="google" />
+                  <Image
+                    src="/Assets/images/search.png"
+                    width={20}
+                    height={20}
+                    alt="google"
+                    className="mx-2"
+                  />
+                  <Image
+                    src="/Assets/images/facebook.png"
+                    width={20}
+                    height={20}
+                    alt="google"
+                  />
                 </p>
               </div>
             </form>

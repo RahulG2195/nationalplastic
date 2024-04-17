@@ -22,10 +22,7 @@ function Register() {
   const [formErrors, setFormErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
   const mailUpdate = async () => {
-    const response = await axios.post(
-      "/api/RegisterEmail",
-      formData
-    );
+    const response = await axios.post("/api/RegisterEmail", formData);
   };
 
   const handleSubmit = async (event) => {
@@ -66,15 +63,15 @@ function Register() {
         if (existingEmails.includes(formData.email)) {
           alert("Email already exists!");
         } else {
-          const securePass = await encryptPassword(formData.password);
-          if (!securePass) {
-            console.error("Error in encryption");
-            return;
-          }
-          // Store the hash in the database
-          console.log(securePass);
-          const formDataWithEncryptedPassword = { ...formData };
-          formDataWithEncryptedPassword.password = securePass;
+          // const securePass = await encryptPassword(formData.password);
+          // if (!securePass) {
+          //   console.error("Error in encryption");
+          //   return;
+          // }
+          // // Store the hash in the database
+          // console.log(securePass);
+          // const formDataWithEncryptedPassword = { ...formData };
+          // formDataWithEncryptedPassword.password = securePass;
 
           const response = axios.post(
             "/api/Users",

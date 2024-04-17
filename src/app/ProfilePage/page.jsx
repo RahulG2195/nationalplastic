@@ -6,9 +6,13 @@ import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/router";
-
+import { notify, notifyError } from "@/utils/notify.js";
+import { useSelector } from "react-redux";
+import {
+  isValidPassword,
+  isValidReason, // Address validations
+} from "@/utils/validation";
 function ProfilePage() {
-
   useEffect(() => {
     localStorage.getItem("isLoggedIn") === "true"
       ? true
@@ -19,20 +23,93 @@ function ProfilePage() {
         ? true
         : (window.location.href = "Login");
 
-    // //console.log("isLoggedIn+++++", isLoggedIn)
     const storedData = JSON.parse(localStorage.getItem("userData")) || {};
     // Retrieve data from local storage
     const userDataString = localStorage.getItem("userData");
     // Convert the retrieved data from string to JSON object
     const userDataID = JSON.parse(userDataString);
-    // //console.log("userDataID....", isLoggedIn);
 
     // Example: Accessing the email property
 
     // setIsLoggedIn(isLoggedIn);
     setData(storedData);
   }, []);
+  const userEmail = useSelector((state) => state.userData.email);
+
   const [editable, setEditable] = useState(false);
+  const [adress2, setAdress2] = useState("");
+
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  // Get user ID from context (replace with your logic)
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError(null);
+    setSuccess(null);
+
+    if (!newPassword || !confirmPassword) {
+      setError("Missing required fields (newPassword, confirmPassword)");
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    try {
+      const requestData = {
+        newPassword: newPassword,
+        confirmPassword: confirmPassword,
+        Id: cust_id,
+      };
+
+      // Send DELETE request to the API endpoint
+      const response = await axios.patch("/api/Users", requestData);
+
+      if (response.data.status === 200) {
+        setSuccess("Password updated successfully!");
+        setNewPassword("");
+        setConfirmPassword("");
+      } else {
+        setError(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error updating password:", error);
+      setError("Internal server error");
+    }
+  };
+
+  const handleInputAddressChange = (event) => {
+    setAdress2(event.target.value);
+  };
+
+  const updateAddressTwo = async (event) => {
+    event.preventDefault();
+    const data = {
+      Adress2: adress2,
+      Id: cust_id,
+    };
+    if (!isValidReason(adress2)) {
+      toast.error("Please enter a  Valid address.");
+      return;
+    }
+    const response = await axios.put(
+      "http://localhost:3000/api/UserProfile",
+      data
+    );
+    const status = response.statusCode || response.status;
+    if (status === 200) {
+      notify("Updated address");
+    } else {
+      notifyError(response.message);
+    }
+
+    setAdress2("");
+  };
 
   const allowEdit = () => {
     setEditable(!editable);
@@ -50,72 +127,37 @@ function ProfilePage() {
     phone: "",
     address: "",
   });
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [data, setData] = useState({});
-  // const [phone, setPhone] = useState(null);
   const [messages, setMessages] = useState([]);
   const cust_id = messages.length > 0 ? messages[0].customer_id : null;
   const email_id = messages.length > 0 ? messages[0].Email : null;
-  // //console.log(" messages.length=========", messages.length)
-
-  // const UpdateData = {
-  //   email: email_id,
-  //   customer_id: cust_id,
-  // };
-  // localStorage.setItem("userId", JSON.stringify(UpdateData));
-
-  // //console.log("UpdateDataaaaaaaaaaaaaaaaaaaaaaaaaaaa Profile page", UpdateData)
-
-  // //console.log("ssssssssssssssssssssssss",cust_id , email_id)
 
   const [editedData, setEditedData] = useState({
     Id: "",
-    // Email: "",
     Phone: "",
     Address: "",
   });
 
-  // //console.log("eeeeeeeeeeeeeeddddddddddiiiiiiiittttttt",cust_id)
-
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const email = localStorage.getItem("userData");
-        const data = JSON.parse(email);
-        // const id = JSON.parse(customer_id);
-        const useremail = data.email;
-        // //console.log("oLIne no 77 from profilePagebject")
-
         const formData = {
-          email: useremail,
+          email: userEmail,
           getProfile: true,
         };
 
-        const response = await axios.put(
-          "/api/Users",
-          formData
-        );
-        // //console.log("After -------------------response on profile page", formData);
-        // //console.log(response.data);
-        // //console.log("JSONDATA " + JSON.stringify(response.data));
+        const response = await axios.put("/api/Users", formData);
+
         const userData = response.data.message[0]; // Directly access response.data.message
-        // //console.log("JSONDATA " + JSON.stringify(userData));
         const { customer_id, Email } = userData; // Destructure from userData, not from JSON.stringify
-        // //console.log("-", customer_id);
-        // //console.log("-", Email);
         const UpdateData = {
           email: Email,
           customer_id: customer_id,
         };
         localStorage.setItem("userData", JSON.stringify(UpdateData));
-
-        // Email
-        // localStorage.setItem("userData", true);
-
         const responseData = response.data;
         const messageArray = responseData.message;
         setMessages(messageArray);
-
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -127,14 +169,11 @@ function ProfilePage() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-
     setEditedData((prevData) => ({
       ...prevData,
       [name]: value,
       Id: cust_id,
     }));
-
-    // //console.log("name0000000000000/////////////////////////////", editedData);
     let errorMessage = "";
 
     // Validate phone number
@@ -142,6 +181,13 @@ function ProfilePage() {
       const phoneNumber = value.replace(/\D/g, ""); // Remove non-digit characters
       if (phoneNumber.length !== 10) {
         errorMessage = "Phone number must be 10 digits";
+      }
+    }
+    if (name === "address") {
+      const allowedChars = /^[a-zA-Z0-9\s]+$/; // Regular expression for allowed characters
+      if (!allowedChars.test(value)) {
+        errorMessage =
+          "Address can only contain spaces, numbers, and letters (a-z, A-Z).";
       }
     }
 
@@ -159,45 +205,17 @@ function ProfilePage() {
 
   const handleEdit = async (e) => {
     e.preventDefault();
-    //console.log("event" + e.target);
     try {
-      // Gather form data from the event target
-      const formData = new FormData(e.target);
-      //console.log(".........formData", formData);
-      const email = formData.get("email");
-      const phone = formData.get("phone");
-      const address = formData.get("address");
-      // //console.log("email========================", email)
-      // Validate the form data
-      // if (!email || !phone || !address) {
-      //   toast.error("Please provide all required information");
-      //   return;
-      // }
-
-      // Construct the data object to be sent to the API
-      const userData = {
-        // Id: id,
-        Email: email,
-        Phone: phone,
-        Address: address,
+      const updatedData = {
+        ...editedData, // Copy existing properties from editedData
+        Id: cust_id, // Add or update Id property
       };
-      // Send updated data to userProfile API
-      // //console.log("userData======222222222222222======", userData);
-      const response = await axios.post(
-        "/api/UserProfile",
-        editedData
-      );
 
-      // //console.log("Form submitted editedData:", editedData);
-      // Handle success response
-      // //console.log("Updated data:", response.data);
+      const response = await axios.post("/api/UserProfile", updatedData);
+      notify("UserProfile updated");
       toast.success("Data updated successfully");
-      // //console.log("LIne 165:::");
-      if (response.status == 200) {
-        fetchUserData();
-      }
     } catch (error) {
-      // Handle error
+      notifyError(error.message);
       console.error("Error updating data:", error);
       toast.error("Error updating data. Please try again.");
     }
@@ -205,21 +223,9 @@ function ProfilePage() {
 
   async function handleLogout(e) {
     e.preventDefault();
-
-    // Confirmation prompt (optional, can be replaced with a custom component)
     if (window.confirm("Are you sure you want to log out?")) {
-      // Clear localStorage (remove `isLoggedIn` key only for better control)
-      localStorage.removeItem("isLoggedIn");
-      localStorage.removeItem("products");
-      localStorage.removeItem("userData");
-      localStorage.removeItem("userId");
       localStorage.clear();
-      // Update state variables
-      // setIsLoggedIn(false);
       setData({}); // Clear user data
-
-      // Redirect after logout (optional)
-      // router.push('/login'); // Use Next.js router for navigation
       window.location.href = "/";
     }
   }
@@ -354,7 +360,7 @@ function ProfilePage() {
                     } */}
 
                       {Array.isArray(messages) ||
-                        (messages.length > 0 && messages != null) ? (
+                      (messages.length > 0 && messages != null) ? (
                         messages.map((message, index) => (
                           <form key={index} onSubmit={handleEdit}>
                             <div className="row user-data">
@@ -414,7 +420,12 @@ function ProfilePage() {
                             <div className="row user-data">
                               <div className="col">
                                 <label htmlFor="">Address</label>
-                                <textarea className="form-control fw-semibold" name="Address" readOnly={!editable}>
+                                <textarea
+                                  className="form-control fw-semibold"
+                                  name="Address"
+                                  readOnly={!editable}
+                                  onChange={handleInputChange}
+                                >
                                   {message.Address}
                                 </textarea>
                               </div>
@@ -442,29 +453,32 @@ function ProfilePage() {
 
                   <div>
                     {(Array.isArray(messages) && messages.length > 0) ||
-                      messages !== null ? (
+                    messages !== null ? (
                       messages.map((message, index) => (
-                        <form key={index}>
+                        <form key={index} onSubmit={updateAddressTwo}>
                           <div className="row user-data">
                             <div className="col">
                               <label htmlFor="">Secondary Address</label>
-                              {/* <input
+
+                              <textarea
                                 required
                                 type="text"
                                 className="form-control fw-semibold"
-                                placeholder="Address"
-                              /> */}
-                              <textarea required
-                                type="text"
-                                className="form-control fw-semibold"
-                                placeholder="Address"></textarea>
+                                placeholder={
+                                  message.Adress2 || "Please enter Address"
+                                }
+                                defaultValue={
+                                  message.Adress2 || "Please enter Address"
+                                }
+                                onChange={handleInputAddressChange}
+                              ></textarea>
                             </div>
                           </div>
 
                           <div className="form-group row">
                             <div className="col-sm-10">
                               <button type="submit" className="btn form-btn">
-                                Add
+                                {message.Adress2 ? "Update" : "Add"}
                               </button>
                             </div>
                           </div>
@@ -591,10 +605,16 @@ function ProfilePage() {
                   <hr />
                   <div className="row mx-auto">
                     <div className="col-md-6">
-                      <a href="tel: +91000000000"><strong>Give a call :</strong><u> 0000000000000 </u></a>
+                      <a href="tel: +91000000000">
+                        <strong>Give a call :</strong>
+                        <u> 0000000000000 </u>
+                      </a>
                     </div>
                     <div className="col-md-6">
-                      <a href="mail:nationalplastic@gmail.com"><strong>Or Send Mail to us :</strong><u>nationaplastic@gmail.com </u></a>
+                      <a href="mail:nationalplastic@gmail.com">
+                        <strong>Or Send Mail to us :</strong>
+                        <u>nationaplastic@gmail.com </u>
+                      </a>
                     </div>
                   </div>
                   <hr />
@@ -624,7 +644,7 @@ function ProfilePage() {
                   <h3>Change Password</h3>
                   <hr />
                   <div>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                       <div className="row user-data">
                         <div className="col">
                           <label htmlFor="">New Password</label>
@@ -633,6 +653,8 @@ function ProfilePage() {
                             required
                             className="form-control fw-semibold"
                             placeholder="New Password"
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
                           />
                         </div>
                         <div className="col">
@@ -642,9 +664,18 @@ function ProfilePage() {
                             required
                             className="form-control fw-semibold"
                             placeholder="Confirm Password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
                           />
                         </div>
                       </div>
+
+                      {error && (
+                        <div className="alert alert-danger">{error}</div>
+                      )}
+                      {success && (
+                        <div className="alert alert-success">{success}</div>
+                      )}
 
                       <div className="form-group row">
                         <div className="col-sm-10">

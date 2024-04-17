@@ -51,10 +51,7 @@ const AddBody = () => {
         getProfile: true,
       };
 
-      const response = await axios.put(
-        "/api/Users",
-        formData
-      );
+      const response = await axios.put("/api/Users", formData);
       const userData = response.data.message[0];
       //console.log("userData", userData);
       //console.log("userData", JSON.stringify(userData));
@@ -86,12 +83,9 @@ const AddBody = () => {
           //console.log("Dummies ", JSON.stringify(Dummies));
           cartData = Dummies;
         } else {
-          const response = await axios.post(
-            "/api/UserCart",
-            {
-              customer_id: customerId,
-            }
-          );
+          const response = await axios.post("/api/UserCart", {
+            customer_id: customerId,
+          });
           getAdress();
           cartData = response.data.products;
         }
@@ -206,13 +200,13 @@ const AddBody = () => {
                         className="form-control"
                         placeholder={address}
                       >
-                      {address}
+                        {address}
                       </textarea>
                       <button
                         onClick={handleSubmit}
                         className="sizing rounded-2 fw-semibold btn btn-danger text-white border-0 my-3 py-2 px-4 text-center"
                       >
-                       Save
+                        Save
                       </button>
                     </div>
                   ) : (
@@ -339,7 +333,9 @@ const AddBody = () => {
                   </p>
                   <div>
                     {productDetailArr.length === 0 ? (
-                      <h5 className="text-secondary text-center p-2">No products in cart</h5>
+                      <h5 className="text-secondary text-center p-2">
+                        No products in cart
+                      </h5>
                     ) : (
                       <div className="container">
                         {productDetailArr.map((val) => (
