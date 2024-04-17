@@ -20,6 +20,7 @@ const GetQuoteForm = (props) => {
   useEffect(() => {
     // This effect runs once when the component mounts, updating products state
     setProducts(props.product);
+    notify("Product Added to BulkOrder Form");
   }, [props.product]);
   const [formData, setFromData] = useState({
     fullName: "",
