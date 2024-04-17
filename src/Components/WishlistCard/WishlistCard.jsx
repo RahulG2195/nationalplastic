@@ -75,7 +75,7 @@ const WishlistCard = (props) => {
         </Link>
       </div>
       <div className="wishlist-details d-flex justify-content-evenly px-0">
-        <div className="w-50 wishCptResp">
+        <div className="wishCptResp">
           <Link onClick={setid} href={`/ProductDetail`}>
             <h5 className="card-title ProductTitle fw-semibold">
               {props.productName}

@@ -24,14 +24,11 @@ const AwardsAndCertificates = () => {
                     <div className="col-md-3 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
                     <div className="col-md-3 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
                     <div className="col-md-3 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
-                </div>
-                <div className="row">
                     <div className="col-md-3 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
                     <div className="col-md-3 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
                     <div className="col-md-3 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
                     <div className="col-md-3 my-2"><Card imgsrc="https://picsum.photos/539/354" /></div>
                 </div>
-
             </div>
         </div>
     )

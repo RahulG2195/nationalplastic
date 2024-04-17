@@ -97,7 +97,7 @@ const RecentlyViewed = () => {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/Products"
+          "/api/Products"
         );
         const filteredproducts = response.data.products.filter(
           (item) => item.category_id === 17
@@ -118,7 +118,7 @@ const RecentlyViewed = () => {
       const customerId = userData.customer_id;
 
       const response = await axios.post(
-        "http://localhost:3000/api/wishListUser",
+        "/api/wishListUser",
         {
           customer_id: customerId,
         }
@@ -162,7 +162,7 @@ const RecentlyViewed = () => {
   const fetchPrice = async (id) => {
     try {
       const response = await fetch(
-        "http://localhost:3000/api/ProductsCat",
+        "/api/ProductsCat",
         {
           method: "POST",
           headers: {

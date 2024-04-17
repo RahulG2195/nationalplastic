@@ -10,6 +10,7 @@ import { notify, notifyError } from "@/utils/notify.js";
 import { useSelector } from "react-redux";
 
 function ProfilePage() {
+
   useEffect(() => {
     localStorage.getItem("isLoggedIn") === "true"
       ? true
@@ -171,7 +172,7 @@ function ProfilePage() {
         Address: address,
       };
       const response = await axios.post(
-        "http://localhost:3000/api/UserProfile",
+        "/api/UserProfile",
         editedData
       );
       toast.success("Data updated successfully");
@@ -269,14 +270,25 @@ function ProfilePage() {
                 >
                   Help Desk
                 </a>
+                <a
+                  className="d-flex list-group-item list-group-item-action fw-semibold logout_btn"
+                  id="list-settings-lists"
+                  data-bs-toggle="list"
+                  onClick={handleLogout}
+                >
+                  <div>
+                    <i className="fa fa-sign-out" aria-hidden="true"></i>
+                  </div>
+                  <p className="fw-semibold">Logout</p>
+                </a>
               </div>
 
-              <div onClick={handleLogout} className="EditAccount">
+              {/* <div onClick={handleLogout} className="EditAccount list-group-item list-group-item-action fw-semibold">
                 <div>
                   <i className="fa fa-sign-out" aria-hidden="true"></i>
                 </div>
                 <p className="fw-semibold">Logout</p>
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -312,7 +324,7 @@ function ProfilePage() {
                     } */}
 
                       {Array.isArray(messages) ||
-                      (messages.length > 0 && messages != null) ? (
+                        (messages.length > 0 && messages != null) ? (
                         messages.map((message, index) => (
                           <form key={index} onSubmit={handleEdit}>
                             <div className="row user-data">
@@ -323,18 +335,27 @@ function ProfilePage() {
                                 readOnly
                               />
 
-                              <div className="col">
-                                <label htmlFor="">Name</label>
+                              <div className="col-md-6">
+                                <label htmlFor="">First Name</label>
                                 <input
                                   type="text"
                                   className="form-control fw-semibold"
-                                  placeholder={`${message.FirstName} ${message.LasttName}`}
+                                  placeholder={`${message.FirstName} `}
+                                  readOnly
+                                />
+                              </div>
+                              <div className="col-md-6">
+                                <label htmlFor="">Last Name</label>
+                                <input
+                                  type="text"
+                                  className="form-control fw-semibold"
+                                  placeholder={`${message.LasttName}`}
                                   readOnly
                                 />
                               </div>
                             </div>
                             <div className="row user-data">
-                              <div className="col">
+                              <div className="col-md-6">
                                 <label htmlFor="email">E-mail Address</label>
                                 <input
                                   // name="email"
@@ -346,7 +367,7 @@ function ProfilePage() {
                                   readOnly
                                 />
                               </div>
-                              <div className="col">
+                              <div className="col-md-6">
                                 <label htmlFor="">Mobile Number</label>
                                 <input
                                   // name="phone"
@@ -359,18 +380,13 @@ function ProfilePage() {
                                   readOnly={!editable}
                                 />
                               </div>
+                            </div>
+                            <div className="row user-data">
                               <div className="col">
                                 <label htmlFor="">Address</label>
-                                <input
-                                  // name="address"
-                                  type="text"
-                                  className="form-control fw-semibold"
-                                  placeholder={message.Address}
-                                  defaultValue={message.Address}
-                                  onChange={handleInputChange}
-                                  name="Address"
-                                  readOnly={!editable}
-                                />
+                                <textarea className="form-control fw-semibold" name="Address" readOnly={!editable}>
+                                  {message.Address}
+                                </textarea>
                               </div>
                             </div>
                             <div className="form-group row user-data">
@@ -391,18 +407,18 @@ function ProfilePage() {
                       )}
                     </div>
                   </div>
-                  <h3>Add Secondary Address</h3>
+                  <h3 className="fs-4 fw-semibold">Add Secondary Address</h3>
                   <hr />
 
                   <div>
                     {(Array.isArray(messages) && messages.length > 0) ||
-                    messages !== null ? (
+                      messages !== null ? (
                       messages.map((message, index) => (
                         <form key={index} onSubmit={updateAddressTwo}>
                           <div className="row user-data">
                             <div className="col">
                               <label htmlFor="">Secondary Address</label>
-                              <input
+                              {/* <input
                                 required
                                 type="text"
                                 className="form-control fw-semibold"
@@ -545,8 +561,14 @@ function ProfilePage() {
                 <div className="Right-Profile">
                   <h3>Help Desk</h3>
                   <hr />
-
-                  <h3>Give a call : 0000000000000 </h3>
+                  <div className="row mx-auto">
+                    <div className="col-md-6">
+                      <a href="tel: +91000000000"><strong>Give a call :</strong><u> 0000000000000 </u></a>
+                    </div>
+                    <div className="col-md-6">
+                      <a href="mail:nationalplastic@gmail.com"><strong>Or Send Mail to us :</strong><u>nationaplastic@gmail.com </u></a>
+                    </div>
+                  </div>
                   <hr />
                 </div>
               </div>
@@ -560,7 +582,7 @@ function ProfilePage() {
                   <h3>Order List </h3>
                   <hr />
 
-                  <h3>No Order Placed </h3>
+                  <h5 className="text-center p-2">No Order Placed </h5>
                   <hr />
                 </div>
               </div>
@@ -577,19 +599,21 @@ function ProfilePage() {
                     <form>
                       <div className="row user-data">
                         <div className="col">
-                          <label htmlFor="">Old Password</label>
-                          <input
-                            type="password"
-                            required
-                            className="form-control fw-semibold"
-                          />
-                        </div>
-                        <div className="col">
                           <label htmlFor="">New Password</label>
                           <input
                             type="password"
                             required
                             className="form-control fw-semibold"
+                            placeholder="New Password"
+                          />
+                        </div>
+                        <div className="col">
+                          <label htmlFor="">Confirm Password</label>
+                          <input
+                            type="password"
+                            required
+                            className="form-control fw-semibold"
+                            placeholder="Confirm Password"
                           />
                         </div>
                       </div>

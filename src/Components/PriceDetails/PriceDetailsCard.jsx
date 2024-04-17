@@ -95,20 +95,20 @@ const PriceDetailsCard = ({
               : "0000"}
           </div>
         </div>
-        <div className="small my-2 text-success">
-          Congratulations, you have just saved RS{" "}
+        <div className="small my-2 text-success text-center">
+          Congratulations, you have just saved RS
           {totalDiscount ? discount : "0000"} on your order
         </div>
         <div className="small text-center">EMI starts with Rs 10,000</div>
 
         <div className="d-flex justify-content-center mt-2">
           {redirect ? (
-            <Link href="/Address">
+            <Link href={`${(count == 0) ? '/' : '/Address'}`}>
               <button
                 type="submit"
                 className="btn btn-danger px-5 placeOrderResp"
               >
-                Checkout
+               {(count == 0) ? 'Home' : 'Checkout'}
               </button>
             </Link>
           ) : (

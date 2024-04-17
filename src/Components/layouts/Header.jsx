@@ -53,7 +53,7 @@ export default function Header() {
   //   const userData = JSON.parse(userDataString) || {};
   //   const customerId = userData.customer_id || {};
 
-  //   const check = await axios.post("http://localhost:3000/api/UserCart", {
+  //   const check = await axios.post("/api/UserCart", {
   //     customer_id: customerId,
   //   });
   //   if (
@@ -93,8 +93,8 @@ export default function Header() {
     setSearchResults([]);
     try {
       const searchTerm2 = e.target.querySelector(".HeadSearch").value;
-      console.log("searchTerm2", searchTerm2);
-      console.log("header", searchTerm);
+      // console.log("searchTerm2", searchTerm2);
+      // console.log("header", searchTerm);
 
       router.push(`/Search?query=${searchTerm}`);
     } catch (error) {

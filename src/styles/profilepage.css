@@ -24,10 +24,14 @@
 .Right-Profile,
 .Left-Profile {
     padding: 20px;
-    background-color: #f7f7f7;
-    border: 1px solid lightgrey;
+    background-color: #fff;
+    box-shadow: 0 0 12px 2px lightgrey;
+    border-radius: 5px;
 }
 
+.logout_btn{
+    cursor: pointer;
+}
 .profile-detail {
     margin: auto 20px;
 }
@@ -35,11 +39,12 @@
 .EditAccount {
     display: flex;
     margin: 20px;
+    cursor: pointer;
 }
 
 .EditAccount:hover {
     /* Example styles to apply when the EditAccount element is focused */
-    outline: 2px solid blue;
+   text-decoration: none;
     /* Example: Adds a blue outline */
     /* Add your additional styles here */
 }
@@ -70,6 +75,12 @@
     font-weight: 600;
     border-radius: 5px;
     padding: 6px 20px;
+}
+
+.form-btn:hover{
+    border: 1px solid #cc0008;
+    background-color: #fff;
+    color: #cc0008;
 }
 
 .user-data div label {

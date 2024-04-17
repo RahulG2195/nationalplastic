@@ -6,7 +6,9 @@
 }
 
 .Addleft {
-  background-color: #f7f7f7;
+  background-color: #fff;
+    box-shadow: 0 0 12px 2px lightgrey;
+    border-radius: 5px;
 }
 
 .bordrBtm {
@@ -38,13 +40,19 @@
 }
 
 .BGcolor {
-  background-color: #f7f7f7;
+  background-color: #fff;
+  box-shadow: 0 0 12px 2px lightgrey;
+  border-radius: 5px;
   min-height: 35vh;
   width: 100%;
 }
 
 .AddRight {
   text-align: start;
+}
+
+.onHOverFocus{
+  cursor: pointer;
 }
 
 @media (max-width: 600px) {

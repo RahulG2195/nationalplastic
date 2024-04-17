@@ -90,6 +90,9 @@ h6 {
 }
 
 @media (max-width:615px) {
+    .navbar-expand-lg .navbar-nav .nav-link{
+        width: fit-content;
+    }
     .HeadSearch {
         font-size: 10px !important;
     }

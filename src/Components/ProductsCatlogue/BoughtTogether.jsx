@@ -30,7 +30,7 @@ const BoughtTogether = () => {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/Products"
+          "/api/Products"
         );
         setTogetherCardsData(response.data.products);
       } catch (error) {
@@ -44,7 +44,7 @@ const BoughtTogether = () => {
       <div className="mt-5">
         <div className="text-center">
           <div className="fs-1 fw-bold text-danger">
-            Frequently Bought{" "}
+            Frequently Bought
             <span className="darkBlue fw-normal">Together</span>{" "}
           </div>
           <div className="mt-1 fw-semibold subCptRes">
@@ -62,7 +62,7 @@ const BoughtTogether = () => {
           modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
           spaceBetween={50}
           slidesPerView={3}
-          navigation
+          // navigation
           loop={true}
           // pagination={{ clickable: true }}
           autoplay={{

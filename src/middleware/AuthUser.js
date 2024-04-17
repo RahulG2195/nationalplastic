@@ -5,13 +5,13 @@
 // Allow requests from your Next.js domain
 app.use(
     cors({
-        origin: "http://localhost:3000/",
+        origin: "/",
     })
 );
 // // Allow requests from your Next.js domain
 // app.use(
 //   cors({
-//     origin: "http://localhost:3000/",
+//     origin: "/",
 //   })
 // );=
 // // Other routes and middleware...
