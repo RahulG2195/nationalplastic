@@ -10,7 +10,6 @@ import { notify, notifyError } from "@/utils/notify.js";
 import { useSelector } from "react-redux";
 
 function ProfilePage() {
-
   useEffect(() => {
     localStorage.getItem("isLoggedIn") === "true"
       ? true
@@ -126,13 +125,14 @@ function ProfilePage() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-
+    console.log(name, value);
+    console.log(cust_id);
     setEditedData((prevData) => ({
       ...prevData,
       [name]: value,
       Id: cust_id,
     }));
-
+    console.log(editedData);
     let errorMessage = "";
 
     // Validate phone number
@@ -159,22 +159,15 @@ function ProfilePage() {
     e.preventDefault();
     //console.log("event" + e.target);
     try {
-      // Gather form data from the event target
-      const formData = new FormData(e.target);
-      //console.log(".........formData", formData);
-      const email = formData.get("email");
-      const phone = formData.get("phone");
-      const address = formData.get("address");
+      console.log(editedData);
 
-      const userData = {
-        Email: email,
-        Phone: phone,
-        Address: address,
+      const updatedData = {
+        ...editedData, // Copy existing properties from editedData
+        Id: cust_id, // Add or update Id property
       };
-      const response = await axios.post(
-        "/api/UserProfile",
-        editedData
-      );
+
+      const response = await axios.post("/api/UserProfile", updatedData);
+
       toast.success("Data updated successfully");
       if (response.status == 200) {
         fetchUserData();
@@ -324,7 +317,7 @@ function ProfilePage() {
                     } */}
 
                       {Array.isArray(messages) ||
-                        (messages.length > 0 && messages != null) ? (
+                      (messages.length > 0 && messages != null) ? (
                         messages.map((message, index) => (
                           <form key={index} onSubmit={handleEdit}>
                             <div className="row user-data">
@@ -384,7 +377,12 @@ function ProfilePage() {
                             <div className="row user-data">
                               <div className="col">
                                 <label htmlFor="">Address</label>
-                                <textarea className="form-control fw-semibold" name="Address" readOnly={!editable}>
+                                <textarea
+                                  className="form-control fw-semibold"
+                                  name="Address"
+                                  readOnly={!editable}
+                                  onChange={handleInputChange}
+                                >
                                   {message.Address}
                                 </textarea>
                               </div>
@@ -412,13 +410,14 @@ function ProfilePage() {
 
                   <div>
                     {(Array.isArray(messages) && messages.length > 0) ||
-                      messages !== null ? (
+                    messages !== null ? (
                       messages.map((message, index) => (
                         <form key={index} onSubmit={updateAddressTwo}>
                           <div className="row user-data">
                             <div className="col">
                               <label htmlFor="">Secondary Address</label>
-                              {/* <input
+
+                              <textarea
                                 required
                                 type="text"
                                 className="form-control fw-semibold"
@@ -429,7 +428,7 @@ function ProfilePage() {
                                   message.Adress2 || "Please enter Address"
                                 }
                                 onChange={handleInputAddressChange}
-                              />
+                              ></textarea>
                             </div>
                           </div>
 
@@ -563,10 +562,16 @@ function ProfilePage() {
                   <hr />
                   <div className="row mx-auto">
                     <div className="col-md-6">
-                      <a href="tel: +91000000000"><strong>Give a call :</strong><u> 0000000000000 </u></a>
+                      <a href="tel: +91000000000">
+                        <strong>Give a call :</strong>
+                        <u> 0000000000000 </u>
+                      </a>
                     </div>
                     <div className="col-md-6">
-                      <a href="mail:nationalplastic@gmail.com"><strong>Or Send Mail to us :</strong><u>nationaplastic@gmail.com </u></a>
+                      <a href="mail:nationalplastic@gmail.com">
+                        <strong>Or Send Mail to us :</strong>
+                        <u>nationaplastic@gmail.com </u>
+                      </a>
                     </div>
                   </div>
                   <hr />

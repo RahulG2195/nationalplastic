@@ -24,17 +24,31 @@ export async function GET(request) {
 export async function POST(request) {
   try {
     const { Id, Phone, Address } = await request.json();
-    const result = await query({
-      query:
-        "UPDATE customer SET Phone = ?, Address = ? WHERE customer_id = ?;",
-      values: [Phone, Address, Id],
-    });
+    let result;
+    if (Phone && Address) {
+      result = await query({
+        query:
+          "UPDATE customer SET Phone = ?, Address = ? WHERE customer_id = ?;",
+        values: [Phone, Address, Id],
+      });
+    } else if (Phone) {
+      result = await query({
+        query: "UPDATE customer SET Phone = ?  WHERE customer_id = ?;",
+        values: [Phone, Id],
+      });
+    } else if (Address) {
+      result = await query({
+        query: "UPDATE customer SET Address = ?  WHERE customer_id = ?;",
+        values: [Address, Id],
+      });
+    } else {
+      return new Response(JSON.stringify({ message: "No Data To update" }), {
+        status: 500,
+      });
+    }
 
     if (result.affectedRows > 0) {
-      return new Response(
-        JSON.stringify({ message: "Registration successful2" }),
-        { status: 200 }
-      );
+      return new Response(JSON.stringify({ message: result }), { status: 200 });
     } else {
       return new Response(
         JSON.stringify({ message: "Failed to register user" }),
