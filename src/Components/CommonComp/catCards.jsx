@@ -23,7 +23,7 @@ function CatCards({
 
   return (
     <>
-      <div className={`cards  `}>
+      <div className={`cards sbr_card`}>
         <Link onClick={sendCategory} href={`/ProductCatlogue/${catid}`}>
           <div
             className={`"card_img" ${hovereffect} ${manfacthover} ${hoverglow} `}

@@ -107,7 +107,7 @@ const BulkPremiumCards = ({proddata}) => {
           {proddata.map(chair => (
             <div
               key={chair.product_id}
-              className="PreCardSm col-6 col-sm-6 col-xs-4 col-md-6 col-lg-3"
+              className="PreCardSm col-12 col-sm-6 col-xs-4 col-md-6 col-lg-3"
             >
               <PreChairsCard
                 id={chair.product_id}

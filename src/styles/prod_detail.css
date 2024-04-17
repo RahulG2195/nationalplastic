@@ -405,19 +405,34 @@ input:focus-visible {
   .RespFAQans {
     font-size: small !important;
   }
+  .mySwiper2 img{
+    object-fit: cover !important;
+  }
+  .product-ccount .input-group{
+    width: 40%;
+  }
+  .product-ccount .input-group.input-group-text{
+    font-size: 21px;
+  }
+  .prod_desc_sec{
+    padding: 30px 0;
+  }
 }
 
 @media (max-width: 425px) {
   .ProdbtnRes {
-    padding: 5px 10px !important;
-    font-size: 12px;
+    padding: 7px 20px !important;
+    font-size: 15px;
+  }
+  .product-dtl label{
+    font-size: 16px;
   }
   .bulkRes {
     /* margin: 5% 0 0 25% !important; */
     padding: 5px 20px !important;
   }
   .discRes p {
-    font-size: 10px !important;
+    font-size: 12px !important;
     line-height: 1.2;
   }
   .discRes {
@@ -430,11 +445,16 @@ input:focus-visible {
     font-size: 14px !important;
   }
   .prod_size {
-    font-size: 14px;
+    font-size: 15px;
+    max-width: 41%; 
   }
   .prod_size input {
     text-align: center;
     width: 66% !important;
+  }
+
+  .PreFoot .left{
+    font-size: 16px;
   }
 }
 
@@ -448,8 +468,11 @@ input:focus-visible {
   }
 }
 
-@media (max-width: 307px) {
+@media (max-width: 360px) {
   .ChckBtnRes a {
     margin-top: 5px !important;
   }
+  /* .swiper-slide{
+    border: 1px solid lightgray;
+  } */
 }

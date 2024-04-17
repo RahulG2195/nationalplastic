@@ -396,7 +396,7 @@ const PreChairsCards = () => {
             {products.map((product) => (
               <div
                 key={product.product_id}
-                className="PreCardSm col-6 col-sm-6 col-xs-4 col-md-6 col-lg-3"
+                className="PreCardSm col-12 col-sm-6 col-xs-4 col-md-6 col-lg-3"
               >
                 <PreChairsCard
                   ChairImg={`/Assets/images/New-launches-1/${product.image_name}`}

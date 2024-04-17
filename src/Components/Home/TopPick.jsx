@@ -75,7 +75,7 @@ export default function TopPick() {
               </p>
             </div>
           </div>
-          <div className="col-12 px-5 products_col mt-4">
+          <div className="col-12 px-md-5 products_col mt-4">
             <div className="row">
               <Swiper
                 className="swipper"
@@ -85,7 +85,7 @@ export default function TopPick() {
                 // slidesPerView={3}
                 loop={true}
                 // navigation
-                pagination={{ clickable: true }}
+                // pagination={{ clickable: true }}
                 // scrollbar={{ draggable: false }}
                 // onSwiper={(swiper) => //console.log(swiper)}
                 // onSlideChange={() => //console.log("slide change")}
@@ -109,6 +109,7 @@ export default function TopPick() {
                   1024: {
                     slidesPerView: 3,
                     spaceBetween: 50,
+                    pagination: { clickable: true }
                   },
                 }}
               >

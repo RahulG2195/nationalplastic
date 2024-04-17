@@ -536,4 +536,10 @@
     .about_icons {
         justify-content: left;
     }
+    .ctatitle{
+        font-size: 18px;
+    }
+    .medium{
+        font-size: 14px;
+    }
 }

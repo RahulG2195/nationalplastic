@@ -82,7 +82,7 @@ export default function Highlight() {
             <div className=" highlight_col mb-5">
               <div className="d-flex justify-content-center gap-4 flex-wrap">
                 {productArr.map((product) => (
-                  <div key={product.key} className="my-2">
+                  <div key={product.key} className="my-2 prodHcard">
                     <Link href="/ProductCatlogue">
                       <div className="card highlightcard">
                         <Image
@@ -99,7 +99,7 @@ export default function Highlight() {
                           <p className="card-text mb-5 pb-4">
                             {product.short_description}
                           </p>
-                          <div className="btn btn-dark text-white rounded-circle highArrow mt-5">
+                          <div className="btn btn-dark text-white rounded-circle highArrow mt-md-5">
                             <i
                               className="fa fa-arrow-right"
                               aria-hidden="true"

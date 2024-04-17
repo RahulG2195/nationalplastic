@@ -94,7 +94,7 @@ h6 {
         width: fit-content;
     }
     .HeadSearch {
-        font-size: 10px !important;
+        font-size: 14px !important;
     }
     .HeadSearch:focus {
         background-color: transparent !important;

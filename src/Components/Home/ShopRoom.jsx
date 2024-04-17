@@ -64,7 +64,7 @@ export default function ShopRoom() {
                 modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
                 spaceBetween={15}
                 loop={true}
-                pagination={{ clickable: true }}
+                // pagination={{ clickable: true }}
                 autoplay={{
                   delay: 2700,
                   disableOnInteraction: false,

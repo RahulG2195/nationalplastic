@@ -112,7 +112,7 @@ export default function Manufacture() {
                 // slidesPerView={3}
                 loop={true}
                 // navigation
-                pagination={{ clickable: true }}
+                // pagination={{ clickable: true }}
                 // scrollbar={{ draggable: false }}
                 // onSwiper={(swiper) => //console.log(swiper)}
                 // onSlideChange={() => //console.log("slide change")}

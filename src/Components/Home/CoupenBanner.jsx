@@ -69,7 +69,7 @@ function CoupenBanner() {
       <div className="delivery_inst_Sec mt-4">
         {/* <div className=" "> */}
           <div className="d-flex justify-content-center gap-4 flex-wrap featuresFour">
-            <div className="px-4">
+            <div className="px-3 px-md-4">
               <div className="divelerycol d-flex align-items-center">
                 <div className="del_img">
                   <Image
@@ -82,7 +82,7 @@ function CoupenBanner() {
                 <p>Happy Customers</p>
               </div>
             </div>
-            <div className="px-4">
+            <div className="px-3 px-md-4">
               <div className="divelerycol d-flex align-items-center">
                 <div className="del_img">
                   <Image
@@ -95,7 +95,7 @@ function CoupenBanner() {
                 <p>Free Shipping</p>
               </div>
             </div>
-            <div className="px-4">
+            <div className="px-3 px-md-4">
               <div className="divelerycol d-flex align-items-center">
                 <div className="del_img">
                   <Image
@@ -108,7 +108,7 @@ function CoupenBanner() {
                 <p>Free Installation</p>
               </div>
             </div>
-            <div className="px-4">
+            <div className="px-3 px-md-4">
               <div className="divelerycol d-flex align-items-center">
                 <div className="del_img">
                   <Image

@@ -76,7 +76,7 @@ function About() {
   return (
     <>
       <Subbanner />
-      <div className="container">
+      <div className="container about_container">
         <div className="row section_header">
           <h2>
             About<span> us</span>
