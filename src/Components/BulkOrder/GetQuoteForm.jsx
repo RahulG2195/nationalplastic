@@ -1,38 +1,10 @@
 "use client";
 import Link from "next/link";
 import "./GetQuoteForm.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { Bounce, toast } from "react-toastify";
-
-const notify = () => {
-  toast.success("Mail Sended SucessFully", {
-    position: "top-center",
-    autoClose: 2000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-    transition: Bounce,
-  });
-};
-
-const notifyError = () => {
-  toast.error("Failed To send Mail", {
-    position: "top-center",
-    autoClose: 2000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-    transition: Bounce,
-  });
-};
-
+import { notify, notifyError } from "@/utils/notify";
 import {
   isValidName,
   isValidEmail,
@@ -43,6 +15,12 @@ import {
 } from "@/utils/validation";
 
 const GetQuoteForm = (props) => {
+  const [products, setProducts] = useState();
+  console.log("props", props);
+  useEffect(() => {
+    // This effect runs once when the component mounts, updating products state
+    setProducts(props.product);
+  }, [props.product]);
   const [formData, setFromData] = useState({
     fullName: "",
     Email: "",
@@ -85,25 +63,19 @@ const GetQuoteForm = (props) => {
     if (!isValid) return;
 
     try {
-      await axios.post(
-        "/api/BulkOrderForm",
-        formData
-      );
-      notify();
+      await axios.post("/api/BulkOrderForm", formData);
+      notify("Mail Sended SucessFully");
     } catch (error) {
       console.error("Error:", error);
-      notifyError();
+      notifyError("Failed to send");
     }
     try {
-      const response = await axios.post(
-        "/api/bulkOrderEmail",
-        formData
-      );
+      const response = await axios.post("/api/bulkOrderEmail", formData);
       // console.log("Response:", response.data);
       // console.log("Response:", JSON.stringify(response.data));
     } catch (error) {
       console.error("Error:", error);
-      notifyError();
+      notifyError(error.message);
     }
   };
 
@@ -147,7 +119,8 @@ const GetQuoteForm = (props) => {
               name="ProductName"
               onChange={handleOnChange}
               className="form-control"
-              placeholder="Enter Product Name"
+              placeholder={products || "Enter Product Name"}
+              defaultValue={products || ""}
             />
           </div>
 

@@ -45,3 +45,20 @@ export const isLoggedIn = () => {
     initializeLocalStorage();
   }
 };
+export const isValidPassword = (password) => {
+  // Regular expression to check if password has at least one special character and one number
+  const specialCharRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+  const numberRegex = /[0-9]/;
+
+  // Check if the password meets the length requirement
+  if (password.length < 8) {
+    return false;
+  }
+
+  // Check if the password contains at least one special character and one number
+  if (!specialCharRegex.test(password) || !numberRegex.test(password)) {
+    return false;
+  }
+
+  return true;
+};

@@ -8,7 +8,10 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { notify, notifyError } from "@/utils/notify.js";
 import { useSelector } from "react-redux";
-
+import {
+  isValidPassword,
+  isValidReason, // Address validations
+} from "@/utils/validation";
 function ProfilePage() {
   useEffect(() => {
     localStorage.getItem("isLoggedIn") === "true"
@@ -20,13 +23,11 @@ function ProfilePage() {
         ? true
         : (window.location.href = "Login");
 
-    // //console.log("isLoggedIn+++++", isLoggedIn)
     const storedData = JSON.parse(localStorage.getItem("userData")) || {};
     // Retrieve data from local storage
     const userDataString = localStorage.getItem("userData");
     // Convert the retrieved data from string to JSON object
     const userDataID = JSON.parse(userDataString);
-    // //console.log("userDataID....", isLoggedIn);
 
     // Example: Accessing the email property
 
@@ -38,6 +39,50 @@ function ProfilePage() {
   const [editable, setEditable] = useState(false);
   const [adress2, setAdress2] = useState("");
 
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  // Get user ID from context (replace with your logic)
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError(null);
+    setSuccess(null);
+
+    if (!newPassword || !confirmPassword) {
+      setError("Missing required fields (newPassword, confirmPassword)");
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    try {
+      const requestData = {
+        newPassword: newPassword,
+        confirmPassword: confirmPassword,
+        Id: cust_id,
+      };
+
+      // Send DELETE request to the API endpoint
+      const response = await axios.patch("/api/Users", requestData);
+
+      if (response.data.status === 200) {
+        setSuccess("Password updated successfully!");
+        setNewPassword("");
+        setConfirmPassword("");
+      } else {
+        setError(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error updating password:", error);
+      setError("Internal server error");
+    }
+  };
+
   const handleInputAddressChange = (event) => {
     setAdress2(event.target.value);
   };
@@ -48,7 +93,10 @@ function ProfilePage() {
       Adress2: adress2,
       Id: cust_id,
     };
-    console.log("Address2:", adress2);
+    if (!isValidReason(adress2)) {
+      toast.error("Please enter a  Valid address.");
+      return;
+    }
     const response = await axios.put(
       "http://localhost:3000/api/UserProfile",
       data
@@ -59,7 +107,6 @@ function ProfilePage() {
     } else {
       notifyError(response.message);
     }
-    console.log(response.body);
 
     setAdress2("");
   };
@@ -94,15 +141,12 @@ function ProfilePage() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        console.log("mahn");
         const formData = {
           email: userEmail,
           getProfile: true,
         };
-        console.log("Error fetching user data:", formData);
 
         const response = await axios.put("/api/Users", formData);
-        console.log("Error fetching user data:", response);
 
         const userData = response.data.message[0]; // Directly access response.data.message
         const { customer_id, Email } = userData; // Destructure from userData, not from JSON.stringify
@@ -125,14 +169,11 @@ function ProfilePage() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    console.log(name, value);
-    console.log(cust_id);
     setEditedData((prevData) => ({
       ...prevData,
       [name]: value,
       Id: cust_id,
     }));
-    console.log(editedData);
     let errorMessage = "";
 
     // Validate phone number
@@ -140,6 +181,13 @@ function ProfilePage() {
       const phoneNumber = value.replace(/\D/g, ""); // Remove non-digit characters
       if (phoneNumber.length !== 10) {
         errorMessage = "Phone number must be 10 digits";
+      }
+    }
+    if (name === "address") {
+      const allowedChars = /^[a-zA-Z0-9\s]+$/; // Regular expression for allowed characters
+      if (!allowedChars.test(value)) {
+        errorMessage =
+          "Address can only contain spaces, numbers, and letters (a-z, A-Z).";
       }
     }
 
@@ -157,22 +205,17 @@ function ProfilePage() {
 
   const handleEdit = async (e) => {
     e.preventDefault();
-    //console.log("event" + e.target);
     try {
-      console.log(editedData);
-
       const updatedData = {
         ...editedData, // Copy existing properties from editedData
         Id: cust_id, // Add or update Id property
       };
 
       const response = await axios.post("/api/UserProfile", updatedData);
-
+      notify("UserProfile updated");
       toast.success("Data updated successfully");
-      if (response.status == 200) {
-        fetchUserData();
-      }
     } catch (error) {
+      notifyError(error.message);
       console.error("Error updating data:", error);
       toast.error("Error updating data. Please try again.");
     }
@@ -601,7 +644,7 @@ function ProfilePage() {
                   <h3>Change Password</h3>
                   <hr />
                   <div>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                       <div className="row user-data">
                         <div className="col">
                           <label htmlFor="">New Password</label>
@@ -610,6 +653,8 @@ function ProfilePage() {
                             required
                             className="form-control fw-semibold"
                             placeholder="New Password"
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
                           />
                         </div>
                         <div className="col">
@@ -619,9 +664,18 @@ function ProfilePage() {
                             required
                             className="form-control fw-semibold"
                             placeholder="Confirm Password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
                           />
                         </div>
                       </div>
+
+                      {error && (
+                        <div className="alert alert-danger">{error}</div>
+                      )}
+                      {success && (
+                        <div className="alert alert-success">{success}</div>
+                      )}
 
                       <div className="form-group row">
                         <div className="col-sm-10">
