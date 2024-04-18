@@ -41,9 +41,7 @@ function BottomBar() {
         const allproducts = res.data.products;
 
         // start -- fetch category which want to display on navbar
-        const nav = await axios.get(
-          "/api/NavCategory"
-        );
+        const nav = await axios.get("/api/NavCategory");
         const navshow = nav.data.navshow;
         SetAllProd(allproducts);
         setNavbar(navshow);

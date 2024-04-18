@@ -7,6 +7,7 @@ export async function GET(request) {
             values: [],
         });
 
+        console.log(Categories);
         return new Response(JSON.stringify({
             status: 200,
             navshow: Categories
