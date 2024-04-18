@@ -5,7 +5,15 @@ import userSliceReducer from "@/redux/reducer/userSlice";
 import tempSliceReducer from "@/redux/reducer/tempSlice";
 import { combineReducers } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import storage from "redux-persist/lib/storage"; // Use browser storage by default
+import {
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 
 const rootReducer = combineReducers({
   cart: cartReducer,
@@ -23,6 +31,12 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
 export const persistor = persistStore(store);
