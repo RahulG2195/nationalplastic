@@ -239,12 +239,17 @@ function AddToCart() {
       // Calculate total price, discount, total payable, and installation charges
       // Calculate product totals
       // log;
+      console.log("products:--------------------", products);
       const productTotals = products.map(
         (product) =>
-          parseFloat(product.price) *
-          parseFloat(product.discount_price) *
-          parseFloat(product.quantity)
+          parseFloat(product.price) -
+          parseFloat(product.discount_price) * parseFloat(product.quantity)
       );
+      console.log(product.price);
+      console.log(product.discount_price);
+
+      console.log(product.quantity);
+
       console.log(productTotals);
 
       // Calculate total amount of all products
