@@ -96,9 +96,7 @@ const RecentlyViewed = () => {
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const response = await axios.get(
-          "/api/Products"
-        );
+        const response = await axios.get("/api/Products");
         const filteredproducts = response.data.products.filter(
           (item) => item.category_id === 17
         );
@@ -117,12 +115,9 @@ const RecentlyViewed = () => {
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
 
-      const response = await axios.post(
-        "/api/wishListUser",
-        {
-          customer_id: customerId,
-        }
-      );
+      const response = await axios.post("/api/wishListUser", {
+        customer_id: customerId,
+      });
       setWishlistItems(response.data.Wishlist);
     } catch (error) {
       console.error("Error fetching wishlist items:", error);
@@ -161,16 +156,13 @@ const RecentlyViewed = () => {
   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch(
-        "/api/ProductsCat",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ product_id: id }),
-        }
-      );
+      const response = await fetch("/api/ProductsCat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ product_id: id }),
+      });
       //console.log(response);
 
       if (!response.ok) {
@@ -202,7 +194,7 @@ const RecentlyViewed = () => {
             product_id,
             price,
             discount_price,
-            quantity: quantity || 1,
+            quantity: typeof quantity !== "undefined" ? quantity : 1,
           })
         );
         break;

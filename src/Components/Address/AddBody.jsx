@@ -8,6 +8,7 @@ import "./AddBody.css";
 import axios from "axios";
 import { addItemToCart } from "@/redux/reducer/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { isLoggedIn } from "@/utils/validation";
 
 const AddBody = () => {
   const [productDetailArr, setProductDetailArr] = useState([]);
@@ -104,23 +105,26 @@ const AddBody = () => {
           }),
           []
         );
+        if (isLoggedIn()) {
+          console.log("addbody...");
+          console.log(isLoggedIn());
+          products.forEach((product) => {
+            //console.log("products forEach: " + product.product_id);
+            //console.log("products forEach: " + product.price);
+            //console.log("products forEach: " + JSON.stringify(product));
+            // //console.log("products forEach: " + product.cart_ quantity);
 
-        products.forEach((product) => {
-          //console.log("products forEach: " + product.product_id);
-          //console.log("products forEach: " + product.price);
-          //console.log("products forEach: " + JSON.stringify(product));
-          // //console.log("products forEach: " + product.cart_ quantity);
-
-          dispatch(
-            addItemToCart({
-              product_id: product.product_id,
-              quantity: product.quantity, // Explicitly set quantity to 1
-              price: product.price,
-              discount_price: product.discount_price,
-              from: false,
-            })
-          );
-        });
+            dispatch(
+              addItemToCart({
+                product_id: product.product_id,
+                quantity: product.quantity, // Explicitly set quantity to 1
+                price: product.price,
+                discount_price: product.discount_price,
+                from: false,
+              })
+            );
+          });
+        }
 
         // Calculate total price, discount, total payable, and installation charges
         const totalPrice = products.reduce(

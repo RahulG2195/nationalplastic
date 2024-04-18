@@ -12,8 +12,8 @@ export const tempSlice = createSlice({
   },
 
   reducers: {
-    setInitialCount: (state, action) => {
-      state.initialCount = action.payload;
+    setInitialCountD: (state, action) => {
+      return { ...tempSlice.initialState };
     },
 
     addItemToCartD: (state, action) => {
@@ -154,7 +154,7 @@ export const tempSlice = createSlice({
 
 export const {
   addItemToCartD,
-  setInitialCount,
+  setInitialCountD,
   increaseQuantityD,
   decreaseQuantityD,
   removeItemFromCartD,

@@ -4,16 +4,24 @@ import TopPicsCard from "../TopPicsCard/TopPicsCard";
 import GetQuoteForm from "./GetQuoteForm";
 import "./GetQuote.css";
 import { useState } from "react";
-
+import { notifyError } from "@/utils/notify";
 const GetQuote = ({ proddata }) => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const handleImageClick = (imageName) => {
-    // Update the state with the new image appended to the existing one (if any)
-    setSelectedImage((prevSelectedImage) =>
-      prevSelectedImage ? `${prevSelectedImage},${imageName}` : imageName
-    );
-    console.log(selectedImage); // Updated selected image name state
+    // Split the selectedImage string into an array of image names
+    const selectedImages = selectedImage ? selectedImage.split(",") : [];
+
+    // Check if the new image is already present in the array
+    if (!selectedImages.includes(imageName)) {
+      // If not present, append the new image name
+      setSelectedImage((prevSelectedImage) =>
+        prevSelectedImage ? `${prevSelectedImage},${imageName}` : imageName
+      );
+    } else {
+      // Handle the case where the image is already selected (optional)
+      notifyError("Already Added to Form");
+    }
   };
 
   const chunkArray = (arr, size) => {

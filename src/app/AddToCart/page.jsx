@@ -6,11 +6,19 @@ import PriceDetailsCard from "@/Components/PriceDetails/PriceDetailsCard";
 import FooterRow from "@/Components/FooterRow/FooterRow";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { addItemToCart, removeItemFromCart } from "@/redux/reducer/cartSlice";
+import {
+  addItemToCart,
+  removeItemFromCart,
+  addToCart,
+} from "@/redux/reducer/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 // import { useSelector } from "react-redux";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
-import { addItemToCartD, removeItemFromCartD } from "@/redux/reducer/tempSlice";
+import {
+  addItemToCartD,
+  removeItemFromCartD,
+  setInitialCountD,
+} from "@/redux/reducer/tempSlice";
 import { prod } from "../ConstantURL";
 import { isLoggedIn } from "@/utils/validation";
 function AddToCart() {
@@ -50,12 +58,9 @@ function AddToCart() {
     const tempOrUserData = async () => {
       if (customerId) {
         console.log("If loggedIn user");
-        const response = await axios.post(
-          "/api/UserCart",
-          {
-            customer_id: customerId,
-          }
-        );
+        const response = await axios.post("/api/UserCart", {
+          customer_id: customerId,
+        });
         cartData = response.data.products;
         console.log(cartData);
         fetchData(cartData);
@@ -68,12 +73,9 @@ function AddToCart() {
         // If else to send request to API depending upon No of Product count
         if (productIds.length === 1) {
           console.log("54");
-          const response = await axios.post(
-            "/api/tempData",
-            {
-              product_id: productIds[0],
-            }
-          );
+          const response = await axios.post("/api/tempData", {
+            product_id: productIds[0],
+          });
           const products = response.data.products;
           const quan = tempData.products[0].quantity;
           let obj = products[0];
@@ -83,12 +85,9 @@ function AddToCart() {
           fetchData(objToArray);
         } else if (productIds.length > 1) {
           // Send request with multiple product IDs
-          const response = await axios.post(
-            "/api/tempData",
-            {
-              product_ids: productIds,
-            }
-          );
+          const response = await axios.post("/api/tempData", {
+            product_ids: productIds,
+          });
           // const product = response.data.products;
           console.log("Response Where product count is 1", response);
           const products = response.data.products;
@@ -146,22 +145,29 @@ function AddToCart() {
         );
         console.log("Response From line Number 132", products);
         // state.products.push(action.payload);
-
-        products.forEach((product) => {
-          dispatch(
-            addItemToCart({
-              product_id: product.product_id,
-              quantity: product.quantity || 1, // Explicitly set quantity to 1
-              price: product.price,
-              discount_price: product.discount_price,
-              color: product.color,
-              from: false,
-            })
-          );
-        });
+        const len = tempCartStates.products.length;
+        console.log(len, "Product");
+        if (isLoggedIn() && len > 0) {
+          console.log("addbodyNhi...");
+          console.log(isLoggedIn());
+          products.forEach((product) => {
+            dispatch(
+              addToCart({
+                product_id: product.product_id,
+                quantity: product.quantity || 1, // Explicitly set quantity to 1
+                price: product.price,
+                discount_price: product.discount_price,
+                color: product.color,
+                from: false,
+              })
+            );
+          });
+        }
         // console.log("Response From line Number 132", products);
         // Calculate total price, discount, total payable, and installation charges
         // Calculate total payable amount, total discount, and total price without discount
+        setProductDetailArr(products);
+
         const { totalPayable, totalDiscount, totalPriceWithoutDiscount } =
           products.reduce(
             (totals, product) => {
@@ -169,7 +175,7 @@ function AddToCart() {
                 parseFloat(product.price) * parseFloat(product.quantity);
               const discountedProductTotal = product.discount_price
                 ? parseFloat(product.discount_price) *
-                parseFloat(product.quantity)
+                  parseFloat(product.quantity)
                 : productTotal;
 
               totals.totalPriceWithoutDiscount += productTotal;
@@ -188,13 +194,15 @@ function AddToCart() {
 
         const totalCount = products.length;
         // Update state variables
-        setProductDetailArr(products);
         console.log("fdghjjjjjjjjjjjjjjjjjjjjjj", products);
         setTotalPrice(totalPriceWithoutDiscount);
         setDiscount(totalDiscount);
         setTotalPayble(totalPayble);
         setInstallationCharges(40);
         setTotalCount(totalCount);
+        if (isLoggedIn()) {
+          dispatch(setInitialCountD);
+        }
       } catch (error) {
         console.error("Error fetching data", error);
       }
@@ -208,12 +216,9 @@ function AddToCart() {
       const userDataString = localStorage.getItem("userData");
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
-      const response = await axios.post(
-        "/api/UserCart",
-        {
-          customer_id: customerId,
-        }
-      );
+      const response = await axios.post("/api/UserCart", {
+        customer_id: customerId,
+      });
       //console.log("response", response);
       const cartData = response.data.products;
       console.log("cartdata: ", cartData);
@@ -234,13 +239,24 @@ function AddToCart() {
       // Calculate total price, discount, total payable, and installation charges
       // Calculate product totals
       // log;
+      console.log("products:--------------------", products);
       const productTotals = products.map(
-        (product) => product.price * product.discount_price * product.quantity
+        (product) =>
+          parseFloat(product.price) -
+          parseFloat(product.discount_price) * parseFloat(product.quantity)
       );
+      console.log(product.price);
+      console.log(product.discount_price);
+
+      console.log(product.quantity);
+
       console.log(productTotals);
 
       // Calculate total amount of all products
-      const totalPrice = productTotals.reduce((acc, curr) => acc + curr, 0);
+      const totalPrice = productTotals.reduce(
+        (acc, curr) => parseFloat(acc) + parseFloat(curr),
+        0
+      );
       console.log(totalPrice);
       // Calculate total discount (consider using discount_price if available)
       const discount = products.reduce((acc, curr) => {
@@ -252,7 +268,7 @@ function AddToCart() {
       }, 0);
       console.log(discount);
       // Calculate total payable amount (consider discount)
-      const totalPayble = totalPrice - discount;
+      const totalPayble = parseFloat(totalPrice) - parseFloat(discount);
       console.log(totalPayble);
 
       // Calculate total installation charge
@@ -307,15 +323,12 @@ function AddToCart() {
         const formData = new FormData();
         formData.append("customer_id", customerId);
         formData.append("product_id", product_id);
-        const response = await axios.delete(
-          "/api/UserCart",
-          {
-            data: formData,
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
+        const response = await axios.delete("/api/UserCart", {
+          data: formData,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
         // If all products are removed, update the state to reflect empty cart
         if (productDetailArr.length === 1) {
           console.log("nopes for product", installationCharges);
@@ -398,7 +411,9 @@ function AddToCart() {
               <hr />
               <div className="cartList">
                 {productDetailArr.length === 0 ? (
-                  <h5 className="text-secondary text-center py-2">No products in cart</h5>
+                  <h5 className="text-secondary text-center py-2">
+                    No products in cart
+                  </h5>
                 ) : (
                   <div className="container RowCont">
                     {productDetailArr.map((val) => (
@@ -414,14 +429,14 @@ function AddToCart() {
                           discPer={Math.floor(
                             ((val.discount_price - val.price) /
                               val.discount_price) *
-                            100
+                              100
                           )}
                           color={val.color}
                           installationCharges={val.InstallationCharges}
                           quantity={val.quantity}
                           onRemoveSuccess={() => {
                             if (isLoggedIn()) {
-                              console.log("Removing", isLoggedIn);
+                              console.log("Removing", isLoggedIn());
                               onRemoveSuccess(val.product_id);
                             } else {
                               console.log("Removing", isLoggedIn);
@@ -447,10 +462,18 @@ function AddToCart() {
               <h6 className="pb-2">Have a coupon Code?</h6>
               <form>
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="" aria-label="coupon code" aria-describedby="basic-addon2" />
-                    <div class="input-group-append">
-                      <span class="input-group-text coupon_btn" id="basic-addon2">Apply</span>
-                    </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder=""
+                    aria-label="coupon code"
+                    aria-describedby="basic-addon2"
+                  />
+                  <div class="input-group-append">
+                    <span class="input-group-text coupon_btn" id="basic-addon2">
+                      Apply
+                    </span>
+                  </div>
                 </div>
               </form>
             </div>

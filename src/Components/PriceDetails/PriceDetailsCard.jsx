@@ -3,6 +3,7 @@ import "./PriceDetailsCard.css";
 import { useDispatch, useSelector } from "react-redux";
 // import { setTotalPrice} from '@/redux/reducer/counterSlice';
 import { useEffect, useState } from "react";
+
 const PriceDetailsCard = ({
   itemCount,
   cartPrice,
@@ -103,12 +104,12 @@ const PriceDetailsCard = ({
 
         <div className="d-flex justify-content-center mt-2">
           {redirect ? (
-            <Link href={`${(count == 0) ? '/' : '/Address'}`}>
+            <Link href={`${userState ? "/Address" : "/Login"}`}>
               <button
                 type="submit"
                 className="btn btn-danger px-md-5 placeOrderResp"
               >
-               {(count == 0) ? 'Home' : 'Checkout'}
+                {userState ? "Checkout" : "Login To Checkout"}
               </button>
             </Link>
           ) : (
