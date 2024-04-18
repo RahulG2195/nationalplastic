@@ -36,7 +36,7 @@ function Infrastructure() {
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna.
           </p>
-          <button className="btntextInfra py-3 px-5">
+          <button className="btntextInfra py-3 px-md-5">
             EXPLORE OUR LOCATIONS
           </button>
         </div>

@@ -106,7 +106,7 @@ const Details = () => {
         </div>
       </div>
 
-      <div className="d-flex justify-content-center mx-5 mb-5 py-5 px-5 DetailsTogetherSlide">
+      <div className="d-flex justify-content-center mx-5 mb-5 py-5 px-md-5 DetailsTogetherSlide">
         <Swiper
           modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
           spaceBetween={10}

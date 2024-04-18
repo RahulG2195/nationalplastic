@@ -172,7 +172,7 @@ export default function Manufacture() {
 
               {Household.map((product) => (
                 <div
-                  className="col-xs-12 col-sm-6 px-5 col-md-4 shop_col my-md-4 my-2 hideswiper"
+                  className="col-xs-12 col-sm-6 px-md-5 col-md-4 shop_col my-md-4 my-2 hideswiper"
                   key={product.key}
                 >
                   <CatCards

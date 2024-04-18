@@ -80,7 +80,7 @@ function BottomBar() {
   };
 
   return (
-    <div className=" px-5  d-flex align-items-center bottom_nav position-relative mainrow">
+    <div className=" px-md-5  d-flex align-items-center bottom_nav position-relative mainrow">
       <div className="col second px-3 py-2">
         <Link onClick={sendCategory} href={`/ProductCatlogue/13`}>
           <p className="">Premium Event Chairs</p>

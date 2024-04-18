@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
+//   reactStrictMode: false,
   // output:'export',
   eslint: {
     ignoreDuringBuilds: true,
@@ -11,9 +11,9 @@ const nextConfig = {
 
   env: {
     MYSQL_HOST: "localhost",
-    MYSQL_DATABASE: "nationalplastic_db",
+    MYSQL_DATABASE: "nationalplastic",
     MYSQL_USER: "root",
-    MYSQL_PASSWORD: "National2024",
+    MYSQL_PASSWORD: "Webfarm2024",
     MYSQL_PORT: "3306",
   },
 };

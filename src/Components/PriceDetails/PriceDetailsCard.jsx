@@ -106,7 +106,7 @@ const PriceDetailsCard = ({
             <Link href={`${(count == 0) ? '/' : '/Address'}`}>
               <button
                 type="submit"
-                className="btn btn-danger px-5 placeOrderResp"
+                className="btn btn-danger px-md-5 placeOrderResp"
               >
                {(count == 0) ? 'Home' : 'Checkout'}
               </button>
@@ -115,7 +115,7 @@ const PriceDetailsCard = ({
             <Link href="/ThankYouPage">
               <button
                 type="submit"
-                className="btn btn-danger px-5 placeOrderResp"
+                className="btn btn-danger px-md-5 placeOrderResp"
               >
                 Place Order
               </button>

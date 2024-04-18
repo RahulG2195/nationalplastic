@@ -83,14 +83,14 @@ function About() {
           </h2>
         </div>
       </div>
-      <div className="position-relative aboutsliderCont px-5">
+      <div className="position-relative aboutsliderCont px-md-5">
       <div className=" h-100 position-absolute backblue "></div>
       <SliderCard />
       <AboutCTA />
       </div>
       {/* Vission and Mission start */}
       <div className="container p0  mx-auto">
-        <div className="row px-5 mx-5 vmcont">
+        <div className="row px-md-5 mx-5 vmcont">
           {arr.map((val) => (
             <div className=" col-md-6" key={val.key}>
               {" "}

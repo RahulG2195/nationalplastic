@@ -103,7 +103,7 @@ function BottomBar() {
   };
   // console.log('img' + getImg);
   return (
-    <div className=" px-5 d-flex align-items-center bottom_nav position-relative mainrow">
+    <div className=" px-md-5 d-flex align-items-center bottom_nav position-relative mainrow">
       {navbar.map((val) => (
         <div
           key={val.category_id}

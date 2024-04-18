@@ -302,7 +302,7 @@ const AddBody = () => {
                 </div>
                 <button
                   type="submit"
-                  className="btn btn-danger px-5 SaveBtnResp"
+                  className="btn btn-danger px-md-5 SaveBtnResp"
                 >
                   Save
                 </button>

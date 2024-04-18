@@ -246,7 +246,7 @@ function ContactUs() {
                 <h1>Get In Touch</h1>
               </div>
 
-              <div className="col-md-6 cta-form px-5 py-5">
+              <div className="col-md-6 cta-form px-md-5 py-5">
                 <form onSubmit={onFormSubmit}>
                   <h3 className="fw-bold">Send a message</h3>
                   <div className="mb-3">
@@ -341,7 +341,7 @@ function ContactUs() {
                   <div className="d-flex justify-content-center">
                     <button
                       type="submit"
-                      className="btn cta-contact-btn py-3 px-5 medium"
+                      className="btn cta-contact-btn py-3 px-md-5 medium"
                     >
                       Submit Your Request
                     </button>
@@ -365,7 +365,7 @@ function ContactUs() {
               />
             </div>
             <div className="RegisteredOffice py-5 ps-5 col-md-8 col-lg-8 col-xl-4 ">
-              <div className="ROtitle px-5">
+              <div className="ROtitle px-md-5">
                 <h1>Registered</h1>
                 <h1>Office</h1>
               </div>

@@ -237,6 +237,13 @@ p {
     font-size: 23px;
 }
 
+.swiper-button-prev, .swiper-rtl .swiper-button-next, .swiper-button-next, .swiper-rtl .swiper-button-prev{
+    box-shadow: 0 0 12px 2px lightgray;
+}
+.swiper-button-next:after, .swiper-rtl .swiper-button-prev:after, .swiper-button-prev:after, .swiper-rtl .swiper-button-next:after {
+    font-size: 20px !important;
+}
+
 @media (max-width:992px) {
     .subCptRes {
         width: 75% !important;
@@ -412,6 +419,8 @@ p {
    .about_container{
     margin: 0 0 60px 0;
    }
+
+  
 }
 
 .dropdown {

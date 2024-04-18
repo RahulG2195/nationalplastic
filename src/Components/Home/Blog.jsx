@@ -71,7 +71,7 @@ export default function Blog() {
           <div className="col-12 products_col">
             <div className="row">
               <Swiper
-                className="swipper swpr px-5 py-5"
+                className="swipper swpr px-md-5 py-5"
                 style={{ width: "100%", height: "100%" }}
                 modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
                 spaceBetween={15}
