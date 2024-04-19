@@ -117,15 +117,11 @@ function ContactUs() {
 
     //TryCatch For the Email Message
 
-    const res = await axios.post(
-      `/api/sendEmail`,
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data", // Set content type for FormData
-        },
-      }
-    );
+    const res = await axios.post(`/api/sendEmail`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data", // Set content type for FormData
+      },
+    });
     if (res.status === 200) {
       setUserInput({
         name: "",

@@ -49,6 +49,10 @@ function AddToCart() {
   }, [productCount]);
   useEffect(() => {
     console.log("useEffect called inside addtocart page");
+    const daata = process.env.RAZORPAY_KEY_ID;
+    const ds = process.env.RAZORPAY_SUBCRIPTION_ID;
+    console.log("dataa", daata);
+    console.log("ds", ds);
     // console.log();
 
     const userDataString = localStorage.getItem("userData");

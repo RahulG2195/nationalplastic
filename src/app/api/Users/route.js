@@ -43,7 +43,6 @@ export async function POST(request) {
       query: "SELECT * FROM customer WHERE Email = ?",
       values: [email],
     });
-    const hashedPassword = await bcrypt.hash(password, 12);
 
     // If the email already exists, return a 400 Bad Request response
     if (existingUser.length > 0) {
@@ -86,11 +85,12 @@ export async function PUT(request) {
   // const router = useRouter();
   try {
     // //console.log("FROM put " + request);
-    console.log("FROM put " + JSON.stringify(request));
 
     const { email, password, getProfile } = await request.json();
-    console.log("putttttttttp request" + email + password + getProfile);
-
+    const daata = process.env.RAZORPAY_KEY_ID;
+    const ds = process.env.RAZORPAY_SUBCRIPTION_ID;
+    console.log("dataa", daata);
+    console.log("ds", ds);
     //console.log(email);
     // Check if the email already exists in the database
     const existingUser = await query({

@@ -85,3 +85,7 @@ Chnages on friday rechange before pull/push
       setCount(value);
     }
   }, [dispatch]);
+
+
+Order
+Order detail

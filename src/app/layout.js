@@ -12,7 +12,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import store, { persistor } from "@/redux/store";
 import dynamic from "next/dynamic";
-
+import Script from "next/script";
 const inter = Inter({ subsets: ["latin"] });
 
 const BrowserRouter = dynamic(
@@ -29,6 +29,12 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
+      <head>
+        <Script
+          src="https://checkout.razorpay.com/v1/checkout.js"
+          strategy="beforeInteractive"
+        />
+      </head>
       <body className={inter.className}>
         <BrowserRouter>
           <Provider store={store}>
