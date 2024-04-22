@@ -1,9 +1,11 @@
+"use client";
 import Link from "next/link";
 import "./PriceDetailsCard.css";
 import { useDispatch, useSelector } from "react-redux";
 // import { setTotalPrice} from '@/redux/reducer/counterSlice';
 import { useEffect, useState } from "react";
-
+import axios from "axios";
+import { createOrderSuccess } from "@/redux/reducer/paySlice";
 const PriceDetailsCard = ({
   itemCount,
   cartPrice,
@@ -24,13 +26,13 @@ const PriceDetailsCard = ({
     const cart = state[who] || {};
     return cart.products?.length || 0;
   });
+  const dispatch = useDispatch();
+
   const [count, setCount] = useState(productCount);
   useEffect(() => {
     setCount(productCount);
     setInstallationCharge(productCount * 40);
-    // Update localCount whenever productCount changes
   }, [productCount]);
-  console.log("pdc", itemCount);
   const priceFromState = useSelector(
     (state) => state.cart.total_price || state.temp.total_price || 0
   );
@@ -38,12 +40,30 @@ const PriceDetailsCard = ({
     (state) => state.cart.discount_price || state.temp.discount_price || 0
   );
   const [discount, setdiscount] = useState(MRPvalue - priceFromState);
-  console.log("dis", discount);
   const [totalPrice, setTotalPrice] = useState(priceFromState);
   const [MRPPrice, setMRPPrice] = useState(MRPvalue);
   const [DiscountToPoint, setDiscountToPoint] = useState(
     totalDiscount * itemCount
   );
+
+  const handleClick = async () => {
+    console.log("handleClick-------------------");
+
+    const razorpay = parseFloat(totalPrice) + parseFloat(InstallationCharge);
+    const response = await axios.post("/api/razorpay", {
+      amount: razorpay * 100,
+      currency: "INR",
+    });
+    console.log(response);
+    const orderData = response;
+    console.log("Order data: " + orderData);
+    dispatch(createOrderSuccess(orderData));
+    const orderd = JSON.stringify(orderData);
+    const orderdd = JSON.parse(orderd);
+    console.log("Order dd: " + orderdd);
+    console.log("Order dd: " + orderd);
+    console.log(response);
+  };
 
   const [DiscountCard, setDiscountCard] = useState(0);
   useEffect(() => {
@@ -90,10 +110,10 @@ const PriceDetailsCard = ({
           <div className="fw-bold">
             Rs{" "}
             {totalPay
-              ? totalPay
-              : totalPrice
               ? parseFloat(totalPrice) + parseFloat(InstallationCharge)
-              : "0000"}
+              : "0000.00"
+              ? parseFloat(totalPrice) + parseFloat(InstallationCharge)
+              : "0000.00"}
           </div>
         </div>
         <div className="small my-2 text-success text-center">
@@ -108,12 +128,13 @@ const PriceDetailsCard = ({
               <button
                 type="submit"
                 className="btn btn-danger px-md-5 placeOrderResp"
+                onClick={userState ? () => handleClick() : () => {}}
               >
                 {userState ? "Checkout" : "Login To Checkout"}
               </button>
             </Link>
           ) : (
-            <Link href="/ThankYouPage">
+            <Link href="/razorpay">
               <button
                 type="submit"
                 className="btn btn-danger px-md-5 placeOrderResp"
