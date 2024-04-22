@@ -50,6 +50,7 @@ export async function POST(request) {
         status: 400,
       });
     }
+    const hashedPassword = await bcrypt.hash(password, 12);
 
     // Execute database query to insert new user
     const result = await query({
