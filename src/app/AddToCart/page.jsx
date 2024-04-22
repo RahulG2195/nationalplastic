@@ -23,6 +23,8 @@ import { prod } from "../ConstantURL";
 import { isLoggedIn } from "@/utils/validation";
 function AddToCart() {
   const tempCartStates = useSelector((state) => state.temp);
+  const CartStates = useSelector((state) => state.cart);
+
   const userState = useSelector((state) => state.userData.isLoggedIn);
   const productCount = useSelector((state) => {
     let who;
@@ -151,12 +153,31 @@ function AddToCart() {
         // state.products.push(action.payload);
         const len = tempCartStates.products.length;
         console.log(len, "Product");
+        //logic to addtocart db after login when temp data will be there.
         if (isLoggedIn() && len > 0) {
           console.log("addbodyNhi...");
           console.log(isLoggedIn());
           products.forEach((product) => {
             dispatch(
               addToCart({
+                product_id: product.product_id,
+                quantity: product.quantity || 1, // Explicitly set quantity to 1
+                price: product.price,
+                discount_price: product.discount_price,
+                color: product.color,
+                from: false,
+              })
+            );
+          });
+        }
+        const cartLen = CartStates.products.length;
+
+        if (isLoggedIn() && cartLen == 0) {
+          console.log("addbodyNhi...");
+          console.log(isLoggedIn());
+          products.forEach((product) => {
+            dispatch(
+              addItemToCart({
                 product_id: product.product_id,
                 quantity: product.quantity || 1, // Explicitly set quantity to 1
                 price: product.price,
