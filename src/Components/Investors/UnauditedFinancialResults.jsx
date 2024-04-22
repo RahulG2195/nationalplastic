@@ -94,20 +94,20 @@ function UnauditedFinancialResults() {
 
         <div className="row">
           <div className="col-md-4 colred">
-            <div className="FinancialResults-2 FinancialResults-2-ufr bg-danger mt-5 px-5 py-2 rounded-1 text-center">
+            <div className="FinancialResults-2 FinancialResults-2-ufr bg-danger mt-5 px-md-5 py-2 rounded-1 text-center">
               <h4 className="fw-bold my-5 text-center mx-1">Unaudited Financial Results</h4>
             </div>
           </div>
           {/* *******Q1 June******** */}
 
-          <div className="col-md-8 FinancialResults-10 px-5">
+          <div className="col-md-8 FinancialResults-10 px-md-5">
             <div>
               <h2>Financial Results</h2>
               <h4>Q1 June</h4>
 
               <div className="row">
                 {Resultarr.map((val) => (
-                  <div className="col-md-4 results-data" key={val.key}>
+                  <div className="col-md-4 col-6 results-data" key={val.key}>
                     <FinancialResults
                       date={val.date}
                       text={val.text}
@@ -125,7 +125,7 @@ function UnauditedFinancialResults() {
 
               <div className="row">
                 {Resultarr.map((val) => (
-                  <div className="col-md-4 results-data" key={val.key}>
+                  <div className="col-md-4 col-6 results-data" key={val.key}>
                     <FinancialResults
                       date={val.date}
                       text={val.text}
@@ -142,7 +142,7 @@ function UnauditedFinancialResults() {
               <h4>Q3 December</h4>
               <div className="row">
                 {Resultarr.map((val) => (
-                  <div className="col-md-4 results-data" key={val.key}>
+                  <div className="col-md-4 col-6 results-data" key={val.key}>
                     <FinancialResults
                       date={val.date}
                       text={val.text}
@@ -159,18 +159,18 @@ function UnauditedFinancialResults() {
         {/* ****Audited Financial Results***** */}
         <div className="row FinancialResults">
           <div className="col-md-4 colred">
-            <div className="FinancialResults-2 FinancialResults-2-ufr bg-danger mt-5 px-5 py-2 rounded-1 text-center">
+            <div className="FinancialResults-2 FinancialResults-2-ufr bg-danger mt-5 px-md-5 py-2 rounded-1 text-center">
               <h4 className="fw-bold my-5 text-center">Audited Financial Results</h4>
             </div>
           </div>
 
-          <div className="col-md-8 FinancialResults-10 px-5">
+          <div className="col-md-8 FinancialResults-10 px-md-5">
             <div>
               <h2>Financial Results</h2> 
 
               <div className="row">
                 {Resultarr.map((val) => (
-                  <div className="col-md-4 results-data" key={val.key}>
+                  <div className="col-md-4 col-6 results-data" key={val.key}>
                     <FinancialResults
                       date={val.date}
                       text={val.text}
@@ -186,17 +186,17 @@ function UnauditedFinancialResults() {
         {/* ****Annual Report***** */}
         <div className="row FinancialResults">
           <div className="col-md-4 colred">
-            <div className="FinancialResults-2 FinancialResults-2-ufr bg-danger mt-5 px-5 py-2 rounded-1 text-center">
+            <div className="FinancialResults-2 FinancialResults-2-ufr bg-danger mt-5 px-md-5 py-2 rounded-1 text-center">
               <h4 className="fw-bold my-5 text-center">Annual Report</h4>
             </div>
           </div>
 
-          <div className="col-md-8 FinancialResults-10 px-5">
+          <div className="col-md-8 FinancialResults-10 px-md-5">
             <div> 
 
               <div className="row">
                 {Resultarr.map((val) => (
-                  <div className="col-md-4 results-data" key={val.key}>
+                  <div className="col-md-4 col-6 results-data" key={val.key}>
                     <FinancialResults
                       date={val.date}
                       text={val.text}
@@ -212,17 +212,17 @@ function UnauditedFinancialResults() {
         {/* ****Annual Return***** */}
         <div className="row FinancialResults">
           <div className="col-md-4 colred">
-            <div className="FinancialResults-2 FinancialResults-2-ufr bg-danger mt-5 px-5 py-2 rounded-1 text-center">
+            <div className="FinancialResults-2 FinancialResults-2-ufr bg-danger mt-5 px-md-5 py-2 rounded-1 text-center">
               <h4 className="fw-bold my-5 text-center">Annual Return</h4>
             </div>
           </div>
 
-          <div className="col-md-8 FinancialResults-10 px-5">
+          <div className="col-md-8 FinancialResults-10 px-md-5">
             <div> 
 
               <div className="row">
                 {Resultarr.map((val) => (
-                  <div className="col-md-4 results-data" key={val.key}>
+                  <div className="col-md-4 col-6 results-data" key={val.key}>
                     <FinancialResults
                       date={val.date}
                       text={val.text}

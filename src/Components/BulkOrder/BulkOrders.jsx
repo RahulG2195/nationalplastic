@@ -53,7 +53,7 @@ const BulkOrders = () => {
 
               <div className="col-md-4 colResText">
                 <div className="text-center fw-bold">
-                  <div className="mx-5 px-5 darkBlue fs-1 fw-large2 GQRespTxt hide">
+                  <div className="mx-5 px-md-5 darkBlue fs-1 fw-large2 GQRespTxt hide">
                     GET<span className="text-danger"> QUOTE</span>
                   </div>
                 </div>

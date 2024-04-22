@@ -65,7 +65,7 @@ function Investor() {
 
       {/* <NationalFitnessUpp/> */}
       <div className="container NationalFitnessUpp-contaner p-0">
-        <div className="row px-5">
+        <div className="row px-md-5">
           {NationalFitnessUppArr.map((val) => (
             <div className="col-md-4" key={val.key}>
               <NationalFitnessUpper title={val.title} description={val.desc} />

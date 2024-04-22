@@ -72,7 +72,7 @@ export default function HappyStory() {
                   // width: "75%",
                   height: "100%",
                 }}
-                className="swipper px-5 swpr "
+                className="swipper px-md-5 swpr "
                 // style={{ width: "75%", height: "100%" }}
                 modules={[Navigation, Pagination, Scrollbar, A11y]}
                 spaceBetween={0}

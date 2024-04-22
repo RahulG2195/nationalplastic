@@ -16,7 +16,7 @@ const PremiumChairs = ({ cattitle }) => {
                 </div>
 
 
-                {/* <div className="px-5 mx-5 dropboxRes mt-5 d-flex justify-content-between">
+                {/* <div className="px-md-5 mx-5 dropboxRes mt-5 d-flex justify-content-between">
                     <div>
                         <div className='text-body-secondary fw-semibold'>FILTER BY</div>
                         <div className="d-flex flex-wrap gap-3 mt-2">

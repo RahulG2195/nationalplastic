@@ -3,7 +3,7 @@ import "../../styles/about.css";
 
 const SharePricesCard = ({image, title, description}) => {
     return (
-      <div className="vmcontainer py-5 px-5"> 
+      <div className="vmcontainer py-5 px-md-5"> 
         <Image
               src={image}
               className="img-fluid " // Use w-100 to make the image fill the entire col-lg col-md-3 col-sm-12umn

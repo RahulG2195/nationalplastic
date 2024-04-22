@@ -144,7 +144,7 @@ const CartProduct = ({
           <div style={{ display: "flex" }}>
             <h6 style={{ marginRight: "7px" }}>{productName}</h6>
           </div>
-          <h11>color:{color}</h11>
+          <h6 className="py-2">color: {color}</h6>
         </Link>
         <p>{productDesc}</p>
 

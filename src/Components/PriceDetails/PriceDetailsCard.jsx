@@ -127,7 +127,7 @@ const PriceDetailsCard = ({
             <Link href={`${userState ? "/Address" : "/Login"}`}>
               <button
                 type="submit"
-                className="btn btn-danger px-5 placeOrderResp"
+                className="btn btn-danger px-md-5 placeOrderResp"
                 onClick={userState ? () => handleClick() : () => {}}
               >
                 {userState ? "Checkout" : "Login To Checkout"}
@@ -137,8 +137,7 @@ const PriceDetailsCard = ({
             <Link href="/razorpay">
               <button
                 type="submit"
-                className="btn btn-danger px-5 placeOrderResp"
-                // onClick={() => handleClick()}
+                className="btn btn-danger px-md-5 placeOrderResp"
               >
                 Place Order
               </button>

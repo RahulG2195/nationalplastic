@@ -292,7 +292,7 @@ function ProdData() {
               <div className="bulk_order_div">
                 {/* <Link href="/BulkOrder" className=""> */}
                 <button
-                  className="btn btn-danger px-5 my-2 ProdbtnRes bulkRes  "
+                  className="btn btn-danger px-md-5 my-2 ProdbtnRes bulkRes  "
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
                 >
@@ -309,13 +309,13 @@ function ProdData() {
                 />
                 <p
                   onClick={() => handleMoveToCart(productId, initialCount)}
-                  className="btn m-2 px-5 ProdbtnRes"
+                  className="btn m-2 px-md-5 ProdbtnRes"
                 >
                   Add to Cart
                 </p>
                 <Link
                   href={userState ? "/Address" : "#"}
-                  className={`btn bg-danger text-white m-2 px-5 ProdbtnRes ${
+                  className={`btn bg-danger text-white m-2 px-md-5 ProdbtnRes ${
                     !userState ? "disabled-button" : ""
                   }`}
                   onClick={() => handleMoveToCart(productId)}
