@@ -69,16 +69,12 @@ export async function PUT(request) {
   try {
     //Address Spelling is wrong but it works properly
     const { Adress2, Id } = await request.json();
-    console.log("address2", Adress2, Id);
     const result = await query({
       query: "UPDATE customer SET Adress2 = ? WHERE customer_id = ?;",
       values: [Adress2, Id],
     });
-    console.log("useEffect called inside addtocart page");
     const daata = process.env.RAZORPAY_KEY_ID;
     const ds = process.env.RAZORPAY_SUBCRIPTION_ID;
-    console.log("dataa", daata);
-    console.log("ds", ds);
 
     if (result.affectedRows > 0) {
       return new Response(

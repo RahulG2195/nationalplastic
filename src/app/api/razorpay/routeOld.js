@@ -6,8 +6,6 @@ const instance = new Razorpay({
 });
 
 export async function POST(request) {
-  console.log("----------inside post request");
-
   const { amount, currency = "INR", receipt_email } = await request.json();
 
   try {

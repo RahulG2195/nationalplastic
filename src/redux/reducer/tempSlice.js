@@ -25,30 +25,15 @@ export const tempSlice = createSlice({
         color = "Gold",
         from = true,
       } = action.payload;
-      console.log(
-        "product added before adding" + JSON.stringify(action.payload)
-      );
-      console.log(" products in states " + JSON.stringify(state.products));
 
       const isItemInCart = state.products.some(
         (product) => product.product_id === product_id
       );
 
-      console.log("f or t", isItemInCart);
-
       if (!isItemInCart) {
         state.products.push(action.payload);
-        console.log("stateTotalPrice: " + discount_price);
-        console.log(
-          "stateTotalPrice:---- " + parseFloat(discount_price) * quantity
-        );
-        console.log("Actionpayload;" + action.payload);
-        console.log("state.items;" + state);
-        console.log("state.items;" + JSON.stringify(state));
-        console.log("State updating ---------------------");
 
         state.total_price += parseFloat(price) * quantity;
-        console.log("State updating ---------------------", state.total_price);
 
         state.discount_price += parseFloat(discount_price) * quantity;
         // Get the existing array from localStorage
@@ -58,29 +43,21 @@ export const tempSlice = createSlice({
         // Store the updated array back into localStorage
         localStorage.setItem("temp", JSON.stringify(existingArray));
 
-        console.log("flase or true", from);
-
         notify("product Added Successfully");
       } else if (from) {
-        console.log("NoMahnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn!");
         const existingProduct = state.products.find(
           (product) => product.product_id === product_id
         );
         existingProduct.quantity += quantity;
         state.discount_price += parseFloat(discount_price) * quantity;
-        console.log("State updating ---------------------");
 
         state.total_price += parseFloat(price) * quantity;
-        console.log("State updating ---------------------", state.total_price);
 
         // Update total price
         notify("products Added Successfully");
       }
     },
     removeItemFromCartD: (state, action) => {
-      console.log("gggggggggggggggggg");
-      console.log("Removing", action.payload);
-      console.log("JSON", JSON.stringify(action.payload));
       const { product_id } = action.payload;
 
       // Find the existing product in the cart
@@ -162,7 +139,5 @@ export const {
 
 export const addToCartD = (item) => async (dispatch, getState) => {
   dispatch(addItemToCartD(item));
-
-  console.log(item, "this are items ");
 };
 export default tempSlice.reducer;

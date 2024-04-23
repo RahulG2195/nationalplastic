@@ -63,11 +63,9 @@ const Search = (props) => {
 
   const fetchData = async () => {
     try {
-      console.log("query", query);
       const value = params.get("query");
       setQuery(value);
 
-      console.log("query", query);
       if (query.trim() === "") {
         return;
       }
@@ -75,13 +73,9 @@ const Search = (props) => {
       const response = await axios.get(
         `/api/search?query=${query}&page=${page}`
       );
-      console.log("response", response);
-      console.log("response", response.data.products);
 
       const newProducts = response.data.products;
       const all = response.data.allproducts;
-      console.log(all);
-      console.log(all.length);
 
       setAllproducts(all);
       setProducts((prevProducts) => [...prevProducts, ...newProducts]);
@@ -111,16 +105,13 @@ const Search = (props) => {
   //   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch(
-        "/api/ProductsCat",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ product_id: id }),
-        }
-      );
+      const response = await fetch("/api/ProductsCat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ product_id: id }),
+      });
       //console.log(response);
 
       if (!response.ok) {

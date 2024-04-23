@@ -11,7 +11,6 @@ import HappyStory from "@/Components/Home/HappyStory";
 import Dealers from "@/Components/Home/Dealers";
 import Blog from "@/Components/Home/Blog";
 import Catalogue from "@/Components/Home/Catalogue";
-import BuyProduct from "@/app/razorpay/BuyProduct";
 import "../styles/home_prod.css";
 import { React, useEffect } from "react";
 import AOS from "aos";
