@@ -96,9 +96,7 @@ export default function Manufacture() {
             </div>
             <div className="mt-1 fw-medium subCptRes w-50">
               <p>
-                ILorem Ipsum is simply dummy text of the printing and
-                typesetting industry. Lorem Ipsum has been the industrys
-                standard dummy text ever since the 1500s,
+              Explore India's largest variety of household products, including comfortable seating, functional tables, convenient storage solutions, adorable baby chairs, and more!
               </p>
             </div>
           </div>
