@@ -39,15 +39,17 @@
     }
 
     .icon img {
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: auto;
+        margin: 0 5px;
     }
 
     .FeatureText h6 {
-        font-size: 12px;
+        font-size: 10px;
     }
 
     .feature {
-        margin-bottom: 10px; 
+        /* margin-bottom: 10px; */
+        margin: 14px 0;
     }
 }
