@@ -320,11 +320,11 @@
   }
 }
 
-@media (max-width: 769px) {
+/* @media (max-width: 769px) {
   .highlightCont {
     margin-top: 150px;
   }
-}
+} */
 
 @media (max-width: 990px) and (min-width: 640px) {
   .respCatTitle {
@@ -371,6 +371,10 @@
 }
 
 @media only screen and (min-width: 481px) and (max-width: 600px) {
+
+  .highlightCont {
+    margin-top: 5px;
+  }
   .houseImg {
     display: none;
     margin-top: 56px;
@@ -395,6 +399,21 @@
 }
 
 @media only screen and (min-width: 361px) and (max-width: 480px) {
+
+  .highlight_col .card {
+    height: 555px;
+    margin: 17px 0;
+}
+
+  .highlightCont {
+    margin-top: 5px;
+  }
+
+  .products_col {
+    padding: 0px 30px;
+}
+
+
   .houseImg {
     display: none;
   }
@@ -443,6 +462,12 @@
 
 @media only screen and (max-width: 360px) {
 
+
+
+  .highlightCont {
+    margin-top: auto;
+}
+
   .footer ul li {
     padding: 4px 0;
     font-size: 14px;
@@ -463,6 +488,6 @@
   }
 
   .highlightCont {
-    margin-top: 65px;
+    margin-top: 5px;
   }
 }

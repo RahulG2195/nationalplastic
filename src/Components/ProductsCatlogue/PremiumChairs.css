@@ -19,9 +19,9 @@
 }
 
 @media (max-width:788px) {
-    .dropdownbuttonResp{
-        padding: 3px !important;
-        font-size: small !important;
+    .dropdownbuttonResp {
+        padding: 10px 10px !important;
+        font-size: 13px !important;
     }
     .dropboxRes{
         justify-content: space-between !important;
