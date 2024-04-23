@@ -42,6 +42,7 @@
 .prodname {
   margin-top: 10px;
   align-items: center;
+  display: flex;
 }
 
 .prodname h4 {
@@ -297,6 +298,7 @@
   .respswpr h5 {
     font-size: 15px !important;
   }
+
   .respswpr p {
     font-size: 10px !important;
   }
@@ -312,6 +314,7 @@
   .hideswiper {
     display: none !important;
   }
+
   .show_swipper {
     display: block !important;
   }
@@ -329,11 +332,9 @@
   }
 }
 
-@media only screen and (min-width: 1367px) and (max-width: 1501px) {
-}
+@media only screen and (min-width: 1367px) and (max-width: 1501px) {}
 
-@media only screen and (min-width: 1201px) and (max-width: 1366px) {
-}
+@media only screen and (min-width: 1201px) and (max-width: 1366px) {}
 
 @media only screen and (min-width: 1025px) and (max-width: 1200px) {
   .highlight_col .card {
@@ -359,9 +360,11 @@
   .catalogue_sec {
     margin-top: 56px;
   }
+
   .houseImg {
     display: none;
   }
+
   .highlight_col .card {
     height: 445px;
   }
@@ -372,11 +375,22 @@
     display: none;
     margin-top: 56px;
   }
+
   .highlight_col .card {
     height: 585px;
   }
+
   .catalogue_sec {
     margin-top: 56px;
+  }
+
+  .sbr_card {
+    padding: 0 20px;
+  }
+
+  .prodHcard {
+    width: 100%;
+    padding: 30px;
   }
 }
 
@@ -384,18 +398,22 @@
   .houseImg {
     display: none;
   }
+
   .highlight_col .card {
     height: 555px;
   }
+
   .catalogue_sec {
     margin-top: 56px;
   }
+
   .prodname {
     display: flex !important;
 
     gap: 10px;
     padding: 10px 0;
   }
+
   .sbr_card {
     padding: 0px 10px;
   }
@@ -408,6 +426,7 @@
     width: auto;
     height: 75px;
   }
+
   .products_col {
     margin: 0 0;
   }
@@ -416,21 +435,33 @@
     width: 100%;
     margin: 0 15px;
   }
+
   .shop-room {
     display: flex;
-  } 
+  }
 }
 
 @media only screen and (max-width: 360px) {
+
+  .footer ul li {
+    padding: 4px 0;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
   .houseImg {
     display: none;
   }
+
   .catalogue_sec {
     margin-top: 56px;
   }
+
   .houseConntentDiv {
     padding: 30px 16px;
   }
+
   .highlightCont {
     margin-top: 65px;
   }
