@@ -19,10 +19,9 @@ const WishlistPage1 = () => {
     // console.log("wishlistID ", customerId);
     const fetchData = async () => {
       try {
-        const response = await axios.post(
-          "/api/wishListUser",
-          { customer_id: customerId }
-        );
+        const response = await axios.post("/api/wishListUser", {
+          customer_id: customerId,
+        });
         // const wishlistData = response.data.products;
         // console.log(
         //   "response from wishlistpage after useEffect ",
@@ -63,25 +62,16 @@ const WishlistPage1 = () => {
       const userDataString = localStorage.getItem("userData");
       const userData = JSON.parse(userDataString);
       // const product_id = await JSON.parse(product_id);
-      console.log("product_id: " + product_id);
-      console.log("product_id: " + typeof product_id);
 
       const customerId = userData.customer_id;
       const formData = new FormData();
       formData.append("customer_id", customerId);
       formData.append("product_id", product_id);
-      console.log("YYYYYYYYYYYYYYYYYYYYYYYyy" + formData);
       for (const entry of formData.entries()) {
-        console.log("Entryyyyyyyyy" + entry);
       }
-      const response = await axios.delete(
-        "/api/wishListUser",
-        { data: formData }
-      );
-
-      console.log(response);
-      console.log(response.data);
-      console.log(response.body);
+      const response = await axios.delete("/api/wishListUser", {
+        data: formData,
+      });
 
       setWishlistItems((prevItems) =>
         prevItems.filter((item) => item.product_id !== product_id)

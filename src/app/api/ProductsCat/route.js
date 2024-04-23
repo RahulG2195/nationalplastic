@@ -11,14 +11,16 @@ export async function GET(request) {
     });
 
     const color = await query({
-      query: "SELECT DISTINCT color, category_id FROM products WHERE LOWER(category_id) = LOWER(?)",
+      query:
+        "SELECT DISTINCT color, category_id FROM products WHERE LOWER(category_id) = LOWER(?)",
       values: [`${queryParams}`],
     });
 
     const armType = await query({
-      query: "SELECT DISTINCT armType, category_id FROM products WHERE LOWER(category_id) = LOWER(?)",
+      query:
+        "SELECT DISTINCT armType, category_id FROM products WHERE LOWER(category_id) = LOWER(?)",
       values: [`${queryParams}`],
-    })
+    });
 
     return new Response(
       JSON.stringify({
@@ -70,13 +72,11 @@ export async function POST(request) {
 export async function PUT(request) {
   try {
     const { seo_url } = await request.json();
-    //console.log("-",seo_url)
     const result = await query({
       query:
         "SELECT price, discount_price, product_id FROM nationalplastic_db.products WHERE seo_url = ?;",
       values: [seo_url],
     });
-    //console.log("-",result);
 
     if (result.length > 0) {
       const { price, discount_price, product_id } = result[0];

@@ -74,7 +74,6 @@ function Register() {
           // formDataWithEncryptedPassword.password = securePass;
 
           const response = axios.post("/api/Users", formData);
-          console.log("Form submitted:", response);
           // Clear form data on successful submission
           mailUpdate(formData);
 

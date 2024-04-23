@@ -50,3 +50,14 @@ export async function POST(request) {
     });
   }
 }
+//Fetches Payement data based on the payment ID
+export async function PUT(request) {
+  try {
+    const response = await instance.payments.fetch("pay_O1c22PH32Wvazw");
+    console.log("----------------------------", response.id);
+    return NextResponse.json({ msg: "successss", response });
+  } catch (error) {
+    return NextResponse.json({ msg: "Failed to verifyy", err: error.message });
+  }
+}
+//response from put request
