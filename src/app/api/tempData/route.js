@@ -4,17 +4,12 @@ export async function POST(request) {
   try {
     const requestData = await request.json();
     let product_ids = [];
-    console.log("isit", requestData);
-    console.log("isitno", requestData.product_ids);
 
     // If the request contains a single product_id, convert it to an array
     if (requestData.product_id) {
-      console.log(requestData.product);
-
       product_ids = [requestData.product_id];
     } else if (requestData.product_ids) {
       // If the request contains product_ids array, use it directly
-      console.log(requestData.product_ids);
 
       product_ids = requestData.product_ids;
     } else {
@@ -30,8 +25,6 @@ export async function POST(request) {
 
     // Construct a comma-separated list of placeholders for SQL query
     const placeholders = Array(product_ids.length).fill("?").join(", ");
-    console.log(placeholders);
-    console.log(product_ids);
 
     // Execute the query with product_ids as values
     const products = await query({

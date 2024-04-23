@@ -65,3 +65,74 @@ export async function POST(request, res) {
     return NextResponse.json({ success: false, error: "Email sending failed" });
   }
 }
+
+export async function PUT(request, res) {
+  try {
+    const data = await request.json();
+    const {
+      id,
+      contact,
+      email,
+      bank,
+      description,
+      method,
+      order_id,
+      currency = "INR",
+      amount,
+      status,
+    } = data;
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "webDevs2024@gmail.com",
+        pass: "kppr tbup pqne eirr", // Replace with your Gmail App Password (not account password)
+      },
+    });
+
+    // Create HTML email content dynamically for personalization
+    const userEmailTemplate = `
+    <h2>Hello,</h2>
+    <p>Thank you for your payment! Your payment for ${description} was successful.</p>
+    <p>Amount Paid: ${amount} ${currency}</p>
+    <p>status: ${status}</p>
+    <p>If you have any questions or need assistance, please don't hesitate to reach out to us.</p>
+    <p>Thank you for choosing our platform!</p>
+    <p>Best regards,</p>
+    <p>National PLastic Team</p>
+    `;
+    const clientEmailTemplate = `
+    <h2>Hello,</h2>
+    <p>Here are your order details:</p>
+    <p>status: ${status}</p>
+    <p>Order ID: ${order_id}</p>
+    <p>payment ID: ${id}</p>
+    <p>Description: ${description}</p>
+    <p>Payment Method: ${method}</p>
+    <p>bank: ${bank}</p>
+    <p>Amount Paid: ${currency}${amount}</p>
+    <p>Contact Number: ${contact} </p>
+    `;
+
+    // Send email to the user
+    const user = await transporter.sendMail({
+      from: "webDevs2024@gmail.com",
+      to: email,
+      subject: "Payment Successful",
+      html: userEmailTemplate,
+    });
+
+    const client = await transporter.sendMail({
+      from: "webDevs2024@gmail.com",
+      to: "webDevs2024@gmail.com",
+      subject: "Product Order Details",
+      html: clientEmailTemplate,
+    });
+    console.log("c", client);
+    console.log("u ", user);
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("Error sending email:", error);
+    return NextResponse.json({ success: false, error: "Email sending failed" });
+  }
+}

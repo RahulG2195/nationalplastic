@@ -12,8 +12,6 @@ export async function POST(request) {
 
     const productIds = mycart.map((row) => row.product_id);
 
-    console.log("productIds:", productIds); // Add this line to log productIds
-
     // Fetch product details for the retrieved product IDs
     const products = await query({
       query: `
@@ -24,8 +22,6 @@ export async function POST(request) {
       `,
       values: [user_id],
     });
-
-    console.log("products:", products); // Add this line to log products
 
     return new Response(
       JSON.stringify({

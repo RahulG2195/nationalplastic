@@ -46,8 +46,6 @@ const CartProduct = ({
   seourl,
   color,
 }) => {
-  console.log("Cart Product");
-  console.log("Cart Product", productName, productDesc, productPrice, quantity);
   const router = useRouter();
 
   const [initialCount, setInitialCount] = useState(quantity);
@@ -55,14 +53,10 @@ const CartProduct = ({
   // const dispatch = useDispatch();
 
   const handleIncrement = async () => {
-    console.log("decrease+Quantity");
     const isLoggedInResult = await isLoggedIn();
     //console.log("state", isLoggedInResult);
     //console.log("state", typeof isLoggedInResult);
     if (!isLoggedInResult) {
-      console.log("state", isLoggedInResult);
-      console.log("state", productId);
-
       await dispatch(increaseQuantityD({ product_id: productId }));
       setInitialCount(initialCount + 1);
     } else {
@@ -76,8 +70,6 @@ const CartProduct = ({
 
     if (initialCount > 0) {
       if (!isLoggedInResult) {
-        console.log("state", isLoggedInResult);
-        console.log("state", productId);
         dispatch(decreaseQuantityD({ product_id: productId }));
         setInitialCount(initialCount - 1);
       } else {

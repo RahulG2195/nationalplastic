@@ -50,11 +50,9 @@ function AddToCart() {
     setCount(productCount); // Update localCount whenever productCount changes
   }, [productCount]);
   useEffect(() => {
-    console.log("useEffect called inside addtocart page");
     const daata = process.env.RAZORPAY_KEY_ID;
     const ds = process.env.RAZORPAY_SUBCRIPTION_ID;
-    console.log("dataa", daata);
-    console.log("ds", ds);
+
     // console.log();
 
     const userDataString = localStorage.getItem("userData");
@@ -68,7 +66,6 @@ function AddToCart() {
           customer_id: customerId,
         });
         cartData = response.data.products;
-        console.log(cartData);
         fetchData(cartData);
       } else {
         //Logic to Store Temporary Data
@@ -78,7 +75,6 @@ function AddToCart() {
           : [];
         // If else to send request to API depending upon No of Product count
         if (productIds.length === 1) {
-          console.log("54");
           const response = await axios.post("/api/tempData", {
             product_id: productIds[0],
           });
@@ -95,14 +91,11 @@ function AddToCart() {
             product_ids: productIds,
           });
           // const product = response.data.products;
-          console.log("Response Where product count is 1", response);
           const products = response.data.products;
           const tempProducts = tempData.products;
           // console.log();
           // Iterate through products and tempProducts to update quantity
           // console.log(tempProduct);
-
-          console.log(tempProducts);
 
           products.forEach((product) => {
             const tempProduct = tempProducts.find(
@@ -131,7 +124,6 @@ function AddToCart() {
       // cartData.forEach((item, index) => {
       //   console.log(`Item ${index}:`, item);
       // });
-      console.log("Length of cartData:", cartData);
       try {
         const products = cartData.map(
           (item) => ({
@@ -149,7 +141,6 @@ function AddToCart() {
           }),
           []
         );
-        console.log("Response From line Number 132", products);
         // state.products.push(action.payload);
         const len = tempCartStates.products.length;
         console.log(len, "Product");
@@ -173,8 +164,6 @@ function AddToCart() {
         const cartLen = CartStates.products.length;
 
         if (isLoggedIn() && cartLen == 0) {
-          console.log("addbodyNhi...");
-          console.log(isLoggedIn());
           products.forEach((product) => {
             dispatch(
               addItemToCart({
@@ -264,25 +253,16 @@ function AddToCart() {
       // Calculate total price, discount, total payable, and installation charges
       // Calculate product totals
       // log;
-      console.log("products:--------------------", products);
       const productTotals = products.map(
         (product) =>
           parseFloat(product.price) -
           parseFloat(product.discount_price) * parseFloat(product.quantity)
       );
-      console.log(product.price);
-      console.log(product.discount_price);
-
-      console.log(product.quantity);
-
-      console.log(productTotals);
-
       // Calculate total amount of all products
       const totalPrice = productTotals.reduce(
         (acc, curr) => parseFloat(acc) + parseFloat(curr),
         0
       );
-      console.log(totalPrice);
       // Calculate total discount (consider using discount_price if available)
       const discount = products.reduce((acc, curr) => {
         // Use discount_price if available, otherwise use regular price for discount calculation
@@ -323,25 +303,15 @@ function AddToCart() {
     );
   };
   const onRemoveSuccess = async (product_id) => {
-    console.log("271");
-
     if (!userState) {
-      console.log("271");
-
       setProductDetailArr((prevItems) =>
         prevItems.filter((item) => item.product_id !== product_id)
       );
-      console.log(JSON.stringify(productDetailArr));
-      console.log(productDetailArr);
 
       // setCount(ProductDetailArr.length);
       // handleCartChange();
-      console.log("271");
-      console.log(productDetailArr);
     } else {
       try {
-        console.log("271");
-
         const userDataString = localStorage.getItem("userData");
         const userData = JSON.parse(userDataString);
         const customerId = userData.customer_id;
