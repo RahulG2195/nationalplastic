@@ -12,6 +12,7 @@ export const isValidEmail = (email) => {
 };
 export const isValidProduct = (name) => {
   // Allow comma (",") as a separator
+  console.log("p ", name);
   const namePattern = /^[A-Za-z\s,]+$/;
 
   // Check if the name string consists only of letters, spaces, and commas

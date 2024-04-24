@@ -50,11 +50,7 @@ function AddToCart() {
     setCount(productCount); // Update localCount whenever productCount changes
   }, [productCount]);
   useEffect(() => {
-    const daata = process.env.RAZORPAY_KEY_ID;
-    const ds = process.env.RAZORPAY_SUBCRIPTION_ID;
-
     // console.log();
-
     const userDataString = localStorage.getItem("userData");
     const userData = JSON.parse(userDataString) || {};
     const customerId = userData.customer_id || null;
