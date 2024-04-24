@@ -49,20 +49,13 @@ function Login() {
     }
 
     try {
-      // //console.log("formDataaaaaaa++++++++++",formData)
       const res = await axios.put(`/api/Users`, formData);
-      // //console.log("formDataaaaaaa++++++++++ formData.email on login page",formData.email)
-      // //console.log("this is statussssssssssssssssss  login page", res.data);
-      // //console.log("this is statussssssssssssssssss  login page", res.data.email);
       const userData = res.data.message[0];
-      // //console.log(" login page userData res",userData) // Directly access response.data.message
       const { customer_id } = userData;
-      //console.log("csID Login page..........", customer_id);
 
       if (res.data.status === 500) {
         setErrorMessage(JSON.stringify(res.data.message));
         alert("Failed to loggedin");
-        // router.push('/'); // Redirect to home page after successful login
       } else {
         alert("Successfully logged in");
 

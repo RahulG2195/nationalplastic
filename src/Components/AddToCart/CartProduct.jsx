@@ -65,7 +65,6 @@ const CartProduct = ({
     }
   };
   const handleDecrement = async () => {
-    console.log("decreaseQuantity");
     const isLoggedInResult = await isLoggedIn();
 
     if (initialCount > 0) {

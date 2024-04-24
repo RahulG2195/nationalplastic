@@ -107,18 +107,12 @@ const PasswordToken = () => {
         setFormErrors(errors);
       }
       if (Date.now() < expiry) {
-        console.log("yes  here");
         const res = await axios.put(`/api/forgotPassword`, formDataToSend);
-        //console.log(res);
         notify();
         localStorage.clear();
-        // return res.status(400).json({ error: "Token expired" });
       } else {
-        //console.log("Everthing okay");
         notifyError();
-        //   router.push("/forgot-password");
       }
-      //console.log("FormData from token: ", formData);
     } catch (error) {
       notifyError();
       console.error("Error submitting form:", error);

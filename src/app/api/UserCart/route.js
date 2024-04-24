@@ -50,19 +50,15 @@ export async function PUT(request) {
           "SELECT count(*) as count FROM mycart where product_id = ? and user_id = ?",
         values: [product_id, user_id],
       });
-      console.log(insertResult);
       if (insertResult[0].count === 0) {
         // product count is zero
         try {
-          //console.log("userid - and pass", product_id, customer_id);
-
           const insertResult = await query({
             query:
               "INSERT INTO mycart (product_id, user_id, quantity, color) VALUES (?, ?, ?, ?)",
             values: [product_id, user_id, quantity, color],
           });
 
-          //console.log("insertResult", insertResult);
           if (insertResult.affectedRows === 1) {
             return new Response(
               JSON.stringify({

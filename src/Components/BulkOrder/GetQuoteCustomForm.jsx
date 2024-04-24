@@ -70,7 +70,6 @@ const GetQuoteCustomForm = (props) => {
       return;
     }
     if (!isValidProduct(userInput.ProductName)) {
-      console.log(userInput.ProductName);
       toast.error("Please enter a message.");
       return;
     }
