@@ -35,7 +35,7 @@
 //       service: "gmail",
 //       auth: {
 //         user: "webDevs2024@gmail.com",
-//         pass: "kppr tbup pqne eirr", // Replace with your Gmail App Password (not account password)
+//         pass: "fkbt nnro yfnk ngmc", // Replace with your Gmail App Password (not account password)
 //       },
 //     });
 

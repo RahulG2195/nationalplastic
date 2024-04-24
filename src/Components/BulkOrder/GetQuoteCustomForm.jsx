@@ -70,6 +70,7 @@ const GetQuoteCustomForm = (props) => {
       return;
     }
     if (!isValidProduct(userInput.ProductName)) {
+      console.log(userInput.ProductName);
       toast.error("Please enter a message.");
       return;
     }
@@ -86,20 +87,14 @@ const GetQuoteCustomForm = (props) => {
     if (!isValid) return;
 
     try {
-      await axios.post(
-        "/api/BulkOrderForm",
-        formData
-      );
+      await axios.post("/api/BulkOrderForm", formData);
       notify();
     } catch (error) {
       console.error("Error:", error);
       notifyError();
     }
     try {
-      const response = await axios.post(
-        "/api/bulkOrderEmail",
-        formData
-      );
+      const response = await axios.post("/api/bulkOrderEmail", formData);
       // console.log("Response:", response.data);
       // console.log("Response:", JSON.stringify(response.data));
     } catch (error) {

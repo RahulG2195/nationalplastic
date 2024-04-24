@@ -34,7 +34,7 @@ function Login() {
     }));
   };
   const handleResetPassword = async (event) => {
-    router.push("/reset-password");
+    router.push("/forgot-password");
   };
   const handleRegisterClick = async (event) => {
     router.push("/Register");
