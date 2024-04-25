@@ -7,7 +7,7 @@ import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 // import { Response } from 'your-response-library'; // Assuming 'your-response-library' is the correct library for handling responses
-import "@/envConfig.js";
+import "../../../../envConfig.js";
 
 // Define your API endpoint handler for GET request
 // import { useRouter } from 'next/navigation'

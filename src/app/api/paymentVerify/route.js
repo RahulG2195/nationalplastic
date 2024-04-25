@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import "@/envConfig.js";
+import crypto from "crypto";
+import "../../../../envConfig.js";
+
 export async function POST(req) {
   try {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
@@ -14,7 +16,6 @@ export async function POST(req) {
     }
 
     // Import crypto for security best practices
-    const crypto = require("crypto"); // Node.js built-in module
 
     const body = razorpay_order_id + "|" + razorpay_payment_id;
 
