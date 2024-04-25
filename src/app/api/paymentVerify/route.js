@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-
+import "@/envConfig.js";
 export async function POST(req) {
   try {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =

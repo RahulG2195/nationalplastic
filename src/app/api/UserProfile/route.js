@@ -1,4 +1,5 @@
 import { query } from "@/lib/db"; // Assuming 'your-database-module' is the correct path to your database module
+import "@/envConfig.js";
 
 export async function GET(request) {
   try {
