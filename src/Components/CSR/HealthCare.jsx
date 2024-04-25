@@ -18,7 +18,7 @@ const HealthCare = () => {
                 </div>
                 <div className="mt-1 fw-medium subCptRes w-50">
                     <p>
-                    From your living room to healthcare spaces: Our commitment to wellness extends as we collaborate with healthcare initiatives, providing comfort with a purpose.                    </p>
+                    Deeply ingrained in National’s philosophy is the belief in giving back to society and contributing to building a stronger community. For the past 5 years, in loving memory of Late Sri Vinodrai Vrajlal Parekh, we have organized Eye Camps. These Eye Camps last for a month and provide free eye checkups, cataract surgery, including eye glasses, and post-operative eye care for all those in need. </p>
                 </div>
             </div>
 

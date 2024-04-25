@@ -276,7 +276,7 @@ function ProdData() {
                     />
                     {/* <label htmlFor="white">White</label> */}
                   </div>
-                  <div className="prod_size">
+                  {/* <div className="prod_size">
                     <div>
                       <strong>Size: </strong> 0000
                     </div>
@@ -286,7 +286,7 @@ function ProdData() {
                       id="size"
                       placeholder="Ex: 111"
                     />
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="bulk_order_div">
