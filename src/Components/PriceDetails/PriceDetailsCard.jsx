@@ -85,17 +85,20 @@ const PriceDetailsCard = ({
       // image: logoBase64,
       handler: async function (response) {
         // if (response.length==0) return <Loading/>;
-        const data = await fetch("/api/paymentVerify", {
-          method: "POST",
-          // headers: {
-          //   // Authorization: 'YOUR_AUTH_HERE'
-          // },
-          body: JSON.stringify({
+        const data = await axios.post(
+          "/api/paymentVerify",
+          {
             razorpay_payment_id: response.razorpay_payment_id,
             razorpay_order_id: response.razorpay_order_id,
             razorpay_signature: response.razorpay_signature,
-          }),
-        });
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              // You can add additional headers here
+            },
+          }
+        );
 
         const res = await data.json();
 
