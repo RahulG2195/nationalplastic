@@ -35,7 +35,7 @@ const Search = (props) => {
   const [hasMore, setHasMore] = useState(true);
   const [allproducts, setAllproducts] = useState([]);
   const dispatch = useDispatch();
-  const [query, setQuery] = useState(props.searchParams.query);
+  const [query, setQuery] = useState({});
   const params = useSearchParams();
 
   useEffect(() => {

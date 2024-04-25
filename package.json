@@ -56,7 +56,6 @@
     "react-spinners": "^0.13.8",
     "react-toastify": "^10.0.4",
     "redux-persist": "^6.0.0",
-    "shortid": "^2.2.16",
     "swiper": "^11.0.5",
     "trace": "^3.1.1",
     "ui": "^0.2.4",

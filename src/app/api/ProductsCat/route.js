@@ -1,9 +1,9 @@
-"use client";
 import { query } from "@/lib/db";
 import { parse } from "url";
 
 export async function GET(request) {
   const parsedUrl = parse(request.url, true);
+
   const queryParams = parsedUrl.query.query;
   try {
     const products = await query({
