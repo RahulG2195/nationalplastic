@@ -92,17 +92,11 @@ export async function PUT(request) {
 }
 
 export async function DELETE(request) {
-  //console.log("first");
-  // //console.log("dleete entere", request.json());
-
   try {
-    // //console.log(request);
     const formData = await request.formData();
     //console.log("formData", formData); // Get form data
     const user_id = formData.get("customer_id");
     const product_id = formData.get("product_id");
-    //console.log("Received product_id:", product_id); // Log received product_id
-    //console.log("Received product_id:", user_id); // Log received product_id
 
     // Log received product_id
     const deleteWishlist = await query({

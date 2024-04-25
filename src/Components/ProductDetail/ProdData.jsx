@@ -156,7 +156,6 @@ function ProdData() {
             color: selectedColor,
           })
         );
-        console.log(userState);
         break;
       case true:
         dispatch(

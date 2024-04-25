@@ -211,7 +211,13 @@ export default function Header() {
                     Bulk Orders
                   </Link>
                 </li>
-                <li className="nav-item brdr d-none d-md-none d-xl-block">
+               
+              </ul>
+            </div>
+
+            <div className="row">
+              <ul class=" d-flex side-icons">
+              <li className="nav-item brdr d-none d-md-none d-xl-block">
                   <Link
                     className="nav-link"
                     href="/ContactUs"
@@ -292,7 +298,7 @@ export default function Header() {
               </ul>
             </div>
             
-      {/* Floating menu */}
+      {/* footer menu */}
       <div className="lower-mobile-menu">
         <ul className="list-unstyled">
 
@@ -300,8 +306,8 @@ export default function Header() {
             <Link href="/#">
               <Image
                 src="Assets/images/home-icon-silhouette_69524.svg"
-                height={50} // Adjust height
-                width={50} // Adjust width
+                height={50}
+                width={50} 
                 layout="responsive"
                 objectFit="contain"
                 alt="Home"
@@ -313,8 +319,8 @@ export default function Header() {
             <Link href="/Wishlist">
               <Image
                 src="/Assets/svg/Path 3.svg"
-                height={50} // Adjust height
-                width={50} // Adjust width
+                height={50} 
+                width={50} 
                 layout="responsive"
                 objectFit="contain"
                 alt="Wishlist"
@@ -327,8 +333,8 @@ export default function Header() {
               <Link href="/ProfilePage">
                 <Image
                   src="/Assets/svg/Group 4.svg"
-                  height={50} // Adjust height
-                  width={50} // Adjust width
+                  height={50}
+                  width={50} 
                   layout="responsive"
                   objectFit="contain"
                   alt="Profile"
@@ -340,8 +346,8 @@ export default function Header() {
               <Link href="/Login">
                 <Image
                   src="/Assets/svg/Group 4.svg"
-                  height={50} // Adjust height
-                  width={50} // Adjust width
+                  height={50} 
+                  width={50} 
                   layout="responsive"
                   objectFit="contain"
                   alt="Profile"
@@ -354,8 +360,8 @@ export default function Header() {
             <Link href="/AddToCart">
               <Image
                 src="/Assets/svg/Group 5.svg"
-                height={50} // Adjust height
-                width={50} // Adjust width
+                height={50} 
+                width={50} 
                 layout="responsive"
                 objectFit="contain"
                 alt="Cart"

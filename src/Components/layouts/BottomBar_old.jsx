@@ -9,7 +9,6 @@ function BottomBar() {
   const [name, setName] = useState("");
   const [seourl, setSeourl] = useState();
   const [preEventChair, setPreEventChair] = useState([]);
-  // //console.log("urlurlurlurl", preEventChair);
   const [withountArm, setWithoutArm] = useState([]);
   const [prechair, setPrechair] = useState([]);
   const [Popularchair, setPopularchair] = useState([]);
@@ -20,15 +19,7 @@ function BottomBar() {
   const [box, setBox] = useState([]);
   const [drawer, setDrawer] = useState([]);
 
-  // const preEventChair = [
-  //   { label: "karen", seoUrl: "karen" },
-  //   { label: "ICE, GLASS", seoUrl: "ice-glass" },
-  //   { label: "GHOST CHAIR", seoUrl: "ghost-chair" },
-  //   // Add more link objects as needed
-  // ];
-
   useEffect(() => {
-    // //console.log("nameenamee", name)
     const fetchData = async () => {
       try {
         const res = await axios.get("/api/Products");
@@ -55,8 +46,6 @@ function BottomBar() {
         setTable(allproducts.filter((products) => products.category_id == 25));
         setBox(allproducts.filter((products) => products.category_id == 21));
         setDrawer(allproducts.filter((products) => products.category_id == 22));
-
-        //console.log(preEventChair);
       } catch {
         console.error("Error fetching data:");
       }
@@ -67,7 +56,6 @@ function BottomBar() {
 
   const sendCategory = (e) => {
     const title = e.target.innerText;
-    //console.log("Category clicked:", title);
     localStorage.setItem("category", title);
   };
 

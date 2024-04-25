@@ -53,32 +53,18 @@ export const cartSlice = createSlice({
         color = "Gold",
         from = true,
       } = action.payload;
-      //console.log(
-      //   "product added successfully before adding " +
-      //     JSON.stringify(action.payload)
-      // );
-      //console.log("isItemInCart  ", quantity);
 
       const isItemInCart = state.products.some(
         (product) => product.product_id === product_id
       );
       if (!isItemInCart) {
-        //console.log("Inside ! ");
         state.products.push(action.payload);
-        //console.log("stateTotalPrice: " + discount_price);
-        // //console.log(
-        //   "stateTotalPrice:---- " + parseFloat(discount_price) * quantity
-        // );
-        //console.log("Actionpayload;" + action.payload);
-        //console.log("state.items;" + state.product);
         state.total_price += parseFloat(price) * quantity;
         state.discount_price += parseFloat(discount_price) * quantity;
         localStorage.setItem("products", JSON.stringify(action.payload));
 
         // alert("Added");
       } else if (from) {
-        //console.log(from);
-        //console.log("NoMahnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn!");
         const existingProduct = state.products.find(
           (product) => product.product_id === product_id
         );
@@ -139,11 +125,6 @@ export const cartSlice = createSlice({
       if (existingProductIndex !== -1) {
         const existingProduct = state.products[existingProductIndex];
 
-        //console.log("Its should be coming anyways " + existingProduct.quantity);
-        //console.log(
-        //   "Its should be coming anyways " + JSON.stringify(existingProduct)
-        // );
-
         // Create a new product object with updated quantity
         const updatedProduct = {
           ...existingProduct, // Spread operator to copy existing product properties
@@ -173,7 +154,6 @@ export const cartSlice = createSlice({
           product_id: product_id,
           quantity: 1,
         });
-        //console.log("response after - ", response);
 
         // Return the new state (assuming you're using a state management library)
         return newState;
@@ -228,7 +208,6 @@ export const cartSlice = createSlice({
           product_id: product_id,
           quantity: -1,
         });
-        //console.log("response after - ", response);
 
         // Return the new state (assuming you're using a state management library)
         return newState;
@@ -250,7 +229,6 @@ export const {
 
 export const addToCart = (item) => async (dispatch, getState) => {
   const { initialCount, items } = getState().wishlist; // Access state through the second parameter
-  //console.log("addToCart" + JSON.stringify(item));
   const userDataString = localStorage.getItem("userData");
   const userData = JSON.parse(userDataString);
   const customerId = userData.customer_id;
@@ -260,9 +238,6 @@ export const addToCart = (item) => async (dispatch, getState) => {
     quantity: item.quantity,
     color: item.color || "Gold",
   });
-  //console.log("response From slicer" + response.status);
-  //console.log("response From slicer" + response.data);
-  //console.log("response From slicer" + response.body);
   notify();
   dispatch(addItemToCart(item));
 };

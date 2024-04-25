@@ -16,18 +16,21 @@ import {
 
 const GetQuoteForm = (props) => {
   const [products, setProducts] = useState();
-  console.log("props", props);
   useEffect(() => {
     // This effect runs once when the component mounts, updating products state
     setProducts(props.product);
     if (props.product) {
       notify("Product Added to BulkOrder Form");
+      setFromData((prev) => ({
+        ...prev,
+        ProductName: products ? products : "",
+      }));
     }
   }, [props.product]);
   const [formData, setFromData] = useState({
     fullName: "",
     Email: "",
-    ProductName: "",
+    ProductName: products ? products : "",
     Mobile: "",
     Requirements: "",
     city: "",
@@ -49,8 +52,8 @@ const GetQuoteForm = (props) => {
       toast.error("Please enter a valid email.");
       return;
     }
-    if (!isValidProduct(userInput.ProductName)) {
-      toast.error("Please enter a message.");
+    if (!isValidProduct(products ? products : userInput.ProductName)) {
+      toast.error("Please enter a product.");
       return;
     }
     if (!isValidMobile(userInput.Mobile)) {

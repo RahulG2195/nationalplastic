@@ -40,6 +40,8 @@ const PasswordToken = () => {
     resetToken: "",
     email: localStorage.getItem("resetEmail"),
   });
+  const [formErrors, setFormErrors] = useState({});
+
   const [showPassword, setShowPassword] = useState(false);
   const resetTokenParam = window.location.search
     .slice(1)
@@ -79,7 +81,7 @@ const PasswordToken = () => {
     event.preventDefault();
     try {
       //console.log("INvalid");
-
+      const errors = {};
       //console.log(formData.password);
       //console.log(formData.email);
       const inputString = formData.resetToken;
@@ -88,28 +90,29 @@ const PasswordToken = () => {
       const storedValue = valueAfterColon;
       //console.log(storedValue);
       const expiry = parseInt(storedValue);
-
+      const isValidPassword = (password) => {
+        const passwordPattern =
+          /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/;
+        return passwordPattern.test(password);
+      };
       const formDataToSend = new FormData();
       formDataToSend.append("resetEmail", formData.email);
       formDataToSend.append("password", formData.password);
+      if (!isValidPassword(formData.password)) {
+        errors.password =
+          "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character";
+      }
       //   formDataToSend.append("email", formData.email);
-
+      if (errors.password) {
+        setFormErrors(errors);
+      }
       if (Date.now() < expiry) {
-        //console.log("yes  here");
-        const res = await axios.put(
-          `/api/forgotPassword`,
-          formDataToSend
-        );
-        //console.log(res);
+        const res = await axios.put(`/api/forgotPassword`, formDataToSend);
         notify();
         localStorage.clear();
-        // return res.status(400).json({ error: "Token expired" });
       } else {
-        //console.log("Everthing okay");
         notifyError();
-        //   router.push("/forgot-password");
       }
-      //console.log("FormData from token: ", formData);
     } catch (error) {
       notifyError();
       console.error("Error submitting form:", error);
@@ -128,6 +131,9 @@ const PasswordToken = () => {
           onChange={handleInputChange}
           placeholder="Enter your password"
         />
+        {formErrors.password && (
+          <div className="text-danger">{formErrors.password}</div>
+        )}
         <button
           type="button"
           className="toggle-button"

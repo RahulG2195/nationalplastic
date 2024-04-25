@@ -90,8 +90,6 @@ export async function PUT(request) {
     const { email, password, getProfile } = await request.json();
     const daata = process.env.RAZORPAY_KEY_ID;
     const ds = process.env.RAZORPAY_SUBCRIPTION_ID;
-    console.log("dataa", daata);
-    console.log("ds", ds);
     //console.log(email);
     // Check if the email already exists in the database
     const existingUser = await query({
@@ -126,7 +124,6 @@ export async function PUT(request) {
       if (checkPassword) {
         // return new Response(JSON.stringify({ message: "Login successful" }), { status: 200 });
         {
-          console.log("its data");
           return new Response(
             JSON.stringify({
               status: 200,
@@ -152,10 +149,7 @@ export async function PUT(request) {
 
 export async function PATCH(request) {
   try {
-    console.log("request", request);
-
     const { Id, newPassword, confirmPassword } = await request.json();
-    console.log("id ", Id, newPassword, confirmPassword);
 
     if (!newPassword || !confirmPassword) {
       return new Response(
