@@ -1,19 +1,20 @@
-import crypto from "crypto";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req, res) {
+export async function POST(req) {
   try {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
       await req.json();
 
     // Validation
     if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
-      return new Response(
-        JSON.stringify({
-          status: 400,
-          message: "Missing required data in request body",
-        })
-      );
+      return NextResponse.json({
+        success: false,
+        error: "Missing required data in request body",
+      });
     }
+
+    // Import crypto for security best practices
+    const crypto = require("crypto"); // Node.js built-in module
 
     const body = razorpay_order_id + "|" + razorpay_payment_id;
 
@@ -29,28 +30,16 @@ export async function POST(req, res) {
 
     if (isAuthentic) {
       console.log("Payment verification successful");
-      return new Response(
-        JSON.stringify({
-          status: 200,
-          message: "Success",
-        })
-      );
+      return NextResponse.json({ success: true });
     } else {
       console.log("Payment verification failed");
-      return new Response(
-        JSON.stringify({
-          status: 400,
-          message: "Invalid signature",
-        })
-      );
+      return NextResponse.json({
+        success: false,
+        message: "Invalid signature",
+      });
     }
   } catch (err) {
     console.error("Error verifying payment:", err);
-    return new Response(
-      JSON.stringify({
-        status: 500,
-        message: "Internal Server Error",
-      })
-    );
+    return NextResponse.json({ success: false, message: err.message });
   }
 }
