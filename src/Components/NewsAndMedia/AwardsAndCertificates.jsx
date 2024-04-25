@@ -14,7 +14,8 @@ const AwardsAndCertificates = () => {
                 </div>
                 <div className="mt-1 fw-medium subCptRes w-50">
                     <p>
-                    National has been awarded as the number one exporter in the Plastic Furniture category for three consecutive years by The Plastics Export Promotion Council (popularly known as PLEXCONCIL) sponsored by the Ministry of Commerce & Industry, Department of Commerce, Government of India.                    </p>
+                    National has been awarded as the number one exporter in the Plastic Furniture category by The Plastics Export Promotion Council (popularly known as PLEXCONCIL) sponsored by the Ministry of Commerce & Industry, Department of Commerce, Government of India.
+National is also accredited as a One Star Export House, the most distinguished title by the Ministry of Commerce & Industry, Directorate General of Foreign Trade, Government of India.</p>
                 </div>
             </div>
 

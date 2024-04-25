@@ -15,7 +15,7 @@ const EventsAndActivities = () => {
                 </div>
                 <div className="mt-1 fw-medium subCptRes w-50">
                     <p>
-                    Join us in the pursuit of a cleaner world – our plastic furniture embodies style, comfort, and environmental responsibility.
+                    Stay tuned for latest updates and upcoming events!
                     </p>
                 </div>
             </div>

@@ -50,9 +50,7 @@ export default function ShopRoom() {
             </div>
             <div className="mt-1 fw-medium subCptRes w-50">
               <p>
-                ILorem Ipsum is simply dummy text of the printing and
-                typesetting industry. Lorem Ipsum has been the industrys
-                standard dummy text ever since the 1500s,
+                Easily furnish every room in your home! Check out our Shop By Rooms section for furniture and accessories tailored to your living room, dining room, bedroom, balcony, baby room, and more.
               </p>
             </div>
           </div>

@@ -10,9 +10,7 @@ function Infrastructure() {
         </div>
         <div className="mt-1 fw-medium subCptRes w-50">
           <p>
-            ILorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industrys standard dummy text
-            ever since the 1500s,
+          National Plastic Industries operates three production units across India, utilizing cutting-edge machinery and robotic systems in Silvassa and Patna for manufacturing plastic molded furniture and household products, while in Nellore, a new product line of PVC Flooring Mats, branded as INSTA, has been initiated.
           </p>
         </div>
       </div>

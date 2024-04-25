@@ -267,6 +267,9 @@ p {
 }
 
 @media (max-width:600px) {
+    .main_container{
+        margin-top: 2rem;
+    }
     .TCTxt {
         margin: 0;
         padding: 10px;

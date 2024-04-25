@@ -69,9 +69,7 @@ export default function TopPick() {
             </div>
             <div className="mt-1 fw-medium subCptRes w-50">
               <p>
-                ILorem Ipsum is simply dummy text of the printing and
-                typesetting industry. Lorem Ipsum has been the industrys
-                standard dummy text ever since the 1500s,
+                  Explore our top picks featuring the Premium Chair Collection, offering Quality, Comfort, and Style all in one place!
               </p>
             </div>
           </div>
