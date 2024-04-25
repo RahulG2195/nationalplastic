@@ -1,3 +1,4 @@
+"use client";
 import { query } from "@/lib/db";
 import { parse } from "url";
 
