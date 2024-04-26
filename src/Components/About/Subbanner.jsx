@@ -7,7 +7,7 @@ function Subbanner() {
         <div className="">
           <Image
             src="/Assets/images/banner/About-Us-banner.png"
-            className="img-fluid d-block w-100"
+            className="img-fluid d-block w-100 banner"
             alt="ome banner 1"
             width={100}
             height={80}

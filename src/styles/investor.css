@@ -1,35 +1,32 @@
-
-.InvestorBanner{
+.InvestorBanner {
     position: relative;
 }
 
-.vmcontainer{
-   
+.vmcontainer {
+
     width: 300px;
     height: 320px;
     justify-content: center !important;
 }
 
-.swaperinvestor .swiper-wrapper{
+.swaperinvestor .swiper-wrapper {}
 
-}
-
-.InvestorBanner h2{
+.InvestorBanner h2 {
     font-size: 5vw !important;
 }
 
-.InvestorBannerText{
+.InvestorBannerText {
     position: absolute;
     top: 15%;
     left: 5%;
     /* text-align: center; */
 }
 
-.InvestorBannerText p{
-    font-size:2vw ;
+.InvestorBannerText p {
+    font-size: 2vw;
 }
 
-.InvestorBannerText button{
+.InvestorBannerText button {
     cursor: pointer;
     background-color: #262262;
     color: #fff;
@@ -38,48 +35,53 @@
     border-radius: 10px;
     /* margin: 20px; */
 }
-.NationalFitnessUpp-contaner{
+
+.NationalFitnessUpp-contaner {
     background-color: #2E3192;
     color: #fff;
 }
-.NationalFitnessUpp-text h2{
-   color: #FFE000; 
-  
+
+.NationalFitnessUpp-text h2 {
+    color: #FFE000;
+
 }
 
-.NationalFitnessUpp-text{
-    
+.NationalFitnessUpp-text {
+
     text-align: center;
 }
 
-.NationalFitness-container h2{
+.NationalFitness-container h2 {
     font-size: 40px;
     color: var(--header-secondary-clr);
     padding: 0 0 15px 0;
 }
+
 .NationalFitness-container h2 span {
     font-weight: 700;
     color: var(--header-primary-clr);
 }
-.NationalFitness-container{
+
+.NationalFitness-container {
     width: 100%;
     text-align: center;
     margin: 60px auto;
 }
 
-.NationalFitness-container p{
+.NationalFitness-container p {
     /* padding: 0px 267px; */
     font-weight: 500;
     font-size: 13px;
     line-height: normal;
 }
 
-.colred{
+.colred {
     margin-right: -44px;
     z-index: 7;
     margin-top: 96px;
 }
-.FinancialResults-2{
+
+.FinancialResults-2 {
     /* background-color: #CC0008;
     width: 302px;
     height: 175px;
@@ -93,73 +95,81 @@
     left: 11%; */
 }
 
-.FinancialResults-2 h4{
+.FinancialResults-2 h4 {
     color: #fff;
 }
-.FinancialResults-10{
+
+.FinancialResults-10 {
     background-color: #F4F4F4;
     text-align: center;
 }
 
-.FinancialResults-10 h2{
+.FinancialResults-10 h2 {
     color: #2E3192;
     font-weight: 700;
     /* margin: 35px auto 0px; */
 }
 
-.FinancialResults-10 h4{
+.FinancialResults-10 h4 {
     color: #CC0008;
     font-weight: 600;
     margin: 7px;
-    }
+}
 
-    .download-btn{
-        display: inline-flex;
-    }
-   .Download-p{
+.download-btn {
+    display: inline-flex;
+}
+
+.Download-p {
     display: flex;
     align-items: center;
     margin: 5px;
-   }
-   .Download-p p{ 
-    color:#2E3192;    
+}
+
+.Download-p p {
+    color: #2E3192;
     font-weight: 500;
-   }
-   .Download-img{
+}
+
+.Download-img {
     width: 15px;
     align-items: center;
     display: flex;
-   }
+}
 
-   .results-data{
-padding: 20px;
-   }
-   .results-data h5{
-    font-weight: 600;
-   }
+.results-data {
+    padding: 20px;
+}
 
-   .FinancialResults{
-    margin-top: 100px;
-   }
-   .share-pricei-title {
+.results-data h5 {
     font-weight: 600;
 }
 
-.InvestorBannerText h2{
+.FinancialResults {
+    margin-top: 100px;
+}
+
+.share-pricei-title {
+    font-weight: 600;
+}
+
+.InvestorBannerText h2 {
     color: #C9070F;
     font-weight: 700;
     /* font-size: 38px;  */
 }
+
 /* RESPONSIVE */
 @media (max-width:769px) {
-    .colred{
+    .colred {
         margin-right: 0px;
         width: 100% !important;
         display: flex;
         justify-content: center;
         /* z-index: 7; */
-        /* margin-top: 96px; */
+        margin-top: 0px !important;
     }
+
     /* .FinancialResults-10{
         margin-top: -100px;
     } */
@@ -167,64 +177,82 @@ padding: 20px;
 
 
 @media only screen and (min-width: 1502) {}
-@media only screen and (min-width: 1367px) and (max-width: 1501px) {} 
+
+@media only screen and (min-width: 1367px) and (max-width: 1501px) {}
+
 @media only screen and (min-width: 1201px) and (max-width: 1366px) {}
+
 @media only screen and (min-width: 1025px) and (max-width: 1200px) {}
+
 @media only screen and (min-width: 992px) and (max-width: 1024px) {}
+
 @media only screen and (min-width: 769px) and (max-width: 991px) {
-    .FinancialResults-2 { 
+    .FinancialResults-2 {
         margin-top: -28px;
     }
+
     .FinancialResults {
         margin-top: 149px;
-    } 
-.FinancialResults-2 {
-    margin-top: -105px;
-}
-.FinancialResults-2-ufr {
-    margin-top: -36px;
-}
+    }
+
+    .FinancialResults-2 {
+        margin-top: -105px;
+    }
+
+    .FinancialResults-2-ufr {
+        margin-top: -36px;
+    }
 }
 
 
 /* Mobile: */
 @media only screen and (min-width: 601px) and (max-width: 768px) {
-    .InvestorBannerText { 
+
+    
+.FinancialResults {
+    margin-top: 0px;
+}
+
+    .InvestorBannerText {
         /* top: 18%;
         left: 10px;  */
     }
-    .InvestorBannerText h2 { 
+
+    .InvestorBannerText h2 {
         /* font-size: 25px; */
     }
+
     .InvestorBannerText p {
         /* font-size: 12px; */
     }
-    .InvestorBannerText button { 
+
+    .InvestorBannerText button {
         /* font-size: 10px;
         padding: 6px 11px;
         border-radius: 10px;
         margin: 15px; */
     }
+
     /* .FinancialResults-10 { 
         margin-top: 150px;
     } */
 
     .FinancialResults-2 {
         width: 300px;
-        margin-top: 9px; 
+        margin-top: 9px;
     }
-    
+
     /* .SharePrices-row {
         padding:  5px !important;
     } */
     .NationalFitness-container {
         margin: 11px auto;
     }
-    
+
 }
 
 @media (max-width:516px) {
-    .vmcontainer{
+    .vmcontainer {
         padding-left: 0 !important;
         padding-right: 0 !important;
         margin: 0 !important;
@@ -234,51 +262,68 @@ padding: 20px;
 }
 
 @media (max-width:600px) {
-   
-    .btnInverstor{
+
+    .btnInverstor {
         padding: 5px !important;
         font-size: 15px;
     }
+
     .SharePrices-row {
-        padding:  0px !important;
+        padding: 0px !important;
     }
-    
+
 }
+
 @media only screen and (min-width: 481px) and (max-width: 600px) {
-    .InvestorBannerText { 
+
+    .InvestorBanner {
+        position: relative;
+        margin-top: 70px;
+    }
+
+    .InvestorBannerText {
         /* top: 18%;
         left: 10px;  */
     }
-    .InvestorBannerText h2 { 
+
+    .InvestorBannerText h2 {
         /* font-size: 25px; */
     }
+
     .InvestorBannerText p {
         /* font-size: 12px; */
     }
-    .InvestorBannerText button { 
+
+    .InvestorBannerText button {
         /* font-size: 10px; */
         /* padding: 6px 11px; */
         border-radius: 10px;
         /* margin: 15px; */
     }
+
     /* .FinancialResults-10 { 
         margin-top: 150px;
     } */
 
     .FinancialResults-2 {
-        margin-top: 9px; 
+        margin-top: 9px;
     }
-    
+
     /* .SharePrices-row {
         padding:  5px !important;
     } */
     .NationalFitness-container {
         margin: 11px auto;
     }
-    
+
 }
-@media only screen and (min-width: 361px) and (max-width: 480px) 
-{
+
+@media only screen and (min-width: 361px) and (max-width: 480px) {
+
+    .InvestorBanner {
+        position: relative;
+        margin-top: 70px;
+    }
     /* .InvestorBannerText { 
         top: 18%;
         left: 10px; 
@@ -300,32 +345,44 @@ padding: 20px;
     } */
 
     .FinancialResults-2 {
-        margin-top: 9px;  
+        margin-top: 9px;
     }
-    
-   
+
+
     .NationalFitness-container {
         margin: 11px auto;
     }
-    
+
 }
+
 @media only screen and (max-width: 360px) {
-    .NationalFitness-container h2{
+
+    .InvestorBanner {
+        position: relative;
+        margin-top: 70px;
+    }
+
+    .NationalFitness-container h2 {
         font-size: 34px;
     }
-    .colred{
-        margin-top: 0px;
+
+    .colred {
+        margin-top: 0px !important;
     }
-    .NationalFitness-container p{
+
+    .NationalFitness-container p {
         font-size: 14px;
     }
+
     .FinancialResults-2 {
         margin-top: 9px;
         padding: 0 50px;
     }
+
     .FinancialResults {
-        margin-top: 80px;
+        margin-top: 0px;
     }
+
     /* .InvestorBannerText { 
         top: 1%;
         left: 10px; 
@@ -347,16 +404,14 @@ padding: 20px;
     } */
 
     .FinancialResults-2 {
-        margin-top: 9px; 
+        margin-top: 0px;
     }
-    
+
     /* .SharePrices-row {
         padding:  5px !important;
     } */
     .NationalFitness-container {
         margin: 11px auto;
     }
-    
+
 }
-  
-    
