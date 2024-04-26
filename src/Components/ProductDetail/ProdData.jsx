@@ -113,13 +113,15 @@ function ProdData() {
   const fetchPrice = async (storedId) => {
     //console.log("Fetching price", storedId);
     try {
-      const response = await fetch("/api/ProductsCat", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ seo_url: storedId }),
-      });
+      const response = await axios.put(
+        "/api/ProductsCat",
+        { seo_url: storedId },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       //console.log(response);
 
       if (!response.ok) {
@@ -156,7 +158,6 @@ function ProdData() {
             color: selectedColor,
           })
         );
-        console.log(userState);
         break;
       case true:
         dispatch(
@@ -276,7 +277,7 @@ function ProdData() {
                     />
                     {/* <label htmlFor="white">White</label> */}
                   </div>
-                  <div className="prod_size">
+                  {/* <div className="prod_size">
                     <div>
                       <strong>Size: </strong> 0000
                     </div>
@@ -286,7 +287,7 @@ function ProdData() {
                       id="size"
                       placeholder="Ex: 111"
                     />
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="bulk_order_div">

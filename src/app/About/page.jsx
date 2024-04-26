@@ -14,12 +14,12 @@ function About() {
     {
       key: 1,
       title: "Vision",
-      desc: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+      desc: "At National Plastic Industries Limited, we aim to build a more inclusive society by providing premium-quality products at the most affordable prices.",
     },
     {
       key: 2,
       title: "Mission",
-      desc: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+      desc: "Our vision is to improve global accessibility to high-quality products, setting new standards in the plastic products industry and enhancing everyday living experiences for people worldwide.",
     },
   ];
   // Array for misson vission end
@@ -153,10 +153,7 @@ function About() {
             </div>
             <div className="mt-1 fw-medium subCptRes w-50">
               <p>
-                ILorem Ipsum is simply dummy text of the printing and
-                typesetting industry. Lorem Ipsum has been the industrys
-                standard dummy text ever since the 1500s,
-              </p>
+              National has been awarded as the number one exporter in the Plastic Furniture category by The Plastics Export Promotion Council (popularly known as PLEXCONCIL) sponsored by the Ministry of Commerce & Industry, Department of Commerce, Government of India. National is also accredited as a One Star Export House, the most distinguished title by the Ministry of Commerce & Industry, Directorate General of Foreign Trade, Government of India.</p>
             </div>
           </div>
         <div className="row team-members">

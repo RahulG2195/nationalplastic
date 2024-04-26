@@ -156,7 +156,6 @@ const AddBody = () => {
         setTotalPrice(totalPrice);
         setDiscount(discount);
         setTotalPayble(totalPayble);
-        console.log("nopes for product", installationCharges);
         setInstallationCharges(installationCharges);
         setTotalCount(totalCount);
         setIsLoading(false);

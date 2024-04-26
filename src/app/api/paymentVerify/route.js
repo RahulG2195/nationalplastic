@@ -1,48 +1,46 @@
-import { NextResponse } from "next/server";
-import Razorpay from "razorpay";
-import shortid from "shortid";
+import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
-const instance = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_SECRET,
-});
+import "../../../../envConfig.js";
 
-export async function POST(req, res) {
+export async function POST(req) {
   try {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
       await req.json();
-    console.log("--", razorpay_signature);
+
+    // Validation
+    if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+      return NextResponse.json({
+        success: false,
+        error: "Missing required data in request body",
+      });
+    }
+
+    // Import crypto for security best practices
 
     const body = razorpay_order_id + "|" + razorpay_payment_id;
-    console.log("id==", body);
 
     const expectedSignature = crypto
       .createHmac("sha256", process.env.RAZORPAY_SECRET)
       .update(body.toString())
       .digest("hex");
-    console.log("e--s", expectedSignature);
-    console.log("--", razorpay_signature);
+
+    console.log("Expected Signature:", expectedSignature);
+    console.log("Received Signature:", razorpay_signature);
 
     const isAuthentic = expectedSignature === razorpay_signature;
 
     if (isAuthentic) {
-      return NextResponse.json(
-        {
-          message: "success",
-        },
-        {
-          status: 200,
-        }
-      );
+      console.log("Payment verification successful");
+      return NextResponse.json({ success: true });
+    } else {
+      console.log("Payment verification failed");
+      return NextResponse.json({
+        success: false,
+        message: "Invalid signature",
+      });
     }
   } catch (err) {
-    return NextResponse.json(
-      {
-        message: err.message,
-      },
-      {
-        status: 501,
-      }
-    );
+    console.error("Error verifying payment:", err);
+    return NextResponse.json({ success: false, message: err.message });
   }
 }

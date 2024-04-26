@@ -69,19 +69,11 @@ const PriceDetailsCard = ({
     setTotalPrice(priceFromState.toFixed(2));
     setMRPPrice(MRPvalue.toFixed(2));
     setdiscount(Math.round((MRPvalue - priceFromState) * 100) / 100);
-    console.log(DiscountToPoint);
     const discount = Math.round((MRPvalue - priceFromState) * 100) / 100;
     setDiscountCard(discount > 0 ? discount.toFixed(2) : 0);
   }, [priceFromState, MRPvalue, DiscountCard, totalDiscount]);
 
   const makePayment = async ({ productId = null }) => {
-    // "use server"
-    // const key = process.env.RAZORPAY_API_KEY;
-    // console.log(key);
-    // Make API call to the serverless API
-    // const data = await axios.post("/api/razorpay");
-    // const { order } = await data.json();
-    // console.log(order.id);
     const options = {
       key: "rzp_test_WUEWvbWJ3T7hJ0",
       amount: orderData.amount,
@@ -93,32 +85,25 @@ const PriceDetailsCard = ({
       // image: logoBase64,
       handler: async function (response) {
         // if (response.length==0) return <Loading/>;
-        console.log("FROM BUyProduct: ", response);
-        const data = await fetch("/api/paymentVerify", {
-          method: "POST",
-          // headers: {
-          //   // Authorization: 'YOUR_AUTH_HERE'
-          // },
-          body: JSON.stringify({
+        const data = await axios.post(
+          "/api/paymentVerify",
+          {
             razorpay_payment_id: response.razorpay_payment_id,
             razorpay_order_id: response.razorpay_order_id,
             razorpay_signature: response.razorpay_signature,
-          }),
-        });
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              // You can add additional headers here
+            },
+          }
+        );
 
         const res = await data.json();
 
-        console.log("response verify==", res);
-
-        // {message: 'success'}
-        // message
-        // :
-        // "success"
-
         if (res?.message == "success") {
-          console.log("redirected.......");
           const response = await axios.put("/api/razorpay");
-          console.log("resS ", response);
           sendPaymentSuccessMail(response.data.response);
           router.push("/ThankYouPage");
         }
@@ -132,21 +117,15 @@ const PriceDetailsCard = ({
 
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
-    console.log("---", paymentObject.on);
     paymentObject.on("payment.success", function (response) {
-      console.log("response:  ", response);
-
       alert("Payment failed. Please try again. Contact support for help");
     });
     paymentObject.on("payment.failed", function (response) {
-      console.log("response: ", response);
       alert("Payment failed. Please try again. Contact support for help");
     });
   };
 
   const sendPaymentSuccessMail = async (values) => {
-    console.log("sendingdata", values);
-    console.log("sendingdata", JSON.stringify(values));
     const paymentData = {
       id: values.id,
       contact: values.contact,
@@ -161,7 +140,6 @@ const PriceDetailsCard = ({
     };
 
     const response = await axios.put("/api/RegisterEmail", paymentData);
-    console.log(response);
   };
   return (
     <>

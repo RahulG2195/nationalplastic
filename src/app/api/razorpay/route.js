@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
 import Razorpay from "razorpay";
-import shortid from "shortid";
+import { v4 as uuidv4 } from "uuid"; // Import for generating unique IDs
 
 const instance = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_SECRET,
 });
+
 export async function GET() {
   const payment_capture = 1;
   const amount = 1 * 100; // amount in paisa. In our case it's INR 1
@@ -13,7 +14,7 @@ export async function GET() {
   const options = {
     amount: amount.toString(),
     currency,
-    receipt: shortid.generate(),
+    receipt: uuidv4(), // Generate unique receipt ID using uuid
     payment_capture,
     notes: {
       // These notes will be added to your transaction. So you can search it within their dashboard.

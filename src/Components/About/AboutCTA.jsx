@@ -10,15 +10,7 @@ function AboutCTA() {
           nonumy eirmod.
         </h3>
         <p className="row2 medium text-secondary-2">
-          ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-          eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
-          diam voluptua. At vero eos et accusam et justo duo dolores et ea
-          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-          ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-          sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-          et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-          takimata sanctus est Lorem ipsum dolor sit amet.
+        National Plastic started its production in a humble manner in 1952, operating from a 500 sq.ft. premises, manufacturing plastic buttons for shirts. It then took a quantum leap in 1994, commencing commercial production of Molded Furniture. Since then, National Plastic Industries Ltd. has gone from strength to strength. Over the years, National developed into a market leader in homeware products through continuous innovation and a nuanced understanding of the Indian consumer. Soon, National became India's leading manufacturer of homeware products and the largest exporter of plastic furniture in India.
         </p>
         <div className="d-flex justify-content-evenly flex-wrap py-5 gap-4">
           <div className="about_icons">

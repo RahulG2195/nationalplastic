@@ -16,7 +16,6 @@ import {
 
 const GetQuoteForm = (props) => {
   const [products, setProducts] = useState();
-  console.log("props", props);
   useEffect(() => {
     // This effect runs once when the component mounts, updating products state
     setProducts(props.product);
@@ -54,7 +53,6 @@ const GetQuoteForm = (props) => {
       return;
     }
     if (!isValidProduct(products ? products : userInput.ProductName)) {
-      console.log(userInput.ProductName);
       toast.error("Please enter a product.");
       return;
     }

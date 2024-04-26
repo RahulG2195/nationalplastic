@@ -70,7 +70,7 @@ export default function Dealers() {
             <h2>
               <span>National Plastic </span> Dealers
             </h2>
-            <p>States We Deliver In (carousel will be here)</p>
+            <p>We deliver quality products across multiple states.</p>
           </div>
           <div className="col-12 view_all_sec">
             <Link href="#" className="my-3">

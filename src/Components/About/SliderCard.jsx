@@ -24,7 +24,7 @@ function SliderCard() {
       key: 2,
       title: "Infrastructure",
       image: "/Assets/images/aboutIcons/infrastructure.png",
-      desc: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.",
+      desc: "National Plastic Industries operates three production units across India, in Silvassa, Patna and Nellore",
     },
     {
       key: 3,
@@ -42,7 +42,7 @@ function SliderCard() {
       key: 5,
       title: "Infrastructure",
       image: "/Assets/images/aboutIcons/infrastructure.png",
-      desc: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.",
+      desc: "National Plastic Industries operates three production units across India, in Silvassa, Patna and Nellore",
     },
     {
       key: 6,
@@ -54,7 +54,7 @@ function SliderCard() {
 
   return (
     < >
-    <div className="container p0 ">
+    <div className="container p-0">
       <Swiper
         className=" pb-5 "
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}

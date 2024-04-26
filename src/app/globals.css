@@ -267,6 +267,9 @@ p {
 }
 
 @media (max-width:600px) {
+    .main_container{
+        margin-top: 2rem;
+    }
     .TCTxt {
         margin: 0;
         padding: 10px;
@@ -379,6 +382,10 @@ p {
 }
 
 @media only screen and (max-width: 360px) {
+
+    .pacing-catalogue{
+        margin: auto !important;
+    }
 
     .banner{
         margin-top: 70px;

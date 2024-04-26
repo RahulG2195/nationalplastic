@@ -10,7 +10,6 @@ function BottomBar() {
   const [name, setName] = useState("");
   const [seourl, setSeourl] = useState();
   const [preEventChair, setPreEventChair] = useState([]);
-  // //console.log("urlurlurlurl", preEventChair);
   const [withountArm, setWithoutArm] = useState([]);
   const [prechair, setPrechair] = useState([]);
   const [Popularchair, setPopularchair] = useState([]);
@@ -26,15 +25,7 @@ function BottomBar() {
   const [AllProd, SetAllProd] = useState([]);
   const [getImg, SetGetImg] = useState("Blog-section-1.jpg");
 
-  // const preEventChair = [
-  //   { label: "karen", seoUrl: "karen" },
-  //   { label: "ICE, GLASS", seoUrl: "ice-glass" },
-  //   { label: "GHOST CHAIR", seoUrl: "ghost-chair" },
-  //   // Add more link objects as needed
-  // ];
-
   useEffect(() => {
-    // //console.log("nameenamee", name)
     const fetchData = async () => {
       try {
         const res = await axios.get("/api/Products");

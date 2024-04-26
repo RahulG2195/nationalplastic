@@ -24,7 +24,6 @@ import { isLoggedIn } from "@/utils/validation";
 function AddToCart() {
   const tempCartStates = useSelector((state) => state.temp);
   const CartStates = useSelector((state) => state.cart);
-
   const userState = useSelector((state) => state.userData.isLoggedIn);
   const productCount = useSelector((state) => {
     let who;
@@ -62,6 +61,9 @@ function AddToCart() {
           customer_id: customerId,
         });
         cartData = response.data.products;
+        if (tempCartStates) {
+          const tempData = tempCartStates;
+        }
         fetchData(cartData);
       } else {
         //Logic to Store Temporary Data
@@ -116,10 +118,6 @@ function AddToCart() {
     };
 
     const fetchData = async (cartData) => {
-      // console.log("cd fetch", cartData);
-      // cartData.forEach((item, index) => {
-      //   console.log(`Item ${index}:`, item);
-      // });
       try {
         const products = cartData.map(
           (item) => ({
@@ -291,13 +289,7 @@ function AddToCart() {
       console.error("Error fetching data", error);
     }
   };
-  const onAddToCart = async (product_id) => {
-    dispatch(
-      addItemToWishlist({
-        product_id: product_id,
-      })
-    );
-  };
+
   const onRemoveSuccess = async (product_id) => {
     if (!userState) {
       setProductDetailArr((prevItems) =>
@@ -346,9 +338,7 @@ function AddToCart() {
       }
     }
   };
-  const updatePriceInCard = (newPrice) => {
-    setTotalPrice(newPrice);
-  };
+
   return (
     <>
       <div className="row">
@@ -369,36 +359,6 @@ function AddToCart() {
               <div className="col-md-4 py-3">
                 <h5>My Cart ( {count} Items)</h5>
               </div>
-              {/* <div className="col-md-8 search-pin">
-                <div className="LocationIconPin">
-                  <div className="locationIcon">
-                    <div className="iconImage">
-                      <Image
-                        src="/Assets/images/AddTOCart/Icon-location.png"
-                        classname="img-fluid d-block w-3"
-                        alt="ome banner 1"
-                        width={100}
-                        height={80}
-                      />
-                    </div>
-                    <p>Deliver To</p>
-                  </div>
-                  <div className="locationPin">
-                    <div className="input-group mb-3">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Enter Your Pin code"
-                        aria-label="Recipient's username"
-                        aria-describedby="basic-addon2"
-                      />
-                      <div className="input-group-append">
-                        <button>Check Now</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
               <hr />
               <div className="cartList">
                 {productDetailArr.length === 0 ? (

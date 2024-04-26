@@ -159,9 +159,7 @@ const PreChairsCards = () => {
       const categoryTitle = localStorage.getItem("category");
       setCategoryType(categoryTitle);
 
-      const response = await axios.get(
-        `/api/ProductsCat?query=${cat_id}`
-      );
+      const response = await axios.get(`/api/ProductsCat?query=${cat_id}`);
       //console.log("API Response:", response.data); // Log API response
 
       const fetchedData = response.data;
@@ -243,17 +241,15 @@ const PreChairsCards = () => {
   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch(
+      const response = await axios.post(
         "/api/ProductsCat",
+        { product_id: id },
         {
-          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ product_id: id }),
         }
       );
-      console.log('prod cat :'+ response);
 
       if (!response.ok) {
         throw new Error("Failed to fetch product data");

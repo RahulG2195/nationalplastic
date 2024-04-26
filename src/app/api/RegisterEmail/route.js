@@ -128,8 +128,6 @@ export async function PUT(request, res) {
       subject: "Product Order Details",
       html: clientEmailTemplate,
     });
-    console.log("c", client);
-    console.log("u ", user);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error sending email:", error);
