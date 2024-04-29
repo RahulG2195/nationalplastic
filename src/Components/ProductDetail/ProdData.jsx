@@ -113,15 +113,13 @@ function ProdData() {
   const fetchPrice = async (storedId) => {
     //console.log("Fetching price", storedId);
     try {
-      const response = await axios.put(
-        "/api/ProductsCat",
-        { seo_url: storedId },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch("/api/ProductsCat", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ seo_url: storedId }),
+      });
       //console.log(response);
 
       if (!response.ok) {

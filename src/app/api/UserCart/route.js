@@ -82,20 +82,8 @@ export async function PUT(request) {
             })
           );
         }
-        //console.log("yes", insertResult[0].count);
       } else {
-        //console.log("Cools", insertResult[0]);
-
-        //console.log("Cools", insertResult[0].count);
         try {
-          // const { product_id, customer_id } = await request.json();
-          // const user_id = customer_id;
-          // //console.log("quantity", typeof quantity);
-          //console.log("user_id", typeof user_id);
-          //console.log("product_id", typeof product_id);
-          //console.log("product_id", color);
-
-          //console.log("userid and pass", product_id, customer_id);
           const insertResult = await query({
             query:
               "UPDATE mycart SET quantity = quantity + 1, color = ? WHERE product_id = ? AND user_id = ?",
@@ -121,17 +109,26 @@ export async function PUT(request) {
           return new Response(
             JSON.stringify({
               status: 500,
-              message: "Internal Server Error",
+              message: error.message,
             })
           );
         }
       }
-    } catch (err) {
-      //console.log(err);
+    } catch (error) {
+      return new Response(
+        JSON.stringify({
+          status: 500,
+          message: error.message,
+        })
+      );
     }
-  } catch (err) {
-    //console.log(err);
-    //Add the Logic to increase the quantity of the product
+  } catch (error) {
+    return new Response(
+      JSON.stringify({
+        status: 500,
+        message: error.message,
+      })
+    );
   }
 }
 
