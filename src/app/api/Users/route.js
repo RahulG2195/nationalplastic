@@ -89,8 +89,6 @@ export async function PUT(request) {
     // //console.log("FROM put " + request);
 
     const { email, password, getProfile } = await request.json();
-    const daata = process.env.RAZORPAY_KEY_ID;
-    const ds = process.env.RAZORPAY_SUBCRIPTION_ID;
     //console.log(email);
     // Check if the email already exists in the database
     const existingUser = await query({

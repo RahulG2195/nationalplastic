@@ -18,7 +18,28 @@ const PriceDetailsCard = ({
 }) => {
   const router = useRouter();
   const { customer_id, email } = useSelector((state) => state.userData);
+  const [Phone, setPhone] = useState(null);
+  const [Name, setName] = useState(null);
+
   const isBrowser = typeof window !== "undefined";
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const formData = {
+        email: email,
+        getProfile: true,
+      };
+      const response = await axios.put("/api/Users", formData);
+      const userData = response.data.message[0]; // Directly access response.data.message
+      const { Phone, FirstName } = userData;
+      console.log("hpomne", Phone);
+      console.log("hpodmne", FirstName);
+
+      setPhone(Phone);
+      setName(FirstName);
+    };
+
+    fetchUserData();
+  }, []);
 
   const userState = useSelector((state) => state.userData.isLoggedIn);
 
@@ -65,14 +86,12 @@ const PriceDetailsCard = ({
     setDiscountCard(discount > 0 ? discount.toFixed(2) : 0);
   }, [priceFromState, MRPvalue, DiscountCard, totalDiscount]);
 
-  const handleClick = async () => {
-    //! logic for getting products data as a array with qty, color , p_id and name from usercart
-    // const userCartData = await axios.post("/api/UserCart", {
-    //   customer_id: customer_id,
-    // });
-    // const productsData = userCartData.data.productps;
-    // dispatch(createOrderSuccess(orderData));
-  };
+  //! logic for getting products data as a array with qty, color , p_id and name from usercart
+  // const userCartData = await axios.post("/api/UserCart", {
+  //   customer_id: customer_id,
+  // });
+  // const productsData = userCartData.data.productps;
+  // dispatch(createOrderSuccess(orderData));
   const makePayment = async ({ productId = null }) => {
     const totalPay = parseFloat(totalPrice) + parseFloat(InstallationCharge);
     const response = await axios.post("/api/razorpay", {
@@ -109,13 +128,7 @@ const PriceDetailsCard = ({
         console.log("Payment Verification api");
         const res = await data.json();
         const status = res.success || false;
-        console.log("status: " + status);
-        console.log(res);
-        console.log("--", res.message);
         if (status) {
-          console.log(
-            "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
-          );
           const response = await axios.put("/api/razorpay", {
             razorpay_payment_id: payID,
             isBrowser: isBrowser,
@@ -125,9 +138,9 @@ const PriceDetailsCard = ({
         }
       },
       prefill: {
-        name: "Dinesh",
-        email: "dineshndr02@gmail.com",
-        contact: "8291516755",
+        name: Name || null,
+        email: email || null,
+        contact: Phone || null,
       },
     };
     // const gettingOptions = await axios.get("/api/razorpay");
@@ -212,7 +225,6 @@ const PriceDetailsCard = ({
               <button
                 type="submit"
                 className="btn btn-danger px-md-5 placeOrderResp"
-                onClick={userState ? () => handleClick() : () => {}}
               >
                 {userState ? "Checkout" : "Login To Checkout"}
               </button>
