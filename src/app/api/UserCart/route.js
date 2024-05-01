@@ -22,11 +22,19 @@ export async function POST(request) {
       `,
       values: [user_id],
     });
-
+    //appply map here to get data
+    const dataForPayment = products.map((row) => ({
+      product_id: row.product_id,
+      product_name: row.product_name,
+      color: row.color,
+      quantity: row.cart_quantity,
+    }));
     return new Response(
       JSON.stringify({
         status: 200,
         products: products,
+        productIds: productIds,
+        productps: dataForPayment,
       })
     );
   } catch (error) {

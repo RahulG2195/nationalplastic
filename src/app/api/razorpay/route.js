@@ -11,54 +11,68 @@ export async function GET() {
   const payment_capture = 1;
   const amount = 1 * 100; // amount in paisa. In our case it's INR 1
   const currency = "INR";
-  const options = {
-    amount: amount.toString(),
-    currency,
-    receipt: uuidv4(), // Generate unique receipt ID using uuid
-    payment_capture,
-    notes: {
-      // These notes will be added to your transaction. So you can search it within their dashboard.
-      // Also, it's included in webhooks as well. So you can automate it.
-      paymentFor: "testingDemo",
-      userId: "100",
-      productId: "P100",
-    },
-  };
 
   const order = await instance.orders.create(options);
   return NextResponse.json({ msg: "success", order });
 }
 
 export async function POST(request) {
-  console.log("----------inside post request");
-
-  const { amount, currency = "INR", receipt_email } = await request.json();
-
   try {
-    const order = await instance.orders.create({
-      amount: amount,
-      currency,
-    });
-
-    return new Response(JSON.stringify({ message: order }), {
-      status: 201,
-    });
-    console.error(error);
+    const {
+      amount,
+      currency = "INR",
+      products,
+      email,
+      isBrowser,
+    } = await request.json();
+    console.log("is browser", isBrowser);
+    if (isBrowser) {
+      const options = {
+        amount: amount,
+        currency,
+        receipt: uuidv4(), // Generate unique receipt ID using uuid
+        notes: {
+          email: email,
+          // cart: JSON.stringify(products),
+        },
+      };
+      const order = await instance.orders.create(options);
+      return new Response(JSON.stringify({ message: order }), {
+        status: 201,
+      });
+    } else {
+      throw new Error("Failed to fetch payment details");
+    }
   } catch (error) {
-    console.error(error);
-    return new Response(JSON.stringify({ message: error.message }), {
-      status: 400,
-    });
+    console.error("error ", error);
+    return new Response(
+      JSON.stringify({ message: error || "INTERNAL SERVER ERROR" }),
+      {
+        status: 500,
+      }
+    );
   }
 }
 //Fetches Payement data based on the payment ID
 export async function PUT(request) {
   try {
-    const response = await instance.payments.fetch("pay_O1c22PH32Wvazw");
-    console.log("----------------------------", response.id);
-    return NextResponse.json({ msg: "successss", response });
+    console.log("inside- put request");
+
+    const { razorpay_payment_id, isBrowser } = await request.json();
+    console.log("inside put request");
+
+    if (isBrowser) {
+      const response = await instance.payments.fetch(razorpay_payment_id);
+      console.log("----------------------------", response.id);
+      return NextResponse.json({ msg: "successss", response });
+    } else {
+      throw new Error("Failed to fetch payment details");
+    }
   } catch (error) {
-    return NextResponse.json({ msg: "Failed to verifyy", err: error.message });
+    return NextResponse.json({
+      msg: "Failed to verifyy",
+      err: error.message,
+    });
   }
 }
 //response from put request
