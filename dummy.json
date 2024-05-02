@@ -1,0 +1,36 @@
+{
+    "razorpay_order_id": "from handler",
+    "customer_id": "from redux",
+    "customer_email":"dinesh@gmail.com",
+    "Phone": {"contact":"from might"},
+    "order_address": "from db",
+    "order_city": "from db",
+    "order_pincode": "from db",
+    "order_payment_type": {"from mgiht":"method"},
+    "payment_status": {"from mgiht":"status"},
+    "razor_payment_id": "from handler",
+    "order_detail": {
+      "price": {"amount":"from might"},
+      "cart": [
+        {
+            "these data": "from testing function",
+          "product_name": "Product 1",
+          "quantity": 2,
+          "price": 50,
+          "product_id": 1,
+          "color":"red"
+        },
+        {
+          "product_name": "Product 2",
+          "quantity": 1,
+          "price": 100,
+          "product_id": 2,
+          "color":"yellow"
+        }
+      ]
+    }
+  }
+  
+
+
+

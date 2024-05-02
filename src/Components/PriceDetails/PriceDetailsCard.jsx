@@ -20,6 +20,7 @@ const PriceDetailsCard = ({
   const { customer_id, email } = useSelector((state) => state.userData);
   const [Phone, setPhone] = useState(null);
   const [Name, setName] = useState(null);
+  const [Address, setAddress] = useState(null);
 
   const isBrowser = typeof window !== "undefined";
   useEffect(() => {
@@ -30,12 +31,13 @@ const PriceDetailsCard = ({
       };
       const response = await axios.put("/api/Users", formData);
       const userData = response.data.message[0]; // Directly access response.data.message
-      const { Phone, FirstName } = userData;
+      const { Phone, FirstName, Address } = userData;
       console.log("hpomne", Phone);
       console.log("hpodmne", FirstName);
 
       setPhone(Phone);
       setName(FirstName);
+      setAddress(Address);
     };
 
     fetchUserData();
@@ -77,7 +79,16 @@ const PriceDetailsCard = ({
   );
 
   const [DiscountCard, setDiscountCard] = useState(0);
+  const [productsData, setProductsData] = useState(null);
+  const testing = async () => {
+    const userCartData = await axios.post("/api/UserCart", {
+      customer_id: customer_id,
+    });
+    setProductsData(userCartData.data.productps);
+    console.log("nbrho: ", productsData);
+  };
   useEffect(() => {
+    testing();
     console.log("env", process.env.razorpay_order_id);
     setTotalPrice(priceFromState.toFixed(2));
     setMRPPrice(MRPvalue.toFixed(2));
@@ -112,6 +123,7 @@ const PriceDetailsCard = ({
       image: "",
       order_id: orderData.data.message.id,
       handler: async function (response) {
+        console.log("response after handler: ", response);
         const data = await fetch("/api/paymentVerify", {
           method: "POST",
           // headers: {
@@ -133,6 +145,8 @@ const PriceDetailsCard = ({
             razorpay_payment_id: payID,
             isBrowser: isBrowser,
           });
+          console.log("payment data might be the one i need : ", response);
+          updateDatabase(response.data.response);
           sendPaymentSuccessMail(response.data.response);
           router.push("/ThankYouPage");
         }
@@ -148,9 +162,12 @@ const PriceDetailsCard = ({
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
     paymentObject.on("payment.success", function (response) {
-      alert("Payment failed. Please try again. Contact support for help");
+      console.log("success response154 : ", response);
+      // alert("Payment failed. Please try again. Contact support for help");
     });
     paymentObject.on("payment.failed", function (response) {
+      console.log("payment failed. Please try again. Contact");
+      console.log("failed response : ", response);
       alert("Payment failed. Please try again. Contact support for help");
     });
   };
@@ -168,8 +185,32 @@ const PriceDetailsCard = ({
       amount: values.amount,
       status: values.status,
     };
+    await axios.put("/api/RegisterEmail", paymentData);
+  };
+  const updateDatabase = async (values) => {
+    // console.log("op", JSON.parse(productsData));
+    console.log("oj", JSON.stringify(productsData) || null);
 
-    const response = await axios.put("/api/RegisterEmail", paymentData);
+    const paymentData = {
+      razorpay_order_id: values.order_id,
+      customer_id: customer_id,
+      customer_email: values.email,
+      Phone: values.contact,
+      order_address: Address,
+      order_city: Address,
+      order_pincode: Address,
+      order_payment_type: values.method,
+      payment_status: values.status,
+      razor_payment_id: values.id,
+      order_detail: {
+        price: values.amount,
+        cart: productsData,
+      },
+    };
+    console.log("pdata", JSON.stringify(paymentData));
+    console.log("oj", paymentData);
+    const resData = await axios.put("/api/paymentVerify", paymentData);
+    console.log("resdataWoooow", resData);
   };
   return (
     <>
