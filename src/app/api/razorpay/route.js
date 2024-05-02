@@ -25,7 +25,6 @@ export async function POST(request) {
       email,
       isBrowser,
     } = await request.json();
-    console.log("is browser", isBrowser);
     if (isBrowser) {
       const options = {
         amount: amount,
@@ -56,14 +55,10 @@ export async function POST(request) {
 //Fetches Payement data based on the payment ID
 export async function PUT(request) {
   try {
-    console.log("inside- put request");
-
     const { razorpay_payment_id, isBrowser } = await request.json();
-    console.log("inside put request");
 
     if (isBrowser) {
       const response = await instance.payments.fetch(razorpay_payment_id);
-      console.log("----------------------------", response.id);
       return NextResponse.json({ msg: "successss", response });
     } else {
       throw new Error("Failed to fetch payment details");

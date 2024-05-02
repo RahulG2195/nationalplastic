@@ -47,7 +47,6 @@ export async function POST(req) {
 }
 
 export async function PUT(request) {
-  console.log("PUT", request);
   try {
     const requestData = await request.json();
     const {
@@ -63,10 +62,6 @@ export async function PUT(request) {
       razor_payment_id,
       order_detail,
     } = requestData;
-    console.log("o_detail", razor_payment_id);
-    console.log("o_detail", order_city);
-    console.log("o_detail", Phone);
-
     // Insert order_list
     const orderListValues = [
       razorpay_order_id,
@@ -88,13 +83,11 @@ export async function PUT(request) {
 
     const orderListQuery =
       "INSERT INTO order_list (razorpay_order_id, customer_id,customer_email, Phone, order_address, order_pincode, order_city, order_payment_type, payment_status, razor_payment_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    console.log("----", orderListQuery, "----------", sanitizedOrderListValues);
 
     const res = await query({
       query: orderListQuery,
       values: sanitizedOrderListValues,
     });
-    console.log("-----------------------", res);
 
     // Insert order_detail
     const orderDetailValues = [
@@ -109,7 +102,6 @@ export async function PUT(request) {
       query: orderDetailQuery,
       values: orderDetailValues,
     });
-    console.log("o_detail", res2);
 
     return new Response(
       JSON.stringify({

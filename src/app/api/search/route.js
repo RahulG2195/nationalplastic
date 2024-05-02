@@ -6,15 +6,12 @@ export async function GET(request) {
     // const parsedUrl = parse(request.url, true);
     const isBrowser = typeof window !== "undefined";
     // Default limit to 10 products per page
-    // //console.log("Searched string:", searchTerm);
 
     if (isBrowser) {
       const parsedUrl = parse(request.url, true);
       const queryParams = parsedUrl.query || "Pune";
       // console.log("from routes", queryParams);
       // console.log("from routes", parsedUrl);
-
-      // //console.log("Query parameters:", queryParams);
 
       const searchTerm = queryParams.query.toLocaleLowerCase();
       const page = parseInt(queryParams.page) || 1;

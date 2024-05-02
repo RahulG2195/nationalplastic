@@ -49,14 +49,12 @@ function AddToCart() {
     setCount(productCount); // Update localCount whenever productCount changes
   }, [productCount]);
   useEffect(() => {
-    // console.log();
     const userDataString = localStorage.getItem("userData");
     const userData = JSON.parse(userDataString) || {};
     const customerId = userData.customer_id || null;
     let cartData;
     const tempOrUserData = async () => {
       if (customerId) {
-        console.log("If loggedIn user");
         const response = await axios.post("/api/UserCart", {
           customer_id: customerId,
         });
@@ -91,15 +89,12 @@ function AddToCart() {
           // const product = response.data.products;
           const products = response.data.products;
           const tempProducts = tempData.products;
-          // console.log();
           // Iterate through products and tempProducts to update quantity
-          // console.log(tempProduct);
 
           products.forEach((product) => {
             const tempProduct = tempProducts.find(
               (tempProd) => tempProd.product_id === product.product_id
             );
-            console.log(tempProduct);
             if (tempProduct) {
               // Update quantity if corresponding tempProduct is found
               product.quantity = tempProduct.quantity;
@@ -137,11 +132,8 @@ function AddToCart() {
         );
         // state.products.push(action.payload);
         const len = tempCartStates.products.length;
-        console.log(len, "Product");
         //logic to addtocart db after login when temp data will be there.
         if (isLoggedIn() && len > 0) {
-          console.log("addbodyNhi...");
-          console.log(isLoggedIn());
           products.forEach((product) => {
             dispatch(
               addToCart({
@@ -171,7 +163,6 @@ function AddToCart() {
             );
           });
         }
-        // console.log("Response From line Number 132", products);
         // Calculate total price, discount, total payable, and installation charges
         // Calculate total payable amount, total discount, and total price without discount
         setProductDetailArr(products);
@@ -196,13 +187,8 @@ function AddToCart() {
             { totalPayable: 0, totalDiscount: 0, totalPriceWithoutDiscount: 0 }
           );
 
-        console.log("Total payable amount:", totalPayable);
-        console.log("Total discount:", totalDiscount);
-        console.log("Total price without discount:", totalPriceWithoutDiscount);
-
         const totalCount = products.length;
         // Update state variables
-        console.log("fdghjjjjjjjjjjjjjjjjjjjjjj", products);
         setTotalPrice(totalPriceWithoutDiscount);
         setDiscount(totalDiscount);
         setTotalPayble(totalPayble);
@@ -227,9 +213,7 @@ function AddToCart() {
       const response = await axios.post("/api/UserCart", {
         customer_id: customerId,
       });
-      //console.log("response", response);
       const cartData = response.data.products;
-      console.log("cartdata: ", cartData);
       // Extracting relevant data from the cart data
       const products = cartData.map((item) => ({
         product_id: item.product_id,
@@ -243,10 +227,8 @@ function AddToCart() {
         seo_url: item.seo_url,
         color: item.color,
       }));
-      //console.log("products:-------------------- ", products);
       // Calculate total price, discount, total payable, and installation charges
       // Calculate product totals
-      // log;
       const productTotals = products.map(
         (product) =>
           parseFloat(product.price) -
@@ -265,19 +247,15 @@ function AddToCart() {
           : 0;
         return acc + discountPerItem * curr.quantity;
       }, 0);
-      console.log(discount);
       // Calculate total payable amount (consider discount)
       const totalPayble = parseFloat(totalPrice) - parseFloat(discount);
-      console.log(totalPayble);
 
       // Calculate total installation charge
       const installationCharges = products.reduce(
         (acc, curr) => acc + curr.InstallationCharges * curr.quantity,
         0
       );
-      console.log(installationCharges);
       const totalCount = products.length;
-      console.log(totalCount);
       // Update state variables
       setProductDetailArr(products);
       setTotalPrice(totalPrice);
@@ -314,8 +292,6 @@ function AddToCart() {
         });
         // If all products are removed, update the state to reflect empty cart
         if (productDetailArr.length === 1) {
-          console.log("nopes for product", installationCharges);
-
           setProductDetailArr([]);
           setTotalPrice(0);
           setDiscount(0);
@@ -333,7 +309,6 @@ function AddToCart() {
           handleCartChange();
         }
       } catch (error) {
-        console.error("Error removing item:", error);
         alert("Error removing item. Please try again later.");
       }
     }
@@ -387,11 +362,8 @@ function AddToCart() {
                           quantity={val.quantity}
                           onRemoveSuccess={() => {
                             if (isLoggedIn()) {
-                              console.log("Removing", isLoggedIn());
                               onRemoveSuccess(val.product_id);
                             } else {
-                              console.log("Removing", isLoggedIn);
-                              console.log("Removing", val.product_id);
                               onRemoveSuccess(val.product_id);
 
                               dispatch(removeItemFromCartD(val.product_id));
@@ -444,21 +416,3 @@ function AddToCart() {
   );
 }
 export default AddToCart;
-//console.log("products forEach: " + product.product_id);
-//console.log("products forEach: " + product.price);
-//console.log("products forEach: " + JSON.stringify(product));
-//console.log("products forEach: " + product.cart_ quantity);
-// Extracting relevant data from the cart data
-//console.log(
-//   "-------------------------------------------------------- --" +
-//     JSON.stringify(cartData)
-// );
-// //console.log(
-//   "-------------------------------------------------------- --" +
-//     typeof cartData
-// );
-// const isArray = Array.isArray(cartData);
-// //console.log(
-//   "-------------------------------------------------------- --" +
-//     isArray
-// );

@@ -32,9 +32,6 @@ const PriceDetailsCard = ({
       const response = await axios.put("/api/Users", formData);
       const userData = response.data.message[0]; // Directly access response.data.message
       const { Phone, FirstName, Address } = userData;
-      console.log("hpomne", Phone);
-      console.log("hpodmne", FirstName);
-
       setPhone(Phone);
       setName(FirstName);
       setAddress(Address);
@@ -85,11 +82,9 @@ const PriceDetailsCard = ({
       customer_id: customer_id,
     });
     setProductsData(userCartData.data.productps);
-    console.log("nbrho: ", productsData);
   };
   useEffect(() => {
     testing();
-    console.log("env", process.env.razorpay_order_id);
     setTotalPrice(priceFromState.toFixed(2));
     setMRPPrice(MRPvalue.toFixed(2));
     setdiscount(Math.round((MRPvalue - priceFromState) * 100) / 100);
@@ -112,7 +107,6 @@ const PriceDetailsCard = ({
       email: email,
       isBrowser: isBrowser,
     });
-    console.log("response: ", response);
     const orderData = response;
 
     const options = {
@@ -123,7 +117,6 @@ const PriceDetailsCard = ({
       image: "",
       order_id: orderData.data.message.id,
       handler: async function (response) {
-        console.log("response after handler: ", response);
         const data = await fetch("/api/paymentVerify", {
           method: "POST",
           // headers: {
@@ -137,7 +130,6 @@ const PriceDetailsCard = ({
           }),
         });
         const payID = response.razorpay_payment_id;
-        console.log("Payment Verification api");
         const res = await data.json();
         const status = res.success || false;
         if (status) {
@@ -145,7 +137,6 @@ const PriceDetailsCard = ({
             razorpay_payment_id: payID,
             isBrowser: isBrowser,
           });
-          console.log("payment data might be the one i need : ", response);
           updateDatabase(response.data.response);
           sendPaymentSuccessMail(response.data.response);
           router.push("/ThankYouPage");
@@ -162,12 +153,9 @@ const PriceDetailsCard = ({
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
     paymentObject.on("payment.success", function (response) {
-      console.log("success response154 : ", response);
-      // alert("Payment failed. Please try again. Contact support for help");
+      alert("Payment succesfully received");
     });
     paymentObject.on("payment.failed", function (response) {
-      console.log("payment failed. Please try again. Contact");
-      console.log("failed response : ", response);
       alert("Payment failed. Please try again. Contact support for help");
     });
   };
@@ -188,9 +176,6 @@ const PriceDetailsCard = ({
     await axios.put("/api/RegisterEmail", paymentData);
   };
   const updateDatabase = async (values) => {
-    // console.log("op", JSON.parse(productsData));
-    console.log("oj", JSON.stringify(productsData) || null);
-
     const paymentData = {
       razorpay_order_id: values.order_id,
       customer_id: customer_id,
@@ -207,10 +192,7 @@ const PriceDetailsCard = ({
         cart: productsData,
       },
     };
-    console.log("pdata", JSON.stringify(paymentData));
-    console.log("oj", paymentData);
     const resData = await axios.put("/api/paymentVerify", paymentData);
-    console.log("resdataWoooow", resData);
   };
   return (
     <>
