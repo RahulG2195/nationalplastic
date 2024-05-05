@@ -19,6 +19,7 @@ const NewsBanner = () => {
         layout='responsive'
         objectFit='cover'
         alt="Picture of the author"
+        className='banner'
       />
     </>
   )

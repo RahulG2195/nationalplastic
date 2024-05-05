@@ -13,19 +13,6 @@ import { isLoggedIn } from "@/utils/validation";
 import { Bounce, toast } from "react-toastify";
 import { useRouter, useSearchParams } from "next/navigation";
 
-const notify = () => {
-  toast.error("Login To Add to CART", {
-    position: "top-center",
-    autoClose: 2000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-    transition: Bounce,
-  });
-};
 const notifyError = () => {
   toast.error("Login To Add To WishList", {
     position: "top-center",
@@ -48,7 +35,7 @@ const Search = (props) => {
   const [hasMore, setHasMore] = useState(true);
   const [allproducts, setAllproducts] = useState([]);
   const dispatch = useDispatch();
-  const [query, setQuery] = useState(props.searchParams.query);
+  const [query, setQuery] = useState({});
   const params = useSearchParams();
 
   useEffect(() => {
@@ -179,10 +166,6 @@ const Search = (props) => {
     }
     // setInWishlist(true);
   };
-
-  // const loadMore = () => {
-  //     setPage(prevPage => prevPage + 1); // Load next page of products
-  // };
 
   return (
     <>

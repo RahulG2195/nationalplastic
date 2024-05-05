@@ -106,8 +106,6 @@ const AddBody = () => {
           []
         );
         if (isLoggedIn()) {
-          console.log("addbody...");
-          console.log(isLoggedIn());
           products.forEach((product) => {
             //console.log("products forEach: " + product.product_id);
             //console.log("products forEach: " + product.price);

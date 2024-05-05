@@ -13,7 +13,7 @@ const nextConfig = {
     MYSQL_HOST: "localhost",
     MYSQL_DATABASE: "nationalplastic",
     MYSQL_USER: "root",
-    MYSQL_PASSWORD: "Webfarm2024",
+    MYSQL_PASSWORD: "",
     MYSQL_PORT: "3306",
   },
 };

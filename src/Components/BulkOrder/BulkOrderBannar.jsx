@@ -8,7 +8,9 @@ const BulkOrderBannar = () => {
                 height={70}
                 layout='responsive'
                 objectFit='cover'
+                className="banner"
                 alt="Picture of the author" />
+                
         </>
     )
 }

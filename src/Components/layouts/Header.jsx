@@ -78,7 +78,6 @@ export default function Header() {
       return;
     }
     try {
-      // const response = await axios.get(`/api/search?query=${searchTerm}`);
       // setSuggestions(response.data.products);
     } catch (error) {
       console.error("Error fetching suggestions:", error);
@@ -111,20 +110,22 @@ export default function Header() {
       <div className="container-fluid  header menbg">
         <TopBar />
         <nav className="navbar navbar-expand-lg main_header px-3">
+          
           <div className="container-fluid ">
             <div className="navbar-brand">
-            <button
-              onClick={handleShow}
-              id="navei"
-              className="navbar-toggler "
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="true"
-              aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon" />
-            </button>
+              <button
+                onClick={handleShow}
+                id="navei"
+                className="navbar-toggler "
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="true"
+                aria-label="Toggle navigation"
+              >
+                <span className="navbar-toggler-icon" />
+              </button>
               <Link href="/#/">
                 <Image
                   src="/Assets/images/nation_logo.png"
@@ -148,14 +149,14 @@ export default function Header() {
               />
             </form>
 
-          
             <div
               className={`${
                 isClicked
                   ? " collapse navbar-collapse show menubg"
                   : "menuhide "
               }`}
-              id="navbarSupportedContent">
+              id="navbarSupportedContent"
+            >
               <ul className="navbar-nav homeNav mb-2 mb-lg-0">
                 <li className="nav-item brdr">
                   {/* <div className='border'></div> */}
@@ -163,7 +164,8 @@ export default function Header() {
                     className="nav-link"
                     aria-current="page"
                     href="/"
-                    onClick={isClicked ? handleShow : null}>
+                    onClick={isClicked ? handleShow : null}
+                  >
                     Home
                   </Link>
                   {/* <div className='border'></div> */}
@@ -172,7 +174,8 @@ export default function Header() {
                   <Link
                     className="nav-link"
                     href="/About"
-                    onClick={isClicked ? handleShow : null}>
+                    onClick={isClicked ? handleShow : null}
+                  >
                     About Us
                   </Link>
                 </li>
@@ -180,7 +183,8 @@ export default function Header() {
                   <Link
                     className="nav-link"
                     href="/Investor"
-                    onClick={isClicked ? handleShow : null}>
+                    onClick={isClicked ? handleShow : null}
+                  >
                     Investors
                   </Link>
                 </li>
@@ -191,7 +195,8 @@ export default function Header() {
                   <Link
                     className="nav-link"
                     href="/NewsAndMedia"
-                    onClick={isClicked ? handleShow : null}>
+                    onClick={isClicked ? handleShow : null}
+                  >
                     Media/News
                   </Link>
                 </li>
@@ -199,7 +204,8 @@ export default function Header() {
                   <Link
                     className="nav-link"
                     href="/CSR"
-                    onClick={isClicked ? handleShow : null}>
+                    onClick={isClicked ? handleShow : null}
+                  >
                     CSR
                   </Link>
                 </li>
@@ -207,21 +213,22 @@ export default function Header() {
                   <Link
                     className="nav-link bulk_ord px-4"
                     href="/BulkOrder"
-                    onClick={isClicked ? handleShow : null}>
+                    onClick={isClicked ? handleShow : null}
+                  >
                     Bulk Orders
                   </Link>
                 </li>
-               
               </ul>
             </div>
 
             <div className="row">
               <ul class=" d-flex side-icons">
-              <li className="nav-item brdr d-none d-md-none d-xl-block">
+                <li className="nav-item brdr d-none d-md-none d-xl-block">
                   <Link
                     className="nav-link"
                     href="/ContactUs"
-                    onClick={isClicked ? handleShow : null}>
+                    onClick={isClicked ? handleShow : null}
+                  >
                     <Image
                       height={100}
                       width={100}
@@ -236,7 +243,8 @@ export default function Header() {
                   <Link
                     className="nav-link"
                     href="/Wishlist"
-                    onClick={isClicked ? handleShow : null}>
+                    onClick={isClicked ? handleShow : null}
+                  >
                     <Image
                       height={100}
                       width={100}
@@ -252,7 +260,8 @@ export default function Header() {
                     <Link
                       className="nav-link position-relative profile"
                       href="/ProfilePage"
-                      onClick={isClicked ? handleShow : null}>
+                      onClick={isClicked ? handleShow : null}
+                    >
                       <Image
                         height={100}
                         width={100}
@@ -267,7 +276,8 @@ export default function Header() {
                     <Link
                       className="nav-link"
                       href="/Login"
-                      onClick={isClicked ? handleShow : null}>
+                      onClick={isClicked ? handleShow : null}
+                    >
                       <Image
                         height={100}
                         width={100}
@@ -283,7 +293,8 @@ export default function Header() {
                   <Link
                     className="nav-link AddToCartNav-link  position-relative"
                     href="/AddToCart"
-                    onClick={isClicked ? handleShow : null}>
+                    onClick={isClicked ? handleShow : null}
+                  >
                     <Image
                       height={100}
                       width={100}
@@ -297,81 +308,80 @@ export default function Header() {
                 </li>
               </ul>
             </div>
-            
-      {/* footer menu */}
-      <div className="lower-mobile-menu">
-        <ul className="list-unstyled">
 
-        <li>
-            <Link href="/#">
-              <Image
-                src="Assets/images/home-icon-silhouette_69524.svg"
-                height={50}
-                width={50} 
-                layout="responsive"
-                objectFit="contain"
-                alt="Home"
-                className="footer-icon"
-              />
-            </Link>
-          </li>
-          <li>
-            <Link href="/Wishlist">
-              <Image
-                src="/Assets/svg/Path 3.svg"
-                height={50} 
-                width={50} 
-                layout="responsive"
-                objectFit="contain"
-                alt="Wishlist"
-                className="footer-icon"
-              />
-            </Link>
-          </li>
-          <li>
-            {isLoggedIn ? (
-              <Link href="/ProfilePage">
-                <Image
-                  src="/Assets/svg/Group 4.svg"
-                  height={50}
-                  width={50} 
-                  layout="responsive"
-                  objectFit="contain"
-                  alt="Profile"
-                  className="footer-icon"
-                />
-                <p className="Homeemail">{userEmail}</p>
-              </Link>
-            ) : (
-              <Link href="/Login">
-                <Image
-                  src="/Assets/svg/Group 4.svg"
-                  height={50} 
-                  width={50} 
-                  layout="responsive"
-                  objectFit="contain"
-                  alt="Profile"
-                  className="footer-icon"
-                />
-              </Link>
-            )}
-          </li>
-          <li>
-            <Link href="/AddToCart">
-              <Image
-                src="/Assets/svg/Group 5.svg"
-                height={50} 
-                width={50} 
-                layout="responsive"
-                objectFit="contain"
-                alt="Cart"
-                className="footer-icon"
-              />
-              <div className="cartCount text-center medium">{count}</div>
-            </Link>
-          </li>
-        </ul>
-      </div>
+            {/* footer menu */}
+            <div className="lower-mobile-menu">
+              <ul className="list-unstyled">
+                <li>
+                  <Link href="/#">
+                    <Image
+                      src="Assets/images/home-icon-silhouette_69524.svg"
+                      height={50}
+                      width={50}
+                      layout="responsive"
+                      objectFit="contain"
+                      alt="Home"
+                      className="footer-icon"
+                    />
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/Wishlist">
+                    <Image
+                      src="/Assets/svg/Path 3.svg"
+                      height={50}
+                      width={50}
+                      layout="responsive"
+                      objectFit="contain"
+                      alt="Wishlist"
+                      className="footer-icon"
+                    />
+                  </Link>
+                </li>
+                <li>
+                  {isLoggedIn ? (
+                    <Link href="/ProfilePage">
+                      <Image
+                        src="/Assets/svg/Group 4.svg"
+                        height={50}
+                        width={50}
+                        layout="responsive"
+                        objectFit="contain"
+                        alt="Profile"
+                        className="footer-icon"
+                      />
+                      <p className="Homeemail">{userEmail}</p>
+                    </Link>
+                  ) : (
+                    <Link href="/Login">
+                      <Image
+                        src="/Assets/svg/Group 4.svg"
+                        height={50}
+                        width={50}
+                        layout="responsive"
+                        objectFit="contain"
+                        alt="Profile"
+                        className="footer-icon"
+                      />
+                    </Link>
+                  )}
+                </li>
+                <li>
+                  <Link href="/AddToCart">
+                    <Image
+                      src="/Assets/svg/Group 5.svg"
+                      height={50}
+                      width={50}
+                      layout="responsive"
+                      objectFit="contain"
+                      alt="Cart"
+                      className="footer-icon"
+                    />
+                    <div className="cartCount text-center medium">{count}</div>
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
         </nav>
         <BottomBar />

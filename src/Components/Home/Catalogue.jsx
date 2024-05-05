@@ -19,8 +19,9 @@ function Catalogue() {
                         />
                     </div>
                 </div>
-                <div className="col-md-6 catalogueConntentDiv ms-4" >
-                    <h2 className="fs-1 fw-bold mt-5  mb-3">Catalogue</h2>
+                <div className="col-md-6 catalogueConntentDiv spacing-catalogue ms-4">
+
+                    <h2 className="fs-1 fw-bold mt-5   mb-3">Catalogue</h2>
                     <p className="fw-bold">Explore our comprehensive catalogue for a wide range of durable and versatile plastic products designed to meet your everyday needs.</p>
                     <div className="Catasec">
                         <Link href='/Catalogue' className="catalogue-know-more">

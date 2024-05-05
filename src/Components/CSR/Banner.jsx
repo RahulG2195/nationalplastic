@@ -11,6 +11,7 @@ const Banner = () => {
                 height={80}
                 layout='responsive'
                 objectFit='cover'
+                className='banner'
                 alt="Picture of the author"
             />
 

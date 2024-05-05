@@ -17,8 +17,31 @@ const PriceDetailsCard = ({
   redirect,
 }) => {
   const router = useRouter();
+  const { customer_id, email } = useSelector((state) => state.userData);
+  const [Phone, setPhone] = useState(null);
+  const [Name, setName] = useState(null);
+  const [Address, setAddress] = useState(null);
+
+  const isBrowser = typeof window !== "undefined";
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const formData = {
+        email: email,
+        getProfile: true,
+      };
+      const response = await axios.put("/api/Users", formData);
+      const userData = response.data.message[0]; // Directly access response.data.message
+      const { Phone, FirstName, Address } = userData;
+      setPhone(Phone);
+      setName(FirstName);
+      setAddress(Address);
+    };
+
+    fetchUserData();
+  }, []);
 
   const userState = useSelector((state) => state.userData.isLoggedIn);
+
   const [InstallationCharge, setInstallationCharge] = useState(40);
   const productCount = useSelector((state) => {
     let who;
@@ -52,20 +75,16 @@ const PriceDetailsCard = ({
     totalDiscount * itemCount
   );
 
-  const handleClick = async () => {
-    const razorpay = parseFloat(totalPrice) + parseFloat(InstallationCharge);
-    const response = await axios.post("/api/razorpay", {
-      amount: razorpay * 100,
-      currency: "INR",
-    });
-    const orderData = response;
-    dispatch(createOrderSuccess(orderData));
-    const orderd = JSON.stringify(orderData);
-    const orderdd = JSON.parse(orderd);
-  };
-
   const [DiscountCard, setDiscountCard] = useState(0);
+  const [productsData, setProductsData] = useState(null);
+  const testing = async () => {
+    const userCartData = await axios.post("/api/UserCart", {
+      customer_id: customer_id,
+    });
+    setProductsData(userCartData.data.productps);
+  };
   useEffect(() => {
+    testing();
     setTotalPrice(priceFromState.toFixed(2));
     setMRPPrice(MRPvalue.toFixed(2));
     setdiscount(Math.round((MRPvalue - priceFromState) * 100) / 100);
@@ -73,18 +92,31 @@ const PriceDetailsCard = ({
     setDiscountCard(discount > 0 ? discount.toFixed(2) : 0);
   }, [priceFromState, MRPvalue, DiscountCard, totalDiscount]);
 
+  //! logic for getting products data as a array with qty, color , p_id and name from usercart
+  // const userCartData = await axios.post("/api/UserCart", {
+  //   customer_id: customer_id,
+  // });
+  // const productsData = userCartData.data.productps;
+  // dispatch(createOrderSuccess(orderData));
   const makePayment = async ({ productId = null }) => {
+    const totalPay = parseFloat(totalPrice) + parseFloat(InstallationCharge);
+    const response = await axios.post("/api/razorpay", {
+      amount: totalPay * 100,
+      currency: "INR",
+      // products: productsData,
+      email: email,
+      isBrowser: isBrowser,
+    });
+    const orderData = response;
+
     const options = {
-      key: "rzp_test_WUEWvbWJ3T7hJ0",
-      amount: orderData.amount,
-      currency: orderData.currency,
+      amount: orderData.data.message.amount,
+      currency: orderData.data.message.currency,
       name: "National PLastic",
       description: "Payment for your purchase",
       image: "",
-      order_id: orderData.id,
-      // image: logoBase64,
+      order_id: orderData.data.message.id,
       handler: async function (response) {
-        // if (response.length==0) return <Loading/>;
         const data = await fetch("/api/paymentVerify", {
           method: "POST",
           // headers: {
@@ -94,28 +126,34 @@ const PriceDetailsCard = ({
             razorpay_payment_id: response.razorpay_payment_id,
             razorpay_order_id: response.razorpay_order_id,
             razorpay_signature: response.razorpay_signature,
+            isBrowser: isBrowser,
           }),
         });
-
+        const payID = response.razorpay_payment_id;
         const res = await data.json();
-
-        if (res?.message == "success") {
-          const response = await axios.put("/api/razorpay");
+        const status = res.success || false;
+        if (status) {
+          const response = await axios.put("/api/razorpay", {
+            razorpay_payment_id: payID,
+            isBrowser: isBrowser,
+          });
+          updateDatabase(response.data.response);
           sendPaymentSuccessMail(response.data.response);
           router.push("/ThankYouPage");
         }
       },
       prefill: {
-        name: "Dinesh",
-        email: "dineshndr02@gmail.com",
-        contact: "8291516755",
+        name: Name || null,
+        email: email || null,
+        contact: Phone || null,
       },
     };
+    // const gettingOptions = await axios.get("/api/razorpay");
 
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
     paymentObject.on("payment.success", function (response) {
-      alert("Payment failed. Please try again. Contact support for help");
+      alert("Payment succesfully received");
     });
     paymentObject.on("payment.failed", function (response) {
       alert("Payment failed. Please try again. Contact support for help");
@@ -135,8 +173,26 @@ const PriceDetailsCard = ({
       amount: values.amount,
       status: values.status,
     };
-
-    const response = await axios.put("/api/RegisterEmail", paymentData);
+    await axios.put("/api/RegisterEmail", paymentData);
+  };
+  const updateDatabase = async (values) => {
+    const paymentData = {
+      razorpay_order_id: values.order_id,
+      customer_id: customer_id,
+      customer_email: values.email,
+      Phone: values.contact,
+      order_address: Address,
+      order_city: Address,
+      order_pincode: Address,
+      order_payment_type: values.method,
+      payment_status: values.status,
+      razor_payment_id: values.id,
+      order_detail: {
+        price: values.amount,
+        cart: productsData,
+      },
+    };
+    const resData = await axios.put("/api/paymentVerify", paymentData);
   };
   return (
     <>
@@ -192,7 +248,6 @@ const PriceDetailsCard = ({
               <button
                 type="submit"
                 className="btn btn-danger px-md-5 placeOrderResp"
-                onClick={userState ? () => handleClick() : () => {}}
               >
                 {userState ? "Checkout" : "Login To Checkout"}
               </button>
@@ -226,3 +281,7 @@ export default PriceDetailsCard;
 // VM4812 PriceDetailsCard.jsx:112 response verify==
 // {message: 'expectedSignature is not defined'}
 // message:"expectedSignature is not defined"
+
+// ! important
+// order_O56riulAYqkU6m;
+// order_O570oinlp2HVzt
