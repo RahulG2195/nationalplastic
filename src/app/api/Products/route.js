@@ -7,6 +7,12 @@ export async function GET(request) {
             values: [],
         });
 
+
+        const prod_detail = await query({
+            query: "SELECT * FROM product_detail",
+            values: [],
+        });
+
         const limitProd = await query({
             query: "SELECT * FROM products limit 12",
             values: [],
@@ -16,6 +22,7 @@ export async function GET(request) {
             status: 200,
             products: products,
             limitProd: limitProd,
+            prod_detail: prod_detail,
         }));
 
     } catch (error) {

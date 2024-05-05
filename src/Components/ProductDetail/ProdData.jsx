@@ -28,6 +28,7 @@ import Breadcrump from "../Breadcrump/Breadcrump";
 import GetQuoteCustomForm from "../BulkOrder/GetQuoteCustomForm";
 function ProdData() {
   const [data, setData] = useState([]);
+  const [prodData, setProdData] = useState([]);
   const userState = useSelector((state) => state.userData.isLoggedIn);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -81,24 +82,24 @@ function ProdData() {
 
         const response = await axios.get("/api/Products");
         let filteredData = [];
-        // if (productName) {
-        //   filteredData = response.data.products.filter(
-        //     (item) =>
-        //       item.product_name.toLowerCase() === productName.toLowerCase()
-        //   );
-        //   localStorage.clear();
-        // }
+        let productDetailArr = [];
         if (storedId || productName) {
           filteredData = response.data.products.filter(
             (item) =>
               item.product_id == storedId ||
               item.seo_url.toLowerCase() === productName.toLowerCase()
           );
+          productDetailArr = response.data.prod_detail.filter(
+            (item) =>
+              item.prod_id == filteredData[0].product_id
+          );
         }
         if (filteredData.length === 0) {
           setErrorMessage("Sorry, this product is not available");
         } else {
           setData(filteredData);
+          setProdData(productDetailArr);
+          // console.log('prod data :' + filteredData[1].product_id);
         }
         setIsLoading(false);
       } catch (error) {
@@ -108,7 +109,7 @@ function ProdData() {
     };
 
     fetchData();
-  }, []);
+  }, [id]);
 
   const fetchPrice = async (storedId) => {
     //console.log("Fetching price", storedId);
@@ -407,7 +408,9 @@ function ProdData() {
           </div>
         </div>
       </div>
-      <MoreProduct />
+
+      {/* product info  */}
+      <MoreProduct prod_detail={prodData}/>
 
       <div>
         {/* <!-- Modal --> */}

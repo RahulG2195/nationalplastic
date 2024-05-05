@@ -10,7 +10,8 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import TabContent from "../TabContent/TabContent";
 import { useState } from "react";
 
-const MoreProduct = () => {
+const MoreProduct = ({prod_detail}) => {
+  const prodDetail = prod_detail;
   const tabs = [
     { id: "description", title: "Description" },
     { id: "merchant-details", title: "Merchant Details" },
@@ -34,15 +35,14 @@ const MoreProduct = () => {
         <div className="container">
           <div className="text-center">
             <div className="darkBlue fs-1 fw-bold">
-              {" "}
-              More Product <span className="text-danger">Details</span>{" "}
+              More Product <span className="text-danger">Details</span>
             </div>
             <div className=" mt-1 fw-normal subCptRes">
-              <p>
+              {/* <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has{" "}
+                industry. Lorem Ipsum has
               </p>
-              <p> been the industriesstandard dummy text ever since the 1500s,</p>
+              <p> been the industriesstandard dummy text ever since the 1500s,</p> */}
             </div>
           </div>
 
@@ -87,7 +87,7 @@ const MoreProduct = () => {
                 </AccordionSummary>
                 <AccordionDetails>
                   <div>
-                    <TabContent activeTab={activeTab} />
+                  {prodDetail.length > 0 && <TabContent activeTab={activeTab} prodDetail={prodDetail} />}
                   </div>
                 </AccordionDetails>
               </Accordion>
