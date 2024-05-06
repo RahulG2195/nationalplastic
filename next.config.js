@@ -10,8 +10,8 @@ const nextConfig = {
   // },
 
   env: {
-    MYSQL_HOST: "3.109.205.239",
-    MYSQL_DATABASE: "nationalplastic",
+    MYSQL_HOST: "localhost",
+    MYSQL_DATABASE: "nationalplastic_db",
     MYSQL_USER: "root",
     MYSQL_PASSWORD: "National2024",
     MYSQL_PORT: "3306",
