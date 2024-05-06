@@ -7,14 +7,14 @@ const instance = new Razorpay({
   key_secret: process.env.RAZORPAY_SECRET,
 });
 
-export async function GET() {
-  const payment_capture = 1;
-  const amount = 1 * 100; // amount in paisa. In our case it's INR 1
-  const currency = "INR";
+// export async function GET() {
+//   const payment_capture = 1;
+//   const amount = 1 * 100; // amount in paisa. In our case it's INR 1
+//   const currency = "INR";
 
-  const order = await instance.orders.create(options);
-  return NextResponse.json({ msg: "success", order });
-}
+//   const order = await instance.orders.create(options);
+//   return NextResponse.json({ msg: "success", order });
+// }
 
 export async function POST(request) {
   try {
@@ -45,10 +45,9 @@ export async function POST(request) {
   } catch (error) {
     console.error("error ", error);
     return new Response(
-      JSON.stringify({ message: error || "INTERNAL SERVER ERROR" }),
-      {
-        status: 500,
-      }
+      JSON.stringify({ message: error || "INTERNAL SERVER ERROR" }), {
+      status: 500,
+    }
     );
   }
 }
