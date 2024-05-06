@@ -74,8 +74,6 @@ export async function PUT(request) {
       query: "UPDATE customer SET Adress2 = ? WHERE customer_id = ?;",
       values: [Adress2, Id],
     });
-    const daata = process.env.RAZORPAY_KEY_ID;
-    const ds = process.env.RAZORPAY_SUBCRIPTION_ID;
 
     if (result.affectedRows > 0) {
       return new Response(
