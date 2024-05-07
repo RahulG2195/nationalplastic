@@ -13,7 +13,6 @@ import { addToCart } from "@/redux/reducer/cartSlice";
 import { addToCartD } from "@/redux/reducer/tempSlice";
 
 import { Bounce, toast } from "react-toastify";
-
 import { useParams } from "next/navigation";
 import { isLoggedIn } from "@/utils/validation";
 import Breadcrump from "../Breadcrump/Breadcrump";
@@ -197,7 +196,7 @@ function ProdData() {
   const orignalPrice = data.length > 0 ? data[0].discount_price : null;
   const image = data.length > 0 ? data[0].image_name : null;
   const saving = (orignalPrice - price).toFixed(2);
-
+  
   return (
     <>
       {/* <Breadcrump productName = {name} /> */}

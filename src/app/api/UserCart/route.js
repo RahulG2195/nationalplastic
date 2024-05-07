@@ -141,7 +141,6 @@ export async function PUT(request) {
 }
 
 export async function DELETE(request) {
-  // //console.log("first");
   try {
     const data = await request.formData();
     const product_id = data.get("product_id"); // Log received product_id
