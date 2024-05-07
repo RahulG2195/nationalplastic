@@ -1,9 +1,8 @@
 "use client";
-import Link from "next/link";
-// import "@/Components/PreChairsCard/PreChairsCard.jsx";
-import { useEffect, useState } from "react";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import Link from "next/link";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { useDispatch } from "react-redux";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import { addToCart } from "@/redux/reducer/cartSlice";
@@ -29,6 +28,9 @@ const notifyError = () => {
 
 const Search = (props) => {
   const router = useRouter();
+  // console.log("props", props);
+  const { searchParams } = props;
+  console.log("hu ",);
   const [products, setProducts] = useState([]);
   const [discounts, setDiscounts] = useState([]);
   const [page, setPage] = useState(1);
@@ -37,6 +39,7 @@ const Search = (props) => {
   const dispatch = useDispatch();
   const [query, setQuery] = useState({});
   const params = useSearchParams();
+  const [loading, setLoading] = useState(true); // New loading state
 
   useEffect(() => {
     setPage(1);
@@ -51,45 +54,54 @@ const Search = (props) => {
   const fetchData = async () => {
     try {
       const value = params.get("query");
-      setQuery(value);
-
+      setQuery(value || searchParams.query);
+      console.log("q", query);
       if (query.trim() === "") {
         return;
       }
+      const isBrowser = typeof window !== "undefined";
+      // Default limit to 10 products per page
+      console.log("before request");
 
-      const response = await axios.get(
-        `/api/search?query=${query}&page=${page}`
-      );
+      if (isBrowser) {
+        console.log("before request");
+        
+        const response = await axios.get(
+          `/api/search?query=${query}&page=${page}`
+        );
+        console.log("q result: " + JSON.stringify(response));
+        const newProducts = response.data.products;
+        const all = response.data.allproducts;
 
-      const newProducts = response.data.products;
-      const all = response.data.allproducts;
+        setAllproducts(all);
+        console.log(": ", newProducts);
+        console.log(":: ", all);
+        console.log(": ", allproducts);
 
-      setAllproducts(all);
-      setProducts((prevProducts) => [...prevProducts, ...newProducts]);
-      setHasMore(newProducts.length > 0); // Check if there are more products to load
-      const calculatedDiscounts = newProducts.map((product) => {
-        const discountPercentage =
-          product.discount_price && product.price
-            ? Math.floor(
-                ((product.discount_price - product.price) /
-                  product.discount_price) *
-                  100
-              )
-            : 0;
-        return discountPercentage;
-      });
-      setDiscounts((prevDiscounts) => [
-        ...prevDiscounts,
-        ...calculatedDiscounts,
-      ]); // Append new discounts
+        setProducts((prevProducts) => [...prevProducts, ...newProducts]);
+        setHasMore(newProducts.length > 0); // Check if there are more products to load
+        const calculatedDiscounts = newProducts.map((product) => {
+          const discountPercentage =
+            product.discount_price && product.price
+              ? Math.floor(
+                  ((product.discount_price - product.price) /
+                    product.discount_price) *
+                    100
+                )
+              : 0;
+          return discountPercentage;
+        });
+        setDiscounts((prevDiscounts) => [
+          ...prevDiscounts,
+          ...calculatedDiscounts,
+        ]); // Append new discounts
+        setLoading(false); // Update loading state to false after fetching data
+      }
     } catch (error) {
       console.error("Error searching products:", error);
     }
   };
 
-  //   const setid = (id) => {
-  //     localStorage.setItem("myId", id);
-  //   };
   const fetchPrice = async (id) => {
     try {
       const response = await fetch("/api/ProductsCat", {
@@ -99,14 +111,12 @@ const Search = (props) => {
         },
         body: JSON.stringify({ product_id: id }),
       });
-      //console.log(response);
 
       if (!response.ok) {
         throw new Error("Failed to fetch product data");
       }
 
       const data = await response.json();
-      //console.log(" data ", data);
 
       return data;
     } catch (error) {
@@ -114,6 +124,7 @@ const Search = (props) => {
       throw error;
     }
   };
+
   const handleAddToCart = async (id) => {
     const isLoggedInResult = await isLoggedIn();
     const data = await fetchPrice(id);
@@ -152,8 +163,7 @@ const Search = (props) => {
 
   const handleAddWishlist = async (id) => {
     const isLoggedInResult = await isLoggedIn();
-    //console.log("state", isLoggedInResult);
-    //console.log("state", typeof isLoggedInResult);
+    
     if (!isLoggedInResult) {
       notifyError();
       router.push("/Login");
@@ -164,101 +174,112 @@ const Search = (props) => {
         })
       );
     }
-    // setInWishlist(true);
   };
 
   return (
     <>
       <div className="container">
-        <p className="darkBlue fw-bold my-4 mx-2">
-          {allproducts.length} products found
-        </p>
+        {loading ? ( // Show loading message if data is being fetched
+          <p>Loading...</p>
+        ) : (
+          <>
+            <p className="darkBlue fw-bold my-4 mx-2">
+              {allproducts.length} products found
+            </p>
 
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-          {products.map((product, index) => (
-            <div key={product.id} className="col">
-              <div className="preCont cards p-1 position-relative">
-                <Link
-                  // onClick={() => setid(product.product_id)}
-                  href={`/ProductDetail/${product.product_id}`}
-                >
-                  <div className="card-header">
-                    <img
-                      src={`/Assets/images/New-launches-1/${product.image_name}`}
-                      className="card-img-top"
-                      alt="..."
-                    />
-                  </div>
-                </Link>
-                <div className="card-body">
-                  <div className="PreFoot mt-2 ">
-                    <div className="class d-flex justify-content-between my-2 ">
-                      <Link
-                        //   onClick={() => setid(product.product_id)}
-                        href={`/ProductDetail/${product.product_id}`}
-                      >
-                        <div className="left fw-bold text-danger">
-                          {product.product_name}
-                        </div>
-                      </Link>
-                      <div className="right">
-                        <i onClick={() => handleAddToCart(product.product_id)}>
-                          {" "}
-                          <ShoppingCartOutlinedIcon />{" "}
-                        </i>
-                        <i
-                          onClick={() => handleAddWishlist(product.product_id)}
-                          className={` ${
-                            product.inWishlist
-                              ? "fa fa-heart"
-                              : "fa fa-heart-o ms-3"
-                          }`}
-                          style={
-                            product.inWishlist
-                              ? { fontSize: "20px", color: "#DC3545" }
-                              : {}
-                          }
-                          aria-hidden="true"
-                        ></i>
+            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+              {products.map((product, index) => (
+                <div key={product.id} className="col">
+                  <div className="preCont cards p-1 position-relative">
+                    <Link
+                      // onClick={() => setid(product.product_id)}
+                      href={`/ProductDetail/${product.product_id}`}
+                    >
+                      <div className="card-header">
+                        <img
+                          src={`/Assets/images/New-launches-1/${product.image_name}`}
+                          className="card-img-top"
+                          alt="..."
+                        />
                       </div>
-                    </div>
-                    <div className="text-left fw-medium my-2 DESCresp">
-                      {product.short_description}
-                    </div>
-                    <div className="rs d-flex justify-content-between align-items-center ">
-                      <div className="d-flex gap-2 align-items-center">
-                        <div>
-                          {" "}
-                          <i
-                            className="medium fa fa-inr fw-bold priceResp"
-                            aria-hidden="true"
-                          ></i>{" "}
+                    </Link>
+                    <div className="card-body">
+                      <div className="PreFoot mt-2 ">
+                        <div className="class d-flex justify-content-between my-2 ">
+                          <Link
+                            //   onClick={() => setid(product.product_id)}
+                            href={`/ProductDetail/${product.product_id}`}
+                          >
+                            <div className="left fw-bold text-danger">
+                              {product.product_name}
+                            </div>
+                          </Link>
+                          <div className="right">
+                            <i
+                              onClick={() =>
+                                handleAddToCart(product.product_id)
+                              }
+                            >
+                              {" "}
+                              <ShoppingCartOutlinedIcon />{" "}
+                            </i>
+                            <i
+                              onClick={() =>
+                                handleAddWishlist(product.product_id)
+                              }
+                              className={` ${
+                                product.inWishlist
+                                  ? "fa fa-heart"
+                                  : "fa fa-heart-o ms-3"
+                              }`}
+                              style={
+                                product.inWishlist
+                                  ? { fontSize: "20px", color: "#DC3545" }
+                                  : {}
+                              }
+                              aria-hidden="true"
+                            ></i>
+                          </div>
                         </div>
-                        <div className="medium fw-bold priceResp">
-                          {product.price}
+                        <div className="text-left fw-medium my-2 DESCresp">
+                          {product.short_description}
                         </div>
-                        <div className="small text-secondary text text-decoration-line-through">
-                          {product.discount_price}
+                        <div className="rs d-flex justify-content-between align-items-center ">
+                          <div className="d-flex gap-2 align-items-center">
+                            <div>
+                              {" "}
+                              <i
+                                className="medium fa fa-inr fw-bold priceResp"
+                                aria-hidden="true"
+                              ></i>{" "}
+                            </div>
+                            <div className="medium fw-bold priceResp">
+                              {product.price}
+                            </div>
+                            <div className="small text-secondary text text-decoration-line-through">
+                              {product.discount_price}
+                            </div>
+                          </div>
+                          <div className="d-flex fw-semibold text-danger ">
+                            <div>{discounts[index]}%</div>
+                          </div>
                         </div>
-                      </div>
-                      <div className="d-flex fw-semibold text-danger ">
-                        <div>{discounts[index]}%</div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
 
-        <InfiniteScroll
-          dataLength={products.length}
-          next={() => setPage(page + 1)}
-          hasMore={hasMore}
-          // loader={<h4>Loading...</h4>}
-          endMessage={<p>No more products to load</p>}
-        />
+            <InfiniteScroll
+              dataLength={products.length}
+              next={() => setPage(page + 1)}
+              hasMore={hasMore}
+              // loader={<h4>Loading...</h4>}
+              endMessage={<p>No more products to load</p>}
+            />
+          </>
+        )}
       </div>
     </>
   );
