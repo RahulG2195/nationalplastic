@@ -90,8 +90,7 @@ function ProdData() {
               item.seo_url.toLowerCase() === productName.toLowerCase()
           );
           productDetailArr = response.data.prod_detail.filter(
-            (item) =>
-              item.prod_id == filteredData[0].product_id
+            (item) => item.prod_id == filteredData[0].product_id
           );
         }
         if (filteredData.length === 0) {
@@ -410,7 +409,7 @@ function ProdData() {
       </div>
 
       {/* product info  */}
-      <MoreProduct prod_detail={prodData}/>
+      <MoreProduct prod_detail={prodData} />
 
       <div>
         {/* <!-- Modal --> */}

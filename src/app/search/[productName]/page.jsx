@@ -11,6 +11,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { isLoggedIn } from "@/utils/validation";
 import { Bounce, toast } from "react-toastify";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 
 const notifyError = () => {
   toast.error("Login To Add To WishList", {
@@ -27,10 +28,17 @@ const notifyError = () => {
 };
 
 const Search = (props) => {
-  const router = useRouter();
-  // console.log("props", props);
+  //   const router = useRouter();
+  //   const router = useParams();
+  const router = useParams();
+  const id = router.productName;
+  //   const { query } = router.query; // This will give you the value after '/'
+
+  console.log(router);
+  console.log(id);
+
+  //   const id = routers.productName;
   const { searchParams } = props;
-  console.log("hu ",);
   const [products, setProducts] = useState([]);
   const [discounts, setDiscounts] = useState([]);
   const [page, setPage] = useState(1);
@@ -39,13 +47,8 @@ const Search = (props) => {
   const dispatch = useDispatch();
   const [query, setQuery] = useState({});
   const params = useSearchParams();
-  const [loading, setLoading] = useState(true); // New loading state
-
-  useEffect(() => {
-    setPage(1);
-    setProducts([]);
-    setDiscounts([]);
-  }, [query]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchData();
@@ -53,33 +56,30 @@ const Search = (props) => {
 
   const fetchData = async () => {
     try {
-      const value = params.get("query");
-      setQuery(value || searchParams.query);
-      console.log("q", query);
+      //   const value = params.get("query");
+      setQuery(id);
+      setPage(1);
+      setProducts([]);
+      setDiscounts([]);
+      setLoading(true);
+      setError(null);
+
       if (query.trim() === "") {
+        setLoading(false);
         return;
       }
-      const isBrowser = typeof window !== "undefined";
-      // Default limit to 10 products per page
-      console.log("before request");
 
+      const isBrowser = typeof window !== "undefined";
       if (isBrowser) {
-        console.log("before request",query);
-        
-        const response = await axios.get(
-          `/api/search?query=${query}&page=${page}`
-        );
-        console.log("q result: " + JSON.stringify(response));
+        const response = await axios.post("/api/search", {
+          productName: query,
+        });
         const newProducts = response.data.products;
         const all = response.data.allproducts;
 
         setAllproducts(all);
-        console.log(": ", newProducts);
-        console.log(":: ", all);
-        console.log(": ", allproducts);
-
         setProducts((prevProducts) => [...prevProducts, ...newProducts]);
-        setHasMore(newProducts.length > 0); // Check if there are more products to load
+        setHasMore(newProducts.length > 0);
         const calculatedDiscounts = newProducts.map((product) => {
           const discountPercentage =
             product.discount_price && product.price
@@ -94,10 +94,12 @@ const Search = (props) => {
         setDiscounts((prevDiscounts) => [
           ...prevDiscounts,
           ...calculatedDiscounts,
-        ]); // Append new discounts
-        setLoading(false); // Update loading state to false after fetching data
+        ]);
+        setLoading(false);
       }
     } catch (error) {
+      setLoading(false);
+      setError(error);
       console.error("Error searching products:", error);
     }
   };
@@ -120,6 +122,7 @@ const Search = (props) => {
 
       return data;
     } catch (error) {
+      setError(error);
       console.error("Error fetching product data:", error);
       throw error;
     }
@@ -163,10 +166,10 @@ const Search = (props) => {
 
   const handleAddWishlist = async (id) => {
     const isLoggedInResult = await isLoggedIn();
-    
+
     if (!isLoggedInResult) {
       notifyError();
-      router.push("/Login");
+      //   router.push("/Login");
     } else {
       dispatch(
         addItemToWishlist({
@@ -179,8 +182,10 @@ const Search = (props) => {
   return (
     <>
       <div className="container">
-        {loading ? ( // Show loading message if data is being fetched
+        {loading ? (
           <p>Loading...</p>
+        ) : error ? (
+          <p>Error: {error.message}</p>
         ) : (
           <>
             <p className="darkBlue fw-bold my-4 mx-2">
@@ -191,10 +196,7 @@ const Search = (props) => {
               {products.map((product, index) => (
                 <div key={product.id} className="col">
                   <div className="preCont cards p-1 position-relative">
-                    <Link
-                      // onClick={() => setid(product.product_id)}
-                      href={`/ProductDetail/${product.product_id}`}
-                    >
+                    <Link href={`/ProductDetail/${product.product_id}`}>
                       <div className="card-header">
                         <img
                           src={`/Assets/images/New-launches-1/${product.image_name}`}
@@ -206,10 +208,7 @@ const Search = (props) => {
                     <div className="card-body">
                       <div className="PreFoot mt-2 ">
                         <div className="class d-flex justify-content-between my-2 ">
-                          <Link
-                            //   onClick={() => setid(product.product_id)}
-                            href={`/ProductDetail/${product.product_id}`}
-                          >
+                          <Link href={`/ProductDetail/${product.product_id}`}>
                             <div className="left fw-bold text-danger">
                               {product.product_name}
                             </div>
@@ -275,7 +274,6 @@ const Search = (props) => {
               dataLength={products.length}
               next={() => setPage(page + 1)}
               hasMore={hasMore}
-              // loader={<h4>Loading...</h4>}
               endMessage={<p>No more products to load</p>}
             />
           </>

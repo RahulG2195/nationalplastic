@@ -95,7 +95,7 @@ export default function Header() {
       // console.log("searchTerm2", searchTerm2);
       // console.log("header", searchTerm);
 
-      router.push(`/Search?query=${searchTerm}`);
+      router.push(`/search/${searchTerm}`);
     } catch (error) {
       console.error("Error searching products:", error);
     }
@@ -110,7 +110,6 @@ export default function Header() {
       <div className="container-fluid  header menbg">
         <TopBar />
         <nav className="navbar navbar-expand-lg main_header px-3">
-          
           <div className="container-fluid ">
             <div className="navbar-brand">
               <button

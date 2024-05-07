@@ -1,22 +1,23 @@
 import { query } from "@/lib/db";
-import { parse } from "url";
+// import { parse } from "url";
 
-export async function GET(request) {
+export async function POST(request) {
   try {
     // const parsedUrl = parse(request.url, true);
     // Default limit to 10 products per page
-
+    const data = await request.json(); // Parse incoming JSON data
+const { productName } = data;
     console.log("before request");
 
-    const parsedUrl = parse(request.url, true);
-    const queryParams = parsedUrl.query || "Pune";
+    // const parsedUrl = parse(request.url, true);
+    // const queryParams = parsedUrl.query || "Pune";
     // console.log("from routes", queryParams);
     // console.log("from routes", parsedUrl);
-
-    const searchTerm = queryParams.query.toLocaleLowerCase();
-    const page = parseInt(queryParams.page) || 1;
+    console.log("from routes",productName)
+    const searchTerm = productName.toLocaleLowerCase();
+    const page =  1;
     // Default to page 1
-    const limit = parseInt(queryParams.limit) || 12;
+    const limit = 12;
     const offset = (page - 1) * limit;
 
     const products = await query({
