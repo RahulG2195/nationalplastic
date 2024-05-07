@@ -64,7 +64,7 @@ const Search = (props) => {
       console.log("before request");
 
       if (isBrowser) {
-        console.log("before request");
+        console.log("before request",query);
         
         const response = await axios.get(
           `/api/search?query=${query}&page=${page}`
