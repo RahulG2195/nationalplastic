@@ -3,9 +3,6 @@ import "../../envConfig.js";
 
 export async function query({ query, values = [] }) {
   try {
-    console.log("query");
-    console.log("query", process.env.MYSQL_HOST);
-
     const dbconnection = await mysql.createConnection({
       Host: process.env.MYSQL_HOST,
       database: process.env.MYSQL_DATABASE,

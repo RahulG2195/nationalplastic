@@ -97,10 +97,7 @@ function ProfilePage() {
       toast.error("Please enter a  Valid address.");
       return;
     }
-    const response = await axios.put(
-      "http://localhost:3000/api/UserProfile",
-      data
-    );
+    const response = await axios.put("/api/UserProfile", data);
     const status = response.statusCode || response.status;
     if (status === 200) {
       notify("Updated address");

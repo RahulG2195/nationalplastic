@@ -12,13 +12,8 @@ export async function GET(request) {
             values: [],
         })
 
-        const prod_detail = await query({
-            query: "SELECT * FROM product_detail",
-            values: [],
-        });
-
         const limitProd = await query({
-            query: "SELECT * FROM products  WHERE prod_status = 1 GROUP BY product_name limit 12",
+            query: "SELECT * FROM products WHERE prod_status = 1  GROUP BY product_name limit 12",
             values: [],
         });
 
@@ -40,10 +35,23 @@ export async function GET(request) {
 
 export async function POST(request) {
     try {
-        const { product_name, short_description, price, discount_price, image_name } = await request.json();
-        const values = [product_name, short_description, price, discount_price, image_name];
+        const {
+            product_name,
+            short_description,
+            price,
+            discount_price,
+            image_name,
+        } = await request.json();
+        const values = [
+            product_name,
+            short_description,
+            price,
+            discount_price,
+            image_name,
+        ];
         const updateProducts = await query({
-            query: "INSERT INTO products (product_name, short_description, price, discount_price, image_name) VALUES (?)",
+            query:
+                "INSERT INTO products (product_name, short_description, price, discount_price, image_name) VALUES (?)",
             values: [values],
         });
         const result = updateProducts.affectedRows;
@@ -51,16 +59,20 @@ export async function POST(request) {
         const product = {
             product_name: product_name,
         };
-        return new Response(JSON.stringify({
-            message: message,
-            status: 200,
-            product: product
-        }));
+        return new Response(
+            JSON.stringify({
+                message: message,
+                status: 200,
+                product: product,
+            })
+        );
     } catch (error) {
-        return new Response(JSON.stringify({
-            status: 500,
-            data: error.message
-        }));
+        return new Response(
+            JSON.stringify({
+                status: 500,
+                data: error.message,
+            })
+        );
     }
 }
 

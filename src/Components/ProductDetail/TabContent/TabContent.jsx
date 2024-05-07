@@ -88,6 +88,7 @@ const TabContent = ({ activeTab, prodDetail }) => {
                             height={100}
                             layout="responsive"
                             objectFit="cover"
+                            alt="img"
                         />
                     </div>
                 </div>
