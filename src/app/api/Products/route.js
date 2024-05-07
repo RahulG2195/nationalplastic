@@ -3,10 +3,14 @@ import { query } from "@/lib/db";
 export async function GET(request) {
     try {
         const products = await query({
-            query: "SELECT * FROM products",
+            query: "SELECT * FROM products WHERE prod_status = 1 GROUP BY product_name order by product_id",
             values: [],
         });
 
+        const prod_clr = await query({
+            query: "Select product_id, product_name, color, color_code FROM products WHERE prod_status = 1 order by product_id",
+            values: [],
+        })
 
         const prod_detail = await query({
             query: "SELECT * FROM product_detail",
@@ -14,7 +18,7 @@ export async function GET(request) {
         });
 
         const limitProd = await query({
-            query: "SELECT * FROM products limit 12",
+            query: "SELECT * FROM products  WHERE prod_status = 1 GROUP BY product_name limit 12",
             values: [],
         });
 
@@ -23,6 +27,7 @@ export async function GET(request) {
             products: products,
             limitProd: limitProd,
             prod_detail: prod_detail,
+            prod_clr: prod_clr,
         }));
 
     } catch (error) {

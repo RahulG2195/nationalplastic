@@ -5,11 +5,6 @@ import Image from "next/image";
 import NoCostEmi from "../NoCostEmi/NoCostEmi";
 import ProductDetailSlider from "../ProductDetailSlider/ProductDetailSlider";
 import MoreProduct from "./MoreProducts/MoreProduct";
-// import RecentlyViewedDetails from "./RecentlyViewedDetails/RecentlyViewedDetails";
-// import CustomerReview from "./CustomerReview/CustomerReview";
-// import Faqs from "../FAQs/Faqs";
-// import FooterRow from "../FooterRow/FooterRow";
-// import TabContent from "./TabContent/TabContent";
 import IncrementDecrement from "@/Components/AddToCart/IncrementDecrement";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -18,10 +13,6 @@ import { addToCart } from "@/redux/reducer/cartSlice";
 import { addToCartD } from "@/redux/reducer/tempSlice";
 
 import { Bounce, toast } from "react-toastify";
-
-// import { Message } from "@mui/icons-material";
-// import Breadcrump from "@/app/Breadcromp/page";
-// import RecentlyViewed from "../ProductsCatlogue/RecentlyViewed";
 import { useParams } from "next/navigation";
 import { isLoggedIn } from "@/utils/validation";
 import Breadcrump from "../Breadcrump/Breadcrump";
@@ -37,7 +28,8 @@ function ProdData() {
   const [filteredData, setFilteredData] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [initialCount, setInitialCount] = useState(1);
-  const [selectedColor, setSelectedColor] = useState("GOLD");
+  const [Product_Color, setProductColor] = useState([]);
+  const [selectedColor, setSelectedColor] = useState(null);
 
   const notify = () => {
     toast.error("Login To Buy now", {
@@ -59,9 +51,7 @@ function ProdData() {
   // const increment = () => {
   //   setCount(count + 1);
   // };
-  const handleColorChange = (event) => {
-    setSelectedColor(event.target.value);
-  };
+  
   const handleIncrement = async () => {
     // await dispatch(increaseQuantity({ product_id: productId }));
     setInitialCount(initialCount + 1);
@@ -83,12 +73,21 @@ function ProdData() {
         const response = await axios.get("/api/Products");
         let filteredData = [];
         let productDetailArr = [];
+        let productColor = [];
         if (storedId || productName) {
           filteredData = response.data.products.filter(
             (item) =>
               item.product_id == storedId ||
               item.seo_url.toLowerCase() === productName.toLowerCase()
           );
+
+
+          // get all color as per prod name
+          productColor = response.data.prod_clr.filter(
+            (val) =>
+              val.product_name == filteredData[0].product_name
+          );
+
           productDetailArr = response.data.prod_detail.filter(
             (item) =>
               item.prod_id == filteredData[0].product_id
@@ -99,7 +98,8 @@ function ProdData() {
         } else {
           setData(filteredData);
           setProdData(productDetailArr);
-          // console.log('prod data :' + filteredData[1].product_id);
+          setProductColor(productColor);
+          setSelectedColor(filteredData[0].color)
         }
         setIsLoading(false);
       } catch (error) {
@@ -135,6 +135,11 @@ function ProdData() {
       console.error("Error fetching product data:", error);
       throw error;
     }
+  };
+
+
+  const handleColorChange = (event) => {
+    setSelectedColor(event.target.value);
   };
 
   const handleMoveToCart = async (storedId, quantity) => {
@@ -179,7 +184,7 @@ function ProdData() {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="hv-100">Loading...</div>;
   }
 
   if (errorMessage) {
@@ -191,7 +196,7 @@ function ProdData() {
   const orignalPrice = data.length > 0 ? data[0].discount_price : null;
   const image = data.length > 0 ? data[0].image_name : null;
   const saving = (orignalPrice - price).toFixed(2);
-
+  
   return (
     <>
       {/* <Breadcrump productName = {name} /> */}
@@ -237,7 +242,23 @@ function ProdData() {
                     <p>
                       <strong>Color: </strong> {selectedColor}
                     </p>
-                    <input
+                    {
+                      
+                      Product_Color.map((val, index) => {
+                       return <input
+                          type="radio"
+                          name="prod_clr"
+                          id={val.color}
+                          value={val.color}
+                          checked={selectedColor === val.color}
+                          onChange={handleColorChange}
+                          key={index}
+                          className="productDetailsRadio m-1"
+                          style={{ '--radio-color': val.color_code }}
+                        />
+                    })
+                    }
+                    {/* <input
                       type="radio"
                       name="prod_clr"
                       id="gold"
@@ -246,7 +267,6 @@ function ProdData() {
                       onChange={handleColorChange}
                       className="productDetailsRadio m-1"
                     />
-                    {/* <label htmlFor="gold">Gold</label> */}
                     <input
                       type="radio"
                       name="prod_clr"
@@ -273,7 +293,7 @@ function ProdData() {
                       checked={selectedColor === "BLUE"}
                       onChange={handleColorChange}
                       className="productDetailsRadio m-1"
-                    />
+                    /> */}
                     {/* <label htmlFor="white">White</label> */}
                   </div>
                   {/* <div className="prod_size">

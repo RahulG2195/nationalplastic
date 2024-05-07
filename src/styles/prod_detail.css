@@ -119,7 +119,8 @@
 .productDetailsRadio {
   height: 30px;
   width: 30px;
-  accent-color: gold;
+  accent-color: var(--radio-color); /* var came from dynamically from db */
+  cursor: ponter;
   border: none !important;
 }
 
