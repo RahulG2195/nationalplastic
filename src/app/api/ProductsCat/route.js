@@ -46,7 +46,7 @@ export async function POST(request) {
     const { product_id } = await request.json();
     const result = await query({
       query:
-        "SELECT price, discount_price FROM nationalplastic_db.products WHERE product_id = ? AND prod_status = 1 GROUP BY product_name;",
+        "SELECT price, discount_price FROM products WHERE product_id = ? AND prod_status = 1",
       values: [product_id],
     });
 
@@ -74,8 +74,7 @@ export async function PUT(request) {
   try {
     const { seo_url } = await request.json();
     const result = await query({
-      query:
-        "SELECT price, discount_price, product_id FROM nationalplastic_db.products WHERE seo_url = ? AND prod_status = 1 GROUP BY product_name;",
+      query: "SELECT price, discount_price, product_id FROM products WHERE seo_url = ? AND prod_status = 1",
       values: [seo_url],
     });
 

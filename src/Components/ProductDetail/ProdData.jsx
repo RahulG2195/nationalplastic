@@ -121,7 +121,7 @@ function ProdData() {
         },
         body: JSON.stringify({ seo_url: storedId }),
       });
-      //console.log(response);
+      console.log('fetch price' + response);
 
       if (!response.ok) {
         throw new Error("Failed to fetch product data");
