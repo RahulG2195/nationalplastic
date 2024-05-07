@@ -135,7 +135,6 @@ function ContactUs() {
     } else {
       notifyError();
     }
-    // //console.log("sending Mail " ,formData);
   }
 
   const RegisteredOfficeCardArr = [

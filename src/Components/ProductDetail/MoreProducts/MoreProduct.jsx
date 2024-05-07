@@ -10,7 +10,8 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import TabContent from "../TabContent/TabContent";
 import { useState } from "react";
 
-const MoreProduct = ({prod_detail}) => {
+const MoreProduct = ({ prod_detail }) => {
+  console.log("p_detail", prod_detail);
   const prodDetail = prod_detail;
   const tabs = [
     { id: "description", title: "Description" },
@@ -55,7 +56,9 @@ const MoreProduct = ({prod_detail}) => {
               {tabs.map((tab, index) => (
                 <li className="nav-item" key={tab.id}>
                   <a
-                    className={`nav-link ${activeTab === tab.id ? "active" : ""}`}
+                    className={`nav-link ${
+                      activeTab === tab.id ? "active" : ""
+                    }`}
                     id={`${tab.id}-tab`}
                     data-toggle="tab"
                     href={`#${tab.id}`}
@@ -87,7 +90,12 @@ const MoreProduct = ({prod_detail}) => {
                 </AccordionSummary>
                 <AccordionDetails>
                   <div>
-                  {prodDetail.length > 0 && <TabContent activeTab={activeTab} prodDetail={prodDetail} />}
+                    {prodDetail.length > 0 && (
+                      <TabContent
+                        activeTab={activeTab}
+                        prodDetail={prodDetail}
+                      />
+                    )}
                   </div>
                 </AccordionDetails>
               </Accordion>

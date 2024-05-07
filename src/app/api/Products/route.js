@@ -8,7 +8,7 @@ export async function GET(request) {
     });
 
     const prod_detail = await query({
-      query: "SELECT * FROM products",
+      query: "SELECT * FROM product_detail",
       values: [],
     });
 

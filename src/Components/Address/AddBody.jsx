@@ -107,11 +107,6 @@ const AddBody = () => {
         );
         if (isLoggedIn()) {
           products.forEach((product) => {
-            //console.log("products forEach: " + product.product_id);
-            //console.log("products forEach: " + product.price);
-            //console.log("products forEach: " + JSON.stringify(product));
-            // //console.log("products forEach: " + product.cart_ quantity);
-
             dispatch(
               addItemToCart({
                 product_id: product.product_id,

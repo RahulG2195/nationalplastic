@@ -7,13 +7,6 @@ export async function POST(request) {
     // Default limit to 10 products per page
     const data = await request.json(); // Parse incoming JSON data
 const { productName } = data;
-    console.log("before request");
-
-    // const parsedUrl = parse(request.url, true);
-    // const queryParams = parsedUrl.query || "Pune";
-    // console.log("from routes", queryParams);
-    // console.log("from routes", parsedUrl);
-    console.log("from routes",productName)
     const searchTerm = productName.toLocaleLowerCase();
     const page =  1;
     // Default to page 1
@@ -37,8 +30,6 @@ const { productName } = data;
         "SELECT * FROM products WHERE LOWER(product_name) REGEXP ? OR LOWER(categoryType) REGEXP ? OR LOWER(short_description) REGEXP ?",
       values: [`${searchTerm}`, `${searchTerm}`, `${searchTerm}`],
     });
-    console.log("allpr ::" + allproducts);
-    console.log("allpr ::" + JSON.stringify(allproducts));
 
     return new Response(
       JSON.stringify({
