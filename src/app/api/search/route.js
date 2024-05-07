@@ -15,7 +15,7 @@ const { productName } = data;
 
     const products = await query({
       query:
-        "SELECT * FROM products WHERE LOWER(product_name) REGEXP ? OR LOWER(categoryType) REGEXP ? OR LOWER(short_description) REGEXP ? LIMIT ? OFFSET ?",
+        "SELECT * FROM products WHERE LOWER(product_name) REGEXP ? OR LOWER(categoryType) REGEXP ? OR LOWER(short_description) REGEXP ? GROUP BY product_name LIMIT ? OFFSET ?",
       values: [
         `${searchTerm}`,
         `${searchTerm}`,
@@ -27,7 +27,7 @@ const { productName } = data;
 
     const allproducts = await query({
       query:
-        "SELECT * FROM products WHERE LOWER(product_name) REGEXP ? OR LOWER(categoryType) REGEXP ? OR LOWER(short_description) REGEXP ?",
+        "SELECT * FROM products WHERE LOWER(product_name) REGEXP ? OR LOWER(categoryType) REGEXP ? OR LOWER(short_description) REGEXP ? GROUP BY product_name",
       values: [`${searchTerm}`, `${searchTerm}`, `${searchTerm}`],
     });
 
