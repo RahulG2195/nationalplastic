@@ -6,21 +6,15 @@ import PriceDetailsCard from "@/Components/PriceDetails/PriceDetailsCard";
 import FooterRow from "@/Components/FooterRow/FooterRow";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {
-  addItemToCart,
-  removeItemFromCart,
-  addToCart,
-} from "@/redux/reducer/cartSlice";
+import { addItemToCart, removeItemFromCart, addToCart, } from "@/redux/reducer/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 // import { useSelector } from "react-redux";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
-import {
-  addItemToCartD,
-  removeItemFromCartD,
-  setInitialCountD,
-} from "@/redux/reducer/tempSlice";
+import {addItemToCartD, removeItemFromCartD, setInitialCountD, } from "@/redux/reducer/tempSlice";
 import { prod } from "../ConstantURL";
 import { isLoggedIn } from "@/utils/validation";
+
+
 function AddToCart() {
   const tempCartStates = useSelector((state) => state.temp);
   const CartStates = useSelector((state) => state.cart);
@@ -35,7 +29,9 @@ function AddToCart() {
     const cart = state[who] || {};
     return cart.products?.length || 0;
   });
+  console.log('add to cart' + JSON.stringify(productCount));
 
+  
   // Use useState to manage local product count and update function
   const [count, setCount] = useState(productCount);
   const [productDetailArr, setProductDetailArr] = useState([]);
@@ -313,7 +309,7 @@ function AddToCart() {
       }
     }
   };
-
+  console.log('proddata' + productDetailArr)
   return (
     <>
       <div className="row">
