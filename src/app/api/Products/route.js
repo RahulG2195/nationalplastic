@@ -3,7 +3,8 @@ import { query } from "@/lib/db";
 export async function GET(request) {
     try {
         const products = await query({
-            query: "SELECT MIN(product_id) AS product_id, product_name, MIN(seo_url) AS seo_url, MIN(category_id) AS category_id, MIN(image_name) AS image_name, MIN(price) AS price, MIN(discount_price) AS discount_price, MIN(discount_percentage) AS discount_percentage, MIN(categoryType) AS categoryType, MIN(duration) AS duration, MIN(InstallationCharges) AS InstallationCharges, MIN(color) AS color, MIN(color_code) AS color_code, MIN(armType) AS armType, prod_status FROM products WHERE prod_status = 1 GROUP BY product_name", 
+            query:
+                "SELECT MIN(product_id) AS product_id, product_name, MIN(seo_url) AS seo_url, MIN(category_id) AS category_id, MIN(image_name) AS image_name, MIN(price) AS price, MIN(discount_price) AS discount_price, MIN(discount_percentage) AS discount_percentage, MIN(categoryType) AS categoryType, MIN(duration) AS duration, MIN(InstallationCharges) AS InstallationCharges, MIN(color) AS color, MIN(color_code) AS color_code, MIN(armType) AS armType, prod_status FROM products WHERE prod_status = 1 GROUP BY product_name",
             values: [],
         });
 
@@ -23,7 +24,8 @@ export async function GET(request) {
         })
 
         const limitProd = await query({
-            query: "SELECT MIN(product_id) AS product_id, product_name, MIN(seo_url) AS seo_url, MIN(category_id) AS category_id, MIN(image_name) AS image_name, MIN(price) AS price, MIN(discount_price) AS discount_price, MIN(discount_percentage) AS discount_percentage, MIN(categoryType) AS categoryType, MIN(duration) AS duration, MIN(InstallationCharges) AS InstallationCharges, MIN(color) AS color, MIN(color_code) AS color_code, MIN(armType) AS armType, prod_status FROM products WHERE prod_status = 1  GROUP BY product_name limit 12",
+            query:
+                "SELECT MIN(product_id) AS product_id, product_name, MIN(seo_url) AS seo_url, MIN(category_id) AS category_id, MIN(image_name) AS image_name, MIN(price) AS price, MIN(discount_price) AS discount_price, MIN(discount_percentage) AS discount_percentage, MIN(categoryType) AS categoryType, MIN(duration) AS duration, MIN(InstallationCharges) AS InstallationCharges, MIN(color) AS color, MIN(color_code) AS color_code, MIN(armType) AS armType, prod_status FROM products WHERE prod_status = 1  GROUP BY product_name limit 12",
             values: [],
         });
 
@@ -46,10 +48,23 @@ export async function GET(request) {
 
 export async function POST(request) {
     try {
-        const { product_name, short_description, price, discount_price, image_name } = await request.json();
-        const values = [product_name, short_description, price, discount_price, image_name];
+        const {
+            product_name,
+            short_description,
+            price,
+            discount_price,
+            image_name,
+        } = await request.json();
+        const values = [
+            product_name,
+            short_description,
+            price,
+            discount_price,
+            image_name,
+        ];
         const updateProducts = await query({
-            query: "INSERT INTO products (product_name, short_description, price, discount_price, image_name) VALUES (?)",
+            query:
+                "INSERT INTO products (product_name, short_description, price, discount_price, image_name) VALUES (?)",
             values: [values],
         });
         const result = updateProducts.affectedRows;
@@ -57,16 +72,49 @@ export async function POST(request) {
         const product = {
             product_name: product_name,
         };
-        return new Response(JSON.stringify({
-            message: message,
-            status: 200,
-            product: product
-        }));
+        return new Response(
+            JSON.stringify({
+                message: message,
+                status: 200,
+                product: product,
+            })
+        );
     } catch (error) {
-        return new Response(JSON.stringify({
-            status: 500,
-            data: error.message
-        }));
+        return new Response(
+            JSON.stringify({
+                status: 500,
+                data: error.message,
+            })
+        );
+    }
+}
+
+export async function PUT(request) {
+    try {
+        const { category_id } = await request.json();
+
+        const getCategory = await query({
+            query: "SELECT category_name FROM categories WHERE category_id = ?",
+            values: [category_id],
+        });
+
+        const category =
+            getCategory.length > 0 ? getCategory[0].category_name : null;
+
+        return new Response(
+            JSON.stringify({
+                status: 200,
+                category_name: category,
+                id: category_id,
+            })
+        );
+    } catch (error) {
+        return new Response(
+            JSON.stringify({
+                status: 500,
+                data: error.message,
+            })
+        );
     }
 }
 

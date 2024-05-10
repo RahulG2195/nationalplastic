@@ -54,10 +54,13 @@ function AddToCart() {
         const response = await axios.post("/api/UserCart", {
           customer_id: customerId,
         });
+        console.log(response);
         cartData = response.data.products;
+        console.log("cd", response.data.products);
         if (tempCartStates) {
           const tempData = tempCartStates;
         }
+        console.log(cartData);
         fetchData(cartData);
       } else {
         //Logic to Store Temporary Data
