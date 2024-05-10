@@ -59,7 +59,7 @@ const TopPicsCard = (props) => {
                     Get Quote
                   </button>
                   <button className="btn small bg-black p-1 fw-semibold text-white mx-2">
-                    Read Moreeeeeeeeee
+                    Read More
                   </button>
                   <i className="fa fa-heart-o" aria-hidden="true"></i>
                 </div>

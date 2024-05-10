@@ -93,15 +93,16 @@ const BoughtTogether = () => {
             },
           }}
         >
-          {togetherCardsData.slice(0, 5).map((card) => (
-            <SwiperSlide key={card.product_id}>
+          {togetherCardsData.slice(0, 5).map((card) => {
+            const images = card.image_name ? card.image_name.split(', ').map(image => image.trim()) : [];
+            return <SwiperSlide key={card.product_id}>
               <TogetherCard
-                imgSrc={`/Assets/images/New-launches-1/${card.image_name}`}
+                imgSrc={`/Assets/images/products/${images[0]}`}
                 Price={card.price}
                 prod_name={card.product_name}
               />
             </SwiperSlide>
-          ))}
+          })}
         </Swiper>
       </div>
 

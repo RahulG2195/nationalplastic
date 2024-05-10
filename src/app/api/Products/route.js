@@ -7,6 +7,16 @@ export async function GET(request) {
             values: [],
         });
 
+        const heighlightProd = await query({
+            query: "SELECT * FROM products where categoryType = 'highlights'",
+            values: [],
+        })
+
+        const Blog = await query({
+            query: "SELECT * FROM products where categoryType = 'Blog'",
+            values: [],
+        })
+
         const prod_clr = await query({
             query: "Select product_id, product_name, color, color_code FROM products WHERE prod_status = 1",
             values: [],
@@ -21,7 +31,8 @@ export async function GET(request) {
             status: 200,
             products: products,
             limitProd: limitProd,
-            // prod_detail: prod_detail,
+            heighlightProd: heighlightProd,
+            Blog: Blog,
             prod_clr: prod_clr,
         }));
 

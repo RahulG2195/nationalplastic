@@ -104,7 +104,7 @@ const WishlistPage1 = () => {
                 <WishlistCard
                   key={item.product_id}
                   id={item.product_id}
-                  WishlistImg={`/Assets/images/New-launches-1/${item.image_name}`}
+                  WishlistImg={`/Assets/images/products/${item.image_name}`}
                   productName={item.product_name}
                   producDiscription={item.short_description}
                   Price={item.price}

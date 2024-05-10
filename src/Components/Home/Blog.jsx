@@ -51,13 +51,16 @@ export default function Blog() {
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get("/api/Products");
-      const filteredData = response.data.products.filter(
-        (item) => item.categoryType === "Blog"
-      );
-      setProductArr(filteredData);
+      // const filteredData = response.data.Blog.filter(
+      //   (item) => item.categoryType === "Blog"
+      // );
+      // console.log('fosfd' + response.data.Blog);
+      setProductArr(response.data.Blog);
     };
     fetchdata();
   }, []);
+  
+
   return (
     <section className="top_pick_sec common_section">
       <div className="container">
@@ -105,10 +108,11 @@ export default function Blog() {
                   },
                 }}
               >
-                {productArr.map((product) => (
-                  <SwiperSlide key={product.product_id}>
+                {productArr.map((product) => {
+                  const images = product.image_name ? product.image_name.split(', ').map(image => image.trim()) : [];
+                 return <SwiperSlide key={product.product_id}>
                     <BlogCard
-                      image={`/Assets/images/Home-page/${product.image_name}`}
+                      image={`/Assets/images/products/${images[0]}`}
                       title={product.product_name}
                       url={product.url}
                       cat={product.categoryType}
@@ -123,7 +127,7 @@ export default function Blog() {
                       shortDesc={product.short_description}
                     />
                   </SwiperSlide>
-                ))}
+                })}
               </Swiper>
             </div>
           </div>

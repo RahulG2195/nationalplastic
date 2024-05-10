@@ -199,7 +199,7 @@ const Search = (props) => {
                     <Link href={`/ProductDetail/${product.product_id}`}>
                       <div className="card-header">
                         <img
-                          src={`/Assets/images/New-launches-1/${product.image_name}`}
+                          src={`/Assets/images/products/${product.image_name}`}
                           className="card-img-top"
                           alt="..."
                         />

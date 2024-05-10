@@ -53,7 +53,7 @@ const PreChairsCards = () => {
   const dispatch = useDispatch();
   // const chairData = [
   //   {
-  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     ChairImg: "/Assets/images/products/products.png",
   //     Title: "SHAMIYANA",
   //     Discription: "Lorem ipsum dolor sit amet.",
   //     Price: "00,000",
@@ -61,7 +61,7 @@ const PreChairsCards = () => {
   //     Discount: "20%",
   //   },
   //   {
-  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     ChairImg: "/Assets/images/products/products.png",
   //     Title: "SHAMIYANA",
   //     Discription: "Lorem ipsum dolor sit amet.",
   //     Price: "00,000",
@@ -69,7 +69,7 @@ const PreChairsCards = () => {
   //     Discount: "20%",
   //   },
   //   {
-  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     ChairImg: "/Assets/images/products/products.png",
   //     Title: "SHAMIYANA",
   //     Discription: "Lorem ipsum dolor sit amet.",
   //     Price: "00,000",
@@ -77,7 +77,7 @@ const PreChairsCards = () => {
   //     Discount: "20%",
   //   },
   //   {
-  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     ChairImg: "/Assets/images/products/products.png",
   //     Title: "SHAMIYANA",
   //     Discription: "Lorem ipsum dolor sit amet.",
   //     Price: "00,000",
@@ -85,7 +85,7 @@ const PreChairsCards = () => {
   //     Discount: "20%",
   //   },
   //   {
-  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     ChairImg: "/Assets/images/products/products.png",
   //     Title: "SHAMIYANA",
   //     Discription: "Lorem ipsum dolor sit amet.",
   //     Price: "00,000",
@@ -93,7 +93,7 @@ const PreChairsCards = () => {
   //     Discount: "20%",
   //   },
   //   {
-  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     ChairImg: "/Assets/images/products/products.png",
   //     Title: "SHAMIYANA",
   //     Discription: "Lorem ipsum dolor sit amet.",
   //     Price: "00,000",
@@ -101,7 +101,7 @@ const PreChairsCards = () => {
   //     Discount: "20%",
   //   },
   //   {
-  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     ChairImg: "/Assets/images/products/products.png",
   //     Title: "SHAMIYANA",
   //     Discription: "Lorem ipsum dolor sit amet.",
   //     Price: "00,000",
@@ -109,7 +109,7 @@ const PreChairsCards = () => {
   //     Discount: "20%",
   //   },
   //   {
-  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     ChairImg: "/Assets/images/products/products.png",
   //     Title: "SHAMIYANA",
   //     Discription: "Lorem ipsum dolor sit amet.",
   //     Price: "00,000",
@@ -117,7 +117,7 @@ const PreChairsCards = () => {
   //     Discount: "20%",
   //   },
   //   {
-  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     ChairImg: "/Assets/images/products/products.png",
   //     Title: "SHAMIYANA",
   //     Discription: "Lorem ipsum dolor sit amet.",
   //     Price: "00,000",
@@ -125,7 +125,7 @@ const PreChairsCards = () => {
   //     Discount: "20%",
   //   },
   //   {
-  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     ChairImg: "/Assets/images/products/products.png",
   //     Title: "SHAMIYANA",
   //     Discription: "Lorem ipsum dolor sit amet.",
   //     Price: "00,000",
@@ -133,7 +133,7 @@ const PreChairsCards = () => {
   //     Discount: "20%",
   //   },
   //   {
-  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     ChairImg: "/Assets/images/products/products.png",
   //     Title: "SHAMIYANA",
   //     Discription: "Lorem ipsum dolor sit amet.",
   //     Price: "00,000",
@@ -141,7 +141,7 @@ const PreChairsCards = () => {
   //     Discount: "20%",
   //   },
   //   {
-  //     ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+  //     ChairImg: "/Assets/images/products/products.png",
   //     Title: "SHAMIYANA",
   //     Discription: "Lorem ipsum dolor sit amet.",
   //     Price: "00,000",
@@ -387,13 +387,14 @@ const PreChairsCards = () => {
             endMessage={<p>No more products to load</p>}
           > */}
           <div className="row">
-            {products.map((product) => (
-              <div
+            {products.map((product) => {
+              const images = product.image_name ? product.image_name.split(', ').map(image => image.trim()) : [];
+             return <div
                 key={product.product_id}
                 className="PreCardSm col-12 col-sm-6 col-xs-4 col-md-6 col-lg-3"
               >
                 <PreChairsCard
-                  ChairImg={`/Assets/images/New-launches-1/${product.image_name}`}
+                  ChairImg={`/Assets/images/products/${images[0]}`}
                   id={product.seo_url}
                   Title={product.product_name}
                   Discription={product.short_description}
@@ -410,7 +411,7 @@ const PreChairsCards = () => {
                   onAddToCart={() => handleMoveToCart(product.product_id)}
                 />
               </div>
-            ))}
+            })}
           </div>
           {/* </InfiniteScroll> */}
         </>

@@ -341,7 +341,7 @@ function AddToCart() {
                     {productDetailArr.map((val) => (
                       <div className="row" key={val.product_id}>
                         <CartProduct
-                          src={`/Assets/images/New-launches-1/${val.image_name}`}
+                          src={`/Assets/images/products/${val.image_name}`}
                           productId={val.product_id}
                           productName={val.product_name}
                           productPrice={val.price}

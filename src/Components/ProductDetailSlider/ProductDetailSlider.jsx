@@ -16,58 +16,52 @@ const ProductDetailSlider = (imageurl) => {
     const getimageurl = imageurl.imageurl
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
+    const images = getimageurl ? getimageurl.split(', ').map(image => image.trim()) : [];
+    // console.log('img' + JSON.stringify(getimageurl));
     return (
         <>
-            <Swiper
-                style={{
-                    '--swiper-navigation-color': '#fff',
-                    '--swiper-pagination-color': '#fff',
-                }}
-                loop={true}
-                spaceBetween={10}
-                thumbs={{ swiper: thumbsSwiper }}
-                modules={[FreeMode, Navigation, Thumbs]}
-                className="mySwiper2 topSliderRes"
-            >
-                <SwiperSlide>
-                    <img src={`/Assets/images/New-launches-1/${getimageurl}`} alt="Product" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src={`/Assets/images/New-launches-1/${getimageurl}`} alt="Product" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src={`/Assets/images/New-launches-1/${getimageurl}`} alt="Product" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src={`/Assets/images/New-launches-1/${getimageurl}`} alt="Product" />
-                </SwiperSlide>
+            {images.length > 1 ?
+                (
+                    <>
+                        <Swiper
+                            style={{
+                                '--swiper-navigation-color': '#fff',
+                                '--swiper-pagination-color': '#fff',
+                            }}
+                            loop={true}
+                            spaceBetween={10}
+                            thumbs={{ swiper: thumbsSwiper }}
+                            modules={[FreeMode, Navigation, Thumbs]}
+                            className="mySwiper2 topSliderRes"
+                        >
+                            {images.map((imageName) => (
+                                <SwiperSlide key={imageName}>
+                                    <img src={`/Assets/images/products/${imageName}`} alt="Product" />
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
 
-            </Swiper>
+                        <Swiper
+                            onSwiper={setThumbsSwiper}
+                            loop={true}
+                            spaceBetween={10}
+                            slidesPerView={4}
+                            freeMode={true}
+                            watchSlidesProgress={true}
+                            modules={[FreeMode, Navigation, Thumbs]}
+                            className="mySwiper mt-4"
+                        >
+                            {images.map((imageName) => (
+                                <SwiperSlide key={imageName}>
+                                    <img src={`/Assets/images/products/${imageName}`} alt="Product" />
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    </>
+                ) : (
+                    <img src={`/Assets/images/products/${images[0]}`} alt="Product" />
+                )}
 
-            <Swiper
-                onSwiper={setThumbsSwiper}
-                loop={true}
-                spaceBetween={10}
-                slidesPerView={4}
-                freeMode={true}
-                watchSlidesProgress={true}
-                modules={[FreeMode, Navigation, Thumbs]}
-                className="mySwiper mt-4"
-            >
-                <SwiperSlide>
-                    <img src={`/Assets/images/New-launches-1/${getimageurl}`} alt="Product" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src={`/Assets/images/New-launches-1/${getimageurl}`} alt="Product" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src={`/Assets/images/New-launches-1/${getimageurl}`} alt="Product" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src={`/Assets/images/New-launches-1/${getimageurl}`} alt="Product" />
-                </SwiperSlide>
-
-            </Swiper>
         </>
     )
 }

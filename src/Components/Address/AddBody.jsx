@@ -337,7 +337,7 @@ const AddBody = () => {
                         {productDetailArr.map((val) => (
                           <div className="row" key={val.product_id}>
                             <OrderSummaryCard
-                              imgSrc={`/Assets/images/New-launches-1/${val.image_name}`}
+                              imgSrc={`/Assets/images/products/${val.image_name}`}
                               description={val.product_name}
                               quantity={val.quantity}
                             />

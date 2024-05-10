@@ -42,26 +42,24 @@ export default function Highlight() {
 
   useEffect(() => {
     const fetchdata = async () => {
-      const response = await axios.get(
-        "/api/Products"
-      );
-      const filteredData = response.data.products.filter(
-        (item) => item.categoryType === "highlights"
-      );
-      setProductArr(filteredData);
+      const response = await axios.get("/api/Products");
+
+      // const filteredData = response.data.heighlightProd.filter(
+      //   (item) => item.categoryType === "highlights"
+      // );
+      setProductArr(response.data.heighlightProd);
       // setIsLoading(false);
     };
     fetchdata();
   }, []);
-
   return (
     <section className="top_pick_sec position-relative common_section position-relative">
       <div className="">
         <div className="row">
           <div className="text-center highlightCont">
             <div className="darkBlue fs-1 fw-medium">
-            Our Must-Have 
-              <span className="fs-1 lh-small fw-bolder text-danger ">
+            Our Must-Have &nbsp;
+               <span className="fs-1 lh-small fw-bolder text-danger ">
               Collection!
               </span>
             </div>
@@ -79,13 +77,14 @@ export default function Highlight() {
             ) : ( */}
             <div className=" highlight_col mb-5">
               <div className="d-flex justify-content-center gap-4 flex-wrap">
-                {productArr.map((product) => (
-                  <div key={product.key} className="my-2 prodHcard">
-                    <Link href="/ProductCatlogue">
+                {productArr.map((product) => {
+                  const images = product.image_name ? product.image_name.split(', ').map(image => image.trim()) : [];
+                  return <div key={product.product_name} className="my-2 prodHcard">
+                    <Link href={`/ProductDetail/${product.product_id}`}>
                       <div className="card highlightcard">
                         <Image
                           className="imagetop"
-                          src={`/Assets/images/Home-page/${product.image_name}`}
+                          src={`/Assets/images/products/${images[0]}`}
                           alt={product.image}
                           width={50}
                           height={100}
@@ -107,7 +106,7 @@ export default function Highlight() {
                       </div>
                     </Link>
                   </div>
-                ))}
+                })}
               </div>
             </div>
             {/* )} */}

@@ -76,7 +76,7 @@ const PremiumChairs = ({ cattitle }) => {
                     </div>
                 </div> */}
 
-            </div >
+            </div>
         </>
     );
 }
