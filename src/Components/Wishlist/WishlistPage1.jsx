@@ -101,7 +101,7 @@ const WishlistPage1 = () => {
           <div className="table-wishlist">
             {wishlistItems.length > 0 ? (
               wishlistItems.map((item) => {
-                const images = item ? item.split(', ').map(image => image.trim()) : [];
+                const images = item ? item.image_name.split(', ').map(image => image.trim()) : [];
                 return <WishlistCard
                   key={item.product_id}
                   id={item.product_id}
