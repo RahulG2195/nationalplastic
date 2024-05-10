@@ -11,6 +11,8 @@ export async function POST(request) {
     });
 
     const productIds = mycart.map((row) => row.product_id);
+    console.log("pIDS", productIds);
+    console.log("pIDS", productIds.join(","));
 
     // Fetch product details for the retrieved product IDs
     const products = await query({
@@ -29,6 +31,7 @@ export async function POST(request) {
       color: row.color,
       quantity: row.cart_quantity,
     }));
+    console.log(products);
     return new Response(
       JSON.stringify({
         status: 200,
@@ -52,6 +55,8 @@ export async function PUT(request) {
   try {
     try {
       const { product_id, customer_id, quantity, color } = await request.json();
+      console.log("all data: ", product_id, customer_id, quantity, color);
+
       const user_id = customer_id;
       const insertResult = await query({
         query:
@@ -86,7 +91,7 @@ export async function PUT(request) {
           return new Response(
             JSON.stringify({
               status: 500,
-              message: "Product Not  Avaiable",
+              message: error.message,
             })
           );
         }
@@ -203,7 +208,10 @@ export async function PATCH(request) {
   } catch (error) {
     console.error(error);
     return new Response(
-      JSON.stringify({ message: "Error updating product quantity" }),
+      JSON.stringify({
+        message: "Error updating product quantity",
+        error: error.message,
+      }),
       { status: 500 }
     );
   }

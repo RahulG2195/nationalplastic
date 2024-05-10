@@ -18,10 +18,12 @@ import { isLoggedIn } from "@/utils/validation";
 import Breadcrump from "../Breadcrump/Breadcrump";
 import GetQuoteCustomForm from "../BulkOrder/GetQuoteCustomForm";
 
-function ProdData() {
+function ProdData({ category_id }) {
   const [data, setData] = useState([]);
   const [prodData, setProdData] = useState([]);
   const userState = useSelector((state) => state.userData.isLoggedIn);
+  const [categoryId, setCategoryId] = useState(null);
+  const [categoryName, setCategoryName] = useState(null);
 
   const [isLoading, setIsLoading] = useState(true);
   const [productId, setProductId] = useState(null);
@@ -31,20 +33,6 @@ function ProdData() {
   const [initialCount, setInitialCount] = useState(1);
   const [Product_Color, setProductColor] = useState([]);
   const [selectedColor, setSelectedColor] = useState(null);
-
-  const notify = () => {
-    toast.error("Login To Buy now", {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-      transition: Bounce,
-    });
-  };
   const dispatch = useDispatch();
   const router = useParams();
   const id = router.productId;
@@ -52,7 +40,7 @@ function ProdData() {
   // const increment = () => {
   //   setCount(count + 1);
   // };
-  
+
   const handleIncrement = async () => {
     // await dispatch(increaseQuantity({ product_id: productId }));
     setInitialCount(initialCount + 1);
@@ -82,11 +70,16 @@ function ProdData() {
               item.seo_url.toLowerCase() === productName.toLowerCase()
           );
 
+          console.log("products filtered", JSON.stringify(filteredData));
+          const catName = filteredData[0].category_id;
+          console.log("Category", JSON.stringify(catName));
+          // Breadcrump(category_id);
+          category(catName);
+          setCategoryId(catName);
 
           // get all color as per prod name
           productColor = response.data.prod_clr.filter(
-            (val) =>
-              val.product_name == filteredData[0].product_name
+            (val) => val.product_name == filteredData[0].product_name
           );
 
           // productDetailArr = response.data.prod_detail.filter(
@@ -99,7 +92,7 @@ function ProdData() {
           setData(filteredData);
           setProdData(productDetailArr);
           setProductColor(productColor);
-          setSelectedColor(filteredData[0].color)
+          setSelectedColor(filteredData[0].color);
         }
         setIsLoading(false);
       } catch (error) {
@@ -107,9 +100,25 @@ function ProdData() {
         setIsLoading(false);
       }
     };
-
     fetchData();
   }, [id]);
+
+  const category = async (catName) => {
+    try {
+      if (catName) {
+        console.log(catName);
+        const category = await axios.put("/api/Products", {
+          category_id: catName,
+        });
+        const { category_name, category_id } = category.data;
+        const cleanedName = category_name.replace(/"/g, "");
+        setCategoryName(cleanedName);
+        console.log("categoryNAme", categoryName);
+      }
+    } catch (err) {
+      console.log("Error", err);
+    }
+  };
 
   const fetchPrice = async (storedId) => {
     //console.log("Fetching price", storedId);
@@ -121,7 +130,7 @@ function ProdData() {
         },
         body: JSON.stringify({ seo_url: storedId }),
       });
-      console.log('fetch price' + response);
+      console.log("fetch price" + response);
 
       if (!response.ok) {
         throw new Error("Failed to fetch product data");
@@ -136,7 +145,6 @@ function ProdData() {
       throw error;
     }
   };
-
 
   const handleColorChange = (event) => {
     setSelectedColor(event.target.value);
@@ -196,7 +204,7 @@ function ProdData() {
   const orignalPrice = data.length > 0 ? data[0].discount_price : null;
   const image = data.length > 0 ? data[0].image_name : null;
   const saving = (orignalPrice - price).toFixed(2);
-  
+
   return (
     <>
       {/* <Breadcrump productName = {name} /> */}
@@ -204,7 +212,11 @@ function ProdData() {
         {/* <div className="heading-section"><h2>Product Details</h2></div> */}
         <div className="row">
           <div className="col-12">
-            <Breadcrump />
+            <Breadcrump
+              category_id={categoryId}
+              category_name={categoryName}
+              product_name={name}
+            />
           </div>
           <div className="col-md-6">
             <ProductDetailSlider imageurl={image} />
@@ -242,10 +254,9 @@ function ProdData() {
                     <p>
                       <strong>Color: </strong> {selectedColor}
                     </p>
-                    {
-                      
-                      Product_Color.map((val, index) => {
-                       return <input
+                    {Product_Color.map((val, index) => {
+                      return (
+                        <input
                           type="radio"
                           name="prod_clr"
                           id={val.color}
@@ -254,10 +265,10 @@ function ProdData() {
                           onChange={handleColorChange}
                           key={index}
                           className="productDetailsRadio m-1"
-                          style={{ '--radio-color': val.color_code }}
+                          style={{ "--radio-color": val.color_code }}
                         />
-                    })
-                    }
+                      );
+                    })}
                     {/* <label htmlFor="white">White</label> */}
                   </div>
                   {/* <div className="prod_size">

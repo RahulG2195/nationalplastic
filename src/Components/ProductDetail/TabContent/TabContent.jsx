@@ -15,8 +15,8 @@ const TabContent = ({ activeTab, prodDetail }) => {
   // prodDetail.map(data => {
   //     console.log('inner data' + data);
   // })
-  console.log("first product", firstProductData);
-  console.log("first product", firstProductData?.descp);
+  // console.log("first product", firstProductData);
+  // console.log("first product", firstProductData?.descp);
 
   switch (activeTab) {
     case "description":

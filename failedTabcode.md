@@ -208,6 +208,7 @@ const saving = (orignalPrice - price).toFixed(2);
 return (
 <>
 {/_ <Breadcrump productName = {name} /> _/}
+
 <div className="container">
 {/_ <div className="heading-section"><h2>Product Details</h2></div> _/}
 <div className="row">
@@ -524,6 +525,7 @@ img = "/Assets/images/Image 5/Image 5.png";
 
 return (
 <>
+
 <div class="tab-content" id="myTabContent">
 <div class="row justify-content-center">
 <div

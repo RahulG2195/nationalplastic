@@ -11,7 +11,7 @@ import TabContent from "../TabContent/TabContent";
 import { useState } from "react";
 
 const MoreProduct = ({ prod_detail }) => {
-  console.log("p_detail", prod_detail);
+  // console.log("p_detail", prod_detail);
   const prodDetail = prod_detail;
   const tabs = [
     { id: "description", title: "Description" },
