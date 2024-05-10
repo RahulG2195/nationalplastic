@@ -341,10 +341,11 @@ function AddToCart() {
                   </h5>
                 ) : (
                   <div className="container RowCont">
-                    {productDetailArr.map((val) => (
-                      <div className="row" key={val.product_id}>
+                    {productDetailArr.map((val) => {
+                      const images = val ? val.split(', ').map(image => image.trim()) : [];
+                      return <div className="row" key={val.product_id}>
                         <CartProduct
-                          src={`/Assets/images/products/${val.image_name}`}
+                          src={`/Assets/images/products/${images[0]}`}
                           productId={val.product_id}
                           productName={val.product_name}
                           productPrice={val.price}
@@ -373,7 +374,7 @@ function AddToCart() {
                           }
                         />
                       </div>
-                    ))}
+                    })}
                   </div>
                 )}
               </div>
