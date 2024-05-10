@@ -2,7 +2,6 @@ import Link from "next/link";
 import React, { useEffect } from "react";
 
 const Breadcrump = ({ category_id, category_name, product_name }) => {
-  console.log("category:", category_id);
   return (
     <>
       <nav aria-label="breadcrumb">

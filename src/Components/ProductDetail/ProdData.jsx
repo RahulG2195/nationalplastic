@@ -22,12 +22,10 @@ function ProdData({ category_id }) {
   const [data, setData] = useState([]);
   const [prodData, setProdData] = useState([]);
   const userState = useSelector((state) => state.userData.isLoggedIn);
-  const [categoryId, setCategoryId] = useState(null);
-  const [categoryName, setCategoryName] = useState(null);
-
+  const [categoryId, setCategoryId] = useState(null); // For Id of category to send to breadcrumbs
+  const [categoryName, setCategoryName] = useState(null); // For Name of category to send to breadcrumbs
   const [isLoading, setIsLoading] = useState(true);
   const [productId, setProductId] = useState(null);
-  // const [productName, setProductName] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [initialCount, setInitialCount] = useState(1);
@@ -70,10 +68,7 @@ function ProdData({ category_id }) {
               item.seo_url.toLowerCase() === productName.toLowerCase()
           );
 
-          console.log("products filtered", JSON.stringify(filteredData));
           const catName = filteredData[0].category_id;
-          console.log("Category", JSON.stringify(catName));
-          // Breadcrump(category_id);
           category(catName);
           setCategoryId(catName);
 
@@ -106,14 +101,12 @@ function ProdData({ category_id }) {
   const category = async (catName) => {
     try {
       if (catName) {
-        console.log(catName);
         const category = await axios.put("/api/Products", {
           category_id: catName,
         });
         const { category_name, category_id } = category.data;
         const cleanedName = category_name.replace(/"/g, "");
         setCategoryName(cleanedName);
-        console.log("categoryNAme", categoryName);
       }
     } catch (err) {
       console.log("Error", err);
@@ -121,7 +114,6 @@ function ProdData({ category_id }) {
   };
 
   const fetchPrice = async (storedId) => {
-    //console.log("Fetching price", storedId);
     try {
       const response = await fetch("/api/ProductsCat", {
         method: "PUT",
@@ -130,14 +122,12 @@ function ProdData({ category_id }) {
         },
         body: JSON.stringify({ seo_url: storedId }),
       });
-      console.log("fetch price" + response);
 
       if (!response.ok) {
         throw new Error("Failed to fetch product data");
       }
 
       const data = await response.json();
-      //console.log(" data ", data);
 
       return data;
     } catch (error) {
@@ -151,11 +141,7 @@ function ProdData({ category_id }) {
   };
 
   const handleMoveToCart = async (storedId, quantity) => {
-    //console.log("state", isLoggedInResult);
-    //console.log("state", typeof isLoggedInResult);
     const data = await fetchPrice(storedId);
-    //console.log(data);
-
     const price = data.price;
     const discount_price = data.discount_price;
     const product_id = data.product_id;
