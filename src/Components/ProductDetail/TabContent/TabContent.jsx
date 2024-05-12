@@ -7,41 +7,75 @@ const TabContent = ({ activeTab, prodDetail }) => {
   let content = "";
   let img = "";
   const firstProductData = prodDetail?.[0]; // Use optional chaining
+  console.log("-1-", prodDetail);
+  console.log(firstProductData?.features);
+  const productData = prodDetail[0];
 
-  //  console.log(firstProductData?.features);
-  // const productData = prodDetail[0];
+  console.dir(prodDetail[0]);
+  // prodDetail.map((data) => {
+  //   console.log("inner data" + data);
+  // });
+  console.log("first product", firstProductData);
+  console.log("first product", firstProductData?.descp);
+  const faq_disclaimer = `
+  Frequently Asked Questions (FAQs) - Plastic Chair:
+  
+  Q: Is this chair suitable for outdoor use?
+  A: Yes, this chair is designed for both indoor and outdoor use. However, prolonged exposure to extreme weather conditions may cause damage.
+  
+  Q: Can I leave this chair outside in all weather conditions?
+  A: While this chair is weather-resistant, we recommend storing it indoors during harsh weather conditions to prolong its lifespan.
+  
+  If you have any further questions, please feel free to contact us.
+  `;
+  const deliveryInstructions = `
+  **Delivery Instructions:**
 
-  // console.dir(prodDetail[0]);
-  // prodDetail.map(data => {
-  //     console.log('inner data' + data);
-  // })
-  // console.log("first product", firstProductData);
-  // console.log("first product", firstProductData?.descp);
+  - Your plastic chair will be delivered to the address provided during checkout.
+  
+  - Please ensure that someone is available to receive the delivery at the specified address.
+  
+  - The delivery team will not be responsible for any installation or assembly of the chair.
+  `;
 
+  // Care Instructions
+  const careInstructions = `
+  **Care & Maintenance:**
+
+  - Regularly inspect the chair for any signs of damage or wear.
+  
+  - Clean with mild soap and water as needed. Avoid using harsh chemicals or abrasive materials as they may damage the chair's surface.
+  
+  - Avoid placing the chair on uneven surfaces or on slippery floors to prevent accidents.
+  
+  - While this chair is weather-resistant, prolonged exposure to extreme weather conditions may cause damage. Store indoors during harsh weather conditions.
+  
+  - Always supervise children while they are using the chair. 
+  `;
   switch (activeTab) {
     case "description":
       heading = "Description";
-      content = firstProductData?.descp;
+      content = firstProductData?.dimenions;
       img = "/Assets/images/Image 5/Image 5.png";
       break;
     case "merchant-details":
       heading = "Merchant Details";
-      content = firstProductData?.descp;
+      content = firstProductData?.features;
       img = "/Assets/images/Image 5/Image 5.png";
       break;
     case "care-instruction":
       heading = "Care & Instruction";
-      content = firstProductData?.careAndInstruct;
+      content = firstProductData?.careAndInstruct || careInstructions;
       img = "/Assets/images/Image 5/Image 5.png";
       break;
     case "delivery-instructions":
       heading = "Delivery Instructions";
-      content = firstProductData?.deliveryInsct;
+      content = firstProductData?.deliveryInsct || deliveryInstructions;
       img = "/Assets/images/Image 5/Image 5.png";
       break;
     case "warranty":
       heading = "Warranty";
-      content = firstProductData?.warranty;
+      content = firstProductData?.warranty || "2 Year WARRANTY";
       img = "/Assets/images/Image 5/Image 5.png";
 
       break;
@@ -53,13 +87,14 @@ const TabContent = ({ activeTab, prodDetail }) => {
       break;
     case "faqs":
       heading = "FAQ'S";
-      content = firstProductData?.descp;
+      content = faq_disclaimer;
 
       img = "/Assets/images/Image 5/Image 5.png";
       break;
     case "disclaimer":
       heading = "Disclaimer";
-      content = firstProductData?.descp;
+      content =
+        "Environment: Avoid placing the chair on uneven surfaces or on slippery floors to prevent accidents.";
       img = "/Assets/images/Image 5/Image 5.png";
 
       break;

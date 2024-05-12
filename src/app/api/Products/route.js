@@ -13,6 +13,10 @@ export async function GET(request) {
         "Select product_id, product_name, color, color_code FROM products WHERE prod_status = 1",
       values: [],
     });
+    const prod_detail = await query({
+      query: "SELECT * FROM product_detail",
+      values: [],
+    });
 
     const limitProd = await query({
       query:
@@ -25,7 +29,7 @@ export async function GET(request) {
         status: 200,
         products: products,
         limitProd: limitProd,
-        // prod_detail: prod_detail,
+        prod_detail: prod_detail,
         prod_clr: prod_clr,
       })
     );

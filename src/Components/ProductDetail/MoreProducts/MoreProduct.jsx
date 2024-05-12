@@ -12,6 +12,7 @@ import { useState } from "react";
 
 const MoreProduct = ({ prod_detail }) => {
   // console.log("p_detail", prod_detail);
+  console.log("prod_detail", prod_detail);
   const prodDetail = prod_detail;
   const tabs = [
     { id: "description", title: "Description" },
@@ -75,7 +76,7 @@ const MoreProduct = ({ prod_detail }) => {
           </div>
 
           <div className="listTabContent">
-            <TabContent activeTab={activeTab} />
+            <TabContent activeTab={activeTab} prodDetail={prodDetail} />
           </div>
 
           <div className="AccorProductInfo">

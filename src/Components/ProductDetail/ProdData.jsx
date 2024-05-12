@@ -76,10 +76,14 @@ function ProdData({ category_id }) {
           productColor = response.data.prod_clr.filter(
             (val) => val.product_name == filteredData[0].product_name
           );
+          // console.log("get all color as per prod name", productColor);
+          console.log(response.data.prod_detail);
+          console.log(filteredData[0].product_id);
 
-          // productDetailArr = response.data.prod_detail.filter(
-          //   (item) => item.prod_id == filteredData[0].product_id
-          // );
+          productDetailArr = response.data.prod_detail.filter(
+            (item) => item.prod_id == filteredData[0].product_id
+          );
+          console.log("1", productDetailArr);
         }
         if (filteredData.length === 0) {
           setErrorMessage("Sorry, this product is not available");
@@ -257,17 +261,6 @@ function ProdData({ category_id }) {
                     })}
                     {/* <label htmlFor="white">White</label> */}
                   </div>
-                  {/* <div className="prod_size">
-                    <div>
-                      <strong>Size: </strong> 0000
-                    </div>
-                    <input
-                      type="text"
-                      name="prod_size"
-                      id="size"
-                      placeholder="Ex: 111"
-                    />
-                  </div> */}
                 </div>
               </div>
               <div className="bulk_order_div">
@@ -316,75 +309,6 @@ function ProdData({ category_id }) {
                   <li>Lorem ipsum</li>
                 </ul>
               </div>
-              {/* <div className=" d-flex flex-wrap justify-content-center position-relative align-items-center m-4 ChkAvblityRes">
-                <p className="fw-semibold m-2">Check Availability</p>
-                <div className="d-flex flex-wrap justify-content-center align-items-center reschkAvbl">
-                  <div>
-                    <input
-                      className="p-2"
-                      type="text"
-                      placeholder="Enter Your Pin Code"
-                    />
-                  </div>
-                  <div className="ChckBtnRes">
-                    <a
-                      href="#"
-                      className="btn rounded-0 text-white p-2"
-                    >
-                      CheckNow
-                    </a>
-                  </div>
-                </div>
-              </div> */}
-
-              {/* <div className="freuently_bought mb-2">
-                <h6 className="m-3">Frequently Bought Together</h6>
-                <div className="combile_price d-flex flex-wrap">
-                  <div className="relevent_img d-flex gap-2 align-items-center">
-                    <Image
-                      src="/Assets/images/Single Altis Image.png"
-                      width={100}
-                      height={100}
-                      layout="responsive"
-                      objectFit="cover"
-                      alt="img1"
-                    />
-                    <span>
-                      <i className="fa fa-plus"></i>
-                    </span>
-                    <Image
-                      src="/Assets/images/Single Altis Image.png"
-                      width={100}
-                      height={100}
-                      layout="responsive"
-                      objectFit="cover"
-                      alt="img1"
-                    />
-                    <span>
-                      <i className="fa fa-plus"></i>
-                    </span>
-                    <Image
-                      src="/Assets/images/Single Altis Image.png"
-                      width={100}
-                      height={100}
-                      layout="responsive"
-                      objectFit="cover"
-                      alt="img1"
-                    />
-                  </div>
-
-                  <div className="com_price text-top m-3 text-center">
-                    <p>Total Price: 0000/-</p>
-                    <button
-                      type="button"
-                      class="btn rounded-0 btn-outline-danger py-1 px-4 fw-semibold medium"
-                    >
-                      Add selected to cart
-                    </button>
-                  </div>
-                </div>
-                <NoCostEmi />
-              </div> */}
             </div>
           </div>
         </div>
