@@ -8,6 +8,16 @@ export async function GET(request) {
       values: [],
     });
 
+    const heighlightProd = await query({
+      query: "SELECT * FROM products where categoryType = 'highlights'",
+      values: [],
+    });
+
+    const Blog = await query({
+      query: "SELECT * FROM products where categoryType = 'Blog'",
+      values: [],
+    });
+
     const prod_clr = await query({
       query:
         "Select product_id, product_name, color, color_code FROM products WHERE prod_status = 1",
@@ -17,7 +27,6 @@ export async function GET(request) {
       query: "SELECT * FROM product_detail",
       values: [],
     });
-
     const limitProd = await query({
       query:
         "SELECT MIN(product_id) AS product_id, product_name, MIN(seo_url) AS seo_url, MIN(category_id) AS category_id, MIN(image_name) AS image_name, MIN(price) AS price, MIN(discount_price) AS discount_price, MIN(discount_percentage) AS discount_percentage, MIN(categoryType) AS categoryType, MIN(duration) AS duration, MIN(InstallationCharges) AS InstallationCharges, MIN(color) AS color, MIN(color_code) AS color_code, MIN(armType) AS armType, prod_status FROM products WHERE prod_status = 1  GROUP BY product_name limit 12",
@@ -30,6 +39,8 @@ export async function GET(request) {
         products: products,
         limitProd: limitProd,
         prod_detail: prod_detail,
+        heighlightProd: heighlightProd,
+        Blog: Blog,
         prod_clr: prod_clr,
       })
     );

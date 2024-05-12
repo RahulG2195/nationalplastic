@@ -37,11 +37,11 @@ const notify = () => {
 };
 const RecentlyViewed = () => {
   // const RecentlyViewedData = [
-  //     { ChairImg: "/Assets/images/New-launches-1/New-launches-1.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
+  //     { ChairImg: "/Assets/images/products/products.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
   //     { ChairImg: "/Assets/images/New-launches-2/New-launches-2.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
   //     { ChairImg: "/Assets/images/New-launches-3/New-launches-3.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
   //     { ChairImg: "/Assets/images/New-launches-4/New-launches-4.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-  //     { ChairImg: "/Assets/images/New-launches-1/New-launches-1.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
+  //     { ChairImg: "/Assets/images/products/products.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
   //     { ChairImg: "/Assets/images/New-launches-2/New-launches-2.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
   //     { ChairImg: "/Assets/images/New-launches-3/New-launches-3.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
   //     { ChairImg: "/Assets/images/New-launches-4/New-launches-4.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
@@ -272,10 +272,11 @@ const RecentlyViewed = () => {
             },
           }}
         >
-          {RecentlyViewedData.map((chair) => (
-            <SwiperSlide key={chair.product_id}>
+          {RecentlyViewedData.map((chair) => {
+            const images = chair.image_name ? chair.image_name.split(', ').map(image => image.trim()) : [];
+           return <SwiperSlide key={chair.product_id}>
               <PreChairsCard
-                ChairImg={`/Assets/images/New-launches-1/${chair.image_name}`}
+                ChairImg={`/Assets/images/products/${images[0]}`}
                 id={chair.seo_url}
                 Title={chair.product_name}
                 // Discription={chair.short_description}
@@ -297,7 +298,7 @@ const RecentlyViewed = () => {
                 recentClass="reventHoverView"
               />
             </SwiperSlide>
-          ))}
+          })}
         </Swiper>
       </div>
     </>

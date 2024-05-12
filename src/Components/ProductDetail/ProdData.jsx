@@ -126,6 +126,7 @@ function ProdData({ category_id }) {
         },
         body: JSON.stringify({ seo_url: storedId }),
       });
+      
 
       if (!response.ok) {
         throw new Error("Failed to fetch product data");

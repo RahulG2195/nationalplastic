@@ -3,7 +3,7 @@ import PreChairsCard from "@/Components/preChairsCard/preChairsCard.jsx";
 const BulkPremiumCards = ({proddata}) => {
   const chairData = [
     {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      ChairImg: "/Assets/images/products/products.png",
       Title: "SHAMIYANA",
       Discription: "Lorem ipsum dolor sit amet.",
       Price: "00,000",
@@ -11,7 +11,7 @@ const BulkPremiumCards = ({proddata}) => {
       Discount: "20%",
     },
     {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      ChairImg: "/Assets/images/products/products.png",
       Title: "SHAMIYANA",
       Discription: "Lorem ipsum dolor sit amet.",
       Price: "00,000",
@@ -19,7 +19,7 @@ const BulkPremiumCards = ({proddata}) => {
       Discount: "20%",
     },
     {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      ChairImg: "/Assets/images/products/products.png",
       Title: "SHAMIYANA",
       Discription: "Lorem ipsum dolor sit amet.",
       Price: "00,000",
@@ -27,7 +27,7 @@ const BulkPremiumCards = ({proddata}) => {
       Discount: "20%",
     },
     {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      ChairImg: "/Assets/images/products/products.png",
       Title: "SHAMIYANA",
       Discription: "Lorem ipsum dolor sit amet.",
       Price: "00,000",
@@ -35,7 +35,7 @@ const BulkPremiumCards = ({proddata}) => {
       Discount: "20%",
     },
     {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      ChairImg: "/Assets/images/products/products.png",
       Title: "SHAMIYANA",
       Discription: "Lorem ipsum dolor sit amet.",
       Price: "00,000",
@@ -43,7 +43,7 @@ const BulkPremiumCards = ({proddata}) => {
       Discount: "20%",
     },
     {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      ChairImg: "/Assets/images/products/products.png",
       Title: "SHAMIYANA",
       Discription: "Lorem ipsum dolor sit amet.",
       Price: "00,000",
@@ -51,7 +51,7 @@ const BulkPremiumCards = ({proddata}) => {
       Discount: "20%",
     },
     {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      ChairImg: "/Assets/images/products/products.png",
       Title: "SHAMIYANA",
       Discription: "Lorem ipsum dolor sit amet.",
       Price: "00,000",
@@ -59,7 +59,7 @@ const BulkPremiumCards = ({proddata}) => {
       Discount: "20%",
     },
     {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      ChairImg: "/Assets/images/products/products.png",
       Title: "SHAMIYANA",
       Discription: "Lorem ipsum dolor sit amet.",
       Price: "00,000",
@@ -67,7 +67,7 @@ const BulkPremiumCards = ({proddata}) => {
       Discount: "20%",
     },
     {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      ChairImg: "/Assets/images/products/products.png",
       Title: "SHAMIYANA",
       Discription: "Lorem ipsum dolor sit amet.",
       Price: "00,000",
@@ -75,7 +75,7 @@ const BulkPremiumCards = ({proddata}) => {
       Discount: "20%",
     },
     {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      ChairImg: "/Assets/images/products/products.png",
       Title: "SHAMIYANA",
       Discription: "Lorem ipsum dolor sit amet.",
       Price: "00,000",
@@ -83,7 +83,7 @@ const BulkPremiumCards = ({proddata}) => {
       Discount: "20%",
     },
     {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      ChairImg: "/Assets/images/products/products.png",
       Title: "SHAMIYANA",
       Discription: "Lorem ipsum dolor sit amet.",
       Price: "00,000",
@@ -91,7 +91,7 @@ const BulkPremiumCards = ({proddata}) => {
       Discount: "20%",
     },
     {
-      ChairImg: "/Assets/images/New-launches-1/New-launches-1.png",
+      ChairImg: "/Assets/images/products/products.png",
       Title: "SHAMIYANA",
       Discription: "Lorem ipsum dolor sit amet.",
       Price: "00,000",
@@ -111,7 +111,7 @@ const BulkPremiumCards = ({proddata}) => {
             >
               <PreChairsCard
                 id={chair.product_id}
-                ChairImg={`/Assets/images/New-launches-1/${chair.image_name}`}
+                ChairImg={`/Assets/images/products/${chair.image_name}`}
                 Title={chair.product_name}
                 Discription={chair.short_description}
                 Price={chair.price}

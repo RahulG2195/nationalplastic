@@ -89,7 +89,8 @@ function BottomBar() {
       (products) => products.product_name == prod_name
     );
     img_name.map((val) => {
-      SetGetImg(val.image_name);
+      const images = val.image_name ? val.image_name.split(', ').map(image => image.trim()) : [];
+      SetGetImg(images[0]);
     });
   };
   // console.log('img' + getImg);
@@ -145,7 +146,7 @@ function BottomBar() {
               ))}
               <div className="barImgCont py-3">
                 <Image
-                  src={`/Assets/images/New-launches-1/${getImg}`}
+                  src={`/Assets/images/products/${getImg}`}
                   alt=""
                   height={100}
                   width={100}

@@ -100,11 +100,12 @@ const WishlistPage1 = () => {
           <h4 className="p-4 fw-bold">Wishlist</h4>
           <div className="table-wishlist">
             {wishlistItems.length > 0 ? (
-              wishlistItems.map((item) => (
-                <WishlistCard
+              wishlistItems.map((item) => {
+                const images = item ? item.image_name.split(', ').map(image => image.trim()) : [];
+                return <WishlistCard
                   key={item.product_id}
                   id={item.product_id}
-                  WishlistImg={`/Assets/images/New-launches-1/${item.image_name}`}
+                  WishlistImg={`/Assets/images/products/${images[0]}`}
                   productName={item.product_name}
                   producDiscription={item.short_description}
                   Price={item.price}
@@ -119,7 +120,7 @@ const WishlistPage1 = () => {
                     )
                   }
                 />
-              ))
+            })
             ) : (
               <h4 className="text-secondary text-center mx-auto">
                 Wishlist is empty{" "}
