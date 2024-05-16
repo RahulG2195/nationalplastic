@@ -557,3 +557,5 @@ aria-labelledby={`${activeTab}-tab`} >
 };
 
 export default TabContent;
+'Agra-chair-in-size-IGREY(45D).webp', 'Agra chairs-IGREY(45).webp'
+Agra-chair-in-size-Beige(45D).webp, Agra chairs-beige-(45).webp
