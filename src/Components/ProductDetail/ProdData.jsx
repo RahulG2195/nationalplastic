@@ -152,9 +152,10 @@ function ProdData({ category_id }) {
         colorBasedProduct
       );
       console.log(JSON.stringify(response));
-      const data = response.data?.data;
-      console.log("Data: " + JSON.stringify(data));
-      setProdData(data);
+      const dataBasedOnColor = response.data?.data;
+      console.log("Data: " + JSON.stringify(dataBasedOnColor));
+      setProdData(dataBasedOnColor);
+      setData(dataBasedOnColor);
 
       // console.log("OYESSresponse: " + JSON.stringify(rdata));
     } catch (err) {
