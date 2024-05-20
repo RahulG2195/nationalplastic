@@ -11,6 +11,7 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { setUserData } from "@/redux/reducer/userSlice";
 // import { useNavigate } from "react-router-dom";
+import { toast, Bounce } from "react-toastify";
 
 function Login() {
   const dispatch = useDispatch();
@@ -42,37 +43,53 @@ function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     if (!formData.email || !formData.password) {
       setErrorMessage("Please enter both email and password.");
       return;
     }
+    const loginLoader = async () => {
+      try {
+        const res = await axios.put(`/api/Users`, formData);
+        const userData = res.data.message[0];
+        const { customer_id } = userData;
 
-    try {
-      const res = await axios.put(`/api/Users`, formData);
-      const userData = res.data.message[0];
-      const { customer_id } = userData;
-
-      if (res.data.status === 500) {
-        setErrorMessage(JSON.stringify(res.data.message));
-        alert("Failed to loggedin");
-      } else {
-        alert("Successfully logged in");
-
-        setLogin(true);
-        // let cust_id2 = await getUserId(formData.email)
-        // push("/");
-        dispatch(
-          setUserData({
-            email: formData.email,
-            customer_id: customer_id,
-          })
+        if (res.data.status === 500) {
+          const errorMsg = res.data.message;
+          setErrorMessage(errorMsg);
+          throw new Error(errorMsg || "Failed to Login");
+        } else {
+          setLogin(true);
+          dispatch(
+            setUserData({
+              email: formData.email,
+              customer_id: customer_id,
+            })
+          );
+        }
+      } catch (error) {
+        setErrorMessage(
+          error.message || "An error occurred during login. Please try again."
         );
+
+        throw new Error(error.message || "Failed to Login");
       }
-    } catch (error) {
-      console.error("Error during login:", error);
-      setErrorMessage("An error occurred during login. Please try again.");
-    }
+    };
+    toast.promise(
+      loginLoader(),
+      {
+        pending: "Logging In...",
+        success: "Login successfully!",
+        error: {
+          render({ data }) {
+            return data.message || "Failed to Login";
+          },
+        },
+      },
+      {
+        position: "top-center",
+        transition: Bounce,
+      }
+    );
   };
 
   return (
