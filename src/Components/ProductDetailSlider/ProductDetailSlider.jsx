@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 
@@ -10,15 +10,22 @@ import "swiper/css/thumbs";
 
 import "./productDetSliderstyles.css";
 
-const ProductDetailSlider = (imageurl) => {
-  const getimageurl = imageurl.imageurl;
-
+const ProductDetailSlider = ({ imageurl }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  //   const commaSeparatedString = getimageurl.join(",");
-  const images = getimageurl
-    ? getimageurl.split(",").map((image) => image.trim())
-    : [];
-  // console.log('img' + JSON.stringify(getimageurl));
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    if (imageurl) {
+      setImages([]); // Clear the images state
+      const splitImages = imageurl.split(",").map((image) => image.trim()) || [
+        "default_chair_img.webp",
+      ];
+      setImages(splitImages);
+    } else {
+      setImages(["default_chair_img.webp"]); // Set default image if imageurl is not provided
+    }
+  }, [imageurl]);
+
   return (
     <>
       {images.length > 1 ? (
@@ -70,4 +77,5 @@ const ProductDetailSlider = (imageurl) => {
     </>
   );
 };
+
 export default ProductDetailSlider;

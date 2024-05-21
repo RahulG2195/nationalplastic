@@ -17,6 +17,7 @@ import { useParams } from "next/navigation";
 import { isLoggedIn } from "@/utils/validation";
 import Breadcrump from "../Breadcrump/Breadcrump";
 import GetQuoteCustomForm from "../BulkOrder/GetQuoteCustomForm";
+import { notifyError } from "@/utils/notify";
 
 function ProdData({ category_id }) {
   const [data, setData] = useState([]);
@@ -76,14 +77,14 @@ function ProdData({ category_id }) {
           productColor = response.data.prod_clr.filter(
             (val) => val.product_name == filteredData[0].product_name
           );
-          // console.log("get all color as per prod name", productColor);
+          console.log("get all color as per prod name", productColor);
           // console.log(response.data.prod_detail);
           // console.log(filteredData[0].product_id);
 
           productDetailArr = response.data.prod_detail.filter(
             (item) => item.prod_id == filteredData[0].product_id
           );
-          // console.log("1", productDetailArr);
+          console.log("1", productDetailArr);
         }
         if (filteredData.length === 0) {
           setErrorMessage("Sorry, this product is not available");
@@ -113,7 +114,7 @@ function ProdData({ category_id }) {
         setCategoryName(cleanedName);
       }
     } catch (err) {
-      console.log("Error", err);
+      notifyError(err.message);
     }
   };
 
@@ -142,24 +143,23 @@ function ProdData({ category_id }) {
 
   const handleColorChange = async (event) => {
     setSelectedColor(event.target.value);
-    console.log("selectedColor", event.target.value);
-    console.log("id: ", id);
     const colorBasedProduct = { color: event.target.value, name: id };
-    console.log(colorBasedProduct);
     try {
       const response = await axios.post(
         "/api/colorBasedProduct",
         colorBasedProduct
       );
-      console.log(JSON.stringify(response));
       const dataBasedOnColor = response.data?.data;
-      console.log("Data: " + JSON.stringify(dataBasedOnColor));
-      setProdData(dataBasedOnColor);
-      setData(dataBasedOnColor);
-
-      // console.log("OYESSresponse: " + JSON.stringify(rdata));
+      const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
+      const NoOfImages = dataBasedOnColor[0].image_name;
+      if (isImageAvailable && NoOfImages.length > 30) {
+        setProdData(dataBasedOnColor);
+        setData(dataBasedOnColor);
+      } else {
+        notifyError("Out of stock");
+      }
     } catch (err) {
-      console.log("16|05|24 ", err.message);
+      notifyError(err.message || "Out of stock");
     }
   };
 
@@ -212,42 +212,11 @@ function ProdData({ category_id }) {
   const price = data.length > 0 ? data[0].price : null;
   const orignalPrice = data.length > 0 ? data[0].discount_price : null;
   // const image = data.length > 0 ? data[0].image_name : null;
-
-  const generateImageUrls = (baseNames, color) => {
-    const imageSuffixes = ["(front).webp", "(45D).webp", "(45).webp"];
-    console.log("Base names: " + baseNames);
-    console.log("Base color: " + color);
-
-    const imageList = baseNames.split(",").map((image) => image.trim());
-    // Clean up each image URL by removing leading/trailing spaces and extra parentheses
-    const cleanedImages = imageList.map((image) =>
-      image.replace(/^\s+|\s+$|\(|\)/g, "")
-    );
-    let updatedFilenames = cleanedImages.map((filename) => {
-      return filename.replace(/(-in-size|-chairs)-?[\w()-]+/i, `$1-${color}`);
-    });
-    console.log("updatedFilenames: " + updatedFilenames);
-    console.log("cleanedImages", cleanedImages);
-
-    // Generate the new URLs
-    return cleanedImages.map((base, index) => {
-      // Split the base name to identify the point where the new color should be inserted
-      const parts = base.split(/(size|chairs)/i);
-      console.log("parts", parts);
-      const cleanedBase = parts.join("");
-      console.log("cleanedBase", cleanedBase);
-      return `${cleanedBase}-${color}${imageSuffixes[index]}`;
-    });
-  };
-
-  const baseImageNames = data.length > 0 ? data[0].image_name : [];
-  console.log("baseImageNames ", baseImageNames);
+  const baseImageNames =
+    data.length > 0 ? data[0].image_name : "default_chair_img.webp";
   const image = baseImageNames;
-  // && selectedColor
-  // ? generateImageUrls(baseImageNames, selectedColor)
-  // : null;
+
   const saving = (orignalPrice - price).toFixed(2);
-  console.log("Image", image);
   return (
     <>
       {/* <Breadcrump productName = {name} /> */}
