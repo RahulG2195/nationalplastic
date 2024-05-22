@@ -58,7 +58,7 @@ const Search = (props) => {
 
   useEffect(() => {
     fetchData();
-  }, [query, page]);
+  }, [query]);
 
   const fetchData = async () => {
     try {
