@@ -7,16 +7,16 @@ const TabContent = ({ activeTab, prodDetail }) => {
   let content = "";
   let img = "";
   const firstProductData = prodDetail?.[0]; // Use optional chaining
-  console.log("-1-", prodDetail);
-  console.log(firstProductData?.features);
+  // console.log("-1-", prodDetail);
+  // console.log(firstProductData?.features);
   const productData = prodDetail[0];
 
-  console.dir(prodDetail[0]);
+  // console.dir(prodDetail[0]);
   // prodDetail.map((data) => {
   //   console.log("inner data" + data);
   // });
-  console.log("first product", firstProductData);
-  console.log("first product", firstProductData?.descp);
+  // console.log("first product", firstProductData);
+  // console.log("first product", firstProductData?.descp);
   const faq_disclaimer = `
   Frequently Asked Questions (FAQs) - Plastic Chair:
   
@@ -55,7 +55,7 @@ const TabContent = ({ activeTab, prodDetail }) => {
   switch (activeTab) {
     case "description":
       heading = "Description";
-      content = firstProductData?.dimenions;
+      content = firstProductData?.descp;
       img = "/Assets/images/Image 5/Image 5.png";
       break;
     case "merchant-details":

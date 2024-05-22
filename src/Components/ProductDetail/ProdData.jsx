@@ -17,6 +17,7 @@ import { useParams } from "next/navigation";
 import { isLoggedIn } from "@/utils/validation";
 import Breadcrump from "../Breadcrump/Breadcrump";
 import GetQuoteCustomForm from "../BulkOrder/GetQuoteCustomForm";
+import { notifyError } from "@/utils/notify";
 
 function ProdData({ category_id }) {
   const [data, setData] = useState([]);
@@ -76,9 +77,9 @@ function ProdData({ category_id }) {
           productColor = response.data.prod_clr.filter(
             (val) => val.product_name == filteredData[0].product_name
           );
-          // console.log("get all color as per prod name", productColor);
-          console.log(response.data.prod_detail);
-          console.log(filteredData[0].product_id);
+          console.log("get all color as per prod name", productColor);
+          // console.log(response.data.prod_detail);
+          // console.log(filteredData[0].product_id);
 
           productDetailArr = response.data.prod_detail.filter(
             (item) => item.prod_id == filteredData[0].product_id
@@ -113,7 +114,7 @@ function ProdData({ category_id }) {
         setCategoryName(cleanedName);
       }
     } catch (err) {
-      console.log("Error", err);
+      notifyError(err.message);
     }
   };
 
@@ -126,7 +127,6 @@ function ProdData({ category_id }) {
         },
         body: JSON.stringify({ seo_url: storedId }),
       });
-      
 
       if (!response.ok) {
         throw new Error("Failed to fetch product data");
@@ -141,8 +141,26 @@ function ProdData({ category_id }) {
     }
   };
 
-  const handleColorChange = (event) => {
+  const handleColorChange = async (event) => {
     setSelectedColor(event.target.value);
+    const colorBasedProduct = { color: event.target.value, name: id };
+    try {
+      const response = await axios.post(
+        "/api/colorBasedProduct",
+        colorBasedProduct
+      );
+      const dataBasedOnColor = response.data?.data;
+      const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
+      const NoOfImages = dataBasedOnColor[0].image_name;
+      if (isImageAvailable && NoOfImages.length > 30) {
+        setProdData(dataBasedOnColor);
+        setData(dataBasedOnColor);
+      } else {
+        notifyError("Out of stock");
+      }
+    } catch (err) {
+      notifyError(err.message || "Out of stock");
+    }
   };
 
   const handleMoveToCart = async (storedId, quantity) => {
@@ -193,9 +211,12 @@ function ProdData({ category_id }) {
   const name = data.length > 0 ? data[0].product_name : null;
   const price = data.length > 0 ? data[0].price : null;
   const orignalPrice = data.length > 0 ? data[0].discount_price : null;
-  const image = data.length > 0 ? data[0].image_name : null;
-  const saving = (orignalPrice - price).toFixed(2);
+  // const image = data.length > 0 ? data[0].image_name : null;
+  const baseImageNames =
+    data.length > 0 ? data[0].image_name : "default_chair_img.webp";
+  const image = baseImageNames;
 
+  const saving = (orignalPrice - price).toFixed(2);
   return (
     <>
       {/* <Breadcrump productName = {name} /> */}
