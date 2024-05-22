@@ -49,6 +49,12 @@ const Search = (props) => {
   const params = useSearchParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const getFirstImageName = (imageName) => {
+    const images = imageName
+      ? imageName.split(",").map((image) => image.trim())
+      : [];
+    return images[0];
+  };
 
   useEffect(() => {
     fetchData();
@@ -76,7 +82,7 @@ const Search = (props) => {
         });
         const newProducts = response.data.products;
         const all = response.data.allproducts;
-
+        console.log("All " + JSON.stringify(all));
         setAllproducts(all);
         setProducts((prevProducts) => [...prevProducts, ...newProducts]);
         setHasMore(newProducts.length > 0);
@@ -199,7 +205,9 @@ const Search = (props) => {
                     <Link href={`/ProductDetail/${product.product_id}`}>
                       <div className="card-header">
                         <img
-                          src={`/Assets/images/products/${product.image_name}`}
+                          src={`/Assets/images/products/${getFirstImageName(
+                            product.image_name
+                          )}`}
                           className="card-img-top"
                           alt="..."
                         />
