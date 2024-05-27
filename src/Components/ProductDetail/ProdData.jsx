@@ -142,6 +142,7 @@ function ProdData({ category_id }) {
   };
 
   const handleColorChange = async (event) => {
+
     setSelectedColor(event.target.value);
     const colorBasedProduct = { color: event.target.value, name: id };
     try {
@@ -156,7 +157,7 @@ function ProdData({ category_id }) {
         setProdData(dataBasedOnColor);
         setData(dataBasedOnColor);
       } else {
-        notifyError("Out of stock");
+        notifyError("Image Not available");
       }
     } catch (err) {
       notifyError(err.message || "Out of stock");
@@ -311,9 +312,8 @@ function ProdData({ category_id }) {
                 </p>
                 <Link
                   href={userState ? "/Address" : "#"}
-                  className={`btn bg-danger text-white m-2 px-md-5 ProdbtnRes ${
-                    !userState ? "disabled-button" : ""
-                  }`}
+                  className={`btn bg-danger text-white m-2 px-md-5 ProdbtnRes ${!userState ? "disabled-button" : ""
+                    }`}
                   onClick={() => handleMoveToCart(productId)}
                 >
                   Buy Now

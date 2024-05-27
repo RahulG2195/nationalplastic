@@ -90,10 +90,10 @@ const Search = (props) => {
           const discountPercentage =
             product.discount_price && product.price
               ? Math.floor(
-                  ((product.discount_price - product.price) /
-                    product.discount_price) *
-                    100
-                )
+                ((product.discount_price - product.price) /
+                  product.discount_price) *
+                100
+              )
               : 0;
           return discountPercentage;
         });
@@ -202,7 +202,7 @@ const Search = (props) => {
               {products.map((product, index) => (
                 <div key={product.id} className="col">
                   <div className="preCont cards p-1 position-relative">
-                    <Link href={`/ProductDetail/${product.product_id}`}>
+                    <Link href={`/ProductDetail/${product.seo_url}`}>
                       <div className="card-header">
                         <img
                           src={`/Assets/images/products/${getFirstImageName(
@@ -234,11 +234,10 @@ const Search = (props) => {
                               onClick={() =>
                                 handleAddWishlist(product.product_id)
                               }
-                              className={` ${
-                                product.inWishlist
-                                  ? "fa fa-heart"
-                                  : "fa fa-heart-o ms-3"
-                              }`}
+                              className={` ${product.inWishlist
+                                ? "fa fa-heart"
+                                : "fa fa-heart-o ms-3"
+                                }`}
                               style={
                                 product.inWishlist
                                   ? { fontSize: "20px", color: "#DC3545" }
