@@ -17,7 +17,7 @@ const ProductDetailSlider = ({ imageurl }) => {
   useEffect(() => {
     if (imageurl) {
       setImages([]); // Clear the images state
-      const splitImages = imageurl.split(",").map((image) => image.trim()) || [
+      const splitImages = imageurl.split(", ").map((image) => image.trim()) || [
         "default_chair_img.webp",
       ];
       setImages(splitImages);

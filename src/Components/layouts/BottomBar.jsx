@@ -23,7 +23,7 @@ function BottomBar() {
   // state for navbar loop
   const [navbar, setNavbar] = useState([]);
   const [AllProd, SetAllProd] = useState([]);
-  const [getImg, SetGetImg] = useState("Blog-section-1.jpg");
+  const [getImg, SetGetImg] = useState("default_chair_img.webp");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,30 +36,6 @@ function BottomBar() {
         const navshow = nav.data.navshow;
         SetAllProd(allproducts);
         setNavbar(navshow);
-        // end --
-
-        /* setPreEventChair(
-          allproducts.filter((products) => products.category_id == 13)
-        );
-        setWithoutArm(
-          allproducts.filter((products) => products.category_id == 14)
-        );
-        setPrechair(
-          allproducts.filter((products) => products.category_id == 15)
-        );
-        setPopularchair(
-          allproducts.filter((products) => products.category_id == 16)
-        );
-        setCabinet(
-          allproducts.filter((products) => products.category_id == 17)
-        );
-        setBabychair(
-          allproducts.filter((products) => products.category_id == 18)
-        );
-        setStool(allproducts.filter((products) => products.category_id == 28));
-        setTable(allproducts.filter((products) => products.category_id == 25));
-        setBox(allproducts.filter((products) => products.category_id == 21));
-        setDrawer(allproducts.filter((products) => products.category_id == 22)); */
 
         //console.log(preEventChair);
       } catch {
@@ -86,13 +62,14 @@ function BottomBar() {
 
   const ChangeImage = (prod_name) => {
     const img_name = AllProd.filter(
-      (products) => products.product_name == prod_name
+      (products) => products.product_name == prod_name || products.seo_url_clr != ''
     );
     img_name.map((val) => {
       const images = val.image_name ? val.image_name.split(', ').map(image => image.trim()) : [];
       SetGetImg(images[0]);
     });
   };
+
   // console.log('img' + getImg);
   return (
     <div className=" px-md-5 d-flex align-items-center bottom_nav position-relative mainrow">

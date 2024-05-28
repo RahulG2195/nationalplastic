@@ -51,104 +51,6 @@ const PreChairsCards = () => {
   const route = useRouter();
 
   const dispatch = useDispatch();
-  // const chairData = [
-  //   {
-  //     ChairImg: "/Assets/images/products/products.png",
-  //     Title: "SHAMIYANA",
-  //     Discription: "Lorem ipsum dolor sit amet.",
-  //     Price: "00,000",
-  //     orignalPrice: "00,000",
-  //     Discount: "20%",
-  //   },
-  //   {
-  //     ChairImg: "/Assets/images/products/products.png",
-  //     Title: "SHAMIYANA",
-  //     Discription: "Lorem ipsum dolor sit amet.",
-  //     Price: "00,000",
-  //     orignalPrice: "00,000",
-  //     Discount: "20%",
-  //   },
-  //   {
-  //     ChairImg: "/Assets/images/products/products.png",
-  //     Title: "SHAMIYANA",
-  //     Discription: "Lorem ipsum dolor sit amet.",
-  //     Price: "00,000",
-  //     orignalPrice: "00,000",
-  //     Discount: "20%",
-  //   },
-  //   {
-  //     ChairImg: "/Assets/images/products/products.png",
-  //     Title: "SHAMIYANA",
-  //     Discription: "Lorem ipsum dolor sit amet.",
-  //     Price: "00,000",
-  //     orignalPrice: "00,000",
-  //     Discount: "20%",
-  //   },
-  //   {
-  //     ChairImg: "/Assets/images/products/products.png",
-  //     Title: "SHAMIYANA",
-  //     Discription: "Lorem ipsum dolor sit amet.",
-  //     Price: "00,000",
-  //     orignalPrice: "00,000",
-  //     Discount: "20%",
-  //   },
-  //   {
-  //     ChairImg: "/Assets/images/products/products.png",
-  //     Title: "SHAMIYANA",
-  //     Discription: "Lorem ipsum dolor sit amet.",
-  //     Price: "00,000",
-  //     orignalPrice: "00,000",
-  //     Discount: "20%",
-  //   },
-  //   {
-  //     ChairImg: "/Assets/images/products/products.png",
-  //     Title: "SHAMIYANA",
-  //     Discription: "Lorem ipsum dolor sit amet.",
-  //     Price: "00,000",
-  //     orignalPrice: "00,000",
-  //     Discount: "20%",
-  //   },
-  //   {
-  //     ChairImg: "/Assets/images/products/products.png",
-  //     Title: "SHAMIYANA",
-  //     Discription: "Lorem ipsum dolor sit amet.",
-  //     Price: "00,000",
-  //     orignalPrice: "00,000",
-  //     Discount: "20%",
-  //   },
-  //   {
-  //     ChairImg: "/Assets/images/products/products.png",
-  //     Title: "SHAMIYANA",
-  //     Discription: "Lorem ipsum dolor sit amet.",
-  //     Price: "00,000",
-  //     orignalPrice: "00,000",
-  //     Discount: "20%",
-  //   },
-  //   {
-  //     ChairImg: "/Assets/images/products/products.png",
-  //     Title: "SHAMIYANA",
-  //     Discription: "Lorem ipsum dolor sit amet.",
-  //     Price: "00,000",
-  //     orignalPrice: "00,000",
-  //     Discount: "20%",
-  //   },
-  //   {
-  //     ChairImg: "/Assets/images/products/products.png",
-  //     Title: "SHAMIYANA",
-  //     Discription: "Lorem ipsum dolor sit amet.",
-  //     Price: "00,000",
-  //     orignalPrice: "00,000",
-  //     Discount: "20%",
-  //   },
-  //   {
-  //     ChairImg: "/Assets/images/products/products.png",
-  //     Title: "SHAMIYANA",
-  //     Discription: "Lorem ipsum dolor sit amet.",
-  //     Price: "00,000",
-  //     orignalPrice: "00,000",
-  //     Discount: "20%",
-  //   },
-  // ];
 
   useEffect(() => {
     fetchData();
@@ -389,6 +291,7 @@ const PreChairsCards = () => {
           <div className="row">
             {products.map((product) => {
               const images = product.image_name ? product.image_name.split(', ').map(image => image.trim()) : [];
+              console.log('images' + images[0]);
              return <div
                 key={product.product_id}
                 className="PreCardSm col-12 col-sm-6 col-xs-4 col-md-6 col-lg-3"
