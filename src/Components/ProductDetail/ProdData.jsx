@@ -77,14 +77,14 @@ function ProdData({ category_id }) {
           productColor = response.data.prod_clr.filter(
             (val) => val.product_name == filteredData[0].product_name
           );
-          console.log("get all color as per prod name", productColor);
+          // console.log("get all color as per prod name", productColor);
           // console.log(response.data.prod_detail);
           // console.log(filteredData[0].product_id);
 
           productDetailArr = response.data.prod_detail.filter(
             (item) => item.prod_id == filteredData[0].product_id
           );
-          console.log("1", productDetailArr);
+          // console.log("1", productDetailArr);
         }
         if (filteredData.length === 0) {
           setErrorMessage("Sorry, this product is not available");
@@ -142,6 +142,7 @@ function ProdData({ category_id }) {
   };
 
   const handleColorChange = async (event) => {
+
     setSelectedColor(event.target.value);
     const colorBasedProduct = { color: event.target.value, name: id };
     try {
@@ -156,7 +157,7 @@ function ProdData({ category_id }) {
         setProdData(dataBasedOnColor);
         setData(dataBasedOnColor);
       } else {
-        notifyError("Out of stock");
+        notifyError("Image Not available");
       }
     } catch (err) {
       notifyError(err.message || "Out of stock");
@@ -311,9 +312,8 @@ function ProdData({ category_id }) {
                 </p>
                 <Link
                   href={userState ? "/Address" : "#"}
-                  className={`btn bg-danger text-white m-2 px-md-5 ProdbtnRes ${
-                    !userState ? "disabled-button" : ""
-                  }`}
+                  className={`btn bg-danger text-white m-2 px-md-5 ProdbtnRes ${!userState ? "disabled-button" : ""
+                    }`}
                   onClick={() => handleMoveToCart(productId)}
                 >
                   Buy Now

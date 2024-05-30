@@ -7,19 +7,19 @@ export async function GET(request) {
   const queryParams = parsedUrl.query.query;
   try {
     const products = await query({
-      query: "SELECT MIN(product_id) AS product_id, product_name, MIN(seo_url) AS seo_url, MIN(seo_url_clr) AS seo_url_clr, MIN(category_id) AS category_id, MIN(image_name) AS image_name, MIN(price) AS price, MIN(discount_price) AS discount_price, MIN(discount_percentage) AS discount_percentage, MIN(categoryType) AS categoryType, MIN(duration) AS duration, MIN(InstallationCharges) AS InstallationCharges, MIN(color) AS color, MIN(color_code) AS color_code, MIN(armType) AS armType, prod_status FROM products where LOWER(category_id) = ? AND seo_url_clr != '' AND prod_status = 1 GROUP BY product_name",
+      query: "SELECT product_id, product_name, seo_url, category_id, image_name, price, discount_price, discount_percentage, categoryType, duration, InstallationCharges, color, color_code, armType, prod_status FROM products where category_id = ?  AND prod_status = 1 GROUP BY product_name",
       values: [`${queryParams}`],
     });
 
     const color = await query({
       query:
-        "SELECT DISTINCT color, category_id FROM products WHERE LOWER(category_id) = LOWER(?)",
+        "SELECT DISTINCT color, category_id FROM products WHERE category_id = ?",
       values: [`${queryParams}`],
     });
 
     const armType = await query({
       query:
-        "SELECT DISTINCT armType, category_id FROM products WHERE LOWER(category_id) = LOWER(?)",
+        "SELECT DISTINCT armType, category_id FROM products WHERE category_id = ?",
       values: [`${queryParams}`],
     });
 

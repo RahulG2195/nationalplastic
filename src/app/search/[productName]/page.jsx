@@ -49,10 +49,16 @@ const Search = (props) => {
   const params = useSearchParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const getFirstImageName = (imageName) => {
+    const images = imageName
+      ? imageName.split(",").map((image) => image.trim())
+      : [];
+    return images[0];
+  };
 
   useEffect(() => {
     fetchData();
-  }, [query, page]);
+  }, [query]);
 
   const fetchData = async () => {
     try {
@@ -76,7 +82,7 @@ const Search = (props) => {
         });
         const newProducts = response.data.products;
         const all = response.data.allproducts;
-
+        console.log("All " + JSON.stringify(all));
         setAllproducts(all);
         setProducts((prevProducts) => [...prevProducts, ...newProducts]);
         setHasMore(newProducts.length > 0);
@@ -84,10 +90,10 @@ const Search = (props) => {
           const discountPercentage =
             product.discount_price && product.price
               ? Math.floor(
-                  ((product.discount_price - product.price) /
-                    product.discount_price) *
-                    100
-                )
+                ((product.discount_price - product.price) /
+                  product.discount_price) *
+                100
+              )
               : 0;
           return discountPercentage;
         });
@@ -196,10 +202,12 @@ const Search = (props) => {
               {products.map((product, index) => (
                 <div key={product.id} className="col">
                   <div className="preCont cards p-1 position-relative">
-                    <Link href={`/ProductDetail/${product.product_id}`}>
+                    <Link href={`/ProductDetail/${product.seo_url}`}>
                       <div className="card-header">
                         <img
-                          src={`/Assets/images/products/${product.image_name}`}
+                          src={`/Assets/images/products/${getFirstImageName(
+                            product.image_name
+                          )}`}
                           className="card-img-top"
                           alt="..."
                         />
@@ -226,11 +234,10 @@ const Search = (props) => {
                               onClick={() =>
                                 handleAddWishlist(product.product_id)
                               }
-                              className={` ${
-                                product.inWishlist
-                                  ? "fa fa-heart"
-                                  : "fa fa-heart-o ms-3"
-                              }`}
+                              className={` ${product.inWishlist
+                                ? "fa fa-heart"
+                                : "fa fa-heart-o ms-3"
+                                }`}
                               style={
                                 product.inWishlist
                                   ? { fontSize: "20px", color: "#DC3545" }

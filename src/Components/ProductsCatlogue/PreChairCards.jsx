@@ -217,6 +217,7 @@ const PreChairsCards = () => {
       selectedPriceSort === "all" ? null : selectedPriceSort
     );
   };
+  // console.log('product data',  products)
 
   return (
     <div className="container mt-5">
@@ -291,7 +292,7 @@ const PreChairsCards = () => {
           <div className="row">
             {products.map((product) => {
               const images = product.image_name ? product.image_name.split(', ').map(image => image.trim()) : [];
-              console.log('images' + images[0]);
+              {/* console.log('images' + images[0]); */}
              return <div
                 key={product.product_id}
                 className="PreCardSm col-12 col-sm-6 col-xs-4 col-md-6 col-lg-3"
