@@ -104,14 +104,15 @@ const BulkPremiumCards = ({proddata}) => {
     <>
       <div className="container mt-5">
         <div className="row ">
-          {proddata.map(chair => (
-            <div
+          {proddata.map(chair => {
+            const images = chair.image_name ? chair.image_name.split(', ').map(image => image.trim()) : [];
+            return <div
               key={chair.product_id}
               className="PreCardSm col-12 col-sm-6 col-xs-4 col-md-6 col-lg-3"
             >
               <PreChairsCard
                 id={chair.product_id}
-                ChairImg={`/Assets/images/products/${chair.image_name}`}
+                ChairImg={`/Assets/images/products/${images[0]}`}
                 Title={chair.product_name}
                 Discription={chair.short_description}
                 Price={chair.price}
@@ -119,7 +120,7 @@ const BulkPremiumCards = ({proddata}) => {
                 Discount={chair.discount_percentage}
               />
             </div>
-          ))}
+          })}
         </div>
       </div>
     </>
