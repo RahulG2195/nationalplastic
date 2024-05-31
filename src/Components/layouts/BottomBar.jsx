@@ -23,7 +23,7 @@ function BottomBar() {
   // state for navbar loop
   const [navbar, setNavbar] = useState([]);
   const [AllProd, SetAllProd] = useState([]);
-  const [getImg, SetGetImg] = useState("default_chair_img.webp");
+  const [getImg, SetGetImg] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,17 +60,26 @@ function BottomBar() {
     return chunkedArray;
   };
 
+  const ChangeNavImage = (category_id) => {
+    const navImg = navbar.filter(
+      (cat) => cat.category_id == category_id
+    );
+    // console.log('navImg', navImg[0]['image_name']);
+    SetGetImg(navImg[0]['image_name']);
+  };
+
   const ChangeImage = (prod_name) => {
     const img_name = AllProd.filter(
       (products) => products.product_name == prod_name && products.seo_url_clr !== ''
     );
+
     img_name.map((val) => {
       const images = val.image_name ? val.image_name.split(', ').map(image => image.trim()) : [];
       SetGetImg(images[0]);
     });
   };
 
-  // console.log('img' + getImg);
+  // console.log('img' , getImg);
   return (
     <div className=" px-md-5 d-flex align-items-center bottom_nav position-relative mainrow">
       {navbar.map((val) => (
@@ -89,7 +98,7 @@ function BottomBar() {
             onClick={sendCategory}
             href={`/ProductCatlogue/${val.category_id}`}
           >
-            <p className="">{val.category_name}</p>
+            <p className=""  onMouseOver={() => ChangeNavImage(val.category_id)}>{val.category_name}</p>
           </Link>
 
           <div className="ulCont SecondDrop mx-4 secondHover p-3 ">

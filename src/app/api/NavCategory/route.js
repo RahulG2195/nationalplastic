@@ -4,7 +4,7 @@ export async function GET(request) {
   try {
     const Categories = await query({
       query:
-        "SELECT category_id, category_name, navshow FROM categories where navshow = 1",
+        "SELECT category_id, category_name, navshow, image_name FROM categories where navshow = 1",
       values: [],
     });
 
