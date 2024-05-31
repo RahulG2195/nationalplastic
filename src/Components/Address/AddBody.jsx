@@ -334,15 +334,16 @@ const AddBody = () => {
                       </h5>
                     ) : (
                       <div className="container">
-                        {productDetailArr.map((val) => (
-                          <div className="row" key={val.product_id}>
+                        {productDetailArr.map((val) => {
+                          const images = val.image_name ? val.image_name.split(', ').map(image => image.trim()) : [];
+                          return <div className="row" key={val.product_id}>
                             <OrderSummaryCard
-                              imgSrc={`/Assets/images/products/${val.image_name}`}
+                              imgSrc={`/Assets/images/products/${images[0]}`}
                               description={val.product_name}
                               quantity={val.quantity}
                             />
                           </div>
-                        ))}
+                        })}
                       </div>
                     )}
                   </div>
