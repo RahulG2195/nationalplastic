@@ -160,7 +160,7 @@ function ProdData({ category_id }) {
         notifyError("Image Not available");
       }
     } catch (err) {
-      notifyError(err.message || "Out of stock");
+      notifyError("Image isnt available");
     }
   };
 
