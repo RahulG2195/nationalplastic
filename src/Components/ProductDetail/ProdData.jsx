@@ -153,7 +153,7 @@ function ProdData({ category_id }) {
       const dataBasedOnColor = response.data?.data;
       const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
       const NoOfImages = dataBasedOnColor[0].image_name;
-      if (isImageAvailable && NoOfImages.length > 30) {
+      if (isImageAvailable && NoOfImages.includes(",")) {
         setProdData(dataBasedOnColor);
         setData(dataBasedOnColor);
       } else {
