@@ -4,7 +4,7 @@ import ShippingBanner from "../../Components/ShippingAndDelivery/ShippingBannner
 const ShippingAndDelivery = () => {
   return (
     <>
-      <ShippingBanner />
+      {/* <ShippingBanner /> */}
       <ShippingHeading />
     </>
   );

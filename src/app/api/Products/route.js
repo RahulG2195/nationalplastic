@@ -8,6 +8,8 @@ export async function GET(request) {
       values: [],
     });
 
+    console.log("SELECT MIN(product_id) AS product_id, product_name, MIN(seo_url) AS seo_url, MIN(category_id) AS category_id, MIN(image_name) AS image_name, MIN(price) AS price, MIN(discount_price) AS discount_price, MIN(discount_percentage) AS discount_percentage, MIN(categoryType) AS categoryType, MIN(duration) AS duration, MIN(InstallationCharges) AS InstallationCharges, MIN(color) AS color, MIN(color_code) AS color_code, MIN(armType) AS armType, prod_status FROM products WHERE prod_status = 1 AND seo_url_clr != '' GROUP BY product_name order by image_name ASC");
+
     const heighlightProd = await query({
       query: "SELECT * FROM products where categoryType = 'highlights'",
       values: [],

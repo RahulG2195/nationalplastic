@@ -170,32 +170,32 @@ export default function Footer() {
                   alt='logo'
                   layout='responsive'
                   objectFit='cover'
-                  width={100}
-                  height={100}
+                  width={50}
+                  height={50}
                 />
                 <Image
                   src="/Assets/images/Path 19.svg"
                   alt='logo'
                   layout='responsive'
                   objectFit='cover'
-                  width={100}
-                  height={100}
+                  width={50}
+                  height={50}
                 />
                 <Image
                   src="/Assets/images/Path 20.svg"
                   alt='logo'
                   layout='responsive'
                   objectFit='cover'
-                  width={100}
-                  height={100}
+                  width={50}
+                  height={50}
                 />
                 <Image
                   src="/Assets/images/Path 80.svg"
                   alt='logo'
                   layout='responsive'
                   objectFit='cover'
-                  width={100}
-                  height={100}
+                  width={50}
+                  height={50}
                 />
               </div>
 
@@ -203,8 +203,8 @@ export default function Footer() {
             <div className="footer_term d-flex justify-content-center">
               <Link href='/TermsAndConditions'><p>Terms and Conditions <span> | </span> </p></Link>
               <Link href='/PrivacyAndPolicy'><p> Privacy Policy <span> | </span> </p></Link>
-              <Link href='#'><p> Cookies Policy <span> | </span> </p></Link>
-              <Link href='#'><p> Refund Policy </p></Link>
+              <Link href='/ShippingAndDelivery'><p> Shipping Policy <span> | </span> </p></Link>
+              <Link href='/Refund'><p> Refund Policy </p></Link>
             </div>
           </div>
         </div>
