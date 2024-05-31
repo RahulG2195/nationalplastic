@@ -66,6 +66,7 @@ const PreChairsCards = () => {
 
       const fetchedData = response.data;
 
+      // console.log('fetchdata: ', fetchedData);
       setFetchClr(fetchedData.color);
       setFetchType(fetchedData.armType);
       // console.log("Fetched data:", fetchedData);
