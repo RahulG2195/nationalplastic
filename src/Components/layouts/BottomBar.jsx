@@ -62,7 +62,7 @@ function BottomBar() {
 
   const ChangeImage = (prod_name) => {
     const img_name = AllProd.filter(
-      (products) => products.product_name == prod_name || products.seo_url_clr != ''
+      (products) => products.product_name == prod_name && products.seo_url_clr !== ''
     );
     img_name.map((val) => {
       const images = val.image_name ? val.image_name.split(', ').map(image => image.trim()) : [];
