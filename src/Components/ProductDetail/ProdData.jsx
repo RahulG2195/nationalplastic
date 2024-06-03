@@ -18,7 +18,7 @@ import { isLoggedIn } from "@/utils/validation";
 import Breadcrump from "../Breadcrump/Breadcrump";
 import GetQuoteCustomForm from "../BulkOrder/GetQuoteCustomForm";
 import { notifyError } from "@/utils/notify";
-
+import { Tooltip } from 'react-tooltip';
 function ProdData({ category_id }) {
   const [data, setData] = useState([]);
   const [prodData, setProdData] = useState([]);
@@ -321,8 +321,8 @@ function ProdData({ category_id }) {
                 </p>
                 <Link
                   href={userState ? "/Address" : "#"}
-                  className={`btn bg-danger text-white m-2 px-md-5 ProdbtnRes ${!userState ? "disabled-button" : ""
-                    }`}
+                  className={`btn m-2 px-md-5 ProdbtnRes ${!userState ? "disabled-button" : ""
+                }`}
                   onClick={() => handleMoveToCart(productId)}
                 >
                   Buy Now
