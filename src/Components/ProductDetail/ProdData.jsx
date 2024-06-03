@@ -82,7 +82,7 @@ function ProdData({ category_id }) {
           // console.log("get all color as per prod name", productColor);
           // console.log(response.data.prod_detail);
           // console.log(filteredData[0].product_id);
-
+          // product_id
           productDetailArr = response.data.prod_detail.filter(
             (item) => item.prod_id == filteredData[0].product_id
           );
@@ -95,6 +95,7 @@ function ProdData({ category_id }) {
           setProdData(productDetailArr);
           setProductColor(productColor);
           setSelectedColor(filteredData[0].color);
+          setProduct_id(filteredData[0].product_id)
         }
         setIsLoading(false);
       } catch (error) {
