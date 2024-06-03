@@ -16,7 +16,6 @@ export async function POST(request) {
       values: [name, color],
     });
   }
-  console.log("getproducts", getProducts);
     return new Response(
       JSON.stringify({
         status: 200,

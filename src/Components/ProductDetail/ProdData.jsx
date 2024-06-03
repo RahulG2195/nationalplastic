@@ -79,14 +79,10 @@ function ProdData({ category_id }) {
           productColor = response.data.prod_clr.filter(
             (val) => val.product_name == filteredData[0].product_name
           );
-          // console.log("get all color as per prod name", productColor);
-          // console.log(response.data.prod_detail);
-          // console.log(filteredData[0].product_id);
           // product_id
           productDetailArr = response.data.prod_detail.filter(
             (item) => item.prod_id == filteredData[0].product_id
           );
-          // console.log("1", productDetailArr);
         }
         if (filteredData.length === 0) {
           setErrorMessage("Sorry, this product is not available");
@@ -148,18 +144,14 @@ function ProdData({ category_id }) {
 
     setSelectedColor(event.target.value);
     const colorBasedProduct = { color: event.target.value, name: id };
-    console.log("the data ", JSON.stringify(colorBasedProduct) || colorBasedProduct);
     try {
       const response = await axios.post(
         "/api/colorBasedProduct",
         colorBasedProduct
       );
-      console.log("colorBAsedProduct ",JSON.stringify(response));
       const dataBasedOnColor = response.data?.data;
-      console.log("db", JSON.stringify(dataBasedOnColor));
       const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
       const newProductID = dataBasedOnColor[0].product_id;
-      console.log(newProductID);
       setProduct_id(newProductID)
       const NoOfImages = dataBasedOnColor[0].image_name;
       if (isImageAvailable && NoOfImages.includes(",")) {
