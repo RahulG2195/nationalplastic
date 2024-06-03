@@ -156,6 +156,7 @@ function ProdData({ category_id }) {
       );
       console.log("colorBAsedProduct ",JSON.stringify(response));
       const dataBasedOnColor = response.data?.data;
+      console.log("db", JSON.stringify(dataBasedOnColor));
       const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
       const newProductID = dataBasedOnColor[0].product_id;
       console.log(newProductID);
