@@ -41,6 +41,7 @@ function AddToCart() {
   const [totalPayble, setTotalPayble] = useState(0);
   const [installationCharges, setInstallationCharges] = useState(0);
   const dispatch = useDispatch();
+
   useEffect(() => {
     setCount(productCount); // Update localCount whenever productCount changes
   }, [productCount]);
@@ -61,6 +62,7 @@ function AddToCart() {
           const tempData = tempCartStates;
         }
         console.log(cartData);
+        console.log("fetch1");
         fetchData(cartData);
       } else {
         //Logic to Store Temporary Data
@@ -74,11 +76,13 @@ function AddToCart() {
             product_id: productIds[0],
           });
           const products = response.data.products;
-          const quan = tempData.products[0].quantity;
           let obj = products[0];
-          obj.quantity = quan;
+          obj.quantity = tempData.products[0].quantity;
+          obj.color = tempData.products[0].color;
+          
           const objToArray = new Array(obj);
           //Single product detail with updated quantity
+          ColorBasedImage(obj.color , tempData.products[0].product_id);
           fetchData(objToArray);
         } else if (productIds.length > 1) {
           // Send request with multiple product IDs
@@ -94,9 +98,15 @@ function AddToCart() {
             const tempProduct = tempProducts.find(
               (tempProd) => tempProd.product_id === product.product_id
             );
+            console.log("99");
             if (tempProduct) {
+              console.log("Inside");
               // Update quantity if corresponding tempProduct is found
+              console.log(product.color);
+              console.log(tempProduct.color);
+
               product.quantity = tempProduct.quantity;
+              product.color =  tempProduct.color;
             }
           });
 
@@ -106,13 +116,33 @@ function AddToCart() {
           // Now, updatedProductsArray contains products with updated quantities
 
           //Mutiple product detail with updated quantity
+        console.log("fetch3");
+
           fetchData(updatedProductsArray);
         }
       }
     };
+    const ColorBasedImage = async (color , product_id) => {
+      const colorBasedProduct = { color: color, product_id: product_id };
+      const response = await axios.post(
+        "/api/colorBasedProduct",
+        colorBasedProduct
+      );
+      console.log("colorBAsedProduct ",JSON.stringify(response));
+      const dataBasedOnColor = response.data?.data;
+      console.log(dataBasedOnColor);
+      console.log(JSON.stringify(dataBasedOnColor));
+
+      // const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
+      const NoOfImages = dataBasedOnColor[0].image_name;
+      console.log(NoOfImages);
+      console.log(typeof(NoOfImages));
+
+    }
 
     const fetchData = async (cartData) => {
       try {
+        console.log("cartData", JSON.stringify(cartData));
         const products = cartData.map(
           (item) => ({
             product_id: item.product_id,
@@ -129,6 +159,7 @@ function AddToCart() {
           }),
           []
         );
+        console.log("products ", JSON.stringify(products));
         // state.products.push(action.payload);
         const len = tempCartStates.products.length;
         //logic to addtocart db after login when temp data will be there.
@@ -162,6 +193,8 @@ function AddToCart() {
             );
           });
         }
+      console.log("Data GettiNG updated: ------")
+
         // Calculate total price, discount, total payable, and installation charges
         // Calculate total payable amount, total discount, and total price without discount
         setProductDetailArr(products);
@@ -206,6 +239,7 @@ function AddToCart() {
   const handleCartChange = async () => {
     try {
       // Fetch updated cart data
+      console.log("Cart cHange code: ------")
       const userDataString = localStorage.getItem("userData");
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;

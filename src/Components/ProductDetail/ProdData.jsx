@@ -32,6 +32,8 @@ function ProdData({ category_id }) {
   const [initialCount, setInitialCount] = useState(1);
   const [Product_Color, setProductColor] = useState([]);
   const [selectedColor, setSelectedColor] = useState(null);
+  const [product_id, setProduct_id] = useState(null);
+
   const dispatch = useDispatch();
   const router = useParams();
   const id = router.productId;
@@ -145,13 +147,18 @@ function ProdData({ category_id }) {
 
     setSelectedColor(event.target.value);
     const colorBasedProduct = { color: event.target.value, name: id };
+    console.log("the data ", JSON.stringify(colorBasedProduct) || colorBasedProduct);
     try {
       const response = await axios.post(
         "/api/colorBasedProduct",
         colorBasedProduct
       );
+      console.log("colorBAsedProduct ",JSON.stringify(response));
       const dataBasedOnColor = response.data?.data;
       const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
+      const newProductID = dataBasedOnColor[0].product_id;
+      console.log(newProductID);
+      setProduct_id(newProductID)
       const NoOfImages = dataBasedOnColor[0].image_name;
       if (isImageAvailable && NoOfImages.includes(",")) {
         setProdData(dataBasedOnColor);
@@ -168,7 +175,7 @@ function ProdData({ category_id }) {
     const data = await fetchPrice(storedId);
     const price = data.price;
     const discount_price = data.discount_price;
-    const product_id = data.product_id;
+    // const product_id = data.product_id;
     switch (userState) {
       case false:
         dispatch(
