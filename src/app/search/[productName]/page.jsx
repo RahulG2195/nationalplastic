@@ -34,8 +34,8 @@ const Search = (props) => {
   const id = router.productName;
   //   const { query } = router.query; // This will give you the value after '/'
 
-  console.log(router);
-  console.log(id);
+  // console.log(router);
+  // console.log(id);
 
   //   const id = routers.productName;
   const { searchParams } = props;
@@ -76,13 +76,14 @@ const Search = (props) => {
       }
 
       const isBrowser = typeof window !== "undefined";
+      // console.log('window', isBrowser);
       if (isBrowser) {
-        const response = await axios.post("/api/search", {
+        const response = await axios.post("/api/Search", {
           productName: query,
         });
         const newProducts = response.data.products;
         const all = response.data.allproducts;
-        console.log("All " + JSON.stringify(all));
+        // console.log("All ", all);
         setAllproducts(all);
         setProducts((prevProducts) => [...prevProducts, ...newProducts]);
         setHasMore(newProducts.length > 0);

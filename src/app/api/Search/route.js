@@ -27,7 +27,7 @@ export async function POST(request) {
 
     const allproducts = await query({
       query:
-        "SELECT *,product_id FROM products WHERE LOWER(product_name) REGEXP ? OR LOWER(categoryType) REGEXP ? OR LOWER(short_description) REGEXP ? GROUP BY product_name",
+        "SELECT p.product_id, p.product_name, p.seo_url, p.seo_url_clr, p.short_description,  p.category_id, p.image_name, p.price, p.discount_price, p.discount_percentage, p.categoryType, p.duration, p.InstallationCharges, p.color, p.color_code, p.armType, p.prod_status FROM products p JOIN ( SELECT product_name, MIN(product_id) AS min_product_id FROM products WHERE prod_status = 1 GROUP BY product_name ) sub ON p.product_name = sub.product_name AND p.product_id = sub.min_product_id WHERE LOWER(p.product_name) REGEXP ? OR LOWER(categoryType) REGEXP ? OR LOWER(short_description) REGEXP ? AND p.prod_status = 1",
       values: [`${searchTerm}`, `${searchTerm}`, `${searchTerm}`],
     });
 
@@ -42,11 +42,11 @@ export async function POST(request) {
     // console.log("Products: from toutes query", allproducts);
     // console.log("Products: from toutes query", products);
 
-    return new Response(
-      JSON.stringify({
-        status: 200,
-      })
-    );
+    // return new Response(
+    //   JSON.stringify({
+    //     status: 200,
+    //   })
+    // );
 
     // Return the search results
   } catch (error) {
