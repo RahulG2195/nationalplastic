@@ -170,32 +170,32 @@ export default function Footer() {
                   alt='logo'
                   layout='responsive'
                   objectFit='cover'
-                  width={50}
-                  height={50}
+                  width={100}
+                  height={100}
                 />
                 <Image
                   src="/Assets/images/Path 19.svg"
                   alt='logo'
                   layout='responsive'
                   objectFit='cover'
-                  width={50}
-                  height={50}
+                  width={100}
+                  height={100}
                 />
                 <Image
                   src="/Assets/images/Path 20.svg"
                   alt='logo'
                   layout='responsive'
                   objectFit='cover'
-                  width={50}
-                  height={50}
+                  width={100}
+                  height={100}
                 />
                 <Image
                   src="/Assets/images/Path 80.svg"
                   alt='logo'
                   layout='responsive'
                   objectFit='cover'
-                  width={50}
-                  height={50}
+                  width={100}
+                  height={100}
                 />
               </div>
 

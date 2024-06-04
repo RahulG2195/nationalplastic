@@ -58,6 +58,7 @@
 }
 .social_icons img{
     margin: 0 6px;
+    width: 20% !important;
 }
 .social_icons img:nth-child(1){
     margin-left: 0;

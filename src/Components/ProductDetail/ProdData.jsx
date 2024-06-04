@@ -32,6 +32,7 @@ function ProdData({ category_id }) {
   const [initialCount, setInitialCount] = useState(1);
   const [Product_Color, setProductColor] = useState([]);
   const [selectedColor, setSelectedColor] = useState(null);
+  const [updateImage, SetUpdateImage] = useState('');
   const dispatch = useDispatch();
   const router = useParams();
   const id = router.productId;
@@ -51,6 +52,36 @@ function ProdData({ category_id }) {
     }
   };
 
+  const handleColorChange = async (event) => {
+
+    setSelectedColor(event.target.value);
+    const colorBasedProduct = { color: event.target.value, name: id };
+
+    try {
+      const response = await axios.post("/api/colorBasedProduct", colorBasedProduct);
+      const dataBasedOnColor = response.data?.data;
+
+      const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
+
+      const NoOfImages = dataBasedOnColor[0].image_name;
+
+      if (isImageAvailable) {
+
+        if(NoOfImages.includes(",") || NoOfImages.includes(", ")){
+          SetUpdateImage(NoOfImages);
+        }else{
+          // SetUpdateImage(NoOfImages);
+          notifyError("Image Not available");
+        }
+      } else {
+        notifyError("Image Not available");
+      }
+      
+      
+    } catch (err) {
+      console.log("Image isnt available", err);
+    }
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -77,9 +108,6 @@ function ProdData({ category_id }) {
           productColor = response.data.prod_clr.filter(
             (val) => val.product_name == filteredData[0].product_name
           );
-          // console.log("get all color as per prod name", productColor);
-          // console.log(response.data.prod_detail);
-          // console.log(filteredData[0].product_id);
 
           productDetailArr = response.data.prod_detail.filter(
             (item) => item.prod_id == filteredData[0].product_id
@@ -93,6 +121,7 @@ function ProdData({ category_id }) {
           setProdData(productDetailArr);
           setProductColor(productColor);
           setSelectedColor(filteredData[0].color);
+          SetUpdateImage(filteredData[0].image_name)
         }
         setIsLoading(false);
       } catch (error) {
@@ -141,28 +170,7 @@ function ProdData({ category_id }) {
     }
   };
 
-  const handleColorChange = async (event) => {
-
-    setSelectedColor(event.target.value);
-    const colorBasedProduct = { color: event.target.value, name: id };
-    try {
-      const response = await axios.post(
-        "/api/colorBasedProduct",
-        colorBasedProduct
-      );
-      const dataBasedOnColor = response.data?.data;
-      const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
-      const NoOfImages = dataBasedOnColor[0].image_name;
-      if (isImageAvailable && NoOfImages.includes(",")) {
-        setProdData(dataBasedOnColor);
-        setData(dataBasedOnColor);
-      } else {
-        notifyError("Image Not available");
-      }
-    } catch (err) {
-      notifyError("Image isnt available");
-    }
-  };
+  
 
   const handleMoveToCart = async (storedId, quantity) => {
     const data = await fetchPrice(storedId);
@@ -213,9 +221,9 @@ function ProdData({ category_id }) {
   const price = data.length > 0 ? data[0].price : null;
   const orignalPrice = data.length > 0 ? data[0].discount_price : null;
   // const image = data.length > 0 ? data[0].image_name : null;
-  const baseImageNames =
-    data.length > 0 ? data[0].image_name : "default_chair_img.webp";
-  const image = baseImageNames;
+  // const baseImageNames =
+  //   data.length > 0 ? data[0].image_name : "default_chair_img.webp";
+  // const image = baseImageNames;
 
   const saving = (orignalPrice - price).toFixed(2);
   return (
@@ -232,7 +240,7 @@ function ProdData({ category_id }) {
             />
           </div>
           <div className="col-md-6">
-            <ProductDetailSlider imageurl={image} />
+            <ProductDetailSlider imageurl={updateImage} />
           </div>
 
           <div className="col-md-6">

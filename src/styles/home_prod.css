@@ -238,7 +238,7 @@
 .dealer_Sec .dealer_cont .dealer_imgs img {
   height: 100%;
   width: 100%;
-  object-fit: cover;
+  object-fit: cover !important;
 }
 
 /* catalogue start */
