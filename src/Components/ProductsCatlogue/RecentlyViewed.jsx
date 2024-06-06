@@ -226,11 +226,11 @@ const RecentlyViewed = () => {
             Recently Viewed <span className="darkBlue fw-normal">Products</span>{" "}
           </div>
           <div className="mt-1 subCptRes fw-semibold">
-            <p>
+            {/* <p>
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has{" "}
             </p>
-            <p>been the industriesstandard dummy text ever since the 1500s,</p>
+            <p>been the industriesstandard dummy text ever since the 1500s,</p> */}
           </div>
         </div>
       </div>
@@ -274,7 +274,7 @@ const RecentlyViewed = () => {
         >
           {RecentlyViewedData.map((chair) => {
             const images = chair.image_name ? chair.image_name.split(', ').map(image => image.trim()) : [];
-           return <SwiperSlide key={chair.product_id}>
+           return <SwiperSlide key={chair.product_id} className="newProdCard">
               <PreChairsCard
                 ChairImg={`/Assets/images/products/${images[0]}`}
                 id={chair.seo_url}

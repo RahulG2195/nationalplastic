@@ -90,7 +90,7 @@
 .product-name h2 {
   /* font-size: 22px; */
   font-weight: 600;
-  line-height: 22px;
+  /* line-height: 22px; */
   margin-bottom: 4px;
   color: #2e3192;
 }
@@ -146,6 +146,7 @@
 
 .reviews-counter .mrp h6,
 .reviews-counter del {
+  font-size: 1.4rem;
   margin: 0 6px 0 0;
 }
 

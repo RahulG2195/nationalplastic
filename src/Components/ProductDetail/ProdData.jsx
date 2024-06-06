@@ -18,6 +18,7 @@ import { isLoggedIn } from "@/utils/validation";
 import Breadcrump from "../Breadcrump/Breadcrump";
 import GetQuoteCustomForm from "../BulkOrder/GetQuoteCustomForm";
 import { notifyError } from "@/utils/notify";
+import { Tooltip } from 'react-tooltip';
 
 function ProdData({ category_id }) {
   const [data, setData] = useState([]);
@@ -32,7 +33,8 @@ function ProdData({ category_id }) {
   const [initialCount, setInitialCount] = useState(1);
   const [Product_Color, setProductColor] = useState([]);
   const [selectedColor, setSelectedColor] = useState(null);
-  const [updateImage, SetUpdateImage] = useState('');
+  const [product_id, setProduct_id] = useState(null);
+
   const dispatch = useDispatch();
   const router = useParams();
   const id = router.productId;
@@ -52,36 +54,36 @@ function ProdData({ category_id }) {
     }
   };
 
-  const handleColorChange = async (event) => {
+  // const handleColorChange = async (event) => {
 
-    setSelectedColor(event.target.value);
-    const colorBasedProduct = { color: event.target.value, name: id };
+  //   setSelectedColor(event.target.value);
+  //   const colorBasedProduct = { color: event.target.value, name: id };
 
-    try {
-      const response = await axios.post("/api/colorBasedProduct", colorBasedProduct);
-      const dataBasedOnColor = response.data?.data;
+  //   try {
+  //     const response = await axios.post("/api/colorBasedProduct", colorBasedProduct);
+  //     const dataBasedOnColor = response.data?.data;
 
-      const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
+  //     const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
 
-      const NoOfImages = dataBasedOnColor[0].image_name;
+  //     const NoOfImages = dataBasedOnColor[0].image_name;
 
-      if (isImageAvailable) {
+  //     if (isImageAvailable) {
 
-        if(NoOfImages.includes(",") || NoOfImages.includes(", ")){
-          SetUpdateImage(NoOfImages);
-        }else{
-          // SetUpdateImage(NoOfImages);
-          notifyError("Image Not available");
-        }
-      } else {
-        notifyError("Image Not available");
-      }
-      
-      
-    } catch (err) {
-      console.log("Image isnt available", err);
-    }
-  };
+  //       if(NoOfImages.includes(",") || NoOfImages.includes(", ")){
+  //         SetUpdateImage(NoOfImages);
+  //       }else{
+  //         // SetUpdateImage(NoOfImages);
+  //         notifyError("Image Not available");
+  //       }
+  //     } else {
+  //       notifyError("Image Not available");
+  //     }
+
+
+  //   } catch (err) {
+  //     console.log("Image isnt available", err);
+  //   }
+  // };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -108,11 +110,10 @@ function ProdData({ category_id }) {
           productColor = response.data.prod_clr.filter(
             (val) => val.product_name == filteredData[0].product_name
           );
-
+          // product_id
           productDetailArr = response.data.prod_detail.filter(
             (item) => item.prod_id == filteredData[0].product_id
           );
-          // console.log("1", productDetailArr);
         }
         if (filteredData.length === 0) {
           setErrorMessage("Sorry, this product is not available");
@@ -121,7 +122,7 @@ function ProdData({ category_id }) {
           setProdData(productDetailArr);
           setProductColor(productColor);
           setSelectedColor(filteredData[0].color);
-          SetUpdateImage(filteredData[0].image_name)
+          setProduct_id(filteredData[0].product_id)
         }
         setIsLoading(false);
       } catch (error) {
@@ -170,13 +171,35 @@ function ProdData({ category_id }) {
     }
   };
 
-  
+  const handleColorChange = async (event) => {
+
+    setSelectedColor(event.target.value);
+    const colorBasedProduct = { color: event.target.value, name: id };
+    try {
+      const response = await axios.post("/api/colorBasedProduct", colorBasedProduct);
+      const dataBasedOnColor = response.data?.data;
+      const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
+      const newProductID = dataBasedOnColor[0].product_id;
+      setProduct_id(newProductID)
+      const NoOfImages = dataBasedOnColor[0].image_name;
+
+      if (isImageAvailable && (NoOfImages.includes(",") || NoOfImages.includes(", "))) {
+        setProdData(dataBasedOnColor);
+        setData(dataBasedOnColor);
+      } else {
+        notifyError("Image Not available");
+      }
+
+    } catch (err) {
+      notifyError("Image isnt available");
+    }
+  };
 
   const handleMoveToCart = async (storedId, quantity) => {
     const data = await fetchPrice(storedId);
     const price = data.price;
     const discount_price = data.discount_price;
-    const product_id = data.product_id;
+    // const product_id = data.product_id;
     switch (userState) {
       case false:
         dispatch(
@@ -220,10 +243,9 @@ function ProdData({ category_id }) {
   const name = data.length > 0 ? data[0].product_name : null;
   const price = data.length > 0 ? data[0].price : null;
   const orignalPrice = data.length > 0 ? data[0].discount_price : null;
-  // const image = data.length > 0 ? data[0].image_name : null;
-  // const baseImageNames =
-  //   data.length > 0 ? data[0].image_name : "default_chair_img.webp";
-  // const image = baseImageNames;
+  // let image = data.length > 0 ? data[0].image_name : null;
+  const baseImageNames = data.length > 0 ? data[0].image_name : "default_chair_img.webp";
+  const image = baseImageNames;
 
   const saving = (orignalPrice - price).toFixed(2);
   return (
@@ -240,25 +262,24 @@ function ProdData({ category_id }) {
             />
           </div>
           <div className="col-md-6">
-            <ProductDetailSlider imageurl={updateImage} />
+            <ProductDetailSlider imageurl={image} />
           </div>
 
           <div className="col-md-6">
             <div className="product-dtl">
               <div className="product-info">
                 <div className="product-name">
-                  <h2>{name}</h2>
+                  <h2 className="prod_nameh2">{name}</h2>
                 </div>
 
                 <div className="reviews-counter d-flex flex-wrap gap-2">
                   <div className="mrp">
                     <h6>
-                      <strong>MRP ₹{price}</strong>
+                      <strong className="text-danger"> ₹{price}</strong>
                     </h6>
                     <del> ₹{orignalPrice}</del>
                   </div>
-
-                  <div className="d-flex flex-wrap align-items-center">
+                  {/* <div className="d-flex flex-wrap align-items-center">
                     <div className="discount discRes">
                       <p>
                         Save <span>₹</span> {saving}
@@ -267,9 +288,15 @@ function ProdData({ category_id }) {
                     <div className="inc small">
                       <small>(incl. of all taxes)</small>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
-
+                <div>
+                    <i className="fa fa-star-o rating-star pr-2" />
+                    <span className="rating-number">4.8</span>
+                  </div>
+                  <div className="shortProdDesc">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut numquam ullam is recusandae laborum explicabo id sequi quisquam, ab sunt deleniti quidem ea animi facilis quod nostrum odit! Repellendus voluptas suscipit.</p>
+                  </div>
                 <div className="prod_type mt-4">
                   <div className="prod_clr">
                     <p>
@@ -294,38 +321,51 @@ function ProdData({ category_id }) {
                   </div>
                 </div>
               </div>
-              <div className="bulk_order_div">
-                {/* <Link href="/BulkOrder" className=""> */}
-                <button
-                  className="btn btn-danger px-md-5 my-2 ProdbtnRes bulkRes  "
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
-                  Bulk Order
-                </button>
-                {/* </Link> */}
-              </div>
+              {/* <div className="bulk_order_div">
+                <Link href="/BulkOrder" className="">
+                    <button
+                    className="btn btn-danger px-md-5 my-2 ProdbtnRes bulkRes  "
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    Bulk Order
+                  </button>
+                </Link>
+              </div> */}
               <div className="product-ccount">
                 <label htmlFor="size">Quantity</label>
+                <div className="d-md-flex pb-md-3">
                 <IncrementDecrement
                   initialCount={initialCount}
                   onIncrement={handleIncrement}
                   onDecrement={handleDecrement}
                 />
-                <p
+                <button
                   onClick={() => handleMoveToCart(productId, initialCount)}
                   className="btn m-2 px-md-5 ProdbtnRes"
                 >
                   Add to Cart
-                </p>
+                </button>
+                </div>
+                
                 <Link
                   href={userState ? "/Address" : "#"}
-                  className={`btn bg-danger text-white m-2 px-md-5 ProdbtnRes ${!userState ? "disabled-button" : ""
+                  className={`btn m-2 px-md-5 ProdbtnRes ${!userState ? "disabled-button" : ""
                     }`}
                   onClick={() => handleMoveToCart(productId)}
                 >
                   Buy Now
                 </Link>
+                <Link href="/BulkOrder" className="">
+                    <button
+                    className="btn btn-danger px-md-5 my-2 ProdbtnRes bulkRes  "
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    Bulk Order
+                  </button>
+                </Link>
+                
               </div>
               <p className="eye">
                 <i className="fa fa-eye"></i> 210 customers are interviewing the

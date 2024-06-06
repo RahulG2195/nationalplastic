@@ -49,68 +49,66 @@ const PreChairsCard = (props) => {
   return (
     <>
       <div
-        className={`preCont cards mt-3 position-relative  my-4 ${
-          props.recentClass ? props.recentClass : ""
-        }`}
+        className={`card preCont mt-3 position-relative  my-4 ${props.recentClass ? props.recentClass : ""
+          }`}
       >
-        <Link href={`/ProductDetail/${props.id}`}>
-          {/* <Link href={`/ProductDetail?id=${props.id}`}> */}
-
-          <div className="card-header">
-            <img src={props.ChairImg} className="card-img-top" alt="..." />
-          </div>
-        </Link>
-        <div className="card-body">
-          <div className="PreFoot pt-2 ">
-            <div className="class d-flex flex-wrap justify-content-between py-2 ">
-              <Link href={`/ProductDetail/${props.id}`}>
-                <div className="left fw-bold text-danger one-line-ellipsis">
-                  {props.Title}
-                </div>
-              </Link>
-              <div className="right">
-                <i onClick={handleAddToCart}>
-                  {" "}
-                  <ShoppingCartOutlinedIcon />{" "}
-                </i>
+        <div className="image-container">
+          <div className="first">
+            <div className="d-flex justify-content-between align-items-center">
+              <span className="discount">25%</span>
+              <span className="wishlist">
                 <i
                   onClick={handleAddWishlist}
-                  className={` ${
-                    inWishlist ? "fa fa-heart" : "fa fa-heart-o ms-3"
-                  }`}
+                  className={` ${inWishlist ? "fa fa-heart" : "fa fa-heart-o"
+                    }`}
                   style={
                     inWishlist ? { fontSize: "20px", color: "#DC3545" } : {}
                   }
                   aria-hidden="true"
                 ></i>
-              </div>
-            </div>
-            {/* show disc only when its available  */}
-            {props.Discription && (
-              <div className="text-left fw-medium my-2 DESCresp one-line-ellipsis1">
-                {props.Discription}
-              </div>
-            )}
-
-            <div className="rs d-flex flex-wrap  justify-content-between align-items-center ">
-              <div className="d-flex gap-2 align-items-center">
-                <div>
-                  {" "}
-                  <i
-                    className="medium fa fa-inr fw-bold priceResp"
-                    aria-hidden="true"
-                  ></i>{" "}
-                </div>
-                <div className="medium fw-bold priceResp">{props.Price}</div>
-                <div className="small text-secondary text text-decoration-line-through">
-                  {props.orignalPrice}
-                </div>
-              </div>
-              <div className="d-flex flex-wrap fw-semibold text-danger ">
-                <div>{props.Discount}%</div>
-              </div>
+                {/* <i className="fa fa-heart-o" /> */}
+              </span>
             </div>
           </div>
+          <Link href={`/ProductDetail/${props.id}`}>
+            <img
+              src={props.ChairImg}
+              className="img-fluid rounded thumbnail-image"
+            />
+          </Link>
+        </div>
+
+        <div className="product-detail-container p-2">
+          <div className="d-flex  align-items-center">
+            <Link href={`/ProductDetail/${props.id}`} className="w-75">
+              <h5 className="dress-name">{props.Title}</h5>
+            </Link>
+            <div className="d-flex flex-column mb-2 w-25 text-end">
+
+              <span className="new-price">₹{props.Price}</span>
+              <small className="old-price text-right"><del>₹{props.orignalPrice}</del></small>
+            </div>
+          </div>
+          {/* <div className="d-flex justify-content-between align-items-center pt-1">
+            <div className="color-select d-flex ">
+              <input type="button" name="grey" className="btn creme" />
+              <input type="button" name="red" className="btn red ml-2" />
+              <input type="button" name="blue" className="btn blue ml-2" />
+            </div>
+          </div> */}
+          <div className="d-flex justify-content-between align-items-center pt-1">
+            <div>
+
+              <i className="fa fa-star-o rating-star" />
+              <span className="rating-number">4.8</span>
+            </div>
+            <span className="buy">
+              <i onClick={handleAddToCart} className="shoppingCartIcon">
+                <ShoppingCartOutlinedIcon />
+              </i>
+            </span>
+          </div>
+
         </div>
       </div>
     </>

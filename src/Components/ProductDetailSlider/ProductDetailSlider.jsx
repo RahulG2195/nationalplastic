@@ -20,7 +20,6 @@ const ProductDetailSlider = ({ imageurl }) => {
       const splitImages = imageurl.split(", ").map((image) => image.trim()) || [
         "default_chair_img.webp",
       ];
-      console.log(typeof splitImages);
       setImages(splitImages);
     } else {
       setImages(["default_chair_img.webp"]); // Set default image if imageurl is not provided

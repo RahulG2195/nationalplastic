@@ -6,7 +6,6 @@ export async function POST(request) {
     const { name, color,product_id } = await request.json();
     let getProducts;
     if(product_id) {
-
        getProducts = await query({
         query: "SELECT * FROM products WHERE product_id = ?",
         values: [product_id],

@@ -221,107 +221,109 @@ const PreChairsCards = () => {
   // console.log('product data',  products)
 
   return (
-    <div className="container mt-5">
-      <PremiumChairs cattitle={categoryType} />
+    <>
+      <div className="container mt-5">
+        <PremiumChairs cattitle={categoryType} />
 
-      <div className="dropboxRes my-md-5 my-3 d-flex justify-content-between">
-        <div>
-          <div className="text-body-secondary fw-semibold">FILTER BY</div>
-          <div className="d-flex flex-wrap gap-3 mt-2">
-            <div className="dropdown mt-2 arrow">
-              <select
-                id="Price"
-                name="Price"
-                className="form-control border-primary darkBlue fw-semibold dropdownbuttonResp"
-                onChange={handlePriceSort}
-              >
-                <option value="all">Price</option>
-                <option value="asc">Low to high</option>
-                <option value="desc">High to low</option>
-              </select>
-            </div>
-            <div className="dropdown mt-2 arrow">
-              <select
-                id="Arm_Type"
-                name="Arm_Type"
-                className="form-control border-primary darkBlue fw-semibold dropdownbuttonResp"
-                onChange={handleArmType}
-              >
-                <option value="all">Arm type</option>
-                {FetchType.map((val) => (
-                  <option key={val.category_id} value={val.armType}>
-                    {val.armType}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="dropdown mt-2 arrow">
-              <select
-                id="Color"
-                name="Color"
-                className="form-control border-primary darkBlue fw-semibold dropdownbuttonResp"
-                onChange={handleColor}
-              >
-                <option value="all">Color</option>
-                {FetchClr.map((val) => (
-                  <option key={val.category_id} value={val.color}>
-                    {val.color}
-                  </option>
-                ))}
-              </select>
+        <div className="dropboxRes my-md-5 my-3 d-flex justify-content-between">
+          <div>
+            <div className="text-body-secondary fw-semibold">FILTER BY</div>
+            <div className="d-flex flex-wrap gap-3 mt-2">
+              <div className="dropdown mt-2 arrow">
+                <select
+                  id="Price"
+                  name="Price"
+                  className="form-control border-primary darkBlue fw-semibold dropdownbuttonResp"
+                  onChange={handlePriceSort}
+                >
+                  <option value="all">Price</option>
+                  <option value="asc">Low to high</option>
+                  <option value="desc">High to low</option>
+                </select>
+              </div>
+              <div className="dropdown mt-2 arrow">
+                <select
+                  id="Arm_Type"
+                  name="Arm_Type"
+                  className="form-control border-primary darkBlue fw-semibold dropdownbuttonResp"
+                  onChange={handleArmType}
+                >
+                  <option value="all">Arm type</option>
+                  {FetchType.map((val) => (
+                    <option key={val.category_id} value={val.armType}>
+                      {val.armType}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="dropdown mt-2 arrow">
+                <select
+                  id="Color"
+                  name="Color"
+                  className="form-control border-primary darkBlue fw-semibold dropdownbuttonResp"
+                  onChange={handleColor}
+                >
+                  <option value="all">Color</option>
+                  {FetchClr.map((val) => (
+                    <option key={val.category_id} value={val.color}>
+                      {val.color}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      {isLoading ? (
-        <center className="spinner">
-          <DotLoader color={"#36D7B7"} loading={isLoading} />
-        </center>
-      ) : products.length === 0 ? (
-        <div className="text-center mt-5">
-          <h3 className="text-muted">No products available</h3>
-        </div>
-      ) : (
-        <>
-          {/* <InfiniteScroll
+        {isLoading ? (
+          <center className="spinner">
+            <DotLoader color={"#36D7B7"} loading={isLoading} />
+          </center>
+        ) : products.length === 0 ? (
+          <div className="text-center mt-5">
+            <h3 className="text-muted">No products available</h3>
+          </div>
+        ) : (
+          <>
+            {/* <InfiniteScroll
             dataLength={products.length}
             next={() => setPage(page + 1)}
             hasMore={hasMore}
             loader={<h4>Loading...</h4>}
             endMessage={<p>No more products to load</p>}
           > */}
-          <div className="row">
-            {products.map((product) => {
-              const images = product.image_name ? product.image_name.split(', ').map(image => image.trim()) : [];
-              {/* console.log('images' + images[0]); */}
-             return <div
-                key={product.product_id}
-                className="PreCardSm col-12 col-sm-6 col-xs-4 col-md-6 col-lg-3"
-              >
-                <PreChairsCard
-                  ChairImg={`/Assets/images/products/${images[0]}`}
-                  id={product.seo_url}
-                  Title={product.product_name}
-                  Discription={product.short_description}
-                  Price={product.price}
-                  orignalPrice={product.discount_price}
-                  Discount={Math.floor(
-                    ((product.discount_price - product.price) /
-                      product.discount_price) *
+            <div className="row">
+              {products.map((product) => {
+                const images = product.image_name ? product.image_name.split(', ').map(image => image.trim()) : [];
+                {/* console.log('images' + images[0]); */ }
+                return <div
+                  key={product.product_id}
+                  className="PreCardSm col-12 col-sm-6 col-xs-4 col-md-6 col-lg-3 newProdCard"
+                >
+                  <PreChairsCard
+                    ChairImg={`/Assets/images/products/${images[0]}`}
+                    id={product.seo_url}
+                    Title={product.product_name}
+                    Discription={product.short_description}
+                    Price={product.price}
+                    orignalPrice={product.discount_price}
+                    Discount={Math.floor(
+                      ((product.discount_price - product.price) /
+                        product.discount_price) *
                       100
-                  )}
-                  onaddToWishlist={() =>
-                    handleAddToWishlist(product.product_id)
-                  }
-                  onAddToCart={() => handleMoveToCart(product.product_id)}
-                />
-              </div>
-            })}
-          </div>
-          {/* </InfiniteScroll> */}
-        </>
-      )}
-    </div>
+                    )}
+                    onaddToWishlist={() =>
+                      handleAddToWishlist(product.product_id)
+                    }
+                    onAddToCart={() => handleMoveToCart(product.product_id)}
+                  />
+                </div>
+              })}
+            </div>
+            {/* </InfiniteScroll> */}
+          </>
+        )}
+      </div>
+    </>
   );
 };
 

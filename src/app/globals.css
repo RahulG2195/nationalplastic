@@ -244,6 +244,224 @@ p {
     font-size: 20px !important;
 }
 
+/* prod card  */
+.newProdCard .card {
+    background-color: #fff;
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+.newProdCard .image-container {
+    position: relative
+}
+
+.newProdCard .thumbnail-image {
+    border-radius: 10px !important
+}
+
+.newProdCard .discount {
+    background-color: red;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 4px;
+    padding-right: 4px;
+    font-size: 10px;
+    border-radius: 6px;
+    color: #fff
+}
+
+.newProdCard .wishlist {
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+}
+
+.newProdCard .first {
+    position: absolute;
+    width: 100%;
+    padding: 9px
+}
+
+.newProdCard .dress-name {
+    font-size: 13px;
+    font-weight: bold;
+    width: 75%
+}
+
+.newProdCard .new-price {
+    font-size: 13px;
+    font-weight: bold;
+    color: red
+}
+
+.newProdCard .old-price {
+    font-size: 8px;
+    font-weight: bold;
+    color: grey
+}
+
+.newProdCard .btn {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    padding: 3px
+}
+
+.newProdCard .creme {
+    background-color: #fff;
+    border: 2px solid grey
+}
+
+.newProdCard .creme:hover {
+    border: 3px solid grey
+}
+
+.newProdCard .creme:focus {
+    background-color: grey
+}
+
+.newProdCard .red {
+    background-color: #fff;
+    border: 2px solid red
+}
+
+.newProdCard .red:hover {
+    border: 3px solid red
+}
+
+.newProdCard .red:focus {
+    background-color: red
+}
+
+.newProdCard .blue {
+    background-color: #fff;
+    border: 2px solid #40C4FF
+}
+
+.newProdCard .blue:hover {
+    border: 3px solid #40C4FF
+}
+
+.newProdCard .blue:focus {
+    background-color: #40C4FF
+}
+
+.newProdCard .darkblue {
+    background-color: #fff;
+    border: 2px solid #01579B
+}
+
+.newProdCard .darkblue:hover {
+    border: 3px solid #01579B
+}
+
+.newProdCard .darkblue:focus {
+    background-color: #01579B
+}
+
+.newProdCard .yellow {
+    background-color: #fff;
+    border: 2px solid #FFCA28
+}
+
+.newProdCard .yellow:hover {
+    border-radius: 3px solid #FFCA28
+}
+
+.newProdCard .yellow:focus {
+    background-color: #FFCA28
+}
+
+.newProdCard .item-size {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid grey;
+    color: grey;
+    font-size: 10px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center
+}
+
+.newProdCard .rating-star {
+    font-size: 14px !important;
+    color: #E7700D;
+}
+
+.newProdCard .rating-number {
+    font-size: 14px;
+    color: grey
+}
+
+.newProdCard .buy {
+    font-size: 12px;
+    color: purple;
+    font-weight: 500
+}
+
+.newProdCard .voutchers {
+    background-color: #fff;
+    border: none;
+    border-radius: 10px;
+    width: 190px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    overflow: hidden
+}
+
+.newProdCard .voutcher-divider {
+    display: flex
+}
+
+.newProdCard .voutcher-left {
+    width: 60%
+}
+
+.newProdCard .voutcher-name {
+    color: grey;
+    font-size: 9px;
+    font-weight: 500
+}
+
+.newProdCard .voutcher-code {
+    color: red;
+    font-size: 11px;
+    font-weight: bold
+}
+
+.newProdCard .voutcher-right {
+    width: 40%;
+    background-color: purple;
+    color: #fff
+}
+
+.newProdCard .discount-percent {
+    font-size: 12px;
+    font-weight: bold;
+    position: relative;
+    top: 5px
+}
+
+.newProdCard .off {
+    font-size: 14px;
+    position: relative;
+    bottom: 5px
+}
+
+.shoppingCartIcon{
+    cursor: pointer;
+}
+
 @media (max-width:992px) {
     .subCptRes {
         width: 75% !important;
