@@ -13,23 +13,28 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import styles from "./Navbar.module.css";
 
 export default function Header() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
+  const [dropdown, setDropdown] = useState(false);
+  const [subDropdown, setSubDropdown] = useState(false);
   // const [count, setCount] = useState(0);
   const router = useRouter();
   const dispatch = useDispatch;
   const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
   // const counts = useSelector((state) => state.cart || 0);
   // const [count, setCount] = useState(0);
-  function check() {}
+  function check() { }
   const userState = useSelector((state) => state.userData.isLoggedIn);
   const userEmail = useSelector((state) => state.userData.email);
 
   const productCount = useSelector((state) => {
+
     let who;
+
     if (!userState) {
       who = "temp";
     } else {
@@ -149,11 +154,10 @@ export default function Header() {
             </form>
 
             <div
-              className={`${
-                isClicked
-                  ? " collapse navbar-collapse show menubg"
-                  : "menuhide "
-              }`}
+              className={`${isClicked
+                ? " collapse navbar-collapse show menubg"
+                : "menuhide "
+                }`}
               id="navbarSupportedContent"
             >
               <ul className="navbar-nav homeNav mb-2 mb-lg-0">
@@ -178,14 +182,112 @@ export default function Header() {
                     About Us
                   </Link>
                 </li>
-                <li className="nav-item brdr">
+                <li className={`nav-item brdr ${styles.navItem}`}
+                  onMouseEnter={() => setDropdown(true)}
+                  onMouseLeave={() => setDropdown(false)}
+                >
                   <Link
-                    className="nav-link"
-                    href="/Investor"
+                    className="nav-link multidropdown"
+                    href="!#"
                     onClick={isClicked ? handleShow : null}
                   >
                     Investors
                   </Link>
+                  {dropdown && (
+                    <ul className={styles.dropdown}>
+                      <li
+                        className={styles.dropdownItem}
+                        onMouseEnter={() => setSubDropdown(true)}
+                        onMouseLeave={() => setSubDropdown(false)}
+                      >
+                        <a href="#">Financials</a>
+                        {subDropdown && (
+                          <ul className={styles.subDropdown}>
+                            <li className={styles.subDropdownItem}>
+                              <a href="#">Unaudited Financial Results</a>
+                            </li>
+                            <li className={styles.subDropdownItem}>
+                              <a href="#">Audited Financial Results</a>
+                            </li>
+                            <li className={styles.subDropdownItem}>
+                              <a href="#">Annual Report</a>
+                            </li>
+                            <li className={styles.subDropdownItem}>
+                              <a href="#">Annual Return</a>
+                            </li>
+
+                          </ul>
+                        )}
+                      </li>
+                      <li className={styles.dropdownItem}>
+                        <a href="#">Shareholding Pattern</a>
+                      </li>
+                      <li className={styles.dropdownItem}>
+                        <a href="#">Corporate Governance</a>
+                      </li>
+                      <li className={styles.dropdownItem}>
+                        <a href="#">Investor Contact</a>
+                      </li>
+                      <li
+                        className={styles.dropdownItem}
+                        onMouseEnter={() => setSubDropdown(true)}
+                        onMouseLeave={() => setSubDropdown(false)}
+                      >
+                        <a href="#">AGM Compliance </a>
+                        {subDropdown && (
+                          <ul className={styles.subDropdown}>
+                            <li className={styles.subDropdownItem}>
+                              <a href="#">Outcome of AGM</a>
+                            </li>
+                            <li className={styles.subDropdownItem}>
+                              <a href="#">Notices</a>
+                            </li>
+                          </ul>
+                        )}
+                      </li>
+                      <li className={styles.dropdownItem}>
+                        <a href="#">Listing Disclosure</a>
+                      </li>
+                      <li className={styles.dropdownItem}>
+                        <a href="#">Related Party Transaction</a>
+                      </li>
+                      <li
+                        className={styles.dropdownItem}
+                        onMouseEnter={() => setSubDropdown(true)}
+                        onMouseLeave={() => setSubDropdown(false)}
+                      >
+                        <a href="#" className="dropArrow">General Disclosure</a>
+                        {subDropdown && (
+                          <ul className={styles.subDropdown}>
+                            <li className={styles.subDropdownItem}>
+                              <a href="#">2020</a>
+                            </li>
+                            <li className={styles.subDropdownItem}>
+                              <a href="#">2021</a>
+                            </li>
+                            <li className={styles.subDropdownItem}>
+                              <a href="#">2022</a>
+                            </li>
+                            <li className={styles.subDropdownItem}>
+                              <a href="#">2023</a>
+                            </li>
+                            <li className={styles.subDropdownItem}>
+                              <a href="#">2024</a>
+                            </li>
+                          </ul>
+                        )}
+                      </li>
+                      <li className={styles.dropdownItem}>
+                        <a href="#">Investor KYC</a>
+                      </li>
+                      <li className={styles.dropdownItem}>
+                        <a href="#">IEPF</a>
+                      </li>
+                      <li className={styles.dropdownItem}>
+                        <a href="#">Advertisements</a>
+                      </li>
+                    </ul>
+                  )}
                 </li>
                 <li className="nav-item brdr accr ">
                   <ProductsAccr handleShow={handleShow} />

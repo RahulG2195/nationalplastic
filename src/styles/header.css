@@ -264,12 +264,16 @@ h6 {
     z-index: 999;
     /* background-color: #fff;  */
 }
-
+.homeNav {
+    position: relative;
+    z-index: 99;
+}
 .navbar-expand-lg .navbar-nav .nav-link {
     font-size: 15px !important;
     font-weight: 600;
     margin: 0 16px;
     color: #000;
+    
 }
 
 .navbar-expand-lg .navbar-nav .nav-link i {
@@ -334,4 +338,8 @@ h6 {
 
 .ulCont {
     height: auto !important;
+}
+
+.multidropdown{
+    z-index: 99;
 }

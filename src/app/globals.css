@@ -258,7 +258,8 @@ p {
 }
 
 .newProdCard .thumbnail-image {
-    border-radius: 10px !important
+    border-radius: 10px !important;
+    width:100%;
 }
 
 .newProdCard .discount {

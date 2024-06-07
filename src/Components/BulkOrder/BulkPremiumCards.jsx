@@ -108,7 +108,7 @@ const BulkPremiumCards = ({proddata}) => {
             const images = chair.image_name ? chair.image_name.split(', ').map(image => image.trim()) : [];
             return <div
               key={chair.product_id}
-              className="PreCardSm col-12 col-sm-6 col-xs-4 col-md-6 col-lg-3"
+              className="PreCardSm col-12 col-sm-6 col-xs-4 col-md-6 col-lg-3 newProdCard"
             >
               <PreChairsCard
                 id={chair.product_id}
