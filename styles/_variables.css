@@ -1,0 +1,111 @@
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700&display=swap");
+
+/* Font Family */
+body {
+  font-family: "Nunito", sans-serif;
+}
+
+/* Theme Colors */
+:root {
+  --primary: #2962ff;
+  --info: #3699ff;
+  --danger: #f64e60;
+  --success: #0bb7af;
+  --warning: #ee9d01;
+  --dark: #343a40;
+  --light: #eaf2fb;
+  --secondary: #35363b;
+
+  --light-primary: #d6e4f3;
+  --light-success: #d5f3f2;
+  --light-info: #d3edfa;
+  --light-warning: #f8ecdc;
+  --light-danger: #f8dddd;
+
+  --white: #fff;
+  --gray-100: #f8f9fa;
+  --gray-200: #eef5f9;
+  --gray-300: #dee2e6;
+  --gray-400: #ced4da;
+  --gray-500: #adb5bd;
+  --gray-600: #757e85;
+  --gray-700: #495057;
+  --gray-800: #343a40;
+  --gray-900: #1e2a35;
+  --black: #000;
+
+  --body-bg: #eef5f9;
+  --body-color: #1e2a35;
+
+  --border-radius: 0.3rem;
+  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+  --headings-font-weight: 600;
+
+  --card-border-width: 0;
+  --card-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+  --grid-gutter-width: 1.85rem;
+
+  --input-bg: #fff;
+  --btn-focus-width: 0px;
+
+  --sidebar-width: 260px;
+  --sidebar-color: #fff;
+}
+
+/* Theme Text Contrast */
+body {
+  background-color: var(--body-bg);
+  color: var(--body-color);
+}
+
+.card {
+  margin-bottom: 30px;
+  box-shadow: var(--box-shadow);
+}
+
+.dropdown-menu {
+  box-shadow: var(--box-shadow);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.circle-box {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 100%;
+}
+
+.circle-box.lg-box {
+  width: 60px;
+  height: 60px;
+  font-size: 21px;
+  line-height: 60px;
+}
+
+.circle-box.md-box {
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  line-height: 50px;
+}
+
+.button-group .btn {
+  margin: 3px;
+}
+
+.btn-white {
+  border: 1px solid;
+}
+
+.simplebar-scrollbar:before {
+  background: #a0a0a0;
+}
+
+.apexcharts-toolbar {
+  z-index: 0 !important;
+}
