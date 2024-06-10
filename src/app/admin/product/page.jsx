@@ -1,4 +1,3 @@
-import Addproducts from '@/components/Admin/Product/Addproduct'
 import ProdList from '@/components/Admin/Product/ProdList'
 import React from 'react'
 

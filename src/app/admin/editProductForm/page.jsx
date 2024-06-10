@@ -1,9 +1,9 @@
-import Addproducts from '@/components/Admin/Product/Addproduct'
 import React from 'react'
+import EditProduct from '@/Components/Admin/Product/EditProduct'
 const page = () => {
   return (
     <div>
-      <Addproducts></Addproducts>
+      <EditProduct></EditProduct>
     </div>
   )
 }

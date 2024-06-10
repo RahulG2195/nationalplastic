@@ -81,9 +81,10 @@ export async function POST(request) {
 export async function GET(request){
   try{
     const allProducts = await query({
-      query:"select * from products",
+      query:"    SELECT p.*, c.category_name FROM products p JOIN categories c ON p.category_id = c.category_id",
       values:[],
     })
+    
     return new Response(
       JSON.stringify({
         status: 200,

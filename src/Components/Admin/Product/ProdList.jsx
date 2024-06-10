@@ -1,19 +1,20 @@
 "use client"
 import Link from 'next/link';
 import React, { useState, useEffect, useRef } from 'react';
-import { Container, Row, Col, FormGroup, Input, Button } from 'reactstrap';
+import { Container, Row, Col, FormGroup, Input, Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import axios from 'axios';
-import { Table, Switch } from 'antd';
+import { Table } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
+import { useRouter } from "next/navigation";
 
 const ProdList = () => {
+  const router = useRouter();
     const [productArray, setProductArray] = useState([]);
     const [filteredProductArray, setFilteredProductArray] = useState([]);
-    const [fixedTop, setFixedTop] = useState(false);
     const [searchText, setSearchText] = useState('');
     const searchInput = useRef(null);
-
+    const [modalContent, setModalContent] = useState('');
     useEffect(() => {
         const fetchData = async () => {
             const rawData = await axios.get("/api/adminProducts");
@@ -27,6 +28,18 @@ const ProdList = () => {
 
     const handleOnclick = (type, index) => {
         console.log(`${type} clicked on item ${index}`);
+        if(type == 'Edit'){
+          console.log(`${type} clicked oIFn item ${index}`);
+          const productToEdit = productArray.find(product => product.product_id === index);
+          console.log("data: ", JSON.stringify(productToEdit))
+          localStorage.setItem('productToEdit', JSON.stringify(productToEdit));
+        localStorage.setItem("pDataToEdit", JSON.stringify(productToEdit));
+
+          router.push("/admin/editProductForm")
+        }else if(type == 'Delete'){
+        console.log(`${type} clicked oelsen item ${index}`);
+
+        }
     }
 
     const handleSearch = (e) => {
@@ -37,7 +50,9 @@ const ProdList = () => {
       );
       setFilteredProductArray(filteredData);
   };
-  
+  const toggleModal = () => {
+    setModalContent('');
+};
 
     const columns = [
         {
@@ -77,8 +92,8 @@ const ProdList = () => {
       },
         {
             title: 'Category ID',
-            dataIndex: 'category_id',
-            key: 'category_id',
+            dataIndex: 'category_name',
+            key: 'category_name',
         },
         {
             title: 'Price',
@@ -104,6 +119,25 @@ const ProdList = () => {
           title: 'Image Name',
           dataIndex: 'image_name',
           key: 'image_name',
+          render: (text) => (
+            <div className="image-name-cell">
+                {text.length > 20 ? (
+                    <>
+                        <span>{text.substring(0, 20)}...</span>
+                        <Button
+            type="link"
+            size="small"
+            style={{ fontSize: '12px', padding: '2px' }}
+            onClick={() => setModalContent(text)}
+          >
+            View More 
+          </Button>
+                    </>
+                ) : (
+                    <span>{text}</span>
+                )}
+            </div>
+        ),
       },
         {
             title: 'Action',
@@ -120,24 +154,17 @@ const ProdList = () => {
 
     return (
         <Container fluid>
-            <h1 className="my-4">Logo</h1>
+            <h1 className="my-4">National Plastic Products Table</h1>
             <Row className="mb-3 align-items-start justify-content-between">
                 <Col xs={4} md={4} lg={2} className="mb-2 mb-md-0 col-12">
-                    <FormGroup>
-                        <Input type="select" name="entries" id="entriesSelect">
-                            <option>10</option>
-                            <option>25</option>
-                            <option>50</option>
-                            <option>100</option>
-                        </Input>
-                    </FormGroup>
+                   
                 </Col>
                 <Col xs={4} md={4} lg={4} className="text-md-right col-12">
                     <Input
                         type="text"
                         name="Product Name"
                         id="search"
-                        placeholder="Search"
+                        placeholder="Search Product_name"
                         value={searchText}
                         onChange={handleSearch}
                     />
@@ -150,43 +177,15 @@ const ProdList = () => {
                 columns={columns}
                 dataSource={filteredProductArray.map(product => ({ ...product, key: product.product_id }))}
                 scroll={{ x: 1500 }}
-                summary={() => (
-                    <Table.Summary fixed={fixedTop ? 'top' : 'bottom'}>
-                        <Table.Summary.Row>
-                            <Table.Summary.Cell index={0} colSpan={2}>
-                                <Switch
-                                    checkedChildren="Fixed Top"
-                                    unCheckedChildren="Fixed Top"
-                                    checked={fixedTop}
-                                    onChange={() => {
-                                        setFixedTop(!fixedTop);
-                                    }}
-                                />
-                            </Table.Summary.Cell>
-                            <Table.Summary.Cell index={2} colSpan={8}>
-                                Scroll Context
-                            </Table.Summary.Cell>
-                            <Table.Summary.Cell index={10}>Fix Right</Table.Summary.Cell>
-                        </Table.Summary.Row>
-                    </Table.Summary>
-                )}
-                sticky={{ offsetHeader: 64 }}
             />
+             <Modal isOpen={modalContent !== ''} toggle={toggleModal}>
+            <ModalHeader toggle={toggleModal}>Image Name</ModalHeader>
+            <ModalBody>
+                {modalContent}
+            </ModalBody>
+        </Modal>
             <div className="d-flex justify-content-between flex-column flex-md-row align-items-center">
                 <span>Showing 1 to {filteredProductArray.length} of {filteredProductArray.length} entries</span>
-                <nav className="mt-3 mt-md-0">
-                    <ul className="pagination mb-0">
-                        <li className="page-item disabled">
-                            <a className="page-link" href="#">Previous</a>
-                        </li>
-                        <li className="page-item active">
-                            <a className="page-link" href="#">1</a>
-                        </li>
-                        <li className="page-item disabled">
-                            <a className="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>
             </div>
         </Container>
     );

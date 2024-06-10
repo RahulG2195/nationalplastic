@@ -4,18 +4,18 @@ import { useForm } from 'react-hook-form';
 import "./EditProduct.css";
 
 export default function App() {
-  const { register, handleSubmit,  formState: { errors } } = useForm();
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm();
   const onSubmit = data => console.log(data);
-// s
-//   useEffect(() => {
-//     const data = JSON.parse(localStorage.getItem("productToEdit"));
-//     if (data) {
-//       // Set form values with data from localStorage
-//       Object.keys(data).forEach(key => {
-//         setValue(key, data[key]);
-//       });
-//     }
-//   }, [setValue]);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("productToEdit"));
+    if (data) {
+      // Set form values with data from localStorage
+      Object.keys(data).forEach(key => {
+        setValue(key, data[key]);
+      });
+    }
+  }, [setValue]);
 
   console.log(errors);
 
