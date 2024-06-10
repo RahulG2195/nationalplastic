@@ -120,7 +120,7 @@ const CartProduct = ({
         <Link onClick={setid} href={`/ProductDetail/${seourl}`}>
           <Image
             src={src}
-            classname="img-fluid d-block w-100" // Use w-100 to make the image fill the entire col-lg col-md-3 col-sm-12umn
+            className="img-fluid d-block w-100" // Use w-100 to make the image fill the entire col-lg col-md-3 col-sm-12umn
             alt="Team Member"
             width={100}
             height={100}
@@ -166,7 +166,7 @@ const CartProduct = ({
           <div className="CouponApplied">
             <Image
               src="/Assets/images/AddTOCart/percentage.png"
-              classname="img-fluid d-block "
+              className="img-fluid d-block "
               alt="ome banner 1"
               width={100}
               height={80}
@@ -182,7 +182,7 @@ const CartProduct = ({
           >
             <Image
               src="/Assets/images/AddTOCart/core-heart.png"
-              classname="img-fluid d-block w-100"
+              className="img-fluid d-block w-100"
               alt="ome banner 1"
               width={100}
               height={80}
@@ -195,7 +195,7 @@ const CartProduct = ({
           >
             <Image
               src="/Assets/images/AddTOCart/Icon-core-trash.png"
-              classname="img-fluid d-block w-100"
+              className="img-fluid d-block w-100"
               alt="ome banner 1"
               width={100}
               height={80}

@@ -200,33 +200,33 @@ export default function Header() {
                         onMouseEnter={() => setSubDropdown(true)}
                         onMouseLeave={() => setSubDropdown(false)}
                       >
-                        <a href="#">Financials</a>
+                        <Link href="#">Financials</Link>
                         {subDropdown && (
                           <ul className={styles.subDropdown}>
                             <li className={styles.subDropdownItem}>
-                              <a href="#">Unaudited Financial Results</a>
+                              <Link href="/Unaudited">Unaudited Financial Results</Link>
                             </li>
                             <li className={styles.subDropdownItem}>
-                              <a href="#">Audited Financial Results</a>
+                              <Link href="/Audited">Audited Financial Results</Link>
                             </li>
                             <li className={styles.subDropdownItem}>
-                              <a href="#">Annual Report</a>
+                              <Link href="/Annual">Annual Report</Link>
                             </li>
                             <li className={styles.subDropdownItem}>
-                              <a href="#">Annual Return</a>
+                              <Link href="AnnualReturn">Annual Return</Link>
                             </li>
 
                           </ul>
                         )}
                       </li>
                       <li className={styles.dropdownItem}>
-                        <a href="#">Shareholding Pattern</a>
+                        <Link href="/ShareHolding">Shareholding Pattern</Link>
                       </li>
                       <li className={styles.dropdownItem}>
-                        <a href="#">Corporate Governance</a>
+                        <Link href="/Corporate">Corporate Governance</Link>
                       </li>
                       <li className={styles.dropdownItem}>
-                        <a href="#">Investor Contact</a>
+                        <Link href="/InvestorContact">Investor Contact</Link>
                       </li>
                       <li
                         className={styles.dropdownItem}
@@ -237,19 +237,25 @@ export default function Header() {
                         {subDropdown && (
                           <ul className={styles.subDropdown}>
                             <li className={styles.subDropdownItem}>
-                              <a href="#">Outcome of AGM</a>
+                              <Link href="/OutcomeAGM">Outcome of AGM</Link>
                             </li>
                             <li className={styles.subDropdownItem}>
-                              <a href="#">Notices</a>
+                              <Link href="/Notice">Notices</Link>
                             </li>
                           </ul>
                         )}
                       </li>
                       <li className={styles.dropdownItem}>
-                        <a href="#">Listing Disclosure</a>
+                        <Link href="/TransferShare">Transfer Of Share Notice</Link>
                       </li>
                       <li className={styles.dropdownItem}>
-                        <a href="#">Related Party Transaction</a>
+                        <Link href="/OutcomeMeet">Outcome Of Board Meeting</Link>
+                      </li>
+                      <li className={styles.dropdownItem}>
+                        <Link href="/Disclosure">Listing Disclosure</Link>
+                      </li>
+                      <li className={styles.dropdownItem}>
+                        <Link href="/Transaction">Related Party Transaction</Link>
                       </li>
                       <li
                         className={styles.dropdownItem}
@@ -260,31 +266,31 @@ export default function Header() {
                         {subDropdown && (
                           <ul className={styles.subDropdown}>
                             <li className={styles.subDropdownItem}>
-                              <a href="#">2020</a>
+                              <Link href="/Twenty">2020</Link>
                             </li>
                             <li className={styles.subDropdownItem}>
-                              <a href="#">2021</a>
+                              <Link href="/TwentyOne">2021</Link>
                             </li>
                             <li className={styles.subDropdownItem}>
-                              <a href="#">2022</a>
+                              <Link href="/TwentyTwo">2022</Link>
                             </li>
                             <li className={styles.subDropdownItem}>
-                              <a href="#">2023</a>
+                              <Link href="/TwentyThree">2023</Link>
                             </li>
                             <li className={styles.subDropdownItem}>
-                              <a href="#">2024</a>
+                              <Link href="/TwentyFour">2024</Link>
                             </li>
                           </ul>
                         )}
                       </li>
                       <li className={styles.dropdownItem}>
-                        <a href="#">Investor KYC</a>
+                        <Link href="/InvestorKYC">Investor KYC</Link>
                       </li>
                       <li className={styles.dropdownItem}>
-                        <a href="#">IEPF</a>
+                        <Link href="/IEPF">IEPF</Link>
                       </li>
                       <li className={styles.dropdownItem}>
-                        <a href="#">Advertisements</a>
+                        <Link href="/Advertisements">Advertisements</Link>
                       </li>
                     </ul>
                   )}
