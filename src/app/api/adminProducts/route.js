@@ -1,13 +1,18 @@
 import { query } from '@/lib/db';
+import colorNameList from 'color-name-list';
 
-
-
+function convertColorToCode(color) {
+  const colorEntry = colorNameList.find(entry => entry.name.toLowerCase() === color.toLowerCase());
+  if (!colorEntry) {
+    throw new Error(`Invalid color name: ${color}`);
+  }
+  return colorEntry.hex;
+}
 
 export async function POST(request) {
   try {
     const data = await request.json(); // Parse incoming JSON data
     const {
-      product_id,
       product_name,
       seo_url,
       category_id,
@@ -15,51 +20,51 @@ export async function POST(request) {
       price,
       discount_price,
       color,
-      color_code,
       armType,
       prod_status,
     } = data;
 
     // Manual validation
-    if (!product_id || !product_name || !seo_url || !category_id ||
-        !image_name || !price || !discount_price || !color || !color_code || !armType || !prod_status) {
+    const requiredFields = {
+      product_name,
+      seo_url,
+      category_id,
+      image_name,
+      price,
+      discount_price,
+      color,
+      armType,
+      prod_status,
+    };
+
+    const missingFields = Object.entries(requiredFields).filter(([key, value]) => !value).map(([key]) => key);
+
+    if (missingFields.length > 0) {
       return new Response(
-        JSON.stringify({ success: false, error: 'All fields are required' }),
+        JSON.stringify({ success: false, error: `The following fields are required: ${missingFields.join(', ')}` }),
         { status: 400 }
       );
     }
 
-    // Check if product_id already exists
-    const existingProduct = await query({
-      query: 'SELECT product_id FROM products WHERE product_id = ?',
-      values: [product_id],
-    });
-    if (existingProduct.length > 0) {
+    // Convert color name to color code
+    let color_code;
+    try {
+      color_code = convertColorToCode(color);
+    } catch (error) {
       return new Response(
-        JSON.stringify({ success: false, error: 'Product ID already exists' }),
+        JSON.stringify({ success: false, error: error.message }),
         { status: 400 }
       );
     }
 
-    // Validate category_id
-    const validCategory = await query({
-      query: 'SELECT id FROM categories WHERE id = ?',
-      values: [category_id],
-    });
-    if (validCategory.length === 0) {
-      return new Response(
-        JSON.stringify({ success: false, error: 'Invalid category ID' }),
-        { status: 400 }
-      );
-    }
 
     // Insert the new product
     const result = await query({
       query: `
-        INSERT INTO products (product_id, product_name, seo_url, category_id, image_name, price, discount_price, color, color_code, armType, prod_status)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO products (product_name, seo_url, category_id, image_name, price, discount_price, color, color_code, armType, prod_status)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `,
-      values: [product_id, product_name, seo_url, category_id, image_name, price, discount_price, color, color_code, armType, prod_status],
+      values: [product_name, seo_url, category_id, image_name, price, discount_price, color, color_code, armType, prod_status],
     });
 
     return new Response(
@@ -78,10 +83,11 @@ export async function POST(request) {
 }
 
 
+
 export async function GET(request){
   try{
     const allProducts = await query({
-      query:"    SELECT p.*, c.category_name FROM products p JOIN categories c ON p.category_id = c.category_id",
+      query:"    SELECT p.*, c.category_id FROM products p JOIN categories c ON p.category_id = c.category_id",
       values:[],
     })
     
@@ -102,5 +108,51 @@ export async function GET(request){
       })
     );
 
+  }
+}
+
+export async function DELETE(request) {
+  try {
+    const requestBody = await request.json();
+    const { product_id } = requestBody;
+    if (!product_id) {
+      return new Response(
+        JSON.stringify({
+          status: 400,
+          message: "Product ID is required",
+        }),
+        { status: 400 }
+      );
+    }
+    const result = await query({
+      query: "DELETE FROM products WHERE product_id = $1",
+      values: [product_id],
+    });
+    if (result.rowCount === 1) {
+      return new Response(
+        JSON.stringify({
+          status: 200,
+          message: `Product with ID ${product_id} deleted successfully`,
+        })
+      );
+    } else {
+      return new Response(
+        JSON.stringify({
+          status: 404,
+          message: `Product with ID ${product_id} not found`,
+        }),
+        { status: 404 }
+      );
+    }
+  } catch (e) {
+    console.log(e.message);
+    return new Response(
+      JSON.stringify({
+        status: 500,
+        message: "Internal Server Error",
+        error: e.message,
+      }),
+      { status: 500 }
+    );
   }
 }
