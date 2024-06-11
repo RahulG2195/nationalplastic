@@ -203,6 +203,7 @@ h6 {
         top: 100% !important;
         left: 100%;
         width: 100% !important;
+        height: 100vh;
     }
     .bulk_ord {
         padding-left: 0% !important;
@@ -233,6 +234,7 @@ h6 {
     top: 0%;
     left: 0;
     width: 0%;
+    height: 100vh;
 }
 
 .header {

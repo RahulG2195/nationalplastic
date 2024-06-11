@@ -21,6 +21,7 @@ export default function Header() {
   const [isClicked, setIsClicked] = useState(false);
   const [dropdown, setDropdown] = useState(false);
   const [subDropdown, setSubDropdown] = useState(false);
+  
   // const [count, setCount] = useState(0);
   const router = useRouter();
   const dispatch = useDispatch;
@@ -188,7 +189,7 @@ export default function Header() {
                 >
                   <Link
                     className="nav-link multidropdown"
-                    href="!#"
+                    href="#"
                     onClick={isClicked ? handleShow : null}
                   >
                     Investors
@@ -204,29 +205,29 @@ export default function Header() {
                         {subDropdown && (
                           <ul className={styles.subDropdown}>
                             <li className={styles.subDropdownItem}>
-                              <Link href="/Unaudited">Unaudited Financial Results</Link>
+                              <Link href="/Unaudited" onClick={isClicked ? handleShow : null}>Unaudited Financial Results</Link>
                             </li>
                             <li className={styles.subDropdownItem}>
-                              <Link href="/Audited">Audited Financial Results</Link>
+                              <Link href="/Audited" onClick={isClicked ? handleShow : null}>Audited Financial Results</Link>
                             </li>
                             <li className={styles.subDropdownItem}>
-                              <Link href="/Annual">Annual Report</Link>
+                              <Link href="/Annual" onClick={isClicked ? handleShow : null}>Annual Report</Link>
                             </li>
                             <li className={styles.subDropdownItem}>
-                              <Link href="AnnualReturn">Annual Return</Link>
+                              <Link href="AnnualReturn" onClick={isClicked ? handleShow : null}>Annual Return</Link>
                             </li>
 
                           </ul>
                         )}
                       </li>
                       <li className={styles.dropdownItem}>
-                        <Link href="/ShareHolding">Shareholding Pattern</Link>
+                        <Link href="/ShareHolding" onClick={isClicked ? handleShow : null}>Shareholding Pattern</Link>
                       </li>
                       <li className={styles.dropdownItem}>
-                        <Link href="/Corporate">Corporate Governance</Link>
+                        <Link href="/Corporate" onClick={isClicked ? handleShow : null}>Corporate Governance</Link>
                       </li>
                       <li className={styles.dropdownItem}>
-                        <Link href="/InvestorContact">Investor Contact</Link>
+                        <Link href="/InvestorContact" onClick={isClicked ? handleShow : null}>Investor Contact</Link>
                       </li>
                       <li
                         className={styles.dropdownItem}
@@ -237,25 +238,25 @@ export default function Header() {
                         {subDropdown && (
                           <ul className={styles.subDropdown}>
                             <li className={styles.subDropdownItem}>
-                              <Link href="/OutcomeAGM">Outcome of AGM</Link>
+                              <Link href="/OutcomeAGM" onClick={isClicked ? handleShow : null}>Outcome of AGM</Link>
                             </li>
                             <li className={styles.subDropdownItem}>
-                              <Link href="/Notice">Notices</Link>
+                              <Link href="/Notice" onClick={isClicked ? handleShow : null}>Notices</Link>
                             </li>
                           </ul>
                         )}
                       </li>
                       <li className={styles.dropdownItem}>
-                        <Link href="/TransferShare">Transfer Of Share Notice</Link>
+                        <Link href="/TransferShare" onClick={isClicked ? handleShow : null}>Transfer Of Share Notice</Link>
                       </li>
                       <li className={styles.dropdownItem}>
-                        <Link href="/OutcomeMeet">Outcome Of Board Meeting</Link>
+                        <Link href="/OutcomeMeet" onClick={isClicked ? handleShow : null}>Outcome Of Board Meeting</Link>
                       </li>
                       <li className={styles.dropdownItem}>
-                        <Link href="/Disclosure">Listing Disclosure</Link>
+                        <Link href="/Disclosure" onClick={isClicked ? handleShow : null}>Listing Disclosure</Link>
                       </li>
                       <li className={styles.dropdownItem}>
-                        <Link href="/Transaction">Related Party Transaction</Link>
+                        <Link href="/Transaction" onClick={isClicked ? handleShow : null}>Related Party Transaction</Link>
                       </li>
                       <li
                         className={styles.dropdownItem}
@@ -266,31 +267,31 @@ export default function Header() {
                         {subDropdown && (
                           <ul className={styles.subDropdown}>
                             <li className={styles.subDropdownItem}>
-                              <Link href="/Twenty">2020</Link>
+                              <Link href="/Twenty" onClick={isClicked ? handleShow : null}>2020</Link>
                             </li>
                             <li className={styles.subDropdownItem}>
-                              <Link href="/TwentyOne">2021</Link>
+                              <Link href="/TwentyOne" onClick={isClicked ? handleShow : null}>2021</Link>
                             </li>
                             <li className={styles.subDropdownItem}>
-                              <Link href="/TwentyTwo">2022</Link>
+                              <Link href="/TwentyTwo" onClick={isClicked ? handleShow : null}>2022</Link>
                             </li>
                             <li className={styles.subDropdownItem}>
-                              <Link href="/TwentyThree">2023</Link>
+                              <Link href="/TwentyThree" onClick={isClicked ? handleShow : null}>2023</Link>
                             </li>
                             <li className={styles.subDropdownItem}>
-                              <Link href="/TwentyFour">2024</Link>
+                              <Link href="/TwentyFour" onClick={isClicked ? handleShow : null}>2024</Link>
                             </li>
                           </ul>
                         )}
                       </li>
                       <li className={styles.dropdownItem}>
-                        <Link href="/InvestorKYC">Investor KYC</Link>
+                        <Link href="/InvestorKYC" onClick={isClicked ? handleShow : null}>Investor KYC</Link>
                       </li>
                       <li className={styles.dropdownItem}>
-                        <Link href="/IEPF">IEPF</Link>
+                        <Link href="/IEPF" onClick={isClicked ? handleShow : null}>IEPF</Link>
                       </li>
                       <li className={styles.dropdownItem}>
-                        <Link href="/Advertisements">Advertisements</Link>
+                        <Link href="/Advertisements" onClick={isClicked ? handleShow : null}>Advertisements</Link>
                       </li>
                     </ul>
                   )}

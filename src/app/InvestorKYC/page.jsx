@@ -138,7 +138,6 @@ const InvestorKYC = () => {
                 </b>
               </p>
             </div>
-
           </div>
         </div>
       </section>
