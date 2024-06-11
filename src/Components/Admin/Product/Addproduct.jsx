@@ -9,6 +9,7 @@ export default function App() {
   const onSubmit = async (data) => {
     try {
       // Send data to the API
+      console.log("whyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
       const isValidCategoryName = await axios.post("/api/adminValidationP", {
         category_name: data.category_name
       });

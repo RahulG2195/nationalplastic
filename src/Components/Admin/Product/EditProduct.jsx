@@ -4,19 +4,40 @@ import { useForm, Controller } from 'react-hook-form';
 import { Form, Input, Button, InputNumber } from 'antd';
 import "./EditProduct.css";
 import axios from 'axios';
+
 export default function App() {
   const { control, handleSubmit, setValue, formState: { errors } } = useForm();
+
+  const validateProduct = async (data) => {
+    try {
+      const response = await axios.post("/api/adminProducts",data);
+      console.log('Validation response:', response.data);
+      return response.data;
+    } catch (error) {
+      console.error('Validation Error:', error.message);
+      throw error; // Re-throw the error to be caught in the onSubmit function
+    }
+  };
+
+  const updateProduct = async (data) => {
+    try {
+      const response = await axios.put("/api/adminProducts",data);
+      console.log('Update response:', response.data);
+      return response.data;
+    } catch (error) {
+      console.error('Update Error:', error.message);
+      throw error; // Re-throw the error to be caught in the onSubmit function
+    }
+  };
+
   const onSubmit = async (data) => {
     try {
-      // Send data to the API
-      const isValidCategoryName = axios.post("/api/adminValidationP", data.category_name)
-      console.log("isValid", isValidCategoryName)
-      const response = await axios.post('/api/adminProducts', data);
-      // Handle the response, e.g., show a success message
-      console.log('Response:', response.data);
+      await updateProduct(data);
+
+      await validateProduct(data);
     } catch (error) {
       // Handle errors, e.g., show an error message
-      console.error('Error:', error);
+      console.error('Submission Error:', error.message);
     }
   };
 
@@ -24,6 +45,7 @@ export default function App() {
     const data = JSON.parse(localStorage.getItem("productToEdit"));
     if (data) {
       // Set form values with data from localStorage
+      console.log("data: ", data);
       Object.keys(data).forEach(key => {
         setValue(key, data[key]);
       });
@@ -37,6 +59,8 @@ export default function App() {
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
     >
+      {/* Form fields here, unchanged */}
+      {/* Form field components remain the same */}
       <Form.Item
         label="Product Name"
         validateStatus={errors.product_name ? 'error' : ''}
