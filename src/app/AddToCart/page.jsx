@@ -29,7 +29,7 @@ function AddToCart() {
     const cart = state[who] || {};
     return cart.products?.length || 0;
   });
-  console.log('add to cart' + JSON.stringify(productCount));
+  
 
   
   // Use useState to manage local product count and update function
@@ -82,7 +82,7 @@ function AddToCart() {
           
           const objToArray = new Array(obj);
           //Single product detail with updated quantity
-          ColorBasedImage(obj.color , tempData.products[0].product_id);
+          
           fetchData(objToArray);
         } else if (productIds.length > 1) {
           // Send request with multiple product IDs
@@ -98,13 +98,8 @@ function AddToCart() {
             const tempProduct = tempProducts.find(
               (tempProd) => tempProd.product_id === product.product_id
             );
-            console.log("99");
+            
             if (tempProduct) {
-              console.log("Inside");
-              // Update quantity if corresponding tempProduct is found
-              console.log(product.color);
-              console.log(tempProduct.color);
-
               product.quantity = tempProduct.quantity;
               product.color =  tempProduct.color;
             }

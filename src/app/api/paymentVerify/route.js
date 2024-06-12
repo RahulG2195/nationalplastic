@@ -49,6 +49,7 @@ export async function POST(req) {
 export async function PUT(request) {
   try {
     const requestData = await request.json();
+
     const {
       razorpay_order_id,
       customer_id,
@@ -62,6 +63,8 @@ export async function PUT(request) {
       razor_payment_id,
       order_detail,
     } = requestData;
+
+
     // Insert order_list
     const orderListValues = [
       razorpay_order_id,
@@ -71,6 +74,7 @@ export async function PUT(request) {
       order_address,
       order_pincode,
       order_city,
+      order_detail.price,
       order_payment_type,
       payment_status,
       razor_payment_id,
@@ -82,26 +86,45 @@ export async function PUT(request) {
     );
 
     const orderListQuery =
-      "INSERT INTO order_list (razorpay_order_id, customer_id,customer_email, Phone, order_address, order_pincode, order_city, order_payment_type, payment_status, razor_payment_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      "INSERT INTO order_list (razorpay_order_id, customer_id, customer_email, Phone, order_address, order_pincode, order_city, order_amount, order_payment_type, payment_status, razor_payment_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     const res = await query({
       query: orderListQuery,
       values: sanitizedOrderListValues,
     });
 
+    // Retrieve the last inserted ID
+    const lastInsertedId = res.insertId;
     // Insert order_detail
-    const orderDetailValues = [
-      razorpay_order_id,
-      customer_id,
-      order_detail.price,
-      JSON.stringify(order_detail.cart),
-    ];
-    const orderDetailQuery =
-      "INSERT INTO order_detail (razorpay_order_id, customer_id, price, cart) VALUES (?, ?, ?, ?)";
-    const res2 = await query({
-      query: orderDetailQuery,
-      values: orderDetailValues,
-    });
+
+    // console.log('last id', res);
+    // console.log('last id2', JSON.stringify(res));
+    
+
+
+    const orderDetailQuery = "INSERT INTO order_detail (order_id, user_id, prod_id, quantity) VALUES (?, ?, ?, ?)";
+
+    const products = order_detail.cart;
+
+    for (const product of products) {
+      try {
+        // Prepare values for the SQL query
+        const orderDetailValues = [lastInsertedId, customer_id, product.product_id, product.quantity];
+        // Execute the SQL query
+        const [detailRes] = await query({query: orderDetailQuery, values: orderDetailValues});
+    
+        // Log the insert ID of the operation
+        console.log(`Inserted into order_detail: ${detailRes.insertId}`);
+      } catch (error) {
+        // Handle any errors that occur during the execution
+        console.error(`${error} inserting into order_detail for product ID ${product.product_id}:, error`);
+      }
+    }
+    // for (const product of products) {
+    //   const orderDetailValues = [lastInsertedId, customer_id, product.product_id, product.quantity];
+    //   const [detailRes] = await query({query: orderDetailQuery, values: orderDetailValues});
+    //   console.log(`Inserted into order_detail: ${detailRes.insertId}`);
+    // }
 
     return new Response(
       JSON.stringify({

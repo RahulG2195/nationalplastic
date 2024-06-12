@@ -185,7 +185,7 @@ const CartProduct = ({
               className="img-fluid d-block w-100"
               alt="ome banner 1"
               width={100}
-              height={80}
+              height={100}
             />
             <p>Save For Later</p>
           </div>
