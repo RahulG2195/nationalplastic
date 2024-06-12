@@ -10,7 +10,7 @@ const Disclosure = () => {
               <div class="inn-content-wrap">
                 <h3>Year 2020-2001</h3>
 
-                <table className='table table-responsive table-bordered'>
+                <table className='table table-responsive table-bordered table-striped'>
                   <thead>
                     <tr>
                       <th className='col'>Quarter - 1</th>
@@ -55,7 +55,7 @@ const Disclosure = () => {
 
                 <h3>Year 2019-2020</h3>
 
-                <table className='table table-responsive table-bordered'>
+                <table className='table table-responsive table-bordered table-striped'>
                   <thead>
                     <tr>
                       <th className='col'>Quarter - 1</th>
@@ -93,7 +93,7 @@ const Disclosure = () => {
                 <h3>Year 2018-2019</h3>
 
                 <div class="investor-table">
-                  <table border="0" cellpadding="0" cellspacing="0" class="grid-table grid-table-striped table-condensed cf" id="grid_detail" rules="all" width="100%">
+                  <table className='table table-responsive table-bordered table-striped'>
                     <thead>
                       <tr>
                         <th className='col'>Quarter - 1</th>
@@ -142,7 +142,7 @@ const Disclosure = () => {
                 <h3>Year 2017-2018</h3>
 
                 <div class="investor-table">
-                  <table border="0" cellpadding="0" cellspacing="0" class="grid-table grid-table-striped table-condensed cf" id="grid_detail" rules="all" width="100%">
+                  <table className='table table-responsive table-bordered table-striped'>
                     <thead>
                       <tr>
                         <th className='col'>Quarter - 1</th>
@@ -186,7 +186,7 @@ const Disclosure = () => {
                 <h3>Year 2016-2017</h3>
 
                 <div class="investor-table">
-                  <table border="0" cellpadding="0" cellspacing="0" class="nb-table" rules="all" width="100%">
+                  <table className='table table-responsive table-bordered table-striped'>
                     <tbody>
                       <tr>
                         <td><a href="/Assets/pdf/Notice_of_Board_Meeting_for_Q1_Results_on_10-Aug-2016.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Notice of Board Meeting for Q1 Results on 10 Aug 2016</a></td>
@@ -206,7 +206,7 @@ const Disclosure = () => {
                 <h3>Year 2015-2016</h3>
 
                 <div class="investor-table">
-                  <table border="0" cellpadding="0" cellspacing="0" class="nb-table" rules="all" width="100%">
+                  <table className='table table-responsive table-bordered table-striped'>
                     <tbody>
                       <tr>
                         <td><a href="/Assets/pdf/Notice_of_Board_Meeting_for_Q2_Results_on_7-Nov-2015.pdf" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Notice of Board Meeting for Q2 Results on 7 Nov 2015</a></td>

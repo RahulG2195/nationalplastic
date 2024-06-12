@@ -294,17 +294,17 @@ p {
 .newProdCard .dress-name {
     font-size: 13px;
     font-weight: bold;
-    width: 75%
+    width: 100%
 }
 
 .newProdCard .new-price {
-    font-size: 13px;
+    font-size: 16px;
     font-weight: bold;
     color: red
 }
 
 .newProdCard .old-price {
-    font-size: 8px;
+    font-size: 11px;
     font-weight: bold;
     color: grey
 }
@@ -461,6 +461,13 @@ p {
 
 .shoppingCartIcon{
     cursor: pointer;
+}
+
+.inn-content-wrap ul li{
+    list-style: none;
+}
+.inn-content-wrap ul li i{
+    padding: 2px;
 }
 
 @media (max-width:992px) {

@@ -96,12 +96,12 @@
 
 @media (max-width:762px) {
 
-  .dropdown,
-  .subDropdown {
+  .dropdown {
     max-height: 350px;
-    /* overflow-y: auto; */
+    overflow-y: auto;
   }
+  
   .navItem a {
-    padding: auto;
+    padding: 8px 0;
   }
 }

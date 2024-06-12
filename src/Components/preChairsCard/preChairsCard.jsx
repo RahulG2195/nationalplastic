@@ -15,12 +15,8 @@ const PreChairsCard = (props) => {
         const userData = JSON.parse(userDataString);
         const customerId = userData.customer_id;
 
-        const response = await axios.post(
-          "/api/wishListUser",
-          {
-            customer_id: customerId,
-          }
-        );
+        const response = await axios.post("/api/wishListUser", {customer_id: customerId,});
+
         const wishlistItems = response.data.products.map(
           (product) => product.product_id
         );
@@ -48,10 +44,7 @@ const PreChairsCard = (props) => {
 
   return (
     <>
-      <div
-        className={`card preCont mt-3 position-relative  my-4 ${props.recentClass ? props.recentClass : ""
-          }`}
-      >
+      <div className={`card preCont mt-3 position-relative  my-4 ${props.recentClass ? props.recentClass : "" }`}>
         <div className="image-container">
           <div className="first">
             <div className="d-flex justify-content-between align-items-center">
@@ -79,11 +72,11 @@ const PreChairsCard = (props) => {
         </div>
 
         <div className="product-detail-container p-2">
-          <div className="d-flex  align-items-center">
-            <Link href={`/ProductDetail/${props.id}`} className="w-75">
+          <div className="align-items-center">
+            <Link href={`/ProductDetail/${props.id}`} className="">
               <h5 className="dress-name">{props.Title}</h5>
             </Link>
-            <div className="d-flex flex-column mb-2 w-25 text-end">
+            <div className="d-flex flex-column mb-2">
 
               <span className="new-price">₹{props.Price}</span>
               <small className="old-price text-right"><del>₹{props.orignalPrice}</del></small>

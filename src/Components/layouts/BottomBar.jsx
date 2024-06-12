@@ -98,7 +98,7 @@ function BottomBar() {
             onClick={sendCategory}
             href={`/ProductCatlogue/${val.category_id}`}
           >
-            <p className=""  onMouseOver={() => ChangeNavImage(val.category_id)}>{val.category_name}</p>
+            <p className="" onMouseOver={() => ChangeNavImage(val.category_id)}>{val.category_name}</p>
           </Link>
 
           <div className="ulCont SecondDrop mx-4 secondHover p-3 ">
@@ -124,7 +124,7 @@ function BottomBar() {
                         className="nav-link"
                         href={`/ProductDetail/${product.seo_url}`}
                       >
-                        {product.product_name}
+                        {product.product_name2}
                       </Link>
                     </p>
                   ))}

@@ -204,6 +204,7 @@ h6 {
         left: 100%;
         width: 100% !important;
         height: 100vh;
+        overflow-y: scroll;
     }
     .bulk_ord {
         padding-left: 0% !important;

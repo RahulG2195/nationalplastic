@@ -12,9 +12,10 @@ import { isLoggedIn } from "@/utils/validation";
 import { Bounce, toast } from "react-toastify";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useParams } from "next/navigation";
+import PreChairsCard from "@/Components/preChairsCard/preChairsCard.jsx";
 
-const notifyError = () => {
-  toast.error("Login To Add To WishList", {
+const notify = () => {
+  toast.error("Login To Add to CART", {
     position: "top-center",
     autoClose: 2000,
     hideProgressBar: false,
@@ -26,7 +27,6 @@ const notifyError = () => {
     transition: Bounce,
   });
 };
-
 const Search = (props) => {
   //   const router = useRouter();
   //   const router = useParams();
@@ -45,6 +45,7 @@ const Search = (props) => {
   const [hasMore, setHasMore] = useState(true);
   const [allproducts, setAllproducts] = useState([]);
   const dispatch = useDispatch();
+  const [wishlistItems, setWishlistItems] = useState([]);
   const [query, setQuery] = useState({});
   const params = useSearchParams();
   const [loading, setLoading] = useState(true);
@@ -59,6 +60,10 @@ const Search = (props) => {
   useEffect(() => {
     fetchData();
   }, [query]);
+
+  
+
+  
 
   const fetchData = async () => {
     try {
@@ -135,27 +140,28 @@ const Search = (props) => {
     }
   };
 
-  const handleAddToCart = async (id) => {
+  const handleMoveToCart = async (product_id) => {
     const isLoggedInResult = await isLoggedIn();
-    const data = await fetchPrice(id);
+    const data = await fetchPrice(product_id);
     const price = data.price;
     const discount_price = data.discount_price;
-
+    // const product_id = data.product_id;
     switch (isLoggedInResult) {
       case false:
+        //console.log("User not logged in. Notifying...");
         dispatch(
           addToCartD({
-            product_id: id,
+            product_id,
             price,
             discount_price,
-            quantity: quantity || 1,
+            quantity: typeof quantity !== "undefined" ? quantity : 1,
           })
         );
         break;
       case true:
         dispatch(
           addToCart({
-            product_id: id,
+            product_id: product_id,
             price: price,
             discount_price: discount_price,
             quantity: 1,
@@ -169,26 +175,87 @@ const Search = (props) => {
         );
       // Consider additional actions for unexpected login states
     }
+    //console.log("this is product id in card ", product_id);
   };
 
-  const handleAddWishlist = async (id) => {
-    const isLoggedInResult = await isLoggedIn();
+  const fetchWishlistItems = async () => {
+    try {
+      const userDataString = localStorage.getItem("userData");
+      const userData = JSON.parse(userDataString);
+      const customerId = userData.customer_id;
 
-    if (!isLoggedInResult) {
-      notifyError();
-      //   router.push("/Login");
-    } else {
-      dispatch(
-        addItemToWishlist({
-          product_id: id,
-        })
-      );
+      const response = await axios.post("/api/wishListUser", {
+        customer_id: customerId,
+      });
+      setWishlistItems(response.data.Wishlist);
+    } catch (error) {
+      console.error("Error fetching wishlist items:", error);
     }
+  };
+
+  const handleAddToWishlist = async (
+    product_id,
+    product_name,
+    short_description,
+    price,
+    discount_price,
+    discount,
+    ChairImg
+  ) => {
+    try {
+      const isLoggedInResult = await isLoggedIn();
+      //console.log("state", isLoggedInResult);
+      //console.log("state", typeof isLoggedInResult);
+      if (!isLoggedInResult) {
+        notifyError();
+        router.push("/Login");
+      } else {
+        dispatch(
+          addItemToWishlist({
+            product_id: product_id,
+          })
+        );
+        notify();
+        fetchWishlistItems();
+      }
+    } catch (error) {
+      notifyinfo();
+      console.error("Error:", error);
+    }
+  };
+
+  
+
+  const notifyinfo = () => {
+    toast.success("Already in WISHLIST", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+  };
+  const notifyError = () => {
+    toast.error("Login To Add To WishList", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
   };
 
   return (
     <>
-      <div className="container">
+      <div className="container newProdCard">
         {loading ? (
           <p>Loading...</p>
         ) : error ? (
@@ -199,83 +266,36 @@ const Search = (props) => {
               {allproducts.length} products found
             </p>
 
-            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-              {products.map((product, index) => (
-                <div key={product.id} className="col">
-                  <div className="preCont cards p-1 position-relative">
-                    <Link href={`/ProductDetail/${product.seo_url}`}>
-                      <div className="card-header">
-                        <img
-                          src={`/Assets/images/products/${getFirstImageName(
-                            product.image_name
-                          )}`}
-                          className="card-img-top"
-                          alt="..."
-                        />
-                      </div>
-                    </Link>
-                    <div className="card-body">
-                      <div className="PreFoot mt-2 ">
-                        <div className="class d-flex justify-content-between my-2 ">
-                          <Link href={`/ProductDetail/${product.product_id}`}>
-                            <div className="left fw-bold text-danger">
-                              {product.product_name}
-                            </div>
-                          </Link>
-                          <div className="right">
-                            <i
-                              onClick={() =>
-                                handleAddToCart(product.product_id)
-                              }
-                            >
-                              {" "}
-                              <ShoppingCartOutlinedIcon />{" "}
-                            </i>
-                            <i
-                              onClick={() =>
-                                handleAddWishlist(product.product_id)
-                              }
-                              className={` ${product.inWishlist
-                                ? "fa fa-heart"
-                                : "fa fa-heart-o ms-3"
-                                }`}
-                              style={
-                                product.inWishlist
-                                  ? { fontSize: "20px", color: "#DC3545" }
-                                  : {}
-                              }
-                              aria-hidden="true"
-                            ></i>
-                          </div>
-                        </div>
-                        <div className="text-left fw-medium my-2 DESCresp">
-                          {product.short_description}
-                        </div>
-                        <div className="rs d-flex justify-content-between align-items-center ">
-                          <div className="d-flex gap-2 align-items-center">
-                            <div>
-                              {" "}
-                              <i
-                                className="medium fa fa-inr fw-bold priceResp"
-                                aria-hidden="true"
-                              ></i>{" "}
-                            </div>
-                            <div className="medium fw-bold priceResp">
-                              {product.price}
-                            </div>
-                            <div className="small text-secondary text text-decoration-line-through">
-                              {product.discount_price}
-                            </div>
-                          </div>
-                          <div className="d-flex fw-semibold text-danger ">
-                            <div>{discounts[index]}%</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+            <div className="row">
+              {products.map((product, index) => {
+                const images = product.image_name ? product.image_name.split(', ').map(image => image.trim()) : [];
+                return <div
+                  key={index}
+                  className="col-12 col-sm-6 col-xs-4 col-md-6 col-lg-3 newProdCard">
+                  <PreChairsCard
+                    ChairImg={`/Assets/images/products/${images[0]}`}
+                    id={product.seo_url}
+                    Title={product.product_name}
+                    // Discription={product.short_description}
+                    Price={product.price}
+                    orignalPrice={product.discount_price}
+                    Discount={product.discount_percentage}
+                    onaddToWishlist={() =>
+                      handleAddToWishlist(
+                        product.product_id,
+                        product.product_name,
+                        product.short_description,
+                        product.price,
+                        product.discount_price,
+                        product.discount_percentage,
+                        product.image_name
+                      )
+                    }
+                    onAddToCart={() => handleMoveToCart(product.product_id)}
+                    recentClass="reventHoverView"
+                  />
                 </div>
-              ))}
+              })}
             </div>
 
             <InfiniteScroll
