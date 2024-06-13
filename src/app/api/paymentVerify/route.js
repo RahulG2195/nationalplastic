@@ -102,29 +102,32 @@ export async function PUT(request) {
     
 
 
-    const orderDetailQuery = "INSERT INTO order_detail (order_id, user_id, prod_id, quantity) VALUES (?, ?, ?, ?)";
+    const orderDetailQuery = "INSERT INTO order_detail (order_id, user_id, prod_id, quantity, prod_price) VALUES (?, ?, ?, ?, ?)";
+
+    const DeleteCartDataAfterOrderPlaced = "DELETE FROM mycart WHERE user_id = ? AND product_id = ?";
 
     const products = order_detail.cart;
-
+    console.log('products', products);
     for (const product of products) {
+
       try {
+
         // Prepare values for the SQL query
-        const orderDetailValues = [lastInsertedId, customer_id, product.product_id, product.quantity];
+        const orderDetailValues = [lastInsertedId, customer_id, product.product_id, product.quantity, product.prod_price];
+
+        const DeleteCartDataAfterOrderPlacedData = [customer_id, product.product_id];
         // Execute the SQL query
         const [detailRes] = await query({query: orderDetailQuery, values: orderDetailValues});
-    
-        // Log the insert ID of the operation
-        console.log(`Inserted into order_detail: ${detailRes.insertId}`);
+
+        // delete cart data after order placed
+        const [deteleCart] = await query({query: DeleteCartDataAfterOrderPlaced, values: DeleteCartDataAfterOrderPlacedData});
+        
+        
       } catch (error) {
         // Handle any errors that occur during the execution
         console.error(`${error} inserting into order_detail for product ID ${product.product_id}:, error`);
       }
     }
-    // for (const product of products) {
-    //   const orderDetailValues = [lastInsertedId, customer_id, product.product_id, product.quantity];
-    //   const [detailRes] = await query({query: orderDetailQuery, values: orderDetailValues});
-    //   console.log(`Inserted into order_detail: ${detailRes.insertId}`);
-    // }
 
     return new Response(
       JSON.stringify({

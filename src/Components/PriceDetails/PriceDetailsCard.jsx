@@ -78,6 +78,7 @@ const PriceDetailsCard = ({
 
   const [DiscountCard, setDiscountCard] = useState(0);
   const [productsData, setProductsData] = useState(null);
+
   const testing = async () => {
     const userCartData = await axios.post("/api/UserCart", {
       customer_id: customer_id,

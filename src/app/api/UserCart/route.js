@@ -30,6 +30,7 @@ export async function POST(request) {
       product_name: row.product_name,
       color: row.color,
       quantity: row.cart_quantity,
+      prod_price: row.price,
     }));
     console.log(products);
     return new Response(

@@ -8,11 +8,26 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { notify, notifyError } from "@/utils/notify.js";
 import { useSelector } from "react-redux";
+import Link from "next/link";
+
 import {
   isValidPassword,
   isValidReason, // Address validations
 } from "@/utils/validation";
+
 function ProfilePage() {
+  const userEmail = useSelector((state) => state.userData.email);
+  const [data, setData] = useState({});
+  const [messages, setMessages] = useState([]);
+  const [editable, setEditable] = useState(false);
+  const [adress2, setAdress2] = useState("");
+
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const [orderData, setOrderData] = useState([]);
+  const [currentDateTime, setCurrentDateTime] = useState(new Date());
   useEffect(() => {
     localStorage.getItem("isLoggedIn") === "true"
       ? true
@@ -34,15 +49,8 @@ function ProfilePage() {
     // setIsLoggedIn(isLoggedIn);
     setData(storedData);
   }, []);
-  const userEmail = useSelector((state) => state.userData.email);
 
-  const [editable, setEditable] = useState(false);
-  const [adress2, setAdress2] = useState("");
 
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
   // Get user ID from context (replace with your logic)
 
   const handleSubmit = async (event) => {
@@ -124,8 +132,8 @@ function ProfilePage() {
     phone: "",
     address: "",
   });
-  const [data, setData] = useState({});
-  const [messages, setMessages] = useState([]);
+
+
   const cust_id = messages.length > 0 ? messages[0].customer_id : null;
   const email_id = messages.length > 0 ? messages[0].Email : null;
 
@@ -138,24 +146,24 @@ function ProfilePage() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const formData = {
-          email: userEmail,
-          getProfile: true,
-        };
+        const formData = { email: userEmail, getProfile: true, };
 
         const response = await axios.put("/api/Users", formData);
 
         const userData = response.data.message[0]; // Directly access response.data.message
         const { customer_id, Email } = userData; // Destructure from userData, not from JSON.stringify
-        const UpdateData = {
-          email: Email,
-          customer_id: customer_id,
-        };
+        const UpdateData = { email: Email, customer_id: customer_id, };
+
+        // get order data 
+        const OrderResponse = await axios.put("/api/UserOrder", UpdateData);
+        setOrderData(OrderResponse.data.orderData);
+
         localStorage.setItem("userData", JSON.stringify(UpdateData));
         const responseData = response.data;
         const messageArray = responseData.message;
         setMessages(messageArray);
         setIsLoading(false);
+
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -227,6 +235,18 @@ function ProfilePage() {
     }
   }
 
+  // cancel and return functionality 
+  useEffect(() => {
+    const cancelOrder = () => {
+      const currentTime = new Date();
+      const DateFromDB = orderData;
+
+      console.log('orderData', orderData)
+    }
+  
+    cancelOrder()
+  }, []);
+  
   return (
     <>
       <div className="container profile-page-container mb-5">
@@ -316,12 +336,6 @@ function ProfilePage() {
                 </a>
               </div>
 
-              {/* <div onClick={handleLogout} className="EditAccount list-group-item list-group-item-action fw-semibold">
-                <div>
-                  <i className="fa fa-sign-out" aria-hidden="true"></i>
-                </div>
-                <p className="fw-semibold">Logout</p>
-              </div> */}
             </div>
           </div>
 
@@ -339,25 +353,9 @@ function ProfilePage() {
                   <hr />
                   <div>
                     <div>
-                      {/* {Array.isArray(messages) && messages.length > 0 ? (messages.map((message, index) => (
-                        <div key={index}>
-                          <p>Customer ID: {message.customer_id}</p>
-                          <p>First Name: {message.FirstName}</p>
-                          <p>Last Name: {message.LasttName}</p>
-                          <p>Email: {message.Email}</p>
-                          <p>Phone: {message.Phone}</p>
-                          <p>Address: {message.Address}</p>
-                          <p>Address2: {message.Adress2}</p>
-                          <p>Password: {message.Password}</p>
-                        </div>
-                      ))
-                      ) : (
-                        <div>You are not loggedin</div>
-                      )
-                    } */}
 
                       {Array.isArray(messages) ||
-                      (messages.length > 0 && messages != null) ? (
+                        (messages.length > 0 && messages != null) ? (
                         messages.map((message, index) => (
                           <form key={index} onSubmit={handleEdit}>
                             <div className="row user-data">
@@ -450,7 +448,7 @@ function ProfilePage() {
 
                   <div>
                     {(Array.isArray(messages) && messages.length > 0) ||
-                    messages !== null ? (
+                      messages !== null ? (
                       messages.map((message, index) => (
                         <form key={index} onSubmit={updateAddressTwo}>
                           <div className="row user-data">
@@ -487,99 +485,6 @@ function ProfilePage() {
                   </div>
                 </div>
               </div>
-              {/* Address Book */}
-              {/* <div
-                className="tab-pane fade"
-                id="list-profile"
-                role="tabpanel"
-                aria-labelledby="list-profile-list"
-              >
-                <div className="Right-Profile">
-                  <h3>Address Book</h3>
-                  <hr />
-
-                  <div>
-                    <form>
-                      <div className="row user-data">
-                        <div className="col">
-                          <label htmlFor="">First name</label>
-                          <input
-                            type="text"
-                            className="form-control fw-semibold"
-                            placeholder="First name"
-                          />
-                        </div>
-                        <div className="col">
-                          <label htmlFor="">Last name</label>
-                          <input
-                            type="text"
-                            className="form-control fw-semibold"
-                            placeholder="Last name"
-                          />
-                        </div>
-                      </div>
-                      <div className="row user-data">
-                        <div className="col">
-                          <label htmlFor="">E-mail Address</label>
-                          <input
-                            type="text"
-                            className="form-control fw-semibold"
-                            placeholder="E-mail Address"
-                          />
-                        </div>
-                        <div className="col">
-                          <label htmlFor="">Mobile Number</label>
-                          <input
-                            type="text"
-                            className="form-control fw-semibold"
-                            placeholder="Mobile Number"
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group row user-data">
-                        <div className="col-sm-10">
-                          <button type="submit" className="btn form-btn">
-                            Update
-                          </button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <h3>Change Password</h3>
-                  <hr />
-
-                  <div>
-                    <form>
-                      <div className="row user-data">
-                        <div className="col">
-                          <label htmlFor="">Password</label>
-                          <input
-                            type="text"
-                            className="form-control fw-semibold"
-                            placeholder="First name"
-                          />
-                        </div>
-                        <div className="col">
-                          <label htmlFor="">New Password</label>
-                          <input
-                            type="text"
-                            className="form-control fw-semibold"
-                            placeholder="Last name"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="form-group row">
-                        <div className="col-sm-10">
-                          <button type="submit" className="btn form-btn">
-                            Update Password
-                          </button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div> */}
 
               {/* Wishlist */}
               <div
@@ -627,7 +532,35 @@ function ProfilePage() {
                   <h3>Order List </h3>
                   <hr />
 
-                  <h5 className="text-center p-2">No Order Placed </h5>
+                  <table class="table table-bordered table-responsive border-primary table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Sr No</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {
+                      orderData.map((data, index) => {
+                        const images = data ? data.image_name.split(', ').map(image => image.trim()) : [];
+                          return <tr key={index}>
+                        <th scope="row">{index + 1}</th>
+                        <td><Link href={`/ProductDetail/${data.seo_url}`}><img src={`/Assets/images/products/${images[0]}`} height={50} width={50} alt="prod_image" /></Link></td>
+                        <td><Link href={`/ProductDetail/${data.seo_url}`}>{data.product_name}</Link></td>
+                        <td>{data.quantity}</td>
+                        <td>₹ {data.quantity * data.prod_price} </td>
+                        <td>
+                          <button className="btn btn-danger btn-rounded">Cancel order</button>
+                        </td>
+                      </tr>
+                      })
+                    }
+                    </tbody>
+                  </table>
                   <hr />
                 </div>
               </div>
