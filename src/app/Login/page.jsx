@@ -38,6 +38,35 @@ function Login() {
   const handleRegisterClick = async (event) => {
     router.push("/Register");
   };
+  async function sendDataToBackend() {
+    try {
+      await signIn("google")
+      const response = await axios.post('/api/googleProvider', session.user);
+      console.log('Response from API:', response.data);
+  
+      const { email, customer_id } = response.data;
+      console.log("before if == = = =");
+  
+      if (status === "authenticated" && session?.user) {
+        console.log("inside if == = = =");
+        dispatch(
+          setUserData({
+            email: email,
+            customer_id: customer_id,
+          })
+        );
+        console.log("inside if == =2 = =");
+
+        // router.push("/"); // Redirect to homepage
+      }
+      console.log("inside if == = 3= =");
+
+      
+    } catch (error) {
+      console.log('Error sending data to API:', error);
+    }
+  }
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -90,23 +119,34 @@ function Login() {
     );
   };
 
-  useEffect(() => {
-    if (session) {
-      // Send session data to your backend
-      axios.post('/api/googleProvider', session.user)
-        .then(response => {
-          console.log('Response from API:', response.data);
-          if (status === "authenticated" && session?.user) {
-            // Store user info in localStorage after successful sign-in
-            localStorage.setItem("userData", JSON.stringify(session.user));
-            router.push("/"); // Redirect to homepage
-          }
-        })
-        .catch(error => {
-          console.log('Error sending data to API:', error);
-        });
-    }
-  }, [session]);
+  // useEffect(() => {
+  //   if (session) {
+  //     // Send session data to your backend
+  //     axios.post('/api/googleProvider', session.user)
+  //       .then(response => {
+  //         console.log('Response from API:', response.data);
+  //         console.log(response.body);
+  //         console.log('Response from API:', );
+  //         const email = response.data.email
+  //         const customer_id = response.data.customer_id
+
+
+  //         if (status === "authenticated" && session?.user) {
+  //           dispatch(
+  //             setUserData({
+  //               email: email,
+  //               customer_id: customer_id,
+  //             })
+  //           );
+  //           router.push("/"); // Redirect to homepage
+  //         }
+  //       })
+  //       .catch(error => {
+  //         console.log('Error sending data to API:', error);
+  //       });
+  //        hasSentRequest.current = true; 
+  //   }
+  // }, [session]);
 
   return (
     <div className="container">
@@ -235,7 +275,7 @@ function Login() {
                   />
                   <button
                     className="btn btn-danger mt-3"
-                    onClick={() => signIn("google")}
+                    onClick={() => sendDataToBackend()}
                   >
                     <i className="fa fa-google"></i> Sign in with Google
                   </button>

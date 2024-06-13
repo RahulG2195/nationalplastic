@@ -12,6 +12,8 @@ import {
   isValidPassword,
   isValidReason, // Address validations
 } from "@/utils/validation";
+import { signOut } from "next-auth/react";
+
 function ProfilePage() {
   useEffect(() => {
     localStorage.getItem("isLoggedIn") === "true"
@@ -221,6 +223,7 @@ function ProfilePage() {
   async function handleLogout(e) {
     e.preventDefault();
     if (window.confirm("Are you sure you want to log out?")) {
+      signOut()
       localStorage.clear();
       setData({}); // Clear user data
       window.location.href = "/";
