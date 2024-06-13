@@ -1,0 +1,21 @@
+.ATCflow {
+    display: flex;
+    justify-content: center;
+    background-color: #F6F6F6;
+    padding: 20px;
+    font-weight: 600;
+}
+
+.ATCflow p {
+    color: #262262;
+}
+
+.ATCflow p span {
+    color: #C9070F;
+}
+@media (max-width:350px) {
+    .ATCflow p {
+        font-size: x-small !important;
+    }
+    
+}

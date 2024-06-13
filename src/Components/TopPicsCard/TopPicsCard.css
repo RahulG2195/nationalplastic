@@ -1,0 +1,32 @@
+
+.circularimg{
+    overflow: hidden;
+}
+.circularimg .image:hover{
+    transform: scale(0.9);
+    transition: all .5s;
+
+}
+
+
+
+@media (max-width: 991px){
+
+    .circularimg {
+
+        width: 150px;
+        height: 150px;
+    }
+
+}
+
+@media only screen and (min-width: 991px) and (max-width: 1256px) {
+    .GqRmbtnRes button{
+        font-size: x-small !important;
+        padding: 2px !important;
+    } 
+} 
+
+
+
+    

@@ -1,0 +1,30 @@
+Ec2 and nginx settings:
+
+Update repositories of ec2
+sudo apt-get update
+
+Update pacage of ec2
+sudo apt-get upgrade
+
+check location of git
+which git
+
+node installation
+https://github.com/nodesource/distributions
+
+after installing now clode git prj into aws
+
+install pm2 packages manager
+sudo npm install pm2 -g
+
+run below cmd to start npm for prj 
+ pm2 start npm --name prj-name -- run start -- -p 3000
+
+nginx setup and ssl 
+https://gist.github.com/piyushgarg-dev/8b14c87c8ff4d626ecbc747b6b9fc57f
+
+
+for mysql setup 
+https://www.youtube.com/watch?v=rtG8S5WsSHg&ab_channel=AMonkinCloud%E2%98%81%EF%B8%8F
+
+

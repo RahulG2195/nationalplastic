@@ -1,0 +1,35 @@
+.custReview {
+    height:'';
+    width: 70%;
+}
+.custReviewContainer{
+    margin: 0 auto;
+}
+
+.custReviewLeft {
+    height: 100%;
+    width: 100%;
+}
+
+.custReviewRight {
+    height: 100%;
+    width: 100%;
+}
+
+@media (max-width:767px) {
+    .custReviewContainer{
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100%;
+    }
+    .filterSortRes i {
+        background-color: transparent; 
+    }
+    .filterSortRes span{
+        font-size: small;
+    }
+    .resVeiwBtn{
+        margin-bottom: 15px;
+    }
+}
+    
