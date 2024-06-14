@@ -158,6 +158,19 @@ function ProfilePage() {
         const OrderResponse = await axios.put("/api/UserOrder", UpdateData);
         setOrderData(OrderResponse.data.orderData);
 
+        // cancel and return functionality 
+        // const currentTime = new Date();
+        // const DateFromDB = OrderResponse.data.orderData[0]['order_status_date'];
+
+        // console.log('Database Timestamp:', DateFromDB.getFullYear());
+        // console.log('Current Timestamp:', currentTime.getFullYear());
+
+        // if (DateFromDB.getTime() === currentTime.getTime()) {
+        //   console.log('Timestamps match, performing action...');
+        // } else {
+        //   console.log('Timestamps match, performing action11111111...');
+        // }
+
         localStorage.setItem("userData", JSON.stringify(UpdateData));
         const responseData = response.data;
         const messageArray = responseData.message;
@@ -217,6 +230,7 @@ function ProfilePage() {
       };
 
       const response = await axios.post("/api/UserProfile", updatedData);
+
       notify("UserProfile updated");
       toast.success("Data updated successfully");
     } catch (error) {
@@ -235,18 +249,24 @@ function ProfilePage() {
     }
   }
 
-  // cancel and return functionality 
-  useEffect(() => {
-    const cancelOrder = () => {
-      const currentTime = new Date();
-      const DateFromDB = orderData;
+  const CancelProduct = async (prod_id, user_id) => {
+    try {
 
-      console.log('orderData', orderData)
+      const ProdData = { prod_id: prod_id, user_id: user_id,};
+      const res = await axios.post('/api/UserOrder', ProdData);
+
+      if(res.data.message === 'updated'){
+        notify("Your order cancel Request has been sent");
+        toast.success("Your order cancel Request has been sent");
+      }else{
+        notify("Your order cancel Request fail");
+        toast.success("Your order cancel Request fail");
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
-  
-    cancelOrder()
-  }, []);
-  
+  }
+
   return (
     <>
       <div className="container profile-page-container mb-5">
@@ -544,21 +564,43 @@ function ProfilePage() {
                       </tr>
                     </thead>
                     <tbody>
-                    {
-                      orderData.map((data, index) => {
-                        const images = data ? data.image_name.split(', ').map(image => image.trim()) : [];
+                      {
+                        orderData.map((data, index) => {
+                        console.log(data.order_status_date);
+
+                          const images = data ? data.image_name.split(', ').map(image => image.trim()) : [];
+                          let cancelButton;
+
+                          if(data.order_status === 5){
+
+                            cancelButton = <button className="btn btn-danger btn-rounded">Return order</button>
+
+                          }else if(data.order_status === 1 || data.order_status === 2 || data.order_status === 3 || data.order_status === 4)
+                          {
+
+                            if(data.per_order_status === 1){
+
+                              cancelButton = <button className="btn btn-warning btn-rounded" onClick={() => CancelProduct(data.product_id, data.customer_id)}>Cancel order</button> 
+
+                            }else{
+                              cancelButton = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>
+                            }
+                            
+                          }else{
+                            cancelButton = ''
+                          }
                           return <tr key={index}>
-                        <th scope="row">{index + 1}</th>
-                        <td><Link href={`/ProductDetail/${data.seo_url}`}><img src={`/Assets/images/products/${images[0]}`} height={50} width={50} alt="prod_image" /></Link></td>
-                        <td><Link href={`/ProductDetail/${data.seo_url}`}>{data.product_name}</Link></td>
-                        <td>{data.quantity}</td>
-                        <td>₹ {data.quantity * data.prod_price} </td>
-                        <td>
-                          <button className="btn btn-danger btn-rounded">Cancel order</button>
-                        </td>
-                      </tr>
-                      })
-                    }
+                            <th scope="row">{index + 1}</th>
+                            <td><Link href={`/ProductDetail/${data.seo_url}`}><img src={`/Assets/images/products/${images[0]}`} height={50} width={50} alt="prod_image" /></Link></td>
+                            <td><Link href={`/ProductDetail/${data.seo_url}`}>{data.product_name}</Link></td>
+                            <td>{data.quantity}</td>
+                            <td>₹ {data.quantity * data.prod_price} </td>
+                            <td>
+                              {cancelButton}
+                            </td>
+                          </tr>
+                        })
+                      }
                     </tbody>
                   </table>
                   <hr />

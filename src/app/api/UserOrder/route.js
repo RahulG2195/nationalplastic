@@ -37,42 +37,19 @@ export async function GET(req, res) {
 export async function POST(request) {
   try {
     // Extract data from the request JSON
-    const { firstName, lastName, email, phone, address, password } =
-      await request.json();
-
-    // Check if the email already exists in the database
-    const existingUser = await query({
-      query: "SELECT * FROM customer WHERE Email = ?",
-      values: [email],
-    });
-
-    // If the email already exists, return a 400 Bad Request response
-    if (existingUser.length > 0) {
-      return new Response(JSON.stringify({ message: "Email already exists" }), {
-        status: 400,
-      });
-    }
-    const hashedPassword = await bcrypt.hash(password, 12);
-
-    // Execute database query to insert new user
-    const result = await query({
-      query:
-        "INSERT INTO customer (FirstName, LasttName, Email, Phone, Address, Password) VALUES (?, ?, ?, ?, ?, ?)",
-      values: [firstName, lastName, email, phone, address, hashedPassword],
-    });
-
-    // Check if the insertion was successful
-    if (result.affectedRows > 0) {
-      return new Response(
-        JSON.stringify({ message: "Registration successful" }),
-        { status: 200 }
-      );
-    } else {
-      return new Response(
-        JSON.stringify({ message: "Failed to register user" }),
-        { status: 500 }
-      );
-    }
+    const { prod_id, user_id } = await request.json();
+    
+    const updateprodtocancel = await query({
+      query: "UPDATE order_detail SET cancel_order = 0, per_order_status = 0 WHERE prod_id = ? AND user_id = ?",
+      values: [prod_id, user_id],
+    })
+    
+    return new Response(
+      JSON.stringify({
+        status: 200,
+        message: "updated",
+      })
+    );
   } catch (error) {
     return new Response(
       JSON.stringify({
