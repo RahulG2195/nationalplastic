@@ -17,6 +17,7 @@ const WishlistCard = (props) => {
       // props.ChairImg
     );
   };
+  const Np = "National Plastic";
   const handleOnClick = async () => {
     toast.dismiss(); // Close any existing toast notifications
     toast.dark(
@@ -78,7 +79,7 @@ const WishlistCard = (props) => {
         <div className="wishCptResp">
           <Link onClick={setid} href={`/ProductDetail`}>
             <h5 className="card-title ProductTitle fw-semibold">
-              {props.productName}
+              {Np} {props.productName} ({props.color}) 
             </h5>
           </Link>
           <p className="card-text productSubTitle">{props.producDiscription}</p>

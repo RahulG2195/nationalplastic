@@ -42,7 +42,7 @@ const PreChairsCards = () => {
 
   const [FetchClr, setFetchClr] = useState([]);
   const [FetchType, setFetchType] = useState([]);
-
+  const Np = "National Plastic"
   // const [page, setPage] = useState(1);
   // const [hasMore, setHasMore] = useState(true);
   // const [length, setlength] = useState([]);
@@ -108,7 +108,7 @@ const PreChairsCards = () => {
         //       item.categoryType.toLowerCase() == categoryType.toLowerCase()
         //   );
         // }
-
+      console.log("fliteredDta: " + JSON.stringify(filteredData));
         setProducts(filteredData);
 
         // if (page === 1) {
@@ -117,6 +117,8 @@ const PreChairsCards = () => {
 
         // setHasMore(filteredData.length > 0);
       } else {
+      console.log("fliteredDta: " + filteredData);
+
         setProducts(filteredData);
       }
 
@@ -302,7 +304,7 @@ const PreChairsCards = () => {
                   <PreChairsCard
                     ChairImg={`/Assets/images/products/${images[0]}`}
                     id={product.seo_url}
-                    Title={product.product_name}
+                    Title={`${Np} ${product.product_name} (${product.color})`}
                     Discription={product.short_description}
                     Price={product.price}
                     orignalPrice={product.discount_price}
