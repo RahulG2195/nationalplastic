@@ -37,13 +37,14 @@ export async function GET(req, res) {
 export async function POST(request) {
   try {
     // Extract data from the request JSON
-    const { prod_id, user_id } = await request.json();
-    
+    const { prod_id, user_id, extraCharge } = await request.json();
+    console.log('extraCharge', extraCharge)
     const updateprodtocancel = await query({
-      query: "UPDATE order_detail SET cancel_order = 0, per_order_status = 0 WHERE prod_id = ? AND user_id = ?",
-      values: [prod_id, user_id],
+      query: "UPDATE order_detail SET cancel_order = 0, per_order_status = 0, extraCharge = ? WHERE prod_id = ? AND user_id = ?",
+      values: [extraCharge, prod_id, user_id],
     })
-    
+    console.log('updateprodtocancel', updateprodtocancel)
+
     return new Response(
       JSON.stringify({
         status: 200,

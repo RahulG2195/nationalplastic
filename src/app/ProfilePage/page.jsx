@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { notify, notifyError } from "@/utils/notify.js";
 import { useSelector } from "react-redux";
 import Link from "next/link";
-
+import CancelProdChargeAfterTwentyFourHr from "@/utils/CancelProduct";
 import {
   isValidPassword,
   isValidReason, // Address validations
@@ -27,7 +27,8 @@ function ProfilePage() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [orderData, setOrderData] = useState([]);
-  const [currentDateTime, setCurrentDateTime] = useState(new Date());
+  const [CancelProdCharge, setCancelProdCharge] = useState();
+
   useEffect(() => {
     localStorage.getItem("isLoggedIn") === "true"
       ? true
@@ -157,6 +158,7 @@ function ProfilePage() {
         // get order data 
         const OrderResponse = await axios.put("/api/UserOrder", UpdateData);
         setOrderData(OrderResponse.data.orderData);
+       
 
         // cancel and return functionality 
         // const currentTime = new Date();
@@ -249,19 +251,44 @@ function ProfilePage() {
     }
   }
 
-  const CancelProduct = async (prod_id, user_id) => {
+  const CancelProduct = async (prod_id, user_id, extraCharge = 0) => {
     try {
 
-      const ProdData = { prod_id: prod_id, user_id: user_id,};
-      const res = await axios.post('/api/UserOrder', ProdData);
+      if(extraCharge > 0){
 
+        const confirm = window.confirm('Cancelling the order will incur a fee of ₹50. Do you want to proceed?');
+
+        if (!confirm) {
+          // User chose not to proceed
+          return;
+        }else{
+          const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: extraCharge};
+          var res = await axios.post('/api/UserOrder', ProdData);
+        }
+      }else{
+        const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: extraCharge};
+        var res = await axios.post('/api/UserOrder', ProdData);
+      }
+      
+
+      // setCancelProdCharge()
       if(res.data.message === 'updated'){
+
         notify("Your order cancel Request has been sent");
         toast.success("Your order cancel Request has been sent");
+        
       }else{
+
         notify("Your order cancel Request fail");
         toast.success("Your order cancel Request fail");
+
       }
+      /* try{
+        const extraCharge = { extraCharge: extraCharge};
+        const res = await axios.post('/api/UserOrder', ProdData);
+      }catch(error){
+        console.error('extra charge Error:', error);
+      } */
     } catch (error) {
       console.error('Error:', error);
     }
@@ -566,7 +593,7 @@ function ProfilePage() {
                     <tbody>
                       {
                         orderData.map((data, index) => {
-                        console.log(data.order_status_date);
+                          const cancelProd = CancelProdChargeAfterTwentyFourHr(data.order_status_date);
 
                           const images = data ? data.image_name.split(', ').map(image => image.trim()) : [];
                           let cancelButton;
@@ -580,7 +607,7 @@ function ProfilePage() {
 
                             if(data.per_order_status === 1){
 
-                              cancelButton = <button className="btn btn-warning btn-rounded" onClick={() => CancelProduct(data.product_id, data.customer_id)}>Cancel order</button> 
+                              cancelButton = <button className="btn btn-warning btn-rounded" onClick={() => CancelProduct(data.product_id, data.customer_id, cancelProd)}>Cancel order</button> 
 
                             }else{
                               cancelButton = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>
