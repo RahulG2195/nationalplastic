@@ -13,23 +13,20 @@ import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import {addItemToCartD, removeItemFromCartD, setInitialCountD, } from "@/redux/reducer/tempSlice";
 import { prod } from "../ConstantURL";
 import { isLoggedIn } from "@/utils/validation";
-
+import {emptyTempSlice} from "@/redux/reducer/tempSlice";
 
 function AddToCart() {
-  const tempCartStates = useSelector((state) => state.temp);
+
   const CartStates = useSelector((state) => state.cart);
+  const tempCartStates = useSelector((state) => state.temp);
   const userState = useSelector((state) => state.userData.isLoggedIn);
   const productCount = useSelector((state) => {
-    let who;
-    if (!userState) {
-      who = "temp";
-    } else {
-      who = "cart";
-    }
-    const cart = state[who] || {};
-    return cart.products?.length || 0;
+    const cartType = state.userData.isLoggedIn ? state.cart : state.temp;
+    return cartType?.products?.length || 0;
   });
-  console.log('add to cart' + JSON.stringify(productCount));
+  const userID = useSelector((state) => state.userData.customer_id || null);
+
+  //console.log('add to cart' + JSON.stringify(productCount));
 
   
   // Use useState to manage local product count and update function
@@ -40,29 +37,60 @@ function AddToCart() {
   const [discount, setDiscount] = useState(0);
   const [totalPayble, setTotalPayble] = useState(0);
   const [installationCharges, setInstallationCharges] = useState(0);
+  const [Updated , setUpdated] = useState(true);
   const dispatch = useDispatch();
-
+  const StoreGuestData = async (products) => {
+    // Check if user is logged in and products array has items
+    console.log(products);
+    if (await isLoggedIn() && products.length > 0) {
+      try {
+        // Use Promise.all to await all dispatch calls in parallel
+        await products.map(async (product) => {
+          await dispatch(addToCart({
+            product_id: product.product_id,
+            quantity: product.quantity || 1,
+            price: product.price,
+            discount_price: product.discount_price,
+            color: product.color,
+            from: 0,
+          }));
+        });
+  
+        // After all products are added to the cart, perform final actions
+        dispatch(emptyTempSlice());
+        setUpdated(false);
+  
+      } catch (error) {
+        console.error('Error while storing guest data:', error);
+        throw error; // Propagate the error further if necessary
+      }
+    }
+  };
+  
   useEffect(() => {
     setCount(productCount); // Update localCount whenever productCount changes
   }, [productCount]);
+
   useEffect(() => {
-    const userDataString = localStorage.getItem("userData");
-    const userData = JSON.parse(userDataString) || {};
-    const customerId = userData.customer_id || null;
     let cartData;
     const tempOrUserData = async () => {
-      if (customerId) {
+      if (userID) {
         const response = await axios.post("/api/UserCart", {
-          customer_id: customerId,
+          customer_id: userID,
         });
-        console.log(response);
+        //console.log(response);
         cartData = response.data.products;
-        console.log("cd", response.data.products);
-        if (tempCartStates) {
-          const tempData = tempCartStates;
+        //console.log("cd", response.data.products);
+        console.log(tempCartStates);
+        console.log("length",tempCartStates.products.length??"NO length");
+
+        if (tempCartStates.products.length>0 && Updated) {
+          const tempData = tempCartStates.products;
+          console.log("tD", tempData);
+          StoreGuestData(tempData)
         }
-        console.log(cartData);
-        console.log("fetch1");
+        //console.log(cartData);
+        //console.log("fetch1");
         fetchData(cartData);
       } else {
         //Logic to Store Temporary Data
@@ -98,12 +126,12 @@ function AddToCart() {
             const tempProduct = tempProducts.find(
               (tempProd) => tempProd.product_id === product.product_id
             );
-            console.log("99");
+            //console.log("99");
             if (tempProduct) {
-              console.log("Inside");
+              //console.log("Inside");
               // Update quantity if corresponding tempProduct is found
-              console.log(product.color);
-              console.log(tempProduct.color);
+              //console.log(product.color);
+              //console.log(tempProduct.color);
 
               product.quantity = tempProduct.quantity;
               product.color =  tempProduct.color;
@@ -116,7 +144,7 @@ function AddToCart() {
           // Now, updatedProductsArray contains products with updated quantities
 
           //Mutiple product detail with updated quantity
-        console.log("fetch3");
+        //console.log("fetch3");
 
           fetchData(updatedProductsArray);
         }
@@ -128,21 +156,21 @@ function AddToCart() {
         "/api/colorBasedProduct",
         colorBasedProduct
       );
-      console.log("colorBAsedProduct ",JSON.stringify(response));
+      //console.log("colorBAsedProduct ",JSON.stringify(response));
       const dataBasedOnColor = response.data?.data;
-      console.log(dataBasedOnColor);
-      console.log(JSON.stringify(dataBasedOnColor));
+      //console.log(dataBasedOnColor);
+      //console.log(JSON.stringify(dataBasedOnColor));
 
       // const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
       const NoOfImages = dataBasedOnColor[0].image_name;
-      console.log(NoOfImages);
-      console.log(typeof(NoOfImages));
+      //console.log(NoOfImages);
+      //console.log(typeof(NoOfImages));
 
     }
 
     const fetchData = async (cartData) => {
       try {
-        console.log("cartData", JSON.stringify(cartData));
+        //console.log("cartData", JSON.stringify(cartData));
         const products = cartData.map(
           (item) => ({
             product_id: item.product_id,
@@ -159,24 +187,9 @@ function AddToCart() {
           }),
           []
         );
-        console.log("products ", JSON.stringify(products));
+        //console.log("products ", JSON.stringify(products));
         // state.products.push(action.payload);
-        const len = tempCartStates.products.length;
-        //logic to addtocart db after login when temp data will be there.
-        if (isLoggedIn() && len > 0) {
-          products.forEach((product) => {
-            dispatch(
-              addToCart({
-                product_id: product.product_id,
-                quantity: product.quantity || 1, // Explicitly set quantity to 1
-                price: product.price,
-                discount_price: product.discount_price,
-                color: product.color,
-                from: false,
-              })
-            );
-          });
-        }
+      
         const cartLen = CartStates.products.length;
 
         if (isLoggedIn() && cartLen == 0) {
@@ -193,7 +206,7 @@ function AddToCart() {
             );
           });
         }
-      console.log("Data GettiNG updated: ------")
+      //console.log("Data GettiNG updated: ------")
 
         // Calculate total price, discount, total payable, and installation charges
         // Calculate total payable amount, total discount, and total price without discount
@@ -234,17 +247,14 @@ function AddToCart() {
       }
     };
     tempOrUserData();
-  }, []);
+  }, [Updated]);
 
   const handleCartChange = async () => {
     try {
       // Fetch updated cart data
-      console.log("Cart cHange code: ------")
-      const userDataString = localStorage.getItem("userData");
-      const userData = JSON.parse(userDataString);
-      const customerId = userData.customer_id;
+     
       const response = await axios.post("/api/UserCart", {
-        customer_id: customerId,
+        customer_id: userID,
       });
       const cartData = response.data.products;
       // Extracting relevant data from the cart data
@@ -311,11 +321,8 @@ function AddToCart() {
       // handleCartChange();
     } else {
       try {
-        const userDataString = localStorage.getItem("userData");
-        const userData = JSON.parse(userDataString);
-        const customerId = userData.customer_id;
         const formData = new FormData();
-        formData.append("customer_id", customerId);
+        formData.append("customer_id", userID);
         formData.append("product_id", product_id);
         const response = await axios.delete("/api/UserCart", {
           data: formData,
@@ -346,7 +353,7 @@ function AddToCart() {
       }
     }
   };
-  console.log('proddata' + productDetailArr)
+  //console.log('proddata' + productDetailArr)
   return (
     <>
       <div className="row">

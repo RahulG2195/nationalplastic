@@ -18,19 +18,8 @@ import {
 import { isLoggedIn } from "@/utils/validation";
 import { Bounce, toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-const notifyError = () => {
-  toast.error("Login To Add To WishList", {
-    position: "top-center",
-    autoClose: 2000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-    transition: Bounce,
-  });
-};
+import { notifyError } from "@/utils/notify";
+
 
 const CartProduct = ({
   src,
@@ -49,9 +38,9 @@ const CartProduct = ({
   const router = useRouter();
 
   const [initialCount, setInitialCount] = useState(quantity);
-  // Set initial count to 1 by default
-  // const dispatch = useDispatch();
-const Np = "National Plastic"
+  const dispatch = useDispatch();
+  const Np = "National Plastic"
+
   const handleIncrement = async () => {
     const isLoggedInResult = await isLoggedIn();
     //console.log("state", isLoggedInResult);
@@ -78,7 +67,6 @@ const Np = "National Plastic"
       // Decrement by 1
     }
   };
-  const dispatch = useDispatch();
 
   const handleAddtoWishlist = async (product_id) => {
     //console.log("want to cart tp wish", product_id);
@@ -86,7 +74,7 @@ const Np = "National Plastic"
     //console.log("state", isLoggedInResult);
     //console.log("state", typeof isLoggedInResult);
     if (!isLoggedInResult) {
-      notifyError();
+      notifyError("Login to Add to cart");
       router.push("/Login");
     } else {
       dispatch(

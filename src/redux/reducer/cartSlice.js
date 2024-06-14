@@ -2,34 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import { Bounce, toast } from "react-toastify";
+import { notify  } from "@/utils/notify";
 
-const notify = () => {
-  toast.success("ADDED TO CART", {
-    position: "top-center",
-    autoClose: 2000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-    transition: Bounce,
-  });
-};
 
-const notifyinfo = () => {
-  toast.info("ALREADY IN CART", {
-    position: "top-center",
-    autoClose: 2000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-    transition: Bounce,
-  });
-};
 
 export const cartSlice = createSlice({
   name: "cart",
@@ -228,6 +203,7 @@ export const {
 } = cartSlice.actions;
 
 export const addToCart = (item) => async (dispatch, getState) => {
+  // const {color, from = true} = action;
   const { initialCount, items } = getState().wishlist; // Access state through the second parameter
   const userDataString = localStorage.getItem("userData");
   const userData = JSON.parse(userDataString);
@@ -238,7 +214,14 @@ export const addToCart = (item) => async (dispatch, getState) => {
     quantity: item.quantity,
     color: item.color || "Gold",
   });
-  notify();
+  const tORF = item.from || 1;
+  const data = item
+  console.log("tORF", tORF);
+  if(tORF !== 0){
+    console.log("YEsSSSSSSSSSSSSSSSSs", tORF);
+    console.log("YEsSSSSSSSSSSSSSSSS", data);
+  notify("ADDED TO CARTS");
+}
   dispatch(addItemToCart(item));
 };
 
