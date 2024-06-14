@@ -45,7 +45,7 @@ const WishlistPage1 = () => {
             discount_percentage: discountPercentage,
           };
         });
-
+        console.log("WS dta:",JSON.stringify(wishlistData))
         setWishlistItems(wishlistData);
         setIsLoading(false);
       } catch (error) {
@@ -109,6 +109,7 @@ const WishlistPage1 = () => {
                   productName={item.product_name}
                   producDiscription={item.short_description}
                   Price={item.price}
+                  color={item.color}
                   originalPrice={item.discount_price}
                   discount={item.discount_percentage}
                   onDeleteSuccess={() => handleDeleteSuccess(item.product_id)}

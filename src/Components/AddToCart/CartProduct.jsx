@@ -51,7 +51,7 @@ const CartProduct = ({
   const [initialCount, setInitialCount] = useState(quantity);
   // Set initial count to 1 by default
   // const dispatch = useDispatch();
-
+const Np = "National Plastic"
   const handleIncrement = async () => {
     const isLoggedInResult = await isLoggedIn();
     //console.log("state", isLoggedInResult);
@@ -133,7 +133,7 @@ const CartProduct = ({
       <div className="col-md-8 card-Quantity-section">
         <Link onClick={setid} href={`/ProductDetail/${seourl}`}>
           <div style={{ display: "flex" }}>
-            <h6 style={{ marginRight: "7px" }}>{productName}</h6>
+            <h6 style={{ marginRight: "7px" }}>{Np} {productName}</h6>
           </div>
           <h6 className="py-2">color: {color}</h6>
         </Link>

@@ -99,6 +99,7 @@ const BulkPremiumCards = ({proddata}) => {
       Discount: "20%",
     },
   ];
+  const Np = "National Plastic";
 
   return (
     <>
@@ -113,7 +114,7 @@ const BulkPremiumCards = ({proddata}) => {
               <PreChairsCard
                 id={chair.product_id}
                 ChairImg={`/Assets/images/products/${images[0]}`}
-                Title={chair.product_name}
+                Title={`${Np} ${chair.product_name} (${chair.color})`}
                 Discription={chair.short_description}
                 Price={chair.price}
                 orignalPrice={chair.discount_price}

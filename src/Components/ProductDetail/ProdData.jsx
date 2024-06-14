@@ -269,7 +269,7 @@ function ProdData({ category_id }) {
             <div className="product-dtl">
               <div className="product-info">
                 <div className="product-name">
-                  <h2 className="prod_nameh2">{name}</h2>
+                  <h2 className="prod_nameh2">National Plastic {name} {selectedColor ? `(${selectedColor})` : ''}</h2>
                 </div>
 
                 <div className="reviews-counter d-flex flex-wrap gap-2">
