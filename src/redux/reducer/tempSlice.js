@@ -147,6 +147,15 @@ export const tempSlice = createSlice({
         localStorage.setItem("temp", JSON.stringify(state.products));
       }
     },
+    emptyTempSlice: (state, action) => {
+      state.products = [];
+      state.total_price = 0;
+      state.discount_price = 0;
+
+      localStorage.removeItem("temp");
+
+      // notify("Cart Emptied Successfully");
+    },
   },
 });
 
@@ -156,6 +165,7 @@ export const {
   increaseQuantityD,
   decreaseQuantityD,
   removeItemFromCartD,
+  emptyTempSlice,
 } = tempSlice.actions;
 
 export const addToCartD = (item) => async (dispatch, getState) => {

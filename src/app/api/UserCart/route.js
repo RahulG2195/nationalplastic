@@ -10,6 +10,19 @@ export async function POST(request) {
       values: [user_id],
     });
 
+    console.log("mycart: ",mycart);
+
+
+if (mycart.length === 0) {
+console.log("mycart0000000000000000: ",mycart);
+
+  return new Response(
+    JSON.stringify({
+      status: 200,
+      message:"Empty cart",
+    })
+  );
+}
     const productIds = mycart.map((row) => row.product_id);
     console.log("pIDS", productIds);
     console.log("pIDS", productIds.join(","));
@@ -24,6 +37,9 @@ export async function POST(request) {
       `,
       values: [user_id],
     });
+    console.log("--------------------------------")
+    console.log("--------------------------------",products)
+
     //appply map here to get data
     const dataForPayment = products.map((row) => ({
       product_id: row.product_id,
