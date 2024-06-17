@@ -123,6 +123,7 @@ function Login() {
                     type="email"
                     className="form-control"
                     id="inputEmail3"
+                    placeholder="Enter Your Email"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}

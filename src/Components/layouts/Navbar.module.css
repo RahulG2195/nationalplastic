@@ -52,6 +52,9 @@
   font-weight: 400;
 }
 
+.dropdownItem a:hover{
+  color: #CC0008 !important;
+}
 .subDropdown {
   left: 100%;
   top: 0;

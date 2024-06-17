@@ -87,7 +87,7 @@ export default function Manufacture() {
   }, []);
   return (
     <section className="shop_room_sec common_section manufacturer_common_section ">
-      <div className="px-4">
+      <div className="container">
         <div className="row">
           <div className="text-center mb-5 ">
             <div className="fs-1 lh-small fw-bolder manuf_head">
@@ -156,7 +156,7 @@ export default function Manufacture() {
                         }
                         manfacthover="manfact"
                         style="manfTitle"
-                        image={`/Assets/images/Home-page/${product.image_name}`}
+                        image={`/Assets/images/products/category/${product.image_name}`}
                         title={product.category_name}
                         categoryType={product.categoryType}
                         onCategoryChange={() =>
@@ -170,7 +170,7 @@ export default function Manufacture() {
 
               {Household.map((product) => (
                 <div
-                  className="col-xs-12 col-sm-6 px-md-5 col-md-4 shop_col my-md-4 my-2 hideswiper"
+                  className="col-xs-12 col-sm-6 px-md-3 col-md-4 shop_col my-md-4 my-2 hideswiper"
                   key={product.key}
                 >
                   <CatCards
@@ -187,7 +187,7 @@ export default function Manufacture() {
                         : product.category_id
                     }
                     style="manfTitle pt-4 px-4 d-flex gap-5  justify-content-arround"
-                    image={`/Assets/images/Home-page/${product.image_name}`}
+                    image={`/Assets/images/products/category/${product.image_name}`}
                     title={product.category_name}
                     categoryType={product.categoryType}
                     onCategoryChange={() => sendCategory(product.product_name)}

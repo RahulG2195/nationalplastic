@@ -244,6 +244,17 @@ p {
     font-size: 20px !important;
 }
 
+.InitialName{
+    padding: 7px 5px;
+    border-radius: 50%;
+    background: #262262;
+    color: #fff;
+    font-size: 13px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    box-shadow: 1px 2px 6px 1px rgba(0, 0, 0, 0.3);
+}
+
 /* prod card  */
 .newProdCard .card {
     background-color: #fff;

@@ -8,12 +8,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 // import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import ProductsAccr from "../ProductsAccor/ProductsAccr";
+import ProductsAccr from "../ProductsAccor/ProductsAccor";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import styles from "./Navbar.module.css";
+import InvestorAccor from "../InvesterAccor/InvesterAccor";
 
 export default function Header() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -21,7 +22,9 @@ export default function Header() {
   const [isClicked, setIsClicked] = useState(false);
   const [dropdown, setDropdown] = useState(false);
   const [subDropdown, setSubDropdown] = useState(false);
-  
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+  });
   // const [count, setCount] = useState(0);
   const router = useRouter();
   const dispatch = useDispatch;
@@ -31,6 +34,7 @@ export default function Header() {
   function check() { }
   const userState = useSelector((state) => state.userData.isLoggedIn);
   const userEmail = useSelector((state) => state.userData.email);
+
 
   const productCount = useSelector((state) => {
 
@@ -111,6 +115,27 @@ export default function Header() {
     setIsClicked(!isClicked);
   };
 
+
+  useEffect(() => {
+    // Handler to call on window resize
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+      });
+    };
+
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+
+    // Call handler right away so state gets updated with initial window size
+    handleResize();
+
+    // Remove event listener on cleanup
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const {width} = windowSize;
+  
   return (
     <>
       <div className="container-fluid  header menbg">
@@ -183,10 +208,14 @@ export default function Header() {
                     About Us
                   </Link>
                 </li>
-                <li className={`nav-item brdr ${styles.navItem}`}
+                {
+                  (width <= 991) ? <InvestorAccor handleShow={handleShow}/>
+                  :
+                  <li className={`nav-item brdr ${styles.navItem}`}
                   onMouseEnter={() => setDropdown(true)}
                   onMouseLeave={() => setDropdown(false)}
                 >
+
                   <Link
                     className="nav-link multidropdown"
                     href="#"
@@ -295,7 +324,9 @@ export default function Header() {
                       </li>
                     </ul>
                   )}
-                </li>
+                  </li>
+                }
+                
                 <li className="nav-item brdr accr ">
                   <ProductsAccr handleShow={handleShow} />
                 </li>
@@ -370,7 +401,8 @@ export default function Header() {
                       href="/ProfilePage"
                       onClick={isClicked ? handleShow : null}
                     >
-                      <Image
+                    <span className="InitialName">RG</span>
+                      {/* <Image
                         height={100}
                         width={100}
                         layout="responsive"
@@ -378,7 +410,7 @@ export default function Header() {
                         src="/Assets/svg/Group 4.svg"
                         alt="location"
                       />
-                      <p className="Homeemail">{userEmail}</p>
+                      <p className="Homeemail">{userEmail}</p> */}
                     </Link>
                   ) : (
                     <Link
@@ -449,7 +481,8 @@ export default function Header() {
                 <li>
                   {isLoggedIn ? (
                     <Link href="/ProfilePage">
-                      <Image
+                      <span className="InitialName">RG</span>
+                      {/* <Image
                         src="/Assets/svg/Group 4.svg"
                         height={50}
                         width={50}
@@ -458,7 +491,7 @@ export default function Header() {
                         alt="Profile"
                         className="footer-icon"
                       />
-                      <p className="Homeemail">{userEmail}</p>
+                      <p className="Homeemail">{userEmail}</p> */}
                     </Link>
                   ) : (
                     <Link href="/Login">

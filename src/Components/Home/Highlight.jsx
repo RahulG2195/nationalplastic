@@ -54,7 +54,7 @@ export default function Highlight() {
   }, []);
   return (
     <section className="top_pick_sec position-relative common_section position-relative">
-      <div className="">
+      <div className="container">
         <div className="row">
           <div className="text-center highlightCont">
             <div className="darkBlue fs-1 fw-medium">
@@ -76,10 +76,10 @@ export default function Highlight() {
               </center >
             ) : ( */}
             <div className=" highlight_col mb-5">
-              <div className="d-flex justify-content-center gap-4 flex-wrap">
+              <div className="row">
                 {productArr.map((product) => {
                   const images = product.image_name ? product.image_name.split(', ').map(image => image.trim()) : [];
-                  return <div key={product.product_name} className="my-2 prodHcard">
+                  return <div key={product.product_name} className="col-md-4 my-2 prodHcard">
                     <Link href={`/ProductDetail/${product.product_id}`}>
                       <div className="card highlightcard">
                         <Image
@@ -93,7 +93,7 @@ export default function Highlight() {
                         />
                         <div className="card-body cardbtm">
                           <h5 className="card-title">{product.product_name}</h5>
-                          <p className="card-text mb-5 pb-4">
+                          <p className="card-text py-2">
                             {product.short_description}
                           </p>
                           <div className="btn btn-dark text-white rounded-circle highArrow mt-md-5">
