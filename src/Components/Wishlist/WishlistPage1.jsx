@@ -45,7 +45,7 @@ const WishlistPage1 = () => {
             discount_percentage: discountPercentage,
           };
         });
-        console.log("WS dta:",JSON.stringify(wishlistData))
+        // console.log("WS dta:",JSON.stringify(wishlistData))
         setWishlistItems(wishlistData);
         setIsLoading(false);
       } catch (error) {

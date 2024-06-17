@@ -358,7 +358,7 @@ function ProdData({ category_id }) {
                 </Link>
                 <Link href="/BulkOrder" className="">
                     <button
-                    className="btn btn-danger px-md-5 my-2 ProdbtnRes bulkRes  "
+                    className="btn btn-danger px-md-5 my-2 ProdbtnRes bulkRes"
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
                   >

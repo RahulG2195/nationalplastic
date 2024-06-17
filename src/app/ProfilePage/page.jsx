@@ -14,6 +14,7 @@ import {
   isValidPassword,
   isValidReason, // Address validations
 } from "@/utils/validation";
+import ProdEmail from "@/Components/ReturnProdEmail/prodEmail";
 
 function ProfilePage() {
   const userEmail = useSelector((state) => state.userData.email);
@@ -27,7 +28,7 @@ function ProfilePage() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [orderData, setOrderData] = useState([]);
-  const [CancelProdCharge, setCancelProdCharge] = useState();
+  const [ReturnSingleProd, setReturnSingleProd] = useState([]);
 
   useEffect(() => {
     localStorage.getItem("isLoggedIn") === "true"
@@ -158,7 +159,7 @@ function ProfilePage() {
         // get order data 
         const OrderResponse = await axios.put("/api/UserOrder", UpdateData);
         setOrderData(OrderResponse.data.orderData);
-       
+
 
         // cancel and return functionality 
         // const currentTime = new Date();
@@ -251,49 +252,57 @@ function ProfilePage() {
     }
   }
 
-  const CancelProduct = async (prod_id, user_id, extraCharge = 0) => {
+  const CancelProduct = async (prod_id, user_id) => {
     try {
 
-      if(extraCharge > 0){
+      const checkorderStatus = orderData.filter((od) => od.prod_id == prod_id && od.customer_id == user_id)
 
+      const cancelProd = CancelProdChargeAfterTwentyFourHr(checkorderStatus[0]['order_status_date']);
+      const orderStatus = checkorderStatus[0]['order_status'];
+
+      if (cancelProd > 0 && orderStatus >= 2) {
         const confirm = window.confirm('Cancelling the order will incur a fee of ₹50. Do you want to proceed?');
 
         if (!confirm) {
           // User chose not to proceed
           return;
-        }else{
-          const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: extraCharge};
+        } else {
+          const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: cancelProd };
           var res = await axios.post('/api/UserOrder', ProdData);
         }
-      }else{
-        const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: extraCharge};
+      } else {
+        const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: cancelProd };
         var res = await axios.post('/api/UserOrder', ProdData);
       }
-      
+
 
       // setCancelProdCharge()
-      if(res.data.message === 'updated'){
+      if (res.data.message === 'updated') {
 
         notify("Your order cancel Request has been sent");
         toast.success("Your order cancel Request has been sent");
-        
-      }else{
+
+      } else {
 
         notify("Your order cancel Request fail");
         toast.success("Your order cancel Request fail");
 
       }
-      /* try{
-        const extraCharge = { extraCharge: extraCharge};
-        const res = await axios.post('/api/UserOrder', ProdData);
-      }catch(error){
-        console.error('extra charge Error:', error);
-      } */
     } catch (error) {
       console.error('Error:', error);
     }
   }
 
+  const ReturnProduct = async (prod_id, user_id) => {
+    try {
+
+      const GetSingleData = orderData.filter((od) => od.prod_id == prod_id && od.customer_id == user_id)
+      setReturnSingleProd(GetSingleData)
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+  console.log('ReturnSingleProd', ReturnSingleProd);
   return (
     <>
       <div className="container profile-page-container mb-5">
@@ -593,27 +602,25 @@ function ProfilePage() {
                     <tbody>
                       {
                         orderData.map((data, index) => {
-                          const cancelProd = CancelProdChargeAfterTwentyFourHr(data.order_status_date);
 
                           const images = data ? data.image_name.split(', ').map(image => image.trim()) : [];
                           let cancelButton;
 
-                          if(data.order_status === 5){
+                          if (data.order_status === 5) {
 
-                            cancelButton = <button className="btn btn-danger btn-rounded">Return order</button>
+                            cancelButton = <button className="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => ReturnProduct(data.product_id, data.customer_id)}>Return order</button>
 
-                          }else if(data.order_status === 1 || data.order_status === 2 || data.order_status === 3 || data.order_status === 4)
-                          {
+                          } else if (data.order_status === 1 || data.order_status === 2 || data.order_status === 3 || data.order_status === 4) {
 
-                            if(data.per_order_status === 1){
+                            if (data.per_order_status === 1) {
 
-                              cancelButton = <button className="btn btn-warning btn-rounded" onClick={() => CancelProduct(data.product_id, data.customer_id, cancelProd)}>Cancel order</button> 
+                              cancelButton = <button className="btn btn-warning btn-rounded" onClick={() => CancelProduct(data.product_id, data.customer_id)}>Cancel order</button>
 
-                            }else{
+                            } else {
                               cancelButton = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>
                             }
-                            
-                          }else{
+
+                          } else {
                             cancelButton = ''
                           }
                           return <tr key={index}>
@@ -695,6 +702,37 @@ function ProfilePage() {
       <div className="my-5">
         <FooterRow />
       </div>
+
+      {/* popup */}
+      <div>
+        <div
+          className="modal fade"
+          id="exampleModal"
+          tabIndex={-1}
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog">
+            <div className="modal-content modal-content-mypopup">
+              <div className="modal-body">
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                />
+                {
+                  ReturnSingleProd.length > 0 ?
+                    <ProdEmail OId={ReturnSingleProd[0]['od_id']} cID={ReturnSingleProd[0]['customer_id']} cEmail={ReturnSingleProd[0]['customer_email']} cPhone={ReturnSingleProd[0]['Phone']}  pID={ReturnSingleProd[0]['prod_id']} price={ReturnSingleProd[0]['prod_price']} qty={ReturnSingleProd[0]['quantity']}></ProdEmail>
+                  : ''
+                }
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </>
   );
 }
