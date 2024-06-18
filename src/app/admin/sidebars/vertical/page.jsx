@@ -18,8 +18,8 @@ const navigation = [
 
   },
   {
-    title: "Alert",
-    href: "/ui/alerts",
+    title: "category",
+    href: "/admin/category",
     icon: "bi bi-bell",
   },
   {
