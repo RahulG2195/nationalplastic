@@ -13,6 +13,10 @@ import {
   isValidReason, // Address validations
 } from "@/utils/validation";
 function ProfilePage() {
+  const [FirstName, setFirstName] = useState('');
+  const [LastName, setLastName] = useState('');
+  const [InitialName, setInitialName] = useState('');
+
   useEffect(() => {
     localStorage.getItem("isLoggedIn") === "true"
       ? true
@@ -146,7 +150,9 @@ function ProfilePage() {
         const response = await axios.put("/api/Users", formData);
 
         const userData = response.data.message[0]; // Directly access response.data.message
-        const { customer_id, Email } = userData; // Destructure from userData, not from JSON.stringify
+        const { customer_id, Email, FirstName, LasttName  } = userData; // Destructure from userData, not from JSON.stringify
+        setFirstName(FirstName)
+        setLastName(LasttName)
         const UpdateData = {
           email: Email,
           customer_id: customer_id,
@@ -156,13 +162,24 @@ function ProfilePage() {
         const messageArray = responseData.message;
         setMessages(messageArray);
         setIsLoading(false);
+        
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     };
 
     fetchUserData();
-  }, []);
+  }, [userEmail]);
+
+  useEffect(() => {
+
+    if (FirstName && LastName ) {
+      setInitialName(FirstName[0].toUpperCase() + LastName[0].toUpperCase());
+    } 
+    else {
+      setInitialName('N' + 'P');
+    }
+  }, [FirstName, LastName]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -235,7 +252,8 @@ function ProfilePage() {
             <div className="Left-Profile">
               <div className="Left-Profile-inner">
                 <div>
-                  <i className="fa fa-user-circle" aria-hidden="true"></i>
+                  {/* <i className="fa fa-user-circle" aria-hidden="true"></i> */}
+                  <span className="InitialName profileInitialName">{InitialName}</span>
                 </div>
                 <div className="profile-detail">
                   <p className="fw-semibold darkBlue">Hello,</p>

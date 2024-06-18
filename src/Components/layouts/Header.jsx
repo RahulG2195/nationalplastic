@@ -25,6 +25,10 @@ export default function Header() {
   const [windowSize, setWindowSize] = useState({
     width: undefined,
   });
+  const [FirstName, setFirstName] = useState('');
+  const [LastName, setLastName] = useState('');
+  const [InitialName, setInitialName] = useState('');
+
   // const [count, setCount] = useState(0);
   const router = useRouter();
   const dispatch = useDispatch;
@@ -58,28 +62,46 @@ export default function Header() {
     setCount(productCount); // Update localCount whenever productCount changes
   }, [productCount]);
 
+
+  // get user data to show initial name after login 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const formData = {
+          email: userEmail,
+          getProfile: true,
+        };
+
+        const response = await axios.put("/api/Users", formData);
+        
+        const userData = response.data.message[0];
+        const { FirstName, LasttName } = userData;
+        setFirstName(FirstName)
+        setLastName(LasttName)
+
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, [userEmail]);
+
+  useEffect(() => {
+
+    if (FirstName && LastName ) {
+      setInitialName(FirstName[0].toUpperCase() + LastName[0].toUpperCase());
+    } 
+    else {
+      setInitialName('N' + 'P');
+    }
+  }, [FirstName, LastName]);
+
+  // console.log('initial value', InitialName);
+  // ----------------------- End of initail name after login --------------------------------- // 
+
+
   // useEffect(async () => {
-  //   const userDataString = localStorage.getItem("userData");
-  //   const userData = JSON.parse(userDataString) || {};
-  //   const customerId = userData.customer_id || {};
-
-  //   const check = await axios.post("/api/UserCart", {
-  //     customer_id: customerId,
-  //   });
-  //   if (
-  //     check &&
-  //     check.data &&
-  //     check.data.products &&
-  //     Array.isArray(check.data.products)
-  //   ) {
-  //     length = check.data.products.length;
-  //     setCount(length);
-  //   } else {
-  //     length = 0;
-  //   }
-  //   // setCount(data);
-  // }, [dispatch]);
-
   const handleSearchChange = async (e) => {
     setSearchTerm(e.target.value);
 
@@ -135,7 +157,7 @@ export default function Header() {
   }, []);
 
   const {width} = windowSize;
-  
+
   return (
     <>
       <div className="container-fluid  header menbg">
@@ -156,7 +178,7 @@ export default function Header() {
               >
                 <span className="navbar-toggler-icon" />
               </button>
-              <Link href="/#/">
+              <Link href="/">
                 <Image
                   src="/Assets/images/nation_logo.png"
                   className="Image-fluid"
@@ -401,7 +423,7 @@ export default function Header() {
                       href="/ProfilePage"
                       onClick={isClicked ? handleShow : null}
                     >
-                    <span className="InitialName">RG</span>
+                    <span className="InitialName">{InitialName}</span>
                       {/* <Image
                         height={100}
                         width={100}
@@ -481,7 +503,7 @@ export default function Header() {
                 <li>
                   {isLoggedIn ? (
                     <Link href="/ProfilePage">
-                      <span className="InitialName">RG</span>
+                      <span className="InitialName">{InitialName}</span>
                       {/* <Image
                         src="/Assets/svg/Group 4.svg"
                         height={50}

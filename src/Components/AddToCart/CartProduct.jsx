@@ -168,12 +168,10 @@ const CartProduct = ({
             onClick={() => handleAddtoWishlist(productId)}
             className="CouponApplied mx-3"
           >
-            <Image
+            <img
               src="/Assets/images/AddTOCart/core-heart.png"
-              className="img-fluid d-block w-100"
+              className="img-fluid d-block"
               alt="ome banner 1"
-              width={100}
-              height={80}
             />
             <p>Save For Later</p>
           </div>
