@@ -7,18 +7,13 @@ import upload from "@/utils/multer.middleware";
 const uploadImage = async (file)=>{
   try{
     await upload.single(file);
-    console.log("Upload")
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
     const path = `./uploads/${file.name}`;
-    console.log("Upload::")
     await writeFile(path, buffer);
-    console.log("Upload:::")
   }catch(error){
     console.log('error: ', error.message);
   }
-
-  
 }
 export async function POST(request) {
   try {
@@ -57,17 +52,17 @@ export async function POST(request) {
     }
 
     // Insert the new category
-    // const result = await query({
-    //   query: `
-    //     INSERT INTO categories (category_name, image_name, navshow, status)
-    //     VALUES (?, ?, ?, ?)
-    //   `,
-    //   values: [category_name, image_name, navshow, status],
-    // });
+    const result = await query({
+      query: `
+        INSERT INTO categories (category_name, image_name, navshow, status)
+        VALUES (?, ?, ?, ?)
+      `,
+      values: [category_name, image_name, navshow, status],
+    });
     console.log(category_name, image_name, navshow, status)
 
     return new Response(
-      JSON.stringify({ success: true, data: "result" }),
+      JSON.stringify({ success: true, data: result }),
       { status: 201 }
     );
 
@@ -83,13 +78,18 @@ export async function POST(request) {
 
 export async function PUT(request) {
   try {
-    const data = await request.json(); // Parse incoming JSON data
-    const { category_id, category_name, image_name, navshow, status } = data;
+    const data = await request.formData();
 
-    // if(allCategories)
+    const { category_id, category_name, image_name, navshow, status, image } = Object.fromEntries(
+      data.entries()
+    );
+
+    if (image) {
+      await uploadImage(image);  // Ensure this function handles image upload
+    }
+
     // Manual validation
     const requiredFields = { category_id, category_name, image_name, navshow, status };
-
     const missingFields = Object.entries(requiredFields).filter(([key, value]) => !value).map(([key]) => key);
 
     if (missingFields.length > 0) {

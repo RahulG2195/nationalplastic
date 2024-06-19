@@ -1,12 +1,13 @@
 "use client";
 import Link from 'next/link';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from 'axios';
 import { Table } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { useRouter } from "next/navigation";
-
+import Image from "next/image";
+import "./CategoryList.css";
 const CategoryList = () => {
   const router = useRouter();
   const [categoryArray, setCategoryArray] = useState([]);
@@ -39,13 +40,12 @@ const CategoryList = () => {
   const handleConfirmDelete = async () => {
     if (currentItemToDelete !== null) {
       try {
-        const response = await axios.delete("/api/adminCategories", {
+        await axios.delete("/api/adminCategories", {
           headers: {
             'Content-Type': 'application/json',
           },
           data: JSON.stringify({ category_id: currentItemToDelete })
         });
-        // Update category array after deletion
         const updatedCategories = categoryArray.filter(category => category.category_id !== currentItemToDelete);
         setCategoryArray(updatedCategories);
         setFilteredCategoryArray(updatedCategories);
@@ -72,10 +72,17 @@ const CategoryList = () => {
 
   const columns = [
     {
+      title: 'Index',
+      key: 'index',
+      render: (text, record, index) => index + 1,
+      fixed: 'left',
+    },
+    {
       title: 'Category ID',
       dataIndex: 'category_id',
       key: 'category_id',
       fixed: 'left',
+      hidden: true
     },
     {
       title: 'Category Name',
@@ -91,9 +98,21 @@ const CategoryList = () => {
       ),
     },
     {
-      title: 'Image Name',
+      title: 'Image',
       dataIndex: 'image_name',
       key: 'image_name',
+      render: (text) => (
+        <Image
+          src={`/Assets/images/circular/${text}`}
+          className='admin-product-img'
+          alt={text}
+          style={{ width: '100px', height: '50px' }}
+          width={3}
+                height={3}
+                layout="responsive"
+                objectFit="cover"
+        />
+      ),
     },
     {
       title: 'Navshow',

@@ -2,26 +2,42 @@
 import React, { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Form, Input, Button, InputNumber } from 'antd';
-import "./EditCategory.css";
 import axios from 'axios';
+import "./EditCategory.css";
 
 export default function EditCategory() {
   const { control, handleSubmit, setValue, formState: { errors } } = useForm();
 
-  const validateCategory = async (data) => {
-    try {
-      const response = await axios.post("/api/adminCategories", data);
-      console.log('Validation response:', response.data);
-      return response.data;
-    } catch (error) {
-      console.error('Validation Error:', error.message);
-      throw error; // Re-throw the error to be caught in the onSubmit function
-    }
-  };
+  // const validateCategory = async (data) => {
+  //   try {
+  //     const response = await axios.post("/api/adminCategories", data);
+  //     console.log('Validation response:', response.data);
+  //     return response.data;
+  //   } catch (error) {
+  //     console.error('Validation Error:', error.message);
+  //     throw error; // Re-throw the error to be caught in the onSubmit function
+  //   }
+  // };
 
   const updateCategory = async (data) => {
     try {
-      const response = await axios.put("/api/adminCategories", data);
+      // Prepare form data
+      const formData = new FormData();
+      formData.append('category_name', data.category_name);
+      formData.append('image_name', data.image_name);
+      formData.append('navshow', data.navshow);
+      formData.append('status', data.status);
+      formData.append('category_id', data.category_id);
+
+      if (data.image) {
+        formData.append('image', data.image);
+      }
+
+      const response = await axios.put("/api/adminCategories", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
       console.log('Update response:', response.data);
       return response.data;
     } catch (error) {
@@ -38,6 +54,12 @@ export default function EditCategory() {
       // Handle errors, e.g., show an error message
       console.error('Submission Error:', error.message);
     }
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setValue('image', file);
+    setValue('image_name', file ? file.name : '');
   };
 
   useEffect(() => {
@@ -71,17 +93,25 @@ export default function EditCategory() {
         />
       </Form.Item>
       <Form.Item
-        label="Image Name"
-        validateStatus={errors.image_name ? 'error' : ''}
-        help={errors.image_name ? 'Please input the image name!' : ''}
+        label="Image"
+        validateStatus={errors.image ? 'error' : ''}
+        help={errors.image ? 'Please upload an image!' : ''}
       >
-        <Controller
-          name="image_name"
-          control={control}
-          rules={{ required: true }}
-          render={({ field }) => <Input {...field} />}
+        <input
+          type="file"
+          onChange={handleFileChange}
         />
       </Form.Item>
+      <Controller
+        name="image_name"
+        control={control}
+        render={({ field }) => <Input {...field} type="hidden" />}
+      />
+      <Controller
+        name="image"
+        control={control}
+        render={({ field }) => <input {...field} type="hidden" />}
+      />
       <Form.Item
         label="Nav Show"
         validateStatus={errors.navshow ? 'error' : ''}
