@@ -23,21 +23,19 @@ const uploadImage = async (file)=>{
 export async function POST(request) {
   try {
     const data = await request.formData();
-    console.log("Upload:::" + data);
 
 
-    const { category_name, image_name, navshow, status, images } = Object.fromEntries(
+    const { category_name, image_name, navshow, status, image } = Object.fromEntries(
       data.entries()
     );
-    const File = data.get("File");
-    console.log("file: "+ File)
+
     
-    console.log("values: "+category_name, image_name, navshow, status , images)
-    if(images){
-      uploadImage(images)
+    if(image){
+      uploadImage(image)
     }
+
     const allCategories = await query({
-      query: "SELECT * FROM categories whesre category_name = ?",
+      query: "SELECT * FROM categories where category_name = ? ",
       values: [category_name],
     });
     if(allCategories.length>0){
