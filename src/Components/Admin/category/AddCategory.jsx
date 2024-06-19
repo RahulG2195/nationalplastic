@@ -5,6 +5,8 @@ import { Form, Input, Button, InputNumber, message } from 'antd';
 import axios from 'axios';
 import "./EditCategory.css";
 
+
+
 export default function AddCategory() {
   const { control, handleSubmit, setValue, formState: { errors } } = useForm();
 
@@ -22,6 +24,7 @@ export default function AddCategory() {
 
   const handleFileChange = (e) => {
     const files = e.target.files;
+    setValue('image' , files)
     const imageNames = Array.from(files).map(file => file.name);
     setValue('image_name', imageNames.join(', '));
   };

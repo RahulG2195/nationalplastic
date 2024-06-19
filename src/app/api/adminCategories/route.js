@@ -1,11 +1,43 @@
 import { query } from '@/lib/db';
+import nodemailer from "nodemailer";
+import { writeFile } from "fs/promises";
+import upload from "@/utils/multer.middleware";
 
+
+const uploadImage = async (file)=>{
+  try{
+    await upload.single(file);
+    console.log("Upload")
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    const path = `./uploads/${file.name}`;
+    console.log("Upload::")
+    await writeFile(path, buffer);
+    console.log("Upload:::")
+  }catch(error){
+    console.log('error: ', error.message);
+  }
+
+  
+}
 export async function POST(request) {
   try {
-    const data = await request.json(); // Parse incoming JSON data
-    const { category_name, image_name, navshow, status } = data;
+    const data = await request.formData();
+    console.log("Upload:::" + data);
+
+
+    const { category_name, image_name, navshow, status, images } = Object.fromEntries(
+      data.entries()
+    );
+    const File = data.get("File");
+    console.log("file: "+ File)
+    
+    console.log("values: "+category_name, image_name, navshow, status , images)
+    if(images){
+      uploadImage(images)
+    }
     const allCategories = await query({
-      query: "SELECT * FROM categories where category_name = ?",
+      query: "SELECT * FROM categories whesre category_name = ?",
       values: [category_name],
     });
     if(allCategories.length>0){
