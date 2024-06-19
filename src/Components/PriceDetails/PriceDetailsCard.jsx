@@ -23,6 +23,7 @@ const PriceDetailsCard = ({
   const [Address, setAddress] = useState(null);
 
   const isBrowser = typeof window !== "undefined";
+
   useEffect(() => {
     const fetchUserData = async () => {
       const formData = {
@@ -77,6 +78,7 @@ const PriceDetailsCard = ({
 
   const [DiscountCard, setDiscountCard] = useState(0);
   const [productsData, setProductsData] = useState(null);
+
   const testing = async () => {
     const userCartData = await axios.post("/api/UserCart", {
       customer_id: customer_id,
@@ -99,7 +101,10 @@ const PriceDetailsCard = ({
   // const productsData = userCartData.data.productps;
   // dispatch(createOrderSuccess(orderData));
   const makePayment = async ({ productId = null }) => {
+
     const totalPay = parseFloat(totalPrice) + parseFloat(InstallationCharge);
+    // console.log('totalPay', totalPay);
+    // console.log('totalPay', totalPay * 100);
     const response = await axios.post("/api/razorpay", {
       amount: totalPay * 100,
       currency: "INR",

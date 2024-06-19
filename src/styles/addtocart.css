@@ -108,6 +108,7 @@
     width: 18px;
     height: 14px;
     margin-right: 5px;
+    object-fit: contain;
 }
 
 .CouponApplied i{

@@ -8,14 +8,30 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { notify, notifyError } from "@/utils/notify.js";
 import { useSelector } from "react-redux";
+import Link from "next/link";
+import CancelProdChargeAfterTwentyFourHr from "@/utils/CancelProduct";
 import {
   isValidPassword,
   isValidReason, // Address validations
 } from "@/utils/validation";
+import ProdEmail from "@/Components/ReturnProdEmail/prodEmail";
+
 function ProfilePage() {
   const [FirstName, setFirstName] = useState('');
   const [LastName, setLastName] = useState('');
   const [InitialName, setInitialName] = useState('');
+  const userEmail = useSelector((state) => state.userData.email);
+  const [data, setData] = useState({});
+  const [messages, setMessages] = useState([]);
+  const [editable, setEditable] = useState(false);
+  const [adress2, setAdress2] = useState("");
+
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const [orderData, setOrderData] = useState([]);
+  const [ReturnSingleProd, setReturnSingleProd] = useState([]);
 
   useEffect(() => {
     localStorage.getItem("isLoggedIn") === "true"
@@ -38,15 +54,8 @@ function ProfilePage() {
     // setIsLoggedIn(isLoggedIn);
     setData(storedData);
   }, []);
-  const userEmail = useSelector((state) => state.userData.email);
 
-  const [editable, setEditable] = useState(false);
-  const [adress2, setAdress2] = useState("");
 
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
   // Get user ID from context (replace with your logic)
 
   const handleSubmit = async (event) => {
@@ -128,8 +137,8 @@ function ProfilePage() {
     phone: "",
     address: "",
   });
-  const [data, setData] = useState({});
-  const [messages, setMessages] = useState([]);
+
+
   const cust_id = messages.length > 0 ? messages[0].customer_id : null;
   const email_id = messages.length > 0 ? messages[0].Email : null;
 
@@ -142,10 +151,7 @@ function ProfilePage() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const formData = {
-          email: userEmail,
-          getProfile: true,
-        };
+        const formData = { email: userEmail, getProfile: true, };
 
         const response = await axios.put("/api/Users", formData);
 
@@ -153,16 +159,33 @@ function ProfilePage() {
         const { customer_id, Email, FirstName, LasttName  } = userData; // Destructure from userData, not from JSON.stringify
         setFirstName(FirstName)
         setLastName(LasttName)
-        const UpdateData = {
-          email: Email,
-          customer_id: customer_id,
-        };
+        const UpdateData = {email: Email, customer_id: customer_id, };
+
+        // get order data 
+        const OrderResponse = await axios.put("/api/UserOrder", UpdateData);
+        setOrderData(OrderResponse.data.orderData);
+
+
+        // cancel and return functionality 
+        // const currentTime = new Date();
+        // const DateFromDB = OrderResponse.data.orderData[0]['order_status_date'];
+
+        // console.log('Database Timestamp:', DateFromDB.getFullYear());
+        // console.log('Current Timestamp:', currentTime.getFullYear());
+
+        // if (DateFromDB.getTime() === currentTime.getTime()) {
+        //   console.log('Timestamps match, performing action...');
+        // } else {
+        //   console.log('Timestamps match, performing action11111111...');
+        // }
+
         localStorage.setItem("userData", JSON.stringify(UpdateData));
         const responseData = response.data;
         const messageArray = responseData.message;
         setMessages(messageArray);
         setIsLoading(false);
         
+
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -226,6 +249,7 @@ function ProfilePage() {
       };
 
       const response = await axios.post("/api/UserProfile", updatedData);
+
       notify("UserProfile updated");
       toast.success("Data updated successfully");
     } catch (error) {
@@ -244,6 +268,57 @@ function ProfilePage() {
     }
   }
 
+  const CancelProduct = async (prod_id, user_id) => {
+    try {
+
+      const checkorderStatus = orderData.filter((od) => od.prod_id == prod_id && od.customer_id == user_id)
+
+      const cancelProd = CancelProdChargeAfterTwentyFourHr(checkorderStatus[0]['order_status_date']);
+      const orderStatus = checkorderStatus[0]['order_status'];
+
+      if (cancelProd > 0 && orderStatus >= 2) {
+        const confirm = window.confirm('Cancelling the order will incur a fee of ₹50. Do you want to proceed?');
+
+        if (!confirm) {
+          // User chose not to proceed
+          return;
+        } else {
+          const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: cancelProd };
+          var res = await axios.post('/api/UserOrder', ProdData);
+        }
+      } else {
+        const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: cancelProd };
+        var res = await axios.post('/api/UserOrder', ProdData);
+      }
+
+
+      // setCancelProdCharge()
+      if (res.data.message === 'updated') {
+
+        notify("Your order cancel Request has been sent");
+        toast.success("Your order cancel Request has been sent");
+
+      } else {
+
+        notify("Your order cancel Request fail");
+        toast.success("Your order cancel Request fail");
+
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
+  const ReturnProduct = async (prod_id, user_id) => {
+    try {
+
+      const GetSingleData = orderData.filter((od) => od.prod_id == prod_id && od.customer_id == user_id)
+      setReturnSingleProd(GetSingleData)
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+  console.log('ReturnSingleProd', ReturnSingleProd);
   return (
     <>
       <div className="container profile-page-container mb-5">
@@ -334,12 +409,6 @@ function ProfilePage() {
                 </a>
               </div>
 
-              {/* <div onClick={handleLogout} className="EditAccount list-group-item list-group-item-action fw-semibold">
-                <div>
-                  <i className="fa fa-sign-out" aria-hidden="true"></i>
-                </div>
-                <p className="fw-semibold">Logout</p>
-              </div> */}
             </div>
           </div>
 
@@ -357,25 +426,9 @@ function ProfilePage() {
                   <hr />
                   <div>
                     <div>
-                      {/* {Array.isArray(messages) && messages.length > 0 ? (messages.map((message, index) => (
-                        <div key={index}>
-                          <p>Customer ID: {message.customer_id}</p>
-                          <p>First Name: {message.FirstName}</p>
-                          <p>Last Name: {message.LasttName}</p>
-                          <p>Email: {message.Email}</p>
-                          <p>Phone: {message.Phone}</p>
-                          <p>Address: {message.Address}</p>
-                          <p>Address2: {message.Adress2}</p>
-                          <p>Password: {message.Password}</p>
-                        </div>
-                      ))
-                      ) : (
-                        <div>You are not loggedin</div>
-                      )
-                    } */}
 
                       {Array.isArray(messages) ||
-                      (messages.length > 0 && messages != null) ? (
+                        (messages.length > 0 && messages != null) ? (
                         messages.map((message, index) => (
                           <form key={index} onSubmit={handleEdit}>
                             <div className="row user-data">
@@ -468,7 +521,7 @@ function ProfilePage() {
 
                   <div>
                     {(Array.isArray(messages) && messages.length > 0) ||
-                    messages !== null ? (
+                      messages !== null ? (
                       messages.map((message, index) => (
                         <form key={index} onSubmit={updateAddressTwo}>
                           <div className="row user-data">
@@ -505,99 +558,6 @@ function ProfilePage() {
                   </div>
                 </div>
               </div>
-              {/* Address Book */}
-              {/* <div
-                className="tab-pane fade"
-                id="list-profile"
-                role="tabpanel"
-                aria-labelledby="list-profile-list"
-              >
-                <div className="Right-Profile">
-                  <h3>Address Book</h3>
-                  <hr />
-
-                  <div>
-                    <form>
-                      <div className="row user-data">
-                        <div className="col">
-                          <label htmlFor="">First name</label>
-                          <input
-                            type="text"
-                            className="form-control fw-semibold"
-                            placeholder="First name"
-                          />
-                        </div>
-                        <div className="col">
-                          <label htmlFor="">Last name</label>
-                          <input
-                            type="text"
-                            className="form-control fw-semibold"
-                            placeholder="Last name"
-                          />
-                        </div>
-                      </div>
-                      <div className="row user-data">
-                        <div className="col">
-                          <label htmlFor="">E-mail Address</label>
-                          <input
-                            type="text"
-                            className="form-control fw-semibold"
-                            placeholder="E-mail Address"
-                          />
-                        </div>
-                        <div className="col">
-                          <label htmlFor="">Mobile Number</label>
-                          <input
-                            type="text"
-                            className="form-control fw-semibold"
-                            placeholder="Mobile Number"
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group row user-data">
-                        <div className="col-sm-10">
-                          <button type="submit" className="btn form-btn">
-                            Update
-                          </button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <h3>Change Password</h3>
-                  <hr />
-
-                  <div>
-                    <form>
-                      <div className="row user-data">
-                        <div className="col">
-                          <label htmlFor="">Password</label>
-                          <input
-                            type="text"
-                            className="form-control fw-semibold"
-                            placeholder="First name"
-                          />
-                        </div>
-                        <div className="col">
-                          <label htmlFor="">New Password</label>
-                          <input
-                            type="text"
-                            className="form-control fw-semibold"
-                            placeholder="Last name"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="form-group row">
-                        <div className="col-sm-10">
-                          <button type="submit" className="btn form-btn">
-                            Update Password
-                          </button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div> */}
 
               {/* Wishlist */}
               <div
@@ -645,7 +605,55 @@ function ProfilePage() {
                   <h3>Order List </h3>
                   <hr />
 
-                  <h5 className="text-center p-2">No Order Placed </h5>
+                  <table class="table table-bordered table-responsive border-primary table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Sr No</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {
+                        orderData.map((data, index) => {
+
+                          const images = data ? data.image_name.split(', ').map(image => image.trim()) : [];
+                          let cancelButton;
+
+                          if (data.order_status === 5) {
+
+                            cancelButton = <button className="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => ReturnProduct(data.product_id, data.customer_id)}>Return order</button>
+
+                          } else if (data.order_status === 1 || data.order_status === 2 || data.order_status === 3 || data.order_status === 4) {
+
+                            if (data.per_order_status === 1) {
+
+                              cancelButton = <button className="btn btn-warning btn-rounded" onClick={() => CancelProduct(data.product_id, data.customer_id)}>Cancel order</button>
+
+                            } else {
+                              cancelButton = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>
+                            }
+
+                          } else {
+                            cancelButton = ''
+                          }
+                          return <tr key={index}>
+                            <th scope="row">{index + 1}</th>
+                            <td><Link href={`/ProductDetail/${data.seo_url}`}><img src={`/Assets/images/products/${images[0]}`} height={50} width={50} alt="prod_image" /></Link></td>
+                            <td><Link href={`/ProductDetail/${data.seo_url}`}>{data.product_name}</Link></td>
+                            <td>{data.quantity}</td>
+                            <td>₹ {data.quantity * data.prod_price} </td>
+                            <td>
+                              {cancelButton}
+                            </td>
+                          </tr>
+                        })
+                      }
+                    </tbody>
+                  </table>
                   <hr />
                 </div>
               </div>
@@ -711,6 +719,37 @@ function ProfilePage() {
       <div className="my-5">
         <FooterRow />
       </div>
+
+      {/* popup */}
+      <div>
+        <div
+          className="modal fade"
+          id="exampleModal"
+          tabIndex={-1}
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog">
+            <div className="modal-content modal-content-mypopup">
+              <div className="modal-body">
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                />
+                {
+                  ReturnSingleProd.length > 0 ?
+                    <ProdEmail OId={ReturnSingleProd[0]['od_id']} cID={ReturnSingleProd[0]['customer_id']} cEmail={ReturnSingleProd[0]['customer_email']} cPhone={ReturnSingleProd[0]['Phone']}  pID={ReturnSingleProd[0]['prod_id']} price={ReturnSingleProd[0]['prod_price']} qty={ReturnSingleProd[0]['quantity']}></ProdEmail>
+                  : ''
+                }
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </>
   );
 }
