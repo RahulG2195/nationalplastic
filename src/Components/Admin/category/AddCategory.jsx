@@ -1,19 +1,29 @@
 "use client"
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Form, Input, Button, InputNumber, message } from 'antd';
+import { Form, Input, Button, InputNumber } from 'antd';
 import axios from 'axios';
 import "./EditCategory.css";
 
-
-
 export default function AddCategory() {
-  const { control, handleSubmit, setValue, formState: { errors } } = useForm();
+  const { control, handleSubmit, setValue, getValues, formState: { errors } } = useForm();
 
   const onSubmit = async (data) => {
     try {
+      // Prepare form data
+      const formData = new FormData();
+      formData.append('category_name', data.category_name);
+      formData.append('image_name', data.image_name);
+      formData.append('navshow', data.navshow);
+      formData.append('status', data.status);
+      formData.append('image', data.image);
+
       // Send data to the API
-      const response = await axios.post('/api/adminCategories', data);
+      const response = await axios.post('/api/adminCategories', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
       // Handle the response, e.g., show a success message
       console.log('Response:', response.data);
     } catch (error) {
@@ -23,10 +33,9 @@ export default function AddCategory() {
   };
 
   const handleFileChange = (e) => {
-    const files = e.target.files;
-    setValue('image' , files)
-    const imageNames = Array.from(files).map(file => file.name);
-    setValue('image_name', imageNames.join(', '));
+    const file = e.target.files[0];
+    setValue('image', file);
+    setValue('image_name', file ? file.name : '');
   };
 
   return (
@@ -51,13 +60,12 @@ export default function AddCategory() {
         />
       </Form.Item>
       <Form.Item
-        label="Images"
-        validateStatus={errors.images ? 'error' : ''}
-        help={errors.images ? 'Please upload images!' : ''}
+        label="Image"
+        validateStatus={errors.image ? 'error' : ''}
+        help={errors.image ? 'Please upload an image!' : ''}
       >
         <input
           type="file"
-          multiple
           onChange={handleFileChange}
         />
       </Form.Item>
@@ -65,6 +73,11 @@ export default function AddCategory() {
         name="image_name"
         control={control}
         render={({ field }) => <Input {...field} type="hidden" />}
+      />
+      <Controller
+        name="image"
+        control={control}
+        render={({ field }) => <input {...field} type="hidden" />}
       />
       <Form.Item
         label="Nav Show"
