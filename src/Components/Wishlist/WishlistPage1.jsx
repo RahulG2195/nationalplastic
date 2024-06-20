@@ -5,7 +5,7 @@ import FooterRow from "../FooterRow/FooterRow";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { addToCart } from "@/redux/reducer/cartSlice";
+import { addToCart} from "../../redux/reducer/cartSlice.js";
 
 const WishlistPage1 = () => {
   const [wishlistItems, setWishlistItems] = useState([]);

@@ -3,11 +3,7 @@ import "./Registration.css";
 import { useState } from "react";
 import axios from "axios";
 import { Bounce, toast } from "react-toastify";
-import {
-  isValidName,
-  isValidMobile,
-  // isValidFile,
-} from "@/utils/validation";
+import { isValidName, isValidMobile } from "../../utils/validation";
 const notify = () => {
   toast.success("Mail Sended SucessFully", {
     position: "top-center",

@@ -2,23 +2,23 @@ import Image from "next/image";
 import IncrementDecrement from "./IncrementDecrement";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
+import { addItemToWishlist } from "../../redux/reducer/wishlistSlice";
 import Link from "next/link";
 // import axios from "axios";
 import {
   increaseQuantity,
   decreaseQuantity,
   removeItemFromCart,
-} from "@/redux/reducer/cartSlice";
+} from "../../redux/reducer/cartSlice";
 import {
   increaseQuantityD,
   decreaseQuantityD,
   removeItemFromCartD,
-} from "@/redux/reducer/tempSlice";
-import { isLoggedIn } from "@/utils/validation";
+} from "../../redux/reducer/tempSlice";
+import { isLoggedIn } from "../../utils/validation";
 import { Bounce, toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { notifyError } from "@/utils/notify";
+import { notifyError } from "../../utils/notify";
 
 
 const CartProduct = ({
