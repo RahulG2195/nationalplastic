@@ -45,7 +45,7 @@ const BoughtTogether = () => {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          "/api/Products"
+          "http://118.139.165.1:3000/api/Products"
         );
         setTogetherCardsData(response.data.products);
       } catch (error) {
@@ -109,7 +109,7 @@ const BoughtTogether = () => {
 
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch("/api/ProductsCat", {
+      const response = await fetch("http://118.139.165.1:3000/api/ProductsCat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
