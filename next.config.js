@@ -11,7 +11,7 @@ const nextConfig = {
 
   env: {
     MYSQL_HOST: "localhost",
-    MYSQL_DATABASE: "nationalplastic",
+    MYSQL_DATABASE: "np",
     MYSQL_USER: "root",
     MYSQL_PASSWORD: "Webfarm2024",
     MYSQL_PORT: "3306",

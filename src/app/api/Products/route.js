@@ -8,6 +8,7 @@ export async function GET(request) {
       values: [],
     });
 
+
     const heighlightProd = await query({
       query: "SELECT * FROM products where categoryType = 'highlights'",
       values: [],
