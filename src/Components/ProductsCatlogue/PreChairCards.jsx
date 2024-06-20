@@ -61,7 +61,7 @@ const PreChairsCards = () => {
       const categoryTitle = localStorage.getItem("category");
       setCategoryType(categoryTitle);
 
-      const response = await axios.get(`/api/ProductsCat?query=${cat_id}`);
+      const response = await axios.get(`http://118.139.165.1:3000/api/ProductsCat?query=${cat_id}`);
       //console.log("API Response:", response.data); // Log API response
 
       const fetchedData = response.data;
@@ -146,7 +146,7 @@ const PreChairsCards = () => {
   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch("/api/ProductsCat", {
+      const response = await fetch("http://118.139.165.1:3000/api/ProductsCat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
