@@ -17,6 +17,8 @@ export default function AddCategory() {
       formData.append('navshow', data.navshow);
       formData.append('status', data.status);
       formData.append('image', data.image);
+      formData.append('topPick', data.topPick);
+
 
       // Send data to the API
       const response = await axios.post('/api/adminCategories', formData, {
@@ -102,6 +104,19 @@ export default function AddCategory() {
           name="status"
           control={control}
           rules={{ required: true }}
+          render={({ field }) => (
+            <InputNumber {...field} style={{ width: '100%' }} />
+          )}
+        />
+      </Form.Item>
+      <Form.Item
+        label="Top pick"
+        validateStatus={errors.topPick ? 'error' : ''}
+        help={errors.topPick ? 'Please input the topPick  value!' : ''}
+      >
+        <Controller
+          name="topPick"
+          control={control}
           render={({ field }) => (
             <InputNumber {...field} style={{ width: '100%' }} />
           )}

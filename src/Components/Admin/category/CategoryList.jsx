@@ -120,6 +120,11 @@ const CategoryList = () => {
       key: 'navshow',
     },
     {
+      title: 'Top Pick',
+      dataIndex: 'topPick',
+      key: 'topPick',
+    },
+    {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',

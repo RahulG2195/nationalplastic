@@ -28,6 +28,8 @@ export default function EditCategory() {
       formData.append('navshow', data.navshow);
       formData.append('status', data.status);
       formData.append('category_id', data.category_id);
+      formData.append('topPick', data.topPick);
+
 
       if (data.image) {
         formData.append('image', data.image);
@@ -133,6 +135,17 @@ export default function EditCategory() {
           name="status"
           control={control}
           rules={{ required: true }}
+          render={({ field }) => <InputNumber {...field} style={{ width: '100%' }} />}
+        />
+      </Form.Item>
+      <Form.Item
+        label="Top Pick"
+        validateStatus={errors.topPick ? 'error' : ''}
+        help={errors.topPick ? 'Please input the topPick show value!' : ''}
+      >
+        <Controller
+          name="topPick"
+          control={control}
           render={({ field }) => <InputNumber {...field} style={{ width: '100%' }} />}
         />
       </Form.Item>

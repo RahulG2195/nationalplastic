@@ -6,10 +6,15 @@ export async function GET(request) {
             query: "SELECT * FROM categories",
             values: [],
         });
+        const topPick = await query({
+            query: "SELECT * FROM categories where topPick = 1",
+            values: [],
+        });
 
         return new Response(JSON.stringify({
             status: 200,
-            categories: Categories
+            categories: Categories,
+            topPick:topPick
         }));
 
     } catch (error) {

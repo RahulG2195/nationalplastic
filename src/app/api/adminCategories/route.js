@@ -20,7 +20,7 @@ export async function POST(request) {
     const data = await request.formData();
 
 
-    const { category_name, image_name, navshow, status, image } = Object.fromEntries(
+    const { category_name, image_name, navshow, status, image , topPick=0 } = Object.fromEntries(
       data.entries()
     );
 
@@ -54,12 +54,12 @@ export async function POST(request) {
     // Insert the new category
     const result = await query({
       query: `
-        INSERT INTO categories (category_name, image_name, navshow, status)
-        VALUES (?, ?, ?, ?)
+        INSERT INTO categories (category_name, image_name, navshow, status ,topPick)
+        VALUES (?, ?, ?, ?, ?)
       `,
-      values: [category_name, image_name, navshow, status],
+      values: [category_name, image_name, navshow, status, topPick],
     });
-    console.log(category_name, image_name, navshow, status)
+    console.log(category_name, image_name, navshow, status, topPick)
 
     return new Response(
       JSON.stringify({ success: true, data: result }),
@@ -80,7 +80,7 @@ export async function PUT(request) {
   try {
     const data = await request.formData();
 
-    const { category_id, category_name, image_name, navshow, status, image } = Object.fromEntries(
+    const { category_id, category_name, image_name, navshow, status, image , topPick=0} = Object.fromEntries(
       data.entries()
     );
 
@@ -107,11 +107,12 @@ export async function PUT(request) {
           category_name = ?,
           image_name = ?,
           navshow = ?,
-          status = ?
+          status = ?,
+          topPick=?
         WHERE 
           category_id = ?
       `,
-      values: [category_name, image_name, navshow, status, category_id],
+      values: [category_name, image_name, navshow, status,topPick, category_id],
     });
 
     return new Response(
