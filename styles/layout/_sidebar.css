@@ -1,0 +1,35 @@
+
+
+
+
+.sidebarArea .sidenav-bg:hover {
+  background-color: gray; 
+  border-radius: 20px;
+}
+
+
+
+
+
+
+.sidebarArea {
+  flex-shrink: 0 !important;
+  width: 260px !important;
+  background-color: #fff;
+}
+
+@media (max-width: 991.98px) {
+  .sidebarArea {
+      position: fixed;
+      height: 100%;
+      overflow: auto;
+      z-index: 1;
+      margin-left: -260px;
+      transition: 0.2s ease-in;
+  }
+  .sidebarArea.showSidebar {
+    margin-left: 0px;
+}
+}
+
+

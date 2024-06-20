@@ -42,13 +42,9 @@ export default function TopPick() {
       );
       // "/api/Category"
       //console.log("response of the category ", response.data.categories);
-      const filteredData = response.data.categories.filter(
-        (item) =>
-          item.category_id === 15 ||
-          item.category_id === 13 ||
-          item.category_id === 18
-      );
-      //console.log(response);
+      const filteredData = response.data.topPick
+      console.log("fd",filteredData);
+      console.log("fd",JSON.stringify(filteredData))
 
       setHometoppics(filteredData);
     };

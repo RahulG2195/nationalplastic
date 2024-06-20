@@ -1,0 +1,11 @@
+.Form{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    align-content: center;
+    justify-content: center;
+    align-items: stretch;
+    justify-items: stretch;
+}
