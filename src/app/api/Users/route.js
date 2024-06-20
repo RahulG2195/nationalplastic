@@ -8,10 +8,26 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 // import { Response } from 'your-response-library'; // Assuming 'your-response-library' is the correct library for handling responses
 import "../../../../envConfig.js";
-
+import {generateToken} from "@/utils/jwtAuth.js"
 // Define your API endpoint handler for GET request
 // import { useRouter } from 'next/navigation'
-
+const isAdmin = async (email) => {
+  const user_data = await query({
+    query: "SELECT role FROM customer WHERE email = ?",
+    values: [email],
+  });
+  const role = user_data[0].role
+  console.log(`Role ${role}`);
+  if(role === "admin") {
+  console.log(`Role ${role}`);
+  const token = generateToken({email: email})
+  console.log(`Token ${token}`);
+  return token;
+  }else{
+  return false;
+  }
+  
+}
 export async function GET(request) {
   try {
     const users = await query({
@@ -86,27 +102,14 @@ export async function POST(request) {
 export async function PUT(request) {
   // const router = useRouter();
   try {
-    // //console.log("FROM put " + request);
 
     const { email, password, getProfile } = await request.json();
-    //console.log(email);
-    // Check if the email already exists in the database
     const existingUser = await query({
       query: "SELECT * FROM customer WHERE email = ?",
       values: [email],
     });
-    //console.log("existingUser:", existingUser);
-    //For reseting the password
-    // const passwordChecker = ()=>{
-    //console.log(existingUser);
-    // }
     if (existingUser.length > 0) {
-      //console.log("Nope All is well");
-
-      // Implement password comparison logic using a secure method (e.g., bcrypt)
-      // const passwordMatch = comparePasswords(password, storedPassword); // Implement comparePasswords function
       if (getProfile && existingUser.length > 0) {
-        //console.log("Not Found");
         return new Response(
           JSON.stringify({
             status: 200,
@@ -114,22 +117,38 @@ export async function PUT(request) {
           })
         );
       }
-      // Check if the provided password matches the stored password
       const storedPassword = existingUser[0].Password;
-      // Adjust the property name as per your database schema
-
       const checkPassword = await bcrypt.compare(password, storedPassword);
-
-      if (checkPassword) {
-        // return new Response(JSON.stringify({ message: "Login successful" }), { status: 200 });
-        {
+      // let isItAdmin = false;
+      if (checkPassword) { {
+          const isItAdmin = await isAdmin(email)
+          console.log("----",isItAdmin)
+          if (!isItAdmin) {
           return new Response(
             JSON.stringify({
               status: 200,
               message: existingUser,
             })
           );
+        }else{
+          return new Response(
+            JSON.stringify({
+              status: 200,
+              message: existingUser,
+              isAdmin: isItAdmin
+            })
+          );
         }
+      }
+      return new Response(
+        JSON.stringify({
+          status: 200,
+          message: existingUser,
+          isAdmin: isItAdmin
+        })
+      );
+    
+
       } else {
         throw new Error("Invalid password");
       }
