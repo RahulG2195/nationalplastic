@@ -7,6 +7,7 @@ import { Table } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const ProdList = () => {
   const router = useRouter();
@@ -85,11 +86,18 @@ const ProdList = () => {
   };
 
   const columns = [
+    {
+        title: 'Index',
+        key: 'index',
+        render: (text, record, index) => index + 1,
+        fixed: 'left',
+      },
       {
           title: 'Product ID',
           dataIndex: 'product_id',
           key: 'product_id',
           fixed: 'left',
+          hidden: true
       },
       {
           title: 'Product Name',
@@ -140,28 +148,24 @@ const ProdList = () => {
           key: 'prod_status',
       },
       {
-        title: 'Image Name',
+        title: 'Image',
         dataIndex: 'image_name',
         key: 'image_name',
-        render: (text) => (
-          <div className="image-name-cell">
-              {text.length > 20 ? (
-                  <>
-                      <span>{text.substring(0, 20)}...</span>
-                      <Button
-          type="link"
-          size="small"
-          style={{ fontSize: '12px', padding: '2px' }}
-          onClick={() => setModalContent(text)}
-        >
-          View More 
-        </Button>
-                  </>
-              ) : (
-                  <span>{text}</span>
-              )}
-          </div>
-      ),
+        render: (text) => {
+            const firstImage = text.split(',')[0]; // Get the first image from the comma-separated string
+            return (
+                <Image
+                    src={`/Assets/images/products/${firstImage}`}
+                    className='admin-product-img'
+                    alt={firstImage}
+                    style={{ width: '100px', height: '50px' }}
+                    width={3}
+                    height={3}
+                    layout="responsive"
+                    objectFit="cover"
+                />
+            );
+        },
     },
       {
           title: 'Action',

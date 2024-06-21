@@ -5,28 +5,55 @@ import { Form, Input, Button, InputNumber } from 'antd';
 import "./EditProduct.css";
 import axios from 'axios';
 export default function App() {
-  const { control, handleSubmit, formState: { errors } } = useForm();
+  const { control, handleSubmit, setValue, getValues, formState: { errors } } = useForm();
   const onSubmit = async (data) => {
     try {
-      // Send data to the API
-      console.log("whyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
+      // Validate category name and get category_id
       const isValidCategoryName = await axios.post("/api/adminValidationP", {
         category_name: data.category_name
       });
+  
       const category_id = isValidCategoryName.data.category_id;
       data.category_id = category_id;
-      console.log("isValid", isValidCategoryName)
-      if(isValidCategoryName){
- 
-        console.log(data);
-      const response = await axios.post('/api/adminProducts', data);}
-      // Handle the response, e.g., show a success message
-      console.log('Response:', response.data);
+  
+      if (isValidCategoryName) {
+        // Prepare the form data
+        const { product_name, meta_title, meta_description, short_description, long_description,
+          seo_title, seo_url, category_name, image_name, navshow, status, image, topPick,
+          price, discount_price, discount_percentage, duration, InstallationCharges,
+          color, armType, prod_status } = data;
+        const formData = new FormData();
+        const entries = { product_name, meta_title, meta_description, short_description, long_description,
+          seo_title, seo_url, category_name, image_name, navshow, status, image, topPick,
+          price, discount_price, discount_percentage, duration, InstallationCharges,
+          color, armType, prod_status};
+  
+        for (const [key, value] of Object.entries(entries)) {
+          formData.append(key, value);
+        }
+  
+        // Send data to the API
+        const response = await axios.post('/api/adminProducts', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+  
+        // Handle the response, e.g., show a success message
+        console.log('Response:', response.data);
+      }
     } catch (error) {
       // Handle errors, e.g., show an error message
-      console.error('Error:', error);
+      console.error('Error:', error.response ? error.response.data : error.message);
     }
   };
+  
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setValue('image', file);
+    setValue('image_name', file ? file.name : '');
+  };
+  
   return (
     <Form
       onFinish={handleSubmit(onSubmit)}
@@ -112,14 +139,13 @@ export default function App() {
         />
       </Form.Item>
       <Form.Item
-        label="Image Name"
-        validateStatus={errors.image_name ? 'error' : ''}
+        label="Images"
+        validateStatus={errors.image ? 'error' : ''}
+        help={errors.image ? 'Please upload an image!' : ''}
       >
-        <Controller
-          name="image_name"
-          control={control}
-          rules={{ required: true}}
-          render={({ field }) => <Input.TextArea {...field} />}
+        <input
+          type="file"
+          onChange={handleFileChange}
         />
       </Form.Item>
       <Form.Item

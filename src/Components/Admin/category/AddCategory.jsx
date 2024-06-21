@@ -10,29 +10,27 @@ export default function AddCategory() {
 
   const onSubmit = async (data) => {
     try {
-      // Prepare form data
+      const { category_name, image_name, navshow, status, image, topPick } = data;
+      
       const formData = new FormData();
-      formData.append('category_name', data.category_name);
-      formData.append('image_name', data.image_name);
-      formData.append('navshow', data.navshow);
-      formData.append('status', data.status);
-      formData.append('image', data.image);
-      formData.append('topPick', data.topPick);
-
-
-      // Send data to the API
+      const entries = { category_name, image_name, navshow, status, image, topPick };
+  
+      for (const [key, value] of Object.entries(entries)) {
+        formData.append(key, value);
+      }
+  
       const response = await axios.post('/api/adminCategories', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
-      // Handle the response, e.g., show a success message
+  
       console.log('Response:', response.data);
     } catch (error) {
-      // Handle errors, e.g., show an error message
-      console.error('Error:', error);
+      console.error('Error:', error.response ? error.response.data : error.message);
     }
   };
+  
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];

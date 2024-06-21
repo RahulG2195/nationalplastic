@@ -279,16 +279,6 @@ function ProdData({ category_id }) {
                     </h6>
                     <del> ₹{orignalPrice}</del>
                   </div>
-                  {/* <div className="d-flex flex-wrap align-items-center">
-                    <div className="discount discRes">
-                      <p>
-                        Save <span>₹</span> {saving}
-                      </p>
-                    </div>
-                    <div className="inc small">
-                      <small>(incl. of all taxes)</small>
-                    </div>
-                  </div> */}
                 </div>
                 <div>
                     <i className="fa fa-star-o rating-star pr-2" />
