@@ -1,6 +1,6 @@
-import BlogCategory from "@/components/BlogPage/BlogCategory"
-import BlogBanner from "@/components/BlogPage/BlogBanner"
-import CategoryGrid from "@/components/BlogPage/CategoryGrid"
+import BlogCategory from "@/Components/BlogPage/BlogCategory"
+import BlogBanner from "@/Components/BlogPage/BlogBanner"
+import CategoryGrid from "@/Components/BlogPage/CategoryGrid"
 
 
 const BlogPage = () => {

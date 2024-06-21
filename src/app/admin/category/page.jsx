@@ -1,5 +1,5 @@
 import React from 'react'
-import CategoryList from '../../../components/Admin/category/CategoryList'
+import CategoryList from '../../../Components/Admin/category/CategoryList'
 const page = () => {
   return (
     <div>

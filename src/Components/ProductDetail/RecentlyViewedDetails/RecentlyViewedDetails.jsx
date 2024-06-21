@@ -1,5 +1,5 @@
 "use client";
-import RecentlyViewed from "@/components/ProductsCatlogue/RecentlyViewed";
+import RecentlyViewed from "@/Components/ProductsCatlogue/RecentlyViewed";
 // import PreChairsCard from "@/Components/preChairsCard/PreChairsCard";
 // import "@/Components/preChairsCard/preChairsCard.css";
 

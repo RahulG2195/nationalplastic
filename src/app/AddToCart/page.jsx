@@ -1,10 +1,10 @@
 "use client";
 import Image from "next/image";
 import "../../styles/addtocart.css";
-import CartProduct from "../../components/AddToCart/CartProduct";
-import PriceDetailsCard from "../../components/PriceDetails/PriceDetailsCard";
+import CartProduct from "../../Components/AddToCart/CartProduct";
+import PriceDetailsCard from "../../Components/PriceDetails/PriceDetailsCard";
 // import FooterRow from "@/Components/FooterRow/FooterRow";
-import FooterRow from "../../components/FooterRow/FooterRow.jsx";
+import FooterRow from "../../Components/FooterRow/FooterRow.jsx";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { addItemToCart, removeItemFromCart, addToCart, } from "@/redux/reducer/cartSlice";

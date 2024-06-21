@@ -1,4 +1,4 @@
-import Privacy from "../../components/PrivacyAndPolicy/Privacy";
+import Privacy from "../../Components/PrivacyAndPolicy/Privacy";
 
 const PrivacyAndPolicy = () => {
   return (

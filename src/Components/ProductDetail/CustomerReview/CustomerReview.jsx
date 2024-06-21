@@ -1,8 +1,8 @@
 import "./CustomerReview.css";
 import React from "react";
-import UserRatingScoreBord from "@/components/RatingScoreBoard/UserRatingScoreBord";
+import UserRatingScoreBord from "@/Components/RatingScoreBoard/UserRatingScoreBord";
 import Filters from "../Filters/Filters";
-import CustomersExpirence from "@/components/CustomersExpirence/CustomersExpirence";
+import CustomersExpirence from "@/Components/CustomersExpirence/CustomersExpirence";
 
 const CustomerReview = () => {
   // const userRatings = [
