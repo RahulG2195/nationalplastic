@@ -1,11 +1,11 @@
 
-import AboutCTA from "@/Components/About/AboutCTA";
-import Subbanner from "@/Components/About/Subbanner";
-import VMCard from "@/Components/About/VMCard";
-import Infrastructure from "@/Components/About/Infrastructure";
-import Team from "@/Components/About/team";
-import AwardsCertificates from "@/Components/About/AwardsCertificates";
-import SliderCard from "@/Components/About/SliderCard";
+import AboutCTA from "@/components/About/AboutCTA";
+import Subbanner from "@/components/About/Subbanner";
+import VMCard from "@/components/About/VMCard";
+import Infrastructure from "@/components/About/Infrastructure";
+import Team from "@/components/About/team";
+import AwardsCertificates from "@/components/About/AwardsCertificates";
+import SliderCard from "@/components/About/SliderCard";
 
 function About() {
 

@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../../Components/Cards/Card";
+import Card from "../Cards/Card";
 import './Environmental.css';
 
 const EnvironmentalConservation = () => {

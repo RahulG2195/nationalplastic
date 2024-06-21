@@ -12,7 +12,7 @@ import { isLoggedIn } from "@/utils/validation";
 import { Bounce, toast } from "react-toastify";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useParams } from "next/navigation";
-import PreChairsCard from "@/Components/preChairsCard/preChairsCard.jsx";
+import PreChairsCard from "@/components/preChairsCard/preChairsCard.jsx";
 
 const notify = () => {
   toast.error("Login To Add to CART", {

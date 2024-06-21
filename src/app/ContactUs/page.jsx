@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import "../../styles/contactus.css";
-import ContactUsCard from "@/Components/ContactUs/ContactUsCard";
+import ContactUsCard from "@/components/ContactUs/ContactUsCard";
 import { useState } from "react";
 import axios from "axios";
 import { Bounce, toast } from "react-toastify";

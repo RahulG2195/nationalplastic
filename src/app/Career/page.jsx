@@ -1,8 +1,8 @@
 // import React from "react";
-import Opening from "../../Components/Career/Opening";
-import Banner from "../../Components/Career/Banner";
-import Registration from "../../Components/Career/Registration";
-import Hiring from "@/Components/Career/Hiring";
+import Opening from "../../components/Career/Opening";
+import Banner from "../../components/Career/Banner";
+import Registration from "../../components/Career/Registration";
+import Hiring from "@/components/Career/Hiring";
 
 const Career = () => {
   return (

@@ -1,6 +1,6 @@
-import NewsBanner from "../../Components/NewsAndMedia/NewsBanner";
-import AwardsAndCertificates from "../../Components/NewsAndMedia/AwardsAndCertificates";
-import EventsAndActivities from "../../Components/NewsAndMedia/EventsAndActivities";
+import NewsBanner from "../../components/NewsAndMedia/NewsBanner";
+import AwardsAndCertificates from "../../components/NewsAndMedia/AwardsAndCertificates";
+import EventsAndActivities from "../../components/NewsAndMedia/EventsAndActivities";
 const NewsAndMedia = () => {
   return (
     <>

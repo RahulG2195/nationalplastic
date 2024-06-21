@@ -1,6 +1,6 @@
 import Image from "next/image";
 import "../../styles/productCatalogue.css";
-import CatalogueCard from "@/Components/CatalogueCard/CatalogueCard";
+import CatalogueCard from "@/components/CatalogueCard/CatalogueCard";
 
 function Catalogue() {
     const Cataloguearr = [

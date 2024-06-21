@@ -1,11 +1,11 @@
-import InvestorBanner from "@/Components/Investors/InvestorBanner";
-import NationalFitnessUpper from "@/Components/Investors/NationalFinancesUpper";
-import NationalFitness from "@/Components/Investors/NationalFinances";
-import UnauditedFinancialResults from "@/Components/Investors/UnauditedFinancialResults";
-import SharePricesCard from "@/Components/Investors/SharePricesCard"; 
-import InvestorsSlider from "@/Components/Investors/InvestorsSlider";
-import AboutSlider from "@/Components/About/AboutSlider";
-import SliderCard from "@/Components/About/SliderCard";
+import InvestorBanner from "@/components/Investors/InvestorBanner";
+import NationalFitnessUpper from "@/components/Investors/NationalFinancesUpper";
+import NationalFitness from "@/components/Investors/NationalFinances";
+import UnauditedFinancialResults from "@/components/Investors/UnauditedFinancialResults";
+import SharePricesCard from "@/components/Investors/SharePricesCard"; 
+import InvestorsSlider from "@/components/Investors/InvestorsSlider";
+import AboutSlider from "@/components/About/AboutSlider";
+import SliderCard from "@/components/About/SliderCard";
 // import InvestorSliderCard from "@/Components/Investors/investorSliderCard";
 
 

@@ -10,7 +10,7 @@ import { addToCartD } from "@/redux/reducer/tempSlice";
 
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import PremiumChairs from "./PremiumChairs";
-import PreChairsCard from "../../Components/preChairsCard/preChairsCard";
+import PreChairsCard from "../preChairsCard/preChairsCard";
 import { useParams } from "next/navigation";
 import { Bounce, toast } from "react-toastify";
 import { isLoggedIn } from "@/utils/validation";

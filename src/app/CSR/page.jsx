@@ -1,8 +1,8 @@
 import React from "react";
-import Banner from "../../Components/CSR/Banner";
-import HealthCare from "../../Components/CSR/HealthCare";
-import Slider from "../../Components/CSR/Slider";
-import EnvironmentalConservation from "../../Components/CSR/EnvironmentalConservation";
+import Banner from "../../components/CSR/Banner";
+import HealthCare from "../../components/CSR/HealthCare";
+import Slider from "../../components/CSR/Slider";
+import EnvironmentalConservation from "../../components/CSR/EnvironmentalConservation";
 
 const CSR = () => {
   return (

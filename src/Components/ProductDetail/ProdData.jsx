@@ -5,7 +5,7 @@ import Image from "next/image";
 import NoCostEmi from "../NoCostEmi/NoCostEmi";
 import ProductDetailSlider from "../ProductDetailSlider/ProductDetailSlider";
 import MoreProduct from "./MoreProducts/MoreProduct";
-import IncrementDecrement from "@/Components/AddToCart/IncrementDecrement";
+import IncrementDecrement from "@/components/AddToCart/IncrementDecrement";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";

@@ -1,9 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
-import BulkOrderBannar from "@/Components/BulkOrder/BulkOrderBannar";
-import GetQuote from "@/Components/BulkOrder/GetQuote";
-import BulkPremiumCards from "@/Components/BulkOrder/BulkPremiumCards";
-import BulkOrders from "@/Components/BulkOrder/BulkOrders";
+import BulkOrderBannar from "@/components/BulkOrder/BulkOrderBannar";
+import GetQuote from "@/components/BulkOrder/GetQuote";
+import BulkPremiumCards from "@/components/BulkOrder/BulkPremiumCards";
+import BulkOrders from "@/components/BulkOrder/BulkOrders";
 import axios from "axios";
 
 const BulkOrder = () => {
