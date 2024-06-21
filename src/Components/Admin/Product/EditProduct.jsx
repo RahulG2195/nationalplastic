@@ -60,7 +60,7 @@ export default function App() {
       wrapperCol={{ span: 16 }}
     >
       {/* Form fields here, unchanged */}
-      {/* Form field components remain the same */}
+      {/* Form field Components remain the same */}
       <Form.Item
         label="Product Name"
         validateStatus={errors.product_name ? 'error' : ''}

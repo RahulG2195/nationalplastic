@@ -1,4 +1,4 @@
-import TC from "../../components/TC/TC";
+import TC from "../../Components/TC/TC";
 
 const TermsAndConditions = () => {
   return (

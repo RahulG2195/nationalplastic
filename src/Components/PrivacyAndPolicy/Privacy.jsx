@@ -91,7 +91,7 @@ const Privacy = () => {
                     <li>That is threatening, defamatory, obscene, indecent, seditious, offensive, pornographic, abusive, liable to incite racial hatred, discriminatory, menacing, scandalous, inflammatory, blasphemous, in breach of confidence, in breach of privacy or which may cause annoyance or inconvenience;</li>
                     <li>For which you have not obtained all necessary licenses and/or approvals; or</li>
                     <li>Which constitutes or encourages conduct that would be considered a criminal offence, give rise to civil liability, or otherwise be contrary to the law of or infringe the rights of any third party, in any country in the world; or</li>
-                    <li>Which is technically harmful (including, without limitation, computer viruses, logic bombs, Trojan horses, worms, harmful components, corrupted data or other malicious software or harmful data).</li>
+                    <li>Which is technically harmful (including, without limitation, computer viruses, logic bombs, Trojan horses, worms, harmful Components, corrupted data or other malicious software or harmful data).</li>
                 </ul>
                 <p>
                     You may not misuse the Website (including, without limitation, by hacking).

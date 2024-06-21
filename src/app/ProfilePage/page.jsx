@@ -1,5 +1,5 @@
 "use client";
-import FooterRow from "@/components/FooterRow/FooterRow";
+import FooterRow from "@/Components/FooterRow/FooterRow";
 import "../../styles/profilepage.css";
 import Wishlist from "../Wishlist/page";
 import { useEffect, useState } from "react";
@@ -14,7 +14,7 @@ import {
   isValidPassword,
   isValidReason, // Address validations
 } from "@/utils/validation";
-import ProdEmail from "@/components/ReturnProdEmail/prodEmail";
+import ProdEmail from "@/Components/ReturnProdEmail/prodEmail";
 
 function ProfilePage() {
   const [FirstName, setFirstName] = useState('');

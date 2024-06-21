@@ -1,9 +1,9 @@
-import ProdData from "@/components/ProductDetail/ProdData";
+import ProdData from "@/Components/ProductDetail/ProdData";
 import Breadcrump from "../../Breadcromp/page";
-import RecentlyViewedDetails from "@/components/ProductDetail/RecentlyViewedDetails/RecentlyViewedDetails";
-import CustomerReview from "@/components/ProductDetail/CustomerReview/CustomerReview";
-import Faqs from "@/components/FAQs/Faqs";
-import FooterRow from "@/components/FooterRow/FooterRow";
+import RecentlyViewedDetails from "@/Components/ProductDetail/RecentlyViewedDetails/RecentlyViewedDetails";
+import CustomerReview from "@/Components/ProductDetail/CustomerReview/CustomerReview";
+import Faqs from "@/Components/FAQs/Faqs";
+import FooterRow from "@/Components/FooterRow/FooterRow";
 
 function page() {
   return (
