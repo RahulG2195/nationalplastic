@@ -1,5 +1,5 @@
 import React from 'react'
-import EditProduct from '@/Components/Admin/Product/EditProduct'
+import EditProduct from '../../../Components/Admin/Product/EditProduct'
 const page = () => {
   return (
     <div>
