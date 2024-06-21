@@ -52,7 +52,11 @@ function Login() {
         const res = await axios.put(`/api/Users`, formData);
         const userData = res.data.message[0];
         const { customer_id } = userData;
-
+        
+        const isAdmin = res.data.isAdmin ? res.data.isAdmin[0] : null;
+        if (isAdmin !== null) {
+          localStorage.setItem("adminjwt", isAdmin);
+      }
         if (res.data.status === 500) {
           const errorMsg = res.data.message;
           setErrorMessage(errorMsg);

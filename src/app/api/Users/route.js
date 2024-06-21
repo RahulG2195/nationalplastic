@@ -11,6 +11,8 @@ import "../../../../envConfig.js";
 import {generateToken} from "@/utils/jwtAuth.js"
 // Define your API endpoint handler for GET request
 // import { useRouter } from 'next/navigation'
+import { cookies } from 'next/headers'
+
 const isAdmin = async (email) => {
   const user_data = await query({
     query: "SELECT role FROM customer WHERE email = ?",
@@ -122,8 +124,13 @@ export async function PUT(request) {
       // let isItAdmin = false;
       if (checkPassword) { {
           const isItAdmin = await isAdmin(email)
-          console.log("----",isItAdmin)
+    
+          // Set the JWT token as an httpOnly cookie
+         console.log('Setting JWT token', isItAdmin);
           if (!isItAdmin) {
+          // const cookies = new Cookies(request);
+          //   cookies.set('authToken', token, { httpOnly: true });
+          //   console.log("----",isItAdmin)
           return new Response(
             JSON.stringify({
               status: 200,
@@ -140,15 +147,6 @@ export async function PUT(request) {
           );
         }
       }
-      return new Response(
-        JSON.stringify({
-          status: 200,
-          message: existingUser,
-          isAdmin: isItAdmin
-        })
-      );
-    
-
       } else {
         throw new Error("Invalid password");
       }
