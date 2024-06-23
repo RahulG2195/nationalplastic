@@ -11,8 +11,8 @@ import "../../../../envConfig.js";
 import {generateToken} from "@/utils/jwtAuth.js"
 // Define your API endpoint handler for GET request
 // import { useRouter } from 'next/navigation'
-import { cookies } from 'next/headers'
-
+import { cookies } from 'next/headers';
+// import { setCookie } from 'cookies-next';
 const isAdmin = async (email) => {
   const user_data = await query({
     query: "SELECT role FROM customer WHERE email = ?",
@@ -22,7 +22,13 @@ const isAdmin = async (email) => {
   console.log(`Role ${role}`);
   if(role === "admin") {
   console.log(`Role ${role}`);
-  const token = generateToken({email: email})
+  const token = await generateToken({email: email , role: "admin"});
+  cookies().set('auth', token, { 
+    maxAge: 60 * 60 * 24, // 1 day in seconds
+    httpOnly: true,
+    secure: false,
+    sameSite: 'strict'
+  });
   console.log(`Token ${token}`);
   return token;
   }else{

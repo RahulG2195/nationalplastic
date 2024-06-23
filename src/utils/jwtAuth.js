@@ -1,19 +1,24 @@
 // utils/auth.js
 
-import jwt from 'jsonwebtoken';
+import { SignJWT, jwtVerify } from 'jose';
 
-const secret = 'national_plastic'; // Replace with a secure random string
+const secret = new TextEncoder().encode('national_plastic'); // Replace with a secure random string
 
-export function generateToken(payload) {
-    console.log("Generating token");
-  return jwt.sign(payload, secret, { expiresIn: '1h' }); // Token expires in 1 hour
+export async function generateToken(payload) {
+  console.log("Generating token");
+  return new SignJWT(payload)
+    .setProtectedHeader({ alg: 'HS256' })
+    .setIssuedAt()
+    .setExpirationTime('1h')
+    .sign(secret);
 }
 
-export function verifyToken(token) {
+export async function verifyToken(token) {
   try {
-    const decoded = jwt.verify(token, secret);
-    return decoded;
+    const { payload } = await jwtVerify(token, secret);
+    console.log("Decoded token:", payload);
+    return payload;
   } catch (error) {
-    return null;
+    return error.message;
   }
 }

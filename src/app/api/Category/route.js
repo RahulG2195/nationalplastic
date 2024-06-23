@@ -20,7 +20,7 @@ export async function GET(request) {
     } catch (error) {
         return new Response(JSON.stringify({
             status: 500,
-            message: "Internal Server Error"
+            message: error.message
         }));
     }
 }
