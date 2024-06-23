@@ -15,7 +15,7 @@ import {
   isValidReason, // Address validations
 } from "@/utils/validation";
 import ProdEmail from "@/Components/ReturnProdEmail/prodEmail";
-
+import Cookies from 'js-cookie';
 function ProfilePage() {
   const [FirstName, setFirstName] = useState('');
   const [LastName, setLastName] = useState('');
@@ -264,6 +264,7 @@ function ProfilePage() {
     if (window.confirm("Are you sure you want to log out?")) {
       localStorage.clear();
       setData({}); // Clear user data
+      axios.delete("api/Users")
       window.location.href = "/";
     }
   }

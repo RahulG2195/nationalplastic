@@ -29,6 +29,7 @@ const isAdmin = async (email) => {
     secure: false,
     sameSite: 'strict'
   });
+
   console.log(`Token ${token}`);
   return token;
   }else{
@@ -231,5 +232,21 @@ export async function PATCH(request) {
       JSON.stringify({ status: 500, message: error.message }),
       { status: 500 }
     );
+  }
+}
+
+export async function DELETE(request) {
+  try {
+    cookies().delete('auth');
+    return new Response(JSON.stringify({ message: 'Auth cookie deleted successfully' }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  } catch (error) {
+    console.error('Error deleting auth cookie:', error);
+    return new Response(JSON.stringify({ error: 'Failed to delete auth cookie' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 }
