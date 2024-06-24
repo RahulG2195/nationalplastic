@@ -6,7 +6,7 @@ const IEPF = () => {
       <section className='investor_sec my-5 py-5'>
         <div className='container'>
           <div className='row'>
-            <div class="inn-content-wrap">
+            <div className="inn-content-wrap">
               <p><strong>Details of Nodal Officer under IEPF Rules, 2016</strong></p>
 
               <p>Name: <span><span>CS Amit Jain</span></span></p>
@@ -19,7 +19,7 @@ const IEPF = () => {
 
               <h3>2024-2025</h3>
 
-              <table border="0" cellpadding="0" cellspacing="0" class="nb-table" rules="all" width="100%">
+              <table border="0" cellpadding="0" cellspacing="0" className="nb-table" rules="all" width="100%">
                 <tbody>
                   <tr>
                     <td><a href="/Assets/pdf/Mumbai%20Lakshadeep.pdf">Notice - Transfer of shares of IEPF - Mumbai Lakshdeep</a></td>
@@ -35,7 +35,7 @@ const IEPF = () => {
 
               <h3>2023-2024</h3>
 
-              <table border="0" cellpadding="0" cellspacing="0" class="nb-table" rules="all" width="100%">
+              <table border="0" cellpadding="0" cellspacing="0" className="nb-table" rules="all" width="100%">
                 <tbody>
                   <tr>
                     <td><a href="/Assets/pdf/Newspaper%20-%20Marathi.pdf">Notice - Transfer of shares of IEPF - Mumbai Lakshdeep</a></td>
@@ -51,7 +51,7 @@ const IEPF = () => {
 
               <h3>2022-2023</h3>
 
-              <table border="0" cellpadding="0" cellspacing="0" class="nb-table" rules="all" width="100%">
+              <table border="0" cellpadding="0" cellspacing="0" className="nb-table" rules="all" width="100%">
                 <tbody>
                   <tr>
                     <td><a href="/Assets/pdf/Notice%20%20-%20Transfer%20of%20shares%20of%20IEPF%20-%20Mumbai%20Lakshdeep.pdf">Notice - Transfer of shares of IEPF - Mumbai Lakshdeep</a></td>
@@ -69,7 +69,7 @@ const IEPF = () => {
 
               <h3>2019-2020</h3>
 
-              <table border="0" cellpadding="0" cellspacing="0" class="nb-table" rules="all" width="100%">
+              <table border="0" cellpadding="0" cellspacing="0" className="nb-table" rules="all" width="100%">
                 <tbody>
                   <tr>
                     <td><a href="/Assets/pdf/Notice%20-%20Transfer%20of%20Shares%20to%20IEPF%20-%20Mumbai%20Lakshadeep(1).pdf">Notice&nbsp; - Transfer of shares of IEPF - Mumbai Lakshdeep</a></td>
@@ -85,13 +85,13 @@ const IEPF = () => {
 
               <h3>2018-2019</h3>
 
-              <table border="0" cellpadding="0" cellspacing="0" class="nb-table" rules="all" width="100%">
+              <table border="0" cellpadding="0" cellspacing="0" className="nb-table" rules="all" width="100%">
                 <tbody>
                   <tr>
-                    <td><a href="/Assets/pdf/NationalPlastics_TransferofShares_BusinessStandard_Mumbai_18%2007%202018.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Notice - Transfer of Shares to IEPF - Business Standard</a></td>
+                    <td><a href="/Assets/pdf/NationalPlastics_TransferofShares_BusinessStandard_Mumbai_18%2007%202018.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Notice - Transfer of Shares to IEPF - Business Standard</a></td>
                   </tr>
                   <tr>
-                    <td><a href="/Assets/pdf/NationalPlastics_TransferofShares_MumbaiLakshadeep_Mumbai_19%2007%202018.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Notice - Transfer of Shares to IEPF - Mumbai Lakshadeep</a></td>
+                    <td><a href="/Assets/pdf/NationalPlastics_TransferofShares_MumbaiLakshadeep_Mumbai_19%2007%202018.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Notice - Transfer of Shares to IEPF - Mumbai Lakshadeep</a></td>
                   </tr>
                   <tr>
                     <td><a href="/Assets/pdf/List%20of%20Shareholders%20_2018-19.pdf">List of Shareholders_2018-19.pdf</a></td>
@@ -101,13 +101,13 @@ const IEPF = () => {
 
               <h3>2017-2018</h3>
 
-              <table border="0" cellpadding="0" cellspacing="0" class="nb-table" rules="all" width="100%">
+              <table border="0" cellpadding="0" cellspacing="0" className="nb-table" rules="all" width="100%">
                 <tbody>
                   <tr>
-                    <td><a href="/Assets/pdf/List_of_Shareholders_whose_shares_are_liable_to_be_transferred_to_IEPF.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> List of shareholders whose shares are liable to be transferred to IEPF</a></td>
+                    <td><a href="/Assets/pdf/List_of_Shareholders_whose_shares_are_liable_to_be_transferred_to_IEPF.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> List of shareholders whose shares are liable to be transferred to IEPF</a></td>
                   </tr>
                   <tr>
-                    <td><a href="/Assets/pdf/Notice_Transfer_of_Shares_to_IEPF_02.12.2017.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Notice - Transfer of Shares to IEPF</a></td>
+                    <td><a href="/Assets/pdf/Notice_Transfer_of_Shares_to_IEPF_02.12.2017.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Notice - Transfer of Shares to IEPF</a></td>
                   </tr>
                   <tr>
                     <td><a href="/Assets/pdf/List%20of%20Shareholders%20_2017-18.pdf">List of Shareholders_2017-18.pdf</a></td>
@@ -125,8 +125,8 @@ const IEPF = () => {
 
               <p>Accordingly detailed information in respect of the relevant financial years is provided for the benefit of the Company\'s Investors.</p>
 
-              <div class="investor-table">
-                <table border="0" cellpadding="0" cellspacing="0" class="grid-table grid-table-striped table-condensed cf" id="grid_detail" rules="all" width="100%">
+              <div className="investor-table">
+                <table border="0" cellpadding="0" cellspacing="0" className="grid-table grid-table-striped table-condensed cf" id="grid_detail" rules="all" width="100%">
                   <tbody>
                     <tr>
                       <td data-title="Year" width="25%"><strong>Year 2018-19</strong></td>

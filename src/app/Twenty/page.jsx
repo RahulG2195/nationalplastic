@@ -6,7 +6,7 @@ const Twenty = () => {
       <section className='investor_sec my-5 py-5'>
         <div className='container'>
           <div className='row'>
-            <div class="inn-content-wrap">
+            <div className="inn-content-wrap">
               <p><a href="/Assets/pdf/2020/1.Closure%20of%20Trading%20Window%20_Jan2020.pdf" target="_blank">1.Closure of Trading Window_Jan2020.pdf</a></p>
 
               <p><a href="/Assets/pdf/2020/2.Certificate%20under%20regulation%2074(5)_Jan2020.pdf" target="_blank">2.Certificate under regulation 74(5)_Jan2020.pdf</a></p>

@@ -6,7 +6,7 @@ const TwentyTwo = () => {
       <section className='investor_sec my-5 py-5'>
         <div className='container'>
           <div className='row'>
-            <div class="inn-content-wrap">
+            <div className="inn-content-wrap">
               <p><a href="/Assets/pdf/1.Certificate%20under%20Reg.74(5)_Jan2022.pdf" target="_blank">1.Certificate under Reg.74(5)_Jan2022</a></p>
 
               <p><a href="/Assets/pdf/2.Certificate%20under%20Reg.76_Jan2022.pdf" target="_blank">2.Certificate under Reg.76_Jan2022</a></p>

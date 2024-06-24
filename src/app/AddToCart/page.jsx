@@ -422,16 +422,16 @@ function AddToCart() {
             <div className="coupenDiv p-4">
               <h6 className="pb-2">Have a coupon Code?</h6>
               <form>
-                <div class="input-group mb-3">
+                <div className="input-group mb-3">
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     placeholder=""
                     aria-label="coupon code"
                     aria-describedby="basic-addon2"
                   />
-                  <div class="input-group-append">
-                    <span class="input-group-text coupon_btn" id="basic-addon2">
+                  <div className="input-group-append">
+                    <span className="input-group-text coupon_btn" id="basic-addon2">
                       Apply
                     </span>
                   </div>

@@ -294,11 +294,11 @@ const PreChairsCards = () => {
             endMessage={<p>No more products to load</p>}
           > */}
             <div className="row">
-              {products.map((product) => {
+              {products.map((product, index) => {
                 const images = product.image_name ? product.image_name.split(', ').map(image => image.trim()) : [];
                 {/* console.log('images' + images[0]); */ }
                 return <div
-                  key={product.product_id}
+                  key={index}
                   className="PreCardSm col-12 col-sm-6 col-xs-4 col-md-6 col-lg-3 newProdCard"
                 >
                   <PreChairsCard

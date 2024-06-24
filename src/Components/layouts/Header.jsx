@@ -383,7 +383,7 @@ export default function Header() {
             </div>
 
             <div className="row">
-              <ul class=" d-flex side-icons">
+              <ul className=" d-flex side-icons">
                 <li className="nav-item brdr d-none d-md-none d-xl-block">
                   <Link
                     className="nav-link"

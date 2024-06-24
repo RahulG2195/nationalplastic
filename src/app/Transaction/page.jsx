@@ -6,7 +6,7 @@ const Transaction = () => {
       <section className='investor_sec my-5 py-5'>
         <div className='container'>
           <div className='row'>
-            <div class="col-12">
+            <div className="col-12">
               <table className='table table-responsive table-bordered'>
                 <tbody>
                   <tr>

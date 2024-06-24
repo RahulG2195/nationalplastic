@@ -606,7 +606,7 @@ function ProfilePage() {
                   <h3>Order List </h3>
                   <hr />
 
-                  <table class="table table-bordered table-responsive border-primary table-striped">
+                  <table className="table table-bordered table-responsive border-primary table-striped">
                     <thead>
                       <tr>
                         <th scope="col">Sr No</th>

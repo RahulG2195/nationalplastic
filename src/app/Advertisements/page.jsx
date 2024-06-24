@@ -6,12 +6,12 @@ const Advertisements = () => {
       <section className='investor_sec my-5 py-5'>
         <div className='container'>
           <div className='row'>
-            <div class="inn-content-wrap">
+            <div className="inn-content-wrap">
               <h3>Newspaper Advertisements</h3>
 
               <p>&nbsp;</p>
 
-              <div class="investor-table">
+              <div className="investor-table">
                 <table className='table table-rsponsive table-striped'>
                   <thead>
                     <tr>
@@ -54,7 +54,7 @@ const Advertisements = () => {
                 <p>&nbsp;</p>
               </div>
 
-              <div class="investor-table">
+              <div className="investor-table">
                 <table className='table table-rsponsive table-striped'>
                   <thead>
                     <tr>
@@ -97,7 +97,7 @@ const Advertisements = () => {
                 <p>&nbsp;</p>
               </div>
 
-              <div class="investor-table">
+              <div className="investor-table">
                 <table className='table table-rsponsive table-striped'>
                   <thead>
                     <tr>
