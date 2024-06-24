@@ -19,6 +19,7 @@ const WishlistPage1 = () => {
     // console.log("wishlistID ", customerId);
     const fetchData = async () => {
       try {
+        console.log("from whishlistpage1")
         const response = await axios.post("/api/wishListUser", {
           customer_id: customerId,
         });

@@ -25,7 +25,6 @@ export default function AddCategory() {
         }
       });
   
-      console.log('Response:', response.data);
     } catch (error) {
       console.error('Error:', error.response ? error.response.data : error.message);
     }

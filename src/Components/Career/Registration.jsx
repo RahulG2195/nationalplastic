@@ -43,15 +43,7 @@ const Registration = () => {
     return emailPattern.test(email);
   };
 
-  //   function handleInputChange(e) {
-  //     const { name, value, files } = e.target;
-  //     const file = files ? files[0] : " ";
-  // //console.log(file);
-  //     setUserInput({
-  //       ...userInput,
-  //       [name]: file || value,
-  //     });
-  //   }
+
   async function handleInputChange(event) {
     const { name, value } = event.target;
     {

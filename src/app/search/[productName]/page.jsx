@@ -183,7 +183,7 @@ const Search = (props) => {
       const userDataString = localStorage.getItem("userData");
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
-
+      console.log("isnt abovious customer")
       const response = await axios.post("/api/wishListUser", {
         customer_id: customerId,
       });

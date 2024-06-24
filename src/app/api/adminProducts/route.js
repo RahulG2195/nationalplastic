@@ -40,6 +40,7 @@ const convertCategoryID = async (category_name) => {
   }
 };
 
+
 export async function POST(request) {
   try {
     const formData = await request.formData();
@@ -48,8 +49,6 @@ export async function POST(request) {
       'product_name',
       'seo_url',
       'category_name',
-      'image_name',
-      'image',
       'price',
       'discount_price',
       'color',
@@ -75,20 +74,24 @@ export async function POST(request) {
       );
     }
 
-    if (data.image) {
-      try {
-        const response = await uploadImage(data.image);
-        console.log("79",response);
-      } catch (error) {
-        console.error('Error uploading image:', error);
-        return NextResponse.json(
-          { success: false, error: 'Failed to upload image' },
-          { status: 500 }
-        );
+    // Handle multiple image uploads
+    const imageNames = [];
+    for (let [key, value] of formData.entries()) {
+      if (key.startsWith('image')) {
+        try {
+          const imageName = await uploadImage(value);
+          imageNames.push(imageName);
+        } catch (error) {
+          console.error('Error uploading image:', error);
+          return NextResponse.json(
+            { success: false, error: 'Failed to upload image' },
+            { status: 500 }
+          );
+        }
       }
     }
+    data.image_name = imageNames.join(',');
 
-    console.log("data:- "+ JSON.stringify(data));
     const category_id = await convertCategoryID(data.category_name);
     data.category_id = category_id;
 
@@ -138,17 +141,21 @@ export async function POST(request) {
 export async function PUT(request) {
   try {
     const formData = await request.formData();
-    const {image} = Object.fromEntries(
-      formData.entries()
-    );
-    if (image) {
-      await uploadImage(image);  // Ensure this function handles image upload
+    const images = formData.getAll('image');
+    let imageNames = [];
+
+    // Handle multiple image uploads
+    if (images && images.length > 0) {
+      for (const image of images) {
+        const imageName = await uploadImage(image);  // Ensure this function handles image upload and returns the image name
+        imageNames.push(imageName);
+      }
     }
+
     const requiredFields = [
       'product_name',
       'seo_url',
       'category_id',
-      'image_name',
       'price',
       'discount_price',
       'color',
@@ -174,6 +181,9 @@ export async function PUT(request) {
         { status: 400 }
       );
     }
+
+    // Set image_name to the new image names if uploaded, otherwise keep the existing ones
+    data.image_name = imageNames.length > 0 ? imageNames.join(',') : formData.get('image_name');
 
     // Convert color name to color code
     let color_code;
@@ -249,7 +259,6 @@ export async function GET(request){
     );
 
   }catch(e){
-    console.log(e.message);
     return new Response(
       JSON.stringify({
         status: 500,
@@ -263,10 +272,8 @@ export async function GET(request){
 
 export async function DELETE(request) {
   try {
-    console.log("Received DELETE request"); // Log receipt of the request
 
     const requestBody = await request.json();
-    console.log("Request body:", requestBody); 
     const { product_id } = requestBody;
     if (!product_id) {
       return new Response(
@@ -282,7 +289,6 @@ export async function DELETE(request) {
       query: "DELETE FROM products WHERE product_id = ?",
       values: [product_id],
     });
-    console.log("result ", result);
     if (result.affectedRows > 0) {
       return new Response(
         JSON.stringify({

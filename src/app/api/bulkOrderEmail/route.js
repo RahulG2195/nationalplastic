@@ -7,10 +7,6 @@ export async function POST(request, res) {
   try {
     const { fullName, Email, ProductName, Mobile, Requirements, city } =
       await request.json();
-    // console.log("-----", fullName);
-    // console.log(JSON.stringify(fullName));
-
-    // const url = "/new-password/1?resetToken=" + resetToken;
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
