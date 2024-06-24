@@ -1,6 +1,8 @@
 import { query } from '@/lib/db';
 import colorNameList from 'color-name-list';
 import { NextResponse } from 'next/server';
+import { writeFile } from "fs/promises";
+import upload from "@/utils/multer.middleware";
 function convertColorToCode(color) {
   const colorEntry = colorNameList.find(entry => entry.name.toLowerCase() === color.toLowerCase());
   if (!colorEntry) {
@@ -8,28 +10,55 @@ function convertColorToCode(color) {
   }
   return colorEntry.hex;
 }
+const uploadImage = async (file)=>{
+  try{
+    await upload.single(file);
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    const path = `./uploads/${file.name}`;
+    await writeFile(path, buffer);
+  }catch(error){
+    console.log('error: ', error.message);
+  }
+}
 
-
+const convertCategoryID = async (category_name) => {
+  try {
+    const category = await query({
+      query: "SELECT category_id FROM categories WHERE category_name = ?",
+      values: [category_name],
+    });
+    
+    if (category.length > 0) {
+      return category[0].category_id;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error("Error querying the database:", error);
+    return false;
+  }
+};
 
 export async function POST(request) {
   try {
     const formData = await request.formData();
-    
+   
     const requiredFields = [
       'product_name',
       'seo_url',
-      'category_id',
+      'category_name',
       'image_name',
+      'image',
       'price',
       'discount_price',
       'color',
       'armType',
       'prod_status'
     ];
-
     const data = {};
     const missingFields = [];
-
+   
     requiredFields.forEach(field => {
       const value = formData.get(field);
       if (!value) {
@@ -45,6 +74,23 @@ export async function POST(request) {
         { status: 400 }
       );
     }
+
+    if (data.image) {
+      try {
+        const response = await uploadImage(data.image);
+        console.log("79",response);
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        return NextResponse.json(
+          { success: false, error: 'Failed to upload image' },
+          { status: 500 }
+        );
+      }
+    }
+
+    console.log("data:- "+ JSON.stringify(data));
+    const category_id = await convertCategoryID(data.category_name);
+    data.category_id = category_id;
 
     // Convert color name to color code
     let color_code;
@@ -81,10 +127,8 @@ export async function POST(request) {
       { success: true, data: result },
       { status: 201 }
     );
-
   } catch (error) {
     console.error('Error creating product:', error);
-
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 500 }
@@ -93,37 +137,40 @@ export async function POST(request) {
 }
 export async function PUT(request) {
   try {
-    const data = await request.json(); // Parse incoming JSON data
-    const {
-      product_name,
-      seo_url,
-      category_id,
-      image_name,
-      price,
-      discount_price,
-      color,
-      armType,
-      prod_status,
-    } = data;
-
-    // Manual validation
-    const requiredFields = {
-      product_name,
-      seo_url,
-      category_id,
-      image_name,
-      price,
-      discount_price,
-      color,
-      armType,
-      prod_status,
-    };
-
-    const missingFields = Object.entries(requiredFields).filter(([key, value]) => !value).map(([key]) => key);
+    const formData = await request.formData();
+    const {image} = Object.fromEntries(
+      formData.entries()
+    );
+    if (image) {
+      await uploadImage(image);  // Ensure this function handles image upload
+    }
+    const requiredFields = [
+      'product_name',
+      'seo_url',
+      'category_id',
+      'image_name',
+      'price',
+      'discount_price',
+      'color',
+      'armType',
+      'prod_status',
+      'product_id'
+    ];
+    const data = {};
+    const missingFields = [];
+   
+    requiredFields.forEach(field => {
+      const value = formData.get(field);
+      if (!value) {
+        missingFields.push(field);
+      } else {
+        data[field] = value;
+      }
+    });
 
     if (missingFields.length > 0) {
-      return new Response(
-        JSON.stringify({ success: false, error: `The following fields are required: ${missingFields.join(', ')}` }),
+      return NextResponse.json(
+        { success: false, error: `The following fields are required: ${missingFields.join(', ')}` },
         { status: 400 }
       );
     }
@@ -131,16 +178,15 @@ export async function PUT(request) {
     // Convert color name to color code
     let color_code;
     try {
-      color_code = convertColorToCode(color);
+      color_code = convertColorToCode(data.color);
     } catch (error) {
-      return new Response(
-        JSON.stringify({ success: false, error: error.message }),
+      return NextResponse.json(
+        { success: false, error: error.message },
         { status: 400 }
       );
     }
 
-
-    // Updating the new product
+    // Updating the product
     const result = await query({
       query: `
         UPDATE products 
@@ -158,20 +204,30 @@ export async function PUT(request) {
         WHERE 
           product_id = ?
       `,
-      values: [product_name, seo_url, category_id, image_name, price, discount_price, color, color_code, armType, prod_status, product_id],
+      values: [
+        data.product_name,
+        data.seo_url,
+        data.category_id,
+        data.image_name,
+        data.price,
+        data.discount_price,
+        data.color,
+        color_code,
+        data.armType,
+        data.prod_status,
+        data.product_id
+      ],
     });
-    
 
-    return new Response(
-      JSON.stringify({ success: true, data: result }),
-      { status: 201 }
+    return NextResponse.json(
+      { success: true, data: result },
+      { status: 200 }
     );
 
   } catch (error) {
-    console.error('Error creating product:', error);
-
-    return new Response(
-      JSON.stringify({ success: false, error: error.message }),
+    console.error('Error updating product:', error);
+    return NextResponse.json(
+      { success: false, error: error.message },
       { status: 500 }
     );
   }

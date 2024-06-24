@@ -4,7 +4,7 @@ import { verifyToken } from './utils/jwtAuth';
 const secret = 'national_plastic'; 
 
 export async function middleware(req) {
-    const token = req.cookies.get('auth')?.value;
+    const token = req.cookies.get('token')?.value;
     if (!token) {
         return NextResponse.redirect(new URL('/login', req.url));
     }
