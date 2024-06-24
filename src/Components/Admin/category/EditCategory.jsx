@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Form, Input, Button, InputNumber } from 'antd';
 import axios from 'axios';
@@ -7,17 +7,7 @@ import "./EditCategory.css";
 
 export default function EditCategory() {
   const { control, handleSubmit, setValue, formState: { errors } } = useForm();
-
-  // const validateCategory = async (data) => {
-  //   try {
-  //     const response = await axios.post("/api/adminCategories", data);
-  //     console.log('Validation response:', response.data);
-  //     return response.data;
-  //   } catch (error) {
-  //     console.error('Validation Error:', error.message);
-  //     throw error; // Re-throw the error to be caught in the onSubmit function
-  //   }
-  // };
+  const [imagePreview, setImagePreview] = useState('');
 
   const updateCategory = async (data) => {
     try {
@@ -29,8 +19,6 @@ export default function EditCategory() {
       formData.append('status', data.status);
       formData.append('category_id', data.category_id);
       formData.append('topPick', data.topPick);
-
-
       if (data.image) {
         formData.append('image', data.image);
       }
@@ -44,16 +32,14 @@ export default function EditCategory() {
       return response.data;
     } catch (error) {
       console.error('Update Error:', error.message);
-      throw error; // Re-throw the error to be caught in the onSubmit function
+      throw error;
     }
   };
 
   const onSubmit = async (data) => {
     try {
       await updateCategory(data);
-      // await validateCategory(data);
     } catch (error) {
-      // Handle errors, e.g., show an error message
       console.error('Submission Error:', error.message);
     }
   };
@@ -62,16 +48,28 @@ export default function EditCategory() {
     const file = e.target.files[0];
     setValue('image', file);
     setValue('image_name', file ? file.name : '');
+    
+    // Create a preview for the new image
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("categoryToEdit"));
     if (data) {
-      // Set form values with data from localStorage
       console.log("data: ", data);
       Object.keys(data).forEach(key => {
         setValue(key, data[key]);
       });
+      // Set the image preview
+      if (data.image_name) {
+        setImagePreview(`/Assets/images/circular/${data.image_name}`);
+      }
     }
   }, [setValue]);
 
@@ -99,6 +97,11 @@ export default function EditCategory() {
         validateStatus={errors.image ? 'error' : ''}
         help={errors.image ? 'Please upload an image!' : ''}
       >
+        {imagePreview && (
+          <div className="image-preview">
+            <img src={imagePreview} alt="Current category image" title={control._formValues.image_name}  style={{ maxWidth: '200px', marginBottom: '10px' }} />
+          </div>
+        )}
         <input
           type="file"
           onChange={handleFileChange}
