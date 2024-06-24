@@ -8,35 +8,48 @@ import axios from 'axios';
 export default function App() {
   const { control, handleSubmit, setValue, formState: { errors } } = useForm();
 
-  const validateProduct = async (data) => {
+  const validateProduct = async (formData) => {
     try {
-      const response = await axios.post("/api/adminProducts",data);
+      const response = await axios.post("/api/adminProducts", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
       console.log('Validation response:', response.data);
       return response.data;
     } catch (error) {
       console.error('Validation Error:', error.message);
-      throw error; // Re-throw the error to be caught in the onSubmit function
+      throw error;
     }
   };
 
-  const updateProduct = async (data) => {
+  const updateProduct = async (formData) => {
     try {
-      const response = await axios.put("/api/adminProducts",data);
+      const response = await axios.put("/api/adminProducts", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
       console.log('Update response:', response.data);
       return response.data;
     } catch (error) {
       console.error('Update Error:', error.message);
-      throw error; // Re-throw the error to be caught in the onSubmit function
+      throw error;
     }
   };
 
   const onSubmit = async (data) => {
     try {
-      await updateProduct(data);
+      const formData = new FormData();
+      
+      // Append all form fields to FormData
+      Object.keys(data).forEach(key => {
+        formData.append(key, data[key]);
+      });
 
-      await validateProduct(data);
+      await updateProduct(formData);
+      await validateProduct(formData);
     } catch (error) {
-      // Handle errors, e.g., show an error message
       console.error('Submission Error:', error.message);
     }
   };
@@ -44,13 +57,14 @@ export default function App() {
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("productToEdit"));
     if (data) {
-      // Set form values with data from localStorage
       console.log("data: ", data);
       Object.keys(data).forEach(key => {
         setValue(key, data[key]);
       });
     }
   }, [setValue]);
+
+  // The rest of the component remains the same
 
   return (
     <Form

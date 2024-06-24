@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2024 at 01:45 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.0.25
+-- Generation Time: Jun 24, 2024 at 05:35 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `nationalplastic`
+-- Database: `np`
 --
 
 -- --------------------------------------------------------
@@ -33,52 +33,54 @@ CREATE TABLE `categories` (
   `image_name` varchar(255) NOT NULL,
   `navshow` int(11) NOT NULL DEFAULT 0,
   `status` int(11) NOT NULL DEFAULT 1,
-  `created_on` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_on` timestamp NOT NULL DEFAULT current_timestamp(),
+  `topPick` int(2) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`category_id`, `category_name`, `image_name`, `navshow`, `status`, `created_on`) VALUES
-(1, 'Karnival Chair', 'Karnival-Chair.jpg-2/Karnival-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36'),
-(2, 'Atlantis Chair', 'Atlantis-Chair.jpg-2/Atlantis-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36'),
-(3, 'Karen Chair', 'Karen-Chair.jpg-2/Karen-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36'),
-(4, 'Orca Chair', 'Orca-Chair 2/Orca-Chair 2.png', 0, 1, '2024-02-15 06:19:36'),
-(5, 'Magna Chair', 'Magna-Chair.jpg-2/Magna-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36'),
-(6, 'Saab Chair', 'Saab-Chair.jpg-2/Saab-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36'),
-(7, 'Leisure Chair', 'Leisure-Chair.jpg-2/Leisure-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36'),
-(8, 'Merc Sofa Chair', 'Merc-Sofa-Chair.jpg-2/Merc-Sofa-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36'),
-(9, 'Omega Chair', 'Omega-Chair.jpg-2/Omega-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36'),
-(10, 'Storm Chair', 'Storm-Chair/Storm-Chair.png', 0, 1, '2024-02-15 06:19:36'),
-(11, 'Solace Chair', 'Solace-chair/Solace-chair.png', 0, 1, '2024-02-15 06:19:36'),
-(12, 'Ghost Chair', 'Ghost-Chair/Ghost-Chair.png', 0, 1, '2024-02-15 06:19:36'),
-(13, 'Premium Event Chair', '1st-section-Table-set.png', 1, 1, '2024-03-20 04:39:27'),
-(14, 'Without Arm Tent', 'Alto Chair-ICOFFEE-(45)-Lifestyle.webp', 1, 1, '2024-03-20 04:39:27'),
-(15, 'Premium Chair', '1st-section-Premium-Chairs.png', 1, 1, '2024-03-20 04:39:27'),
-(16, 'Popular Chair', 'Agra chairs-Mangowood-(45) Lifestyle.webp', 1, 1, '2024-03-20 04:39:27'),
-(17, 'Cabinet', 'Planet Power Big (45)-blue & grey- white bg.webp', 1, 1, '2024-03-20 04:39:27'),
-(18, 'Baby Chair', 'Dolphin Chair Banner.png', 1, 1, '2024-03-20 04:39:27'),
-(19, 'Stool', 'placeholder_image_url', 0, 1, '2024-03-20 04:39:27'),
-(20, 'Table', 'placeholder_image_url', 0, 1, '2024-03-20 04:39:27'),
-(21, 'Box', 'Tote Box 15 Ltrs With-Wheels-Natural-white bg.webp', 1, 1, '2024-03-20 04:39:27'),
-(22, 'Drawer', 'Drawer 3 Tier 130-Pink & voilet-(45)-white bg.webp', 1, 1, '2024-03-20 04:39:27'),
-(24, 'Seatings', 'Seatings.png', 0, 1, '2024-03-21 23:33:37'),
-(25, 'Tables', 'Tables-2.png', 1, 1, '2024-03-21 23:33:37'),
-(26, 'Storage', 'Storage.png', 0, 1, '2024-03-21 23:33:37'),
-(27, 'Sets', 'Table-Sets.png', 0, 1, '2024-03-21 23:33:37'),
-(28, 'Stools', 'Stools.png', 1, 1, '2024-03-21 23:33:37'),
-(29, 'Baby chairs', 'Baby-chair.png', 0, 1, '2024-03-21 23:33:37'),
-(30, 'Living Room', 'Living-Room.png', 0, 1, '2024-03-22 03:06:28'),
-(31, 'Dining Room', 'Dining-Room.png', 0, 1, '2024-03-22 03:06:28'),
-(32, 'Bedroom', 'Bedroom.png', 0, 1, '2024-03-22 03:06:28'),
-(33, 'Balcony', 'Balcony-Room.png', 0, 1, '2024-03-22 03:06:28'),
-(34, 'Baby Room', 'Kids-room.png', 0, 1, '2024-03-22 03:06:28'),
-(35, 'Store Room', 'Store-room.png', 0, 1, '2024-03-22 03:06:28'),
-(36, 'Shoe Rack', '', 0, 1, '2024-04-30 03:40:56'),
-(37, 'Shell', '', 0, 1, '2024-04-30 03:45:31'),
-(38, 'Utility', '', 0, 1, '2024-04-30 04:02:48'),
-(39, 'Planters', '', 0, 1, '2024-04-30 04:06:06');
+INSERT INTO `categories` (`category_id`, `category_name`, `image_name`, `navshow`, `status`, `created_on`, `topPick`) VALUES
+(1, 'Karnival Chair', 'Karnival-Chair.jpg-2/Karnival-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36', 0),
+(2, 'Atlantis Chair', 'Atlantis-Chair.jpg-2/Atlantis-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36', 0),
+(3, 'Karen Chair', 'Karen-Chair.jpg-2/Karen-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36', 0),
+(4, 'Orca Chair', 'Orca-Chair 2/Orca-Chair 2.png', 0, 1, '2024-02-15 06:19:36', 0),
+(5, 'Magna Chair', 'Magna-Chair.jpg-2/Magna-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36', 0),
+(6, 'Saab Chair', 'Saab-Chair.jpg-2/Saab-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36', 0),
+(7, 'Leisure Chair', 'Leisure-Chair.jpg-2/Leisure-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36', 0),
+(8, 'Merc Sofa Chair', 'Merc-Sofa-Chair.jpg-2/Merc-Sofa-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36', 0),
+(9, 'Omega Chair', 'Omega-Chair.jpg-2/Omega-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36', 0),
+(10, 'Storm Chair', 'Storm-Chair/Storm-Chair.png', 0, 1, '2024-02-15 06:19:36', 0),
+(11, 'Solace Chair', 'Solace-chair/Solace-chair.png', 0, 1, '2024-02-15 06:19:36', 0),
+(12, 'Ghost Chair', 'Ghost-Chair/Ghost-Chair.png', 0, 1, '2024-02-15 06:19:36', 0),
+(13, 'Premium Event Chair', '1st-section-Table-set.png', 1, 1, '2024-03-20 04:39:27', 1),
+(14, 'Without Arm Tent', 'Alto Chair-ICOFFEE-(45)-Lifestyle.webp', 1, 1, '2024-03-20 04:39:27', 0),
+(15, 'Premium Chair', '1st-section-Premium-Chairs.png', 1, 1, '2024-03-20 04:39:27', 0),
+(16, 'Popular Chair', 'Agra chairs-Mangowood-(45) Lifestyle.webp', 1, 1, '2024-03-20 04:39:27', 0),
+(17, 'Cabinet', 'Planet Power Big (45)-blue & grey- white bg.webp', 1, 1, '2024-03-20 04:39:27', 0),
+(18, 'Baby Chair', 'Dolphin Chair Banner.png', 1, 1, '2024-03-20 04:39:27', 0),
+(19, 'Stool', 'placeholder_image_url', 0, 1, '2024-03-20 04:39:27', 0),
+(20, 'Table', 'placeholder_image_url', 0, 1, '2024-03-20 04:39:27', 0),
+(21, 'Box', 'Tote Box 15 Ltrs With-Wheels-Natural-white bg.webp', 1, 1, '2024-03-20 04:39:27', 0),
+(22, 'Drawer', 'Drawer 3 Tier 130-Pink & voilet-(45)-white bg.webp', 1, 1, '2024-03-20 04:39:27', 0),
+(24, 'Seatings', 'Chair.png', 0, 1, '2024-03-21 23:33:37', 1),
+(25, 'Tables', 'Tables.png', 1, 1, '2024-03-21 23:33:37', 0),
+(26, 'Storage', 'Storage.png', 0, 1, '2024-03-21 23:33:37', 0),
+(27, 'Sets', 'Table-Set.png', 0, 1, '2024-03-21 23:33:37', 0),
+(28, 'Stools', 'Stools.png', 1, 1, '2024-03-21 23:33:37', 0),
+(29, 'Baby chairs', 'Kids-Chair.png', 0, 1, '2024-03-21 23:33:37', 0),
+(30, 'Living Room', 'Living-Room.png', 0, 1, '2024-03-22 03:06:28', 0),
+(31, 'Dining Room', 'Dining-Room.png', 0, 1, '2024-03-22 03:06:28', 0),
+(32, 'Bedroom', 'Bedroom.png', 0, 1, '2024-03-22 03:06:28', 0),
+(33, 'Balcony', 'Balcony-Room.png', 0, 1, '2024-03-22 03:06:28', 0),
+(34, 'Baby Room', 'Kids-room.png', 0, 1, '2024-03-22 03:06:28', 0),
+(35, 'Store Room', 'Store-room.png', 0, 1, '2024-03-22 03:06:28', 0),
+(36, 'Shoe Rack', '', 0, 1, '2024-04-30 03:40:56', 0),
+(37, 'Shell', '', 0, 1, '2024-04-30 03:45:31', 0),
+(38, 'Utility', '', 0, 1, '2024-04-30 04:02:48', 0),
+(39, 'Planters', '', 0, 1, '2024-04-30 04:06:06', 0),
+(47, 'updatedCode', 'Screenshot (8).png', 0, 0, '2024-06-21 09:58:47', 0);
 
 -- --------------------------------------------------------
 
@@ -95,24 +97,28 @@ CREATE TABLE `customer` (
   `Address` varchar(255) NOT NULL,
   `Adress2` varchar(255) DEFAULT NULL,
   `Password` varchar(255) NOT NULL,
-  `google_id` int(11) DEFAULT NULL
+  `google_id` int(11) DEFAULT NULL,
+  `role` enum('user','admin') NOT NULL DEFAULT 'user'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`customer_id`, `FirstName`, `LasttName`, `Email`, `Phone`, `Address`, `Adress2`, `Password`, `google_id`) VALUES
-(1, 'John', 'Doe', 'asd@gmail.com', '00000000', 'absc', '', 'password123', NULL),
-(2, 'Craig', 'Bowers', 'nefebiduzo@mailinator.com', '4545454545', 'Et accusantium excep', NULL, 'Pa$$w0rd!', NULL),
-(3, 'Aishwarya', 'Bhoir', 'aishwarya@crezvatic.com', '9999999999', 'vasai', NULL, 'Aish@123', NULL),
-(4, 'Zena', 'Whitley', 'xugevicif@mailinator.com', '2323232323', 'Architecto dolores n', NULL, 'Pa$$w0rd!', NULL),
-(5, 'sid', 'dhamale', 'sid@gmail.com', '7777777777', 'junnar', NULL, 'passwordsid@123', NULL),
-(6, 'Dinesh', 'nadar', 'd@gmail.com', '7779997777', 'kalyan', NULL, 'passwordd@123', NULL),
-(7, 'Pratik', 'Shinde', 'p@gmail.com', '8787676565', 'Kalyan', NULL, 'Pratik@123', NULL),
-(8, 'Keane', 'Duncan', 'rahul@crezvatic.com', '7738035606', 'In ad libero commodi', NULL, '$2a$12$G1VJ1oNTRI/OgWLVIrFe9egdajw/ycFGTcrtRNwrP6qzgocvPY1Kq', NULL),
-(9, 'Zia', 'Cantu', 'reve@mailinator.com', '9874589658', 'Quia rem quia ad atq', NULL, '$2a$12$Hx6JtVkDdx9Mwj2O7xIxpOxN6vlVz9aE7rgMbhTpb9f//Y3ZBgw6.', NULL),
-(10, 'Rahul', 'jaiswal', 'Rahul@gmail.com', '9518595869', 'opal squal, near midc', NULL, '$2a$12$stylQAy6xgMiNa7Srq8H3.L1WPzb6DOHMHz2qc0gnx5bb/L3L2Zdu', NULL);
+INSERT INTO `customer` (`customer_id`, `FirstName`, `LasttName`, `Email`, `Phone`, `Address`, `Adress2`, `Password`, `google_id`, `role`) VALUES
+(1, 'John', 'Doe', 'asd@gmail.com', '00000000', 'absc', '', 'password123', NULL, 'user'),
+(2, 'Craig', 'Bowers', 'nefebiduzo@mailinator.com', '4545454545', 'Et accusantium excep', NULL, 'Pa$$w0rd!', NULL, 'user'),
+(3, 'Aishwarya', 'Bhoir', 'aishwarya@crezvatic.com', '9999999999', 'vasai', NULL, 'Aish@123', NULL, 'user'),
+(4, 'Zena', 'Whitley', 'xugevicif@mailinator.com', '2323232323', 'Architecto dolores n', NULL, 'Pa$$w0rd!', NULL, 'user'),
+(5, 'sid', 'dhamale', 'sid@gmail.com', '7777777777', 'junnar', NULL, 'passwordsid@123', NULL, 'user'),
+(6, 'Dinesh', 'nadar', 'd@gmail.com', '7779997777', 'kalyan', NULL, 'passwordd@123', NULL, 'user'),
+(7, 'Pratik', 'Shinde', 'p@gmail.com', '8787676565', 'Kalyan', NULL, 'Pratik@123', NULL, 'user'),
+(8, 'Keane', 'Duncan', 'rahul@crezvatic.com', '7738035606', 'In ad libero commodi', NULL, '$2a$12$G1VJ1oNTRI/OgWLVIrFe9egdajw/ycFGTcrtRNwrP6qzgocvPY1Kq', NULL, 'user'),
+(9, 'Zia', 'Cantu', 'reve@mailinator.com', '9874589658', 'Quia rem quia ad atq', NULL, '$2a$12$Hx6JtVkDdx9Mwj2O7xIxpOxN6vlVz9aE7rgMbhTpb9f//Y3ZBgw6.', NULL, 'user'),
+(10, 'Rahul', 'Gupta', 'Rahul@gmail.com', '9518595869', 'opal squal, near midc', NULL, '$2a$12$stylQAy6xgMiNa7Srq8H3.L1WPzb6DOHMHz2qc0gnx5bb/L3L2Zdu', NULL, 'user'),
+(11, 'Austin', 'Martin', 'password@gmail.com', '0987123333', 'F1', NULL, '$2a$12$dLG/7XSCdP9BoMQYkFu3hOy/lzSx8jmd1Qizfm7PqCIhDLItQ/5Qm', NULL, 'user'),
+(12, 'Dinesh', 'Nadar', 'password2@gmail.com', '8291617522', 'Home', NULL, '$2a$12$j3/0yJt8YdHDLYbnVXpOe.pSpNQE6CK9uqHfHBc/h/et77UVBfsVm', NULL, 'admin'),
+(17, 'Dinesh', 'Nadar', 'dineshndr02@gmail.com', '1234567890', 'Cloud', NULL, '$2a$12$IgztBH9cwbxIWWIIfyfw1OCrdKViC0XDj/PLr.S7pKAI7.HhSmoum', NULL, 'admin');
 
 -- --------------------------------------------------------
 
@@ -150,10 +156,7 @@ CREATE TABLE `mycart` (
 
 INSERT INTO `mycart` (`cart_id`, `product_id`, `user_id`, `quantity`, `color`) VALUES
 (1, 21, 7, 1, 'Gold'),
-(2, 26, 7, 1, 'Gold'),
-(18, 68, 10, 2, 'Gold'),
-(19, 46, 10, 2, 'Gold'),
-(20, 94, 10, 1, 'Gold');
+(2, 26, 7, 1, 'Gold');
 
 -- --------------------------------------------------------
 
@@ -169,10 +172,9 @@ CREATE TABLE `order_detail` (
   `quantity` int(11) NOT NULL,
   `prod_price` int(11) NOT NULL,
   `cancel_order` int(11) NOT NULL DEFAULT 1 COMMENT '1 == not cancel\r\n0 == cancel order',
-  `per_order_status` int(11) NOT NULL DEFAULT 1 COMMENT 'created to updae status on return or cancel of particular product. once all prod canlled as per uid and pid then will update orders order_Status',
+  `per_order_status` int(11) NOT NULL DEFAULT 1 COMMENT 'created to updae status on return or cancel of particular product',
   `return_order` int(11) NOT NULL DEFAULT 1 COMMENT '1 == not return\r\n0 == return order',
   `cancel_comment` text DEFAULT NULL,
-  `extraCharge` int(11) DEFAULT NULL COMMENT 'extra charge will apply if user cancel or return prod after T&C time',
   `last_modified` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `added_on` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -181,13 +183,13 @@ CREATE TABLE `order_detail` (
 -- Dumping data for table `order_detail`
 --
 
-INSERT INTO `order_detail` (`od_id`, `order_id`, `user_id`, `prod_id`, `quantity`, `prod_price`, `cancel_order`, `per_order_status`, `return_order`, `cancel_comment`, `extraCharge`, `last_modified`, `added_on`) VALUES
-(1, 1, 10, 10, 19, 478, 1, 1, 1, NULL, 0, '2024-06-14 09:22:10', '2024-06-13 05:24:47'),
-(2, 1, 10, 58, 19, 598, 1, 1, 1, NULL, 0, '2024-06-14 09:22:10', '2024-06-13 05:24:47'),
-(3, 1, 10, 74, 19, 570, 1, 1, 1, NULL, NULL, '2024-06-14 08:35:01', '2024-06-13 05:24:47'),
-(4, 2, 10, 77, 4, 2090, 1, 1, 1, NULL, 0, '2024-06-14 08:35:01', '2024-06-13 11:36:00'),
-(5, 2, 10, 46, 1, 816, 1, 1, 1, NULL, 0, '2024-06-14 09:22:10', '2024-06-13 11:36:01'),
-(6, 2, 10, 68, 1, 922, 1, 1, 1, NULL, 0, '2024-06-14 09:35:22', '2024-06-13 11:36:01');
+INSERT INTO `order_detail` (`od_id`, `order_id`, `user_id`, `prod_id`, `quantity`, `prod_price`, `cancel_order`, `per_order_status`, `return_order`, `cancel_comment`, `last_modified`, `added_on`) VALUES
+(1, 1, 10, 10, 19, 478, 1, 1, 1, NULL, '2024-06-13 05:24:47', '2024-06-13 05:24:47'),
+(2, 1, 10, 58, 19, 598, 1, 1, 1, NULL, '2024-06-13 05:24:47', '2024-06-13 05:24:47'),
+(3, 1, 10, 74, 19, 570, 0, 0, 1, NULL, '2024-06-13 11:04:40', '2024-06-13 05:24:47'),
+(4, 2, 10, 77, 4, 2090, 1, 1, 1, NULL, '2024-06-13 11:36:00', '2024-06-13 11:36:00'),
+(5, 2, 10, 46, 1, 816, 1, 1, 1, NULL, '2024-06-13 11:36:01', '2024-06-13 11:36:01'),
+(6, 2, 10, 68, 1, 922, 0, 0, 1, NULL, '2024-06-13 11:39:22', '2024-06-13 11:36:01');
 
 -- --------------------------------------------------------
 
@@ -218,9 +220,8 @@ CREATE TABLE `order_list` (
 --
 
 INSERT INTO `order_list` (`order_id`, `razorpay_order_id`, `customer_id`, `customer_email`, `Phone`, `order_address`, `order_pincode`, `order_city`, `order_amount`, `order_status`, `order_payment_type`, `payment_status`, `razor_payment_id`, `order_status_date`, `added_on`) VALUES
-(1, 'order_OM82LQxGWgY0Xv', '10', 'rahul@gmail.com', '+919518595869', 'opal squal, near midc', 'opal squal, near midc', 'opal squal, near midc', '176600.00', 2, 'wallet', 'captured', 'pay_OM82TF1h1iGb0v', '2024-06-13 09:33:12', '2024-06-13 07:05:16'),
-(2, 'order_OMEMXmHEy3Vets', '10', 'rahul@gmail.com', '+919518595869', 'opal squal, near midc', 'opal squal, near midc', 'opal squal, near midc', '1021800.00', 5, 'paylater', 'captured', 'pay_OMEMhc70dw9aq0', '2024-06-14 09:53:34', '2024-06-13 11:36:00'),
-(3, 'order_ONoEETNmHdQOaE', '10', 'rahul@gmail.com', '+919518595869', 'opal squal, near midc', 'opal squal, near midc', 'opal squal, near midc', NULL, 1, 'wallet', 'captured', 'pay_ONoETzJVNCMqws', '2024-06-17 11:20:20', '2024-06-17 11:20:20');
+(1, 'order_OM82LQxGWgY0Xv', '10', 'rahul@gmail.com', '+919518595869', 'opal squal, near midc', 'opal squal, near midc', 'opal squal, near midc', 176600.00, 1, 'wallet', 'captured', 'pay_OM82TF1h1iGb0v', '2024-06-13 07:05:16', '2024-06-13 07:05:16'),
+(2, 'order_OMEMXmHEy3Vets', '10', 'rahul@gmail.com', '+919518595869', 'opal squal, near midc', 'opal squal, near midc', 'opal squal, near midc', 1021800.00, 1, 'paylater', 'captured', 'pay_OMEMhc70dw9aq0', '2024-06-13 11:36:00', '2024-06-13 11:36:00');
 
 -- --------------------------------------------------------
 
@@ -242,7 +243,7 @@ INSERT INTO `order_status` (`status_id`, `status_name`) VALUES
 (2, 'Confirmed'),
 (3, 'Processing'),
 (4, 'Shipped'),
-(5, 'Delivered'),
+(5, 'Completed'),
 (6, 'Canceled'),
 (7, 'Return');
 
@@ -340,7 +341,7 @@ INSERT INTO `products` (`product_id`, `product_name`, `product_name2`, `meta_tit
 (55, 'Bentley', 'Bentley', '', '', '', '', '', 'Bentley', 'Bentley-IRWD', 15, 'Bentely Chairs-IRWD-(45) white bg.webp', '853', '1023', '20', '', '', '40', 'IRWD', '#5E3734', 'without arm tent', 1, '2024-06-14 05:22:14'),
 (56, 'Bentley', 'Bentley', '', '', '', '', '', 'Bentley', 'Bentley-CAPPUCCINO', 15, 'default_chair_img.webp', '853', '1023', '20', '', '', '40', 'CAPPUCCINO', '#8C4C27', 'without arm tent', 1, '2024-06-14 05:22:14'),
 (57, 'Bentley', 'Bentley', '', '', '', '', '', 'Bentley', 'Bentley-Mat-Brown', 15, 'default_chair_img.webp', '853', '1023', '20', '', '', '40', 'Mat Brown', '#563921', 'without arm tent', 1, '2024-06-14 05:22:14'),
-(58, 'BEST', 'BEST', '', '', '', '', '', 'BEST', 'BEST-Mat-Brown', 16, 'Best chairs Matt Brown-(45 right)-white brown.webp, Best chairs Matt Brown-(45)-Lifestyle.webp, Best chairs Matt Brown-(45)-white brown.webp, Best chairs Matt Brown-(back)-white brown.webp, Best chairs Matt Brown-(front)-white brown.webp', '598', '717', '20', 'Blog', '', '40', 'Mat Brown', '#563921', 'without arm tent', 1, '2024-06-14 05:22:14'),
+(58, 'BEST', 'BEST', '', '', '', '', '', 'BEST', 'BEST-Mat-Brown', 16, 'Best chairs Matt Brown-(45 right)-white brown.webp, Best chairs Matt Brown-(45)-Lifestyle.webp, Best chairs Matt Brown-(45)-white brown.webp, Best chairs Matt Brown-(back)-white brown.webp, Best chairs Matt Brown-(front)-white brown.webp', '598', '717', '20', '', '', '40', 'Mat Brown', '#563921', 'without arm tent', 1, '2024-06-14 05:22:14'),
 (59, 'BEST', 'BEST', '', '', '', '', '', 'BEST', 'BEST-MBG', 16, 'default_chair_img.webp', '598', '717', '20', '', '', '40', 'MBG', '#F4E5D2', 'without arm tent', 1, '2024-06-14 05:22:14'),
 (60, 'Boss', 'Boss', '', '', '', '', '', 'BOSS', 'BOSS-RED', 15, 'Boss chair-Red-(45)-Lifestyle.webp', '511', '613', '20', '', '', '40', 'RED', '#D61725', 'without arm tent', 1, '2024-06-14 05:22:14'),
 (61, 'Boss', 'Boss', '', '', '', '', '', 'BOSS', 'BOSS-Mat-Brown', 15, 'Boss-chair-MATT BROWN-(45)-white bg.webp, Boss-chair-MATT BROWN-(front)-white bg.webp', '511', '613', '20', '', '', '40', 'Mat Brown', '#563921', 'without arm tent', 1, '2024-06-14 05:22:14'),
@@ -350,15 +351,15 @@ INSERT INTO `products` (`product_id`, `product_name`, `product_name2`, `meta_tit
 (65, 'Bubbly', 'Bubbly', '', '', '', '', '', 'bubbly', 'bubbly-PINK', 18, 'Bubbly-Kids-Pink-(45)-white bg.webp,    Bubbly-Kids-Pink-(front)-white bg.webp', '238', '285', '20', '', '', '40', 'PINK', '#FFC0CB', 'with arm tent', 1, '2024-06-14 05:22:14'),
 (66, 'Bubbly', 'Bubbly', '', '', '', '', '', 'bubbly', 'bubbly-RED', 18, 'Bubbly-Kids-Red-(45)-white bg.webp,    Bubbly-Kids-Red-(front)-white bg.webp', '238', '285', '20', '', '', '40', 'RED', '#D61725', 'with arm tent', 1, '2024-06-14 05:22:14'),
 (67, 'Bubbly', 'Bubbly', '', '', '', '', '', 'bubbly', 'bubbly-VIOLET', 18, 'default_chair_img.webp', '238', '285', '20', '', '', '40', 'VIOLET', '#7F00FF', 'with arm tent', 1, '2024-06-14 05:22:14'),
-(68, 'Cambridge', 'Cambridge', '', '', '', '', '', 'Cambridge', 'Cambridge-GOLD', 13, 'Cambridge Chair- Gold-(45)-white bg.webp, Cambridge Chair- Gold-(front)-white bg.webp', '922', '1106', '20', 'Blog', '', '40', 'GOLD', '#ECCA78', 'without arm tent', 1, '2024-06-14 05:22:14'),
+(68, 'Cambridge', 'Cambridge', '', '', '', '', '', 'Cambridge', 'Cambridge-GOLD', 13, 'Cambridge Chair- Gold-(45)-white bg.webp, Cambridge Chair- Gold-(front)-white bg.webp', '922', '1106', '20', '', '', '40', 'GOLD', '#ECCA78', 'without arm tent', 1, '2024-06-14 05:22:14'),
 (69, 'Cambridge', 'Cambridge', '', '', '', '', '', 'Cambridge', 'Cambridge-Mat-Brown', 13, 'Cambridge Chair- Mattbrown-(45)-white bg.webp, Cambridge Chair- MattBrown-(front)-Lifestyle.webp, Cambridge Chair- MattBrown-(front)-white bg.webp', '922', '1106', '20', '', '', '40', 'Mat Brown', '#563921', 'without arm tent', 1, '2024-06-14 05:22:14'),
 (70, 'Cambridge', 'Cambridge', '', '', '', '', '', 'Cambridge', 'Cambridge-DWT', 13, 'Cambridge-chairs-DWT(45)-white-bg.webp, Cambridge-chairs-DWT(front)-white-bg.webp', '922', '1106', '20', '', '', '40', 'DWT', '#ffffff', 'without arm tent', 1, '2024-06-14 05:22:14'),
 (71, 'Cheeta', 'Cheeta', '', '', '', '', '', 'cheeta', 'cheeta-MBG', 28, 'Cheeta Table-MBG-Lifestyle.webp', '214', '256', '20', '', '', '40', 'MBG', '#F4E5D2', 'without arm tent', 1, '2024-06-14 05:22:14'),
 (72, 'Cheeta', 'Cheeta', '', '', '', '', '', 'cheeta', 'cheeta-PBL', 28, 'Cheeta Table-PBL-Lifestyle.webp', '214', '256', '20', '', '', '40', 'PBL', '#563921', 'without arm tent', 1, '2024-06-14 05:22:14'),
 (73, 'Cheeta', 'Cheeta', '', '', '', '', '', 'cheeta', 'cheeta-RED', 28, 'Cheeta Table-Red-Lifestyle.webp', '214', '256', '20', '', '', '40', 'RED', '#D61725', 'without arm tent', 1, '2024-06-14 05:22:14'),
 (74, 'Creta', 'Creta', '', '', '', '', '', 'Creta', 'Creta-Mango-Wood', 16, 'Creta Chair-Mangowood-Lifestyle.webp, Creta-chair-mangowood-(45)-white bg.webp, Creta-chair-Mangowood-(front)-white bg.webp', '570', '684', '20', '', '', '40', 'Mango Wood', '#F2B66D', 'without arm tent', 1, '2024-06-14 05:22:14'),
-(75, 'Creta', 'Creta', '', '', '', '', '', 'Creta', 'Creta-MBG', 16, 'Creta Chair-MBG-Lifestyle.webp, Creta-chair-MBG-(45)-white bg.webp, Creta-chair-MBG-(front)-white bg.webp', '570', '684', '20', 'Blog', '', '40', 'MBG', '#F4E5D2', 'without arm tent', 1, '2024-06-14 05:22:14'),
-(76, 'Creta', 'Creta', '', '', 'Explore our durable and affordable plastic chairs, ideal for any event or occasion. It\'s built to last, ensuring lasting use without sacrificing quality.', '', '', 'Creta', 'Creta-TWOOD', 16, 'Creta Chair-Twood-Lifestyle.webp, Creta-chair-Twood-(45)-white bg.webp, Creta-chair-Twood-(front)-white bg.webp', '570', '684', '20', 'highlights', '', '40', 'TWOOD', '#A47449', 'without arm tent', 1, '2024-06-14 05:22:14'),
+(75, 'Creta', 'Creta', '', '', '', '', '', 'Creta', 'Creta-MBG', 16, 'Creta Chair-MBG-Lifestyle.webp, Creta-chair-MBG-(45)-white bg.webp, Creta-chair-MBG-(front)-white bg.webp', '570', '684', '20', '', '', '40', 'MBG', '#F4E5D2', 'without arm tent', 1, '2024-06-14 05:22:14'),
+(76, 'Creta', 'Creta', '', '', '', '', '', 'Creta', 'Creta-TWOOD', 16, 'Creta Chair-Twood-Lifestyle.webp, Creta-chair-Twood-(45)-white bg.webp, Creta-chair-Twood-(front)-white bg.webp', '570', '684', '20', '', '', '40', 'TWOOD', '#A47449', 'without arm tent', 1, '2024-06-14 05:22:14'),
 (77, 'Crown', 'Crown', '', '', '', '', '', 'Crown', 'Crown-NATURAL', 13, 'Crown-NATURAL-(45)-white-bg.webp, Crown-NATURAL-(front)-white-bg.webp', '2090', '2508', '20', '', '', '40', 'NATURAL', '#E5D3BF', 'without arm tent', 1, '2024-06-14 05:22:14'),
 (78, 'Decor Otter Stool', 'Decor Otter Stool', '', '', '', '', '', 'Décor-Otter-Stool', 'Décor-Otter-Stool-MAT-BROWN-P-BEIGE', 28, 'Decor-Otter-Stool-MAT-BROWN-&-P-BEIGE-(45)-white-bg.webp, Decor-Otter-Stool-MAT-BROWN-&-P-BEIGE-(Front)-white-bg.webp', '472', '567', '20', '', '', '40', 'MAT BROWN / P BEIGE', '#563921, #F5F5DC', 'without arm tent', 1, '2024-06-14 05:22:14'),
 (79, 'Decor Otter Stool', 'Decor Otter Stool', '', '', '', '', '', 'Décor-Otter-Stool', 'Décor-Otter-Stool-PLAIN-BEIGE-MAT-BROWN', 28, 'Decor-Otter-Stool-PLAIN-BEIGE-&-MAT-BROWN-(45)-white-bg.webp, Decor-Otter-Stool-PLAIN-BEIGE-&-MAT-BROWN-(Front)-white-bg.webp, Decor-Panda-Stool-PLAIN-BEIGE-&-MAT-BROWN-(front)-white-bg.webp', '472', '567', '20', '', '', '40', 'PLAIN BEIGE / MAT BROWN', '#F2E3D5, #563921', 'without arm tent', 1, '2024-06-14 05:22:14'),
@@ -447,7 +448,7 @@ INSERT INTO `products` (`product_id`, `product_name`, `product_name2`, `meta_tit
 (162, 'JODHPUR - ROUND DINING TABLE (FOLDING LEGS)', 'JODHPUR - ROUND DINING TABLE (FOLDING LEGS)', '', '', '', '', '', 'jodhpur-(round-folding', 'jodhpur-(round-folding-RED', 25, 'default_chair_img.webp', '1603', '1923', '20', '', '', '40', 'RED', '#D61725', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (163, 'JODHPUR - ROUND DINING TABLE (FOLDING LEGS)', 'JODHPUR - ROUND DINING TABLE (FOLDING LEGS)', '', '', '', '', '', 'jodhpur-(round-folding', 'jodhpur-(round-folding-TWOOD', 25, 'default_chair_img.webp', '1603', '1923', '20', '', '', '40', 'TWOOD', '#A47449', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (164, 'Karen', 'Karen', '', '', '', '', '', 'Karen', 'Karen-DWT', 13, 'Karen Chairs- DWT-(45)-white bg.webp, Karen Chairs- DWT-(front)-white bg.webp, Karen Chairs- DWT-(right 45)-white bg.webp, Karen Chairs-DWT-(45)-Lifestyle.webp', '1687', '2025', '20', '', '', '40', 'DWT', '#ffffff', 'without arm tent', 1, '2024-06-14 05:22:15'),
-(165, 'Karen', 'Karen', '', '', 'Our premium event plastic chairs are meticulously crafted for quality and comfort, ensuring your guests are seated in style.', '', '', 'Karen', 'Karen-GOLD', 13, 'Karen Chairs-Gold (45)-Lifestyle.webp, Karen Chairs-Gold (45)-white bg.webp, Karen Chairs-Gold (Back)-white bg.webp, Karen Chairs-Gold (front)-white bg.webp, Karen Chairs-Gold (right 45)-white bg.webp', '1687', '2025', '20', 'highlights', '', '40', 'GOLD', '#ECCA78', 'without arm tent', 1, '2024-06-14 05:22:15'),
+(165, 'Karen', 'Karen', '', '', '', '', '', 'Karen', 'Karen-GOLD', 13, 'Karen Chairs-Gold (45)-Lifestyle.webp, Karen Chairs-Gold (45)-white bg.webp, Karen Chairs-Gold (Back)-white bg.webp, Karen Chairs-Gold (front)-white bg.webp, Karen Chairs-Gold (right 45)-white bg.webp', '1687', '2025', '20', '', '', '40', 'GOLD', '#ECCA78', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (166, 'Karnival', 'Karnival', '', '', '', '', '', 'Karnival', 'Karnival-DWT', 13, 'karnival Chairs- DWT-(front)-white bg.webp, karnival Chairs- DWT-(right 45)-white bg.webp, Karnival-Chair-DWT-(45)-white bg.webp', '1687', '2025', '20', '', '', '40', 'DWT', '#ffffff', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (167, 'Karnival', 'Karnival', '', '', '', '', '', 'Karnival', 'Karnival-GOLD', 13, 'karnival Chairs- Gold (Back)-white bg.webp, karnival Chairs- Gold (front)-white bg.webp, karnival Chairs- Gold-(right 45)-white bg.webp, karnival Chairs-Gold-(45)-white bg.webp', '1687', '2025', '20', '', '', '40', 'GOLD', '#ECCA78', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (168, 'Kia', 'Kia', '', '', '', '', '', 'Kia', 'Kia-DWT', 13, 'Kia Chair-DWT (Front)-white bg.webp, Kia Chair-DWT-(45)-white bg.webp, Kia Chair-DWT-(right 45)-white bg.webp', '1687', '2025', '20', '', '', '40', 'DWT', '#ffffff', 'without arm tent', 1, '2024-06-14 05:22:15'),
@@ -470,10 +471,10 @@ INSERT INTO `products` (`product_id`, `product_name`, `product_name2`, `meta_tit
 (185, 'Merc Sofa', 'Merc Sofa', '', '', '', '', '', 'Merc', 'Merc-Mango-Wood', 15, 'default_chair_img.webp', '863', '1036', '20', '', '', '40', 'Mango Wood', '#F2B66D', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (186, 'Merc Sofa', 'Merc Sofa', '', '', '', '', '', 'Merc', 'Merc-Mat-Brown', 15, 'default_chair_img.webp', '863', '1036', '20', '', '', '40', 'Mat Brown', '#563921', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (187, 'Merc Sofa', 'Merc Sofa', '', '', '', '', '', 'Merc', 'Merc-PNTMAROON', 15, 'default_chair_img.webp', '863', '1036', '20', '', '', '40', 'PNTMAROON', '#800000', 'without arm tent', 1, '2024-06-14 05:22:15'),
-(188, 'Merc Sofa', 'Merc Sofa', '', '', '', '', '', 'Merc', 'Merc-MBG', 15, 'Merc Sofa-MBG-(45)-Lifestyle.webp', '863', '1036', '20', '', '', '40', 'MBG', '#F4E5D2', 'without arm tent', 1, '2024-06-14 05:22:15');
-INSERT INTO `products` (`product_id`, `product_name`, `product_name2`, `meta_title`, `meta_description`, `short_description`, `long_description`, `seo_titile`, `seo_url`, `seo_url_clr`, `category_id`, `image_name`, `price`, `discount_price`, `discount_percentage`, `categoryType`, `duration`, `InstallationCharges`, `color`, `color_code`, `armType`, `prod_status`, `created_on`) VALUES
+(188, 'Merc Sofa', 'Merc Sofa', '', '', '', '', '', 'Merc', 'Merc-MBG', 15, 'Merc Sofa-MBG-(45)-Lifestyle.webp', '863', '1036', '20', '', '', '40', 'MBG', '#F4E5D2', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (189, 'Merc Sofa', 'Merc Sofa', '', '', '', '', '', 'Merc', 'Merc-RED', 15, 'Merc Sofa-Red-(45)-white bg.jpg', '863', '1036', '20', '', '', '40', 'RED', '#D61725', 'without arm tent', 1, '2024-06-14 05:22:15'),
-(190, 'Merc Sofa', 'Merc Sofa', '', '', '', '', '', 'Merc', 'Merc-DARKBLUE', 15, 'Merc-Sofa-DARKBLUE-(45)-white-bg.webp', '863', '1036', '20', '', '', '40', 'DARKBLUE', '#153259', 'without arm tent', 1, '2024-06-14 05:22:15'),
+(190, 'Merc Sofa', 'Merc Sofa', '', '', '', '', '', 'Merc', 'Merc-DARKBLUE', 15, 'Merc-Sofa-DARKBLUE-(45)-white-bg.webp', '863', '1036', '20', '', '', '40', 'DARKBLUE', '#153259', 'without arm tent', 1, '2024-06-14 05:22:15');
+INSERT INTO `products` (`product_id`, `product_name`, `product_name2`, `meta_title`, `meta_description`, `short_description`, `long_description`, `seo_titile`, `seo_url`, `seo_url_clr`, `category_id`, `image_name`, `price`, `discount_price`, `discount_percentage`, `categoryType`, `duration`, `InstallationCharges`, `color`, `color_code`, `armType`, `prod_status`, `created_on`) VALUES
 (191, 'Merc Sofa', 'Merc Sofa', '', '', '', '', '', 'Merc', 'Merc-IRWD', 15, 'Merc-Sofa-IRWD-(45)-white-bg.webp', '863', '1036', '20', '', '', '40', 'IRWD', '#5E3734', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (192, 'Merc Sofa', 'Merc Sofa', '', '', '', '', '', 'Merc', 'Merc-MGR', 15, 'Merc-Sofa-MGR-(45)-white-bg.webp', '863', '1036', '20', '', '', '40', 'MGR', '#D7DCE1', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (193, 'Merc Sofa', 'Merc Sofa', '', '', '', '', '', 'Merc', 'Merc-SWOOD', 15, 'Merc-Sofa-SWOOD-(45)-white-bg.webp', '863', '1036', '20', '', '', '40', 'SWOOD', '#6E4C1E', 'without arm tent', 1, '2024-06-14 05:22:15'),
@@ -544,7 +545,7 @@ INSERT INTO `products` (`product_id`, `product_name`, `product_name2`, `meta_tit
 (258, 'Puma', 'Puma', '', '', '', '', '', 'puma', 'puma-PK-BLUE', 28, 'Puma-stool-PK Blue-(45)-white bg.webp, Puma-stool-PK Blue-(front)-white bg.webp', '331', '397', '20', '', '', '40', 'PK BLUE', '#64C5E6', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (259, 'Puma', 'Puma', '', '', '', '', '', 'puma', 'puma-RED', 28, 'Puma-stool-Red-(45)-white bg.webp, Puma-stool-Red-(front)-white bg.webp', '331', '397', '20', '', '', '40', 'RED', '#D61725', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (260, 'Pune', 'Pune', '', '', '', '', '', 'Pune', 'Pune-KPT-DARK-GREY', 16, 'default_chair_img.webp', '623', '748', '20', '', '', '40', 'KPT DARK GREY', '#A9A9A9', 'without arm tent', 1, '2024-06-14 05:22:15'),
-(261, 'Pune', 'Pune', '', '', 'Explore our durable and affordable plastic chairs, ideal for any event or occasion. It\'s built to last, ensuring lasting use without sacrificing quality.', '', '', 'Pune', 'Pune-Mat-Brown', 16, 'Pune chairs-Matt Brown-(45)-Lifestyle.webp, Pune chairs-Matt Brown-(45)-white bg.webp, Pune chairs-Matt Brown-(front)-white bg.webp', '623', '748', '20', 'highlights', '', '40', 'Mat Brown', '#563921', 'without arm tent', 1, '2024-06-14 05:22:15'),
+(261, 'Pune', 'Pune', '', '', '', '', '', 'Pune', 'Pune-Mat-Brown', 16, 'Pune chairs-Matt Brown-(45)-Lifestyle.webp, Pune chairs-Matt Brown-(45)-white bg.webp, Pune chairs-Matt Brown-(front)-white bg.webp', '623', '748', '20', '', '', '40', 'Mat Brown', '#563921', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (262, 'Pune', 'Pune', '', '', '', '', '', 'Pune', 'Pune-MBG', 16, 'Pune chairs-MBG-(45)-Lifestyle.webp, Pune chairs-MBG-(45)-white bg.webp, Pune chairs-MBG-(front)-white bg.webp', '623', '748', '20', '', '', '40', 'MBG', '#F4E5D2', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (263, 'Pune', 'Pune', '', '', '', '', '', 'Pune', 'Pune-MGR', 16, 'Pune chairs-MGR-(45)-Lifestyle.webp, Pune chairs-MGR-(45)-white bg.webp, Pune chairs-MGR-(front)-white bg.webp', '623', '748', '20', '', '', '40', 'MGR', '#D7DCE1', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (264, 'Pune', 'Pune', '', '', '', '', '', 'Pune', 'Pune-PBL', 16, 'Pune chairs-PBL-(45)-Lifestyle.webp, Pune chairs-PBL-(45)-white bg.webp, Pune chairs-PBL-(front)-white bg.webp', '623', '748', '20', '', '', '40', 'PBL', '#563921', 'without arm tent', 1, '2024-06-14 05:22:15'),
@@ -653,10 +654,10 @@ INSERT INTO `products` (`product_id`, `product_name`, `product_name2`, `meta_tit
 (367, 'Tote 21 35 Ltrs Without Wheels', 'Tote 21 35 Ltrs Without Wheels', '', '', '', '', '', 'tote-21-35-ltrs-without-wheels', 'tote-21-35-ltrs-without-wheels-NATURAL', 21, 'Tote Box 35 Ltrs Without Wheels-Natural-white bg.webp', '490', '588', '20', '', '', '40', 'NATURAL', '#E5D3BF', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (368, 'Tote 21 60 Ltrs With Wheels', 'Tote 21 60 Ltrs With Wheels', '', '', '', '', '', 'tote-21-60-ltrs-with-wheels', 'tote-21-60-ltrs-with-wheels-NATURAL', 21, 'Tote Box 60 Ltrs With-Wheels-Natural-White bg.webp', '783', '940', '20', '', '', '40', 'NATURAL', '#E5D3BF', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (369, 'Tote 21 60 Ltrs Without Wheels', 'Tote 21 60 Ltrs Without Wheels', '', '', '', '', '', 'tote-21-60-ltrs-without-wheels', 'tote-21-60-ltrs-without-wheels-NATURAL', 21, 'Tote Box 60 Ltrs Without Wheels-Natural-white bg.webp', '754', '905', '20', '', '', '40', 'NATURAL', '#E5D3BF', 'without arm tent', 1, '2024-06-14 05:22:15'),
-(370, 'UDAIPUR - RECTANGLE DINING TABLE (FOLDING LEGS)', 'UDAIPUR - RECTANGLE DINING TABLE (FOLDING LEGS)', '', '', '', '', '', 'udaipur-(rectangular', 'udaipur-(rectangular-MBG', 25, 'default_chair_img.webp', '1834', '2200', '20', '', '', '40', 'MBG', '#F4E5D2', 'without arm tent', 1, '2024-06-14 05:22:15');
-INSERT INTO `products` (`product_id`, `product_name`, `product_name2`, `meta_title`, `meta_description`, `short_description`, `long_description`, `seo_titile`, `seo_url`, `seo_url_clr`, `category_id`, `image_name`, `price`, `discount_price`, `discount_percentage`, `categoryType`, `duration`, `InstallationCharges`, `color`, `color_code`, `armType`, `prod_status`, `created_on`) VALUES
+(370, 'UDAIPUR - RECTANGLE DINING TABLE (FOLDING LEGS)', 'UDAIPUR - RECTANGLE DINING TABLE (FOLDING LEGS)', '', '', '', '', '', 'udaipur-(rectangular', 'udaipur-(rectangular-MBG', 25, 'default_chair_img.webp', '1834', '2200', '20', '', '', '40', 'MBG', '#F4E5D2', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (371, 'UDAIPUR - RECTANGLE DINING TABLE (FOLDING LEGS)', 'UDAIPUR - RECTANGLE DINING TABLE (FOLDING LEGS)', '', '', '', '', '', 'udaipur-(rectangular', 'udaipur-(rectangular-Mat-Brown', 25, 'Uno chair-Matt brown-(45)-white bg.webp, Uno chair-Matt brown-(front)-white bg.webp', '1834', '2200', '20', '', '', '40', 'Mat Brown', '#563921', 'without arm tent', 1, '2024-06-14 05:22:15'),
-(372, 'UDAIPUR - RECTANGLE DINING TABLE (FOLDING LEGS)', 'UDAIPUR - RECTANGLE DINING TABLE (FOLDING LEGS)', '', '', '', '', '', 'udaipur-(rectangular', 'udaipur-(rectangular-RED', 25, 'Uno chair-Red-(45)-white bg.webp, Uno chair-Red-(front)-white bg.webp', '1834', '2200', '20', '', '', '40', 'RED', '#D61725', 'without arm tent', 1, '2024-06-14 05:22:15'),
+(372, 'UDAIPUR - RECTANGLE DINING TABLE (FOLDING LEGS)', 'UDAIPUR - RECTANGLE DINING TABLE (FOLDING LEGS)', '', '', '', '', '', 'udaipur-(rectangular', 'udaipur-(rectangular-RED', 25, 'Uno chair-Red-(45)-white bg.webp, Uno chair-Red-(front)-white bg.webp', '1834', '2200', '20', '', '', '40', 'RED', '#D61725', 'without arm tent', 1, '2024-06-14 05:22:15');
+INSERT INTO `products` (`product_id`, `product_name`, `product_name2`, `meta_title`, `meta_description`, `short_description`, `long_description`, `seo_titile`, `seo_url`, `seo_url_clr`, `category_id`, `image_name`, `price`, `discount_price`, `discount_percentage`, `categoryType`, `duration`, `InstallationCharges`, `color`, `color_code`, `armType`, `prod_status`, `created_on`) VALUES
 (373, 'Uno', 'Uno', '', '', '', '', '', 'UNO-from-Silvassa', 'UNO-from-Silvassa-KPT-GREY', 14, 'default_chair_img.webp', '553', '664', '20', '', '', '40', 'KPT GREY', '#696969', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (374, 'Uno', 'Uno', '', '', '', '', '', 'UNO-from-Silvassa', 'UNO-from-Silvassa-MBG', 14, 'default_chair_img.webp', '553', '664', '20', '', '', '40', 'MBG', '#F4E5D2', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (375, 'Uno', 'Uno', '', '', '', '', '', 'UNO-from-Silvassa', 'UNO-from-Silvassa-ORANGE', 14, 'default_chair_img.webp', '553', '664', '20', '', '', '40', 'ORANGE', '#FFA500', 'without arm tent', 1, '2024-06-14 05:22:15'),
@@ -706,7 +707,8 @@ INSERT INTO `products` (`product_id`, `product_name`, `product_name2`, `meta_tit
 (419, 'Yoyo Rocker', 'Yoyo Rocker', '', '', '', '', '', 'yoyo-rocker', 'yoyo-rocker-RED-BLUE', 18, 'Yoyo rocker-Red & Blue-(45)-white bg.webp,   Yoyo rocker-Red & Blue-(front)-white bg.webp', '430', '516', '20', '', '', '40', 'RED / BLUE', '#D61725, #132EA0', 'with arm tent', 1, '2024-06-14 05:22:15'),
 (420, 'Yoyo Rocker', 'Yoyo Rocker', '', '', '', '', '', 'yoyo-rocker', 'yoyo-rocker-RED-YELLOW', 18, 'Yoyo rocker-Red & Yellow-(45)-white bg.webp,   Yoyo rocker-Red & Yellow-(front)-white bg.webp', '429.735', '516', '20', '', '', '40', 'RED / YELLOW', '#D61725, #FFFF00', 'with arm tent', 1, '2024-06-14 05:22:15'),
 (421, 'ZEST', 'ZEST', '', '', '', '', '', 'ZEST-Mat-Brown', 'ZEST-Mat-Brown', 16, 'default_chair_img.webp', '598', '717', '20', '', '', '40', 'Mat Brown', '#563921', 'without arm tent', 1, '2024-06-14 05:22:15'),
-(422, 'ZEST', 'ZEST', '', '', '', '', '', 'ZEST-MBG', 'ZEST-MBG', 16, 'Zest-chair-MBG-(45)-white bg.webp, Zest-chair-MBG-(back)-white bg.webp, Zest-chair-MBG-(front)-white bg.webp, Zest-chair-MBG-(side)-white bg.webp', '598', '717', '20', '', '', '40', 'MBG', '#F4E5D2', 'without arm tent', 1, '2024-06-14 05:22:15');
+(422, 'ZEST', 'ZEST', '', '', '', '', '', 'ZEST-MBG', 'ZEST-MBG', 16, 'Zest-chair-MBG-(45)-white bg.webp, Zest-chair-MBG-(back)-white bg.webp, Zest-chair-MBG-(front)-white bg.webp, Zest-chair-MBG-(side)-white bg.webp', '598', '717', '20', '', '', '40', 'MBG', '#F4E5D2', 'without arm tent', 1, '2024-06-14 05:22:15'),
+(423, 'Elegant Sofa', '', '', '', '', '', '', 'elegant-sofa', NULL, 3, 'elegant_sofa.png', '1200', '1000', '', '', '', '', 'Blue', '#0000ff', 'Curved', 0, '2024-06-21 11:00:36');
 
 -- --------------------------------------------------------
 
@@ -1247,7 +1249,9 @@ INSERT INTO `wishlist` (`WishlistId`, `product_id`, `user_id`, `createdOn`) VALU
 (5, 18, 10, '2024-06-12 04:41:05'),
 (6, 276, 10, '2024-06-12 04:56:35'),
 (7, 27, 10, '2024-06-12 05:07:25'),
-(8, 46, 10, '2024-06-14 05:23:26');
+(8, 46, 10, '2024-06-14 05:23:26'),
+(9, 112, 10, '2024-06-14 06:22:41'),
+(10, 10, 10, '2024-06-14 06:45:03');
 
 --
 -- Indexes for dumped tables
@@ -1333,13 +1337,13 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `customer_detail`
@@ -1351,7 +1355,7 @@ ALTER TABLE `customer_detail`
 -- AUTO_INCREMENT for table `mycart`
 --
 ALTER TABLE `mycart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `order_detail`
@@ -1363,7 +1367,7 @@ ALTER TABLE `order_detail`
 -- AUTO_INCREMENT for table `order_list`
 --
 ALTER TABLE `order_list`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `order_status`
@@ -1375,7 +1379,7 @@ ALTER TABLE `order_status`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=423;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=424;
 
 --
 -- AUTO_INCREMENT for table `product_detail`
@@ -1399,7 +1403,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `WishlistId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `WishlistId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

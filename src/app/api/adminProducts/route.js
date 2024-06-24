@@ -1,6 +1,6 @@
 import { query } from '@/lib/db';
 import colorNameList from 'color-name-list';
-
+import { NextResponse } from 'next/server';
 function convertColorToCode(color) {
   const colorEntry = colorNameList.find(entry => entry.name.toLowerCase() === color.toLowerCase());
   if (!colorEntry) {
@@ -9,39 +9,39 @@ function convertColorToCode(color) {
   return colorEntry.hex;
 }
 
+
+
 export async function POST(request) {
   try {
-    const data = await request.json(); // Parse incoming JSON data
-    const {
-      product_name,
-      seo_url,
-      category_id,
-      image_name,
-      price,
-      discount_price,
-      color,
-      armType,
-      prod_status,
-    } = data;
+    const formData = await request.formData();
+    
+    const requiredFields = [
+      'product_name',
+      'seo_url',
+      'category_id',
+      'image_name',
+      'price',
+      'discount_price',
+      'color',
+      'armType',
+      'prod_status'
+    ];
 
-    // Manual validation
-    const requiredFields = {
-      product_name,
-      seo_url,
-      category_id,
-      image_name,
-      price,
-      discount_price,
-      color,
-      armType,
-      prod_status,
-    };
+    const data = {};
+    const missingFields = [];
 
-    const missingFields = Object.entries(requiredFields).filter(([key, value]) => !value).map(([key]) => key);
+    requiredFields.forEach(field => {
+      const value = formData.get(field);
+      if (!value) {
+        missingFields.push(field);
+      } else {
+        data[field] = value;
+      }
+    });
 
     if (missingFields.length > 0) {
-      return new Response(
-        JSON.stringify({ success: false, error: `The following fields are required: ${missingFields.join(', ')}` }),
+      return NextResponse.json(
+        { success: false, error: `The following fields are required: ${missingFields.join(', ')}` },
         { status: 400 }
       );
     }
@@ -49,14 +49,13 @@ export async function POST(request) {
     // Convert color name to color code
     let color_code;
     try {
-      color_code = convertColorToCode(color);
+      color_code = convertColorToCode(data.color);
     } catch (error) {
-      return new Response(
-        JSON.stringify({ success: false, error: error.message }),
+      return NextResponse.json(
+        { success: false, error: error.message },
         { status: 400 }
       );
     }
-
 
     // Insert the new product
     const result = await query({
@@ -64,19 +63,30 @@ export async function POST(request) {
         INSERT INTO products (product_name, seo_url, category_id, image_name, price, discount_price, color, color_code, armType, prod_status)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `,
-      values: [product_name, seo_url, category_id, image_name, price, discount_price, color, color_code, armType, prod_status],
+      values: [
+        data.product_name,
+        data.seo_url,
+        data.category_id,
+        data.image_name,
+        data.price,
+        data.discount_price,
+        data.color,
+        color_code,
+        data.armType,
+        data.prod_status
+      ],
     });
 
-    return new Response(
-      JSON.stringify({ success: true, data: result }),
+    return NextResponse.json(
+      { success: true, data: result },
       { status: 201 }
     );
 
   } catch (error) {
     console.error('Error creating product:', error);
 
-    return new Response(
-      JSON.stringify({ success: false, error: error.message }),
+    return NextResponse.json(
+      { success: false, error: error.message },
       { status: 500 }
     );
   }
