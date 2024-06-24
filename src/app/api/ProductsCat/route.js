@@ -12,7 +12,6 @@ export async function GET(request) {
         values: [queryParams, queryParams],
     });
 
-
     const color = await query({
       query:
         "SELECT DISTINCT color, category_id FROM products WHERE category_id = ?",

@@ -36,16 +36,16 @@ const notify = () => {
   });
 };
 const RecentlyViewed = () => {
- //  const RecentlyViewedData = [
-  //     { ChairImg: "/Assets/images/products/products.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-  //     { ChairImg: "/Assets/images/New-launches-2/New-launches-2.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-  //     { ChairImg: "/Assets/images/New-launches-3/New-launches-3.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-  //     { ChairImg: "/Assets/images/New-launches-4/New-launches-4.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-  //     { ChairImg: "/Assets/images/products/products.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-  //     { ChairImg: "/Assets/images/New-launches-2/New-launches-2.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-  //     { ChairImg: "/Assets/images/New-launches-3/New-launches-3.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-  //     { ChairImg: "/Assets/images/New-launches-4/New-launches-4.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-  // ];
+  /* const RecentlyViewedDatas = [
+      { ChairImg: "/Assets/images/products/products.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
+      { ChairImg: "/Assets/images/New-launches-2/New-launches-2.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
+      { ChairImg: "/Assets/images/New-launches-3/New-launches-3.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
+      { ChairImg: "/Assets/images/New-launches-4/New-launches-4.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
+      { ChairImg: "/Assets/images/products/products.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
+      { ChairImg: "/Assets/images/New-launches-2/New-launches-2.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
+      { ChairImg: "/Assets/images/New-launches-3/New-launches-3.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
+      { ChairImg: "/Assets/images/New-launches-4/New-launches-4.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
+  ]; */
 
   // const notify = () => {
   //   toast.success("ADDED TO WISHLIST", {
@@ -96,10 +96,8 @@ const RecentlyViewed = () => {
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const response = await axios.get("http://118.139.165.1:3000/api/Products");
-        const filteredproducts = response.data.products.filter(
-          (item) => item.category_id === 17
-        );
+        const response = await axios.get("/api/Products");
+        const filteredproducts = response.data.limitProd;
 
         setRecentlyViewedData(filteredproducts);
       } catch (error) {
@@ -115,7 +113,7 @@ const RecentlyViewed = () => {
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
 
-      const response = await axios.post("http://118.139.165.1:3000/api/wishListUser", {
+      const response = await axios.post("/api/wishListUser", {
         customer_id: customerId,
       });
       setWishlistItems(response.data.Wishlist);
@@ -156,7 +154,7 @@ const RecentlyViewed = () => {
   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch("http://118.139.165.1:3000/api/ProductsCat", {
+      const response = await fetch("/api/ProductsCat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
