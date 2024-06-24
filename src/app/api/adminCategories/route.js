@@ -59,7 +59,6 @@ export async function POST(request) {
       `,
       values: [category_name, image_name, navshow, status, topPick],
     });
-    console.log(category_name, image_name, navshow, status, topPick)
 
     return new Response(
       JSON.stringify({ success: true, data: result }),

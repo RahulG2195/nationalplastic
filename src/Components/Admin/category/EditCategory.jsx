@@ -28,7 +28,6 @@ export default function EditCategory() {
           'Content-Type': 'multipart/form-data'
         }
       });
-      console.log('Update response:', response.data);
       return response.data;
     } catch (error) {
       console.error('Update Error:', error.message);
@@ -62,7 +61,6 @@ export default function EditCategory() {
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("categoryToEdit"));
     if (data) {
-      console.log("data: ", data);
       Object.keys(data).forEach(key => {
         setValue(key, data[key]);
       });

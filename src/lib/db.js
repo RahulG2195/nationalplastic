@@ -1,22 +1,27 @@
 import mysql from "mysql2/promise";
 import "../../envConfig.js";
 
+const pool = mysql.createPool({
+  host: process.env.MYSQL_HOST,
+  port: process.env.MYSQL_PORT,
+  database: process.env.MYSQL_DATABASE,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
+});
 export async function query({ query, values = [] }) {
+  let connection;
   try {
-    const dbconnection = await mysql.createConnection({
-      Host: process.env.MYSQL_HOST,
-      database: process.env.MYSQL_DATABASE,
-      user: process.env.MYSQL_USER,
-      password: process.env.MYSQL_PASSWORD,
-      port: process.env.MYSQL_PORT,
-    });
-    const [results] = await dbconnection.execute(query, values);
-    dbconnection.end();
+    connection = await pool.getConnection();
+    const [results] = await connection.execute(query, values);
     return results;
   } catch (error) {
-    console.log("error in connecting Database: " + error);
+    console.log("Error in executing query: " + error);
     throw Error(error.message);
-    return { error };
+  } finally {
+    if (connection) connection.release();
   }
 }
 // // db.js file

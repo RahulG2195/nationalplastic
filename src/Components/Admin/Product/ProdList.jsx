@@ -23,10 +23,6 @@ const ProdList = () => {
       const fetchData = async () => {
           const rawData = await axios.get("/api/adminProducts");
           const { allProducts } = rawData.data;
-          console.log(JSON.stringify(allProducts));
-        // console.log(allProducts)
-        //   const images = allProducts[0].image_name.split(',');
-        //   console.log("images: ", images)
           setProductArray(allProducts);
           setFilteredProductArray(allProducts);
       }
@@ -34,11 +30,8 @@ const ProdList = () => {
   }, []);
 
   const handleOnclick = (type, index) => {
-      console.log(`${type} clicked on item ${index}`);
       if(type == 'Edit'){
-        console.log(`${type} clicked on item ${index}`);
         const productToEdit = productArray.find(product => product.product_id === index);
-        console.log("data: ", JSON.stringify(productToEdit))
         localStorage.setItem('productToEdit', JSON.stringify(productToEdit));
         localStorage.setItem("pDataToEdit", JSON.stringify(productToEdit));
         router.push("/admin/editProductForm");

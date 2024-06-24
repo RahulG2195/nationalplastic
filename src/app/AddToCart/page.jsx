@@ -43,7 +43,6 @@ function AddToCart() {
   const dispatch = useDispatch();
   const StoreGuestData = async (products) => {
     // Check if user is logged in and products array has items
-    console.log(products);
     if (await isLoggedIn() && products.length > 0) {
       try {
         // Use Promise.all to await all dispatch calls in parallel
@@ -82,17 +81,11 @@ function AddToCart() {
         });
         //console.log(response);
         cartData = response.data.products;
-        //console.log("cd", response.data.products);
-        console.log(tempCartStates);
-        console.log("length",tempCartStates.products.length??"NO length");
 
         if (tempCartStates.products.length>0 && Updated) {
           const tempData = tempCartStates.products;
-          console.log("tD", tempData);
           StoreGuestData(tempData)
         }
-        //console.log(cartData);
-        //console.log("fetch1");
         fetchData(cartData);
       } else {
         //Logic to Store Temporary Data

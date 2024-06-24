@@ -40,20 +40,14 @@ export default function TopPick() {
       const response = await axios.get(
         "/api/Category"
       );
-      // "/api/Category"
-      //console.log("response of the category ", response.data.categories);
       const filteredData = response.data.topPick
-      console.log("fd",filteredData);
-      console.log("fd",JSON.stringify(filteredData))
 
       setHometoppics(filteredData);
     };
     fetchdata();
   }, []);
 
-  // const sendCategory = (productName) => {
-  //   localStorage.setItem("category", productName);
-  // };
+
 
   return (
     <section className="top_pick_sec common_section">

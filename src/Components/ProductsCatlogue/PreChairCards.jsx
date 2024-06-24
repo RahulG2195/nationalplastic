@@ -60,16 +60,12 @@ const PreChairsCards = () => {
     try {
       const categoryTitle = localStorage.getItem("category");
       setCategoryType(categoryTitle);
-
       const response = await axios.get(`/api/ProductsCat?query=${cat_id}`);
-      //console.log("API Response:", response.data); // Log API response
 
       const fetchedData = response.data;
 
-      // console.log('fetchdata: ', fetchedData);
       setFetchClr(fetchedData.color);
       setFetchType(fetchedData.armType);
-      // console.log("Fetched data:", fetchedData);
 
       if (fetchedData?.products) {
         let filteredData = fetchedData.products;
@@ -101,23 +97,11 @@ const PreChairsCards = () => {
           });
         }
 
-        // if (categoryType) {
-        //   filteredData = filteredData.filter(
-        //     (item) =>
-        //       item.categoryType &&
-        //       item.categoryType.toLowerCase() == categoryType.toLowerCase()
-        //   );
-        // }
-      console.log("fliteredDta: " + JSON.stringify(filteredData));
+   
         setProducts(filteredData);
 
-        // if (page === 1) {
-        //   setlength(filteredData);
-        // }
 
-        // setHasMore(filteredData.length > 0);
       } else {
-      console.log("fliteredDta: " + filteredData);
 
         setProducts(filteredData);
       }

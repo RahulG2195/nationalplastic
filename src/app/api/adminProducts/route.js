@@ -259,7 +259,6 @@ export async function GET(request){
     );
 
   }catch(e){
-    console.log(e.message);
     return new Response(
       JSON.stringify({
         status: 500,
@@ -273,10 +272,8 @@ export async function GET(request){
 
 export async function DELETE(request) {
   try {
-    console.log("Received DELETE request"); // Log receipt of the request
 
     const requestBody = await request.json();
-    console.log("Request body:", requestBody); 
     const { product_id } = requestBody;
     if (!product_id) {
       return new Response(
@@ -292,7 +289,6 @@ export async function DELETE(request) {
       query: "DELETE FROM products WHERE product_id = ?",
       values: [product_id],
     });
-    console.log("result ", result);
     if (result.affectedRows > 0) {
       return new Response(
         JSON.stringify({

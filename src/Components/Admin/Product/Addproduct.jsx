@@ -41,7 +41,6 @@ export default function App() {
         });
   
         // Handle the response, e.g., show a success message
-        console.log('Response:', response.data);
         message.success('Product created successfully');
       }
     } catch (error) {

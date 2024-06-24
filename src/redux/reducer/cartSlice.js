@@ -216,10 +216,7 @@ export const addToCart = (item) => async (dispatch, getState) => {
   });
   const tORF = item.from || 1;
   const data = item
-  console.log("tORF", tORF);
   if(tORF !== 0){
-    console.log("YEsSSSSSSSSSSSSSSSSs", tORF);
-    console.log("YEsSSSSSSSSSSSSSSSS", data);
   notify("ADDED TO CARTS");
 }
   dispatch(addItemToCart(item));
