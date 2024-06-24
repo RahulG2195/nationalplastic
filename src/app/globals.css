@@ -44,7 +44,9 @@ body {
     /* background-color: #FCF5DA; */
     /* background-color: #F1F1F1; */
     /* background-color: #f8f3f3; */
-    background-color: #f5f9fd;
+    /* background-color: #f5f9fd; */
+    background-color: #FFF;
+
 }
 
 p,
@@ -266,7 +268,8 @@ p {
     border: none;
     border-radius: 10px;
     width: 100%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: left;
 }
 
 .newProdCard .image-container {
@@ -284,21 +287,22 @@ p {
     padding-bottom: 1px;
     padding-left: 4px;
     padding-right: 4px;
-    font-size: 10px;
+    font-size: 15px;
     border-radius: 6px;
-    color: #fff
+    color: white;
 }
 
 .newProdCard .wishlist {
-    height: 25px;
-    width: 25px;
+    height: 30px;
+    width: 30px;
     background-color: #eee;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, -0.41);
     cursor: pointer;
+    padding: 15px;
 }
 
 .newProdCard .first {
@@ -624,6 +628,8 @@ p {
 }
 
 @media only screen and (max-width: 360px) {
+
+    
 
     .pacing-catalogue{
         margin: auto !important;
