@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React, { useState, useEffect, useRef } from 'react';
 import { Container, Row, Col, FormGroup, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from 'axios';
-import { Table } from 'antd';
+import { Table , Tooltip} from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
 import { useRouter } from "next/navigation";
@@ -24,6 +24,9 @@ const ProdList = () => {
           const rawData = await axios.get("/api/adminProducts");
           const { allProducts } = rawData.data;
           console.log(JSON.stringify(allProducts));
+        // console.log(allProducts)
+        //   const images = allProducts[0].image_name.split(',');
+        //   console.log("images: ", images)
           setProductArray(allProducts);
           setFilteredProductArray(allProducts);
       }
@@ -152,18 +155,39 @@ const ProdList = () => {
         dataIndex: 'image_name',
         key: 'image_name',
         render: (text) => {
-            const firstImage = text.split(',')[0]; // Get the first image from the comma-separated string
+            const images = text.split(',');
+            console.log('Images:', images);
             return (
-                <Image
-                    src={`/Assets/images/products/${firstImage}`}
-                    className='admin-product-img'
-                    alt={firstImage}
-                    style={{ width: '100px', height: '50px' }}
-                    width={3}
-                    height={3}
-                    layout="responsive"
-                    objectFit="cover"
-                />
+                <div style={{ display: 'flex', gap: '5px' }}>
+                    {images.map((image, index) => (
+                        <Tooltip
+                        key={`image-${index}`} 
+                            overlayInnerStyle={{ backgroundColor: 'transparent' }}
+                            color="transparent"
+                            arrowPointAtCenter={false}
+                            title={
+                                <div style={{ width: '200px', height: '300px', position: 'relative' }}>
+                                    <Image
+                                        src={`/Assets/images/products/${image.trim()}`}
+                                        alt={image}
+                                        layout="fill"
+                                        objectFit="contain"
+                                    />
+                                </div>
+                            }
+                        >
+                            <div style={{ width: '30px', height: '30px', position: 'relative' }}>
+                                <Image
+                                    src={`/Assets/images/products/${image.trim()}`}
+                                    alt={image}
+                                    layout="fill"
+                                    objectFit="cover"
+                                    className='admin-product-img'
+                                />
+                            </div>
+                        </Tooltip>
+                    ))}
+                </div>
             );
         },
     },
