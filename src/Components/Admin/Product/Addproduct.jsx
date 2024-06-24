@@ -12,18 +12,21 @@ export default function App() {
       const isValidCategoryName = await axios.post("/api/adminValidationP", {
         category_name: data.category_name
       });
-  
+      console.log("resPonse:--------------", isValidCategoryName)
+      console.log("resPonse:--------------", isValidCategoryName)
+
       const category_id = isValidCategoryName.data.category_id;
+      console.log("category_id:--------------------------- " + category_id);
       data.category_id = category_id;
   
       if (isValidCategoryName) {
         // Prepare the form data
         const { product_name, meta_title, meta_description, short_description, long_description,
           seo_title, seo_url, category_name, image_name, navshow, status, image, topPick,
-          price, discount_price, discount_percentage, duration, InstallationCharges,
+          price, discount_price, discount_percentage, duration, InstallationCharges,category_id,
           color, armType, prod_status } = data;
         const formData = new FormData();
-        const entries = { product_name, meta_title, meta_description, short_description, long_description,
+        const entries = { product_name, meta_title, meta_description, short_description, long_description,category_id,
           seo_title, seo_url, category_name, image_name, navshow, status, image, topPick,
           price, discount_price, discount_percentage, duration, InstallationCharges,
           color, armType, prod_status};

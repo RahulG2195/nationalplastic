@@ -23,7 +23,7 @@ const isAdmin = async (email) => {
   if(role === "admin") {
   console.log(`Role ${role}`);
   const token = await generateToken({email: email , role: "admin"});
-  cookies().set('auth', token, { 
+  cookies().set('token', token, { 
     maxAge: 60 * 60 * 24, // 1 day in seconds
     httpOnly: true,
     secure: false,
@@ -237,8 +237,8 @@ export async function PATCH(request) {
 
 export async function DELETE(request) {
   try {
-    cookies().delete('auth');
-    return new Response(JSON.stringify({ message: 'Auth cookie deleted successfully' }), {
+    cookies().delete('token');
+    return new Response(JSON.stringify({ message: 'Token cookie deleted successfully' }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
     });

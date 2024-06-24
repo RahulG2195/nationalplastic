@@ -16,13 +16,10 @@ export async function generateToken(payload) {
 export async function verifyToken(token) {
   try {
     const { payload } = await jwtVerify(token, secret);
-    console.log("Decoded token:", payload);
+    // console.log("Decoded token:", payload);
     return payload;
   } catch (error) {
     return error.message;
   }
 }
 
-// export function logout() {
-//   cookies().delete('auth');
-// }

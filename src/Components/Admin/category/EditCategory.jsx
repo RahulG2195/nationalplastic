@@ -51,7 +51,7 @@ export default function EditCategory() {
   const onSubmit = async (data) => {
     try {
       await updateCategory(data);
-      await validateCategory(data);
+      // await validateCategory(data);
     } catch (error) {
       // Handle errors, e.g., show an error message
       console.error('Submission Error:', error.message);

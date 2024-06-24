@@ -8,20 +8,7 @@ import axios from 'axios';
 export default function App() {
   const { control, handleSubmit, setValue, formState: { errors } } = useForm();
 
-  const validateProduct = async (formData) => {
-    try {
-      const response = await axios.post("/api/adminProducts", formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-      console.log('Validation response:', response.data);
-      return response.data;
-    } catch (error) {
-      console.error('Validation Error:', error.message);
-      throw error;
-    }
-  };
+
 
   const updateProduct = async (formData) => {
     try {
@@ -48,12 +35,17 @@ export default function App() {
       });
 
       await updateProduct(formData);
-      await validateProduct(formData);
+
     } catch (error) {
       console.error('Submission Error:', error.message);
     }
   };
-
+  
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setValue('image', file);
+    setValue('image_name', file ? file.name : '');
+  };
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("productToEdit"));
     if (data) {
@@ -165,15 +157,13 @@ export default function App() {
       </Form.Item>
 
       <Form.Item
-        label="Image Name"
-        validateStatus={errors.image_name ? 'error' : ''}
-        help={errors.image_name ? 'Please input the image name!' : ''}
+        label="Image"
+        validateStatus={errors.image ? 'error' : ''}
+        help={errors.image ? 'Please upload an image!' : ''}
       >
-        <Controller
-          name="image_name"
-          control={control}
-          rules={{ required: true }}
-          render={({ field }) => <Input.TextArea {...field} />}
+        <input
+          type="file"
+          onChange={handleFileChange}
         />
       </Form.Item>
 
