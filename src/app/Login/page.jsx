@@ -25,7 +25,11 @@ function Login() {
   // const navigate =useNavigate();
   // const router = useRouter();
   const { data: session, status } = useSession();
-  const [refresh ,SetRefresh] = useSession(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [refresh ,SetRefresh] = useState(false);
     useEffect(() => {
     if (session) {
       // Send session data to your backend
@@ -55,10 +59,7 @@ function Login() {
         //  hasSentRequest.current = true; 
     }
   }, [session,refresh]);
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
