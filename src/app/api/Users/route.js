@@ -1,25 +1,42 @@
-// 'use client'
 // Import the required modules
-// import { useRouter } from 'next/router';
-import { query } from "@/lib/db"; // Assuming 'your-database-module' is the correct path to your database module
-// const router = useRouter();
+import { query } from "@/lib/db";
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-// import { Response } from 'your-response-library'; // Assuming 'your-response-library' is the correct library for handling responses
 import "../../../../envConfig.js";
 
-// Define your API endpoint handler for GET request
-// import { useRouter } from 'next/navigation'
-
+// Handler for GET request to fetch all customers
 export async function GET(request) {
+  const { searchParams } = new URL(request.url);
+  const email = searchParams.get("email");
+
+  if (!email) {
+    return new Response(
+      JSON.stringify({
+        status: 400,
+        message: "Email query parameter is required",
+      }),
+      { status: 400 }
+    );
+  }
+
   try {
     const users = await query({
-      query: "SELECT * FROM customer",
-      values: [],
+      query: "SELECT * FROM customer WHERE Email = ?",
+      values: [email],
     });
 
-    let data = JSON.stringify(users);
+    if (users.length === 0) {
+      return new Response(
+        JSON.stringify({
+          status: 201,
+          message: "User not found",
+        }),
+        { status: 201 }
+      );
+    }
+
+    let data = JSON.stringify(users[0]);
     return new Response(data, {
       status: 200,
     });
@@ -28,43 +45,42 @@ export async function GET(request) {
       JSON.stringify({
         status: 500,
         message: error.message,
-      })
+      }),
+      { status: 500 }
     );
   }
 }
 
+
+// Handler for POST request to register a new customer
 export async function POST(request) {
   try {
-    // Extract data from the request JSON
     const { firstName, lastName, email, phone, address, password } =
       await request.json();
 
-    // Check if the email already exists in the database
     const existingUser = await query({
       query: "SELECT * FROM customer WHERE Email = ?",
       values: [email],
     });
 
-    // If the email already exists, return a 400 Bad Request response
     if (existingUser.length > 0) {
       return new Response(JSON.stringify({ message: "Email already exists" }), {
         status: 400,
       });
     }
+
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    // Execute database query to insert new user
     const result = await query({
       query:
         "INSERT INTO customer (FirstName, LasttName, Email, Phone, Address, Password) VALUES (?, ?, ?, ?, ?, ?)",
       values: [firstName, lastName, email, phone, address, hashedPassword],
     });
 
-    // Check if the insertion was successful
     if (result.affectedRows > 0) {
       return new Response(
         JSON.stringify({ message: "Registration successful" }),
-        { status: 200 }
+        { status: 201 }
       );
     } else {
       return new Response(
@@ -82,31 +98,18 @@ export async function POST(request) {
   }
 }
 
-// Define your API endpoint handler for registration POST request
+// Handler for PUT request to update customer details or login
 export async function PUT(request) {
-  // const router = useRouter();
   try {
-    // //console.log("FROM put " + request);
-
     const { email, password, getProfile } = await request.json();
-    //console.log(email);
-    // Check if the email already exists in the database
+
     const existingUser = await query({
-      query: "SELECT * FROM customer WHERE email = ?",
+      query: "SELECT * FROM customer WHERE Email = ?",
       values: [email],
     });
-    //console.log("existingUser:", existingUser);
-    //For reseting the password
-    // const passwordChecker = ()=>{
-    //console.log(existingUser);
-    // }
-    if (existingUser.length > 0) {
-      //console.log("Nope All is well");
 
-      // Implement password comparison logic using a secure method (e.g., bcrypt)
-      // const passwordMatch = comparePasswords(password, storedPassword); // Implement comparePasswords function
-      if (getProfile && existingUser.length > 0) {
-        //console.log("Not Found");
+    if (existingUser.length > 0) {
+      if (getProfile) {
         return new Response(
           JSON.stringify({
             status: 200,
@@ -114,22 +117,17 @@ export async function PUT(request) {
           })
         );
       }
-      // Check if the provided password matches the stored password
-      const storedPassword = existingUser[0].Password;
-      // Adjust the property name as per your database schema
 
+      const storedPassword = existingUser[0].Password;
       const checkPassword = await bcrypt.compare(password, storedPassword);
 
       if (checkPassword) {
-        // return new Response(JSON.stringify({ message: "Login successful" }), { status: 200 });
-        {
-          return new Response(
-            JSON.stringify({
-              status: 200,
-              message: existingUser,
-            })
-          );
-        }
+        return new Response(
+          JSON.stringify({
+            status: 200,
+            message: existingUser,
+          })
+        );
       } else {
         throw new Error("Invalid password");
       }
@@ -146,6 +144,7 @@ export async function PUT(request) {
   }
 }
 
+// Handler for PATCH request to reset customer password
 export async function PATCH(request) {
   try {
     const { Id, newPassword, confirmPassword } = await request.json();
@@ -166,7 +165,7 @@ export async function PATCH(request) {
         { status: 400 }
       );
     }
-    // Validate required fields
+
     if (!Id) {
       return new Response(
         JSON.stringify({
@@ -176,10 +175,8 @@ export async function PATCH(request) {
         { status: 400 }
       );
     }
-    // Password validation (adjust requirements as needed)
-    const passwordValidationRegex = /^(?=.*\d)(?=.*[^\w\s]).{8,}$/;
-    // Minimum 8 characters, at least 1 digit, 1 lowercase letter, 1 uppercase letter, and 1 special character
 
+    const passwordValidationRegex = /^(?=.*\d)(?=.*[^\w\s]).{8,}$/;
     if (!passwordValidationRegex.test(newPassword)) {
       return new Response(
         JSON.stringify({
@@ -189,10 +186,9 @@ export async function PATCH(request) {
         { status: 400 }
       );
     }
-    // Hash the new password using bcrypt
-    const hashedPassword = await bcrypt.hash(newPassword, 10); // Adjust cost factor as needed
 
-    // Update user password in the database
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
     await query({
       query: "UPDATE customer SET Password = ? WHERE customer_id = ?",
       values: [hashedPassword, Id],
@@ -206,6 +202,53 @@ export async function PATCH(request) {
     console.error("Error updating password:", error);
     return new Response(
       JSON.stringify({ status: 500, message: error.message }),
+      { status: 500 }
+    );
+  }
+}
+
+// Handler for UPDATE request to get customer details by email
+export async function UPDATE(request) {
+  try {
+    console.log("Updating customer")
+    const formData = await request.json();
+    const email = formData.email;
+
+    if (!email) {
+      return new Response(
+        JSON.stringify({
+          status: 400,
+          message: "Email is required",
+        }),
+        { status: 400 }
+      );
+    }
+
+    const users = await query({
+      query: "SELECT * FROM customer WHERE Email = ?",
+      values: [email],
+    });
+
+    if (users.length === 0) {
+      return new Response(
+        JSON.stringify({
+          status: 404,
+          message: "User not found",
+        }),
+        { status: 404 }
+      );
+    }
+
+    const data = JSON.stringify(users[0]);
+    return new Response(data, {
+      status: 200,
+    });
+  } catch (error) {
+    return new Response(
+      JSON.stringify({
+        status: 500,
+        message: error.message,
+      }),
       { status: 500 }
     );
   }
