@@ -28,3 +28,11 @@ for mysql setup
 https://www.youtube.com/watch?v=rtG8S5WsSHg&ab_channel=AMonkinCloud%E2%98%81%EF%B8%8F
 
 
+godaddy vps redhat linux cmd
+
+sudo dnf update -- system update
+cd /var/www -- deploy code here
+
+
+
+
