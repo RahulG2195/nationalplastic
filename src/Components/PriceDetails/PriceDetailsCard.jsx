@@ -153,7 +153,6 @@ const PriceDetailsCard = ({
         contact: Phone || null,
       },
     };
-    // const gettingOptions = await axios.get("/api/razorpay");
 
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
