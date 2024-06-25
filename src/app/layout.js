@@ -13,6 +13,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import store, { persistor } from "@/redux/store";
 import dynamic from "next/dynamic";
 import Script from "next/script";
+import { SessionProvider } from "next-auth/react";
 const inter = Inter({ subsets: ["latin"] });
 
 const BrowserRouter = dynamic(
@@ -36,6 +37,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={inter.className}>
+      <SessionProvider>
         <BrowserRouter>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
@@ -46,6 +48,7 @@ export default function RootLayout({ children }) {
             </PersistGate>
           </Provider>
         </BrowserRouter>
+        </SessionProvider>
       </body>
     </html>
   );

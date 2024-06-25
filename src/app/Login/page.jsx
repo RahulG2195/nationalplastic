@@ -12,6 +12,9 @@ import { useDispatch } from "react-redux";
 import { setUserData } from "@/redux/reducer/userSlice";
 // import { useNavigate } from "react-router-dom";
 import { toast, Bounce } from "react-toastify";
+import { signIn, useSession } from "next-auth/react";
+import { notify } from "@/utils/notify";
+
 
 function Login() {
   const dispatch = useDispatch();
@@ -21,11 +24,42 @@ function Login() {
   const router = useRouter(); // Use useRouter on the client-side only
   // const navigate =useNavigate();
   // const router = useRouter();
-
+  const { data: session, status } = useSession();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const [refresh ,SetRefresh] = useState(false);
+    useEffect(() => {
+    if (session) {
+      // Send session data to your backend
+      axios.post('/api/googleProvider', session.user)
+        .then(response => {
+          console.log('Response from API:', response.data);
+          console.log(response.body);
+          console.log('Response from API:', );
+          const email = response.data.email
+          const customer_id = response.data.customer_id
+
+          
+          if (status === "authenticated" && session?.user) {
+            notify("Successfull login!")
+            dispatch(
+              setUserData({
+                email: email,
+                customer_id: customer_id,
+              })
+            );
+            router.push("/"); // Redirect to homepage
+          }
+        })
+        .catch(error => {
+          console.log('Error sending data to API:', error);
+        });
+        //  hasSentRequest.current = true; 
+    }
+  }, [session,refresh]);
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -40,6 +74,30 @@ function Login() {
   const handleRegisterClick = async (event) => {
     router.push("/Register");
   };
+  async function sendDataToBackend() {
+    try {
+      await signIn("google")
+      const response = await axios.post('/api/googleProvider', session.user);
+      console.log('Response from API:', response.data);
+      const { email, customer_id } = response.data;
+      console.log("before if == = = =");
+      if (status === "authenticated" && session?.user) {
+        console.log("inside if == = = =");
+        dispatch(
+          setUserData({
+            email: email,
+            customer_id: customer_id,
+          })
+        );
+        console.log("inside if == =2 = =");
+        SetRefresh(true);
+        // router.push("/"); // Redirect to homepage
+      }
+      console.log("inside if == = 3= =");
+    } catch (error) {
+      console.log('Error sending data to API:', error);
+    }
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -52,11 +110,11 @@ function Login() {
         const res = await axios.put(`/api/Users`, formData);
         const userData = res.data.message[0];
         const { customer_id } = userData;
-        
+
         const isAdmin = res.data.isAdmin ? res.data.isAdmin[0] : null;
         if (isAdmin !== null) {
           localStorage.setItem("adminjwt", isAdmin);
-      }
+        }
         if (res.data.status === 500) {
           const errorMsg = res.data.message;
           setErrorMessage(errorMsg);
@@ -226,12 +284,18 @@ function Login() {
                     alt="google"
                     className="mx-2"
                   />
-                  <Image
-                    src="/Assets/images/facebook.png"
-                    width={20}
-                    height={20}
-                    alt="google"
-                  />
+                  <button
+  className="btn btn-danger mt-3"
+  onClick={() => sendDataToBackend()}
+>
+  <img
+    src="/Assets/images/facebook.png"
+    alt="google"
+    width={20}
+    height={20}
+  />
+  <i className="fa fa-google"></i> Sign in with Google
+</button>
                 </p>
               </div>
             </form>

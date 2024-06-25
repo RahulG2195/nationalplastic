@@ -274,12 +274,40 @@
     }
 }
 
-@media only screen and (max-width: 360px) {
+@media only screen and (max-width: 360.5px) {
 
     .nav-search {
         margin: auto;
     }
 
+    .cartCount {
+        position: absolute;
+        background-color: #FE0000;
+        border-radius: 50%;
+        width: 17px;
+        height: 17px;
+        padding: 0 0px;
+        top: 4px;
+        right: 40px;
+        color: #fff;
+        left: 0;
+        margin-left: auto;
+    }
+
+    .footer-icon {
+        height: auto;
+        width: 26% !important;
+    }
+
+    .lower-mobile-menu {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: #FFE101;
+        padding: 10px 15px;
+        z-index: 9999;
+        left: 0px;
+    }
 }
 
 
@@ -321,11 +349,11 @@
 }
 
 .lower-mobile-menu img {
-    height: 30px; 
+    height: 30px;
     width: 30px;
 }
 
-.side-icons{
+.side-icons {
     gap: 20px;
     margin: 0 auto;
     position: relative;
@@ -333,10 +361,12 @@
 }
 
 .lower-mobile-menu li:not(:last-child) {
-    border-right: 1px solid black; /* Add a border to separate the icons */
+    border-right: 1px solid black;
+    /* Add a border to separate the icons */
 }
+
 @media only screen and (min-width: 769px) {
-    .lower-mobile-menu{
+    .lower-mobile-menu {
         display: none;
     }
 
@@ -361,12 +391,13 @@
 
     .brdr {
         display: block !important;
-    
+
     }
 
-    .lower-mobile-menu{
+    .lower-mobile-menu {
         display: none;
     }
+
     .cartCount {
         position: absolute;
         background-color: #FE0000;
@@ -399,12 +430,12 @@
 
 @media only screen and (min-width: 481px) and (max-width: 600px) {
 
-  
 
-    .lower-mobile-menu{
+
+    .lower-mobile-menu {
         display: block;
     }
-    
+
     .cartCount {
         position: absolute;
         background-color: #FE0000;
@@ -467,9 +498,9 @@
     }
 }
 
-@media only screen and (max-width: 360px) {
+@media screen and (max-width: 360px) {
 
-    .cartCount {
+    /* .cartCount {
         position: absolute;
         background-color: #FE0000;
         border-radius: 50%;
@@ -485,7 +516,7 @@
 
     .footer-icon {
         height: auto;
-        width: 30% !important;
+        width: 26% !important;
     }
 
     .lower-mobile-menu {
@@ -496,8 +527,7 @@
         padding: 10px 15px;
         z-index: 9999;
         left: 0px;
-    }
+    } */
 
-    
-    
+
 }

@@ -7,6 +7,7 @@ import "../../../../envConfig.js";
 import {generateToken} from "@/utils/jwtAuth.js"
 // Handler for GET request to fetch all customersimport { cookies } from 'next/headers';
 // import { setCookie } from 'cookies-next';
+import { cookies } from 'next/headers';
 const isAdmin = async (email) => {
   const user_data = await query({
     query: "SELECT role FROM customer WHERE email = ?",
@@ -298,8 +299,8 @@ export async function DELETE(request) {
     });
   } catch (error) {
     console.error('Error deleting auth cookie:', error);
-    return new Response(JSON.stringify({ error: 'Failed to delete auth cookie' }), {
-      status: 500,
+    return new Response(JSON.stringify({ error: 'Token cookie Not present' }), {
+      status: 200,
       headers: { 'Content-Type': 'application/json' }
     });
   }
