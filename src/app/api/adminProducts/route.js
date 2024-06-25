@@ -3,6 +3,7 @@ import colorNameList from 'color-name-list';
 import { NextResponse } from 'next/server';
 import { writeFile } from "fs/promises";
 import upload from "@/utils/multer.middleware";
+
 function convertColorToCode(color) {
   const colorEntry = colorNameList.find(entry => entry.name.toLowerCase() === color.toLowerCase());
   if (!colorEntry) {
