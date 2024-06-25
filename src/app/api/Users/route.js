@@ -19,9 +19,7 @@ const isAdmin = async (email) => {
     values: [email],
   });
   const role = user_data[0].role
-  console.log(`Role ${role}`);
   if(role === "admin") {
-  console.log(`Role ${role}`);
   const token = await generateToken({email: email , role: "admin"});
   cookies().set('token', token, { 
     maxAge: 60 * 60 * 24, // 1 day in seconds
@@ -30,7 +28,6 @@ const isAdmin = async (email) => {
     sameSite: 'strict'
   });
 
-  console.log(`Token ${token}`);
   return token;
   }else{
   return false;
@@ -133,11 +130,7 @@ export async function PUT(request) {
           const isItAdmin = await isAdmin(email)
     
           // Set the JWT token as an httpOnly cookie
-         console.log('Setting JWT token', isItAdmin);
           if (!isItAdmin) {
-          // const cookies = new Cookies(request);
-          //   cookies.set('authToken', token, { httpOnly: true });
-          //   console.log("----",isItAdmin)
           return new Response(
             JSON.stringify({
               status: 200,

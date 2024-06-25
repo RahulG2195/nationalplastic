@@ -19,7 +19,7 @@ function ErrorPage() {
           <h1>Looks like you are lost</h1>
           <h5>We can not seem to find the page you are looking for</h5>
           <button className="error-homepage-btn">
-            BACK TO HOME<i class="fa fa-arrow-right" aria-hidden="true"></i>
+            BACK TO HOME<i className="fa fa-arrow-right" aria-hidden="true"></i>
           </button>
         </div>
       </div>

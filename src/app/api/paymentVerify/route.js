@@ -97,8 +97,6 @@ export async function PUT(request) {
     const lastInsertedId = res.insertId;
     // Insert order_detail
 
-    // console.log('last id', res);
-    // console.log('last id2', JSON.stringify(res));
     
 
 
@@ -107,7 +105,6 @@ export async function PUT(request) {
     const DeleteCartDataAfterOrderPlaced = "DELETE FROM mycart WHERE user_id = ? AND product_id = ?";
 
     const products = order_detail.cart;
-    console.log('products', products);
     for (const product of products) {
 
       try {

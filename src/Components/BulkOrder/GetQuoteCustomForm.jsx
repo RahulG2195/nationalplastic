@@ -115,7 +115,7 @@ const GetQuoteCustomForm = (props) => {
       <div
         className={`GQform GQformprodpage rounded p-5 py-5 mt-2 GQFormRes rounded-4 ${props.bottomclass} `}
       >
-        {/* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
+        {/* <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
         <form onSubmit={handleOnSubmit}>
           <div className="mb-4">
             <input

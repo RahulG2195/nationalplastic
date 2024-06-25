@@ -30,10 +30,10 @@ const Opening = () => {
                                 <div className="col-md-4"><JobCard /></div>
                                 <div className="col-md-4"><JobCard /></div>
                                 <div className="col-md-4"><JobCard /></div> */}
-                                <div class="container text-center">
-                                    <div class="row">
+                                <div className="container text-center">
+                                    <div className="row">
                                         {[...Array(9)].map((_, index) => (
-                                            <div class="col-md-4" key={index}>
+                                            <div className="col-md-4" key={index}>
                                                 <JobCard />
                                             </div>
                                         ))}

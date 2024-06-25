@@ -216,7 +216,7 @@ function ContactUs() {
           />
         </div>
         <div className="row">
-          <div class="clip-path-element">
+          <div className="clip-path-element">
             <h1>CONTACT US</h1>
             <div className="contact-btn pb-5">
               <button>Branch Offices</button>
@@ -365,18 +365,18 @@ function ContactUs() {
                 <h1>Office</h1>
               </div>
               <div className="RegisteredOfficeIcon">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <i className="fa fa-map-marker" aria-hidden="true"></i>
                 <p>
                   Office No. 213, 214 & 215, 2nd Floor, Hubtown Solaris, N. S.
                   Phadake Marg, Andheri (East), Mumbai- 400 069. India.
                 </p>
               </div>
               <div className="RegisteredOfficeIcon">
-                <i class="fa fa-phone" aria-hidden="true"></i>
+                <i className="fa fa-phone" aria-hidden="true"></i>
                 <p>+91-22-6766 9920/ +91-22-6766 9922</p>
               </div>
               <div className="RegisteredOfficeIcon">
-                <i class="fa fa-envelope-open" aria-hidden="true"></i>
+                <i className="fa fa-envelope-open" aria-hidden="true"></i>
                 <p>info@nationalplastic.com</p>
               </div>
             </div>

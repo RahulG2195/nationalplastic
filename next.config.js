@@ -11,9 +11,9 @@ const nextConfig = {
 
   env: {
     MYSQL_HOST: "localhost",
-    MYSQL_DATABASE: "national_db",
+    MYSQL_DATABASE: "nationalplastic_db",
     MYSQL_USER: "root",
-    MYSQL_PASSWORD: "",
+    MYSQL_PASSWORD: "National2024",
     MYSQL_PORT: "3306",
     RAZORPAY_KEY_ID: "rzp_test_WUEWvbWJ3T7hJ0",
     RAZORPAY_SECRET: "onArQM2aO7a1EUWCV8q7Gjrv",

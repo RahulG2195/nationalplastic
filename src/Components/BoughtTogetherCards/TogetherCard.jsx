@@ -7,7 +7,7 @@ const TogetherCard = (props) => {
 
             <div className="card bought_card border border-0">
                 <div className="card-headers">
-                <div class="overlay"></div>
+                <div className="overlay"></div>
                     <Image
                         src={props.imgSrc}
                         width={25}

@@ -28,7 +28,7 @@ export default function Header() {
   const [FirstName, setFirstName] = useState('');
   const [LastName, setLastName] = useState('');
   const [InitialName, setInitialName] = useState('');
-
+  const [hideLayout, setHideLayout] = useState(false);
   // const [count, setCount] = useState(0);
   const router = useRouter();
   const dispatch = useDispatch;
@@ -99,7 +99,15 @@ export default function Header() {
 
   // console.log('initial value', InitialName);
   // ----------------------- End of initail name after login --------------------------------- // 
-
+  useEffect(() => {
+    // Check if the custom header is present
+    const checkHeader = async () => {
+        const res = await fetch(router.asPath, { method: 'HEAD' });
+        const isAdmin = res.headers.get('x-admin-access') === 'true';
+        setHideLayout(isAdmin);
+    };
+    checkHeader();
+}, [router]);
 
   // useEffect(async () => {
   const handleSearchChange = async (e) => {
@@ -159,6 +167,8 @@ export default function Header() {
   const {width} = windowSize;
 
   return (
+    <div>
+    {!hideLayout ? 
     <>
       <div className="container-fluid  header menbg">
         <TopBar />
@@ -383,7 +393,7 @@ export default function Header() {
             </div>
 
             <div className="row">
-              <ul class=" d-flex side-icons">
+              <ul className=" d-flex side-icons">
                 <li className="nav-item brdr d-none d-md-none d-xl-block">
                   <Link
                     className="nav-link"
@@ -550,5 +560,7 @@ export default function Header() {
         <BottomBar />
       </div>
     </>
+    : null}
+    </div>
   );
 }

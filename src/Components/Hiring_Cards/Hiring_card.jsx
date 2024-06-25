@@ -12,7 +12,7 @@ const Hirirng_Card = (props) => {
                     <div className="card-body text-center">
                         <h5 className={`${props.TitleclassName} respHiringCardTitle`}>{props.Title}</h5>
                         <p className="card-text HText respHiringCardCpt ">{props.Text}</p>
-                        <button type="button" class="btn small ReadMoreRespBtn" data-bs-toggle="button">read More</button>
+                        <button type="button" className="btn small ReadMoreRespBtn" data-bs-toggle="button">read More</button>
 
                     </div>
                 </div>

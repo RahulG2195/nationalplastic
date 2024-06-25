@@ -86,7 +86,7 @@ const ProdEmail = ({OId, cID, cEmail, cPhone, pID, price, qty}) => {
       <div
         className={`GQform GQformprodpage rounded p-5 py-5 mt-2 GQFormRes rounded-4`}
       >
-        {/* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
+        {/* <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
         <h5 className="text-white py-2 text-center">Send Email of damage product</h5>
         <form onSubmit={ReturnOrderFormSubmit}>
           <div className="mb-4">

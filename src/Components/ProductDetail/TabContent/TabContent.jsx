@@ -106,10 +106,10 @@ const TabContent = ({ activeTab, prodDetail }) => {
 
   return (
     <>
-      <div class="tab-content" id="myTabContent">
-        <div class="row justify-content-center">
+      <div className="tab-content" id="myTabContent">
+        <div className="row justify-content-center">
           <div
-            class="col-sm-12 col-md-8 p-5 tab-pane fade show active fw-bold mt-3"
+            className="col-sm-12 col-md-8 p-5 tab-pane fade show active fw-bold mt-3"
             id={activeTab}
             role="tabpanel"
             aria-labelledby={`${activeTab}-tab`}
@@ -118,7 +118,7 @@ const TabContent = ({ activeTab, prodDetail }) => {
             <p>{content}</p>
           </div>
 
-          <div class="col-sm-12 col-md-6 imgCont">
+          <div className="col-sm-12 col-md-6 imgCont">
             <Image
               src={img}
               width={100}

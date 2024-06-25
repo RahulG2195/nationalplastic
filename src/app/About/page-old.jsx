@@ -35,12 +35,12 @@
 //       <div className="container">
 //         <div className="row">
 //           {arr.map((val) => (
-//             <div class="col-md-6" key={val.key}>
+//             <div className="col-md-6" key={val.key}>
 //               {" "}
 //               <VMCard title={val.title} description={val.desc} />
 //             </div>
 //           ))}
-//           {/* <div class="col-md-6"> <VMCard  title={titleValue} description={descriptionValue}/> </div> */}
+//           {/* <div className="col-md-6"> <VMCard  title={titleValue} description={descriptionValue}/> </div> */}
 //         </div>
 //       </div>
 //     </>

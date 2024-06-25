@@ -61,7 +61,6 @@ export const tempSlice = createSlice({
               notify("Product Quantity Updated Successfully");
           } else {
               // If the item with the same product_id but different color is found, add it as a new product
-              console.log("INTI-------------------------------");
               state.products.push(action.payload);
   
               state.total_price += parseFloat(price) * quantity;

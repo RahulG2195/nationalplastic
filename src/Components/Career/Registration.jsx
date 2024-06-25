@@ -43,15 +43,7 @@ const Registration = () => {
     return emailPattern.test(email);
   };
 
-  //   function handleInputChange(e) {
-  //     const { name, value, files } = e.target;
-  //     const file = files ? files[0] : " ";
-  // //console.log(file);
-  //     setUserInput({
-  //       ...userInput,
-  //       [name]: file || value,
-  //     });
-  //   }
+
   async function handleInputChange(event) {
     const { name, value } = event.target;
     {
@@ -194,7 +186,7 @@ const Registration = () => {
                   />
                 </div>
                 <div className="mb-3 col-md-4 d-flex align-items-end justify-content-center gap-5">
-                  <div class="mb- col-md-4 d-flex align-items-end justify-content-center registrationBtnResp gap-4">
+                  <div className="mb- col-md-4 d-flex align-items-end justify-content-center registrationBtnResp gap-4">
                     <button className="btn btn-danger px-4" type="submit">
                       Submit
                     </button>

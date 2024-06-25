@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Form, Input, Button, InputNumber } from 'antd';
 import "./EditProduct.css";
@@ -7,8 +7,7 @@ import axios from 'axios';
 
 export default function App() {
   const { control, handleSubmit, setValue, formState: { errors } } = useForm();
-
-
+  const [imagePreviews, setImagePreviews] = useState([]);
 
   const updateProduct = async (formData) => {
     try {
@@ -17,7 +16,6 @@ export default function App() {
           'Content-Type': 'multipart/form-data'
         }
       });
-      console.log('Update response:', response.data);
       return response.data;
     } catch (error) {
       console.error('Update Error:', error.message);
@@ -31,7 +29,14 @@ export default function App() {
       
       // Append all form fields to FormData
       Object.keys(data).forEach(key => {
-        formData.append(key, data[key]);
+        if (key === 'image') {
+          // Append each file separately
+          data[key].forEach(file => {
+            formData.append('image', file);
+          });
+        } else {
+          formData.append(key, data[key]);
+        }
       });
 
       await updateProduct(formData);
@@ -42,21 +47,36 @@ export default function App() {
   };
   
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setValue('image', file);
-    setValue('image_name', file ? file.name : '');
+    const files = Array.from(e.target.files);
+    setValue('image', files);
+    setValue('image_name', files.map(file => file.name).join(','));
+    
+    // Create previews for the new images
+    const newPreviews = files.map(file => {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(file);
+      });
+    });
+
+    Promise.all(newPreviews).then(setImagePreviews);
   };
+
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("productToEdit"));
     if (data) {
-      console.log("data: ", data);
       Object.keys(data).forEach(key => {
         setValue(key, data[key]);
       });
+      // Set the image previews
+      if (data.image_name) {
+        const images = data.image_name.split(',');
+        const previews = images.map(img => `/Assets/images/products/${img.trim()}`);
+        setImagePreviews(previews);
+      }
     }
   }, [setValue]);
-
-  // The rest of the component remains the same
 
   return (
     <Form
@@ -65,8 +85,6 @@ export default function App() {
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
     >
-      {/* Form fields here, unchanged */}
-      {/* Form field Components remain the same */}
       <Form.Item
         label="Product Name"
         validateStatus={errors.product_name ? 'error' : ''}
@@ -80,9 +98,7 @@ export default function App() {
         />
       </Form.Item>
 
-      <Form.Item
-        label="Meta Title"
-      >
+      <Form.Item label="Meta Title">
         <Controller
           name="meta_title"
           control={control}
@@ -90,9 +106,7 @@ export default function App() {
         />
       </Form.Item>
 
-      <Form.Item
-        label="Meta Description"
-      >
+      <Form.Item label="Meta Description">
         <Controller
           name="meta_description"
           control={control}
@@ -100,9 +114,7 @@ export default function App() {
         />
       </Form.Item>
 
-      <Form.Item
-        label="Short Description"
-      >
+      <Form.Item label="Short Description">
         <Controller
           name="short_description"
           control={control}
@@ -110,9 +122,7 @@ export default function App() {
         />
       </Form.Item>
 
-      <Form.Item
-        label="Long Description"
-      >
+      <Form.Item label="Long Description">
         <Controller
           name="long_description"
           control={control}
@@ -120,9 +130,7 @@ export default function App() {
         />
       </Form.Item>
 
-      <Form.Item
-        label="SEO Title"
-      >
+      <Form.Item label="SEO Title">
         <Controller
           name="seo_title"
           control={control}
@@ -157,13 +165,25 @@ export default function App() {
       </Form.Item>
 
       <Form.Item
-        label="Image"
+        label="Images"
         validateStatus={errors.image ? 'error' : ''}
-        help={errors.image ? 'Please upload an image!' : ''}
+        help={errors.image ? 'Please upload at least one image!' : ''}
       >
+        <div className="image-previews">
+          {imagePreviews.map((preview, index) => (
+            <img 
+              key={index}
+              src={preview} 
+              alt={`Product image ${index + 1}`} 
+              title={`Product Image ${index + 1}`}
+              style={{ maxWidth: '40px', marginRight: '10px', marginBottom: '10px' }} 
+            />
+          ))}
+        </div>
         <input
           type="file"
           onChange={handleFileChange}
+          multiple
         />
       </Form.Item>
 
@@ -206,9 +226,7 @@ export default function App() {
         />
       </Form.Item>
 
-      <Form.Item
-        label="Duration"
-      >
+      <Form.Item label="Duration">
         <Controller
           name="duration"
           control={control}

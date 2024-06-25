@@ -14,9 +14,12 @@ export async function middleware(req) {
         const role = decodedToken.role;
 
         if (role === 'admin') {
+            // NextResponse.headers.set
+            // NextResponse.headers.set('x-admin-access', 'true');
             return NextResponse.next();
         }
     } catch (error) {
+        console.log(error.message);
         return NextResponse.redirect(new URL('/Login', req.url));
     }
 

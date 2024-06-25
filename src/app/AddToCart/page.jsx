@@ -43,7 +43,6 @@ function AddToCart() {
   const dispatch = useDispatch();
   const StoreGuestData = async (products) => {
     // Check if user is logged in and products array has items
-    console.log(products);
     if (await isLoggedIn() && products.length > 0) {
       try {
         // Use Promise.all to await all dispatch calls in parallel
@@ -82,17 +81,11 @@ function AddToCart() {
         });
         //console.log(response);
         cartData = response.data.products;
-        //console.log("cd", response.data.products);
-        console.log(tempCartStates);
-        console.log("length",tempCartStates.products.length??"NO length");
 
         if (tempCartStates.products.length>0 && Updated) {
           const tempData = tempCartStates.products;
-          console.log("tD", tempData);
           StoreGuestData(tempData)
         }
-        //console.log(cartData);
-        //console.log("fetch1");
         fetchData(cartData);
       } else {
         //Logic to Store Temporary Data
@@ -422,16 +415,16 @@ function AddToCart() {
             <div className="coupenDiv p-4">
               <h6 className="pb-2">Have a coupon Code?</h6>
               <form>
-                <div class="input-group mb-3">
+                <div className="input-group mb-3">
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     placeholder=""
                     aria-label="coupon code"
                     aria-describedby="basic-addon2"
                   />
-                  <div class="input-group-append">
-                    <span class="input-group-text coupon_btn" id="basic-addon2">
+                  <div className="input-group-append">
+                    <span className="input-group-text coupon_btn" id="basic-addon2">
                       Apply
                     </span>
                   </div>

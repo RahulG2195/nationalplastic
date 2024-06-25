@@ -10,11 +10,7 @@ export async function POST(request) {
       values: [user_id],
     });
 
-    console.log("mycart: ",mycart);
-
-
 if (mycart.length === 0) {
-console.log("mycart0000000000000000: ",mycart);
 
   return new Response(
     JSON.stringify({
@@ -24,8 +20,6 @@ console.log("mycart0000000000000000: ",mycart);
   );
 }
     const productIds = mycart.map((row) => row.product_id);
-    console.log("pIDS", productIds);
-    console.log("pIDS", productIds.join(","));
 
     // Fetch product details for the retrieved product IDs
     const products = await query({
@@ -37,9 +31,6 @@ console.log("mycart0000000000000000: ",mycart);
       `,
       values: [user_id],
     });
-    console.log("--------------------------------")
-    console.log("--------------------------------",products)
-
     //appply map here to get data
     const dataForPayment = products.map((row) => ({
       product_id: row.product_id,
@@ -48,7 +39,6 @@ console.log("mycart0000000000000000: ",mycart);
       quantity: row.cart_quantity,
       prod_price: row.price,
     }));
-    console.log(products);
     return new Response(
       JSON.stringify({
         status: 200,
@@ -72,8 +62,6 @@ export async function PUT(request) {
   try {
     try {
       const { product_id, customer_id, quantity, color } = await request.json();
-      console.log("all data: ", product_id, customer_id, quantity, color);
-
       const user_id = customer_id;
       const insertResult = await query({
         query:

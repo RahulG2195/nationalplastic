@@ -144,7 +144,7 @@ function Login() {
                 </label>
 
                 <div className="col-sm-12">
-                  <div class="password-container">
+                  <div className="password-container">
                     <input
                       type={showPassword ? "text" : "password"}
                       id="password"

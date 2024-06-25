@@ -6,7 +6,7 @@ const ShareHolding = () => {
       <div className='container'>
         <div className='row'>
           <div className='col-12'>
-            <table class="table table-responsive table-striped table-light table-bordered">
+            <table className="table table-responsive table-striped table-light table-bordered">
               <thead>
                 <tr>
                   <th scope="col">Year</th>

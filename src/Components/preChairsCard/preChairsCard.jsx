@@ -8,31 +8,6 @@ import axios from "axios";
 const PreChairsCard = (props) => {
   const [inWishlist, setInWishlist] = useState(false);
 
-  useEffect(() => {
-    const fetchWishlistItems = async () => {
-      try {
-        const userDataString = localStorage.getItem("userData");
-        const userData = JSON.parse(userDataString);
-        const customerId = userData.customer_id;
-
-        const response = await axios.post("/api/wishListUser", {customer_id: customerId,});
-
-        const wishlistItems = response.data.products.map(
-          (product) => product.product_id
-        );
-        const isInWishlist = wishlistItems.includes(props.id);
-        setInWishlist(isInWishlist);
-      } catch (error) {
-        console.error("Error fetching wishlist items:", error);
-      }
-    };
-    fetchWishlistItems();
-  }, [props.id, inWishlist]);
-
-  // const setid = () => {
-  //   localStorage.setItem("myId", props.id);
-  // };
-
   const handleAddToCart = () => {
     props.onAddToCart(props.id);
   };
