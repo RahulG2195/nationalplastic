@@ -16,6 +16,7 @@ import {
 } from "@/utils/validation";
 import ProdEmail from "@/Components/ReturnProdEmail/prodEmail";
 import Cookies from 'js-cookie';
+import { signOut } from "next-auth/react";
 function ProfilePage() {
   const [FirstName, setFirstName] = useState('');
   const [LastName, setLastName] = useState('');
@@ -263,6 +264,7 @@ function ProfilePage() {
     e.preventDefault();
     if (window.confirm("Are you sure you want to log out?")) {
       localStorage.clear();
+      signOut();
       setData({}); // Clear user data
       axios.delete("api/Users")
       window.location.href = "/";
