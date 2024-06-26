@@ -1,6 +1,6 @@
 "use client";
 import { Inter } from "next/font/google";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.min.css";
 import Header from "@/Components/layouts/Header";
@@ -14,6 +14,7 @@ import store, { persistor } from "@/redux/store";
 import dynamic from "next/dynamic";
 import Script from "next/script";
 import { SessionProvider } from "next-auth/react";
+
 const inter = Inter({ subsets: ["latin"] });
 
 const BrowserRouter = dynamic(
@@ -21,11 +22,16 @@ const BrowserRouter = dynamic(
   { ssr: false }
 );
 
-// Other routes and middleware...
-
 export default function RootLayout({ children }) {
+  const [isAdmin, setIsAdmin] = useState(false);
+
   useEffect(() => {
     import("bootstrap/dist/js/bootstrap.bundle.min.js");
+
+    const queryParams = window.location.pathname;
+    if (queryParams.includes("admin")) {
+      setIsAdmin(true);
+    }
   }, []);
 
   return (
@@ -37,17 +43,19 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={inter.className}>
-      <SessionProvider>
-        <BrowserRouter>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-              <Header />
-              {children}
-              <ToastContainer />
-              <Footer />
-            </PersistGate>
-          </Provider>
-        </BrowserRouter>
+        <SessionProvider>
+          <BrowserRouter>
+            <Provider store={store}>
+              <PersistGate loading={null} persistor={persistor}>
+                {!isAdmin && <Header />}
+                <div className={`${isAdmin ? "pt-0 mt-0" : "pt-5 mt-4"}`}>
+                  {children}
+                </div>
+                <ToastContainer />
+                {!isAdmin && <Footer />}
+              </PersistGate>
+            </Provider>
+          </BrowserRouter>
         </SessionProvider>
       </body>
     </html>
