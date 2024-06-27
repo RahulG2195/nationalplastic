@@ -7,7 +7,7 @@ import { Table } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { useRouter } from "next/navigation";
 import "./CouponList.css";
-
+import moment from 'moment';
 const CouponList = () => {
   const router = useRouter();
   const [couponArray, setCouponArray] = useState([]);
@@ -18,21 +18,22 @@ const CouponList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const rawData = await axios.get("/api/adminCoupons");
-      const { allCoupons } = rawData.data;
-      setCouponArray(allCoupons);
-      setFilteredCouponArray(allCoupons);
+      const rawData = await axios.get("/api/adminCoupon");
+      const { coupons } = rawData.data;
+      console.log("coupons", coupons);
+      setCouponArray(coupons);
+      setFilteredCouponArray(coupons);
     };
     fetchData();
   }, []);
 
-  const handleOnclick = (type, index) => {
+  const handleOnclick = (type, id) => {
     if (type === 'Edit') {
-      const couponToEdit = couponArray.find(coupon => coupon.coupon_id === index);
+      const couponToEdit = couponArray.find(coupon => coupon.id === id);
       localStorage.setItem('couponToEdit', JSON.stringify(couponToEdit));
-      router.push("/admin/editCouponForm");
+      router.push("/admin/EditCoupon");
     } else if (type === 'Delete') {
-      setCurrentItemToDelete(index);
+      setCurrentItemToDelete(id);
       setDeleteModalOpen(true);
     }
   };
@@ -40,13 +41,13 @@ const CouponList = () => {
   const handleConfirmDelete = async () => {
     if (currentItemToDelete !== null) {
       try {
-        await axios.delete("/api/adminCoupons", {
+        await axios.delete("/api/adminCoupon", {
           headers: {
             'Content-Type': 'application/json',
           },
-          data: JSON.stringify({ coupon_id: currentItemToDelete })
+          data: JSON.stringify({ id: currentItemToDelete })
         });
-        const updatedCoupons = couponArray.filter(coupon => coupon.coupon_id !== currentItemToDelete);
+        const updatedCoupons = couponArray.filter(coupon => coupon.id !== currentItemToDelete);
         setCouponArray(updatedCoupons);
         setFilteredCouponArray(updatedCoupons);
       } catch (error) {
@@ -61,7 +62,7 @@ const CouponList = () => {
     const value = e.target.value.toLowerCase();
     setSearchText(value);
     const filteredData = couponArray.filter(coupon =>
-      coupon.coupon_code.toLowerCase().includes(value)
+      coupon.code.toLowerCase().includes(value)
     );
     setFilteredCouponArray(filteredData);
   };
@@ -75,19 +76,18 @@ const CouponList = () => {
       title: 'Index',
       key: 'index',
       render: (text, record, index) => index + 1,
-      fixed: 'left',
     },
     {
-      title: 'Coupon ID',
-      dataIndex: 'coupon_id',
-      key: 'coupon_id',
-      fixed: 'left',
+      title: 'ID',
+      dataIndex: 'id',
+      key: 'id',
+      fixed: 'left',    
       hidden: true
     },
     {
-      title: 'Coupon Code',
-      dataIndex: 'coupon_code',
-      key: 'coupon_code',
+      title: 'Code',
+      dataIndex: 'code',
+      key: 'code',
       render: (text) => (
         <Highlighter
           highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
@@ -98,28 +98,36 @@ const CouponList = () => {
       ),
     },
     {
-      title: 'Percentage',
-      dataIndex: 'percentage',
-      key: 'percentage',
+      title: 'Discount Value',
+      dataIndex: 'discount_value',
+      key: 'discount_value',
     },
     {
-      title: 'Create Date',
-      dataIndex: 'create_date',
-      key: 'create_date',
+      title: 'Start Date',
+      dataIndex: 'start_date',
+      key: 'start_date',
+      render: (text) => moment(text).format('DD-MM-YYYY'),
     },
     {
-      title: 'Expire Date',
-      dataIndex: 'expire_date',
-      key: 'expire_date',
+      title: 'End Date',
+      dataIndex: 'end_date',
+      key: 'end_date',
+      render: (text) => moment(text).format('DD-MM-YYYY'),
+    },
+    {
+      title: 'Is Active',
+      dataIndex: 'is_active',
+      key: 'is_active',
+      render: (is_active) => is_active ? 'Yes' : 'No',
     },
     {
       title: 'Action',
       key: 'action',
       fixed: 'right',
       render: (text, record) => (
-        <div className='d-flex justify-content-between gap-2'>
-          <Button onClick={() => handleOnclick('Edit', record.coupon_id)} color="primary" className="mr-2">Edit</Button>
-          <Button onClick={() => handleOnclick('Delete', record.coupon_id)} color="danger">Delete</Button>
+        <div className='d-flex justify-content-evenly'>
+          <Button onClick={() => handleOnclick('Edit', record.id)} color="primary" className="mr-2">Edit</Button>
+          <Button onClick={() => handleOnclick('Delete', record.id)} color="danger">Delete</Button>
         </div>
       ),
     },
@@ -128,10 +136,8 @@ const CouponList = () => {
   return (
     <Container fluid>
       <h1 className="my-4">Coupon Code Table</h1>
-      <Row className="mb-3 align-items-start justify-content-between">
-        <Col xs={4} md={4} lg={2} className="mb-2 mb-md-0 col-12">
-        </Col>
-        <Col xs={4} md={4} lg={4} className="text-md-right col-12">
+      <Row className="mb-3 align-items-center">
+        <Col xs={12} md={6} lg={4} className="mb-2 mb-md-0">
           <Input
             type="text"
             name="Coupon Code"
@@ -141,14 +147,14 @@ const CouponList = () => {
             onChange={handleSearch}
           />
         </Col>
-        <Col className='col-2'>
-          <Link href='/admin/addCouponForm' className='mx-auto btn btn-secondary'>Add New</Link>
+        <Col xs={12} md={6} lg={8} className="text-md-end">
+          <Link href='/admin/addCoupon' className='btn btn-secondary'>Add New</Link>
         </Col>
       </Row>
       <Table
         columns={columns}
-        dataSource={filteredCouponArray.map(coupon => ({ ...coupon, key: coupon.coupon_id }))}
-        scroll={{ x: 1500 }}
+        dataSource={filteredCouponArray.map(coupon => ({ ...coupon, key: coupon.id }))}
+        scroll={{ x: 'max-content' }}
       />
       <Modal isOpen={deleteModalOpen} toggle={toggleDeleteModal}>
         <ModalHeader toggle={toggleDeleteModal}>Confirm Deletion</ModalHeader>
@@ -160,7 +166,7 @@ const CouponList = () => {
           <Button color="secondary" onClick={toggleDeleteModal}>Cancel</Button>
         </ModalFooter>
       </Modal>
-      <div className="d-flex justify-content-between flex-column flex-md-row align-items-center">
+      <div className="mt-3">
         <span>Showing 1 to {filteredCouponArray.length} of {filteredCouponArray.length} entries</span>
       </div>
     </Container>

@@ -24,7 +24,7 @@ const navigation = [
   },
   {
     title: "Coupon Code",
-    href: "/admin/coupon",
+    href: "/admin/CouponList",
     icon: "bi bi-patch-check",
   },
   {
