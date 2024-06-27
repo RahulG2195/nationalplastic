@@ -48,8 +48,8 @@ export default function RootLayout({ children }) {
             <Provider store={store}>
               <PersistGate loading={null} persistor={persistor}>
                 {!isAdmin && <Header />}
-                <div className={`${isAdmin ? "pt-0 mt-0" : "pt-5 mt-4"}`}>
-                  {children}
+                <div className={`${isAdmin ? "pt-0 mt-0" : "pt-0 mt-0"}`}>
+                  {children}s
                 </div>
                 <ToastContainer />
                 {!isAdmin && <Footer />}
