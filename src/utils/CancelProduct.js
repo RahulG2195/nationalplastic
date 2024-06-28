@@ -16,7 +16,24 @@ function CancelProdChargeAfterTwentyFourHr(orderStatusDate) {
     } else {
       return 0; // No charge
     }
-
 }
 
-module.exports = CancelProdChargeAfterTwentyFourHr;
+
+function ReturnProductBeforeFourteenDays(orderStatusDate){
+  const orderDate = new Date(orderStatusDate);
+
+  // Get the current date
+  const currentDate = new Date();
+
+  // Calculate the difference in milliseconds
+  const diffInMs = currentDate - orderDate;
+
+  // Convert milliseconds to hours
+  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
+  return diffInDays;
+}
+export default CancelProdChargeAfterTwentyFourHr;
+export  {ReturnProductBeforeFourteenDays}; 
+
+//1042614565  86400000

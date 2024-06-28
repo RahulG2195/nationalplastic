@@ -79,6 +79,16 @@ If you still see the default Nginx page, check Nginx's error log for any issues:
 
 sudo tail -f /var/log/nginx/error.log
 
+sudo systemctl stop nginx
+sudo dnf remove nginx
+
+# Optional: Remove Nginx configuration and log files
+sudo rm -rf /etc/nginx
+sudo rm -rf /var/log/nginx
+sudo rm -rf /var/cache/nginx
+
+# Verify uninstallation
+nginx -v
 
 
 
