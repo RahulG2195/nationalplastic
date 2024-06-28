@@ -11,10 +11,12 @@ import { addItemToCart, removeItemFromCart, addToCart, } from "@/redux/reducer/c
 import { useDispatch, useSelector } from "react-redux";
 // import { useSelector } from "react-redux";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
-import {addItemToCartD, removeItemFromCartD, setInitialCountD, } from "@/redux/reducer/tempSlice";
+import { addItemToCartD, removeItemFromCartD, setInitialCountD, } from "@/redux/reducer/tempSlice";
 import { prod } from "../ConstantURL";
 import { isLoggedIn } from "@/utils/validation";
-import {emptyTempSlice} from "@/redux/reducer/tempSlice";
+import { emptyTempSlice } from "@/redux/reducer/tempSlice";
+import { notify, notifyError } from "@/utils/notify";
+import { Button } from "reactstrap";
 
 function AddToCart() {
 
@@ -28,9 +30,9 @@ function AddToCart() {
   const userID = useSelector((state) => state.userData.customer_id || null);
 
   //console.log('add to cart' + JSON.stringify(productCount));
-  
 
-  
+
+
   // Use useState to manage local product count and update function
   const [count, setCount] = useState(productCount);
   const [productDetailArr, setProductDetailArr] = useState([]);
@@ -39,7 +41,9 @@ function AddToCart() {
   const [discount, setDiscount] = useState(0);
   const [totalPayble, setTotalPayble] = useState(0);
   const [installationCharges, setInstallationCharges] = useState(0);
-  const [Updated , setUpdated] = useState(true);
+  const [Updated, setUpdated] = useState(true);
+  const [couponCode, setCouponCode] = useState('');
+
   const dispatch = useDispatch();
   const StoreGuestData = async (products) => {
     // Check if user is logged in and products array has items
@@ -56,18 +60,18 @@ function AddToCart() {
             from: 0,
           }));
         });
-  
+
         // After all products are added to the cart, perform final actions
         dispatch(emptyTempSlice());
         setUpdated(false);
-  
+
       } catch (error) {
         console.error('Error while storing guest data:', error);
         throw error; // Propagate the error further if necessary
       }
     }
   };
-  
+
   useEffect(() => {
     setCount(productCount); // Update localCount whenever productCount changes
   }, [productCount]);
@@ -82,7 +86,7 @@ function AddToCart() {
         //console.log(response);
         cartData = response.data.products;
 
-        if (tempCartStates.products.length>0 && Updated) {
+        if (tempCartStates.products.length > 0 && Updated) {
           const tempData = tempCartStates.products;
           StoreGuestData(tempData)
         }
@@ -102,10 +106,10 @@ function AddToCart() {
           let obj = products[0];
           obj.quantity = tempData.products[0].quantity;
           obj.color = tempData.products[0].color;
-          
+
           const objToArray = new Array(obj);
           //Single product detail with updated quantity
-          
+
           fetchData(objToArray);
         } else if (productIds.length > 1) {
           // Send request with multiple product IDs
@@ -121,10 +125,10 @@ function AddToCart() {
             const tempProduct = tempProducts.find(
               (tempProd) => tempProd.product_id === product.product_id
             );
-            
+
             if (tempProduct) {
               product.quantity = tempProduct.quantity;
-              product.color =  tempProduct.color;
+              product.color = tempProduct.color;
             }
           });
 
@@ -134,13 +138,13 @@ function AddToCart() {
           // Now, updatedProductsArray contains products with updated quantities
 
           //Mutiple product detail with updated quantity
-        //console.log("fetch3");
+          //console.log("fetch3");
 
           fetchData(updatedProductsArray);
         }
       }
     };
-    const ColorBasedImage = async (color , product_id) => {
+    const ColorBasedImage = async (color, product_id) => {
       const colorBasedProduct = { color: color, product_id: product_id };
       const response = await axios.post(
         "/api/colorBasedProduct",
@@ -179,7 +183,7 @@ function AddToCart() {
         );
         //console.log("products ", JSON.stringify(products));
         // state.products.push(action.payload);
-      
+
         const cartLen = CartStates.products.length;
 
         if (isLoggedIn() && cartLen == 0) {
@@ -196,7 +200,7 @@ function AddToCart() {
             );
           });
         }
-      //console.log("Data GettiNG updated: ------")
+        //console.log("Data GettiNG updated: ------")
 
         // Calculate total price, discount, total payable, and installation charges
         // Calculate total payable amount, total discount, and total price without discount
@@ -209,7 +213,7 @@ function AddToCart() {
                 parseFloat(product.price) * parseFloat(product.quantity);
               const discountedProductTotal = product.discount_price
                 ? parseFloat(product.discount_price) *
-                  parseFloat(product.quantity)
+                parseFloat(product.quantity)
                 : productTotal;
 
               totals.totalPriceWithoutDiscount += productTotal;
@@ -242,7 +246,7 @@ function AddToCart() {
   const handleCartChange = async () => {
     try {
       // Fetch updated cart data
-     
+
       const response = await axios.post("/api/UserCart", {
         customer_id: userID,
       });
@@ -306,9 +310,6 @@ function AddToCart() {
       setProductDetailArr((prevItems) =>
         prevItems.filter((item) => item.product_id !== product_id)
       );
-
-      // setCount(ProductDetailArr.length);
-      // handleCartChange();
     } else {
       try {
         const formData = new FormData();
@@ -343,7 +344,20 @@ function AddToCart() {
       }
     }
   };
-  //console.log('proddata' + productDetailArr)
+  const handleInputChange = (event) => {
+    setCouponCode(event.target.value);
+  };
+  const validateCouponCode = async (event) => {
+    event.preventDefault();
+    try{
+      const response = await axios.post("api/couponValidation", { code:couponCode })
+      if(response.data.success) {
+        notify("Coupon code Applied!");
+      }
+    }catch(e){
+      notifyError(response.data.message)
+    }
+  }
   return (
     <>
       <div className="row">
@@ -386,7 +400,7 @@ function AddToCart() {
                           discPer={Math.floor(
                             ((val.discount_price - val.price) /
                               val.discount_price) *
-                              100
+                            100
                           )}
                           color={val.color}
                           installationCharges={val.InstallationCharges}
@@ -414,19 +428,20 @@ function AddToCart() {
           <div className="col-sm-12 col-md-4 col-lg-4 col-xl-4 place-order">
             <div className="coupenDiv p-4">
               <h6 className="pb-2">Have a coupon Code?</h6>
-              <form>
+              <form onSubmit={validateCouponCode}>
                 <div className="input-group mb-3">
                   <input
                     type="text"
                     className="form-control"
-                    placeholder=""
+                    placeholder="Enter coupon code"
                     aria-label="coupon code"
                     aria-describedby="basic-addon2"
+                    onChange={handleInputChange}
                   />
                   <div className="input-group-append">
-                    <span className="input-group-text coupon_btn" id="basic-addon2">
+                    <Button className="input-group-text coupon_btn" id="basic-addon2" type="submit">
                       Apply
-                    </span>
+                    </Button>
                   </div>
                 </div>
               </form>
