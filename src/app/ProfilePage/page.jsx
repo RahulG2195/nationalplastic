@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { notify, notifyError } from "@/utils/notify.js";
 import { useSelector } from "react-redux";
 import Link from "next/link";
-import CancelProdChargeAfterTwentyFourHr from "@/utils/CancelProduct";
+import CancelProdChargeAfterTwentyFourHr, {ReturnProductBeforeFourteenDays} from "@/utils/CancelProduct";
 import {
   isValidPassword,
   isValidReason, // Address validations
@@ -33,6 +33,7 @@ function ProfilePage() {
   const [success, setSuccess] = useState(null);
   const [orderData, setOrderData] = useState([]);
   const [ReturnSingleProd, setReturnSingleProd] = useState([]);
+  const [VerifyReturnDays, setVerifyReturnDays] = useState([]);
 
   useEffect(() => {
     localStorage.getItem("isLoggedIn") === "true"
@@ -55,6 +56,8 @@ function ProfilePage() {
     // setIsLoggedIn(isLoggedIn);
     setData(storedData);
   }, []);
+
+ 
 
 
   // Get user ID from context (replace with your logic)
@@ -157,35 +160,21 @@ function ProfilePage() {
         const response = await axios.put("/api/Users", formData);
 
         const userData = response.data.message[0]; // Directly access response.data.message
-        const { customer_id, Email, FirstName, LasttName  } = userData; // Destructure from userData, not from JSON.stringify
+        const { customer_id, Email, FirstName, LasttName } = userData; // Destructure from userData, not from JSON.stringify
         setFirstName(FirstName)
         setLastName(LasttName)
-        const UpdateData = {email: Email, customer_id: customer_id, };
+        const UpdateData = { email: Email, customer_id: customer_id, };
 
         // get order data 
         const OrderResponse = await axios.put("/api/UserOrder", UpdateData);
         setOrderData(OrderResponse.data.orderData);
-
-
-        // cancel and return functionality 
-        // const currentTime = new Date();
-        // const DateFromDB = OrderResponse.data.orderData[0]['order_status_date'];
-
-        // console.log('Database Timestamp:', DateFromDB.getFullYear());
-        // console.log('Current Timestamp:', currentTime.getFullYear());
-
-        // if (DateFromDB.getTime() === currentTime.getTime()) {
-        //   console.log('Timestamps match, performing action...');
-        // } else {
-        //   console.log('Timestamps match, performing action11111111...');
-        // }
 
         localStorage.setItem("userData", JSON.stringify(UpdateData));
         const responseData = response.data;
         const messageArray = responseData.message;
         setMessages(messageArray);
         setIsLoading(false);
-        
+
 
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -197,9 +186,9 @@ function ProfilePage() {
 
   useEffect(() => {
 
-    if (FirstName && LastName ) {
+    if (FirstName && LastName) {
       setInitialName(FirstName[0].toUpperCase() + LastName[0].toUpperCase());
-    } 
+    }
     else {
       setInitialName('N' + 'P');
     }
@@ -285,10 +274,12 @@ function ProfilePage() {
         if (!confirm) {
           // User chose not to proceed
           return;
+
         } else {
           const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: cancelProd };
           var res = await axios.post('/api/UserOrder', ProdData);
         }
+
       } else {
         const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: cancelProd };
         var res = await axios.post('/api/UserOrder', ProdData);
@@ -314,14 +305,18 @@ function ProfilePage() {
 
   const ReturnProduct = async (prod_id, user_id) => {
     try {
-
+      // od == order detail 
       const GetSingleData = orderData.filter((od) => od.prod_id == prod_id && od.customer_id == user_id)
-      setReturnSingleProd(GetSingleData)
+      const fourteendayvalidate = ReturnProductBeforeFourteenDays(GetSingleData[0]['order_status_date']);
+      setVerifyReturnDays(fourteendayvalidate);
+      
+      setReturnSingleProd(GetSingleData);
+
     } catch (error) {
       console.error('Error:', error);
     }
   }
-  console.log('ReturnSingleProd', ReturnSingleProd);
+  // console.log('ReturnSingleProd', ReturnSingleProd);
   return (
     <>
       <div className="container profile-page-container mb-5">
@@ -622,26 +617,44 @@ function ProfilePage() {
                     <tbody>
                       {
                         orderData.map((data, index) => {
+                          {/* console.log('data', data) */ }
+                          let vdate = ReturnProductBeforeFourteenDays(data['order_status_date']);
+                          if (data.image_name) {
+                            var images = data ? data.image_name.split(', ').map(image => image.trim()) : [];
+                          }
 
-                          const images = data ? data.image_name.split(', ').map(image => image.trim()) : [];
-                          let cancelButton;
+                          let ReturnCancelBtn;
 
-                          if (data.order_status === 5) {
+                          {/* order status == delivered  */ }
+                          if (data.order_status === 5 && vdate <= 14) {
+                            if(data['per_order_status'] == 0 && data['return_order'] == 0){
+                              ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Return confirmation Sent</button>
+                            }else{
+                              ReturnCancelBtn = <button className="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#ReturnProd" onClick={() => ReturnProduct(data.product_id, data.customer_id)}>Return order</button>
+                            }
 
-                            cancelButton = <button className="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => ReturnProduct(data.product_id, data.customer_id)}>Return order</button>
 
                           } else if (data.order_status === 1 || data.order_status === 2 || data.order_status === 3 || data.order_status === 4) {
 
                             if (data.per_order_status === 1) {
 
-                              cancelButton = <button className="btn btn-warning btn-rounded" onClick={() => CancelProduct(data.product_id, data.customer_id)}>Cancel order</button>
+                              ReturnCancelBtn = <button className="btn btn-warning btn-rounded" onClick={() => CancelProduct(data.product_id, data.customer_id)}>Cancel order</button>
 
                             } else {
-                              cancelButton = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>
+
+                              {/* once order status get 0 in db it will show order cancelled  */ }
+                              ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>
+
                             }
 
+                          } else if (data.order_status == 6) {
+
+                            ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>
+
+                          } else if (data.order_status == 7) {
+                            ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Returned</button>
                           } else {
-                            cancelButton = ''
+                            ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Placed</button>;
                           }
                           return <tr key={index}>
                             <th scope="row">{index + 1}</th>
@@ -650,7 +663,7 @@ function ProfilePage() {
                             <td>{data.quantity}</td>
                             <td>₹ {data.quantity * data.prod_price} </td>
                             <td>
-                              {cancelButton}
+                              {ReturnCancelBtn}
                             </td>
                           </tr>
                         })
@@ -727,9 +740,9 @@ function ProfilePage() {
       <div>
         <div
           className="modal fade"
-          id="exampleModal"
+          id="ReturnProd"
           tabIndex={-1}
-          aria-labelledby="exampleModalLabel"
+          aria-labelledby="ReturnProdLabel"
           aria-hidden="true"
         >
           <div className="modal-dialog">
@@ -743,10 +756,10 @@ function ProfilePage() {
                 />
                 {
                   ReturnSingleProd.length > 0 ?
-                    <ProdEmail OId={ReturnSingleProd[0]['od_id']} cID={ReturnSingleProd[0]['customer_id']} cEmail={ReturnSingleProd[0]['customer_email']} cPhone={ReturnSingleProd[0]['Phone']}  pID={ReturnSingleProd[0]['prod_id']} price={ReturnSingleProd[0]['prod_price']} qty={ReturnSingleProd[0]['quantity']}></ProdEmail>
-                  : ''
+                    <ProdEmail OId={ReturnSingleProd[0]['od_id']} cID={ReturnSingleProd[0]['customer_id']} cEmail={ReturnSingleProd[0]['customer_email']} cPhone={ReturnSingleProd[0]['Phone']} pID={ReturnSingleProd[0]['prod_id']} price={ReturnSingleProd[0]['prod_price']} qty={ReturnSingleProd[0]['quantity']}></ProdEmail>
+                    : ''
                 }
-                
+
               </div>
             </div>
           </div>

@@ -42,35 +42,28 @@ const notifyError = () => {
 
 const ProdEmail = ({OId, cID, cEmail, cPhone, pID, price, qty}) => {
 
-  console.log('OrderData', {OId, cID, cEmail, cPhone, pID, price, qty});
-  const [formData, setFromData] = useState({
-    Requirements: "",
-  });
+  const [formData, setFromData] = useState({'order_id' : OId, 'user_id' : cID, 'prodId' : pID, 'price': price, 'qty' : qty});
+
   const validation = (userInput) => {
     if (!isValidReason(userInput.Requirements)) {
       toast.error("Please enter a valid Reason.");
       return;
     }
   };
-  const ReturnOrderFormSubmit = async (e) => {
-    e.preventDefault();
-    const isValid = await validation(formData);
-    if (!isValid) return;
 
+
+  const ReturnOrderFormSubmit = async (e) => {
+    
+    e.preventDefault();
     try {
-      await axios.post("/api/BulkOrderForm", formData);
+      
+      await axios.post("/api/ReturnOrder", formData);
+      setFromData([]);
       notify();
     } catch (error) {
       console.error("Error:", error);
       notifyError();
     }
-
-    /* try {
-      const response = await axios.post("/api/bulkOrderEmail", formData);
-    } catch (error) {
-      console.error("Error:", error);
-      notifyError();
-    } */
   };
 
   const handleOnChange = (event) => {

@@ -12,13 +12,8 @@ import "../../../../envConfig.js";
 export async function GET(req, res) {
   try {
 
-    const { email, password, getProfile } = await request.json();
-    //console.log(email);
-    // Check if the email already exists in the database
-    // const existingUser = await query({
-    //   query: "SELECT * FROM customer WHERE email = ?",
-    //   values: [email],
-    // });
+    const { email, password, getProfile } = await req.json();
+    console.log('requestings111', req.json())
     if (existingUser.length > 0) {
       
     } else {
@@ -87,71 +82,6 @@ export async function PUT(request) {
         status: 500,
         message: error.message,
       })
-    );
-  }
-}
-
-export async function PATCH(request) {
-  try {
-    const { Id, newPassword, confirmPassword } = await request.json();
-
-    if (!newPassword || !confirmPassword) {
-      return new Response(
-        JSON.stringify({
-          status: 400,
-          message: "Missing required fields (newPassword, confirmPassword)",
-        }),
-        { status: 400 }
-      );
-    }
-
-    if (newPassword !== confirmPassword) {
-      return new Response(
-        JSON.stringify({ status: 400, message: "Passwords do not match" }),
-        { status: 400 }
-      );
-    }
-    // Validate required fields
-    if (!Id) {
-      return new Response(
-        JSON.stringify({
-          status: 401,
-          message: "Unauthorized",
-        }),
-        { status: 400 }
-      );
-    }
-    // Password validation (adjust requirements as needed)
-    const passwordValidationRegex = /^(?=.*\d)(?=.*[^\w\s]).{8,}$/;
-    // Minimum 8 characters, at least 1 digit, 1 lowercase letter, 1 uppercase letter, and 1 special character
-
-    if (!passwordValidationRegex.test(newPassword)) {
-      return new Response(
-        JSON.stringify({
-          status: 400,
-          message: "Password does not meet requirements",
-        }),
-        { status: 400 }
-      );
-    }
-    // Hash the new password using bcrypt
-    const hashedPassword = await bcrypt.hash(newPassword, 10); // Adjust cost factor as needed
-
-    // Update user password in the database
-    await query({
-      query: "UPDATE customer SET Password = ? WHERE customer_id = ?",
-      values: [hashedPassword, Id],
-    });
-
-    return new Response(
-      JSON.stringify({ status: 200, message: "Password updated successfully" }),
-      { status: 200 }
-    );
-  } catch (error) {
-    console.error("Error updating password:", error);
-    return new Response(
-      JSON.stringify({ status: 500, message: error.message }),
-      { status: 500 }
     );
   }
 }

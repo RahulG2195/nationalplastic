@@ -33,6 +33,62 @@ godaddy vps redhat linux cmd
 sudo dnf update -- system update
 cd /var/www -- deploy code here
 
+access port
+sudo firewall-cmd --permanent --zone=public --add-port=2224/tcp -- Add
+sudo firewall-cmd --reload -- reload
+sudo firewall-cmd --list-ports -- list of active port
+
+install nginx
+sudo dnf / yum install nginx
+
+create file for config (as redhat linux not provide default of nginx)
+sudo nano /etc/nginx/conf.d/your_domain.conf
+
+
+integrate below code 
+server {
+    listen 80;
+    server_name your_domain.com www.your_domain.com;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
+Replace your_domain.com with your actual domain name.
+
+Adjust Firewall Rules:
+Ensure that your firewall allows traffic on port 80. You can check and update firewall rules with the following commands:
+
+sudo firewall-cmd --permanent --add-service=http
+sudo firewall-cmd --reload
+
+Restart Nginx:
+Save the Nginx configuration file and restart Nginx to apply the changes
+
+sudo systemctl restart nginx
+
+
+Debugging:
+If you still see the default Nginx page, check Nginx's error log for any issues:
+
+sudo tail -f /var/log/nginx/error.log
+
+sudo systemctl stop nginx
+sudo dnf remove nginx
+
+# Optional: Remove Nginx configuration and log files
+sudo rm -rf /etc/nginx
+sudo rm -rf /var/log/nginx
+sudo rm -rf /var/cache/nginx
+
+# Verify uninstallation
+nginx -v
 
 
 
