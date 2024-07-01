@@ -41,7 +41,7 @@ export async function POST (req){
                 success:false,
                 message:e.message
             }),{
-                status:200
+                status:202
             }
         )
     }

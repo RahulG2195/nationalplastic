@@ -4,6 +4,7 @@ import wishlistReducer from "@/redux/reducer/wishlistSlice";
 import userSliceReducer from "@/redux/reducer/userSlice";
 import tempSliceReducer from "@/redux/reducer/tempSlice";
 import paySliceReducer from "./reducer/paySlice";
+import couponReducer from "@/redux/reducer/couponSlice";
 import { combineReducers } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // Use browser storage by default
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   userData: userSliceReducer,
   temp: tempSliceReducer,
   payment: paySliceReducer,
+  discount: couponReducer
 });
 
 const persistConfig = {

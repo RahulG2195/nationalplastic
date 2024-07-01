@@ -17,7 +17,7 @@ import { isLoggedIn } from "@/utils/validation";
 import { emptyTempSlice } from "@/redux/reducer/tempSlice";
 import { notify, notifyError } from "@/utils/notify";
 import { Button } from "reactstrap";
-
+import { applyDiscount } from "@/redux/reducer/couponSlice";
 function AddToCart() {
 
   const CartStates = useSelector((state) => state.cart);
@@ -347,15 +347,24 @@ function AddToCart() {
   const handleInputChange = (event) => {
     setCouponCode(event.target.value);
   };
+  const applyCouponCode = async (message) => {
+    console.log(message);
+    const discount_percentage = parseInt(message)
+    dispatch(applyDiscount({discountPercentage: discount_percentage, couponCode: couponCode}));
+  }
+
   const validateCouponCode = async (event) => {
     event.preventDefault();
     try{
       const response = await axios.post("api/couponValidation", { code:couponCode })
-      if(response.data.success) {
+      if(response.data.status === 200) {
+        await applyCouponCode(response?.data?.message);
         notify("Coupon code Applied!");
-      }
+      }else{
+      notifyError(response.data.message)}
     }catch(e){
-      notifyError(response.data.message)
+      notifyError("failed to validate coupon code")
+
     }
   }
   return (
