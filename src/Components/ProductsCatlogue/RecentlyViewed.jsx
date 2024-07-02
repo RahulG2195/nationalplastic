@@ -96,14 +96,37 @@ const RecentlyViewed = () => {
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const response = await axios.get("/api/Products");
-        const filteredproducts = response.data.limitProd;
-
-        setRecentlyViewedData(filteredproducts);
+        const searchedProducts = JSON.parse(localStorage.getItem('searchedProducts') || '[]');
+        
+        if (searchedProducts.length > 0) {
+          const response = await axios.put("/api/Search", { 
+            productNames: searchedProducts 
+          });
+          let products = response.data.products;
+  
+          if (products.length < 3) {
+            const additionalResponse = await axios.get("/api/Products");
+            const additionalProducts = additionalResponse.data.limitProd;
+            
+            const newProducts = additionalProducts.filter(product => 
+              !products.some(p => p.product_id === product.product_id)
+            );
+            products = [...products, ...newProducts];
+          }
+  
+          setRecentlyViewedData(products);
+        } else {
+          // If no searched products, use the original API
+          const response = await axios.get("/api/Products");
+          const filteredproducts = response.data.limitProd;
+          setRecentlyViewedData(filteredproducts);
+        }
       } catch (error) {
-        alert("Error fetching data", error);
+        console.error("Error fetching data", error);
+        // Optionally, set an error state here instead of using an alert
       }
     };
+    
     fetchdata();
   }, []);
 

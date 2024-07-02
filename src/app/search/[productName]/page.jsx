@@ -33,7 +33,7 @@ const Search = (props) => {
   const router = useParams();
   const id = router.productName;
   //   const { query } = router.query; // This will give you the value after '/'
-
+  console.log("---------",id);
   // console.log(router);
   // console.log(id);
 
@@ -61,7 +61,21 @@ const Search = (props) => {
     fetchData();
   }, [query]);
 
-  
+  const storeSearchedProduct = (productName) => {
+    if (typeof window !== 'undefined') {
+      // Get the existing searched products from localStorage
+      const existingSearches = JSON.parse(localStorage.getItem('searchedProducts') || '[]');
+      
+      // Add the new search to the beginning of the array
+      const updatedSearches = [productName, ...existingSearches.filter(item => item !== productName)];
+      
+      // Limit the array to a maximum of 10 items (or any other number you prefer)
+      const limitedSearches = updatedSearches.slice(0, 10);
+      
+      // Store the updated list back in localStorage
+      localStorage.setItem('searchedProducts', JSON.stringify(limitedSearches));
+    }
+  };
 
   
 
@@ -74,6 +88,7 @@ const Search = (props) => {
       setDiscounts([]);
       setLoading(true);
       setError(null);
+      storeSearchedProduct(id);
 
       if (query.trim() === "") {
         setLoading(false);
