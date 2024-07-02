@@ -60,3 +60,58 @@ export async function POST(request) {
     );
   }
 }
+
+
+export async function PUT(request) {
+  try {
+    const data = await request.json();
+    const { productNames } = data;
+
+    // Ensure productNames is an array
+    if (!Array.isArray(productNames) || productNames.length === 0) {
+      return new Response(
+        JSON.stringify({
+          status: 400,
+          message: "Invalid or empty productNames array",
+        }),
+        { status: 400 }
+      );
+    }
+
+    // Create placeholders for the SQL query
+    const placeholders = productNames.map(() => '?').join(',');
+
+    const products = await query({
+      query: `
+        SELECT p.product_id, p.product_name, p.seo_url, p.seo_url_clr, p.short_description,
+               p.category_id, p.image_name, p.price, p.discount_price, p.discount_percentage,
+               p.categoryType, p.duration, p.InstallationCharges, p.color, p.color_code,
+               p.armType, p.prod_status
+        FROM products p
+        WHERE p.product_name IN (${placeholders})
+          AND p.prod_status = 1
+        GROUP BY p.product_name
+      `,
+      values: productNames,
+    });
+
+    return new Response(
+      JSON.stringify({
+        status: 200,
+        products: products,
+      }),
+      { status: 200 }
+    );
+
+  } catch (error) {
+    console.error("Error fetching products:", error);
+
+    return new Response(
+      JSON.stringify({
+        status: 500,
+        message: error.message,
+      }),
+      { status: 500 }
+    );
+  }
+}

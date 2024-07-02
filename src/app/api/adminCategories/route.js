@@ -1,5 +1,4 @@
 import { query } from '@/lib/db';
-import nodemailer from "nodemailer";
 import { writeFile } from "fs/promises";
 import upload from "@/utils/multer.middleware";
 

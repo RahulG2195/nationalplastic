@@ -10,20 +10,20 @@ import { useRouter } from "next/navigation";
 
 const PriceDetailsCard = ({
   itemCount,
-  cartPrice,
   totalDiscount,
   totalPay,
-  InstallationCharges,
   redirect,
 }) => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const { customer_id, email } = useSelector((state) => state.userData);
+
+  const { discountPercentage , couponCode} = useSelector((state) => state.discount);
   const [Phone, setPhone] = useState(null);
   const [Name, setName] = useState(null);
   const [Address, setAddress] = useState(null);
-
   const isBrowser = typeof window !== "undefined";
-
+// User Data 
   useEffect(() => {
     const fetchUserData = async () => {
       const formData = {
@@ -40,9 +40,7 @@ const PriceDetailsCard = ({
 
     fetchUserData();
   }, []);
-
   const userState = useSelector((state) => state.userData.isLoggedIn);
-
   const [InstallationCharge, setInstallationCharge] = useState(40);
   const productCount = useSelector((state) => {
     let who;
@@ -54,7 +52,6 @@ const PriceDetailsCard = ({
     const cart = state[who] || {};
     return cart.products?.length || 0;
   });
-  const dispatch = useDispatch();
 
   const [count, setCount] = useState(productCount);
   useEffect(() => {
@@ -72,10 +69,7 @@ const PriceDetailsCard = ({
   const [discount, setdiscount] = useState(MRPvalue - priceFromState);
   const [totalPrice, setTotalPrice] = useState(priceFromState);
   const [MRPPrice, setMRPPrice] = useState(MRPvalue);
-  const [DiscountToPoint, setDiscountToPoint] = useState(
-    totalDiscount * itemCount
-  );
-
+  const [finalAmount, setFinalAmount] = useState(0);
   const [DiscountCard, setDiscountCard] = useState(0);
   const [productsData, setProductsData] = useState(null);
 
@@ -87,33 +81,37 @@ const PriceDetailsCard = ({
   };
   useEffect(() => {
     testing();
+    
     setTotalPrice(priceFromState.toFixed(2));
     setMRPPrice(MRPvalue.toFixed(2));
     setdiscount(Math.round((MRPvalue - priceFromState) * 100) / 100);
     const discount = Math.round((MRPvalue - priceFromState) * 100) / 100;
     setDiscountCard(discount > 0 ? discount.toFixed(2) : 0);
+    const calculateFinalAmount = () => {
+      if (count === 0) {
+        setFinalAmount("0.00");
+        return;
+      }
+
+      const baseAmount = parseFloat(totalPrice) + parseFloat(InstallationCharge);
+      const discountAmount = baseAmount * (discountPercentage / 100);
+      const finalTotal = baseAmount - discountAmount;
+      setFinalAmount(finalTotal.toFixed(2));
+    };
+
+    calculateFinalAmount();
   }, [priceFromState, MRPvalue, DiscountCard, totalDiscount]);
 
-  //! logic for getting products data as a array with qty, color , p_id and name from usercart
-  // const userCartData = await axios.post("/api/UserCart", {
-  //   customer_id: customer_id,
-  // });
-  // const productsData = userCartData.data.productps;
-  // dispatch(createOrderSuccess(orderData));
   const makePayment = async ({ productId = null }) => {
 
-    const totalPay = parseFloat(totalPrice) + parseFloat(InstallationCharge);
-    // console.log('totalPay', totalPay);
-    // console.log('totalPay', totalPay * 100);
+    const totalPay = finalAmount
     const response = await axios.post("/api/razorpay", {
       amount: totalPay * 100,
       currency: "INR",
-      // products: productsData,
       email: email,
       isBrowser: isBrowser,
     });
     const orderData = response;
-
     const options = {
       amount: orderData.data.message.amount,
       currency: orderData.data.message.currency,
@@ -124,9 +122,6 @@ const PriceDetailsCard = ({
       handler: async function (response) {
         const data = await fetch("/api/paymentVerify", {
           method: "POST",
-          // headers: {
-          //   // Authorization: 'YOUR_AUTH_HERE'
-          // },
           body: JSON.stringify({
             razorpay_payment_id: response.razorpay_payment_id,
             razorpay_order_id: response.razorpay_order_id,
@@ -153,7 +148,6 @@ const PriceDetailsCard = ({
         contact: Phone || null,
       },
     };
-
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
     paymentObject.on("payment.success", function (response) {
@@ -163,7 +157,6 @@ const PriceDetailsCard = ({
       alert("Payment failed. Please try again. Contact support for help");
     });
   };
-
   const sendPaymentSuccessMail = async (values) => {
     const paymentData = {
       id: values.id,
@@ -175,6 +168,7 @@ const PriceDetailsCard = ({
       order_id: values.order_id,
       currency: values.currency || "INR",
       amount: values.amount,
+      coupon_code: couponCode,
       status: values.status,
     };
     await axios.put("/api/RegisterEmail", paymentData);
@@ -187,6 +181,7 @@ const PriceDetailsCard = ({
       Phone: values.contact,
       order_address: Address,
       order_city: Address,
+      paymentData,
       order_pincode: Address,
       order_payment_type: values.method,
       payment_status: values.status,
@@ -208,23 +203,25 @@ const PriceDetailsCard = ({
         <div className="mt-4">
           <div className={`d-flex justify-content-between mt-1 fw-semibold`}>
             <div className="text-secondary">MRP</div>
-            <div> RS {MRPPrice ? MRPPrice : "0000.00"}</div>
+            <div> ₹ {MRPPrice ? MRPPrice : "0000.00"}</div>
           </div>
           <div
             className={`d-flex justify-content-between mt-1 fw-semibold text-success`}
           >
             <div className="text-secondary">Discount</div>
-            <div> RS {totalDiscount ? discount : "0000"}</div>
+            <div> - ₹ {totalDiscount ? discount.toFixed(2) : "0000"}</div>
           </div>
           <div
             className={`d-flex justify-content-between mt-1 fw-semibold text-success`}
           >
-            <div className="text-secondary">Coupon (htyxhs5)</div>
-            <div>RS 0000.00</div>
+            <div className="text-secondary">
+  Coupon ({couponCode ? couponCode : '(NONE'})
+</div>
+            <div>{discountPercentage}%</div>
           </div>
           <div className={`d-flex justify-content-between mt-1 fw-semibold`}>
             <div className="text-secondary ">Installation Charge</div>
-            <div>Rs {InstallationCharge ? InstallationCharge : "0000"}</div>
+            <div> ₹ {InstallationCharge ? InstallationCharge : "0000"}</div>
           </div>
           <div className="border-bottom border-secondary mt-2"></div>
         </div>
@@ -232,17 +229,12 @@ const PriceDetailsCard = ({
         <div className="d-flex justify-content-between mt-3">
           <div>Total Payable</div>
           <div className="fw-bold">
-            Rs{" "}
-            {totalPay
-              ? parseFloat(totalPrice) + parseFloat(InstallationCharge)
-              : "0000.00"
-              ? parseFloat(totalPrice) + parseFloat(InstallationCharge)
-              : "0000.00"}
+          ₹{totalPrice ? finalAmount : "0000.00"}
           </div>
         </div>
         <div className="small my-2 text-success text-center">
           Congratulations, you have just saved RS
-          {totalDiscount ? discount : "0000"} on your order
+          {totalDiscount ?(MRPPrice - finalAmount).toFixed(2) : "0000"} on your order
         </div>
         <div className="small text-center">EMI starts with Rs 10,000</div>
 
@@ -257,7 +249,6 @@ const PriceDetailsCard = ({
               </button>
             </Link>
           ) : (
-            // <Link href="/razorpay">
             <button
               type="submit"
               className="btn btn-danger px-md-5 placeOrderResp"
@@ -268,7 +259,6 @@ const PriceDetailsCard = ({
             >
               Place Order
             </button>
-            // </Link>
           )}
         </div>
       </div>
@@ -278,14 +268,3 @@ const PriceDetailsCard = ({
 
 export default PriceDetailsCard;
 
-// razorpay_order_id: "order_O1vVcUugpUouWV"
-// razorpay_payment_id"pay_O1vf4hyeCnkPNw"
-// razorpay_signature"3dd852f8211df76541b1a2dcafc2382676ed064f61fc50106795211d40ae5431"
-
-// VM4812 PriceDetailsCard.jsx:112 response verify==
-// {message: 'expectedSignature is not defined'}
-// message:"expectedSignature is not defined"
-
-// ! important
-// order_O56riulAYqkU6m;
-// order_O570oinlp2HVzt

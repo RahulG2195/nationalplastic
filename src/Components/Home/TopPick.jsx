@@ -40,6 +40,9 @@ export default function TopPick() {
       const response = await axios.get(
         "/api/Category"
       );
+      console.log("response", response);
+      console.log("response", JSON.stringify(response.data.topPick));
+
       const filteredData = response.data.topPick
 
       setHometoppics(filteredData);
