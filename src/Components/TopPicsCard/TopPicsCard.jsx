@@ -6,7 +6,7 @@ const TopPicsCard = (props) => {
   return (
     <div className="main">
       {props.ReDirect ? (
-        <div className="circularCard d-flex flex-column align-items-center position-relative">
+        <div className="circularCard d-flex flex-column align-items-center position-relative text-center">
           <div className="circularimg mb-3">
             <Image
               className="image"
@@ -39,7 +39,7 @@ const TopPicsCard = (props) => {
         </div>
       ) : (
         <Link href="/ProductDetail" id="nav-link">
-          <div className="circularCard d-flex flex-column align-items-center position-relative">
+          <div className="circularCard d-flex flex-column align-items-center position-relative text-center">
             <div className="circularimg mb-3">
               <Image
                 className="image"

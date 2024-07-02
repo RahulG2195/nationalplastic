@@ -456,17 +456,34 @@
 
   .prodHcard {
     width: 100%;
-    margin: 0 15px;
+    /* margin: 0 15px; */
   }
 
   .shop-room {
     display: flex;
   }
+  .houseConntentDiv h2 {
+    font-size: 25px;
+}
+.houseConntentDiv p {
+  font-size: 17px;
+}
+.knowmoresec {
+  padding: 25px 0;
+}
+.catalogue_sec .catalogueConntentDiv{
+  margin: 0 !important;
+}
+.catalogue_sec .catalogueConntentDiv .view_btn{
+  font-size: 15px !important;
+}
 }
 
 @media only screen and (max-width: 360px) {
 
-
+  .mobHeader{
+    font-size: 15px;
+  }
 
   .highlightCont {
     margin-top: auto;
@@ -495,4 +512,19 @@
   .highlightCont {
     margin-top: 5px;
   }
+  .houseConntentDiv h2 {
+    font-size: 25px;
+}
+.houseConntentDiv p {
+  font-size: 17px;
+}
+.knowmoresec {
+  padding: 25px 0;
+}
+.catalogue_sec .catalogueConntentDiv{
+  margin: 0 !important;
+}
+.catalogue_sec .catalogueConntentDiv .view_btn{
+  font-size: 15px !important;
+}
 }

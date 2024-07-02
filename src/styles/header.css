@@ -93,7 +93,7 @@ h6 {
 
     .carousel-inner {
        
-        margin-top: 70px;
+        margin-top: 6px;
     }
 
     .main_header {
@@ -136,8 +136,8 @@ h6 {
         box-shadow: none;
     }
     .navbar-brand img {
-        height: 50px !important;
-        width: 100px !important;
+        height: 40px !important;
+        width: 80px !important;
         object-fit: contain;
     }
     .navbar-brand {

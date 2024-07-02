@@ -73,7 +73,7 @@ export default function Header() {
         };
 
         const response = await axios.put("/api/Users", formData);
-        
+
         const userData = response.data.message[0];
         const { FirstName, LasttName } = userData;
         setFirstName(FirstName)
@@ -89,9 +89,9 @@ export default function Header() {
 
   useEffect(() => {
 
-    if (FirstName && LastName ) {
+    if (FirstName && LastName) {
       setInitialName(FirstName[0].toUpperCase() + LastName[0].toUpperCase());
-    } 
+    }
     else {
       setInitialName('N' + 'P');
     }
@@ -102,12 +102,12 @@ export default function Header() {
   useEffect(() => {
     // Check if the custom header is present
     const checkHeader = async () => {
-        const res = await fetch(router.asPath, { method: 'HEAD' });
-        const isAdmin = res.headers.get('x-admin-access') === 'true';
-        setHideLayout(isAdmin);
+      const res = await fetch(router.asPath, { method: 'HEAD' });
+      const isAdmin = res.headers.get('x-admin-access') === 'true';
+      setHideLayout(isAdmin);
     };
     checkHeader();
-}, [router]);
+  }, [router]);
 
   // useEffect(async () => {
   const handleSearchChange = async (e) => {
@@ -164,31 +164,31 @@ export default function Header() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const {width} = windowSize;
+  const { width } = windowSize;
 
   return (
     <div>
-    {!hideLayout ? 
-    <>
-      <div className="container-fluid  header menbg">
-        <TopBar />
-        <nav className="navbar navbar-expand-lg main_header px-3">
-          <div className="container-fluid ">
-            <div className="navbar-brand">
-              <button
-                onClick={handleShow}
-                id="navei"
-                className="navbar-toggler "
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="true"
-                aria-label="Toggle navigation"
-              >
-                <span className="navbar-toggler-icon" />
-              </button>
-              <Link href="/">
+      {!hideLayout ?
+        <>
+          <div className="container-fluid  header menbg">
+            <TopBar />
+            <nav className="navbar navbar-expand-lg main_header px-3">
+              <div className="container-fluid ">
+                <div className="navbar-brand">
+                  <button
+                    onClick={handleShow}
+                    id="navei"
+                    className="navbar-toggler "
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="true"
+                    aria-label="Toggle navigation"
+                  >
+                    <span className="navbar-toggler-icon" />
+                  </button>
+                  <Link href="/">
                 <Image
                   src="/Assets/images/nation_logo.png"
                   className="Image-fluid"
@@ -199,242 +199,242 @@ export default function Header() {
                   objectFit="contain"
                 />
               </Link>
-            </div>
-            <form onSubmit={handleSearchSubmit} className="d-flex nav-search">
-              <input
-                className="form-control text-center HeadSearch fw-semibold"
-                type="search"
-                placeholder="Search 5000+ products"
-                aria-label="Search"
-                value={searchTerm}
-                onChange={handleSearchChange}
-              />
-            </form>
+                </div>
+                <form onSubmit={handleSearchSubmit} className="d-flex nav-search">
+                  <input
+                    className="form-control text-center HeadSearch fw-semibold"
+                    type="search"
+                    placeholder="Search 5000+ products"
+                    aria-label="Search"
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                  />
+                </form>
 
-            <div
-              className={`${isClicked
-                ? " collapse navbar-collapse show menubg"
-                : "menuhide "
-                }`}
-              id="navbarSupportedContent"
-            >
-              <ul className="navbar-nav homeNav mb-2 mb-lg-0">
-                <li className="nav-item brdr">
-                  {/* <div className='border'></div> */}
-                  <Link
-                    className="nav-link"
-                    aria-current="page"
-                    href="/"
-                    onClick={isClicked ? handleShow : null}
-                  >
-                    Home
-                  </Link>
-                  {/* <div className='border'></div> */}
-                </li>
-                <li className="nav-item brdr">
-                  <Link
-                    className="nav-link"
-                    href="/About"
-                    onClick={isClicked ? handleShow : null}
-                  >
-                    About Us
-                  </Link>
-                </li>
-                {
-                  (width <= 991) ? <InvestorAccor handleShow={handleShow}/>
-                  :
-                  <li className={`nav-item brdr ${styles.navItem}`}
-                  onMouseEnter={() => setDropdown(true)}
-                  onMouseLeave={() => setDropdown(false)}
+                <div
+                  className={`${isClicked
+                    ? " collapse navbar-collapse show menubg"
+                    : "menuhide "
+                    }`}
+                  id="navbarSupportedContent"
                 >
-
-                  <Link
-                    className="nav-link multidropdown"
-                    href="#"
-                    onClick={isClicked ? handleShow : null}
-                  >
-                    Investors
-                  </Link>
-                  {dropdown && (
-                    <ul className={styles.dropdown}>
-                      <li
-                        className={styles.dropdownItem}
-                        onMouseEnter={() => setSubDropdown(true)}
-                        onMouseLeave={() => setSubDropdown(false)}
+                  <ul className="navbar-nav homeNav mb-2 mb-lg-0">
+                    <li className="nav-item brdr">
+                      {/* <div className='border'></div> */}
+                      <Link
+                        className="nav-link"
+                        aria-current="page"
+                        href="/"
+                        onClick={isClicked ? handleShow : null}
                       >
-                        <Link href="#">Financials</Link>
-                        {subDropdown && (
-                          <ul className={styles.subDropdown}>
-                            <li className={styles.subDropdownItem}>
-                              <Link href="/Unaudited" onClick={isClicked ? handleShow : null}>Unaudited Financial Results</Link>
-                            </li>
-                            <li className={styles.subDropdownItem}>
-                              <Link href="/Audited" onClick={isClicked ? handleShow : null}>Audited Financial Results</Link>
-                            </li>
-                            <li className={styles.subDropdownItem}>
-                              <Link href="/Annual" onClick={isClicked ? handleShow : null}>Annual Report</Link>
-                            </li>
-                            <li className={styles.subDropdownItem}>
-                              <Link href="AnnualReturn" onClick={isClicked ? handleShow : null}>Annual Return</Link>
-                            </li>
-
-                          </ul>
-                        )}
-                      </li>
-                      <li className={styles.dropdownItem}>
-                        <Link href="/ShareHolding" onClick={isClicked ? handleShow : null}>Shareholding Pattern</Link>
-                      </li>
-                      <li className={styles.dropdownItem}>
-                        <Link href="/Corporate" onClick={isClicked ? handleShow : null}>Corporate Governance</Link>
-                      </li>
-                      <li className={styles.dropdownItem}>
-                        <Link href="/InvestorContact" onClick={isClicked ? handleShow : null}>Investor Contact</Link>
-                      </li>
-                      <li
-                        className={styles.dropdownItem}
-                        onMouseEnter={() => setSubDropdown(true)}
-                        onMouseLeave={() => setSubDropdown(false)}
+                        Home
+                      </Link>
+                      {/* <div className='border'></div> */}
+                    </li>
+                    <li className="nav-item brdr">
+                      <Link
+                        className="nav-link"
+                        href="/About"
+                        onClick={isClicked ? handleShow : null}
                       >
-                        <a href="#">AGM Compliance </a>
-                        {subDropdown && (
-                          <ul className={styles.subDropdown}>
-                            <li className={styles.subDropdownItem}>
-                              <Link href="/OutcomeAGM" onClick={isClicked ? handleShow : null}>Outcome of AGM</Link>
-                            </li>
-                            <li className={styles.subDropdownItem}>
-                              <Link href="/Notice" onClick={isClicked ? handleShow : null}>Notices</Link>
-                            </li>
-                          </ul>
-                        )}
-                      </li>
-                      <li className={styles.dropdownItem}>
-                        <Link href="/TransferShare" onClick={isClicked ? handleShow : null}>Transfer Of Share Notice</Link>
-                      </li>
-                      <li className={styles.dropdownItem}>
-                        <Link href="/OutcomeMeet" onClick={isClicked ? handleShow : null}>Outcome Of Board Meeting</Link>
-                      </li>
-                      <li className={styles.dropdownItem}>
-                        <Link href="/Disclosure" onClick={isClicked ? handleShow : null}>Listing Disclosure</Link>
-                      </li>
-                      <li className={styles.dropdownItem}>
-                        <Link href="/Transaction" onClick={isClicked ? handleShow : null}>Related Party Transaction</Link>
-                      </li>
-                      <li
-                        className={styles.dropdownItem}
-                        onMouseEnter={() => setSubDropdown(true)}
-                        onMouseLeave={() => setSubDropdown(false)}
-                      >
-                        <a href="#" className="dropArrow">General Disclosure</a>
-                        {subDropdown && (
-                          <ul className={styles.subDropdown}>
-                            <li className={styles.subDropdownItem}>
-                              <Link href="/Twenty" onClick={isClicked ? handleShow : null}>2020</Link>
-                            </li>
-                            <li className={styles.subDropdownItem}>
-                              <Link href="/TwentyOne" onClick={isClicked ? handleShow : null}>2021</Link>
-                            </li>
-                            <li className={styles.subDropdownItem}>
-                              <Link href="/TwentyTwo" onClick={isClicked ? handleShow : null}>2022</Link>
-                            </li>
-                            <li className={styles.subDropdownItem}>
-                              <Link href="/TwentyThree" onClick={isClicked ? handleShow : null}>2023</Link>
-                            </li>
-                            <li className={styles.subDropdownItem}>
-                              <Link href="/TwentyFour" onClick={isClicked ? handleShow : null}>2024</Link>
-                            </li>
-                          </ul>
-                        )}
-                      </li>
-                      <li className={styles.dropdownItem}>
-                        <Link href="/InvestorKYC" onClick={isClicked ? handleShow : null}>Investor KYC</Link>
-                      </li>
-                      <li className={styles.dropdownItem}>
-                        <Link href="/IEPF" onClick={isClicked ? handleShow : null}>IEPF</Link>
-                      </li>
-                      <li className={styles.dropdownItem}>
-                        <Link href="/Advertisements" onClick={isClicked ? handleShow : null}>Advertisements</Link>
-                      </li>
-                    </ul>
-                  )}
-                  </li>
-                }
-                
-                <li className="nav-item brdr accr ">
-                  <ProductsAccr handleShow={handleShow} />
-                </li>
-                <li className="nav-item brdr">
-                  <Link
-                    className="nav-link"
-                    href="/NewsAndMedia"
-                    onClick={isClicked ? handleShow : null}
-                  >
-                    Media/News
-                  </Link>
-                </li>
-                <li className="nav-item brdr">
-                  <Link
-                    className="nav-link"
-                    href="/CSR"
-                    onClick={isClicked ? handleShow : null}
-                  >
-                    CSR
-                  </Link>
-                </li>
-                <li className="nav-item brdr">
-                  <Link
-                    className="nav-link bulk_ord px-4"
-                    href="/BulkOrder"
-                    onClick={isClicked ? handleShow : null}
-                  >
-                    Bulk Orders
-                  </Link>
-                </li>
-              </ul>
-            </div>
+                        About Us
+                      </Link>
+                    </li>
+                    {
+                      (width <= 991) ? <InvestorAccor handleShow={handleShow} />
+                        :
+                        <li className={`nav-item brdr ${styles.navItem}`}
+                          onMouseEnter={() => setDropdown(true)}
+                          onMouseLeave={() => setDropdown(false)}
+                        >
 
-            <div className="row">
-              <ul className=" d-flex side-icons">
-                <li className="nav-item brdr d-none d-md-none d-xl-block">
-                  <Link
-                    className="nav-link"
-                    href="/ContactUs"
-                    onClick={isClicked ? handleShow : null}
-                  >
-                    <Image
-                      height={100}
-                      width={100}
-                      layout="responsive"
-                      objectFit="contain"
-                      src="/Assets/svg/Path 2.svg"
-                      alt="location"
-                    />
-                  </Link>
-                </li>
-                <li className="nav-item brdr d-none d-md-none d-xl-block">
-                  <Link
-                    className="nav-link"
-                    href="/Wishlist"
-                    onClick={isClicked ? handleShow : null}
-                  >
-                    <Image
-                      height={100}
-                      width={100}
-                      layout="responsive"
-                      objectFit="contain"
-                      src="/Assets/svg/Path 3.svg"
-                      alt="location"
-                    />
-                  </Link>
-                </li>
-                <li className="nav-item brdr d-none d-md-none d-xl-block">
-                  {isLoggedIn ? (
-                    <Link
-                      className="nav-link position-relative profile"
-                      href="/ProfilePage"
-                      onClick={isClicked ? handleShow : null}
-                    >
-                    <span className="InitialName">{InitialName}</span>
-                      {/* <Image
+                          <Link
+                            className="nav-link multidropdown mobHeader"
+                            href="#"
+                            onClick={isClicked ? handleShow : null}
+                          >
+                            Investors
+                          </Link>
+                          {dropdown && (
+                            <ul className={styles.dropdown}>
+                              <li
+                                className={styles.dropdownItem}
+                                onMouseEnter={() => setSubDropdown(true)}
+                                onMouseLeave={() => setSubDropdown(false)}
+                              >
+                                <Link href="#">Financials</Link>
+                                {subDropdown && (
+                                  <ul className={styles.subDropdown}>
+                                    <li className={styles.subDropdownItem}>
+                                      <Link href="/Unaudited" onClick={isClicked ? handleShow : null}>Unaudited Financial Results</Link>
+                                    </li>
+                                    <li className={styles.subDropdownItem}>
+                                      <Link href="/Audited" onClick={isClicked ? handleShow : null}>Audited Financial Results</Link>
+                                    </li>
+                                    <li className={styles.subDropdownItem}>
+                                      <Link href="/Annual" onClick={isClicked ? handleShow : null}>Annual Report</Link>
+                                    </li>
+                                    <li className={styles.subDropdownItem}>
+                                      <Link href="AnnualReturn" onClick={isClicked ? handleShow : null}>Annual Return</Link>
+                                    </li>
+
+                                  </ul>
+                                )}
+                              </li>
+                              <li className={styles.dropdownItem}>
+                                <Link href="/ShareHolding" onClick={isClicked ? handleShow : null}>Shareholding Pattern</Link>
+                              </li>
+                              <li className={styles.dropdownItem}>
+                                <Link href="/Corporate" onClick={isClicked ? handleShow : null}>Corporate Governance</Link>
+                              </li>
+                              <li className={styles.dropdownItem}>
+                                <Link href="/InvestorContact" onClick={isClicked ? handleShow : null}>Investor Contact</Link>
+                              </li>
+                              <li
+                                className={styles.dropdownItem}
+                                onMouseEnter={() => setSubDropdown(true)}
+                                onMouseLeave={() => setSubDropdown(false)}
+                              >
+                                <a href="#">AGM Compliance </a>
+                                {subDropdown && (
+                                  <ul className={styles.subDropdown}>
+                                    <li className={styles.subDropdownItem}>
+                                      <Link href="/OutcomeAGM" onClick={isClicked ? handleShow : null}>Outcome of AGM</Link>
+                                    </li>
+                                    <li className={styles.subDropdownItem}>
+                                      <Link href="/Notice" onClick={isClicked ? handleShow : null}>Notices</Link>
+                                    </li>
+                                  </ul>
+                                )}
+                              </li>
+                              <li className={styles.dropdownItem}>
+                                <Link href="/TransferShare" onClick={isClicked ? handleShow : null}>Transfer Of Share Notice</Link>
+                              </li>
+                              <li className={styles.dropdownItem}>
+                                <Link href="/OutcomeMeet" onClick={isClicked ? handleShow : null}>Outcome Of Board Meeting</Link>
+                              </li>
+                              <li className={styles.dropdownItem}>
+                                <Link href="/Disclosure" onClick={isClicked ? handleShow : null}>Listing Disclosure</Link>
+                              </li>
+                              <li className={styles.dropdownItem}>
+                                <Link href="/Transaction" onClick={isClicked ? handleShow : null}>Related Party Transaction</Link>
+                              </li>
+                              <li
+                                className={styles.dropdownItem}
+                                onMouseEnter={() => setSubDropdown(true)}
+                                onMouseLeave={() => setSubDropdown(false)}
+                              >
+                                <a href="#" className="dropArrow">General Disclosure</a>
+                                {subDropdown && (
+                                  <ul className={styles.subDropdown}>
+                                    <li className={styles.subDropdownItem}>
+                                      <Link href="/Twenty" onClick={isClicked ? handleShow : null}>2020</Link>
+                                    </li>
+                                    <li className={styles.subDropdownItem}>
+                                      <Link href="/TwentyOne" onClick={isClicked ? handleShow : null}>2021</Link>
+                                    </li>
+                                    <li className={styles.subDropdownItem}>
+                                      <Link href="/TwentyTwo" onClick={isClicked ? handleShow : null}>2022</Link>
+                                    </li>
+                                    <li className={styles.subDropdownItem}>
+                                      <Link href="/TwentyThree" onClick={isClicked ? handleShow : null}>2023</Link>
+                                    </li>
+                                    <li className={styles.subDropdownItem}>
+                                      <Link href="/TwentyFour" onClick={isClicked ? handleShow : null}>2024</Link>
+                                    </li>
+                                  </ul>
+                                )}
+                              </li>
+                              <li className={styles.dropdownItem}>
+                                <Link href="/InvestorKYC" onClick={isClicked ? handleShow : null}>Investor KYC</Link>
+                              </li>
+                              <li className={styles.dropdownItem}>
+                                <Link href="/IEPF" onClick={isClicked ? handleShow : null}>IEPF</Link>
+                              </li>
+                              <li className={styles.dropdownItem}>
+                                <Link href="/Advertisements" onClick={isClicked ? handleShow : null}>Advertisements</Link>
+                              </li>
+                            </ul>
+                          )}
+                        </li>
+                    }
+
+                    <li className="nav-item brdr accr ">
+                      <ProductsAccr handleShow={handleShow} />
+                    </li>
+                    <li className="nav-item brdr">
+                      <Link
+                        className="nav-link"
+                        href="/NewsAndMedia"
+                        onClick={isClicked ? handleShow : null}
+                      >
+                        Media/News
+                      </Link>
+                    </li>
+                    <li className="nav-item brdr">
+                      <Link
+                        className="nav-link"
+                        href="/CSR"
+                        onClick={isClicked ? handleShow : null}
+                      >
+                        CSR
+                      </Link>
+                    </li>
+                    <li className="nav-item brdr">
+                      <Link
+                        className="nav-link bulk_ord px-4"
+                        href="/BulkOrder"
+                        onClick={isClicked ? handleShow : null}
+                      >
+                        Bulk Orders
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="row">
+                  <ul className=" d-flex side-icons">
+                    <li className="nav-item brdr d-none d-md-none d-xl-block">
+                      <Link
+                        className="nav-link"
+                        href="/ContactUs"
+                        onClick={isClicked ? handleShow : null}
+                      >
+                        <Image
+                          height={100}
+                          width={100}
+                          layout="responsive"
+                          objectFit="contain"
+                          src="/Assets/svg/Path 2.svg"
+                          alt="location"
+                        />
+                      </Link>
+                    </li>
+                    <li className="nav-item brdr d-none d-md-none d-xl-block">
+                      <Link
+                        className="nav-link"
+                        href="/Wishlist"
+                        onClick={isClicked ? handleShow : null}
+                      >
+                        <Image
+                          height={100}
+                          width={100}
+                          layout="responsive"
+                          objectFit="contain"
+                          src="/Assets/svg/Path 3.svg"
+                          alt="location"
+                        />
+                      </Link>
+                    </li>
+                    <li className="nav-item brdr d-none d-md-none d-xl-block">
+                      {isLoggedIn ? (
+                        <Link
+                          className="nav-link position-relative profile"
+                          href="/ProfilePage"
+                          onClick={isClicked ? handleShow : null}
+                        >
+                          <span className="InitialName">{InitialName}</span>
+                          {/* <Image
                         height={100}
                         width={100}
                         layout="responsive"
@@ -443,78 +443,91 @@ export default function Header() {
                         alt="location"
                       />
                       <p className="Homeemail">{userEmail}</p> */}
-                    </Link>
-                  ) : (
-                    <Link
-                      className="nav-link"
-                      href="/Login"
-                      onClick={isClicked ? handleShow : null}
-                    >
-                      <Image
-                        height={100}
-                        width={100}
-                        layout="responsive"
-                        objectFit="contain"
-                        src="/Assets/svg/Group 4.svg"
-                        alt="group"
-                      />
-                    </Link>
-                  )}
-                </li>
-                <li className="nav-item brdr d-none d-md-block d-xl-block">
-                  <Link
-                    className="nav-link AddToCartNav-link  position-relative"
-                    href="/AddToCart"
-                    onClick={isClicked ? handleShow : null}
-                  >
-                    <Image
-                      height={100}
-                      width={100}
-                      layout="responsive"
-                      objectFit="contain"
-                      src="/Assets/svg/Group 5.svg"
-                      alt="counter"
-                    />
-                    <div className="cartCount text-center medium">{count}</div>
-                  </Link>
-                </li>
-              </ul>
-            </div>
+                        </Link>
+                      ) : (
+                        <Link
+                          className="nav-link"
+                          href="/Login"
+                          onClick={isClicked ? handleShow : null}
+                        >
+                          <Image
+                            height={100}
+                            width={100}
+                            layout="responsive"
+                            objectFit="contain"
+                            src="/Assets/svg/Group 4.svg"
+                            alt="group"
+                          />
+                        </Link>
+                      )}
+                    </li>
+                    <li className="nav-item brdr d-none d-md-block d-xl-block">
+                      <Link
+                        className="nav-link AddToCartNav-link  position-relative"
+                        href="/AddToCart"
+                        onClick={isClicked ? handleShow : null}
+                      >
+                        <Image
+                          height={100}
+                          width={100}
+                          layout="responsive"
+                          objectFit="contain"
+                          src="/Assets/svg/Group 5.svg"
+                          alt="counter"
+                        />
+                        <div className="cartCount text-center medium">{count}</div>
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
 
-            {/* footer menu */}
-            <div className="lower-mobile-menu">
-              <ul className="list-unstyled">
-                <li>
-                  <Link href="/#">
-                    <Image
-                      src="Assets/images/home-icon-silhouette_69524.svg"
-                      height={50}
-                      width={50}
-                      layout="responsive"
-                      objectFit="contain"
-                      alt="Home"
-                      className="footer-icon"
-                    />
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/Wishlist">
-                    <Image
-                      src="/Assets/svg/Path 3.svg"
-                      height={50}
-                      width={50}
-                      layout="responsive"
-                      objectFit="contain"
-                      alt="Wishlist"
-                      className="footer-icon"
-                    />
-                  </Link>
-                </li>
-                <li>
-                  {isLoggedIn ? (
-                    <Link href="/ProfilePage">
-                      <span className="InitialName">{InitialName}</span>
-                      {/* <Image
+                {/* footer menu */}
+                <div className="lower-mobile-menu">
+                  <ul className="list-unstyled">
+                    <li>
+                      <Link href="/#">
+                        <Image
+                          src="Assets/images/home-icon-silhouette_69524.svg"
+                          height={50}
+                          width={50}
+                          layout="responsive"
+                          objectFit="contain"
+                          alt="Home"
+                          className="footer-icon"
+                        />
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/Wishlist">
+                        <Image
+                          src="/Assets/svg/Path 3.svg"
+                          height={50}
+                          width={50}
+                          layout="responsive"
+                          objectFit="contain"
+                          alt="Wishlist"
+                          className="footer-icon"
+                        />
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/">
+                        <Image
+                          src="/Assets/images/nation_logo.png"
+                          className="Image-fluid"
+                          alt="Landscape picture"
+                          height={34}
+                          width={52}
+                          // layout="responsive"
+                          // objectFit="contain"
+                        />
+                      </Link>
+                    </li>
+                    <li>
+                      {isLoggedIn ? (
+                        <Link href="/ProfilePage">
+                          <span className="InitialName">{InitialName}</span>
+                          {/* <Image
                         src="/Assets/svg/Group 4.svg"
                         height={50}
                         width={50}
@@ -524,43 +537,43 @@ export default function Header() {
                         className="footer-icon"
                       />
                       <p className="Homeemail">{userEmail}</p> */}
-                    </Link>
-                  ) : (
-                    <Link href="/Login">
-                      <Image
-                        src="/Assets/svg/Group 4.svg"
-                        height={50}
-                        width={50}
-                        layout="responsive"
-                        objectFit="contain"
-                        alt="Profile"
-                        className="footer-icon"
-                      />
-                    </Link>
-                  )}
-                </li>
-                <li>
-                  <Link href="/AddToCart">
-                    <Image
-                      src="/Assets/svg/Group 5.svg"
-                      height={50}
-                      width={50}
-                      layout="responsive"
-                      objectFit="contain"
-                      alt="Cart"
-                      className="footer-icon"
-                    />
-                    <div className="cartCount text-center medium">{count}</div>
-                  </Link>
-                </li>
-              </ul>
-            </div>
+                        </Link>
+                      ) : (
+                        <Link href="/Login">
+                          <Image
+                            src="/Assets/svg/Group 4.svg"
+                            height={50}
+                            width={50}
+                            layout="responsive"
+                            objectFit="contain"
+                            alt="Profile"
+                            className="footer-icon"
+                          />
+                        </Link>
+                      )}
+                    </li>
+                    <li>
+                      <Link href="/AddToCart">
+                        <Image
+                          src="/Assets/svg/Group 5.svg"
+                          height={50}
+                          width={50}
+                          layout="responsive"
+                          objectFit="contain"
+                          alt="Cart"
+                          className="footer-icon"
+                        />
+                        <div className="cartCount text-center medium">{count}</div>
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+            <BottomBar />
           </div>
-        </nav>
-        <BottomBar />
-      </div>
-    </>
-    : null}
+        </>
+        : null}
     </div>
   );
 }

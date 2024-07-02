@@ -29,19 +29,19 @@ function Login() {
     email: "",
     password: "",
   });
-  const [refresh ,SetRefresh] = useState(false);
-    useEffect(() => {
+  const [refresh, SetRefresh] = useState(false);
+  useEffect(() => {
     if (session) {
       // Send session data to your backend
       axios.post('/api/googleProvider', session.user)
         .then(response => {
           console.log('Response from API:', response.data);
           console.log(response.body);
-          console.log('Response from API:', );
+          console.log('Response from API:',);
           const email = response.data.email
           const customer_id = response.data.customer_id
 
-          
+
           if (status === "authenticated" && session?.user) {
             notify("Successfull login!")
             dispatch(
@@ -56,9 +56,9 @@ function Login() {
         .catch(error => {
           console.log('Error sending data to API:', error);
         });
-        //  hasSentRequest.current = true; 
+      //  hasSentRequest.current = true; 
     }
-  }, [session,refresh]);
+  }, [session, refresh]);
 
 
   const handleInputChange = (event) => {
@@ -277,25 +277,26 @@ function Login() {
               <div className="row ContinueWithgoogle">
                 <p className="d-flex justify-content-center">
                   OR Continue With
-                  <Image
+                  {/* <Image
                     src="/Assets/images/search.png"
                     width={20}
                     height={20}
                     alt="google"
                     className="mx-2"
+                  /> */}
+                  {/* <button
+                    className="btn btn-light mt-3"
+                    onClick={() => sendDataToBackend()}
+                  > */}
+                    <Image
+                    src="/Assets/images/search.png"
+                    width={20}
+                    height={20}
+                    alt="google"
+                    className="mx-2"
+                    onClick={() => sendDataToBackend()}
                   />
-                  <button
-  className="btn btn-danger mt-3"
-  onClick={() => sendDataToBackend()}
->
-  <img
-    src="/Assets/images/facebook.png"
-    alt="google"
-    width={20}
-    height={20}
-  />
-  <i className="fa fa-google"></i> Sign in with Google
-</button>
+                  {/* </button> */}
                 </p>
               </div>
             </form>

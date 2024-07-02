@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 24, 2024 at 05:35 AM
+-- Generation Time: Jul 02, 2024 at 05:07 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -21,66 +21,32 @@ SET time_zone = "+00:00";
 -- Database: `np`
 --
 
--- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Table structure for table `coupons`
 --
 
-CREATE TABLE `categories` (
-  `category_id` int(11) NOT NULL,
-  `category_name` varchar(255) NOT NULL,
-  `image_name` varchar(255) NOT NULL,
-  `navshow` int(11) NOT NULL DEFAULT 0,
-  `status` int(11) NOT NULL DEFAULT 1,
-  `created_on` timestamp NOT NULL DEFAULT current_timestamp(),
-  `topPick` int(2) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `coupons` (
+  `id` int(11) NOT NULL,
+  `code` varchar(20) NOT NULL,
+  `discount_value` decimal(10,2) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `is_active` tinyint(1) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `categories`
+-- Dumping data for table `coupons`
 --
 
-INSERT INTO `categories` (`category_id`, `category_name`, `image_name`, `navshow`, `status`, `created_on`, `topPick`) VALUES
-(1, 'Karnival Chair', 'Karnival-Chair.jpg-2/Karnival-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36', 0),
-(2, 'Atlantis Chair', 'Atlantis-Chair.jpg-2/Atlantis-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36', 0),
-(3, 'Karen Chair', 'Karen-Chair.jpg-2/Karen-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36', 0),
-(4, 'Orca Chair', 'Orca-Chair 2/Orca-Chair 2.png', 0, 1, '2024-02-15 06:19:36', 0),
-(5, 'Magna Chair', 'Magna-Chair.jpg-2/Magna-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36', 0),
-(6, 'Saab Chair', 'Saab-Chair.jpg-2/Saab-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36', 0),
-(7, 'Leisure Chair', 'Leisure-Chair.jpg-2/Leisure-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36', 0),
-(8, 'Merc Sofa Chair', 'Merc-Sofa-Chair.jpg-2/Merc-Sofa-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36', 0),
-(9, 'Omega Chair', 'Omega-Chair.jpg-2/Omega-Chair.jpg-2.png', 0, 1, '2024-02-15 06:19:36', 0),
-(10, 'Storm Chair', 'Storm-Chair/Storm-Chair.png', 0, 1, '2024-02-15 06:19:36', 0),
-(11, 'Solace Chair', 'Solace-chair/Solace-chair.png', 0, 1, '2024-02-15 06:19:36', 0),
-(12, 'Ghost Chair', 'Ghost-Chair/Ghost-Chair.png', 0, 1, '2024-02-15 06:19:36', 0),
-(13, 'Premium Event Chair', '1st-section-Table-set.png', 1, 1, '2024-03-20 04:39:27', 1),
-(14, 'Without Arm Tent', 'Alto Chair-ICOFFEE-(45)-Lifestyle.webp', 1, 1, '2024-03-20 04:39:27', 0),
-(15, 'Premium Chair', '1st-section-Premium-Chairs.png', 1, 1, '2024-03-20 04:39:27', 0),
-(16, 'Popular Chair', 'Agra chairs-Mangowood-(45) Lifestyle.webp', 1, 1, '2024-03-20 04:39:27', 0),
-(17, 'Cabinet', 'Planet Power Big (45)-blue & grey- white bg.webp', 1, 1, '2024-03-20 04:39:27', 0),
-(18, 'Baby Chair', 'Dolphin Chair Banner.png', 1, 1, '2024-03-20 04:39:27', 0),
-(19, 'Stool', 'placeholder_image_url', 0, 1, '2024-03-20 04:39:27', 0),
-(20, 'Table', 'placeholder_image_url', 0, 1, '2024-03-20 04:39:27', 0),
-(21, 'Box', 'Tote Box 15 Ltrs With-Wheels-Natural-white bg.webp', 1, 1, '2024-03-20 04:39:27', 0),
-(22, 'Drawer', 'Drawer 3 Tier 130-Pink & voilet-(45)-white bg.webp', 1, 1, '2024-03-20 04:39:27', 0),
-(24, 'Seatings', 'Chair.png', 0, 1, '2024-03-21 23:33:37', 1),
-(25, 'Tables', 'Tables.png', 1, 1, '2024-03-21 23:33:37', 0),
-(26, 'Storage', 'Storage.png', 0, 1, '2024-03-21 23:33:37', 0),
-(27, 'Sets', 'Table-Set.png', 0, 1, '2024-03-21 23:33:37', 0),
-(28, 'Stools', 'Stools.png', 1, 1, '2024-03-21 23:33:37', 0),
-(29, 'Baby chairs', 'Kids-Chair.png', 0, 1, '2024-03-21 23:33:37', 0),
-(30, 'Living Room', 'Living-Room.png', 0, 1, '2024-03-22 03:06:28', 0),
-(31, 'Dining Room', 'Dining-Room.png', 0, 1, '2024-03-22 03:06:28', 0),
-(32, 'Bedroom', 'Bedroom.png', 0, 1, '2024-03-22 03:06:28', 0),
-(33, 'Balcony', 'Balcony-Room.png', 0, 1, '2024-03-22 03:06:28', 0),
-(34, 'Baby Room', 'Kids-room.png', 0, 1, '2024-03-22 03:06:28', 0),
-(35, 'Store Room', 'Store-room.png', 0, 1, '2024-03-22 03:06:28', 0),
-(36, 'Shoe Rack', '', 0, 1, '2024-04-30 03:40:56', 0),
-(37, 'Shell', '', 0, 1, '2024-04-30 03:45:31', 0),
-(38, 'Utility', '', 0, 1, '2024-04-30 04:02:48', 0),
-(39, 'Planters', '', 0, 1, '2024-04-30 04:06:06', 0),
-(47, 'updatedCode', 'Screenshot (8).png', 0, 0, '2024-06-21 09:58:47', 0);
+INSERT INTO `coupons` (`id`, `code`, `discount_value`, `start_date`, `end_date`, `is_active`) VALUES
+(1, 'Code@10', 10.00, '2024-06-30', '2024-07-30', 1),
+(2, 'SAVE@10', 10.00, '2024-06-30', '2024-07-30', 1),
+(3, 'SAVE@15', 15.00, '2024-06-30', '2024-07-30', 1),
+(4, 'SAVE@20', 20.00, '2024-06-30', '2024-07-30', 1),
+(9, 'Coder+33', 33.00, '2024-06-25', '2024-06-30', 1),
+(10, 'Teste!22', 22.00, '2024-05-28', '2024-06-13', 0),
+(14, 'Testew!22', 22.00, '2024-06-25', '2024-06-26', 1);
 
 -- --------------------------------------------------------
 
@@ -118,7 +84,8 @@ INSERT INTO `customer` (`customer_id`, `FirstName`, `LasttName`, `Email`, `Phone
 (10, 'Rahul', 'Gupta', 'Rahul@gmail.com', '9518595869', 'opal squal, near midc', NULL, '$2a$12$stylQAy6xgMiNa7Srq8H3.L1WPzb6DOHMHz2qc0gnx5bb/L3L2Zdu', NULL, 'user'),
 (11, 'Austin', 'Martin', 'password@gmail.com', '0987123333', 'F1', NULL, '$2a$12$dLG/7XSCdP9BoMQYkFu3hOy/lzSx8jmd1Qizfm7PqCIhDLItQ/5Qm', NULL, 'user'),
 (12, 'Dinesh', 'Nadar', 'password2@gmail.com', '8291617522', 'Home', NULL, '$2a$12$j3/0yJt8YdHDLYbnVXpOe.pSpNQE6CK9uqHfHBc/h/et77UVBfsVm', NULL, 'admin'),
-(17, 'Dinesh', 'Nadar', 'dineshndr02@gmail.com', '1234567890', 'Cloud', NULL, '$2a$12$IgztBH9cwbxIWWIIfyfw1OCrdKViC0XDj/PLr.S7pKAI7.HhSmoum', NULL, 'admin');
+(17, 'Dinesh', 'Nadar', 'dineshndr02@gmail.com', '1234567890', 'Cloud', NULL, '$2a$12$IgztBH9cwbxIWWIIfyfw1OCrdKViC0XDj/PLr.S7pKAI7.HhSmoum', 2147483647, 'admin'),
+(19, 'Dinesh Nadar', '', 'dinesh.crezvatic@gmail.com', '', '', NULL, '', 2147483647, 'user');
 
 -- --------------------------------------------------------
 
@@ -156,7 +123,8 @@ CREATE TABLE `mycart` (
 
 INSERT INTO `mycart` (`cart_id`, `product_id`, `user_id`, `quantity`, `color`) VALUES
 (1, 21, 7, 1, 'Gold'),
-(2, 26, 7, 1, 'Gold');
+(2, 26, 7, 1, 'Gold'),
+(74, 11, 17, 1, 'BLACK');
 
 -- --------------------------------------------------------
 
@@ -212,16 +180,17 @@ CREATE TABLE `order_list` (
   `payment_status` varchar(255) DEFAULT NULL,
   `razor_payment_id` varchar(255) DEFAULT NULL,
   `order_status_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `added_on` timestamp NOT NULL DEFAULT current_timestamp()
+  `added_on` timestamp NOT NULL DEFAULT current_timestamp(),
+  `coupon_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `order_list`
 --
 
-INSERT INTO `order_list` (`order_id`, `razorpay_order_id`, `customer_id`, `customer_email`, `Phone`, `order_address`, `order_pincode`, `order_city`, `order_amount`, `order_status`, `order_payment_type`, `payment_status`, `razor_payment_id`, `order_status_date`, `added_on`) VALUES
-(1, 'order_OM82LQxGWgY0Xv', '10', 'rahul@gmail.com', '+919518595869', 'opal squal, near midc', 'opal squal, near midc', 'opal squal, near midc', 176600.00, 1, 'wallet', 'captured', 'pay_OM82TF1h1iGb0v', '2024-06-13 07:05:16', '2024-06-13 07:05:16'),
-(2, 'order_OMEMXmHEy3Vets', '10', 'rahul@gmail.com', '+919518595869', 'opal squal, near midc', 'opal squal, near midc', 'opal squal, near midc', 1021800.00, 1, 'paylater', 'captured', 'pay_OMEMhc70dw9aq0', '2024-06-13 11:36:00', '2024-06-13 11:36:00');
+INSERT INTO `order_list` (`order_id`, `razorpay_order_id`, `customer_id`, `customer_email`, `Phone`, `order_address`, `order_pincode`, `order_city`, `order_amount`, `order_status`, `order_payment_type`, `payment_status`, `razor_payment_id`, `order_status_date`, `added_on`, `coupon_id`) VALUES
+(1, 'order_OM82LQxGWgY0Xv', '10', 'rahul@gmail.com', '+919518595869', 'opal squal, near midc', 'opal squal, near midc', 'opal squal, near midc', 176600.00, 1, 'wallet', 'captured', 'pay_OM82TF1h1iGb0v', '2024-06-13 07:05:16', '2024-06-13 07:05:16', NULL),
+(2, 'order_OMEMXmHEy3Vets', '10', 'rahul@gmail.com', '+919518595869', 'opal squal, near midc', 'opal squal, near midc', 'opal squal, near midc', 1021800.00, 1, 'paylater', 'captured', 'pay_OMEMhc70dw9aq0', '2024-06-13 11:36:00', '2024-06-13 11:36:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -708,7 +677,9 @@ INSERT INTO `products` (`product_id`, `product_name`, `product_name2`, `meta_tit
 (420, 'Yoyo Rocker', 'Yoyo Rocker', '', '', '', '', '', 'yoyo-rocker', 'yoyo-rocker-RED-YELLOW', 18, 'Yoyo rocker-Red & Yellow-(45)-white bg.webp,   Yoyo rocker-Red & Yellow-(front)-white bg.webp', '429.735', '516', '20', '', '', '40', 'RED / YELLOW', '#D61725, #FFFF00', 'with arm tent', 1, '2024-06-14 05:22:15'),
 (421, 'ZEST', 'ZEST', '', '', '', '', '', 'ZEST-Mat-Brown', 'ZEST-Mat-Brown', 16, 'default_chair_img.webp', '598', '717', '20', '', '', '40', 'Mat Brown', '#563921', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (422, 'ZEST', 'ZEST', '', '', '', '', '', 'ZEST-MBG', 'ZEST-MBG', 16, 'Zest-chair-MBG-(45)-white bg.webp, Zest-chair-MBG-(back)-white bg.webp, Zest-chair-MBG-(front)-white bg.webp, Zest-chair-MBG-(side)-white bg.webp', '598', '717', '20', '', '', '40', 'MBG', '#F4E5D2', 'without arm tent', 1, '2024-06-14 05:22:15'),
-(423, 'Elegant Sofa', '', '', '', '', '', '', 'elegant-sofa', NULL, 3, 'elegant_sofa.png', '1200', '1000', '', '', '', '', 'Blue', '#0000ff', 'Curved', 0, '2024-06-21 11:00:36');
+(423, 'Elegant Sofa', '', '', '', '', '', '', 'elegant-sofa', NULL, 3, 'elegant_sofa.png', '1200', '1000', '', '', '', '', 'Blue', '#0000ff', 'Curved', 0, '2024-06-21 11:00:36'),
+(429, 'OPo', '', '', '', '', '', '', 'Earum omnis qui magn', NULL, 27, ',,', '225', '737', '', '', '', '', 'blue', '#0000ff', 'Harum suscipit eiusm', 0, '2024-06-24 06:08:42'),
+(430, 'Monna', '', '', '', '', '', '', 'Aliqua Aperiam ut q', NULL, 27, ',,', '55', '543', '', '', '', '', 'red', '#ff0000', 'Aut molestiae quibus', 0, '2024-06-24 09:37:03');
 
 -- --------------------------------------------------------
 
@@ -1264,6 +1235,13 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`);
 
 --
+-- Indexes for table `coupons`
+--
+ALTER TABLE `coupons`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `code` (`code`);
+
+--
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
@@ -1291,7 +1269,8 @@ ALTER TABLE `order_detail`
 -- Indexes for table `order_list`
 --
 ALTER TABLE `order_list`
-  ADD PRIMARY KEY (`order_id`);
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `fk_coupon` (`coupon_id`);
 
 --
 -- Indexes for table `order_status`
@@ -1340,10 +1319,16 @@ ALTER TABLE `categories`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
+-- AUTO_INCREMENT for table `coupons`
+--
+ALTER TABLE `coupons`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `customer_detail`
@@ -1355,7 +1340,7 @@ ALTER TABLE `customer_detail`
 -- AUTO_INCREMENT for table `mycart`
 --
 ALTER TABLE `mycart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `order_detail`
@@ -1379,7 +1364,7 @@ ALTER TABLE `order_status`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=424;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=431;
 
 --
 -- AUTO_INCREMENT for table `product_detail`
@@ -1404,6 +1389,16 @@ ALTER TABLE `users`
 --
 ALTER TABLE `wishlist`
   MODIFY `WishlistId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `order_list`
+--
+ALTER TABLE `order_list`
+  ADD CONSTRAINT `fk_coupon` FOREIGN KEY (`coupon_id`) REFERENCES `coupons` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

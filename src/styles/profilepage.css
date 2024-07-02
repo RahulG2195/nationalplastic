@@ -257,6 +257,9 @@
     .Login-Page-ImgForm {
         margin: 25px 20px;
     }
+    .form-btn-login{
+        font-size: 16px;
+    }
 }
 
 @media only screen and (min-width: 481px) and (max-width: 600px) {
@@ -264,6 +267,9 @@
         margin: 60px 0;
         border: none;
         
+    }
+    .loginForm p{
+        font-size: 13px;
     }
     .login-image {
         padding: 17px 82px;
@@ -273,6 +279,9 @@
     }
     .login-image img {
         border-radius: 50%;
+    }
+    .form-btn-login{
+        font-size: 16px;
     }
 }
 
@@ -289,6 +298,12 @@
     .login-image img {
         border-radius: 50%;
     }
+    .loginForm p{
+        font-size: 13px;
+    }
+    .form-btn-login{
+        font-size: 16px;
+    }
 }
 
 @media only screen and (max-width: 360px) {
@@ -296,12 +311,21 @@
         margin: 60px 0;
         border: none;
     }
+
     .login-image {
         padding: 17px 82px;
         height: auto;
         display: none;
     }
+
     .login-image img {
         border-radius: 50%;
+    }
+    
+    .loginForm p{
+        font-size: 13px;
+    }
+    .form-btn-login{
+        font-size: 16px;
     }
 }

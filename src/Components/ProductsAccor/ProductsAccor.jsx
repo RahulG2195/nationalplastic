@@ -91,7 +91,7 @@ const ProductsAccr = ({ handleShow }) => {
         >
           <Typography className="m-0 ">
             <li className="">
-              <p className="medium fw-bold ">Products</p>
+              <p className=" fw-bold mobHeader">Products</p>
             </li>
           </Typography>
         </AccordionSummary>

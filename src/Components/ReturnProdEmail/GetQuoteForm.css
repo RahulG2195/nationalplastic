@@ -72,6 +72,7 @@
     .GQFormSubmitRes button {
         padding: 5px 10px !important;
         font-size: small;
+        z-index: 1;
     }
     .sbmtButton {
         position: absolute;
