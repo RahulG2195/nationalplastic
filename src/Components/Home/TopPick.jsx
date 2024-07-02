@@ -56,7 +56,7 @@ export default function TopPick() {
     <section className="top_pick_sec common_section">
       <div className="container">
         <div className="row">
-          <div className="text-center mb-5 ">
+          <div className="text-center mb-md-5 mb-2">
             <div className="fs-1 fw-bold text-danger">
               Top Picks <span className="darkBlue fw-normal">For You</span>{" "}
             </div>

@@ -4,7 +4,7 @@ import Image from "next/image";
 function Infrastructure() {
   return (
     <div className="container py-5">
-      <div className="text-center mb-5 py-5">
+      <div className="text-center mb-md-5 py-md-5 py-2">
         <div className="fs-1 darkBlue fw-normal">
           Infra<span className="fs-1 fw-bold text-danger">structure</span>{" "}
         </div>

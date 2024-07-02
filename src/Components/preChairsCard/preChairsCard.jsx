@@ -51,9 +51,9 @@ const PreChairsCard = (props) => {
             <Link href={`/ProductDetail/${props.id}`} className="">
               <h5 className="dress-name">{props.Title}</h5>
             </Link>
-            <div className="d-flex flex-column mb-2">
+            <div className="d-md-flex flex-column mb-2">
 
-              <span className="new-price">₹{props.Price}</span>
+              <span className="new-price pr-2 pr-md-0">₹{props.Price}</span>
               <small className="old-price text-right"><del>₹{props.orignalPrice}</del></small>
             </div>
           </div>

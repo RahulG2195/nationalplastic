@@ -114,14 +114,14 @@ function About() {
         </div>
         <div className="row team-members">
           {imgarr.map((val) => (
-            <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6" key={val.key}>
+            <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6" key={val.key}>
               <Team image={val.image} name={val.name} disignation={val.desig} />
             </div>
           ))}
         </div>
         <div className="row team-members">
         {imgarr.map((val) => (
-            <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6" key={val.key}>
+            <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6" key={val.key}>
               <Team image={val.image} name={val.name} disignation={val.desig} />
             </div>
           ))}
@@ -133,14 +133,14 @@ function About() {
         </div>
         <div className="row team-members">
         {imgarr.map((val) => (
-            <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6" key={val.key}>
+            <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6" key={val.key}>
               <Team image={val.image} name={val.name} disignation={val.desig} />
             </div>
           ))}
         </div>
         <div className="row team-members">
         {imgarr.map((val) => (
-            <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6" key={val.key}>
+            <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6" key={val.key}>
               <Team image={val.image} name={val.name} disignation={val.desig} />
             </div>
           ))}
@@ -158,7 +158,7 @@ function About() {
           </div>
         <div className="row team-members">
           {certificatesarr.map((val) => (
-            <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6" key={val.key}>
+            <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6" key={val.key}>
               {" "}
               <AwardsCertificates image={val.image} />
             </div>
@@ -166,7 +166,7 @@ function About() {
         </div>
         <div className="row team-members">
           {certificatesarr.map((val) => (
-            <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6" key={val.key}>
+            <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6" key={val.key}>
             {" "}
             <AwardsCertificates image={val.image} />
           </div>

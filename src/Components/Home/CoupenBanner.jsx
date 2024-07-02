@@ -44,7 +44,7 @@ function CoupenBanner() {
                 layout="responsive"
                 objectFit="cover"
               />
-              <div className="d-flex gap-4 dSupMobile">
+              <div className="d-md-flex gap-md-4 text-center dSupMobile">
                 <div className="">
                   <p className="coupen_code">
                     <strong className="diwaliM">DIWALI20</strong>

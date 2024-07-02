@@ -22,8 +22,14 @@
     color: #fff;
 }
 
-@media only screen and (max-width: 360px) {
+@media only screen and (max-width: 600px) {
     .round_prod {
         margin: 0 0 0 0;
     }
+    .form_title {
+        font-size: 2rem;
+    }
+
+    
+    
 }
