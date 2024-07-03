@@ -52,6 +52,8 @@ export async function POST(request) {
       'category_name',
       'price',
       'discount_price',
+      'discount_percentage',
+      'InstallationCharges',
       'color',
       'armType',
       'prod_status'
@@ -68,12 +70,31 @@ export async function POST(request) {
       }
     });
 
+    // Add non-required fields
+    const optionalFields = [
+      'meta_title',
+      'meta_description',
+      'short_description',
+      'long_description',
+      'duration'
+    ];
+    optionalFields.forEach(field => {
+      const value = formData.get(field);
+      if (value) {
+        data[field] = value;
+      }
+    });
+
+    console.log("data: ", data);
     if (missingFields.length > 0) {
       return NextResponse.json(
         { success: false, error: `The following fields are required: ${missingFields.join(', ')}` },
         { status: 400 }
       );
     }
+
+    // Create seo_url_clr
+    data.seo_url_clr = `${data.seo_url}-${data.color}`.toUpperCase();
 
     // Handle multiple image uploads
     const imageNames = [];
@@ -110,16 +131,28 @@ export async function POST(request) {
     // Insert the new product
     const result = await query({
       query: `
-        INSERT INTO products (product_name, seo_url, category_id, image_name, price, discount_price, color, color_code, armType, prod_status)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO products (
+          product_name, meta_title, meta_description, short_description, long_description,
+          seo_url, seo_url_clr, category_id, image_name, price, discount_price, discount_percentage,
+          duration, InstallationCharges, color, color_code, armType, prod_status
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `,
       values: [
         data.product_name,
+        data.meta_title || null,
+        data.meta_description || null,
+        data.short_description || null,
+        data.long_description || null,
         data.seo_url,
+        data.seo_url_clr,
         data.category_id,
         data.image_name,
         data.price,
         data.discount_price,
+        data.discount_percentage,
+        data.duration || null,
+        data.InstallationCharges,
         data.color,
         color_code,
         data.armType,
