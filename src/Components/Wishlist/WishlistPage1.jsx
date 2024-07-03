@@ -20,7 +20,7 @@ const WishlistPage1 = () => {
     const fetchData = async () => {
       try {
         console.log("from whishlistpage1")
-        const response = await axios.post("/api/wishListUser", {
+        const response = await axios.post(`${process.env.BASE_URL}/wishListUser`, {
           customer_id: customerId,
         });
         // const wishlistData = response.data.products;
@@ -70,7 +70,7 @@ const WishlistPage1 = () => {
       formData.append("product_id", product_id);
       for (const entry of formData.entries()) {
       }
-      const response = await axios.delete("/api/wishListUser", {
+      const response = await axios.delete(`${process.env.BASE_URL}/wishListUser`, {
         data: formData,
       });
 

@@ -98,7 +98,7 @@ const Search = (props) => {
       const isBrowser = typeof window !== "undefined";
       // console.log('window', isBrowser);
       if (isBrowser) {
-        const response = await axios.post("/api/Search", {
+        const response = await axios.post(`${process.env.BASE_URL}/Search`, {
           productName: query,
         });
         const newProducts = response.data.products;
@@ -133,7 +133,7 @@ const Search = (props) => {
 
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch("/api/ProductsCat", {
+      const response = await fetch(`${process.env.BASE_URL}/ProductsCat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -199,7 +199,7 @@ const Search = (props) => {
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
       console.log("isnt abovious customer")
-      const response = await axios.post("/api/wishListUser", {
+      const response = await axios.post(`${process.env.BASE_URL}/wishListUser`, {
         customer_id: customerId,
       });
       setWishlistItems(response.data.Wishlist);

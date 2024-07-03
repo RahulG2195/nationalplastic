@@ -19,7 +19,7 @@ export default function AddCategory() {
         formData.append(key, value);
       }
   
-      const response = await axios.post('/api/adminCategories', formData, {
+      const response = await axios.post('`${process.env.BASE_URL}/adminCategories', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

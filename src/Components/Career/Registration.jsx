@@ -84,7 +84,7 @@ const Registration = () => {
     }
     try {
       const res = await axios.post(
-        `/api/sendResume`,
+        `${process.env.BASE_URL}/sendResume`,
         formData,
         {
           headers: {

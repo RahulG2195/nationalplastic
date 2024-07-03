@@ -36,7 +36,7 @@ const Register = () => {
 
   const sendOTPLoader = async (email) => {
     try {
-      const response = await axios.post('/api/sendOTP', { email });
+      const response = await axios.post('`${process.env.BASE_URL}/sendOTP', { email });
       if (response.status === 200) {
         const data = response.data;
         localStorage.setItem('otp', data.otp);
@@ -86,7 +86,7 @@ const Register = () => {
       setMessage('OTP verified successfully.');
       localStorage.removeItem('otp');
       localStorage.removeItem('otpExpiry');
-      const response = await axios.post('/api/Users', formData);
+      const response = await axios.post('`${process.env.BASE_URL}/Users', formData);
 
       if (response.status === 201) {
         setSuccessMessage('OTP verified successfully!! Registration complete.');
@@ -126,7 +126,7 @@ const Register = () => {
 
     if (Object.keys(errors).length === 0) {
       try {
-        const response = await axios.get(`/api/Users?email=${formData.email}`);
+        const response = await axios.get(`${process.env.BASE_URL}/Users?email=${formData.email}`);
         if (response.status === 201) {
           handleSendOTP(formData.email); // Use handleSendOTP instead of sendOTP
         } else {

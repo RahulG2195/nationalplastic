@@ -19,7 +19,7 @@ export default function App() {
     const submitLoader = async () => {
       try {
         // Validate category name and get category_id
-        const isValidCategoryName = await axios.post("/api/adminValidationP", {
+        const isValidCategoryName = await axios.post(`${process.env.BASE_URL}/adminValidationP`, {
           category_name: data.category_name
         });
 
@@ -41,7 +41,7 @@ export default function App() {
             }
           });
           // Send data to the API
-          const response = await axios.post('/api/adminProducts', formData, {
+          const response = await axios.post('`${process.env.BASE_URL}/adminProducts', formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }

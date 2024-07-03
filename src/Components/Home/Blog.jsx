@@ -50,7 +50,7 @@ export default function Blog() {
   const [productArr, setProductArr] = useState([]);
   useEffect(() => {
     const fetchdata = async () => {
-      const response = await axios.get("/api/Products");
+      const response = await axios.get(`${process.env.BASE_URL}/Products`);
       // const filteredData = response.data.Blog.filter(
       //   (item) => item.categoryType === "Blog"
       // );

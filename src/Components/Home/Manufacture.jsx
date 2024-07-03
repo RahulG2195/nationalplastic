@@ -63,7 +63,7 @@ export default function Manufacture() {
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get(
-        "/api/Category"
+        `${process.env.BASE_URL}/Category`
       );
       //console.log("response of the category ", response.data.categories);
       const filteredData = response.data.categories.filter(

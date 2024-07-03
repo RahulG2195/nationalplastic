@@ -38,7 +38,7 @@ export default function TopPick() {
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get(
-        "/api/Category"
+        `${process.env.BASE_URL}/Category`
       );
       console.log("response", response);
       console.log("response", JSON.stringify(response.data.topPick));

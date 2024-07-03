@@ -30,7 +30,7 @@ const PriceDetailsCard = ({
         email: email,
         getProfile: true,
       };
-      const response = await axios.put("/api/Users", formData);
+      const response = await axios.put(`${process.env.BASE_URL}/Users`, formData);
       const userData = response.data.message[0]; // Directly access response.data.message
       const { Phone, FirstName, Address } = userData;
       setPhone(Phone);
@@ -74,7 +74,7 @@ const PriceDetailsCard = ({
   const [productsData, setProductsData] = useState(null);
 
   const testing = async () => {
-    const userCartData = await axios.post("/api/UserCart", {
+    const userCartData = await axios.post(`${process.env.BASE_URL}/UserCart`, {
       customer_id: customer_id,
     });
     setProductsData(userCartData.data.productps);
@@ -105,7 +105,7 @@ const PriceDetailsCard = ({
   const makePayment = async ({ productId = null }) => {
 
     const totalPay = finalAmount
-    const response = await axios.post("/api/razorpay", {
+    const response = await axios.post(`${process.env.BASE_URL}/razorpay`, {
       amount: totalPay * 100,
       currency: "INR",
       email: email,
@@ -120,7 +120,7 @@ const PriceDetailsCard = ({
       image: "",
       order_id: orderData.data.message.id,
       handler: async function (response) {
-        const data = await fetch("/api/paymentVerify", {
+        const data = await fetch(`${process.env.BASE_URL}/paymentVerify`, {
           method: "POST",
           body: JSON.stringify({
             razorpay_payment_id: response.razorpay_payment_id,
@@ -133,7 +133,7 @@ const PriceDetailsCard = ({
         const res = await data.json();
         const status = res.success || false;
         if (status) {
-          const response = await axios.put("/api/razorpay", {
+          const response = await axios.put(`${process.env.BASE_URL}/razorpay`, {
             razorpay_payment_id: payID,
             isBrowser: isBrowser,
           });
@@ -171,7 +171,7 @@ const PriceDetailsCard = ({
       coupon_code: couponCode,
       status: values.status,
     };
-    await axios.put("/api/RegisterEmail", paymentData);
+    await axios.put(`${process.env.BASE_URL}/RegisterEmail`, paymentData);
   };
   const updateDatabase = async (values) => {
     const paymentData = {
@@ -191,7 +191,7 @@ const PriceDetailsCard = ({
         cart: productsData,
       },
     };
-    const resData = await axios.put("/api/paymentVerify", paymentData);
+    const resData = await axios.put(`${process.env.BASE_URL}/paymentVerif`, paymentData);
   };
   return (
     <>

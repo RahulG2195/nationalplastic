@@ -60,7 +60,7 @@ function ProdData({ category_id }) {
   //   const colorBasedProduct = { color: event.target.value, name: id };
 
   //   try {
-  //     const response = await axios.post("/api/colorBasedProduct", colorBasedProduct);
+  //     const response = await axios.post(`${process.env.BASE_URL}/colorBasedProduct", colorBasedProduct);
   //     const dataBasedOnColor = response.data?.data;
 
   //     const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
@@ -91,7 +91,7 @@ function ProdData({ category_id }) {
         const productName = id;
         setProductId(storedId);
 
-        const response = await axios.get("/api/Products");
+        const response = await axios.get(`${process.env.BASE_URL}/Products`);
         let filteredData = [];
         let productDetailArr = [];
         let productColor = [];
@@ -136,7 +136,7 @@ function ProdData({ category_id }) {
   const category = async (catName) => {
     try {
       if (catName) {
-        const category = await axios.put("/api/Products", {
+        const category = await axios.put(`${process.env.BASE_URL}/Products`, {
           category_id: catName,
         });
         const { category_name, category_id } = category.data;
@@ -150,7 +150,7 @@ function ProdData({ category_id }) {
 
   const fetchPrice = async (storedId) => {
     try {
-      const response = await fetch("/api/ProductsCat", {
+      const response = await fetch(`${process.env.BASE_URL}/ProductsCat`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -176,7 +176,7 @@ function ProdData({ category_id }) {
     setSelectedColor(event.target.value);
     const colorBasedProduct = { color: event.target.value, name: id };
     try {
-      const response = await axios.post("/api/colorBasedProduct", colorBasedProduct);
+      const response = await axios.post(`${process.env.BASE_URL}/colorBasedProduct`, colorBasedProduct);
       const dataBasedOnColor = response.data?.data;
       const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
       const newProductID = dataBasedOnColor[0].product_id;

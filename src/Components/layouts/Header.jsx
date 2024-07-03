@@ -15,8 +15,16 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import styles from "./Navbar.module.css";
 import InvestorAccor from "../InvesterAccor/InvesterAccor";
+import dynamic from 'next/dynamic'
+import { PlaceholderBar } from "./Placeholder";
+// const BottomBar = dynamic(() => import('./BottomBar'), {
+//   loading: () => <PlaceholderBar />,
+//   ssr: false // If BottomBar uses browser-only features
+// })
+import { useDelayedRender } from "@/utils/useDelayedRender";
 
 export default function Header() {
+  const shouldRenderBottomBar = useDelayedRender(2000) 
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
@@ -72,7 +80,7 @@ export default function Header() {
           getProfile: true,
         };
 
-        const response = await axios.put("/api/Users", formData);
+        const response = await axios.put(`${process.env.BASE_URL}/Users`, formData);
 
         const userData = response.data.message[0];
         const { FirstName, LasttName } = userData;
@@ -570,7 +578,11 @@ export default function Header() {
                 </div>
               </div>
             </nav>
-            <BottomBar />
+            {shouldRenderBottomBar ? (
+        <BottomBar />
+      ) : (
+        <PlaceholderBar/>
+      )}
           </div>
         </>
         : null}

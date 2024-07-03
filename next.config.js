@@ -20,9 +20,11 @@ env: {
   RAZORPAY_SUBCRIPTION_ID: "sub_NTYSuq8IY1beGk",
   GOOGLE_CLIENT_ID: "lorem",
   GOOGLE_CLIENT_SECRET: "lorem",
-  NEXTAUTH_URL: "http://localhost:3000",
+  // NEXTAUTH_URL: "http://localhost:3000/",
+  NEXTAUTH_URL: "https://nationalplastic.com/",
   NEXTAUTH_SECRET: "national_plastic_secure_secret_!_@#$%^&",
-
+  // BASE_URL: "http://localhost:3000/api",
+  BASE_URL: "https://nationalplastic.com/api",
 },
 };
 

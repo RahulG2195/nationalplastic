@@ -117,7 +117,7 @@ function ContactUs() {
 
     //TryCatch For the Email Message
 
-    const res = await axios.post(`/api/sendEmail`, formData, {
+    const res = await axios.post(`${process.env.BASE_URL}/sendEmail`, formData, {
       headers: {
         "Content-Type": "multipart/form-data", // Set content type for FormData
       },

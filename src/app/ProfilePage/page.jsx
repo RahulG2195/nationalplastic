@@ -85,7 +85,7 @@ function ProfilePage() {
       };
 
       // Send DELETE request to the API endpoint
-      const response = await axios.patch("/api/Users", requestData);
+      const response = await axios.patch(`${process.env.BASE_URL}/Users`, requestData);
 
       if (response.data.status === 200) {
         setSuccess("Password updated successfully!");
@@ -114,7 +114,7 @@ function ProfilePage() {
       toast.error("Please enter a  Valid address.");
       return;
     }
-    const response = await axios.put("/api/UserProfile", data);
+    const response = await axios.put(`${process.env.BASE_URL}/UserProfile`, data);
     const status = response.statusCode || response.status;
     if (status === 200) {
       notify("Updated address");
@@ -157,7 +157,7 @@ function ProfilePage() {
       try {
         const formData = { email: userEmail, getProfile: true, };
 
-        const response = await axios.put("/api/Users", formData);
+        const response = await axios.put(`${process.env.BASE_URL}/Users`, formData);
 
         const userData = response.data.message[0]; // Directly access response.data.message
         const { customer_id, Email, FirstName, LasttName } = userData; // Destructure from userData, not from JSON.stringify
@@ -166,7 +166,7 @@ function ProfilePage() {
         const UpdateData = { email: Email, customer_id: customer_id, };
 
         // get order data 
-        const OrderResponse = await axios.put("/api/UserOrder", UpdateData);
+        const OrderResponse = await axios.put(`${process.env.BASE_URL}/UserOrder`, UpdateData);
         setOrderData(OrderResponse.data.orderData);
 
         localStorage.setItem("userData", JSON.stringify(UpdateData));
@@ -238,7 +238,7 @@ function ProfilePage() {
         Id: cust_id, // Add or update Id property
       };
 
-      const response = await axios.post("/api/UserProfile", updatedData);
+      const response = await axios.post(`${process.env.BASE_URL}/UserProfile`, updatedData);
 
       notify("UserProfile updated");
       toast.success("Data updated successfully");
@@ -277,12 +277,12 @@ function ProfilePage() {
 
         } else {
           const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: cancelProd };
-          var res = await axios.post('/api/UserOrder', ProdData);
+          var res = await axios.post('`${process.env.BASE_URL}/UserOrder', ProdData);
         }
 
       } else {
         const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: cancelProd };
-        var res = await axios.post('/api/UserOrder', ProdData);
+        var res = await axios.post('`${process.env.BASE_URL}/UserOrder', ProdData);
       }
 
 

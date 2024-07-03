@@ -69,14 +69,14 @@ const GetQuoteForm = (props) => {
     if (!isValid) return;
 
     try {
-      await axios.post("/api/BulkOrderForm", formData);
+      await axios.post(`${process.env.BASE_URL}/BulkOrderForm`, formData);
       notify("Mail Sended SucessFully");
     } catch (error) {
       console.error("Error:", error);
       notifyError("Failed to send");
     }
     try {
-      const response = await axios.post("/api/bulkOrderEmail", formData);
+      const response = await axios.post(`${process.env.BASE_URL}/bulkOrderEmail`, formData);
       // console.log("Response:", response.data);
       // console.log("Response:", JSON.stringify(response.data));
     } catch (error) {

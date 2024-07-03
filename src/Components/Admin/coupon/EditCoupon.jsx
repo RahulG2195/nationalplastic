@@ -28,7 +28,7 @@ export default function EditCoupon() {
 
   const updateCoupon = async (formData) => {
     try {
-      const response = await axios.put("/api/adminCoupon", formData);
+      const response = await axios.put(`${process.env.BASE_URL}/adminCoupon`, formData);
       return response.data;
     } catch (error) {
       console.error('Update Error:', error.message);

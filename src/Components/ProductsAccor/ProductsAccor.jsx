@@ -17,7 +17,7 @@ const ProductsAccr = ({ handleShow }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("/api/Products");
+        const res = await axios.get(`${process.env.BASE_URL}/Products`);
         const allproducts = res.data.products;
         const categoryIds = [13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
 
