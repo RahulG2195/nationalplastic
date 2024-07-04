@@ -54,36 +54,7 @@ function ProdData({ category_id }) {
     }
   };
 
-  // const handleColorChange = async (event) => {
-
-  //   setSelectedColor(event.target.value);
-  //   const colorBasedProduct = { color: event.target.value, name: id };
-
-  //   try {
-  //     const response = await axios.post(`${process.env.BASE_URL}/colorBasedProduct", colorBasedProduct);
-  //     const dataBasedOnColor = response.data?.data;
-
-  //     const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
-
-  //     const NoOfImages = dataBasedOnColor[0].image_name;
-
-  //     if (isImageAvailable) {
-
-  //       if(NoOfImages.includes(",") || NoOfImages.includes(", ")){
-  //         SetUpdateImage(NoOfImages);
-  //       }else{
-  //         // SetUpdateImage(NoOfImages);
-  //         notifyError("Image Not available");
-  //       }
-  //     } else {
-  //       notifyError("Image Not available");
-  //     }
-
-
-  //   } catch (err) {
-  //     console.log("Image isnt available", err);
-  //   }
-  // };
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {

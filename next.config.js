@@ -23,8 +23,8 @@ env: {
   // NEXTAUTH_URL: "http://localhost:3000/",
   NEXTAUTH_URL: "https://nationalplastic.com/",
   NEXTAUTH_SECRET: "national_plastic_secure_secret_!_@#$%^&",
-  // BASE_URL: "http://localhost:3000/api",
-  BASE_URL: "https://nationalplastic.com/api",
+  BASE_URL: "/api",
+  // BASE_URL: "https://nationalplastic.com/api",
 },
 };
 

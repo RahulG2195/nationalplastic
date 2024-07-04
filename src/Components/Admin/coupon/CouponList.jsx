@@ -20,7 +20,6 @@ const CouponList = () => {
     const fetchData = async () => {
       const rawData = await axios.get(`${process.env.BASE_URL}/adminCoupon`);
       const { coupons } = rawData.data;
-      console.log("coupons", coupons);
       setCouponArray(coupons);
       setFilteredCouponArray(coupons);
     };

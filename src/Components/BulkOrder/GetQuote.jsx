@@ -32,7 +32,6 @@ const GetQuote = ({ proddata }) => {
     return chunkedArray;
   };
 
-  //   console.log('quotes' + proddata);
   const imageData = [
     {
       imgSrc:
@@ -73,7 +72,6 @@ const GetQuote = ({ proddata }) => {
       imgText: "MERC SOFA",
     },
   ];
-  //   console.log('datas' + chunkArray(proddata, 9));
   return (
     <>
       <div className="main_container">

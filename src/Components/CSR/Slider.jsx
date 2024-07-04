@@ -24,7 +24,6 @@ const Slider = () => {
           loop={true}
           navigation
           pagination={{ clickable: true }}
-          //    onSlideChange={() => console.log('slide change')}
           autoplay={{
             delay: 2500,
             disableOnInteraction: false,

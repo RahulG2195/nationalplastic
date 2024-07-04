@@ -36,10 +36,7 @@ const AddBody = () => {
   };
 
   const handleSubmit = () => {
-    // Here you can perform any action with the submitted address, like sending it to an API
-    //console.log("Submitted Address:", address);
     setEditable(false);
-    // Reset the address input after submission
     setAddress("");
   };
   const getAdress = async () => {
@@ -54,9 +51,6 @@ const AddBody = () => {
 
       const response = await axios.put(`${process.env.BASE_URL}/Users`, formData);
       const userData = response.data.message[0];
-      //console.log("userData", userData);
-      //console.log("userData", JSON.stringify(userData));
-
       const { Address, FirstName, Phone } = userData;
       const addressString = JSON.stringify(Address);
       const addressWithoutQuotes = addressString.replace(/^"|"$/g, "");
@@ -80,8 +74,6 @@ const AddBody = () => {
       let cartData;
       try {
         if (!Dummies) {
-          //console.log("Dummies ", Dummies);
-          //console.log("Dummies ", JSON.stringify(Dummies));
           cartData = Dummies;
         } else {
           const response = await axios.post(`${process.env.BASE_URL}/UserCart`, {

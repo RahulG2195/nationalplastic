@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { verifyToken } from './utils/jwtAuth';
-
+import { notifyError} from "@/utils/notify";
 const secret = 'national_plastic'; 
 
 export async function middleware(req) {
@@ -14,15 +14,12 @@ export async function middleware(req) {
         const role = decodedToken.role;
 
         if (role === 'admin') {
-            // NextResponse.headers.set
-            // NextResponse.headers.set('x-admin-access', 'true');
             return NextResponse.next();
         }
     } catch (error) {
-        console.log(error.message);
         return NextResponse.redirect(new URL('/Login', req.url));
     }
-
+    notifyError("Session Expired Please Login Again");
     return NextResponse.redirect(new URL('/unauthorized', req.url));
 }
 

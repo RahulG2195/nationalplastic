@@ -13,8 +13,5 @@ export const setCookie = (name, value, options = {}) => {
 
 //SETTING LocalStorage for google id using session storage mechanism
 export const setLocalStorage = (data= {}) =>{
-  console.log("--------------------------------------------------------------------------------------------------------------------------------")
-  console.log("DATA: ",data);
-  console.log(JSON.stringify(data));
-  // localStorage.setItem("userData", JSON.stringify(value));
+ console.log("It shouldnt be working nor called...cookie.js")
 };

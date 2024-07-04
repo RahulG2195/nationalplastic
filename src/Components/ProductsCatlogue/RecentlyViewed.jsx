@@ -156,8 +156,6 @@ const RecentlyViewed = () => {
   ) => {
     try {
       const isLoggedInResult = await isLoggedIn();
-      //console.log("state", isLoggedInResult);
-      //console.log("state", typeof isLoggedInResult);
       if (!isLoggedInResult) {
         notifyError();
         router.push("/Login");
@@ -184,15 +182,11 @@ const RecentlyViewed = () => {
         },
         body: JSON.stringify({ product_id: id }),
       });
-      //console.log(response);
-
       if (!response.ok) {
         throw new Error("Failed to fetch product data");
       }
 
       const data = await response.json();
-      //console.log(" data ", data);
-
       return data;
     } catch (error) {
       console.error("Error fetching product data:", error);
@@ -206,10 +200,8 @@ const RecentlyViewed = () => {
     const data = await fetchPrice(product_id);
     const price = data.price;
     const discount_price = data.discount_price;
-    // const product_id = data.product_id;
     switch (isLoggedInResult) {
       case false:
-        //console.log("User not logged in. Notifying...");
         dispatch(
           addToCartD({
             product_id,
@@ -236,7 +228,6 @@ const RecentlyViewed = () => {
         );
       // Consider additional actions for unexpected login states
     }
-    //console.log("this is product id in card ", product_id);
   };
 
   return (

@@ -31,7 +31,6 @@ export async function POST(request) {
       query: `SELECT * FROM products WHERE product_id IN (${placeholders})`,
       values: product_ids,
     });
-    // console.log("--", products);
 
     return new Response(
       JSON.stringify({
@@ -63,15 +62,12 @@ export async function PUT(request) {
       if (insertResult[0].count === 0) {
         // product count is zero
         try {
-          //console.log("userid - and pass", product_id, customer_id);
-
           const insertResult = await query({
             query:
               "INSERT INTO mycart (product_id, user_id, quantity, color) VALUES (?, ?, ?, ?)",
             values: [product_id, user_id, quantity, color],
           });
 
-          //console.log("insertResult", insertResult);
           if (insertResult.affectedRows === 1) {
             return new Response(
               JSON.stringify({
@@ -128,10 +124,10 @@ export async function PUT(request) {
         }
       }
     } catch (err) {
-      //console.log(err);
+      console.log(err.message);
     }
   } catch (err) {
-    //console.log(err);
+    console.log(err.message);
     //Add the Logic to increase the quantity of the product
   }
 }
@@ -146,7 +142,6 @@ export async function DELETE(request) {
       query: "DELETE FROM mycart WHERE product_id = ? AND user_id = ?",
       values: [product_id, user_id],
     });
-    //console.log("Affected Rows:", deleteWishlist.affectedRows); // Log affected rows
     const message = deleteWishlist.affectedRows ? "success" : "error";
     return new Response(
       JSON.stringify({
@@ -169,16 +164,12 @@ export async function PATCH(request) {
   try {
     const { customer_id, product_id, quantity } = await request.json();
     const user_id = customer_id; // Assuming customer_id is the same as user_id
-    //console.log("quantity", typeof quantity);
-    //console.log("user_id", typeof user_id);
-    //console.log("product_id", typeof product_id);
 
     const updateResult = await query({
       query:
         "UPDATE mycart SET quantity = quantity + ? WHERE product_id = ? AND user_id = ?",
       values: [quantity, product_id, user_id],
     });
-    //console.log("-", updateResult);
 
     if (updateResult.affectedRows === 1) {
       return new Response(

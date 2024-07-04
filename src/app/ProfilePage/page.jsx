@@ -316,7 +316,6 @@ function ProfilePage() {
       console.error('Error:', error);
     }
   }
-  // console.log('ReturnSingleProd', ReturnSingleProd);
   return (
     <>
       <div className="container profile-page-container mb-5">
@@ -617,7 +616,6 @@ function ProfilePage() {
                     <tbody>
                       {
                         orderData.map((data, index) => {
-                          {/* console.log('data', data) */ }
                           let vdate = ReturnProductBeforeFourteenDays(data['order_status_date']);
                           if (data.image_name) {
                             var images = data ? data.image_name.split(', ').map(image => image.trim()) : [];

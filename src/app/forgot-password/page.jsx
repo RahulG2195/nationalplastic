@@ -65,7 +65,6 @@ const ResetPasswordPage = () => {
       // 3. (Optional) Add timestamp for expiry
       const expiry = Date.now() + 5 * 60 * 1000; // One hour from now (milliseconds)
       const tokenWithExpiry = `${token}:${expiry}`;
-      //console.log("Token with expiry", tokenWithExpiry);
       return tokenWithExpiry;
     };
     const formDataToSend = new FormData();
@@ -77,27 +76,19 @@ const ResetPasswordPage = () => {
     );
     //Generating Token and sending Email to the user
     if (res.status === 200) {
-      //console.log("res  ----------");
       const resetToken = await generatePasswordResetToken();
-      //console.log("resetToken ----------", resetToken);
       formDataToSend.append("resetToken", resetToken); // Ensure only the first file is appended
-      //console.log("resetTOken" + resetToken);
       const response = await axios.post(
         `${process.env.BASE_URL}/mail`,
         formDataToSend
       );
-      //console.log("response: ");
       if (response.status === 200) {
         notify();
 
-        //console.log("success from forgot-Passwords");
-        // localStorage.setItem("resetToken", resetToken);
         localStorage.setItem("resetEmail", formData.email);
       }
-      //console.log(response);
     } else {
       notifyError();
-      //console.log("Inside Email Send failed with error");
       alert(res.messsage);
     }
   };

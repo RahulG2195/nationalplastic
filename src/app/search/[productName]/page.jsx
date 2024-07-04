@@ -28,16 +28,8 @@ const notify = () => {
   });
 };
 const Search = (props) => {
-  //   const router = useRouter();
-  //   const router = useParams();
   const router = useParams();
   const id = router.productName;
-  //   const { query } = router.query; // This will give you the value after '/'
-  console.log("---------",id);
-  // console.log(router);
-  // console.log(id);
-
-  //   const id = routers.productName;
   const { searchParams } = props;
   const [products, setProducts] = useState([]);
   const [discounts, setDiscounts] = useState([]);
@@ -96,14 +88,12 @@ const Search = (props) => {
       }
 
       const isBrowser = typeof window !== "undefined";
-      // console.log('window', isBrowser);
       if (isBrowser) {
         const response = await axios.post(`${process.env.BASE_URL}/Search`, {
           productName: query,
         });
         const newProducts = response.data.products;
         const all = response.data.allproducts;
-        // console.log("All ", all);
         setAllproducts(all);
         setProducts((prevProducts) => [...prevProducts, ...newProducts]);
         setHasMore(newProducts.length > 0);
@@ -163,7 +153,6 @@ const Search = (props) => {
     // const product_id = data.product_id;
     switch (isLoggedInResult) {
       case false:
-        //console.log("User not logged in. Notifying...");
         dispatch(
           addToCartD({
             product_id,
@@ -190,7 +179,6 @@ const Search = (props) => {
         );
       // Consider additional actions for unexpected login states
     }
-    //console.log("this is product id in card ", product_id);
   };
 
   const fetchWishlistItems = async () => {
@@ -198,7 +186,6 @@ const Search = (props) => {
       const userDataString = localStorage.getItem("userData");
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
-      console.log("isnt abovious customer")
       const response = await axios.post(`${process.env.BASE_URL}/wishListUser`, {
         customer_id: customerId,
       });
@@ -219,8 +206,6 @@ const Search = (props) => {
   ) => {
     try {
       const isLoggedInResult = await isLoggedIn();
-      //console.log("state", isLoggedInResult);
-      //console.log("state", typeof isLoggedInResult);
       if (!isLoggedInResult) {
         notifyError();
         router.push("/Login");

@@ -50,7 +50,6 @@ const ProdList = () => {
                 },
                 data: JSON.stringify({ product_id: currentItemToDelete })
               });
-              console.log('Delete successful', response);
               // Update product array after deletion
               const updatedProducts = productArray.filter(product => product.product_id !== currentItemToDelete);
               setProductArray(updatedProducts);
@@ -149,7 +148,6 @@ const ProdList = () => {
         key: 'image_name',
         render: (text) => {
             const images = text.split(',');
-            console.log('Images:', images);
             return (
                 <div style={{ display: 'flex', gap: '5px' }}>
                     {images.map((image, index) => (

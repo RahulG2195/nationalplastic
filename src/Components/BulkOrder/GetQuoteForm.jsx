@@ -77,8 +77,6 @@ const GetQuoteForm = (props) => {
     }
     try {
       const response = await axios.post(`${process.env.BASE_URL}/bulkOrderEmail`, formData);
-      // console.log("Response:", response.data);
-      // console.log("Response:", JSON.stringify(response.data));
     } catch (error) {
       console.error("Error:", error);
       notifyError(error.message);

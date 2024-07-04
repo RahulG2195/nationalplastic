@@ -96,17 +96,7 @@ function ContactUs() {
       toast.error("Please enter a valid mobile number.");
       return;
     }
-    // if (!isValidFile(userInput.file)) {
-    //   toast.error("Please upload a valid file.");
-    //   return;
-    // }
-    // if (!userInput.file) {
-    //   toast.error("Please select a file to upload.");
-    //   return;
-    // }
-    //console.log("--" + userInput.file);
-    //Try catch For the File Upload :Multer
-    //console.log("Try    catch");
+   
     const formData = new FormData();
     formData.append("name", userInput.name);
     formData.append("email", userInput.email);

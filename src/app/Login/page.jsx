@@ -35,9 +35,6 @@ function Login() {
       // Send session data to your backend
       axios.post('`${process.env.BASE_URL}/googleProvider', session.user)
         .then(response => {
-          console.log('Response from API:', response.data);
-          console.log(response.body);
-          console.log('Response from API:',);
           const email = response.data.email
           const customer_id = response.data.customer_id
 
@@ -78,22 +75,17 @@ function Login() {
     try {
       await signIn("google")
       const response = await axios.post('`${process.env.BASE_URL}/googleProvider', session.user);
-      console.log('Response from API:', response.data);
       const { email, customer_id } = response.data;
-      console.log("before if == = = =");
       if (status === "authenticated" && session?.user) {
-        console.log("inside if == = = =");
         dispatch(
           setUserData({
             email: email,
             customer_id: customer_id,
           })
         );
-        console.log("inside if == =2 = =");
         SetRefresh(true);
         // router.push("/"); // Redirect to homepage
       }
-      console.log("inside if == = 3= =");
     } catch (error) {
       console.log('Error sending data to API:', error);
     }

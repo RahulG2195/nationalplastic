@@ -10,7 +10,6 @@ import {
 } from "@/utils/validation";
 
 const notify = () => {
-  //console.log("name " + prodName);
   toast.success("Return Request Sent successfully!", {
     position: "top-center",
     autoClose: 2000,

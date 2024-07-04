@@ -160,7 +160,6 @@ export async function DELETE(request) {
       query: "DELETE FROM mycart WHERE product_id = ? AND user_id = ?",
       values: [product_id, user_id],
     });
-    //console.log("Affected Rows:", deleteWishlist.affectedRows); // Log affected rows
     const message = deleteWishlist.affectedRows ? "success" : "error";
     return new Response(
       JSON.stringify({
@@ -183,16 +182,12 @@ export async function PATCH(request) {
   try {
     const { customer_id, product_id, quantity } = await request.json();
     const user_id = customer_id; // Assuming customer_id is the same as user_id
-    //console.log("quantity", typeof quantity);
-    //console.log("user_id", typeof user_id);
-    //console.log("product_id", typeof product_id);
 
     const updateResult = await query({
       query:
         "UPDATE mycart SET quantity = quantity + ? WHERE product_id = ? AND user_id = ?",
       values: [quantity, product_id, user_id],
     });
-    //console.log("-", updateResult);
 
     if (updateResult.affectedRows === 1) {
       return new Response(

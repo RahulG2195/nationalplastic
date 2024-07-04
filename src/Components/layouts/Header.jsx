@@ -105,14 +105,13 @@ export default function Header() {
     }
   }, [FirstName, LastName]);
 
-  // console.log('initial value', InitialName);
-  // ----------------------- End of initail name after login --------------------------------- // 
   useEffect(() => {
-    // Check if the custom header is present
     const checkHeader = async () => {
-      const res = await fetch(router.asPath, { method: 'HEAD' });
-      const isAdmin = res.headers.get('x-admin-access') === 'true';
-      setHideLayout(isAdmin);
+      if (router.asPath) {
+        const res = await fetch(router.asPath, { method: 'HEAD' });
+        const isAdmin = res.headers.get('x-admin-access') === 'true';
+        setHideLayout(isAdmin);
+      }
     };
     checkHeader();
   }, [router]);
@@ -140,9 +139,6 @@ export default function Header() {
     setSearchResults([]);
     try {
       const searchTerm2 = e.target.querySelector(".HeadSearch").value;
-      // console.log("searchTerm2", searchTerm2);
-      // console.log("header", searchTerm);
-
       router.push(`/search/${searchTerm}`);
     } catch (error) {
       console.error("Error searching products:", error);

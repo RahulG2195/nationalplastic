@@ -37,7 +37,6 @@ function BottomBar() {
         SetAllProd(allproducts);
         setNavbar(navshow);
 
-        //console.log(preEventChair);
       } catch {
         console.error("Error fetching data:");
       }
@@ -48,7 +47,6 @@ function BottomBar() {
 
   const sendCategory = (e) => {
     const title = e.target.innerText;
-    //console.log("Category clicked:", title);
     localStorage.setItem("category", title);
   };
 
@@ -64,7 +62,6 @@ function BottomBar() {
     const navImg = navbar.filter(
       (cat) => cat.category_id == category_id
     );
-    // console.log('navImg', navImg[0]['image_name']);
     SetGetImg(navImg[0]['image_name']);
   };
 
@@ -79,7 +76,6 @@ function BottomBar() {
     });
   };
 
-  // console.log('img' , getImg);
   return (
     <div className=" px-md-5 d-flex align-items-center bottom_nav position-relative mainrow">
       {navbar.map((val) => (

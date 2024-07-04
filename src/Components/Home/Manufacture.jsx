@@ -65,7 +65,6 @@ export default function Manufacture() {
       const response = await axios.get(
         `${process.env.BASE_URL}/Category`
       );
-      //console.log("response of the category ", response.data.categories);
       const filteredData = response.data.categories.filter(
         (item) =>
           item.category_id === 24 ||
@@ -107,13 +106,7 @@ export default function Manufacture() {
                 style={{ width: "100%", height: "100%" }}
                 modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
                 spaceBetween={15}
-                // slidesPerView={3}
                 loop={true}
-                // navigation
-                // pagination={{ clickable: true }}
-                // scrollbar={{ draggable: false }}
-                // onSwiper={(swiper) => //console.log(swiper)}
-                // onSlideChange={() => //console.log("slide change")}
                 autoplay={{
                   delay: 2400,
                   disableOnInteraction: false,

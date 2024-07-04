@@ -59,7 +59,6 @@ export default function EditCoupon() {
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("couponToEdit"));
-    console.log("DaTaAAAAAAAAAAAAAAAAAAAa",data)
     if (data) {
       Object.keys(data).forEach(key => {
         if (key === 'start_date' || key === 'end_date') {

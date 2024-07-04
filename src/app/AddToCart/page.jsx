@@ -29,10 +29,6 @@ function AddToCart() {
   });
   const userID = useSelector((state) => state.userData.customer_id || null);
 
-  //console.log('add to cart' + JSON.stringify(productCount));
-
-
-
   // Use useState to manage local product count and update function
   const [count, setCount] = useState(productCount);
   const [productDetailArr, setProductDetailArr] = useState([]);
@@ -83,7 +79,6 @@ function AddToCart() {
         const response = await axios.post(`${process.env.BASE_URL}/UserCart`, {
           customer_id: userID,
         });
-        //console.log(response);
         cartData = response.data.products;
 
         if (tempCartStates.products.length > 0 && Updated) {
@@ -135,10 +130,6 @@ function AddToCart() {
           // If you need to convert the updated products into an array
           const updatedProductsArray = Object.values(products);
 
-          // Now, updatedProductsArray contains products with updated quantities
-
-          //Mutiple product detail with updated quantity
-          //console.log("fetch3");
 
           fetchData(updatedProductsArray);
         }
@@ -150,21 +141,12 @@ function AddToCart() {
         `${process.env.BASE_URL}/colorBasedProduct`,
         colorBasedProduct
       );
-      //console.log("colorBAsedProduct ",JSON.stringify(response));
       const dataBasedOnColor = response.data?.data;
-      //console.log(dataBasedOnColor);
-      //console.log(JSON.stringify(dataBasedOnColor));
-
-      // const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
       const NoOfImages = dataBasedOnColor[0].image_name;
-      //console.log(NoOfImages);
-      //console.log(typeof(NoOfImages));
-
     }
 
     const fetchData = async (cartData) => {
       try {
-        //console.log("cartData", JSON.stringify(cartData));
         const products = cartData.map(
           (item) => ({
             product_id: item.product_id,
@@ -181,8 +163,6 @@ function AddToCart() {
           }),
           []
         );
-        //console.log("products ", JSON.stringify(products));
-        // state.products.push(action.payload);
 
         const cartLen = CartStates.products.length;
 
@@ -200,10 +180,6 @@ function AddToCart() {
             );
           });
         }
-        //console.log("Data GettiNG updated: ------")
-
-        // Calculate total price, discount, total payable, and installation charges
-        // Calculate total payable amount, total discount, and total price without discount
         setProductDetailArr(products);
 
         const { totalPayable, totalDiscount, totalPriceWithoutDiscount } =
@@ -348,7 +324,6 @@ function AddToCart() {
     setCouponCode(event.target.value);
   };
   const applyCouponCode = async (message) => {
-    console.log(message);
     const discount_percentage = parseInt(message)
     dispatch(applyDiscount({discountPercentage: discount_percentage, couponCode: couponCode}));
   }

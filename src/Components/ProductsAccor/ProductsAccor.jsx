@@ -12,7 +12,6 @@ import axios from "axios"; // Don't forget to import axios
 
 const ProductsAccr = ({ handleShow }) => {
   const [categories, setCategories] = useState([]);
-  //console.log("fghjkl", categories);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +31,6 @@ const ProductsAccr = ({ handleShow }) => {
         });
 
         setCategories(categoryData);
-        //console.log(categoryData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -71,7 +69,6 @@ const ProductsAccr = ({ handleShow }) => {
   };
 
   const handleOnClick = (productName) => {
-    //console.log("this product is clicked", productName);
     localStorage.setItem("productName", productName);
   };
 

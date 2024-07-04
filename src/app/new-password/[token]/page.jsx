@@ -49,9 +49,7 @@ const PasswordToken = () => {
     .find((param) => param.startsWith("resetToken="));
   //   const params = useParams();
   formData.resetToken = resetTokenParam.split("=")[1];
-  //console.log("Entire Query Object:", formData.resetToken);
   useEffect(() => {
-    //console.log();
     const storedResetEmail = localStorage.getItem("resetEmail");
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -60,7 +58,6 @@ const PasswordToken = () => {
   }, []);
 
   const isValidPassword = (password) => {
-    //console.log("isValidPAssword" + password);
     const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).+$/;
     return passwordPattern.test(password);
   };
@@ -80,15 +77,11 @@ const PasswordToken = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      //console.log("INvalid");
       const errors = {};
-      //console.log(formData.password);
-      //console.log(formData.email);
       const inputString = formData.resetToken;
 
       const [_, valueAfterColon] = inputString.split(":");
       const storedValue = valueAfterColon;
-      //console.log(storedValue);
       const expiry = parseInt(storedValue);
       const isValidPassword = (password) => {
         const passwordPattern =

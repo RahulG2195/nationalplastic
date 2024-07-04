@@ -20,7 +20,6 @@ export default function ShopRoom() {
         const response = await axios.get(
           `${process.env.BASE_URL}/Category`
         );
-        //console.log("response of the category ", response.data.categories);
         const filteredData = response.data.categories.filter(
           (item) =>
             item.category_id === 30 ||
