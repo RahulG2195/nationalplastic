@@ -239,28 +239,29 @@ const PriceDetailsCard = ({
         <div className="small text-center">EMI starts with Rs 10,000</div>
 
         <div className="d-flex justify-content-center mt-2">
-          {redirect ? (
-            <Link href={`${userState ? "/Address" : "/Login"}`}>
-              <button
-                type="submit"
-                className="btn btn-danger px-md-5 placeOrderResp"
-              >
-                {userState ? "Checkout" : "Login To Checkout"}
-              </button>
-            </Link>
-          ) : (
-            <button
-              type="submit"
-              className="btn btn-danger px-md-5 placeOrderResp"
-              onClick={() => {
-                makePayment({ productId: "example_ebook" });
-              }}
-              disabled={!userState}
-            >
-              Place Order
-            </button>
-          )}
-        </div>
+  {redirect ? (
+    <Link href={`${userState ? "/Address" : "/Login"}`}>
+      <button
+        type="submit"
+        className="btn btn-danger px-md-5 placeOrderResp"
+        disabled={ count === 0}
+      >
+        {userState ? "Checkout" : "Login To Checkout"}
+      </button>
+    </Link>
+  ) : (
+    <button
+      type="submit"
+      className="btn btn-danger px-md-5 placeOrderResp"
+      onClick={() => {
+        makePayment({ productId: "example_ebook" });
+      }}
+      disabled={!userState || count === 0}
+    >
+      Place Order
+    </button>
+  )}
+</div>
       </div>
     </>
   );
