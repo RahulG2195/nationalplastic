@@ -20,6 +20,7 @@ const uploadImage = async (file)=>{
     await writeFile(path, buffer);
   }catch(error){
     console.log('error: ', error.message);
+    throw new Error('Image upload failed: ' + error.message);
   }
 }
 
@@ -176,13 +177,18 @@ export async function PUT(request) {
   try {
     const formData = await request.formData();
     const images = formData.getAll('image');
-    let imageNames = [];
 
     // Handle multiple image uploads
+    const imageNames = [];
     if (images && images.length > 0) {
       for (const image of images) {
-        const imageName = await uploadImage(image);  // Ensure this function handles image upload and returns the image name
-        imageNames.push(imageName);
+        try {
+          const imageName = await uploadImage(image);  // Ensure this function handles image upload and returns the image name
+          imageNames.push(imageName);
+        } catch (error) {
+          console.error(`Error uploading image ${image.name}:`, error);
+          throw new Error(`Failed to upload image ${image.name}: ${error.message}`);
+        }
       }
     }
 

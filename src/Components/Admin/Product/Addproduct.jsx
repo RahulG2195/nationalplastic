@@ -41,7 +41,7 @@ export default function App() {
             }
           });
           // Send data to the API
-          const response = await axios.post('`${process.env.BASE_URL}/adminProducts', formData, {
+          const response = await axios.post(`${process.env.BASE_URL}/adminProducts`, formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }

@@ -12,6 +12,7 @@ const uploadImage = async (file)=>{
     await writeFile(path, buffer);
   }catch(error){
     console.log('error: ', error.message);
+    throw new Error('Image upload failed: ' + error.message);
   }
 }
 export async function POST(request) {
@@ -24,8 +25,15 @@ export async function POST(request) {
     );
 
     
-    if(image){
-      uploadImage(image)
+    if (image) {
+      try {
+        await uploadImage(image);
+      } catch (uploadError) {
+        return new Response(
+          JSON.stringify({ success: false, error: uploadError.message }),
+          { status: 400 }
+        );
+      }
     }
 
     const allCategories = await query({
@@ -83,7 +91,14 @@ export async function PUT(request) {
     );
 
     if (image) {
-      await uploadImage(image);  // Ensure this function handles image upload
+      try {
+        await uploadImage(image);
+      } catch (uploadError) {
+        return new Response(
+          JSON.stringify({ success: false, error: uploadError.message }),
+          { status: 400 }
+        );
+      }
     }
 
     // Manual validation

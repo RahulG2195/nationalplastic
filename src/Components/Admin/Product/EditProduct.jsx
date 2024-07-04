@@ -15,6 +15,7 @@ export default function App() {
 
   const handleNavigation = () => {
     navigate('/admin/product', { replace: true });
+    window.location.reload();
   };
 
   const updateProduct = async (formData) => {
@@ -122,7 +123,7 @@ export default function App() {
           <Controller
             name="product_name"
             control={control}
-            rules={{ required: true, minLength: 1, maxLength: 65, pattern: /^[a-zA-Z-]+$/i }}
+            rules={{ required: true, minLength: 1, maxLength: 65, pattern: /^[a-zA-Z0-9\s-]+$/i }}
             render={({ field }) => <Input {...field} />}
           />
         </Form.Item>
