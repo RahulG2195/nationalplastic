@@ -27,6 +27,9 @@ const Register = () => {
     address: "",
     password: "",
     confirmPassword: "",
+    state: "",
+    city: "",
+    pincode: '',
     otp: "", // Add OTP field
   });
   const [formErrors, setFormErrors] = useState({});
@@ -171,10 +174,22 @@ const Register = () => {
     return errors;
   };
 
+  const fields = {
+    "First Name": "firstName",
+    "Last Name": "lastName",
+    "Email": "email",
+    "Mobile No": "phone",
+    "State": "state",
+    "City": "city",
+    "Pincode": "pincode",
+    "Password": "Password",
+    "Confirm Password": "confirmPassword",
+    "Address": "address",
+  };
   return (
     <div className="container">
       <div className="row Login-Page-ImgForm">
-        <div className="col-md-6 login-image">
+        <div className="col-md-5 login-image">
           <Image
             src="/Assets/images/catalogue/loginPage.png"
             className="img-fluid d-block w-100"
@@ -185,21 +200,62 @@ const Register = () => {
             objectFit="cover"
           />
         </div>
-        <div className="col-md-6">
+        <div className="col-md-7">
           <div className="Login-Form">
             <form onSubmit={handleSubmit}>
-              <h3 className="text-center mb-2">Registration</h3>
-              {successMessage && (
-                <div className="alert alert-success">{successMessage}</div>
-              )}
-              {!otpSent ? (
-                <>
-                  {["firstName", "lastName", "email", "phone", "address"].map(
-                    (field, index) => (
-                      <div className="row mb-3 mt-3" key={index}>
+              <div className="row">
+                <h3 className="mb-2">Registration</h3>
+                <p>Track your order, create wishlist & more</p>
+                {successMessage && (
+                  <div className="alert alert-success">{successMessage}</div>
+                )}
+                {!otpSent ? (
+                  <>
+                    {Object.entries(fields).map(
+                      ([key, value], index) => (
+                        <div className={`mb-3 mt-3 ${(value === 'state' || value === 'city' || value === 'pincode') ? 'col-md-4' : value === 'address' ? 'col-12' : 'col-md-6'}`} key={index}>
+                          {value == 'address' ? 
+                          <>
+                          <label htmlFor={`input${value.charAt(0).toUpperCase() + value.slice(1)}`}>
+                            {key}
+                            </label>
+                            <textarea
+                              type='text'
+                              className="form-control"
+                              id={`input${value.charAt(0).toUpperCase() + value.slice(1)}`}
+                              name='address'
+                              // placeholder={`Enter Your ${value.charAt(0).toUpperCase() + value.slice(1)}`}
+                              value=''
+                              onChange={handleInputChange}
+                            />
+                          </>
+                          : 
+                          <>
+                          <label htmlFor={`input${value.charAt(0).toUpperCase() + value.slice(1)}`}>
+                            {key}
+                            </label>
+                            <input
+                              type={value === "email" ? "email" : (value === 'Password' || value === 'confirmPassword') ? 'password' : 'text'}
+                              className="form-control"
+                              id={`input${value.charAt(0).toUpperCase() + value.slice(1)}`}
+                              name={value}
+                              // placeholder={`Enter Your ${value.charAt(0).toUpperCase() + value.slice(1)}`}
+                              value={formData[value]}
+                              onChange={handleInputChange}/>
+                          </>
+                          }
+                          
+                          {formErrors[value] && (
+                            <div className="text-danger">{formErrors[value]}</div>
+                          )}
+                        </div>
+                      )
+                    )}
+                    {/* {["password", "confirmPassword"].map((field, index) => (
+                      <div className=" mb-3 mt-3" key={index}>
                         <div className="col-sm-12">
                           <input
-                            type={field === "email" ? "email" : "text"}
+                            type="password"
                             className="form-control"
                             id={`input${field.charAt(0).toUpperCase() + field.slice(1)}`}
                             name={field}
@@ -212,57 +268,39 @@ const Register = () => {
                           )}
                         </div>
                       </div>
-                    )
-                  )}
-                  {["password", "confirmPassword"].map((field, index) => (
-                    <div className="row mb-3 mt-3" key={index}>
-                      <div className="col-sm-12">
-                        <input
-                          type="password"
-                          className="form-control"
-                          id={`input${field.charAt(0).toUpperCase() + field.slice(1)}`}
-                          name={field}
-                          placeholder={`Enter Your ${field.charAt(0).toUpperCase() + field.slice(1)}`}
-                          value={formData[field]}
-                          onChange={handleInputChange}
-                        />
-                        {formErrors[field] && (
-                          <div className="text-danger">{formErrors[field]}</div>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </>
-              ) : (
-                <div className="row mb-3 mt-3">
-                  <div className="col-sm-12">
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="inputOtp"
-                      name="otp"
-                      placeholder="Enter OTP"
-                      value={formData.otp}
-                      onChange={handleInputChange}
-                    />
-                    {formErrors.otp && (
-                      <div className="text-danger">{formErrors.otp}</div>
-                    )}
-                  </div>
-                </div>
-              )}
-              <div className="form-btn-login-div">
-                {!otpSent ? (
-                  <button type="submit" className="btn form-btn-login">
-                    Register
-                  </button>
+                    ))} */}
+                  </>
                 ) : (
-                  <button type="button" className="btn form-btn-login" onClick={handleVerifyOtp}>
-                    Submit OTP
-                  </button>
+                  <div className=" mb-3 mt-3">
+                    <div className="col-sm-12">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="inputOtp"
+                        name="otp"
+                        placeholder="Enter OTP"
+                        value={formData.otp}
+                        onChange={handleInputChange}
+                      />
+                      {formErrors.otp && (
+                        <div className="text-danger">{formErrors.otp}</div>
+                      )}
+                    </div>
+                  </div>
                 )}
+                <div className="form-btn-login-div">
+                  {!otpSent ? (
+                    <button type="submit" className="btn form-btn-login">
+                      Register
+                    </button>
+                  ) : (
+                    <button type="button" className="btn form-btn-login" onClick={handleVerifyOtp}>
+                      Submit OTP
+                    </button>
+                  )}
+                </div>
+                {message && <div className="alert alert-info">{message}</div>}
               </div>
-              {message && <div className="alert alert-info">{message}</div>}
             </form>
           </div>
         </div>
