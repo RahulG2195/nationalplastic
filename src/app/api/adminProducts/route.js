@@ -17,6 +17,7 @@ const uploadImage = async (file)=>{
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
     const path = `./uploads/${file.name}`;
+    
     await writeFile(path, buffer);
   }catch(error){
     console.log('error: ', error.message);

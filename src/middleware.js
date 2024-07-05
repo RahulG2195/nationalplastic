@@ -20,7 +20,7 @@ export async function middleware(req) {
         return NextResponse.redirect(new URL('/Login', req.url));
     }
     notifyError("Session Expired Please Login Again");
-    return NextResponse.redirect(new URL('/unauthorized', req.url));
+    return NextResponse.redirect(new URL('/Login', req.url));
 }
 
 export const config = {
