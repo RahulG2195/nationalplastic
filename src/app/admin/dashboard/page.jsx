@@ -16,7 +16,6 @@ import {
   Button,
 } from "reactstrap";
 // import LogoWhite from "public/assets/images/logo/main-logo.png";
-// import user1 from "public/assets/images/logo/logo.png";
 
 const Header = ({ showMobmenu }) => {
   const [isOpen, setIsOpen] = React.useState(false);
