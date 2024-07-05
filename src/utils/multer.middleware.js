@@ -9,7 +9,6 @@ if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
 
-console.log("Upload directory:", uploadDir);
 
 const upload = multer({
   limits: { fileSize: 10 * 1024 * 1024 }, // 10 MB size limit

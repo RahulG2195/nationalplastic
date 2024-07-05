@@ -13,7 +13,6 @@ export async function GET(req){
             })
         )
     }catch(e){
-    console.log(e.message);
          return new Response(
             JSON.stringify({success:false, message:e.message}),
             {status:500}

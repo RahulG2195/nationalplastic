@@ -76,19 +76,15 @@ function ProdData({ category_id }) {
           );
           // product_id
 
-          console.log("Colors productColor : ", productColor);
 
           const colors = productColor.map((item) => item.color);
           colorBasedProductsImages(colors) 
 
-          console.log("Colors: ", colors);
-          console.log("Colors-: ", JSON.stringify(availableColor));
 
           productDetailArr = response.data.prod_detail.filter(
             (item) => item.prod_id == filteredData[0].product_id
           );
         }
-        console.log("productDetailsArray", productDetailArr )
         
         if (filteredData.length === 0) {
           setErrorMessage("Sorry, this product is not available");
@@ -110,7 +106,6 @@ function ProdData({ category_id }) {
 
 
   const colorBasedProductsImages = async (colors) => {
-    console.log("Its from the 106 ", colors);
     setAvailableColor(colors);
   
     try {
@@ -120,7 +115,6 @@ function ProdData({ category_id }) {
       });
       const  rawdataToShow  = response.data.data
       setdataToShow(rawdataToShow);
-      console.log('Response response::::::', rawdataToShow);
       // Handle the response as needed
     } catch (error) {
       console.error('Error updating colors:', error);
@@ -177,7 +171,6 @@ function ProdData({ category_id }) {
       const newProductID = dataBasedOnColor[0].product_id;
       setProduct_id(newProductID)
       const NoOfImages = dataBasedOnColor[0].image_name;
-      console.log(availableColor);
       if (isImageAvailable && (NoOfImages.includes(",") || NoOfImages.includes(", "))) {
         setProdData(dataBasedOnColor);
         setData(dataBasedOnColor);
@@ -289,11 +282,8 @@ function ProdData({ category_id }) {
                     </p>
 
 {dataToShow.map((val, index) => {
-  // Assume you have a base URL for your images
   const baseImageUrl = '/Assets/images/products';
   const imageSrc = `${baseImageUrl}/${val.image_name}`;
-  console.log("imagesrc   ", imageSrc )
-  // public\Assets\images\products\Agra chairs-PKBLUE-(45) Lifestyle.webp
   return (
     <label key={index} style={{
       display: 'inline-block',

@@ -25,7 +25,6 @@ function Banner() {
 
   const { width } = windowSize;
 
-  // console.log('width', width)
   return (
     <>
     <div

@@ -98,7 +98,6 @@ const Registration = () => {
         notifyError();
       }
     } catch (err) {
-      //console.log(err.message);
       toast.error("Something went Wrong. please try again later.");
     }
   }

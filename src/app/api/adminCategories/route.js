@@ -81,7 +81,6 @@ export async function POST(request) {
 export async function PUT(request) {
   try {
     const data = await request.formData();
-    console.log(data, data);
     const { category_id, category_name, image_name, navshow, status, image , topPick=0} = Object.fromEntries(
       data.entries()
     );

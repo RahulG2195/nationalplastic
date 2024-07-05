@@ -20,7 +20,6 @@ const uploadImage = async (file)=>{
     
     await writeFile(path, buffer);
   }catch(error){
-    console.log('error: ', error.message);
     throw new Error('Image upload failed: ' + error.message);
   }
 }
@@ -87,7 +86,6 @@ export async function POST(request) {
       }
     });
 
-    console.log("data: ", data);
     if (missingFields.length > 0) {
       return NextResponse.json(
         { success: false, error: `The following fields are required: ${missingFields.join(', ')}` },

@@ -18,7 +18,6 @@ export async function query({ query, values = [] }) {
     const [results] = await connection.execute(query, values);
     return results;
   } catch (error) {
-    console.log("Error in executing query: " + error);
     throw Error(error.message);
   } finally {
     if (connection) connection.release();

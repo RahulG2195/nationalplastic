@@ -16,7 +16,6 @@ const CardDectionPage = () => {
   const fetchHeroSections = async () => {
     try {
       const data = await axios.get(`${process.env.BASE_URL}/adminHomePage/heroSections`);
-      console.log("data", data.data.allHeroSections);
       setHeroSections(data.data.allHeroSections);
     } catch (error) {
       message.error('Failed to fetch hero sections');

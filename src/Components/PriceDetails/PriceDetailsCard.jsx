@@ -158,6 +158,8 @@ const PriceDetailsCard = ({
     });
   };
   const sendPaymentSuccessMail = async (values) => {
+    // console.log("values from sendPaymentSuccessMail", values)
+
     const paymentData = {
       id: values.id,
       contact: values.contact,
@@ -167,13 +169,14 @@ const PriceDetailsCard = ({
       method: values.method,
       order_id: values.order_id,
       currency: values.currency || "INR",
-      amount: values.amount,
+      amount: finalAmount,
       coupon_code: couponCode,
       status: values.status,
     };
     await axios.put(`${process.env.BASE_URL}/RegisterEmail`, paymentData);
   };
   const updateDatabase = async (values) => {
+    // console.log("values from updaetDatabase", values)
     const paymentData = {
       razorpay_order_id: values.order_id,
       customer_id: customer_id,
@@ -181,17 +184,16 @@ const PriceDetailsCard = ({
       Phone: values.contact,
       order_address: Address,
       order_city: Address,
-      paymentData,
       order_pincode: Address,
       order_payment_type: values.method,
       payment_status: values.status,
       razor_payment_id: values.id,
       order_detail: {
-        price: values.amount,
+        price: finalAmount,
         cart: productsData,
       },
     };
-    const resData = await axios.put(`${process.env.BASE_URL}/paymentVerif`, paymentData);
+    const resData = await axios.put(`${process.env.BASE_URL}/paymentVerify`, paymentData);
   };
   return (
     <>

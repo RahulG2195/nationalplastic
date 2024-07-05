@@ -49,8 +49,8 @@ const navigation = [
     icon: "bi bi-patch-check",
   },
   {
-    title: "Cards",
-    href: "/ui/cards",
+    title: "Order List",
+    href: "/admin/OrderList",
     icon: "bi bi-card-text",
   },
   {
