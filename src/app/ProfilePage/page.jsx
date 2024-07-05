@@ -277,12 +277,12 @@ function ProfilePage() {
 
         } else {
           const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: cancelProd };
-          var res = await axios.post('`${process.env.BASE_URL}/UserOrder', ProdData);
+          var res = await axios.post(`${process.env.BASE_URL}/UserOrder`, ProdData);
         }
 
       } else {
         const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: cancelProd };
-        var res = await axios.post('`${process.env.BASE_URL}/UserOrder', ProdData);
+        var res = await axios.post(`${process.env.BASE_URL}/UserOrder`, ProdData);
       }
 
 

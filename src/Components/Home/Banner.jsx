@@ -69,6 +69,17 @@ function Banner() {
             objectFit="cover"
           />
         </div>
+        <div className="carousel-item">
+          <Image
+            src={`/Assets/images/banner/Header-banner-websize.webp`}
+            className="img-fluid d-block w-100"
+            alt="ome banner 3"
+            width={100}
+            height={70}
+            layout="responsive"
+            objectFit="cover"
+          />
+        </div>
 
       </div>
       

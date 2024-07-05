@@ -33,7 +33,7 @@ function Login() {
   useEffect(() => {
     if (session) {
       // Send session data to your backend
-      axios.post('`${process.env.BASE_URL}/googleProvider', session.user)
+      axios.post(`${process.env.BASE_URL}/googleProvider`, session.user)
         .then(response => {
           const email = response.data.email
           const customer_id = response.data.customer_id
@@ -74,7 +74,7 @@ function Login() {
   async function sendDataToBackend() {
     try {
       await signIn("google")
-      const response = await axios.post('`${process.env.BASE_URL}/googleProvider', session.user);
+      const response = await axios.post(`${process.env.BASE_URL}/googleProvider`, session.user);
       const { email, customer_id } = response.data;
       if (status === "authenticated" && session?.user) {
         dispatch(
