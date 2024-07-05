@@ -2,6 +2,7 @@
 const nextConfig = {
   //   reactStrictMode: false,
   // output:'export',
+    // runtime: 'nodejs',
   eslint: {
     ignoreDuringBuilds: true,
   },
