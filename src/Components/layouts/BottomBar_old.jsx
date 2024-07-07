@@ -22,7 +22,7 @@ function BottomBar() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("/api/Products");
+        const res = await axios.get(`${process.env.BASE_URL}/Products`);
         const allproducts = res.data.products;
         setPreEventChair(
           allproducts.filter((products) => products.category_id == 13)

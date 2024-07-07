@@ -86,11 +86,7 @@ export default function Dealers() {
                 spaceBetween={10}
                 slidesPerView={6}
                 loop={true}
-                // navigation
-                // pagination={{ clickable: true }}
-                // scrollbar={{ draggable: true }}
-                // onSwiper={(swiper) => //console.log(swiper)}
-                // onSlideChange={() => //console.log('slide change')}
+              
                 autoplay={{
                   delay: 2500,
                   disableOnInteraction: false,

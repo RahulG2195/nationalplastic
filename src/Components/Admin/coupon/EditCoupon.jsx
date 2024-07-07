@@ -28,7 +28,7 @@ export default function EditCoupon() {
 
   const updateCoupon = async (formData) => {
     try {
-      const response = await axios.put("/api/adminCoupon", formData);
+      const response = await axios.put(`${process.env.BASE_URL}/adminCoupon`, formData);
       return response.data;
     } catch (error) {
       console.error('Update Error:', error.message);
@@ -59,7 +59,6 @@ export default function EditCoupon() {
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("couponToEdit"));
-    console.log("DaTaAAAAAAAAAAAAAAAAAAAa",data)
     if (data) {
       Object.keys(data).forEach(key => {
         if (key === 'start_date' || key === 'end_date') {

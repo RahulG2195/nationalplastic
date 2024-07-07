@@ -40,9 +40,9 @@ const Privacy = () => {
 
                 <h2>Account Information</h2>
                 <p>
-                    By using the account access service in the Company's websites, you authorize the Company and its agents to access third party sites, including that of banks and other payment gateways, designated by them or on their behalf for retrieving requested information.
-                    Each registration is for a single user only. The Company does not permit you to share your user's name and password with any other person nor with multiple users on a network.
-                    Responsibility for the security of any passwords issued rests with you. It is your duty to notify the Company immediately in writing of any unauthorized use of your password or account or any other breach of security. The Company will not be liable for any loss that may be incurred by you as a result of unauthorized use of your password or account, either with or without your knowledge. You shall not use anyone else's information such as address, password, order history or any other data etc. at any time.
+                    By using the account access service in the Companys websites, you authorize the Company and its agents to access third party sites, including that of banks and other payment gateways, designated by them or on their behalf for retrieving requested information.
+                    Each registration is for a single user only. The Company does not permit you to share your users name and password with any other person nor with multiple users on a network.
+                    Responsibility for the security of any passwords issued rests with you. It is your duty to notify the Company immediately in writing of any unauthorized use of your password or account or any other breach of security. The Company will not be liable for any loss that may be incurred by you as a result of unauthorized use of your password or account, either with or without your knowledge. You shall not use anyone elses information such as address, password, order history or any other data etc. at any time.
                 </p>
 
                 <h2>Shipping</h2>
@@ -70,16 +70,16 @@ const Privacy = () => {
                 <ul>
                     <li>No documents or related graphics on the Website are modified in any way;</li>
                     <li>No graphics on the Website are used separately from the corresponding text; and</li>
-                    <li>The Company's copyright and trade mark notices and this permission notice appear in all copies.</li>
+                    <li>The Companys copyright and trade mark notices and this permission notice appear in all copies.</li>
                 </ul>
                 <p>
-                    Subject to this clause, no part of the Website may be reproduced or stored in any other website or included in any public or private electronic retrieval system or service without the Company's prior written permission.
+                    Subject to this clause, no part of the Website may be reproduced or stored in any other website or included in any public or private electronic retrieval system or service without the Companys prior written permission.
                     Any rights not expressly granted in these terms are reserved.
                 </p>
 
                 <h2>Visitor Material and Conduct</h2>
                 <p>
-                    Other than personally identifiable information, which is covered under our Privacy Policy, any material you transmit or post to the Website shall be considered non-confidential and non-proprietary. The Company and its designees shall be free to copy, disclose, distribute, incorporate and otherwise use such material and all data, images, sounds, text and other things embodied therein for any and all commercial or non-commercial purposes. The Company may change, edit, or remove any user material or conversations that are illegal, indecent, obscene or offensive, or that violates the Company's policies in any way.
+                    Other than personally identifiable information, which is covered under our Privacy Policy, any material you transmit or post to the Website shall be considered non-confidential and non-proprietary. The Company and its designees shall be free to copy, disclose, distribute, incorporate and otherwise use such material and all data, images, sounds, text and other things embodied therein for any and all commercial or non-commercial purposes. The Company may change, edit, or remove any user material or conversations that are illegal, indecent, obscene or offensive, or that violates the Companys policies in any way.
                 </p>
                 <p>
                     The Company reserves the right at all times to disclose any information as is necessary to satisfy or comply with any applicable law, regulation, legal process or governmental request, or to edit, refuse to post or to remove any information or materials, in whole or in part, in its sole discretion.
@@ -139,8 +139,8 @@ const Privacy = () => {
                 <strong>Security Policy</strong>
                 <p>What are cookies and how www.NationalPlastic.com uses them?</p>
                 <p>A cookie is a small file created by website to store information on a personal computer and which it can later retrieve.
-                    We may use cookies for some administrative purposes, i.e. to store our customer's preferences for certain kinds of products or to store a password so that you do not have to input it every time you visit our website.
-                    If you are uncomfortable with the use of cookies technology, you can change your cookies preferences so that your browser doesn't accept cookies or accepts them only from limited sources.
+                    We may use cookies for some administrative purposes, i.e. to store our customers preferences for certain kinds of products or to store a password so that you do not have to input it every time you visit our website.
+                    If you are uncomfortable with the use of cookies technology, you can change your cookies preferences so that your browser does not accept cookies or accepts them only from limited sources.
                     Refer the Help section of your browser on how to enable or disable cookies.</p>
 
 
@@ -152,7 +152,7 @@ const Privacy = () => {
 
 
                 <strong>Secure Socket Layer - Protect Online Order Information</strong>
-                <p><Link href="/">www.NationalPlastic.com</Link> uses Secure Sockets Layer (SSL) encryption on all web pages where personal information is collected. To make purchases from this service, you must use an SSL-enabled browser such as Safari, Firefox, or Internet Explorer. Doing so protects the confidentiality of your personal information while it's transmitted over the Internet.</p>
+                <p><Link href="/">www.NationalPlastic.com</Link> uses Secure Sockets Layer (SSL) encryption on all web pages where personal information is collected. To make purchases from this service, you must use an SSL-enabled browser such as Safari, Firefox, or Internet Explorer. Doing so protects the confidentiality of your personal information while it is transmitted over the Internet.</p>
                 <p> "We are using Razorpay Software Private Limited which is certified by "VeriSign Secured" and "Payment Card Industry Data Security Standards (PCI-DSS)" authorities.</p>
 
 

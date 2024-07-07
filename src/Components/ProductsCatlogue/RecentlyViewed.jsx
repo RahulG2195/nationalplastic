@@ -99,13 +99,13 @@ const RecentlyViewed = () => {
         const searchedProducts = JSON.parse(localStorage.getItem('searchedProducts') || '[]');
         
         if (searchedProducts.length > 0) {
-          const response = await axios.put("/api/Search", { 
+          const response = await axios.put(`${process.env.BASE_URL}/Search`, { 
             productNames: searchedProducts 
           });
           let products = response.data.products;
   
           if (products.length < 3) {
-            const additionalResponse = await axios.get("/api/Products");
+            const additionalResponse = await axios.get(`${process.env.BASE_URL}/Products`);
             const additionalProducts = additionalResponse.data.limitProd;
             
             const newProducts = additionalProducts.filter(product => 
@@ -117,7 +117,7 @@ const RecentlyViewed = () => {
           setRecentlyViewedData(products);
         } else {
           // If no searched products, use the original API
-          const response = await axios.get("/api/Products");
+          const response = await axios.get(`${process.env.BASE_URL}/Products`);
           const filteredproducts = response.data.limitProd;
           setRecentlyViewedData(filteredproducts);
         }
@@ -136,7 +136,7 @@ const RecentlyViewed = () => {
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
 
-      const response = await axios.post("/api/wishListUser", {
+      const response = await axios.post(`${process.env.BASE_URL}/wishListUser`, {
         customer_id: customerId,
       });
       setWishlistItems(response.data.Wishlist);
@@ -156,8 +156,6 @@ const RecentlyViewed = () => {
   ) => {
     try {
       const isLoggedInResult = await isLoggedIn();
-      //console.log("state", isLoggedInResult);
-      //console.log("state", typeof isLoggedInResult);
       if (!isLoggedInResult) {
         notifyError();
         router.push("/Login");
@@ -177,22 +175,18 @@ const RecentlyViewed = () => {
   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch("/api/ProductsCat", {
+      const response = await fetch(`${process.env.BASE_URL}/ProductsCat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ product_id: id }),
       });
-      //console.log(response);
-
       if (!response.ok) {
         throw new Error("Failed to fetch product data");
       }
 
       const data = await response.json();
-      //console.log(" data ", data);
-
       return data;
     } catch (error) {
       console.error("Error fetching product data:", error);
@@ -206,10 +200,8 @@ const RecentlyViewed = () => {
     const data = await fetchPrice(product_id);
     const price = data.price;
     const discount_price = data.discount_price;
-    // const product_id = data.product_id;
     switch (isLoggedInResult) {
       case false:
-        //console.log("User not logged in. Notifying...");
         dispatch(
           addToCartD({
             product_id,
@@ -236,7 +228,6 @@ const RecentlyViewed = () => {
         );
       // Consider additional actions for unexpected login states
     }
-    //console.log("this is product id in card ", product_id);
   };
 
   return (

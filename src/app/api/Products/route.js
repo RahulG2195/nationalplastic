@@ -53,7 +53,6 @@ export async function GET(request) {
       })
     );
   } catch (error) {
-    // console.log("")
     return new Response(
       JSON.stringify({
         status: 500,

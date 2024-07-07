@@ -1,53 +1,82 @@
 "use client"
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import { Form, Input, Button, InputNumber, message } from 'antd';
 import "./EditProduct.css";
 import axios from 'axios';
-
+import { toast, Bounce } from "react-toastify";
 export default function App() {
-  const { control, handleSubmit, setValue, formState: { errors } } = useForm();
+  const { control, handleSubmit, setValue, reset,formState: { errors } } = useForm();
   const [imagePreviews, setImagePreviews] = useState([]);
+  const navigate = useNavigate();
+  const handleNavigation = () => {
+    navigate('/admin/product', { replace: true });
+    window.location.reload();
+  };
 
   const onSubmit = async (data) => {
-    try {
-      // Validate category name and get category_id
-      const isValidCategoryName = await axios.post("/api/adminValidationP", {
-        category_name: data.category_name
-      });
-      
-      const category_id = isValidCategoryName.data.category_id;
-      data.category_id = category_id;
-  
-      if (isValidCategoryName) {
-        // Prepare the form data
-        const formData = new FormData();
-        
-        Object.keys(data).forEach(key => {
-          if (key === 'images') {
-            data[key].forEach((file, index) => {
-              formData.append(`image${index}`, file);
-            });
-          } else {
-            formData.append(key, data[key]);
-          }
+    const submitLoader = async () => {
+      try {
+        // Validate category name and get category_id
+        const isValidCategoryName = await axios.post(`${process.env.BASE_URL}/adminValidationP`, {
+          category_name: data.category_name
         });
-  
-        // Send data to the API
-        const response = await axios.post('/api/adminProducts', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        });
-  
-        // Handle the response, e.g., show a success message
-        message.success('Product created successfully');
+
+        if (!isValidCategoryName.status == 200) {
+          throw new Error(isValidCategoryName.data.error || "Invalid category name");
+        }
+        const category_id = isValidCategoryName.data.category_id;
+        data.category_id = category_id;
+        if (isValidCategoryName) {
+          // Prepare the form data
+          const formData = new FormData();
+          Object.keys(data).forEach(key => {
+            if (key === 'images') {
+              data[key].forEach((file, index) => {
+                formData.append(`image${index}`, file);
+              });
+            } else {
+              formData.append(key, data[key]);
+            }
+          });
+          // Send data to the API
+          const response = await axios.post(`${process.env.BASE_URL}/adminProducts`, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          });
+
+          reset();
+          handleNavigation();
+          return 'Product created successfully';
+        }
+        throw new Error(response.data.error || "Failed to add product");
+      } catch (error) {
+        if (error.response && error.response.status === 404) {
+        throw new Error(error.response ? error.response.data.message: 'Category is invalid');
+        } else {
+        throw new Error(error.response ? error.response.data.error : 'Failed to create product');
+        }
       }
-    } catch (error) {
-      // Handle errors, e.g., show an error message
-      console.error('Error:', error.response ? error.response.data : error.message);
-      message.error('Failed to create product');
-    }
+    };
+  
+    toast.promise(
+      submitLoader(),
+      {
+        pending: "Creating product...",
+        success: "Product created successfully!",
+        error: {
+          render({ data }) {
+            return data.message || "Failed to create product";
+          },
+        },
+      },
+      {
+        position: "top-center",
+        transition: Bounce,
+      }
+    );
   };
   
   const handleFileChange = (e) => {

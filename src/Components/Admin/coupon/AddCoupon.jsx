@@ -28,7 +28,7 @@ export default function AddCoupon() {
 
   const addCoupon = async (formData) => {
     try {
-      const response = await axios.post("/api/adminCoupon", formData);
+      const response = await axios.post(`${process.env.BASE_URL}/adminCoupon`, formData);
       return response.data;
     } catch (error) {
       console.error('Add Error:', error.message);

@@ -9,22 +9,36 @@ import "../../../../envConfig.js";
 // Define your API endpoint handler for GET request
 // import { useRouter } from 'next/navigation'
 
-export async function GET(req, res) {
+export async function GET(request) {
   try {
+    const orderResult = await query({
+      query: `
+        SELECT ol.*, od.*
+        FROM order_list AS ol
+        LEFT JOIN order_detail AS od ON ol.order_id = od.order_id
+      `
+    });
 
-    const { email, password, getProfile } = await req.json();
-    console.log('requestings111', req.json())
-    if (existingUser.length > 0) {
-      
-    } else {
-      throw new Error("User not registered");
-    }
+    return new Response(
+      JSON.stringify({
+        status: 200,
+        orderData: orderResult,
+        message: "All Orders Retrieved",
+      }),
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+    );
   } catch (error) {
     return new Response(
       JSON.stringify({
         status: 500,
         message: error.message,
-      })
+      }),
+      {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      }
     );
   }
 }

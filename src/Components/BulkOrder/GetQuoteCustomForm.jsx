@@ -6,7 +6,6 @@ import axios from "axios";
 import { Bounce, toast } from "react-toastify";
 
 const notify = (props) => {
-  //console.log("name " + prodName);
   toast.success("Mail Sended SucessFully", {
     position: "top-center",
     autoClose: 2000,
@@ -86,16 +85,14 @@ const GetQuoteCustomForm = (props) => {
     if (!isValid) return;
 
     try {
-      await axios.post("/api/BulkOrderForm", formData);
+      await axios.post(`${process.env.BASE_URL}/BulkOrderForm`, formData);
       notify();
     } catch (error) {
       console.error("Error:", error);
       notifyError();
     }
     try {
-      const response = await axios.post("/api/bulkOrderEmail", formData);
-      // console.log("Response:", response.data);
-      // console.log("Response:", JSON.stringify(response.data));
+      const response = await axios.post(`${process.env.BASE_URL}/bulkOrderEmail`, formData);
     } catch (error) {
       console.error("Error:", error);
       notifyError();

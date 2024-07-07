@@ -22,10 +22,8 @@ export async function POST(req, res) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    const path = `./uploads/${file.name}`;
+    const path = `./public/Assets/uploads/${file.name}`;
     await writeFile(path, buffer);
-    //console.log(`open ${path} to see the uploaded file`);
-
     // Extract other form fields
     const { FullName, email, JobProfile, MobileNumber } = Object.fromEntries(
       data.entries()
@@ -66,7 +64,6 @@ export async function POST(req, res) {
       ], // Attachments array with conditional file attachment
     });
 
-    //console.log("Email sent successfully!", info);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error sending email:", error);

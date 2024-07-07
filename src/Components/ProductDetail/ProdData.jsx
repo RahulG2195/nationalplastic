@@ -2,7 +2,6 @@
 import Link from "next/link";
 import "../../styles/prod_detail.css";
 import Image from "next/image";
-import NoCostEmi from "../NoCostEmi/NoCostEmi";
 import ProductDetailSlider from "../ProductDetailSlider/ProductDetailSlider";
 import MoreProduct from "./MoreProducts/MoreProduct";
 import IncrementDecrement from "@/Components/AddToCart/IncrementDecrement";
@@ -12,13 +11,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/redux/reducer/cartSlice";
 import { addToCartD } from "@/redux/reducer/tempSlice";
 
-import { Bounce, toast } from "react-toastify";
 import { useParams } from "next/navigation";
-import { isLoggedIn } from "@/utils/validation";
 import Breadcrump from "../Breadcrump/Breadcrump";
 import GetQuoteCustomForm from "../BulkOrder/GetQuoteCustomForm";
 import { notifyError } from "@/utils/notify";
-import { Tooltip } from 'react-tooltip';
+// import user1 from "public/assets/images/logo/logo.png";
 
 function ProdData({ category_id }) {
   const [data, setData] = useState([]);
@@ -28,62 +25,29 @@ function ProdData({ category_id }) {
   const [categoryName, setCategoryName] = useState(null); // For Name of category to send to breadcrumbs
   const [isLoading, setIsLoading] = useState(true);
   const [productId, setProductId] = useState(null);
-  const [filteredData, setFilteredData] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [initialCount, setInitialCount] = useState(1);
   const [Product_Color, setProductColor] = useState([]);
   const [selectedColor, setSelectedColor] = useState(null);
   const [product_id, setProduct_id] = useState(null);
+  const [availableColor, setAvailableColor] = useState([]);
+  const [dataToShow, setdataToShow] = useState([]);
 
   const dispatch = useDispatch();
   const router = useParams();
   const id = router.productId;
 
-  // const increment = () => {
-  //   setCount(count + 1);
-  // };
+
 
   const handleIncrement = async () => {
-    // await dispatch(increaseQuantity({ product_id: productId }));
     setInitialCount(initialCount + 1);
   };
   const handleDecrement = async () => {
     if (initialCount > 0) {
-      // await dispatch(decreaseQuantity({ product_id: productId }));
       setInitialCount(initialCount - 1); // Decrement by 1
     }
   };
 
-  // const handleColorChange = async (event) => {
-
-  //   setSelectedColor(event.target.value);
-  //   const colorBasedProduct = { color: event.target.value, name: id };
-
-  //   try {
-  //     const response = await axios.post("/api/colorBasedProduct", colorBasedProduct);
-  //     const dataBasedOnColor = response.data?.data;
-
-  //     const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
-
-  //     const NoOfImages = dataBasedOnColor[0].image_name;
-
-  //     if (isImageAvailable) {
-
-  //       if(NoOfImages.includes(",") || NoOfImages.includes(", ")){
-  //         SetUpdateImage(NoOfImages);
-  //       }else{
-  //         // SetUpdateImage(NoOfImages);
-  //         notifyError("Image Not available");
-  //       }
-  //     } else {
-  //       notifyError("Image Not available");
-  //     }
-
-
-  //   } catch (err) {
-  //     console.log("Image isnt available", err);
-  //   }
-  // };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -91,7 +55,7 @@ function ProdData({ category_id }) {
         const productName = id;
         setProductId(storedId);
 
-        const response = await axios.get("/api/Products");
+        const response = await axios.get(`${process.env.BASE_URL}/Products`);
         let filteredData = [];
         let productDetailArr = [];
         let productColor = [];
@@ -111,10 +75,17 @@ function ProdData({ category_id }) {
             (val) => val.product_name == filteredData[0].product_name
           );
           // product_id
+
+
+          const colors = productColor.map((item) => item.color);
+          colorBasedProductsImages(colors) 
+
+
           productDetailArr = response.data.prod_detail.filter(
             (item) => item.prod_id == filteredData[0].product_id
           );
         }
+        
         if (filteredData.length === 0) {
           setErrorMessage("Sorry, this product is not available");
         } else {
@@ -133,10 +104,28 @@ function ProdData({ category_id }) {
     fetchData();
   }, [id]);
 
+
+  const colorBasedProductsImages = async (colors) => {
+    setAvailableColor(colors);
+  
+    try {
+      const response = await axios.put(`${process.env.BASE_URL}/colorBasedProduct`, {
+        name: "Agra",
+        colors: colors
+      });
+      const  rawdataToShow  = response.data.data
+      setdataToShow(rawdataToShow);
+      // Handle the response as needed
+    } catch (error) {
+      console.error('Error updating colors:', error);
+      // Handle any errors
+    }
+  };
+
   const category = async (catName) => {
     try {
       if (catName) {
-        const category = await axios.put("/api/Products", {
+        const category = await axios.put(`${process.env.BASE_URL}/Products`, {
           category_id: catName,
         });
         const { category_name, category_id } = category.data;
@@ -150,7 +139,7 @@ function ProdData({ category_id }) {
 
   const fetchPrice = async (storedId) => {
     try {
-      const response = await fetch("/api/ProductsCat", {
+      const response = await fetch(`${process.env.BASE_URL}/ProductsCat`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -176,13 +165,12 @@ function ProdData({ category_id }) {
     setSelectedColor(event.target.value);
     const colorBasedProduct = { color: event.target.value, name: id };
     try {
-      const response = await axios.post("/api/colorBasedProduct", colorBasedProduct);
+      const response = await axios.post(`${process.env.BASE_URL}/colorBasedProduct`, colorBasedProduct);
       const dataBasedOnColor = response.data?.data;
       const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
       const newProductID = dataBasedOnColor[0].product_id;
       setProduct_id(newProductID)
       const NoOfImages = dataBasedOnColor[0].image_name;
-
       if (isImageAvailable && (NoOfImages.includes(",") || NoOfImages.includes(", "))) {
         setProdData(dataBasedOnColor);
         setData(dataBasedOnColor);
@@ -292,36 +280,59 @@ function ProdData({ category_id }) {
                     <p>
                       <strong>Color: </strong> {selectedColor}
                     </p>
-                    {Product_Color.map((val, index) => {
-                      return (
-                        <input
-                          type="radio"
-                          name="prod_clr"
-                          id={val.color}
-                          value={val.color}
-                          checked={selectedColor === val.color}
-                          onChange={handleColorChange}
-                          key={index}
-                          className="productDetailsRadio m-1"
-                          style={{ "--radio-color": val.color_code }}
-                        />
-                      );
-                    })}
+
+{dataToShow.map((val, index) => {
+  const baseImageUrl = '/Assets/images/products';
+  const imageSrc = `${baseImageUrl}/${val.image_name}`;
+  return (
+    <label key={index} style={{
+      display: 'inline-block',
+      margin: '4px',
+      cursor: 'pointer'
+    }}>
+      <input
+        type="radio"
+        name="prod_clr"
+        id={val.color}
+        value={val.color}
+        checked={selectedColor === val.color}
+        onChange={handleColorChange}
+        style={{ display: 'none' }} // Hide the actual radio button
+      />
+      <div style={{
+        width: '48px',
+        height: '48px',
+        position: 'relative',
+        borderRadius: '50%',
+        border: selectedColor === val.color ? '2px solid #000' : '2px solid transparent',
+        transition: 'all 0.3s ease',
+        ...(selectedColor === val.color ? {
+          boxShadow: '0 0 0 2px #fff, 0 0 0 4px #000'
+        } : {}),
+      }}>
+        <Image 
+          src={imageSrc} 
+          alt={val.color}
+          width={3}
+          height={3}
+          layout="responsive"
+          objectFit="cover"
+          // layout="fill"
+          // objectFit="cover"
+          style={{
+            borderRadius: '50%',
+            height:'100%',
+            width:'100%'
+          }}
+        />
+      </div>
+    </label>
+  );
+})}
                     {/* <label htmlFor="white">White</label> */}
                   </div>
                 </div>
               </div>
-              {/* <div className="bulk_order_div">
-                <Link href="/BulkOrder" className="">
-                    <button
-                    className="btn btn-danger px-md-5 my-2 ProdbtnRes bulkRes  "
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
-                  >
-                    Bulk Order
-                  </button>
-                </Link>
-              </div> */}
               <div className="product-ccount">
                 <label htmlFor="size">Quantity</label>
                 <div className="d-md-flex pb-md-3">

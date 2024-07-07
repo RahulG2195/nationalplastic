@@ -33,11 +33,8 @@ function Login() {
   useEffect(() => {
     if (session) {
       // Send session data to your backend
-      axios.post('/api/googleProvider', session.user)
+      axios.post(`${process.env.BASE_URL}/googleProvider`, session.user)
         .then(response => {
-          console.log('Response from API:', response.data);
-          console.log(response.body);
-          console.log('Response from API:',);
           const email = response.data.email
           const customer_id = response.data.customer_id
 
@@ -77,23 +74,18 @@ function Login() {
   async function sendDataToBackend() {
     try {
       await signIn("google")
-      const response = await axios.post('/api/googleProvider', session.user);
-      console.log('Response from API:', response.data);
+      const response = await axios.post(`${process.env.BASE_URL}/googleProvider`, session.user);
       const { email, customer_id } = response.data;
-      console.log("before if == = = =");
       if (status === "authenticated" && session?.user) {
-        console.log("inside if == = = =");
         dispatch(
           setUserData({
             email: email,
             customer_id: customer_id,
           })
         );
-        console.log("inside if == =2 = =");
         SetRefresh(true);
         // router.push("/"); // Redirect to homepage
       }
-      console.log("inside if == = 3= =");
     } catch (error) {
       console.log('Error sending data to API:', error);
     }
@@ -107,7 +99,7 @@ function Login() {
     }
     const loginLoader = async () => {
       try {
-        const res = await axios.put(`/api/Users`, formData);
+        const res = await axios.put(`${process.env.BASE_URL}/Users`, formData);
         const userData = res.data.message[0];
         const { customer_id } = userData;
 

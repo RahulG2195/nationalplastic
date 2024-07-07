@@ -16,22 +16,12 @@ const WishlistPage1 = () => {
     const userDataString = localStorage.getItem("userData");
     const userData = JSON.parse(userDataString) || {};
     const customerId = userData.customer_id || {};
-    // console.log("wishlistID ", customerId);
     const fetchData = async () => {
       try {
-        console.log("from whishlistpage1")
-        const response = await axios.post("/api/wishListUser", {
+        const response = await axios.post(`${process.env.BASE_URL}/wishListUser`, {
           customer_id: customerId,
         });
-        // const wishlistData = response.data.products;
-        // console.log(
-        //   "response from wishlistpage after useEffect ",
-        //   response.data
-        // );
-        // console.log(
-        //   "response from wishlistpage after useEffect ",
-        //   response.data.products
-        // );
+        
         const wishlistData = response.data.products.map((item) => {
           // Calculate discount percentage
           const discountPercentage =
@@ -46,7 +36,6 @@ const WishlistPage1 = () => {
             discount_percentage: discountPercentage,
           };
         });
-        // console.log("WS dta:",JSON.stringify(wishlistData))
         setWishlistItems(wishlistData);
         setIsLoading(false);
       } catch (error) {
@@ -70,7 +59,7 @@ const WishlistPage1 = () => {
       formData.append("product_id", product_id);
       for (const entry of formData.entries()) {
       }
-      const response = await axios.delete("/api/wishListUser", {
+      const response = await axios.delete(`${process.env.BASE_URL}/wishListUser`, {
         data: formData,
       });
 

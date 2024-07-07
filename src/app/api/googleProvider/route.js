@@ -3,11 +3,6 @@ import { query } from "@/lib/db";
 export async function POST(request) {
     try {
         const { email, name, id } = await request.json();
-
-        console.log("Email:", email);
-        console.log("username:", name);
-        console.log("google_id:", id);
-
         // Check if the email already exists in the database
         const existingUser = await query({
             query: "SELECT * FROM customer WHERE Email = ?",

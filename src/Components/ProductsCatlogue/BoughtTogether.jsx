@@ -45,7 +45,7 @@ const BoughtTogether = () => {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          "/api/Products"
+          `${process.env.BASE_URL}/Products`
         );
         setTogetherCardsData(response.data.products);
       } catch (error) {
@@ -57,8 +57,6 @@ const BoughtTogether = () => {
 
   const handleMoveToCart = async (product_id) => {
     const isLoggedInResult = await isLoggedIn();
-    //console.log("state", isLoggedInResult);
-    //console.log("state", typeof isLoggedInResult);
     const data = await fetchPrice(product_id);
     const price = data.price;
     const discount_price = data.discount_price;
@@ -93,8 +91,6 @@ const BoughtTogether = () => {
 
   const handleAddToWishlist = async (product_id) => {
     const isLoggedInResult = await isLoggedIn();
-    //console.log("state", isLoggedInResult);
-    //console.log("state", typeof isLoggedInResult);
     if (!isLoggedInResult) {
       notify();
       route.push("/Login");
@@ -109,7 +105,7 @@ const BoughtTogether = () => {
 
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch("/api/ProductsCat", {
+      const response = await fetch(`${process.env.BASE_URL}/ProductsCat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -122,8 +118,6 @@ const BoughtTogether = () => {
       }
 
       const data = await response.json();
-      //console.log(" data ", data);
-
       return data;
     } catch (error) {
       console.error("Error fetching product data:", error);

@@ -18,9 +18,8 @@ const CouponList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const rawData = await axios.get("/api/adminCoupon");
+      const rawData = await axios.get(`${process.env.BASE_URL}/adminCoupon`);
       const { coupons } = rawData.data;
-      console.log("coupons", coupons);
       setCouponArray(coupons);
       setFilteredCouponArray(coupons);
     };
@@ -41,7 +40,7 @@ const CouponList = () => {
   const handleConfirmDelete = async () => {
     if (currentItemToDelete !== null) {
       try {
-        await axios.delete("/api/adminCoupon", {
+        await axios.delete(`${process.env.BASE_URL}/adminCoupon`, {
           headers: {
             'Content-Type': 'application/json',
           },

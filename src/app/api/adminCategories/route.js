@@ -1,47 +1,49 @@
 import { query } from '@/lib/db';
 import { writeFile } from "fs/promises";
 import upload from "@/utils/multer.middleware";
+import { uploadFile } from "@/utils/fileUploader";
+// import { query } from "@/lib/db";
 
-
-const uploadImage = async (file)=>{
-  try{
-    await upload.single(file);
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-    const path = `./uploads/${file.name}`;
-    await writeFile(path, buffer);
-  }catch(error){
-    console.log('error: ', error.message);
-  }
-}
 export async function POST(request) {
   try {
     const data = await request.formData();
 
-
-    const { category_name, image_name, navshow, status, image , topPick=0 } = Object.fromEntries(
+    const { category_name, navshow, status, topPick = 0 } = Object.fromEntries(
       data.entries()
     );
 
-    
-    if(image){
-      uploadImage(image)
+    const image = data.get('image');
+    let uploadedImageName = '';
+
+    if (image && image instanceof File) {
+      try {
+        uploadedImageName = await uploadFile(image);
+      } catch (uploadError) {
+        return new Response(
+          JSON.stringify({ success: false, error: uploadError.message }),
+          { status: 400 }
+        );
+      }
     }
 
     const allCategories = await query({
-      query: "SELECT * FROM categories where category_name = ? ",
+      query: "SELECT * FROM categories WHERE category_name = ?",
       values: [category_name],
     });
-    if(allCategories.length>0){
-      return new Response(
-        JSON.stringify({ success: false, error: "Cataegory Name already exists" }),
-        { status: 401 }
-      ); 
-    }
-    // Manual validation
-    const requiredFields = { category_name, image_name, navshow, status };
 
-    const missingFields = Object.entries(requiredFields).filter(([key, value]) => !value).map(([key]) => key);
+    if (allCategories.length > 0) {
+      return new Response(
+        JSON.stringify({ success: false, error: "Category Name already exists" }),
+        { status: 401 }
+      );
+    }
+
+    // Manual validation
+    const requiredFields = { category_name, navshow, status };
+
+    const missingFields = Object.entries(requiredFields)
+      .filter(([key, value]) => !value)
+      .map(([key]) => key);
 
     if (missingFields.length > 0) {
       return new Response(
@@ -53,10 +55,10 @@ export async function POST(request) {
     // Insert the new category
     const result = await query({
       query: `
-        INSERT INTO categories (category_name, image_name, navshow, status ,topPick)
+        INSERT INTO categories (category_name, image_name, navshow, status, topPick)
         VALUES (?, ?, ?, ?, ?)
       `,
-      values: [category_name, image_name, navshow, status, topPick],
+      values: [category_name, uploadedImageName, navshow, status, topPick],
     });
 
     return new Response(
@@ -74,16 +76,24 @@ export async function POST(request) {
   }
 }
 
+
+
 export async function PUT(request) {
   try {
     const data = await request.formData();
-
     const { category_id, category_name, image_name, navshow, status, image , topPick=0} = Object.fromEntries(
       data.entries()
     );
 
     if (image) {
-      await uploadImage(image);  // Ensure this function handles image upload
+      try {
+        await uploadImage(image);
+      } catch (uploadError) {
+        return new Response(
+          JSON.stringify({ success: false, error: uploadError.message }),
+          { status: 400 }
+        );
+      }
     }
 
     // Manual validation

@@ -49,7 +49,6 @@ const WishlistCard = (props) => {
       toast.dismiss(); // Close the toast after deletion
     } catch (error) {
       alert("Can't delete");
-      //console.log(error);
     }
   };
   const handleCancel = () => {

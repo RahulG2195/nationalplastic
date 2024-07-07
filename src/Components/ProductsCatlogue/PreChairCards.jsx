@@ -60,7 +60,7 @@ const PreChairsCards = () => {
     try {
       const categoryTitle = localStorage.getItem("category");
       setCategoryType(categoryTitle);
-      const response = await axios.get(`/api/ProductsCat?query=${cat_id}`);
+      const response = await axios.get(`${process.env.BASE_URL}/ProductsCat?query=${cat_id}`);
 
       const fetchedData = response.data;
 
@@ -115,8 +115,6 @@ const PreChairsCards = () => {
 
   const handleAddToWishlist = async (product_id) => {
     const isLoggedInResult = await isLoggedIn();
-    //console.log("state", isLoggedInResult);
-    //console.log("state", typeof isLoggedInResult);
     if (!isLoggedInResult) {
       notify();
       route.push("/Login");
@@ -130,7 +128,7 @@ const PreChairsCards = () => {
   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch("/api/ProductsCat", {
+      const response = await fetch(`${process.env.BASE_URL}/ProductsCat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -143,8 +141,6 @@ const PreChairsCards = () => {
       }
 
       const data = await response.json();
-      //console.log(" data ", data);
-
       return data;
     } catch (error) {
       console.error("Error fetching product data:", error);
@@ -154,8 +150,6 @@ const PreChairsCards = () => {
 
   const handleMoveToCart = async (product_id) => {
     const isLoggedInResult = await isLoggedIn();
-    //console.log("state", isLoggedInResult);
-    //console.log("state", typeof isLoggedInResult);
     const data = await fetchPrice(product_id);
     const price = data.price;
     const discount_price = data.discount_price;
@@ -204,7 +198,6 @@ const PreChairsCards = () => {
       selectedPriceSort === "all" ? null : selectedPriceSort
     );
   };
-  // console.log('product data',  products)
 
   return (
     <>
@@ -280,7 +273,6 @@ const PreChairsCards = () => {
             <div className="row">
               {products.map((product, index) => {
                 const images = product.image_name ? product.image_name.split(', ').map(image => image.trim()) : [];
-                {/* console.log('images' + images[0]); */ }
                 return <div
                   key={index}
                   className="PreCardSm col-12 col-sm-6 col-xs-4 col-md-6 col-lg-3 newProdCard"
