@@ -24,6 +24,13 @@ export async function GET(request) {
         "Select product_id, product_name, color, color_code FROM products WHERE prod_status = 1",
       values: [],
     });
+
+    // const per_prod_img = await query({
+    //   query:
+    //     "Select product_id, product_name, color, color_code FROM products WHERE prod_status = 1",
+    //   values: [],
+    // });
+
     const prod_detail = await query({
       query: "SELECT * FROM product_detail",
       values: [],
