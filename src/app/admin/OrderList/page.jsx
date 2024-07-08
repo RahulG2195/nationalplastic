@@ -26,7 +26,18 @@ const OrderTable = () => {
     //   if (!response.ok) {
     //     throw new Error('Failed to fetch orders');
     //   }
-      const data = await response.json();
+
+    const orderData = response.data.orderData; 
+
+
+    console.log("response 2", orderData);
+
+    console.log("response 3 ", orderData3);
+
+
+
+
+      // const data = await response.json();
       if (data.status === 200) {
         setOrders(data.orderData);
       } else {
