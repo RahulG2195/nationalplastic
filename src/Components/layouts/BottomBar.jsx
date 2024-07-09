@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./BottomBar.css";
 import "./BottomBar.module.css";
 import Link from "next/link";
@@ -8,22 +8,10 @@ import Image from "next/image";
 
 function BottomBar() {
   const [name, setName] = useState("");
-  const [seourl, setSeourl] = useState();
-  const [preEventChair, setPreEventChair] = useState([]);
-  const [withountArm, setWithoutArm] = useState([]);
-  const [prechair, setPrechair] = useState([]);
-  const [Popularchair, setPopularchair] = useState([]);
-  const [cabinet, setCabinet] = useState([]);
-  const [babychair, setBabychair] = useState([]);
-  const [stool, setStool] = useState([]);
-  const [table, setTable] = useState([]);
-  const [box, setBox] = useState([]);
-  const [drawer, setDrawer] = useState([]);
-
-  // state for navbar loop
   const [navbar, setNavbar] = useState([]);
   const [AllProd, SetAllProd] = useState([]);
   const [getImg, SetGetImg] = useState("");
+  const dropdownRefs = useRef([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,9 +24,8 @@ function BottomBar() {
         const navshow = nav.data.navshow;
         SetAllProd(allproducts);
         setNavbar(navshow);
-
-      } catch {
-        console.error("Error fetching data:");
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -59,67 +46,93 @@ function BottomBar() {
   };
 
   const ChangeNavImage = (category_id) => {
-    const navImg = navbar.filter(
-      (cat) => cat.category_id == category_id
-    );
-    SetGetImg(navImg[0]['image_name']);
+    const navImg = navbar.filter((cat) => cat.category_id === category_id);
+    SetGetImg(navImg[0]["image_name"]);
   };
 
   const ChangeImage = (prod_name) => {
     const img_name = AllProd.filter(
-      (products) => products.product_name == prod_name && products.seo_url_clr !== ''
+      (products) =>
+        products.product_name === prod_name && products.seo_url_clr !== ""
     );
 
     img_name.map((val) => {
-      const images = val.image_name ? val.image_name.split(', ').map(image => image.trim()) : [];
+      const images = val.image_name
+        ? val.image_name.split(", ").map((image) => image.trim())
+        : [];
       SetGetImg(images[0]);
     });
   };
 
+  useEffect(() => {
+    const handleHover = (index) => {
+      const dropdown = dropdownRefs.current[index];
+      const rect = dropdown.getBoundingClientRect();
+      if (rect.right > window.innerWidth) {
+        dropdown.classList.add('flipped');
+      } else {
+        dropdown.classList.remove('flipped');
+      }
+    };
+
+    dropdownRefs.current.forEach((dropdown, index) => {
+      const parent = dropdown.parentElement;
+      parent.addEventListener('mouseover', () => handleHover(index));
+    });
+
+    return () => {
+      dropdownRefs.current.forEach((dropdown, index) => {
+        const parent = dropdown.parentElement;
+        parent.removeEventListener('mouseover', () => handleHover(index));
+      });
+    };
+  }, [navbar]);
+
   return (
-    <div className=" px-md-5 d-flex align-items-center bottom_nav position-relative mainrow">
-      {navbar.map((val) => (
+    <div className="px-md-5 d-flex align-items-center bottom_nav position-relative mainrow">
+      {navbar.map((val, index) => (
         <div
           key={val.category_id}
-          className={`px-2 py-2 ${
-            val.category_name == "Stools" ||
-            val.category_name == "Tables" ||
-            val.category_name == "Drawer" ||
-            val.category_name == "Box"
+          className={`px-2 py-2 custom-dropdown-css ${
+            val.category_name === "Stools" ||
+            val.category_name === "Tables" ||
+            val.category_name === "Drawer" ||
+            val.category_name === "Box"
               ? val.category_name + " position-relative"
               : "second"
-          }`}
-        >
+          }`}>
           <Link
             onClick={sendCategory}
-            href={`/ProductCatlogue/${val.category_id}`}
-          >
-            <p className="" onMouseOver={() => ChangeNavImage(val.category_id)}>{val.category_name}</p>
+            href={`/ProductCatlogue/${val.category_id}`}>
+            <p className="" onMouseOver={() => ChangeNavImage(val.category_id)}>
+              {val.category_name}
+            </p>
           </Link>
 
-          <div className="ulCont SecondDrop mx-4 secondHover p-3 ">
+          <div
+            className="ulCont SecondDrop mx-4 secondHover p-3"
+            ref={(el) => (dropdownRefs.current[index] = el)}
+          >
             <p className="text-start fw-bold dropHeading p-3">
               {val.category_name}
             </p>
-            <div className="d-flex flex-row gap-5 px-3">
+            <div className="d-flex flex-row gap-3 px-3">
               {chunkArray(
                 AllProd.filter(
-                  (products) => products.category_id == val.category_id
+                  (products) => products.category_id === val.category_id
                 ),
                 6
               ).map((chunk, columnIndex) => (
                 <div key={columnIndex} className="column pt-3">
                   {chunk.map((product, index) => (
                     <p
-                      className="p-3 fw-semibold"
+                      className="p-2 fw-semibold"
                       key={index}
-                      onMouseOver={() => ChangeImage(product.product_name)}
-                    >
+                      onMouseOver={() => ChangeImage(product.product_name)}>
                       <Link
                         // onClick={() => handleOnClick(product.seo_url)}
                         className="nav-link"
-                        href={`/ProductDetail/${product.seo_url}`}
-                      >
+                        href={`/ProductDetail/${product.seo_url}`}>
                         {product.product_name2}
                       </Link>
                     </p>
@@ -141,16 +154,6 @@ function BottomBar() {
           </div>
         </div>
       ))}
-
-      {/* <div className="col">
-        <p>Drawers & Racks</p>
-      </div>
-      <div className="col small">
-        <p>Household Accesories</p>
-      </div>
-      <div className="col">
-        <p>Planters</p>
-      </div> */}
     </div>
   );
 }
