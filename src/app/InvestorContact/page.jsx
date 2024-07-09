@@ -8,7 +8,7 @@ const InvestorContact = () => {
           <div className="row">
             <div className="col-12">
               <div className="inn-content-wrap">
-                <h3 style={{ marginTop: 0 }}>Investor Services</h3>
+                <h3 style={{ marginTop: 0, padding: '9px, 0' }}>Investor Services</h3>
                 <p>
                   For any assistance / information on Share-related matters including
                   Dematerialisation / Rematerialisation, Transfer of shares, Transmission of
@@ -17,11 +17,7 @@ const InvestorContact = () => {
                   at:
                 </p>
                 <p style={{}}>
-                  <font face="Calibri, sans-serif">
-                    <span style={{ fontSize: "14.6667px" }}>
                       <b>Amit Jain</b>
-                    </span>
-                  </font>
                 </p>
                 <p>Company Secretary &amp; Compliance Officer</p>
                 <p>

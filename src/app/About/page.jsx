@@ -56,19 +56,23 @@ function About() {
   const certificatesarr = [
     {
       key: 1,
-      image: "/Assets/images/user.png",
+      image: "/Assets/images/certificates/PLEXCONCIL-Award-25-Sep-2015.jpg",
     },
     {
       key: 2,
-      image: "/Assets/images/user.png",
+      image: "/Assets/images/certificates/PLEXCONCIL-Award-2006-07.jpg",
     },
     {
       key: 3,
-      image: "/Assets/images/user.png",
+      image: "/Assets/images/certificates/PLEXCONCIL-Award-2008-09.jpg",
     },
     {
       key: 4,
-      image: "/Assets/images/user.png",
+      image: "/Assets/images/certificates/PLEXCONCIL-Award-2014-15.jpg",
+    },
+    {
+      key: 5,
+      image: "/Assets/images/certificates/PLEXCONCIL-Trophy-2014-15-16-17.jpg",
     },
   ];
   // Array for Awards & Certificatesend
@@ -97,7 +101,6 @@ function About() {
               <VMCard title={val.title} description={val.desc} />
             </div>
           ))}
-          {/* <div className="col-md-6"> <VMCard  title={titleValue} description={descriptionValue}/> </div> */}
         </div>
       </div>
       {/* Vission and Mission end */}
@@ -110,7 +113,7 @@ function About() {
         {/* Board Of Directors start */}
         <div className="row section_header team-header">
           <h2>Team</h2>
-          <h3>Board Of Directorss</h3>
+          <h3>Board Of Directors</h3>
         </div>
         <div className="row team-members">
           {imgarr.map((val) => (
@@ -151,7 +154,7 @@ function About() {
             <div className="fs-1 darkBlue fw-normal">
               Awards & <span className="fw-bold text-danger">Certificates</span>{" "}
             </div>
-            <div className="mt-1 fw-medium subCptRes w-50">
+            <div className="mt-1 fw-medium subCptRes">
               <p>
               National has been awarded as the number one exporter in the Plastic Furniture category by The Plastics Export Promotion Council (popularly known as PLEXCONCIL) sponsored by the Ministry of Commerce & Industry, Department of Commerce, Government of India. National is also accredited as a One Star Export House, the most distinguished title by the Ministry of Commerce & Industry, Directorate General of Foreign Trade, Government of India.</p>
             </div>
@@ -164,14 +167,14 @@ function About() {
             </div>
           ))}
         </div>
-        <div className="row team-members">
+        {/* <div className="row team-members">
           {certificatesarr.map((val) => (
             <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6" key={val.key}>
             {" "}
             <AwardsCertificates image={val.image} />
           </div>
           ))}
-        </div>
+        </div> */}
 
       </div>
     </>

@@ -19,10 +19,10 @@ const ShareHolding = () => {
               <thead>
                 <tr>
                   <td data-title="Year">Year 2023-2024</td>
-                  <td data-title="Quarter - 1"><a href="/Assets/pdf/30th%20June%202023.pdf">30th June 2023</a></td>
-                  <td data-title="Quarter - 2"><a href="/Assets/pdf/shreholding%20pattern.pdf">30th September 2023</a></td>
+                  <td data-title="Quarter - 1"><a href="/Assets/pdf/30th%20June%202023.pdf" target='_blank' >30th June 2023</a></td>
+                  <td data-title="Quarter - 2"><a href="/Assets/pdf/shreholding%20pattern.pdf" target='_blank' >30th September 2023</a></td>
                   <td data-title="Quarter - 3"><a href="/Assets/pdf/shreholding%20pattern(1).pdf" target="_blank">31<sup>st</sup> December 2023</a></td>
-                  <td data-title="Quarter - 4"><a href="/Assets/pdf/31st%20March%202024(1).pdf">31st March 2024</a></td>
+                  <td data-title="Quarter - 4"><a href="/Assets/pdf/31st%20March%202024(1).pdf" target='_blank' >31st March 2024</a></td>
                 </tr>
                 <tr>
                 </tr>

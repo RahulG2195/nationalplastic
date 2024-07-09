@@ -16,7 +16,7 @@ const Corporate = () => {
                     <td><a href="/Assets/pdf/UPSI_Leak_Inquiry_Policy.pdf" target="_blank"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> UPSI Leak Inquiry Policy</a></td>
                   </tr>
                   <tr>
-                    <td><a href="/Assets/pdf/Related%20Party%20Transaction%20Policy%20updated_28.05.2022.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>Related Party Transaction Policy</a></td>
+                    <td><a href="/Assets/pdf/Related%20Party%20Transaction%20Policy%20updated_28.05.2022.pdf" target='_blank' ><i className="fa fa-file-pdf-o" aria-hidden="true"></i>Related Party Transaction Policy</a></td>
                   </tr>
                   <tr>
                     <td><a href="/Assets/pdf/Code_for_Independent_Director.pdf" target="_blank"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Code for Independent Director</a></td>
@@ -58,16 +58,16 @@ const Corporate = () => {
               <table className='table table-responsive table-striped table-light table-bordered'>
                 <tbody>
                   <tr>
-                    <td><a href="/Assets/pdf/Annual%20Secretarial%20Compliance%20Certificate%20-%202022-23.pdf">Annual Secretarial Compliance Certificate - 2022-23</a></td>
+                    <td><a target='_blank' href="/Assets/pdf/Annual%20Secretarial%20Compliance%20Certificate%20-%202022-23.pdf">Annual Secretarial Compliance Certificate - 2022-23</a></td>
                   </tr>
                   <tr>
-                    <td><a href="/Assets/pdf/Annual%20Secretarial%20Compliance%20Certificate%20-%202021-22.pdf">Annual Secretarial Compliance Certificate - 2021-22</a></td>
+                    <td><a target='_blank' href="/Assets/pdf/Annual%20Secretarial%20Compliance%20Certificate%20-%202021-22.pdf">Annual Secretarial Compliance Certificate - 2021-22</a></td>
                   </tr>
                   <tr>
-                    <td><a href="/Assets/pdf/Annual%20Secretarial%20Compliance%20Certificate%20-%202020-21.pdf">Annual Secretarial Compliance Certificate - 2020-21</a></td>
+                    <td><a target='_blank' href="/Assets/pdf/Annual%20Secretarial%20Compliance%20Certificate%20-%202020-21.pdf">Annual Secretarial Compliance Certificate - 2020-21</a></td>
                   </tr>
                   <tr>
-                    <td><a href="/Assets/pdf/Annual%20Secretarial%20Compliance%20Report_%202019-20.pdf">Annual Secretarial Compliance Report_ 2019-20</a></td>
+                    <td><a target='_blank' href="/Assets/pdf/Annual%20Secretarial%20Compliance%20Report_%202019-20.pdf">Annual Secretarial Compliance Report_ 2019-20</a></td>
                   </tr>
                 </tbody>
               </table>
@@ -86,40 +86,40 @@ const Corporate = () => {
                   </tr>
                   <tr>
                     <td data-title="Year"><strong>Year 2023-2024</strong></td>
-                    <td data-title="Quarter - 1"><a href="/Assets/pdf/30th%20June%202023(1).pdf">30th June 2023</a></td>
-                    <td data-title="Quarter - 2"><a href="/Assets/pdf/Corporate%20Governance.pdf">30<sup>th</sup> September 2023</a></td>
-                    <td data-title="Quarter - 3"><a href="/Assets/pdf/Corporate%20Governance(1).pdf">31<sup>st</sup> December 2023</a></td>
-                    <td data-title="Quarter - 4"><a href="/Assets/pdf/31st%20March%202024.pdf">31st March 2024</a></td>
+                    <td data-title="Quarter - 1"><a target='_blank' href="/Assets/pdf/30th%20June%202023(1).pdf">30th June 2023</a></td>
+                    <td data-title="Quarter - 2"><a target='_blank' href="/Assets/pdf/Corporate%20Governance.pdf">30<sup>th</sup> September 2023</a></td>
+                    <td data-title="Quarter - 3"><a target='_blank' href="/Assets/pdf/Corporate%20Governance(1).pdf">31<sup>st</sup> December 2023</a></td>
+                    <td data-title="Quarter - 4"><a target='_blank' href="/Assets/pdf/31st%20March%202024.pdf">31st March 2024</a></td>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td data-title="Year"><strong>Year 2022-2023</strong></td>
-                    <td data-title="Quarter - 1"><a href="/Assets/pdf/30th%20June%202022..pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>30<sup>th</sup> June 2022</a></td>
-                    <td data-title="Quarter - 2"><a href="/Assets/pdf/30th%20September%202022(2).pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>30<sup>th</sup> September 2022</a></td>
-                    <td data-title="Quarter - 3"><a href="/Assets/pdf/31st%20December%202022(1).pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>31<sup>st</sup> December 2022</a></td>
-                    <td data-title="Quarter - 4"><a href="/Assets/pdf/31st%20March%202023.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>31<sup>st</sup> March 2023</a></td>
+                    <td data-title="Quarter - 1"><a target='_blank' href="/Assets/pdf/30th%20June%202022..pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>30<sup>th</sup> June 2022</a></td>
+                    <td data-title="Quarter - 2"><a target='_blank' href="/Assets/pdf/30th%20September%202022(2).pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>30<sup>th</sup> September 2022</a></td>
+                    <td data-title="Quarter - 3"><a target='_blank' href="/Assets/pdf/31st%20December%202022(1).pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>31<sup>st</sup> December 2022</a></td>
+                    <td data-title="Quarter - 4"><a target='_blank' href="/Assets/pdf/31st%20March%202023.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>31<sup>st</sup> March 2023</a></td>
                   </tr>
                   <tr>
                     <td data-title="Year"><strong>Year 2021-2022</strong></td>
-                    <td data-title="Quarter - 1"><a href="/Assets/pdf/30th%20June%202021.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>30<sup>th</sup> June 2021</a></td>
-                    <td data-title="Quarter - 2"><a href="/Assets/pdf/30th%20September%202021.pdf">30th September 2021</a></td>
-                    <td data-title="Quarter - 3"><a href="/Assets/pdf/31st%20December%202021.pdf">31st December 2021</a></td>
-                    <td data-title="Quarter - 4">&nbsp;<a href="/Assets/pdf/31st%20March%202022..pdf">31st March 2022</a></td>
+                    <td data-title="Quarter - 1"><a target='_blank' href="/Assets/pdf/30th%20June%202021.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>30<sup>th</sup> June 2021</a></td>
+                    <td data-title="Quarter - 2"><a target='_blank' href="/Assets/pdf/30th%20September%202021.pdf">30th September 2021</a></td>
+                    <td data-title="Quarter - 3"><a target='_blank' href="/Assets/pdf/31st%20December%202021.pdf">31st December 2021</a></td>
+                    <td data-title="Quarter - 4">&nbsp;<a target='_blank' href="/Assets/pdf/31st%20March%202022..pdf">31st March 2022</a></td>
                   </tr>
                   <tr>
                     <td data-title="Year"><strong>Year 2020-2021</strong></td>
                     <td data-title="Quarter - 1"><a href="/Assets/pdf/Quaterly_Compliance_Report_30th_June-2014.pdf" target="_blank"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>30<sup>th</sup> June 2020</a></td>
                     <td data-title="Quarter - 2"><a href="/Assets/pdf/Quaterly_Compliance_Report_30th-Sep-2014.pdf" target="_blank"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>30<sup>th</sup> September 2020</a></td>
                     <td data-title="Quarter - 3"><a href="/Assets/pdf/Quaterly_Compliance_Report_31st-Dec-2013.pdf" target="_blank"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>31<sup>st</sup> December 2020</a></td>
-                    <td data-title="Quarter - 4"><a href="/Assets/pdf/31st%20March%202021.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>31st March 2021</a></td>
+                    <td data-title="Quarter - 4"><a target='_blank' href="/Assets/pdf/31st%20March%202021.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>31st March 2021</a></td>
                   </tr>
                   <tr>
                     <td data-title="Year"><strong>Year 2019-2020</strong></td>
-                    <td data-title="Quarter - 1"><a href="/Assets/pdf/30th%20June%202019.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>30<sup>th</sup>&nbsp;June 2019</a></td>
-                    <td data-title="Quarter - 2"><a href="/Assets/pdf/30th%20Sept%202019.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>30<sup>th</sup> September 2019</a></td>
-                    <td data-title="Quarter - 3"><a href="/Assets/pdf/31st%20December%202019.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>31<sup>st</sup> December 2019</a></td>
-                    <td data-title="Quarter - 4"><a href="/Assets/pdf/30th%20March%202020(1).pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>30<sup>th</sup> March 2020</a></td>
+                    <td data-title="Quarter - 1"><a target='_blank' href="/Assets/pdf/30th%20June%202019.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>30<sup>th</sup>&nbsp;June 2019</a></td>
+                    <td data-title="Quarter - 2"><a target='_blank' href="/Assets/pdf/30th%20Sept%202019.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>30<sup>th</sup> September 2019</a></td>
+                    <td data-title="Quarter - 3"><a target='_blank' href="/Assets/pdf/31st%20December%202019.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>31<sup>st</sup> December 2019</a></td>
+                    <td data-title="Quarter - 4"><a target='_blank' href="/Assets/pdf/30th%20March%202020(1).pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>30<sup>th</sup> March 2020</a></td>
                   </tr>
                   <tr>
                     <td data-title="Year"><strong>Year 2014-2015</strong></td>

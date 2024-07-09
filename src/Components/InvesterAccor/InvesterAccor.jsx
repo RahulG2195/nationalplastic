@@ -33,7 +33,7 @@ const InvestorAccor = ({ handleShow }) => {
         >
           <Typography className="m-0 ">
             <li className="">
-              <p className="mobHeader fw-bold ">Investors</p>
+              <p className="mobHeader fw-bold ">Investors (Reg. 46)</p>
             </li>
           </Typography>
         </AccordionSummary>

@@ -257,7 +257,7 @@ export default function Header() {
                             href="#"
                             onClick={isClicked ? handleShow : null}
                           >
-                            Investors
+                            Investors (Reg. 46)
                           </Link>
                           {dropdown && (
                             <ul className={styles.dropdown}>
