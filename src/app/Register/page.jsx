@@ -6,186 +6,189 @@ import { useRouter } from "next/navigation";
 import "../../styles/profilepage.css";
 import { toast, Bounce } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
-// Import validation functions
+import { Input } from 'antd';
+import { useEffect, useRef } from 'react';
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import {
   isValidName,
   isValidEmail,
   isValidMobile as isValidPhone,
   isValidPassword,
   isValidReason as isValidAddress,
+  isValidCity, isValidState, isValidPincode
 } from "@/utils/validation";
 import { notifyError } from "@/utils/notify";
+import "./passwordStyle.css";
+const initialFormData = {
+  firstName: "", lastName: "", email: "", phone: "", address: "",
+  password: "", confirmPassword: "", state: "", city: "", pincode: '', otp: "",
+};
 
 const Register = () => {
   const router = useRouter();
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    address: "",
-    password: "",
-    confirmPassword: "",
-    state: "",
-    city: "",
-    pincode: '',
-    otp: "", // Add OTP field
-  });
+  const [formData, setFormData] = useState(initialFormData);
   const [formErrors, setFormErrors] = useState({});
-  const [successMessage, setSuccessMessage] = useState("");
   const [message, setMessage] = useState('');
-  const [otpSent, setOtpSent] = useState(false); // State to track OTP sent status
+  const [otpSent, setOtpSent] = useState(false);
+  const otpInputs = useRef([]);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedOtpSent = localStorage.getItem('otp');
+      if (storedOtpSent === 'true') {
+        setOtpSent(true);
+      }
+    }
+  }, []);
 
-  const sendOTPLoader = async (email) => {
+  useEffect(() => {
+    if (otpSent && otpInputs.current[0]) {
+      otpInputs.current[0].focus();
+    }
+  }, [otpSent]);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormErrors(prev => ({ ...prev, [name]: "" }));
+  };
+  const handleOtpChange = (element, index) => {
+    if (isNaN(element.value)) return false;
+
+    setFormData(prev => ({
+      ...prev,
+      otp: prev.otp.substring(0, index) + element.value + prev.otp.substring(index + 1)
+    }));
+
+    if (element.nextSibling) {
+      element.nextSibling.focus();
+    }
+  };
+
+  const handleOtpKeyDown = (e, index) => {
+    if (e.key === 'Backspace' && !formData.otp[index] && index > 0) {
+      otpInputs.current[index - 1].focus();
+    }
+  };
+  const validateForm = () => {
+    const errors = {};
+    if (!isValidState(formData.state)){errors.state = "Invalid state";}
+    if (!isValidCity(formData.city)){errors.city = "Invalid city";}
+    if (!isValidPincode(formData.pincode)){errors.pincode = "Invalid pincode";}
+    if (!isValidName(formData.firstName)) errors.firstName = "Invalid first name";
+    if (!isValidName(formData.lastName)) errors.lastName = "Invalid last name";
+    if (!isValidEmail(formData.email)) errors.email = "Invalid email address";
+    if (!isValidPhone(formData.phone)) errors.phone = "Invalid phone number";
+    if (!isValidAddress(formData.address)) errors.address = "Invalid address";
+    if (!isValidPassword(formData.password)) errors.password = "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character";
+    if (formData.password !== formData.confirmPassword) errors.confirmPassword = "Passwords do not match";
+    return errors;
+  };
+  const combineAddressFields = (formData) => {
+    // Combine address fields
+    const fullAddress = `${formData.address}, ${formData.city}, ${formData.state}, ${formData.pincode}`.trim();
+
+    // Create updated formData with combined address
+    const updatedFormData = {
+      ...formData,
+      address: fullAddress, // Update the address field with the combined address
+    };
+
+    // Remove individual address fields
+    delete updatedFormData.state;
+    delete updatedFormData.city;
+    delete updatedFormData.pincode;
+
+    return updatedFormData;
+  };
+
+  const handleOTP = async (action) => {
     try {
-      const response = await axios.post(`${process.env.BASE_URL}/sendOTP`, { email });
-      if (response.status === 200) {
-        const data = response.data;
-        localStorage.setItem('otp', data.otp);
-        localStorage.setItem('otpExpiry', data.otpExpiry);
-        setMessage('Please check your email, OTP sent successfully.');
-        setOtpSent(true); // Set OTP sent status to true
-      } else {
-        setMessage(data.message);
-        throw new Error(data.message || 'Failed to send OTP');
+      if (action === 'send') {
+        const response = await axios.post(`${process.env.BASE_URL}/sendOTP`, { email: formData.email });
+        if (response.status === 200) {
+          const { otp, otpExpiry } = response.data;
+          localStorage.setItem('otp', otp);
+          localStorage.setItem('otpExpiry', otpExpiry);
+          setMessage('Please check your email, OTP sent successfully.');
+          setOtpSent(true);
+        } else {
+          throw new Error(response.data.message || 'Failed to send OTP');
+        }
+        // ... (keep the existing 'send' logic)
+      } else if (action === 'verify') {
+        const storedOtp = localStorage.getItem('otp');
+        const storedOtpExpiry = localStorage.getItem('otpExpiry');
+        if (new Date(storedOtpExpiry) < new Date()) {
+          throw new Error('OTP has expired.');
+        }
+        if (storedOtp !== formData.otp) {
+          throw new Error('Invalid OTP.');
+        }
+        // If OTP is valid, proceed with user registration
+        const updatedFormData = combineAddressFields(formData);
+        const response = await axios.post(`${process.env.BASE_URL}/Users`, updatedFormData);
+        localStorage.removeItem('otp');
+        localStorage.removeItem('otpExpiry');
+
+        if (response.status === 201) {
+          setMessage('Registration successful!');
+          setTimeout(() => router.push('/Login'), 2000); // Redirect after 2 seconds
+        } else {
+          throw new Error(response.data.message || 'Failed to complete registration');
+        }
       }
     } catch (error) {
-      setMessage(error.message || 'An error occurred while sending OTP. Please try again.');
-      throw new Error(error.message || 'Failed to send OTP');
+      setMessage(error.message || 'An error occurred. Please try again.');
+      throw error;
     }
-  };
-
-  const handleSendOTP = (email) => {
-    toast.promise(
-      sendOTPLoader(email),
-      {
-        pending: 'Sending OTP...',
-        success: 'OTP sent successfully!',
-        error: {
-          render({ data }) {
-            return data.message || 'Failed to send OTP';
-          },
-        },
-      },
-      {
-        position: 'top-center',
-        transition: Bounce,
-      }
-    );
-  };
-
-  const verifyOtpLoader = async () => {
-    const storedOtp = localStorage.getItem('otp');
-    const storedOtpExpiry = localStorage.getItem('otpExpiry');
-    const now = new Date();
-
-    if (storedOtpExpiry && new Date(storedOtpExpiry) < now) {
-      setMessage('OTP has expired.');
-      throw new Error('OTP has expired.');
-    }
-
-    if (storedOtp === formData.otp) {
-      setMessage('OTP verified successfully.');
-      localStorage.removeItem('otp');
-      localStorage.removeItem('otpExpiry');
-      const response = await axios.post(`${process.env.BASE_URL}/Users`, formData);
-
-      if (response.status === 201) {
-        setSuccessMessage('OTP verified successfully!! Registration complete.');
-        router.push('/Login');
-      } else {
-        throw new Error(response.data.message || 'Failed to complete registration');
-      }
-    } else {
-      setMessage('Invalid OTP.');
-      throw new Error('Invalid OTP.');
-    }
-  };
-
-  const handleVerifyOtp = () => {
-    toast.promise(
-      verifyOtpLoader(),
-      {
-        pending: 'Verifying OTP...',
-        success: 'OTP verified, Registration successfully!',
-        error: {
-          render({ data }) {
-            return data.message || 'Failed to verify OTP';
-          },
-        },
-      },
-      {
-        position: 'top-center',
-        transition: Bounce,
-      }
-    );
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const errors = validateForm(formData);
-
-    if (Object.keys(errors).length === 0) {
-      try {
-        const response = await axios.get(`${process.env.BASE_URL}/Users?email=${formData.email}`);
-        if (response.status === 201) {
-          handleSendOTP(formData.email); // Use handleSendOTP instead of sendOTP
-        } else {
-          notifyError("Email already exists!");
+    if (!otpSent) {
+      // This is the initial registration attempt
+      const errors = validateForm();
+      if (Object.keys(errors).length === 0) {
+        try {
+          const response = await axios.get(`${process.env.BASE_URL}/Users?email=${formData.email}`);
+          if (response.status === 201) {
+            toast.promise(
+              handleOTP('send'),
+              {
+                pending: 'Sending OTP...',
+                success: 'OTP sent successfully!',
+                error: { render: ({ data }) => data.message || 'Failed to send OTP' },
+              },
+              { position: 'top-center', transition: Bounce }
+            );
+          } else {
+            notifyError("Email already exists!");
+          }
+        } catch (error) {
+          console.error("Error submitting form:", error);
         }
-      } catch (error) {
-        console.error("Error submitting form:", error);
+      } else {
+        setFormErrors(errors);
       }
     } else {
-      setFormErrors(errors);
+      // This is the OTP verification attempt
+      toast.promise(
+        handleOTP('verify'),
+        {
+          pending: 'Verifying OTP...',
+          success: 'OTP verified successfully!',
+          error: { render: ({ data }) => data.message || 'Failed to verify OTP' },
+        },
+        { position: 'top-center', transition: Bounce }
+      );
     }
   };
-
-  const handleInputChange = (event) => {
-    const { name, value, files } = event.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: name === "image" ? files[0] : value,
-    }));
-
-    setFormErrors((prev) => ({
-      ...prev,
-      [name]: "",
-    }));
-  };
-
-  const validateForm = (data) => {
-    const errors = {};
-
-    if (!isValidName(data.firstName)) errors.firstName = "Invalid first name";
-    if (!isValidName(data.lastName)) errors.lastName = "Invalid last name";
-    if (!isValidEmail(data.email)) errors.email = "Invalid email address";
-    if (!isValidPhone(data.phone)) errors.phone = "Invalid phone number";
-    if (!isValidAddress(data.address)) errors.address = "Invalid address";
-    if (!isValidPassword(data.password))
-      errors.password =
-        "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character";
-    if (data.password !== data.confirmPassword)
-      errors.confirmPassword = "Passwords do not match";
-
-    return errors;
-  };
-
   const fields = {
-    "First Name": "firstName",
-    "Last Name": "lastName",
-    "Email": "email",
-    "Mobile No": "phone",
-    "State": "state",
-    "City": "city",
-    "Pincode": "pincode",
-    "Password": "Password",
-    "Confirm Password": "confirmPassword",
-    "Address": "address",
+    "First Name": "firstName", "Last Name": "lastName", "Email": "email",
+    "Mobile No": "phone", "State": "state", "City": "city", "Pincode": "pincode",
+    "Password": "password", "Confirm Password": "confirmPassword", "Address": "address",
   };
+
   return (
     <div className="container">
       <div className="row Login-Page-ImgForm">
@@ -206,98 +209,66 @@ const Register = () => {
               <div className="row">
                 <h3 className="mb-2">Registration</h3>
                 <p>Track your order, create wishlist & more</p>
-                {successMessage && (
-                  <div className="alert alert-success">{successMessage}</div>
-                )}
                 {!otpSent ? (
                   <>
-                    {Object.entries(fields).map(
-                      ([key, value], index) => (
-                        <div className={`mb-3 mt-3 ${(value === 'state' || value === 'city' || value === 'pincode') ? 'col-md-4' : value === 'address' ? 'col-12' : 'col-md-6'}`} key={index}>
-                          {value == 'address' ? 
-                          <>
-                          <label htmlFor={`input${value.charAt(0).toUpperCase() + value.slice(1)}`}>
-                            {key}
-                            </label>
-                            <textarea
-                              type='text'
-                              className="form-control"
-                              id={`input${value.charAt(0).toUpperCase() + value.slice(1)}`}
-                              name='address'
-                              // placeholder={`Enter Your ${value.charAt(0).toUpperCase() + value.slice(1)}`}
-                              value=''
-                              onChange={handleInputChange}
-                            />
-                          </>
-                          : 
-                          <>
-                          <label htmlFor={`input${value.charAt(0).toUpperCase() + value.slice(1)}`}>
-                            {key}
-                            </label>
-                            <input
-                              type={value === "email" ? "email" : (value === 'Password' || value === 'confirmPassword') ? 'password' : 'text'}
-                              className="form-control"
-                              id={`input${value.charAt(0).toUpperCase() + value.slice(1)}`}
-                              name={value}
-                              // placeholder={`Enter Your ${value.charAt(0).toUpperCase() + value.slice(1)}`}
-                              value={formData[value]}
-                              onChange={handleInputChange}/>
-                          </>
-                          }
-                          
-                          {formErrors[value] && (
-                            <div className="text-danger">{formErrors[value]}</div>
-                          )}
-                        </div>
-                      )
-                    )}
-                    {/* {["password", "confirmPassword"].map((field, index) => (
-                      <div className=" mb-3 mt-3" key={index}>
-                        <div className="col-sm-12">
-                          <input
-                            type="password"
+                    {Object.entries(fields).map(([key, value]) => (
+                      <div key={value} className={`mb-3 mt-3 ${['state', 'city', 'pincode'].includes(value) ? 'col-md-4' : value === 'address' ? 'col-12' : 'col-md-6'}`}>
+                        <label htmlFor={`input${value}`}>{key}</label>
+                        {value === 'address' ? (
+                          <textarea
                             className="form-control"
-                            id={`input${field.charAt(0).toUpperCase() + field.slice(1)}`}
-                            name={field}
-                            placeholder={`Enter Your ${field.charAt(0).toUpperCase() + field.slice(1)}`}
-                            value={formData[field]}
+                            id={`input${value}`}
+                            name={value}
+                            value={formData[value]}
                             onChange={handleInputChange}
                           />
-                          {formErrors[field] && (
-                            <div className="text-danger">{formErrors[field]}</div>
-                          )}
-                        </div>
+                        ) : ['password', 'confirmPassword'].includes(value) ? (
+                          <Input.Password
+                            className="form-control password-input"
+                            id={`input${value}`}
+                            name={value}
+                            value={formData[value]}
+                            onChange={handleInputChange}
+                            iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                          />
+                        ) : (
+                          <input
+                            type={value === "email" ? "email" : 'text'}
+                            className="form-control"
+                            id={`input${value}`}
+                            name={value}
+                            value={formData[value]}
+                            onChange={handleInputChange}
+                          />
+                        )}
+                        {formErrors[value] && <div className="text-danger">{formErrors[value]}</div>}
                       </div>
-                    ))} */}
+                    ))}
                   </>
                 ) : (
-                  <div className=" mb-3 mt-3">
-                    <div className="col-sm-12">
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="inputOtp"
-                        name="otp"
-                        placeholder="Enter OTP"
-                        value={formData.otp}
-                        onChange={handleInputChange}
-                      />
-                      {formErrors.otp && (
-                        <div className="text-danger">{formErrors.otp}</div>
-                      )}
+                  <div className="mb-3 mt-3">
+                    <label htmlFor="otp-input" className="form-label">Enter OTP</label>
+                    <div className="otp-input-container">
+                      {[...Array(6)].map((_, index) => (
+                        <input
+                          key={index}
+                          ref={el => otpInputs.current[index] = el}
+                          type="text"
+                          maxLength="1"
+                          className="form-control otp-input"
+                          value={formData.otp[index] || ''}
+                          onChange={e => handleOtpChange(e.target, index)}
+                          onKeyDown={e => handleOtpKeyDown(e, index)}
+                        />
+                      ))}
                     </div>
+                    {formErrors.otp && <div className="text-danger mt-2">{formErrors.otp}</div>}
                   </div>
                 )}
                 <div className="form-btn-login-div">
-                  {!otpSent ? (
-                    <button type="submit" className="btn form-btn-login">
-                      Register
-                    </button>
-                  ) : (
-                    <button type="button" className="btn form-btn-login" onClick={handleVerifyOtp}>
-                      Submit OTP
-                    </button>
-                  )}
+                  <button type="submit" className="btn form-btn-login">
+                    {otpSent ? "Submit OTP" : "Register"}
+                  </button>
                 </div>
                 {message && <div className="alert alert-info">{message}</div>}
               </div>

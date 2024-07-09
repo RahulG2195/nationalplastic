@@ -26,9 +26,11 @@ const OrderTable = () => {
     //   if (!response.ok) {
     //     throw new Error('Failed to fetch orders');
     //   }
-      const data = await response.json();
-      if (data.status === 200) {
-        setOrders(data.orderData);
+    const orderData = response.data.orderData; 
+    console.log('orderData', orderData);
+      // const data = await response.json();
+      if (response.data.status === 200) {
+        setOrders(orderData);
       } else {
         throw new Error(data.message || 'Failed to fetch orders');
       }
@@ -79,14 +81,15 @@ const OrderTable = () => {
 
   const columns = [
     {
-      title: 'Order ID',
-      dataIndex: 'order_id',
-      key: 'order_id',
+      title: 'Sr No',
+      dataIndex: 'srNo',
+      key: 'srNo',
+      render: (text, record, index) => index + 1,
     },
     {
-      title: 'Customer ID',
-      dataIndex: 'customer_id',
-      key: 'customer_id',
+      title: 'Name',
+      dataIndex: 'FirstName',
+      key: 'FirstName' + ' ' + 'LasttName',
     },
     {
       title: 'Order Date',
@@ -135,7 +138,7 @@ const OrderTable = () => {
 
       <Modal
         title="Update Order Status"
-        visible={isStatusModalVisible}
+        open={isStatusModalVisible}
         onOk={updateOrderStatus}
         onCancel={() => setIsStatusModalVisible(false)}
       >
@@ -152,7 +155,7 @@ const OrderTable = () => {
 
       <Modal
         title="Cancel Order"
-        visible={isCancelModalVisible}
+        open={isCancelModalVisible}
         onOk={cancelOrder}
         onCancel={() => setIsCancelModalVisible(false)}
       >

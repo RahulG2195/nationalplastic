@@ -12,7 +12,7 @@ export const config = {
 export async function middleware(request) {
   const token = request.cookies.get('token')?.value;
   if (!token) {
-    return NextResponse.redirect(new URL('/login', request.url));
+    return NextResponse.redirect(new URL('/Login', request.url));
   }
   
   try {

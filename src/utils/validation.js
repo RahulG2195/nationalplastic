@@ -62,3 +62,18 @@ export const isValidPassword = (password) => {
 
   return true;
 };
+
+export const isValidState = (state) => {
+  return state.trim().length > 0 && state.trim().length <= 50;
+};
+
+export const isValidCity = (city) => {
+  return city.trim().length > 0 && city.trim().length <= 50;
+};
+
+export const isValidPincode = (pincode) => {
+  // Assuming Indian pincode format (6 digits)
+  return /^\d{6}$/.test(pincode);
+};
+
+// We'll use the existing isValidAddress function for the address field

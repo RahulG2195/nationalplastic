@@ -495,7 +495,10 @@ p {
     cursor: pointer;
 }
 
-.inn-content-wrap p{
+.investcont p{
+    padding: 3px 0;
+}
+.investcont h3{
     padding: 6px 0;
 }
 .inn-content-wrap ul li {
