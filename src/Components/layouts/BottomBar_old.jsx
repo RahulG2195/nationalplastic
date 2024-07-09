@@ -81,7 +81,7 @@ function BottomBar() {
             {chunkArray(preEventChair, 6).map((chunk, columnIndex) => (
               <div key={columnIndex} className="column pt-3">
                 {chunk.map((product, index) => (
-                  <p className="p-3 fw-semibold" key={index}>
+                  <p className="p-1 fw-semibold" key={index}>
                     <Link
                       onClick={() => handleOnClick(product.seo_url)}
                       className="nav-link"
@@ -111,7 +111,7 @@ function BottomBar() {
             {chunkArray(withountArm, 6).map((chunk, columnIndex) => (
               <div key={columnIndex} className="column pt-3">
                 {chunk.map((product, index) => (
-                  <p className="p-3 fw-semibold" key={index}>
+                  <p className="p-1 fw-semibold" key={index}>
                     <Link
                       onClick={() => handleOnClick(product.seo_url)}
                       className="nav-link"
@@ -140,7 +140,7 @@ function BottomBar() {
             {chunkArray(prechair, 6).map((chunk, columnIndex) => (
               <div key={columnIndex} className="column pt-3">
                 {chunk.map((product, index) => (
-                  <p className="p-3 fw-semibold" key={index}>
+                  <p className="p-1 fw-semibold" key={index}>
                     <Link
                       onClick={() => handleOnClick(product.seo_url)}
                       className="nav-link "
@@ -169,7 +169,7 @@ function BottomBar() {
             {chunkArray(Popularchair, 6).map((chunk, columnIndex) => (
               <div key={columnIndex} className="column pt-3">
                 {chunk.map((product, index) => (
-                  <p className="p-3 fw-semibold" key={index}>
+                  <p className="p-1 fw-semibold" key={index}>
                     <Link
                       onClick={() => handleOnClick(product.seo_url)}
                       className="nav-link"
@@ -198,7 +198,7 @@ function BottomBar() {
             {chunkArray(cabinet, 6).map((chunk, columnIndex) => (
               <div key={columnIndex} className="column  pt-3">
                 {chunk.map((product, index) => (
-                  <p className="p-3 fw-semibold" key={index}>
+                  <p className="p-1 fw-semibold" key={index}>
                     <Link
                       onClick={() => handleOnClick(product.seo_url)}
                       className="nav-link"
@@ -227,7 +227,7 @@ function BottomBar() {
             {chunkArray(babychair, 6).map((chunk, columnIndex) => (
               <div key={columnIndex} className="column pt-3">
                 {chunk.map((product, index) => (
-                  <p className="p-3 fw-semibold" key={index}>
+                  <p className="p-1 fw-semibold" key={index}>
                     <Link
                       onClick={() => handleOnClick(product.seo_url)}
                       className="nav-link"
@@ -256,7 +256,7 @@ function BottomBar() {
             {chunkArray(stool, 6).map((chunk, columnIndex) => (
               <div key={columnIndex} className="column pt-3">
                 {chunk.map((product, index) => (
-                  <p className="p-3 fw-semibold" key={index}>
+                  <p className="p-1 fw-semibold" key={index}>
                     <Link
                       onClick={() => handleOnClick(product.seo_url)}
                       className="nav-link"
@@ -285,7 +285,7 @@ function BottomBar() {
             {chunkArray(table, 6).map((chunk, columnIndex) => (
               <div key={columnIndex} className="column pt-3">
                 {chunk.map((product, index) => (
-                  <p className="p-3 fw-semibold" key={index}>
+                  <p className="p-1 fw-semibold" key={index}>
                     <Link
                       onClick={() => handleOnClick(product.seo_url)}
                       className="nav-link"
@@ -314,7 +314,7 @@ function BottomBar() {
             {chunkArray(box, 6).map((chunk, columnIndex) => (
               <div key={columnIndex} className="column pt-3">
                 {chunk.map((product, index) => (
-                  <p className="p-3 fw-semibold" key={index}>
+                  <p className="p-1 fw-semibold" key={index}>
                     <Link
                       onClick={() => handleOnClick(product.seo_url)}
                       className="nav-link"
@@ -343,7 +343,7 @@ function BottomBar() {
             {chunkArray(drawer, 6).map((chunk, columnIndex) => (
               <div key={columnIndex} className="column pt-3">
                 {chunk.map((product, index) => (
-                  <p className="p-3 fw-semibold" key={index}>
+                  <p className="p-1 fw-semibold" key={index}>
                     <Link
                       onClick={() => handleOnClick(product.seo_url)}
                       className="nav-link"

@@ -3,6 +3,81 @@
     cursor: pointer;
 }
 
+.certificate-para p {
+    text-wrap: pretty;
+    margin: 10px 0;
+}
+
+
+.team-members {
+    background-color: white;
+}
+
+.team-members-container {
+    padding: 0 60px;
+}
+
+.team-detail {
+    padding: 3rem 2rem;
+}
+
+.team-detail p {
+    text-wrap: balance;
+    font-size: 0.9rem;
+}
+
+.TemMemImg img {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    border-radius: 50%;
+    padding: 0;
+    width: 250px !important;
+    margin: 40px auto;
+}
+
+.AwardsCertificatesImg img {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    border-radius: 50%;
+    padding: 0;
+    width: 250px !important;
+    margin: auto;
+}
+
+.team-title {
+    color: #262262;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.ulCont {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+    animation: dropdownAnimation 0.5s ease-in-out forwards;
+    position: absolute;
+}
+
+.ulCont.flipped {
+    right: 0;
+}
+
+@keyframes dropdownAnimation {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.custom-dropdown-css:hover .ulCont {
+    opacity: 1;
+    visibility: visible;
+}
+
 
 
 .column p:hover {

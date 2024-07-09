@@ -222,10 +222,16 @@
     overflow-y: visible !important;
 }
 
-.TeamMemCard {
+/* .TeamMemCard {
     position: relative;
     margin-bottom: 25px;
+} */
+
+.TeamMemCard {
+    position: relative;
+    margin-bottom: 5px;
 }
+
 
 .TeamMemNames {
     display: none;
