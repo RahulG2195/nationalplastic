@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const InvestorContact = () => {
   return (
@@ -7,21 +7,19 @@ const InvestorContact = () => {
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <div className="inn-content-wrap">
-                <h3 style={{ marginTop: 0 }}>Investor Services</h3>
+              <div className="inn-content-wrap investcont">
+                <h3 style={{ marginTop: 0, padding: "6px 0" }}>
+                  Investor Services
+                </h3>
                 <p>
-                  For any assistance / information on Share-related matters including
-                  Dematerialisation / Rematerialisation, Transfer of shares, Transmission of
-                  Shares, Sub-division or Consolidation of Shares, Issue of Duplicate Share
-                  Certificates, Dividends, please get in touch with our Investor Services Cell
-                  at:
+                  For any assistance / information on Share-related matters
+                  including Dematerialisation / Rematerialisation, Transfer of
+                  shares, Transmission of Shares, Sub-division or Consolidation
+                  of Shares, Issue of Duplicate Share Certificates, Dividends,
+                  please get in touch with our Investor Services Cell at:
                 </p>
                 <p style={{}}>
-                  <font face="Calibri, sans-serif">
-                    <span style={{ fontSize: "14.6667px" }}>
-                      <b>Amit Jain</b>
-                    </span>
-                  </font>
+                  <b>Amit Jain</b>
                 </p>
                 <p>Company Secretary &amp; Compliance Officer</p>
                 <p>
@@ -50,7 +48,7 @@ const InvestorContact = () => {
                   Vile Parle (East), Mumbai - 400 057.&nbsp;
                 </p>
                 <p>&nbsp;</p>
-                <h4>Our Registrars &amp; Share Transfer Agents:</h4>
+                <h3>Our Registrars &amp; Share Transfer Agents:</h3>
                 <p>
                   <strong>M/s Link Intime&nbsp;(India) Private Limited</strong>
                   <br />
@@ -70,7 +68,10 @@ const InvestorContact = () => {
                 </p>
                 <p>
                   <strong>E-mail</strong> -{" "}
-                  <a href="mailto:rnt.helpdesk@linkintime.co.in" target="_blank">
+                  <a
+                    href="mailto:rnt.helpdesk@linkintime.co.in"
+                    target="_blank"
+                  >
                     rnt.helpdesk@linkintime.co.in
                   </a>
                   <br />
@@ -85,13 +86,12 @@ const InvestorContact = () => {
                   &nbsp;&nbsp;
                 </p>
               </div>
-
             </div>
           </div>
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default InvestorContact
+export default InvestorContact;
