@@ -13,9 +13,11 @@ export async function GET(request) {
   try {
     const orderResult = await query({
       query: `
-        SELECT ol.*, od.*
+        SELECT ol.*, od.*, cm.customer_id, cm.FirstName, cm.LasttName, cm.Phone, cm.Address, os.*
         FROM order_list AS ol
         LEFT JOIN order_detail AS od ON ol.order_id = od.order_id
+        LEFT JOIN customer as cm ON ol.customer_id = cm.customer_id
+        LEFT JOIN order_status as os ON ol.order_status = os.status_id
       `
     });
 
