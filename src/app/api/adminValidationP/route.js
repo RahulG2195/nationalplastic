@@ -32,7 +32,6 @@ export async function POST(request) {
       }
     } catch (e) {
       // If an error occurs, return a 500 Internal Server Error response
-      console.log(e.message);
       return new Response(
         JSON.stringify({
           status: 500,

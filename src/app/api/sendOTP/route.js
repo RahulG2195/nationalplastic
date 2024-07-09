@@ -1,4 +1,4 @@
-// pages/api/send-otp.js
+
 import { sendMail } from '@/utils/nodemailer';
 import crypto from 'crypto';
 

@@ -10,7 +10,6 @@ const validateDate =(start_date,end_date) =>{
 export async function POST (req){
     try{
         const { code } = await req.json();
-        console.log("code of coupen ",code)
         const isValid = await query({
             query:"select * from coupons where code = ?",
             values:[code]
@@ -26,7 +25,6 @@ export async function POST (req){
         if(!validRange){
             throw new Error("Token is not Valid anymore");
         }
-        console.log("AllValues",discount_value,end_date,is_active,start_date)
         return new Response(
             JSON.stringify({
                 status: 200,

@@ -4,7 +4,7 @@ export async function GET(request) {
   try {
     const Categories = await query({
       query:
-        "SELECT category_id, category_name, navshow, image_name FROM categories where navshow = 1",
+        "SELECT category_id, category_name, navshow, image_name, header_position FROM categories where navshow = 1 ORDER BY header_position ASC",
       values: [],
     });
 
@@ -18,7 +18,7 @@ export async function GET(request) {
     return new Response(
       JSON.stringify({
         status: 500,
-        message: "Internal Server Error",
+        message: error.message
       })
     );
   }

@@ -15,8 +15,16 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import styles from "./Navbar.module.css";
 import InvestorAccor from "../InvesterAccor/InvesterAccor";
+import dynamic from 'next/dynamic'
+import { PlaceholderBar } from "./Placeholder";
+// const BottomBar = dynamic(() => import('./BottomBar'), {
+//   loading: () => <PlaceholderBar />,
+//   ssr: false // If BottomBar uses browser-only features
+// })
+import { useDelayedRender } from "@/utils/useDelayedRender";
 
 export default function Header() {
+  const shouldRenderBottomBar = useDelayedRender(2000) 
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
@@ -72,7 +80,7 @@ export default function Header() {
           getProfile: true,
         };
 
-        const response = await axios.put("/api/Users", formData);
+        const response = await axios.put(`${process.env.BASE_URL}/Users`, formData);
 
         const userData = response.data.message[0];
         const { FirstName, LasttName } = userData;
@@ -97,14 +105,13 @@ export default function Header() {
     }
   }, [FirstName, LastName]);
 
-  // console.log('initial value', InitialName);
-  // ----------------------- End of initail name after login --------------------------------- // 
   useEffect(() => {
-    // Check if the custom header is present
     const checkHeader = async () => {
-      const res = await fetch(router.asPath, { method: 'HEAD' });
-      const isAdmin = res.headers.get('x-admin-access') === 'true';
-      setHideLayout(isAdmin);
+      if (router.asPath) {
+        const res = await fetch(router.asPath, { method: 'HEAD' });
+        const isAdmin = res.headers.get('x-admin-access') === 'true';
+        setHideLayout(isAdmin);
+      }
     };
     checkHeader();
   }, [router]);
@@ -132,9 +139,6 @@ export default function Header() {
     setSearchResults([]);
     try {
       const searchTerm2 = e.target.querySelector(".HeadSearch").value;
-      // console.log("searchTerm2", searchTerm2);
-      // console.log("header", searchTerm);
-
       router.push(`/search/${searchTerm}`);
     } catch (error) {
       console.error("Error searching products:", error);
@@ -570,7 +574,11 @@ export default function Header() {
                 </div>
               </div>
             </nav>
-            <BottomBar />
+            {shouldRenderBottomBar ? (
+        <BottomBar />
+      ) : (
+        <PlaceholderBar/>
+      )}
           </div>
         </>
         : null}

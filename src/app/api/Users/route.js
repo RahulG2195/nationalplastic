@@ -246,7 +246,6 @@ export async function PATCH(request) {
 // Handler for UPDATE request to get customer details by email
 export async function UPDATE(request) {
   try {
-    console.log("Updating customer")
     const formData = await request.json();
     const email = formData.email;
 

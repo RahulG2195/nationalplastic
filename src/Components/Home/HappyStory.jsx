@@ -77,13 +77,7 @@ export default function HappyStory() {
                 modules={[Navigation, Pagination, Scrollbar, A11y]}
                 spaceBetween={0}
                 slidesPerView={3}
-                // loop={true}
                 navigation={{ clickable: true }}
-                // pagination={{ clickable: true }}
-                // scrollbar={{ draggable: false }}
-                // onSwiper={(swiper) => //console.log(swiper)}
-                // onSlideChange={() => //console.log("slide change")}
-
                 autoplay={{
                   delay: 2600,
                   disableOnInteraction: false,

@@ -14,11 +14,7 @@ function CatCards({
   hoverglow,
 }) {
   const sendCategory = () => {
-    //console.log("Category clicked:", title);
-    // if (onCategoryChange) {
-    //   onCategoryChange(title);
     localStorage.setItem("category", title);
-    // }
   };
 
   return (

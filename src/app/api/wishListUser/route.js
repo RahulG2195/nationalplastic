@@ -6,11 +6,7 @@ export async function POST(request) {
   try {
     // Assuming you're passing customer_id as part of the request query
     const { customer_id } = await request.json();
-    //console.log("CustomerINsidePost: " + customer_id);
     const user_id = customer_id;
-    //console.log("User: " + user_id);
-    // Get the product IDs from the wishlist table for a specific customer
-    // alert();
     const wishlist = await query({
       query: "SELECT product_id FROM wishlist WHERE user_id = ?",
       values: [user_id],
@@ -25,8 +21,6 @@ export async function POST(request) {
       `,
       values: [],
     });
-    //console.log(wishlist);
-    // Fetch products from the products table based on the product IDs
     return new Response(
       JSON.stringify({
         status: 200,
@@ -49,7 +43,6 @@ export async function PUT(request) {
   try {
     const { product_id, customer_id } = await request.json();
     const user_id = customer_id;
-    //console.log("this is id i want to post ", product_id);
 
     // Check if the product_id is provided
     if (!product_id) {
@@ -95,7 +88,6 @@ export async function PUT(request) {
 export async function DELETE(request) {
   try {
     const formData = await request.formData();
-    //console.log("formData", formData); // Get form data
     const user_id = formData.get("customer_id");
     const product_id = formData.get("product_id");
 
@@ -104,9 +96,6 @@ export async function DELETE(request) {
       query: "DELETE FROM wishlist WHERE product_id = ? AND user_id = ?",
       values: [product_id, user_id],
     });
-    //console.log("Affected Rows:", deleteWishlist); // Log affected rows
-
-    //console.log("Affected Rows:", deleteWishlist.affectedRows); // Log affected rows
     const message = deleteWishlist.affectedRows ? "success" : "error";
     return new Response(
       JSON.stringify({

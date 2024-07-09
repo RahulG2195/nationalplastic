@@ -50,11 +50,7 @@ export default function Blog() {
   const [productArr, setProductArr] = useState([]);
   useEffect(() => {
     const fetchdata = async () => {
-      const response = await axios.get("/api/Products");
-      // const filteredData = response.data.Blog.filter(
-      //   (item) => item.categoryType === "Blog"
-      // );
-      // console.log('fosfd' + response.data.Blog);
+      const response = await axios.get(`${process.env.BASE_URL}/Products`);
       setProductArr(response.data.Blog);
     };
     fetchdata();
@@ -79,12 +75,7 @@ export default function Blog() {
                 modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
                 spaceBetween={15}
                 slidesPerView={2}
-                // loop={true}
                 navigation={{ clickable: true }}
-                // pagination={{ clickable: true }}
-                // scrollbar={{ draggable: false }}
-                // onSwiper={(swiper) => //console.log(swiper)}
-                // onSlideChange={() => //console.log("slide change")}
                 autoplay={{
                   delay: 2600,
                   disableOnInteraction: false,

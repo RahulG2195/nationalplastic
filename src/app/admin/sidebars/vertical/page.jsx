@@ -5,22 +5,43 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const navigation = [
-
   {
     title: "Dashboard",
     href: "/admin",
     icon: "bi bi-speedometer2",
   },
   {
+    type: "accordion",
+    title: "Home Page",
+    items: [
+      {
+        title: "Hero Section",
+        href: "/admin/homepage/herosection",
+      },
+      {
+        title: "Cards Section",
+        href: "/admin/homepage/cards",
+      },
+      {
+        title: "Offer Banner",
+        href: "/admin/homepage/offersection",
+      },
+      {
+        title: "house section",
+        href: "/admin/homepage/house section",
+      },
+    ],
+    icon: "bi bi-hdd-stack",
+  },
+  {
     title: "Products",
     href: "/admin/product",
-    icon: "bi bi-card-text",
-
+    icon: "bi bi-p-square",
   },
   {
     title: "category",
     href: "/admin/category",
-    icon: "bi bi-bell",
+    icon: "bi bi-c-square",
   },
   {
     title: "Coupon Code",
@@ -28,13 +49,8 @@ const navigation = [
     icon: "bi bi-patch-check",
   },
   {
-    title: "Buttons",
-    href: "/ui/buttons",
-    icon: "bi bi-hdd-stack",
-  },
-  {
-    title: "Cards",
-    href: "/ui/cards",
+    title: "Order List",
+    href: "/admin/OrderList",
     icon: "bi bi-card-text",
   },
   {
@@ -62,7 +78,6 @@ const navigation = [
     href: "/about",
     icon: "bi bi-people",
   },
-
 ];
 
 const Sidebar = ({ showMobilemenu }) => {
@@ -71,9 +86,7 @@ const Sidebar = ({ showMobilemenu }) => {
 
   return (
     <div className="p-3">
-
       <div className="d-flex align-items-center justify-content-between">
-        {/* <Logo /> */}
         <img src="/assets/images/logo/logo_alt.png" alt="" className="w-25" />
         <div className="ms-auto d-lg-none">
           <Button
@@ -81,52 +94,58 @@ const Sidebar = ({ showMobilemenu }) => {
             size="sm"
             className="ms-auto d-lg-none"
             onClick={showMobilemenu}
-          ></Button></div>
+          ></Button>
+        </div>
       </div>
       <div className="pt-4 mt-2">
-        
-
-
         <Nav vertical className="sidebarNav">
-
-        {/* <div className="accordion accordion-flush" id="accordionFlushExample">
-          <div className="accordion-item">
-            <NavItem
-              className="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#flush-collapseOne"
-              aria-expanded="false"
-              aria-controls="flush-collapseOne"
-            >
-              Products
-            </NavItem>
-            <ul
-              id="flush-collapseOne"
-              className="accordion-collapse collapse"
-              aria-labelledby="flush-headingOne"
-              data-bs-parent="#accordionFlushExample"
-            >
-              <li>add</li>
-              <li>edit</li>
-              <li>delete</li>
-            </ul>
-          </div>
-        </div> */}
-          
-          {navigation.map((navi, index) => (
-            <NavItem key={index} className="sidenav-bg">
-              <Link href={navi.href} className={
-                location === navi.href
-                  ? "text-primary nav-link py-3"
-                  : "nav-link text-secondary py-3"
-              }>
-                <i className={navi.icon}></i>
-                <span className="ms-3 d-inline-block">{navi.title}</span>
-              </Link>
-            </NavItem>
-          ))}
-          
+          {navigation.map((navi, index) => {
+            if (navi.type === "accordion") {
+              return (
+                <div className="accordion accordion-flush" id={`accordionFlushExample${index}`} key={index}>
+                  <div className="accordion-item">
+                    <div
+                      className="accordion-button collapsed p-3"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target={`#flush-collapse${index}`}
+                      aria-expanded="false"
+                      aria-controls={`flush-collapse${index}`}
+                    >
+                      <i className={navi.icon}></i>
+                      <span className="ms-3 d-inline-block">{navi.title}</span>
+                    </div>
+                    <ul
+                      id={`flush-collapse${index}`}
+                      className="accordion-collapse collapse"
+                      aria-labelledby={`flush-heading${index}`}
+                      data-bs-parent={`#accordionFlushExample${index}`}
+                    >
+                      {navi.items.map((item, subIndex) => (
+                        <li className="nav-item" key={subIndex}>
+                          <Link href={item.href} className="nav-link">
+                            {item.title}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              );
+            }
+            return (
+              <NavItem key={index} className="sidenav-bg">
+                <Link href={navi.href} className={
+                  location === navi.href
+                    ? "text-primary nav-link py-3"
+                    : "nav-link text-secondary py-3"
+                }>
+                  <i className={navi.icon}></i>
+                  <span className="ms-3 d-inline-block">{navi.title}</span>
+                </Link>
+              </NavItem>
+            );
+          })}
         </Nav>
       </div>
     </div>

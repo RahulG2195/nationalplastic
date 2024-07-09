@@ -39,16 +39,6 @@ export async function POST(request) {
       })
     );
 
-    // console.log("Products: from toutes query", allproducts);
-    // console.log("Products: from toutes query", products);
-
-    // return new Response(
-    //   JSON.stringify({
-    //     status: 200,
-    //   })
-    // );
-
-    // Return the search results
   } catch (error) {
     console.error("Error searching products:", error);
 

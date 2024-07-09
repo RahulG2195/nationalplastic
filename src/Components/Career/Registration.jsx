@@ -67,8 +67,6 @@ const Registration = () => {
   async function onFormSubmit(e) {
     // toast
     e.preventDefault();
-    //console.log("UserInput");
-    //console.log(JSON.stringify(userInput));
     if (!isValidName(userInput.JobProfile)) {
       toast.error("Please enter a valid name.");
       return;
@@ -84,7 +82,7 @@ const Registration = () => {
     }
     try {
       const res = await axios.post(
-        `/api/sendResume`,
+        `${process.env.BASE_URL}/sendResume`,
         formData,
         {
           headers: {
@@ -100,7 +98,6 @@ const Registration = () => {
         notifyError();
       }
     } catch (err) {
-      //console.log(err.message);
       toast.error("Something went Wrong. please try again later.");
     }
   }

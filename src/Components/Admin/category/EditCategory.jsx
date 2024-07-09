@@ -1,29 +1,45 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Form, Input, Button, InputNumber } from 'antd';
+import { Form, Input, Button, InputNumber, Spin } from 'antd';
 import axios from 'axios';
 import "./EditCategory.css";
+import { useNavigate } from 'react-router-dom';
+import { toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function EditCategory() {
   const { control, handleSubmit, setValue, formState: { errors } } = useForm();
   const [imagePreview, setImagePreview] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleNavigation = () => {
+    navigate('/admin/category', { replace: true });
+    window.location.reload();
+  };
 
   const updateCategory = async (data) => {
     try {
-      // Prepare form data
       const formData = new FormData();
-      formData.append('category_name', data.category_name);
-      formData.append('image_name', data.image_name);
-      formData.append('navshow', data.navshow);
-      formData.append('status', data.status);
-      formData.append('category_id', data.category_id);
-      formData.append('topPick', data.topPick);
+      const entries = { 
+        category_name: data.category_name, 
+        image_name: data.image_name, 
+        navshow: data.navshow, 
+        status: data.status, 
+        category_id: data.category_id, 
+        topPick: data.topPick 
+      };
+
+      for (const [key, value] of Object.entries(entries)) {
+        formData.append(key, value);
+      }
+
       if (data.image) {
         formData.append('image', data.image);
       }
 
-      const response = await axios.put("/api/adminCategories", formData, {
+      const response = await axios.put(`${process.env.BASE_URL}/adminCategories`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -36,11 +52,32 @@ export default function EditCategory() {
   };
 
   const onSubmit = async (data) => {
-    try {
-      await updateCategory(data);
-    } catch (error) {
-      console.error('Submission Error:', error.message);
-    }
+    setIsLoading(true);
+    const submitLoader = async () => {
+      try {
+        await updateCategory(data);
+        handleNavigation();
+        return 'Category updated successfully';
+      } catch (error) {
+        console.error('Submission Error:', error.message);
+        throw error;
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    toast.promise(
+      submitLoader(),
+      {
+        pending: "Updating category...",
+        success: "Category updated successfully!",
+        error: "Failed to update category",
+      },
+      {
+        position: "top-center",
+        transition: Bounce,
+      }
+    );
   };
 
   const handleFileChange = (e) => {
@@ -48,7 +85,6 @@ export default function EditCategory() {
     setValue('image', file);
     setValue('image_name', file ? file.name : '');
     
-    // Create a preview for the new image
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -64,7 +100,6 @@ export default function EditCategory() {
       Object.keys(data).forEach(key => {
         setValue(key, data[key]);
       });
-      // Set the image preview
       if (data.image_name) {
         setImagePreview(`/Assets/images/circular/${data.image_name}`);
       }
@@ -72,13 +107,14 @@ export default function EditCategory() {
   }, [setValue]);
 
   return (
-    <Form
-      onFinish={handleSubmit(onSubmit)}
-      className='Form'
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
-    >
-      <Form.Item
+    <Spin spinning={isLoading}>
+      <Form
+        onFinish={handleSubmit(onSubmit)}
+        className='Form'
+        labelCol={{ span: 8 }}
+        wrapperCol={{ span: 16 }}
+      >
+ <Form.Item
         label="Category Name"
         validateStatus={errors.category_name ? 'error' : ''}
         help={errors.category_name ? 'Please input the category name!' : ''}
@@ -150,11 +186,12 @@ export default function EditCategory() {
           render={({ field }) => <InputNumber {...field} style={{ width: '100%' }} />}
         />
       </Form.Item>
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
-          Update
-        </Button>
-      </Form.Item>
-    </Form>
+        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+          <Button type="primary" htmlType="submit">
+            Update
+          </Button>
+        </Form.Item>
+      </Form>
+    </Spin>
   );
 }

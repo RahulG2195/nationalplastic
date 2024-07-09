@@ -30,7 +30,7 @@ const PriceDetailsCard = ({
         email: email,
         getProfile: true,
       };
-      const response = await axios.put("/api/Users", formData);
+      const response = await axios.put(`${process.env.BASE_URL}/Users`, formData);
       const userData = response.data.message[0]; // Directly access response.data.message
       const { Phone, FirstName, Address } = userData;
       setPhone(Phone);
@@ -74,7 +74,7 @@ const PriceDetailsCard = ({
   const [productsData, setProductsData] = useState(null);
 
   const testing = async () => {
-    const userCartData = await axios.post("/api/UserCart", {
+    const userCartData = await axios.post(`${process.env.BASE_URL}/UserCart`, {
       customer_id: customer_id,
     });
     setProductsData(userCartData.data.productps);
@@ -105,7 +105,7 @@ const PriceDetailsCard = ({
   const makePayment = async ({ productId = null }) => {
 
     const totalPay = finalAmount
-    const response = await axios.post("/api/razorpay", {
+    const response = await axios.post(`${process.env.BASE_URL}/razorpay`, {
       amount: totalPay * 100,
       currency: "INR",
       email: email,
@@ -120,7 +120,7 @@ const PriceDetailsCard = ({
       image: "",
       order_id: orderData.data.message.id,
       handler: async function (response) {
-        const data = await fetch("/api/paymentVerify", {
+        const data = await fetch(`${process.env.BASE_URL}/paymentVerify`, {
           method: "POST",
           body: JSON.stringify({
             razorpay_payment_id: response.razorpay_payment_id,
@@ -133,7 +133,7 @@ const PriceDetailsCard = ({
         const res = await data.json();
         const status = res.success || false;
         if (status) {
-          const response = await axios.put("/api/razorpay", {
+          const response = await axios.put(`${process.env.BASE_URL}/razorpay`, {
             razorpay_payment_id: payID,
             isBrowser: isBrowser,
           });
@@ -158,6 +158,8 @@ const PriceDetailsCard = ({
     });
   };
   const sendPaymentSuccessMail = async (values) => {
+    // console.log("values from sendPaymentSuccessMail", values)
+
     const paymentData = {
       id: values.id,
       contact: values.contact,
@@ -167,13 +169,14 @@ const PriceDetailsCard = ({
       method: values.method,
       order_id: values.order_id,
       currency: values.currency || "INR",
-      amount: values.amount,
+      amount: finalAmount,
       coupon_code: couponCode,
       status: values.status,
     };
-    await axios.put("/api/RegisterEmail", paymentData);
+    await axios.put(`${process.env.BASE_URL}/RegisterEmail`, paymentData);
   };
   const updateDatabase = async (values) => {
+    // console.log("values from updaetDatabase", values)
     const paymentData = {
       razorpay_order_id: values.order_id,
       customer_id: customer_id,
@@ -181,17 +184,16 @@ const PriceDetailsCard = ({
       Phone: values.contact,
       order_address: Address,
       order_city: Address,
-      paymentData,
       order_pincode: Address,
       order_payment_type: values.method,
       payment_status: values.status,
       razor_payment_id: values.id,
       order_detail: {
-        price: values.amount,
+        price: finalAmount,
         cart: productsData,
       },
     };
-    const resData = await axios.put("/api/paymentVerify", paymentData);
+    const resData = await axios.put(`${process.env.BASE_URL}/paymentVerify`, paymentData);
   };
   return (
     <>
@@ -239,28 +241,29 @@ const PriceDetailsCard = ({
         <div className="small text-center">EMI starts with Rs 10,000</div>
 
         <div className="d-flex justify-content-center mt-2">
-          {redirect ? (
-            <Link href={`${userState ? "/Address" : "/Login"}`}>
-              <button
-                type="submit"
-                className="btn btn-danger px-md-5 placeOrderResp"
-              >
-                {userState ? "Checkout" : "Login To Checkout"}
-              </button>
-            </Link>
-          ) : (
-            <button
-              type="submit"
-              className="btn btn-danger px-md-5 placeOrderResp"
-              onClick={() => {
-                makePayment({ productId: "example_ebook" });
-              }}
-              disabled={!userState}
-            >
-              Place Order
-            </button>
-          )}
-        </div>
+  {redirect ? (
+    <Link href={`${userState ? "/Address" : "/Login"}`}>
+      <button
+        type="submit"
+        className="btn btn-danger px-md-5 placeOrderResp"
+        disabled={ count === 0}
+      >
+        {userState ? "Checkout" : "Login To Checkout"}
+      </button>
+    </Link>
+  ) : (
+    <button
+      type="submit"
+      className="btn btn-danger px-md-5 placeOrderResp"
+      onClick={() => {
+        makePayment({ productId: "example_ebook" });
+      }}
+      disabled={!userState || count === 0}
+    >
+      Place Order
+    </button>
+  )}
+</div>
       </div>
     </>
   );

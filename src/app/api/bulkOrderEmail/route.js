@@ -42,7 +42,6 @@ export async function POST(request, res) {
       html: HtmlFormat,
     });
 
-    // console.log("Email sent successfully!", info);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error sending email:", error);

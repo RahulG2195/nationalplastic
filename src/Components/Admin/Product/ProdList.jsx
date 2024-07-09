@@ -21,7 +21,7 @@ const ProdList = () => {
 
   useEffect(() => {
       const fetchData = async () => {
-          const rawData = await axios.get("/api/adminProducts");
+          const rawData = await axios.get(`${process.env.BASE_URL}/adminProducts`);
           const { allProducts } = rawData.data;
           setProductArray(allProducts);
           setFilteredProductArray(allProducts);
@@ -44,13 +44,12 @@ const ProdList = () => {
   const handleConfirmDelete = async () => {
       if (currentItemToDelete !== null) {
           try {
-            const response = await axios.delete("/api/adminProducts", {
+            const response = await axios.delete(`${process.env.BASE_URL}/adminProducts`, {
                 headers: {
                   'Content-Type': 'application/json',
                 },
                 data: JSON.stringify({ product_id: currentItemToDelete })
               });
-              console.log('Delete successful', response);
               // Update product array after deletion
               const updatedProducts = productArray.filter(product => product.product_id !== currentItemToDelete);
               setProductArray(updatedProducts);
@@ -149,7 +148,6 @@ const ProdList = () => {
         key: 'image_name',
         render: (text) => {
             const images = text.split(',');
-            console.log('Images:', images);
             return (
                 <div style={{ display: 'flex', gap: '5px' }}>
                     {images.map((image, index) => (

@@ -43,8 +43,6 @@ const CartProduct = ({
 
   const handleIncrement = async () => {
     const isLoggedInResult = await isLoggedIn();
-    //console.log("state", isLoggedInResult);
-    //console.log("state", typeof isLoggedInResult);
     if (!isLoggedInResult) {
       await dispatch(increaseQuantityD({ product_id: productId }));
       setInitialCount(initialCount + 1);
@@ -64,15 +62,11 @@ const CartProduct = ({
         dispatch(decreaseQuantity({ product_id: productId }));
         setInitialCount(initialCount - 1);
       }
-      // Decrement by 1
     }
   };
 
   const handleAddtoWishlist = async (product_id) => {
-    //console.log("want to cart tp wish", product_id);
     const isLoggedInResult = await isLoggedIn();
-    //console.log("state", isLoggedInResult);
-    //console.log("state", typeof isLoggedInResult);
     if (!isLoggedInResult) {
       notifyError("Login to Add to cart");
       router.push("/Login");
@@ -94,8 +88,6 @@ const CartProduct = ({
       onRemoveSuccess(productId);
       dispatch(removeItemFromCart({ product_id: product_id }));
     }
-
-    //console.log(product_id);
   };
 
   const setid = () => {
