@@ -18,10 +18,10 @@ const TransferShare = () => {
                   <table className='table table-responsive table-striped table-light'>
                     <tbody>
                       <tr>
-                        <td><a href="/Assets/pdf/Business%20Standard(5).pdf">Transfer of share notice - Business Standard</a></td>
+                        <td><a target='_blank' href="/Assets/pdf/Business%20Standard(5).pdf">Transfer of share notice - Business Standard</a></td>
                       </tr>
                       <tr>
-                        <td><a href="/Assets/pdf/Mumbai%20Lakshadeep(2).pdf">Transfer of share notice - Mumbai Lakshdeep</a></td>
+                        <td><a target='_blank' href="/Assets/pdf/Mumbai%20Lakshadeep(2).pdf">Transfer of share notice - Mumbai Lakshdeep</a></td>
                       </tr>
                     </tbody>
                   </table>
@@ -33,10 +33,10 @@ const TransferShare = () => {
                   <table className='table table-responsive  table-striped table-light'>
                     <tbody>
                       <tr>
-                        <td><a href="/Assets/pdf/Newspaper%20-%20English(1).pdf">Transfer of share notice - Business Standard</a></td>
+                        <td><a target='_blank' href="/Assets/pdf/Newspaper%20-%20English(1).pdf">Transfer of share notice - Business Standard</a></td>
                       </tr>
                       <tr>
-                        <td><a href="/Assets/pdf/Newspaper%20-%20Marathi(1).pdf">Transfer of share notice - Mumbai Lakshdeep</a></td>
+                        <td><a target='_blank'  href="/Assets/pdf/Newspaper%20-%20Marathi(1).pdf">Transfer of share notice - Mumbai Lakshdeep</a></td>
                       </tr>
                     </tbody>
                   </table>
@@ -48,10 +48,10 @@ const TransferShare = () => {
                   <table className='table table-responsive  table-striped table-light'>
                     <tbody>
                       <tr>
-                        <td><a href="/Assets/pdf/Transfer%20of%20share%20notice%20-%20Business%20Standard.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Transfer of share notice - Business Standard</a></td>
+                        <td><a target='_blank' href="/Assets/pdf/Transfer%20of%20share%20notice%20-%20Business%20Standard.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Transfer of share notice - Business Standard</a></td>
                       </tr>
                       <tr>
-                        <td><a href="/Assets/pdf/Transfer%20of%20share%20notice%20-%20Mumbai%20Lakshdeep.pdf">Transfer of share notice - Mumbai Lakshdeep</a></td>
+                        <td><a target='_blank' href="/Assets/pdf/Transfer%20of%20share%20notice%20-%20Mumbai%20Lakshdeep.pdf">Transfer of share notice - Mumbai Lakshdeep</a></td>
                       </tr>
                     </tbody>
                   </table>

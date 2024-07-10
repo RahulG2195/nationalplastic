@@ -13,13 +13,13 @@ const page = () => {
                 <table className='table table-responsive table-striped table-light'>
                   <tbody>
                     <tr>
-                      <td><a href="/Assets/pdf/AGM%20proceeding_signed.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Outcome of AGM 21.08.2023.pdf</a></td>
+                      <td><a target='_blank' href="/Assets/pdf/AGM%20proceeding_signed.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Outcome of AGM 21.08.2023.pdf</a></td>
                     </tr>
                     <tr>
-                      <td><a href="/Assets/pdf/Signed_Scrutinizers_Report.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Scrutinizer Report on E-voting.pdf</a></td>
+                      <td><a target='_blank' href="/Assets/pdf/Signed_Scrutinizers_Report.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Scrutinizer Report on E-voting.pdf</a></td>
                     </tr>
                     <tr>
-                      <td><a href="/Assets/pdf/Results-%20AGM_signed.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Voting Results 22.08.2023.pdf</a></td>
+                      <td><a target='_blank' href="/Assets/pdf/Results-%20AGM_signed.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Voting Results 22.08.2023.pdf</a></td>
                     </tr>
                   </tbody>
                 </table>
@@ -31,13 +31,13 @@ const page = () => {
                 <table className='table table-responsive table-striped table-light'>
                   <tbody>
                     <tr>
-                      <td><a href="/Assets/pdf/Outcome%20of%20AGM%2026.08.2022.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Outcome of AGM 26.08.2022.pdf</a></td>
+                      <td><a target='_blank' href="/Assets/pdf/Outcome%20of%20AGM%2026.08.2022.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Outcome of AGM 26.08.2022.pdf</a></td>
                     </tr>
                     <tr>
-                      <td><a href="/Assets/pdf/Scrutinizer%20Report%20on%20E-voting(1).pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Scrutinizer Report on E-voting.pdf</a></td>
+                      <td><a target='_blank' href="/Assets/pdf/Scrutinizer%20Report%20on%20E-voting(1).pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Scrutinizer Report on E-voting.pdf</a></td>
                     </tr>
                     <tr>
-                      <td><a href="/Assets/pdf/Voting%20Results%2027.08.2022.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Voting Results 27.08.2022.pdf</a></td>
+                      <td><a target='_blank' href="/Assets/pdf/Voting%20Results%2027.08.2022.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Voting Results 27.08.2022.pdf</a></td>
                     </tr>
                   </tbody>
                 </table>
@@ -49,10 +49,10 @@ const page = () => {
                 <table className='table table-responsive table-striped table-light'>
                   <tbody>
                     <tr>
-                      <td><a href="/Assets/pdf/Outcome%20of%20AGM%2030.07.2021.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Outcome of AGM 30.07.2021.pdf</a></td>
+                      <td><a target='_blank' href="/Assets/pdf/Outcome%20of%20AGM%2030.07.2021.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Outcome of AGM 30.07.2021.pdf</a></td>
                     </tr>
                     <tr>
-                      <td><a href="/Assets/pdf/Scrutinizer%20Report%20on%20E-voting.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Scrutinizer Report on E-voting.pdf</a></td>
+                      <td><a target='_blank' href="/Assets/pdf/Scrutinizer%20Report%20on%20E-voting.pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Scrutinizer Report on E-voting.pdf</a></td>
                     </tr>
                     <tr>
                       <td><i className="fa fa-file-pdf-o" aria-hidden="true"></i> <a href="/Assets/pdf/Voting%20Results%2030.07.2021.pdf">Voting Results 18.09.20</a></td>
@@ -65,13 +65,13 @@ const page = () => {
                 <table className='table table-responsive table-striped table-light'>
                   <tbody>
                     <tr>
-                      <td><a href="/Assets/pdf/Outcome(1).pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Outcome of the Meeting 18.09.2020</a></td>
+                      <td><a target='_blank' href="/Assets/pdf/Outcome(1).pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Outcome of the Meeting 18.09.2020</a></td>
                     </tr>
                     <tr>
-                      <td><a href="/Assets/pdf/Scrutinizer%20report-%20Evoting%20National%20Plastic%202019%20(1).pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Scrutinizer's Report Evoting National Plastic 2020</a></td>
+                      <td><a target='_blank' href="/Assets/pdf/Scrutinizer%20report-%20Evoting%20National%20Plastic%202019%20(1).pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Scrutinizer's Report Evoting National Plastic 2020</a></td>
                     </tr>
                     <tr>
-                      <td><i className="fa fa-file-pdf-o" aria-hidden="true"></i> <a href="/Assets/pdf/Evoting-20-09-2019.html">Voting Results 30.07.2021.pdf</a></td>
+                      <td><i className="fa fa-file-pdf-o" aria-hidden="true"></i> <a target='_blank' href="/Assets/pdf/Evoting-20-09-2019.html">Voting Results 30.07.2021.pdf</a></td>
                     </tr>
                   </tbody>
                 </table>
@@ -81,13 +81,13 @@ const page = () => {
                 <table className='table table-responsive table-striped table-light'>
                   <tbody>
                     <tr>
-                      <td><i className="fa fa-file-pdf-o" aria-hidden="true"></i> <a href="/Assets/pdf/30th%20June,%202019.pdf">Outcome of the Meeting 20.09.2019</a></td>
+                      <td><i target='_blank' className="fa fa-file-pdf-o" aria-hidden="true"></i> <a href="/Assets/pdf/30th%20June,%202019.pdf">Outcome of the Meeting 20.09.2019</a></td>
                     </tr>
                     <tr>
-                      <td><a href="/Assets/pdf/Scrutinizer%20report-%20Evoting%20National%20Plastic%202019%20(1).pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Scrutinizer's Report Evoting National Plastic 2019</a></td>
+                      <td><a target='_blank' href="/Assets/pdf/Scrutinizer%20report-%20Evoting%20National%20Plastic%202019%20(1).pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Scrutinizer's Report Evoting National Plastic 2019</a></td>
                     </tr>
                     <tr>
-                      <td><i className="fa fa-file-pdf-o" aria-hidden="true"></i> <a href="/Assets/pdf/Evoting-20-09-2019.html">Voting Results 20.09.2019</a></td>
+                      <td><i className="fa fa-file-pdf-o" aria-hidden="true"></i> <a target='_blank' href="/Assets/pdf/Evoting-20-09-2019.html">Voting Results 20.09.2019</a></td>
                     </tr>
                   </tbody>
                 </table>

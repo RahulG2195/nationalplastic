@@ -107,19 +107,23 @@ function About() {
   const certificatesarr = [
     {
       key: 1,
-      image: "/Assets/images/user.png",
+      image: "/Assets/images/certificates/PLEXCONCIL-Award-25-Sep-2015.jpg",
     },
     {
       key: 2,
-      image: "/Assets/images/user.png",
+      image: "/Assets/images/certificates/PLEXCONCIL-Award-2006-07.jpg",
     },
     {
       key: 3,
-      image: "/Assets/images/user.png",
+      image: "/Assets/images/certificates/PLEXCONCIL-Award-2008-09.jpg",
     },
     {
       key: 4,
-      image: "/Assets/images/user.png",
+      image: "/Assets/images/certificates/PLEXCONCIL-Award-2014-15.jpg",
+    },
+    {
+      key: 5,
+      image: "/Assets/images/certificates/PLEXCONCIL-Trophy-2014-15-16-17.jpg",
     },
   ];
   // Array for Awards & Certificatesend
@@ -148,7 +152,6 @@ function About() {
               <VMCard title={val.title} description={val.desc} />
             </div>
           ))}
-          {/* <div className="col-md-6"> <VMCard  title={titleValue} description={descriptionValue}/> </div> */}
         </div>
       </div>
       {/* Vission and Mission end */}
@@ -161,7 +164,7 @@ function About() {
         {/* Board Of Directors start */}
         <div className="row section_header team-header">
           <h2>Team</h2>
-          <h3>Board Of Directorss</h3>
+          <h3>Board Of Directors</h3>
         </div>
         {/* <div className="row team-members">
           {imgarr.map((val) => (

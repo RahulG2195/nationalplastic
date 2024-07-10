@@ -29,14 +29,16 @@ function Infrastructure() {
           </div>
         </div>
         <div className="col-xl-6 col-lg-6 col-md-6 col-sm-8 col-xs-8 india-map-text float-start w-20">
-          <h2 className="fs-1 py-0">Lorem ipsum</h2>
+          {/* <h2 className="fs-1 py-0">Lorem ipsum</h2> */}
           <p className="fs-6 fw-semibold infraTextrsp ">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna.
+          In Silvassa and Patna - National has employed the use of state of the art machinery, equipment and robotic systems. In these two factories the manufacturing of plastic molded furniture and household products are taking place.
           </p>
-          <button className="btntextInfra py-3 px-md-5">
+          <p className="fs-6 fw-semibold infraTextrsp ">
+          In the Nellore plant - National has started a new product line - PVC Flooring Mats - which is under a different brand name called - "INSTA."
+          </p>
+          {/* <button className="btntextInfra py-3 px-md-5">
             EXPLORE OUR LOCATIONS
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

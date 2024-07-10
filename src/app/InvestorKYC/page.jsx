@@ -50,7 +50,7 @@ const InvestorKYC = () => {
                 <span style={{ fontSize: "11pt" }}>
                   <span style={{ color: "#494949" }}>
                     1. ISR – 1 –{" "}
-                    <a href="/UploadedFiles/Files/Form%20ISR%20-1%20-%20Form%20for%20availing%20investor%20services%20KYC.PDF">
+                    <a target='_blank' href="/UploadedFiles/Files/Form%20ISR%20-1%20-%20Form%20for%20availing%20investor%20services%20KYC.PDF">
                       Form for availing investor services/KYC
                     </a>
                   </span>
@@ -60,7 +60,7 @@ const InvestorKYC = () => {
                 <span style={{ fontSize: "11pt" }}>
                   <span style={{ color: "#494949" }}>
                     2. ISR – 2 –{" "}
-                    <a href="/UploadedFiles/Files/Form%20ISR%20-2%20-%20Signature%20Verification%20from%20Bank.pdf">
+                    <a target='_blank' href="/UploadedFiles/Files/Form%20ISR%20-2%20-%20Signature%20Verification%20from%20Bank.pdf">
                       Signature Verification from Bank
                     </a>
                   </span>
@@ -70,7 +70,7 @@ const InvestorKYC = () => {
                 <span style={{ fontSize: "11pt" }}>
                   <span style={{ color: "#494949" }}>
                     3. ISR – 3 –{" "}
-                    <a href="/UploadedFiles/Files/Form%20ISR%20-3%20%20-%20Opting-out%20from%20Nomination.pdf">
+                    <a target='_blank' href="/UploadedFiles/Files/Form%20ISR%20-3%20%20-%20Opting-out%20from%20Nomination.pdf">
                       Opting-out from Nomination
                     </a>
                   </span>
@@ -80,7 +80,7 @@ const InvestorKYC = () => {
                 <span style={{ fontSize: "11pt" }}>
                   <span style={{ color: "#494949" }}>
                     4. ISR&nbsp;– 5&nbsp;–&nbsp;
-                    <a href="/UploadedFiles/Files/1.%20Investor%20Complaints_31.12.2022.pdf">
+                    <a target='_blank' href="/UploadedFiles/Files/1.%20Investor%20Complaints_31.12.2022.pdf">
                       Request for Transmission of Securities by Nominee or Legal Heir
                     </a>
                   </span>
@@ -90,7 +90,7 @@ const InvestorKYC = () => {
                 <span style={{ fontSize: "11pt" }}>
                   <span style={{ color: "#494949" }}>
                     5. SH– 13 –{" "}
-                    <a href="/UploadedFiles/Files/Form%20SH-13%20-%20Nomination%20Form.pdf">
+                    <a target='_blank' href="/UploadedFiles/Files/Form%20SH-13%20-%20Nomination%20Form.pdf">
                       Nomination Form
                     </a>
                   </span>
@@ -100,7 +100,7 @@ const InvestorKYC = () => {
                 <span style={{ fontSize: "11pt" }}>
                   <span style={{ color: "#494949" }}>
                     6. SH– 14 –{" "}
-                    <a href="/UploadedFiles/Files/Form%20SH-14%20-%20Cancellation%20or%20Variation%20from%20Nomination.pdf">
+                    <a target='_blank' href="/UploadedFiles/Files/Form%20SH-14%20-%20Cancellation%20or%20Variation%20from%20Nomination.pdf">
                       Cancellation / Variation from Nomination{" "}
                     </a>
                   </span>
