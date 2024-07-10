@@ -48,55 +48,35 @@ function ProdData({ category_id }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const storedId = id;
-        const productName = id;
-        setProductId(storedId);
+        setIsLoading(true);
+        const response = await axios.get(`${process.env.BASE_URL}/product-details?id=${id}`);
+        const { product, productDetails, colors, category } = response.data;
+        console.log("const storedId = id;" , product.product_id);
 
-        const response = await axios.get(`${process.env.BASE_URL}/Products`);
-        let filteredData = [];
-        let productDetailArr = [];
-        let productColor = [];
-        if (storedId || productName) {
-          filteredData = response.data.products.filter(
-            (item) =>
-              item.product_id == storedId ||
-              item.seo_url.toLowerCase() === productName.toLowerCase()
-          );
-
-          const catName = filteredData[0].category_id;
-          category(catName);
-          setCategoryId(catName);
-
-          // get all color as per prod name
-          productColor = response.data.prod_clr.filter(
-            (val) => val.product_name == filteredData[0].product_name
-          );
-
-          const colors = productColor.map((item) => item.color);
-          colorBasedProductsImages(colors) 
-          productDetailArr = response.data.prod_detail.filter(
-            (item) => item.prod_id == filteredData[0].product_id
-          );
-        }
-        
-        if (filteredData.length === 0) {
+        if (!product) {
           setErrorMessage("Sorry, this product is not available");
         } else {
-          setData(filteredData);
-          setProdData(productDetailArr);
-          setProductColor(productColor);
-          setSelectedColor(filteredData[0].color);
-          setProduct_id(filteredData[0].product_id)
+          setData([product]);
+          setProdData(productDetails);
+          setProductColor(colors);
+          setSelectedColor(product.color);
+          setProduct_id(product.product_id);
+          setCategoryId(category);
+          // CleanCateogoryName(category);
+          const allColors = colors.map(color => color.color);
+          colorBasedProductsImages(allColors);
         }
-        setIsLoading(false);
       } catch (error) {
-        setErrorMessage("Error fetching data");
+        setErrorMessage(error.message ||"Error fetching data");
+      } finally {
         setIsLoading(false);
       }
     };
-    fetchData();
-  }, [id]);
 
+    if (id) {
+      fetchData();
+    }
+  }, [id]);
 
   const colorBasedProductsImages = async (colors) => {
     setAvailableColor(colors);
@@ -134,7 +114,7 @@ function ProdData({ category_id }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ seo_url: storedId }),
+        body: JSON.stringify({ seo_url: id }),
       });
 
       if (!response.ok) {
@@ -170,7 +150,7 @@ function ProdData({ category_id }) {
   };
 
   const handleMoveToCart = async (storedId, quantity) => {
-    const data = await fetchPrice(storedId);
+    const data = await fetchPrice(id);
     const price = data.price;
     const discount_price = data.discount_price;
     switch (userState) {
