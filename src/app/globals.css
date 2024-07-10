@@ -294,7 +294,7 @@ p {
 }
 
 .newProdCard .discount {
-    background-color: red;
+    background-color: #CC0008;
     padding-top: 1px;
     padding-bottom: 1px;
     padding-left: 4px;
@@ -328,11 +328,13 @@ p {
     font-weight: bold;
     width: 100%
 }
-
+.newProdCard .dress-name span {
+    color: #CC0008;
+}
 .newProdCard .new-price {
     font-size: 16px;
     font-weight: bold;
-    color: red
+    color: #CC0008
 }
 
 .newProdCard .old-price {
@@ -363,15 +365,15 @@ p {
 
 .newProdCard .red {
     background-color: #fff;
-    border: 2px solid red
+    border: 2px solid #CC0008
 }
 
 .newProdCard .red:hover {
-    border: 3px solid red
+    border: 3px solid #CC0008
 }
 
 .newProdCard .red:focus {
-    background-color: red
+    background-color: #CC0008
 }
 
 .newProdCard .blue {
@@ -432,6 +434,9 @@ p {
     color: #E7700D;
 }
 
+.np_color_red{
+    color: #CC0008 !important;
+}
 .newProdCard .rating-number {
     font-size: 14px;
     color: grey
@@ -467,7 +472,7 @@ p {
 }
 
 .newProdCard .voutcher-code {
-    color: red;
+    color: #CC0008;
     font-size: 11px;
     font-weight: bold
 }

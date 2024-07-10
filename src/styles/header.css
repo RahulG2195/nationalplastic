@@ -47,9 +47,9 @@ h6 {
 }
 
 .HeadSearch {
-    padding: 10px 10px 30px 40px;
+    padding: 10px 10px 30px 10px;
     padding-bottom: 0;
-    margin: 10px;
+    /* margin: 10px; */
     background-image: url('/Assets/images/search-svgrepo-com.svg');
     background-repeat: no-repeat;
     background-position: 20px center;
@@ -274,7 +274,7 @@ h6 {
 .navbar-expand-lg .navbar-nav .nav-link {
     font-size: 15px !important;
     font-weight: 600;
-    margin: 0 16px;
+    margin: 0 10px;
     color: #000;
     
 }
@@ -307,14 +307,17 @@ h6 {
     position: relative;
     /* border-left: 2px solid;
       border-right: 2px solid; */
+      display: flex;
+      align-items: center;
+      text-wrap: nowrap;
 }
 
 .bulk_ord::after {
     content: "";
     position: absolute;
     top: 5%;
-    right: 0%;
-    width: 1px;
+    right: 6%;
+    width: 2px;
     height: 80%;
     background-color: #1E1F23;
 }

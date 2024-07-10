@@ -5,6 +5,8 @@ import Infrastructure from "@/Components/About/Infrastructure";
 import Team from "@/Components/About/team";
 import AwardsCertificates from "@/Components/About/AwardsCertificates";
 import SliderCard from "@/Components/About/SliderCard";
+import Header from "@/Components/layouts/Header";
+import Footer from "@/Components/layouts/Footer";
 
 function About() {
   // Array for misson vission
@@ -73,7 +75,7 @@ function About() {
     {
       key: 5,
       image: "/Assets/images/user.png",
-      name: "Mr. Mishal Ketan Parekh - Executive Director",
+      name: "Mr. Mishaal Ketan Parekh - Executive Director",
       desig:
         "Mr. Mishaal Parekh is Bachelor of Science in Industrial Systems Engineering from University of Southern California, Los Angeles, California. He has expertise in Lean Operations, Systems Analysis, Six Sigma, Statistical Quality Control, Project Management, Human Factors Analysis, Supply Chain Design, Facilities Design, NX, Solid Works, Auto CAD, Arena Simulation, MATLAB, House of Quality, Injection Molding, MS Project, Asana. He was also associated with the Company as Design and Quality Engineer, in this profile he worked and led and executed market research with cross-functional team consisting of members R&D department, Marketing, and Manufacturing, on the attractiveness of the bathroom fitting industry.",
     },
@@ -130,7 +132,8 @@ function About() {
 
   return (
     <>
-      <Subbanner />
+    <Header/>
+      <Subbanner img='/Assets/images/banner/About-Us-banner-V2.jpg' alt='about banner' height='80'/>
       <div className="container about_container">
         <div className="row section_header">
           <h2>
@@ -378,6 +381,7 @@ function About() {
           ))}
         </div>
       </div>
+      <Footer/>
     </>
   );
 }
