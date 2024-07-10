@@ -10,19 +10,17 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/redux/reducer/cartSlice";
 import { addToCartD } from "@/redux/reducer/tempSlice";
-
 import { useParams } from "next/navigation";
 import Breadcrump from "../Breadcrump/Breadcrump";
 import GetQuoteCustomForm from "../BulkOrder/GetQuoteCustomForm";
 import { notifyError } from "@/utils/notify";
-// import user1 from "public/assets/images/logo/logo.png";
 
 function ProdData({ category_id }) {
   const [data, setData] = useState([]);
   const [prodData, setProdData] = useState([]);
   const userState = useSelector((state) => state.userData.isLoggedIn);
-  const [categoryId, setCategoryId] = useState(null); // For Id of category to send to breadcrumbs
-  const [categoryName, setCategoryName] = useState(null); // For Name of category to send to breadcrumbs
+  const [categoryId, setCategoryId] = useState(null); 
+  const [categoryName, setCategoryName] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [productId, setProductId] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -37,14 +35,13 @@ function ProdData({ category_id }) {
   const router = useParams();
   const id = router.productId;
 
-
-
   const handleIncrement = async () => {
     setInitialCount(initialCount + 1);
   };
+
   const handleDecrement = async () => {
     if (initialCount > 0) {
-      setInitialCount(initialCount - 1); // Decrement by 1
+      setInitialCount(initialCount - 1); 
     }
   };
 
@@ -74,13 +71,9 @@ function ProdData({ category_id }) {
           productColor = response.data.prod_clr.filter(
             (val) => val.product_name == filteredData[0].product_name
           );
-          // product_id
-
 
           const colors = productColor.map((item) => item.color);
           colorBasedProductsImages(colors) 
-
-
           productDetailArr = response.data.prod_detail.filter(
             (item) => item.prod_id == filteredData[0].product_id
           );
@@ -107,18 +100,15 @@ function ProdData({ category_id }) {
 
   const colorBasedProductsImages = async (colors) => {
     setAvailableColor(colors);
-  
     try {
       const response = await axios.put(`${process.env.BASE_URL}/colorBasedProduct`, {
-        name: "Agra",
+        name: id,
         colors: colors
       });
       const  rawdataToShow  = response.data.data
       setdataToShow(rawdataToShow);
-      // Handle the response as needed
     } catch (error) {
-      console.error('Error updating colors:', error);
-      // Handle any errors
+      notifyError(error.message);
     }
   };
 
@@ -150,9 +140,7 @@ function ProdData({ category_id }) {
       if (!response.ok) {
         throw new Error("Failed to fetch product data");
       }
-
       const data = await response.json();
-
       return data;
     } catch (error) {
       console.error("Error fetching product data:", error);
@@ -161,7 +149,6 @@ function ProdData({ category_id }) {
   };
 
   const handleColorChange = async (event) => {
-
     setSelectedColor(event.target.value);
     const colorBasedProduct = { color: event.target.value, name: id };
     try {
@@ -177,7 +164,6 @@ function ProdData({ category_id }) {
       } else {
         notifyError("Image Not available");
       }
-
     } catch (err) {
       notifyError("Image isnt available");
     }
@@ -187,7 +173,6 @@ function ProdData({ category_id }) {
     const data = await fetchPrice(storedId);
     const price = data.price;
     const discount_price = data.discount_price;
-    // const product_id = data.product_id;
     switch (userState) {
       case false:
         dispatch(
@@ -216,7 +201,6 @@ function ProdData({ category_id }) {
           "Unexpected login state. Please handle appropriately.",
           isLoggedInResult
         );
-      // Consider additional actions for unexpected login states
     }
   };
 
@@ -231,16 +215,13 @@ function ProdData({ category_id }) {
   const name = data.length > 0 ? data[0].product_name : null;
   const price = data.length > 0 ? data[0].price : null;
   const orignalPrice = data.length > 0 ? data[0].discount_price : null;
-  // let image = data.length > 0 ? data[0].image_name : null;
   const baseImageNames = data.length > 0 ? data[0].image_name : "default_chair_img.webp";
   const image = baseImageNames;
 
   const saving = (orignalPrice - price).toFixed(2);
   return (
     <>
-      {/* <Breadcrump productName = {name} /> */}
       <div className="container">
-        {/* <div className="heading-section"><h2>Product Details</h2></div> */}
         <div className="row">
           <div className="col-12">
             <Breadcrump
