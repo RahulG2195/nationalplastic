@@ -69,24 +69,58 @@ function BottomBar() {
       const dropdown = dropdownRefs.current[index];
       const rect = dropdown.getBoundingClientRect();
       if (rect.right > window.innerWidth) {
-        dropdown.classList.add('flipped');
+        dropdown.classList.add("flipped");
       } else {
-        dropdown.classList.remove('flipped');
+        dropdown.classList.remove("flipped");
       }
     };
 
     dropdownRefs.current.forEach((dropdown, index) => {
       const parent = dropdown.parentElement;
-      parent.addEventListener('mouseover', () => handleHover(index));
+      parent.addEventListener("mouseover", () => handleHover(index));
     });
 
     return () => {
       dropdownRefs.current.forEach((dropdown, index) => {
         const parent = dropdown.parentElement;
-        parent.removeEventListener('mouseover', () => handleHover(index));
+        parent.removeEventListener("mouseover", () => handleHover(index));
       });
     };
   }, [navbar]);
+
+  useEffect(() => {
+    const handleDropdownPosition = () => {
+      dropdownRefs.current.forEach((dropdown) => {
+        if (dropdown) {
+          const rect = dropdown.getBoundingClientRect();
+          const parentRect = dropdown.parentElement.getBoundingClientRect();
+          const viewportWidth = window.innerWidth;
+
+          if (rect.right > viewportWidth) {
+            // If dropdown extends beyond right edge, align it to the right
+            dropdown.style.left = "auto";
+            dropdown.style.right = "0";
+          } else {
+            // Reset positioning
+            dropdown.style.left = "0";
+            dropdown.style.right = "auto";
+          }
+
+          // Ensure the dropdown doesn't go off the left edge
+          if (rect.left < 0) {
+            dropdown.style.left = `${-parentRect.left}px`;
+          }
+        }
+      });
+    };
+
+    handleDropdownPosition();
+    window.addEventListener("resize", handleDropdownPosition);
+
+    return () => {
+      window.removeEventListener("resize", handleDropdownPosition);
+    };
+  }, []);
 
   return (
     <div className="px-md-5 d-flex align-items-center bottom_nav position-relative mainrow">
@@ -116,7 +150,7 @@ function BottomBar() {
             <p className="text-start fw-bold dropHeading p-3">
               {val.category_name}
             </p>
-            <div className="d-flex flex-row gap-3 px-3">
+            <div className="d-flex flex-row gap-4 px-3">
               {chunkArray(
                 AllProd.filter(
                   (products) => products.category_id === val.category_id
@@ -126,7 +160,7 @@ function BottomBar() {
                 <div key={columnIndex} className="column pt-3">
                   {chunk.map((product, index) => (
                     <p
-                      className="p-2 fw-semibold"
+                      className="p-3 fw-semibold"
                       key={index}
                       onMouseOver={() => ChangeImage(product.product_name)}>
                       <Link
@@ -155,6 +189,8 @@ function BottomBar() {
         </div>
       ))}
     </div>
+
+  
   );
 }
 

@@ -3,6 +3,49 @@
     cursor: pointer;
 }
 
+
+.custom-section {
+    background-color: whitesmoke;
+}
+
+
+.custom-content {
+    background-color: #FFFF;
+}
+
+.custom-title {
+    color: #262262;
+    border-bottom: 2px solid #262262;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+}
+
+.custom-description {
+    color: #262262;
+    margin-bottom: 24px;
+}
+
+.contact-info p,
+.custom-address,
+.custom-contact {
+    color: #262262;
+    margin-bottom: 8px;
+}
+
+.custom-link {
+    color: #262262;
+    text-decoration: underline;
+}
+
+.custom-link:hover {
+    color: #FFE101;
+}
+
+p {
+    line-height: 1.6;
+}
+
+
 .certificate-para p {
     text-wrap: pretty;
     margin: 10px 0;
@@ -34,9 +77,13 @@
     margin: 40px auto;
 }
 
+.AwardsCertificatesImg{
+    border-radius: 50%;
+
+}
+
 .AwardsCertificatesImg img {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    border-radius: 50%;
     padding: 0;
     width: 250px !important;
     margin: auto;
@@ -73,10 +120,14 @@
     }
 }
 
+
+
 .custom-dropdown-css:hover .ulCont {
     opacity: 1;
     visibility: visible;
+    animation: dropdownAnimation 0.5s ease-in-out forwards, waterDrop 1.5s ease-in-out forwards;
 }
+
 
 
 

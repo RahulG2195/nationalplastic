@@ -107,7 +107,7 @@ function About() {
   const certificatesarr = [
     {
       key: 1,
-      image: "/Assets/images/user.png",
+      image: "/Assets/images/certificate_img/PLEXCONCIL-Trophy-2014-15-16-17.jpg",
     },
     {
       key: 2,
@@ -148,7 +148,6 @@ function About() {
               <VMCard title={val.title} description={val.desc} />
             </div>
           ))}
-          {/* <div className="col-md-6"> <VMCard  title={titleValue} description={descriptionValue}/> </div> */}
         </div>
       </div>
       {/* Vission and Mission end */}
@@ -163,44 +162,7 @@ function About() {
           <h2>Team</h2>
           <h3>Board Of Directorss</h3>
         </div>
-        {/* <div className="row team-members">
-          {imgarr.map((val) => (
-            <div
-              // className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6"
-              className="col-xl-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6"
-              key={val.key}>
-              <div className="team-members-container">
-                {imgarr.map((val, index) => (
-                  <div
-                    key={index}
-                    className={`row team-member ${
-                      index % 2 === 0 ? "left-image" : "right-image"
-                    }`}>
-                    <div
-                      className={`col-md-4 ${
-                        index % 2 === 0 ? "order-1" : "order-2"
-                      }`}>
-                      <Team
-                        image={val.image}
-                        name={val.name}
-                        designation={val.desig}
-                      />
-                    </div>
-                    <div
-                      className={`col-md-8  ${
-                        index % 2 === 0 ? "order-2" : "order-1"
-                      }`}>
-                      <div className="team-detail">
-                        <h3 className="team-title">{val.name}</h3>
-                        <p>{val.desig}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div> */}
+
 
         <div className="row team-members">
           {imgarr.map((val, index) => (
@@ -237,15 +199,6 @@ function About() {
           ))}
         </div>
 
-        {/* <div className="row team-members">
-          {imgarr.map((val) => (
-            <div
-              className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6"
-              key={val.key}>
-              <Team image={val.image} name={val.name} disignation={val.desig} />
-            </div>
-          ))}
-        </div> */}
         {/* Board Of Directors end */}
 
         {/* Managing Committee start */}
@@ -278,34 +231,7 @@ function About() {
           ))}
         </div>
 
-        {/* <div className="row team-members">
-          {imgarr.map((val) => (
-            <div
-              className="col-xl-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6"
-              key={val.key}>
-              <div className="row">
-                <div className="col-md-4">
-                  <Team image={val.image} />
-                </div>
-                <div className="col-md-8">
-                  <div className="team-detail">
-                    <h3 className="team-title">{val.name}</h3>
-                    <p>{val.desig}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div> */}
-        {/* <div className="row team-members">
-          {imgarr.map((val) => (
-            <div
-              className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6"
-              key={val.key}>
-              <Team image={val.image} name={val.name} disignation={val.desig} />
-            </div>
-          ))}
-        </div> */}
+        
       </div>
       <div className="container">
         <div className="text-center mb-5 ">
@@ -324,46 +250,7 @@ function About() {
             </p>
           </div>
         </div>
-        {/* <div className="row team-members">
-          {certificatesarr.map((val, index) => (
-            <div className="team-members-container">
-              <div
-                className="col-xl-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6"
-                key={val.key}>
-                <div className="row">
-                  <div
-                    className={`col-md-4 ${
-                      index % 2 === 0 ? "order-1" : "order-2"
-                    }`}>
-                    {" "}
-                    <AwardsCertificates image={val.image} />
-                  </div>
-                  <div
-                    className={`col-md-8 ${
-                      index % 2 === 0 ? "order-2" : "order-1"
-                    }`}>
-                    <div className="team-detail">
-                      <h3 className="team-title">Title of the Paragraph</h3>
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Sed consectetur soluta voluptas praesentium provident!
-                        Rem quia libero deserunt cumque ea, quod, quibusdam et
-                        enim a tempora odio. Deserunt, unde aperiam!
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            // <div
-            //   className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6"
-            //   key={val.key}>
-            //   {" "}
-            //   <AwardsCertificates image={val.image} />
-            // </div>
-          ))}
-        </div> */}
+     
         <div className="row team-members">
           {certificatesarr.map((val) => (
             <div
