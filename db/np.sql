@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 09, 2024 at 08:31 AM
+-- Generation Time: Jul 10, 2024 at 01:48 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -81,7 +81,7 @@ INSERT INTO `categories` (`category_id`, `category_name`, `image_name`, `navshow
 (37, 'Shell', '', 0, NULL, 1, '2024-04-30 03:45:31', 0),
 (38, 'Utility', '', 0, NULL, 1, '2024-04-30 04:02:48', 0),
 (39, 'Planters', '', 0, NULL, 1, '2024-04-30 04:06:06', 0),
-(40, 'Office Chair', 'abc.jbp', 1, 2, 1, '2024-07-05 06:46:05', 0);
+(40, 'Office Chair', 'office_chair_header.jpeg', 1, 2, 1, '2024-07-05 06:46:05', 0);
 
 -- --------------------------------------------------------
 
@@ -709,12 +709,12 @@ INSERT INTO `products` (`product_id`, `product_name`, `product_name2`, `meta_tit
 (362, 'TIGER', 'TIGER', '', '', '', '', '', 'tiger', 'tiger-MBG', 28, 'default_chair_img.webp', NULL, '266', '319', '20', '', '', '40', 'MBG', '#F4E5D2', 'without arm tent', 1, '2024-06-14 05:22:15');
 INSERT INTO `products` (`product_id`, `product_name`, `product_name2`, `meta_title`, `meta_description`, `short_description`, `long_description`, `seo_titile`, `seo_url`, `seo_url_clr`, `category_id`, `image_name`, `header_image`, `price`, `discount_price`, `discount_percentage`, `categoryType`, `duration`, `InstallationCharges`, `color`, `color_code`, `armType`, `prod_status`, `created_on`) VALUES
 (363, 'TIGER', 'TIGER', '', '', '', '', '', 'tiger', 'tiger-RED', 28, 'Tiger-stool-Red-(front)-white bg.webp', NULL, '266', '319', '20', '', '', '40', 'RED', '#D61725', 'without arm tent', 1, '2024-06-14 05:22:15'),
-(364, 'Tote 21 15 Ltrs With Wheels', 'Tote 21 15 Ltrs With Wheels', '', '', '', '', '', 'tote-21-15-ltrs-with-wheels', 'tote-21-15-ltrs-with-wheels-NATURAL', 21, 'Tote Box 15 Ltrs With-Wheels-Natural-white bg.webp', NULL, '332', '399', '20', '', '', '40', 'NATURAL', '#E5D3BF', 'without arm tent', 1, '2024-06-14 05:22:15'),
-(365, 'Tote 21 15 Ltrs Without Wheels', 'Tote 21 15 Ltrs Without Wheels', '', '', '', '', '', 'tote-21-15-ltrs-without-wheels', 'tote-21-15-ltrs-without-wheels-NATURAL', 21, 'Tote Box 15 Ltrs Without Wheels-Natural-white bg.webp', NULL, '320', '384', '20', '', '', '40', 'NATURAL', '#E5D3BF', 'without arm tent', 1, '2024-06-14 05:22:15'),
-(366, 'Tote 21 35 Ltrs With Wheels', 'Tote 21 35 Ltrs With Wheels', '', '', '', '', '', 'tote-21-35-ltrs-with-wheels', 'tote-21-35-ltrs-with-wheels-NATURAL', 21, 'Tote Box 35 Ltrs With-Wheels-Natural-white bg.webp', NULL, '503', '604', '20', '', '', '40', 'NATURAL', '#E5D3BF', 'without arm tent', 1, '2024-06-14 05:22:15'),
-(367, 'Tote 21 35 Ltrs Without Wheels', 'Tote 21 35 Ltrs Without Wheels', '', '', '', '', '', 'tote-21-35-ltrs-without-wheels', 'tote-21-35-ltrs-without-wheels-NATURAL', 21, 'Tote Box 35 Ltrs Without Wheels-Natural-white bg.webp', NULL, '490', '588', '20', '', '', '40', 'NATURAL', '#E5D3BF', 'without arm tent', 1, '2024-06-14 05:22:15'),
-(368, 'Tote 21 60 Ltrs With Wheels', 'Tote 21 60 Ltrs With Wheels', '', '', '', '', '', 'tote-21-60-ltrs-with-wheels', 'tote-21-60-ltrs-with-wheels-NATURAL', 21, 'Tote Box 60 Ltrs With-Wheels-Natural-White bg.webp', NULL, '783', '940', '20', '', '', '40', 'NATURAL', '#E5D3BF', 'without arm tent', 1, '2024-06-14 05:22:15'),
-(369, 'Tote 21 60 Ltrs Without Wheels', 'Tote 21 60 Ltrs Without Wheels', '', '', '', '', '', 'tote-21-60-ltrs-without-wheels', 'tote-21-60-ltrs-without-wheels-NATURAL', 21, 'Tote Box 60 Ltrs Without Wheels-Natural-white bg.webp', NULL, '754', '905', '20', '', '', '40', 'NATURAL', '#E5D3BF', 'without arm tent', 1, '2024-06-14 05:22:15'),
+(364, 'Tote Box 15 Ltrs With Wheels', 'Tote Box 15 Ltrs With Wheels', '', '', '', '', '', 'tote-Box-15-ltrs-with-wheels', 'tote-box-15-ltrs-with-wheels-NATURAL', 21, 'Tote Box 15 Ltrs With-Wheels-Natural-white bg.webp', NULL, '332', '399', '20', '', '', '40', 'NATURAL', '#E5D3BF', 'without arm tent', 1, '2024-06-14 05:22:15'),
+(365, 'Tote Box 15 Ltrs Without Wheels', 'Tote Box 15 Ltrs Without Wheels', '', '', '', '', '', 'tote-box-15-ltrs-without-wheels', 'tote-box-15-ltrs-without-wheels-NATURAL', 21, 'Tote Box 15 Ltrs Without Wheels-Natural-white bg.webp', NULL, '320', '384', '20', '', '', '40', 'NATURAL', '#E5D3BF', 'without arm tent', 1, '2024-06-14 05:22:15'),
+(366, 'Tote Box 35 Ltrs With Wheels', 'Tote Box 35 Ltrs With Wheels', '', '', '', '', '', 'tote-box-35-ltrs-with-wheels', 'tote-box-35-ltrs-with-wheels-NATURAL', 21, 'Tote Box 35 Ltrs With-Wheels-Natural-white bg.webp', NULL, '503', '604', '20', '', '', '40', 'NATURAL', '#E5D3BF', 'without arm tent', 1, '2024-06-14 05:22:15'),
+(367, 'Tote Box 35 Ltrs Without Wheels', 'Tote Box 35 Ltrs Without Wheels', '', '', '', '', '', 'tote-box-35-ltrs-without-wheels', 'tote-box-35-ltrs-without-wheels-NATURAL', 21, 'Tote Box 35 Ltrs Without Wheels-Natural-white bg.webp', NULL, '490', '588', '20', '', '', '40', 'NATURAL', '#E5D3BF', 'without arm tent', 1, '2024-06-14 05:22:15'),
+(368, 'Tote Box 60 Ltrs With Wheels', 'Tote Box 60 Ltrs With Wheels', '', '', '', '', '', 'tote-box-60-ltrs-with-wheels', 'tote-box-60-ltrs-with-wheels-NATURAL', 21, 'Tote Box 60 Ltrs With-Wheels-Natural-White bg.webp', NULL, '783', '940', '20', '', '', '40', 'NATURAL', '#E5D3BF', 'without arm tent', 1, '2024-06-14 05:22:15'),
+(369, 'Tote Box 60 Ltrs Without Wheels', 'Tote Box 60 Ltrs Without Wheels', '', '', '', '', '', 'tote-box-60-ltrs-without-wheels', 'tote-box-60-ltrs-without-wheels-NATURAL', 21, 'Tote Box 60 Ltrs Without Wheels-Natural-white bg.webp', NULL, '754', '905', '20', '', '', '40', 'NATURAL', '#E5D3BF', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (370, 'UDAIPUR - RECTANGLE DINING TABLE (FOLDING LEGS)', 'UDAIPUR - RECTANGLE DINING TABLE (FOLDING LEGS)', '', '', '', '', '', 'udaipur-rectangular', 'udaipur-rectangular-MBG', 25, 'default_chair_img.webp', NULL, '1834', '2200', '20', '', '', '40', 'MBG', '#F4E5D2', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (371, 'UDAIPUR - RECTANGLE DINING TABLE (FOLDING LEGS)', 'UDAIPUR - RECTANGLE DINING TABLE (FOLDING LEGS)', '', '', '', '', '', 'udaipur-rectangular', 'udaipur-rectangular-Mat-Brown', 25, 'udaipur-rectangular-front-metbrown.jpg, udaipur-rectangular-Matbrown.jpg', NULL, '1834', '2200', '20', '', '', '40', 'Mat Brown', '#563921', 'without arm tent', 1, '2024-06-14 05:22:15'),
 (372, 'UDAIPUR - RECTANGLE DINING TABLE (FOLDING LEGS)', 'UDAIPUR - RECTANGLE DINING TABLE (FOLDING LEGS)', '', '', '', '', '', 'udaipur-rectangular', 'udaipur-rectangular-RED', 25, 'Uno chair-Red-(45)-white bg.webp, Uno chair-Red-(front)-white bg.webp', NULL, '1834', '2200', '20', '', '', '40', 'RED', '#D61725', 'without arm tent', 1, '2024-06-14 05:22:15'),
@@ -1224,6 +1224,36 @@ INSERT INTO `product_detail` (`pd_id`, `prod_id`, `features`, `dimenions`, `desc
 (420, 420, 'Made from high-quality plastic for long-lasting durability\n-- Resistant to daily wear and tear, as well as tough weather conditions and UV rays\n-- Easy to clean – just wipe with a damp cloth and soap\n-- Suitable for indoor and outdoor use, blending seamlessly into any setting\n-- Suitable for children aged 1 to 9 years', '', 'Our baby chair collection offers a range of plastic chairs designed specifically for little ones. These chairs are carefully designed to provide safe and comfortable seating for your little ones. With sturdy construction and child-friendly features, our chairs are perfect for children aged 1 to 9 years old. Choose from a variety of colorful designs to suit your child\'s personality and style. Keep your little ones happy and secure during meal times and play with our reliable and practical baby chair collection.', 'Cleaning: Use a damp cloth with mild soap to wipe down the chair regularly. Don\'t use strong chemicals or acid-based cleaners as they can damage the plastic. You can also use a dry cloth to wipe it daily.\n-- Handling: When moving the chair, be careful not to push or pull it forcefully.\n-- Storage: If you need to store the chair, you can stack it and keep it together in a room without direct sunlight. \n-- Avoid Sunlight: Keep the chair away from direct sunlight to prevent fading or warping.', '', '', ''),
 (421, 421, 'Made from high-quality plastic for long-lasting durability\n-- Resistant to daily wear and tear, as well as tough weather conditions and UV rays\n-- Easy to clean – just wipe with a damp cloth and soap\n-- Stackable design for convenient storage and transport\n-- Suitable for indoor and outdoor use, blending seamlessly into any setting', '', 'Explore our durable and affordable plastic chairs, ideal for any event or occasion. It\'s built to last, ensuring lasting use without sacrificing quality. With its strong build, it provides reliable seating in any setting. Choose from various stylish designs to match your decor effortlessly. Cleaning is easy, saving you time and effort while keeping your space clean.', 'Cleaning: Use a damp cloth with mild soap to wipe down the chair regularly. Don\'t use strong chemicals or acid-based cleaners as they can damage the plastic. You can also use a dry cloth to wipe it daily.\n-- Handling: When moving the chair, be careful not to push or pull it forcefully.\n-- Storage: If you need to store the chair, you can stack it and keep it together in a room without direct sunlight. \n-- Avoid Sunlight: Keep the chair away from direct sunlight to prevent fading or warping.', '', '', ''),
 (422, 422, 'Made from high-quality plastic for long-lasting durability\n-- Resistant to daily wear and tear, as well as tough weather conditions and UV rays\n-- Easy to clean – just wipe with a damp cloth and soap\n-- Stackable design for convenient storage and transport\n-- Suitable for indoor and outdoor use, blending seamlessly into any setting', '', 'Explore our durable and affordable plastic chairs, ideal for any event or occasion. It\'s built to last, ensuring lasting use without sacrificing quality. With its strong build, it provides reliable seating in any setting. Choose from various stylish designs to match your decor effortlessly. Cleaning is easy, saving you time and effort while keeping your space clean.', 'Cleaning: Use a damp cloth with mild soap to wipe down the chair regularly. Don\'t use strong chemicals or acid-based cleaners as they can damage the plastic. You can also use a dry cloth to wipe it daily.\n-- Handling: When moving the chair, be careful not to push or pull it forcefully.\n-- Storage: If you need to store the chair, you can stack it and keep it together in a room without direct sunlight. \n-- Avoid Sunlight: Keep the chair away from direct sunlight to prevent fading or warping.', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `review`
+--
+
+CREATE TABLE `review` (
+  `review_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `review_message` text NOT NULL,
+  `review_status` tinyint(1) DEFAULT 0,
+  `added_on` timestamp NOT NULL DEFAULT current_timestamp(),
+  `review_rate` int(11) DEFAULT NULL,
+  `username` varchar(50) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `review`
+--
+
+INSERT INTO `review` (`review_id`, `user_id`, `review_message`, `review_status`, `added_on`, `review_rate`, `username`, `product_id`) VALUES
+(1, 1, 'Great product! Highly recommended.', 1, '2024-07-10 05:29:41', 5, 'john_doe', 3),
+(2, 2, 'Good value for money, but delivery was slow.', 1, '2024-07-10 05:29:41', 4, 'jane_smith', 7),
+(3, 3, 'Not satisfied with the quality. Would not buy again.', 1, '2024-07-10 05:29:41', 2, 'mike_johnson', 10),
+(4, 4, 'Average product, meets basic expectations.', 0, '2024-07-10 05:29:41', 3, 'sarah_lee', 6),
+(5, 5, 'Exceeded my expectations! Fantastic service.', 1, '2024-07-10 05:29:41', 5, 'chris_brown', 9),
+(6, 1, 'This product exceeded my expectations. The quality is outstanding and it arrived earlier than expected. Highly recommended!', 0, '2024-07-10 06:22:25', 5, 'kartik', 5),
+(7, 1, 'This product exceeded my expectations. The quality is outstanding and it arrived earlier than expected. Highly recommended!', 0, '2024-07-10 06:22:54', 5, 'rahul', 12);
 
 -- --------------------------------------------------------
 

@@ -1,18 +1,18 @@
 import Image from "next/image";
 
-function Subbanner() {
+function Subbanner({img, alt, height}) {
   return (
     <section>
       <div className="about_slider">
         <div className="">
           <Image
-            src="/Assets/images/banner/About-Us-banner.png"
+            src={img}
             className="img-fluid d-block w-100 banner"
-            alt="ome banner 1"
+            alt={alt}
             width={100}
-            height={80}
+            height={height}
             layout="responsive"
-            objectFit="cover"
+            objectFit="contain"
           />
         </div>
 

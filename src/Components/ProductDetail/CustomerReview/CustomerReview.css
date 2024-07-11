@@ -108,6 +108,18 @@
   .large-stars .ant-rate-star {
     margin-right: 12px; /* Adjust spacing between stars if needed */
   }
+
+  .InitialName.profileInitialName {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    color: #333;
+    font-weight: bold;
+  }
   @media (max-width: 768px) {
     .review-content {
       flex-direction: column;

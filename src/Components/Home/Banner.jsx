@@ -37,7 +37,7 @@ function Banner() {
         <div className="carousel-item active">
 
           <Image
-            src={`/Assets/images/banner/Header-banner-websize.webp`}
+            src={`/Assets/images/banner/Header-banner-websize.jpg`}
             className="img-fluid d-block w-100"
             alt="ome banner 1"
             width={100}
@@ -48,7 +48,7 @@ function Banner() {
         </div>
         <div className="carousel-item">
           <Image
-            src={`/Assets/images/banner/Header-banner-websize.webp`}
+            src={`/Assets/images/banner/Header-banner-websize.jpg`}
             className="img-fluid d-block w-100"
             alt="ome banner 2"
             width={100}
@@ -59,7 +59,7 @@ function Banner() {
         </div>
         <div className="carousel-item">
           <Image
-            src={`/Assets/images/banner/Header-banner-websize.webp`}
+            src={`/Assets/images/banner/Header-banner-websize.jpg`}
             className="img-fluid d-block w-100"
             alt="ome banner 3"
             width={100}
@@ -70,7 +70,7 @@ function Banner() {
         </div>
         <div className="carousel-item">
           <Image
-            src={`/Assets/images/banner/Header-banner-websize.webp`}
+            src={`/Assets/images/banner/Header-banner-websize.jpg`}
             className="img-fluid d-block w-100"
             alt="ome banner 3"
             width={100}

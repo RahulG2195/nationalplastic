@@ -16,7 +16,7 @@ const PreChairsCard = (props) => {
     props.onaddToWishlist(props.id);
     setInWishlist(true);
   };
-
+const Np = "National Plastic";
   return (
     <>
       <div className={`card preCont mt-3 position-relative  my-4 ${props.recentClass ? props.recentClass : "" }`}>
@@ -49,7 +49,7 @@ const PreChairsCard = (props) => {
         <div className="product-detail-container p-2">
           <div className="align-items-center">
             <Link href={`/ProductDetail/${props.id}`} className="">
-              <h5 className="dress-name">{props.Title}</h5>
+              <h5 className="dress-name"><span>{Np}</span> {props.Title}</h5>
             </Link>
             <div className="d-md-flex flex-column mb-2">
 

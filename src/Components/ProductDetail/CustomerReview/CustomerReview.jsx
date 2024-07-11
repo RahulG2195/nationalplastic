@@ -1,40 +1,71 @@
 "use client";
-import "./CustomerReview.css";
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Rate, Modal, Input, message, Card, Avatar } from "antd";
 import { useParams } from "next/navigation";
 import axios from "axios";
+import "./CustomerReview.css";
 
 const { TextArea } = Input;
-
-// Dummy data
-const dummyReviews = [
-  { id: 1, name: "John Doe", rating: 5, review: "Great product! Highly recommended.", avatar: "https://xsgames.co/randomusers/avatar.php?g=male" },
-  { id: 2, name: "Jane Smith", rating: 5, review: "Good quality, Excellent service and fast delivery..", avatar: "https://xsgames.co/randomusers/avatar.php?g=female" },
-  { id: 3, name: "Bob Johnson", rating: 5, review: "Excellent service and fast delivery.", avatar: "https://xsgames.co/randomusers/avatar.php?g=male" },
-];
 
 const CustomerReview = () => {
   const [overallRating, setOverallRating] = useState(5);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [newReview, setNewReview] = useState({ rating: 0, text: "" });
   const [canReview, setCanReview] = useState(true);
+  const [reviews, setReviews] = useState([]);
   const router = useParams();
   const product_id = router.productId;
-  // const [reviews, setReviews] = useState([]);
-  const [reviews, setReviews] = useState(dummyReviews);
 
+  const gettingIdBasedReviews = async (product_id) => {
+    try {
+      const response = await axios.put(`${process.env.BASE_URL}/reviews`, JSON.stringify({ product_id: product_id }));
+      const data = response.data;
 
-  // const gettingIdBasedReviews = async (product_id) => {
-  //   console.log("product_id: " + product_id);
-  //   const reviewsFromDb = await axios.put(`${process.env.BASE_URL}/reviews`,JSON.stringify({ product_id: product_id }));
-  //   console.log("reviews_from_db: " + JSON.stringify(reviewsFromDb))
-  //   return reviewsFromDb.data;
-  // };
+      let reviewsToReturn = [];
 
-  // useEffect(() => {
-  //   gettingIdBasedReviews(product_id).then(setReviews);
-  // }, [product_id]);
+      const mapReview = (review) => ({
+        id: review.review_id,
+        name: review.username,
+        rating: review.review_rate,
+        review: review.review_message,
+        avatar: `https://xsgames.co/randomusers/avatar.php?g=${Math.random() > 0.5 ? 'male' : 'female'}`
+      });
+
+      if (data.review && Array.isArray(data.review)) {
+        reviewsToReturn = data.review.map(mapReview);
+      }
+
+      if (reviewsToReturn.length < 5 && data.dummyReviews && Array.isArray(data.dummyReviews)) {
+        const remainingCount = 5 - reviewsToReturn.length;
+        const dummyReviewsToAdd = data.dummyReviews.slice(0, remainingCount).map(mapReview);
+        reviewsToReturn = [...reviewsToReturn, ...dummyReviewsToAdd];
+      }
+
+      if (reviewsToReturn.length === 0) {
+        console.warn("No reviews or dummy reviews found in the response");
+      }
+
+      return reviewsToReturn;
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
+      return [];
+    }
+  };
+
+  useEffect(() => {
+    gettingIdBasedReviews(product_id).then(fetchedReviews => {
+      console.log("fetchedReviews", fetchedReviews);
+      setReviews(fetchedReviews);
+      updateOverallRating(fetchedReviews);
+    });
+  }, [product_id]);
+
+  const updateOverallRating = (reviewsToRate) => {
+    if (reviewsToRate.length > 0) {
+      const newOverallRating = reviewsToRate.reduce((sum, review) => sum + review.rating, 0) / reviewsToRate.length;
+      setOverallRating(newOverallRating);
+    }
+  };
 
   const showModal = () => {
     if (canReview) {
@@ -43,7 +74,6 @@ const CustomerReview = () => {
       message.warning("You can only review after a successful order and haven't reviewed yet.");
     }
   };
-
 
   const handleOk = () => {
     if (newReview.rating === 0 || newReview.text.trim() === "") {
@@ -55,18 +85,18 @@ const CustomerReview = () => {
       id: reviews.length + 1,
       name: "Current User",
       rating: newReview.rating,
-      text: newReview.text,
+      review: newReview.text,
       avatar: "https://xsgames.co/randomusers/avatar.php?g=pixel",
     };
 
-    setReviews([reviewToAdd, ...reviews]);
+
+    const updatedReviews = [reviewToAdd, ...reviews];
+    setReviews(updatedReviews);
     setIsModalVisible(false);
     setNewReview({ rating: 0, text: "" });
     message.success("Review submitted successfully!");
 
-    const newOverallRating = (reviews.reduce((sum, review) => sum + review.rating, 0) + newReview.rating) / (reviews.length + 1);
-    setOverallRating(newOverallRating);
-
+    updateOverallRating(updatedReviews);
     setCanReview(false);
   };
 
@@ -87,10 +117,9 @@ const CustomerReview = () => {
           <Card>
             <h2>Customer Satisfaction</h2>
             <div className="overall-rating">
-              {/* <span className="rating-number">{overallRating.toFixed(1)}</span> */}
               <Rate
                 disabled
-                defaultValue={overallRating}
+                value={overallRating}
                 allowHalf
                 className="large-stars"
               />
@@ -105,7 +134,9 @@ const CustomerReview = () => {
           {reviews.map((review) => (
             <Card key={review.id} className="review-card">
               <div className="review-header">
-                <Avatar src={review.avatar} />
+                <span className="InitialName profileInitialName">
+                  {review.name.charAt(0).toUpperCase()}
+                </span>
                 <div className="review-info">
                   <h3>{review.name}</h3>
                   <Rate disabled defaultValue={review.rating} />

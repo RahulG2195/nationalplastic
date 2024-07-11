@@ -329,10 +329,10 @@ function ProdData({ category_id }) {
                 </Link>
                 
               </div>
-              <p className="eye">
+              {/* <p className="eye">
                 <i className="fa fa-eye"></i> 210 customers are interviewing the
                 product
-              </p>
+              </p> */}
               <div className="terms fw-medium term_and_condition">
                 <Link href="TearnsAndConditions">Terms and Conditions</Link>
                 <ul>

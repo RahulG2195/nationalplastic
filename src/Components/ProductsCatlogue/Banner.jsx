@@ -10,17 +10,17 @@ const CatlogueBanner = () => {
                     <Image
                         src="/Assets/images/Header-banner-1-(Karen-chair-)/Header-banner-1-(Karen-chair-).png"
                         width={100}
-                        height={80}
+                        height={60}
                         layout='responsive'
                         objectFit='cover'
                         alt="Picture of the author"
                     />
-                    <button type="button" className="fw-bold">Shop Now</button>
+                    {/* <button type="button" className="fw-bold">Shop Now</button> */}
 
                 </div>
 
 
-                <div className="Imgbottom d-flex align-items-center justify-content-center gap-5 ">
+                {/* <div className="Imgbottom d-flex align-items-center justify-content-center gap-5 ">
 
                     <div className="cont">
                         <div className="img">
@@ -56,7 +56,7 @@ const CatlogueBanner = () => {
                         </div>
                     </div>
 
-                </div>
+                </div> */}
 
             </div>
 
