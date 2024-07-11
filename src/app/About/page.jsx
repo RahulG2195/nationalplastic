@@ -132,7 +132,7 @@ function About() {
 
   return (
     <>
-    <Header/>
+    {/* <Header/> */}
       <Subbanner img='/Assets/images/banner/About-Us-banner-V2.jpg' alt='about banner' height='80'/>
       <div className="container about_container">
         <div className="row section_header">
@@ -381,7 +381,7 @@ function About() {
           ))}
         </div>
       </div>
-      <Footer/>
+      {/* <Footer/> */}
     </>
   );
 }
