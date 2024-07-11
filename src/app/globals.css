@@ -627,7 +627,7 @@ p {
 
 /* Mobile: */
 
-@media only screen and (min-width: 601px) and (max-width: 768px) {
+@media only screen and (min-width: 601px) and (max-width: 616px) {
 
 
     .mobile__top {

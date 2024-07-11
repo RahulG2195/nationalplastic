@@ -11,23 +11,23 @@ import Footer from "@/Components/layouts/Footer";
 function About() {
   // Array for misson vission
 
-  const arr2 = [
-    {
-      key: 1,
-      image: "/Assets/images/user.png",
-      name: "this is Dummy Title",
-      desig:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-    },
+  // const arr2 = [
+  //   {
+  //     key: 1,
+  //     image: "/Assets/images/user.png",
+  //     name: "this is Dummy Title",
+  //     desig:
+  //       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+  //   },
 
-    {
-      key: 2,
-      image: "/Assets/images/user.png",
-      name: "this is Dummy Title",
-      desig:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-    },
-  ];
+  //   {
+  //     key: 2,
+  //     image: "/Assets/images/user.png",
+  //     name: "this is Dummy Title",
+  //     desig:
+  //       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+  //   },
+  // ];
 
   const arr = [
     {
@@ -107,10 +107,10 @@ function About() {
 
   // Array for Awards & Certificates
   const certificatesarr = [
-    {
-      key: 1,
-      image: "/Assets/images/certificates/PLEXCONCIL-Award-25-Sep-2015.jpg",
-    },
+    // {
+    //   key: 1,
+    //   image: "/Assets/images/user.png",
+    // },
     {
       key: 2,
       image: "/Assets/images/certificates/PLEXCONCIL-Award-2006-07.jpg",
@@ -167,46 +167,9 @@ function About() {
         {/* Board Of Directors start */}
         <div className="row section_header team-header">
           <h2>Team</h2>
-          <h3>Board Of Directors</h3>
+          <h3>PROMOTERS/DIRECTORS</h3>
         </div>
-        {/* <div className="row team-members">
-          {imgarr.map((val) => (
-            <div
-              // className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6"
-              className="col-xl-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6"
-              key={val.key}>
-              <div className="team-members-container">
-                {imgarr.map((val, index) => (
-                  <div
-                    key={index}
-                    className={`row team-member ${
-                      index % 2 === 0 ? "left-image" : "right-image"
-                    }`}>
-                    <div
-                      className={`col-md-4 ${
-                        index % 2 === 0 ? "order-1" : "order-2"
-                      }`}>
-                      <Team
-                        image={val.image}
-                        name={val.name}
-                        designation={val.desig}
-                      />
-                    </div>
-                    <div
-                      className={`col-md-8  ${
-                        index % 2 === 0 ? "order-2" : "order-1"
-                      }`}>
-                      <div className="team-detail">
-                        <h3 className="team-title">{val.name}</h3>
-                        <p>{val.desig}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div> */}
+
 
         <div className="row team-members">
           {imgarr.map((val, index) => (
@@ -224,8 +187,8 @@ function About() {
                     }`}>
                     <Team
                       image={val.image}
-                      name={val.name}
-                      designation={val.desig}
+                      // name={val.name}
+                      // designation={val.desig}
                     />
                   </div>
                   <div
@@ -243,22 +206,13 @@ function About() {
           ))}
         </div>
 
-        {/* <div className="row team-members">
-          {imgarr.map((val) => (
-            <div
-              className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6"
-              key={val.key}>
-              <Team image={val.image} name={val.name} disignation={val.desig} />
-            </div>
-          ))}
-        </div> */}
         {/* Board Of Directors end */}
 
         {/* Managing Committee start */}
-        <div className="row section_header team-header">
+        {/* <div className="row section_header team-header">
           <h3>Managing Committee</h3>
-        </div>
-        <div className="team-members-container">
+        </div> */}
+        {/* <div className="team-members-container">
           {arr2.map((val, index) => (
             <div
               key={index}
@@ -282,38 +236,11 @@ function About() {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
 
-        {/* <div className="row team-members">
-          {imgarr.map((val) => (
-            <div
-              className="col-xl-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6"
-              key={val.key}>
-              <div className="row">
-                <div className="col-md-4">
-                  <Team image={val.image} />
-                </div>
-                <div className="col-md-8">
-                  <div className="team-detail">
-                    <h3 className="team-title">{val.name}</h3>
-                    <p>{val.desig}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div> */}
-        {/* <div className="row team-members">
-          {imgarr.map((val) => (
-            <div
-              className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6"
-              key={val.key}>
-              <Team image={val.image} name={val.name} disignation={val.desig} />
-            </div>
-          ))}
-        </div> */}
+        
       </div>
-      <div className="container">
+      {/* <div className="container" id="managementBoardCommittees">
         <div className="text-center mb-5 ">
           <div className="fs-1 darkBlue fw-normal">
             Awards & <span className="fw-bold text-danger">Certificates</span>{" "}
@@ -330,46 +257,7 @@ function About() {
             </p>
           </div>
         </div>
-        {/* <div className="row team-members">
-          {certificatesarr.map((val, index) => (
-            <div className="team-members-container">
-              <div
-                className="col-xl-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6"
-                key={val.key}>
-                <div className="row">
-                  <div
-                    className={`col-md-4 ${
-                      index % 2 === 0 ? "order-1" : "order-2"
-                    }`}>
-                    {" "}
-                    <AwardsCertificates image={val.image} />
-                  </div>
-                  <div
-                    className={`col-md-8 ${
-                      index % 2 === 0 ? "order-2" : "order-1"
-                    }`}>
-                    <div className="team-detail">
-                      <h3 className="team-title">Title of the Paragraph</h3>
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Sed consectetur soluta voluptas praesentium provident!
-                        Rem quia libero deserunt cumque ea, quod, quibusdam et
-                        enim a tempora odio. Deserunt, unde aperiam!
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            // <div
-            //   className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6"
-            //   key={val.key}>
-            //   {" "}
-            //   <AwardsCertificates image={val.image} />
-            // </div>
-          ))}
-        </div> */}
+     
         <div className="row team-members">
           {certificatesarr.map((val) => (
             <div
@@ -380,8 +268,7 @@ function About() {
             </div>
           ))}
         </div>
-      </div>
-      {/* <Footer/> */}
+      </div> */}
     </>
   );
 }

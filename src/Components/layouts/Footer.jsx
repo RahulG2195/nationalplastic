@@ -157,7 +157,7 @@ export default function Footer() {
           <div className="col-12 text-center">
             <p>We Deliver in Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer</p>
 
-            <div className="footer_social">
+            <div className="footer_social d-flex align-items-center">
               <div className="comp_logo">
                 <Link href='/'>
                   <Image
@@ -167,55 +167,48 @@ export default function Footer() {
                   />
                 </Link>
               </div>
-              <div className="social_icons">
-                <Link href=' https://www.instagram.com/nationalplastic1952' target='_blank'>
-                  <Image
-                    src="/Assets/images/Group 37.svg"
-                    alt='logo'
-                    layout='responsive'
-                    objectFit='cover'
-                    width={100}
-                    height={100}
-                  />
-                </Link>
-                <Link href=' https://www.youtube.com/@NationalPlastic1952' target='_blank'>
-                  <Image
-                    src="/Assets/images/Path 19.svg"
-                    alt='logo'
-                    layout='responsive'
-                    objectFit='cover'
-                    width={100}
-                    height={100}
-                  />
-                </Link>
-                <Image
+              <div className="social_icons d-flex gap-3">
+                {/* <Image
+                  src="/Assets/images/Group 37.svg"
+                  alt='logo'
+                  layout='responsive'
+                  objectFit='cover'
+                  width={100}
+                  height={100}
+                /> */}
+                <a href='https://www.instagram.com/nationalplastic1952/' target="_blank"><i class="fa fa-instagram  fs-1" aria-hidden="true"></i>
+                </a>
+                {/* <Image
+                  src="/Assets/images/Path 19.svg"
+                  alt='logo'
+                  layout='responsive'
+                  objectFit='cover'
+                  width={100}
+                  height={100}
+                /> */}
+                <a href='https://www.youtube.com/@NationalPlastic1952' target="_blank"><i class="fa fa-youtube-play  fs-1" aria-hidden="true"></i>
+                </a>
+                {/* <Image
                   src="/Assets/images/Path 20.svg"
                   alt='logo'
                   layout='responsive'
                   objectFit='cover'
                   width={100}
                   height={100}
-                />
-                <Link href='https://www.facebook.com/NationalPlastic1952/' target='_blank'>
-                  <Image
-                    src="/Assets/images/Path 80.svg"
-                    alt='logo'
-                    layout='responsive'
-                    objectFit='cover'
-                    width={100}
-                    height={100}
-                  />
-                </Link>
-                <Link href='https://www.facebook.com/NationalPlastic1952/' target='_blank'>
-                  <Image
-                    src="/Assets/images/Path 80.svg"
-                    alt='logo'
-                    layout='responsive'
-                    objectFit='cover'
-                    width={100}
-                    height={100}
-                  />
-                </Link>
+                /> */}
+                <a href='https://x.com/national1952' target="_blank"><i class="fa fa-twitter fs-1" aria-hidden="true"></i>
+                </a>
+                {/* <Image
+                  src="/Assets/images/Path 80.svg"
+                  alt='logo'
+                  layout='responsive'
+                  objectFit='cover'
+                  width={100}
+                  height={100}
+                /> */}
+
+                <a href='https://www.facebook.com/NationalPlastic1952/' target="_blank"><i class="fa fa-facebook fa-flip fs-1" aria-hidden="true"></i>
+                </a>
               </div>
 
             </div>
