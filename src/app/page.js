@@ -15,6 +15,7 @@ import "../styles/home_prod.css";
 import { React, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import CommingSoon from "./CommingSoon/page";
 
 export default function Home() {
   // alert(pool)
@@ -27,6 +28,7 @@ export default function Home() {
   return (
     <>
       <main>
+        {/* <CommingSoon /> */}
         <Banner />
         <Features />
         <CoupenBanner />

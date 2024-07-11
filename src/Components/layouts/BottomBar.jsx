@@ -24,6 +24,9 @@ function BottomBar() {
         const navshow = nav.data.navshow;
         SetAllProd(allproducts);
         setNavbar(navshow);
+
+        console.log(navshow);
+
       } catch (error) {
         console.error("Error fetching data:", error);
       }

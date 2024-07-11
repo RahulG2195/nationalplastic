@@ -1,89 +1,147 @@
+"use client";
 import "./CustomerReview.css";
-import React from "react";
-import UserRatingScoreBord from "@/Components/RatingScoreBoard/UserRatingScoreBord";
-import Filters from "../Filters/Filters";
-import CustomersExpirence from "@/Components/CustomersExpirence/CustomersExpirence";
+import React, { useState , useEffect} from "react";
+import { Rate, Modal, Input, message, Card, Avatar } from "antd";
+import { useParams } from "next/navigation";
+import axios from "axios";
+
+const { TextArea } = Input;
+
+// Dummy data
+const dummyReviews = [
+  { id: 1, name: "John Doe", rating: 5, review: "Great product! Highly recommended.", avatar: "https://xsgames.co/randomusers/avatar.php?g=male" },
+  { id: 2, name: "Jane Smith", rating: 5, review: "Good quality, Excellent service and fast delivery..", avatar: "https://xsgames.co/randomusers/avatar.php?g=female" },
+  { id: 3, name: "Bob Johnson", rating: 5, review: "Excellent service and fast delivery.", avatar: "https://xsgames.co/randomusers/avatar.php?g=male" },
+];
 
 const CustomerReview = () => {
-  // const userRatings = [
-  //     { name: 'User1', rating: 4 },
-  //     { name: 'User2', rating: 5 },
-  //     { name: 'User3', rating: 3 }
-  //     // Add more user ratings as needed
-  // ];
+  const [overallRating, setOverallRating] = useState(5);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [newReview, setNewReview] = useState({ rating: 0, text: "" });
+  const [canReview, setCanReview] = useState(true);
+  const router = useParams();
+  const product_id = router.productId;
+  // const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState(dummyReviews);
+
+
+  // const gettingIdBasedReviews = async (product_id) => {
+  //   console.log("product_id: " + product_id);
+  //   const reviewsFromDb = await axios.put(`${process.env.BASE_URL}/reviews`,JSON.stringify({ product_id: product_id }));
+  //   console.log("reviews_from_db: " + JSON.stringify(reviewsFromDb))
+  //   return reviewsFromDb.data;
+  // };
+
+  // useEffect(() => {
+  //   gettingIdBasedReviews(product_id).then(setReviews);
+  // }, [product_id]);
+
+  const showModal = () => {
+    if (canReview) {
+      setIsModalVisible(true);
+    } else {
+      message.warning("You can only review after a successful order and haven't reviewed yet.");
+    }
+  };
+
+
+  const handleOk = () => {
+    if (newReview.rating === 0 || newReview.text.trim() === "") {
+      message.error("Please provide both a rating and a review.");
+      return;
+    }
+
+    const reviewToAdd = {
+      id: reviews.length + 1,
+      name: "Current User",
+      rating: newReview.rating,
+      text: newReview.text,
+      avatar: "https://xsgames.co/randomusers/avatar.php?g=pixel",
+    };
+
+    setReviews([reviewToAdd, ...reviews]);
+    setIsModalVisible(false);
+    setNewReview({ rating: 0, text: "" });
+    message.success("Review submitted successfully!");
+
+    const newOverallRating = (reviews.reduce((sum, review) => sum + review.rating, 0) + newReview.rating) / (reviews.length + 1);
+    setOverallRating(newOverallRating);
+
+    setCanReview(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+    setNewReview({ rating: 0, text: "" });
+  };
+
   return (
-    <>
-      <div className="mt-5 ">
-        <div className="text-center">
-          <div className="fs-1 fw-bold darkBlue">
-            Customer<span className="text-danger"> Reviews</span>{" "}
-          </div>
-          <div className="mt-1 fw-semibold subCptRes">
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has{" "}
-            </p>
-            <p>been the industriesstandard dummy text ever since the 1500s,</p>{" "}
-          </div>
-        </div>
+    <div className="customer-review-container">
+      <div className="review-header">
+        <h1>Customer <span className="highlight">Reviews</span></h1>
+        <p>See what our customers are saying about their experience</p>
       </div>
 
-      <div className="custReviewContainer mt-5 mt-5">
-        <div className="row custReview bg-litepurple2 p-4 custReviewContainer">
-          <div className="col-sm-12 col-md-4">
-            <div className="custReviewRight text-center p-4 border-end border-secondary border-opacity-25">
-              <div className="darkBlue fw-bold fs-4">Customer Love Us!</div>
-              <div className="small fw-bold text-danger">
-                Explore customers photos, videos & reviews
-              </div>
-
-              <div className="fw-bold fs-4 mt-4">
-                4.6{" "}
-                <i className="fa fa-star text-danger" aria-hidden="true"></i>
-              </div>
-
-              <div className="small mb-4">
-                Overall rating of this product by our customers from all
-                platforms
-              </div>
-
-              <UserRatingScoreBord />
-
-              <div className="filterSortRes pb-2 border-bottom border-secondary border-opacity-25 mt-5 d-flex justify-content-center align-items-center gap-2">
-                <div>
-                  <i
-                    className="fa fa-bars mx-2 bg-litepurple p-2 rounded-circle"
-                    aria-hidden="true"
-                  ></i>
-                  <span>Sort by</span>
-                </div>
-                <div>
-                  <i
-                    className="fa fa-filter mx-2 bg-litepurple p-2 rounded-circle"
-                    aria-hidden="true"
-                  ></i>
-                  <span>Filter by</span>
-                </div>
-              </div>
-
-              <Filters />
+      <div className="review-content">
+        <div className="review-summary">
+          <Card>
+            <h2>Customer Satisfaction</h2>
+            <div className="overall-rating">
+              {/* <span className="rating-number">{overallRating.toFixed(1)}</span> */}
+              <Rate
+                disabled
+                defaultValue={overallRating}
+                allowHalf
+                className="large-stars"
+              />
             </div>
-          </div>
-
-          <div className="col-sm-12 col-md-8">
-            <div className="custReviewLeft">
-              <CustomersExpirence />
-            </div>
-          </div>
-
-          <div className="text-center resVeiwBtn mt-5">
-            <button type="button" className="btn btn-secondary opacity-10">
-              View All Reviews
+            <button className="write-review-btn" onClick={showModal}>
+              Write a Review
             </button>
-          </div>
+          </Card>
+        </div>
+
+        <div className="review-list">
+          {reviews.map((review) => (
+            <Card key={review.id} className="review-card">
+              <div className="review-header">
+                <Avatar src={review.avatar} />
+                <div className="review-info">
+                  <h3>{review.name}</h3>
+                  <Rate disabled defaultValue={review.rating} />
+                </div>
+              </div>
+              <p className="review-text">{review.review}</p>
+            </Card>
+          ))}
         </div>
       </div>
-    </>
+
+      <Modal
+        title="Write a Review"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <div className="review-form">
+          <label>Rating:</label>
+          <Rate
+            value={newReview.rating}
+            onChange={(value) => setNewReview({ ...newReview, rating: value })}
+          />
+        </div>
+        <div className="review-form">
+          <label>Review:</label>
+          <TextArea
+            rows={4}
+            value={newReview.text}
+            onChange={(e) => setNewReview({ ...newReview, text: e.target.value })}
+            placeholder="Share your experience with this product..."
+          />
+        </div>
+      </Modal>
+    </div>
   );
 };
+
 export default CustomerReview;

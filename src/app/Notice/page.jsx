@@ -13,13 +13,13 @@ const Notice = () => {
                 <table className='table table-responsive  table-striped table-light'>
                   <tbody>
                     <tr>
-                      <td><a href="/Assets/pdf/Notice%20of%2036th%20AGM.pdf">AGM Notice 2022-2023</a></td>
+                      <td><a target='_blank' href="/Assets/pdf/Notice%20of%2036th%20AGM.pdf">AGM Notice 2022-2023</a></td>
                     </tr>
                     <tr>
-                      <td><a href="/Assets/pdf/Newspaper%20-%20English(2).pdf">AGM Notice Business Standard Mumbai_21.07.2023</a></td>
+                      <td><a target='_blank' href="/Assets/pdf/Newspaper%20-%20English(2).pdf">AGM Notice Business Standard Mumbai_21.07.2023</a></td>
                     </tr>
                     <tr>
-                      <td><a href="/Assets/pdf/Newspaper%20-%20Marathi(2).pdf">AGM Notice Mumbai Lakshadeep Mumbai_21.07.2023</a></td>
+                      <td><a target='_blank' href="/Assets/pdf/Newspaper%20-%20Marathi(2).pdf">AGM Notice Mumbai Lakshadeep Mumbai_21.07.2023</a></td>
                     </tr>
                   </tbody>
                 </table>
@@ -31,13 +31,13 @@ const Notice = () => {
                 <table className='table table-responsive  table-striped table-light'>
                   <tbody>
                     <tr>
-                      <td><a href="/Assets/pdf/AGM%20Notice%202021-2022(2).pdf">AGM Notice 2021-2022</a></td>
+                      <td><a target='_blank' href="/Assets/pdf/AGM%20Notice%202021-2022(2).pdf">AGM Notice 2021-2022</a></td>
                     </tr>
                     <tr>
-                      <td><a href="/Assets/pdf/AGM%20Notice%20BusinessStandard%20Mumbai_26.07.2022(1).pdf">AGM Notice BusinessStandard Mumbai_26.07.2022</a></td>
+                      <td><a target='_blank' href="/Assets/pdf/AGM%20Notice%20BusinessStandard%20Mumbai_26.07.2022(1).pdf">AGM Notice BusinessStandard Mumbai_26.07.2022</a></td>
                     </tr>
                     <tr>
-                      <td><a href="/Assets/pdf/AGM%20Notice%20MumbaiLakshadeep%20Mumbai_26.07.2022(1).pdf">AGM Notice MumbaiLakshadeep Mumbai_26.07.2022</a></td>
+                      <td><a target='_blank' href="/Assets/pdf/AGM%20Notice%20MumbaiLakshadeep%20Mumbai_26.07.2022(1).pdf">AGM Notice MumbaiLakshadeep Mumbai_26.07.2022</a></td>
                     </tr>
                   </tbody>
                 </table>
@@ -49,13 +49,13 @@ const Notice = () => {
                 <table className='table table-responsive  table-striped table-light'>
                   <tbody>
                     <tr>
-                      <td><a href="/Assets/pdf/AGM%20Notice%202020%20-%202021.pdf">AGM Notice 2020 - 2021</a></td>
+                      <td><a target='_blank' href="/Assets/pdf/AGM%20Notice%202020%20-%202021.pdf">AGM Notice 2020 - 2021</a></td>
                     </tr>
                     <tr>
-                      <td><a href="/Assets/pdf/AGM%20Notice%20BusinessStandard%20Mumbai_02.07.2021.pdf">AGM Notice BusinessStandard Mumbai_02.07.2021</a></td>
+                      <td><a target='_blank' href="/Assets/pdf/AGM%20Notice%20BusinessStandard%20Mumbai_02.07.2021.pdf">AGM Notice BusinessStandard Mumbai_02.07.2021</a></td>
                     </tr>
                     <tr>
-                      <td><a href="/Assets/pdf/AGM%20Notice%20BusinessStandard%20Mumbai.pdf">AGM Notice BusinessStandard Mumbai_02.07.2021</a></td>
+                      <td><a target='_blank' href="/Assets/pdf/AGM%20Notice%20BusinessStandard%20Mumbai.pdf">AGM Notice BusinessStandard Mumbai_02.07.2021</a></td>
                     </tr>
                   </tbody>
                 </table>
@@ -67,7 +67,7 @@ const Notice = () => {
                 <table className='table table-responsive  table-striped table-light'>
                   <tbody>
                     <tr>
-                      <td><a href="/Assets/pdf/Notice(1).pdf">AGM Notice 2019-2020</a></td>
+                      <td><a target='_blank' href="/Assets/pdf/Notice(1).pdf">AGM Notice 2019-2020</a></td>
                     </tr>
                     <tr>
                       <td><a href="/Assets/pdf/AGM%20Notice%20BusinessStandard%20Mumbai%2026.08.2018.pdf" target="_blank"><i aria-hidden="true" className="fa fa-file-pdf-o"></i> AGM Notice BusinessStandard Mumbai 22.08.201</a><a href="/Assets/pdf/National%20Plastic_BS_22%2008%202020.pdf">9</a></td>
@@ -89,10 +89,10 @@ const Notice = () => {
                   <table className='table table-responsive  table-striped table-light'>
                     <tbody>
                       <tr>
-                        <td><a href="/Assets/pdf/AGM%20Notice%20-2018-19.pdf">AGM Notice-2018-2019</a></td>
+                        <td><a target='_blank' href="/Assets/pdf/AGM%20Notice%20-2018-19.pdf">AGM Notice-2018-2019</a></td>
                       </tr>
                       <tr>
-                        <td><a href="/Assets/pdf/30th%20June,%202019.pdf">Venue_Route_Map_AGM_2019-20</a></td>
+                        <td><a target='_blank' href="/Assets/pdf/30th%20June,%202019.pdf">Venue_Route_Map_AGM_2019-20</a></td>
                       </tr>
                       <tr>
                         <td><a href="/Assets/pdf/AGM%20Notice%20BusinessStandard%20Mumbai%2026.08.2018.pdf" target="_blank"><i aria-hidden="true" className="fa fa-file-pdf-o"></i> AGM Notice BusinessStandard Mumbai 26.08.2018 </a></td>

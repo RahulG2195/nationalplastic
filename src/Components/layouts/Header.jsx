@@ -15,7 +15,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import styles from "./Navbar.module.css";
 import InvestorAccor from "../InvesterAccor/InvesterAccor";
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
 import { PlaceholderBar } from "./Placeholder";
 // const BottomBar = dynamic(() => import('./BottomBar'), {
 //   loading: () => <PlaceholderBar />,
@@ -24,18 +24,20 @@ import { PlaceholderBar } from "./Placeholder";
 import { useDelayedRender } from "@/utils/useDelayedRender";
 
 export default function Header() {
-  const shouldRenderBottomBar = useDelayedRender(2000) 
+  const shouldRenderBottomBar = useDelayedRender(2000);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
   const [dropdown, setDropdown] = useState(false);
+  const [aboutDropdown, setAboutDropdown] = useState(false);
   const [subDropdown, setSubDropdown] = useState(false);
+
   const [windowSize, setWindowSize] = useState({
     width: undefined,
   });
-  const [FirstName, setFirstName] = useState('');
-  const [LastName, setLastName] = useState('');
-  const [InitialName, setInitialName] = useState('');
+  const [FirstName, setFirstName] = useState("");
+  const [LastName, setLastName] = useState("");
+  const [InitialName, setInitialName] = useState("");
   const [hideLayout, setHideLayout] = useState(false);
   // const [count, setCount] = useState(0);
   const router = useRouter();
@@ -43,13 +45,11 @@ export default function Header() {
   const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
   // const counts = useSelector((state) => state.cart || 0);
   // const [count, setCount] = useState(0);
-  function check() { }
+  function check() {}
   const userState = useSelector((state) => state.userData.isLoggedIn);
   const userEmail = useSelector((state) => state.userData.email);
 
-
   const productCount = useSelector((state) => {
-
     let who;
 
     if (!userState) {
@@ -70,8 +70,7 @@ export default function Header() {
     setCount(productCount); // Update localCount whenever productCount changes
   }, [productCount]);
 
-
-  // get user data to show initial name after login 
+  // get user data to show initial name after login
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -80,13 +79,15 @@ export default function Header() {
           getProfile: true,
         };
 
-        const response = await axios.put(`${process.env.BASE_URL}/Users`, formData);
+        const response = await axios.put(
+          `${process.env.BASE_URL}/Users`,
+          formData
+        );
 
         const userData = response.data.message[0];
         const { FirstName, LasttName } = userData;
-        setFirstName(FirstName)
-        setLastName(LasttName)
-
+        setFirstName(FirstName);
+        setLastName(LasttName);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -96,20 +97,18 @@ export default function Header() {
   }, [userEmail]);
 
   useEffect(() => {
-
     if (FirstName && LastName) {
       setInitialName(FirstName[0].toUpperCase() + LastName[0].toUpperCase());
-    }
-    else {
-      setInitialName('N' + 'P');
+    } else {
+      setInitialName("N" + "P");
     }
   }, [FirstName, LastName]);
 
   useEffect(() => {
     const checkHeader = async () => {
       if (router.asPath) {
-        const res = await fetch(router.asPath, { method: 'HEAD' });
-        const isAdmin = res.headers.get('x-admin-access') === 'true';
+        const res = await fetch(router.asPath, { method: "HEAD" });
+        const isAdmin = res.headers.get("x-admin-access") === "true";
         setHideLayout(isAdmin);
       }
     };
@@ -149,7 +148,6 @@ export default function Header() {
     setIsClicked(!isClicked);
   };
 
-
   useEffect(() => {
     // Handler to call on window resize
     const handleResize = () => {
@@ -159,20 +157,20 @@ export default function Header() {
     };
 
     // Add event listener
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     // Call handler right away so state gets updated with initial window size
     handleResize();
 
     // Remove event listener on cleanup
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const { width } = windowSize;
 
   return (
     <div>
-      {!hideLayout ?
+      {!hideLayout ? (
         <>
           <div className="container-fluid  header menbg">
             <TopBar />
@@ -188,23 +186,24 @@ export default function Header() {
                     data-bs-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent"
                     aria-expanded="true"
-                    aria-label="Toggle navigation"
-                  >
+                    aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon" />
                   </button>
                   <Link href="/">
-                <Image
-                  src="/Assets/images/nation_logo.png"
-                  className="Image-fluid"
-                  alt="Landscape picture"
-                  height={100}
-                  width={100}
-                  layout="responsive"
-                  objectFit="contain"
-                />
-              </Link>
+                    <Image
+                      src="/Assets/images/nation_logo.png"
+                      className="Image-fluid"
+                      alt="Landscape picture"
+                      height={100}
+                      width={100}
+                      layout="responsive"
+                      objectFit="contain"
+                    />
+                  </Link>
                 </div>
-                <form onSubmit={handleSearchSubmit} className="d-flex nav-search">
+                <form
+                  onSubmit={handleSearchSubmit}
+                  className="d-flex nav-search">
                   <input
                     className="form-control text-center HeadSearch fw-semibold"
                     type="search"
@@ -216,12 +215,12 @@ export default function Header() {
                 </form>
 
                 <div
-                  className={`${isClicked
-                    ? " collapse navbar-collapse show menubg"
-                    : "menuhide "
-                    }`}
-                  id="navbarSupportedContent"
-                >
+                  className={`${
+                    isClicked
+                      ? " collapse navbar-collapse show menubg"
+                      : "menuhide "
+                  }`}
+                  id="navbarSupportedContent">
                   <ul className="navbar-nav homeNav mb-2 mb-lg-0">
                     <li className="nav-item brdr">
                       {/* <div className='border'></div> */}
@@ -229,13 +228,13 @@ export default function Header() {
                         className="nav-link"
                         aria-current="page"
                         href="/"
-                        onClick={isClicked ? handleShow : null}
-                      >
+                        onClick={isClicked ? handleShow : null}>
                         Home
                       </Link>
                       {/* <div className='border'></div> */}
                     </li>
-                    <li className="nav-item brdr">
+
+                    {/* <li className="nav-item brdr">
                       <Link
                         className="nav-link"
                         href="/About"
@@ -243,125 +242,275 @@ export default function Header() {
                       >
                         About Us
                       </Link>
+                    </li> */}
+
+                    <li
+                      className={`nav-item brdr ${styles.navItem}`}
+                      onMouseEnter={() => setAboutDropdown(true)}
+                      onMouseLeave={() => setAboutDropdown(false)}>
+                      <Link
+                        className="nav-link"
+                        href="/About"
+                        onClick={isClicked ? handleShow : null}>
+                        About Us
+                      </Link>
+                      {aboutDropdown && (
+                        <ul className={styles.dropdown}>
+                          <li className={styles.dropdownItem}>
+                            <Link
+                              href="/Companyprofile"
+                              onClick={isClicked ? handleShow : null}>
+                              Company Profile
+                            </Link>
+                          </li>
+                          <li className={styles.dropdownItem}>
+                            <Link
+                              href="/Infrastructure"
+                              onClick={isClicked ? handleShow : null}>
+                              Infrastructure
+                            </Link>
+                          </li>
+                          <li className={styles.dropdownItem}>
+                            <Link
+                              href="#managementBoardCommittees"
+                              onClick={isClicked ? handleShow : null}>
+                              Promoters/Directors
+                            </Link>
+                          </li>
+
+                          <li className={styles.dropdownItem}>
+                            <Link
+                              href="#managementBoardCommittees"
+                              onClick={handleShow}>
+                              Management and Board Committees
+                            </Link>
+                          </li>
+
+                          <li className={styles.dropdownItem}>
+                            <Link
+                              href="/Awards"
+                              onClick={isClicked ? handleShow : null}>
+                              Awards/Exports
+                            </Link>
+                          </li>
+
+                          <li className={styles.dropdownItem}>
+                            <Link
+                              href="#"
+                              onClick={isClicked ? handleShow : null}>
+                              Introduction
+                            </Link>
+                          </li>
+
+                          <li className={styles.dropdownItem}>
+                            <Link
+                              href="#"
+                              onClick={isClicked ? handleShow : null}>
+                              Terms & Conditions
+                            </Link>
+                          </li>
+                        </ul>
+                      )}
                     </li>
-                    {
-                      (width <= 991) ? <InvestorAccor handleShow={handleShow} />
-                        :
-                        <li className={`nav-item brdr ${styles.navItem}`}
-                          onMouseEnter={() => setDropdown(true)}
-                          onMouseLeave={() => setDropdown(false)}
-                        >
 
-                          <Link
-                            className="nav-link multidropdown mobHeader"
-                            href="#"
-                            onClick={isClicked ? handleShow : null}
-                          >
-                            Investors
-                          </Link>
-                          {dropdown && (
-                            <ul className={styles.dropdown}>
-                              <li
-                                className={styles.dropdownItem}
-                                onMouseEnter={() => setSubDropdown(true)}
-                                onMouseLeave={() => setSubDropdown(false)}
-                              >
-                                <Link href="#">Financials</Link>
-                                {subDropdown && (
-                                  <ul className={styles.subDropdown}>
-                                    <li className={styles.subDropdownItem}>
-                                      <Link href="/Unaudited" onClick={isClicked ? handleShow : null}>Unaudited Financial Results</Link>
-                                    </li>
-                                    <li className={styles.subDropdownItem}>
-                                      <Link href="/Audited" onClick={isClicked ? handleShow : null}>Audited Financial Results</Link>
-                                    </li>
-                                    <li className={styles.subDropdownItem}>
-                                      <Link href="/Annual" onClick={isClicked ? handleShow : null}>Annual Report</Link>
-                                    </li>
-                                    <li className={styles.subDropdownItem}>
-                                      <Link href="AnnualReturn" onClick={isClicked ? handleShow : null}>Annual Return</Link>
-                                    </li>
-
-                                  </ul>
-                                )}
-                              </li>
-                              <li className={styles.dropdownItem}>
-                                <Link href="/ShareHolding" onClick={isClicked ? handleShow : null}>Shareholding Pattern</Link>
-                              </li>
-                              <li className={styles.dropdownItem}>
-                                <Link href="/Corporate" onClick={isClicked ? handleShow : null}>Corporate Governance</Link>
-                              </li>
-                              <li className={styles.dropdownItem}>
-                                <Link href="/InvestorContact" onClick={isClicked ? handleShow : null}>Investor Contact</Link>
-                              </li>
-                              <li
-                                className={styles.dropdownItem}
-                                onMouseEnter={() => setSubDropdown(true)}
-                                onMouseLeave={() => setSubDropdown(false)}
-                              >
-                                <a href="#">AGM Compliance </a>
-                                {subDropdown && (
-                                  <ul className={styles.subDropdown}>
-                                    <li className={styles.subDropdownItem}>
-                                      <Link href="/OutcomeAGM" onClick={isClicked ? handleShow : null}>Outcome of AGM</Link>
-                                    </li>
-                                    <li className={styles.subDropdownItem}>
-                                      <Link href="/Notice" onClick={isClicked ? handleShow : null}>Notices</Link>
-                                    </li>
-                                  </ul>
-                                )}
-                              </li>
-                              <li className={styles.dropdownItem}>
-                                <Link href="/TransferShare" onClick={isClicked ? handleShow : null}>Transfer Of Share Notice</Link>
-                              </li>
-                              <li className={styles.dropdownItem}>
-                                <Link href="/OutcomeMeet" onClick={isClicked ? handleShow : null}>Outcome Of Board Meeting</Link>
-                              </li>
-                              <li className={styles.dropdownItem}>
-                                <Link href="/Disclosure" onClick={isClicked ? handleShow : null}>Listing Disclosure</Link>
-                              </li>
-                              <li className={styles.dropdownItem}>
-                                <Link href="/Transaction" onClick={isClicked ? handleShow : null}>Related Party Transaction</Link>
-                              </li>
-                              <li
-                                className={styles.dropdownItem}
-                                onMouseEnter={() => setSubDropdown(true)}
-                                onMouseLeave={() => setSubDropdown(false)}
-                              >
-                                <a href="#" className="dropArrow">General Disclosure</a>
-                                {subDropdown && (
-                                  <ul className={styles.subDropdown}>
-                                    <li className={styles.subDropdownItem}>
-                                      <Link href="/Twenty" onClick={isClicked ? handleShow : null}>2020</Link>
-                                    </li>
-                                    <li className={styles.subDropdownItem}>
-                                      <Link href="/TwentyOne" onClick={isClicked ? handleShow : null}>2021</Link>
-                                    </li>
-                                    <li className={styles.subDropdownItem}>
-                                      <Link href="/TwentyTwo" onClick={isClicked ? handleShow : null}>2022</Link>
-                                    </li>
-                                    <li className={styles.subDropdownItem}>
-                                      <Link href="/TwentyThree" onClick={isClicked ? handleShow : null}>2023</Link>
-                                    </li>
-                                    <li className={styles.subDropdownItem}>
-                                      <Link href="/TwentyFour" onClick={isClicked ? handleShow : null}>2024</Link>
-                                    </li>
-                                  </ul>
-                                )}
-                              </li>
-                              <li className={styles.dropdownItem}>
-                                <Link href="/InvestorKYC" onClick={isClicked ? handleShow : null}>Investor KYC</Link>
-                              </li>
-                              <li className={styles.dropdownItem}>
-                                <Link href="/IEPF" onClick={isClicked ? handleShow : null}>IEPF</Link>
-                              </li>
-                              <li className={styles.dropdownItem}>
-                                <Link href="/Advertisements" onClick={isClicked ? handleShow : null}>Advertisements</Link>
-                              </li>
-                            </ul>
-                          )}
-                        </li>
-                    }
+                    {width <= 991 ? (
+                      <InvestorAccor handleShow={handleShow} />
+                    ) : (
+                      <li
+                        className={`nav-item brdr ${styles.navItem}`}
+                        onMouseEnter={() => setDropdown(true)}
+                        onMouseLeave={() => setDropdown(false)}>
+                        <Link
+                          className="nav-link multidropdown mobHeader"
+                          href="#"
+                          onClick={isClicked ? handleShow : null}>
+                          Investors (Reg. 46)
+                        </Link>
+                        {dropdown && (
+                          <ul className={styles.dropdown}>
+                            <li
+                              className={styles.dropdownItem}
+                              onMouseEnter={() => setSubDropdown(true)}
+                              onMouseLeave={() => setSubDropdown(false)}>
+                              <Link href="#">Financials</Link>
+                              {subDropdown && (
+                                <ul className={styles.subDropdown}>
+                                  <li className={styles.subDropdownItem}>
+                                    <Link
+                                      href="/Unaudited"
+                                      onClick={isClicked ? handleShow : null}>
+                                      Unaudited Financial Results
+                                    </Link>
+                                  </li>
+                                  <li className={styles.subDropdownItem}>
+                                    <Link
+                                      href="/Audited"
+                                      onClick={isClicked ? handleShow : null}>
+                                      Audited Financial Results
+                                    </Link>
+                                  </li>
+                                  <li className={styles.subDropdownItem}>
+                                    <Link
+                                      href="/Annual"
+                                      onClick={isClicked ? handleShow : null}>
+                                      Annual Report
+                                    </Link>
+                                  </li>
+                                  <li className={styles.subDropdownItem}>
+                                    <Link
+                                      href="AnnualReturn"
+                                      onClick={isClicked ? handleShow : null}>
+                                      Annual Return
+                                    </Link>
+                                  </li>
+                                </ul>
+                              )}
+                            </li>
+                            <li className={styles.dropdownItem}>
+                              <Link
+                                href="/ShareHolding"
+                                onClick={isClicked ? handleShow : null}>
+                                Shareholding Pattern
+                              </Link>
+                            </li>
+                            <li className={styles.dropdownItem}>
+                              <Link
+                                href="/Corporate"
+                                onClick={isClicked ? handleShow : null}>
+                                Corporate Governance
+                              </Link>
+                            </li>
+                            <li className={styles.dropdownItem}>
+                              <Link
+                                href="/InvestorContact"
+                                onClick={isClicked ? handleShow : null}>
+                                Investor Contact
+                              </Link>
+                            </li>
+                            <li
+                              className={styles.dropdownItem}
+                              onMouseEnter={() => setSubDropdown(true)}
+                              onMouseLeave={() => setSubDropdown(false)}>
+                              <a href="#">AGM Compliance </a>
+                              {subDropdown && (
+                                <ul className={styles.subDropdown}>
+                                  <li className={styles.subDropdownItem}>
+                                    <Link
+                                      href="/OutcomeAGM"
+                                      onClick={isClicked ? handleShow : null}>
+                                      Outcome of AGM
+                                    </Link>
+                                  </li>
+                                  <li className={styles.subDropdownItem}>
+                                    <Link
+                                      href="/Notice"
+                                      onClick={isClicked ? handleShow : null}>
+                                      Notices
+                                    </Link>
+                                  </li>
+                                </ul>
+                              )}
+                            </li>
+                            <li className={styles.dropdownItem}>
+                              <Link
+                                href="/TransferShare"
+                                onClick={isClicked ? handleShow : null}>
+                                Transfer Of Share Notice
+                              </Link>
+                            </li>
+                            <li className={styles.dropdownItem}>
+                              <Link
+                                href="/OutcomeMeet"
+                                onClick={isClicked ? handleShow : null}>
+                                Outcome Of Board Meeting
+                              </Link>
+                            </li>
+                            <li className={styles.dropdownItem}>
+                              <Link
+                                href="/Disclosure"
+                                onClick={isClicked ? handleShow : null}>
+                                Listing Disclosure
+                              </Link>
+                            </li>
+                            <li className={styles.dropdownItem}>
+                              <Link
+                                href="/Transaction"
+                                onClick={isClicked ? handleShow : null}>
+                                Related Party Transaction
+                              </Link>
+                            </li>
+                            <li
+                              className={styles.dropdownItem}
+                              onMouseEnter={() => setSubDropdown(true)}
+                              onMouseLeave={() => setSubDropdown(false)}>
+                              <a href="#" className="dropArrow">
+                                General Disclosure
+                              </a>
+                              {subDropdown && (
+                                <ul className={styles.subDropdown}>
+                                  <li className={styles.subDropdownItem}>
+                                    <Link
+                                      href="/Twenty"
+                                      onClick={isClicked ? handleShow : null}>
+                                      2020
+                                    </Link>
+                                  </li>
+                                  <li className={styles.subDropdownItem}>
+                                    <Link
+                                      href="/TwentyOne"
+                                      onClick={isClicked ? handleShow : null}>
+                                      2021
+                                    </Link>
+                                  </li>
+                                  <li className={styles.subDropdownItem}>
+                                    <Link
+                                      href="/TwentyTwo"
+                                      onClick={isClicked ? handleShow : null}>
+                                      2022
+                                    </Link>
+                                  </li>
+                                  <li className={styles.subDropdownItem}>
+                                    <Link
+                                      href="/TwentyThree"
+                                      onClick={isClicked ? handleShow : null}>
+                                      2023
+                                    </Link>
+                                  </li>
+                                  <li className={styles.subDropdownItem}>
+                                    <Link
+                                      href="/TwentyFour"
+                                      onClick={isClicked ? handleShow : null}>
+                                      2024
+                                    </Link>
+                                  </li>
+                                </ul>
+                              )}
+                            </li>
+                            <li className={styles.dropdownItem}>
+                              <Link
+                                href="/InvestorKYC"
+                                onClick={isClicked ? handleShow : null}>
+                                Investor KYC
+                              </Link>
+                            </li>
+                            <li className={styles.dropdownItem}>
+                              <Link
+                                href="/IEPF"
+                                onClick={isClicked ? handleShow : null}>
+                                IEPF
+                              </Link>
+                            </li>
+                            <li className={styles.dropdownItem}>
+                              <Link
+                                href="/Advertisements"
+                                onClick={isClicked ? handleShow : null}>
+                                Advertisements
+                              </Link>
+                            </li>
+                          </ul>
+                        )}
+                      </li>
+                    )}
 
                     <li className="nav-item brdr accr ">
                       <ProductsAccr handleShow={handleShow} />
@@ -370,8 +519,7 @@ export default function Header() {
                       <Link
                         className="nav-link"
                         href="/NewsAndMedia"
-                        onClick={isClicked ? handleShow : null}
-                      >
+                        onClick={isClicked ? handleShow : null}>
                         Media/News
                       </Link>
                     </li>
@@ -379,8 +527,7 @@ export default function Header() {
                       <Link
                         className="nav-link"
                         href="/CSR"
-                        onClick={isClicked ? handleShow : null}
-                      >
+                        onClick={isClicked ? handleShow : null}>
                         CSR
                       </Link>
                     </li>
@@ -388,8 +535,7 @@ export default function Header() {
                       <Link
                         className="nav-link bulk_ord px-4"
                         href="/BulkOrder"
-                        onClick={isClicked ? handleShow : null}
-                      >
+                        onClick={isClicked ? handleShow : null}>
                         Bulk Orders
                       </Link>
                     </li>
@@ -402,8 +548,7 @@ export default function Header() {
                       <Link
                         className="nav-link"
                         href="/ContactUs"
-                        onClick={isClicked ? handleShow : null}
-                      >
+                        onClick={isClicked ? handleShow : null}>
                         <Image
                           height={100}
                           width={100}
@@ -418,8 +563,7 @@ export default function Header() {
                       <Link
                         className="nav-link"
                         href="/Wishlist"
-                        onClick={isClicked ? handleShow : null}
-                      >
+                        onClick={isClicked ? handleShow : null}>
                         <Image
                           height={100}
                           width={100}
@@ -435,8 +579,7 @@ export default function Header() {
                         <Link
                           className="nav-link position-relative profile"
                           href="/ProfilePage"
-                          onClick={isClicked ? handleShow : null}
-                        >
+                          onClick={isClicked ? handleShow : null}>
                           <span className="InitialName">{InitialName}</span>
                           {/* <Image
                         height={100}
@@ -452,8 +595,7 @@ export default function Header() {
                         <Link
                           className="nav-link"
                           href="/Login"
-                          onClick={isClicked ? handleShow : null}
-                        >
+                          onClick={isClicked ? handleShow : null}>
                           <Image
                             height={100}
                             width={100}
@@ -469,8 +611,7 @@ export default function Header() {
                       <Link
                         className="nav-link AddToCartNav-link  position-relative"
                         href="/AddToCart"
-                        onClick={isClicked ? handleShow : null}
-                      >
+                        onClick={isClicked ? handleShow : null}>
                         <Image
                           height={100}
                           width={100}
@@ -479,7 +620,9 @@ export default function Header() {
                           src="/Assets/svg/Group 5.svg"
                           alt="counter"
                         />
-                        <div className="cartCount text-center medium">{count}</div>
+                        <div className="cartCount text-center medium">
+                          {count}
+                        </div>
                       </Link>
                     </li>
                   </ul>
@@ -567,21 +710,19 @@ export default function Header() {
                           alt="Cart"
                           className="footer-icon"
                         />
-                        <div className="cartCount text-center medium">{count}</div>
+                        <div className="cartCount text-center medium">
+                          {count}
+                        </div>
                       </Link>
                     </li>
                   </ul>
                 </div>
               </div>
             </nav>
-            {shouldRenderBottomBar ? (
-        <BottomBar />
-      ) : (
-        <PlaceholderBar/>
-      )}
+            {shouldRenderBottomBar ? <BottomBar /> : <PlaceholderBar />}
           </div>
         </>
-        : null}
+      ) : null}
     </div>
   );
 }

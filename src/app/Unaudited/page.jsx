@@ -19,21 +19,21 @@ const Unaudited = () => {
                 <tbody>
                   <tr>
                     <td data-title="Year">Year 2023-2024</td>
-                    <td data-title="Quarter - 1"><a href="/Assets/pdf/Financial%20Results%20-%20Ind%20AS.pdf">30th June 2023</a></td>
-                    <td data-title="Quarter - 2"><a href="/Assets/pdf/financials.pdf">30<sup>th</sup> September 2023</a></td>
-                    <td data-title="Quarter - 2"><a href="/Assets/pdf/31st%20December%202023.pdf">31st December 2023</a></td>
+                    <td data-title="Quarter - 1"><a target='_blank' href="/Assets/pdf/Financial%20Results%20-%20Ind%20AS.pdf">30th June 2023</a></td>
+                    <td data-title="Quarter - 2"><a target='_blank' href="/Assets/pdf/financials.pdf">30<sup>th</sup> September 2023</a></td>
+                    <td data-title="Quarter - 2"><a target='_blank' href="/Assets/pdf/31st%20December%202023.pdf">31st December 2023</a></td>
                   </tr>
                   <tr>
                     <td data-title="Year">Year 2022-2023</td>
-                    <td data-title="Quarter - 1"><i aria-hidden="true" className="fa fa-file-pdf-o"></i> <a href="/Assets/pdf/30th%20June%202022(1).pdf">30<sup>th</sup> June 2022</a></td>
-                    <td data-title="Quarter - 1"><i aria-hidden="true" className="fa fa-file-pdf-o"></i> <a href="/Assets/pdf/30th%20September%202022(3).pdf">30<sup>th</sup> September 2022</a></td>
-                    <td data-title="Quarter - 1"><i aria-hidden="true" className="fa fa-file-pdf-o"></i> <a href="/Assets/pdf/31st%20December%202022(3).pdf">31st December 2022</a></td>
+                    <td data-title="Quarter - 1"><i aria-hidden="true" className="fa fa-file-pdf-o"></i> <a target='_blank' href="/Assets/pdf/30th%20June%202022(1).pdf">30<sup>th</sup> June 2022</a></td>
+                    <td data-title="Quarter - 1"><i aria-hidden="true" className="fa fa-file-pdf-o"></i> <a target='_blank' href="/Assets/pdf/30th%20September%202022(3).pdf">30<sup>th</sup> September 2022</a></td>
+                    <td data-title="Quarter - 1"><i aria-hidden="true" className="fa fa-file-pdf-o"></i> <a target='_blank' href="/Assets/pdf/31st%20December%202022(3).pdf">31st December 2022</a></td>
                   </tr>
                   <tr>
                     <td data-title="Year">Year 2021-2022</td>
                     <td data-title="Quarter - 1"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> 30<sup>th</sup> June 2021</td>
                     <td data-title="Quarter - 2"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> 30<sup>th</sup> September 2021</td>
-                    <td data-title="Quarter - 2"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> <a href="/Assets/pdf/31st%20December,%202021.pdf">31st December 2021</a></td>
+                    <td data-title="Quarter - 2"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> <a target='_blank' href="/Assets/pdf/31st%20December,%202021.pdf">31st December 2021</a></td>
                   </tr>
                   <tr>
                     <td data-title="Year">Year 2020-2021</td>

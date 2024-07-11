@@ -54,8 +54,8 @@ const navigation = [
     icon: "bi bi-card-text",
   },
   {
-    title: "Grid",
-    href: "/ui/grid",
+    title: "Investors List",
+    href: "/admin/InvestorsList",
     icon: "bi bi-columns",
   },
   {

@@ -1,98 +1,58 @@
 'use client';
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
+import axios from "axios";
 import {
   Navbar,
-  Collapse,
   Nav,
   NavItem,
   NavbarBrand,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Dropdown,
   Button,
 } from "reactstrap";
-// import LogoWhite from "public/assets/images/logo/main-logo.png";
-// import user1 from "public/assets/images/logo/logo.png";
+import { signOut } from "next-auth/react";
+const Header = () => {
+  const handleLogout = async () => {
+    console.log("Logout initiated");
+    try {
+      // Perform any necessary cleanup on the client-side
+      console.log("Clearing local storage");
+      localStorage.clear();
+      signOut();
 
-const Header = ({ showMobmenu }) => {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [dropdownOpen, setDropdownOpen] = React.useState(false);
+      // Make a request to the server to handle server-side logout
+      console.log("Sending logout request to server");
+      await axios.post("/api/logout");
 
-  const toggle = () => setDropdownOpen((prevState) => !prevState);
-  const Handletoggle = () => {
-    setIsOpen(!isOpen);
+      console.log("Logout successful");
+      
+      // Redirect to the home page or login page
+      console.log("Redirecting to home page");
+      window.location.href = "/";
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
   };
 
   return (
     <Navbar color="primary" dark expand="md">
-      <div className="d-flex align-items-center">
-        <NavbarBrand href="/" className="d-lg-none ">
-          {/* <img src="/assets/images/logo/main-logo.png" alt="logo" /> */}
-        </NavbarBrand>
-        <Button color="primary" className="d-lg-none" onClick={showMobmenu}>
-          <i className="bi bi-list"></i>
-        </Button>
-      </div>
-      <div className="hstack gap-2">
-        <Button
-          color="danger"
-          size="sm"
-          className="d-sm-block d-md-none"
-          onClick={Handletoggle}
-        >
-          {isOpen ? (
-            <i className="bi bi-x"></i>
-          ) : (
-            <i className="bi bi-three-dots-vertical"></i>
-          )}
-        </Button>
-      </div>
-
-      <Collapse navbar isOpen={isOpen}>
-        <Nav className="me-auto" navbar>
-          <NavItem>
-            <Link href="/" className="nav-link">
-              Starter
-            </Link>
-          </NavItem>
-          <NavItem>
-            <Link href="/about" className="nav-link">
-              About
-            </Link>
-          </NavItem>
-          <UncontrolledDropdown inNavbar nav>
-            <DropdownToggle caret nav>
-              DD Menu
-            </DropdownToggle>
-            <DropdownMenu end>
-              <DropdownItem>Option 1</DropdownItem>
-              <DropdownItem>Option 2</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem>Reset</DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
-        </Nav>
-        <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-          <DropdownToggle color="primary">
-            <div style={{ lineHeight: "0px" }}>
-            <i className="bi bi-person-workspace"></i>
-            </div>
-          </DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem header>Info</DropdownItem>
-            <DropdownItem>My Account</DropdownItem>
-            <DropdownItem>Edit Profile</DropdownItem>
-            <DropdownItem divider />
-            <DropdownItem>My Balance</DropdownItem>
-            <DropdownItem>Inbox</DropdownItem>
-            <DropdownItem>Logout</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
-      </Collapse>
+      <NavbarBrand href="/">
+        {/* <img src="/assets/images/logo/main-logo.png" alt="logo" /> */}
+      </NavbarBrand>
+      <Nav className="me-auto" navbar>
+        <NavItem>
+          <Link href="/" className="nav-link">
+            Starter
+          </Link>
+        </NavItem>
+        <NavItem>
+          <Link href="/about" className="nav-link">
+            About
+          </Link>
+        </NavItem>
+      </Nav>
+      <Button color="secondary" onClick={handleLogout}>
+        Logout
+      </Button>
     </Navbar>
   );
 };

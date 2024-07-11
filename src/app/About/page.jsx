@@ -9,23 +9,23 @@ import SliderCard from "@/Components/About/SliderCard";
 function About() {
   // Array for misson vission
 
-  const arr2 = [
-    {
-      key: 1,
-      image: "/Assets/images/user.png",
-      name: "this is Dummy Title",
-      desig:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-    },
+  // const arr2 = [
+  //   {
+  //     key: 1,
+  //     image: "/Assets/images/user.png",
+  //     name: "this is Dummy Title",
+  //     desig:
+  //       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+  //   },
 
-    {
-      key: 2,
-      image: "/Assets/images/user.png",
-      name: "this is Dummy Title",
-      desig:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-    },
-  ];
+  //   {
+  //     key: 2,
+  //     image: "/Assets/images/user.png",
+  //     name: "this is Dummy Title",
+  //     desig:
+  //       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+  //   },
+  // ];
 
   const arr = [
     {
@@ -105,21 +105,25 @@ function About() {
 
   // Array for Awards & Certificates
   const certificatesarr = [
-    {
-      key: 1,
-      image: "/Assets/images/certificate_img/PLEXCONCIL-Trophy-2014-15-16-17.jpg",
-    },
+    // {
+    //   key: 1,
+    //   image: "/Assets/images/user.png",
+    // },
     {
       key: 2,
-      image: "/Assets/images/user.png",
+      image: "/Assets/images/certificates/PLEXCONCIL-Award-2006-07.jpg",
     },
     {
       key: 3,
-      image: "/Assets/images/user.png",
+      image: "/Assets/images/certificates/PLEXCONCIL-Award-2008-09.jpg",
     },
     {
       key: 4,
-      image: "/Assets/images/user.png",
+      image: "/Assets/images/certificates/PLEXCONCIL-Award-2014-15.jpg",
+    },
+    {
+      key: 5,
+      image: "/Assets/images/certificates/PLEXCONCIL-Trophy-2014-15-16-17.jpg",
     },
   ];
   // Array for Awards & Certificatesend
@@ -160,7 +164,7 @@ function About() {
         {/* Board Of Directors start */}
         <div className="row section_header team-header">
           <h2>Team</h2>
-          <h3>Board Of Directorss</h3>
+          <h3>PROMOTERS/DIRECTORS</h3>
         </div>
 
 
@@ -180,8 +184,8 @@ function About() {
                     }`}>
                     <Team
                       image={val.image}
-                      name={val.name}
-                      designation={val.desig}
+                      // name={val.name}
+                      // designation={val.desig}
                     />
                   </div>
                   <div
@@ -202,10 +206,10 @@ function About() {
         {/* Board Of Directors end */}
 
         {/* Managing Committee start */}
-        <div className="row section_header team-header">
+        {/* <div className="row section_header team-header">
           <h3>Managing Committee</h3>
-        </div>
-        <div className="team-members-container">
+        </div> */}
+        {/* <div className="team-members-container">
           {arr2.map((val, index) => (
             <div
               key={index}
@@ -229,11 +233,11 @@ function About() {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
 
         
       </div>
-      <div className="container">
+      {/* <div className="container" id="managementBoardCommittees">
         <div className="text-center mb-5 ">
           <div className="fs-1 darkBlue fw-normal">
             Awards & <span className="fw-bold text-danger">Certificates</span>{" "}
@@ -261,7 +265,7 @@ function About() {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
