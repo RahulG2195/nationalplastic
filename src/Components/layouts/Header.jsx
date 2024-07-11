@@ -43,7 +43,7 @@ export default function Header() {
   const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
   // const counts = useSelector((state) => state.cart || 0);
   // const [count, setCount] = useState(0);
-  function check() {}
+  function check() { }
   const userState = useSelector((state) => state.userData.isLoggedIn);
   const userEmail = useSelector((state) => state.userData.email);
 
@@ -215,11 +215,10 @@ export default function Header() {
                 </form>
 
                 <div
-                  className={`${
-                    isClicked
+                  className={`${isClicked
                       ? " collapse navbar-collapse show menubg"
                       : "menuhide "
-                  }`}
+                    }`}
                   id="navbarSupportedContent"
                 >
                   <ul className="navbar-nav homeNav mb-2 mb-lg-0">
@@ -491,7 +490,7 @@ export default function Header() {
                       </Link>
                     </li>
                     <li className="nav-item brdr bulk_ord px-3">
-                      <a href="tel:+912267669922">
+                      {/* <a href="tel:+912267669922">
                         <Image
                           height={48}
                           width={23}
@@ -500,7 +499,7 @@ export default function Header() {
                           src="/Assets/svg/Path 2.svg"
                           alt="location"
                         />
-                      </a>
+                      </a> */}
                       <Link
                         className="nav-link mx-1"
                         href="/BulkOrder"
@@ -513,8 +512,8 @@ export default function Header() {
                 </div>
 
                 <div className="row">
-                  <ul className=" d-flex side-icons">
-                  <li className="nav-item brdr d-none d-md-none d-xl-block">
+                  <ul className=" d-flex alin-items-center gap-3 side-icons">
+                    <li className="nav-item brdr d-none d-md-none d-xl-block">
                       <Link
                         className="nav-link"
                         href="tel:+912267669922"
@@ -526,9 +525,11 @@ export default function Header() {
                           width={100}
                           layout="responsive"
                           objectFit="contain"
-                          src="/Assets/images/whatsapp.png"
+                          src="/Assets/images/image.png"
                           alt="whatsapp icon"
                         />
+                        {/* <i class="fa fa-whatsapp fs-2 text-black " aria-hidden="true"></i> */}
+
                       </Link>
                     </li>
                     <li className="nav-item brdr d-none d-md-none d-xl-block">
@@ -657,8 +658,8 @@ export default function Header() {
                           alt="Landscape picture"
                           height={34}
                           width={52}
-                          // layout="responsive"
-                          // objectFit="contain"
+                        // layout="responsive"
+                        // objectFit="contain"
                         />
                       </Link>
                     </li>
