@@ -20,7 +20,7 @@ const CustomerReview = () => {
 
   const gettingIdBasedReviews = async (product_id) => {
     try {
-      const response = await axios.put(`${process.env.BASE_URL}/reviews`, JSON.stringify({ product_id: product_id }));
+      const response = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/reviews`, JSON.stringify({ product_id: product_id }));
       const data = response.data;
 
       let reviewsToReturn = [];

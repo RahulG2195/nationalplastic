@@ -16,11 +16,11 @@ function BottomBar() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${process.env.BASE_URL}/Products`);
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/Products`);
         const allproducts = res.data.products;
 
         // start -- fetch category which want to display on navbar
-        const nav = await axios.get(`${process.env.BASE_URL}/NavCategory`);
+        const nav = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/NavCategory`);
         const navshow = nav.data.navshow;
         SetAllProd(allproducts);
         setNavbar(navshow);

@@ -76,7 +76,7 @@ function AddToCart() {
     let cartData;
     const tempOrUserData = async () => {
       if (userID) {
-        const response = await axios.post(`${process.env.BASE_URL}/UserCart`, {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/UserCart`, {
           customer_id: userID,
         });
         cartData = response.data.products;
@@ -94,7 +94,7 @@ function AddToCart() {
           : [];
         // If else to send request to API depending upon No of Product count
         if (productIds.length === 1) {
-          const response = await axios.post(`${process.env.BASE_URL}/tempData`, {
+          const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/tempData`, {
             product_id: productIds[0],
           });
           const products = response.data.products;
@@ -108,7 +108,7 @@ function AddToCart() {
           fetchData(objToArray);
         } else if (productIds.length > 1) {
           // Send request with multiple product IDs
-          const response = await axios.post(`${process.env.BASE_URL}/tempData`, {
+          const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/tempData`, {
             product_ids: productIds,
           });
           // const product = response.data.products;
@@ -138,7 +138,7 @@ function AddToCart() {
     const ColorBasedImage = async (color, product_id) => {
       const colorBasedProduct = { color: color, product_id: product_id };
       const response = await axios.post(
-        `${process.env.BASE_URL}/colorBasedProduct`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/colorBasedProduct`,
         colorBasedProduct
       );
       const dataBasedOnColor = response.data?.data;
@@ -223,7 +223,7 @@ function AddToCart() {
     try {
       // Fetch updated cart data
 
-      const response = await axios.post(`${process.env.BASE_URL}/UserCart`, {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/UserCart`, {
         customer_id: userID,
       });
       const cartData = response.data.products;
@@ -291,7 +291,7 @@ function AddToCart() {
         const formData = new FormData();
         formData.append("customer_id", userID);
         formData.append("product_id", product_id);
-        const response = await axios.delete(`${process.env.BASE_URL}/UserCart`, {
+        const response = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/UserCart`, {
           data: formData,
           headers: {
             "Content-Type": "multipart/form-data",

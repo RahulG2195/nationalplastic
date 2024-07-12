@@ -80,7 +80,7 @@ export default function Header() {
         };
 
         const response = await axios.put(
-          `${process.env.BASE_URL}/Users`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/Users`,
           formData
         );
 

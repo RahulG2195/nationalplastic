@@ -69,7 +69,7 @@ export const addItemToWishlist = (item) => async (dispatch, getState) => {
   const userDataString = localStorage.getItem("userData");
   const userData = JSON.parse(userDataString);
   const customerId = userData.customer_id;
-  const check = await axios.post(`${process.env.BASE_URL}/wishListUser`, {
+  const check = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/wishListUser`, {
     customer_id: customerId,
   });
 
@@ -83,7 +83,7 @@ export const addItemToWishlist = (item) => async (dispatch, getState) => {
 
   if (isWishlistEmpty || !isItemAlreadyAdded) {
     try {
-      const response = await axios.put(`${process.env.BASE_URL}/wishListUser`, {
+      const response = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/wishListUser`, {
         customer_id: customerId,
         product_id: item.product_id,
       });

@@ -50,7 +50,7 @@ export default function Blog() {
   const [productArr, setProductArr] = useState([]);
   useEffect(() => {
     const fetchdata = async () => {
-      const response = await axios.get(`${process.env.BASE_URL}/Products`);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/Products`);
       setProductArr(response.data.Blog);
     };
     fetchdata();

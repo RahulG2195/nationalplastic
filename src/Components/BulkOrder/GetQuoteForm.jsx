@@ -99,7 +99,7 @@ const GetQuoteForm = (props) => {
     if (!isValid) return;
   
     try {
-      await axios.post(`${process.env.BASE_URL}/BulkOrderForm`, submissionData);
+      await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/BulkOrderForm`, submissionData);
       notify("Mail Sent Successfully");
       // ... rest of your submission logic
     } catch (error) {

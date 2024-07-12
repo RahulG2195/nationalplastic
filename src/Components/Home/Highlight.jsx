@@ -42,7 +42,7 @@ export default function Highlight() {
 
   useEffect(() => {
     const fetchdata = async () => {
-      const response = await axios.get(`${process.env.BASE_URL}/Products`);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/Products`);
 
       // const filteredData = response.data.heighlightProd.filter(
       //   (item) => item.categoryType === "highlights"

@@ -18,7 +18,7 @@ const WishlistPage1 = () => {
     const customerId = userData.customer_id || {};
     const fetchData = async () => {
       try {
-        const response = await axios.post(`${process.env.BASE_URL}/wishListUser`, {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/wishListUser`, {
           customer_id: customerId,
         });
         
@@ -59,7 +59,7 @@ const WishlistPage1 = () => {
       formData.append("product_id", product_id);
       for (const entry of formData.entries()) {
       }
-      const response = await axios.delete(`${process.env.BASE_URL}/wishListUser`, {
+      const response = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/wishListUser`, {
         data: formData,
       });
 

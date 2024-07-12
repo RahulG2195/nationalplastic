@@ -16,7 +16,7 @@ const HeroSectionPage = () => {
 
   const fetchHeroSections = async () => {
     try {
-      const data = await axios.get(`${process.env.BASE_URL}/adminHomePage/heroSections`);
+      const data = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/adminHomePage/heroSections`);
 
       setHeroSections(data.data.allHeroSections);
     } catch (error) {
