@@ -5,10 +5,17 @@ import { useParams } from "next/navigation";
 import axios from "axios";
 import "./CustomerReview.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {  useSelector } from "react-redux";
+import { notifyError } from "@/utils/notify";
 
 const { TextArea } = Input;
 
 const CustomerReview = () => {
+  const { customer_id, email ,userState } = useSelector((state) => ({
+    customer_id: state.userData.customer_id,
+    email: state.userData.email,
+    userState: state.userData.isLoggedIn,
+  }));
   const [overallRating, setOverallRating] = useState(5);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [newReview, setNewReview] = useState({ rating: 0, text: "" });
@@ -18,9 +25,19 @@ const CustomerReview = () => {
   const router = useParams();
   const product_id = router.productId;
 
+
+
+  useEffect(() => {
+    gettingIdBasedReviews(product_id).then(fetchedReviews => {
+      console.log("fetchedReviews", fetchedReviews);
+      setReviews(fetchedReviews);
+      updateOverallRating(fetchedReviews);
+    });
+  }, [product_id]);
+
   const gettingIdBasedReviews = async (product_id) => {
     try {
-      const response = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/reviews`, JSON.stringify({ product_id: product_id }));
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/reviews`, JSON.stringify({ action: 'getProductReviews', product_id: product_id }));
       const data = response.data;
 
       let reviewsToReturn = [];
@@ -54,14 +71,6 @@ const CustomerReview = () => {
     }
   };
 
-  useEffect(() => {
-    gettingIdBasedReviews(product_id).then(fetchedReviews => {
-      console.log("fetchedReviews", fetchedReviews);
-      setReviews(fetchedReviews);
-      updateOverallRating(fetchedReviews);
-    });
-  }, [product_id]);
-
   const updateOverallRating = (reviewsToRate) => {
     if (reviewsToRate.length > 0) {
       const newOverallRating = reviewsToRate.reduce((sum, review) => sum + review.rating, 0) / reviewsToRate.length;
@@ -82,7 +91,7 @@ const CustomerReview = () => {
       message.error("Please provide both a rating and a review.");
       return;
     }
-
+    userValidation();
     const reviewToAdd = {
       id: reviews.length + 1,
       name: "Current User",
@@ -109,6 +118,24 @@ const CustomerReview = () => {
   const loadMoreReviews = () => {
     setVisibleReviews((prev) => prev + 2);
   };
+
+  const userValidation = () => {
+    console.log("-", userState,customer_id,email )
+    if(!userState){
+      notifyError("Login to add a review");
+      return;
+    }
+
+
+
+    // TODO: Implement user validation here
+    // using email and product_id to avoid mutiple reviews 
+    //! Check if user has successfully brought the product to review it
+    // Check if user is logged in or not ---- DONE
+    //! Check if user is already reviewed?
+    //! 
+  }
+
 
   return (
     <div className="container py-5">
