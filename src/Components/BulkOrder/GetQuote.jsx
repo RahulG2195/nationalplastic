@@ -74,7 +74,7 @@ const GetQuote = ({ proddata }) => {
             <div
               key={index}
               onClick={() => handleImageClick(data.imgText)}
-              className="col-lg-2 col-md-4 col-sm-4 col-xs-6 col-6 mt-5"
+              className="col-lg-3 col-md-4 col-sm-4 col-xs-6 col-6 mt-5"
             >
               <TopPicsCard
                 imgSrc={data.imgSrc}
