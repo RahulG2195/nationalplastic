@@ -49,7 +49,7 @@ function ProdData({ category_id }) {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get(`${process.env.BASE_URL}/product-details?id=${id}`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`);
         const { product, productDetails, colors, category } = response.data;
         console.log("const storedId = id;" , product.product_id);
 
@@ -81,7 +81,7 @@ function ProdData({ category_id }) {
   const colorBasedProductsImages = async (colors) => {
     setAvailableColor(colors);
     try {
-      const response = await axios.put(`${process.env.BASE_URL}/colorBasedProduct`, {
+      const response = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/colorBasedProduct`, {
         name: id,
         colors: colors
       });
@@ -95,7 +95,7 @@ function ProdData({ category_id }) {
   const category = async (catName) => {
     try {
       if (catName) {
-        const category = await axios.put(`${process.env.BASE_URL}/Products`, {
+        const category = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/Products`, {
           category_id: catName,
         });
         const { category_name, category_id } = category.data;
@@ -109,7 +109,7 @@ function ProdData({ category_id }) {
 
   const fetchPrice = async (storedId) => {
     try {
-      const response = await fetch(`${process.env.BASE_URL}/ProductsCat`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/ProductsCat`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -132,7 +132,7 @@ function ProdData({ category_id }) {
     setSelectedColor(event.target.value);
     const colorBasedProduct = { color: event.target.value, name: id };
     try {
-      const response = await axios.post(`${process.env.BASE_URL}/colorBasedProduct`, colorBasedProduct);
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/colorBasedProduct`, colorBasedProduct);
       const dataBasedOnColor = response.data?.data;
       const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
       const newProductID = dataBasedOnColor[0].product_id;

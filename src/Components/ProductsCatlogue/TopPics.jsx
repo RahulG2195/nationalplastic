@@ -25,7 +25,7 @@ const TopPics = () => {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          `${process.env.BASE_URL}/Category`
+          `${process.env.NEXT_PUBLIC_BASE_URL}/Category`
         );
 
         setCategories(response.data.categories);

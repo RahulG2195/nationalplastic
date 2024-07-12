@@ -85,14 +85,14 @@ const GetQuoteCustomForm = (props) => {
     if (!isValid) return;
 
     try {
-      await axios.post(`${process.env.BASE_URL}/BulkOrderForm`, formData);
+      await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/BulkOrderForm`, formData);
       notify();
     } catch (error) {
       console.error("Error:", error);
       notifyError();
     }
     try {
-      const response = await axios.post(`${process.env.BASE_URL}/bulkOrderEmail`, formData);
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/bulkOrderEmail`, formData);
     } catch (error) {
       console.error("Error:", error);
       notifyError();

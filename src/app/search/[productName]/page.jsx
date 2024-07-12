@@ -89,7 +89,7 @@ const Search = (props) => {
 
       const isBrowser = typeof window !== "undefined";
       if (isBrowser) {
-        const response = await axios.post(`${process.env.BASE_URL}/Search`, {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Search`, {
           productName: query,
         });
         const newProducts = response.data.products;
@@ -123,7 +123,7 @@ const Search = (props) => {
 
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch(`${process.env.BASE_URL}/ProductsCat`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/ProductsCat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -186,7 +186,7 @@ const Search = (props) => {
       const userDataString = localStorage.getItem("userData");
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
-      const response = await axios.post(`${process.env.BASE_URL}/wishListUser`, {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/wishListUser`, {
         customer_id: customerId,
       });
       setWishlistItems(response.data.Wishlist);

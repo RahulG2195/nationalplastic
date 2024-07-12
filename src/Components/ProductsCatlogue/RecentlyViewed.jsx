@@ -99,13 +99,13 @@ const RecentlyViewed = () => {
         const searchedProducts = JSON.parse(localStorage.getItem('searchedProducts') || '[]');
         
         if (searchedProducts.length > 0) {
-          const response = await axios.put(`${process.env.BASE_URL}/Search`, { 
+          const response = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/Search`, { 
             productNames: searchedProducts 
           });
           let products = response.data.products;
   
           if (products.length < 3) {
-            const additionalResponse = await axios.get(`${process.env.BASE_URL}/Products`);
+            const additionalResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/Products`);
             const additionalProducts = additionalResponse.data.limitProd;
             
             const newProducts = additionalProducts.filter(product => 
@@ -117,7 +117,7 @@ const RecentlyViewed = () => {
           setRecentlyViewedData(products);
         } else {
           // If no searched products, use the original API
-          const response = await axios.get(`${process.env.BASE_URL}/Products`);
+          const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/Products`);
           const filteredproducts = response.data.limitProd;
           setRecentlyViewedData(filteredproducts);
         }
@@ -136,7 +136,7 @@ const RecentlyViewed = () => {
       const userData = JSON.parse(userDataString);
       const customerId = userData.customer_id;
 
-      const response = await axios.post(`${process.env.BASE_URL}/wishListUser`, {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/wishListUser`, {
         customer_id: customerId,
       });
       setWishlistItems(response.data.Wishlist);
@@ -175,7 +175,7 @@ const RecentlyViewed = () => {
   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch(`${process.env.BASE_URL}/ProductsCat`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/ProductsCat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

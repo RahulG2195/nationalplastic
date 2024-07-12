@@ -4,7 +4,7 @@ import { query } from "@/lib/db";
 import axios from "axios";
 
 import { NextRequest, NextResponse } from "next/server";
-import "../../../../envConfig.js";
+// import "../../../../envConfig.js";
 
 // Define your API endpoint handler for GET request
 // import { useRouter } from 'next/navigation'

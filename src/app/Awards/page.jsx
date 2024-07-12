@@ -27,7 +27,7 @@ const CERTIFICATES = [
 const Awards = () => {
   return (
     <section className="awards-certificates">
-      <div className="container">
+      <div className="container mt-4 mb-4">
         <header className="text-center mb-5">
           <h1 className="fs-1 darkBlue fw-normal">
             Awards & <span className="fw-bold text-danger">Certificates</span>

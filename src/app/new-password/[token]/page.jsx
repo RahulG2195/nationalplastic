@@ -70,7 +70,7 @@ const PasswordToken = () => {
       formDataToSend.append("resetEmail", formData.email);
       formDataToSend.append("password", formData.password);
 
-      await axios.put(`${process.env.BASE_URL}/forgotPassword`, formDataToSend);
+      await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/forgotPassword`, formDataToSend);
       notify("Password Changed Successfully", "success");
       localStorage.clear();
       setTimeout(() => router.push('/Login'), 2000);

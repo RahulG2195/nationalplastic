@@ -37,7 +37,7 @@ function Awards() {
 
   return (
     <>
-        <div className="container">
+        <div className="container mt-4 mb-4">
         <div className="text-center mb-5 ">
           <div className="fs-1 darkBlue fw-normal">
             Awards & <span className="fw-bold text-danger">Certificates</span>{" "}

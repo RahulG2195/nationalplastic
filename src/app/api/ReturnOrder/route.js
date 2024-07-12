@@ -3,7 +3,7 @@ import { query } from "@/lib/db";
 import axios from "axios";
 
 import { NextRequest, NextResponse } from "next/server";
-import "../../../../envConfig.js";
+// import "../../../../envConfig.js";
 
 export async function POST(request) {
   try {
