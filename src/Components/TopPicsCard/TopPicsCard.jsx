@@ -20,7 +20,7 @@ const TopPicsCard = (props) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="circularimg mb-3">
+      <div className="circularimg mb-3 ">
         <Image
           className="image"
           src={props.imgSrc}

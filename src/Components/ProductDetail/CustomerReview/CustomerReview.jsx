@@ -1,9 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Rate, Modal, Input, message, Card, Avatar } from "antd";
+import { Rate, Modal, Input, message } from "antd";
 import { useParams } from "next/navigation";
 import axios from "axios";
 import "./CustomerReview.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const { TextArea } = Input;
 
@@ -13,6 +14,7 @@ const CustomerReview = () => {
   const [newReview, setNewReview] = useState({ rating: 0, text: "" });
   const [canReview, setCanReview] = useState(true);
   const [reviews, setReviews] = useState([]);
+  const [visibleReviews, setVisibleReviews] = useState(2);
   const router = useParams();
   const product_id = router.productId;
 
@@ -89,7 +91,6 @@ const CustomerReview = () => {
       avatar: "https://xsgames.co/randomusers/avatar.php?g=pixel",
     };
 
-
     const updatedReviews = [reviewToAdd, ...reviews];
     setReviews(updatedReviews);
     setIsModalVisible(false);
@@ -105,48 +106,70 @@ const CustomerReview = () => {
     setNewReview({ rating: 0, text: "" });
   };
 
+  const loadMoreReviews = () => {
+    setVisibleReviews((prev) => prev + 2);
+  };
+
   return (
-    <div className="customer-review-container">
-      <div className="review-header">
-        <h1>Customer <span className="highlight">Reviews</span></h1>
-        <p>See what our customers are saying about their experience</p>
+    <div className="container py-5">
+      <div className="text-center mb-5">
+        <h1 className="display-4">Customer <span className="text-primary">Reviews</span></h1>
+        <p className="lead">See what our customers are saying about their experience</p>
       </div>
 
-      <div className="review-content">
-        <div className="review-summary">
-          <Card>
-            <h2>Customer Satisfaction</h2>
-            <div className="overall-rating">
-              <Rate
-                disabled
-                value={overallRating}
-                allowHalf
-                className="large-stars"
-              />
-            </div>
-            <button className="write-review-btn" onClick={showModal}>
-              Write a Review
-            </button>
-          </Card>
-        </div>
-
-        <div className="review-list">
-          {reviews.map((review) => (
-            <Card key={review.id} className="review-card">
-              <div className="review-header">
-                <span className="InitialName profileInitialName">
-                  {review.name.charAt(0).toUpperCase()}
-                </span>
-                <div className="review-info">
-                  <h3>{review.name}</h3>
-                  <Rate disabled defaultValue={review.rating} />
-                </div>
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <div className="card mb-4">
+            <div className="card-body text-center">
+              <h2 className="card-title">Customer Satisfaction</h2>
+              <div className="mb-3">
+                <Rate
+                  disabled
+                  value={overallRating}
+                  allowHalf
+                  className="large-stars"
+                />
               </div>
-              <p className="review-text">{review.review}</p>
-            </Card>
-          ))}
+              <button className="btn btn-primary" onClick={showModal}>
+                Write a Review
+              </button>
+            </div>
+          </div>
         </div>
       </div>
+
+      <div className="row">
+        {reviews.slice(0, visibleReviews).map((review) => (
+          <div className="col-md-6 mb-4" key={review.id}>
+            <div className="card">
+              <div className="card-body">
+                <div className="d-flex align-items-center mb-3">
+                  <img
+                    src={review.avatar}
+                    alt="Avatar"
+                    className="rounded-circle mr-3"
+                    width="50"
+                    height="50"
+                  />
+                  <div>
+                    <h5 className="card-title mb-0">{review.name}</h5>
+                    <Rate disabled defaultValue={review.rating} />
+                  </div>
+                </div>
+                <p className="card-text">{review.review}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {visibleReviews < reviews.length && (
+        <div className="text-center">
+          <button className="btn btn-outline-primary" onClick={loadMoreReviews}>
+            Load More Reviews
+          </button>
+        </div>
+      )}
 
       <Modal
         title="Write a Review"
@@ -154,14 +177,14 @@ const CustomerReview = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <div className="review-form">
+        <div className="form-group">
           <label>Rating:</label>
           <Rate
             value={newReview.rating}
             onChange={(value) => setNewReview({ ...newReview, rating: value })}
           />
         </div>
-        <div className="review-form">
+        <div className="form-group">
           <label>Review:</label>
           <TextArea
             rows={4}

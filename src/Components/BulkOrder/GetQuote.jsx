@@ -69,7 +69,7 @@ const GetQuote = ({ proddata }) => {
         </div>
 
         {/* Remaining products */}
-        <div className="row remaining_products mt-5">
+        <div className="row remaining_products mt-5 container-fluid mx-auto">
           {remainingImages.map((data, index) => (
             <div
               key={index}
