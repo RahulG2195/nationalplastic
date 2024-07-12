@@ -132,7 +132,6 @@ function About() {
 
   return (
     <>
-    <Header/>
       <Subbanner img='/Assets/images/banner/About-Us-banner-V2.jpg' alt='about banner' height='80'/>
       <div className="container about_container">
         <div className="row section_header">
@@ -174,7 +173,8 @@ function About() {
         <div className="row team-members">
           {imgarr.map((val, index) => (
             <div
-              className="col-xl-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6"
+              // className="col-xl-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6"
+              className="col-12"
               key={val.key}>
               <div className="team-members-container">
                 <div
@@ -269,7 +269,6 @@ function About() {
           ))}
         </div>
       </div> */}
-      <Footer/>
 
     </>
   );

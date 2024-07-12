@@ -56,7 +56,7 @@
 }
 
 /* New styles for desktop layout */
-@media only screen and (min-width: 992px) {
+/* @media only screen and (min-width: 992px) {
     .top_products {
         display: flex;
         flex-wrap: wrap;
@@ -72,7 +72,7 @@
         flex: 0 0 16.666667%;
         max-width: 16.666667%;
     }
-}
+} */
 
 @media only screen and (max-width: 991px) {
     .round_prod {

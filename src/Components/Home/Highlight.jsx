@@ -79,7 +79,7 @@ export default function Highlight() {
               <div className="row">
                 {productArr.map((product) => {
                   const images = product.image_name ? product.image_name.split(', ').map(image => image.trim()) : [];
-                  return <div key={product.product_name} className="col-md-4 my-2 prodHcard">
+                  return <div key={product.product_name} className="col-md-4 col-4 my-2 prodHcard">
                     <Link href={`/ProductDetail/${product.product_id}`}>
                       <div className="card highlightcard">
                         <Image

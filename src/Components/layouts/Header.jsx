@@ -248,7 +248,7 @@ export default function Header() {
                       onMouseLeave={() => setAboutDropdown(false)}>
                       <Link
                         className="nav-link"
-                        href="#"
+                        href="/About"
                         onClick={isClicked ? handleShow : null}>
                         About Us
                       </Link>
