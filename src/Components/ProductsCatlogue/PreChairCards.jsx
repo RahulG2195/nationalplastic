@@ -60,7 +60,7 @@ const PreChairsCards = () => {
     try {
       const categoryTitle = localStorage.getItem("category");
       setCategoryType(categoryTitle);
-      const response = await axios.get(`${process.env.BASE_URL}/ProductsCat?query=${cat_id}`);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/ProductsCat?query=${cat_id}`);
 
       const fetchedData = response.data;
 
@@ -128,7 +128,7 @@ const PreChairsCards = () => {
   };
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch(`${process.env.BASE_URL}/ProductsCat`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/ProductsCat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

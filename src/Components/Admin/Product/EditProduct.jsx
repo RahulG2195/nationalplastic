@@ -20,7 +20,7 @@ export default function App() {
 
   const updateProduct = async (formData) => {
     try {
-      const response = await axios.put(`${process.env.BASE_URL}/adminProducts`, formData, {
+      const response = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/adminProducts`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

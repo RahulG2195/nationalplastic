@@ -39,7 +39,7 @@ export default function EditCategory() {
         formData.append('image', data.image);
       }
 
-      const response = await axios.put(`${process.env.BASE_URL}/adminCategories`, formData, {
+      const response = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/adminCategories`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

@@ -64,7 +64,7 @@ const CmsForm = () => {
     }
 
     try {
-        const response = await axios.post(`${process.env.BASE_URL}/adminInvestor`, formData, {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/adminInvestor`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

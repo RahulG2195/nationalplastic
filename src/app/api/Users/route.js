@@ -3,7 +3,7 @@ import { query } from "@/lib/db";
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import "../../../../envConfig.js";
+// import "../../../../envConfig.js";
 import {generateToken} from "@/utils/jwtAuth.js"
 // Handler for GET request to fetch all customersimport { cookies } from 'next/headers';
 // import { setCookie } from 'cookies-next';

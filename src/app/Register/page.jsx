@@ -104,7 +104,7 @@ const Register = () => {
   const handleOTP = async (action) => {
     try {
       if (action === 'send') {
-        const response = await axios.post(`${process.env.BASE_URL}/sendOTP`, { email: formData.email });
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/sendOTP`, { email: formData.email });
         if (response.status === 200) {
           const { otp, otpExpiry } = response.data;
           localStorage.setItem('otp', otp);
@@ -126,7 +126,7 @@ const Register = () => {
         }
         // If OTP is valid, proceed with user registration
         const updatedFormData = combineAddressFields(formData);
-        const response = await axios.post(`${process.env.BASE_URL}/Users`, updatedFormData);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Users`, updatedFormData);
         localStorage.removeItem('otp');
         localStorage.removeItem('otpExpiry');
 
@@ -150,7 +150,7 @@ const Register = () => {
       const errors = validateForm();
       if (Object.keys(errors).length === 0) {
         try {
-          const response = await axios.get(`${process.env.BASE_URL}/Users?email=${formData.email}`);
+          const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/Users?email=${formData.email}`);
           if (response.status === 201) {
             toast.promise(
               handleOTP('send'),

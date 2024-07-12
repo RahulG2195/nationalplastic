@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
-import "../../../../envConfig.js";
+// import "../../../../envConfig.js";
 import { query } from "@/lib/db";
 
 export async function POST(req) {

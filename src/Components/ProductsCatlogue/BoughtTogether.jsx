@@ -45,7 +45,7 @@ const BoughtTogether = () => {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          `${process.env.BASE_URL}/Products`
+          `${process.env.NEXT_PUBLIC_BASE_URL}/Products`
         );
         setTogetherCardsData(response.data.products);
       } catch (error) {
@@ -105,7 +105,7 @@ const BoughtTogether = () => {
 
   const fetchPrice = async (id) => {
     try {
-      const response = await fetch(`${process.env.BASE_URL}/ProductsCat`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/ProductsCat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

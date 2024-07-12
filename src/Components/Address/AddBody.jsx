@@ -49,7 +49,7 @@ const AddBody = () => {
         getProfile: true,
       };
 
-      const response = await axios.put(`${process.env.BASE_URL}/Users`, formData);
+      const response = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/Users`, formData);
       const userData = response.data.message[0];
       const { Address, FirstName, Phone } = userData;
       const addressString = JSON.stringify(Address);
@@ -76,7 +76,7 @@ const AddBody = () => {
         if (!Dummies) {
           cartData = Dummies;
         } else {
-          const response = await axios.post(`${process.env.BASE_URL}/UserCart`, {
+          const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/UserCart`, {
             customer_id: customerId,
           });
           getAdress();

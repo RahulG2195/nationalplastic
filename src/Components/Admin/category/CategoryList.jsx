@@ -18,7 +18,7 @@ const CategoryList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const rawData = await axios.get(`${process.env.BASE_URL}/adminCategories`);
+      const rawData = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/adminCategories`);
       const { allCategories } = rawData.data;
       setCategoryArray(allCategories);
       setFilteredCategoryArray(allCategories);
@@ -40,7 +40,7 @@ const CategoryList = () => {
   const handleConfirmDelete = async () => {
     if (currentItemToDelete !== null) {
       try {
-        await axios.delete(`${process.env.BASE_URL}/adminCategories`, {
+        await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/adminCategories`, {
           headers: {
             'Content-Type': 'application/json',
           },

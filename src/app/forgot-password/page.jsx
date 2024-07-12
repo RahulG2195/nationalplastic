@@ -71,7 +71,7 @@ const ResetPasswordPage = () => {
     formDataToSend.append("email", formData.email);
     // Checks Email valid or not
     const res = await axios.post(
-      `${process.env.BASE_URL}/forgotPassword`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/forgotPassword`,
       formDataToSend
     );
     //Generating Token and sending Email to the user
@@ -79,7 +79,7 @@ const ResetPasswordPage = () => {
       const resetToken = await generatePasswordResetToken();
       formDataToSend.append("resetToken", resetToken); // Ensure only the first file is appended
       const response = await axios.post(
-        `${process.env.BASE_URL}/mail`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/mail`,
         formDataToSend
       );
       if (response.status === 200) {
