@@ -130,14 +130,14 @@ function BottomBar() {
       {navbar.map((val, index) => (
         <div
           key={val.category_id}
-          className={`px-2 py-2 custom-dropdown-css ${
-            val.category_name === "Stools" ||
-            val.category_name === "Tables" ||
-            val.category_name === "Drawer" ||
-            val.category_name === "Box"
+          className={`px-2 py-2 custom-dropdown-css ${val.category_name === "Stools" ||
+              val.category_name === "Tables" ||
+              val.category_name === "Drawer" ||
+              val.category_name === "Box" ||
+              val.category_name == "Office chair"
               ? val.category_name + " position-relative"
               : "second"
-          }`}>
+            }`}>
           <Link
             onClick={sendCategory}
             href={`/ProductCatlogue/${val.category_id}`}>
@@ -193,7 +193,7 @@ function BottomBar() {
       ))}
     </div>
 
-  
+
   );
 }
 

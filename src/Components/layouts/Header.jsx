@@ -471,20 +471,22 @@ export default function Header() {
 
                 <div className="row">
                   <ul className=" d-flex alin-items-center gap-3 side-icons">
-                    <li className="nav-item brdr d-none d-md-none d-xl-block">
+                    <li className="nav-item brdr d-none d-md-none d-xl-block ">
                       <Link
                         className="nav-link"
                         href="tel:+912267669922"
                         target="_blank"
                         onClick={isClicked ? handleShow : null}
+                        style={{width:'30px'}}
                       >
                         <Image
                           height={100}
                           width={100}
                           layout="responsive"
                           objectFit="contain"
-                          src="/Assets/images/image.png"
+                          src="/Assets/images/wpIcon/whatsapp.png"
                           alt="whatsapp icon"
+                         
                         />
                         {/* <i class="fa fa-whatsapp fs-2 text-black " aria-hidden="true"></i> */}
 
