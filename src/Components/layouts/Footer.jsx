@@ -96,46 +96,46 @@ export default function Footer() {
               <div className="paymentImg d-flex py-3 px-2">
                 <div className="gatewayimg">
                   <Image
-                  width={75}
-                  height={40}
+                    width={75}
+                    height={40}
                     src="/Assets/images/visa-payment-card1873@2x.png"
                     alt='logo'
                     objectFit='cover'
-                    // fill
+                  // fill
                   />
                 </div>
                 <div className="gatewayimg">
                   <Image
-                   width={75}
-                   height={40}
+                    width={75}
+                    height={40}
                     src="/Assets/images/mastercard.png"
                     alt='logo'
                     objectFit='cover'
 
-                    // fill
-                  />
-                </div>
-                 <div className="gatewayimg">
-                  <Image
-                   width={75}
-                   height={40}
-                    src="/Assets/images/Group 697.png"
-                    alt='logo'
-                    objectFit='cover'
-                    // fill
+                  // fill
                   />
                 </div>
                 <div className="gatewayimg">
                   <Image
-                   width={75}
-                   height={40}
+                    width={75}
+                    height={40}
+                    src="/Assets/images/Group 697.png"
+                    alt='logo'
+                    objectFit='cover'
+                  // fill
+                  />
+                </div>
+                <div className="gatewayimg">
+                  <Image
+                    width={75}
+                    height={40}
                     src="/Assets/images/Maestro.png"
                     alt='logo'
                     objectFit='contain'
-                    // fill
+                  // fill
                   />
                 </div>
-               
+
               </div>
               <div className="footer_heading">
                 <h5 className='fw-bolder'>WE ARE ALSO ON</h5>
@@ -157,47 +157,58 @@ export default function Footer() {
           <div className="col-12 text-center">
             <p>We Deliver in Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer</p>
 
-            <div className="footer_social">
+            <div className="footer_social d-flex align-items-center">
               <div className="comp_logo">
-                <Image
-                  src="/Assets/images/nation_logo.png"
-                  alt='logo'
-                  fill
-                />
+                <Link href='/'>
+                  <Image
+                    src="/Assets/images/nation_logo.png"
+                    alt='logo'
+                    fill
+                  />
+                </Link>
               </div>
-              <div className="social_icons">
-                <Image
+              <div className="social_icons d-flex gap-3">
+                {/* <Image
                   src="/Assets/images/Group 37.svg"
                   alt='logo'
                   layout='responsive'
                   objectFit='cover'
                   width={100}
                   height={100}
-                />
-                <Image
+                /> */}
+                <a href='https://www.instagram.com/nationalplastic1952/' target="_blank"><i class="fa fa-instagram  fs-1" aria-hidden="true"></i>
+                </a>
+                {/* <Image
                   src="/Assets/images/Path 19.svg"
                   alt='logo'
                   layout='responsive'
                   objectFit='cover'
                   width={100}
                   height={100}
-                />
-                <Image
+                /> */}
+                <a href='https://www.youtube.com/@NationalPlastic1952' target="_blank"><i class="fa fa-youtube-play  fs-1" aria-hidden="true"></i>
+                </a>
+                {/* <Image
                   src="/Assets/images/Path 20.svg"
                   alt='logo'
                   layout='responsive'
                   objectFit='cover'
                   width={100}
                   height={100}
-                />
-                <Image
+                /> */}
+                <a href='https://x.com/national1952' target="_blank"><i class="fa fa-twitter fs-1" aria-hidden="true"></i>
+                </a>
+                {/* <Image
                   src="/Assets/images/Path 80.svg"
                   alt='logo'
                   layout='responsive'
                   objectFit='cover'
                   width={100}
                   height={100}
-                />
+                /> */}
+
+                <a href='https://www.facebook.com/NationalPlastic1952/' target="_blank"><i class="fa fa-facebook fa-flip fs-1" aria-hidden="true"></i>
+                </a>
               </div>
 
             </div>
@@ -210,6 +221,33 @@ export default function Footer() {
           </div>
         </div>
       </section>
+
+      <div className='social_icon_for_mob'>
+        <div className='icon-wrapper call_icon'>
+          <a href="tel:+912267669922">
+            <Image
+              height={48}
+              width={23}
+              layout="responsive"
+              objectFit="contain"
+              src="/Assets/svg/Path 2.svg"
+              alt="location"
+            />
+          </a>
+        </div>
+        <div className='icon-wrapper wp_icon'>
+          <a href=''>
+            <Image
+              height={100}
+              width={100}
+              layout="responsive"
+              objectFit="contain"
+              src="/Assets/images/whatsapp.png"
+              alt="whatsapp icon"
+            />
+          </a>
+        </div>
+      </div>
     </>
   )
 }

@@ -25,11 +25,9 @@ function Login() {
   // const navigate =useNavigate();
   // const router = useRouter();
   const { data: session, status } = useSession();
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [formData, setFormData] = useState({ email: "", password: "", });
   const [refresh, SetRefresh] = useState(false);
+
   useEffect(() => {
     if (session) {
       // Send session data to your backend
@@ -65,12 +63,15 @@ function Login() {
       [name]: value,
     }));
   };
+
   const handleResetPassword = async (event) => {
     router.push("/forgot-password");
   };
+
   const handleRegisterClick = async (event) => {
     router.push("/Register");
   };
+
   async function sendDataToBackend() {
     try {
       await signIn("google")
@@ -103,23 +104,31 @@ function Login() {
         const userData = res.data.message[0];
         const { customer_id } = userData;
 
-        const isAdmin = res.data.isAdmin ? res.data.isAdmin[0] : null;
-        if (isAdmin !== null) {
-          localStorage.setItem("adminjwt", isAdmin);
-        }
+        const isAdmin = userData.role;
+
         if (res.data.status === 500) {
+
           const errorMsg = res.data.message;
           setErrorMessage(errorMsg);
           throw new Error(errorMsg || "Failed to Login");
+
         } else {
-          setLogin(true);
+          if (isAdmin == 'admin') {
+            localStorage.setItem("adminjwt", isAdmin);
+          }
+          // setLogin(true);
           dispatch(
             setUserData({
               email: formData.email,
               customer_id: customer_id,
             })
           );
+          // redirect as per user
+          (isAdmin == 'admin') ? router.push("/admin") : router.push("/");
+
         }
+
+
       } catch (error) {
         setErrorMessage(
           error.message || "An error occurred during login. Please try again."
@@ -231,21 +240,9 @@ function Login() {
                 </div>
               </div>
               <div className="form-btn-login-div">
-                <button type="submit" className="btn form-btn-login">
-                  {/* LOG IN */}
-
-                  {login ? (
-                    // <Link href="/">Home</Link>
-                    // router.push("/"),
-                    (window.location.href = "/")
-                  ) : (
-                    // window.location.reload("/")
-
-                    <Link href="/Login" className="login_link">
-                      Login
-                    </Link>
-                  )}
-                </button>
+                {/* <Link href="#!" className="login_link"> */}
+                  <button type="submit" className="btn form-btn-login">Login</button>
+                {/* </Link> */}
               </div>
               {errorMessage && (
                 <div className="alert alert-danger">{errorMessage}</div>
@@ -280,7 +277,7 @@ function Login() {
                     className="btn btn-light mt-3"
                     onClick={() => sendDataToBackend()}
                   > */}
-                    <Image
+                  <Image
                     src="/Assets/images/search.png"
                     width={20}
                     height={20}

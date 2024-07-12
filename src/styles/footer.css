@@ -52,13 +52,19 @@
 .comp_logo img{
     object-fit: contain;
 }
+.social_icons a i{
+    color: #fff;
+    transition: all 0.5s linear;
+}
 
-.social_icons{
-    display: flex;
+.social_icons a i:hover{
+    color: yellow;
+    /* background-color:gray; */
+    border-radius: 3px;
 }
 .social_icons img{
     margin: 0 6px;
-    width: 20% !important;
+    /* width: 20% !important; */
 }
 .social_icons img:nth-child(1){
     margin-left: 0;

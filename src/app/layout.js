@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
     import("bootstrap/dist/js/bootstrap.bundle.min.js");
 
     const queryParams = window.location.pathname;
-    console.log('queryParams', queryParams);
+    
     if (queryParams.includes("admin")) {
       setIsAdmin(true);
     }

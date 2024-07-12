@@ -131,7 +131,9 @@ export async function PUT(request) {
       query: "SELECT * FROM customer WHERE email = ?",
       values: [email],
     });
+
     if (existingUser.length > 0) {
+      
       if (getProfile && existingUser.length > 0) {
         return new Response(
           JSON.stringify({
