@@ -67,7 +67,7 @@ function About() {
     },
     {
       key: 4,
-      image: "/Assets/images/user.png",
+      image: "/Assets/images/client_images/Mrs. Ranganayaki Rangachari.png",
       name: "Mrs. Ranganayaki Rangachari – Independent Director",
       desig:
         "Mrs. Ranganayaki Rangachari have reach education background and she is Bachelor of Commerce, Chartered Accountants, Company Secretary, Cost and Management Accountants. She has vast and varied experience of more than 20 years as working India and China in diverse sectors of Retail, Offshore survey, Shipping, Private Equity and Print media in corporate like Oswal Group, RPG Foodworld, Elcome Group of Companies, General Atlantic Partners, ILX Media Group and EGS group. She is currently in Practice as a Partner in Ritu Ranganayaki & Co., Chartered Accountants in Navi Mumbai specialising in areas of FEMA , GST and Valuation and IP consultancy.",
@@ -89,7 +89,7 @@ function About() {
 
     {
       key: 7,
-      image: "/Assets/images/user.png",
+      image: "/Assets/images/client_images/Mr. Vipul A. Desai.jpg",
       name: "Mr. Vipul Desai - Independent Director",
       desig:
         "Mr. Vipul A. Desai is B.COM(HONS), LLB, FCS, ACMA, HON. ACIA (FLORIDA, USA) and a mature strategist, economist, fiscal and governance professional and he has served with fair success in progressive roles from finance manager & company secretary to president-corporate affairs & biz development in corporate for more than 30+ years.",
@@ -162,7 +162,7 @@ function About() {
       <Infrastructure />
       {/*Infrastructure end */}
       {/* Team start */}
-      <div className="container">
+      <div className="container" id="managementBoardCommittees">
         {/* Board Of Directors start */}
         <div className="row section_header team-header">
           <h2>Team</h2>

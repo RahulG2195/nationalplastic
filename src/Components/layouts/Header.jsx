@@ -270,19 +270,19 @@ export default function Header() {
                           </li>
                           <li className={styles.dropdownItem}>
                             <Link
-                              href="#managementBoardCommittees"
+                               href="#managementBoardCommittees" 
                               onClick={isClicked ? handleShow : null}>
                               Promoters/Directors
                             </Link>
                           </li>
 
-                          {/* <li className={styles.dropdownItem}>
+                          <li className={styles.dropdownItem}>
                             <Link
-                              href="#managementBoardCommittees"
-                              onClick={handleShow}>
+                              href="/Management" 
+                              onClick={isClicked ? handleShow : null}>
                               Management and Board Committees
                             </Link>
-                          </li> */}
+                          </li>
 
                           <li className={styles.dropdownItem}>
                             <Link
@@ -302,7 +302,7 @@ export default function Header() {
 
                           <li className={styles.dropdownItem}>
                             <Link
-                              href="#"
+                              href="/Term"
                               onClick={isClicked ? handleShow : null}>
                               Terms & Conditions
                             </Link>
