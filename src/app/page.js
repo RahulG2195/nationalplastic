@@ -28,8 +28,7 @@ export default function Home() {
   return (
     <>
       <main>
-        <CommingSoon />
-        {/* <Banner />
+         <Banner />
         <Features />
         <CoupenBanner />
         <TopPick />
@@ -40,7 +39,7 @@ export default function Home() {
         <HappyStory />
         <Dealers />
         <Blog />
-        <Catalogue /> */}
+        <Catalogue /> 
       </main>
     </>
   );

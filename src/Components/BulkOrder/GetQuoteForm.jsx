@@ -13,29 +13,58 @@ import {
   isValidProduct,
   // isValidFile,
 } from "@/utils/validation";
-
+import { Input, Button, Tag } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 const GetQuoteForm = (props) => {
-  const [products, setProducts] = useState();
-  useEffect(() => {
-    // This effect runs once when the component mounts, updating products state
-    setProducts(props.product);
-    if (props.product) {
-      notify("Product Added to BulkOrder Form");
-      setFromData((prev) => ({
-        ...prev,
-        ProductName: products ? products : "",
-      }));
-    }
-  }, [props.product]);
-  const [formData, setFromData] = useState({
+  console.log("props", props);
+  const [products, setProducts] = useState([]);
+  const [formData, setFormData] = useState({
     fullName: "",
     Email: "",
-    ProductName: products ? products : "",
     Mobile: "",
     Requirements: "",
     city: "",
+    organisation: "",
   });
+  useEffect(() => {
+    if (props.product) {
+      const newProducts = props.product.split(',')
+        .map(p => p.trim())
+        .filter(p => p && !products.includes(p));
+      
+      if (newProducts.length > 0) {
+        setProducts(prevProducts => [...prevProducts, ...newProducts]);
+        notify("Products Added to Query Form, Please Fill the form for futher processing.");
+      }
+    }
+  }, [props.product]);
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+  
+  const handleInputKeyDown = (e) => {
+    if (e.key === 'Enter' && inputValue) {
+      e.preventDefault();
+      if (!products.includes(inputValue.trim())) {
+        setProducts([...products, inputValue.trim()]);
+        setInputValue('');
+      } else {
+        toast.warning("This product is already added.");
+      }
+    }
+  };
+
+  const removeProduct = (productToRemove) => {
+    setProducts(prevProducts => prevProducts.filter(product => product !== productToRemove));
+  };
   const validation = (userInput) => {
+
+    if (products.length === 0) {
+      toast.error("Please add at least one product.");
+      return;
+    }
     if (!isValidName(userInput.city)) {
       toast.error("Please enter a valid  city name.");
       return;
@@ -65,27 +94,22 @@ const GetQuoteForm = (props) => {
   };
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    const isValid = await validation(formData);
+    const submissionData = { ...formData, ProductName: products.join(', ') };
+    const isValid = await validation(submissionData);
     if (!isValid) return;
-
+  
     try {
-      await axios.post(`${process.env.BASE_URL}/BulkOrderForm`, formData);
-      notify("Mail Sended SucessFully");
+      await axios.post(`${process.env.BASE_URL}/BulkOrderForm`, submissionData);
+      notify("Mail Sent Successfully");
+      // ... rest of your submission logic
     } catch (error) {
       console.error("Error:", error);
       notifyError("Failed to send");
     }
-    try {
-      const response = await axios.post(`${process.env.BASE_URL}/bulkOrderEmail`, formData);
-    } catch (error) {
-      console.error("Error:", error);
-      notifyError(error.message);
-    }
   };
-
   const handleOnChange = (event) => {
     const { name, value } = event.target;
-    setFromData((prev) => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -117,16 +141,28 @@ const GetQuoteForm = (props) => {
             />
           </div>
 
+
           <div className="mb-4">
-            <input
-              type="text"
-              name="ProductName"
-              onChange={handleOnChange}
-              className="form-control"
-              placeholder={products || "Enter Product Name"}
-              defaultValue={products || ""}
-            />
-          </div>
+  <Input
+    placeholder="Type product name and press Enter"
+    value={inputValue}
+    onChange={handleInputChange}
+    onKeyDown={handleInputKeyDown}
+    style={{ marginBottom: '8px' }}
+  />
+  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+    {products.map((product, index) => (
+      <Tag 
+        key={index} 
+        closable 
+        onClose={() => removeProduct(product)}
+        style={{ marginBottom: '8px' }}
+      >
+        {product}
+      </Tag>
+    ))}
+  </div>
+</div>
 
           <div className="mb-4">
             <div className="input-group">
