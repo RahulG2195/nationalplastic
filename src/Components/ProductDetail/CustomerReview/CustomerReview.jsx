@@ -127,7 +127,7 @@ const CustomerReview = () => {
                   disabled
                   value={overallRating}
                   allowHalf
-                  className="large-stars"
+                  className="large-star"
                 />
               </div>
               <button className="btn btn-primary" onClick={showModal}>

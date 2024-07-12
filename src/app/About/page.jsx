@@ -178,13 +178,12 @@ function About() {
               key={val.key}>
               <div className="team-members-container">
                 <div
-                  className={`row team-member ${
+                  className={`row team-member align-items-center ${
                     index % 2 === 0 ? "left-image" : "right-image"
                   }`}>
                   <div
-                    className={`col-md-4 ${
-                      index % 2 === 0 ? "order-1" : "order-2"
-                    }`}>
+                  className={`col-md-4 ${index % 2 === 0 ? "order-md-1 order-xs-1" : "order-md-2 order-xs-2"}`}
+>
                     <Team
                       image={val.image}
                       // name={val.name}

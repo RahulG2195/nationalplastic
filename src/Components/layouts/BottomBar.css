@@ -56,13 +56,11 @@ p {
     background-color: white;
 }
 
-.team-members-container {
+/* .team-members-container {
     padding: 0 60px;
-}
+} */
 
-.team-detail {
-    padding: 2rem 2rem;
-}
+
 
 .team-detail p {
     text-wrap: balance;
@@ -404,6 +402,8 @@ p {
 }
 
 @media only screen and (max-width: 360.5px) {
+
+
 
     .nav-search {
         margin: auto;

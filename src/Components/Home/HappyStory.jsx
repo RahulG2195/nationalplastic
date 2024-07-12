@@ -84,11 +84,11 @@ export default function HappyStory() {
                 }}
                 breakpoints={{
                   200: {
-                    slidesPerView: 2,
+                    slidesPerView: 1,
                     spaceBetween: 20,
                   },
                   715: {
-                    slidesPerView: 2,
+                    slidesPerView: 1,
                     spaceBetween: 0,
                   },
                   1018: {
