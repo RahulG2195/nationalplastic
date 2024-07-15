@@ -25,11 +25,11 @@ const CustomerReview = () => {
   const router = useParams();
   const product_id = router.productId;
   const [review_product_id, setReviewProduct_id] = useState(localStorage.getItem("product_id") || NULL);
- 
+  const [InitialName, setInitialName] = useState('');
+
 
   useEffect(() => {
     gettingIdBasedReviews(product_id).then(fetchedReviews => {
-      console.log("fetchedReviews", fetchedReviews);
       setReviews(fetchedReviews);
       updateOverallRating(fetchedReviews);
     });
@@ -48,7 +48,7 @@ const CustomerReview = () => {
         name: review.username,
         rating: review.review_rate,
         review: review.review_message,
-        avatar: `https://xsgames.co/randomusers/avatar.php?g=${Math.random() > 0.5 ? 'male' : 'female'}`
+        avatar: review.username ? review.username[0].toUpperCase() :"https://xsgames.co/randomusers/avatar.php?g=pixel"
       });
 
       if (data.review && Array.isArray(data.review)) {
@@ -81,7 +81,6 @@ const CustomerReview = () => {
 
   const showModal =  async () => {
     const valid = await userValidation();
-    console.log("Final Validations:", valid);
     if (canReview && valid) {
       setIsModalVisible(true);
     }
@@ -100,7 +99,7 @@ const CustomerReview = () => {
       name: "Current User",
       rating: newReview.rating,
       review: newReview.text,
-      avatar: "https://xsgames.co/randomusers/avatar.php?g=pixel",
+      avatar: newReview.username ? newReview.username[0].toUpperCase() : "https://xsgames.co/randomusers/avatar.php?g=pixel",
     };
     const reviewData = {
       action: "postReview",
@@ -109,8 +108,14 @@ const CustomerReview = () => {
       review_message:newReview.text,
       review_rate:newReview.rating
     };
-    const success = await submitReview(reviewData);
-    console.log("sucess", success);
+    try{
+    const response = await submitReview(reviewData);
+    if(!response){
+      message.error("Failed to add a review");
+    }
+    }catch(error){
+      message.error("Failed to add a review");
+    }
     const updatedReviews = [reviewToAdd, ...reviews];
     setReviews(updatedReviews);
     setIsModalVisible(false);
@@ -122,7 +127,6 @@ const CustomerReview = () => {
   };
   const submitReview = async (reviewData) =>{
     try {
-      console.log("reviewData", reviewData);
       const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/reviews`, reviewData);
       return response.data.success;
     } catch (error) {
@@ -130,7 +134,6 @@ const CustomerReview = () => {
       return false;
     }
   }
-
   const handleCancel = () => {
     setIsModalVisible(false);
     setNewReview({ rating: 0, text: "" });
@@ -148,11 +151,10 @@ const CustomerReview = () => {
       }
       const isOrderValid = await validateOrder(customer_id);
       if (!isOrderValid) {
-        notifyError("No valid order found for review");
+        notifyError("Only available after completing an order");
         return false;
       }
       const isReviewed = await isAlreadyReviewed(customer_id);
-      console.log("isReviewed", isReviewed);
       if (isReviewed) {
         notifyError("Already reviewed the product");
         return false;
@@ -181,13 +183,11 @@ const CustomerReview = () => {
       };
       const isValidOrder = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/reviews`, value)
       const { data } = isValidOrder;
-      console.log("isvalidOrder: ", data.canReview);
       if (data.canReview) {
         return true;
       }
       return false;
     } catch (error) {
-      console.log("Error in validating Order: ", error.message);
       return false;
 
     }
@@ -200,22 +200,13 @@ const CustomerReview = () => {
         product_id: review_product_id
       };
       const isAlreadyReviewed = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/reviews`, value)
-      console.log("isAlreadyReviewed: ", isAlreadyReviewed);
       const { data } = isAlreadyReviewed;
-      console.log("isAlreadyReviewed: ", data.alreadyReviewed);
       const truRfalse = data.alreadyReviewed
-      console.log("idar q nhi ah rha hain? 1");
-
       if(!truRfalse){
-        console.log("returning false ")
       return false;
       }
-      console.log("idar q nhi ah rha hain?");
       return true;
     } catch (error) {
-      console.log("returning truee ")
-
-      console.log("Error in checking if already reviewed: ", error.message);
       return true;
   }
   }
@@ -225,7 +216,7 @@ const CustomerReview = () => {
         <h1 className="display-4">Customer <span className="text-primary">Reviews</span></h1>
         <p className="lead">See what our customers are saying about their experience</p>
       </div>
-
+  
       <div className="row justify-content-center">
         <div className="col-md-6">
           <div className="card mb-4">
@@ -246,32 +237,44 @@ const CustomerReview = () => {
           </div>
         </div>
       </div>
-
+  
       <div className="row">
-        {reviews.slice(0, visibleReviews).map((review) => (
-          <div className="col-md-6 mb-4" key={review.id}>
-            <div className="card">
-              <div className="card-body">
-                <div className="d-flex align-items-center mb-3">
-                  <img
-                    src={review.avatar}
-                    alt="Avatar"
-                    className="rounded-circle mr-3"
-                    width="50"
-                    height="50"
-                  />
-                  <div>
-                    <h5 className="card-title mb-0">{review.name}</h5>
-                    <Rate disabled defaultValue={review.rating} />
+        {reviews.slice(0, visibleReviews).map((review) => {
+          const initialName = review.username ? review.username[0].toUpperCase() : 'NP';
+  
+          return (
+            <div className="col-md-6 mb-4" key={review.id}>
+              <div className="card">
+                <div className="card-body">
+                  <div className="d-flex align-items-center mb-3">
+                    <div
+                      className="rounded-circle mr-3 InitialName profileInitialName"
+                      style={{
+                        width: '50px',
+                        height: '50px',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: '#f0f0f0',
+                        color: '#333',
+                        fontWeight: 'bold'
+                      }}
+                    >
+                      {initialName}
+                    </div>
+                    <div>
+                      <h5 className="card-title mb-0">{review.name}</h5>
+                      <Rate disabled defaultValue={review.rating} />
+                    </div>
                   </div>
+                  <p className="card-text">{review.review}</p>
                 </div>
-                <p className="card-text">{review.review}</p>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
-
+  
       {visibleReviews < reviews.length && (
         <div className="text-center">
           <button className="btn btn-outline-primary" onClick={loadMoreReviews}>
@@ -279,7 +282,7 @@ const CustomerReview = () => {
           </button>
         </div>
       )}
-
+  
       <Modal
         title="Write a Review"
         visible={isModalVisible}

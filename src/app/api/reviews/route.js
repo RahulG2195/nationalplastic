@@ -1,5 +1,5 @@
 import { query } from "@/lib/db";
-
+import {isValidReason} from "@/utils/validation";
 
 export async function POST(request) {
     return await handleAction(request);
@@ -36,20 +36,32 @@ async function postReview(body) {
     if (!customer_id || !product_id || !review_message || !review_rate) {
         return Response.json({ message: 'Missing required fields' }, { status: 400 });
     }
+    if (!isValidReason(review_message)) {
+        return Response.json({ message: 'Not a valid review' }, { status: 403 });
+      }
 
     if (review_rate < 1 || review_rate > 5) {
         return Response.json({ message: 'Rating must be between 1 and 5' }, { status: 400 });
     }
     
-    const result = await query({
-        query: `INSERT INTO review (user_id, product_id, review_message, review_rate)
-                VALUES (?, ?, ?,?)`,
-        values: [customer_id, product_id, review_message,  review_rate]
-    });
-    console.log("result", result);
-    return new Response(JSON.stringify({
-        result: "Successfully Added Review",
-    }), { status: 200 });
+    try {
+        const result = await query({
+            query: `INSERT INTO review (user_id, product_id, review_message, review_rate)
+                    VALUES (?, ?, ?, ?)`,
+            values: [customer_id, product_id, review_message, review_rate]
+        });
+
+        if (result.affectedRows > 0) {
+            return new Response(JSON.stringify({
+                result: "Successfully Added Review",
+            }), { status: 200 });
+        } else {
+            return Response.json({ message: 'Failed to add review' }, { status: 500 });
+        }
+    } catch (error) {
+        console.error('Error adding review:', error);
+        return Response.json({ message: 'Failed to add review' }, { status: 500 });
+    }
 }
 
 async function validateOrder(body) {
@@ -58,13 +70,10 @@ async function validateOrder(body) {
         return Response.json({ message: 'Missing required fields' }, { status: 400 });
     }
 
-    console.log("customer_id", customer_id, product_id);
     const perOrderStatus = await query({
         query: "SELECT per_order_status FROM order_detail WHERE user_id = ? AND prod_id = ?",
         values: [customer_id, product_id],
     });
-    console.log("preOrderStatus: " + JSON.stringify(perOrderStatus))
-    // console.log("preOrderStatus: " + perOrderStatus[0].per_order_status);
     if (!perOrderStatus || perOrderStatus.length === 0) {
         return new Response(JSON.stringify({
             result: "No order found",
