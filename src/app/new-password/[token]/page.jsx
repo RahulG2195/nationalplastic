@@ -31,9 +31,11 @@ const PasswordToken = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
-    const resetTokenParam = new URLSearchParams(window.location.search).get("resetToken");
+    const resetTokenParam = new URLSearchParams(window.location.search).get(
+      "resetToken"
+    );
     const storedResetEmail = localStorage.getItem("resetEmail");
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       resetToken: resetTokenParam,
       email: storedResetEmail,
@@ -46,14 +48,16 @@ const PasswordToken = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormErrors({});
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!isValidPassword(formData.password)) {
       setFormErrors({
-        password: "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character"
+        password:
+          "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character",
       });
       return;
     }
@@ -70,10 +74,13 @@ const PasswordToken = () => {
       formDataToSend.append("resetEmail", formData.email);
       formDataToSend.append("password", formData.password);
 
-      await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/forgotPassword`, formDataToSend);
+      await axios.put(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/forgotPassword`,
+        formDataToSend
+      );
       notify("Password Changed Successfully", "success");
       localStorage.clear();
-      setTimeout(() => router.push('/Login'), 2000);
+      setTimeout(() => router.push("/Login"), 2000);
     } catch (error) {
       notify("Process Failed. Try Again!", "error");
       console.error("Error submitting form:", error);
@@ -81,28 +88,31 @@ const PasswordToken = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container new-pass">
       <form className="form" onSubmit={handleSubmit}>
-        <input
-          type={showPassword ? "text" : "password"}
-          className="input"
-          name="password"
-          id="password"
-          value={formData.password}
-          onChange={handleInputChange}
-          placeholder="Enter your password"
-        />
+        <h2 className="mb-3 text-center text-capitalize">update New password</h2>
+        <div className="password-container">
+          <input
+            type={showPassword ? "text" : "password"}
+            id="password"
+            className="password-field form-control"
+            placeholder="Enter Password"
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
+          />
+          <i
+            class={`fa ${showPassword ? "fa-eye-slash" : "fa-eye"}`}
+            id="togglePassword"
+            onClick={() => setShowPassword((prevShow) => !prevShow)}
+          ></i>
+        </div>
+        
         {formErrors.password && (
           <div className="text-danger">{formErrors.password}</div>
         )}
-        <button
-          type="button"
-          className="toggle-button"
-          onClick={() => setShowPassword(!showPassword)}
-        >
-          {showPassword ? "Hide" : "Show"} Password
-        </button>
-        <button type="submit" className="button">
+       
+        <button type="submit" className="button btn-success">
           Submit
         </button>
       </form>

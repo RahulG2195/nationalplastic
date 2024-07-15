@@ -67,7 +67,7 @@ function BottomBar() {
     });
   };
 
-  useEffect(() => {
+  /* useEffect(() => {
     const handleHover = (index) => {
       const dropdown = dropdownRefs.current[index];
       const rect = dropdown.getBoundingClientRect();
@@ -89,7 +89,7 @@ function BottomBar() {
         parent.removeEventListener("mouseover", () => handleHover(index));
       });
     };
-  }, [navbar]);
+  }, [navbar]); */
 
   useEffect(() => {
     const handleDropdownPosition = () => {

@@ -95,12 +95,11 @@ const ResetPasswordPage = () => {
 
   return (
     <div className="center-content">
-      {" "}
-      {/* Apply CSS class to center content */}
-      <h2>Reset Password</h2>
-      <form onSubmit={handleSubmit}>
+    
+      <h2 className="forgot_heading text-center py-4"><u>Reset Password</u></h2>
+      <form onSubmit={handleSubmit} className="text-center">
         <div>
-          <label htmlFor="email" className="text">
+          <label htmlFor="email" className="text text-left">
             Enter your email:
           </label>
           <input
@@ -108,18 +107,16 @@ const ResetPasswordPage = () => {
             id="email"
             value={formData.email}
             name="email"
+            className="form-control"
             onChange={handleInputChange}
             required
           />
         </div>
-        <button type="submit" className="reset-button">
+        <button type="submit" className="reset-button btn btn-warning mx-auto mt-4">
           Reset Password
         </button>
       </form>
-      <p>
-        Enter your email Above. We will send you further instructions to reset
-        your password.
-      </p>
+        <small className="mt-3">We will send you reset link on your email!</small>
     </div>
   );
 };

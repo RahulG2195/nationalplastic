@@ -69,7 +69,7 @@
 .bulkForm input,
 .input-group-text,
 .text-area {
-    background-color: transparent;
+    /* background-color: transparent; */
     border: 1px solid lightgray;
     color: white;
 }
