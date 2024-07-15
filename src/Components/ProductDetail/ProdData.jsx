@@ -52,7 +52,7 @@ function ProdData({ category_id }) {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`);
         const { product, productDetails, colors, category } = response.data;
         console.log("const storedId = id;" , product.product_id);
-
+        localStorage.setItem("product_id",product.product_id);
         if (!product) {
           setErrorMessage("Sorry, this product is not available");
         } else {
@@ -133,6 +133,8 @@ function ProdData({ category_id }) {
     const colorBasedProduct = { color: event.target.value, name: id };
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/colorBasedProduct`, colorBasedProduct);
+      console.log("response", JSON.stringify(response));
+      console.log("response", response.json());
       const dataBasedOnColor = response.data?.data;
       const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
       const newProductID = dataBasedOnColor[0].product_id;
