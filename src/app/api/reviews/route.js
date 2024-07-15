@@ -9,7 +9,6 @@ async function handleAction(request) {
     try {
         const body = await request.json();
         const { action } = body;
-
         switch (action) {
             case 'postReview':
                 return await postReview(body);
@@ -31,23 +30,23 @@ async function handleAction(request) {
 }
 
 async function postReview(body) {
-    const { user_id, username, product_id, review_message, review_rate } = body;
+    const { customer_id, product_id, review_message, review_rate } = body;
 
     // Validate input
-    if (!user_id || !username || !product_id || !review_message || !review_rate) {
+    if (!customer_id || !product_id || !review_message || !review_rate) {
         return Response.json({ message: 'Missing required fields' }, { status: 400 });
     }
 
     if (review_rate < 1 || review_rate > 5) {
         return Response.json({ message: 'Rating must be between 1 and 5' }, { status: 400 });
     }
-
+    
     const result = await query({
-        query: `INSERT INTO review (user_id, username, product_id, review_message, review_status, review_rate)
-                VALUES (?, ?, ?, ?, ?, ?)`,
-        values: [user_id, username, product_id, review_message, 0, review_rate]
+        query: `INSERT INTO review (user_id, product_id, review_message, review_rate)
+                VALUES (?, ?, ?,?)`,
+        values: [customer_id, product_id, review_message,  review_rate]
     });
-
+    console.log("result", result);
     return new Response(JSON.stringify({
         result: "Successfully Added Review",
     }), { status: 200 });
@@ -55,27 +54,25 @@ async function postReview(body) {
 
 async function validateOrder(body) {
     const { customer_id, product_id } = body;
+    if (!customer_id || !product_id) {
+        return Response.json({ message: 'Missing required fields' }, { status: 400 });
+    }
+
     console.log("customer_id", customer_id, product_id);
     const perOrderStatus = await query({
         query: "SELECT per_order_status FROM order_detail WHERE user_id = ? AND prod_id = ?",
         values: [customer_id, product_id],
     });
     console.log("preOrderStatus: " + JSON.stringify(perOrderStatus))
-    console.log("preOrderStatus: " + perOrderStatus[0].per_order_status);
-    const status = perOrderStatus[0].per_order_status;
-    console.log("status: " + status);
-
-    if (!user_id || !product_id) {
-        return Response.json({ message: 'Missing required fields' }, { status: 400 });
+    // console.log("preOrderStatus: " + perOrderStatus[0].per_order_status);
+    if (!perOrderStatus || perOrderStatus.length === 0) {
+        return new Response(JSON.stringify({
+            result: "No order found",
+            canReview: false
+        }), { status: 200 });
     }
-
-    // Assuming you have an 'orders' table
-    const result = await query({
-        query: `SELECT * FROM orders WHERE user_id = ? AND product_id = ? AND status = 'completed'`,
-        values: [user_id, product_id]
-    });
-
-    if (result.length > 0) {
+    const status = perOrderStatus[0].per_order_status ?? 0;
+    if(status === 1){
         return new Response(JSON.stringify({
             result: "Order validated",
             canReview: true
@@ -89,15 +86,15 @@ async function validateOrder(body) {
 }
 
 async function checkAlreadyReviewed(body) {
-    const { user_id, product_id } = body;
+    const { customer_id, product_id } = body;
 
-    if (!user_id || !product_id) {
+    if (!customer_id || !product_id) {
         return Response.json({ message: 'Missing required fields' }, { status: 400 });
     }
 
     const result = await query({
         query: `SELECT * FROM review WHERE user_id = ? AND product_id = ?`,
-        values: [user_id, product_id]
+        values: [customer_id, product_id]
     });
 
     if (result.length > 0) {

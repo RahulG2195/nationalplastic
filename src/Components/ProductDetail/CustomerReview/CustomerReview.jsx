@@ -5,13 +5,13 @@ import { useParams } from "next/navigation";
 import axios from "axios";
 import "./CustomerReview.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { notifyError } from "@/utils/notify";
 
 const { TextArea } = Input;
 
 const CustomerReview = () => {
-  const { customer_id, email ,userState } = useSelector((state) => ({
+  const { customer_id, email, userState } = useSelector((state) => ({
     customer_id: state.userData.customer_id,
     email: state.userData.email,
     userState: state.userData.isLoggedIn,
@@ -24,8 +24,8 @@ const CustomerReview = () => {
   const [visibleReviews, setVisibleReviews] = useState(2);
   const router = useParams();
   const product_id = router.productId;
-
-
+  const [review_product_id, setReviewProduct_id] = useState(localStorage.getItem("product_id") || NULL);
+ 
 
   useEffect(() => {
     gettingIdBasedReviews(product_id).then(fetchedReviews => {
@@ -33,6 +33,7 @@ const CustomerReview = () => {
       setReviews(fetchedReviews);
       updateOverallRating(fetchedReviews);
     });
+
   }, [product_id]);
 
   const gettingIdBasedReviews = async (product_id) => {
@@ -78,20 +79,22 @@ const CustomerReview = () => {
     }
   };
 
-  const showModal = () => {
-    if (canReview) {
+  const showModal =  async () => {
+    const valid = await userValidation();
+    console.log("Final Validations:", valid);
+    if (canReview && valid) {
       setIsModalVisible(true);
-    } else {
-      message.warning("You can only review after a successful order and haven't reviewed yet.");
     }
+    //  else {
+    //   message.warning("You can only review after a successful order and haven't reviewed yet.");
+    // }
   };
 
-  const handleOk = () => {
+  const handleOk = async () => {
     if (newReview.rating === 0 || newReview.text.trim() === "") {
       message.error("Please provide both a rating and a review.");
       return;
     }
-    userValidation();
     const reviewToAdd = {
       id: reviews.length + 1,
       name: "Current User",
@@ -99,7 +102,15 @@ const CustomerReview = () => {
       review: newReview.text,
       avatar: "https://xsgames.co/randomusers/avatar.php?g=pixel",
     };
-
+    const reviewData = {
+      action: "postReview",
+      customer_id: customer_id,
+      product_id:review_product_id,
+      review_message:newReview.text,
+      review_rate:newReview.rating
+    };
+    const success = await submitReview(reviewData);
+    console.log("sucess", success);
     const updatedReviews = [reviewToAdd, ...reviews];
     setReviews(updatedReviews);
     setIsModalVisible(false);
@@ -109,6 +120,16 @@ const CustomerReview = () => {
     updateOverallRating(updatedReviews);
     setCanReview(false);
   };
+  const submitReview = async (reviewData) =>{
+    try {
+      console.log("reviewData", reviewData);
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/reviews`, reviewData);
+      return response.data.success;
+    } catch (error) {
+      console.error("Error submitting review:", error);
+      return false;
+    }
+  }
 
   const handleCancel = () => {
     setIsModalVisible(false);
@@ -119,11 +140,27 @@ const CustomerReview = () => {
     setVisibleReviews((prev) => prev + 2);
   };
 
-  const userValidation = () => {
-    console.log("-", userState,customer_id,email )
-    if(!userState){
-      notifyError("Login to add a review");
-      return;
+  const userValidation = async () => {
+    try {
+      if (!userState) {
+        notifyError("Login to add a review");
+        return false;
+      }
+      const isOrderValid = await validateOrder(customer_id);
+      if (!isOrderValid) {
+        notifyError("No valid order found for review");
+        return false;
+      }
+      const isReviewed = await isAlreadyReviewed(customer_id);
+      console.log("isReviewed", isReviewed);
+      if (isReviewed) {
+        notifyError("Already reviewed the product");
+        return false;
+      }
+      return true;
+    } catch (error) {
+      console.log("Error validating user: ", error.message);
+
     }
 
 
@@ -135,8 +172,53 @@ const CustomerReview = () => {
     //! Check if user is already reviewed?
     //! 
   }
+  const validateOrder = async (customer_id) => {
+    try {
+      const value = {
+        action: "validateOrder",
+        customer_id: customer_id,
+        product_id: review_product_id
+      };
+      const isValidOrder = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/reviews`, value)
+      const { data } = isValidOrder;
+      console.log("isvalidOrder: ", data.canReview);
+      if (data.canReview) {
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.log("Error in validating Order: ", error.message);
+      return false;
 
+    }
+  }
+  const isAlreadyReviewed = async (customer_id) => {
+    try {
+      const value = {
+        action: "alreadyReviewed",
+        customer_id: customer_id,
+        product_id: review_product_id
+      };
+      const isAlreadyReviewed = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/reviews`, value)
+      console.log("isAlreadyReviewed: ", isAlreadyReviewed);
+      const { data } = isAlreadyReviewed;
+      console.log("isAlreadyReviewed: ", data.alreadyReviewed);
+      const truRfalse = data.alreadyReviewed
+      console.log("idar q nhi ah rha hain? 1");
 
+      if(!truRfalse){
+        console.log("returning false ")
+      return false;
+      }
+      console.log("idar q nhi ah rha hain?");
+      return true;
+    } catch (error) {
+      console.log("returning truee ")
+
+      console.log("Error in checking if already reviewed: ", error.message);
+      return true;
+  }
+  }
   return (
     <div className="container py-5">
       <div className="text-center mb-5">
