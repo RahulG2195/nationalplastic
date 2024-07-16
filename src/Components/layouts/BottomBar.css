@@ -220,7 +220,20 @@ p {
 .second {
     position: relative;
 }
+.Office .SecondDrop {
+    right: -35% !important;
+    top: 100% !important;
+    width: max-content !important;
+    padding: 5% !important;
+    position: absolute;
+    transition: all 0.5s ease;
+}
 
+.mainrow .Office:hover .SecondDrop {
+    display: block !important;
+    top: 100%;
+    opacity: 1;
+}
 
 .Stools .SecondDrop {
     right: -35% !important;
