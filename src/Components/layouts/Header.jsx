@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-// import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import ProductsAccr from "../ProductsAccor/ProductsAccor";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { useDispatch } from "react-redux";
@@ -15,12 +14,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import styles from "./Navbar.module.css";
 import InvestorAccor from "../InvesterAccor/InvesterAccor";
-import dynamic from "next/dynamic";
 import { PlaceholderBar } from "./Placeholder";
-// const BottomBar = dynamic(() => import('./BottomBar'), {
-//   loading: () => <PlaceholderBar />,
-//   ssr: false // If BottomBar uses browser-only features
-// })
 import { useDelayedRender } from "@/utils/useDelayedRender";
 
 export default function Header() {
@@ -39,13 +33,9 @@ export default function Header() {
   const [LastName, setLastName] = useState("");
   const [InitialName, setInitialName] = useState("");
   const [hideLayout, setHideLayout] = useState(false);
-  // const [count, setCount] = useState(0);
   const router = useRouter();
   const dispatch = useDispatch;
   const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
-  // const counts = useSelector((state) => state.cart || 0);
-  // const [count, setCount] = useState(0);
-  function check() {}
   const userState = useSelector((state) => state.userData.isLoggedIn);
   const userEmail = useSelector((state) => state.userData.email);
 
@@ -58,12 +48,10 @@ export default function Header() {
       who = "cart";
     }
     const cart = state[who] || {};
-    // return cart.products?.reduce((acc, product) => acc + product.quantity, 0);
     return cart.products?.length || 0;
   });
 
-  // Use useState to manage local product count and update function
-  const [count, setCount] = useState(productCount); // Initialize with initial value
+  const [count, setCount] = useState(productCount); 
 
   // Use useEffect to keep local count in sync with Redux state
   useEffect(() => {
@@ -221,7 +209,6 @@ export default function Header() {
                 >
                   <ul className="navbar-nav homeNav mb-2 mb-lg-0">
                     <li className="nav-item brdr">
-                      {/* <div className='border'></div> */}
                       <Link
                         className="nav-link"
                         aria-current="page"
@@ -229,19 +216,7 @@ export default function Header() {
                         onClick={isClicked ? handleShow : null}>
                         Home
                       </Link>
-                      {/* <div className='border'></div> */}
                     </li>
-
-                    {/* <li className="nav-item brdr">
-                      <Link
-                        className="nav-link"
-                        href="/About"
-                        onClick={isClicked ? handleShow : null}
-                      >
-                        About Us
-                      </Link>
-                    </li> */}
-
                     <li
                       className={`nav-item brdr ${styles.navItem}`}
                       onMouseEnter={() => setAboutDropdown(true)}
@@ -291,15 +266,6 @@ export default function Header() {
                               Awards/Exports
                             </Link>
                           </li>
-
-                          {/* <li className={styles.dropdownItem}>
-                            <Link
-                              href="#"
-                              onClick={isClicked ? handleShow : null}>
-                              Introduction
-                            </Link>
-                          </li> */}
-
                           <li className={styles.dropdownItem}>
                             <Link
                               href="/Term"
@@ -317,7 +283,6 @@ export default function Header() {
                           onMouseEnter={() => setDropdown(true)}
                           onMouseLeave={() => setDropdown(false)}
                         >
-
                           <Link
                             className="nav-link multidropdown mobHeader"
                             href="#"
@@ -347,7 +312,6 @@ export default function Header() {
                                     <li className={styles.subDropdownItem}>
                                       <Link href="AnnualReturn" onClick={isClicked ? handleShow : null}>Annual Return</Link>
                                     </li>
-
                                   </ul>
                                 )}
                               </li>
@@ -428,7 +392,6 @@ export default function Header() {
                           )}
                         </li>
                     }
-
                     <li className="nav-item brdr accr ">
                       <ProductsAccr handleShow={handleShow} />
                     </li>
@@ -449,16 +412,6 @@ export default function Header() {
                       </Link>
                     </li>
                     <li className="nav-item brdr bulk_ord px-3">
-                      {/* <a href="tel:+912267669922">
-                        <Image
-                          height={48}
-                          width={23}
-                          layout="responsive"
-                          objectFit="contain"
-                          src="/Assets/svg/Path 2.svg"
-                          alt="location"
-                        />
-                      </a> */}
                       <Link
                         className="nav-link mx-1"
                         href="/BulkOrder"
@@ -468,7 +421,6 @@ export default function Header() {
                     </li>
                   </ul>
                 </div>
-
                 <div className="row">
                   <ul className=" d-flex alin-items-center gap-3 side-icons">
                     <li className="nav-item brdr d-none d-md-none d-xl-block ">
@@ -486,10 +438,7 @@ export default function Header() {
                           objectFit="contain"
                           src="/Assets/images/wpIcon/whatsapp.png"
                           alt="whatsapp icon"
-                         
                         />
-                        {/* <i class="fa fa-whatsapp fs-2 text-black " aria-hidden="true"></i> */}
-
                       </Link>
                     </li>
                     <li className="nav-item brdr d-none d-md-none d-xl-block">
@@ -530,15 +479,6 @@ export default function Header() {
                           href="/ProfilePage"
                           onClick={isClicked ? handleShow : null}>
                           <span className="InitialName">{InitialName}</span>
-                          {/* <Image
-                        height={100}
-                        width={100}
-                        layout="responsive"
-                        objectFit="contain"
-                        src="/Assets/svg/Group 4.svg"
-                        alt="location"
-                      />
-                      <p className="Homeemail">{userEmail}</p> */}
                         </Link>
                       ) : (
                         <Link
@@ -623,16 +563,6 @@ export default function Header() {
                       {isLoggedIn ? (
                         <Link href="/ProfilePage">
                           <span className="InitialName">{InitialName}</span>
-                          {/* <Image
-                        src="/Assets/svg/Group 4.svg"
-                        height={50}
-                        width={50}
-                        layout="responsive"
-                        objectFit="contain"
-                        alt="Profile"
-                        className="footer-icon"
-                      />
-                      <p className="Homeemail">{userEmail}</p> */}
                         </Link>
                       ) : (
                         <Link href="/Login">
