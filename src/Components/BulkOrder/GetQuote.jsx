@@ -6,6 +6,7 @@ import "./GetQuote.css";
 import { useState } from "react";
 import { notifyError } from "@/utils/notify";
 import { imageData } from "./getQuoteConfig.js";
+
 const GetQuote = ({ proddata }) => {
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -21,6 +22,12 @@ const GetQuote = ({ proddata }) => {
     }
   };
 
+  const handleProductRemove = (productToRemove) => {
+    const selectedImages = selectedImage ? selectedImage.split(",") : [];
+    const newSelectedImages = selectedImages.filter(product => product !== productToRemove).join(',');
+    setSelectedImage(newSelectedImages);
+  };
+
   const chunkArray = (arr, size) => {
     const chunkedArray = [];
     for (let i = 0; i < arr.length; i += size) {
@@ -29,9 +36,6 @@ const GetQuote = ({ proddata }) => {
     return chunkedArray;
   };
 
-
-
-  
   const firstSixImages = imageData.slice(0, 6);
   const remainingImages = imageData.slice(6);
 
@@ -64,7 +68,7 @@ const GetQuote = ({ proddata }) => {
                 GET <span className="text-danger">QUOTE</span>
               </div>
             </div>
-            <GetQuoteForm product={selectedImage} />
+            <GetQuoteForm product={selectedImage} onProductRemove={handleProductRemove} />
           </div>
         </div>
 
