@@ -14,6 +14,7 @@ import store, { persistor } from "@/redux/store";
 import dynamic from "next/dynamic";
 import Script from "next/script";
 import { SessionProvider } from "next-auth/react";
+import { Metadata } from 'next'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,6 +37,7 @@ export default function RootLayout({ children }) {
   }, []);
 
   return (
+    
     <html lang="en">
       <head>
         <Script
@@ -43,6 +45,7 @@ export default function RootLayout({ children }) {
           strategy="beforeInteractive"
         />
       </head>
+      
       <body className={inter.className}>
         <SessionProvider>
           <BrowserRouter>
