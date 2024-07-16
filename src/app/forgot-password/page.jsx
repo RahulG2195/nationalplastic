@@ -4,6 +4,7 @@ import "./forgotPasswordPage.css"; // Import CSS file for styling
 import { isValidEmail } from "@/utils/validation";
 import axios from "axios";
 import { Bounce, toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const notify = () => {
   toast.success("Mail Sended SucessFully", {
@@ -32,6 +33,8 @@ const notifyError = () => {
   });
 };
 const ResetPasswordPage = () => {
+  const router = useRouter();
+
   const [formData, setFormData] = useState({
     email: "",
   });
@@ -84,7 +87,7 @@ const ResetPasswordPage = () => {
       );
       if (response.status === 200) {
         notify();
-
+        setTimeout(() => router.push("/"), 2000);
         localStorage.setItem("resetEmail", formData.email);
       }
     } else {
