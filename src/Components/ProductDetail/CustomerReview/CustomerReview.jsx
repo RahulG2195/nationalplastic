@@ -21,10 +21,10 @@ const CustomerReview = () => {
   const [newReview, setNewReview] = useState({ rating: 0, text: "" });
   const [canReview, setCanReview] = useState(true);
   const [reviews, setReviews] = useState([]);
-  const [visibleReviews, setVisibleReviews] = useState(2);
+  const [visibleReviews, setVisibleReviews] = useState(4);
   const router = useParams();
   const product_id = router.productId;
-  const [review_product_id, setReviewProduct_id] = useState(localStorage.getItem("product_id") || NULL);
+  const [review_product_id, setReviewProduct_id] = useState(localStorage.getItem("product_id") || null);
   const [InitialName, setInitialName] = useState('');
 
 
@@ -246,20 +246,8 @@ const CustomerReview = () => {
             <div className="col-md-6 mb-4" key={review.id}>
               <div className="card">
                 <div className="card-body">
-                  <div className="d-flex align-items-center mb-3">
-                    <div
-                      className="rounded-circle mr-3 InitialName profileInitialName"
-                      style={{
-                        width: '50px',
-                        height: '50px',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: '#f0f0f0',
-                        color: '#333',
-                        fontWeight: 'bold'
-                      }}
-                    >
+                  <div className="d-flex align-items-start gap-3 mb-3">
+                    <div className="rounded-circle InitialName profileInitialName">
                       {initialName}
                     </div>
                     <div>
