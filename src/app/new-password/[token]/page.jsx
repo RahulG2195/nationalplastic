@@ -78,7 +78,7 @@ const PasswordToken = () => {
         `${process.env.NEXT_PUBLIC_BASE_URL}/forgotPassword`,
         formDataToSend
       );
-      notify("Password Changed Successfully", "success");
+      notify("Password Changed Successfully");
       localStorage.clear();
       setTimeout(() => router.push("/Login"), 2000);
     } catch (error) {

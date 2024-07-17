@@ -15,7 +15,7 @@ const TopPicsCard = (props) => {
   };
 
   const CardContent = () => (
-    <div 
+    <div
       className="circularCard d-flex flex-column align-items-center position-relative text-center"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -45,8 +45,13 @@ const TopPicsCard = (props) => {
           </div>
         </div>
       ) : (
-        <div className="circularText text-danger mt-2 fw-semibold">
-          {props.imgtext}
+        <div className="mx-2 mb-4">
+          <span className=" d-inline small fw-bold text-danger" >National Plastic</span>
+          <p className="circularText ms-1 fw-bold d-inline">
+            {props.imgtext}
+          </p>
+          <span className=" d-inline small fw-bold " >{`(${props.color})`}</span>
+
         </div>
       )}
 
