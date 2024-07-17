@@ -153,6 +153,7 @@ const GetQuoteForm = (props) => {
 
         <div className="mb-4">
           <Input
+          className="d-none"
             placeholder="Type product name and press Enter"
             value={inputValue}
             onChange={handleInputChange}
