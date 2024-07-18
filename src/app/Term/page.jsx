@@ -9,8 +9,6 @@ function contition() {
     <>
 
       <Terms />
-
-    
     </>
   );
 }
