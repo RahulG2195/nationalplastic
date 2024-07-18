@@ -111,7 +111,7 @@ function BottomBar() {
                 <div key={columnIndex} className="column pt-3">
                   {chunk.map((product) => (
                     <p
-                      className="p-3 fw-semibold"
+                      className="px-3 py-2 fw-semibold"
                       key={product.product_name}
                       onMouseOver={() => changeImage(product.product_name)}
                     >

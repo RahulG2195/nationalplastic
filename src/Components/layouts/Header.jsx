@@ -26,9 +26,7 @@ export default function Header() {
   const [aboutDropdown, setAboutDropdown] = useState(false);
   const [subDropdown, setSubDropdown] = useState(false);
 
-  const [windowSize, setWindowSize] = useState({
-    width: undefined,
-  });
+  const [windowSize, setWindowSize] = useState({width: undefined,});
   const [FirstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
   const [InitialName, setInitialName] = useState("");
@@ -42,7 +40,7 @@ export default function Header() {
   const [subDropdownIndex, setSubDropdownIndex] = useState(null);
   const productCount = useSelector((state) => {
     let who;
-
+    
     if (!userState) {
       who = "temp";
     } else {
@@ -52,14 +50,25 @@ export default function Header() {
     return cart.products?.length || 0;
   });
 
-
   const [count, setCount] = useState(productCount); 
 
+
+  // redirect to admin to admin panel 
+  useEffect(() => {
+    const IsAdmin = localStorage.getItem('isAdmin');
+    if(IsAdmin == 'true'){
+      router.push("/admin") 
+    }
+  }, []);
+  
+  
+  
+  
   // Use useEffect to keep local count in sync with Redux state
   useEffect(() => {
     setCount(productCount); // Update localCount whenever productCount changes
   }, [productCount]);
-
+  
   // get user data to show initial name after login
   useEffect(() => {
     const fetchUserData = async () => {
@@ -225,7 +234,7 @@ export default function Header() {
                       onMouseLeave={() => setAboutDropdown(false)}>
                       <Link
                         className="nav-link"
-                        href="/About"
+                        href=""
                         onClick={isClicked ? handleShow : null}>
                         About Us
                       </Link>

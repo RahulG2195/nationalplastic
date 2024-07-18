@@ -5,10 +5,13 @@ import Wishlist from "../Wishlist/page";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import { notify, notifyError } from "@/utils/notify.js";
 import { useSelector } from "react-redux";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+
 import CancelProdChargeAfterTwentyFourHr, {ReturnProductBeforeFourteenDays} from "@/utils/CancelProduct";
 import {
   isValidPassword,
@@ -26,7 +29,7 @@ function ProfilePage() {
   const [messages, setMessages] = useState([]);
   const [editable, setEditable] = useState(false);
   const [adress2, setAdress2] = useState("");
-
+  const router = useRouter();
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
@@ -34,6 +37,14 @@ function ProfilePage() {
   const [orderData, setOrderData] = useState([]);
   const [ReturnSingleProd, setReturnSingleProd] = useState([]);
   const [VerifyReturnDays, setVerifyReturnDays] = useState([]);
+  
+ // redirect to admin to admin panel 
+ useEffect(() => {
+  const IsAdmin = localStorage.getItem('isAdmin');
+  if(IsAdmin == 'true'){
+    router.push("/admin") 
+  }
+}, []);
 
   useEffect(() => {
     localStorage.getItem("isLoggedIn") === "true"

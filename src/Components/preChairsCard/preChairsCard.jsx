@@ -17,13 +17,13 @@ const PreChairsCard = (props) => {
     props.onAddToCart(props.id);
   };
   const handleGetQuote = () => {
-console.log("line 20")
+    console.log("line 20")
     if (props.showGetQuote) {
-    notify(props.Title)
-console.log("line 23")
+      notify(props.Title)
+      console.log("line 23")
 
-    handleImageClick(props.Title);
-    // setSelectedImage(props.product_name);
+      handleImageClick(props.Title);
+      // setSelectedImage(props.product_name);
 
     }
   };
@@ -54,7 +54,7 @@ console.log("line 23")
         <div className="image-container">
           <div className="first">
             <div className="d-flex justify-content-between align-items-center">
-              <span className="discount">25%</span>
+              <span className="discount">{props.Discount}%</span>
               <span className="wishlist">
                 <i
                   onClick={handleAddWishlist}
@@ -83,11 +83,11 @@ console.log("line 23")
               <h5 className="dress-name"><span>{Np}</span> {props.Title}</h5>
             </Link>
             <div className="d-md-flex flex-column mb-2">
-            {props.showGetQuote && (
-    <button onClick={handleGetQuote} className="new-price pr-2 pr-md-0">
-      Get Quote
-    </button>
-  )}
+              {props.showGetQuote && (
+                <button onClick={handleGetQuote} className="new-price pr-2 pr-md-0">
+                  Get Quote
+                </button>
+              )}
               {props.Price && (
                 <>
                   <span className="new-price pr-2 pr-md-0">₹{props.Price}</span>
@@ -118,8 +118,8 @@ console.log("line 23")
             </span>
           </div>
           {props.showGetQuote && (
-  <div className="invisible-component"><GetQuoteForm product={selectedImage} /></div>
-)}
+            <div className="invisible-component"><GetQuoteForm product={selectedImage} /></div>
+          )}
         </div>
       </div>
     </>

@@ -284,11 +284,12 @@ const PreChairsCards = () => {
                     Discription={product.short_description}
                     Price={product.price}
                     orignalPrice={product.discount_price}
-                    Discount={Math.floor(
-                      ((product.discount_price - product.price) /
-                        product.discount_price) *
-                      100
-                    )}
+                    // Discount={Math.floor(
+                    //   ((product.discount_price - product.price) /
+                    //     product.discount_price) *
+                    //   100
+                    // )}
+                    Discount={chair.discount_percentage}
                     onaddToWishlist={() =>
                       handleAddToWishlist(product.product_id)
                     }
