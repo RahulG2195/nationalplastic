@@ -3,6 +3,11 @@
     cursor: pointer;
 }
 
+.mainrow{
+    display: flex;
+    align-items: center;
+}
+
 
 .custom-section {
     background-color: whitesmoke;
@@ -356,7 +361,9 @@ p {
     .mainrow {
         display: none !important;
     }
-
+    .bottom_nav{
+        display: none !important;
+    }
 }
 
 @media only screen and (min-width: 769px) and (max-width: 991px) {

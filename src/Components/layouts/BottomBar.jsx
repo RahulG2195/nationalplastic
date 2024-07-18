@@ -76,7 +76,8 @@ function BottomBar() {
   }, []);
 
   return (
-    <div className="px-md-5 d-flex align-items-center bottom_nav position-relative mainrow">
+    
+    <div className="mainrow px-md-5  bottom_nav position-relative ">
       {navbar.map((val, index) => (
         <div
           key={val.category_id}
