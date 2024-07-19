@@ -11,6 +11,11 @@ const navigation = [
     icon: "bi bi-speedometer2",
   },
   {
+    title: "Basic Info",
+    href: "/admin/basicInfo",
+    icon: "bi bi-speedometer2",
+  },
+  {
     type: "accordion",
     title: "Home Page",
     items: [
