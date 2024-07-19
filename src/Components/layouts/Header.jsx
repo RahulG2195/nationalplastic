@@ -236,7 +236,7 @@ export default function Header() {
                       <Link
                         className="nav-link"
                         href=""
-                        onClick={isClicked ? handleShow : null}>
+                        onClik={isClicked ? handleShow : null}>
                         About Us
                       </Link>
                       {aboutDropdown && (
