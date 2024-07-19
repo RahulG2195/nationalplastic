@@ -235,7 +235,7 @@ export default function Header() {
                       onMouseLeave={() => setAboutDropdown(false)}>
                       <Link
                         className="nav-link"
-                        href="/About"
+                        href=""
                         onClick={isClicked ? handleShow : null}>
                         About Us
                       </Link>
@@ -257,7 +257,7 @@ export default function Header() {
                           </li>
                           <li className={styles.dropdownItem}>
                             <Link
-                               href="#managementBoardCommittees" 
+                               href="/Promoters" 
                               onClick={isClicked ? handleShow : null}>
                               Promoters/Directors
                             </Link>

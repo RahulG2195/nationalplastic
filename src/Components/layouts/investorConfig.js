@@ -2,7 +2,7 @@
 export const investorConfig = [
     {
       label: "Investors (Reg. 46)",
-      link: "#",
+      link: "/Investor",
       subItems: [
         {
           label: "Financials",

@@ -357,8 +357,8 @@ function ProdData({ category_id }) {
                 >
                   Buy Now
                 </Link>
-                <Link href="/BulkOrder" className="">
-                  <button
+                <Link href="" className="">
+                    <button
                     className="btn btn-danger px-md-5 my-2 ProdbtnRes bulkRes"
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
@@ -408,7 +408,7 @@ function ProdData({ category_id }) {
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
-                <GetQuoteCustomForm prodName={name} />
+                <GetQuoteCustomForm prodName={name} read={'true'} />
               </div>
               {/* <div className="modal-footer">
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>

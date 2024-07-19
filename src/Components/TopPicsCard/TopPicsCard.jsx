@@ -46,11 +46,10 @@ const TopPicsCard = (props) => {
         </div>
       ) : (
         <div className="mx-2 mb-4">
-          <span className=" d-inline small fw-bold text-danger" >National Plastic</span>
-          <p className="circularText ms-1 fw-bold d-inline">
+          <h6 className="dress-name"><span className=" d-inline fw-bold text-danger">National Plastic</span> {props.imgtext}</h6>
+          {/* <p className="circularText ms-1 fw-bold d-inline">
             {props.imgtext}
-          </p>
-          <span className=" d-inline small fw-bold " >{`(${props.color})`}</span>
+          </p> */}
 
         </div>
       )}

@@ -794,11 +794,11 @@ p {
     }
 
     .section_header h3 {
-        font-size: 30px;
+        font-size: 22px !important;
     }
 
     .section_header h2 {
-        font-size: 25px;
+        font-size: 30px;
     }
 
     .section_header {

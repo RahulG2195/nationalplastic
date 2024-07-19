@@ -142,6 +142,8 @@ const GetQuoteCustomForm = (props) => {
               onChange={handleOnChange}
               className="form-control"
               placeholder={props.prodName}
+              value={props.prodName}
+              readOnly={props.read}
             />
           </div>
 

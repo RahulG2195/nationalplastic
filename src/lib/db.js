@@ -16,6 +16,7 @@ export async function query({ query, values = [] }) {
   try {
     connection = await pool.getConnection();
     const [results] = await connection.execute(query, values);
+    console.log("resultssss",results)
     return results;
   } catch (error) {
     throw Error(error.message);
