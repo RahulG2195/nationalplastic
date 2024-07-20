@@ -119,7 +119,7 @@ function BottomBar() {
                         className="nav-link"
                         href={`/ProductDetail/${product.seo_url}`}
                       >
-                        {product.product_name2}
+                        {product.product_name}
                       </Link>
                     </p>
                   ))}
