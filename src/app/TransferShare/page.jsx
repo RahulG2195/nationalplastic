@@ -8,16 +8,17 @@ const TransferShare = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/api/pages/23'); // Assuming you have an API endpoint to fetch the page data
-        const data = JSON.parse(response.data.content);
-        setTransferShareData(data);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/InvestorPage`, { Id: 13 });
+        console.log("response: ", response.data);
+        setTransferShareData(JSON.parse(response.data.results[0].content));
       } catch (error) {
-        console.error('Error fetching transfer share data:', error);
+        console.error('Error fetching shareholding data:', error);
       }
     };
 
     fetchData();
   }, []);
+
 
   return (
     <section className='investor_sec my-5 py-5'>

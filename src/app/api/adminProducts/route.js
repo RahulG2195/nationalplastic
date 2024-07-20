@@ -13,6 +13,7 @@ function convertColorToCode(color) {
 }
 const uploadImage = async (file)=>{
   try{
+    
     await upload.single(file);
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);

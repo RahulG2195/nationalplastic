@@ -8,8 +8,9 @@ const ShareholdingPattern = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/api/pages/shareholding-pattern');
-        setShareholdingData(JSON.parse(response.data.content));
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/InvestorPage`, { Id: 7 });
+        console.log("response: ", response.data);
+        setShareholdingData(JSON.parse(response.data.results[0].content));
       } catch (error) {
         console.error('Error fetching shareholding data:', error);
       }

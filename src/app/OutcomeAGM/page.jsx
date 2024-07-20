@@ -68,7 +68,7 @@ const page = () => {
                       <td><a target='_blank' href="/Assets/pdf/Outcome(1).pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i> Outcome of the Meeting 18.09.2020</a></td>
                     </tr>
                     <tr>
-                      <td><a target='_blank' href="/Assets/pdf/Scrutinizer%20report-%20Evoting%20National%20Plastic%202019%20(1).pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Scrutinizer's Report Evoting National Plastic 2020</a></td>
+                      <td><a target='_blank' href="/Assets/pdf/Scrutinizer%20report-%20Evoting%20National%20Plastic%202019%20(1).pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Scrutinizers Report Evoting National Plastic 2020</a></td>
                     </tr>
                     <tr>
                       <td><i className="fa fa-file-pdf-o" aria-hidden="true"></i> <a target='_blank' href="/Assets/pdf/Evoting-20-09-2019.html">Voting Results 30.07.2021.pdf</a></td>
@@ -84,7 +84,7 @@ const page = () => {
                       <td><i target='_blank' className="fa fa-file-pdf-o" aria-hidden="true"></i> <a href="/Assets/pdf/30th%20June,%202019.pdf">Outcome of the Meeting 20.09.2019</a></td>
                     </tr>
                     <tr>
-                      <td><a target='_blank' href="/Assets/pdf/Scrutinizer%20report-%20Evoting%20National%20Plastic%202019%20(1).pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Scrutinizer's Report Evoting National Plastic 2019</a></td>
+                      <td><a target='_blank' href="/Assets/pdf/Scrutinizer%20report-%20Evoting%20National%20Plastic%202019%20(1).pdf"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Scrutinizers Report Evoting National Plastic 2019</a></td>
                     </tr>
                     <tr>
                       <td><i className="fa fa-file-pdf-o" aria-hidden="true"></i> <a target='_blank' href="/Assets/pdf/Evoting-20-09-2019.html">Voting Results 20.09.2019</a></td>
@@ -101,7 +101,7 @@ const page = () => {
                         <td><a href="/Assets/pdf/Outcome-of-the-Meeting-19.09.2018.pdf" target="_blank"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Outcome of the Meeting 19.09.2018</a></td>
                       </tr>
                       <tr>
-                        <td><a href="/Assets/pdf/Scrutinizers-Report-Evoting-National-Plastic-2018.pdf" target="_blank"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Scrutinizer's Report Evoting National Plastic 2018</a></td>
+                        <td><a href="/Assets/pdf/Scrutinizers-Report-Evoting-National-Plastic-2018.pdf" target="_blank"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Scrutinizers Report Evoting National Plastic 2018</a></td>
                       </tr>
                       <tr>
                         <td><a href="/Assets/pdf/Voting-Result-2018.pdf" target="_blank"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Voting Results 20.09.2018</a></td>
@@ -121,7 +121,7 @@ const page = () => {
                         <td><a href="/Assets/pdf/AGM_Disclosure_of_Voting_Results_Reg-44_2016-17.pdf" target="_blank"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Disclosure of Voting Results - Reg 44</a></td>
                       </tr>
                       <tr>
-                        <td><a href="/Assets/pdf/Scrutinizers_Report_2016-17.pdf" target="_blank"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Scrutinizer's Report</a></td>
+                        <td><a href="/Assets/pdf/Scrutinizers_Report_2016-17.pdf" target="_blank"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Scrutinizers Report</a></td>
                       </tr>
                       <tr>
                         <td><a href="/Assets/pdf/AGM_Voting_Results_20.09.2017.pdf" target="_blank"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Voting Results - 20.09.2017</a></td>
@@ -138,7 +138,7 @@ const page = () => {
                   <table className='table table-responsive table-striped table-light'>
                     <tbody>
                       <tr>
-                        <td><a href="/Assets/pdf/Scrutinizers_Report_Evoting_National_Plastic-2015-16.pdf" target="_blank"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Scrutinizer's Report-Evoting-National Plastic-2016</a></td>
+                        <td><a href="/Assets/pdf/Scrutinizers_Report_Evoting_National_Plastic-2015-16.pdf" target="_blank"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Scrutinizers Report-Evoting-National Plastic-2016</a></td>
                       </tr>
                       <tr>
                         <td><a href="/Assets/pdf/AGM_Voting_Results_22.09.2016.pdf" target="_blank"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Voting Results- 22.09.2016</a></td>
@@ -164,7 +164,7 @@ const page = () => {
                         <td><a href="/Assets/pdf/Outcome_of_AGM_Voting_Result_29.09.2015.pdf" target="_blank"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Voting Result - 29.09.2015</a></td>
                       </tr>
                       <tr>
-                        <td><a href="/Assets/pdf/Scrutinizers_Report_Evoting_National_Plastic-2014-15.pdf" target="_blank"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Scrutinizer's Report(E-voting &amp; Ballot)</a></td>
+                        <td><a href="/Assets/pdf/Scrutinizers_Report_Evoting_National_Plastic-2014-15.pdf" target="_blank"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Scrutinizers Report(E-voting &amp; Ballot)</a></td>
                       </tr>
                     </tbody>
                   </table>
@@ -181,7 +181,7 @@ const page = () => {
                         <td><a href="/Assets/pdf/AGM_Voting_Result_11.09.2014.pdf" target="_blank"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Voting Result - 11.09.2014</a></td>
                       </tr>
                       <tr>
-                        <td><a href="/Assets/pdf/Scrutinizers_Report_Evoting_National_Plastic-2013-14.pdf" target="_blank"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Scrutinizer's Report (E-voting &amp; Poll) - 11.09.2014</a></td>
+                        <td><a href="/Assets/pdf/Scrutinizers_Report_Evoting_National_Plastic-2013-14.pdf" target="_blank"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Scrutinizers Report (E-voting &amp; Poll) - 11.09.2014</a></td>
                       </tr>
                       <tr>
                         <td><a href="/Assets/pdf/AGM_Disclosure_of_Voting_Results_Clause-35A_2013-14.pdf" target="_blank"><i className="fa fa-file-pdf-o" aria-hidden="true"></i>  Disclosure of Voting Results - Clause 35A</a></td>

@@ -8,16 +8,17 @@ const OutcomeMeet = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/api/pages/24'); // Assuming you have an API endpoint to fetch the page data
-        const data = JSON.parse(response.data.content);
-        setOutcomeData(data);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/InvestorPage`, { Id: 14 });
+        console.log("response: ", response.data);
+        setOutcomeData(JSON.parse(response.data.results[0].content));
       } catch (error) {
-        console.error('Error fetching outcome meeting data:', error);
+        console.error('Error fetching shareholding data:', error);
       }
     };
 
     fetchData();
   }, []);
+
 
   return (
     <section className='investor_sec my-5 py-5'>

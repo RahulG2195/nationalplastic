@@ -8,11 +8,11 @@ const Disclosure = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/api/pages/25'); // Assuming you have an API endpoint to fetch the page data
-        const data = JSON.parse(response.data.content);
-        setDisclosureData(data);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/InvestorPage`, { Id: 15 });
+        console.log("response: ", response.data);
+        setDisclosureData(JSON.parse(response.data.results[0].content));
       } catch (error) {
-        console.error('Error fetching disclosure data:', error);
+        console.error('Error fetching shareholding data:', error);
       }
     };
 

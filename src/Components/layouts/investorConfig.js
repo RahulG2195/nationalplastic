@@ -46,12 +46,8 @@ function restructureData(data) {
 export const fetchInvestorConfig = async () => {
   try {
     const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/InvestorPage`);
-    console.log("response", res);
-    console.log("response data", res.data);
-    console.log("response results", res.data.results);
     
     const restructuredData = restructureData(res.data.results);
-    console.log("restructured data", JSON.stringify(restructuredData, null, 2));
     
     return restructuredData;
   } catch (error) {
