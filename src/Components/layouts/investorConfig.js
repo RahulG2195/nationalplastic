@@ -60,7 +60,7 @@ export const fetchInvestorConfig = async () => {
 export const staticInvestorConfig = [
   {
     label: "Investors (REG. 46)",
-    link: "#",
+    link: "/Investor",
     subItems: [
       {
         label: "Financials",

@@ -216,3 +216,47 @@ export async function PATCH(request) {
     );
   }
 }
+
+
+export async function GET(request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const user_id = searchParams.get("user_id");
+
+    if (!user_id) {
+      return new Response(
+        JSON.stringify({
+          status: 400,
+          message: "User ID is required",
+        }),
+        { status: 400 }
+      );
+    }
+
+    const deleteResult = await query({
+      query: "DELETE FROM mycart WHERE user_id = ?",
+      values: [user_id],
+    });
+
+    const message = deleteResult.affectedRows ? "success" : "no items found";
+
+    return new Response(
+      JSON.stringify({
+        message: message,
+        status: 200,
+        affectedRows: deleteResult.affectedRows,
+      }),
+      { status: 200 }
+    );
+
+  } catch (error) {
+    return new Response(
+      JSON.stringify({
+        status: 500,
+        message: "Internal server error",
+        error: error.message,
+      }),
+      { status: 500 }
+    );
+  }
+}

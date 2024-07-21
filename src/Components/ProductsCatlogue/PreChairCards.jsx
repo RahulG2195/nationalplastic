@@ -289,7 +289,7 @@ const PreChairsCards = () => {
                     //     product.discount_price) *
                     //   100
                     // )}
-                    Discount={chair.discount_percentage}
+                    Discount={product.discount_percentage}
                     onaddToWishlist={() =>
                       handleAddToWishlist(product.product_id)
                     }

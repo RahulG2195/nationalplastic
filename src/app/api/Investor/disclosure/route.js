@@ -2,12 +2,8 @@ import { query } from '@/lib/db';
 import formidable from 'formidable';
 import fs from 'fs/promises';
 import path from 'path';
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+export const dynamic = 'force-dynamic';
+export const bodyParser = false;
 export async function GET(request){
     try{
         const { searchParams } = new URL(request.url);

@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { createOrderSuccess } from "@/redux/reducer/paySlice";
 import { useRouter } from "next/navigation";
-
+import { emptyCartAsync } from "@/redux/reducer/cartSlice"
 const PriceDetailsCard = ({
   itemCount,
   totalDiscount,
@@ -139,6 +139,7 @@ const PriceDetailsCard = ({
           });
           updateDatabase(response.data.response);
           sendPaymentSuccessMail(response.data.response);
+          dispatch(emptyCartAsync(customer_id))
           router.push("/ThankYouPage");
         }
       },
@@ -217,9 +218,9 @@ const PriceDetailsCard = ({
             className={`d-flex justify-content-between mt-1 fw-semibold text-success`}
           >
             <div className="text-secondary">
-  Coupon ({couponCode ? couponCode : '(NONE'})
+  Coupon ({couponCode ? couponCode : 'NONE'})
 </div>
-            <div>{discountPercentage}%</div>
+            <div>{couponCode ? discountPercentage + '%' : "0000"}</div>
           </div>
           <div className={`d-flex justify-content-between mt-1 fw-semibold`}>
             <div className="text-secondary ">Installation Charge</div>
