@@ -85,6 +85,8 @@ const ProductsAccr = ({ handleShow }) => {
           expandIcon={<ExpandMoreIcon />}
           aria-controls={`panel0-content`}
           id={`panel0-header`}
+          className="px-2"
+
         >
           <Typography className="m-0 ">
             <li className="">

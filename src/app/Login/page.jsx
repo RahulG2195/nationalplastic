@@ -120,13 +120,14 @@ function Login() {
               customer_id: customer_id,
             })
           );
+          
           if (isAdmin == 'admin') {
             localStorage.setItem("adminjwt", isAdmin);
             localStorage.setItem("isAdmin", "true");
             router.push("/admin") 
-            setTimeout(() => {
-              window.location.reload();
-            }, 500);
+            // setTimeout(() => {
+            //   window.location.reload();
+            // }, 500);
           }else{
             localStorage.setItem("isAdmin", "false");
             router.push("/")

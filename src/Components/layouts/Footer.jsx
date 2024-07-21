@@ -42,14 +42,14 @@ export default function Footer() {
               </div>
               <ul>
                 <li>
-                  <Link className="nav-link fw-bold" href="/ProductCatlogue">
+                  <Link className="nav-link fw-bold" href="/ProductCatlogue/13">
                     Premium Chairs
                   </Link>
                 </li>
-                <li className='fw-bold'>Centre Tables</li>
-                <li className='fw-bold'>Storage Cabinet</li>
-                <li className='fw-bold'>Household Accesories</li>
-                <li className='fw-bold'>Drawers & Racks</li>
+                <li className='fw-bold'><Link className="nav-link fw-bold" href="/ProductCatlogue/25">Centre Tables</Link> </li>
+                <li className='fw-bold'><Link className="nav-link fw-bold" href="/ProductCatlogue/17">Storage Cabinet</Link> </li>
+                <li className='fw-bold'><Link className="nav-link fw-bold" href="/ProductCatlogue/22">Household Accesories</Link></li>
+                <li className='fw-bold'><Link className="nav-link fw-bold" href="/ProductCatlogue/22">Drawers & Racks</Link></li>
               </ul>
             </div>
             <div className="col-md-2">
@@ -76,13 +76,13 @@ export default function Footer() {
                 <h5 className='fw-bolder'>NEED HELP</h5>
               </div>
               <ul>
-                <li className='fw-bold'>Help Center</li>
+                <li className='fw-bold'><Link className='nav-link fw-bold' href='/ContactUs'>Help Center</Link> </li>
                 <li>
                   <Link className='nav-link fw-bold' href="/ContactUs">
                     Contact Us
                   </Link>
                 </li>
-                <li className='fw-bold'>Ask Experts</li>
+                <li className='fw-bold'><Link className='nav-link fw-bold' href='/ContactUs'>Ask Experts</Link> </li>
 
                 {/* <li>
                   <Link className='nav-link fw-bold' href="/TrackYourOrder">Track your order</Link>

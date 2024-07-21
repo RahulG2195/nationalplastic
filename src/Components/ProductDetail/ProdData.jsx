@@ -19,7 +19,7 @@ function ProdData({ category_id }) {
   const [data, setData] = useState([]);
   const [prodData, setProdData] = useState([]);
   const userState = useSelector((state) => state.userData.isLoggedIn);
-  const [categoryId, setCategoryId] = useState(null); 
+  const [categoryId, setCategoryId] = useState(null);
   const [categoryName, setCategoryName] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [productId, setProductId] = useState(null);
@@ -41,7 +41,7 @@ function ProdData({ category_id }) {
 
   const handleDecrement = async () => {
     if (initialCount > 0) {
-      setInitialCount(initialCount - 1); 
+      setInitialCount(initialCount - 1);
     }
   };
 
@@ -49,10 +49,12 @@ function ProdData({ category_id }) {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`);
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`
+        );
         const { product, productDetails, colors, category } = response.data;
-        console.log("const storedId = id;" , product.product_id);
-        localStorage.setItem("product_id",product.product_id);
+        console.log("const storedId = id;", product.product_id);
+        localStorage.setItem("product_id", product.product_id);
         if (!product) {
           setErrorMessage("Sorry, this product is not available");
         } else {
@@ -63,11 +65,11 @@ function ProdData({ category_id }) {
           setProduct_id(product.product_id);
           setCategoryId(category);
           // CleanCateogoryName(category);
-          const allColors = colors.map(color => color.color);
+          const allColors = colors.map((color) => color.color);
           colorBasedProductsImages(allColors);
         }
       } catch (error) {
-        setErrorMessage(error.message ||"Error fetching data");
+        setErrorMessage(error.message || "Error fetching data");
       } finally {
         setIsLoading(false);
       }
@@ -81,11 +83,14 @@ function ProdData({ category_id }) {
   const colorBasedProductsImages = async (colors) => {
     setAvailableColor(colors);
     try {
-      const response = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/colorBasedProduct`, {
-        name: id,
-        colors: colors
-      });
-      const  rawdataToShow  = response.data.data
+      const response = await axios.put(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/colorBasedProduct`,
+        {
+          name: id,
+          colors: colors,
+        }
+      );
+      const rawdataToShow = response.data.data;
       setdataToShow(rawdataToShow);
     } catch (error) {
       notifyError(error.message);
@@ -95,9 +100,12 @@ function ProdData({ category_id }) {
   const category = async (catName) => {
     try {
       if (catName) {
-        const category = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/Products`, {
-          category_id: catName,
-        });
+        const category = await axios.put(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/Products`,
+          {
+            category_id: catName,
+          }
+        );
         const { category_name, category_id } = category.data;
         const cleanedName = category_name.replace(/"/g, "");
         setCategoryName(cleanedName);
@@ -109,13 +117,16 @@ function ProdData({ category_id }) {
 
   const fetchPrice = async (storedId) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/ProductsCat`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ seo_url: id }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/ProductsCat`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ seo_url: id }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to fetch product data");
@@ -132,15 +143,21 @@ function ProdData({ category_id }) {
     setSelectedColor(event.target.value);
     const colorBasedProduct = { color: event.target.value, name: id };
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/colorBasedProduct`, colorBasedProduct);
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/colorBasedProduct`,
+        colorBasedProduct
+      );
       console.log("response", JSON.stringify(response));
       console.log("response", response.json());
       const dataBasedOnColor = response.data?.data;
       const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
       const newProductID = dataBasedOnColor[0].product_id;
-      setProduct_id(newProductID)
+      setProduct_id(newProductID);
       const NoOfImages = dataBasedOnColor[0].image_name;
-      if (isImageAvailable && (NoOfImages.includes(",") || NoOfImages.includes(", "))) {
+      if (
+        isImageAvailable &&
+        (NoOfImages.includes(",") || NoOfImages.includes(", "))
+      ) {
         setProdData(dataBasedOnColor);
         setData(dataBasedOnColor);
       } else {
@@ -197,7 +214,8 @@ function ProdData({ category_id }) {
   const name = data.length > 0 ? data[0].product_name : null;
   const price = data.length > 0 ? data[0].price : null;
   const orignalPrice = data.length > 0 ? data[0].discount_price : null;
-  const baseImageNames = data.length > 0 ? data[0].image_name : "default_chair_img.webp";
+  const baseImageNames =
+    data.length > 0 ? data[0].image_name : "default_chair_img.webp";
   const image = baseImageNames;
 
   const saving = (orignalPrice - price).toFixed(2);
@@ -220,7 +238,10 @@ function ProdData({ category_id }) {
             <div className="product-dtl">
               <div className="product-info">
                 <div className="product-name">
-                  <h2 className="prod_nameh2">National Plastic {name} {selectedColor ? `(${selectedColor})` : ''}</h2>
+                  <h2 className="prod_nameh2">
+                    National Plastic {name}{" "}
+                    {selectedColor ? `(${selectedColor})` : ""}
+                  </h2>
                 </div>
 
                 <div className="reviews-counter d-flex flex-wrap gap-2">
@@ -232,66 +253,81 @@ function ProdData({ category_id }) {
                   </div>
                 </div>
                 <div>
-                    <i className="fa fa-star-o rating-star pr-2" />
-                    <span className="rating-number">4.8</span>
-                  </div>
-                  <div className="shortProdDesc">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut numquam ullam is recusandae laborum explicabo id sequi quisquam, ab sunt deleniti quidem ea animi facilis quod nostrum odit! Repellendus voluptas suscipit.</p>
-                  </div>
+                  <i className="fa fa-star-o rating-star pr-2" />
+                  <span className="rating-number">4.8</span>
+                </div>
+                <div className="shortProdDesc">
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
+                    numquam ullam is recusandae laborum explicabo id sequi
+                    quisquam, ab sunt deleniti quidem ea animi facilis quod
+                    nostrum odit! Repellendus voluptas suscipit.
+                  </p>
+                </div>
                 <div className="prod_type mt-4">
                   <div className="prod_clr">
                     <p>
                       <strong>Color: </strong> {selectedColor}
                     </p>
 
-{dataToShow.map((val, index) => {
-  const baseImageUrl = '/Assets/images/products';
-  const imageSrc = `${baseImageUrl}/${val.image_name}`;
-  return (
-    <label key={index} style={{
-      display: 'inline-block',
-      margin: '4px',
-      cursor: 'pointer'
-    }}>
-      <input
-        type="radio"
-        name="prod_clr"
-        id={val.color}
-        value={val.color}
-        checked={selectedColor === val.color}
-        onChange={handleColorChange}
-        style={{ display: 'none' }} // Hide the actual radio button
-      />
-      <div style={{
-        width: '48px',
-        height: '48px',
-        position: 'relative',
-        borderRadius: '50%',
-        border: selectedColor === val.color ? '2px solid #000' : '2px solid transparent',
-        transition: 'all 0.3s ease',
-        ...(selectedColor === val.color ? {
-          boxShadow: '0 0 0 2px #fff, 0 0 0 4px #000'
-        } : {}),
-      }}>
-        <Image 
-          src={imageSrc} 
-          alt={val.color}
-          width={3}
-          height={3}
-          layout="responsive"
-          objectFit="cover"
-          // layout="fill"
-          // objectFit="cover"
-          style={{
-            borderRadius: '50%',
-            height:'100%',
-            width:'100%'
-          }}
-        />
-      </div>
-    </label>
-  );
-})}
+                    {dataToShow.map((val, index) => {
+                      const baseImageUrl = "/Assets/images/products";
+                      const imageSrc = `${baseImageUrl}/${val.image_name}`;
+                      return (
+                        <label
+                          key={index}
+                          style={{
+                            display: "inline-block",
+                            margin: "4px",
+                            cursor: "pointer",
+                          }}
+                        >
+                          <input
+                            type="radio"
+                            name="prod_clr"
+                            id={val.color}
+                            value={val.color}
+                            checked={selectedColor === val.color}
+                            onChange={handleColorChange}
+                            style={{ display: "none" }} // Hide the actual radio button
+                          />
+                          <div
+                            style={{
+                              width: "48px",
+                              height: "48px",
+                              position: "relative",
+                              borderRadius: "50%",
+                              border:
+                                selectedColor === val.color
+                                  ? "2px solid #000"
+                                  : "2px solid transparent",
+                              transition: "all 0.3s ease",
+                              ...(selectedColor === val.color
+                                ? {
+                                    boxShadow: "0 0 0 2px #fff, 0 0 0 4px #000",
+                                  }
+                                : {}),
+                            }}
+                          >
+                            <Image
+                              src={imageSrc}
+                              alt={val.color}
+                              width={3}
+                              height={3}
+                              layout="responsive"
+                              objectFit="cover"
+                              // layout="fill"
+                              // objectFit="cover"
+                              style={{
+                                borderRadius: "50%",
+                                height: "100%",
+                                width: "100%",
+                              }}
+                            />
+                          </div>
+                        </label>
+                      );
+                    })}
                     {/* <label htmlFor="white">White</label> */}
                   </div>
                 </div>
@@ -299,28 +335,29 @@ function ProdData({ category_id }) {
               <div className="product-ccount">
                 <label htmlFor="size">Quantity</label>
                 <div className="d-md-flex pb-md-3">
-                <IncrementDecrement
-                  initialCount={initialCount}
-                  onIncrement={handleIncrement}
-                  onDecrement={handleDecrement}
-                />
-                <button
-                  onClick={() => handleMoveToCart(productId, initialCount)}
-                  className="btn m-2 px-md-5 ProdbtnRes"
-                >
-                  Add to Cart
-                </button>
+                  <IncrementDecrement
+                    initialCount={initialCount}
+                    onIncrement={handleIncrement}
+                    onDecrement={handleDecrement}
+                  />
+                  <button
+                    onClick={() => handleMoveToCart(productId, initialCount)}
+                    className="btn m-2 px-md-5 ProdbtnRes"
+                  >
+                    Add to Cart
+                  </button>
                 </div>
-                
+
                 <Link
                   href={userState ? "/Address" : "#"}
-                  className={`btn m-2 px-md-5 ProdbtnRes ${!userState ? "disabled-button" : ""
-                    }`}
+                  className={`btn m-2 px-md-5 ProdbtnRes ${
+                    !userState ? "disabled-button" : ""
+                  }`}
                   onClick={() => handleMoveToCart(productId)}
                 >
                   Buy Now
                 </Link>
-                <Link href="/BulkOrder" className="">
+                <Link href="" className="">
                     <button
                     className="btn btn-danger px-md-5 my-2 ProdbtnRes bulkRes"
                     data-bs-toggle="modal"
@@ -329,14 +366,13 @@ function ProdData({ category_id }) {
                     Bulk Order
                   </button>
                 </Link>
-                
               </div>
               {/* <p className="eye">
                 <i className="fa fa-eye"></i> 210 customers are interviewing the
                 product
               </p> */}
               <div className="terms fw-medium term_and_condition">
-                <Link href="TearnsAndConditions">Terms and Conditions</Link>
+                <Link href="/TermsAndConditions">Terms and Conditions</Link>
                 <ul>
                   <li>Lorem ipsum</li>
                   <li>Lorem ipsum</li>
@@ -372,7 +408,7 @@ function ProdData({ category_id }) {
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
-                <GetQuoteCustomForm prodName={name} />
+                <GetQuoteCustomForm prodName={name} read={'true'} />
               </div>
               {/* <div className="modal-footer">
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>

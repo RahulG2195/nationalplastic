@@ -1,6 +1,7 @@
 import Management from "@/Components/About/Management";
 import Committee from "@/Components/About/Committee";
 import "./management.css";
+import ComapnyProfileSidebar from "@/Components/About/ComapnyProfileSidebar";
 
 function Manage() {
   const auditCommitteeMembers = [
@@ -27,10 +28,10 @@ function Manage() {
   ];
 
   return (
-    <div>
-      <div className="row p-5">
-        <div className="col-md-8">
-          <div className="committee-section">
+    <div className="container">
+      <div className="row py-5 justify-content-center">
+        <div className="col-12 col-md-7">
+          <div className="committee-section mb-4">
             <h2>Committee</h2>
           </div>
           <Committee title="Audit Committee" members={auditCommitteeMembers} />
@@ -44,19 +45,8 @@ function Manage() {
           />
           <Management />
         </div>
-        <div className="col-md-4">
-          <div className="company-profile-sidebar">
-            <h3 className="sidebar-title"> Management and Board Committees</h3>
-            <ul className="sidebar-list">
-              <li className="sidebar-item">Company Profile</li>
-              <li className="sidebar-item">Infrastructure</li>
-              <li className="sidebar-item">Promoters/Directors</li>
-              <li className="sidebar-item">Management and Board Committees</li>
-              <li className="sidebar-item">Awards/Exports</li>
-              <li className="sidebar-item">Introduction</li>
-              <li className="sidebar-item">Terms & Conditions</li>
-            </ul>
-          </div>
+        <div className="col-12 col-md-3">
+          <ComapnyProfileSidebar title="MANAGEMENT AND BOARD COMMITTEES" />
         </div>
       </div>
     </div>

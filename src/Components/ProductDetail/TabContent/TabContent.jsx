@@ -6,9 +6,8 @@ const TabContent = ({ activeTab, prodDetail }) => {
   let heading = "";
   let content = "";
   let img = "";
-  const firstProductData = prodDetail?.[0]; // Use optional chaining
-  const productData = prodDetail[0];
-
+  // const firstProductData = prodDetail?.[0]; // Use optional chaining
+  // const productData = prodDetail[0];
   const faq_disclaimer = `
   Frequently Asked Questions (FAQs) - Plastic Chair:
   
@@ -20,66 +19,43 @@ const TabContent = ({ activeTab, prodDetail }) => {
   
   If you have any further questions, please feel free to contact us.
   `;
-  const deliveryInstructions = `
-  **Delivery Instructions:**
-
-  - Your plastic chair will be delivered to the address provided during checkout.
   
-  - Please ensure that someone is available to receive the delivery at the specified address.
-  
-  - The delivery team will not be responsible for any installation or assembly of the chair.
-  `;
-
-  // Care Instructions
-  const careInstructions = `
-  **Care & Maintenance:**
-
-  - Regularly inspect the chair for any signs of damage or wear.
-  
-  - Clean with mild soap and water as needed. Avoid using harsh chemicals or abrasive materials as they may damage the chair's surface.
-  
-  - Avoid placing the chair on uneven surfaces or on slippery floors to prevent accidents.
-  
-  - While this chair is weather-resistant, prolonged exposure to extreme weather conditions may cause damage. Store indoors during harsh weather conditions.
-  
-  - Always supervise children while they are using the chair. 
-  `;
   switch (activeTab) {
     case "description":
       heading = "Description";
-      content = firstProductData?.descp;
+      content = prodDetail?.descp || "NA";
       img = "/Assets/images/Image 5/Image 5.png";
       break;
     case "merchant-details":
       heading = "Merchant Details";
-      content = firstProductData?.features;
+      content = prodDetail?.features || "NA";
       img = "/Assets/images/Image 5/Image 5.png";
       break;
     case "care-instruction":
       heading = "Care & Instruction";
-      content = firstProductData?.careAndInstruct || careInstructions;
+      content = prodDetail?.careAndInstruct || "NA";
       img = "/Assets/images/Image 5/Image 5.png";
       break;
     case "delivery-instructions":
       heading = "Delivery Instructions";
-      content = firstProductData?.deliveryInsct || deliveryInstructions;
+      content = prodDetail?.deliveryInsct || "NA";
       img = "/Assets/images/Image 5/Image 5.png";
       break;
     case "warranty":
       heading = "Warranty";
-      content = firstProductData?.warranty || "2 Year WARRANTY";
+      content = prodDetail?.warranty || "2 Year WARRANTY";
       img = "/Assets/images/Image 5/Image 5.png";
 
       break;
     case "t-and-c":
       heading = "T & C";
-      content = firstProductData?.descp;
+      content = prodDetail?.descp || "NA";
       img = "/Assets/images/Image 5/Image 5.png";
 
       break;
     case "faqs":
       heading = "FAQ'S";
-      content = faq_disclaimer;
+      content = faq_disclaimer || "NA";
 
       img = "/Assets/images/Image 5/Image 5.png";
       break;

@@ -397,6 +397,9 @@ input:focus-visible {
 }
 
 @media (max-width: 600px) {
+  .pd-wrap{
+    padding: 0 !important;
+  }
   .listTabContent {
     display: none;
   }

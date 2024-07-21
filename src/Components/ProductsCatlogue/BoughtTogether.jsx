@@ -188,11 +188,12 @@ const BoughtTogether = () => {
                     Discription={card.short_description}
                     Price={card.price}
                     orignalPrice={card.discount_price}
-                    Discount={Math.floor(
-                      ((card.discount_price - card.price) /
-                        card.discount_price) *
-                      100
-                    )}
+                    // Discount={Math.floor(
+                    //   ((card.discount_price - card.price) /
+                    //     card.discount_price) *
+                    //   100
+                    // )}
+                    Discount={chair.discount_percentage}
                     onaddToWishlist={() =>
                       handleAddToWishlist(card.product_id)
                     }

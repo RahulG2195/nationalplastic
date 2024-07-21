@@ -24,14 +24,15 @@ const InvestorAccor = ({ handleShow }) => {
   };
 
   return (
-    <div>
+    <div >
       <Accordion className="prdctAccr" style={{ backgroundColor: "#FFE000" }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls={`panel0-content`}
           id={`panel0-header`}
+          className="px-2"
         >
-          <Typography className="m-0 ">
+          <Typography className="m-0 p-0">
             <li className="">
               <p className="mobHeader fw-bold ">Investors (Reg. 46)</p>
             </li>
@@ -112,7 +113,11 @@ const InvestorAccor = ({ handleShow }) => {
                 <Link
                   className="nav-link"
                   href={`/ShareHolding`}
+                  onClick={() => {
+                    handleShow();
+                  }}
                 >
+                   
                   Shareholding Pattern
                 </Link>
               </p>
@@ -122,6 +127,9 @@ const InvestorAccor = ({ handleShow }) => {
                 <Link
                   className="nav-link"
                   href={`/Corporate`}
+                  onClick={() => {
+                    handleShow();
+                  }}
                 >
                   Corporate Governance
                 </Link>
@@ -132,6 +140,9 @@ const InvestorAccor = ({ handleShow }) => {
                 <Link
                   className="nav-link"
                   href={`/InvestorContact`}
+                  onClick={() => {
+                    handleShow();
+                  }}
                 >
                   Investor Contact
                 </Link>
@@ -186,6 +197,9 @@ const InvestorAccor = ({ handleShow }) => {
                 <Link
                   className="nav-link"
                   href={`/TransferShare`}
+                  onClick={() => {
+                    handleShow();
+                  }}
                 >
                   Transfer Of Share Notice
                 </Link>
@@ -196,6 +210,9 @@ const InvestorAccor = ({ handleShow }) => {
                 <Link
                   className="nav-link"
                   href={`/OutcomeMeet`}
+                  onClick={() => {
+                    handleShow();
+                  }}
                 >
                   Outcome Of Board Meeting
                 </Link>
@@ -206,6 +223,9 @@ const InvestorAccor = ({ handleShow }) => {
                 <Link
                   className="nav-link"
                   href={`/Disclosure`}
+                  onClick={() => {
+                    handleShow();
+                  }}
                 >
                   Listing Disclosure
                 </Link>
@@ -216,6 +236,9 @@ const InvestorAccor = ({ handleShow }) => {
                 <Link
                   className="nav-link"
                   href={`/Transaction`}
+                  onClick={() => {
+                    handleShow();
+                  }}
                 >
                   Related Party Transaction
                 </Link>
@@ -306,6 +329,9 @@ const InvestorAccor = ({ handleShow }) => {
                 <Link
                   className="nav-link"
                   href={`/InvestorKYC`}
+                  onClick={() => {
+                    handleShow();
+                  }}
                 >
                   Investor KYC
                 </Link>
@@ -316,6 +342,9 @@ const InvestorAccor = ({ handleShow }) => {
                 <Link
                   className="nav-link"
                   href={`/IEPF`}
+                  onClick={() => {
+                    handleShow();
+                  }}
                 >
                   IEPF
                 </Link>
@@ -326,6 +355,9 @@ const InvestorAccor = ({ handleShow }) => {
                 <Link
                   className="nav-link"
                   href={`/Advertisements`}
+                  onClick={() => {
+                    handleShow();
+                  }}
                 >
                   Advertisements
                 </Link>

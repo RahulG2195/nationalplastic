@@ -76,7 +76,8 @@ function BottomBar() {
   }, []);
 
   return (
-    <div className="px-md-5 d-flex align-items-center bottom_nav position-relative mainrow">
+    
+    <div className="mainrow px-md-5  bottom_nav position-relative ">
       {navbar.map((val, index) => (
         <div
           key={val.category_id}
@@ -110,7 +111,7 @@ function BottomBar() {
                 <div key={columnIndex} className="column pt-3">
                   {chunk.map((product) => (
                     <p
-                      className="p-3 fw-semibold"
+                      className="px-3 py-2 fw-semibold"
                       key={product.product_name}
                       onMouseOver={() => changeImage(product.product_name)}
                     >
@@ -118,7 +119,7 @@ function BottomBar() {
                         className="nav-link"
                         href={`/ProductDetail/${product.seo_url}`}
                       >
-                        {product.product_name2}
+                        {product.product_name}
                       </Link>
                     </p>
                   ))}

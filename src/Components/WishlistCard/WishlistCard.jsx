@@ -62,7 +62,7 @@ const WishlistCard = (props) => {
   return (
     <div className="wishlist-card">
       <div className="wishlist-image">
-        <Link onClick={setid} href={`/ProductDetail`}>
+        <Link onClick={setid} href={`/ProductDetail/${props.productName}`}>
           <Image
             src={props.WishlistImg}
             className="img-fluid rounded-start"
@@ -76,7 +76,7 @@ const WishlistCard = (props) => {
       </div>
       <div className="wishlist-details d-flex justify-content-evenly px-0">
         <div className="wishCptResp">
-          <Link onClick={setid} href={`/ProductDetail`}>
+          <Link onClick={setid} href={`/ProductDetail/${props.productName}`}>
             <h5 className="card-title ProductTitle fw-semibold">
               {Np} {props.productName} ({props.color}) 
             </h5>
