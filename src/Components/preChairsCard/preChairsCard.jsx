@@ -8,7 +8,6 @@ import { notify } from "@/utils/notify";
 import GetQuoteForm from "@/Components/BulkOrder/GetQuoteForm.jsx";
 
 const PreChairsCard = (props) => {
-  console.log("props for PreChairsCard", props);
   const [inWishlist, setInWishlist] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -17,11 +16,8 @@ const PreChairsCard = (props) => {
     props.onAddToCart(props.id);
   };
   const handleGetQuote = () => {
-    console.log("line 20")
     if (props.showGetQuote) {
       notify(props.Title)
-      console.log("line 23")
-
       handleImageClick(props.Title);
       // setSelectedImage(props.product_name);
 

@@ -56,7 +56,6 @@ export default function Header() {
   // redirect to admin to admin panel 
   useEffect(() => {
     const IsAdmin = localStorage.getItem('isAdmin');
-    console.log('IsAdmin', IsAdmin)
     if(IsAdmin == 'true'){
       router.push("/admin") 
     }

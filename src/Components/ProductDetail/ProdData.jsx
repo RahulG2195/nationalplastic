@@ -53,7 +53,6 @@ function ProdData({ category_id }) {
           `${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`
         );
         const { product, productDetails, colors, category } = response.data;
-        console.log("const storedId = id;", product.product_id);
         localStorage.setItem("product_id", product.product_id);
         if (!product) {
           setErrorMessage("Sorry, this product is not available");
