@@ -16,7 +16,7 @@ import styles from "./Navbar.module.css";
 import InvestorAccor from "../InvesterAccor/InvesterAccor";
 import { PlaceholderBar } from "./Placeholder";
 import { useDelayedRender } from "@/utils/useDelayedRender";
-import { staticInvestorConfig , fetchInvestorConfig } from "./investorConfig";
+import { staticInvestorConfig, fetchInvestorConfig } from "./investorConfig";
 export default function Header() {
   const shouldRenderBottomBar = useDelayedRender(2000);
   const [searchTerm, setSearchTerm] = useState("");
@@ -26,7 +26,7 @@ export default function Header() {
   const [aboutDropdown, setAboutDropdown] = useState(false);
   const [subDropdown, setSubDropdown] = useState(false);
 
-  const [windowSize, setWindowSize] = useState({width: undefined,});
+  const [windowSize, setWindowSize] = useState({ width: undefined, });
   const [FirstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
   const [InitialName, setInitialName] = useState("");
@@ -40,7 +40,7 @@ export default function Header() {
   const [subDropdownIndex, setSubDropdownIndex] = useState(null);
   const productCount = useSelector((state) => {
     let who;
-    
+
     if (!userState) {
       who = "temp";
     } else {
@@ -50,25 +50,25 @@ export default function Header() {
     return cart.products?.length || 0;
   });
 
-  const [count, setCount] = useState(productCount); 
+  const [count, setCount] = useState(productCount);
 
 
   // redirect to admin to admin panel 
   useEffect(() => {
     const IsAdmin = localStorage.getItem('isAdmin');
-    if(IsAdmin == 'true'){
-      router.push("/admin") 
+    if (IsAdmin == 'true') {
+      router.push("/admin")
     }
   }, []);
-  
-  
-  
-  
+
+
+
+
   // Use useEffect to keep local count in sync with Redux state
   useEffect(() => {
     setCount(productCount); // Update localCount whenever productCount changes
   }, [productCount]);
-  
+
   // get user data to show initial name after login
   useEffect(() => {
     const fetchUserData = async () => {
@@ -182,6 +182,25 @@ export default function Header() {
 
   const { width } = windowSize;
 
+  const [basicInfo, setBasicInfo] = useState({
+    logo: '',
+  });
+
+  useEffect(() => {
+    const fetchBasicInfo = async () => {
+      try {
+        const response = await axios.get('/api/basicInfo');
+        const basicInfoData = response.data.basicInfo;
+        setBasicInfo(basicInfoData);
+        setInitialBasicInfo(basicInfoData);
+      } catch (error) {
+        console.error('There was an error fetching the basic info!', error);
+      }
+    };
+
+    fetchBasicInfo();
+  }, []);
+
   return (
     <div>
       {!hideLayout ? (
@@ -205,7 +224,7 @@ export default function Header() {
                   </button>
                   <Link href="/">
                     <Image
-                      src="/Assets/images/nation_logo.png"
+                      src={`/Assets/uploads/${basicInfo.logo}`}
                       className="Image-fluid"
                       alt="Landscape picture"
                       height={100}
@@ -271,7 +290,7 @@ export default function Header() {
                           </li>
                           <li className={styles.dropdownItem}>
                             <Link
-                               href="/Promoters" 
+                              href="/Promoters"
                               onClick={isClicked ? handleShow : null}>
                               Promoters/Directors
                             </Link>
@@ -279,7 +298,7 @@ export default function Header() {
 
                           <li className={styles.dropdownItem}>
                             <Link
-                              href="/Management" 
+                              href="/Management"
                               onClick={isClicked ? handleShow : null}>
                               Management and Board Committees
                             </Link>
@@ -306,56 +325,56 @@ export default function Header() {
                       (width <= 991) ? <InvestorAccor handleShow={handleShow} />
                         :
                         <ul className="nav">
-                        {investorConfig.map((item, index) => (
-                          <li
-                            key={index}
-                            className={`nav-item brdr ${styles.navItem}`}
-                            onMouseEnter={() => setDropdownIndex(index)}
-                            onMouseLeave={() => setDropdownIndex(null)}
-                          >
-                            <Link
-                              className="nav-link multidropdown mobHeader"
-                              href={item.link}
-                              onClick={isClicked ? handleShow : null}
+                          {investorConfig.map((item, index) => (
+                            <li
+                              key={index}
+                              className={`nav-item brdr ${styles.navItem}`}
+                              onMouseEnter={() => setDropdownIndex(index)}
+                              onMouseLeave={() => setDropdownIndex(null)}
                             >
-                              {item.label}
-                            </Link>
-                            {dropdownIndex === index && item.subItems && (
-                              <ul className={styles.dropdown}>
-                                {item.subItems.map((subItem, subIndex) => (
-                                  <li
-                                    key={subIndex}
-                                    className={styles.dropdownItem}
-                                    onMouseEnter={() => setSubDropdownIndex(subIndex)}
-                                    onMouseLeave={() => setSubDropdownIndex(null)}
-                                  >
-                                    <Link
-                                      href={subItem.link}
-                                      onClick={isClicked ? handleShow : null}
+                              <Link
+                                className="nav-link multidropdown mobHeader"
+                                href={item.link}
+                                onClick={isClicked ? handleShow : null}
+                              >
+                                {item.label}
+                              </Link>
+                              {dropdownIndex === index && item.subItems && (
+                                <ul className={styles.dropdown}>
+                                  {item.subItems.map((subItem, subIndex) => (
+                                    <li
+                                      key={subIndex}
+                                      className={styles.dropdownItem}
+                                      onMouseEnter={() => setSubDropdownIndex(subIndex)}
+                                      onMouseLeave={() => setSubDropdownIndex(null)}
                                     >
-                                      {subItem.label}
-                                    </Link>
-                                    {subDropdownIndex === subIndex && subItem.subItems && (
-                                      <ul className={styles.subDropdown}>
-                                        {subItem.subItems.map((subSubItem, subSubIndex) => (
-                                          <li key={subSubIndex} className={styles.subDropdownItem}>
-                                            <Link
-                                              href={subSubItem.link}
-                                              onClick={isClicked ? handleShow : null}
-                                            >
-                                              {subSubItem.label}
-                                            </Link>
-                                          </li>
-                                        ))}
-                                      </ul>
-                                    )}
-                                  </li>
-                                ))}
-                              </ul>
-                            )}
-                          </li>
-                        ))}
-                      </ul>
+                                      <Link
+                                        href={subItem.link}
+                                        onClick={isClicked ? handleShow : null}
+                                      >
+                                        {subItem.label}
+                                      </Link>
+                                      {subDropdownIndex === subIndex && subItem.subItems && (
+                                        <ul className={styles.subDropdown}>
+                                          {subItem.subItems.map((subSubItem, subSubIndex) => (
+                                            <li key={subSubIndex} className={styles.subDropdownItem}>
+                                              <Link
+                                                href={subSubItem.link}
+                                                onClick={isClicked ? handleShow : null}
+                                              >
+                                                {subSubItem.label}
+                                              </Link>
+                                            </li>
+                                          ))}
+                                        </ul>
+                                      )}
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
                     }
                     <li className="nav-item brdr accr ">
                       <ProductsAccr handleShow={handleShow} />
@@ -394,7 +413,7 @@ export default function Header() {
                         href="tel:+912267669922"
                         target="_blank"
                         onClick={isClicked ? handleShow : null}
-                        style={{width:'30px'}}
+                        style={{ width: '30px' }}
                       >
                         <Image
                           height={100}
@@ -515,7 +534,7 @@ export default function Header() {
 
                       <Link href="/">
                         <Image
-                          src="/Assets/images/nation_logo.png"
+                          src={`/Assets/uploads/${basicInfo.logo}`}
                           className="Image-fluid"
                           alt="Landscape picture"
                           height={34}

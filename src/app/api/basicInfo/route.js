@@ -6,7 +6,7 @@ const uploadImage = async (file) => {
   try {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const path = `public/uploads/${file.name}`;
+    const path = `public/Assets/uploads/${file.name}`;
     await writeFile(path, buffer);
     return path; // Return the path or filename for storing in the database
   } catch (error) {
@@ -50,6 +50,7 @@ export async function POST(request) {
       'youtube',
       'twitter',
       'facebook',
+      'google',
       'mobile_number1',
       'mobile_number2',
       'address',

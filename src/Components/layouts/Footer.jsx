@@ -1,8 +1,42 @@
 import Image from 'next/image';
 import '../../styles/footer.css';
 import Link from 'next/link';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export default function Footer() {
+
+  const [basicInfo, setBasicInfo] = useState({
+    logo: '',
+    brand1_link: '',
+    brand2_link: '',
+    instagram: '',
+    youtube: '',
+    twitter: '',
+    facebook: '',
+    google: '',
+    mobile_number1: '',
+    mobile_number2: '',
+    address: '',
+    email: ''
+  });
+
+  useEffect(() => {
+    const fetchBasicInfo = async () => {
+      try {
+        const response = await axios.get('/api/basicInfo');
+        const basicInfoData = response.data.basicInfo;
+        setBasicInfo(basicInfoData);
+        setInitialBasicInfo(basicInfoData);
+      } catch (error) {
+        console.error('There was an error fetching the basic info!', error);
+      }
+    };
+
+    fetchBasicInfo();
+  }, []);
+
+
   return (
     <>
       <section className="footer">
@@ -161,53 +195,28 @@ export default function Footer() {
               <div className="comp_logo">
                 <Link href='/'>
                   <Image
-                    src="/Assets/images/nation_logo.png"
+                    src={`/Assets/uploads/${basicInfo.logo}`}
                     alt='logo'
                     fill
                   />
                 </Link>
               </div>
               <div className="social_icons d-flex gap-3">
-                {/* <Image
-                  src="/Assets/images/Group 37.svg"
-                  alt='logo'
-                  layout='responsive'
-                  objectFit='cover'
-                  width={100}
-                  height={100}
-                /> */}
-                <a href='https://www.instagram.com/nationalplastic1952/' target="_blank"><i class="fa fa-instagram  fs-1" aria-hidden="true"></i>
-                </a>
-                {/* <Image
-                  src="/Assets/images/Path 19.svg"
-                  alt='logo'
-                  layout='responsive'
-                  objectFit='cover'
-                  width={100}
-                  height={100}
-                /> */}
-                <a href='https://www.youtube.com/@NationalPlastic1952' target="_blank"><i class="fa fa-youtube-play  fs-1" aria-hidden="true"></i>
-                </a>
-                {/* <Image
-                  src="/Assets/images/Path 20.svg"
-                  alt='logo'
-                  layout='responsive'
-                  objectFit='cover'
-                  width={100}
-                  height={100}
-                /> */}
-                <a href='https://x.com/national1952' target="_blank"><i class="fa fa-twitter fs-1" aria-hidden="true"></i>
-                </a>
-                {/* <Image
-                  src="/Assets/images/Path 80.svg"
-                  alt='logo'
-                  layout='responsive'
-                  objectFit='cover'
-                  width={100}
-                  height={100}
-                /> */}
 
-                <a href='https://www.facebook.com/NationalPlastic1952/' target="_blank"><i class="fa fa-facebook fa-flip fs-1" aria-hidden="true"></i>
+                <a href={basicInfo.instagram} target="_blank"><i class="fa fa-instagram  fs-1" aria-hidden="true"></i>
+                </a>
+
+                <a href={basicInfo.youtube} target="_blank"><i class="fa fa-youtube-play  fs-1" aria-hidden="true"></i>
+                </a>
+
+                <a href={basicInfo.twitter} target="_blank"><i class="fa fa-twitter fs-1" aria-hidden="true"></i>
+                </a>
+
+
+                <a href={basicInfo.facebook} target="_blank"><i class="fa fa-facebook fa-flip fs-1" aria-hidden="true"></i>
+                </a>
+
+                <a href={basicInfo.google} target="_blank"><i class="fa fa-google fs-1" aria-hidden="true"></i>
                 </a>
               </div>
 

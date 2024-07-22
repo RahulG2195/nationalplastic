@@ -173,7 +173,6 @@ const BasicInfoEditor = () => {
                                     value={basicInfo.instagram}
                                     onChange={handleChange}
                                     readOnly={!editMode}
-                                    invalid={!!errors.instagram}
                                 />
                                 <FormFeedback>{errors.instagram}</FormFeedback>
                             </FormGroup>
@@ -188,7 +187,6 @@ const BasicInfoEditor = () => {
                                     value={basicInfo.youtube}
                                     onChange={handleChange}
                                     readOnly={!editMode}
-                                    invalid={!!errors.youtube}
                                 />
                                 <FormFeedback>{errors.youtube}</FormFeedback>
                             </FormGroup>
@@ -203,7 +201,6 @@ const BasicInfoEditor = () => {
                                     value={basicInfo.twitter}
                                     onChange={handleChange}
                                     readOnly={!editMode}
-                                    invalid={!!errors.twitter}
                                 />
                                 <FormFeedback>{errors.twitter}</FormFeedback>
                             </FormGroup>
@@ -218,7 +215,20 @@ const BasicInfoEditor = () => {
                                     value={basicInfo.facebook}
                                     onChange={handleChange}
                                     readOnly={!editMode}
-                                    invalid={!!errors.facebook}
+                                />
+                                <FormFeedback>{errors.facebook}</FormFeedback>
+                            </FormGroup>
+                        </Col>
+                        <Col md="6">
+                            <FormGroup>
+                                <Label className='fw-semibold' for="google">Google Review</Label>
+                                <Input
+                                    type="text"
+                                    name="google"
+                                    id="google"
+                                    value={basicInfo.google}
+                                    onChange={handleChange}
+                                    readOnly={!editMode}
                                 />
                                 <FormFeedback>{errors.facebook}</FormFeedback>
                             </FormGroup>
