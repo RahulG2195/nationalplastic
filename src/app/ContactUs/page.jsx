@@ -3,7 +3,7 @@
 import Image from "next/image";
 import "../../styles/contactus.css";
 import ContactUsCard from "@/Components/ContactUs/ContactUsCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Bounce, toast } from "react-toastify";
 
@@ -192,6 +192,39 @@ function ContactUs() {
       email: "info@nationalplastic.com",
     },
   ];
+
+
+
+  const [basicInfo, setBasicInfo] = useState({
+    logo: '',
+    brand1_link: '',
+    brand2_link: '',
+    instagram: '',
+    youtube: '',
+    twitter: '',
+    facebook: '',
+    mobile_number1: '',
+    mobile_number2: '',
+    address: '',
+    email: ''
+}); 
+
+useEffect(() => {
+  const fetchBasicInfo = async () => {
+      try {
+          const response = await axios.get('/api/basicInfo');
+          const basicInfoData = response.data.basicInfo;
+          setBasicInfo(basicInfoData);
+          setInitialBasicInfo(basicInfoData);
+      } catch (error) {
+          console.error('There was an error fetching the basic info!', error);
+      }
+  };
+
+  fetchBasicInfo();
+}, []);
+
+
   return (
     <>
       <div className="container-flude">
@@ -357,17 +390,16 @@ function ContactUs() {
               <div className="RegisteredOfficeIcon">
                 <i className="fa fa-map-marker" aria-hidden="true"></i>
                 <p>
-                  Office No. 213, 214 & 215, 2nd Floor, Hubtown Solaris, N. S.
-                  Phadake Marg, Andheri (East), Mumbai- 400 069. India.
+                  {basicInfo.address}
                 </p>
               </div>
               <div className="RegisteredOfficeIcon">
                 <i className="fa fa-phone" aria-hidden="true"></i>
-                <p>+91-22-6766 9920/ +91-22-6766 9922</p>
+                <p>+91-{basicInfo.mobile_number1}/ +91-{basicInfo.mobile_number2}</p>
               </div>
               <div className="RegisteredOfficeIcon">
                 <i className="fa fa-envelope-open" aria-hidden="true"></i>
-                <p>info@nationalplastic.com</p>
+                <p>{basicInfo.email}</p>
               </div>
             </div>
           </div>
