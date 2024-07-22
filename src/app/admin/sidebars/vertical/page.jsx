@@ -59,9 +59,27 @@ const navigation = [
     icon: "bi bi-card-text",
   },
   {
-    title: "Investors List",
-    href: "/admin/InvestorsList",
-    icon: "bi bi-columns",
+    type: "accordion",
+    title: "Investors Pages",
+    items: [
+      {
+        title: "General Disclosure",
+        href: "/admin/InvestorsList",
+      },
+      {
+        title: "Cards Section",
+        href: "/admin/homepage/cards",
+      },
+      {
+        title: "Offer Banner",
+        href: "/admin/homepage/offersection",
+      },
+      {
+        title: "house section",
+        href: "/admin/homepage/house section",
+      },
+    ],
+    icon: "bi bi-hdd-stack",
   },
   {
     title: "Table",
@@ -83,6 +101,7 @@ const navigation = [
     href: "/about",
     icon: "bi bi-people",
   },
+
 ];
 
 const Sidebar = ({ showMobilemenu }) => {

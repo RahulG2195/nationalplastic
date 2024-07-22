@@ -58,10 +58,8 @@ const GetQuoteForm = (props) => {
   };
 
   const removeProduct = (productToRemove) => {
-    console.log("Removing product:", productToRemove);
     setProducts((prevProducts) => {
       const newProducts = prevProducts.filter(product => product !== productToRemove);
-      console.log("New products list:", newProducts);
       return newProducts;
     });
     props.onProductRemove(productToRemove);

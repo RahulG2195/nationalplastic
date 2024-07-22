@@ -159,7 +159,7 @@ const ProdList = () => {
                             title={
                                 <div style={{ width: '200px', height: '300px', position: 'relative' }}>
                                     <Image
-                                        src={`/Assets/images/products/${image.trim()}`}
+                                        src={`/Assets/uploads/products/${image.trim()}`}
                                         alt={image}
                                         layout="fill"
                                         objectFit="contain"
@@ -169,7 +169,7 @@ const ProdList = () => {
                         >
                             <div style={{ width: '30px', height: '30px', position: 'relative' }}>
                                 <Image
-                                    src={`/Assets/images/products/${image.trim()}`}
+                                    src={`/Assets/uploads/products/${image.trim()}`}
                                     alt={image}
                                     layout="fill"
                                     objectFit="cover"

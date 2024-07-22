@@ -103,7 +103,7 @@ export default function Blog() {
                   const images = product.image_name ? product.image_name.split(', ').map(image => image.trim()) : [];
                  return <SwiperSlide key={product.product_id}>
                     <BlogCard
-                      image={`/Assets/images/products/${images[0]}`}
+                      image={`/Assets/uploads/products/${images[0]}`}
                       title={product.product_name}
                       url={product.url}
                       cat={product.categoryType}

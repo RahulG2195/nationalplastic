@@ -16,7 +16,7 @@ import styles from "./Navbar.module.css";
 import InvestorAccor from "../InvesterAccor/InvesterAccor";
 import { PlaceholderBar } from "./Placeholder";
 import { useDelayedRender } from "@/utils/useDelayedRender";
-import { investorConfig } from "./investorConfig";
+import { staticInvestorConfig , fetchInvestorConfig } from "./investorConfig";
 export default function Header() {
   const shouldRenderBottomBar = useDelayedRender(2000);
   const [searchTerm, setSearchTerm] = useState("");
@@ -56,7 +56,6 @@ export default function Header() {
   // redirect to admin to admin panel 
   useEffect(() => {
     const IsAdmin = localStorage.getItem('isAdmin');
-    console.log('IsAdmin', IsAdmin)
     if(IsAdmin == 'true'){
       router.push("/admin") 
     }
@@ -103,6 +102,22 @@ export default function Header() {
       setInitialName("N" + "P");
     }
   }, [FirstName, LastName]);
+
+  const [investorConfig, setInvestorConfig] = useState(staticInvestorConfig);
+
+  useEffect(() => {
+    async function loadConfig() {
+      try {
+        const config = await fetchInvestorConfig();
+        console.log("config", config);
+        setInvestorConfig(config);
+      } catch (error) {
+        console.error("Failed to fetch investor config, using static config", error);
+      }
+    }
+    loadConfig();
+  }, []);
+
 
   useEffect(() => {
     const checkHeader = async () => {

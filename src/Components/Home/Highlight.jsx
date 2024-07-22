@@ -84,7 +84,7 @@ export default function Highlight() {
                       <div className="card highlightcard">
                         <Image
                           className="imagetop"
-                          src={`/Assets/images/products/${images[0]}`}
+                          src={`/Assets/uploads/products/${images[0]}`}
                           alt={product.image}
                           width={50}
                           height={100}

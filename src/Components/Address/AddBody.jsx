@@ -330,7 +330,7 @@ const AddBody = () => {
                           const images = val.image_name ? val.image_name.split(', ').map(image => image.trim()) : [];
                           return <div className="row" key={val.product_id}>
                             <OrderSummaryCard
-                              imgSrc={`/Assets/images/products/${images[0]}`}
+                              imgSrc={`/Assets/uploads/products/${images[0]}`}
                               description={val.product_name}
                               quantity={val.quantity}
                             />

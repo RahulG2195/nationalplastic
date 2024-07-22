@@ -1,206 +1,233 @@
 "use client";
-import React, { useState } from 'react';
-import { Form, Select, Input, Upload, Button, message, DatePicker } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Table, Button, Modal, Form, Input, Select, Upload, message, Spin } from 'antd';
+import { UploadOutlined, LoadingOutlined } from '@ant-design/icons';
+
 const { Option } = Select;
 
-const CmsForm = () => {
+export default function MyComponent() {
+  const [years, setYears] = useState([]);
+  const [selectedYear, setSelectedYear] = useState("");
+  const [yearData, setYearData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [editingRecord, setEditingRecord] = useState(null);
   const [form] = Form.useForm();
-  const [fileList, setFileList] = useState([]);
-  const [selectedTitle, setSelectedTitle] = useState(null);
-  const SliderCardArr = [
+
+  useEffect(() => {
+    fetchYears();
+  }, []);
+
+  const fetchYears = async () => {
+    try {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/adminGC`);
+      const data = response.data.results;
+      const yearLabels = data.map(item => item.label);
+      setYears(yearLabels);
+      if (yearLabels.length > 0) {
+        setSelectedYear(yearLabels[0]);
+        fetchYearData(yearLabels[0]);
+      }
+    } catch (error) {
+      console.error("Error fetching years:", error);
+      message.error("Failed to fetch years");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchYearData = async (year) => {
+    setLoading(true);
+    try {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/disclosure?year=${year}`);
+      setYearData(response.data.results);
+    } catch (error) {
+      console.error("Error fetching year data:", error);
+      message.error("Failed to fetch year data");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleYearChange = (value) => {
+    setSelectedYear(value);
+    fetchYearData(value);
+  };
+
+  const handleStatus = async (id, currentStatus) => {
+    const newStatus = currentStatus === 0 ? 1 : 0;
+    try {
+      await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/disclosure`, {
+        action: "updateStatus",
+        Id: id,
+        status: newStatus
+      });
+      fetchYearData(selectedYear);
+      message.success("Status updated successfully");
+    } catch (error) {
+      console.error("Error updating status:", error);
+      message.error("Failed to update status");
+    }
+  };
+
+  const showModal = (record = null) => {
+    setEditingRecord(record);
+    if (record) {
+      form.setFieldsValue(record);
+    } else {
+      form.resetFields();
+    }
+    setModalVisible(true);
+  };
+
+  const handleOk = async () => {
+    try {
+      const values = await form.validateFields();
+      const formData = new FormData();
+  
+      // Append all form values to formData
+      Object.keys(values).forEach(key => {
+        if (key !== 'file') {
+          formData.append(key, values[key]);
+        }
+      });
+  
+      // Append the file if it exists
+      if (values.file && values.file.length > 0 && values.file[0].originFileObj) {
+        formData.append('file', values.file[0].originFileObj);
+      }
+      
+      // Add action to formData
+      formData.append('action', editingRecord ? 'editRecord' : 'addRecord');
+  
+      // Add id if editing
+      if (editingRecord) {
+        formData.append('id', editingRecord.id);
+      }
+      for (let [key, value] of formData.entries()) {
+        if (key === 'file') {
+          console.log(key, value.name); // Log file name instead of the whole File object
+        } else {
+          console.log(key, value);
+        }
+      }
+      // Make the API call
+      await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/disclosure`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+  
+      message.success(editingRecord ? "Record updated successfully" : "Record added successfully");
+      setModalVisible(false);
+      fetchYearData(selectedYear);
+    } catch (error) {
+      console.error("Error saving record:", error);
+      message.error("Failed to save record");
+    }
+  };
+
+  const handleCancel = () => {
+    setModalVisible(false);
+  };
+
+  const columns = [
+    { title: 'ID', dataIndex: 'id', key: 'id' },
+    { title: 'Year', dataIndex: 'year', key: 'year' },
+    { title: 'Title', dataIndex: 'title', key: 'title' },
+    { title: 'File Path', dataIndex: 'filePath', key: 'filePath' },
     {
-      key: 1,
-      title: "Financials",
-      image: "/Assets/svg/Group 829/Group 829.png",
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+      render: (status, record) => (
+        <Button
+          onClick={() => handleStatus(record.id, status)}
+          type={status ? "primary" : "default"}
+        >
+          {status ? 'Active' : 'Inactive'}
+        </Button>
+      ),
     },
     {
-      key: 2,
-      title: "Shareholding Pattern",
-      image: "/Assets/svg/Group 830/Group 830.png",
-    },
-    {
-      key: 3,
-      title: "Corporate Governance",
-      image: "/Assets/svg/Group 831/Group 831.png",
-    },
-    {
-      key: 4,
-      title: "Investor Contact ",
-      image: "/Assets/svg/Group 832/Group 832.png",
-    },
-    {
-      key: 5,
-      title: "AGM Compliance",
-      image: "/Assets/svg/Group 833/Group 833.png",
-    },
-    {
-      key: 6,
-      title: "Transfer Of Share Notice",
-      image: "/Assets/svg/Group 834/Group 834.png",
-    },
-    {
-      key: 7,
-      title: "Outcome Of Board Meeting",
-      image: "/Assets/svg/Group 835/Group 835.png",
-    },
-    {
-      key: 8,
-      title: "Listing Disclosure",
-      image: "/Assets/svg/Group 836/Group 836.png",
+      title: 'Actions',
+      key: 'actions',
+      render: (_, record) => (
+        <Button onClick={() => showModal(record)} type="link">Edit</Button>
+      ),
     },
   ];
 
-  const onFinish = async (values) => {
-    const formData = new FormData();
-    Object.keys(values).forEach(key => {
-      if (values[key] !== undefined) {
-        formData.append(key, values[key]);
-      }
-    });
-    if (fileList[0]) {
-      formData.append('file', fileList[0].originFileObj);
-    }
+  if (loading) {
+    return <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />;
+  }
 
-    try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/adminInvestor`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
-  
-        if (response.data.success) {
-          message.success(response.data.message);
-          form.resetFields();
-          setFileList([]);
-        } else {
-          message.error(response.data.error);
-        }
-    } catch (error) {
-      console.error('Error:', error);
-      message.error('An error occurred');
-    }
-  };
+  return (
+    <div className="container">
+      <h1>General Disclosure Data</h1>
 
-  const normFile = (e) => {
+      <div style={{ marginBottom: 16 }}>
+        <Select
+          style={{ width: 200, marginRight: 16 }}
+          value={selectedYear}
+          onChange={handleYearChange}
+        >
+          {years.map((year) => (
+            <Option key={year} value={year}>{year}</Option>
+          ))}
+        </Select>
+        <Button onClick={() => showModal()} type="primary">Add New Record</Button>
+      </div>
+
+      <Table
+        dataSource={yearData}
+        columns={columns}
+        rowKey="id"
+      />
+
+      <Modal
+        title={editingRecord ? "Edit Record" : "Add New Record"}
+        visible={modalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <Form form={form} layout="vertical">
+          <Form.Item
+            name="title"
+            label="Title"
+            rules={[{ required: true, message: 'Please input the title!' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+  name="file"
+  label="File"
+  rules={[{ required: true, message: 'Please upload a file!' }]}
+  valuePropName="fileList"
+  getValueFromEvent={(e) => {
     if (Array.isArray(e)) {
       return e;
     }
-    return e?.fileList;
-  };
-
-  const handleTitleChange = (value) => {
-    setSelectedTitle(value);
-    form.setFieldsValue({ subCategory: undefined, year: undefined });
-  };
-
-  const renderAdditionalFields = () => {
-    switch (selectedTitle) {
-      case 'Financials':
-        return (
+    return e && e.fileList;
+  }}
+>
+  <Upload beforeUpload={() => false} accept=".pdf,.doc,.docx,.xls,.xlsx">
+    <Button icon={<UploadOutlined />}>Click to Upload</Button>
+  </Upload>
+</Form.Item>
           <Form.Item
-            name="subCategory"
-            label="Sub Category"
-            rules={[{ required: true, message: 'Please select a sub category' }]}
+            name="status"
+            label="Status"
+            initialValue={1}
           >
-            <Select placeholder="Select a sub category">
-              <Option value="Annual Return">Annual Return</Option>
-              <Option value="Annual Report">Annual Report</Option>
-              <Option value="Audited Financial Results">Audited Financial Results</Option>
-              <Option value="Unaudited Financial Results">Unaudited Financial Results</Option>
+            <Select>
+              <Option value={1}>Active</Option>
+              <Option value={0}>Inactive</Option>
             </Select>
           </Form.Item>
-        );
-      case 'AGM Compliance':
-        return (
-          <Form.Item
-            name="subCategory"
-            label="Sub Category"
-            rules={[{ required: true, message: 'Please select a sub category' }]}
-          >
-            <Select placeholder="Select a sub category">
-              <Option value="Outcome of AGM">Outcome of AGM</Option>
-              <Option value="Notices">Notices</Option>
-            </Select>
-          </Form.Item>
-        );
-      case 'General Disclosure':
-        return (
-          <Form.Item
-            name="year"
-            label="Year"
-            rules={[{ required: true, message: 'Please select a year' }]}
-          >
-            <DatePicker picker="year" />
-          </Form.Item>
-        );
-      default:
-        return null;
-    }
-  };
-
-  return (
-    <Form form={form} onFinish={onFinish} layout="vertical">
-      <Form.Item
-        name="title"
-        label="Title"
-        rules={[{ required: true, message: 'Please select a title' }]}
-      >
-        <Select placeholder="Select a title" onChange={handleTitleChange}>
-          {SliderCardArr.map((item) => (
-            <Option key={item.key} value={item.title}>
-              {item.title}
-            </Option>
-          ))}
-          <Option value="General Disclosure">General Disclosure</Option>
-        </Select>
-      </Form.Item>
-
-      {renderAdditionalFields()}
-
-      <Form.Item
-        name="file"
-        label="File"
-        valuePropName="fileList"
-        getValueFromEvent={normFile}
-        rules={[{ required: true, message: 'Please upload a file' }]}
-      >
-        <Upload
-          beforeUpload={() => false}
-          fileList={fileList}
-          onChange={({ fileList }) => setFileList(fileList)}
-        >
-          <Button icon={<UploadOutlined />}>Click to upload</Button>
-        </Upload>
-      </Form.Item>
-
-      <Form.Item
-        name="name"
-        label="Name"
-        rules={[{ required: true, message: 'Please enter a name' }]}
-      >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        name="description"
-        label="Description"
-        rules={[{ required: true, message: 'Please enter a description' }]}
-      >
-        <Input.TextArea rows={4} />
-      </Form.Item>
-
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
+        </Form>
+      </Modal>
+    </div>
   );
-};
-
-export default CmsForm;
-
-
-
+}

@@ -668,7 +668,7 @@ function ProfilePage() {
                           }
                           return <tr key={index}>
                             <th scope="row">{index + 1}</th>
-                            <td><Link href={`/ProductDetail/${data.seo_url}`}><img src={`/Assets/images/products/${images[0]}`} height={50} width={50} alt="prod_image" /></Link></td>
+                            <td><Link href={`/ProductDetail/${data.seo_url}`}><img src={`/Assets/uploads/products/${images[0]}`} height={50} width={50} alt="prod_image" /></Link></td>
                             <td><Link href={`/ProductDetail/${data.seo_url}`}>{data.product_name}</Link></td>
                             <td>{data.quantity}</td>
                             <td>₹ {data.quantity * data.prod_price} </td>

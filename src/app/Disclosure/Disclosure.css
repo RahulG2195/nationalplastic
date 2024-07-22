@@ -1,0 +1,22 @@
+.investor_sec .table th {
+    background-color: #f8f9fa;
+  }
+  
+  .investor_sec .table td {
+    vertical-align: top;
+  }
+  
+  .investor_sec .table a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .investor_sec .table a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+  
+  .investor_sec .fa-file-pdf-o {
+    color: #dc3545;
+  }

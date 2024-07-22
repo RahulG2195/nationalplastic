@@ -44,7 +44,7 @@ const ProductDetailSlider = ({ imageurl }) => {
             {images.map((imageName) => (
               <SwiperSlide key={imageName}>
                 <img
-                  src={`/Assets/images/products/${imageName}`}
+                  src={`/Assets/uploads/products/${imageName}`}
                   alt="Product"
                 />
               </SwiperSlide>
@@ -64,7 +64,7 @@ const ProductDetailSlider = ({ imageurl }) => {
             {images.map((imageName) => (
               <SwiperSlide key={imageName}>
                 <img
-                  src={`/Assets/images/products/${imageName}`}
+                  src={`/Assets/uploads/products/${imageName}`}
                   alt="Product"
                 />
               </SwiperSlide>
@@ -72,7 +72,7 @@ const ProductDetailSlider = ({ imageurl }) => {
           </Swiper>
         </>
       ) : (
-        <img src={`/Assets/images/products/${images[0]}`} alt="Product" />
+        <img src={`/Assets/uploads/products/${images[0]}`} alt="Product" />
       )}
     </>
   );

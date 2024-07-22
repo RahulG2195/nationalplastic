@@ -53,7 +53,6 @@ function ProdData({ category_id }) {
           `${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`
         );
         const { product, productDetails, colors, category } = response.data;
-        console.log("const storedId = id;", product.product_id);
         localStorage.setItem("product_id", product.product_id);
         if (!product) {
           setErrorMessage("Sorry, this product is not available");
@@ -342,7 +341,8 @@ function ProdData({ category_id }) {
                   />
                   <button
                     onClick={() => handleMoveToCart(productId, initialCount)}
-                    className="btn m-2 px-md-5 ProdbtnRes_cart">
+                    className="btn m-2 px-md-5 ProdbtnRes_cart"
+                  >
                     Add to Cart
                   </button>
                 </div>
@@ -357,7 +357,7 @@ function ProdData({ category_id }) {
                   Buy Now
                 </Link>
                 <Link href="" className="">
-                    <button
+                  <button
                     className="btn btn-danger px-md-5 my-2 ProdbtnRes bulkRes"
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
@@ -407,7 +407,7 @@ function ProdData({ category_id }) {
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
-                <GetQuoteCustomForm prodName={name} read={'true'} />
+                <GetQuoteCustomForm prodName={name} read={"true"} />
               </div>
               {/* <div className="modal-footer">
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>

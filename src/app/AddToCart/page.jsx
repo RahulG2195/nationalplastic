@@ -18,6 +18,7 @@ import { emptyTempSlice } from "@/redux/reducer/tempSlice";
 import { notify, notifyError } from "@/utils/notify";
 import { Button } from "reactstrap";
 import { applyDiscount } from "@/redux/reducer/couponSlice";
+
 function AddToCart() {
 
   const CartStates = useSelector((state) => state.cart);
@@ -374,7 +375,7 @@ function AddToCart() {
                       const images = val ? val.image_name.split(', ').map(image => image.trim()) : [];
                       return <div className="row" key={val.product_id}>
                         <CartProduct
-                          src={`/Assets/images/products/${images[0]}`}
+                          src={`/Assets/uploads/products/${images[0]}`}
                           productId={val.product_id}
                           productName={val.product_name}
                           productPrice={val.price}

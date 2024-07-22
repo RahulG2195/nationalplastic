@@ -50,7 +50,6 @@ export const cartSlice = createSlice({
     },
     removeItemFromCart: (state, action) => {
       const { product_id } = action.payload;
-
       // Find the existing product in the cart
       const existingProductIndex = state.products.findIndex(
         (product) => product.product_id === product_id
@@ -191,7 +190,17 @@ export const cartSlice = createSlice({
       // Handle the case where the product is not found
       return state;
     },
+    emptyCart: (state) => {
+      localStorage.removeItem("products");
+      return {
+        ...state,
+        products: [],
+        total_price: 0,
+        discount_price: 0,
+      };
+    },
   },
+  
 });
 
 export const {
@@ -200,6 +209,7 @@ export const {
   increaseQuantity,
   decreaseQuantity,
   removeItemFromCart,
+  emptyCart,
 } = cartSlice.actions;
 
 export const addToCart = (item) => async (dispatch, getState) => {
@@ -220,6 +230,20 @@ export const addToCart = (item) => async (dispatch, getState) => {
   notify("ADDED TO CARTS");
 }
   dispatch(addItemToCart(item));
+};
+
+export const emptyCartAsync = (userId) => async (dispatch) => {
+  try {
+    console.log("hey its coming here no worries then ")
+    
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/UserCart?user_id=${userId}`);
+
+
+      dispatch(emptyCart());
+
+  } catch (error) {
+    console.error('Error emptying cart:', error);
+  }
 };
 
 export default cartSlice.reducer;

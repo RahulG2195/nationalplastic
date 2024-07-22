@@ -1,86 +1,87 @@
-import { NextResponse } from 'next/server';
-import formidable from 'formidable';
-import fs from 'fs';
+import { query } from "@/lib/db";
 
-const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+export async function POST(request) {
+  return await handleAction(request);
+}
 
-export default async function handler(req) {
-  if (req.method !== 'POST') {
-    return NextResponse.json(
-      { success: false, error: `Method ${req.method} Not Allowed` },
-      { status: 405 }
-    );
+async function handleAction(request) {
+  try {
+    const body = await request.json();
+    const { action } = body;
+
+    switch (action) {
+      case 'insertField':
+        return await insertField(body);
+      case 'updateField':
+        return await updateField(body);
+      default:
+        return new Response(JSON.stringify({ message: 'Invalid action' }), { status: 400 });
+    }
+  } catch (error) {
+    return new Response(JSON.stringify({ status: 500, message: error.message }));
+  }
+}
+
+async function insertField(body) {
+  const { label, link, parentId } = body;
+
+  // Validate input
+  if (!label) {
+    return new Response(JSON.stringify({ message: 'Label is required' }), { status: 400 });
   }
 
-  return new Promise((resolve) => {
-    const form = new formidable.IncomingForm();
-    form.uploadDir = "./public/uploads";
-    form.keepExtensions = true;
-
-    form.parse(req, async (err, fields, files) => {
-      if (err) {
-        return resolve(NextResponse.json(
-          { success: false, error: 'Error parsing form data' },
-          { status: 500 }
-        ));
-      }
-
-      const { title, name, description, subCategory, year } = fields;
-      const file = files.file;
-
-      const requiredFields = ['title', 'name', 'description'];
-      const missingFields = requiredFields.filter(field => !fields[field]);
-
-      if (missingFields.length > 0) {
-        return resolve(NextResponse.json(
-          { success: false, error: `The following fields are required: ${missingFields.join(', ')}` },
-          { status: 400 }
-        ));
-      }
-
-      if (title === 'Financials' || title === 'AGM Compliance') {
-        if (!subCategory) {
-          return resolve(NextResponse.json(
-            { success: false, error: 'Sub Category is required for Financials and AGM Compliance' },
-            { status: 400 }
-          ));
-        }
-      }
-
-      if (title === 'General Disclosure' && !year) {
-        return resolve(NextResponse.json(
-          { success: false, error: 'Year is required for General Disclosure' },
-          { status: 400 }
-        ));
-      }
-
-      if (!file) {
-        return resolve(NextResponse.json(
-          { success: false, error: 'File upload is required' },
-          { status: 400 }
-        ));
-      }
-
-      console.log('CMS Entry:', {
-        title,
-        subCategory: subCategory || null,
-        year: year || null,
-        name,
-        description,
-        file: file.newFilename,
-      });
-
-      const newPath = `./public/uploads/${file.newFilename}`;
-      fs.renameSync(file.filepath, newPath);
-
-      resolve(NextResponse.json(
-        { success: true, message: 'CMS entry created successfully' },
-        { status: 200 }
-      ));
+  // Perform database operation
+  try {
+    const result = await query({
+      query: "INSERT INTO fields (label, link, parentId) VALUES (?, ?, ?)",
+      values: [label, link, parentId],
     });
-  });
+
+    return new Response(JSON.stringify({
+      message: 'Field inserted successfully',
+      id: result.insertId
+    }), { status: 201 });
+  } catch (error) {
+    return new Response(JSON.stringify({
+      message: 'Error inserting field',
+      error: error.message
+    }), { status: 500 });
+  }
+}
+
+async function updateField(body) {
+  const { id, label, link, parentId } = body;
+
+  // Validate input
+  if (!id || !label) {
+    return new Response(JSON.stringify({ message: 'ID and label are required' }), { status: 400 });
+  }
+
+  // Perform database operation
+  try {
+    const result = await query({
+      query: "UPDATE fields SET label = ?, link = ?, parentId = ? WHERE id = ?",
+      values: [label, link, parentId, id],
+    });
+
+    if (result.affectedRows === 0) {
+      return new Response(JSON.stringify({ message: 'Field not found' }), { status: 404 });
+    }
+
+    // Fetch the updated field
+    const updatedField = await query({
+      query: "SELECT * FROM fields WHERE id = ?",
+      values: [id],
+    });
+
+    return new Response(JSON.stringify({
+      message: 'Field updated successfully',
+      field: updatedField[0]
+    }), { status: 200 });
+  } catch (error) {
+    return new Response(JSON.stringify({
+      message: 'Error updating field',
+      error: error.message
+    }), { status: 500 });
+  }
 }

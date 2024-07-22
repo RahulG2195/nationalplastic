@@ -119,7 +119,7 @@ function BottomBar() {
                         className="nav-link"
                         href={`/ProductDetail/${product.seo_url}`}
                       >
-                        {product.product_name2}
+                        {product.product_name}
                       </Link>
                     </p>
                   ))}
@@ -127,7 +127,7 @@ function BottomBar() {
               ))}
               <div className="barImgCont py-3">
                 <Image
-                  src={`/Assets/images/products/${currentImage}`}
+                  src={`/Assets/uploads/products/${currentImage}`}
                   alt=""
                   height={100}
                   width={100}

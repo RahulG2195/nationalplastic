@@ -149,7 +149,7 @@ export default function Manufacture() {
                         }
                         manfacthover="manfact"
                         style="manfTitle"
-                        image={`/Assets/images/products/category/${product.image_name}`}
+                        image={`/Assets/uploads/category/${product.image_name}`}
                         title={product.category_name}
                         categoryType={product.categoryType}
                         onCategoryChange={() =>
@@ -180,7 +180,7 @@ export default function Manufacture() {
                         : product.category_id
                     }
                     style="manfTitle pt-4 px-4 d-flex gap-5  justify-content-arround"
-                    image={`/Assets/images/products/category/${product.image_name}`}
+                    image={`/Assets/uploads/category/${product.image_name}`}
                     title={product.category_name}
                     categoryType={product.categoryType}
                     onCategoryChange={() => sendCategory(product.product_name)}
