@@ -13,7 +13,6 @@ const AnnualReturn = () => {
       try {
         setIsLoading(true);
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/InvestorPage`, { Id: 6 });
-        console.log("response: ", response.data.results[0].content);
         const parsedContent = JSON.parse(response.data.results[0].content);
         setAnnualReturns(parsedContent.annual_returns || []);
       } catch (error) {

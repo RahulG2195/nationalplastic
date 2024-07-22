@@ -78,7 +78,7 @@ const WishlistCard = (props) => {
         <div className="wishCptResp">
           <Link onClick={setid} href={`/ProductDetail/${props.productName}`}>
             <h5 className="card-title ProductTitle fw-semibold">
-              {Np} {props.productName} ({props.color}) 
+             <span style={{ color: "#CC0008" }}>{Np}</span>{props.productName} ({props.color}) 
             </h5>
           </Link>
           <p className="card-text productSubTitle">{props.producDiscription}</p>

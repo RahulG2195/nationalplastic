@@ -234,7 +234,6 @@ export const addToCart = (item) => async (dispatch, getState) => {
 
 export const emptyCartAsync = (userId) => async (dispatch) => {
   try {
-    console.log("hey its coming here no worries then ")
     
     const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/UserCart?user_id=${userId}`);
 

@@ -9,7 +9,6 @@ const Notice = () => {
     const fetchData = async () => {
       try {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/InvestorPage`, { Id: 12 });
-        console.log("response: ", response.data.results[0].content);
         setNotices(JSON.parse(response.data.results[0].content));
       } catch (error) {
         console.error('Error fetching notice data:', error);

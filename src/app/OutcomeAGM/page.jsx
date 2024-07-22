@@ -9,7 +9,6 @@ const OutcomeAGM = () => {
     const fetchData = async () => {
       try {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/InvestorPage`, { Id: 11 }); // Assuming 8 is the Id for AGM Outcomes
-        console.log("response: ", response.data.results[0].content);
         setAgmOutcomes(JSON.parse(response.data.results[0].content));
       } catch (error) {
         console.error('Error fetching AGM outcome data:', error);

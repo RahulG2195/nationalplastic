@@ -11,7 +11,6 @@ const Audited = () => {
     const fetchData = async () => {
       try {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/InvestorPage`, { Id: 4 });
-        console.log("response: ", response.data.results[0].content);
         const parsedContent = JSON.parse(response.data.results[0].content);
         setAuditedData(parsedContent.auditedReports || []);
         setIsLoading(false);
