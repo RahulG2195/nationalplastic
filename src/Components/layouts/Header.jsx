@@ -109,7 +109,6 @@ export default function Header() {
     async function loadConfig() {
       try {
         const config = await fetchInvestorConfig();
-        console.log("config", config);
         setInvestorConfig(config);
       } catch (error) {
         console.error("Failed to fetch investor config, using static config", error);

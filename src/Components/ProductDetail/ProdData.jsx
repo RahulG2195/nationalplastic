@@ -147,8 +147,6 @@ function ProdData({ category_id }) {
         `${process.env.NEXT_PUBLIC_BASE_URL}/colorBasedProduct`,
         colorBasedProduct
       );
-      console.log("response", JSON.stringify(response));
-      console.log("response", response.json());
       const dataBasedOnColor = response.data?.data;
       const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
       const newProductID = dataBasedOnColor[0].product_id;

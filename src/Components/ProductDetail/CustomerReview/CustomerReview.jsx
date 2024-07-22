@@ -164,15 +164,6 @@ const CustomerReview = () => {
       console.log("Error validating user: ", error.message);
 
     }
-
-
-
-    // TODO: Implement user validation here
-    // using email and product_id to avoid mutiple reviews 
-    //! Check if user has successfully brought the product to review it
-    // Check if user is logged in or not ---- DONE
-    //! Check if user is already reviewed?
-    //! 
   }
   const validateOrder = async (customer_id) => {
     try {

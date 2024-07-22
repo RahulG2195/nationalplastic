@@ -17,6 +17,7 @@ const OrderTable = () => {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [newStatus, setNewStatus] = useState("");
   const [cancelReason, setCancelReason] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     fetchOrders();
@@ -30,7 +31,6 @@ const OrderTable = () => {
       //     throw new Error('Failed to fetch orders');
       //   }
       const orderData = response.data.orderData;
-      console.log("orderData", orderData);
       // const data = await response.json();
       if (response.data.status === 200) {
         setOrders(orderData);
@@ -58,7 +58,6 @@ const OrderTable = () => {
     try {
       // Here you would call your API to update the order status
       // For now, we'll just log it and show a success message
-      // console.log(`Updating order ${selectedOrder.order_id} status to ${newStatus}`);
       message.success(`Order status updated to ${newStatus}`);
       setIsStatusModalVisible(false);
       // After successful update, refetch the orders
@@ -126,7 +125,6 @@ const OrderTable = () => {
       title: "View Detail",
       key: "View Detail",
       render: (text, record) => {
-        const router = useRouter();
 
         const ShowOrderDetail = () => {
           router.push(`/admin/Order_detail/${record.order_id}`);
