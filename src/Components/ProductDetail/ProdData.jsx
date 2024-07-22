@@ -342,8 +342,7 @@ function ProdData({ category_id }) {
                   />
                   <button
                     onClick={() => handleMoveToCart(productId, initialCount)}
-                    className="btn m-2 px-md-5 ProdbtnRes"
-                  >
+                    className="btn m-2 px-md-5 ProdbtnRes_cart">
                     Add to Cart
                   </button>
                 </div>

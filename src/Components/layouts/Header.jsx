@@ -351,7 +351,7 @@ export default function Header() {
                         className="nav-link"
                         href="/NewsAndMedia"
                         onClick={isClicked ? handleShow : null}>
-                        Media/News
+                        News/Media
                       </Link>
                     </li>
                     <li className="nav-item brdr">

@@ -540,12 +540,13 @@ function ProfilePage() {
                                 required
                                 type="text"
                                 className="form-control fw-semibold"
-                                placeholder={
-                                  message.Adress2 || "Please enter Address"
-                                }
-                                defaultValue={
-                                  message.Adress2 || "Please enter Address"
-                                }
+                                placeholder="Please Enter Address"
+                                // placeholder={
+                                //   message.Adress2 || "Please enter Address"
+                                // }
+                                // defaultValue={
+                                //   message.Adress2 || "Please enter Address"
+                                // }
                                 onChange={handleInputAddressChange}
                               ></textarea>
                             </div>

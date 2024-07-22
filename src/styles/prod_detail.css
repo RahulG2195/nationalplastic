@@ -300,12 +300,12 @@
   text-decoration: underline !important;
 }
 
-.ProdbtnRes {
+.ProdbtnRes, .ProdbtnRes_cart {
   background-color: #cc0008;
-  color: #fff;
+  color: #fff !important;
 }
 
-.ProdbtnRes:hover {
+.ProdbtnRes:hover, .ProdbtnRes_cart:hover {
   color: #cc0008 !important;
   background-color: #fff;
   border: none;
@@ -424,7 +424,7 @@ input:focus-visible {
 }
 
 @media (max-width: 425px) {
-  .ProdbtnRes {
+  .ProdbtnRes, .ProdbtnRes_cart {
     padding: 7px 20px !important;
     font-size: 15px;
   }

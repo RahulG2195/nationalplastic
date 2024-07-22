@@ -7,30 +7,31 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { createOrderSuccess } from "@/redux/reducer/paySlice";
 import { useRouter } from "next/navigation";
+import numberWithCommas from "@/utils/formatnumber";
 
-const PriceDetailsCard = ({
-  itemCount,
-  totalDiscount,
-  totalPay,
-  redirect,
-}) => {
+const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { customer_id, email } = useSelector((state) => state.userData);
 
-  const { discountPercentage , couponCode} = useSelector((state) => state.discount);
+  const { discountPercentage, couponCode } = useSelector(
+    (state) => state.discount
+  );
   const [Phone, setPhone] = useState(null);
   const [Name, setName] = useState(null);
   const [Address, setAddress] = useState(null);
   const isBrowser = typeof window !== "undefined";
-// User Data 
+  // User Data
   useEffect(() => {
     const fetchUserData = async () => {
       const formData = {
         email: email,
         getProfile: true,
       };
-      const response = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/Users`, formData);
+      const response = await axios.put(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/Users`,
+        formData
+      );
       const userData = response.data.message[0]; // Directly access response.data.message
       const { Phone, FirstName, Address } = userData;
       setPhone(Phone);
@@ -74,14 +75,17 @@ const PriceDetailsCard = ({
   const [productsData, setProductsData] = useState(null);
 
   const testing = async () => {
-    const userCartData = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/UserCart`, {
-      customer_id: customer_id,
-    });
+    const userCartData = await axios.post(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/UserCart`,
+      {
+        customer_id: customer_id,
+      }
+    );
     setProductsData(userCartData.data.productps);
   };
   useEffect(() => {
     testing();
-    
+
     setTotalPrice(priceFromState.toFixed(2));
     setMRPPrice(MRPvalue.toFixed(2));
     setdiscount(Math.round((MRPvalue - priceFromState) * 100) / 100);
@@ -93,7 +97,8 @@ const PriceDetailsCard = ({
         return;
       }
 
-      const baseAmount = parseFloat(totalPrice) + parseFloat(InstallationCharge);
+      const baseAmount =
+        parseFloat(totalPrice) + parseFloat(InstallationCharge);
       const discountAmount = baseAmount * (discountPercentage / 100);
       const finalTotal = baseAmount - discountAmount;
       setFinalAmount(finalTotal.toFixed(2));
@@ -103,14 +108,16 @@ const PriceDetailsCard = ({
   }, [priceFromState, MRPvalue, DiscountCard, totalDiscount]);
 
   const makePayment = async ({ productId = null }) => {
-
-    const totalPay = finalAmount
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/razorpay`, {
-      amount: totalPay * 100,
-      currency: "INR",
-      email: email,
-      isBrowser: isBrowser,
-    });
+    const totalPay = finalAmount;
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/razorpay`,
+      {
+        amount: totalPay * 100,
+        currency: "INR",
+        email: email,
+        isBrowser: isBrowser,
+      }
+    );
     const orderData = response;
     const options = {
       amount: orderData.data.message.amount,
@@ -120,23 +127,29 @@ const PriceDetailsCard = ({
       image: "",
       order_id: orderData.data.message.id,
       handler: async function (response) {
-        const data = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/paymentVerify`, {
-          method: "POST",
-          body: JSON.stringify({
-            razorpay_payment_id: response.razorpay_payment_id,
-            razorpay_order_id: response.razorpay_order_id,
-            razorpay_signature: response.razorpay_signature,
-            isBrowser: isBrowser,
-          }),
-        });
+        const data = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/paymentVerify`,
+          {
+            method: "POST",
+            body: JSON.stringify({
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_signature: response.razorpay_signature,
+              isBrowser: isBrowser,
+            }),
+          }
+        );
         const payID = response.razorpay_payment_id;
         const res = await data.json();
         const status = res.success || false;
         if (status) {
-          const response = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/razorpay`, {
-            razorpay_payment_id: payID,
-            isBrowser: isBrowser,
-          });
+          const response = await axios.put(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/razorpay`,
+            {
+              razorpay_payment_id: payID,
+              isBrowser: isBrowser,
+            }
+          );
           updateDatabase(response.data.response);
           sendPaymentSuccessMail(response.data.response);
           router.push("/ThankYouPage");
@@ -173,7 +186,10 @@ const PriceDetailsCard = ({
       coupon_code: couponCode,
       status: values.status,
     };
-    await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/RegisterEmail`, paymentData);
+    await axios.put(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/RegisterEmail`,
+      paymentData
+    );
   };
   const updateDatabase = async (values) => {
     // console.log("values from updaetDatabase", values)
@@ -193,7 +209,10 @@ const PriceDetailsCard = ({
         cart: productsData,
       },
     };
-    const resData = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/paymentVerify`, paymentData);
+    const resData = await axios.put(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/paymentVerify`,
+      paymentData
+    );
   };
   return (
     <>
@@ -205,25 +224,35 @@ const PriceDetailsCard = ({
         <div className="mt-4">
           <div className={`d-flex justify-content-between mt-1 fw-semibold`}>
             <div className="text-secondary">MRP</div>
-            <div> ₹ {MRPPrice ? MRPPrice : "0000.00"}</div>
+            <div> ₹ {MRPPrice ? numberWithCommas(MRPPrice) : "0000.00"}</div>
           </div>
           <div
             className={`d-flex justify-content-between mt-1 fw-semibold text-success`}
           >
             <div className="text-secondary">Discount</div>
-            <div> - ₹ {totalDiscount ? discount.toFixed(2) : "0000"}</div>
+            <div>
+              {" "}
+              - ₹{" "}
+              {totalDiscount ? numberWithCommas(discount.toFixed(2)) : "0000"}
+            </div>
           </div>
           <div
             className={`d-flex justify-content-between mt-1 fw-semibold text-success`}
           >
             <div className="text-secondary">
-  Coupon ({couponCode ? couponCode : '(NONE'})
-</div>
+              Coupon ({couponCode ? couponCode : "(NONE"})
+            </div>
             <div>{discountPercentage}%</div>
           </div>
           <div className={`d-flex justify-content-between mt-1 fw-semibold`}>
             <div className="text-secondary ">Installation Charge</div>
-            <div> ₹ {InstallationCharge ? InstallationCharge : "0000"}</div>
+            <div>
+              {" "}
+              ₹{" "}
+              {InstallationCharge
+                ? numberWithCommas(InstallationCharge)
+                : "0000"}
+            </div>
           </div>
           <div className="border-bottom border-secondary mt-2"></div>
         </div>
@@ -231,43 +260,45 @@ const PriceDetailsCard = ({
         <div className="d-flex justify-content-between mt-3">
           <div>Total Payable</div>
           <div className="fw-bold">
-          ₹{totalPrice ? finalAmount : "0000.00"}
+            ₹{totalPrice ? numberWithCommas(finalAmount) : "0000.00"}
           </div>
         </div>
         <div className="small my-2 text-success text-center">
           Congratulations, you have just saved RS
-          {totalDiscount ?(MRPPrice - finalAmount).toFixed(2) : "0000"} on your order
+          {totalDiscount
+            ? numberWithCommas((MRPPrice - finalAmount).toFixed(2))
+            : "0000"}{" "}
+          on your order
         </div>
         <div className="small text-center">EMI starts with Rs 10,000</div>
 
         <div className="d-flex justify-content-center mt-2">
-  {redirect ? (
-    <Link href={`${userState ? "/Address" : "/Login"}`}>
-      <button
-        type="submit"
-        className="btn btn-danger px-md-5 placeOrderResp"
-        disabled={ count === 0}
-      >
-        {userState ? "Checkout" : "Login To Checkout"}
-      </button>
-    </Link>
-  ) : (
-    <button
-      type="submit"
-      className="btn btn-danger px-md-5 placeOrderResp"
-      onClick={() => {
-        makePayment({ productId: "example_ebook" });
-      }}
-      disabled={!userState || count === 0}
-    >
-      Place Order
-    </button>
-  )}
-</div>
+          {redirect ? (
+            <Link href={`${userState ? "/Address" : "/Login"}`}>
+              <button
+                type="submit"
+                className="btn btn-danger px-md-5 placeOrderResp"
+                disabled={count === 0}
+              >
+                {userState ? "Checkout" : "Login To Checkout"}
+              </button>
+            </Link>
+          ) : (
+            <button
+              type="submit"
+              className="btn btn-danger px-md-5 placeOrderResp"
+              onClick={() => {
+                makePayment({ productId: "example_ebook" });
+              }}
+              disabled={!userState || count === 0}
+            >
+              Place Order
+            </button>
+          )}
+        </div>
       </div>
     </>
   );
 };
 
 export default PriceDetailsCard;
-

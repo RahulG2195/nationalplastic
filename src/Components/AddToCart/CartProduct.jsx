@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemToWishlist } from "../../redux/reducer/wishlistSlice";
 import Link from "next/link";
+import numberWithCommas from '@/utils/formatnumber';
 // import axios from "axios";
 import {
   increaseQuantity,
@@ -131,9 +132,9 @@ const CartProduct = ({
 
           {/* Increment Decrement end */}
           <div className="productPrice">
-            <p className="fw-bold">RS {productPrice}</p>
+            <p className="fw-bold">₹ {numberWithCommas(productPrice)}</p>
             <p>
-              <del className="fw-semibold"> {discountedPrice}</del>
+              <del className="fw-semibold">₹ {numberWithCommas(discountedPrice)}</del>
               <span>{discPer}% Off</span>
             </p>
           </div>
@@ -141,7 +142,7 @@ const CartProduct = ({
         <div className="InstallationCharges align-items-center">
           <p className="text-secondary me-2">
             {" "}
-            Installation Charges : Rs {installationCharges}
+            Installation Charges : ₹ {installationCharges}
           </p>
           <div className="CouponApplied">
             <Image

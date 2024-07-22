@@ -213,7 +213,7 @@ const CustomerReview = () => {
   return (
     <div className="container py-5">
       <div className="text-center mb-5">
-        <h1 className="display-4">Customer <span className="text-primary">Reviews</span></h1>
+        <h1 className="display-4">Customer <span className="text-danger">Reviews</span></h1>
         <p className="lead">See what our customers are saying about their experience</p>
       </div>
   
@@ -230,7 +230,7 @@ const CustomerReview = () => {
                   className="large-star"
                 />
               </div>
-              <button className="btn btn-primary" onClick={showModal}>
+              <button className="btn btn-warning" onClick={showModal}>
                 Write a Review
               </button>
             </div>
@@ -265,7 +265,7 @@ const CustomerReview = () => {
   
       {visibleReviews < reviews.length && (
         <div className="text-center">
-          <button className="btn btn-outline-primary" onClick={loadMoreReviews}>
+          <button className="btn btn-outline-danger" onClick={loadMoreReviews}>
             Load More Reviews
           </button>
         </div>

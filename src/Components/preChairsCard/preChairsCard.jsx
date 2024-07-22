@@ -6,6 +6,7 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import axios from "axios";
 import { notify } from "@/utils/notify";
 import GetQuoteForm from "@/Components/BulkOrder/GetQuoteForm.jsx";
+import numberWithCommas from '@/utils/formatnumber';
 
 const PreChairsCard = (props) => {
   console.log("props for PreChairsCard", props);
@@ -90,9 +91,9 @@ const PreChairsCard = (props) => {
               )}
               {props.Price && (
                 <>
-                  <span className="new-price pr-2 pr-md-0">₹{props.Price}</span>
+                  <span className="new-price pr-2 pr-md-0">₹{numberWithCommas(props.Price)}</span>
                   {props.orignalPrice && (
-                    <small className="old-price text-right"><del>₹{props.orignalPrice}</del></small>
+                    <small className="old-price text-right"><del>₹{numberWithCommas(props.orignalPrice)}</del></small>
                   )}
                 </>
               )}

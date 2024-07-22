@@ -193,7 +193,7 @@ const BoughtTogether = () => {
                     //     card.discount_price) *
                     //   100
                     // )}
-                    Discount={chair.discount_percentage}
+                    Discount={card.discount_percentage}
                     onaddToWishlist={() =>
                       handleAddToWishlist(card.product_id)
                     }

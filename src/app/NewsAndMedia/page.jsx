@@ -6,7 +6,7 @@ const NewsAndMedia = () => {
     <>
       <div>
         <NewsBanner />
-        <AwardsAndCertificates />
+        {/* <AwardsAndCertificates /> */}
         <EventsAndActivities />
       </div>
     </>

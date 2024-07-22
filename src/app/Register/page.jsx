@@ -85,6 +85,7 @@ const Register = () => {
   };
   const combineAddressFields = (formData) => {
     // Combine address fields
+    
     const fullAddress = `${formData.address}, ${formData.city}, ${formData.state}, ${formData.pincode}`.trim();
 
     // Create updated formData with combined address
