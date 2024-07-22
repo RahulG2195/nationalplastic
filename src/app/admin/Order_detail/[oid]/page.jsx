@@ -32,7 +32,6 @@ const Order_detail = ({params}) => {
           const response = await axios.post(`/api/UserOrderDetail/`, { oid });
           
           const UserOrderDetail = response.data.orderData;
-          console.log("orderData", UserOrderDetail);
           
           if (response.data.status === 200) {
             setOrders(UserOrderDetail);

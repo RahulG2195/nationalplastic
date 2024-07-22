@@ -123,7 +123,6 @@ const Unaudited = () => {
   useEffect(() => {
     axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/Unaudited`)
       .then((response) => {
-        console.log("data frm audit", response.data);
         if (Array.isArray(response.data.results)) {
           const updatedResults = response.data.results.map(result => ({
             ...result,

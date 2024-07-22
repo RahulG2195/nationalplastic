@@ -39,8 +39,6 @@ async function handleActionData(request) {
       });
     });
 
-    console.log('Form data:', fields);
-    console.log('File:', files.file);
 
     const action = fields.action;
 
@@ -78,7 +76,6 @@ async function addRecord(fields, files) {
 
     await fs.rename(file.filepath, newPath);
 
-    console.log(`File saved to ${newPath}`);
   }
 
   try {
@@ -120,14 +117,12 @@ async function editRecord(fields, files) {
 
     await fs.rename(file.filepath, newPath);
 
-    console.log(`File saved to ${newPath}`);
 
     // If there was an old file, you might want to delete it here
     if (fields.currentFilePath) {
       const oldPath = path.join(uploadDir, fields.currentFilePath);
       try {
         await fs.unlink(oldPath);
-        console.log(`Old file deleted: ${oldPath}`);
       } catch (error) {
         console.error(`Error deleting old file: ${error.message}`);
       }

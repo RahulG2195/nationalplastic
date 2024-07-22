@@ -10,7 +10,6 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req, res) {
 
     const { oid } = req.body;
-    console.log('Received oid:', req.body);
     
     try {
       const orderResult = await query({

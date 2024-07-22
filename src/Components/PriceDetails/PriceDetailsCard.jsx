@@ -173,7 +173,6 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
     });
   };
   const sendPaymentSuccessMail = async (values) => {
-    // console.log("values from sendPaymentSuccessMail", values)
 
     const paymentData = {
       id: values.id,
@@ -194,7 +193,6 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
     );
   };
   const updateDatabase = async (values) => {
-    // console.log("values from updaetDatabase", values)
     const paymentData = {
       razorpay_order_id: values.order_id,
       customer_id: customer_id,
