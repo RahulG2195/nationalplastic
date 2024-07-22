@@ -30,6 +30,7 @@ function ProdData({ category_id }) {
   const [product_id, setProduct_id] = useState(null);
   const [availableColor, setAvailableColor] = useState([]);
   const [dataToShow, setdataToShow] = useState([]);
+  const [isHovered, setIsHovered] = useState(false);
 
   const dispatch = useDispatch();
   const router = useParams();
@@ -303,8 +304,8 @@ function ProdData({ category_id }) {
                               transition: "all 0.3s ease",
                               ...(selectedColor === val.color
                                 ? {
-                                    boxShadow: "0 0 0 2px #fff, 0 0 0 4px #000",
-                                  }
+                                  boxShadow: "0 0 0 2px #fff, 0 0 0 4px #000",
+                                }
                                 : {}),
                             }}
                           >
@@ -341,7 +342,14 @@ function ProdData({ category_id }) {
                   />
                   <button
                     onClick={() => handleMoveToCart(productId, initialCount)}
-                    className="btn m-2 px-md-5 ProdbtnRes"
+                    className="m-2 px-md-5 btn"
+                    style={{
+                      backgroundColor: isHovered ? '#fff' : '#cc0008',
+                      color: isHovered ? '#cc0008' : '#fff',
+                      border: 'none'
+                    }}
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
                   >
                     Add to Cart
                   </button>
@@ -349,15 +357,14 @@ function ProdData({ category_id }) {
 
                 <Link
                   href={userState ? "/Address" : "#"}
-                  className={`btn m-2 px-md-5 ProdbtnRes ${
-                    !userState ? "disabled-button" : ""
-                  }`}
+                  className={`btn m-2 px-md-5 ProdbtnRes ${!userState ? "disabled-button" : ""
+                    }`}
                   onClick={() => handleMoveToCart(productId)}
                 >
                   Buy Now
                 </Link>
                 <Link href="" className="">
-                    <button
+                  <button
                     className="btn btn-danger px-md-5 my-2 ProdbtnRes bulkRes"
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
