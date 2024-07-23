@@ -1,6 +1,5 @@
 import { query } from '@/lib/db';
 import { writeFile } from "fs/promises";
-import upload from "@/utils/multer.middleware";
 import { uploadFile } from "@/utils/fileUploader";
 // import { query } from "@/lib/db";
 
@@ -13,11 +12,17 @@ export async function POST(request) {
     );
 
     const image = data.get('image');
-    let uploadedImageName = '';
+    const uploadedImageName = image.name;
+    console.log("its inside 1000 line "+image);
+
 
     if (image && image instanceof File) {
       try {
-        uploadedImageName = await uploadFile(image);
+        const bytes = await image.arrayBuffer();
+        const buffer = Buffer.from(bytes);
+    
+        const path = `./public/Assets/uploads/category_banner/${image.name}`;
+        await writeFile(path, buffer);
       } catch (uploadError) {
         return new Response(
           JSON.stringify({ success: false, error: uploadError.message }),
@@ -25,6 +30,7 @@ export async function POST(request) {
         );
       }
     }
+    console.log("its inside 10003 line "+image);
 
     const allCategories = await query({
       query: "SELECT * FROM categories WHERE category_name = ?",
@@ -75,19 +81,21 @@ export async function POST(request) {
     );
   }
 }
-
-
-
 export async function PUT(request) {
   try {
     const data = await request.formData();
     const { category_id, category_name, image_name, navshow, status, image , topPick=0} = Object.fromEntries(
       data.entries()
     );
-
+    console.log("its inside 1000- line ");
     if (image) {
       try {
-        await uploadImage(image);
+
+        const bytes = await image.arrayBuffer();
+        const buffer = Buffer.from(bytes);
+    
+        const path = `./public/Assets/uploads/category_banner/${image.name}`;
+        await writeFile(path, buffer);
       } catch (uploadError) {
         return new Response(
           JSON.stringify({ success: false, error: uploadError.message }),
@@ -137,7 +145,6 @@ export async function PUT(request) {
     );
   }
 }
-
 export async function GET(request) {
   try {
     const allCategories = await query({
@@ -165,7 +172,6 @@ export async function GET(request) {
     );
   }
 }
-
 export async function DELETE(request) {
   try {
     const requestBody = await request.json();
@@ -211,6 +217,53 @@ export async function DELETE(request) {
         message: "Internal Server Error",
         error: error.message,
       }),
+      { status: 500 }
+    );
+  }
+}
+
+export async function PATCH(request) {
+  try {
+    const { category_id, navshow } = await request.json();
+
+    // Validate inputs
+    if (category_id === undefined || navshow === undefined) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'category_id and navshow are required' }),
+        { status: 400 }
+      );
+    }
+
+    // Ensure navshow is either 0 or 1
+    const validatedNavshow = navshow ? 1 : 0;
+
+    // Update the navshow status
+    const result = await query({
+      query: `
+        UPDATE categories 
+        SET navshow = ?
+        WHERE category_id = ?
+      `,
+      values: [validatedNavshow, category_id],
+    });
+
+    if (result.affectedRows === 0) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'Category not found' }),
+        { status: 404 }
+      );
+    }
+
+    return new Response(
+      JSON.stringify({ success: true, data: { category_id, navshow: validatedNavshow } }),
+      { status: 200 }
+    );
+
+  } catch (error) {
+    console.error('Error updating navshow status:', error);
+
+    return new Response(
+      JSON.stringify({ success: false, error: error.message }),
       { status: 500 }
     );
   }

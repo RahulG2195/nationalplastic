@@ -65,7 +65,7 @@ export default function EditCoupon() {
           setValue(key, moment(data[key]));
         } else if (key === 'code') {
           // Split the code into its parts
-          const codeRegex = /^([A-Za-z]{4,6})([-!@#$%^&*()_+])(\d+)$/;
+          const codeRegex = /^([A-Za-z]{4,6})([!@#$%])(\d+)$/;
           const [, prefix, specialChar, discount] = data[key].match(codeRegex) || [];
           setValue('codePrefix', prefix);
           setValue('codeSpecialChar', specialChar);
@@ -106,10 +106,10 @@ export default function EditCoupon() {
             <Controller
               name="codeSpecialChar"
               control={control}
-              rules={{ required: true, pattern: /^[-!@#$%^&*()_+]$/ }}
+              rules={{ required: true, pattern: /^[!@#$%]$/ }}
               render={({ field }) => (
                 <Select {...field} style={{ width: '80px' }}>
-                  {'-!@#$%^&*()_+'.split('').map(char => (
+                  {'!@#$%'.split('').map(char => (
                     <Option key={char} value={char}>{char}</Option>
                   ))}
                 </Select>

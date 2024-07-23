@@ -97,7 +97,7 @@ const CouponList = () => {
       ),
     },
     {
-      title: 'Discount Value',
+      title: 'Discount Percentage',
       dataIndex: 'discount_value',
       key: 'discount_value',
     },

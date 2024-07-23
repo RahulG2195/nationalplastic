@@ -3,11 +3,12 @@ import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from 'axios';
-import { Table } from 'antd';
+import { Table,Switch } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import "./CategoryList.css";
+import { notify , notifyError } from '@/utils/notify';
 const CategoryList = () => {
   const router = useRouter();
   const [categoryArray, setCategoryArray] = useState([]);
@@ -25,6 +26,34 @@ const CategoryList = () => {
     };
     fetchData();
   }, []);
+  const handleToggleNavshow = async (categoryId, checked) => {
+    try {
+      const newNavshowValue = checked ? 1 : 0;
+      const response = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/adminCategories`, {
+        category_id: categoryId,
+        navshow: newNavshowValue
+      });
+      
+      if (response.data.success) {
+
+        // Update the state
+        const updatedCategories = categoryArray.map(category => 
+          category.category_id === categoryId 
+            ? { ...category, navshow: newNavshowValue } 
+            : category
+        );
+        setCategoryArray(updatedCategories);
+        setFilteredCategoryArray(updatedCategories);
+        
+        notify("Navshow status updated successfully");
+      } else {
+        notifyError('Failed to update navshow status');
+      }
+    } catch (error) {
+      console.error('Failed to update navshow', error);
+      notifyError('An error occurred while updating navshow status');
+    }
+  };
 
   const handleOnclick = (type, index) => {
     if (type === 'Edit') {
@@ -103,7 +132,7 @@ const CategoryList = () => {
       key: 'image_name',
       render: (text) => (
         <Image
-          src={`/Assets/images/circular/${text}`}
+          src={`/Assets/uploads/category_banner/${text}`}
           className='admin-product-img'
           alt={text}
           style={{ width: '100px', height: '50px' }}
@@ -118,6 +147,12 @@ const CategoryList = () => {
       title: 'Navshow',
       dataIndex: 'navshow',
       key: 'navshow',
+      render: (navshow, record) => (
+        <Switch
+          checked={navshow === 1}
+          onChange={(checked) => handleToggleNavshow(record.category_id, checked)}
+        />
+      ),
     },
     {
       title: 'Top Pick',

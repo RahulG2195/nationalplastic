@@ -1,12 +1,14 @@
 "use client"
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Form, Input, Button, InputNumber, Spin } from 'antd';
+import { Form, Input, Button, Select, Spin } from 'antd';
 import axios from 'axios';
 import "./EditCategory.css";
 import { useNavigate } from 'react-router-dom';
 import { toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+const { Option } = Select;
 
 export default function AddCategory() {
   const { control, handleSubmit, setValue, getValues, reset, formState: { errors } } = useForm();
@@ -113,41 +115,53 @@ export default function AddCategory() {
         <Form.Item
           label="Nav Show"
           validateStatus={errors.navshow ? 'error' : ''}
-          help={errors.navshow ? 'Please input the navigation show value!' : ''}
+          help={errors.navshow ? 'Please select a value for Nav Show!' : ''}
         >
           <Controller
             name="navshow"
             control={control}
+            defaultValue={1}
             rules={{ required: true }}
             render={({ field }) => (
-              <InputNumber {...field} style={{ width: '100%' }} />
+              <Select {...field}>
+                <Option value={1}>Yes (1)</Option>
+                <Option value={0}>No (0)</Option>
+              </Select>
             )}
           />
         </Form.Item>
         <Form.Item
           label="Status"
           validateStatus={errors.status ? 'error' : ''}
-          help={errors.status ? 'Please input the status!' : ''}
+          help={errors.status ? 'Please select a value for Status!' : ''}
         >
           <Controller
             name="status"
             control={control}
+            defaultValue={1}
             rules={{ required: true }}
             render={({ field }) => (
-              <InputNumber {...field} style={{ width: '100%' }} />
+              <Select {...field}>
+                <Option value={1}>Active (1)</Option>
+                <Option value={0}>Inactive (0)</Option>
+              </Select>
             )}
           />
         </Form.Item>
         <Form.Item
-          label="Top pick"
+          label="Top Pick"
           validateStatus={errors.topPick ? 'error' : ''}
-          help={errors.topPick ? 'Please input the topPick  value!' : ''}
+          help={errors.topPick ? 'Please select a value for Top Pick!' : ''}
         >
           <Controller
             name="topPick"
             control={control}
+            defaultValue={1}
             render={({ field }) => (
-              <InputNumber {...field} style={{ width: '100%' }} />
+              <Select {...field}>
+                <Option value={1}>Yes (1)</Option>
+                <Option value={0}>No (0)</Option>
+              </Select>
             )}
           />
         </Form.Item>

@@ -40,7 +40,7 @@ function AddToCart() {
   const [installationCharges, setInstallationCharges] = useState(0);
   const [Updated, setUpdated] = useState(true);
   const [couponCode, setCouponCode] = useState('');
-
+  const [displayCouponCode, setDisplayCouponCode] = useState('');
   const dispatch = useDispatch();
   const StoreGuestData = async (products) => {
     // Check if user is logged in and products array has items
@@ -322,7 +322,13 @@ function AddToCart() {
     }
   };
   const handleInputChange = (event) => {
-    setCouponCode(event.target.value);
+    // event.target.value;
+    const data = event.target.value
+    setCouponCode(data.toUpperCase());
+    setDisplayCouponCode(data.toUpperCase());
+    if (data.length > 6) {
+      validateCouponCode(data);
+    }
   };
   const applyCouponCode = async (message) => {
     const discount_percentage = parseInt(message)
@@ -415,14 +421,16 @@ function AddToCart() {
               <h6 className="pb-2">Have a coupon Code?</h6>
               <form onSubmit={validateCouponCode}>
                 <div className="input-group mb-3">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter coupon code"
-                    aria-label="coupon code"
-                    aria-describedby="basic-addon2"
-                    onChange={handleInputChange}
-                  />
+                <input
+  type="text"
+  className="form-control"
+  placeholder="Enter coupon code"
+  aria-label="coupon code"
+  aria-describedby="basic-addon2"
+  onChange={handleInputChange}
+  value={displayCouponCode}
+  maxLength={7}
+/>
                   <div className="input-group-append">
                     <Button className="input-group-text coupon_btn" id="basic-addon2" type="submit">
                       Apply

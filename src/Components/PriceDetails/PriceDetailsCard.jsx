@@ -9,6 +9,7 @@ import { createOrderSuccess } from "@/redux/reducer/paySlice";
 import { useRouter } from "next/navigation";
 import { emptyCartAsync } from "@/redux/reducer/cartSlice"
 import numberWithCommas from "@/utils/formatnumber";
+import { removeCoupon } from "@/redux/reducer/couponSlice";
 
 const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
   const router = useRouter();
@@ -154,6 +155,7 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
           updateDatabase(response.data.response);
           sendPaymentSuccessMail(response.data.response);
           dispatch(emptyCartAsync(customer_id))
+          dispatch(removeCoupon());
           router.push("/ThankYouPage");
         }
       },
