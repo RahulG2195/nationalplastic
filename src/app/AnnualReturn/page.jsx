@@ -43,26 +43,28 @@ const AnnualReturn = () => {
       <div className='container'>
         <div className='row'>
           <div className='col-12'>
-            <table className='table table-responsive table-striped table-light table-bordered'>
-              <tbody>
-                {annualReturns.map((yearData, yearIndex) =>
-                  yearData.reports.map((report, reportIndex) => (
-                    <tr key={`${yearIndex}-${reportIndex}`}>
-                      <td className="data-title=&quot;Year&quot;" width="25%">
-                        <a target='_blank' href="/Assets/pdf/NATIONAL%20PLASTIC%20INDUSTRIES%20LIMITED%2019-20.pdf" rel="noopener noreferrer">
-                          <b>Year {yearData.year}</b>
-                        </a>
-                      </td>
-                      <td data-title="Report" width="75%">
-                        <a target='_blank' href={report.url} rel="noopener noreferrer">
-                          <i className="fa fa-file-pdf-o" aria-hidden="true"></i> {report.title}
-                        </a>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
+            <div className="table-responsive">
+              <table className='table table-striped table-light table-bordered'>
+                <tbody>
+                  {annualReturns.map((yearData, yearIndex) =>
+                    yearData.reports.map((report, reportIndex) => (
+                      <tr key={`${yearIndex}-${reportIndex}`}>
+                        <td className="data-title=&quot;Year&quot;" width="25%">
+                          <a target='_blank' href="/Assets/pdf/NATIONAL%20PLASTIC%20INDUSTRIES%20LIMITED%2019-20.pdf" rel="noopener noreferrer">
+                            <b>Year {yearData.year}</b>
+                          </a>
+                        </td>
+                        <td data-title="Report" width="75%">
+                          <a target='_blank' href={report.url} rel="noopener noreferrer">
+                            <i className="fa fa-file-pdf-o" aria-hidden="true"></i> {report.title}
+                          </a>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

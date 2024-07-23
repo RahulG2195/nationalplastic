@@ -270,7 +270,7 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
             : "0000"}{" "}
           on your order
         </div>
-        <div className="small text-center">EMI starts with Rs 10,000</div>
+        {/* <div className="small text-center">EMI starts with Rs 10,000</div> */}
 
         <div className="d-flex justify-content-center mt-2">
           {redirect ? (

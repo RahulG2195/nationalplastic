@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import "../Disclosure/Disclosure.css"
+import "../Disclosure/Disclosure.css";
+
 const Disclosure = () => {
   const [disclosureData, setDisclosureData] = useState({ years: [] });
 
@@ -11,7 +12,7 @@ const Disclosure = () => {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/InvestorPage`, { Id: 15 });
         setDisclosureData(JSON.parse(response.data.results[0].content));
       } catch (error) {
-        console.error('Error fetching shareholding data:', error);
+        console.error('Error fetching disclosure data:', error);
       }
     };
 
@@ -19,7 +20,7 @@ const Disclosure = () => {
   }, []);
 
   return (
-    <section className='investor_sec my-5 py-5'>
+    <section className='investor_sec py-5'>
       <div className='container'>
         <div className='row'>
           <div className="col-12">
@@ -32,7 +33,7 @@ const Disclosure = () => {
                       <thead className="thead-light">
                         <tr>
                           {yearData.quarters.map((quarter, quarterIndex) => (
-                            <th key={quarterIndex} className='col'>{quarter.quarter}</th>
+                            <th key={quarterIndex} className='text-center discloHeading'>{quarter.quarter}</th>
                           ))}
                         </tr>
                       </thead>
@@ -42,7 +43,7 @@ const Disclosure = () => {
                             <td key={quarterIndex} className="align-top">
                               <ul className="list-unstyled">
                                 {quarter.items.map((item, itemIndex) => (
-                                  <li key={itemIndex} className="mb-2">
+                                  <li key={itemIndex} className="mb-2 border-bottom border-2 discliResp">
                                     <a href={item.href} target="_blank" rel="noopener noreferrer" className="d-flex align-items-center">
                                       <i className="fa fa-file-pdf-o mr-2" aria-hidden="true"></i>
                                       <span>{item.text}</span>

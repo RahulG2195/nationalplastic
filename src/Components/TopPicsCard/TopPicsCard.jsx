@@ -20,7 +20,7 @@ const TopPicsCard = (props) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="circularimg mb-3 ">
+      <div className="circularimg border-bottom border-2 ">
         <Image
           className="image"
           src={props.imgSrc}
@@ -45,7 +45,7 @@ const TopPicsCard = (props) => {
           </div>
         </div>
       ) : (
-        <div className="mx-2 mb-4">
+        <div className="my-4">
           <h6 className="dress-name"><span className=" d-inline fw-bold text-danger">National Plastic</span> {props.imgtext}</h6>
           {/* <p className="circularText ms-1 fw-bold d-inline">
             {props.imgtext}
@@ -55,7 +55,7 @@ const TopPicsCard = (props) => {
       )}
 
       {isHovered && props.imgtext.trim() !== "" && (
-        <button onClick={handleGetQuote} className="get-quote-btn">
+        <button onClick={handleGetQuote} className="get-quote-btn fw-bold fs-2">
           Get Quote
         </button>
       )}

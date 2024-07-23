@@ -273,7 +273,7 @@ export default function Header() {
                         About Us
                       </Link>
                       {aboutDropdown && (
-                        <ul className={styles.dropdown}>
+                        <ul className={`${styles.dropdown} ms-2 p-2 `}>
                           <li className={styles.dropdownItem}>
                             <Link
                               href="/Companyprofile"

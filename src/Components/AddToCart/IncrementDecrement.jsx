@@ -18,7 +18,7 @@ const IncrementDecrement = ({ initialCount, onIncrement, onDecrement }) => {
   };
 
   return (
-    <div className="countContainer input-group">
+    <div className="input-group">
       <span className="input-group-text">
         <button onClick={decrement}>-</button>{" "}
       </span>
@@ -26,7 +26,7 @@ const IncrementDecrement = ({ initialCount, onIncrement, onDecrement }) => {
       <input
         type="text"
         value={count}
-        className="form-control"
+        className="form-control p-0 text-center"
         aria-label="Amount (to the nearest dollar)"
         readOnly
       />

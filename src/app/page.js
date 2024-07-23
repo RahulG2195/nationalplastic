@@ -28,8 +28,8 @@ export default function Home() {
   return (
     <>
       <main>
-       <CommingSoon />
-          {/* <Banner />
+       {/* <CommingSoon /> */}
+          <Banner />
         <Features />
         <CoupenBanner />
         <TopPick />
@@ -39,8 +39,8 @@ export default function Home() {
         <Highlight />
         <HappyStory />
         <Dealers />
-        <Blog />
-        <Catalogue />   */}
+        {/* <Blog /> */}
+        <Catalogue />  
       </main>
     </>
   );

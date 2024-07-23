@@ -114,11 +114,11 @@ const CartProduct = ({
       <div className="col-md-8 card-Quantity-section">
         <Link onClick={setid} href={`/ProductDetail/${seourl}`}>
           <div style={{ display: "flex" }}>
-            <h6 style={{ marginRight: "7px" }}>{Np} {productName}</h6>
+            <h6 style={{ marginRight: "7px" }}><span className="text-danger" >{Np}</span> {productName}</h6>
           </div>
           <h6 className="py-2">color: {color}</h6>
         </Link>
-        <p>{productDesc}</p>
+        {/* <p>{productDesc}</p> */}
 
         <div className="CartQuantity d-flex flex-wrap">
           <p>Quantity</p>

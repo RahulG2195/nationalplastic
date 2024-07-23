@@ -412,9 +412,9 @@ input:focus-visible {
   .mySwiper2 img{
     object-fit: cover !important;
   }
-  .product-ccount .input-group{
+  /* .product-ccount .input-group{
     width: 40%;
-  }
+  } */
   .product-ccount .input-group.input-group-text{
     font-size: 21px;
   }

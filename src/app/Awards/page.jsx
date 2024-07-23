@@ -1,5 +1,6 @@
 import React from 'react';
 import AwardsCertificates from "@/Components/About/AwardsCertificates";
+import ComapnyProfileSidebar from '@/Components/About/ComapnyProfileSidebar';
 
 const CERTIFICATES = [
   {
@@ -43,12 +44,17 @@ const Awards = () => {
           </p>
         </header>
 
-        <div className="row team-members">
-          {CERTIFICATES.map(({ key, image, alt }) => (
-            <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6" key={key}>
-              <AwardsCertificates image={image} alt={alt} />
-            </div>
-          ))}
+        <div className="row gap-4 team-members">
+          <div className='row col-12 col-md-8 order-2 order-md-1 order-lg-1' >
+            {CERTIFICATES.map(({ key, image, alt }) => (
+              <div className="col-md-6" key={key}>
+                <AwardsCertificates image={image} alt={alt} />
+              </div>
+            ))}
+          </div>
+          <div className='col-12 col-md-4 order-1 order-md-2 order-lg-2'>
+            <ComapnyProfileSidebar title={'Awards & Certificates'}/>
+          </div>
         </div>
       </div>
     </section>
