@@ -10,9 +10,9 @@ import { notify, notifyError } from "@/utils/notify.js";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from 'next/image';
 
-
-import CancelProdChargeAfterTwentyFourHr, {ReturnProductBeforeFourteenDays} from "@/utils/CancelProduct";
+import CancelProdChargeAfterTwentyFourHr, { ReturnProductBeforeFourteenDays } from "@/utils/CancelProduct";
 import {
   isValidPassword,
   isValidReason, // Address validations
@@ -37,14 +37,14 @@ function ProfilePage() {
   const [orderData, setOrderData] = useState([]);
   const [ReturnSingleProd, setReturnSingleProd] = useState([]);
   const [VerifyReturnDays, setVerifyReturnDays] = useState([]);
-  
- // redirect to admin to admin panel 
- useEffect(() => {
-  const IsAdmin = localStorage.getItem('isAdmin');
-  if(IsAdmin == 'true'){
-    router.push("/admin") 
-  }
-}, []);
+  // const [firstImage , setFirstImage] = useState("Altis-chair-Black-(45)-white bg.webp");
+  // redirect to admin to admin panel 
+  useEffect(() => {
+    const IsAdmin = localStorage.getItem('isAdmin');
+    if (IsAdmin == 'true') {
+      router.push("/admin")
+    }
+  }, []);
 
   useEffect(() => {
     localStorage.getItem("isLoggedIn") === "true"
@@ -67,8 +67,6 @@ function ProfilePage() {
     // setIsLoggedIn(isLoggedIn);
     setData(storedData);
   }, []);
-
- 
 
 
   // Get user ID from context (replace with your logic)
@@ -320,7 +318,7 @@ function ProfilePage() {
       const GetSingleData = orderData.filter((od) => od.prod_id == prod_id && od.customer_id == user_id)
       const fourteendayvalidate = ReturnProductBeforeFourteenDays(GetSingleData[0]['order_status_date']);
       setVerifyReturnDays(fourteendayvalidate);
-      
+
       setReturnSingleProd(GetSingleData);
 
     } catch (error) {
@@ -631,15 +629,16 @@ function ProfilePage() {
                           let vdate = ReturnProductBeforeFourteenDays(data['order_status_date']);
                           if (data.image_name) {
                             var images = data ? data.image_name.split(', ').map(image => image.trim()) : [];
+                            // setFirstImage(images[0]);
                           }
 
                           let ReturnCancelBtn;
 
                           {/* order status == delivered  */ }
                           if (data.order_status === 5 && vdate <= 14) {
-                            if(data['per_order_status'] == 0 && data['return_order'] == 0){
+                            if (data['per_order_status'] == 0 && data['return_order'] == 0) {
                               ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Return confirmation Sent</button>
-                            }else{
+                            } else {
                               ReturnCancelBtn = <button className="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#ReturnProd" onClick={() => ReturnProduct(data.product_id, data.customer_id)}>Return order</button>
                             }
 
@@ -668,7 +667,16 @@ function ProfilePage() {
                           }
                           return <tr key={index}>
                             <th scope="row">{index + 1}</th>
-                            <td><Link href={`/ProductDetail/${data.seo_url}`}><img src={`/Assets/uploads/products/${images[0]}`} height={50} width={50} alt="prod_image" /></Link></td>
+                            <td>
+                              <Link href={`/ProductDetail/${data.seo_url}`}>
+                                <Image
+                                  src={images && images.length > 0 ? `/Assets/uploads/products/${images[0]}` : '/Altis-chair-Black-(45)-white bg.webp'}
+                                  height={50}
+                                  width={50}
+                                  alt="prod_image"
+                                />
+                              </Link>
+                            </td>
                             <td><Link href={`/ProductDetail/${data.seo_url}`}>{data.product_name}</Link></td>
                             <td>{data.quantity}</td>
                             <td>₹ {data.quantity * data.prod_price} </td>

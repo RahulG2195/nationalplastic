@@ -17,7 +17,7 @@ const uploadImage = async (file)=>{
     await upload.single(file);
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const path = `./uploads/${file.name}`;
+    const path = `./public/Assets/uploads/products/${file.name}`;
     
     await writeFile(path, buffer);
   }catch(error){
@@ -102,7 +102,9 @@ export async function POST(request) {
     for (let [key, value] of formData.entries()) {
       if (key.startsWith('image')) {
         try {
-          const imageName = await uploadImage(value);
+          console.log("image line no 105 ", value)
+          await uploadImage(value);
+          const imageName = value.name
           imageNames.push(imageName);
         } catch (error) {
           console.error('Error uploading image:', error);
@@ -177,13 +179,14 @@ export async function PUT(request) {
   try {
     const formData = await request.formData();
     const images = formData.getAll('image');
-
+    console.log("image line no 80 ", images.name);
     // Handle multiple image uploads
     const imageNames = [];
     if (images && images.length > 0) {
       for (const image of images) {
         try {
-          const imageName = await uploadImage(image);  // Ensure this function handles image upload and returns the image name
+           await uploadImage(image);  // Ensure this function handles image upload and returns the image name
+           const imageName = image.name
           imageNames.push(imageName);
         } catch (error) {
           console.error(`Error uploading image ${image.name}:`, error);

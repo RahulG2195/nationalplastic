@@ -86,10 +86,10 @@ export default function AddCoupon() {
             <Controller
               name="codeSpecialChar"
               control={control}
-              rules={{ required: true, pattern: /^[-!@#$%^&*()_+]$/ }}
+              rules={{ required: true, pattern: /^[!@#$%]$/ }}
               render={({ field }) => (
                 <Select {...field} style={{ width: '80px' }}>
-                  {'-!@#$%^&*()_+'.split('').map(char => (
+                  {'!@#$%'.split('').map(char => (
                     <Option key={char} value={char}>{char}</Option>
                   ))}
                 </Select>

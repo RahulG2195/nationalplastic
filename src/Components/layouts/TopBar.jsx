@@ -15,8 +15,9 @@ function TopBar() {
   useEffect(() => {
     const fetchBasicInfo = async () => {
         try {
-            const response = await axios.get('/api/basicInfo');
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/basicInfo`);
             const basicInfoData = response.data.basicInfo;
+            console.log("Basic Info: " + basicInfoData);
             setBasicInfo(basicInfoData);
             setInitialBasicInfo(basicInfoData);
         } catch (error) {

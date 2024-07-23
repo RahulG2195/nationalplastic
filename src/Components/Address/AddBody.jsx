@@ -172,7 +172,7 @@ const AddBody = () => {
                     onClick={handleEdit}
                     className="text-danger fw-bold mb onHOverFocus"
                   >
-                    Change Address
+                    {editable ? "Cancel" : "Change Address"}
                   </div>
                 </div>
                 <div>
