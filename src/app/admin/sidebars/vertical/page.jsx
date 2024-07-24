@@ -82,6 +82,11 @@ const navigation = [
     icon: "bi bi-hdd-stack",
   },
   {
+    title: "News & Media",
+    href: "/admin/newsMedia",
+    icon: "bi bi-layout-split",
+  },
+  {
     title: "Table",
     href: "/ui/tables",
     icon: "bi bi-layout-split",
