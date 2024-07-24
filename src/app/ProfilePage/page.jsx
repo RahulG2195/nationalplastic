@@ -205,6 +205,7 @@ function ProfilePage() {
     }
   }, [FirstName, LastName]);
 
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setEditedData((prevData) => ({
@@ -271,15 +272,15 @@ function ProfilePage() {
     }
   }
 
-  const CancelProduct = async (prod_id, user_id) => {
+  const CancelProduct = async (prod_id, user_id, od_id) => {
     try {
 
-      const checkorderStatus = orderData.filter((od) => od.prod_id == prod_id && od.customer_id == user_id)
+      const checkorderStatus = orderData.filter((od) => od.prod_id == prod_id && od.customer_id == user_id && od.od_id == od_id);
 
-      const cancelProd = CancelProdChargeAfterTwentyFourHr(checkorderStatus[0]['order_status_date']);
+      const extraAmt = CancelProdChargeAfterTwentyFourHr(checkorderStatus[0]['order_status_date']);
       const orderStatus = checkorderStatus[0]['order_status'];
 
-      if (cancelProd > 0 && orderStatus >= 2) {
+      if (extraAmt > 0 && orderStatus >= 2) {
         const confirm = window.confirm('Cancelling the order will incur a fee of ₹50. Do you want to proceed?');
 
         if (!confirm) {
@@ -287,18 +288,18 @@ function ProfilePage() {
           return;
 
         } else {
-          const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: cancelProd };
-          var res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, ProdData);
+          const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: extraAmt, order_id: checkorderStatus[0].order_id, type: 'Cancel' };
+          var res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, ProdData);
         }
 
       } else {
-        const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: cancelProd };
-        var res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, ProdData);
+        const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: extraAmt, order_id: checkorderStatus[0].order_id, type: 'Cancel' };
+        var res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, ProdData);
       }
 
 
       // setCancelProdCharge()
-      if (res.data.message === 'updated') {
+      if (res.data.message === 'Order status Updated') {
 
         notify("Your order cancel Request has been sent");
         toast.success("Your order cancel Request has been sent");
@@ -314,14 +315,33 @@ function ProfilePage() {
     }
   }
 
-  const ReturnProduct = async (prod_id, user_id) => {
+  const ReturnProduct = async (prod_id, user_id, od_id) => {
+
     try {
-      // od == order detail 
-      const GetSingleData = orderData.filter((od) => od.prod_id == prod_id && od.customer_id == user_id)
+      
+      const GetSingleData = orderData.filter((od) => od.prod_id == prod_id && od.customer_id == user_id && od.od_id == od_id)
       const fourteendayvalidate = ReturnProductBeforeFourteenDays(GetSingleData[0]['order_status_date']);
-      setVerifyReturnDays(fourteendayvalidate);
       
       setReturnSingleProd(GetSingleData);
+      setVerifyReturnDays(fourteendayvalidate)
+
+      if(fourteendayvalidate > 0){
+        const ProdData = { prod_id: prod_id, user_id: user_id,  order_id: GetSingleData[0].order_id, type: 'return' };
+          var res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, ProdData);
+
+          if (res.data.message === 'Order status Updated') {
+
+            notify("Your order Return Request has been sent");
+            toast.success("Your order Return Request has been sent");
+    
+          } else {
+    
+            notify("Your order Return Request fail");
+            toast.success("Your order Return Request fail");
+    
+          }
+      }
+
 
     } catch (error) {
       console.error('Error:', error);
@@ -637,10 +657,11 @@ function ProfilePage() {
 
                           {/* order status == delivered  */ }
                           if (data.order_status === 5 && vdate <= 14) {
+
                             if(data['per_order_status'] == 0 && data['return_order'] == 0){
                               ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Return confirmation Sent</button>
                             }else{
-                              ReturnCancelBtn = <button className="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#ReturnProd" onClick={() => ReturnProduct(data.product_id, data.customer_id)}>Return order</button>
+                              ReturnCancelBtn = <button className="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#ReturnProd" onClick={() => ReturnProduct(data.product_id, data.customer_id, data.od_id)}>Return order</button>
                             }
 
 
@@ -648,7 +669,7 @@ function ProfilePage() {
 
                             if (data.per_order_status === 1) {
 
-                              ReturnCancelBtn = <button className="btn btn-warning btn-rounded" onClick={() => CancelProduct(data.product_id, data.customer_id)}>Cancel order</button>
+                              ReturnCancelBtn = <button className="btn btn-warning btn-rounded" onClick={() => CancelProduct(data.product_id, data.customer_id, data.od_id)}>Cancel order</button>
 
                             } else {
 

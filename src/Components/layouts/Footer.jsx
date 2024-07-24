@@ -1,3 +1,4 @@
+'use client'; 
 import Image from 'next/image';
 import '../../styles/footer.css';
 import Link from 'next/link';

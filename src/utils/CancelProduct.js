@@ -33,7 +33,9 @@ function ReturnProductBeforeFourteenDays(orderStatusDate){
 
   return diffInDays;
 }
+
 export default CancelProdChargeAfterTwentyFourHr;
+
 export  {ReturnProductBeforeFourteenDays}; 
 
 //1042614565  86400000
