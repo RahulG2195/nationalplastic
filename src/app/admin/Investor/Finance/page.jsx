@@ -185,9 +185,9 @@ export default function FinancialResults() {
           onChange={handleReportTypeChange}
         >
           <Option value="unaudited">Unaudited</Option>
-          <Option value="annual">Annual</Option>
-          <Option value="audited">Audited</Option>
-          <Option value="annualReturn">Annual Return</Option>
+          <Option value="Annual Report">Annual</Option>
+          <Option value="Audited">Audited</Option>
+          <Option value="Annual Returns">Annual Return</Option>
         </Select>
         <Button onClick={() => showModal()} type="primary">Add New Record</Button>
       </div>
