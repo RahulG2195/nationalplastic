@@ -16,7 +16,7 @@ const notify = () => {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: "dark",
+    theme: "light",
     transition: Bounce,
   });
 };
@@ -29,7 +29,7 @@ const notifyError = () => {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: "dark",
+    theme: "light",
     transition: Bounce,
   });
 };
@@ -413,14 +413,15 @@ function ContactUs() {
             </div>
           </div>
           <div className="col-md-8 col-lg-8 col-xl-8 map-image">
-            <Image
+            {/* <Image
               src="/Assets/images/ContactUs/map.png"
               alt="Contact Us Page Banner"
               width={100}
               height={50}
               layout="responsive"
               objectFit="cover"
-            />
+            /> */}
+            <iframe src={basicInfo.map_url} className="w-100 h-100" style={{border:'0'}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
       </div>

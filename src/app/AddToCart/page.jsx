@@ -18,6 +18,7 @@ import { emptyTempSlice } from "@/redux/reducer/tempSlice";
 import { notify, notifyError } from "@/utils/notify";
 import { Button } from "reactstrap";
 import { applyDiscount } from "@/redux/reducer/couponSlice";
+import AddHeader from "@/Components/Address/Adress";
 
 function AddToCart() {
 
@@ -352,14 +353,8 @@ function AddToCart() {
   return (
     <>
       <div className="row">
-        <div className="ATCflow">
-          <p>
-            Add to Cart <span> ---------- </span>
-          </p>
-          <p>
-            Address <span> ----------- </span>
-          </p>
-          <p> Payment</p>
+        <div>
+          <AddHeader/>
         </div>
       </div>
       <div className="container cartView">

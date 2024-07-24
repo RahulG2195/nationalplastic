@@ -11,7 +11,7 @@ export const notify = (message) => {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: "dark",
+    theme: "light",
     transition: Bounce, // Assuming Bounce is already defined somewhere
   });
 };
@@ -25,7 +25,7 @@ export const notifyError = (errorMessage) => {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: "dark",
+    theme: "light",
     transition: Bounce, // Assuming Bounce is already defined somewhere
   });
 };
