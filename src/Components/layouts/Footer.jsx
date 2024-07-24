@@ -19,7 +19,8 @@ export default function Footer() {
     mobile_number1: '',
     mobile_number2: '',
     address: '',
-    email: ''
+    email: '',
+    indiamart: '',
   });
 
   useEffect(() => {
@@ -63,11 +64,11 @@ export default function Footer() {
                     Media & News
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link className="nav-link fw-bold" href="/BlogPage">
                     Blog
                   </Link>
-                </li>
+                </li> */}
                 <li className='fw-bold'>Customer Stories</li>
               </ul>
             </div>
@@ -176,11 +177,13 @@ export default function Footer() {
                 <h5 className='fw-bolder'>WE ARE ALSO ON</h5>
               </div>
               <div className="otherLogo">
-                <Image
-                  src="/Assets/images/indiamart.svg"
-                  alt='logo'
-                  fill
-                />
+                <a href={basicInfo.indiamart}>
+                  <Image
+                    src="/Assets/images/indiamart.svg"
+                    alt='logo'
+                    fill
+                  />
+                </a>
 
               </div>
             </div>

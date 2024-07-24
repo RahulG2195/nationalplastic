@@ -7,14 +7,16 @@ export async function GET(request) {
   try {
     const [product] = await query({
       query: `
-        SELECT p.*, c.category_name
+        SELECT p.*, c.category_name, pd.descp
         FROM products p
         LEFT JOIN categories c ON p.category_id = c.category_id
+        RIGHT JOIN product_detail pd ON p.product_id = pd.prod_id
         WHERE p.product_id = ? OR LOWER(p.seo_url) = LOWER(?)
         LIMIT 1
       `,
       values: [id, id],
     });
+    
 
     if (!product) {
       return new Response(JSON.stringify({ status: 404, message: "Product not found" }), { status: 404 });

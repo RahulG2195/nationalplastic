@@ -55,6 +55,10 @@ export async function POST(request) {
       'mobile_number2',
       'address',
       'email',
+      'email_2',
+      'map_url',
+      'indiamart',
+      'wpNumber'
     ];
     const missingFields = [];
 
