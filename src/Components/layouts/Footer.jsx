@@ -38,6 +38,9 @@ export default function Footer() {
     fetchBasicInfo();
   }, []);
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <>
@@ -189,8 +192,12 @@ export default function Footer() {
             </div>
           </div>
         </div>
+        <button onClick={scrollToTop} className="back-to-top">
+        <i class="fa fa-arrow-up fa-2x" aria-hidden="true"></i>
+
+        </button>
       </section >
-      <section className='bottom_footer'>
+      <section className='bottom_footer '>
         <div className="container">
           <div className="col-12 text-center">
             <p>We Deliver in Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer</p>
@@ -233,6 +240,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
+
       </section>
 
       <div className='social_icon_for_mob'>

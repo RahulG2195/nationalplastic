@@ -17,6 +17,7 @@ import InvestorAccor from "../InvesterAccor/InvesterAccor";
 import { PlaceholderBar } from "./Placeholder";
 import { useDelayedRender } from "@/utils/useDelayedRender";
 import { staticInvestorConfig, fetchInvestorConfig } from "./investorConfig";
+import ScrollToTop from "scroll-to-top-react";
 
 export default function Header() {
   const shouldRenderBottomBar = useDelayedRender(2000);
@@ -201,8 +202,7 @@ export default function Header() {
 
     fetchBasicInfo();
   }, []);
-
-  // console.log('width', width);
+ 
   return (
     <div>
       {!hideLayout ? (
@@ -588,6 +588,10 @@ export default function Header() {
               </div>
             </nav>
             {shouldRenderBottomBar ? <BottomBar /> : <PlaceholderBar />}
+            <div className="back-to-top-header">
+            <ScrollToTop displayType="htmlArrow" />
+
+            </div>
           </div>
         </>
       ) : null}

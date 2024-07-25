@@ -80,6 +80,7 @@
     "rimraf": "^5.0.7",
     "saas": "^1.0.0",
     "sass": "^1.77.4",
+    "scroll-to-top-react": "^0.0.7",
     "sharp": "^0.33.4",
     "source-map-resolve": "^0.6.0",
     "source-map-url": "^0.4.1",
