@@ -15,6 +15,7 @@ import dynamic from "next/dynamic";
 import Script from "next/script";
 import { SessionProvider } from "next-auth/react";
 import { Metadata } from 'next'
+import BackToTopButton from "@/Components/BackToTopButton/BackToTopButton";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -54,6 +55,7 @@ export default function RootLayout({ children }) {
                 {!isAdmin && <Header />}
                 <div className={`${isAdmin ? "pt-0 mt-0" : "mobile__top"}`}>
                   {children}
+                  {/* <BackToTopButton /> */}
                 </div>
                 <ToastContainer />
                 {!isAdmin && <Footer />}

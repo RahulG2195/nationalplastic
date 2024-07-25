@@ -525,6 +525,16 @@ p {
     display: none;
 }
 
+/* admin css  */
+
+.admin_dashboard .card{
+    background-color: transparent;
+    padding: 25px;
+    border: 1px solid #CC0008;
+    /* min-height: 200px; */
+    height: 100%;
+}
+
 @media (max-width:992px) {
     .subCptRes {
         width: 75% !important;
