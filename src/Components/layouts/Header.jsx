@@ -411,7 +411,7 @@ export default function Header() {
                     <li className="nav-item brdr d-none d-md-none d-xl-block ">
                       <Link
                         className="nav-link"
-                        href="tel:+912267669922"
+                        href={`tel:+91${basicInfo.wpNumber}`}
                         target="_blank"
                         onClick={isClicked ? handleShow : null}
                         style={{ width: '30px' }}

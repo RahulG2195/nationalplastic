@@ -15,7 +15,11 @@ const BasicInfoEditor = () => {
         mobile_number1: '',
         mobile_number2: '',
         address: '',
-        email: ''
+        email: '',
+        email_2: '',
+        map_url: '',
+        indiamart: '',
+        wpNumber: '',
     });
 
     const [initialBasicInfo, setInitialBasicInfo] = useState({});
@@ -129,7 +133,7 @@ const BasicInfoEditor = () => {
                                         <FormFeedback>{errors.logo}</FormFeedback>
                                     </>
                                 ) : (
-                                    basicInfo.logo && <img className='w-25 mx-3' src={`/uploads/${basicInfo.logo}`} alt="Logo" style={{ maxWidth: '100%' }} />
+                                    basicInfo.logo && <img className='w-25 mx-3' src={`/Assets/uploads/${basicInfo.logo}`} alt="Logo" style={{ maxWidth: '100%' }} />
                                 )}
                             </FormGroup>
                         </Col>
@@ -221,6 +225,19 @@ const BasicInfoEditor = () => {
                         </Col>
                         <Col md="6">
                             <FormGroup>
+                                <Label className='fw-semibold' for="indiamart">Indiamart link</Label>
+                                <Input
+                                    type="text"
+                                    name="indiamart"
+                                    id="indiamart"
+                                    value={basicInfo.indiamart}
+                                    onChange={handleChange}
+                                />
+                                <FormFeedback>{errors.facebook}</FormFeedback>
+                            </FormGroup>
+                        </Col>
+                        <Col md="6">
+                            <FormGroup>
                                 <Label className='fw-semibold' for="google">Google Review</Label>
                                 <Input
                                     type="text"
@@ -263,6 +280,19 @@ const BasicInfoEditor = () => {
                         </Col>
                         <Col md="6">
                             <FormGroup>
+                                <Label className='fw-semibold' for="wpNumber">WhatsApp number</Label>
+                                <Input
+                                    type="text"
+                                    name="wpNumber"
+                                    id="wpNumber"
+                                    value={basicInfo.wpNumber}
+                                    onChange={handleChange}
+                                    readOnly={!editMode}
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Col md="6">
+                            <FormGroup>
                                 <Label className='fw-semibold' for="address">Address</Label>
                                 <Input
                                     type="text"
@@ -289,6 +319,34 @@ const BasicInfoEditor = () => {
                                     invalid={!!errors.email}
                                 />
                                 <FormFeedback>{errors.email}</FormFeedback>
+                            </FormGroup>
+                        </Col>
+                        <Col md="6">
+                            <FormGroup>
+                                <Label className='fw-semibold' for="email_2">Email_2</Label>
+                                <Input
+                                    type="email2"
+                                    name="email_2"
+                                    id="email_2"
+                                    value={basicInfo.email_2}
+                                    onChange={handleChange}
+                                    readOnly={!editMode}
+                                    invalid={!!errors.email}
+                                />
+                                <FormFeedback>{errors.email}</FormFeedback>
+                            </FormGroup>
+                        </Col>
+                        <Col md="6">
+                            <FormGroup>
+                                <Label className='fw-semibold' for="map_url">Map_url</Label>
+                                <Input
+                                    type="text"
+                                    name="map_url"
+                                    id="map_url"
+                                    value={basicInfo.map_url}
+                                    onChange={handleChange}
+                                    readOnly={!editMode}
+                                />
                             </FormGroup>
                         </Col>
                     </Row>

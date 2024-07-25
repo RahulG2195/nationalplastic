@@ -12,7 +12,7 @@ const notify = () => {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: "dark",
+    theme: "light",
     transition: Bounce,
   });
 };
@@ -26,7 +26,7 @@ const notifyInfo = () => {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: "dark",
+    theme: "light",
     transition: Bounce,
   });
 };

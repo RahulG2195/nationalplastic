@@ -1,9 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 const TopPics = () => {
   const [categories, setCategories] = useState([]);
+  console.log("categories", categories)
 
   useEffect(() => {
     const fetchdata = async () => {
@@ -33,13 +35,18 @@ const TopPics = () => {
               className="col col-lg-3 d-flex justify-content-center"
             >
               <div className="card text-center border-0 shadow-sm">
-                <img
-                  src={`/Assets/images/circular/${category.image_name}`}
-                  className="card-img-top"
-                  alt={category.category_name}
-                />
+                <Link href={`/ProductCatlogue/${category.category_id}`}>
+                  <img
+                    src={`/Assets/uploads/category/${category.image_name}`}
+                    className="card-img-top"
+                    alt={category.category_name}
+                  />
+                </Link>
+
                 <div className="card-body">
-                  <h5 className="card-title">{category.category_name}</h5>
+                  <Link href={`/ProductCatlogue/${category.category_id}`}>
+                    <h5 className="card-title">{category.category_name}</h5>
+                  </Link>
                 </div>
               </div>
             </div>

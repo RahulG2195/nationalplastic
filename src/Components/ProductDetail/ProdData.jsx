@@ -22,6 +22,7 @@ function ProdData({ category_id }) {
   const [categoryId, setCategoryId] = useState(null);
   const [categoryName, setCategoryName] = useState(null);
   const [catlogue, setCatlogue] = useState(null)
+  const [short_description, setShort_description] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [productId, setProductId] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -54,7 +55,7 @@ function ProdData({ category_id }) {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`
         );
-        const { product, productDetails, colors, category } = response.data;
+        const { product, productDetails, colors, category, short_description } = response.data;
         localStorage.setItem("product_id", product.product_id);
         if (!product) {
           setErrorMessage("Sorry, this product is not available");
@@ -66,6 +67,7 @@ function ProdData({ category_id }) {
           setProduct_id(product.product_id);
           setCategoryId(category);
           setCatlogue(product.category_name)
+          setShort_description(product.descp)
           // CleanCateogoryName(category);
           const allColors = colors.map((color) => color.color);
           colorBasedProductsImages(allColors);
@@ -255,15 +257,12 @@ function ProdData({ category_id }) {
                   </div>
                 </div>
                 <div>
-                  <i className="fa fa-star-o rating-star pr-2" />
+                  <i className="fa fa-star-o rating-star pr-2" style={{color:'gold'}} />
                   <span className="rating-number">4.8</span>
                 </div>
                 <div className="shortProdDesc">
                   <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-                    numquam ullam is recusandae laborum explicabo id sequi
-                    quisquam, ab sunt deleniti quidem ea animi facilis quod
-                    nostrum odit! Repellendus voluptas suscipit.
+                    {short_description}
                   </p>
                 </div>
                 <div className="prod_type mt-4">
@@ -383,21 +382,25 @@ function ProdData({ category_id }) {
                 <i className="fa fa-eye"></i> 210 customers are interviewing the
                 product
               </p> */}
-              <div className="terms fw-medium term_and_condition">
+
+              {/* terms and conditions */}
+
+
+              {/* <div className="terms fw-medium term_and_condition">
                 <Link href="/TermsAndConditions">Terms and Conditions</Link>
                 <ul>
                   <li>Lorem ipsum</li>
                   <li>Lorem ipsum</li>
                   <li>Lorem ipsum</li>
                 </ul>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
       </div>
 
       {/* product info  */}
-      <MoreProduct prod_detail={prodData} />
+      {/* <MoreProduct prod_detail={prodData} /> */}
 
       <div>
         {/* <!-- Modal --> */}

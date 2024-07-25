@@ -39,6 +39,37 @@ const navigation = [
     icon: "bi bi-hdd-stack",
   },
   {
+    type: "accordion",
+    title: "Investors Pages",
+    items: [
+      {
+        title: "General Disclosure",
+        href: "/admin/Investor/General",
+      },
+      {
+        title: "Financial",
+        href: "/admin/Investor/Finance",
+      },
+      {
+        title: "AGM Compliances",
+        href: "/admin/Investor/AGM",
+      },
+      {
+        title: "house section",
+        href: "/admin/homepage/house section",
+      },
+      {
+        title: "house section",
+        href: "/admin/homepage/house section",
+      },
+      {
+        title: "house section",
+        href: "/admin/homepage/house section",
+      },
+    ],
+    icon: "bi bi-hdd-stack",
+  },
+  {
     title: "Products",
     href: "/admin/product",
     icon: "bi bi-p-square",
@@ -57,29 +88,6 @@ const navigation = [
     title: "Order List",
     href: "/admin/OrderList",
     icon: "bi bi-card-text",
-  },
-  {
-    type: "accordion",
-    title: "Investors Pages",
-    items: [
-      {
-        title: "General Disclosure",
-        href: "/admin/InvestorsList",
-      },
-      {
-        title: "Cards Section",
-        href: "/admin/homepage/cards",
-      },
-      {
-        title: "Offer Banner",
-        href: "/admin/homepage/offersection",
-      },
-      {
-        title: "house section",
-        href: "/admin/homepage/house section",
-      },
-    ],
-    icon: "bi bi-hdd-stack",
   },
   {
     title: "Table",
