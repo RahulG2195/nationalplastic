@@ -96,6 +96,7 @@
 .list-group-item.active {
     background-color: #dc3545 !important;
     border-color: #dc3545 !important;
+    color: #fff !important;
 }
 
 .price .btn-danger {

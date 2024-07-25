@@ -20,3 +20,13 @@
   .investor_sec .fa-file-pdf-o {
     color: #dc3545;
   }
+  
+  @media (max-width:600px) {
+    .discliResp{
+      font-size: 10px;
+    }
+    .discloHeading{
+      font-size: 11px;
+    }
+    
+  }

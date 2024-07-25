@@ -24,12 +24,17 @@ export async function GET(request) {
         SELECT * FROM order_status`,
     });
 
+    const OrderCount = await query({
+      query: `SELECT COUNT(order_id) As order_count, SUM(order_amount) AS order_amt FROM order_list WHERE order_status = 5`
+    })
+
     return new Response(
       JSON.stringify({
         status: 200,
         orderData: orderResult,
         orderDetailData: orderDetailResult,
         OrderStatus: OrderStatus,
+        OrderCount: OrderCount,
         message: "All Orders Retrieved",
       }),
       {

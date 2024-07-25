@@ -21,6 +21,7 @@ function ProdData({ category_id }) {
   const userState = useSelector((state) => state.userData.isLoggedIn);
   const [categoryId, setCategoryId] = useState(null);
   const [categoryName, setCategoryName] = useState(null);
+  const [catlogue, setCatlogue] = useState(null)
   const [isLoading, setIsLoading] = useState(true);
   const [productId, setProductId] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -64,6 +65,7 @@ function ProdData({ category_id }) {
           setSelectedColor(product.color);
           setProduct_id(product.product_id);
           setCategoryId(category);
+          setCatlogue(product.category_name)
           // CleanCateogoryName(category);
           const allColors = colors.map((color) => color.color);
           colorBasedProductsImages(allColors);
@@ -226,6 +228,8 @@ function ProdData({ category_id }) {
               category_id={categoryId}
               category_name={categoryName}
               product_name={name}
+              catlogue={catlogue}
+
             />
           </div>
           <div className="col-md-6">
@@ -318,7 +322,7 @@ function ProdData({ category_id }) {
                               // objectFit="cover"
                               style={{
                                 borderRadius: "50%",
-                                height: "100%",
+                                height: "100% !important",
                                 width: "100%",
                               }}
                             />
@@ -332,25 +336,29 @@ function ProdData({ category_id }) {
               </div>
               <div className="product-ccount">
                 <label htmlFor="size">Quantity</label>
-                <div className="d-md-flex pb-md-3">
-                  <IncrementDecrement
-                    initialCount={initialCount}
-                    onIncrement={handleIncrement}
-                    onDecrement={handleDecrement}
-                  />
-                  <button
-                    onClick={() => handleMoveToCart(productId, initialCount)}
-                    className="m-2 px-md-5 btn"
-                    style={{
-                      backgroundColor: isHovered ? '#fff' : '#cc0008',
-                      color: isHovered ? '#cc0008' : '#fff',
-                      border: 'none'
-                    }}
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
-                  >
-                    Add to Cart
-                  </button>
+                <div className="pb-md-3 row align-items-center">
+                  <div className="col-6 col-md-4 col-lg-3">
+                    <IncrementDecrement
+                      initialCount={initialCount}
+                      onIncrement={handleIncrement}
+                      onDecrement={handleDecrement}
+                    />
+                  </div>
+                  <div className="col-6 col-md-8 col-lg-6">
+                    <button
+                      onClick={() => handleMoveToCart(productId, initialCount)}
+                      className="m-2 px-md-5 btn "
+                      style={{
+                        backgroundColor: isHovered ? '#fff' : '#cc0008',
+                        color: isHovered ? '#cc0008' : '#fff',
+                        border: '1px solid #cc0008'
+                      }}
+                      onMouseEnter={() => setIsHovered(true)}
+                      onMouseLeave={() => setIsHovered(false)}
+                    >
+                      Add to Cart
+                    </button>
+                  </div>
                 </div>
 
                 <Link

@@ -13,59 +13,14 @@ import {
 import { useEffect, useState } from "react";
 import axios from "axios";
 export default function Manufacture() {
-  const productArr = [
-    {
-      key: 1,
-      image: "/Assets/images/Home-page/Chair.png",
-      title: "Seatings",
-      url: "#",
-      style: "shop-room",
-    },
-    {
-      key: 2,
-      image: "/Assets/images/Home-page/Chair.png",
-      title: "Tables",
-      url: "#",
-      style: "shop-room",
-    },
-    {
-      key: 3,
-      image: "/Assets/images/Home-page/Chair.png",
-      title: "Storage",
-      url: "#",
-      style: "shop-room",
-    },
-    {
-      key: 4,
-      image: "/Assets/images/Home-page/Chair.png",
-      title: "Sets",
-      url: "#",
-      style: "shop-room",
-    },
-    {
-      key: 5,
-      image: "/Assets/images/Home-page/Chair.png",
-      title: "Stools",
-      url: "#",
-      style: "shop-room",
-    },
-    {
-      key: 6,
-      image: "/Assets/images/Home-page/Chair.png",
-      title: "Kids Chair",
-      url: "#",
-      style: "shop-room",
-    },
-  ];
 
   const [Household, setHousehold] = useState([]);
 
   useEffect(() => {
     const fetchdata = async () => {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/Category`
-      );
-      const filteredData = response.data.categories.filter(
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/Category`);
+      const filteredData = response.data.Manufacture;
+      /* const filteredData = response.data.categories.filter(
         (item) =>
           item.category_id === 24 ||
           item.category_id === 25 ||
@@ -78,7 +33,7 @@ export default function Manufacture() {
           item.category_id === 27 ||
           item.category_id === 28 ||
           item.category_id === 29
-      );
+      ); */
 
       setHousehold(filteredData);
     };
@@ -135,17 +90,7 @@ export default function Manufacture() {
                     <SwiperSlide key={product.category_id}>
                       <CatCards
                         catid={
-                          product.category_name &&
                           product.category_name
-                            .toLowerCase()
-                            .includes("baby chair")
-                            ? 18
-                            : product.category_name &&
-                              product.category_name
-                                .toLowerCase()
-                                .includes("seatings")
-                            ? 15
-                            : product.category_id
                         }
                         manfacthover="manfact"
                         style="manfTitle"

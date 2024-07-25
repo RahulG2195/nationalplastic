@@ -1,4 +1,5 @@
 "use client";
+
 import Banner from "@/Components/Home/Banner";
 import CoupenBanner from "@/Components/Home/CoupenBanner";
 import Features from "@/Components/Home/Features";
@@ -12,14 +13,18 @@ import Dealers from "@/Components/Home/Dealers";
 import Blog from "@/Components/Home/Blog";
 import Catalogue from "@/Components/Home/Catalogue";
 import "../styles/home_prod.css";
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import CommingSoon from "./CommingSoon/page";
 
 export default function Home() {
+  const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
+  const [ValidateLogin, setValidateLogin] = useState(false)
   // alert(pool)
   useEffect(() => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    (isLoggedIn == 'true') && setValidateLogin(true);
     AOS.init({
       duration: 700,
       once: false,
@@ -31,7 +36,12 @@ export default function Home() {
        {/* <CommingSoon /> */}
           <Banner />
         <Features />
-        <CoupenBanner />
+
+        {/* show only when user is not login  */}
+        {
+          (!ValidateLogin) && <CoupenBanner />
+        }
+        
         <TopPick />
         <Manufacture />
         <ShopRoom />
@@ -39,8 +49,9 @@ export default function Home() {
         <Highlight />
         <HappyStory />
         <Dealers />
-        <Blog />
+        {/* <Blog /> */}
         <Catalogue />  
+        
       </main>
     </>
   );

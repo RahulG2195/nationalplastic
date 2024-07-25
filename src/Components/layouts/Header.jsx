@@ -17,6 +17,7 @@ import InvestorAccor from "../InvesterAccor/InvesterAccor";
 import { PlaceholderBar } from "./Placeholder";
 import { useDelayedRender } from "@/utils/useDelayedRender";
 import { staticInvestorConfig, fetchInvestorConfig } from "./investorConfig";
+
 export default function Header() {
   const shouldRenderBottomBar = useDelayedRender(2000);
   const [searchTerm, setSearchTerm] = useState("");
@@ -273,7 +274,7 @@ export default function Header() {
                         About Us
                       </Link>
                       {aboutDropdown && (
-                        <ul className={styles.dropdown}>
+                        <ul className={`${styles.dropdown} ms-2 p-2 `}>
                           <li className={styles.dropdownItem}>
                             <Link
                               href="/Companyprofile"

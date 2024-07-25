@@ -28,7 +28,7 @@ const BulkOrder = () => {
       <BulkOrderBannar />
       <GetQuote proddata={ProdData} />
       {/* <BulkPremiumCards proddata={ProdData} /> */}
-      <BulkOrders />
+      {/* <BulkOrders /> */}
     </>
   );
 };

@@ -17,11 +17,12 @@
 }
 
 .GQform input,
-.input-group-text,
+.GQform .input-group-text,
 .text-area {
-    /* background-color: #4D50A2; */
+    background-color: #4D50A2 !important;
     border: 1px solid lightgray;
     color:#ffff;
+
 }
 .GQform input:focus,
 .input-group-text:focus,

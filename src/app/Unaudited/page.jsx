@@ -143,45 +143,41 @@ const Unaudited = () => {
       <div className='container'>
         <div className='row'>
           <div className='col-12'>
-            <table className="table table-responsive table-striped table-light table-bordered table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">Year</th>
-                  <th scope="col">Financial Results - Q1</th>
-                  <th scope="col">Financial Results - Q2</th>
-                  <th scope="col">Financial Results - Q3</th>
-                </tr>
-              </thead>
-              <tbody>
-                {Array.isArray(FinancialResults) ? FinancialResults.map((result, index) => (
-                  <tr key={index}>
-                    <td data-title="Year">{result.year}</td>
-                    {Array.isArray(result.quarters) ? result.quarters.map((quarter, qIndex) => (
-                      <td key={qIndex} data-title={`Quarter - ${qIndex + 1}`}>
-                        {quarter.link ? (
-                          <a target='_blank' rel="noopener noreferrer" href={quarter.link}>
-                            {quarter.title}
-                          </a>
-                        ) : (
-                          <span>{quarter.title}</span>
-                        )}
-                      </td>
-                    )) : (
-                      <td colSpan="3">No data available</td>
-                    )}
-                  </tr>
-                )) : (
+            <div className="table-responsive">
+              <table className="table table-striped table-light table-bordered table-hover">
+                <thead>
                   <tr>
-                    <td colSpan="4">Loading...</td>
+                    <th scope="col">Year</th>
+                    <th scope="col">Financial Results - Q1</th>
+                    <th scope="col">Financial Results - Q2</th>
+                    <th scope="col">Financial Results - Q3</th>
                   </tr>
-                )}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {Array.isArray(FinancialResults) && FinancialResults.map((result, index) => (
+                    <tr key={index}>
+                      <td>{result.year}</td>
+                      {result.quarters.map((quarter, qIndex) => (
+                        <td key={qIndex}>
+                          {quarter.link ? (
+                            <a href={quarter.link} target="_blank" rel="noopener noreferrer">
+                              {quarter.title}
+                            </a>
+                          ) : (
+                            quarter.title
+                          )}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
-}
+};
 
 export default Unaudited;

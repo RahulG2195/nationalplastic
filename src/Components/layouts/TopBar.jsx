@@ -15,8 +15,9 @@ function TopBar() {
   useEffect(() => {
     const fetchBasicInfo = async () => {
         try {
-            const response = await axios.get('/api/basicInfo');
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/basicInfo`);
             const basicInfoData = response.data.basicInfo;
+            console.log("Basic Info: " + basicInfoData);
             setBasicInfo(basicInfoData);
             setInitialBasicInfo(basicInfoData);
         } catch (error) {
@@ -30,8 +31,8 @@ function TopBar() {
       <div className="row p-2 top_nav m-0">
           <div className="col d-flex justify-content-end text-white">
             <p className='medium '>Explore Our Brands:- </p>
-            <a href={basicInfo.brand1_link} target='_blank' className='medium text-white px-2'>Webite 1</a>
-            <a href={basicInfo.brand2_link} target='_blank' className='medium text-white'>Webite 2</a>
+            <a href={basicInfo?.brand1_link} target='_blank' className='medium text-white px-2'>Webite 1</a>
+            <a href={basicInfo?.brand2_link} target='_blank' className='medium text-white'>Webite 2</a>
           </div>
         </div>
   )

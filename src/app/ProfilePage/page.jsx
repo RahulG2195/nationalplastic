@@ -10,9 +10,9 @@ import { notify, notifyError } from "@/utils/notify.js";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from 'next/image';
 
-
-import CancelProdChargeAfterTwentyFourHr, {ReturnProductBeforeFourteenDays} from "@/utils/CancelProduct";
+import CancelProdChargeAfterTwentyFourHr, { ReturnProductBeforeFourteenDays } from "@/utils/CancelProduct";
 import {
   isValidPassword,
   isValidReason, // Address validations
@@ -37,14 +37,14 @@ function ProfilePage() {
   const [orderData, setOrderData] = useState([]);
   const [ReturnSingleProd, setReturnSingleProd] = useState([]);
   const [VerifyReturnDays, setVerifyReturnDays] = useState([]);
-  
- // redirect to admin to admin panel 
- useEffect(() => {
-  const IsAdmin = localStorage.getItem('isAdmin');
-  if(IsAdmin == 'true'){
-    router.push("/admin") 
-  }
-}, []);
+  // const [firstImage , setFirstImage] = useState("Altis-chair-Black-(45)-white bg.webp");
+  // redirect to admin to admin panel 
+  useEffect(() => {
+    const IsAdmin = localStorage.getItem('isAdmin');
+    if (IsAdmin == 'true') {
+      router.push("/admin")
+    }
+  }, []);
 
   useEffect(() => {
     localStorage.getItem("isLoggedIn") === "true"
@@ -67,8 +67,6 @@ function ProfilePage() {
     // setIsLoggedIn(isLoggedIn);
     setData(storedData);
   }, []);
-
- 
 
 
   // Get user ID from context (replace with your logic)
@@ -162,6 +160,27 @@ function ProfilePage() {
     Phone: "",
     Address: "",
   });
+
+  const [basicInfo, setBasicInfo] = useState({
+    mobile_number1: '',
+    email: ''
+  });
+
+  useEffect(() => {
+    const fetchBasicInfo = async () => {
+      try {
+        const response = await axios.get('/api/basicInfo');
+        const basicInfoData = response.data.basicInfo;
+        setBasicInfo(basicInfoData);
+        setInitialBasicInfo(basicInfoData);
+      } catch (error) {
+        console.error('There was an error fetching the basic info!', error);
+      }
+    };
+
+    fetchBasicInfo();
+  }, []);
+
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -347,6 +366,10 @@ function ProfilePage() {
       console.error('Error:', error);
     }
   }
+
+
+
+
   return (
     <>
       <div className="container profile-page-container mb-5">
@@ -609,15 +632,15 @@ function ProfilePage() {
                   <hr />
                   <div className="row mx-auto">
                     <div className="col-md-6">
-                      <a href="tel: +91000000000">
+                      <a href={`tel: ${basicInfo.mobile_number1}`}>
                         <strong>Give a call :</strong>
-                        <u> 0000000000000 </u>
+                        <u> +91-{basicInfo.mobile_number1}</u>
                       </a>
                     </div>
                     <div className="col-md-6">
                       <a href="mail:nationalplastic@gmail.com">
-                        <strong>Or Send Mail to us :</strong>
-                        <u>nationaplastic@gmail.com </u>
+                        <strong>Or Send Mail to us : </strong>
+                        <u>{basicInfo.email}</u>
                       </a>
                     </div>
                   </div>
@@ -651,6 +674,7 @@ function ProfilePage() {
                           let vdate = ReturnProductBeforeFourteenDays(data['order_status_date']);
                           if (data.image_name) {
                             var images = data ? data.image_name.split(', ').map(image => image.trim()) : [];
+                            // setFirstImage(images[0]);
                           }
 
                           let ReturnCancelBtn;
@@ -689,7 +713,16 @@ function ProfilePage() {
                           }
                           return <tr key={index}>
                             <th scope="row">{index + 1}</th>
-                            <td><Link href={`/ProductDetail/${data.seo_url}`}><img src={`/Assets/uploads/products/${images[0]}`} height={50} width={50} alt="prod_image" /></Link></td>
+                            <td>
+                              <Link href={`/ProductDetail/${data.seo_url}`}>
+                                <Image
+                                  src={images && images.length > 0 ? `/Assets/uploads/products/${images[0]}` : '/Altis-chair-Black-(45)-white bg.webp'}
+                                  height={50}
+                                  width={50}
+                                  alt="prod_image"
+                                />
+                              </Link>
+                            </td>
                             <td><Link href={`/ProductDetail/${data.seo_url}`}>{data.product_name}</Link></td>
                             <td>{data.quantity}</td>
                             <td>₹ {data.quantity * data.prod_price} </td>

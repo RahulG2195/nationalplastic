@@ -30,18 +30,6 @@ const Header = () => {
       <NavbarBrand href="/">
         {/* <img src="/assets/images/logo/main-logo.png" alt="logo" /> */}
       </NavbarBrand>
-      <Nav className="me-auto" navbar>
-        <NavItem>
-          <Link href="/" className="nav-link">
-            Starter
-          </Link>
-        </NavItem>
-        <NavItem>
-          <Link href="/about" className="nav-link">
-            About
-          </Link>
-        </NavItem>
-      </Nav>
       <Button color="secondary" onClick={handleLogout}>
         Logout
       </Button>

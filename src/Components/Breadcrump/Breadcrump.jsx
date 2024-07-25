@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { useEffect } from "react";
 
-const Breadcrump = ({ category_id, category_name, product_name }) => {
+const Breadcrump = ({ category_id, category_name, product_name, catlogue }) => {
   return (
     <>
       <nav aria-label="breadcrumb">
@@ -11,7 +11,7 @@ const Breadcrump = ({ category_id, category_name, product_name }) => {
           </li>
           <li className="breadcrumb-item">
             <Link href={`/ProductCatlogue/${category_id}`}>
-              {category_name || "Product Catelgoue"}
+              {category_name || catlogue || "Product Catelgoue"}
             </Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">

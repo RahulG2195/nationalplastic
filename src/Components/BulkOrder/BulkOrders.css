@@ -1,5 +1,5 @@
 .orders_main {
-    min-height: auto !important;
+    /* height: 30vh !important; */
     margin-bottom: 15%;
 }
 
@@ -69,15 +69,15 @@
 .bulkForm input,
 .input-group-text,
 .text-area {
-    /* background-color: transparent; */
+    background-color: transparent;
     border: 1px solid lightgray;
-    color: white;
+    /* color: white; */
 }
 
 @media (max-width:1089px) {
-    .orders_main {
+    /* .orders_main {
         max-height: 273vh;
-    }
+    } */
     .GQRespTxt {
         margin: 0 !important;
         padding: 0 !important;
@@ -88,6 +88,9 @@
     .colResText {
         flex: 0 0 auto;
         width: 100%;
+    }
+    .ordrmainMargin{
+        margin-top: 0 !important;
     }
 }
 

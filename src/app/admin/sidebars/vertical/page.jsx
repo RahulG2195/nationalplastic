@@ -86,22 +86,6 @@ const navigation = [
     href: "/ui/tables",
     icon: "bi bi-layout-split",
   },
-  {
-    title: "Forms",
-    href: "/ui/forms",
-    icon: "bi bi-textarea-resize",
-  },
-  {
-    title: "Breadcrumbs",
-    href: "/ui/breadcrumbs",
-    icon: "bi bi-link",
-  },
-  {
-    title: "About",
-    href: "/about",
-    icon: "bi bi-people",
-  },
-
 ];
 
 const Sidebar = ({ showMobilemenu }) => {
@@ -110,9 +94,9 @@ const Sidebar = ({ showMobilemenu }) => {
 
   return (
     <div className="p-3">
-      <div className="d-flex align-items-center justify-content-between">
-        <img src="/assets/images/logo/logo_alt.png" alt="" className="w-25" />
-        <div className="ms-auto d-lg-none">
+      <div className="d-flex align-items-center" style={{ justifyContent:"center"}}>
+        <img src="/Assets/images/nation_logo.png" alt="REMO" />
+        <div className="ms-auto d-lg-none"> 
           <Button
             close
             size="sm"

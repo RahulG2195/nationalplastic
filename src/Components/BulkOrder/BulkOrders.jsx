@@ -6,7 +6,7 @@ const BulkOrders = () => {
   return (
     <>
       <div className="orders_main">
-        <div className="d-flex flex-wrap justify-content-center ordersCont mt-5 position-relative">
+        <div className="d-flex flex-wrap justify-content-center ordersCont mt-5 position-relative ordrmainMargin">
           <div className="text-center fw-bold ordersLogo">
             <div className="darkBlue fw-large">
               BULK
@@ -31,7 +31,7 @@ const BulkOrders = () => {
           <div className="bottomForm container text-center">
             <div className="row">
               <div className="col-md-8">
-                <div className="frmW">
+                {/* <div className="frmW">
                   <GetQuoteForm
                     className="sbmtButton"
                     bottomclass="getbottomform rounded-5 w-100"
@@ -48,7 +48,7 @@ const BulkOrders = () => {
                       alt="Picture of the author"
                     />
                   </div>
-                </div>
+                </div> */}
               </div>
 
               <div className="col-md-4 colResText">
