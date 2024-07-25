@@ -202,6 +202,7 @@ export default function Header() {
     fetchBasicInfo();
   }, []);
 
+  // console.log('width', width);
   return (
     <div>
       {!hideLayout ? (
@@ -323,7 +324,9 @@ export default function Header() {
                       )}
                     </li>
                     {
-                      (width <= 991) ? <InvestorAccor handleShow={handleShow} />
+                      (width <= 991) 
+                      ? 
+                      <InvestorAccor handleShow={handleShow} />
                         :
                         <ul className="nav">
                           {investorConfig.map((item, index) => (
