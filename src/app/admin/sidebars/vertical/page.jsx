@@ -90,6 +90,56 @@ const navigation = [
     icon: "bi bi-card-text",
   },
   {
+    title: "News and Media ", //news and media page of NP
+    href: "/admin/newsMedia",
+    icon: "bi bi-layout-split",
+  },
+  {
+    type: "accordion",
+    title: "News and Media",
+    items: [
+      {
+        title: "edit Hero banner",
+        href: "/admin/newsMedia/heroBanner",
+      },
+      {
+        title: "edit content",
+        href: "/admin/newsMedia",
+      },
+    
+    ],
+    icon: "bi bi-hdd-stack",
+  },
+  {
+    type: "accordion",
+    title: "CSR",
+    items: [
+      {
+        title: "edit Hero banner",
+        href: "/admin/csr/heroBanner",
+      },
+      {
+        title: "edit content",
+        href: "/admin/csr",
+      },
+    
+    ],
+    icon: "bi bi-hdd-stack",
+  },
+  {
+    type: "accordion",
+    title: "Bulk Order",
+    items: [
+      {
+        title: "edit Hero banner",
+        href: "/admin/bulkOrder/heroBanner",
+      }
+    
+    ],
+    icon: "bi bi-hdd-stack",
+  },
+
+  {
     title: "Table",
     href: "/ui/tables",
     icon: "bi bi-layout-split",

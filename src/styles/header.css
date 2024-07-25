@@ -2,7 +2,18 @@
     --primary-color: #262262;
     --secondary-color: #FFE000;
 
+
   } */
+
+
+
+  .back-to-top-header{
+    position: fixed;
+    left: 0;
+    top: 50%;
+ z-index: 111111;
+  }
+
 
 p,
 h1,

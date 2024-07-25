@@ -17,10 +17,14 @@ const uploadImage = async (file) => {
 
 // GET request to fetch news media
 export async function GET(request) {
+    const url = new URL(request.url);
+    const id = url.searchParams.get('id');
+
+
     try {
         const newsMedia = await query({
-            query: 'SELECT * FROM news_media',
-            values: [],
+            query: 'SELECT * FROM news_media where id = ?',
+            values: [id],
         });
 
         return new Response(
@@ -43,13 +47,15 @@ export async function GET(request) {
 export async function POST(request) {
     try {
         const formData = await request.formData();
+        const id = formData.get('id');
         const heading = formData.get('heading');
         const subheading = formData.get('subheading');
+        console.log("idd is .............",id)
 
         // Fetch existing data
         const existingData = await query({
             query: 'SELECT * FROM news_media WHERE id = ?',
-            values: [1], // Assuming id = 1
+            values: [id], 
         });
 
         const existing = existingData[0] || {};
@@ -106,7 +112,7 @@ export async function POST(request) {
 
         // Only proceed with update if there are changes
         if (queryParts.length > 0) {
-            values.push(1); // Assuming id = 1
+            values.push(id); 
             const dynamicQuery = `
               UPDATE news_media
               SET ${queryParts.join(', ')}
@@ -141,8 +147,9 @@ export async function POST(request) {
 export async function PUT(request) {
     try {
         // Parse JSON request body
-        const { imageName } = await request.json();
-        console.log("Image Name:", imageName);
+        const { imageName, id } = await request.json();
+        console.log("Image Name:",imageName);
+        console.log("Image Name:", id);
         
         if (!imageName) {
             return NextResponse.json(
@@ -158,7 +165,7 @@ export async function PUT(request) {
         // Execute the query
         const result = await query({
             query: queryText,
-            values: [imageName, 1] // Assuming id = 1; replace with dynamic ID if necessary
+            values: [imageName, id] 
         });
         
         // Log result for debugging

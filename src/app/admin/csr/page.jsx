@@ -2,15 +2,16 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, FormGroup, Label, Input, Container, Row, Col, Card, CardImg, CardBody } from 'reactstrap';
 import axios from 'axios';
+import EditEnvironmental from '@/Components/Admin/CsrEnvironmetSection/CsrEnvironmetSection';
 
-const EditNews = ({ newsId }) => {
+const EditCSR = ({ newsId }) => {
     const [heading, setHeading] = useState('');
     const [subheading, setSubheading] = useState('');
     const [images, setImages] = useState([]);
     const [imageFiles, setImageFiles] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
     console.log("All images are here ", images)
-    const id = 1;
+    const id = 2;
 
     // Fetch initial data when component mounts
     useEffect(() => {
@@ -27,7 +28,7 @@ const EditNews = ({ newsId }) => {
                 setSubheading(subheading || '');
                 setImages(images ? images.split(',') : []);
             } catch (error) {
-                console.error('Error fetching news data:', error);
+                console.error('Error fetching csr data:', error);
             }
         };
 
@@ -56,8 +57,8 @@ const EditNews = ({ newsId }) => {
             const imageName = imageToDelete.split('/').pop();
 
             const response = await axios.put('/api/news_media', {
-                imageName: imageName,
                 id: id,
+                imageName: imageName
             });
 
             if (response.data.success) {
@@ -96,7 +97,7 @@ const EditNews = ({ newsId }) => {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            alert('news updated successfully');
+            alert('csr updated successfully');
             setIsEditing(false); // Exit edit mode after saving
         } catch (error) {
             console.error('Error updating news:', error);
@@ -109,10 +110,12 @@ const EditNews = ({ newsId }) => {
     };
 
     return (
+        <>
+            {/* CSR section */}
 
             <Container className='pt-5'>
                 <div className="d-flex justify-content-between align-items-center mb-4">
-                    <h1 className="fs-3 fw-bold">Edit News Section</h1>
+                    <h1 className="fs-3 fw-bold">Edit HealthCare Section</h1>
                     {!isEditing && (
                         <Button onClick={() => setIsEditing(true)} color="primary">
                             <i className="bi bi-pencil"></i> Edit
@@ -201,7 +204,13 @@ const EditNews = ({ newsId }) => {
                     </div>
                 )}
             </Container>
+
+            {/* Environmental section  */}
+            <Container>
+                <EditEnvironmental />
+            </Container>
+        </>
     );
 };
 
-export default EditNews;
+export default EditCSR;

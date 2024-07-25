@@ -15,13 +15,15 @@ const EventsAndActivities = () => {
     //   ];
 
     const [cardData, setCardData] = useState([]);
+    console.log("All news are here",cardData)
     const [heading, setHeading] = useState('');
     const [subheading, setSubheading] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`/api/news_media`);
+                const id = 1;
+                const response = await axios.get(`/api/news_media`, { params: { id } });
                 const { heading, subheading, images } = response.data.newsMedia[0];
                 setCardData(images ? images.split(',') : []);
                 setHeading(heading || '');
@@ -40,9 +42,9 @@ const EventsAndActivities = () => {
         <div className="main_container mt-5">
             <div className="text-center mb-5">
                 <div className="fs-1 fw-bold text-danger">
-                    {heading.split('&')[0].trim() + ' & '}
+                    {heading && heading.split('&')[0].trim() + ' & '}
                     <span className="darkBlue fw-normal">
-                        {heading.split('&')[1].trim()}
+                        {heading && heading.split('&')[1].trim()}
                     </span>
                 </div>
                 <div className="mt-1 fw-medium subCptRes w-50">
@@ -55,7 +57,7 @@ const EventsAndActivities = () => {
                 <div className="row">
                     {cardData.map((card, index) => (
                         <div className="col-md-4 my-3" key={index}>
-                            <Card imgsrc={card} />
+                            <Card imgsrc={`Assets/uploads/${card}`} />
                         </div>
                     ))}
                 </div>

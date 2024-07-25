@@ -3,14 +3,14 @@ import React, { useState, useEffect } from 'react';
 import { Button, Form, FormGroup, Label, Input, Container, Row, Col, Card, CardImg, CardBody } from 'reactstrap';
 import axios from 'axios';
 
-const EditNews = ({ newsId }) => {
+const EditEnvironmental = ({ newsId }) => {
     const [heading, setHeading] = useState('');
     const [subheading, setSubheading] = useState('');
     const [images, setImages] = useState([]);
     const [imageFiles, setImageFiles] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
     console.log("All images are here ", images)
-    const id = 1;
+    const id = 3;
 
     // Fetch initial data when component mounts
     useEffect(() => {
@@ -27,7 +27,7 @@ const EditNews = ({ newsId }) => {
                 setSubheading(subheading || '');
                 setImages(images ? images.split(',') : []);
             } catch (error) {
-                console.error('Error fetching news data:', error);
+                console.error('Error fetching Environment data:', error);
             }
         };
 
@@ -96,7 +96,7 @@ const EditNews = ({ newsId }) => {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            alert('news updated successfully');
+            alert('Environment updated successfully');
             setIsEditing(false); // Exit edit mode after saving
         } catch (error) {
             console.error('Error updating news:', error);
@@ -112,7 +112,7 @@ const EditNews = ({ newsId }) => {
 
             <Container className='pt-5'>
                 <div className="d-flex justify-content-between align-items-center mb-4">
-                    <h1 className="fs-3 fw-bold">Edit News Section</h1>
+                    <h1 className="fs-3 fw-bold">Edit Environmental Section</h1>
                     {!isEditing && (
                         <Button onClick={() => setIsEditing(true)} color="primary">
                             <i className="bi bi-pencil"></i> Edit
@@ -204,4 +204,4 @@ const EditNews = ({ newsId }) => {
     );
 };
 
-export default EditNews;
+export default EditEnvironmental;

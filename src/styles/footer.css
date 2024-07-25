@@ -1,3 +1,13 @@
+
+
+.back-to-top{
+    position: fixed;
+    right: 2%;
+    top: 73% ;
+    background-color: red !important;
+    padding: 10px;
+    border-radius: 100%;
+}
 .footer{
     background-color: var(--secondary-color);
     padding: 55px 0;
