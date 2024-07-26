@@ -77,6 +77,10 @@ const navigation = [
         title: "CompanyProfile Section",
         href: "/admin/aboutus/company",
       },
+      {
+        title: "Commite and Management Section",
+        href: "/admin/aboutus/committee",
+      },
     ],
     icon: "bi bi-hdd-stack",
   },

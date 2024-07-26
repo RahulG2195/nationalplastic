@@ -1,31 +1,40 @@
-import Management from "@/Components/About/Management";
-import Committee from "@/Components/About/Committee";
+"use client";
+import React, { useState, useEffect } from "react";
 import "./management.css";
 import ComapnyProfileSidebar from "@/Components/About/ComapnyProfileSidebar";
 
+const Committee = ({ title, members }) => {
+  return (
+    <div className="committee-section">
+      <h3>{title}</h3>
+      <ul className="committee-list">
+        {members.map((member, index) => (
+          <li key={index}>{member}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
 function Manage() {
-  const auditCommitteeMembers = [
-    "Mr. Purnachandra Rao Dendukuri, Non-Executive Independent Director, Chairman",
-    "Mr. Bimal Parekh, Non-Executive Independent Director, Member",
-    "Mr. Vipul Desai, Non-Executive Independent Director, Member",
-    "Mrs. Ranganayaki Rangachari, Non Executive Independent Director, Member",
-  ];
+  const [committees, setCommittees] = useState([]);
+  const [management, setManagement] = useState([]);
 
-  const nominationCommitteeMembers = [
-    "Mr. Vipul Desai, Non-Executive Independent Director, Chairman",
-    "Mr. Purnachandra Rao Dendukuri, Non-Executive Independent Director, Member",
-    "Mrs. Ranganayaki Rangachari, Non-Executive Independent Director, Member",
-    "Mr. Bimal Parekh, Non-Executive Independent Director, Member",
-  ];
-
-  const stakeholdersCommitteeMembers = [
-    "Mr. Purnachandra Rao Dendukuri, Non-Executive Independent Director, Chairman",
-    "Mr. Bimal Parekh, Non-Executive Independent Director, Member",
-    "Mr. Paresh Parekh, Managing Director, Member",
-    "Mr. Ketan Parekh, Joint Managing Director, Member",
-    "Mr. Vipul Desai, Non-Executive Independent Director, Member",
-    "Mrs. Ranganayaki Rangachari, Non-Executive Independent Director, Member",
-  ];
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch('/api/admin/committees-and-management');
+        const data = await response.json();
+        if (data.status === 200) {
+          setCommittees(data.data.filter(item => item.type === 'committee'));
+          setManagement(data.data.filter(item => item.type === 'management'));
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+    fetchData();
+  }, []);
 
   return (
     <div className="container">
@@ -34,16 +43,15 @@ function Manage() {
           <div className="committee-section mb-4">
             <h2>Committee</h2>
           </div>
-          <Committee title="Audit Committee" members={auditCommitteeMembers} />
-          <Committee
-            title="Nomination and Remuneration Committee"
-            members={nominationCommitteeMembers}
-          />
-          <Committee
-            title="Stakeholders Relationship Committee"
-            members={stakeholdersCommitteeMembers}
-          />
-          <Management />
+          {committees.map((committee, index) => (
+            <Committee key={index} title={committee.category} members={committee.members} />
+          ))}
+          <div className="management-section">
+            <h2>Management</h2>
+            {management.map((item, index) => (
+              <p key={index}>{item.members.join(', ')}</p>
+            ))}
+          </div>
         </div>
         <div className="col-12 col-md-3">
           <ComapnyProfileSidebar title="MANAGEMENT AND BOARD COMMITTEES" />
