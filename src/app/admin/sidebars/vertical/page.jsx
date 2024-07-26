@@ -70,6 +70,17 @@ const navigation = [
     icon: "bi bi-hdd-stack",
   },
   {
+    type: "accordion",
+    title: "About us",
+    items: [
+      {
+        title: "CompanyProfile Section",
+        href: "/admin/aboutus/company",
+      },
+    ],
+    icon: "bi bi-hdd-stack",
+  },
+  {
     title: "Products",
     href: "/admin/product",
     icon: "bi bi-p-square",
