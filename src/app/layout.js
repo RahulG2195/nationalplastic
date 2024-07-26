@@ -16,6 +16,7 @@ import Script from "next/script";
 import { SessionProvider } from "next-auth/react";
 import { Metadata } from 'next'
 import BackToTopButton from "@/Components/BackToTopButton/BackToTopButton";
+import ScrollToTop from "scroll-to-top-react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,14 +32,14 @@ export default function RootLayout({ children }) {
     import("bootstrap/dist/js/bootstrap.bundle.min.js");
 
     const queryParams = window.location.pathname;
-    
+
     if (queryParams.includes("admin")) {
       setIsAdmin(true);
     }
   }, []);
 
   return (
-    
+
     <html lang="en">
       <head>
         <Script
@@ -46,16 +47,18 @@ export default function RootLayout({ children }) {
           strategy="beforeInteractive"
         />
       </head>
-      
+
       <body className={inter.className}>
         <SessionProvider>
           <BrowserRouter>
             <Provider store={store}>
+              <ScrollToTop displayType="htmlArrow" />
               <PersistGate loading={null} persistor={persistor}>
                 {!isAdmin && <Header />}
                 <div className={`${isAdmin ? "pt-0 mt-0" : "mobile__top"}`}>
                   {children}
                   {/* <BackToTopButton /> */}
+
                 </div>
                 <ToastContainer />
                 {!isAdmin && <Footer />}

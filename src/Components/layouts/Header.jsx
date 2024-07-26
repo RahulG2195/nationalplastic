@@ -585,10 +585,7 @@ export default function Header() {
               </div>
             </nav>
             {shouldRenderBottomBar ? <BottomBar /> : <PlaceholderBar />}
-            <div className="back-to-top-header">
-            <ScrollToTop displayType="htmlArrow" />
 
-            </div>
           </div>
         </>
       ) : null}
