@@ -20,15 +20,15 @@ export default function ShopRoom() {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_BASE_URL}/Category`
         );
-        const filteredData = response.data.categories.filter(
-          (item) =>
-            item.category_id === 30 ||
-            item.category_id === 31 ||
-            item.category_id === 32 ||
-            item.category_id === 33 ||
-            item.category_id === 34 ||
-            item.category_id === 35
-        );
+        const filteredData = response.data.ShopRooms;
+        // (item) =>
+        //     item.category_id === 30 ||
+        //     item.category_id === 31 ||
+        //     item.category_id === 32 ||
+        //     item.category_id === 33 ||
+        //     item.category_id === 34 ||
+        //     item.category_id === 35
+        // );
         setProductArr(filteredData);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -91,18 +91,18 @@ export default function ShopRoom() {
                     key={product.product_id}
                   >
                     <SwiperSlide key={product.category_id}>
-                      <CatCards
-                        catid={
-                          product.category_name &&
-                          product.category_name.toLowerCase().includes("baby")
-                            ? 18
-                            : product.category_id
+                    <CatCards
+                         catid={
+                          product.seo_url
                         }
-                        image={`/Assets/images/Home-page/${product.image_name}`}
+                        manfacthover="manfact"
+                        style="manfTitle"
+                        image={`/Assets/uploads/category/${product.image_name}`}
                         title={product.category_name}
-                        url="#"
-                        style={"shop-room"}
-                        key={product.category_id}
+                        categoryType={product.categoryType}
+                        onCategoryChange={() =>
+                          sendCategory(product.product_name)
+                        }
                       />
                     </SwiperSlide>
                   </div>
@@ -117,17 +117,14 @@ export default function ShopRoom() {
                   <CatCards
                     hoverglow="yellowGlow"
                     catid={
-                      product.category_name &&
-                      product.category_name.toLowerCase().includes("baby ")
-                        ? 18
-                        : product.category_id
+                      product.seo_url
                     }
                     style="manfTitle pt-4 px-4 d-flex gap-5  justify-content-arround"
                     image={`/Assets/images/Home-page/${product.image_name}`}
                     title={product.category_name}
                     categoryType={product.categoryType}
                     onCategoryChange={() => sendCategory(product.product_name)}
-                  />
+                  />                 
                 </div>
               ))}
             </div>

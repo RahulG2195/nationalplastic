@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 25, 2024 at 07:17 AM
+-- Generation Time: Jul 26, 2024 at 09:36 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -24,15 +24,50 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ads`
+--
+
+CREATE TABLE `ads` (
+  `ads_id` int NOT NULL,
+  `years` varchar(255) NOT NULL,
+  `q1` varchar(255) NOT NULL,
+  `image_name1` text NOT NULL,
+  `q2` varchar(255) NOT NULL,
+  `image_name2` text NOT NULL,
+  `q3` varchar(255) NOT NULL,
+  `image_name3` text NOT NULL,
+  `q4` varchar(255) NOT NULL,
+  `image_name4` text NOT NULL,
+  `status` int NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `agm`
+--
+
+CREATE TABLE `agm` (
+  `ad_id` int NOT NULL,
+  `agm_type` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `years` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `names` text COLLATE utf8mb4_general_ci NOT NULL,
+  `image_name` text COLLATE utf8mb4_general_ci NOT NULL,
+  `status` int NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `annual_report_return`
 --
 
 CREATE TABLE `annual_report_return` (
   `arr_id` int NOT NULL,
   `cat_id` int NOT NULL,
-  `years` varchar(255) NOT NULL,
-  `reports` varchar(255) NOT NULL,
-  `image_name` text NOT NULL,
+  `years` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `reports` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `image_name` text COLLATE utf8mb4_general_ci NOT NULL,
   `status` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -44,9 +79,9 @@ CREATE TABLE `annual_report_return` (
 
 CREATE TABLE `audited` (
   `aud_id` int NOT NULL,
-  `year` varchar(255) NOT NULL,
-  `report` varchar(255) NOT NULL,
-  `image_name` text NOT NULL,
+  `year` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `report` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `image_name` text COLLATE utf8mb4_general_ci NOT NULL,
   `status` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -128,6 +163,20 @@ INSERT INTO `categories` (`category_id`, `category_name`, `image_name`, `navshow
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `corporate`
+--
+
+CREATE TABLE `corporate` (
+  `cid` int NOT NULL,
+  `corp_type` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `corp_name` text COLLATE utf8mb4_general_ci NOT NULL,
+  `image_name` text COLLATE utf8mb4_general_ci NOT NULL,
+  `status` int NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `coupons`
 --
 
@@ -186,7 +235,7 @@ INSERT INTO `customer` (`customer_id`, `FirstName`, `LasttName`, `Email`, `Phone
 (7, 'Pratik', 'Shinde', 'p@gmail.com', '8787676565', 'Kalyan', NULL, 'Pratik@123', NULL, 'user'),
 (8, 'Keane', 'Duncan', 'rahul@crezvatic.com', '7738035606', 'In ad libero commodi', NULL, '$2a$12$G1VJ1oNTRI/OgWLVIrFe9egdajw/ycFGTcrtRNwrP6qzgocvPY1Kq', NULL, 'user'),
 (9, 'Zia', 'Cantu', 'reve@mailinator.com', '9874589658', 'Quia rem quia ad atq', NULL, '$2a$12$Hx6JtVkDdx9Mwj2O7xIxpOxN6vlVz9aE7rgMbhTpb9f//Y3ZBgw6.', NULL, 'user'),
-(10, 'Rahul', 'jaiswal', 'Rahul@gmail.com', '9518595869', 'opal squal, near midc', NULL, '$2a$12$stylQAy6xgMiNa7Srq8H3.L1WPzb6DOHMHz2qc0gnx5bb/L3L2Zdu', NULL, 'admin'),
+(10, 'Rahul', 'jaiswal', 'Rahul@gmail.com', '9518595869', 'opal squal, near midc', NULL, '$2a$12$stylQAy6xgMiNa7Srq8H3.L1WPzb6DOHMHz2qc0gnx5bb/L3L2Zdu', NULL, 'user'),
 (11, 'Panasa', 'Sai Kumar ', 'saikumarpanasa143@gmail.com', '7287050702', 'Khammam district kavirajnagar road no 11 cmr shopping be side, Khammam , Telangana , 507002', NULL, '$2a$12$u8jzwh08Jpi9Z5dDcMRahelv736y.6vT6CmYi5q960ULZxUv/dQLO', NULL, 'user');
 
 -- --------------------------------------------------------
@@ -353,6 +402,41 @@ INSERT INTO `disclosure_data` (`id`, `year`, `title`, `file_path`, `status`, `cr
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `disclousure`
+--
+
+CREATE TABLE `disclousure` (
+  `did` int NOT NULL,
+  `names` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `q1` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `img1` text COLLATE utf8mb4_general_ci NOT NULL,
+  `q2` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `img2` text COLLATE utf8mb4_general_ci NOT NULL,
+  `q3` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `img3` text COLLATE utf8mb4_general_ci NOT NULL,
+  `q4` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `img4` text COLLATE utf8mb4_general_ci NOT NULL,
+  `status` int NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `general_disc`
+--
+
+CREATE TABLE `general_disc` (
+  `gd_id` int NOT NULL,
+  `types` varchar(255) NOT NULL,
+  `title` text NOT NULL,
+  `names` text NOT NULL,
+  `image_name` text NOT NULL,
+  `status` int NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `herosection`
 --
 
@@ -376,6 +460,32 @@ INSERT INTO `herosection` (`id`, `redirect_url`, `image_name`, `image_location`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `iepf`
+--
+
+CREATE TABLE `iepf` (
+  `ip_id` int NOT NULL,
+  `titles` varchar(255) NOT NULL,
+  `names` varchar(255) NOT NULL,
+  `image_name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ipef2`
+--
+
+CREATE TABLE `ipef2` (
+  `ip2_id` int NOT NULL,
+  `years` varchar(255) NOT NULL,
+  `reports` text NOT NULL,
+  `image_names` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `mycart`
 --
 
@@ -394,7 +504,7 @@ CREATE TABLE `mycart` (
 INSERT INTO `mycart` (`cart_id`, `product_id`, `user_id`, `quantity`, `color`) VALUES
 (1, 21, 7, 1, 'Gold'),
 (2, 26, 7, 1, 'Gold'),
-(25, 46, 10, 1, 'GOLD');
+(25, 46, 10, 2, 'GOLD');
 
 -- --------------------------------------------------------
 
@@ -556,7 +666,7 @@ CREATE TABLE `pages` (
   `status` tinyint(1) DEFAULT '1',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pages`
@@ -585,27 +695,27 @@ INSERT INTO `pages` (`id`, `nav_item_id`, `title`, `content`, `status`, `created
 
 CREATE TABLE `products` (
   `product_id` int NOT NULL,
-  `product_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `product_name2` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `meta_title` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `meta_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `short_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `long_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `seo_titile` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `seo_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `seo_url_clr` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `product_name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `product_name2` text COLLATE utf8mb4_general_ci NOT NULL,
+  `meta_title` text COLLATE utf8mb4_general_ci NOT NULL,
+  `meta_description` text COLLATE utf8mb4_general_ci NOT NULL,
+  `short_description` text COLLATE utf8mb4_general_ci NOT NULL,
+  `long_description` text COLLATE utf8mb4_general_ci NOT NULL,
+  `seo_titile` text COLLATE utf8mb4_general_ci NOT NULL,
+  `seo_url` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `seo_url_clr` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `category_id` int NOT NULL,
-  `image_name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `header_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `price` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `discount_price` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `discount_percentage` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `categoryType` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `duration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `InstallationCharges` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `color_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `armType` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `image_name` text COLLATE utf8mb4_general_ci NOT NULL,
+  `header_image` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `price` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `discount_price` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `discount_percentage` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `categoryType` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `duration` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `InstallationCharges` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `color` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `color_code` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `armType` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `prod_status` int NOT NULL DEFAULT '1',
   `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -1074,13 +1184,13 @@ INSERT INTO `products` (`product_id`, `product_name`, `product_name2`, `meta_tit
 CREATE TABLE `product_detail` (
   `pd_id` int NOT NULL,
   `prod_id` int NOT NULL,
-  `features` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `dimenions` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `descp` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `careAndInstruct` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `deliveryInsct` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `manufacturing` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `warranty` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+  `features` text COLLATE utf8mb4_general_ci NOT NULL,
+  `dimenions` text COLLATE utf8mb4_general_ci NOT NULL,
+  `descp` text COLLATE utf8mb4_general_ci NOT NULL,
+  `careAndInstruct` text COLLATE utf8mb4_general_ci NOT NULL,
+  `deliveryInsct` text COLLATE utf8mb4_general_ci NOT NULL,
+  `manufacturing` text COLLATE utf8mb4_general_ci NOT NULL,
+  `warranty` text COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -1549,6 +1659,19 @@ INSERT INTO `product_detail` (`pd_id`, `prod_id`, `features`, `dimenions`, `desc
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `related_party`
+--
+
+CREATE TABLE `related_party` (
+  `rp_id` int NOT NULL,
+  `names` varchar(255) NOT NULL,
+  `image_name` text NOT NULL,
+  `status` int NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `review`
 --
 
@@ -1592,15 +1715,15 @@ INSERT INTO `review` (`review_id`, `user_id`, `review_message`, `review_status`,
 CREATE TABLE `shareholding_corporate` (
   `sc_id` int NOT NULL,
   `cat_id` int NOT NULL,
-  `years` varchar(255) NOT NULL,
-  `q1` varchar(255) NOT NULL,
-  `image_name1` text NOT NULL,
-  `q2` varchar(255) NOT NULL,
-  `image_name2` text NOT NULL,
-  `q3` varchar(255) NOT NULL,
-  `image_name3` text NOT NULL,
-  `q4` varchar(255) NOT NULL,
-  `image_name4` text NOT NULL,
+  `years` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `q1` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `image_name1` text COLLATE utf8mb4_general_ci NOT NULL,
+  `q2` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `image_name2` text COLLATE utf8mb4_general_ci NOT NULL,
+  `q3` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `image_name3` text COLLATE utf8mb4_general_ci NOT NULL,
+  `q4` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `image_name4` text COLLATE utf8mb4_general_ci NOT NULL,
   `status` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -1612,15 +1735,19 @@ CREATE TABLE `shareholding_corporate` (
 
 CREATE TABLE `unaudited` (
   `una_id` int NOT NULL,
-  `years` varchar(255) NOT NULL,
-  `name1` varchar(255) NOT NULL,
-  `file_name1` text NOT NULL,
-  `name2` varchar(255) NOT NULL,
-  `file_name2` text NOT NULL,
-  `name3` varchar(255) NOT NULL,
-  `file_name3` text NOT NULL,
+  `years` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `quarter` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `file_name` text COLLATE utf8mb4_general_ci NOT NULL,
   `statue` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `unaudited`
+--
+
+INSERT INTO `unaudited` (`una_id`, `years`, `title`, `quarter`, `file_name`, `statue`) VALUES
+(1, 'Year 2023-2024', '30th June 2023', 'Q1', 'Pradeep Chauhan CV.pdf', 1);
 
 -- --------------------------------------------------------
 
@@ -1710,6 +1837,18 @@ INSERT INTO `wishlist` (`WishlistId`, `product_id`, `user_id`, `createdOn`) VALU
 --
 
 --
+-- Indexes for table `ads`
+--
+ALTER TABLE `ads`
+  ADD PRIMARY KEY (`ads_id`);
+
+--
+-- Indexes for table `agm`
+--
+ALTER TABLE `agm`
+  ADD PRIMARY KEY (`ad_id`);
+
+--
 -- Indexes for table `annual_report_return`
 --
 ALTER TABLE `annual_report_return`
@@ -1732,6 +1871,12 @@ ALTER TABLE `basic_info`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`);
+
+--
+-- Indexes for table `corporate`
+--
+ALTER TABLE `corporate`
+  ADD PRIMARY KEY (`cid`);
 
 --
 -- Indexes for table `coupons`
@@ -1759,10 +1904,34 @@ ALTER TABLE `disclosure_data`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `disclousure`
+--
+ALTER TABLE `disclousure`
+  ADD PRIMARY KEY (`did`);
+
+--
+-- Indexes for table `general_disc`
+--
+ALTER TABLE `general_disc`
+  ADD PRIMARY KEY (`gd_id`);
+
+--
 -- Indexes for table `herosection`
 --
 ALTER TABLE `herosection`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `iepf`
+--
+ALTER TABLE `iepf`
+  ADD PRIMARY KEY (`ip_id`);
+
+--
+-- Indexes for table `ipef2`
+--
+ALTER TABLE `ipef2`
+  ADD PRIMARY KEY (`ip2_id`);
 
 --
 -- Indexes for table `mycart`
@@ -1803,6 +1972,12 @@ ALTER TABLE `pages`
   ADD KEY `nav_item_id` (`nav_item_id`);
 
 --
+-- Indexes for table `related_party`
+--
+ALTER TABLE `related_party`
+  ADD PRIMARY KEY (`rp_id`);
+
+--
 -- Indexes for table `shareholding_corporate`
 --
 ALTER TABLE `shareholding_corporate`
@@ -1837,6 +2012,18 @@ ALTER TABLE `wishlist`
 --
 
 --
+-- AUTO_INCREMENT for table `ads`
+--
+ALTER TABLE `ads`
+  MODIFY `ads_id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `agm`
+--
+ALTER TABLE `agm`
+  MODIFY `ad_id` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `annual_report_return`
 --
 ALTER TABLE `annual_report_return`
@@ -1861,6 +2048,12 @@ ALTER TABLE `categories`
   MODIFY `category_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
+-- AUTO_INCREMENT for table `corporate`
+--
+ALTER TABLE `corporate`
+  MODIFY `cid` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
@@ -1877,6 +2070,30 @@ ALTER TABLE `customer_detail`
 --
 ALTER TABLE `disclosure_data`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+
+--
+-- AUTO_INCREMENT for table `disclousure`
+--
+ALTER TABLE `disclousure`
+  MODIFY `did` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `general_disc`
+--
+ALTER TABLE `general_disc`
+  MODIFY `gd_id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `iepf`
+--
+ALTER TABLE `iepf`
+  MODIFY `ip_id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ipef2`
+--
+ALTER TABLE `ipef2`
+  MODIFY `ip2_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `mycart`
@@ -1912,7 +2129,13 @@ ALTER TABLE `order_status`
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `related_party`
+--
+ALTER TABLE `related_party`
+  MODIFY `rp_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `shareholding_corporate`
@@ -1924,7 +2147,7 @@ ALTER TABLE `shareholding_corporate`
 -- AUTO_INCREMENT for table `unaudited`
 --
 ALTER TABLE `unaudited`
-  MODIFY `una_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `una_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`
