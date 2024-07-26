@@ -18,6 +18,7 @@ import { PlaceholderBar } from "./Placeholder";
 import { useDelayedRender } from "@/utils/useDelayedRender";
 import { staticInvestorConfig, fetchInvestorConfig } from "./investorConfig";
 import ScrollToTop from "scroll-to-top-react";
+
 export default function Header() {
   const shouldRenderBottomBar = useDelayedRender(2000);
   const [searchTerm, setSearchTerm] = useState("");
@@ -323,7 +324,9 @@ export default function Header() {
                       )}
                     </li>
                     {
-                      (width <= 991) ? <InvestorAccor handleShow={handleShow} />
+                      (width <= 991) 
+                      ? 
+                      <InvestorAccor handleShow={handleShow} />
                         :
                         <ul className="nav">
                           {investorConfig.map((item, index) => (
