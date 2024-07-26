@@ -49,7 +49,10 @@ const AddBody = () => {
         getProfile: true,
       };
 
-      const response = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/Users`, formData);
+      const response = await axios.put(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/Users`,
+        formData
+      );
       const userData = response.data.message[0];
       const { Address, FirstName, Phone } = userData;
       const addressString = JSON.stringify(Address);
@@ -76,9 +79,12 @@ const AddBody = () => {
         if (!Dummies) {
           cartData = Dummies;
         } else {
-          const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/UserCart`, {
-            customer_id: customerId,
-          });
+          const response = await axios.post(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/UserCart`,
+            {
+              customer_id: customerId,
+            }
+          );
           getAdress();
           cartData = response.data.products;
         }
@@ -221,7 +227,7 @@ const AddBody = () => {
                   </div>
                 </div>
               </div>
-              <div className="text-start fw-bold mt-3">Service Lift</div>
+              {/* <div className="text-start fw-bold mt-3">Service Lift</div>
               <div className="d-flex align-items-center gap-5 liftOptionsResp">
                 <div className="form-check py-3">
                   <input
@@ -252,7 +258,7 @@ const AddBody = () => {
                     Not Available
                   </label>
                 </div>
-              </div>
+              </div> */}
               <div className="buying text-start mt-4 p-3 bg-white">
                 <input
                   className="form-check-input border-black"
@@ -273,21 +279,21 @@ const AddBody = () => {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Name"
+                    placeholder="Company Name"
                   />
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Email"
+                    placeholder="GST Number"
                   />
                 </div>
-                <div className="mb-3">
+                {/* <div className="mb-3">
                   <input
                     type="text"
                     className="form-control"
                     placeholder="Mobile"
                   />
-                </div>
+                </div> */}
                 <button
                   type="submit"
                   className="btn btn-danger px-md-5 SaveBtnResp"
@@ -327,14 +333,20 @@ const AddBody = () => {
                     ) : (
                       <div className="container">
                         {productDetailArr.map((val) => {
-                          const images = val.image_name ? val.image_name.split(', ').map(image => image.trim()) : [];
-                          return <div className="row" key={val.product_id}>
-                            <OrderSummaryCard
-                              imgSrc={`/Assets/uploads/products/${images[0]}`}
-                              description={val.product_name}
-                              quantity={val.quantity}
-                            />
-                          </div>
+                          const images = val.image_name
+                            ? val.image_name
+                                .split(", ")
+                                .map((image) => image.trim())
+                            : [];
+                          return (
+                            <div className="row" key={val.product_id}>
+                              <OrderSummaryCard
+                                imgSrc={`/Assets/uploads/products/${images[0]}`}
+                                description={val.product_name}
+                                quantity={val.quantity}
+                              />
+                            </div>
+                          );
                         })}
                       </div>
                     )}
