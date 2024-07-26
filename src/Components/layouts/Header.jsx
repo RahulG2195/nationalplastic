@@ -205,6 +205,8 @@ export default function Header() {
  
   return (
     <div>
+                    {/* <ScrollToTop displayType="htmlArrow" /> */}
+
       {!hideLayout ? (
         <>
           <div className="container-fluid p-0 header menbg">
@@ -399,9 +401,9 @@ export default function Header() {
                         CSR
                       </Link>
                     </li>
-                    <li className="nav-item brdr bulk_ord px-3">
+                    <li className="nav-item brdr bulk_ord">
                       <Link
-                        className="nav-link mx-1"
+                        className="nav-link"
                         href="/BulkOrder"
                         onClick={isClicked ? handleShow : null}>
                         Bulk Orders

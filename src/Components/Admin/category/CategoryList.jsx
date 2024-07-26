@@ -1,14 +1,15 @@
-"use client";
-import Link from 'next/link';
+"use client"
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Container, Row, Col, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from 'axios';
-import { Table,Switch } from 'antd';
+import { Table, Switch } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import "./CategoryList.css";
-import { notify , notifyError } from '@/utils/notify';
+import { notify, notifyError } from '@/utils/notify';
+
 const CategoryList = () => {
   const router = useRouter();
   const [categoryArray, setCategoryArray] = useState([]);
@@ -16,6 +17,7 @@ const CategoryList = () => {
   const [searchText, setSearchText] = useState('');
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [currentItemToDelete, setCurrentItemToDelete] = useState(null);
+  const [seoUrl, setSeoUrl] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,6 +28,7 @@ const CategoryList = () => {
     };
     fetchData();
   }, []);
+
   const handleToggleNavshow = async (categoryId, checked) => {
     try {
       const newNavshowValue = checked ? 1 : 0;
@@ -33,18 +36,15 @@ const CategoryList = () => {
         category_id: categoryId,
         navshow: newNavshowValue
       });
-      
-      if (response.data.success) {
 
-        // Update the state
-        const updatedCategories = categoryArray.map(category => 
-          category.category_id === categoryId 
-            ? { ...category, navshow: newNavshowValue } 
+      if (response.data.success) {
+        const updatedCategories = categoryArray.map(category =>
+          category.category_id === categoryId
+            ? { ...category, navshow: newNavshowValue }
             : category
         );
         setCategoryArray(updatedCategories);
         setFilteredCategoryArray(updatedCategories);
-        
         notify("Navshow status updated successfully");
       } else {
         notifyError('Failed to update navshow status');
@@ -99,6 +99,17 @@ const CategoryList = () => {
     setDeleteModalOpen(!deleteModalOpen);
   };
 
+  const handleSeoUrlChange = (e) => {
+    const value = e.target.value;
+    const isValid = /^[a-zA-Z0-9-_]+$/.test(value);
+
+    if (isValid || value === '') {
+      setSeoUrl(value);
+    } else {
+      notifyError('SEO URL can only contain letters, numbers, underscores, and hyphens.');
+    }
+  };
+
   const columns = [
     {
       title: 'Index',
@@ -127,6 +138,11 @@ const CategoryList = () => {
       ),
     },
     {
+      title: 'SEO URL',
+      dataIndex: 'seo_url',
+      key: 'seo_url',
+    },
+    {
       title: 'Image',
       dataIndex: 'image_name',
       key: 'image_name',
@@ -137,9 +153,9 @@ const CategoryList = () => {
           alt={text}
           style={{ width: '100px', height: '50px' }}
           width={3}
-                height={3}
-                layout="responsive"
-                objectFit="cover"
+          height={3}
+          layout="responsive"
+          objectFit="cover"
         />
       ),
     },

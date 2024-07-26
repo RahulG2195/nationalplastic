@@ -33,6 +33,7 @@ const notify = () => {
 // import InfiniteScroll from "react-infinite-scroll-component";
 
 const PreChairsCards = () => {
+  const [cat_id, setCat_id] = useState(null)
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedColor, setSelectedColor] = useState(null);
@@ -47,22 +48,34 @@ const PreChairsCards = () => {
   // const [hasMore, setHasMore] = useState(true);
   // const [length, setlength] = useState([]);
   const router = useParams();
-  const cat_id = router.productCatId;
+  const seo_url = router.productCatId;
   const route = useRouter();
 
   const dispatch = useDispatch();
 
+
+
   useEffect(() => {
     fetchData();
-  }, [selectedColor, selectedArmType, selectedPriceSort, categoryType]);
+  }, [selectedColor, selectedArmType, selectedPriceSort, categoryType,]);
 
   const fetchData = async () => {
     try {
-      const categoryTitle = localStorage.getItem("category");
-      setCategoryType(categoryTitle);
+
+      const catResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/categoryFromSeo?query=${seo_url}`);
+      console.log("all cats are .......", catResponse.data.allCategories[0]);
+      const data = catResponse.data.allCategories[0];
+
+      setCategoryType(data.category_name)
+      setCat_id(data.category_id);
+      
       const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/ProductsCat?query=${cat_id}`);
+      console.log("categoryy isdddd ", cat_id)
+
 
       const fetchedData = response.data;
+      console.log("catalougue data ...", fetchedData)
+
 
       setFetchClr(fetchedData.color);
       setFetchType(fetchedData.armType);
@@ -97,7 +110,7 @@ const PreChairsCards = () => {
           });
         }
 
-   
+
         setProducts(filteredData);
 
 
@@ -201,6 +214,7 @@ const PreChairsCards = () => {
 
   return (
     <>
+
       <div className="container mt-5">
         <PremiumChairs cattitle={categoryType} />
 

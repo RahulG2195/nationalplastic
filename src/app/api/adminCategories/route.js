@@ -7,7 +7,7 @@ export async function POST(request) {
   try {
     const data = await request.formData();
 
-    const { category_name, navshow, status, topPick = 0 } = Object.fromEntries(
+    const { category_name, seo_url, navshow, status, topPick = 0 } = Object.fromEntries(
       data.entries()
     );
 
@@ -45,7 +45,7 @@ export async function POST(request) {
     }
 
     // Manual validation
-    const requiredFields = { category_name, navshow, status };
+    const requiredFields = { category_name, seo_url, navshow, status };
 
     const missingFields = Object.entries(requiredFields)
       .filter(([key, value]) => !value)
@@ -61,10 +61,10 @@ export async function POST(request) {
     // Insert the new category
     const result = await query({
       query: `
-        INSERT INTO categories (category_name, image_name, navshow, status, topPick)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO categories (category_name, seo_url, image_name, navshow, status, topPick)
+        VALUES (?, ?, ?, ?, ?, ?)
       `,
-      values: [category_name, uploadedImageName, navshow, status, topPick],
+      values: [category_name, seo_url, uploadedImageName, navshow, status, topPick],
     });
 
     return new Response(
@@ -84,7 +84,7 @@ export async function POST(request) {
 export async function PUT(request) {
   try {
     const data = await request.formData();
-    const { category_id, category_name, image_name, navshow, status, image , topPick=0} = Object.fromEntries(
+    const { category_id, seo_url, category_name, image_name, navshow, status, image , topPick=0} = Object.fromEntries(
       data.entries()
     );
     console.log("its inside 1000- line ");
@@ -105,7 +105,7 @@ export async function PUT(request) {
     }
 
     // Manual validation
-    const requiredFields = { category_id, category_name, image_name, navshow, status };
+    const requiredFields = { category_id, seo_url, category_name, image_name, navshow, status };
     const missingFields = Object.entries(requiredFields).filter(([key, value]) => !value).map(([key]) => key);
 
     if (missingFields.length > 0) {
@@ -121,6 +121,7 @@ export async function PUT(request) {
         UPDATE categories 
         SET 
           category_name = ?,
+          seo_url = ?,
           image_name = ?,
           navshow = ?,
           status = ?,
@@ -128,7 +129,7 @@ export async function PUT(request) {
         WHERE 
           category_id = ?
       `,
-      values: [category_name, image_name, navshow, status,topPick, category_id],
+      values: [category_name, seo_url, image_name, navshow, status,topPick, category_id],
     });
 
     return new Response(

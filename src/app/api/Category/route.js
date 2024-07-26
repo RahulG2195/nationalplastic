@@ -15,13 +15,18 @@ export async function GET(request) {
             query: "SELECT * FROM categories where category_id IN(40, 16, 15)",
             values: [],
         });
+        const ShopRooms = await query({
+            query: "SELECT * FROM categories where category_id IN(30, 31, 32, 33, 34, 35)",
+            values: [],
+        });
 
 
         return new Response(JSON.stringify({
             status: 200,
             categories: Categories,
             Manufacture: Manufacture,
-            topPick:topPick
+            topPick: topPick,
+            ShopRooms: ShopRooms
         }));
 
     } catch (error) {

@@ -52,7 +52,6 @@ export default function RootLayout({ children }) {
         <SessionProvider>
           <BrowserRouter>
             <Provider store={store}>
-              <ScrollToTop displayType="htmlArrow" />
               <PersistGate loading={null} persistor={persistor}>
                 {!isAdmin && <Header />}
                 <div className={`${isAdmin ? "pt-0 mt-0" : "mobile__top"}`}>
@@ -62,6 +61,7 @@ export default function RootLayout({ children }) {
                 </div>
                 <ToastContainer />
                 {!isAdmin && <Footer />}
+                <ScrollToTop displayType="htmlArrow" />
               </PersistGate>
             </Provider>
           </BrowserRouter>

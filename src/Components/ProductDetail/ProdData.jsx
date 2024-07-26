@@ -19,7 +19,7 @@ function ProdData({ category_id }) {
   const [data, setData] = useState([]);
   const [prodData, setProdData] = useState([]);
   const userState = useSelector((state) => state.userData.isLoggedIn);
-  const [categoryId, setCategoryId] = useState(null);
+  const [seo_url, setSeo_url] = useState(null);
   const [categoryName, setCategoryName] = useState(null);
   const [catlogue, setCatlogue] = useState(null)
   const [short_description, setShort_description] = useState(null);
@@ -61,11 +61,12 @@ function ProdData({ category_id }) {
           setErrorMessage("Sorry, this product is not available");
         } else {
           setData([product]);
+          console.log("all dATA IS , ,,, , ",product)
           setProdData(productDetails);
           setProductColor(colors);
           setSelectedColor(product.color);
           setProduct_id(product.product_id);
-          setCategoryId(category);
+          setSeo_url(product.cat_seo_url);
           setCatlogue(product.category_name)
           setShort_description(product.descp)
           // CleanCateogoryName(category);
@@ -227,7 +228,7 @@ function ProdData({ category_id }) {
         <div className="row">
           <div className="col-12">
             <Breadcrump
-              category_id={categoryId}
+              category_id={seo_url}
               category_name={categoryName}
               product_name={name}
               catlogue={catlogue}
