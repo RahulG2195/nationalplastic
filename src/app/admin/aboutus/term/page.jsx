@@ -37,7 +37,8 @@ export default function CMS() {
 
   return (
     <div style={{ maxWidth: 800, margin: '0 auto', padding: 20 }}>
-      <h1>Content Management System</h1>
+      <h1>Company profile and terms and condition</h1>
+      <h2>select a page to Add , Update and delete the data</h2>
       <Form form={form} onFinish={onFinish} layout="vertical">
         <Form.Item name="page_name" label="Page Name" rules={[{ required: true }]}>
           <Select>
