@@ -1,5 +1,33 @@
 import { query } from '@/lib/db';
 
+
+
+
+export async function POST(request) {
+  return await handleAction(request);
+}
+
+async function handleAction(request) {
+  const { action, ...data } = await request.json();
+
+  switch (action) {
+    case 'GET':
+      return await getCommitteesAndManagement();
+    case 'ADD':
+      return await addCommitteeOrManagement(data);
+    case 'UPDATE':
+      return await updateCommitteeOrManagement(data);
+    case 'DELETE':
+      return await deleteCommitteeOrManagement(data);
+    default:
+      return new Response(
+        JSON.stringify({ status: 405, message: 'Method not allowed' }),
+        { status: 405 }
+      );
+  }
+}
+
+
 export async function GET(request) {
   try {
     const data = await query({
@@ -48,31 +76,6 @@ export async function GET(request) {
       }),
       { status: 500 }
     );
-  }
-}
-
-
-export async function POST(request) {
-  return await handleAction(request);
-}
-
-async function handleAction(request) {
-  const { action, ...data } = await request.json();
-
-  switch (action) {
-    case 'GET':
-      return await getCommitteesAndManagement();
-    case 'ADD':
-      return await addCommitteeOrManagement(data);
-    case 'UPDATE':
-      return await updateCommitteeOrManagement(data);
-    case 'DELETE':
-      return await deleteCommitteeOrManagement(data);
-    default:
-      return new Response(
-        JSON.stringify({ status: 405, message: 'Method not allowed' }),
-        { status: 405 }
-      );
   }
 }
 

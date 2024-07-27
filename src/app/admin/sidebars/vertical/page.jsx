@@ -81,6 +81,10 @@ const navigation = [
         title: "Commite and Management Section",
         href: "/admin/aboutus/committee",
       },
+      {
+        title: "Infrastructure",
+        href: "/admin/aboutus/infrastructure",
+      },
     ],
     icon: "bi bi-hdd-stack",
   },
