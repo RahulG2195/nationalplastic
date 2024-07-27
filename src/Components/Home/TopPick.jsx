@@ -99,7 +99,7 @@ export default function TopPick() {
                     <SwiperSlide key={product.category_id}>
                       <CatCards
                         hovereffect={"TopPickHover"}
-                        catid={product.category_id}
+                        catid={product.seo_url}
                         image={`/Assets/uploads/products/${product.image_name}`}
                         title={product.category_name}
                         url={product.url}

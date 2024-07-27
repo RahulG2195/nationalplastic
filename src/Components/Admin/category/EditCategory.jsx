@@ -22,13 +22,15 @@ export default function EditCategory() {
   const updateCategory = async (data) => {
     try {
       const formData = new FormData();
-      const entries = { 
-        category_name: data.category_name, 
-        image_name: data.image_name, 
-        navshow: data.navshow, 
-        status: data.status, 
-        category_id: data.category_id, 
-        topPick: data.topPick 
+      const entries = {
+        category_name: data.category_name,
+        image_name: data.image_name,
+        navshow: data.navshow,
+        status: data.status,
+        category_id: data.category_id,
+        topPick: data.topPick,
+        seo_url: data.seo_url
+
       };
 
       for (const [key, value] of Object.entries(entries)) {
@@ -84,7 +86,7 @@ export default function EditCategory() {
     const file = e.target.files[0];
     setValue('image', file);
     setValue('image_name', file ? file.name : '');
-    
+
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -114,78 +116,95 @@ export default function EditCategory() {
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
       >
- <Form.Item
-        label="Category Name"
-        validateStatus={errors.category_name ? 'error' : ''}
-        help={errors.category_name ? 'Please input the category name!' : ''}
-      >
+        <Form.Item
+          label="Category Name"
+          validateStatus={errors.category_name ? 'error' : ''}
+          help={errors.category_name ? 'Please input the category name!' : ''}
+        >
+          <Controller
+            name="category_name"
+            control={control}
+            rules={{ required: true, minLength: 1, maxLength: 255 }}
+            render={({ field }) => <Input {...field} />}
+          />
+        </Form.Item>
+        <Form.Item
+          label="SEO URL"
+          validateStatus={errors.seo_url ? 'error' : ''}
+          help={errors.seo_url ? 'SEO URL is invalid! Dont add space between words only underscore or hyphens are allowed.' : ''}
+        >
+          <Controller
+            name="seo_url"
+            control={control}
+            rules={{
+              required: true,
+              pattern: /^[a-zA-Z0-9-_]+$/,
+              minLength: 1,
+              maxLength: 255,
+            }}
+            render={({ field }) => <Input {...field} />}
+          />
+        </Form.Item>
+        <Form.Item
+          label="Image"
+          validateStatus={errors.image ? 'error' : ''}
+          help={errors.image ? 'Please upload an image!' : ''}
+        >
+          {imagePreview && (
+            <div className="image-preview">
+              <img src={imagePreview} alt="Current category image" title={control._formValues.image_name} style={{ maxWidth: '200px', marginBottom: '10px' }} />
+            </div>
+          )}
+          <input
+            type="file"
+            onChange={handleFileChange}
+          />
+        </Form.Item>
         <Controller
-          name="category_name"
+          name="image_name"
           control={control}
-          rules={{ required: true, minLength: 1, maxLength: 255 }}
-          render={({ field }) => <Input {...field} />}
+          render={({ field }) => <Input {...field} type="hidden" />}
         />
-      </Form.Item>
-      <Form.Item
-        label="Image"
-        validateStatus={errors.image ? 'error' : ''}
-        help={errors.image ? 'Please upload an image!' : ''}
-      >
-        {imagePreview && (
-          <div className="image-preview">
-            <img src={imagePreview} alt="Current category image" title={control._formValues.image_name}  style={{ maxWidth: '200px', marginBottom: '10px' }} />
-          </div>
-        )}
-        <input
-          type="file"
-          onChange={handleFileChange}
-        />
-      </Form.Item>
-      <Controller
-        name="image_name"
-        control={control}
-        render={({ field }) => <Input {...field} type="hidden" />}
-      />
-      <Controller
-        name="image"
-        control={control}
-        render={({ field }) => <input {...field} type="hidden" />}
-      />
-      <Form.Item
-        label="Nav Show"
-        validateStatus={errors.navshow ? 'error' : ''}
-        help={errors.navshow ? 'Please input the navigation show value!' : ''}
-      >
         <Controller
-          name="navshow"
+          name="image"
           control={control}
-          rules={{ required: true }}
-          render={({ field }) => <InputNumber {...field} style={{ width: '100%' }} />}
+          render={({ field }) => <input {...field} type="hidden" />}
         />
-      </Form.Item>
-      <Form.Item
-        label="Status"
-        validateStatus={errors.status ? 'error' : ''}
-        help={errors.status ? 'Please input the status!' : ''}
-      >
-        <Controller
-          name="status"
-          control={control}
-          rules={{ required: true }}
-          render={({ field }) => <InputNumber {...field} style={{ width: '100%' }} />}
-        />
-      </Form.Item>
-      <Form.Item
-        label="Top Pick"
-        validateStatus={errors.topPick ? 'error' : ''}
-        help={errors.topPick ? 'Please input the topPick show value!' : ''}
-      >
-        <Controller
-          name="topPick"
-          control={control}
-          render={({ field }) => <InputNumber {...field} style={{ width: '100%' }} />}
-        />
-      </Form.Item>
+        <Form.Item
+          label="Nav Show"
+          validateStatus={errors.navshow ? 'error' : ''}
+          help={errors.navshow ? 'Please input the navigation show value!' : ''}
+        >
+          <Controller
+            name="navshow"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => <InputNumber {...field} style={{ width: '100%' }} />}
+          />
+        </Form.Item>
+        <Form.Item
+          label="Status"
+          validateStatus={errors.status ? 'error' : ''}
+          help={errors.status ? 'Please input the status!' : ''}
+        >
+          <Controller
+            name="status"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => <InputNumber {...field} style={{ width: '100%' }} />}
+          />
+        </Form.Item>
+        <Form.Item
+          label="Top Pick"
+          validateStatus={errors.topPick ? 'error' : ''}
+          help={errors.topPick ? 'Please input the topPick show value!' : ''}
+        >
+          <Controller
+            name="topPick"
+            control={control}
+            render={({ field }) => <InputNumber {...field} style={{ width: '100%' }} />}
+          />
+        </Form.Item>
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit">
             Update

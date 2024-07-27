@@ -5,7 +5,9 @@ export async function GET(request) {
   const parsedUrl = parse(request.url, true);
 
   const queryParams = parsedUrl.query.query;
+  console.log("query paramss.......",queryParams)
   try {
+
     const products = await query(
       {
         query: "WITH ranked_products AS (SELECT product_id, product_name, product_name2, seo_url, seo_url_clr, category_id, image_name, price, discount_price, discount_percentage, categoryType, duration, InstallationCharges, color, color_code, armType, prod_status, ROW_NUMBER() OVER (PARTITION BY product_name ORDER BY CASE WHEN image_name = 'default_chair_img.webp' THEN 1 ELSE 0 END, product_id) AS rn FROM products WHERE category_id = ? AND prod_status = 1) SELECT product_id, product_name, product_name2, seo_url, seo_url_clr, category_id, image_name, price, discount_price, discount_percentage, categoryType, duration, InstallationCharges, color, color_code, armType, prod_status FROM ranked_products WHERE rn = 1 AND category_id = ? AND prod_status = 1",

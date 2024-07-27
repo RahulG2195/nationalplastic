@@ -33,15 +33,15 @@ export default function Home() {
   return (
     <>
       <main>
-       {/* <CommingSoon /> */}
-          <Banner />
+        {/* <CommingSoon /> */}
+        <Banner />
         <Features />
 
         {/* show only when user is not login  */}
         {
           (!ValidateLogin) && <CoupenBanner />
         }
-        
+
         <TopPick />
         <Manufacture />
         <ShopRoom />
@@ -50,8 +50,9 @@ export default function Home() {
         <HappyStory />
         <Dealers />
         {/* <Blog /> */}
-        <Catalogue />  
-        
+        <Catalogue />
+        {/* <ScrollToTop displayType="htmlArrow" /> */}
+
       </main>
     </>
   );

@@ -7,7 +7,7 @@ export async function GET(request) {
   try {
     const [product] = await query({
       query: `
-        SELECT p.*, c.category_name, pd.descp
+        SELECT p.*, c.category_name, pd.descp, c.seo_url AS cat_seo_url
         FROM products p
         LEFT JOIN categories c ON p.category_id = c.category_id
         RIGHT JOIN product_detail pd ON p.product_id = pd.prod_id

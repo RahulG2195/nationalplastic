@@ -192,10 +192,10 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <button onClick={scrollToTop} className="back-to-top">
+        {/* <button onClick={scrollToTop} className="back-to-top">
         <i class="fa fa-arrow-up fa-2x" aria-hidden="true"></i>
 
-        </button>
+        </button> */}
       </section >
       <section className='bottom_footer '>
         <div className="container">

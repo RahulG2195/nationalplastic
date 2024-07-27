@@ -90,7 +90,7 @@ export default function Manufacture() {
                     <SwiperSlide key={product.category_id}>
                       <CatCards
                         catid={
-                          product.category_name
+                          product.seo_url
                         }
                         manfacthover="manfact"
                         style="manfTitle"
@@ -112,24 +112,18 @@ export default function Manufacture() {
                   key={product.key}
                 >
                   <CatCards
-                    manfacthover="manfact"
-                    catid={
-                      product.category_name &&
-                      product.category_name.toLowerCase().includes("baby chair")
-                        ? 18
-                        : product.category_name &&
-                          product.category_name
-                            .toLowerCase()
-                            .includes("seatings")
-                        ? 15
-                        : product.category_id
-                    }
-                    style="manfTitle pt-4 px-4 d-flex gap-5  justify-content-arround"
-                    image={`/Assets/uploads/category/${product.image_name}`}
-                    title={product.category_name}
-                    categoryType={product.categoryType}
-                    onCategoryChange={() => sendCategory(product.product_name)}
-                  />
+                        catid={
+                          product.seo_url
+                        }
+                        manfacthover="manfact"
+                        style="manfTitle"
+                        image={`/Assets/uploads/category/${product.image_name}`}
+                        title={product.category_name}
+                        categoryType={product.categoryType}
+                        onCategoryChange={() =>
+                          sendCategory(product.product_name)
+                        }
+                      />
                 </div>
               ))}
             </div>

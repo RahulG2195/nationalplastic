@@ -6,7 +6,7 @@
     font-weight: 600;
 }
 
-.ATCflow p {
+.ATCflow a {
     color: #262262;
 }
 
@@ -21,7 +21,7 @@
 }
 
 @media (max-width:350px) {
-    .ATCflow p {
+    .ATCflow a {
         font-size: x-small !important;
     }
 

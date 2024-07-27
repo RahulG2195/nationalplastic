@@ -88,7 +88,7 @@ export default function HappyStory() {
                     spaceBetween: 20,
                   },
                   715: {
-                    slidesPerView: 1,
+                    slidesPerView: 2,
                     spaceBetween: 0,
                   },
                   1018: {

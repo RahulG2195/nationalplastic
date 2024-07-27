@@ -89,7 +89,7 @@ function BottomBar() {
         >
           <Link
             onClick={() => sendCategory(val.category_name)}
-            href={`/ProductCatlogue/${val.category_id}`}
+            href={`/ProductCatlogue/${val.seo_url}`}
           >
             <p className="m-0" onMouseOver={() => changeImage(val.category_id, true)}>
               {val.category_name}
