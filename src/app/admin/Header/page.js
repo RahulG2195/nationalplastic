@@ -16,9 +16,10 @@ const Header = () => {
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
   const [isResettingPassword, setIsResettingPassword] = useState(false);
-  const [isPasswordModalVisible , setIsPasswordModalVisible] = useState(true);
+  const [isPasswordModalVisible , setIsPasswordModalVisible] = useState(false);
   useEffect(() => {
     const storedUsername = localStorage.getItem('userData');
+    console.log("userdata stored: " + storedUsername);
     if (storedUsername) {
       const parsedUserData = JSON.parse(storedUsername).email;
       // console.log("parsedUserData", parsedUserData);
@@ -195,27 +196,36 @@ const OTPModal = ({ visible, onCancel, onSubmit, form, isLoading }) => {
 };
 
 const OTPInput = () => {
-  const [form] = Form.useForm();
-  const inputRefs = Array(6).fill(0).map(() => React.createRef());
+    const [form] = Form.useForm();
+    const inputRefs = Array(6).fill(0).map(() => React.createRef());
+  
+    // Initialize the 'otp' field
+    React.useEffect(() => {
+      form.setFieldsValue({ otp: Array(6).fill('') });
+    }, [form]);
+  
+    const handleChange = (e, index) => {
+      const value = e.target.value;
+      if (value.length > 1) {
+        return;
+      }
+      
+      const currentOtp = form.getFieldValue('otp') || Array(6).fill('');
+      form.setFieldsValue({
+        otp: currentOtp.map((v, i) => i === index ? value : v)
+      });
+  
+      if (value && index < 5) {
+        inputRefs[index + 1].current.focus();
+      }
+  
+      if (index === 5 && value) {
+        form.submit();
+      }
+    };
+  
+    // ... rest of the component code
 
-  const handleChange = (e, index) => {
-    const value = e.target.value;
-    if (value.length > 1) {
-      return;
-    }
-    
-    form.setFieldsValue({
-      otp: form.getFieldValue('otp').map((v, i) => i === index ? value : v)
-    });
-
-    if (value && index < 5) {
-      inputRefs[index + 1].current.focus();
-    }
-
-    if (index === 5 && value) {
-      form.submit();
-    }
-  };
 
   const handleKeyDown = (e, index) => {
     if (e.key === 'Backspace' && !form.getFieldValue('otp')[index] && index > 0) {
