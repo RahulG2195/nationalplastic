@@ -89,6 +89,10 @@ const navigation = [
         title: "Awards",
         href: "/admin/aboutus/awards",
       },
+      {
+        title: "Promotors",
+        href: "/admin/aboutus/promotors",
+      },
     ],
     icon: "bi bi-hdd-stack",
   },

@@ -1,4 +1,6 @@
 import { query } from '@/lib/db';
+import { writeFile } from 'fs/promises';
+import path from 'path';
 
 export async function GET(request) {
   return await getTeamMembers();
@@ -42,4 +44,74 @@ async function getTeamMembers() {
   }
 }
 
-// ... rest of the code (saveTeamMember and deleteTeamMember functions) remains the same
+async function saveTeamMember(formData, action) {
+  try {
+    const name = formData.get('name');
+    const designation = formData.get('designation');
+    const description = formData.get('description');
+    const display_order = formData.get('display_order');
+    const image = formData.get('image');
+
+    let image_url = '';
+    if (image) {
+      const filename = `${Date.now()}-${image.name}`;
+      const uploadPath = path.join(process.cwd(), 'public', 'Assets', 'uploads', 'Aboutus', filename);
+      await writeFile(uploadPath, Buffer.from(await image.arrayBuffer()));
+      image_url = `/Assets/uploads/Aboutus/${filename}`;
+    }
+
+    let sql, values;
+
+    if (action === 'ADD') {
+      sql = 'INSERT INTO team_members (name, designation, description, image_url, display_order) VALUES (?, ?, ?, ?, ?)';
+      values = [name, designation, description, image_url, display_order];
+    } else {
+      const id = formData.get('id');
+      sql = 'UPDATE team_members SET name = ?, designation = ?, description = ?, display_order = ? WHERE id = ?';
+      values = [name, designation, description, display_order, id];
+
+      if (image_url) {
+        sql = 'UPDATE team_members SET name = ?, designation = ?, description = ?, image_url = ?, display_order = ? WHERE id = ?';
+        values = [name, designation, description, image_url, display_order, id];
+      }
+    }
+
+    await query({ query: sql, values });
+
+    return new Response(
+      JSON.stringify({
+        status: 200,
+        message: `Team member ${action === 'ADD' ? 'added' : 'updated'} successfully`,
+      }),
+      { status: 200 }
+    );
+  } catch (error) {
+    return new Response(
+      JSON.stringify({ status: 500, message: error.message }),
+      { status: 500 }
+    );
+  }
+}
+
+async function deleteTeamMember(formData) {
+  try {
+    const id = formData.get('id');
+    const sql = 'DELETE FROM team_members WHERE id = ?';
+    const values = [id];
+
+    await query({ query: sql, values });
+
+    return new Response(
+      JSON.stringify({
+        status: 200,
+        message: 'Team member deleted successfully',
+      }),
+      { status: 200 }
+    );
+  } catch (error) {
+    return new Response(
+      JSON.stringify({ status: 500, message: error.message }),
+      { status: 500 }
+    );
+  }
+}
