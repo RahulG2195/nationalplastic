@@ -21,7 +21,7 @@ const Header = () => {
     const storedUsername = localStorage.getItem('userData');
     if (storedUsername) {
       const parsedUserData = JSON.parse(storedUsername).email;
-      console.log("parsedUserData", parsedUserData);
+      // console.log("parsedUserData", parsedUserData);
       setUsername(parsedUserData);
     }
   }, []);
@@ -62,7 +62,7 @@ const Header = () => {
 
   const handleOTPSubmit = (values) => {
     const otp = values.otp.join('');
-    console.log("Submitted OTP:", otp);
+    // console.log("Submitted OTP:", otp);
     setIsLoading(true);
     verifyOTP(otp)
   };
@@ -85,7 +85,7 @@ const Header = () => {
   }
   const handlePasswordSubmit = (values) => {
     setIsLoading(true);
-    console.log('Submitted password:', values.password);
+    // console.log('Submitted password:', values.password);
     const data = {
       email: username,
       password: values.password,
@@ -303,7 +303,7 @@ const PasswordInput = () => {
     setIsValid(validatePassword(value));
     
     // Log the password (for demonstration purposes only)
-    console.log('Current password:', value);
+    // console.log('Current password:', value);
   };
 
   return (

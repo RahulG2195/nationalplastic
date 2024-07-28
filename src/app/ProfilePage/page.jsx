@@ -165,6 +165,7 @@ function ProfilePage() {
     mobile_number1: '',
     email: ''
   });
+  const [initialBasicInfo, setInitialBasicInfo] = useState({});
 
   useEffect(() => {
     const fetchBasicInfo = async () => {

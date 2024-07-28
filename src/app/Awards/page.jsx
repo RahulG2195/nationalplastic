@@ -1,59 +1,61 @@
-import React from 'react';
+"use client";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import AwardsCertificates from "@/Components/About/AwardsCertificates";
 import ComapnyProfileSidebar from '@/Components/About/ComapnyProfileSidebar';
 
-const CERTIFICATES = [
-  {
-    key: "plexconcil-2006-07",
-    image: "/Assets/images/certificates/PLEXCONCIL-Award-2006-07.jpg",
-    alt: "PLEXCONCIL Award 2006-07"
-  },
-  {
-    key: "plexconcil-2008-09",
-    image: "/Assets/images/certificates/PLEXCONCIL-Award-2008-09.jpg",
-    alt: "PLEXCONCIL Award 2008-09"
-  },
-  {
-    key: "plexconcil-2014-15",
-    image: "/Assets/images/certificates/PLEXCONCIL-Award-2014-15.jpg",
-    alt: "PLEXCONCIL Award 2014-15"
-  },
-  {
-    key: "plexconcil-trophy-2014-17",
-    image: "/Assets/images/certificates/PLEXCONCIL-Trophy-2014-15-16-17.jpg",
-    alt: "PLEXCONCIL Trophy 2014-15-16-17"
-  },
-];
-
 const Awards = () => {
+  const [pageContent, setPageContent] = useState({ title: '', description: '' });
+  const [certificates, setCertificates] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('/api/admin/Aboutus/awards');
+        setPageContent(response.data.pageContent[0]);
+        setCertificates(response.data.certificates);
+      } catch (err) {
+        setError('An error occurred while fetching data');
+        console.error('Error fetching data:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+
   return (
     <section className="awards-certificates">
       <div className="container mt-4 mb-4">
         <header className="text-center mb-5">
           <h1 className="fs-1 darkBlue fw-normal">
-            Awards & <span className="fw-bold text-danger">Certificates</span>
+            {pageContent.title?.split('&')[0]}&nbsp;
+            <span className="fw-bold text-danger">
+              {pageContent.title?.split('&')[1]}
+            </span>
           </h1>
           <p className="mt-1 fw-medium subCptRes w-70 certificate-para">
-            National has been awarded as the number one exporter in the
-            Plastic Furniture category by The Plastics Export Promotion
-            Council (popularly known as PLEXCONCIL) sponsored by the Ministry
-            of Commerce & Industry, Department of Commerce, Government of
-            India. National is also accredited as a One Star Export House, the
-            most distinguished title by the Ministry of Commerce & Industry,
-            Directorate General of Foreign Trade, Government of India.
+            {pageContent.description}
           </p>
         </header>
 
         <div className="row gap-4 team-members">
-          <div className='row col-12 col-md-8 order-2 order-md-1 order-lg-1' >
-            {CERTIFICATES.map(({ key, image, alt }) => (
-              <div className="col-md-6" key={key}>
-                <AwardsCertificates image={image} alt={alt} />
+          <div className='row col-12 col-md-8 order-2 order-md-1 order-lg-1'>
+            {certificates.map(({ id, image_url, alt_text }) => (
+              <div className="col-md-6" key={id}>
+                <AwardsCertificates image={image_url} alt={alt_text} />
               </div>
             ))}
           </div>
           <div className='col-12 col-md-4 order-1 order-md-2 order-lg-2'>
-            <ComapnyProfileSidebar title={'Awards & Certificates'}/>
+            <ComapnyProfileSidebar title={pageContent.title || ''}/>
           </div>
         </div>
       </div>

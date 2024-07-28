@@ -22,6 +22,8 @@ export default function Footer() {
     email: '',
     indiamart: '',
   });
+  const [initialBasicInfo, setInitialBasicInfo] = useState({});
+
 
   useEffect(() => {
     const fetchBasicInfo = async () => {

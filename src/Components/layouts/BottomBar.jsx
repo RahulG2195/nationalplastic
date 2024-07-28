@@ -18,7 +18,6 @@ function BottomBar() {
         axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/Products`),
         axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/NavCategory`)
       ]);
-      
       setAllProducts(productsRes.data.products);
       setNavbar(navRes.data.navshow);
     } catch (error) {

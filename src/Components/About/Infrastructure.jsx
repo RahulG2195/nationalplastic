@@ -44,7 +44,7 @@ function Infrastructure() {
           <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div className="india-map-image float-end">
               <Image
-                src={mainInfo.image_url}
+                src={`/Assets/uploads/Aboutus/${mainInfo.image_url}`}
                 className="img-fluid d-block w-70"
                 alt="map image"
                 width={100}

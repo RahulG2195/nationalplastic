@@ -187,6 +187,7 @@ export default function Header() {
   const [basicInfo, setBasicInfo] = useState({
     logo: '',
   });
+  const [initialBasicInfo, setInitialBasicInfo] = useState({});
 
   useEffect(() => {
     const fetchBasicInfo = async () => {

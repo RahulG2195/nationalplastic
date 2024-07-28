@@ -11,6 +11,8 @@ function TopBar() {
     brand2_link: '',
    
 });
+const [initialBasicInfo, setInitialBasicInfo] = useState({});
+
 
   useEffect(() => {
     const fetchBasicInfo = async () => {

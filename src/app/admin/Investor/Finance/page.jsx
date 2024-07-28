@@ -62,10 +62,6 @@ export default function FinancialResults() {
       await new Promise(resolve => setTimeout(resolve, 1000));
       axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/Financial?report=${reportType}`)
       .then((response) =>{console.log("its response from axios" + response);
-         console.log("how to tadd mutiple lines")
-         console.log("how to tadd mutiple lines")
-         console.log("how to tadd mutiple lines")
-        
         })
       .catch((error) => console.log("Its Error: " + error))
     //   const filteredData = dummyData.filter(item => item.reportType === reportType);

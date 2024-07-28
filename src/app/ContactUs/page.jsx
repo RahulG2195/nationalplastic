@@ -51,6 +51,8 @@ function ContactUs() {
     mobile: "",
     file: null,
   });
+  const [initialBasicInfo, setInitialBasicInfo] = useState({});
+
 
   async function handleInputChange(event) {
     const { name, value } = event.target;
