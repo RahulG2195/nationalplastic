@@ -136,10 +136,7 @@ const AdvertisementCMS = () => {
       key: 'actions',
       render: (_, record) => (
         <>
-        <h1>record</h1>
           <Button icon={<EditOutlined />} onClick={() => showModal(record)} />
-          {/* <Button icon={<EditOutlined />} onClick={() => console.log("record", record)} /> */}
-
           <Button icon={<DeleteOutlined />} onClick={() => handleDelete(record)} danger />
         </>
       ),
