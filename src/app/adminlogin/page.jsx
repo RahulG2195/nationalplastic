@@ -15,7 +15,6 @@ function AdminLogin() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-
   const onFinish = async (values) => {
     setLoading(true);
     try {
@@ -47,7 +46,7 @@ function AdminLogin() {
     <div style={{ display: 'flex', minHeight: '100vh' }}>
       <div style={{ flex: 1, background: '#f0f2f5', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Image
-          src="/Assets/images/catalogue/adminLoginPage.png"
+          src="/Assets/images/Blog-section-banner/Blog-section-banner.png"
           alt="Admin Login"
           width={500}
           height={500}
@@ -81,9 +80,6 @@ function AdminLogin() {
             </Button>
           </Form.Item>
         </Form>
-        <Text>
-          Forgot Password? <a onClick={() => router.push("/admin/forgot-password")}>Reset Password</a>
-        </Text>
       </div>
     </div>
   );

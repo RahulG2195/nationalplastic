@@ -71,8 +71,8 @@ const navigation = [
         href: "/admin/homepage/house section",
       },
       {
-        title: "house section",
-        href: "/admin/homepage/house section",
+        title: "Advertisements",
+        href: "/admin/Investor/Advertisements",
       },
      
     ],
