@@ -15,7 +15,6 @@ const EventsAndActivities = () => {
     //   ];
 
     const [cardData, setCardData] = useState([]);
-    console.log("All news are here",cardData)
     const [heading, setHeading] = useState('');
     const [subheading, setSubheading] = useState('');
 

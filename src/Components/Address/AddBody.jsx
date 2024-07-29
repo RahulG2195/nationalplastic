@@ -9,6 +9,7 @@ import axios from "axios";
 import { addItemToCart } from "@/redux/reducer/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { isLoggedIn } from "@/utils/validation";
+import { notifyError } from "@/utils/notify";
 
 const AddBody = () => {
   const [productDetailArr, setProductDetailArr] = useState([]);
@@ -62,6 +63,7 @@ const AddBody = () => {
       setPhone(Phone);
     } catch (e) {
       console.log(e.message);
+      notifyError(e.message);
     }
   };
 

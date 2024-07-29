@@ -97,7 +97,6 @@ const handleModalCancel = () => {
 
   const handleDelete = async (id) => {
     try {
-        console.log("id" + id);
       const response = await axios.post('/api/admin/committees-and-management', { 
         action: 'DELETE', 
         id: id.split('-')[1] 

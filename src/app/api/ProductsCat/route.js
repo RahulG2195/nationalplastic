@@ -5,7 +5,6 @@ export async function GET(request) {
   const parsedUrl = parse(request.url, true);
 
   const queryParams = parsedUrl.query.query;
-  console.log("query paramss.......",queryParams)
   try {
 
     const products = await query(

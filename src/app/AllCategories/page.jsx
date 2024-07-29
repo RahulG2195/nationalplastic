@@ -5,8 +5,6 @@ import Link from "next/link";
 
 const TopPics = () => {
   const [categories, setCategories] = useState([]);
-  console.log("categories", categories)
-
   useEffect(() => {
     const fetchdata = async () => {
       try {

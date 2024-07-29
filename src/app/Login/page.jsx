@@ -13,7 +13,8 @@ import { setUserData } from "@/redux/reducer/userSlice";
 // import { useNavigate } from "react-router-dom";
 import { toast, Bounce } from "react-toastify";
 import { signIn, useSession } from "next-auth/react";
-import { notify } from "@/utils/notify";
+import { notify, notifyError } from "@/utils/notify";
+import { useSelector } from "react-redux";
 
 
 function Login() {
@@ -21,13 +22,14 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [login, setLogin] = useState(false);
-  const router = useRouter(); // Use useRouter on the client-side only
-  // const navigate =useNavigate();
-  // const router = useRouter();
+  const router = useRouter(); 
   const { data: session, status } = useSession();
   const [formData, setFormData] = useState({ email: "", password: "", });
   const [refresh, SetRefresh] = useState(false);
-
+  const productCount = useSelector((state) => {
+    const cart = state.temp;
+    return cart.products?.length || 0;
+  });
   useEffect(() => {
     if (session) {
       // Send session data to your backend
@@ -50,6 +52,7 @@ function Login() {
         })
         .catch(error => {
           console.log('Error sending data to API:', error);
+          notifyError(error.message);
         });
       //  hasSentRequest.current = true; 
     }
@@ -89,6 +92,7 @@ function Login() {
       }
     } catch (error) {
       console.log('Error sending data to API:', error);
+      notifyError(error.message);
     }
   }
 
@@ -121,6 +125,9 @@ function Login() {
             })
           );
           localStorage.setItem("isAdmin", "false");
+          if(productCount > 1){
+            router.push("/AddToCart");
+          }
           router.push("/")
 
         }

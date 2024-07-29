@@ -19,7 +19,6 @@ const [initialBasicInfo, setInitialBasicInfo] = useState({});
         try {
             const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/basicInfo`);
             const basicInfoData = response.data.basicInfo;
-            console.log("Basic Info: " + basicInfoData);
             setBasicInfo(basicInfoData);
             setInitialBasicInfo(basicInfoData);
         } catch (error) {

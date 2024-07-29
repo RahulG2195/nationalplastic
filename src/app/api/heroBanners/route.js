@@ -108,7 +108,6 @@ export async function POST(request) {
               SET ${queryParts.join(', ')}
               WHERE id = ?
             `;
-            console.log("dynaaamic query...........",dynamicQuery)
 
             const result = await query({
                 query: dynamicQuery,

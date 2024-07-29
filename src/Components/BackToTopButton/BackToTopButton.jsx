@@ -27,9 +27,6 @@ const BackToTopButton = () => {
       };
     }, []);
   
-    useEffect(() => {
-      console.log('visible', visible); // Debugging line
-    }, [visible]);
     
   return (
     <>

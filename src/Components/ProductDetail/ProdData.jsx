@@ -61,7 +61,6 @@ function ProdData({ category_id }) {
           setErrorMessage("Sorry, this product is not available");
         } else {
           setData([product]);
-          console.log("all dATA IS , ,,, , ",product)
           setProdData(productDetails);
           setProductColor(colors);
           setSelectedColor(product.color);

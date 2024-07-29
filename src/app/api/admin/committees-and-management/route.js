@@ -81,7 +81,6 @@ export async function GET(request) {
 
 async function getCommitteesAndManagement() {
     try {
-      console.log("Fetching data from database...");
       const data = await query({
         query: `
           SELECT *
@@ -90,10 +89,7 @@ async function getCommitteesAndManagement() {
         `,
         values: [],
       });
-      console.log("Raw data from database:", data);
-  
       if (data.length > 0) {
-        console.log("Formatting data...");
         const formattedData = data.reduce((acc, row) => {
           if (!acc[row.category]) {
             acc[row.category] = {
@@ -105,8 +101,6 @@ async function getCommitteesAndManagement() {
           acc[row.category].members.push(`${row.name}, ${row.position}`);
           return acc;
         }, {});
-        console.log("Formatted data:", formattedData);
-  
         return new Response(
           JSON.stringify({
             status: 200,
@@ -115,7 +109,6 @@ async function getCommitteesAndManagement() {
           { status: 200 }
         );
       } else {
-        console.log("No data found");
         return new Response(
           JSON.stringify({
             status: 404,

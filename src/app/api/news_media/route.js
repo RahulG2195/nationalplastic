@@ -50,7 +50,6 @@ export async function POST(request) {
         const id = formData.get('id');
         const heading = formData.get('heading');
         const subheading = formData.get('subheading');
-        console.log("idd is .............",id)
 
         // Fetch existing data
         const existingData = await query({
@@ -148,9 +147,6 @@ export async function PUT(request) {
     try {
         // Parse JSON request body
         const { imageName, id } = await request.json();
-        console.log("Image Name:",imageName);
-        console.log("Image Name:", id);
-        
         if (!imageName) {
             return NextResponse.json(
                 { success: false, error: 'Image name is required' },
@@ -169,7 +165,6 @@ export async function PUT(request) {
         });
         
         // Log result for debugging
-        console.log('Query result:', result);
         
         if (result.affectedRows === 0) {
             return NextResponse.json(

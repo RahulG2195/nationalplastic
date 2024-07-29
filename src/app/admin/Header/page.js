@@ -19,10 +19,8 @@ const Header = () => {
   const [isPasswordModalVisible , setIsPasswordModalVisible] = useState(false);
   useEffect(() => {
     const storedUsername = localStorage.getItem('userData');
-    console.log("userdata stored: " + storedUsername);
     if (storedUsername) {
       const parsedUserData = JSON.parse(storedUsername).email;
-      // console.log("parsedUserData", parsedUserData);
       setUsername(parsedUserData);
     }
   }, []);
@@ -63,7 +61,6 @@ const Header = () => {
 
   const handleOTPSubmit = (values) => {
     const otp = values.otp.join('');
-    // console.log("Submitted OTP:", otp);
     setIsLoading(true);
     verifyOTP(otp)
   };
@@ -86,7 +83,6 @@ const Header = () => {
   }
   const handlePasswordSubmit = (values) => {
     setIsLoading(true);
-    // console.log('Submitted password:', values.password);
     const data = {
       email: username,
       password: values.password,
@@ -311,9 +307,6 @@ const PasswordInput = () => {
     const value = e.target.value;
     setPassword(value);
     setIsValid(validatePassword(value));
-    
-    // Log the password (for demonstration purposes only)
-    // console.log('Current password:', value);
   };
 
   return (

@@ -23,7 +23,6 @@ function TermsAndConditions() {
   async function fetchPageContent(pageName) {
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/Aboutus`, { page_name: pageName });
-      console.log("response:", response.data);
       if (response.data.status === 200) {
         return response.data.content;
       } else {

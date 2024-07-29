@@ -54,7 +54,6 @@ const OrderTable = () => {
   };
 
   const handleStatusUpdate = (order) => {
-    // console.log('order', order);
     setSelectedOrder(order);
     setIsStatusModalVisible(true);
   };
@@ -64,7 +63,6 @@ const OrderTable = () => {
     try {
       const data = {newStatus: newStatus, order_id: selectedOrder}
       const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, data);
-      // console.log('response', response);
 
       message.success(`Order status has been updated`);
       setIsStatusModalVisible(false);
@@ -77,9 +75,7 @@ const OrderTable = () => {
 
   const cancelOrder = async () => {
     try {
-      // Here you would call your API to cancel the order
-      // For now, we'll just log it and show a success message
-      // console.log(`Cancelling order ${selectedOrder.order_id}. Reason: ${cancelReason}`);
+     
       message.success("Order cancelled successfully");
       setIsCancelModalVisible(false);
       // After successful cancellation, refetch the orders

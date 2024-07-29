@@ -107,7 +107,6 @@ export async function POST(request) {
     for (let [key, value] of formData.entries()) {
       if (key.startsWith("image")) {
         try {
-          console.log("image line no 105 ", value);
           await uploadImage(value);
           const imageName = value.name;
           imageNames.push(imageName);
@@ -181,7 +180,6 @@ export async function PUT(request) {
   try {
     const formData = await request.formData();
     const images = formData.getAll("image");
-    console.log("image line no 80 ", images.name);
     // Handle multiple image uploads
     const imageNames = [];
     if (images && images.length > 0) {

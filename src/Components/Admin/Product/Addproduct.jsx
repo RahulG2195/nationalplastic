@@ -21,7 +21,6 @@ export default function App() {
     const fetchCategories = async () => {
       try {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/adminValidationP`);
-        console.log("Success", response.data.categories);
         setCategories(response.data.categories || []);
       } catch (error) {
         console.error('Failed to fetch categories:', error);

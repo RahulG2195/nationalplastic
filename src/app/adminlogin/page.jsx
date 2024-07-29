@@ -21,7 +21,6 @@ function AdminLogin() {
     try {
       const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/Users`, values);
       const adminData = res.data.message[0];
-      console.log("admindata: " + JSON.stringify(adminData));
       dispatch(
         setUserData({
           email: adminData.Email,

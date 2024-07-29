@@ -13,8 +13,6 @@ export async function POST(request) {
 
     const image = data.get('image');
     const uploadedImageName = image.name;
-    console.log("its inside 1000 line "+image);
-
 
     if (image && image instanceof File) {
       try {
@@ -30,7 +28,6 @@ export async function POST(request) {
         );
       }
     }
-    console.log("its inside 10003 line "+image);
 
     const allCategories = await query({
       query: "SELECT * FROM categories WHERE category_name = ?",
@@ -87,7 +84,6 @@ export async function PUT(request) {
     const { category_id, seo_url, category_name, image_name, navshow, status, image , topPick=0} = Object.fromEntries(
       data.entries()
     );
-    console.log("its inside 1000- line ");
     if (image) {
       try {
 

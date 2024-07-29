@@ -60,7 +60,6 @@ const InfrastructureCMS = () => {
         const response = await axios.post('/api/admin/Aboutus/infraCMS', formData, {
           headers: { 'Content-Type': 'multipart/form-data' }
         });
-        // console.log('Server response:', response.data);
         message.success(editingId ? 'Data updated successfully' : 'Data added successfully');
         setModalVisible(false);
         fetchData();

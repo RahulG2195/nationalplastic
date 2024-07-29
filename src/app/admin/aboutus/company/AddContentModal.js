@@ -11,7 +11,7 @@ const AddContentModal = ({ open, onCancel, onAdd }) => {
       onAdd(values);
       form.resetFields();
     }).catch((info) => {
-      // console.log('Validate Failed:', info);
+      notifyError(info);
     });
   };
 

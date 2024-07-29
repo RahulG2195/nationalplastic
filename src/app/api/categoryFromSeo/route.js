@@ -4,17 +4,9 @@ import { parse } from 'url';
 export async function GET(request) {
   const parsedUrl = parse(request.url, true);
   const queryParams = parsedUrl.query.query;
-
-  console.log("seo_url is:", queryParams);
-
   try {
     let sqlQuery = "SELECT * FROM categories WHERE seo_url = ?";
     let sqlValues = [queryParams];
-
-    // if (queryParams) {
-    //   sqlQuery += " WHERE seo_url = ?";
-    //   sqlValues.push(queryParams);
-    // }
 
     const allCategories = await query({
       query: sqlQuery,

@@ -9,7 +9,6 @@ const EditEnvironmental = ({ newsId }) => {
     const [images, setImages] = useState([]);
     const [imageFiles, setImageFiles] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
-    console.log("All images are here ", images)
     const id = 3;
 
     // Fetch initial data when component mounts

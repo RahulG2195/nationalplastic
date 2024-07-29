@@ -10,13 +10,10 @@ const Unaudited = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("useffect data");
 
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/InvestorPage`, { Id: 3 });
-        console.log("useffect datas ", response.data.results);
 
         const parsedContent = JSON.parse(response.data.results[0].content);
-        console.log("useffect data p"+ JSON.stringify(parsedContent));
 
         setFinancialResults(parsedContent.financialResults || []);
         setIsLoading(false);
