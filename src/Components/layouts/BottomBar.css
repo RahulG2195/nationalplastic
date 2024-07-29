@@ -36,9 +36,16 @@
     color: #262262;
     margin-bottom: 8px;
 }
+.custom-address {
+    white-space: pre-wrap; 
+  }
+  
+  .custom-contact {
+    white-space: pre-wrap; /* Preserve formatting */
+  }
 
 .custom-link {
-    color: #262262;
+    color: #262262 !important;
     text-decoration: underline;
 }
 

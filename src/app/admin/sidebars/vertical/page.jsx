@@ -55,8 +55,12 @@ const navigation = [
         href: "/admin/Investor/AGM",
       },
       {
-        title: "house section",
-        href: "/admin/homepage/house section",
+        title: "Investor contact",
+        href: "/admin/Investor/investorContact",
+      },
+      {
+        title: "Investors KYC",
+        href: "/admin/Investor/investorKYC",
       },
       {
         title: "house section",
@@ -66,6 +70,11 @@ const navigation = [
         title: "house section",
         href: "/admin/homepage/house section",
       },
+      {
+        title: "house section",
+        href: "/admin/homepage/house section",
+      },
+     
     ],
     icon: "bi bi-hdd-stack",
   },
