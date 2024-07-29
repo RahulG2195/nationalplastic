@@ -7,6 +7,7 @@ import Image from "next/image";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import numberWithCommas from "@/utils/formatnumber";
+import { notifyError } from "@/utils/notify";
 
 
 const WishlistCard = (props) => {
@@ -52,7 +53,7 @@ const WishlistCard = (props) => {
       props.onDeleteSuccess(props.id);
       toast.dismiss(); // Close the toast after deletion
     } catch (error) {
-      alert("Can't delete");
+      notifyErrorti("Can't delete");
     }
   };
   const handleCancel = () => {

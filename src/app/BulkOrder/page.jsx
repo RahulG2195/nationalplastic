@@ -5,6 +5,7 @@ import GetQuote from "@/Components/BulkOrder/GetQuote";
 import BulkPremiumCards from "@/Components/BulkOrder/BulkPremiumCards";
 import BulkOrders from "@/Components/BulkOrder/BulkOrders";
 import axios from "axios";
+import { notifyError } from "@/utils/notify";
 
 const BulkOrder = () => {
   const [ProdData, setProdData] = useState([]);
@@ -17,7 +18,7 @@ const BulkOrder = () => {
         );
         setProdData(response.data.limitProd);
       } catch (error) {
-        alert("error");
+        notifyError(error.meesage || "Error fetching products");
       }
     };
     fetchdata();

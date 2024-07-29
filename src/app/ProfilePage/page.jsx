@@ -20,6 +20,10 @@ import {
 import ProdEmail from "@/Components/ReturnProdEmail/prodEmail";
 import Cookies from 'js-cookie';
 import { signOut } from "next-auth/react";
+import { Modal } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+
+const { confirm } = Modal;
 function ProfilePage() {
   const [FirstName, setFirstName] = useState('');
   const [LastName, setLastName] = useState('');
@@ -281,16 +285,32 @@ function ProfilePage() {
     }
   };
 
-  async function handleLogout(e) {
+  const handleLogout = (e) => {
     e.preventDefault();
-    if (window.confirm("Are you sure you want to log out?")) {
-      localStorage.clear();
-      signOut();
-      setData({}); // Clear user data
-      axios.delete("api/Users")
-      window.location.href = "/";
-    }
-  }
+    
+    confirm({
+      title: 'Are you sure you want to log out?',
+      icon: <ExclamationCircleOutlined />,
+      content: 'Your session will be ended and you will be redirected to the home page.',
+      okText: 'Yes, log out',
+      cancelText: 'No, stay logged in',
+      onOk() {
+        localStorage.clear();
+        signOut();
+        setData({}); // Clear user data
+        axios.delete("api/Users")
+          .then(() => {
+            window.location.href = "/";
+          })
+          .catch((error) => {
+            console.error("Error during logout:", error.message);
+            notifyError("logout", error.message);
+          });
+      },
+      onCancel() {
+      },
+    });
+  };
 
   const CancelProduct = async (prod_id, user_id, od_id) => {
     try {

@@ -91,7 +91,7 @@ const ResetPasswordPage = () => {
         localStorage.setItem("resetEmail", formData.email);
       }
     } else {
-      notifyError();
+      notifyError(res.messsage);
       alert(res.messsage);
     }
   };
