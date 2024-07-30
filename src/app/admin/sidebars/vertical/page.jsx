@@ -63,12 +63,8 @@ const navigation = [
         href: "/admin/Investor/investorKYC",
       },
       {
-        title: "house section",
-        href: "/admin/homepage/house section",
-      },
-      {
-        title: "house section",
-        href: "/admin/homepage/house section",
+        title: "Related Party Transactions",
+        href: "/admin/Investor/Transaction",
       },
       {
         title: "Advertisements",
