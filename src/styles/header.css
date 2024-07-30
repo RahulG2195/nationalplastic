@@ -28,6 +28,10 @@ h6 {
     display: block;
 }
 
+.prdctAccr a, .prdctAccr p{
+color: #05276C !important;
+}
+
 .Homeemail {
     position: absolute;
     color: black;
@@ -45,24 +49,22 @@ h6 {
 
 .HeadSearch:focus {
     background-color: transparent !important;
-    border: 1px solid gray !important;
-    border-radius: 20px;
-    transition: all 0.5s;
-    text-align: left !important;
+    /* border: 1px solid gray !important; */
+    /* border-radius: 20px; */
+    /* transition: all 0.5s; */
 }
 
 .HeadSearch {
-    padding: 10px 10px 30px 10px;
+    /* padding: 10px 30px 30px 30px; */
     padding-bottom: 0;
-    /* margin: 10px; */
+    border-radius: 10px !important;
     background-image: url('/Assets/images/search-svgrepo-com.svg');
     background-repeat: no-repeat;
     background-position: 20px center;
     background-size: 24px 24px;
     background-color: transparent !important;
-    border-bottom: 2px solid black !important;
+    border: 1px solid black !important;
     border: none;
-    border-radius: 0;
     color: #1E1F1E;
     opacity: 90;
 }
@@ -195,15 +197,15 @@ h6 {
    
     .brdr {
         /* display: block !important; */
-        border-top: 1px solid #ddc406;
+        /* border-top: 1px solid #ddc406; */
         /* border-top: 1px solid black !important; */
-        background-color: #FFE000;
+        /* background-color: #FFE000; */
     }
     .menuhide {
         display: none !important;
     }
     .menubg {
-        background-color: #FFE000 !important;
+        background-color: #FFFFFF !important;
         position: absolute !important;
         top: 100% !important;
         left: 100%;
@@ -249,9 +251,13 @@ h6 {
 }
 
 .main_header {
-    background-color: var(--secondary-color);
+    background-color: #FFFFFF !important;
     width: 100%;
     height: 90px;
+}
+#navbarSupportedContent ul li a{
+    color: navy !important;
+
 }
 
 .top_nav,
