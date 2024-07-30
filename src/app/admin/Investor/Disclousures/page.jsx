@@ -10,10 +10,16 @@ const DisclosureCMS = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [form] = Form.useForm();
     const [editingId, setEditingId] = useState(null);
+    const [image, setImage] = useState(null);
 
     useEffect(() => {
         fetchDisclosures();
     }, []);
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        setImage(file);
+    };
+
 
     const fetchDisclosures = async () => {
         const response = await fetch('/api/admin/Investors/ldCMS');
@@ -39,14 +45,14 @@ const DisclosureCMS = () => {
         setModalVisible(true);
     };
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (record) => {
         try {
-            const formData = new FormData();
-            formData.append('id', id);
+            const params = new URLSearchParams();
+            params.append('id', record.id);
+            params.append('file', record.document_url);
     
-            const response = await fetch('/api/admin/Investors/ldCMS', {
-                method: 'DELETE',
-                body: formData,
+            const response = await fetch(`/api/admin/Investors/ldCMS?${params.toString()}`, {
+                method: 'DELETE'
             });
     
             const data = await response.json();
@@ -74,6 +80,9 @@ const DisclosureCMS = () => {
                 }
                 if(editingId){
                     formData.append('id', editingId);
+                }
+                if (image) {
+                    formData.append('file', image);
                 }
     
                 const response = await fetch(url, {
@@ -122,7 +131,7 @@ const DisclosureCMS = () => {
             render: (_, record) => (
                 <>
                     <Button icon={<EditOutlined />} onClick={() => handleEdit(record)} />
-                    <Button icon={<DeleteOutlined />} onClick={() => handleDelete(record.id)} danger />
+                    <Button icon={<DeleteOutlined />} onClick={() => handleDelete(record)} danger />
                 </>
             ),
         },
@@ -160,8 +169,8 @@ const DisclosureCMS = () => {
                     <Form.Item name="document_type" label="Document Type" rules={[{ required: true }]}>
                         <Input />
                     </Form.Item>
-                    <Form.Item name="document_url" label="Document URL" rules={[{ required: true }]}>
-                        <Input />
+                    <Form.Item label="Image">
+                        <input type="file" onChange={handleFileChange} required />
                     </Form.Item>
                 </Form>
             </Modal>

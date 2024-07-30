@@ -1,10 +1,22 @@
-import { query } from "@/lib/db";
+import { query } from '@/lib/db';
+import { writeFile, unlink } from 'fs/promises';
+import { join } from 'path';
+import {uploadFile} from "@/utils/fileUploader";
+import path from 'path';
 
 export async function DELETE(request) {
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get('id');
+  const document = searchParams.get('file');
+
   try {
-    const formData = await request.formData();
-    const id = formData.get('id');
-    
+    if (document) {
+      const basePath = path.join(process.cwd(), 'public');
+      const absolutePath = path.join(basePath, document);
+      console
+      await unlink(absolutePath).catch((error) => console.error('Unlink error:', error));
+    }
+
     await query({
       query: "DELETE FROM disclosures WHERE id = ?",
       values: [id],
@@ -13,20 +25,22 @@ export async function DELETE(request) {
     return new Response(
       JSON.stringify({
         status: 200,
-        message: "Disclosure deleted successfully",
-      })
+        message: "disclosures deleted successfully",
+      }),
+      { status: 200 }
     );
   } catch (error) {
+    console.error('Error deleting disclosures:', error);
     return new Response(
       JSON.stringify({
         status: 500,
         message: "Internal Server Error",
-      })
+        error: error.message,
+      }),
+      { status: 500 }
     );
   }
 }
-
-
 
 export async function GET(request) {
   try {
@@ -60,18 +74,19 @@ export async function GET(request) {
   }
 }
 
-
 export async function POST(request) {
   try {
     const formData = await request.formData();
     const year = formData.get('year');
     const quarter = formData.get('quarter');
     const document_type = formData.get('document_type');
-    const document_url = formData.get('document_url');
-
+    const file = formData.get('file');
+    await uploadFile(file); 
+    const pdfPath = `/Assets/uploads/Investors/${file.name}`;
+    
     const result = await query({
       query: "INSERT INTO disclosures (year, quarter, document_type, document_url) VALUES (?, ?, ?, ?)",
-      values: [year, quarter, document_type, document_url],
+      values: [year, quarter, document_type, pdfPath],
     });
 
     return new Response(
@@ -98,13 +113,21 @@ export async function PUT(request) {
     const year = formData.get('year');
     const quarter = formData.get('quarter');
     const document_type = formData.get('document_type');
-    const document_url = formData.get('document_url');
+    const file = formData.get('file');
 
+   if(file){
+    await uploadFile(file); 
+    const pdfPath = `/Assets/uploads/Investors/${file.name}`;
     await query({
       query: "UPDATE disclosures SET year = ?, quarter = ?, document_type = ?, document_url = ? WHERE id = ?",
-      values: [year, quarter, document_type, document_url, id],
+      values: [year, quarter, document_type, pdfPath, id],
     });
-
+   }else{
+    await query({
+      query: "UPDATE disclosures SET year = ?, quarter = ?, document_type = ?, WHERE id = ?",
+      values: [year, quarter, document_type, id],
+    });
+  }
     return new Response(
       JSON.stringify({
         status: 200,
@@ -115,7 +138,7 @@ export async function PUT(request) {
     return new Response(
       JSON.stringify({
         status: 500,
-        message: "Internal Server Error",
+        message: error.message,
       })
     );
   }
