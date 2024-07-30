@@ -6,40 +6,38 @@ import { EditOutlined, DeleteOutlined, PlusOutlined, UploadOutlined } from '@ant
 
 const { Option } = Select;
 
-const Audited = () => {
-  const [Unaudited, setUnaudited] = useState([]);
+const AuditedPage = () => {
+  const [Audited, setAudited] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
   const [editingId, setEditingId] = useState(null);
   const [fileList, setFileList] = useState([]);
 
   useEffect(() => {
-    fetchUnaudited();
+    fetchAudited();
   }, []);
 
-  const fetchUnaudited = async () => {
+  const fetchAudited = async () => {
     try {
-      const response = await axios.get('/api/admin/Investors/Finance/Unaudited');
+      const response = await axios.get('/api/admin/Investors/Finance/Audited');
   
-      if (response.data && response.data.UnauditedData) {
-        
-        const formattedData = formatDataForTable(response.data.UnauditedData);
-        setUnaudited(formattedData);
+      if (response.data && response.data.auditedData) {
+        const formattedData = formatDataForTable(response.data.auditedData);
+        setAudited(formattedData);
       } else {
         console.error('Unexpected response structure:', response.data);
         message.error('Unexpected data structure received from server');
       }
     } catch (error) {
-      console.error('Error fetching Unaudited data:', error);
-      message.error('Failed to fetch Unaudited data: ' + (error.response?.data?.message || error.message));
+      console.error('Error fetching Audited data:', error);
+      message.error('Failed to fetch Audited data: ' + (error.response?.data?.message || error.message));
     }
   };
 
   const formatDataForTable = (data) => {
     return data.map(item => ({
-      key: item.una_id,
+      key: item.aud_id,
       years: item.years,
-      quarter: item.quarter,
       title: item.title,
       file_name: item.file_name
     }));
@@ -52,7 +50,7 @@ const Audited = () => {
 
       form.setFieldsValue(record);
       setEditingId(record.key);
-      console.log('key', record.key);
+      
       setFileList([]);
     } else {
       form.resetFields();
@@ -68,7 +66,6 @@ const Audited = () => {
         const formData = new FormData();
         formData.append('years', values.years);
         formData.append('title', values.title);
-        formData.append('quarter', values.quarter);
         if (fileList[0]) {
           formData.append('file_name', fileList[0].originFileObj);
         }
@@ -77,20 +74,20 @@ const Audited = () => {
         if (editingId) {
 
           formData.append('editingId', editingId);
-          await axios.put(`/api/admin/Investors/Finance/Unaudited`, formData, {
+          await axios.put(`/api/admin/Investors/Finance/Audited`, formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
           });
-          message.success('Unaudited updated successfully');
+          message.success('Audited updated successfully');
         } else {
-          await axios.post('/api/admin/Investors/Finance/Unaudited', formData, {
+          await axios.post('/api/admin/Investors/Finance/Audited', formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
           });
-          message.success('Unaudited added successfully');
+          message.success('Audited added successfully');
         }
         setIsModalVisible(false);
-        fetchUnaudited();
+        fetchAudited();
       } catch (error) {
-        message.error('Failed to save Unaudited');
+        message.error('Failed to save Audited');
       }
     });
   };
@@ -98,14 +95,14 @@ const Audited = () => {
   const handleDelete = async (record) => {
     try {
       const id = record.key;
-
-      await axios.delete('/api/admin/Investors/Finance/Unaudited',{ 
+      console.log('id', record);
+      await axios.delete('/api/admin/Investors/Finance/Audited',{ 
         data: { id: id } 
       });
-      message.success('Unaudited deleted successfully');
-      fetchUnaudited();
+      message.success('Audited deleted successfully');
+      fetchAudited();
     } catch (error) {
-      message.error('Failed to delete Unaudited');
+      message.error('Failed to delete Audited');
     }
   };
 
@@ -127,14 +124,9 @@ const Audited = () => {
       key: 'title',
     },
     {
-      title: 'quarter',
-      dataIndex: 'quarter',
-      key: 'quarter',
-    },
-    {
-      title: 'id',
-      dataIndex: 'una_id',
-      key: 'una_id',
+      title: 'aud_id',
+      dataIndex: 'aud_id',
+      key: 'aud_id',
       hidden: true
     },
     {
@@ -160,11 +152,11 @@ const Audited = () => {
   return (
     <div style={{ padding: '20px' }}>
       <Button icon={<PlusOutlined />} onClick={() => showModal()} style={{ marginBottom: '20px' }}>
-        Add Unaudited
+        Add Audited
       </Button>
-      <Table columns={columns} dataSource={Unaudited} />
+      <Table columns={columns} dataSource={Audited} />
       <Modal
-        title={editingId ? 'Edit Unaudited' : 'Add Unaudited'}
+        title={editingId ? 'Edit Audited' : 'Add Audited'}
         open={isModalVisible}
         onOk={handleOk}
         onCancel={() => setIsModalVisible(false)}
@@ -175,14 +167,6 @@ const Audited = () => {
           </Form.Item>
           <Form.Item name="title" label="Title" rules={[{ required: true }]}>
             <Input />
-          </Form.Item>
-          <Form.Item name="quarter" label="Quarter" rules={[{ required: true }]}>
-            <Select>
-              <Option value="Q1">Q1</Option>
-              <Option value="Q2">Q2</Option>
-              <Option value="Q3">Q3</Option>
-              {/* <Option value="Q4">Q4</Option> */}
-            </Select>
           </Form.Item>
           <Form.Item name="file_name" label="Pdf File" rules={[{ required: !editingId }]}>
             <Upload 
@@ -199,4 +183,4 @@ const Audited = () => {
   );
 };
 
-export default Audited;
+export default AuditedPage;

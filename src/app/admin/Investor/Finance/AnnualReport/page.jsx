@@ -6,40 +6,40 @@ import { EditOutlined, DeleteOutlined, PlusOutlined, UploadOutlined } from '@ant
 
 const { Option } = Select;
 
-const Audited = () => {
-  const [Unaudited, setUnaudited] = useState([]);
+const AnnualReport = () => {
+  const [AnnualReports, setAnnualReports] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
   const [editingId, setEditingId] = useState(null);
   const [fileList, setFileList] = useState([]);
 
   useEffect(() => {
-    fetchUnaudited();
+    fetchAnnualReports();
   }, []);
 
-  const fetchUnaudited = async () => {
+  const fetchAnnualReports = async () => {
     try {
-      const response = await axios.get('/api/admin/Investors/Finance/Unaudited');
+      const response = await axios.get('/api/admin/Investors/Finance/AnnualReport');
   
-      if (response.data && response.data.UnauditedData) {
+      if (response.data && response.data.annual_report_returnData) {
         
-        const formattedData = formatDataForTable(response.data.UnauditedData);
-        setUnaudited(formattedData);
+        const formattedData = formatDataForTable(response.data.annual_report_returnData);
+        setAnnualReports(formattedData);
       } else {
         console.error('Unexpected response structure:', response.data);
         message.error('Unexpected data structure received from server');
       }
     } catch (error) {
-      console.error('Error fetching Unaudited data:', error);
-      message.error('Failed to fetch Unaudited data: ' + (error.response?.data?.message || error.message));
+      console.error('Error fetching Annual Reports data:', error);
+      message.error('Failed to fetch Annual Reports data: ' + (error.response?.data?.message || error.message));
     }
   };
 
   const formatDataForTable = (data) => {
     return data.map(item => ({
-      key: item.una_id,
+      key: item.arr_id,
       years: item.years,
-      quarter: item.quarter,
+      cat_name: item.cat_name,
       title: item.title,
       file_name: item.file_name
     }));
@@ -68,7 +68,7 @@ const Audited = () => {
         const formData = new FormData();
         formData.append('years', values.years);
         formData.append('title', values.title);
-        formData.append('quarter', values.quarter);
+        formData.append('cat_name', values.cat_name);
         if (fileList[0]) {
           formData.append('file_name', fileList[0].originFileObj);
         }
@@ -77,20 +77,20 @@ const Audited = () => {
         if (editingId) {
 
           formData.append('editingId', editingId);
-          await axios.put(`/api/admin/Investors/Finance/Unaudited`, formData, {
+          await axios.put(`/api/admin/Investors/Finance/AnnualReport`, formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
           });
-          message.success('Unaudited updated successfully');
+          message.success('AnnualReports updated successfully');
         } else {
-          await axios.post('/api/admin/Investors/Finance/Unaudited', formData, {
+          await axios.post('/api/admin/Investors/Finance/AnnualReport', formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
           });
-          message.success('Unaudited added successfully');
+          message.success('AnnualReports added successfully');
         }
         setIsModalVisible(false);
-        fetchUnaudited();
+        fetchAnnualReports();
       } catch (error) {
-        message.error('Failed to save Unaudited');
+        message.error('Failed to save AnnualReports');
       }
     });
   };
@@ -99,13 +99,13 @@ const Audited = () => {
     try {
       const id = record.key;
 
-      await axios.delete('/api/admin/Investors/Finance/Unaudited',{ 
+      await axios.delete('/api/admin/Investors/Finance/AnnualReport',{ 
         data: { id: id } 
       });
-      message.success('Unaudited deleted successfully');
-      fetchUnaudited();
+      message.success('AnnualReports deleted successfully');
+      fetchAnnualReports();
     } catch (error) {
-      message.error('Failed to delete Unaudited');
+      message.error('Failed to delete AnnualReports');
     }
   };
 
@@ -127,14 +127,14 @@ const Audited = () => {
       key: 'title',
     },
     {
-      title: 'quarter',
-      dataIndex: 'quarter',
-      key: 'quarter',
+      title: 'cat_name',
+      dataIndex: 'cat_name',
+      key: 'cat_name',
     },
     {
       title: 'id',
-      dataIndex: 'una_id',
-      key: 'una_id',
+      dataIndex: 'arr_id',
+      key: 'arr_id',
       hidden: true
     },
     {
@@ -160,11 +160,11 @@ const Audited = () => {
   return (
     <div style={{ padding: '20px' }}>
       <Button icon={<PlusOutlined />} onClick={() => showModal()} style={{ marginBottom: '20px' }}>
-        Add Unaudited
+        Add Annual Reports & Returns
       </Button>
-      <Table columns={columns} dataSource={Unaudited} />
+      <Table columns={columns} dataSource={AnnualReports} />
       <Modal
-        title={editingId ? 'Edit Unaudited' : 'Add Unaudited'}
+        title={editingId ? 'Edit AnnualReports' : 'Add AnnualReports'}
         open={isModalVisible}
         onOk={handleOk}
         onCancel={() => setIsModalVisible(false)}
@@ -176,12 +176,10 @@ const Audited = () => {
           <Form.Item name="title" label="Title" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item name="quarter" label="Quarter" rules={[{ required: true }]}>
+          <Form.Item name="cat_name" label="cat_name" rules={[{ required: true }]}>
             <Select>
-              <Option value="Q1">Q1</Option>
-              <Option value="Q2">Q2</Option>
-              <Option value="Q3">Q3</Option>
-              {/* <Option value="Q4">Q4</Option> */}
+              <Option value="Annual Return">Annual Return</Option>
+              <Option value="Annual Report">Annual Report</Option>
             </Select>
           </Form.Item>
           <Form.Item name="file_name" label="Pdf File" rules={[{ required: !editingId }]}>
@@ -199,4 +197,4 @@ const Audited = () => {
   );
 };
 
-export default Audited;
+export default AnnualReport;

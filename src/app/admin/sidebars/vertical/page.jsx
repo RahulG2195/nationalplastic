@@ -43,12 +43,12 @@ const navigation = [
     title: "Investors Pages",
     items: [
       {
-        title: "General Disclosure",
-        href: "/admin/Investor/General",
+        title: "Shareholdings",
+        href: "/admin/Investor/Shareholding",
       },
       {
-        title: "Financial",
-        href: "/admin/Investor/Finance",
+        title: "General Disclosure",
+        href: "/admin/Investor/General",
       },
       {
         title: "AGM Compliances",
@@ -75,6 +75,25 @@ const navigation = [
         href: "/admin/Investor/Advertisements",
       },
      
+    ],
+    icon: "bi bi-hdd-stack",
+  },
+  {
+    type: "accordion",
+    title: "Financial",
+    items:[
+      {
+        title: "Unaudited",
+        href: "/admin/Investor/Finance/Unaudited",
+      },
+      {
+        title: "Audited",
+        href: "/admin/Investor/Finance/Audited",
+      },
+      {
+        title: "Annual Report & Returns",
+        href: "/admin/Investor/Finance/AnnualReport",
+      },
     ],
     icon: "bi bi-hdd-stack",
   },
