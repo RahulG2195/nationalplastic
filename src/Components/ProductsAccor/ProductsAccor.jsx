@@ -80,7 +80,7 @@ const ProductsAccr = ({ handleShow }) => {
 
   return (
     <div>
-      <Accordion className="prdctAccr" style={{ backgroundColor: "#FFE000" }}>
+      <Accordion className="prdctAccr" style={{ backgroundColor: "#FFFFFF" }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls={`panel0-content`}
@@ -101,7 +101,7 @@ const ProductsAccr = ({ handleShow }) => {
                 expanded={expanded === `panel${index + 1}`}
                 onChange={handleChange(`panel${index + 1}`)}
                 key={index}
-                style={{ backgroundColor: "#F1EF99" }}
+                style={{ backgroundColor: "#FFF" }}
               >
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
