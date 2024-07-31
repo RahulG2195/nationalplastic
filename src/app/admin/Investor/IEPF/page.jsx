@@ -2,11 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { 
-  Layout, Menu, Button, Form, Input, Table, Modal, Upload, message 
+import {
+  Layout, Menu, Button, Form, Input, Table, Modal, Upload, message
 } from 'antd';
-import { 
-  EditOutlined, DeleteOutlined, PlusOutlined, UploadOutlined 
+import {
+  EditOutlined, DeleteOutlined, PlusOutlined, UploadOutlined
 } from '@ant-design/icons';
 
 const { Header, Content } = Layout;
@@ -20,6 +20,8 @@ const IEPFCMS = () => {
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [editingRecord, setEditingRecord] = useState(null);
   const [editingSection, setEditingSection] = useState('');
+  const [addModalVisible, setAddModalVisible] = useState(false);
+  const [image, setImage] = useState(null);
 
   useEffect(() => {
     fetchAllData();
@@ -44,16 +46,22 @@ const IEPFCMS = () => {
   };
 
   const handleEdit = (record, section) => {
-    console.log("record ", record);
+    console.log("record ", record.content);
     console.log("section ", section);
+    const dataContent = record.content
     if (section === 'UnclaimedDividendContent') {
-        setEditingRecord({ content: unclaimedDividendContent });
-      } else {
-        setEditingRecord(record);
-      }
+      setEditingRecord({ content: typeof record.content === 'string' ? record.content : JSON.stringify(record.content) });
+    } else {
+      setEditingRecord(record);
+    }
     // setEditingRecord(record);
     setEditingSection(section);
     setEditModalVisible(true);
+  };
+  const handleAddModel = (record, section) => {
+    setAddModalVisible(true);
+    setEditingSection(section);
+
   };
 
   const handleDelete = async (id, section) => {
@@ -85,16 +93,32 @@ const IEPFCMS = () => {
     }
   };
 
-  const handleAdd = async (values, section) => {
+  const handleAdd = async (values) => {
     try {
-      await axios.post(`/api/admin/Investors/iepfCMS?section=${section}`, values);
+      const formData = new FormData();
+      formData.append('year', values.year);
+      formData.append(editingSection === 'ShareTransfer' ? 'document_name' : 'report_title', editingSection === 'ShareTransfer' ? values.document_name : values.report_title);
+      formData.append('file', image);
+  
+      await axios.post(`/api/admin/Investors/iepfCMS?section=${editingSection}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       message.success('Record added successfully');
+      setAddModalVisible(false);
       fetchAllData();
     } catch (error) {
       console.error('Error adding record:', error);
       message.error('Failed to add record');
     }
   };
+
+  const handleFileUploading  = async  (e) => {
+    const file = e.target.files[0];
+    setImage(file);
+  };
+  
 
   const handleFileUpload = async (file, section, id) => {
     const formData = new FormData();
@@ -103,7 +127,7 @@ const IEPFCMS = () => {
     formData.append('id', id);
 
     try {
-      await axios.post('/api/upload', formData, {
+      await axios.post('/api/admin/Investors/ipefedit', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       message.success('File uploaded successfully');
@@ -114,13 +138,14 @@ const IEPFCMS = () => {
     }
   };
 
+
   const columns = {
     shareTransfer: [
       { title: 'Year', dataIndex: 'year', key: 'year' },
       { title: 'Document Name', dataIndex: 'document_name', key: 'document_name' },
-      { 
-        title: 'Document', 
-        dataIndex: 'document_link', 
+      {
+        title: 'Document',
+        dataIndex: 'document_link',
         key: 'document_link',
         render: (text) => <Button href={text} target="_blank">View File</Button>
       },
@@ -131,7 +156,7 @@ const IEPFCMS = () => {
           <>
             <Button icon={<EditOutlined />} onClick={() => handleEdit(record, 'ShareTransfer')} />
             <Button icon={<DeleteOutlined />} onClick={() => handleDelete(record.id, 'ShareTransfer')} />
-            <Upload 
+            <Upload
               beforeUpload={(file) => handleFileUpload(file, 'ShareTransfer', record.id)}
               showUploadList={false}
             >
@@ -144,9 +169,9 @@ const IEPFCMS = () => {
     unclaimedDividend: [
       { title: 'Year', dataIndex: 'year', key: 'year' },
       { title: 'Report Title', dataIndex: 'report_title', key: 'report_title' },
-      { 
-        title: 'Report', 
-        dataIndex: 'report_link', 
+      {
+        title: 'Report',
+        dataIndex: 'report_link',
         key: 'report_link',
         render: (text) => <Button href={text} target="_blank">View File</Button>
       },
@@ -157,7 +182,7 @@ const IEPFCMS = () => {
           <>
             <Button icon={<EditOutlined />} onClick={() => handleEdit(record, 'UnclaimedDividend')} />
             <Button icon={<DeleteOutlined />} onClick={() => handleDelete(record.id, 'UnclaimedDividend')} />
-            <Upload 
+            <Upload
               beforeUpload={(file) => handleFileUpload(file, 'UnclaimedDividend', record.id)}
               showUploadList={false}
             >
@@ -198,13 +223,13 @@ const IEPFCMS = () => {
           </div>
 
           <h2>Share Transfer</h2>
-          <Button onClick={() => handleEdit({}, 'ShareTransfer')} icon={<PlusOutlined />}>
+          <Button onClick={() => handleAddModel({}, 'ShareTransfer')} icon={<PlusOutlined />}>
             Add New
           </Button>
           <Table columns={columns.shareTransfer} dataSource={shareTransferData} />
 
           <h2>Unclaimed Dividend</h2>
-          <Button onClick={() => handleEdit({}, 'UnclaimedDividend')} icon={<PlusOutlined />}>
+          <Button onClick={() => handleAddModel({}, 'UnclaimedDividend')} icon={<PlusOutlined />}>
             Add New
           </Button>
           <Table columns={columns.unclaimedDividend} dataSource={unclaimedDividendData} />
@@ -241,9 +266,9 @@ const IEPFCMS = () => {
               <Form.Item name="year" label="Year" rules={[{ required: true }]}>
                 <Input />
               </Form.Item>
-              <Form.Item 
-                name={editingSection === 'ShareTransfer' ? 'document_name' : 'report_title'} 
-                label={editingSection === 'ShareTransfer' ? 'Document Name' : 'Report Title'} 
+              <Form.Item
+                name={editingSection === 'ShareTransfer' ? 'document_name' : 'report_title'}
+                label={editingSection === 'ShareTransfer' ? 'Document Name' : 'Report Title'}
                 rules={[{ required: true }]}
               >
                 <Input />
@@ -253,6 +278,40 @@ const IEPFCMS = () => {
           <Form.Item>
             <Button type="primary" htmlType="submit">
               Save
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
+
+      <Modal
+        title="File Upload"
+        open={addModalVisible}
+        onCancel={() => setAddModalVisible(false)}
+        footer={null}
+      >
+        <Form
+          onFinish={handleAdd}
+        >
+          {(editingSection === 'ShareTransfer' || editingSection === 'UnclaimedDividend') && (
+            <>
+              <Form.Item name="year" label="Year" rules={[{ required: true }]}>
+                <Input />
+              </Form.Item>
+              <Form.Item
+                name={editingSection === 'ShareTransfer' ? 'document_name' : 'report_title'}
+                label={editingSection === 'ShareTransfer' ? 'Document Name' : 'Report Title'}
+                rules={[{ required: true }]}
+              >
+                <Input />
+              </Form.Item>
+            </>
+          )}
+          <Form.Item label="Image">
+            <input type="file" onChange={handleFileUploading} rules={[{ required: true }]} />
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Upload
             </Button>
           </Form.Item>
         </Form>

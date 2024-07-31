@@ -1,6 +1,16 @@
 import { query } from '@/lib/db';
-import fs from 'fs/promises';
-import path from 'path';
+import {
+  addShareTransfer,
+  addUnclaimedDividend,
+  updateNodalOfficerDetails,
+  updateUnclaimedDividendContent,
+  updateShareTransfer,
+  updateUnclaimedDividend,
+  deleteShareTransfer,
+  deleteUnclaimedDividend
+} from './functions';
+
+import {uploadFile} from "@/utils/fileUploader";
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
@@ -21,13 +31,19 @@ export async function GET(request) {
 export async function POST(request) {
   const { searchParams } = new URL(request.url);
   const section = searchParams.get('section');
-  const body = await request.json();
+
+  const formData = await request.formData();
+  const file = formData.get('file');
+  const year = formData.get('year');
+  const documentNameOrReportTitle = formData.get('document_name') || formData.get('report_title');
+  await uploadFile(file); 
+  const url = `/Assets/uploads/Investors/${file.name}`;
 
   switch (section) {
     case 'ShareTransfer':
-      return await addShareTransfer(body);
+      return await addShareTransfer({ year, document_name: documentNameOrReportTitle }, url);
     case 'UnclaimedDividend':
-      return await addUnclaimedDividend(body);
+      return await addUnclaimedDividend({ year, report_title: documentNameOrReportTitle, report_link: url });
     default:
       return new Response(JSON.stringify({ status: 404, message: 'Section not found' }), { status: 404 });
   }
@@ -89,55 +105,55 @@ async function getNodalOfficerDetails() {
 // Implement other functions similarly
 
 async function getUnclaimedDividend() {
-    try {
-      const content = await query({
-        query: "SELECT content FROM unclaimed_dividend WHERE content IS NOT NULL LIMIT 1",
-        values: [],
-      });
-  
-      const reports = await query({
-        query: "SELECT id, year, report_title, report_link FROM unclaimed_dividend WHERE year IS NOT NULL ORDER BY year DESC",
-        values: [],
-      });
-  
-      return new Response(
-        JSON.stringify({
-          status: 200,
-          pageData: [{ content: content[0].content, reports }],
-        }),
-        { status: 200 }
-      );
-    } catch (e) {
-      return new Response(
-        JSON.stringify({
-          status: 500,
-          Error: e.message,
-        }),
-        { status: 500 }
-      );
-    }
+  try {
+    const content = await query({
+      query: "SELECT content FROM unclaimed_dividend WHERE content IS NOT NULL LIMIT 1",
+      values: [],
+    });
+
+    const reports = await query({
+      query: "SELECT id, year, report_title, report_link FROM unclaimed_dividend WHERE year IS NOT NULL ORDER BY year DESC",
+      values: [],
+    });
+
+    return new Response(
+      JSON.stringify({
+        status: 200,
+        pageData: [{ content: content[0].content, reports }],
+      }),
+      { status: 200 }
+    );
+  } catch (e) {
+    return new Response(
+      JSON.stringify({
+        status: 500,
+        Error: e.message,
+      }),
+      { status: 500 }
+    );
   }
-  
-  async function getShareTransfer() {
-    try {
-      const pageContent = await query({
-        query: "SELECT * FROM share_transfer ORDER BY year DESC, document_name",
-        values: [],
-      });
-      return new Response(
-        JSON.stringify({
-          status: 200,
-          pageData: pageContent,
-        }),
-        { status: 200 }
-      );
-    } catch (e) {
-      return new Response(
-        JSON.stringify({
-          status: 500,
-          Error: e.message,
-        }),
-        { status: 500 }
-      );
-    }
+}
+
+async function getShareTransfer() {
+  try {
+    const pageContent = await query({
+      query: "SELECT * FROM share_transfer ORDER BY year DESC, document_name",
+      values: [],
+    });
+    return new Response(
+      JSON.stringify({
+        status: 200,
+        pageData: pageContent,
+      }),
+      { status: 200 }
+    );
+  } catch (e) {
+    return new Response(
+      JSON.stringify({
+        status: 500,
+        Error: e.message,
+      }),
+      { status: 500 }
+    );
   }
+}
