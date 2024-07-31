@@ -67,6 +67,10 @@ const navigation = [
         href: "/admin/Investor/Transaction",
       },
       {
+        title: "Listing Disclousures",
+        href: "/admin/Investor/Disclousures",
+      },
+      {
         title: "Advertisements",
         href: "/admin/Investor/Advertisements",
       },
