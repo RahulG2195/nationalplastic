@@ -24,9 +24,6 @@ export async function POST(request) {
       console.log("GOooodllYYY");
       // Assume uploadFile function is defined elsewhere and handles the file upload
       await uploadFile(file); // Make sure uploadFile returns a Promise
-      console.log("file", file.name);
-      console.log("filename", file);
-      // Set the pdfPath based on where the file is saved
       pdfPath = `/Assets/uploads/Investors/${file.name}`;
     } catch (error) {
       console.error('File upload error:', error);

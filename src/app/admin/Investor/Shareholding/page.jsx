@@ -6,35 +6,32 @@ import { EditOutlined, DeleteOutlined, PlusOutlined, UploadOutlined } from '@ant
 
 const { Option } = Select;
 
-const Shareholding = () => {
-  const [Shareholding, setAnnualReports] = useState([]);
+const ShareHolding = () => {
+  const [shares, setShares] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
   const [editingId, setEditingId] = useState(null);
-  const [fileList1, setFileList1] = useState([]);
-  const [fileList2, setFileList2] = useState([]);
-  const [fileList3, setFileList3] = useState([]);
-  const [fileList4, setFileList4] = useState([]);
+  const [fileList, setFileList] = useState([]);
 
   useEffect(() => {
-    fetchShareholding();
+    fetchUnaudited();
   }, []);
 
-  const fetchShareholding = async () => {
+  const fetchUnaudited = async () => {
     try {
       const response = await axios.get('/api/admin/Investors/Shareholding');
   
-      if (response.data && response.data.annual_report_returnData) {
+      if (response.data && response.data.SharedData) {
         
-        const formattedData = formatDataForTable(response.data.annual_report_returnData);
-        setAnnualReports(formattedData);
+        const formattedData = formatDataForTable(response.data.SharedData);
+        setShares(formattedData);
       } else {
         console.error('Unexpected response structure:', response.data);
         message.error('Unexpected data structure received from server');
       }
     } catch (error) {
-      console.error('Error fetching Annual Reports data:', error);
-      message.error('Failed to fetch Annual Reports data: ' + (error.response?.data?.message || error.message));
+      console.error('Error fetching shares data:', error);
+      message.error('Failed to fetch shares data: ' + (error.response?.data?.message || error.message));
     }
   };
 
@@ -42,30 +39,25 @@ const Shareholding = () => {
     return data.map(item => ({
       key: item.sc_id,
       years: item.years,
-      q1: item.q1,
-      // title: item.title,
-      file_name1: item.file_name1
+      quarter: item.quarter,
+      title: item.title,
+      file_name: item.file_name
     }));
   };
 
   const showModal = (record = null) => {
-      console.log('record', record);
+      // console.log('record', record);
       if (record) {
+      console.log('record1', record.key);
 
       form.setFieldsValue(record);
       setEditingId(record.key);
-      
-      setFileList1([]);
-      setFileList2([]);
-      setFileList3([]);
-      setFileList4([]);
+      console.log('key', record.key);
+      setFileList([]);
     } else {
       form.resetFields();
       setEditingId(null);
-      setFileList1([]);
-      setFileList2([]);
-      setFileList3([]);
-      setFileList4([]);
+      setFileList([]);
     }
     setIsModalVisible(true);
   };
@@ -74,44 +66,31 @@ const Shareholding = () => {
     form.validateFields().then(async (values) => {
       try {
         const formData = new FormData();
-        console.log('formData', formData);
-
         formData.append('years', values.years);
-        formData.append('q1', values.q1);
-        formData.append('q2', values.q2);
-        formData.append('q3', values.q3);
-        formData.append('q4', values.q4);
-        if (fileList1[0]) {
-          formData.append('file_name1', fileList1[0].originFileObj);
+        formData.append('title', values.title);
+        formData.append('quarter', values.quarter);
+        if (fileList[0]) {
+          formData.append('file_name', fileList[0].originFileObj);
         }
-        if (fileList2[0]) {
-          formData.append('file_name2', fileList2[0].originFileObj);
-        }
-        if (fileList3[0]) {
-          formData.append('file_name3', fileList3[0].originFileObj);
-        }
-        if (fileList4[0]) {
-          formData.append('file_name4', fileList4[0].originFileObj);
-        }
-
         
+        console.log('editingId', editingId);
         if (editingId) {
 
           formData.append('editingId', editingId);
           await axios.put(`/api/admin/Investors/Shareholding`, formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
           });
-          message.success('Shareholding updated successfully');
+          message.success('shares updated successfully');
         } else {
           await axios.post('/api/admin/Investors/Shareholding', formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
           });
-          message.success('Shareholding added successfully');
+          message.success('shares added successfully');
         }
         setIsModalVisible(false);
-        fetchShareholding();
+        fetchUnaudited();
       } catch (error) {
-        message.error('Failed to save Shareholding');
+        message.error('Failed to save shares');
       }
     });
   };
@@ -123,10 +102,10 @@ const Shareholding = () => {
       await axios.delete('/api/admin/Investors/Shareholding',{ 
         data: { id: id } 
       });
-      message.success('Shareholding deleted successfully');
-      fetchShareholding();
+      message.success('shares deleted successfully');
+      fetchUnaudited();
     } catch (error) {
-      message.error('Failed to delete Shareholding');
+      message.error('Failed to delete shares');
     }
   };
 
@@ -148,9 +127,9 @@ const Shareholding = () => {
       key: 'title',
     },
     {
-      title: 'q1',
-      dataIndex: 'q1',
-      key: 'q1',
+      title: 'quarter',
+      dataIndex: 'quarter',
+      key: 'quarter',
     },
     {
       title: 'id',
@@ -159,9 +138,9 @@ const Shareholding = () => {
       hidden: true
     },
     {
-      title: 'file_name1',
-      dataIndex: 'file_name1',
-      key: 'file_name1',
+      title: 'file_name',
+      dataIndex: 'file_name',
+      key: 'file_name',
       render: (text) => <a href={text} target="_blank" rel="noopener noreferrer">View File</a>,
     },
     {
@@ -176,19 +155,16 @@ const Shareholding = () => {
     },
   ];
 
-  const handleFileChange1 = ({ fileList }) => setFileList1(fileList);
-  const handleFileChange2 = ({ fileList }) => setFileList2(fileList);
-  const handleFileChange3 = ({ fileList }) => setFileList3(fileList);
-  const handleFileChange4 = ({ fileList }) => setFileList4(fileList);
+  const handleFileChange = ({ fileList }) => setFileList(fileList);
 
   return (
     <div style={{ padding: '20px' }}>
       <Button icon={<PlusOutlined />} onClick={() => showModal()} style={{ marginBottom: '20px' }}>
-        Add Annual Reports & Returns
+        Add shares
       </Button>
-      <Table columns={columns} dataSource={Shareholding} />
+      <Table columns={columns} dataSource={shares} />
       <Modal
-        title={editingId ? 'Edit Shareholding' : 'Add Shareholding'}
+        title={editingId ? 'Edit shares' : 'Add shares'}
         open={isModalVisible}
         onOk={handleOk}
         onCancel={() => setIsModalVisible(false)}
@@ -197,57 +173,22 @@ const Shareholding = () => {
           <Form.Item name="years" label="Years" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          
-          {/* <Form.Item name="q1" label="q1" rules={[{ required: true }]}>
+          <Form.Item name="title" label="Title" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="quarter" label="Quarter" rules={[{ required: true }]}>
             <Select>
-              <Option value="Annual Return">Annual Return</Option>
-              <Option value="Annual Report">Annual Report</Option>
+              <Option value="Q1">Q1</Option>
+              <Option value="Q2">Q2</Option>
+              <Option value="Q3">Q3</Option>
+              <Option value="Q4">Q4</Option>
             </Select>
-          </Form.Item> */}
-          <Form.Item name="q1" label="Title 1" rules={[{ required: true }]}>
-            <Input />
           </Form.Item>
-          <Form.Item name="file_name1" label="Pdf File 1" rules={[{ required: !editingId }]}>
+          <Form.Item name="file_name" label="Pdf File" rules={[{ required: !editingId }]}>
             <Upload 
               beforeUpload={() => false}
-              onChange={handleFileChange1}
-              fileList={fileList1}
-            >
-              <Button icon={<UploadOutlined />}>Select File</Button>
-            </Upload>
-          </Form.Item>
-          <Form.Item name="q2" label="Title 2" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item name="file_name2" label="Pdf File 2" rules={[{ required: !editingId }]}>
-            <Upload 
-              beforeUpload={() => false}
-              onChange={handleFileChange2}
-              fileList={fileList1}
-            >
-              <Button icon={<UploadOutlined />}>Select File</Button>
-            </Upload>
-          </Form.Item>
-          <Form.Item name="q3" label="Title 3" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item name="file_name3" label="Pdf File 3" rules={[{ required: !editingId }]}>
-            <Upload 
-              beforeUpload={() => false}
-              onChange={handleFileChange3}
-              fileList={fileList1}
-            >
-              <Button icon={<UploadOutlined />}>Select File</Button>
-            </Upload>
-          </Form.Item>
-          <Form.Item name="q4" label="Title 4" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item name="file_name4" label="Pdf File 4" rules={[{ required: !editingId }]}>
-            <Upload 
-              beforeUpload={() => false}
-              onChange={handleFileChange4}
-              fileList={fileList1}
+              onChange={handleFileChange}
+              fileList={fileList}
             >
               <Button icon={<UploadOutlined />}>Select File</Button>
             </Upload>
@@ -258,4 +199,4 @@ const Shareholding = () => {
   );
 };
 
-export default Shareholding;
+export default ShareHolding;

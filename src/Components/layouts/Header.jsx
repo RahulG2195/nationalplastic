@@ -106,11 +106,13 @@ export default function Header() {
   }, [FirstName, LastName]);
 
   const [investorConfig, setInvestorConfig] = useState(staticInvestorConfig);
+  console.log('investorConfig', investorConfig);
 
   useEffect(() => {
     async function loadConfig() {
       try {
         const config = await fetchInvestorConfig();
+
         setInvestorConfig(config);
       } catch (error) {
         console.error("Failed to fetch investor config, using static config", error);
@@ -203,15 +205,15 @@ export default function Header() {
 
     fetchBasicInfo();
   }, []);
- 
+
   return (
     <div>
-                    {/* <ScrollToTop displayType="htmlArrow" /> */}
+      {/* <ScrollToTop displayType="htmlArrow" /> */}
 
       {!hideLayout ? (
         <>
           <div className="container-fluid p-0 header menbg">
-            <TopBar />
+            {/* <TopBar /> */}
             <nav className="navbar navbar-expand-lg main_header px-3">
               <div className="container-fluid ">
                 <div className="navbar-brand">
@@ -238,7 +240,9 @@ export default function Header() {
                       objectFit="contain"
                     />
                   </Link>
+
                 </div>
+
                 <form onSubmit={handleSearchSubmit} className="d-flex nav-search">
                   <input
                     className="form-control text-center HeadSearch fw-semibold"
@@ -249,7 +253,6 @@ export default function Header() {
                     onChange={handleSearchChange}
                   />
                 </form>
-
                 <div
                   className={`${isClicked
                     ? " collapse navbar-collapse show menubg"
@@ -327,9 +330,9 @@ export default function Header() {
                       )}
                     </li>
                     {
-                      (width <= 991) 
-                      ? 
-                      <InvestorAccor handleShow={handleShow} />
+                      (width <= 991)
+                        ?
+                        <InvestorAccor handleShow={handleShow} />
                         :
                         <ul className="nav">
                           {investorConfig.map((item, index) => (

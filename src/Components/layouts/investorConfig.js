@@ -45,7 +45,7 @@ function restructureData(data) {
 
 export const fetchInvestorConfig = async () => {
   try {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/InvestorPage`);
+    const res = await axios.get(`/api/Investor/InvestorPage`);
     
     const restructuredData = restructureData(res.data.results);
     

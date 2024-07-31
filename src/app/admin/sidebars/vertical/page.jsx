@@ -47,12 +47,20 @@ const navigation = [
         href: "/admin/Investor/Shareholding",
       },
       {
+        title: "Corporate Governance",
+        href: "/admin/Investor/CorporateGov",
+      },
+      {
+        title: "Corporate Reports",
+        href: "/admin/Investor/CorporateReport",
+      },
+      {
         title: "General Disclosure",
         href: "/admin/Investor/General",
       },
       {
-        title: "AGM Compliances",
-        href: "/admin/Investor/AGM",
+        title: "Transfer Of Shares",
+        href: "/admin/Investor/Transfer",
       },
       {
         title: "Investor contact",
@@ -63,12 +71,8 @@ const navigation = [
         href: "/admin/Investor/investorKYC",
       },
       {
-        title: "house section",
-        href: "/admin/homepage/house section",
-      },
-      {
-        title: "house section",
-        href: "/admin/homepage/house section",
+        title: "Related Party Transactions",
+        href: "/admin/Investor/Transaction",
       },
       {
         title: "Advertisements",
@@ -93,6 +97,21 @@ const navigation = [
       {
         title: "Annual Report & Returns",
         href: "/admin/Investor/Finance/AnnualReport",
+      },
+    ],
+    icon: "bi bi-hdd-stack",
+  },
+  {
+    type: "accordion",
+    title: "AGM Compilance",
+    items:[
+      {
+        title: "Outcome Of Agm",
+        href: "/admin/Investor/Outcome",
+      },
+      {
+        title: "Notice",
+        href: "/admin/Investor/Notice",
       },
     ],
     icon: "bi bi-hdd-stack",
