@@ -204,6 +204,42 @@ function ProdData({ category_id }) {
         );
     }
   };
+  const handleBuyNow = async (storedId, quantity) => {
+    const data = await fetchPrice(id);
+    const price = data.price;
+    const discount_price = data.discount_price;
+    switch (userState) {
+      case false:
+        dispatch(
+          addToCartD({
+            product_id,
+            price,
+            discount_price,
+            quantity: quantity || 1,
+            color: selectedColor,
+            from: 0,
+          })
+        );
+        break;
+      case true:
+        dispatch(
+          addToCart({
+            product_id,
+            price,
+            discount_price,
+            quantity: quantity || 1,
+            color: selectedColor,
+            from: 0,
+          })
+        );
+        break;
+      default:
+        console.warn(
+          "Unexpected login state. Please handle appropriately.",
+          isLoggedInResult
+        );
+    }
+  };
 
   if (isLoading) {
     return <div className="hv-100">Loading...</div>;
@@ -364,7 +400,7 @@ function ProdData({ category_id }) {
                   href={userState ? "/Address" : "#"}
                   className={`btn m-2 px-md-5 ProdbtnRes ${!userState ? "disabled-button" : ""
                     }`}
-                  onClick={() => handleMoveToCart(productId)}
+                  onClick={() => handleBuyNow(productId)}
                 >
                   Buy Now
                 </Link>

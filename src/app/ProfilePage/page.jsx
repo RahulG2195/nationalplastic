@@ -287,7 +287,7 @@ function ProfilePage() {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    
+
     confirm({
       title: 'Are you sure you want to log out?',
       icon: <ExclamationCircleOutlined />,
@@ -358,28 +358,28 @@ function ProfilePage() {
   const ReturnProduct = async (prod_id, user_id, od_id) => {
 
     try {
-      
+
       const GetSingleData = orderData.filter((od) => od.prod_id == prod_id && od.customer_id == user_id && od.od_id == od_id)
       const fourteendayvalidate = ReturnProductBeforeFourteenDays(GetSingleData[0]['order_status_date']);
-      
+
       setReturnSingleProd(GetSingleData);
       setVerifyReturnDays(fourteendayvalidate)
 
-      if(fourteendayvalidate > 0){
-        const ProdData = { prod_id: prod_id, user_id: user_id,  order_id: GetSingleData[0].order_id, type: 'return' };
-          var res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, ProdData);
+      if (fourteendayvalidate > 0) {
+        const ProdData = { prod_id: prod_id, user_id: user_id, order_id: GetSingleData[0].order_id, type: 'return' };
+        var res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, ProdData);
 
-          if (res.data.message === 'Order status Updated') {
+        if (res.data.message === 'Order status Updated') {
 
-            notify("Your order Return Request has been sent");
-            toast.success("Your order Return Request has been sent");
-    
-          } else {
-    
-            notify("Your order Return Request fail");
-            toast.success("Your order Return Request fail");
-    
-          }
+          notify("Your order Return Request has been sent");
+          toast.success("Your order Return Request has been sent");
+
+        } else {
+
+          notify("Your order Return Request fail");
+          toast.success("Your order Return Request fail");
+
+        }
       }
 
 
@@ -689,71 +689,79 @@ function ProfilePage() {
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      {
-                        orderData.map((data, index) => {
-                          let vdate = ReturnProductBeforeFourteenDays(data['order_status_date']);
-                          if (data.image_name) {
-                            var images = data ? data.image_name.split(', ').map(image => image.trim()) : [];
-                            // setFirstImage(images[0]);
-                          }
-
-                          let ReturnCancelBtn;
-
-                          {/* order status == delivered  */ }
-                          if (data.order_status === 5 && vdate <= 14) {
-
-                            if(data['per_order_status'] == 0 && data['return_order'] == 0){
-                              ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Return confirmation Sent</button>
-                            }else{
-                              ReturnCancelBtn = <button className="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#ReturnProd" onClick={() => ReturnProduct(data.product_id, data.customer_id, data.od_id)}>Return order</button>
+                    {orderData && orderData.length > 0 ? (
+                      <tbody>
+                        {
+                          orderData.map((data, index) => {
+                            let vdate = ReturnProductBeforeFourteenDays(data['order_status_date']);
+                            if (data.image_name) {
+                              var images = data ? data.image_name.split(', ').map(image => image.trim()) : [];
+                              // setFirstImage(images[0]);
                             }
 
+                            let ReturnCancelBtn;
 
-                          } else if (data.order_status === 1 || data.order_status === 2 || data.order_status === 3 || data.order_status === 4) {
+                            {/* order status == delivered  */ }
+                            if (data.order_status === 5 && vdate <= 14) {
 
-                            if (data.per_order_status === 1) {
+                              if (data['per_order_status'] == 0 && data['return_order'] == 0) {
+                                ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Return confirmation Sent</button>
+                              } else {
+                                ReturnCancelBtn = <button className="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#ReturnProd" onClick={() => ReturnProduct(data.product_id, data.customer_id, data.od_id)}>Return order</button>
+                              }
 
-                              ReturnCancelBtn = <button className="btn btn-warning btn-rounded" onClick={() => CancelProduct(data.product_id, data.customer_id, data.od_id)}>Cancel order</button>
 
-                            } else {
+                            } else if (data.order_status === 1 || data.order_status === 2 || data.order_status === 3 || data.order_status === 4) {
 
-                              {/* once order status get 0 in db it will show order cancelled  */ }
+                              if (data.per_order_status === 1) {
+
+                                ReturnCancelBtn = <button className="btn btn-warning btn-rounded" onClick={() => CancelProduct(data.product_id, data.customer_id, data.od_id)}>Cancel order</button>
+
+                              } else {
+
+                                {/* once order status get 0 in db it will show order cancelled  */ }
+                                ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>
+
+                              }
+
+                            } else if (data.order_status == 6) {
+
                               ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>
 
+                            } else if (data.order_status == 7) {
+                              ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Returned</button>
+                            } else {
+                              ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Placed</button>;
                             }
-
-                          } else if (data.order_status == 6) {
-
-                            ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>
-
-                          } else if (data.order_status == 7) {
-                            ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Returned</button>
-                          } else {
-                            ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Placed</button>;
-                          }
-                          return <tr key={index}>
-                            <th scope="row">{index + 1}</th>
-                            <td>
-                              <Link href={`/ProductDetail/${data.seo_url}`}>
-                                <Image
-                                  src={images && images.length > 0 ? `/Assets/uploads/products/${images[0]}` : '/Altis-chair-Black-(45)-white bg.webp'}
-                                  height={50}
-                                  width={50}
-                                  alt="prod_image"
-                                />
-                              </Link>
-                            </td>
-                            <td><Link href={`/ProductDetail/${data.seo_url}`}>{data.product_name}</Link></td>
-                            <td>{data.quantity}</td>
-                            <td>₹ {data.quantity * data.prod_price} </td>
-                            <td>
-                              {ReturnCancelBtn}
-                            </td>
-                          </tr>
-                        })
-                      }
-                    </tbody>
+                            return <tr key={index}>
+                              <th scope="row">{index + 1}</th>
+                              <td>
+                                <Link href={`/ProductDetail/${data.seo_url}`}>
+                                  <Image
+                                    src={images && images.length > 0 ? `/Assets/uploads/products/${images[0]}` : '/Altis-chair-Black-(45)-white bg.webp'}
+                                    height={50}
+                                    width={50}
+                                    alt="prod_image"
+                                  />
+                                </Link>
+                              </td>
+                              <td><Link href={`/ProductDetail/${data.seo_url}`}>{data.product_name}</Link></td>
+                              <td>{data.quantity}</td>
+                              <td>₹ {data.quantity * data.prod_price} </td>
+                              <td>
+                                {ReturnCancelBtn}
+                              </td>
+                            </tr>
+                          })
+                        }
+                      </tbody>
+                    ) : (
+                      <tbody>
+                        <tr>
+                          <td colSpan="6" className="text-center">No order data available</td>
+                        </tr>
+                      </tbody>
+                    )}
                   </table>
                   <hr />
                 </div>
