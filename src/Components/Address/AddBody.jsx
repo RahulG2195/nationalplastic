@@ -10,6 +10,8 @@ import { addItemToCart } from "@/redux/reducer/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { isLoggedIn } from "@/utils/validation";
 import { notifyError } from "@/utils/notify";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddBody = () => {
   const [productDetailArr, setProductDetailArr] = useState([]);
@@ -23,11 +25,14 @@ const AddBody = () => {
   const [FirstName, setFirstName] = useState("");
   const [Phone, setPhone] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const userEmail = useSelector((state) => state.userData.email);
 
   const [editable, setEditable] = useState(false);
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const [showFields, setShowFields] = useState(false);
+  const [companyName, setCompanyName] = useState('');
+  const [gstNumber, setGstNumber] = useState('');
 
   const handleCheckboxChange = () => {
     setShowFields(!showFields);
@@ -47,6 +52,29 @@ const AddBody = () => {
     setEditable(false);
     setAddress("");
   };
+
+  const handleBuisnessSubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+      userEmail,
+      companyName,
+      gstNumber
+    };
+
+    console.log("buisness data ",data)
+
+    try {
+      const response = await axios.patch('/api/customersForBuisness', data);
+      console.log('Form submitted successfully:', response.data);
+      toast.success('Data updated successfully!', { autoClose: 1000 });
+      setCompanyName('');
+      setGstNumber('');
+      setShowFields(false);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  };
+
   const getAdress = async () => {
     try {
       const email = localStorage.getItem("userData");
@@ -269,7 +297,7 @@ const AddBody = () => {
                 </div>
               </div> */}
 
-              
+
               {/* <div className="buying text-start mt-4 p-3 bg-white d-flex">
                 <input
                   className="form-check-input border-black"
@@ -285,7 +313,7 @@ const AddBody = () => {
                 </label>
               </div> */}
 
-              <form className="text-start mt-3">
+              <form className="text-start mt-3" onSubmit={handleBuisnessSubmit}>
                 <div className="form-check mb-3">
                   <input
                     className="form-check-input"
@@ -294,12 +322,12 @@ const AddBody = () => {
                     checked={showFields}
                     onChange={handleCheckboxChange}
                   />
-                 <label
-                  className="form-check-label text-danger mx-2 fw-bold "
-                  htmlFor="flexCheckDefault"
-                >
-                  Buying for your Business?
-                </label>
+                  <label
+                    className="form-check-label text-danger mx-2 fw-bold"
+                    htmlFor="showFieldsCheckbox"
+                  >
+                    Buying for your Business?
+                  </label>
                 </div>
                 {showFields && (
                   <>
@@ -308,11 +336,15 @@ const AddBody = () => {
                         type="text"
                         className="form-control"
                         placeholder="Company Name"
+                        value={companyName}
+                        onChange={(e) => setCompanyName(e.target.value)}
                       />
                       <input
                         type="text"
                         className="form-control"
                         placeholder="GST Number"
+                        value={gstNumber}
+                        onChange={(e) => setGstNumber(e.target.value)}
                       />
                     </div>
                     <p className="small fw-semibold py-2">
@@ -326,9 +358,7 @@ const AddBody = () => {
                       Save
                     </button>
                   </>
-
                 )}
-
               </form>
             </div>
 
