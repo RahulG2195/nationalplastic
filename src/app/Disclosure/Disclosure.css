@@ -30,3 +30,11 @@
     }
     
   }
+
+  .disclosureTable :global(.ant-table-cell) {
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .disclosureTable :global(.ant-table-row:last-child .ant-table-cell) {
+    border-bottom: none;
+  }

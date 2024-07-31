@@ -71,8 +71,16 @@ const navigation = [
         href: "/admin/Investor/investorKYC",
       },
       {
+        title: "Outcome of board meet",
+        href: "/admin/Investor/outcome",
+      },
+      {
         title: "Related Party Transactions",
         href: "/admin/Investor/Transaction",
+      },
+      {
+        title: "Listing Disclousures",
+        href: "/admin/Investor/Disclousures",
       },
       {
         title: "Advertisements",
