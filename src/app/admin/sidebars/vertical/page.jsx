@@ -43,16 +43,24 @@ const navigation = [
     title: "Investors Pages",
     items: [
       {
+        title: "Shareholdings",
+        href: "/admin/Investor/Shareholding",
+      },
+      {
+        title: "Corporate Governance",
+        href: "/admin/Investor/CorporateGov",
+      },
+      {
+        title: "Corporate Reports",
+        href: "/admin/Investor/CorporateReport",
+      },
+      {
         title: "General Disclosure",
         href: "/admin/Investor/General",
       },
       {
-        title: "Financial",
-        href: "/admin/Investor/Finance",
-      },
-      {
-        title: "AGM Compliances",
-        href: "/admin/Investor/AGM",
+        title: "Transfer Of Shares",
+        href: "/admin/Investor/Transfer",
       },
       {
         title: "Investor contact",
@@ -61,6 +69,10 @@ const navigation = [
       {
         title: "Investors KYC",
         href: "/admin/Investor/investorKYC",
+      },
+      {
+        title: "Outcome of board meet",
+        href: "/admin/Investor/outcome",
       },
       {
         title: "Related Party Transactions",
@@ -79,6 +91,40 @@ const navigation = [
         href: "/admin/Investor/IEPF",
       },
      
+    ],
+    icon: "bi bi-hdd-stack",
+  },
+  {
+    type: "accordion",
+    title: "Financial",
+    items:[
+      {
+        title: "Unaudited",
+        href: "/admin/Investor/Finance/Unaudited",
+      },
+      {
+        title: "Audited",
+        href: "/admin/Investor/Finance/Audited",
+      },
+      {
+        title: "Annual Report & Returns",
+        href: "/admin/Investor/Finance/AnnualReport",
+      },
+    ],
+    icon: "bi bi-hdd-stack",
+  },
+  {
+    type: "accordion",
+    title: "AGM Compilance",
+    items:[
+      {
+        title: "Outcome Of Agm",
+        href: "/admin/Investor/Outcome",
+      },
+      {
+        title: "Notice",
+        href: "/admin/Investor/Notice",
+      },
     ],
     icon: "bi bi-hdd-stack",
   },

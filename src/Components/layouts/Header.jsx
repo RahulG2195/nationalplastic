@@ -106,11 +106,13 @@ export default function Header() {
   }, [FirstName, LastName]);
 
   const [investorConfig, setInvestorConfig] = useState(staticInvestorConfig);
+  console.log('investorConfig', investorConfig);
 
   useEffect(() => {
     async function loadConfig() {
       try {
         const config = await fetchInvestorConfig();
+
         setInvestorConfig(config);
       } catch (error) {
         console.error("Failed to fetch investor config, using static config", error);

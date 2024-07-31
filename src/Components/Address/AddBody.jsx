@@ -10,6 +10,8 @@ import { addItemToCart } from "@/redux/reducer/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { isLoggedIn } from "@/utils/validation";
 import { notifyError } from "@/utils/notify";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddBody = () => {
   const [productDetailArr, setProductDetailArr] = useState([]);
@@ -23,10 +25,20 @@ const AddBody = () => {
   const [FirstName, setFirstName] = useState("");
   const [Phone, setPhone] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const userEmail = useSelector((state) => state.userData.email);
 
   const [editable, setEditable] = useState(false);
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
+  const [showFields, setShowFields] = useState(false);
+  const [companyName, setCompanyName] = useState('');
+  const [gstNumber, setGstNumber] = useState('');
+
+  const handleCheckboxChange = () => {
+    setShowFields(!showFields);
+  };
+
+
 
   const handleEdit = () => {
     setEditable(!editable);
@@ -40,6 +52,29 @@ const AddBody = () => {
     setEditable(false);
     setAddress("");
   };
+
+  const handleBuisnessSubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+      userEmail,
+      companyName,
+      gstNumber
+    };
+
+    console.log("buisness data ",data)
+
+    try {
+      const response = await axios.patch('/api/customersForBuisness', data);
+      console.log('Form submitted successfully:', response.data);
+      toast.success('Data updated successfully!', { autoClose: 1000 });
+      setCompanyName('');
+      setGstNumber('');
+      setShowFields(false);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  };
+
   const getAdress = async () => {
     try {
       const email = localStorage.getItem("userData");
@@ -261,7 +296,9 @@ const AddBody = () => {
                   </label>
                 </div>
               </div> */}
-              <div className="buying text-start mt-4 p-3 bg-white">
+
+
+              {/* <div className="buying text-start mt-4 p-3 bg-white d-flex">
                 <input
                   className="form-check-input border-black"
                   type="checkbox"
@@ -274,39 +311,54 @@ const AddBody = () => {
                 >
                   Buying for your Business?
                 </label>
-              </div>
+              </div> */}
 
-              <form className="text-start mt-3">
-                <div className="mb-3 d-flex flex-wrap gap-3">
+              <form className="text-start mt-3" onSubmit={handleBuisnessSubmit}>
+                <div className="form-check mb-3">
                   <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Company Name"
+                    className="form-check-input"
+                    type="checkbox"
+                    id="showFieldsCheckbox"
+                    checked={showFields}
+                    onChange={handleCheckboxChange}
                   />
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="GST Number"
-                  />
+                  <label
+                    className="form-check-label text-danger mx-2 fw-bold"
+                    htmlFor="showFieldsCheckbox"
+                  >
+                    Buying for your Business?
+                  </label>
                 </div>
-                {/* <div className="mb-3">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Mobile"
-                  />
-                </div> */}
-                <button
-                  type="submit"
-                  className="btn btn-danger px-md-5 SaveBtnResp"
-                >
-                  Save
-                </button>
-                <p className="small fw-semibold py-2">
-                  Note : After placing an order, GSTIN cannot be changed.
-                  Registration state must match either with the billing or the
-                  shipping state.
-                </p>
+                {showFields && (
+                  <>
+                    <div className="mb-3 d-flex flex-wrap gap-3">
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Company Name"
+                        value={companyName}
+                        onChange={(e) => setCompanyName(e.target.value)}
+                      />
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="GST Number"
+                        value={gstNumber}
+                        onChange={(e) => setGstNumber(e.target.value)}
+                      />
+                    </div>
+                    <p className="small fw-semibold py-2">
+                      Note: After placing an order, GSTIN cannot be changed. Registration
+                      state must match either with the billing or the shipping state.
+                    </p>
+                    <button
+                      type="submit"
+                      className="btn btn-danger px-md-5 SaveBtnResp"
+                    >
+                      Save
+                    </button>
+                  </>
+                )}
               </form>
             </div>
 
@@ -337,8 +389,8 @@ const AddBody = () => {
                         {productDetailArr.map((val) => {
                           const images = val.image_name
                             ? val.image_name
-                                .split(", ")
-                                .map((image) => image.trim())
+                              .split(", ")
+                              .map((image) => image.trim())
                             : [];
                           return (
                             <div className="row" key={val.product_id}>

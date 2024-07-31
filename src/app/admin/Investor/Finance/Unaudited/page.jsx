@@ -1,229 +1,202 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Table, Button, Modal, Form, Input, Select, Upload, message, Spin, Popconfirm } from 'antd';
-import { UploadOutlined, LoadingOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Table, Button, Modal, Form, Input, Select, message, Upload } from 'antd';
+import { EditOutlined, DeleteOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
 
-export default function FinancialResults() {
-  const [selectedReportType, setSelectedReportType] = useState("unaudited");
-  const [financialData, setFinancialData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [editingRecord, setEditingRecord] = useState(null);
+const Unaudited = () => {
+  const [Unaudited, setUnaudited] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
+  const [editingId, setEditingId] = useState(null);
+  const [fileList, setFileList] = useState([]);
 
   useEffect(() => {
-    fetchFinancialData(selectedReportType);
-  }, [selectedReportType]);
+    fetchUnaudited();
+  }, []);
 
-  const fetchFinancialData = async (reportType) => {
-    setLoading(true);
+  const fetchUnaudited = async () => {
     try {
-      // Simulating API call with dummy data
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/Finance/Unaudited`);
-    //   const filteredData = dummyData.filter(item => item.reportType === reportType);
-    const OrderCount = response.data.UnauditedData;
-      setFinancialData(OrderCount);
+      const response = await axios.get('/api/admin/Investors/Finance/Unaudited');
+  
+      if (response.data && response.data.UnauditedData) {
+        
+        const formattedData = formatDataForTable(response.data.UnauditedData);
+        setUnaudited(formattedData);
+      } else {
+        console.error('Unexpected response structure:', response.data);
+        message.error('Unexpected data structure received from server');
+      }
     } catch (error) {
-      console.error("Error fetching financial data:", error);
-      message.error("Failed to fetch financial data");
-    } finally {
-      setLoading(false);
+      console.error('Error fetching Unaudited data:', error);
+      message.error('Failed to fetch Unaudited data: ' + (error.response?.data?.message || error.message));
     }
   };
 
-  const handleReportTypeChange = (value) => {
-    setSelectedReportType(value);
-  };
-
-  const handleDelete = (id) => {
-    const updatedData = financialData.filter(item => item.id !== id);
-    setFinancialData(updatedData);
-    message.success("Record deleted successfully");
+  const formatDataForTable = (data) => {
+    return data.map(item => ({
+      key: item.una_id,
+      years: item.years,
+      quarter: item.quarter,
+      title: item.title,
+      file_name: item.file_name
+    }));
   };
 
   const showModal = (record = null) => {
-    setEditingRecord(record);
-    if (record) {
-        console.log('record', record);
+      // console.log('record', record);
+      if (record) {
+      console.log('record1', record.key);
 
       form.setFieldsValue(record);
+      setEditingId(record.key);
+      console.log('key', record.key);
+      setFileList([]);
     } else {
       form.resetFields();
+      setEditingId(null);
+      setFileList([]);
     }
-    setModalVisible(true);
+    setIsModalVisible(true);
   };
 
-  const handleOk = async () => {
-    try {
-      const values = await form.validateFields();
-      if (editingRecord) {
-
-        console.log('editingRecord', editingRecord);
-        const updatedData = financialData.map(item => 
-            item.id === editingRecord.id ? { ...item, ...values } : item
-          );
-          setFinancialData(updatedData);
-        message.success("Record updated successfully");
-      } else {
-        // Add new record
-        const newRecord = {
-          ...values,
-          reportType: selectedReportType,
-          fileName: values.file_name ? values.file_name[0].name : ''
-        };
-        
-        const response = await fetch('/api/Finance/Unaudited', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(newRecord),
-        });
-  
-        if (!response.ok) {
-          throw new Error('Failed to save record');
+  const handleOk = () => {
+    form.validateFields().then(async (values) => {
+      try {
+        const formData = new FormData();
+        formData.append('years', values.years);
+        formData.append('title', values.title);
+        formData.append('quarter', values.quarter);
+        if (fileList[0]) {
+          formData.append('file_name', fileList[0].originFileObj);
         }
-  
-        // const result = await response.json();
-        // newRecord.id = result.id;
-        // setFinancialData([...financialData, newRecord]);
-        message.success("Record added successfully");
+        
+        console.log('editingId', editingId);
+        if (editingId) {
+
+          formData.append('editingId', editingId);
+          await axios.put(`/api/admin/Investors/Finance/Unaudited`, formData, {
+            headers: { 'Content-Type': 'multipart/form-data' }
+          });
+          message.success('Unaudited updated successfully');
+        } else {
+          await axios.post('/api/admin/Investors/Finance/Unaudited', formData, {
+            headers: { 'Content-Type': 'multipart/form-data' }
+          });
+          message.success('Unaudited added successfully');
+        }
+        setIsModalVisible(false);
+        fetchUnaudited();
+      } catch (error) {
+        message.error('Failed to save Unaudited');
       }
-      setModalVisible(false);
-    } catch (error) {
-      console.error("Error saving record:", error);
-      message.error("Failed to save record");
-    }
+    });
   };
 
-  const handleCancel = () => {
-    setModalVisible(false);
+  const handleDelete = async (record) => {
+    try {
+      const id = record.key;
+
+      await axios.delete('/api/admin/Investors/Finance/Unaudited',{ 
+        data: { id: id } 
+      });
+      message.success('Unaudited deleted successfully');
+      fetchUnaudited();
+    } catch (error) {
+      message.error('Failed to delete Unaudited');
+    }
   };
 
   const columns = [
     {
-      title: 'Index',
-      key: 'index',
-      render: (_, __, index) => index + 1,
+      title: "Sr No",
+      dataIndex: "srNo",
+      key: "srNo",
+      render: (text, record, index) => index + 1,
     },
-    { title: 'Year', dataIndex: 'years', key: 'years' },
-    { title: 'Quarter', dataIndex: 'quarter', key: 'quarter' },
-    { title: 'Title', dataIndex: 'title', key: 'title' },
-    { title: 'File Name', dataIndex: 'file_name', key: 'file_name' },
+    {
+      title: 'Years',
+      dataIndex: 'years',
+      key: 'years',
+    },
+    {
+      title: 'title',
+      dataIndex: 'title',
+      key: 'title',
+    },
+    {
+      title: 'quarter',
+      dataIndex: 'quarter',
+      key: 'quarter',
+    },
+    {
+      title: 'id',
+      dataIndex: 'una_id',
+      key: 'una_id',
+      hidden: true
+    },
+    {
+      title: 'file_name',
+      dataIndex: 'file_name',
+      key: 'file_name',
+      render: (text) => <a href={text} target="_blank" rel="noopener noreferrer">View File</a>,
+    },
     {
       title: 'Actions',
       key: 'actions',
       render: (_, record) => (
         <>
-          <Button 
-            onClick={() => showModal(record)} 
-            type="link"
-            icon={<EditOutlined />}
-          >
-            Edit
-          </Button>
-          <Popconfirm
-            title="Are you sure you want to delete this record?"
-            onConfirm={() => handleDelete(record.id)}
-            okText="Yes"
-            cancelText="No"
-          >
-            <Button 
-              type="link" 
-              danger 
-              icon={<DeleteOutlined />}
-            >
-              Delete
-            </Button>
-          </Popconfirm>
+          <Button icon={<EditOutlined />} onClick={() => showModal(record)} />
+          <Button icon={<DeleteOutlined />} onClick={() => handleDelete(record)} danger />
         </>
       ),
     },
   ];
 
-  if (loading) {
-    return <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />;
-  }
+  const handleFileChange = ({ fileList }) => setFileList(fileList);
 
   return (
-    <div className="container">
-      <h1>Financial Results</h1>
-
-      <div style={{ marginBottom: 16 }}>
-        {/* <Select
-          style={{ width: 200, marginRight: 16 }}
-          value={selectedReportType}
-          onChange={handleReportTypeChange}
-        >
-          <Option value="unaudited">Unaudited</Option>
-          <Option value="Annual Report">Annual</Option>
-          <Option value="Audited">Audited</Option>
-          <Option value="Annual Returns">Annual Return</Option>
-        </Select> */}
-        <Button onClick={() => showModal()} type="primary">Add New Record</Button>
-      </div>
-
-      <Table
-        dataSource={financialData}
-        columns={columns}
-        rowKey="id"
-      />
-
+    <div style={{ padding: '20px' }}>
+      <Button icon={<PlusOutlined />} onClick={() => showModal()} style={{ marginBottom: '20px' }}>
+        Add Unaudited
+      </Button>
+      <Table columns={columns} dataSource={Unaudited} />
       <Modal
-        title={editingRecord ? "Edit Record" : "Add New Record"}
-        visible={modalVisible}
+        title={editingId ? 'Edit Unaudited' : 'Add Unaudited'}
+        open={isModalVisible}
         onOk={handleOk}
-        onCancel={handleCancel}
+        onCancel={() => setIsModalVisible(false)}
       >
         <Form form={form} layout="vertical">
-          <Form.Item
-            name="years"
-            label="Year"
-            rules={[{ required: true, message: 'Please input the year!' }]}
-          >
+          <Form.Item name="years" label="Years" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item
-            name="title"
-            label="Title"
-            rules={[{ required: true, message: 'Please input the title!' }]}
-          >
+          <Form.Item name="title" label="Title" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item
-            name="quarter"
-            label="Quarter"
-            rules={[{ required: true, message: 'Please select the quarter!' }]}
-          >
+          <Form.Item name="quarter" label="Quarter" rules={[{ required: true }]}>
             <Select>
               <Option value="Q1">Q1</Option>
               <Option value="Q2">Q2</Option>
               <Option value="Q3">Q3</Option>
-              <Option value="Q4">Q4</Option>
+              {/* <Option value="Q4">Q4</Option> */}
             </Select>
           </Form.Item>
-          <Form.Item
-            name="file_name"
-            label="File"
-            rules={[{ required: true, message: 'Please upload a file!' }]}
-            valuePropName="fileList"
-            getValueFromEvent={(e) => {
-                
-              if (Array.isArray(e)) {
-                return e;
-              }
-              return e && e.fileList;
-            }}
-          >
-            <Upload beforeUpload={() => false} accept=".pdf,.doc,.docx,.xls,.xlsx">
-              <Button icon={<UploadOutlined />}>Click to Upload</Button>
+          <Form.Item name="file_name" label="Pdf File" rules={[{ required: !editingId }]}>
+            <Upload 
+              beforeUpload={() => false}
+              onChange={handleFileChange}
+              fileList={fileList}
+            >
+              <Button icon={<UploadOutlined />}>Select File</Button>
             </Upload>
           </Form.Item>
         </Form>
       </Modal>
     </div>
   );
-}
+};
+
+export default Unaudited;
