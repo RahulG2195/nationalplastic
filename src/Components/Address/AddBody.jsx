@@ -27,6 +27,13 @@ const AddBody = () => {
   const [editable, setEditable] = useState(false);
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
+  const [showFields, setShowFields] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setShowFields(!showFields);
+  };
+
+
 
   const handleEdit = () => {
     setEditable(!editable);
@@ -261,7 +268,9 @@ const AddBody = () => {
                   </label>
                 </div>
               </div> */}
-              <div className="buying text-start mt-4 p-3 bg-white">
+
+              
+              {/* <div className="buying text-start mt-4 p-3 bg-white d-flex">
                 <input
                   className="form-check-input border-black"
                   type="checkbox"
@@ -274,39 +283,52 @@ const AddBody = () => {
                 >
                   Buying for your Business?
                 </label>
-              </div>
+              </div> */}
 
               <form className="text-start mt-3">
-                <div className="mb-3 d-flex flex-wrap gap-3">
+                <div className="form-check mb-3">
                   <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Company Name"
+                    className="form-check-input"
+                    type="checkbox"
+                    id="showFieldsCheckbox"
+                    checked={showFields}
+                    onChange={handleCheckboxChange}
                   />
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="GST Number"
-                  />
-                </div>
-                {/* <div className="mb-3">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Mobile"
-                  />
-                </div> */}
-                <button
-                  type="submit"
-                  className="btn btn-danger px-md-5 SaveBtnResp"
+                 <label
+                  className="form-check-label text-danger mx-2 fw-bold "
+                  htmlFor="flexCheckDefault"
                 >
-                  Save
-                </button>
-                <p className="small fw-semibold py-2">
-                  Note : After placing an order, GSTIN cannot be changed.
-                  Registration state must match either with the billing or the
-                  shipping state.
-                </p>
+                  Buying for your Business?
+                </label>
+                </div>
+                {showFields && (
+                  <>
+                    <div className="mb-3 d-flex flex-wrap gap-3">
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Company Name"
+                      />
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="GST Number"
+                      />
+                    </div>
+                    <p className="small fw-semibold py-2">
+                      Note: After placing an order, GSTIN cannot be changed. Registration
+                      state must match either with the billing or the shipping state.
+                    </p>
+                    <button
+                      type="submit"
+                      className="btn btn-danger px-md-5 SaveBtnResp"
+                    >
+                      Save
+                    </button>
+                  </>
+
+                )}
+
               </form>
             </div>
 
@@ -337,8 +359,8 @@ const AddBody = () => {
                         {productDetailArr.map((val) => {
                           const images = val.image_name
                             ? val.image_name
-                                .split(", ")
-                                .map((image) => image.trim())
+                              .split(", ")
+                              .map((image) => image.trim())
                             : [];
                           return (
                             <div className="row" key={val.product_id}>
