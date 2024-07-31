@@ -74,6 +74,10 @@ const navigation = [
         title: "Advertisements",
         href: "/admin/Investor/Advertisements",
       },
+      {
+        title: "IEPF",
+        href: "/admin/Investor/IEPF",
+      },
      
     ],
     icon: "bi bi-hdd-stack",
