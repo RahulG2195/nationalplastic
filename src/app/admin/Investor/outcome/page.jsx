@@ -1,304 +1,187 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {
-  Container,
-  Table,
-  Button,
-  FormGroup,
-  Label,
-  Input,
-  Card,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  ListGroup,
-  ListGroupItem,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Form
-} from 'reactstrap';
+import { Table, Button, Modal, Form, Input, Select, message, Upload } from 'antd';
+import { EditOutlined, DeleteOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
 
-const BoardOutcome = () => {
-  const [boardOutcomes, setBoardOutcomes] = useState([]);
+const { Option } = Select;
+
+const Outcome = () => {
+  const [outcome, setout] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [form] = Form.useForm();
   const [editingId, setEditingId] = useState(null);
-  const [currentYearHeading, setCurrentYearHeading] = useState('');
-  const [pdfFiles, setPdfFiles] = useState([]);
-  const [newPdfFiles, setNewPdfFiles] = useState([]);
-  const [status, setStatus] = useState(1);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalYearHeading, setModalYearHeading] = useState('');
-  const [modalPdfFiles, setModalPdfFiles] = useState([]);
-  const [modalStatus, setModalStatus] = useState(1);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('/api/boardOutcome');
-      setBoardOutcomes(response.data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
+  const [fileList, setFileList] = useState([]);
 
   useEffect(() => {
-    fetchData();
+    fetchOutcome();
   }, []);
 
-  const handleEdit = (data) => {
-    setEditingId(data.id);
-    setCurrentYearHeading(data.year_heading || '');
-    setPdfFiles((data.pdf || '').split(','));
-    setStatus(data.status || 1);
-    setNewPdfFiles([]);
-  };
-
-  const handleCancelEdit = () => {
-    setEditingId(null);
-    setCurrentYearHeading('');
-    setPdfFiles([]);
-    setNewPdfFiles([]);
-    setStatus(1);
-  };
-
-  const handleFileChange = (e) => {
-    setNewPdfFiles(Array.from(e.target.files));
-  };
-
-  const handleModalFileChange = (e) => {
-    setModalPdfFiles(Array.from(e.target.files));
-  };
-
-  const handleSave = async (id) => {
-    const formData = new FormData();
-    formData.append('id', id);
-    formData.append('yearHeading', currentYearHeading);
-    formData.append('status', status);
+  const fetchOutcome = async () => {
+    try {
+      const response = await axios.get('/api/admin/Investors/Outcome');
   
-    pdfFiles.forEach((file, index) => {
-      if (typeof file === 'string') {
-        formData.append('existingPdfFiles[]', file); // Send existing files that remain
+      if (response.data && response.data.outcomeData) {
+        
+        const formattedData = formatDataForTable(response.data.outcomeData);
+        setout(formattedData);
       } else {
-        formData.append('pdfFiles', file);
+        console.error('Unexpected response structure:', response.data);
+        message.error('Unexpected data structure received from server');
+      }
+    } catch (error) {
+      console.error('Error fetching outcome data:', error);
+      message.error('Failed to fetch outcome data: ' + (error.response?.data?.message || error.message));
+    }
+  };
+
+  const formatDataForTable = (data) => {
+    return data.map(item => ({
+      key: item.ad_id,
+      years: item.years,
+      title: item.title,
+      file_name: item.file_name
+    }));
+  };
+
+  const showModal = (record = null) => {
+      console.log('record', record);
+      if (record) {
+      console.log('record1', record.key);
+
+      form.setFieldsValue(record);
+      setEditingId(record.key);
+      console.log('key', record.key);
+      setFileList([]);
+    } else {
+      form.resetFields();
+      setEditingId(null);
+      setFileList([]);
+    }
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    form.validateFields().then(async (values) => {
+      try {
+        const formData = new FormData();
+        formData.append('years', values.years);
+        formData.append('title', values.title);
+        if (fileList[0]) {
+          formData.append('file_name', fileList[0].originFileObj);
+        }
+        
+        console.log('formData', formData);
+        if (editingId) {
+
+          formData.append('editingId', editingId);
+          await axios.put(`/api/admin/Investors/Outcome`, formData, {
+            headers: { 'Content-Type': 'multipart/form-data' }
+          });
+          message.success('outcome updated successfully');
+        } else {
+          await axios.post('/api/admin/Investors/Outcome', formData, {
+            headers: { 'Content-Type': 'multipart/form-data' }
+          });
+          message.success('outcome added successfully');
+        }
+        setIsModalVisible(false);
+        fetchOutcome();
+      } catch (error) {
+        message.error('Failed to save outcome');
       }
     });
-  
-    newPdfFiles.forEach(file => {
-      formData.append('newPdfFiles', file);
-    });
-  
+  };
+
+  const handleDelete = async (record) => {
     try {
-      await axios.put('/api/boardOutcome', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
+      const id = record.key;
+
+      await axios.delete('/api/admin/Investors/Outcome',{ 
+        data: { id: id } 
       });
-      fetchData();
-      handleCancelEdit();
+      message.success('outcome deleted successfully');
+      fetchOutcome();
     } catch (error) {
-      console.error('Error saving data:', error);
-    }
-  };
-  
-
-  const handleAddNew = async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData();
-    formData.append('yearHeading', modalYearHeading);
-    formData.append('status', modalStatus);
-
-    modalPdfFiles.forEach(file => {
-      formData.append('pdfFiles', file);
-    });
-
-    try {
-      await axios.post('/api/boardOutcome', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      });
-      fetchData();
-      toggleModal();
-    } catch (error) {
-      console.error('Error adding new data:', error);
+      message.error('Failed to delete outcome');
     }
   };
 
-  const toggleModal = () => {
-    setModalOpen(!modalOpen);
-    if (modalOpen) {
-      setModalYearHeading('');
-      setModalPdfFiles([]);
-      setModalStatus(1);
-    }
-  };
+  const columns = [
+    {
+      title: "Sr No",
+      dataIndex: "srNo",
+      key: "srNo",
+      render: (text, record, index) => index + 1,
+    },
+    {
+      title: 'Years',
+      dataIndex: 'years',
+      key: 'years',
+    },
+    {
+      title: 'title',
+      dataIndex: 'title',
+      key: 'title',
+    },
+    {
+      title: 'id',
+      dataIndex: 'ad_id',
+      key: 'ad_id',
+      hidden: true
+    },
+    {
+      title: 'file_name',
+      dataIndex: 'file_name',
+      key: 'file_name',
+      render: (text) => <a href={text} target="_blank" rel="noopener noreferrer">View File</a>,
+    },
+    {
+      title: 'Actions',
+      key: 'actions',
+      render: (_, record) => (
+        <>
+          <Button icon={<EditOutlined />} onClick={() => showModal(record)} />
+          <Button icon={<DeleteOutlined />} onClick={() => handleDelete(record)} danger />
+        </>
+      ),
+    },
+  ];
 
-  // Group board outcomes by year heading
-  const groupedData = boardOutcomes.reduce((acc, item) => {
-    if (!acc[item.year_heading]) {
-      acc[item.year_heading] = [];
-    }
-    acc[item.year_heading].push(item);
-    return acc;
-  }, {});
+  const handleFileChange = ({ fileList }) => setFileList(fileList);
 
   return (
-    <Container className="my-4">
-      <h1 className="text-center mb-4">Board Outcomes</h1>
-      <Card className='p-5'>
-        <div>
-          <Button color="primary" onClick={toggleModal} className="mb-4">Add New</Button>
-        </div>
-        <Table striped responsive className="mt-4">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Year Heading</th>
-              <th>PDF Files</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Object.keys(groupedData).map((yearHeading) => (
-              groupedData[yearHeading].map((item) => (
-                <tr key={item.id}>
-                  <td>{item.id}</td>
-                  <td>
-                    {editingId === item.id ? (
-                      <Input
-                        type="text"
-                        value={currentYearHeading}
-                        onChange={(e) => setCurrentYearHeading(e.target.value)}
-                      />
-                    ) : (
-                      yearHeading
-                    )}
-                  </td>
-                  <td>
-                    {editingId === item.id ? (
-                      <div>
-                        <ListGroup>
-                          {pdfFiles.map((pdf, index) => (
-                            <ListGroupItem key={index}>
-                              {index + 1}. {pdf}
-                              <Button
-                                color="danger"
-                                size="sm"
-                                onClick={() => setPdfFiles(pdfFiles.filter((_, i) => i !== index))}
-                                className="mx-2"
-                              >
-                                Remove
-                              </Button>
-                            </ListGroupItem>
-                          ))}
-                        </ListGroup>
-                        <FormGroup className="mt-2">
-                          <Label for="newPdfFiles">Add More PDF Files</Label>
-                          <Input
-                            type="file"
-                            id="newPdfFiles"
-                            multiple
-                            onChange={handleFileChange}
-                          />
-                        </FormGroup>
-                      </div>
-                    ) : (
-                      <ListGroup>
-                        {item.pdf.split(',').map((pdf, index) => (
-                          <ListGroupItem key={index}>
-                            {index + 1}. {pdf}
-                          </ListGroupItem>
-                        ))}
-                      </ListGroup>
-                    )}
-                  </td>
-                  <td>
-                    {editingId === item.id ? (
-                      <Input
-                        type="number"
-                        value={status}
-                        onChange={(e) => setStatus(Number(e.target.value))}
-                        style={{ width: '80px' }}
-                      />
-                    ) : (
-                      item.status
-                    )}
-                  </td>
-                  <td>
-                    {editingId === item.id ? (
-                      <div className="d-flex align-items-center">
-                        <Button color="success" onClick={() => handleSave(item.id)} className="me-2">
-                          Save
-                        </Button>
-                        <Button color="secondary" onClick={handleCancelEdit}>
-                          Cancel
-                        </Button>
-                      </div>
-                    ) : (
-                      <Button color="warning" onClick={() => handleEdit(item)}>
-                        Edit
-                      </Button>
-                    )}
-                  </td>
-                </tr>
-              ))
-            ))}
-          </tbody>
-        </Table>
-      </Card>
-
-      {/* Add New Modal */}
-      <Modal isOpen={modalOpen} toggle={toggleModal}>
-        <ModalHeader toggle={toggleModal}>Add New Data</ModalHeader>
-        <ModalBody>
-          <Form onSubmit={handleAddNew}>
-            <FormGroup>
-              <Label for="modalYearHeading">Year Heading</Label>
-              <Input
-                type="text"
-                id="modalYearHeading"
-                value={modalYearHeading}
-                onChange={(e) => setModalYearHeading(e.target.value)}
-                required
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="modalPdfFiles">Upload PDF Files</Label>
-              <Input
-                type="file"
-                id="modalPdfFiles"
-                multiple
-                onChange={handleModalFileChange}
-                required
-              />
-              {modalPdfFiles.length > 0 && (
-                <ListGroup className="mt-2">
-                  {Array.from(modalPdfFiles).map((file, index) => (
-                    <ListGroupItem key={index}>
-                      {index + 1}. {file.name}
-                    </ListGroupItem>
-                  ))}
-                </ListGroup>
-              )}
-            </FormGroup>
-            <FormGroup>
-              <Label for="modalStatus">Status</Label>
-              <Input
-                type="number"
-                id="modalStatus"
-                value={modalStatus}
-                onChange={(e) => setModalStatus(Number(e.target.value))}
-                required
-              />
-            </FormGroup>
-            <ModalFooter>
-              <Button color="secondary" onClick={toggleModal}>Cancel</Button>
-              <Button color="primary" type="submit">Add</Button>
-            </ModalFooter>
-          </Form>
-        </ModalBody>
+    <div style={{ padding: '20px' }}>
+      <Button icon={<PlusOutlined />} onClick={() => showModal()} style={{ marginBottom: '20px' }}>
+        Add Outcome
+      </Button>
+      <Table columns={columns} dataSource={outcome} />
+      <Modal
+        title={editingId ? 'Edit outcome' : 'Add outcome'}
+        open={isModalVisible}
+        onOk={handleOk}
+        onCancel={() => setIsModalVisible(false)}
+      >
+        <Form form={form} layout="vertical">
+          <Form.Item name="years" label="Years" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="title" label="Title" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="file_name" label="Pdf File" rules={[{ required: !editingId }]}>
+            <Upload 
+              beforeUpload={() => false}
+              onChange={handleFileChange}
+              fileList={fileList}
+            >
+              <Button icon={<UploadOutlined />}>Select File</Button>
+            </Upload>
+          </Form.Item>
+        </Form>
       </Modal>
-    </Container>
+    </div>
   );
 };
 
-export default BoardOutcome;
+export default Outcome;
