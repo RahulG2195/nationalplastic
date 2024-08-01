@@ -72,7 +72,7 @@ const navigation = [
       },
       {
         title: "Outcome of board meet",
-        href: "/admin/Investor/outcome",
+        href: "/admin/Investor/outcomes",
       },
       {
         title: "Related Party Transactions",
