@@ -1,9 +1,10 @@
 "use client";
-import { useState, useEffect } from "react";
-import BulkOrderBannar from "@/Components/BulkOrder/BulkOrderBannar";
-import GetQuote from "@/Components/BulkOrder/GetQuote";
-import BulkPremiumCards from "@/Components/BulkOrder/BulkPremiumCards";
-import BulkOrders from "@/Components/BulkOrder/BulkOrders";
+import dynamic from 'next/dynamic'
+
+const BulkOrderBannar = dynamic(() => import('@/Components/BulkOrder/BulkOrderBannar'), { ssr: false })
+const GetQuote = dynamic(() => import('@/Components/BulkOrder/GetQuote'), { ssr: false })
+const BulkPremiumCards = dynamic(() => import('@/Components/BulkOrder/BulkPremiumCards'), { ssr: false })
+const BulkOrders = dynamic(() => import('@/Components/BulkOrder/BulkOrders'), { ssr: false })
 import axios from "axios";
 import { notifyError } from "@/utils/notify";
 
@@ -28,8 +29,8 @@ const BulkOrder = () => {
     <>
       <BulkOrderBannar />
       <GetQuote proddata={ProdData} />
-      {/* <BulkPremiumCards proddata={ProdData} /> */}
-      {/* <BulkOrders /> */}
+      <BulkPremiumCards proddata={ProdData} />
+      <BulkOrders />
     </>
   );
 };
