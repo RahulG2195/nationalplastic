@@ -12,8 +12,12 @@ const couponSlice = createSlice({
       state.discountPercentage = discountPercentage;
       state.couponCode = couponCode;
     },
+    removeCoupon: (state) => {
+      state.discountPercentage = null;
+      state.couponCode = null;
+    },
   },
 });
 
-export const { applyDiscount } = couponSlice.actions;
+export const { applyDiscount, removeCoupon } = couponSlice.actions;
 export default couponSlice.reducer;

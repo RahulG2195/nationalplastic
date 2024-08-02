@@ -18,7 +18,6 @@ function BottomBar() {
         axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/Products`),
         axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/NavCategory`)
       ]);
-      
       setAllProducts(productsRes.data.products);
       setNavbar(navRes.data.navshow);
     } catch (error) {
@@ -49,6 +48,8 @@ function BottomBar() {
       ? item?.image_name
       : item?.image_name?.split(", ")[0].trim();
     
+
+    // console.log('imageName', imageName);
     setCurrentImage(imageName || "");
   }, [navbar, allProducts]);
 
@@ -89,7 +90,7 @@ function BottomBar() {
         >
           <Link
             onClick={() => sendCategory(val.category_name)}
-            href={`/ProductCatlogue/${val.category_id}`}
+            href={`/ProductCatlogue/${val.seo_url}`}
           >
             <p className="m-0" onMouseOver={() => changeImage(val.category_id, true)}>
               {val.category_name}

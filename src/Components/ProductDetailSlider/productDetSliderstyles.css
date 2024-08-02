@@ -46,7 +46,7 @@
 }
 
 .mySwiper {
-    height: 10%;
+    height: 15%;
     box-sizing: border-box;
     padding: 10px 25px;
     width: 60%;
@@ -90,7 +90,7 @@
         object-fit: contain;
         border-radius: 0;
     }
-    .product-ccount .input-group {
+    /* .product-ccount .input-group {
         width: 32%;
-    }
+    } */
 }

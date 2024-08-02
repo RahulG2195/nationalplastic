@@ -39,6 +39,123 @@ const navigation = [
     icon: "bi bi-hdd-stack",
   },
   {
+    type: "accordion",
+    title: "Investors Pages",
+    items: [
+      {
+        title: "Shareholdings",
+        href: "/admin/Investor/Shareholding",
+      },
+      {
+        title: "Corporate Governance",
+        href: "/admin/Investor/CorporateGov",
+      },
+      {
+        title: "Corporate Reports",
+        href: "/admin/Investor/CorporateReport",
+      },
+      {
+        title: "General Disclosure",
+        href: "/admin/Investor/General",
+      },
+      {
+        title: "Transfer Of Shares",
+        href: "/admin/Investor/Transfer",
+      },
+      {
+        title: "Investor contact",
+        href: "/admin/Investor/investorContact",
+      },
+      {
+        title: "Investors KYC",
+        href: "/admin/Investor/investorKYC",
+      },
+      {
+        title: "Outcome of board meet",
+        href: "/admin/Investor/outcomes",
+      },
+      {
+        title: "Related Party Transactions",
+        href: "/admin/Investor/Transaction",
+      },
+      {
+        title: "Listing Disclousures",
+        href: "/admin/Investor/Disclousures",
+      },
+      {
+        title: "Advertisements",
+        href: "/admin/Investor/Advertisements",
+      },
+      {
+        title: "IEPF",
+        href: "/admin/Investor/IEPF",
+      },
+     
+    ],
+    icon: "bi bi-hdd-stack",
+  },
+  {
+    type: "accordion",
+    title: "Financial",
+    items:[
+      {
+        title: "Unaudited",
+        href: "/admin/Investor/Finance/Unaudited",
+      },
+      {
+        title: "Audited",
+        href: "/admin/Investor/Finance/Audited",
+      },
+      {
+        title: "Annual Report & Returns",
+        href: "/admin/Investor/Finance/AnnualReport",
+      },
+    ],
+    icon: "bi bi-hdd-stack",
+  },
+  {
+    type: "accordion",
+    title: "AGM Compilance",
+    items:[
+      {
+        title: "Outcome Of Agm",
+        href: "/admin/Investor/Outcome",
+      },
+      {
+        title: "Notice",
+        href: "/admin/Investor/Notice",
+      },
+    ],
+    icon: "bi bi-hdd-stack",
+  },
+  {
+    type: "accordion",
+    title: "About us",
+    items: [
+      {
+        title: "CompanyProfile Section",
+        href: "/admin/aboutus/company",
+      },
+      {
+        title: "Commite and Management Section",
+        href: "/admin/aboutus/committee",
+      },
+      {
+        title: "Infrastructure",
+        href: "/admin/aboutus/infrastructure",
+      },
+      {
+        title: "Awards",
+        href: "/admin/aboutus/awards",
+      },
+      {
+        title: "Promotors",
+        href: "/admin/aboutus/promotors",
+      },
+    ],
+    icon: "bi bi-hdd-stack",
+  },
+  {
     title: "Products",
     href: "/admin/product",
     icon: "bi bi-p-square",
@@ -59,49 +176,60 @@ const navigation = [
     icon: "bi bi-card-text",
   },
   {
+    title: "News and Media ", //news and media page of NP
+    href: "/admin/newsMedia",
+    icon: "bi bi-layout-split",
+  },
+  {
     type: "accordion",
-    title: "Investors Pages",
+    title: "News and Media",
     items: [
       {
-        title: "General Disclosure",
-        href: "/admin/InvestorsList",
+        title: "edit Hero banner",
+        href: "/admin/newsMedia/heroBanner",
       },
       {
-        title: "Cards Section",
-        href: "/admin/homepage/cards",
+        title: "edit content",
+        href: "/admin/newsMedia",
       },
-      {
-        title: "Offer Banner",
-        href: "/admin/homepage/offersection",
-      },
-      {
-        title: "house section",
-        href: "/admin/homepage/house section",
-      },
+    
     ],
     icon: "bi bi-hdd-stack",
   },
+  {
+    type: "accordion",
+    title: "CSR",
+    items: [
+      {
+        title: "edit Hero banner",
+        href: "/admin/csr/heroBanner",
+      },
+      {
+        title: "edit content",
+        href: "/admin/csr",
+      },
+    
+    ],
+    icon: "bi bi-hdd-stack",
+  },
+  {
+    type: "accordion",
+    title: "Bulk Order",
+    items: [
+      {
+        title: "edit Hero banner",
+        href: "/admin/bulkOrder/heroBanner",
+      }
+    
+    ],
+    icon: "bi bi-hdd-stack",
+  },
+
   {
     title: "Table",
     href: "/ui/tables",
     icon: "bi bi-layout-split",
   },
-  {
-    title: "Forms",
-    href: "/ui/forms",
-    icon: "bi bi-textarea-resize",
-  },
-  {
-    title: "Breadcrumbs",
-    href: "/ui/breadcrumbs",
-    icon: "bi bi-link",
-  },
-  {
-    title: "About",
-    href: "/about",
-    icon: "bi bi-people",
-  },
-
 ];
 
 const Sidebar = ({ showMobilemenu }) => {
@@ -110,9 +238,9 @@ const Sidebar = ({ showMobilemenu }) => {
 
   return (
     <div className="p-3">
-      <div className="d-flex align-items-center justify-content-between">
-        <img src="/assets/images/logo/logo_alt.png" alt="" className="w-25" />
-        <div className="ms-auto d-lg-none">
+      <div className="d-flex align-items-center" style={{ justifyContent:"center"}}>
+        <img src="/Assets/images/nation_logo.png" alt="REMO" />
+        <div className="ms-auto d-lg-none"> 
           <Button
             close
             size="sm"

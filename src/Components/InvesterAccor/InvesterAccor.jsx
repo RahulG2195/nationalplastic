@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Accordion,
   AccordionSummary,
@@ -8,84 +8,82 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Link from "next/link";
-import axios from "axios"; // Don't forget to import axios
+import axios from "axios";
 
 const InvestorAccor = ({ handleShow }) => {
-  const [categories, setCategories] = useState([]);
+  const [expanded, setExpanded] = useState(false);
 
   const handleOnClick = (productName) => {
     localStorage.setItem("productName", productName);
   };
-
-  const [expanded, setExpanded] = React.useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
   return (
-    <div >
-      <Accordion className="prdctAccr" style={{ backgroundColor: "#FFE000" }}>
+    <div>
+      <Accordion className="prdctAccr" style={{ backgroundColor: "#FFFFFF" }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls={`panel0-content`}
           id={`panel0-header`}
           className="px-2"
         >
-          <Typography className="m-0 p-0">
+          <Typography className="m-0 p-0 darkBlue">
             <li className="">
-              <p className="mobHeader fw-bold ">Investors (Reg. 46)</p>
+              <p className="mobHeader fw-bold">Investors (Reg. 46)</p>
             </li>
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <div>
             <Accordion
-              expanded={expanded === `panel${1}`}
-              onChange={handleChange(`panel${1}`)}
-              style={{ backgroundColor: "#F1EF99" }}
+              expanded={expanded === `panel1`}
+              onChange={handleChange(`panel1`)}
+              style={{ backgroundColor: "#fff" }}
             >
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
-                aria-controls={`panel${1}bh-content`}
-                id={`panel${1}bh-header`}
+                aria-controls={`panel1bh-content`}
+                id={`panel1bh-header`}
               >
-                <Typography className="fw-semibold fs-6">
+                <Typography className="fw-semibold fs-6 darkBlue">
                   Financials
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <div>
-                  <p style={{borderBottom: "1px solid lightgrey"}}>
+                  <p style={{ borderBottom: "1px solid lightgrey" }}>
                     <Link
                       className="nav-link"
                       href={`/Unaudited`}
                       onClick={() => {
-                        handleOnClick(product);
+                        handleOnClick("Unaudited Financial Results");
                         handleShow();
                       }}
                     >
                       Unaudited Financial Results
                     </Link>
                   </p>
-                  <p style={{borderBottom: "1px solid lightgrey"}}>
+                  <p style={{ borderBottom: "1px solid lightgrey" }}>
                     <Link
-                      className="nav-link"
-                      href={`/Unaudited`}
+                      className="nav-link darkBlue"
+                      href={`/Audited`}
                       onClick={() => {
-                        handleOnClick(product);
+                        handleOnClick("Audited Financial Results");
                         handleShow();
                       }}
                     >
                       Audited Financial Results
                     </Link>
                   </p>
-                  <p style={{borderBottom: "1px solid lightgrey"}}>
+                  <p style={{ borderBottom: "1px solid lightgrey" }}>
                     <Link
-                      className="nav-link"
-                      href={`/Unaudited`}
+                      className="nav-link darkBlue"
+                      href={`/Annual`}
                       onClick={() => {
-                        handleOnClick(product);
+                        handleOnClick("Annual Report");
                         handleShow();
                       }}
                     >
@@ -94,10 +92,10 @@ const InvestorAccor = ({ handleShow }) => {
                   </p>
                   <p>
                     <Link
-                      className="nav-link"
-                      href={`/Unaudited`}
+                      className="nav-link darkBlue"
+                      href={`/AnnualReturn`}
                       onClick={() => {
-                        handleOnClick(product);
+                        handleOnClick("Annual Return");
                         handleShow();
                       }}
                     >
@@ -106,26 +104,28 @@ const InvestorAccor = ({ handleShow }) => {
                   </p>
                 </div>
               </AccordionDetails>
-
             </Accordion>
-            <div style={{ backgroundColor: "#F1EF99", borderBottom: "1px solid lightgrey" }}>
+            <div
+              style={{ backgroundColor: "#fff", borderBottom: "1px solid lightgrey" }}
+            >
               <p>
                 <Link
-                  className="nav-link"
+                  className="nav-link darkBlue"
                   href={`/ShareHolding`}
                   onClick={() => {
                     handleShow();
                   }}
                 >
-                   
                   Shareholding Pattern
                 </Link>
               </p>
             </div>
-            <div style={{ backgroundColor: "#F1EF99", borderBottom: "1px solid lightgrey" }}>
+            <div
+              style={{ backgroundColor: "#fff", borderBottom: "1px solid lightgrey" }}
+            >
               <p>
-                <Link
-                  className="nav-link"
+                <Link 
+                  className="nav-link darkBlue"
                   href={`/Corporate`}
                   onClick={() => {
                     handleShow();
@@ -135,10 +135,12 @@ const InvestorAccor = ({ handleShow }) => {
                 </Link>
               </p>
             </div>
-            <div style={{ backgroundColor: "#F1EF99", borderBottom: "1px solid lightgrey" }}>
+            <div
+              style={{ backgroundColor: "#fff", borderBottom: "1px solid lightgrey" }}
+            >
               <p>
                 <Link
-                  className="nav-link"
+                  className="nav-link darkBlue"
                   href={`/InvestorContact`}
                   onClick={() => {
                     handleShow();
@@ -149,27 +151,27 @@ const InvestorAccor = ({ handleShow }) => {
               </p>
             </div>
             <Accordion
-              expanded={expanded === `panel${2}`}
-              onChange={handleChange(`panel${2}`)}
-              style={{ backgroundColor: "#F1EF99" }}
+              expanded={expanded === `panel2`}
+              onChange={handleChange(`panel2`)}
+              style={{ backgroundColor: "#fff" }}
             >
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
-                aria-controls={`panel${2}bh-content`}
-                id={`panel${2}bh-header`}
+                aria-controls={`panel2bh-content`}
+                id={`panel2bh-header`}
               >
-                <Typography className="fw-semibold fs-6">
-                AGM Compliance
+                <Typography className="fw-semibold fs-6 darkBlue">
+                  AGM Compliance
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <div>
-                  <p  style={{borderBottom: "1px solid lightgrey" }}>
+                  <p style={{ borderBottom: "1px solid lightgrey" }}>
                     <Link
-                      className="nav-link"
+                      className="nav-link darkBlue"
                       href={`/OutcomeAGM`}
                       onClick={() => {
-                        handleOnClick(product);
+                        handleOnClick("Outcome of AGM");
                         handleShow();
                       }}
                     >
@@ -178,10 +180,10 @@ const InvestorAccor = ({ handleShow }) => {
                   </p>
                   <p>
                     <Link
-                      className="nav-link"
+                      className="nav-link darkBlue"
                       href={`/Notice`}
                       onClick={() => {
-                        handleOnClick(product);
+                        handleOnClick("Notices");
                         handleShow();
                       }}
                     >
@@ -190,12 +192,13 @@ const InvestorAccor = ({ handleShow }) => {
                   </p>
                 </div>
               </AccordionDetails>
-
             </Accordion>
-            <div style={{ backgroundColor: "#F1EF99", borderBottom: "1px solid lightgrey" }}>
+            <div
+              style={{ backgroundColor: "#fff", borderBottom: "1px solid lightgrey" }}
+            >
               <p>
                 <Link
-                  className="nav-link"
+                  className="nav-link darkBlue"
                   href={`/TransferShare`}
                   onClick={() => {
                     handleShow();
@@ -205,10 +208,12 @@ const InvestorAccor = ({ handleShow }) => {
                 </Link>
               </p>
             </div>
-            <div style={{ backgroundColor: "#F1EF99", borderBottom: "1px solid lightgrey" }}>
+            <div
+              style={{ backgroundColor: "#fff", borderBottom: "1px solid lightgrey" }}
+            >
               <p>
-                <Link
-                  className="nav-link"
+                <Link 
+                  className="nav-link darkBlue"
                   href={`/OutcomeMeet`}
                   onClick={() => {
                     handleShow();
@@ -218,10 +223,12 @@ const InvestorAccor = ({ handleShow }) => {
                 </Link>
               </p>
             </div>
-            <div style={{ backgroundColor: "#F1EF99", borderBottom: "1px solid lightgrey" }}>
+            <div
+              style={{ backgroundColor: "#fff", borderBottom: "1px solid lightgrey" }}
+            >
               <p>
                 <Link
-                  className="nav-link"
+                  className="nav-link darkBlue"
                   href={`/Disclosure`}
                   onClick={() => {
                     handleShow();
@@ -231,10 +238,12 @@ const InvestorAccor = ({ handleShow }) => {
                 </Link>
               </p>
             </div>
-            <div style={{ backgroundColor: "#F1EF99", borderBottom: "1px solid lightgrey" }}>
+            <div
+              style={{ backgroundColor: "#fff", borderBottom: "1px solid lightgrey" }}
+            >
               <p>
                 <Link
-                  className="nav-link"
+                  className="nav-link darkBlue"
                   href={`/Transaction`}
                   onClick={() => {
                     handleShow();
@@ -245,75 +254,75 @@ const InvestorAccor = ({ handleShow }) => {
               </p>
             </div>
             <Accordion
-              expanded={expanded === `panel${3}`}
-              onChange={handleChange(`panel${3}`)}
-              style={{ backgroundColor: "#F1EF99" }}
+              expanded={expanded === `panel3`}
+              onChange={handleChange(`panel3`)}
+              style={{ backgroundColor: "#fff" }}
             >
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
-                aria-controls={`panel${3}bh-content`}
-                id={`panel${3}bh-header`}
+                aria-controls={`panel3bh-content`}
+                id={`panel3bh-header`}
               >
-                <Typography className="fw-semibold fs-6">
-                General Disclosure
+                <Typography className="fw-semibold fs-6 darkBlue">
+                  General Disclosure
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <div>
-                  <p style={{borderBottom: "1px solid lightgrey" }}>
+                  <p style={{ borderBottom: "1px solid lightgrey" }}>
                     <Link
-                      className="nav-link"
+                      className="nav-link darkBlue"
                       href={`/Twenty`}
                       onClick={() => {
-                        handleOnClick(product);
+                        handleOnClick("2020");
                         handleShow();
                       }}
                     >
                       2020
                     </Link>
                   </p>
-                  <p style={{borderBottom: "1px solid lightgrey" }}>
+                  <p style={{ borderBottom: "1px solid lightgrey" }}>
                     <Link
-                      className="nav-link"
+                      className="nav-link darkBlue"
                       href={`/TwentyOne`}
                       onClick={() => {
-                        handleOnClick(product);
+                        handleOnClick("2021");
                         handleShow();
                       }}
                     >
                       2021
                     </Link>
                   </p>
-                  <p style={{borderBottom: "1px solid lightgrey" }}>
+                  <p style={{ borderBottom: "1px solid lightgrey" }}>
                     <Link
-                      className="nav-link"
+                      className="nav-link darkBlue"
                       href={`/TwentyTwo`}
                       onClick={() => {
-                        handleOnClick(product);
+                        handleOnClick("2022");
                         handleShow();
                       }}
                     >
                       2022
                     </Link>
                   </p>
-                  <p style={{borderBottom: "1px solid lightgrey" }}>
+                  <p style={{ borderBottom: "1px solid lightgrey" }}>
                     <Link
-                      className="nav-link"
+                      className="nav-link darkBlue"
                       href={`/TwentyThree`}
                       onClick={() => {
-                        handleOnClick(product);
+                        handleOnClick("2023");
                         handleShow();
                       }}
                     >
                       2023
                     </Link>
                   </p>
-                  <p >
+                  <p>
                     <Link
-                      className="nav-link"
+                      className="nav-link darkBlue"
                       href={`/TwentyFour`}
                       onClick={() => {
-                        handleOnClick(product);
+                        handleOnClick("2024");
                         handleShow();
                       }}
                     >
@@ -322,12 +331,13 @@ const InvestorAccor = ({ handleShow }) => {
                   </p>
                 </div>
               </AccordionDetails>
-
             </Accordion>
-            <div style={{ backgroundColor: "#F1EF99", borderBottom: "1px solid lightgrey"}}>
+            <div
+              style={{ backgroundColor: "#fff", borderBottom: "1px solid lightgrey" }}
+            >
               <p>
                 <Link
-                  className="nav-link"
+                  className="nav-link darkBlue"
                   href={`/InvestorKYC`}
                   onClick={() => {
                     handleShow();
@@ -337,10 +347,12 @@ const InvestorAccor = ({ handleShow }) => {
                 </Link>
               </p>
             </div>
-            <div style={{ backgroundColor: "#F1EF99", borderBottom: "1px solid lightgrey" }}>
+            <div
+              style={{ backgroundColor: "#fff", borderBottom: "1px solid lightgrey" }}
+            >
               <p>
                 <Link
-                  className="nav-link"
+                  className="nav-link darkBlue"
                   href={`/IEPF`}
                   onClick={() => {
                     handleShow();
@@ -350,15 +362,18 @@ const InvestorAccor = ({ handleShow }) => {
                 </Link>
               </p>
             </div>
-            <div style={{ backgroundColor: "#F1EF99", borderBottom: "1px solid lightgrey" }}>
+            <div
+              style={{ backgroundColor: "#fff", borderBottom: "1px solid lightgrey" }}
+            >
               <p>
                 <Link
-                  className="nav-link"
+                  className="nav-link darkBlue  "
                   href={`/Advertisements`}
                   onClick={() => {
                     handleShow();
                   }}
                 >
+                  
                   Advertisements
                 </Link>
               </p>

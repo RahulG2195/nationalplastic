@@ -6,7 +6,6 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import TabContent from "../TabContent/TabContent";
 import { useState } from "react";
 
@@ -77,24 +76,19 @@ const MoreProduct = ({ prod_detail }) => {
             <TabContent activeTab={activeTab} prodDetail={prodDetail} />
           </div>
 
-          <div className="AccorProductInfo">
+          <div className="AccorProductInfo mt-4">
             {tabs.map((tab, index) => (
-              <Accordion key={index}>
+              <Accordion key={index} defaultExpanded={index === 0}>
                 <AccordionSummary
                   expandIcon={<ArrowDownwardIcon />}
                   aria-controls={`panel${index + 1}-content`}
                   id={`panel${index + 1}-header`}
                 >
-                  <div className="fw-bolds">{tab.title}</div>
+                  <Typography>{tab.title}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <div>
-                    {prodDetail.length > 0 && (
-                      <TabContent
-                        activeTab={activeTab}
-                        prodDetail={prodDetail}
-                      />
-                    )}
+                    <TabContent activeTab={tab.id} prodDetail={prod_detail} />  
                   </div>
                 </AccordionDetails>
               </Accordion>

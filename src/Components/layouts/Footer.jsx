@@ -19,8 +19,11 @@ export default function Footer() {
     mobile_number1: '',
     mobile_number2: '',
     address: '',
-    email: ''
+    email: '',
+    indiamart: '',
   });
+  const [initialBasicInfo, setInitialBasicInfo] = useState({});
+
 
   useEffect(() => {
     const fetchBasicInfo = async () => {
@@ -37,10 +40,13 @@ export default function Footer() {
     fetchBasicInfo();
   }, []);
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <>
-      <section className="footer">
+      <section className="footer pb-4">
         <div className="container">
           <div className="row">
             <div className="col-md-2">
@@ -63,11 +69,11 @@ export default function Footer() {
                     Media & News
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link className="nav-link fw-bold" href="/BlogPage">
                     Blog
                   </Link>
-                </li>
+                </li> */}
                 <li className='fw-bold'>Customer Stories</li>
               </ul>
             </div>
@@ -176,21 +182,29 @@ export default function Footer() {
                 <h5 className='fw-bolder'>WE ARE ALSO ON</h5>
               </div>
               <div className="otherLogo">
-                <Image
-                  src="/Assets/images/indiamart.svg"
-                  alt='logo'
-                  fill
-                />
+                <a href={basicInfo.indiamart}>
+                  <Image
+                    src="/Assets/images/indiamart.svg"
+                    alt='logo'
+                    fill
+                  />
+                </a>
 
               </div>
             </div>
           </div>
         </div>
+        {/* <button onClick={scrollToTop} className="back-to-top">
+        <i class="fa fa-arrow-up fa-2x" aria-hidden="true"></i>
+
+        </button> */}
       </section >
-      <section className='bottom_footer'>
+      <div className='text-center py-5 ' style={{backgroundColor:'#ECECEC'}}>
+        <p className='w-50 mx-auto fw-semibold footercaption'>We Deliver in Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer</p>
+      </div>
+      <section className='bottom_footer '>
         <div className="container">
           <div className="col-12 text-center">
-            <p>We Deliver in Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer</p>
 
             <div className="footer_social d-flex align-items-center">
               <div className="comp_logo">
@@ -230,6 +244,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
+
       </section>
 
       <div className='social_icon_for_mob'>
@@ -258,6 +273,7 @@ export default function Footer() {
           </a>
         </div>
       </div>
+
     </>
   )
 }

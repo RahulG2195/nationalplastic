@@ -162,6 +162,7 @@ const CustomerReview = () => {
       return true;
     } catch (error) {
       console.log("Error validating user: ", error.message);
+      notifyError("Invalid", error.message);
 
     }
   }

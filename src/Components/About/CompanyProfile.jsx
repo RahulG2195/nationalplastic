@@ -52,7 +52,7 @@ const CompanyProfile = () => {
           </p>
         </div>
       </div>
-      <div className="company-profile-sidebar">
+      {/* <div className="company-profile-sidebar">
         <h3 className="sidebar-title">Company Profile</h3>
         <ul className="sidebar-list">
           <li className="sidebar-item">Company Profile</li>
@@ -63,7 +63,7 @@ const CompanyProfile = () => {
           <li className="sidebar-item">Introduction</li>
           <li className="sidebar-item">Terms & Conditions</li>
         </ul>
-      </div>
+      </div> */}
     </div>
   );
 };

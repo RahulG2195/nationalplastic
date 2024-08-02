@@ -4,6 +4,11 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
+import numberWithCommas from "@/utils/formatnumber";
+import { notifyError } from "@/utils/notify";
+
 
 const WishlistCard = (props) => {
   const handleMoveToCart = () => {
@@ -48,7 +53,7 @@ const WishlistCard = (props) => {
       props.onDeleteSuccess(props.id);
       toast.dismiss(); // Close the toast after deletion
     } catch (error) {
-      alert("Can't delete");
+      notifyErrorti("Can't delete");
     }
   };
   const handleCancel = () => {
@@ -78,16 +83,16 @@ const WishlistCard = (props) => {
         <div className="wishCptResp">
           <Link onClick={setid} href={`/ProductDetail/${props.productName}`}>
             <h5 className="card-title ProductTitle fw-semibold">
-             <span style={{ color: "#CC0008" }}>{Np}</span>{props.productName} ({props.color}) 
+             <span style={{ color: "#CC0008" }}>{Np} </span>{props.productName} ({props.color}) 
             </h5>
           </Link>
-          <p className="card-text productSubTitle">{props.producDiscription}</p>
+          {/* <p className="card-text productSubTitle">{props.producDiscription}</p> */}
         </div>
         <div className="">
           <div className="price m-1 fw-bold WishpriceRsp">
-            <div>₹{props.Price}</div>
+            <div>₹{numberWithCommas(props.Price)}</div>
             <div className=" text-body-tertiary og_price">
-              <del>₹{props.originalPrice}</del>
+              <del>₹{numberWithCommas(props.originalPrice)}</del>
               <span className="text-danger small">{props.discount}%</span>
             </div>
           </div>
@@ -99,10 +104,15 @@ const WishlistCard = (props) => {
               className="btn btn-danger moveTocartResp ms-1 me-3"
               onClick={handleMoveToCart}
             >
-              MOVE TO CART
+              <i className="shoppingCartIcon">
+                <ShoppingCartOutlinedIcon /> 
+              </i>
+               MOVE TO CART
             </button>
-            <button type="button" className="btn" onClick={handleOnClick}>
-              <img src="/Assets/svg/Icon core-trash.svg" alt="" />
+            <button type="button" className="btn btn-danger moveTocartResp ms-1 me-3" onClick={handleOnClick}>
+              {/* <img src="/Assets/svg/Icon core-trash.svg" alt="" /> */}
+              <i className="shoppingCartIcon"><DeleteTwoToneIcon/></i>
+              Delete
             </button>
           </div>
         </div>

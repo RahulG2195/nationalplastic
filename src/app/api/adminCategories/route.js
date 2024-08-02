@@ -1,6 +1,5 @@
 import { query } from '@/lib/db';
 import { writeFile } from "fs/promises";
-import upload from "@/utils/multer.middleware";
 import { uploadFile } from "@/utils/fileUploader";
 // import { query } from "@/lib/db";
 
@@ -8,16 +7,20 @@ export async function POST(request) {
   try {
     const data = await request.formData();
 
-    const { category_name, navshow, status, topPick = 0 } = Object.fromEntries(
+    const { category_name, seo_url, navshow, status, topPick = 0 } = Object.fromEntries(
       data.entries()
     );
 
     const image = data.get('image');
-    let uploadedImageName = '';
+    const uploadedImageName = image.name;
 
     if (image && image instanceof File) {
       try {
-        uploadedImageName = await uploadFile(image);
+        const bytes = await image.arrayBuffer();
+        const buffer = Buffer.from(bytes);
+    
+        const path = `./public/Assets/uploads/category_banner/${image.name}`;
+        await writeFile(path, buffer);
       } catch (uploadError) {
         return new Response(
           JSON.stringify({ success: false, error: uploadError.message }),
@@ -39,7 +42,7 @@ export async function POST(request) {
     }
 
     // Manual validation
-    const requiredFields = { category_name, navshow, status };
+    const requiredFields = { category_name, seo_url, navshow, status };
 
     const missingFields = Object.entries(requiredFields)
       .filter(([key, value]) => !value)
@@ -55,10 +58,10 @@ export async function POST(request) {
     // Insert the new category
     const result = await query({
       query: `
-        INSERT INTO categories (category_name, image_name, navshow, status, topPick)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO categories (category_name, seo_url, image_name, navshow, status, topPick)
+        VALUES (?, ?, ?, ?, ?, ?)
       `,
-      values: [category_name, uploadedImageName, navshow, status, topPick],
+      values: [category_name, seo_url, uploadedImageName, navshow, status, topPick],
     });
 
     return new Response(
@@ -75,19 +78,20 @@ export async function POST(request) {
     );
   }
 }
-
-
-
 export async function PUT(request) {
   try {
     const data = await request.formData();
-    const { category_id, category_name, image_name, navshow, status, image , topPick=0} = Object.fromEntries(
+    const { category_id, seo_url, category_name, image_name, navshow, status, image , topPick=0} = Object.fromEntries(
       data.entries()
     );
-
     if (image) {
       try {
-        await uploadImage(image);
+
+        const bytes = await image.arrayBuffer();
+        const buffer = Buffer.from(bytes);
+    
+        const path = `./public/Assets/uploads/category_banner/${image.name}`;
+        await writeFile(path, buffer);
       } catch (uploadError) {
         return new Response(
           JSON.stringify({ success: false, error: uploadError.message }),
@@ -97,7 +101,7 @@ export async function PUT(request) {
     }
 
     // Manual validation
-    const requiredFields = { category_id, category_name, image_name, navshow, status };
+    const requiredFields = { category_id, seo_url, category_name, image_name, navshow, status };
     const missingFields = Object.entries(requiredFields).filter(([key, value]) => !value).map(([key]) => key);
 
     if (missingFields.length > 0) {
@@ -113,6 +117,7 @@ export async function PUT(request) {
         UPDATE categories 
         SET 
           category_name = ?,
+          seo_url = ?,
           image_name = ?,
           navshow = ?,
           status = ?,
@@ -120,7 +125,7 @@ export async function PUT(request) {
         WHERE 
           category_id = ?
       `,
-      values: [category_name, image_name, navshow, status,topPick, category_id],
+      values: [category_name, seo_url, image_name, navshow, status,topPick, category_id],
     });
 
     return new Response(
@@ -137,7 +142,6 @@ export async function PUT(request) {
     );
   }
 }
-
 export async function GET(request) {
   try {
     const allCategories = await query({
@@ -165,7 +169,6 @@ export async function GET(request) {
     );
   }
 }
-
 export async function DELETE(request) {
   try {
     const requestBody = await request.json();
@@ -211,6 +214,53 @@ export async function DELETE(request) {
         message: "Internal Server Error",
         error: error.message,
       }),
+      { status: 500 }
+    );
+  }
+}
+
+export async function PATCH(request) {
+  try {
+    const { category_id, navshow } = await request.json();
+
+    // Validate inputs
+    if (category_id === undefined || navshow === undefined) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'category_id and navshow are required' }),
+        { status: 400 }
+      );
+    }
+
+    // Ensure navshow is either 0 or 1
+    const validatedNavshow = navshow ? 1 : 0;
+
+    // Update the navshow status
+    const result = await query({
+      query: `
+        UPDATE categories 
+        SET navshow = ?
+        WHERE category_id = ?
+      `,
+      values: [validatedNavshow, category_id],
+    });
+
+    if (result.affectedRows === 0) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'Category not found' }),
+        { status: 404 }
+      );
+    }
+
+    return new Response(
+      JSON.stringify({ success: true, data: { category_id, navshow: validatedNavshow } }),
+      { status: 200 }
+    );
+
+  } catch (error) {
+    console.error('Error updating navshow status:', error);
+
+    return new Response(
+      JSON.stringify({ success: false, error: error.message }),
       { status: 500 }
     );
   }

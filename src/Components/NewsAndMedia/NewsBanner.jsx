@@ -1,28 +1,45 @@
-"use client"
-import React from 'react';
-// import "bootstrap/dist/css/bootstrap.min.css";
-import Image from 'next/image'
+"use client";
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import axios from 'axios';
 
+const Banner = () => {
+    const [bannerData, setBannerData] = useState(null);
+    const [error, setError] = useState(null);
 
+    // Fetch banner data
+    const fetchBannerData = async () => {
+        try {
+            const id = 2;
+            const response = await axios.get(`/api/heroBanners`, { params: { id } });
+            setBannerData(response.data.bannerData);
+        } catch (err) {
+            setError('Error fetching banner data');
+            console.error('Error fetching banner data:', err);
+        }
+    };
 
+    // Fetch data on component mount
+    useEffect(() => {
+        fetchBannerData();
+    }, []);
 
-const NewsBanner = () => {
+    return (
+        <>
+            {error && <p>{error}</p>}
+            {bannerData && (
+                <Image
+                    src={`/Assets/uploads/${bannerData.image}`}
+                    width={100}
+                    height={80}
+                    layout='responsive'
+                    objectFit='cover'
+                    className='banner'
+                    alt="Banner image"
+                />
+            )}
+        </>
+    );
+};
 
-  return (
-
-    <>
-
-      <Image
-        src="/Assets/images/Media_-News-banner/Media_-News-banner.png"
-        width={100}
-        height={80}
-        layout='responsive'
-        objectFit='cover'
-        alt="Picture of the author"
-        className='banner'
-      />
-    </>
-  )
-}
-
-export default NewsBanner
+export default Banner;

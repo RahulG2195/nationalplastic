@@ -5,7 +5,7 @@ export async function GET(request) {
     const Categories = await query({
       //ORDER BY header_position ASC
       query:
-        "SELECT category_id, category_name, navshow, image_name, header_position FROM categories where navshow = 1 ",
+        "SELECT category_id, seo_url, category_name, navshow, image_name, header_position FROM categories where navshow = 1 ",
       values: [],
     });
 

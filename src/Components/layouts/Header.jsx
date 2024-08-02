@@ -17,6 +17,8 @@ import InvestorAccor from "../InvesterAccor/InvesterAccor";
 import { PlaceholderBar } from "./Placeholder";
 import { useDelayedRender } from "@/utils/useDelayedRender";
 import { staticInvestorConfig, fetchInvestorConfig } from "./investorConfig";
+import ScrollToTop from "scroll-to-top-react";
+
 export default function Header() {
   const shouldRenderBottomBar = useDelayedRender(2000);
   const [searchTerm, setSearchTerm] = useState("");
@@ -104,11 +106,13 @@ export default function Header() {
   }, [FirstName, LastName]);
 
   const [investorConfig, setInvestorConfig] = useState(staticInvestorConfig);
+  // console.log('investorConfig', investorConfig);
 
   useEffect(() => {
     async function loadConfig() {
       try {
         const config = await fetchInvestorConfig();
+
         setInvestorConfig(config);
       } catch (error) {
         console.error("Failed to fetch investor config, using static config", error);
@@ -185,6 +189,7 @@ export default function Header() {
   const [basicInfo, setBasicInfo] = useState({
     logo: '',
   });
+  const [initialBasicInfo, setInitialBasicInfo] = useState({});
 
   useEffect(() => {
     const fetchBasicInfo = async () => {
@@ -203,10 +208,12 @@ export default function Header() {
 
   return (
     <div>
+      {/* <ScrollToTop displayType="htmlArrow" /> */}
+
       {!hideLayout ? (
         <>
           <div className="container-fluid p-0 header menbg">
-            <TopBar />
+            {/* <TopBar /> */}
             <nav className="navbar navbar-expand-lg main_header px-3">
               <div className="container-fluid ">
                 <div className="navbar-brand">
@@ -233,7 +240,9 @@ export default function Header() {
                       objectFit="contain"
                     />
                   </Link>
+
                 </div>
+
                 <form onSubmit={handleSearchSubmit} className="d-flex nav-search">
                   <input
                     className="form-control text-center HeadSearch fw-semibold"
@@ -244,7 +253,6 @@ export default function Header() {
                     onChange={handleSearchChange}
                   />
                 </form>
-
                 <div
                   className={`${isClicked
                     ? " collapse navbar-collapse show menubg"
@@ -273,7 +281,7 @@ export default function Header() {
                         About Us
                       </Link>
                       {aboutDropdown && (
-                        <ul className={styles.dropdown}>
+                        <ul className={`${styles.dropdown} ms-2 p-2 `}>
                           <li className={styles.dropdownItem}>
                             <Link
                               href="/Companyprofile"
@@ -322,7 +330,9 @@ export default function Header() {
                       )}
                     </li>
                     {
-                      (width <= 991) ? <InvestorAccor handleShow={handleShow} />
+                      (width <= 991)
+                        ?
+                        <InvestorAccor handleShow={handleShow} />
                         :
                         <ul className="nav">
                           {investorConfig.map((item, index) => (
@@ -395,9 +405,9 @@ export default function Header() {
                         CSR
                       </Link>
                     </li>
-                    <li className="nav-item brdr bulk_ord px-3">
+                    <li className="nav-item brdr bulk_ord">
                       <Link
-                        className="nav-link mx-1"
+                        className="nav-link"
                         href="/BulkOrder"
                         onClick={isClicked ? handleShow : null}>
                         Bulk Orders
@@ -410,7 +420,7 @@ export default function Header() {
                     <li className="nav-item brdr d-none d-md-none d-xl-block ">
                       <Link
                         className="nav-link"
-                        href="tel:+912267669922"
+                        href={`tel:+91${basicInfo.wpNumber}`}
                         target="_blank"
                         onClick={isClicked ? handleShow : null}
                         style={{ width: '30px' }}
@@ -584,6 +594,7 @@ export default function Header() {
               </div>
             </nav>
             {shouldRenderBottomBar ? <BottomBar /> : <PlaceholderBar />}
+
           </div>
         </>
       ) : null}

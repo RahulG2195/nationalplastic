@@ -6,16 +6,23 @@
     font-weight: 600;
 }
 
-.ATCflow p {
+.ATCflow a {
     color: #262262;
 }
 
 .ATCflow p span {
     color: #C9070F;
 }
+
+.AddHeader-container .highlight {
+    text-shadow: 2px 2px 5px rgb(97, 97, 90);
+    font-weight: bold;
+    color: #C9070F !important;
+}
+
 @media (max-width:350px) {
-    .ATCflow p {
+    .ATCflow a {
         font-size: x-small !important;
     }
-    
+
 }

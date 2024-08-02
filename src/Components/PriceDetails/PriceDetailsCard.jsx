@@ -9,6 +9,7 @@ import { createOrderSuccess } from "@/redux/reducer/paySlice";
 import { useRouter } from "next/navigation";
 import { emptyCartAsync } from "@/redux/reducer/cartSlice"
 import numberWithCommas from "@/utils/formatnumber";
+import { removeCoupon } from "@/redux/reducer/couponSlice";
 
 const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
   const router = useRouter();
@@ -154,6 +155,7 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
           updateDatabase(response.data.response);
           sendPaymentSuccessMail(response.data.response);
           dispatch(emptyCartAsync(customer_id))
+          dispatch(removeCoupon());
           router.push("/ThankYouPage");
         }
       },
@@ -270,7 +272,7 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
             : "0000"}{" "}
           on your order
         </div>
-        <div className="small text-center">EMI starts with Rs 10,000</div>
+        {/* <div className="small text-center">EMI starts with Rs 10,000</div> */}
 
         <div className="d-flex justify-content-center mt-2">
           {redirect ? (

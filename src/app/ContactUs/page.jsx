@@ -3,7 +3,7 @@
 import Image from "next/image";
 import "../../styles/contactus.css";
 import ContactUsCard from "@/Components/ContactUs/ContactUsCard";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Bounce, toast } from "react-toastify";
 
@@ -16,7 +16,7 @@ const notify = () => {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: "dark",
+    theme: "light",
     transition: Bounce,
   });
 };
@@ -29,7 +29,7 @@ const notifyError = () => {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: "dark",
+    theme: "light",
     transition: Bounce,
   });
 };
@@ -51,6 +51,8 @@ function ContactUs() {
     mobile: "",
     file: null,
   });
+  const [initialBasicInfo, setInitialBasicInfo] = useState({});
+
 
   async function handleInputChange(event) {
     const { name, value } = event.target;
@@ -96,7 +98,7 @@ function ContactUs() {
       toast.error("Please enter a valid mobile number.");
       return;
     }
-   
+
     const formData = new FormData();
     formData.append("name", userInput.name);
     formData.append("email", userInput.email);
@@ -207,22 +209,31 @@ function ContactUs() {
     mobile_number2: '',
     address: '',
     email: ''
-}); 
+  });
 
-useEffect(() => {
-  const fetchBasicInfo = async () => {
+  useEffect(() => {
+    const fetchBasicInfo = async () => {
       try {
-          const response = await axios.get('/api/basicInfo');
-          const basicInfoData = response.data.basicInfo;
-          setBasicInfo(basicInfoData);
-          setInitialBasicInfo(basicInfoData);
+        const response = await axios.get('/api/basicInfo');
+        const basicInfoData = response.data.basicInfo;
+        setBasicInfo(basicInfoData);
+        setInitialBasicInfo(basicInfoData);
       } catch (error) {
-          console.error('There was an error fetching the basic info!', error);
+        console.error('There was an error fetching the basic info!', error);
       }
-  };
+    };
 
-  fetchBasicInfo();
-}, []);
+    fetchBasicInfo();
+  }, []);
+
+
+
+  const branchOfficesRef = useRef(null);
+  const factoryUnitsRef = useRef(null);
+
+  const scrollToSection = (ref) => {
+    ref.current.scrollIntoView({ behavior: "smooth" });
+  };
 
 
   return (
@@ -242,8 +253,8 @@ useEffect(() => {
           <div className="clip-path-element">
             <h1>CONTACT US</h1>
             <div className="contact-btn pb-5">
-              <button>Branch Offices</button>
-              <button>Factory Units</button>
+              <button onClick={() => scrollToSection(branchOfficesRef)}>Branch Offices</button>
+              <button onClick={() => scrollToSection(factoryUnitsRef)}>Factory Units</button>
             </div>
           </div>
         </div>
@@ -404,20 +415,21 @@ useEffect(() => {
             </div>
           </div>
           <div className="col-md-8 col-lg-8 col-xl-8 map-image">
-            <Image
+            {/* <Image
               src="/Assets/images/ContactUs/map.png"
               alt="Contact Us Page Banner"
               width={100}
               height={50}
               layout="responsive"
               objectFit="cover"
-            />
+            /> */}
+            <iframe src={basicInfo.map_url} className="w-100 h-100" style={{border:'0'}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
       </div>
 
       {/* Branch Offices */}
-      <div className="container BranchOffices pt-5 mt-5">
+      <div className="container BranchOffices pt-5 mt-5" ref={branchOfficesRef}>
         <h2 className="fs-1">
           Branch <span>Offices</span>
         </h2>
@@ -436,7 +448,7 @@ useEffect(() => {
       </div>
       {/* Factory Units */}
 
-      <div className="container BranchOffices py-5">
+      <div className="container BranchOffices py-5" ref={factoryUnitsRef}>
         <h2>
           Factory <span>Units</span>
         </h2>

@@ -1,68 +1,95 @@
 "use client";
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import "../Disclosure/Disclosure.css"
+import React, { useEffect, useState } from 'react';
+import { Table, Typography, Space, Card, Row, Col, Spin } from 'antd';
+import { FilePdfOutlined } from '@ant-design/icons';
+import styles from './Disclosure.css';
+const { Title } = Typography;
+
 const Disclosure = () => {
-  const [disclosureData, setDisclosureData] = useState({ years: [] });
+  const [disclosures, setDisclosures] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchDisclosures = async () => {
       try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/InvestorPage`, { Id: 15 });
-        setDisclosureData(JSON.parse(response.data.results[0].content));
+        const response = await fetch('/api/admin/Investors/l_disclosures');
+        const data = await response.json();
+        if (data.status === 200) {
+          setDisclosures(data.disclosures);
+        } else {
+          console.error('Failed to fetch disclosures');
+        }
       } catch (error) {
-        console.error('Error fetching shareholding data:', error);
+        console.error('Error fetching disclosures:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchData();
+    fetchDisclosures();
   }, []);
 
+  const columns = [
+    {
+      title: 'Quarter - 1',
+      dataIndex: 'quarter1',
+      key: 'quarter1',
+      render: (links) => renderLinks(links),
+    },
+    {
+      title: 'Quarter - 2',
+      dataIndex: 'quarter2',
+      key: 'quarter2',
+      render: (links) => renderLinks(links),
+    },
+    {
+      title: 'Quarter - 3',
+      dataIndex: 'quarter3',
+      key: 'quarter3',
+      render: (links) => renderLinks(links),
+    },
+    {
+      title: 'Quarter - 4',
+      dataIndex: 'quarter4',
+      key: 'quarter4',
+      render: (links) => renderLinks(links),
+    },
+  ];
+
+  const renderLinks = (links) => (
+    <Space direction="vertical">
+      {links.map((link, index) => (
+        <a key={index} href={link.url} target="_blank" rel="noopener noreferrer">
+          <FilePdfOutlined /> {link.text}
+        </a>
+      ))}
+    </Space>
+  );
+
+  if (loading) {
+    return <Spin size="large" />;
+  }
+
   return (
-    <section className='investor_sec my-5 py-5'>
-      <div className='container'>
-        <div className='row'>
-          <div className="col-12">
-            <div className="inn-content-wrap">
-              {disclosureData.years.map((yearData, yearIndex) => (
-                <div key={yearIndex} className="mb-5">
-                  <h3 className="mb-4">Year {yearData.year}</h3>
-                  <div className="table-responsive">
-                    <table className='table table-bordered table-hover'>
-                      <thead className="thead-light">
-                        <tr>
-                          {yearData.quarters.map((quarter, quarterIndex) => (
-                            <th key={quarterIndex} className='col'>{quarter.quarter}</th>
-                          ))}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          {yearData.quarters.map((quarter, quarterIndex) => (
-                            <td key={quarterIndex} className="align-top">
-                              <ul className="list-unstyled">
-                                {quarter.items.map((item, itemIndex) => (
-                                  <li key={itemIndex} className="mb-2">
-                                    <a href={item.href} target="_blank" rel="noopener noreferrer" className="d-flex align-items-center">
-                                      <i className="fa fa-file-pdf-o mr-2" aria-hidden="true"></i>
-                                      <span>{item.text}</span>
-                                    </a>
-                                  </li>
-                                ))}
-                              </ul>
-                            </td>
-                          ))}
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <div className="disclosure-container" style={{ padding: '24px' }}>
+      <Row gutter={[16, 16]}>
+        {disclosures.map((yearData, index) => (
+          <Col xs={24} key={index}>
+            <Card>
+              <Title level={3}>{yearData.year}</Title>
+              <Table
+  columns={columns}
+  dataSource={[yearData]}
+  pagination={false}
+  scroll={{ x: true }}
+  bordered
+  className={styles.disclosureTable}
+/>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </div>
   );
 };
 

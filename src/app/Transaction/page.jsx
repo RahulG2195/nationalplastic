@@ -1,43 +1,55 @@
-import React from 'react'
+"use client";
+import  { useState, useEffect } from 'react';
+import { Table, Typography } from 'antd';
+import axios from 'axios';
+
+const { Title } = Typography;
 
 const Transaction = () => {
+  const [transactions, setTransactions] = useState([]);
+
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      try {
+        const response = await axios.get('/api/admin/Investors/Transactions');
+        setTransactions(response.data.transactions);
+      } catch (error) {
+        console.error('Error fetching transactions:', error);
+      }
+    };
+
+    fetchTransactions();
+  }, []);
+
+  const columns = [
+    {
+      title: 'Document',
+      dataIndex: 'document',
+      key: 'document',
+      render: (text, record) => (
+        <a href={record.url} target="_blank" rel="noopener noreferrer">
+          {text}
+        </a>
+      ),
+    },
+  ];
+
   return (
-    <>
-      <section className='investor_sec my-5 py-5'>
-        <div className='container'>
-          <div className='row'>
-            <div className="col-12">
-              <table className='table table-responsive table-bordered'>
-                <tbody>
-                  <tr>
-                    <td>
-                      <p><a href="/Assets/pdf/Disclosure-on-Related-Party-Transactions-BSE.pdf" target="_blank">Disclosure on Related Party Transactions - BSE</a></p>
+    <section className="investor-sec my-5 py-5">
+      <div className="container">
+        <Title level={2} className="text-center mb-4">
+          RELATED PARTY TRANSACTION
+        </Title>
+        <Table
+          dataSource={transactions}
+          columns={columns}
+          rowKey="id"
+          pagination={false}
+          bordered
+        />
+      </div>
+    </section>
+  );
+};
 
-                      <p><a target='_blank' href="/Assets/pdf/Disclosure%20on%20Related%20Party%20Transactions_Sept.%202020.pdf">Disclosure on Related Party Transactions_Sept.2020</a></p>
-
-                      <p><a target='_blank' href="/Assets/pdf/Disclosure%20on%20Related%20Party%20Transactions_March%202021.pdf">Disclosure on Related Party Transactions_March.2021</a></p>
-
-                      <p><a target='_blank' href="/Assets/pdf/Disclosure%20of%20Related%20Party%20Transaction_Sept.2021.pdf">Disclosure of Related Party Transaction_Sept.2021</a></p>
-
-                      <p><a target='_blank' href="/Assets/pdf/Disclosure%20of%20Related%20Party%20Transaction_March.2022.pdf">Disclosure of Related Party Transaction_March.2022</a></p>
-
-                      <p><a target='_blank' href="/Assets/pdf/Disclosure%20of%20Related%20Party%20Transaction_Sept.2022.pdf">Disclosure of Related Party Transaction_Sept.2022</a></p>
-
-                      <p><a target='_blank' href="/Assets/pdf/Disclosure%20of%20Related%20Party%20Transaction_March%202023.pdf">Disclosure of Related Party Transaction_March 2023</a></p>
-
-                      <p><a target='_blank' href="/Assets/pdf/Related%20Party%20Transaction%20Report.pdf">Disclosure of Related Party Transaction_Sept 2023</a></p>
-
-                      <p><a target='_blank' href="/Assets/pdf/31.03.2024(1).pdf">Disclosure of Related Party Transaction_March 2024</a></p>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  )
-}
-
-export default Transaction
+export default Transaction;

@@ -1,34 +1,42 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
-import { Form, Input, Button, InputNumber, message } from 'antd';
+import { Form, Input, Button, InputNumber, Select, message } from 'antd';
 import "./EditProduct.css";
 import axios from 'axios';
 import { toast, Bounce } from "react-toastify";
+
+const { Option } = Select;
 export default function App() {
-  const { control, handleSubmit, setValue, reset,formState: { errors } } = useForm();
+  const { control, handleSubmit, setValue, reset, formState: { errors } } = useForm();
   const [imagePreviews, setImagePreviews] = useState([]);
+  const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
   const handleNavigation = () => {
     navigate('/admin/product', { replace: true });
     window.location.reload();
   };
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/adminValidationP`);
+        setCategories(response.data.categories || []);
+      } catch (error) {
+        console.error('Failed to fetch categories:', error);
+        toast.error('Failed to load categories');
+      }
+    };
+  
+    fetchCategories();
+  }, []);
 
   const onSubmit = async (data) => {
     const submitLoader = async () => {
       try {
         // Validate category name and get category_id
-        const isValidCategoryName = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/adminValidationP`, {
-          category_name: data.category_name
-        });
+     
 
-        if (!isValidCategoryName.status == 200) {
-          throw new Error(isValidCategoryName.data.error || "Invalid category name");
-        }
-        const category_id = isValidCategoryName.data.category_id;
-        data.category_id = category_id;
-        if (isValidCategoryName) {
           // Prepare the form data
           const formData = new FormData();
           Object.keys(data).forEach(key => {
@@ -50,14 +58,11 @@ export default function App() {
           reset();
           handleNavigation();
           return 'Product created successfully';
-        }
-        throw new Error(response.data.error || "Failed to add product");
+  
       } catch (error) {
-        if (error.response && error.response.status === 404) {
-        throw new Error(error.response ? error.response.data.message: 'Category is invalid');
-        } else {
+        
         throw new Error(error.response ? error.response.data.error : 'Failed to create product');
-        }
+        
       }
     };
   
@@ -162,17 +167,25 @@ export default function App() {
       </Form.Item>
 
       <Form.Item
-        label="Category Name"
-        validateStatus={errors.category_name ? 'error' : ''}
-        help={errors.category_name ? 'Please input the category name!' : ''}
-      >
-        <Controller
-          name="category_name"
-          control={control}
-          rules={{ required: true, minLength: 1, maxLength: 65 }}
-          render={({ field }) => <Input {...field} />}
-        />
-      </Form.Item>
+  label="Category"
+  validateStatus={errors.category_id ? 'error' : ''}
+  help={errors.category_id ? 'Please select a category!' : ''}
+>
+  <Controller
+    name="category_name"
+    control={control}
+    rules={{ required: true }}
+    render={({ field }) => (
+      <Select {...field} placeholder="Select a category">
+        {categories.map((category) => (
+          <Option key={category.category_name} value={category.category_name}>
+            {category.category_name}
+          </Option>
+        ))}
+      </Select>
+    )}
+  />
+</Form.Item>
 
       <Form.Item
         label="Images"

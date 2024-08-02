@@ -11,12 +11,16 @@ const { Option } = Select;
 const OrderTable = () => {
   
   const [orders, setOrders] = useState([]);
+  const [ordersDetail, setordersDetail] = useState([]);
+  const [AllOrderData, setAllOrderData] = useState([]);
+  const [OrderStatus, setOrderStatus] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isStatusModalVisible, setIsStatusModalVisible] = useState(false);
   const [isCancelModalVisible, setIsCancelModalVisible] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [newStatus, setNewStatus] = useState("");
   const [cancelReason, setCancelReason] = useState("");
+
   const router = useRouter();
 
   useEffect(() => {
@@ -26,14 +30,19 @@ const OrderTable = () => {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("/api/UserOrder");
-      //   if (!response.ok) {
-      //     throw new Error('Failed to fetch orders');
-      //   }
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`);
+      
       const orderData = response.data.orderData;
+      const UserOrderListDetail = response.data.orderDetailData;
+      const OrderStatusApi = response.data.OrderStatus;
+
       // const data = await response.json();
       if (response.data.status === 200) {
         setOrders(orderData);
+        setOrderStatus(OrderStatusApi)
+        // setordersDetail(UserOrderListDetail);
+        
+            
       } else {
         throw new Error(data.message || "Failed to fetch orders");
       }
@@ -49,16 +58,13 @@ const OrderTable = () => {
     setIsStatusModalVisible(true);
   };
 
-  const handleCancelOrder = (order) => {
-    setSelectedOrder(order);
-    setIsCancelModalVisible(true);
-  };
 
   const updateOrderStatus = async () => {
     try {
-      // Here you would call your API to update the order status
-      // For now, we'll just log it and show a success message
-      message.success(`Order status updated to ${newStatus}`);
+      const data = {newStatus: newStatus, order_id: selectedOrder}
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, data);
+
+      message.success(`Order status has been updated`);
       setIsStatusModalVisible(false);
       // After successful update, refetch the orders
       await fetchOrders();
@@ -69,9 +75,7 @@ const OrderTable = () => {
 
   const cancelOrder = async () => {
     try {
-      // Here you would call your API to cancel the order
-      // For now, we'll just log it and show a success message
-      // console.log(`Cancelling order ${selectedOrder.order_id}. Reason: ${cancelReason}`);
+     
       message.success("Order cancelled successfully");
       setIsCancelModalVisible(false);
       // After successful cancellation, refetch the orders
@@ -92,6 +96,10 @@ const OrderTable = () => {
       title: "Name",
       dataIndex: "FirstName",
       key: "FirstName",
+        // render: (FirstName, LasttName) => {
+        //   const fullName = FirstName + ' ' + LasttName;
+        //   return fullName;
+        // },
     },
     {
       title: "Mobile No",
@@ -122,6 +130,11 @@ const OrderTable = () => {
       key: "payment_status",
     },
     {
+      title: "Payment Type",
+      dataIndex: "order_payment_type",
+      key: "order_payment_type",
+    },
+    {
       title: "View Detail",
       key: "View Detail",
       render: (text, record) => {
@@ -147,23 +160,24 @@ const OrderTable = () => {
         <>
           <Button
             icon={<EditOutlined />}
-            onClick={() => handleStatusUpdate(record)}
+            onClick={() => handleStatusUpdate(record.order_id)}
             style={{ marginRight: 8 }}
           >
             Update Status
           </Button>
-          <Button
+          {/* <Button
             icon={<DeleteOutlined />}
             onClick={() => handleCancelOrder(record)}
             danger
           >
             Cancel Order
-          </Button>
+          </Button> */}
         </>
       ),
     },
   ];
 
+  // console.log('AllOrderData', AllOrderData);
   return (
     <>
       <Spin spinning={loading}>
@@ -178,16 +192,18 @@ const OrderTable = () => {
       >
         <Select
           style={{ width: "100%" }}
-          placeholder="Select new status"
+          placeholder="Update Status"
           onChange={(value) => setNewStatus(value)}
         >
-          <Option value="order_confirmed">Order Confirmed</Option>
-          <Option value="order_delivered">Order Delivered</Option>
-          <Option value="delivered">Delivered</Option>
+          {
+            OrderStatus.map(data => {
+              return  <Option value={data.status_id}>{data.status_name}</Option>
+            })
+          }
         </Select>
       </Modal>
 
-      <Modal
+      {/* <Modal
         title="Cancel Order"
         open={isCancelModalVisible}
         onOk={cancelOrder}
@@ -199,7 +215,7 @@ const OrderTable = () => {
           value={cancelReason}
           onChange={(e) => setCancelReason(e.target.value)}
         />
-      </Modal>
+      </Modal> */}
     </>
   );
 };

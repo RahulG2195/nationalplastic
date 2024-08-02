@@ -3,18 +3,30 @@ import { query } from "@/lib/db";
 export async function GET(request) {
     try {
         const Categories = await query({
-            query: "SELECT * FROM categories",
+            query: "SELECT * FROM categories where status = 1",
             values: [],
         });
         const topPick = await query({
-            query: "SELECT * FROM categories where topPick = 1",
+            query: "SELECT * FROM categories where topPick = 1 AND status = 1",
             values: [],
         });
+
+        const Manufacture = await query({
+            query: "SELECT * FROM categories where category_id IN(40, 16, 15)",
+            values: [],
+        });
+        const ShopRooms = await query({
+            query: "SELECT * FROM categories where category_id IN(30, 31, 32, 33, 34, 35)",
+            values: [],
+        });
+
 
         return new Response(JSON.stringify({
             status: 200,
             categories: Categories,
-            topPick:topPick
+            Manufacture: Manufacture,
+            topPick: topPick,
+            ShopRooms: ShopRooms
         }));
 
     } catch (error) {

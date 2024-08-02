@@ -2,8 +2,8 @@ import { writeFile } from 'fs/promises';
 import path from 'path';
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
-const ALLOWED_FILE_TYPES = ['.jpg', '.jpeg', '.png', '.webp', '.mp4'];
-const UPLOAD_DIR = path.join(process.cwd(), 'public', 'Assets', 'uploads');
+const ALLOWED_FILE_TYPES = ['.jpg', '.jpeg', '.png', '.webp', '.mp4','.pdf'];
+const UPLOAD_DIR = path.join(process.cwd(), 'public', 'Assets', 'uploads','Investors');
 
 export async function validateFile(file) {
   if (file.size > MAX_FILE_SIZE) {

@@ -19,8 +19,10 @@ function ProdData({ category_id }) {
   const [data, setData] = useState([]);
   const [prodData, setProdData] = useState([]);
   const userState = useSelector((state) => state.userData.isLoggedIn);
-  const [categoryId, setCategoryId] = useState(null);
+  const [seo_url, setSeo_url] = useState(null);
   const [categoryName, setCategoryName] = useState(null);
+  const [catlogue, setCatlogue] = useState(null)
+  const [short_description, setShort_description] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [productId, setProductId] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -53,7 +55,7 @@ function ProdData({ category_id }) {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`
         );
-        const { product, productDetails, colors, category } = response.data;
+        const { product, productDetails, colors, category, short_description } = response.data;
         localStorage.setItem("product_id", product.product_id);
         if (!product) {
           setErrorMessage("Sorry, this product is not available");
@@ -63,7 +65,9 @@ function ProdData({ category_id }) {
           setProductColor(colors);
           setSelectedColor(product.color);
           setProduct_id(product.product_id);
-          setCategoryId(category);
+          setSeo_url(product.cat_seo_url);
+          setCatlogue(product.category_name)
+          setShort_description(product.descp)
           // CleanCateogoryName(category);
           const allColors = colors.map((color) => color.color);
           colorBasedProductsImages(allColors);
@@ -200,6 +204,42 @@ function ProdData({ category_id }) {
         );
     }
   };
+  const handleBuyNow = async (storedId, quantity) => {
+    const data = await fetchPrice(id);
+    const price = data.price;
+    const discount_price = data.discount_price;
+    switch (userState) {
+      case false:
+        dispatch(
+          addToCartD({
+            product_id,
+            price,
+            discount_price,
+            quantity: quantity || 1,
+            color: selectedColor,
+            from: 0,
+          })
+        );
+        break;
+      case true:
+        dispatch(
+          addToCart({
+            product_id,
+            price,
+            discount_price,
+            quantity: quantity || 1,
+            color: selectedColor,
+            from: 0,
+          })
+        );
+        break;
+      default:
+        console.warn(
+          "Unexpected login state. Please handle appropriately.",
+          isLoggedInResult
+        );
+    }
+  };
 
   if (isLoading) {
     return <div className="hv-100">Loading...</div>;
@@ -223,9 +263,11 @@ function ProdData({ category_id }) {
         <div className="row">
           <div className="col-12">
             <Breadcrump
-              category_id={categoryId}
+              category_id={seo_url}
               category_name={categoryName}
               product_name={name}
+              catlogue={catlogue}
+
             />
           </div>
           <div className="col-md-6">
@@ -251,15 +293,12 @@ function ProdData({ category_id }) {
                   </div>
                 </div>
                 <div>
-                  <i className="fa fa-star-o rating-star pr-2" />
+                  <i className="fa fa-star-o rating-star pr-2" style={{color:'gold'}} />
                   <span className="rating-number">4.8</span>
                 </div>
                 <div className="shortProdDesc">
                   <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-                    numquam ullam is recusandae laborum explicabo id sequi
-                    quisquam, ab sunt deleniti quidem ea animi facilis quod
-                    nostrum odit! Repellendus voluptas suscipit.
+                    {short_description}
                   </p>
                 </div>
                 <div className="prod_type mt-4">
@@ -318,7 +357,7 @@ function ProdData({ category_id }) {
                               // objectFit="cover"
                               style={{
                                 borderRadius: "50%",
-                                height: "100%",
+                                height: "100% !important",
                                 width: "100%",
                               }}
                             />
@@ -332,32 +371,36 @@ function ProdData({ category_id }) {
               </div>
               <div className="product-ccount">
                 <label htmlFor="size">Quantity</label>
-                <div className="d-md-flex pb-md-3">
-                  <IncrementDecrement
-                    initialCount={initialCount}
-                    onIncrement={handleIncrement}
-                    onDecrement={handleDecrement}
-                  />
-                  <button
-                    onClick={() => handleMoveToCart(productId, initialCount)}
-                    className="m-2 px-md-5 btn"
-                    style={{
-                      backgroundColor: isHovered ? '#fff' : '#cc0008',
-                      color: isHovered ? '#cc0008' : '#fff',
-                      border: 'none'
-                    }}
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
-                  >
-                    Add to Cart
-                  </button>
+                <div className="pb-md-3 row align-items-center">
+                  <div className="col-6 col-md-4 col-lg-3">
+                    <IncrementDecrement
+                      initialCount={initialCount}
+                      onIncrement={handleIncrement}
+                      onDecrement={handleDecrement}
+                    />
+                  </div>
+                  <div className="col-6 col-md-8 col-lg-6">
+                    <button
+                      onClick={() => handleMoveToCart(productId, initialCount)}
+                      className="m-2 px-md-5 btn "
+                      style={{
+                        backgroundColor: isHovered ? '#fff' : '#cc0008',
+                        color: isHovered ? '#cc0008' : '#fff',
+                        border: '1px solid #cc0008'
+                      }}
+                      onMouseEnter={() => setIsHovered(true)}
+                      onMouseLeave={() => setIsHovered(false)}
+                    >
+                      Add to Cart
+                    </button>
+                  </div>
                 </div>
 
                 <Link
                   href={userState ? "/Address" : "#"}
                   className={`btn m-2 px-md-5 ProdbtnRes ${!userState ? "disabled-button" : ""
                     }`}
-                  onClick={() => handleMoveToCart(productId)}
+                  onClick={() => handleBuyNow(productId)}
                 >
                   Buy Now
                 </Link>
@@ -375,21 +418,25 @@ function ProdData({ category_id }) {
                 <i className="fa fa-eye"></i> 210 customers are interviewing the
                 product
               </p> */}
-              <div className="terms fw-medium term_and_condition">
+
+              {/* terms and conditions */}
+
+
+              {/* <div className="terms fw-medium term_and_condition">
                 <Link href="/TermsAndConditions">Terms and Conditions</Link>
                 <ul>
                   <li>Lorem ipsum</li>
                   <li>Lorem ipsum</li>
                   <li>Lorem ipsum</li>
                 </ul>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
       </div>
 
       {/* product info  */}
-      <MoreProduct prod_detail={prodData} />
+      {/* <MoreProduct prod_detail={prodData} /> */}
 
       <div>
         {/* <!-- Modal --> */}

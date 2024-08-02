@@ -118,9 +118,9 @@ const ProdList = () => {
         key: 'seo_url_clr',
     },
       {
-          title: 'Category ID',
-          dataIndex: 'category_id',
-          key: 'category_id',
+          title: 'Category Name',
+          dataIndex: 'category_name',
+          key: 'category_name',
       },
       {
           title: 'Price',

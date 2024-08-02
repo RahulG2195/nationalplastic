@@ -1,10 +1,20 @@
+
+
+.back-to-top{
+    position: fixed;
+    right: 2%;
+    top: 73% ;
+    background-color: red !important;
+    padding: 10px;
+    border-radius: 100%;
+}
 .footer{
-    background-color: var(--secondary-color);
+    /* background-color: var(--secondary-color); */
     padding: 55px 0;
 }
 
 .footer .footer_heading h5{
-    color: var(--header-primary-clr);
+    color: #2E3192 ;
     margin-bottom: 15px;
     font-size: 18px;
     font-weight: 600;
@@ -100,4 +110,10 @@
     height: 60px;
     width: 164px;
     position: relative;
+}
+
+@media (max-width:768px) {
+    .footercaption{
+        width: 100% !important;
+    }
 }

@@ -42,7 +42,7 @@ export async function POST(request) {
     return new Response(
       JSON.stringify({
         status: 500,
-        message: "Internal Server Error",
+        message: err.message || "Internal server Error",
       })
     );
   }
@@ -118,17 +118,26 @@ export async function PUT(request) {
           return new Response(
             JSON.stringify({
               status: 500,
-              message: "Internal Server Error",
+              message: err.message || "Internal server Error",
             })
           );
         }
       }
     } catch (err) {
-      console.log(err.message);
+      return new Response(
+        JSON.stringify({
+          status: 500,
+          message: err.message || "Internal server Error",
+        })
+      );
     }
   } catch (err) {
-    console.log(err.message);
-    //Add the Logic to increase the quantity of the product
+    return new Response(
+      JSON.stringify({
+        status: 500,
+        message: err.message || "Internal server Error",
+      })
+    );
   }
 }
 

@@ -1,29 +1,30 @@
-import { query } from '@/lib/db';
-import colorNameList from 'color-name-list';
-import { NextResponse } from 'next/server';
+import { query } from "@/lib/db";
+import colorNameList from "color-name-list";
+import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 import upload from "@/utils/multer.middleware";
 
 function convertColorToCode(color) {
-  const colorEntry = colorNameList.find(entry => entry.name.toLowerCase() === color.toLowerCase());
+  const colorEntry = colorNameList.find(
+    (entry) => entry.name.toLowerCase() === color.toLowerCase()
+  );
   if (!colorEntry) {
     throw new Error(`Invalid color name: ${color}`);
   }
   return colorEntry.hex;
 }
-const uploadImage = async (file)=>{
-  try{
-    
+const uploadImage = async (file) => {
+  try {
     await upload.single(file);
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const path = `./uploads/${file.name}`;
-    
+    const path = `./public/Assets/uploads/products/${file.name}`;
+
     await writeFile(path, buffer);
-  }catch(error){
-    throw new Error('Image upload failed: ' + error.message);
+  } catch (error) {
+    throw new Error("Image upload failed: " + error.message);
   }
-}
+};
 
 const convertCategoryID = async (category_name) => {
   try {
@@ -31,7 +32,7 @@ const convertCategoryID = async (category_name) => {
       query: "SELECT category_id FROM categories WHERE category_name = ?",
       values: [category_name],
     });
-    
+
     if (category.length > 0) {
       return category[0].category_id;
     } else {
@@ -43,27 +44,26 @@ const convertCategoryID = async (category_name) => {
   }
 };
 
-
 export async function POST(request) {
   try {
     const formData = await request.formData();
-   
+
     const requiredFields = [
-      'product_name',
-      'seo_url',
-      'category_name',
-      'price',
-      'discount_price',
-      'discount_percentage',
-      'InstallationCharges',
-      'color',
-      'armType',
-      'prod_status'
+      "product_name",
+      "seo_url",
+      "category_name",
+      "price",
+      "discount_price",
+      "discount_percentage",
+      "InstallationCharges",
+      "color",
+      "armType",
+      "prod_status",
     ];
     const data = {};
     const missingFields = [];
-   
-    requiredFields.forEach(field => {
+
+    requiredFields.forEach((field) => {
       const value = formData.get(field);
       if (!value) {
         missingFields.push(field);
@@ -74,13 +74,13 @@ export async function POST(request) {
 
     // Add non-required fields
     const optionalFields = [
-      'meta_title',
-      'meta_description',
-      'short_description',
-      'long_description',
-      'duration'
+      "meta_title",
+      "meta_description",
+      "short_description",
+      "long_description",
+      "duration",
     ];
-    optionalFields.forEach(field => {
+    optionalFields.forEach((field) => {
       const value = formData.get(field);
       if (value) {
         data[field] = value;
@@ -89,7 +89,12 @@ export async function POST(request) {
 
     if (missingFields.length > 0) {
       return NextResponse.json(
-        { success: false, error: `The following fields are required: ${missingFields.join(', ')}` },
+        {
+          success: false,
+          error: `The following fields are required: ${missingFields.join(
+            ", "
+          )}`,
+        },
         { status: 400 }
       );
     }
@@ -100,20 +105,21 @@ export async function POST(request) {
     // Handle multiple image uploads
     const imageNames = [];
     for (let [key, value] of formData.entries()) {
-      if (key.startsWith('image')) {
+      if (key.startsWith("image")) {
         try {
-          const imageName = await uploadImage(value);
+          await uploadImage(value);
+          const imageName = value.name;
           imageNames.push(imageName);
         } catch (error) {
-          console.error('Error uploading image:', error);
+          console.error("Error uploading image:", error);
           return NextResponse.json(
-            { success: false, error: 'Failed to upload image' },
+            { success: false, error: "Failed to upload image" },
             { status: 500 }
           );
         }
       }
     }
-    data.image_name = imageNames.join(',');
+    data.image_name = imageNames.join(",");
 
     const category_id = await convertCategoryID(data.category_name);
     data.category_id = category_id;
@@ -157,16 +163,13 @@ export async function POST(request) {
         data.color,
         color_code,
         data.armType,
-        data.prod_status
+        data.prod_status,
       ],
     });
 
-    return NextResponse.json(
-      { success: true, data: result },
-      { status: 201 }
-    );
+    return NextResponse.json({ success: true, data: result }, { status: 201 });
   } catch (error) {
-    console.error('Error creating product:', error);
+    console.error("Error creating product:", error);
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 500 }
@@ -176,37 +179,39 @@ export async function POST(request) {
 export async function PUT(request) {
   try {
     const formData = await request.formData();
-    const images = formData.getAll('image');
-
+    const images = formData.getAll("image");
     // Handle multiple image uploads
     const imageNames = [];
     if (images && images.length > 0) {
       for (const image of images) {
         try {
-          const imageName = await uploadImage(image);  // Ensure this function handles image upload and returns the image name
+          await uploadImage(image); // Ensure this function handles image upload and returns the image name
+          const imageName = image.name;
           imageNames.push(imageName);
         } catch (error) {
           console.error(`Error uploading image ${image.name}:`, error);
-          throw new Error(`Failed to upload image ${image.name}: ${error.message}`);
+          throw new Error(
+            `Failed to upload image ${image.name}: ${error.message}`
+          );
         }
       }
     }
 
     const requiredFields = [
-      'product_name',
-      'seo_url',
-      'category_id',
-      'price',
-      'discount_price',
-      'color',
-      'armType',
-      'prod_status',
-      'product_id'
+      "product_name",
+      "seo_url",
+      "category_id",
+      "price",
+      "discount_price",
+      "color",
+      "armType",
+      "prod_status",
+      "product_id",
     ];
     const data = {};
     const missingFields = [];
-   
-    requiredFields.forEach(field => {
+
+    requiredFields.forEach((field) => {
       const value = formData.get(field);
       if (!value) {
         missingFields.push(field);
@@ -217,13 +222,19 @@ export async function PUT(request) {
 
     if (missingFields.length > 0) {
       return NextResponse.json(
-        { success: false, error: `The following fields are required: ${missingFields.join(', ')}` },
+        {
+          success: false,
+          error: `The following fields are required: ${missingFields.join(
+            ", "
+          )}`,
+        },
         { status: 400 }
       );
     }
 
     // Set image_name to the new image names if uploaded, otherwise keep the existing ones
-    data.image_name = imageNames.length > 0 ? imageNames.join(',') : formData.get('image_name');
+    data.image_name =
+      imageNames.length > 0 ? imageNames.join(",") : formData.get("image_name");
 
     // Convert color name to color code
     let color_code;
@@ -265,17 +276,13 @@ export async function PUT(request) {
         color_code,
         data.armType,
         data.prod_status,
-        data.product_id
+        data.product_id,
       ],
     });
 
-    return NextResponse.json(
-      { success: true, data: result },
-      { status: 200 }
-    );
-
+    return NextResponse.json({ success: true, data: result }, { status: 200 });
   } catch (error) {
-    console.error('Error updating product:', error);
+    console.error("Error updating product:", error);
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 500 }
@@ -283,13 +290,14 @@ export async function PUT(request) {
   }
 }
 
-
-export async function GET(request){
-  try{
+export async function GET(request) {
+  try {
     const allProducts = await query({
-      query:"SELECT p.*,c.category_id,c.category_name FROM products p JOIN categories c ON p.category_id = c.category_id",
-      values:[],
-    })
+      query:
+        "SELECT p.*,c.category_id,c.category_name FROM products p JOIN categories c ON p.category_id = c.category_id",
+      values: [],
+    });
+
 
     return new Response(
       JSON.stringify({
@@ -297,22 +305,19 @@ export async function GET(request){
         allProducts: allProducts,
       })
     );
-
-  }catch(e){
+  } catch (e) {
     return new Response(
       JSON.stringify({
         status: 500,
         message: "Internal Server Error",
-        error:e.message,
+        error: e.message,
       })
     );
-
   }
 }
 
 export async function DELETE(request) {
   try {
-
     const requestBody = await request.json();
     const { product_id } = requestBody;
     if (!product_id) {

@@ -55,6 +55,10 @@ export async function POST(request) {
       'mobile_number2',
       'address',
       'email',
+      'email_2',
+      'map_url',
+      'indiamart',
+      'wpNumber'
     ];
     const missingFields = [];
 
@@ -74,20 +78,19 @@ export async function POST(request) {
       );
     }
 
-    // Fetch existing basic info to retain current logo if no new file is provided
     const existingInfo = await query({
       query: 'SELECT logo FROM basic_info WHERE id = ?',
-      values: [1], // Assuming id = 1 for simplicity
+      values: [1],
     });
 
     let existingLogo = existingInfo[0]?.logo || null;
 
     // Handle logo upload
     const logoFile = formData.get('logo');
-    if (logoFile && logoFile.size > 0) { // Check if file is provided and has size greater than 0
+    if (logoFile && logoFile.size > 0) {
       try {
         const logoPath = await uploadImage(logoFile);
-        data.logo = logoFile.name; // Or use logoPath if you store the path in the database
+        data.logo = logoFile.name; 
       } catch (error) {
         console.error('Error uploading logo:', error);
         return NextResponse.json(
@@ -96,11 +99,9 @@ export async function POST(request) {
         );
       }
     } else {
-      // If no new file is uploaded, keep the existing value
       data.logo = existingLogo;
     }
 
-    // Build the query dynamically
     const queryParts = [];
     const values = [];
     Object.keys(data).forEach((key) => {
@@ -110,8 +111,7 @@ export async function POST(request) {
       }
     });
 
-    // Ensure there's an ID to update
-    values.push(1); // Assuming id = 1 for simplicity
+    values.push(1); 
 
     const dynamicQuery = `
       UPDATE basic_info
@@ -119,7 +119,6 @@ export async function POST(request) {
       WHERE id = ?
     `;
 
-    // Execute the dynamic query
     const result = await query({
       query: dynamicQuery,
       values: values,

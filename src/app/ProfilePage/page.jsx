@@ -10,9 +10,9 @@ import { notify, notifyError } from "@/utils/notify.js";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from 'next/image';
 
-
-import CancelProdChargeAfterTwentyFourHr, {ReturnProductBeforeFourteenDays} from "@/utils/CancelProduct";
+import CancelProdChargeAfterTwentyFourHr, { ReturnProductBeforeFourteenDays } from "@/utils/CancelProduct";
 import {
   isValidPassword,
   isValidReason, // Address validations
@@ -20,6 +20,10 @@ import {
 import ProdEmail from "@/Components/ReturnProdEmail/prodEmail";
 import Cookies from 'js-cookie';
 import { signOut } from "next-auth/react";
+import { Modal } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+
+const { confirm } = Modal;
 function ProfilePage() {
   const [FirstName, setFirstName] = useState('');
   const [LastName, setLastName] = useState('');
@@ -37,14 +41,14 @@ function ProfilePage() {
   const [orderData, setOrderData] = useState([]);
   const [ReturnSingleProd, setReturnSingleProd] = useState([]);
   const [VerifyReturnDays, setVerifyReturnDays] = useState([]);
-  
- // redirect to admin to admin panel 
- useEffect(() => {
-  const IsAdmin = localStorage.getItem('isAdmin');
-  if(IsAdmin == 'true'){
-    router.push("/admin") 
-  }
-}, []);
+  // const [firstImage , setFirstImage] = useState("Altis-chair-Black-(45)-white bg.webp");
+  // redirect to admin to admin panel 
+  useEffect(() => {
+    const IsAdmin = localStorage.getItem('isAdmin');
+    if (IsAdmin == 'true') {
+      router.push("/admin")
+    }
+  }, []);
 
   useEffect(() => {
     localStorage.getItem("isLoggedIn") === "true"
@@ -67,8 +71,6 @@ function ProfilePage() {
     // setIsLoggedIn(isLoggedIn);
     setData(storedData);
   }, []);
-
- 
 
 
   // Get user ID from context (replace with your logic)
@@ -163,6 +165,28 @@ function ProfilePage() {
     Address: "",
   });
 
+  const [basicInfo, setBasicInfo] = useState({
+    mobile_number1: '',
+    email: ''
+  });
+  const [initialBasicInfo, setInitialBasicInfo] = useState({});
+
+  useEffect(() => {
+    const fetchBasicInfo = async () => {
+      try {
+        const response = await axios.get('/api/basicInfo');
+        const basicInfoData = response.data.basicInfo;
+        setBasicInfo(basicInfoData);
+        setInitialBasicInfo(basicInfoData);
+      } catch (error) {
+        console.error('There was an error fetching the basic info!', error);
+      }
+    };
+
+    fetchBasicInfo();
+  }, []);
+
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -204,6 +228,7 @@ function ProfilePage() {
       setInitialName('N' + 'P');
     }
   }, [FirstName, LastName]);
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -260,26 +285,42 @@ function ProfilePage() {
     }
   };
 
-  async function handleLogout(e) {
+  const handleLogout = (e) => {
     e.preventDefault();
-    if (window.confirm("Are you sure you want to log out?")) {
-      localStorage.clear();
-      signOut();
-      setData({}); // Clear user data
-      axios.delete("api/Users")
-      window.location.href = "/";
-    }
-  }
 
-  const CancelProduct = async (prod_id, user_id) => {
+    confirm({
+      title: 'Are you sure you want to log out?',
+      icon: <ExclamationCircleOutlined />,
+      content: 'Your session will be ended and you will be redirected to the home page.',
+      okText: 'Yes, log out',
+      cancelText: 'No, stay logged in',
+      onOk() {
+        localStorage.clear();
+        signOut();
+        setData({}); // Clear user data
+        axios.delete("api/Users")
+          .then(() => {
+            window.location.href = "/";
+          })
+          .catch((error) => {
+            console.error("Error during logout:", error.message);
+            notifyError("logout", error.message);
+          });
+      },
+      onCancel() {
+      },
+    });
+  };
+
+  const CancelProduct = async (prod_id, user_id, od_id) => {
     try {
 
-      const checkorderStatus = orderData.filter((od) => od.prod_id == prod_id && od.customer_id == user_id)
+      const checkorderStatus = orderData.filter((od) => od.prod_id == prod_id && od.customer_id == user_id && od.od_id == od_id);
 
-      const cancelProd = CancelProdChargeAfterTwentyFourHr(checkorderStatus[0]['order_status_date']);
+      const extraAmt = CancelProdChargeAfterTwentyFourHr(checkorderStatus[0]['order_status_date']);
       const orderStatus = checkorderStatus[0]['order_status'];
 
-      if (cancelProd > 0 && orderStatus >= 2) {
+      if (extraAmt > 0 && orderStatus >= 2) {
         const confirm = window.confirm('Cancelling the order will incur a fee of ₹50. Do you want to proceed?');
 
         if (!confirm) {
@@ -287,18 +328,18 @@ function ProfilePage() {
           return;
 
         } else {
-          const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: cancelProd };
-          var res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, ProdData);
+          const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: extraAmt, order_id: checkorderStatus[0].order_id, type: 'Cancel' };
+          var res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, ProdData);
         }
 
       } else {
-        const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: cancelProd };
-        var res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, ProdData);
+        const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: extraAmt, order_id: checkorderStatus[0].order_id, type: 'Cancel' };
+        var res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, ProdData);
       }
 
 
       // setCancelProdCharge()
-      if (res.data.message === 'updated') {
+      if (res.data.message === 'Order status Updated') {
 
         notify("Your order cancel Request has been sent");
         toast.success("Your order cancel Request has been sent");
@@ -314,19 +355,42 @@ function ProfilePage() {
     }
   }
 
-  const ReturnProduct = async (prod_id, user_id) => {
+  const ReturnProduct = async (prod_id, user_id, od_id) => {
+
     try {
-      // od == order detail 
-      const GetSingleData = orderData.filter((od) => od.prod_id == prod_id && od.customer_id == user_id)
+
+      const GetSingleData = orderData.filter((od) => od.prod_id == prod_id && od.customer_id == user_id && od.od_id == od_id)
       const fourteendayvalidate = ReturnProductBeforeFourteenDays(GetSingleData[0]['order_status_date']);
-      setVerifyReturnDays(fourteendayvalidate);
-      
+
       setReturnSingleProd(GetSingleData);
+      setVerifyReturnDays(fourteendayvalidate)
+
+      if (fourteendayvalidate > 0) {
+        const ProdData = { prod_id: prod_id, user_id: user_id, order_id: GetSingleData[0].order_id, type: 'return' };
+        var res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, ProdData);
+
+        if (res.data.message === 'Order status Updated') {
+
+          notify("Your order Return Request has been sent");
+          toast.success("Your order Return Request has been sent");
+
+        } else {
+
+          notify("Your order Return Request fail");
+          toast.success("Your order Return Request fail");
+
+        }
+      }
+
 
     } catch (error) {
       console.error('Error:', error);
     }
   }
+
+
+
+
   return (
     <>
       <div className="container profile-page-container mb-5">
@@ -589,15 +653,15 @@ function ProfilePage() {
                   <hr />
                   <div className="row mx-auto">
                     <div className="col-md-6">
-                      <a href="tel: +91000000000">
+                      <a href={`tel: ${basicInfo.mobile_number1}`}>
                         <strong>Give a call :</strong>
-                        <u> 0000000000000 </u>
+                        <u> +91-{basicInfo.mobile_number1}</u>
                       </a>
                     </div>
                     <div className="col-md-6">
                       <a href="mail:nationalplastic@gmail.com">
-                        <strong>Or Send Mail to us :</strong>
-                        <u>nationaplastic@gmail.com </u>
+                        <strong>Or Send Mail to us : </strong>
+                        <u>{basicInfo.email}</u>
                       </a>
                     </div>
                   </div>
@@ -625,60 +689,79 @@ function ProfilePage() {
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      {
-                        orderData.map((data, index) => {
-                          let vdate = ReturnProductBeforeFourteenDays(data['order_status_date']);
-                          if (data.image_name) {
-                            var images = data ? data.image_name.split(', ').map(image => image.trim()) : [];
-                          }
-
-                          let ReturnCancelBtn;
-
-                          {/* order status == delivered  */ }
-                          if (data.order_status === 5 && vdate <= 14) {
-                            if(data['per_order_status'] == 0 && data['return_order'] == 0){
-                              ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Return confirmation Sent</button>
-                            }else{
-                              ReturnCancelBtn = <button className="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#ReturnProd" onClick={() => ReturnProduct(data.product_id, data.customer_id)}>Return order</button>
+                    {orderData && orderData.length > 0 ? (
+                      <tbody>
+                        {
+                          orderData.map((data, index) => {
+                            let vdate = ReturnProductBeforeFourteenDays(data['order_status_date']);
+                            if (data.image_name) {
+                              var images = data ? data.image_name.split(', ').map(image => image.trim()) : [];
+                              // setFirstImage(images[0]);
                             }
 
+                            let ReturnCancelBtn;
 
-                          } else if (data.order_status === 1 || data.order_status === 2 || data.order_status === 3 || data.order_status === 4) {
+                            {/* order status == delivered  */ }
+                            if (data.order_status === 5 && vdate <= 14) {
 
-                            if (data.per_order_status === 1) {
+                              if (data['per_order_status'] == 0 && data['return_order'] == 0) {
+                                ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Return confirmation Sent</button>
+                              } else {
+                                ReturnCancelBtn = <button className="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#ReturnProd" onClick={() => ReturnProduct(data.product_id, data.customer_id, data.od_id)}>Return order</button>
+                              }
 
-                              ReturnCancelBtn = <button className="btn btn-warning btn-rounded" onClick={() => CancelProduct(data.product_id, data.customer_id)}>Cancel order</button>
 
-                            } else {
+                            } else if (data.order_status === 1 || data.order_status === 2 || data.order_status === 3 || data.order_status === 4) {
 
-                              {/* once order status get 0 in db it will show order cancelled  */ }
+                              if (data.per_order_status === 1) {
+
+                                ReturnCancelBtn = <button className="btn btn-warning btn-rounded" onClick={() => CancelProduct(data.product_id, data.customer_id, data.od_id)}>Cancel order</button>
+
+                              } else {
+
+                                {/* once order status get 0 in db it will show order cancelled  */ }
+                                ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>
+
+                              }
+
+                            } else if (data.order_status == 6) {
+
                               ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>
 
+                            } else if (data.order_status == 7) {
+                              ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Returned</button>
+                            } else {
+                              ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Placed</button>;
                             }
-
-                          } else if (data.order_status == 6) {
-
-                            ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>
-
-                          } else if (data.order_status == 7) {
-                            ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Returned</button>
-                          } else {
-                            ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Placed</button>;
-                          }
-                          return <tr key={index}>
-                            <th scope="row">{index + 1}</th>
-                            <td><Link href={`/ProductDetail/${data.seo_url}`}><img src={`/Assets/uploads/products/${images[0]}`} height={50} width={50} alt="prod_image" /></Link></td>
-                            <td><Link href={`/ProductDetail/${data.seo_url}`}>{data.product_name}</Link></td>
-                            <td>{data.quantity}</td>
-                            <td>₹ {data.quantity * data.prod_price} </td>
-                            <td>
-                              {ReturnCancelBtn}
-                            </td>
-                          </tr>
-                        })
-                      }
-                    </tbody>
+                            return <tr key={index}>
+                              <th scope="row">{index + 1}</th>
+                              <td>
+                                <Link href={`/ProductDetail/${data.seo_url}`}>
+                                  <Image
+                                    src={images && images.length > 0 ? `/Assets/uploads/products/${images[0]}` : '/Altis-chair-Black-(45)-white bg.webp'}
+                                    height={50}
+                                    width={50}
+                                    alt="prod_image"
+                                  />
+                                </Link>
+                              </td>
+                              <td><Link href={`/ProductDetail/${data.seo_url}`}>{data.product_name}</Link></td>
+                              <td>{data.quantity}</td>
+                              <td>₹ {data.quantity * data.prod_price} </td>
+                              <td>
+                                {ReturnCancelBtn}
+                              </td>
+                            </tr>
+                          })
+                        }
+                      </tbody>
+                    ) : (
+                      <tbody>
+                        <tr>
+                          <td colSpan="6" className="text-center">No order data available</td>
+                        </tr>
+                      </tbody>
+                    )}
                   </table>
                   <hr />
                 </div>

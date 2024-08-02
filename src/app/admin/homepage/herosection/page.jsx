@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Modal, Form, Input, message, Space  } from 'antd';
+import { Table, Button, Modal, Form, Input, message, Space } from 'antd';
 // import { getAllHeroSections, addHeroSection, updateHeroSection, deleteHeroSection } from './api'; // Import your API functions
 import axios from 'axios';
 
@@ -69,9 +69,9 @@ const HeroSectionPage = () => {
       key: 'actions',
       render: (_, record) => (
         <Space size="small">
-        <Button onClick={() => showModal(record)}>Edit</Button>
-        <Button danger onClick={() => handleDelete(record.image_name)}>Delete</Button>
-      </Space>
+          <Button onClick={() => showModal(record)}>Edit</Button>
+          <Button danger onClick={() => handleDelete(record.image_name)}>Delete</Button>
+        </Space>
       ),
     },
   ];

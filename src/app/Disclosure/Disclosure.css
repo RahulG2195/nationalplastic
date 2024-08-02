@@ -20,3 +20,21 @@
   .investor_sec .fa-file-pdf-o {
     color: #dc3545;
   }
+  
+  @media (max-width:600px) {
+    .discliResp{
+      font-size: 10px;
+    }
+    .discloHeading{
+      font-size: 11px;
+    }
+    
+  }
+
+  .disclosureTable :global(.ant-table-cell) {
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .disclosureTable :global(.ant-table-row:last-child .ant-table-cell) {
+    border-bottom: none;
+  }
