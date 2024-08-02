@@ -1,5 +1,6 @@
 "use client";
 import axios from 'axios';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
 const Unaudited = () => {
@@ -10,22 +11,21 @@ const Unaudited = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/GetInvestor`, { type: 'unaudited' });
 
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/InvestorPage`, { Id: 3 });
-
-        const parsedContent = JSON.parse(response.data.results[0].content);
-
-        setFinancialResults(parsedContent.financialResults || []);
-        setIsLoading(false);
+        setFinancialResults(response.data.results); // Assuming data is in response.data
       } catch (error) {
         console.error('Error fetching unaudited financial results data:', error);
         setError('Failed to load data. Please try again later.');
+      } finally {
         setIsLoading(false);
       }
     };
+  
     fetchData();
+  
   }, []);
-
+  
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
@@ -39,26 +39,18 @@ const Unaudited = () => {
                 <thead>
                   <tr>
                     <th scope="col">Year</th>
-                    {financialResults[0]?.quarters.map((quarter, index) => (
-                      <th key={index} scope="col">Financial Results - Q{index + 1}</th>
-                    ))}
+                    <th scope="col">Financial Results - Q1</th>
+                    <th scope="col">Financial Results - Q2</th>
+                    <th scope="col">Financial Results - Q3</th>
                   </tr>
                 </thead>
                 <tbody>
                   {financialResults.map((result, index) => (
                     <tr key={index}>
-                      <td>{result.year}</td>
-                      {result.quarters.map((quarter, qIndex) => (
-                        <td key={qIndex}>
-                          {quarter.link ? (
-                            <a href={quarter.link} target="_blank" rel="noopener noreferrer">
-                              {quarter.title}
-                            </a>
-                          ) : (
-                            quarter.title
-                          )}
-                        </td>
-                      ))}
+                      <td>{result.years}</td>
+                      <td><Link href={result.Q1?.file_name ? result.Q1?.file_name : ''} target='_blank'>{result.Q1?.title}</Link></td>
+                      <td><Link href={result.Q2?.file_name ? result.Q2?.file_name : ''} target='_blank'>{result.Q2?.title}</Link></td>
+                      <td><Link href={result.Q3?.file_name ? result.Q3?.file_name : ''} target='_blank'>{result.Q3?.title}</Link></td>
                     </tr>
                   ))}
                 </tbody>

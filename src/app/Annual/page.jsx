@@ -10,17 +10,19 @@ const Annual = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/InvestorPage`, { Id: 5 });
-        const parsedContent = JSON.parse(response.data.results[0].content);
-        setAnnualReports(parsedContent.annualReports || []);
-        setIsLoading(false);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/GetInvestor`, { type: 'report' });
+        console.log('response', response);
+        setAnnualReports(response.data.results); 
       } catch (error) {
-        console.error('Error fetching annual reports data:', error);
+        console.error('Error fetching Audited financial results data:', error);
         setError('Failed to load data. Please try again later.');
+      } finally {
         setIsLoading(false);
       }
     };
+  
     fetchData();
+  
   }, []);
 
   if (isLoading) return <div>Loading...</div>;
@@ -35,10 +37,10 @@ const Annual = () => {
               <tbody>
                 {annualReports.map((report, index) => (
                   <tr key={index}>
-                    <td data-title="Year" width="25%"><strong>{report.year}</strong></td>
+                    <td data-title="Year" width="25%"><strong>{report.years}</strong></td>
                     <td data-title="Report" width="75%">
-                      <a target='_blank' href={report.pdfUrl} rel="noopener noreferrer">
-                        <i className="fa fa-file-pdf-o" aria-hidden="true"></i> Annual Report
+                      <a target='_blank' href={report.file_name} rel="noopener noreferrer">
+                        <i className="fa fa-file-pdf-o" aria-hidden="true"></i> {report.title}
                       </a>
                     </td>
                   </tr>

@@ -11,19 +11,19 @@ const AnnualReturn = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setIsLoading(true);
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/InvestorPage`, { Id: 6 });
-        const parsedContent = JSON.parse(response.data.results[0].content);
-        setAnnualReturns(parsedContent.annual_returns || []);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/GetInvestor`, { type: 'returns' });
+        console.log('response', response);
+        setAnnualReturns(response.data.results); 
       } catch (error) {
-        console.error('Error fetching annual returns data:', error);
-        setError('Failed to load annual returns data. Please try again later.');
+        console.error('Error fetching Audited financial results data:', error);
+        setError('Failed to load data. Please try again later.');
       } finally {
         setIsLoading(false);
       }
     };
-
+  
     fetchData();
+  
   }, []);
 
   if (isLoading) {
@@ -43,28 +43,20 @@ const AnnualReturn = () => {
       <div className='container'>
         <div className='row'>
           <div className='col-12'>
-            <div className="table-responsive">
-              <table className='table table-striped table-light table-bordered'>
-                <tbody>
-                  {annualReturns.map((yearData, yearIndex) =>
-                    yearData.reports.map((report, reportIndex) => (
-                      <tr key={`${yearIndex}-${reportIndex}`}>
-                        <td className="data-title=&quot;Year&quot;" width="25%">
-                          <a target='_blank' href="/Assets/pdf/NATIONAL%20PLASTIC%20INDUSTRIES%20LIMITED%2019-20.pdf" rel="noopener noreferrer">
-                            <b>Year {yearData.year}</b>
-                          </a>
-                        </td>
-                        <td data-title="Report" width="75%">
-                          <a target='_blank' href={report.url} rel="noopener noreferrer">
-                            <i className="fa fa-file-pdf-o" aria-hidden="true"></i> {report.title}
-                          </a>
-                        </td>
-                      </tr>
-                    ))
-                  )}
-                </tbody>
-              </table>
-            </div>
+            <table className='table table-responsive table-striped table-light table-bordered'>
+              <tbody>
+                {annualReturns.map((report, index) => (
+                  <tr key={index}>
+                    <td data-title="Year" width="25%"><strong>{report.years}</strong></td>
+                    <td data-title="Report" width="75%">
+                      <a target='_blank' href={report.file_name} rel="noopener noreferrer">
+                        <i className="fa fa-file-pdf-o" aria-hidden="true"></i> {report.title}
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

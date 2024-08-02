@@ -10,17 +10,19 @@ const Audited = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/InvestorPage`, { Id: 4 });
-        const parsedContent = JSON.parse(response.data.results[0].content);
-        setAuditedData(parsedContent.auditedReports || []);
-        setIsLoading(false);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/GetInvestor`, { type: 'audited' });
+        console.log('response', response);
+        setAuditedData(response.data.results); 
       } catch (error) {
-        console.error('Error fetching audited financial results data:', error);
+        console.error('Error fetching Audited financial results data:', error);
         setError('Failed to load data. Please try again later.');
+      } finally {
         setIsLoading(false);
       }
     };
+  
     fetchData();
+  
   }, []);
 
   if (isLoading) {
@@ -50,12 +52,12 @@ const Audited = () => {
                     {auditedData.map((item, index) => (
                       <tr key={index}>
                         <td data-title="Year">
-                          <strong>{item.year}</strong>
+                          <strong>{item.years}</strong>
                         </td>
                         <td data-title="Report">
-                          <a href={item.pdfLink} target="_blank" rel="noopener noreferrer">
-                            <i className="fa fa-file-pdf-o" aria-hidden="true" />{" "}
-                            {item.reportTitle}
+                          <a href={item.file_name} target="_blank" rel="noopener noreferrer">
+                            <i className="fa fa-file-pdf-o" aria-hidden="true" />
+                            {item.title}
                           </a>
                         </td>
                       </tr>
