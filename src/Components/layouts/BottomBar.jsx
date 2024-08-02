@@ -48,6 +48,8 @@ function BottomBar() {
       ? item?.image_name
       : item?.image_name?.split(", ")[0].trim();
     
+
+    // console.log('imageName', imageName);
     setCurrentImage(imageName || "");
   }, [navbar, allProducts]);
 
