@@ -10,8 +10,8 @@ const OutcomeMeet = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/api/boardOutcome');
-        setOutcomeData(response.data);
+        const response = await axios.get('/api/admin/Investors/Outcome');
+        setOutcomeData(response.data.outcomeData); // Access the outcomeData property
       } catch (error) {
         console.error('Error fetching data:', error);
         setError('Error fetching data');
@@ -27,7 +27,7 @@ const OutcomeMeet = () => {
   if (error) return <p>{error}</p>;
 
   const groupedData = outcomeData.reduce((acc, item) => {
-    const year = item.year_heading || 'Unknown Year';
+    const year = item.years || 'Unknown Year'; // Use 'years' instead of 'year_heading'
     if (!acc[year]) {
       acc[year] = [];
     }
@@ -52,11 +52,9 @@ const OutcomeMeet = () => {
                             groupedData[year].map((meeting, meetingIndex) => (
                               <tr key={meetingIndex}>
                                 <td>
-                                  {meeting.pdf.split(',').map((pdf, pdfIndex) => (
-                                    <a key={pdfIndex} target='_blank' href={pdf} rel="noopener noreferrer" className='d-block'>
-                                      <i className="fa fa-file-pdf-o" aria-hidden="true"></i> {pdf}
-                                    </a>
-                                  ))}
+                                  <a target='_blank' href={meeting.file_name} rel="noopener noreferrer" className='d-block'>
+                                    <i className="fa fa-file-pdf-o" aria-hidden="true"></i> {meeting.title}
+                                  </a>
                                 </td>
                               </tr>
                             ))
@@ -83,60 +81,3 @@ const OutcomeMeet = () => {
 };
 
 export default OutcomeMeet;
-
-
-// {
-//   "years": [
-//     {
-//       "year": "2024-2025",
-//       "meetings": [
-//         {
-//           "href": "/Assets/pdf/BSE%20Upload-3-13_merged.pdf",
-//           "text": "Outcome of Board Meeting 21st May 2024"
-//         }
-//       ]
-//     },
-//     {
-//       "year": "2023-2024",
-//       "meetings": [
-//         {
-//           "href": "/Assets/pdf/BSE%20Upload(15).pdf",
-//           "text": "Outcome of Board Meeting 12th February 2024"
-//         },
-//         {
-//           "href": "/Assets/pdf/BSE%20Upload(8).pdf",
-//           "text": "Outcome of Board Meeting 9th November 2023"
-//         },
-//         {
-//           "href": "/Assets/pdf/BSE%20Upload(3).pdf",
-//           "text": "Outcome of Board Meeting 11th August 2023"
-//         },
-//         {
-//           "href": "/Assets/pdf/Outcome%20of%20Board%20Meeting%2026th%20May%202023(2).pdf",
-//           "text": "Outcome of Board Meeting 26th May 2023"
-//         }
-//       ]
-//     },
-//     {
-//       "year": "2022-2023",
-//       "meetings": [
-//         {
-//           "href": "/Assets/pdf/Outcome%20of%20Board%20Meeting%20February%2013,%202023.pdf",
-//           "text": "Outcome of Board Meeting 13th February 2023"
-//         },
-//         {
-//           "href": "/Assets/pdf/Outcome%20of%20Board%20Meeting%2028th%20May%202022.pdf",
-//           "text": "Outcome of Board Meeting 28th May 2022"
-//         },
-//         {
-//           "href": "/Assets/pdf/Outcome%20of%20Board%20Meeting%20August%2011,%202022.pdf",
-//           "text": "Outcome of Board Meeting 11th August 2022"
-//         },
-//         {
-//           "href": "/Assets/pdf/Outcome%20of%20Board%20Meeting%20November%2014,%202022.pdf",
-//           "text": "Outcome of Board Meeting 14th November 2022"
-//         }
-//       ]
-//     }
-//   ]
-// }

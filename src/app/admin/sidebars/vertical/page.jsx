@@ -72,7 +72,7 @@ const navigation = [
       },
       {
         title: "Outcome of board meet",
-        href: "/admin/Investor/outcome",
+        href: "/admin/Investor/outcomes",
       },
       {
         title: "Related Party Transactions",
@@ -85,6 +85,10 @@ const navigation = [
       {
         title: "Advertisements",
         href: "/admin/Investor/Advertisements",
+      },
+      {
+        title: "IEPF",
+        href: "/admin/Investor/IEPF",
       },
      
     ],
