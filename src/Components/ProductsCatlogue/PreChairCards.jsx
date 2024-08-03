@@ -284,7 +284,8 @@ const PreChairsCards = () => {
                   <PreChairsCard
                     ChairImg={`/Assets/uploads/products/${images[0]}`}
                     id={product.seo_url}
-                    Title={`${product.product_name} (${product.color})`}
+                    Title={`${product.product_name}`}
+                    Color= {`${product.color}`}
                     Discription={product.short_description}
                     Price={product.price}
                     orignalPrice={product.discount_price}

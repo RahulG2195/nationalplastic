@@ -77,7 +77,7 @@ const PreChairsCard = (props) => {
         <div className="product-detail-container p-2">
           <div className="align-items-center">
             <Link href={`/ProductDetail/${props.id}`} className="">
-              <h5 className="dress-name"><span>{Np}</span> {props.Title} <span className="text-black">({props.color})</span></h5>
+              <h5 className="dress-name"><span>{Np}</span> {props.Title} <span className="text-black">({props.Color})</span></h5>
             </Link>
             <div className="d-md-flex flex-column mb-2">
               {props.showGetQuote && (
