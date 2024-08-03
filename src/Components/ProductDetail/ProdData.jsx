@@ -143,30 +143,30 @@ function ProdData({ category_id }) {
     }
   };
 
+
+  // image change of product on select of radio button 
   const handleColorChange = async (event) => {
     setSelectedColor(event.target.value);
     const colorBasedProduct = { color: event.target.value, name: id };
+
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/colorBasedProduct`,
-        colorBasedProduct
-      );
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/colorBasedProduct`,colorBasedProduct);
+
       const dataBasedOnColor = response.data?.data;
       const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
       const newProductID = dataBasedOnColor[0].product_id;
       setProduct_id(newProductID);
       const NoOfImages = dataBasedOnColor[0].image_name;
-      if (
-        isImageAvailable &&
-        (NoOfImages.includes(",") || NoOfImages.includes(", "))
-      ) {
+      
+      if (NoOfImages || NoOfImages.includes(", ")) {
+        
         setProdData(dataBasedOnColor);
         setData(dataBasedOnColor);
       } else {
         notifyError("Image Not available");
       }
     } catch (err) {
-      notifyError("Image isnt available");
+      notifyError("Opps! somethings is wrong");
     }
   };
 
@@ -252,8 +252,8 @@ function ProdData({ category_id }) {
   const name = data.length > 0 ? data[0].product_name : null;
   const price = data.length > 0 ? data[0].price : null;
   const orignalPrice = data.length > 0 ? data[0].discount_price : null;
-  const baseImageNames =
-    data.length > 0 ? data[0].image_name : "default_chair_img.webp";
+  const baseImageNames = data.length > 0 ? data[0].image_name : "default_chair_img.webp";
+    
   const image = baseImageNames;
 
   const saving = (orignalPrice - price).toFixed(2);

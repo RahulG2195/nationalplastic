@@ -39,17 +39,21 @@ function BottomBar() {
     );
   }, []);
 
+
+  // dynamic images
   const changeImage = useCallback((id, isCategory = false) => {
+    console.log('id', id);
+    console.log('isCategory', isCategory);
     const item = isCategory
       ? navbar.find((cat) => cat.category_id === id)
-      : allProducts.find((prod) => prod.product_name === id && prod.seo_url_clr !== "");
-    
+      : allProducts.find((prod) => prod.product_name === id);
+    console.log('item', item);
     const imageName = isCategory
       ? item?.image_name
       : item?.image_name?.split(", ")[0].trim();
     
 
-    // console.log('imageName', imageName);
+    console.log('imageName', imageName);
     setCurrentImage(imageName || "");
   }, [navbar, allProducts]);
 

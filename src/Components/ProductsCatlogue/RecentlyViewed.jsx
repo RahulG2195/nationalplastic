@@ -295,7 +295,7 @@ const RecentlyViewed = () => {
                 Price={chair.price}
                 orignalPrice={chair.discount_price}
                 Discount={chair.discount_percentage}
-                color={chair.color}
+                Color={chair.color}
                 onaddToWishlist={() =>
                   handleAddToWishlist(
                     chair.product_id,

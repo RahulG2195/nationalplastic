@@ -188,7 +188,7 @@ const BoughtTogether = () => {
                     Discription={card.short_description}
                     Price={card.price}
                     orignalPrice={card.discount_price}
-                    color={card.color}
+                    Color={card.color}
                     // Discount={Math.floor(
                     //   ((card.discount_price - card.price) /
                     //     card.discount_price) *
