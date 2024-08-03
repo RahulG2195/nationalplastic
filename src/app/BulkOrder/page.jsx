@@ -1,6 +1,6 @@
 "use client";
 import dynamic from 'next/dynamic'
-
+import { useState, useEffect } from 'react';
 const BulkOrderBannar = dynamic(() => import('@/Components/BulkOrder/BulkOrderBannar'), { ssr: false })
 const GetQuote = dynamic(() => import('@/Components/BulkOrder/GetQuote'), { ssr: false })
 const BulkPremiumCards = dynamic(() => import('@/Components/BulkOrder/BulkPremiumCards'), { ssr: false })
