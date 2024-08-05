@@ -285,7 +285,7 @@ export default function App() {
         />
       </Form.Item>
 
-      <Form.Item
+      {/* <Form.Item
         label="Product Status"
         validateStatus={errors.prod_status ? 'error' : ''}
         help={errors.prod_status ? 'Please input the product status!' : ''}
@@ -296,7 +296,7 @@ export default function App() {
           rules={{ required: true }}
           render={({ field }) => <Input {...field} />}
         />
-      </Form.Item>
+      </Form.Item> */}
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
         <Button type="primary" htmlType="submit">
