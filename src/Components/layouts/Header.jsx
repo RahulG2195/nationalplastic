@@ -230,7 +230,7 @@ export default function Header() {
                   <Link href="/">
                     <Image
                       src={`/Assets/uploads/${basicInfo.logo}`}
-                      className="Image-fluid"
+                      className="Image-fluid py-3"
                       alt="Landscape picture"
                       height={100}
                       width={100}
