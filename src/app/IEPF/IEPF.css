@@ -1,0 +1,20 @@
+.layout {
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+
+  h2 {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+  
+  .space {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  

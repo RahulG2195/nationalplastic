@@ -10,8 +10,8 @@ const OutcomeMeet = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/api/boardOutcome');
-        setOutcomeData(response.data);
+        const response = await axios.get('/api/admin/Investors/Outcome');
+        setOutcomeData(response.data.outcomeData); // Access the outcomeData property
       } catch (error) {
         console.error('Error fetching data:', error);
         setError('Error fetching data');
@@ -27,7 +27,7 @@ const OutcomeMeet = () => {
   if (error) return <p>{error}</p>;
 
   const groupedData = outcomeData.reduce((acc, item) => {
-    const year = item.year_heading || 'Unknown Year';
+    const year = item.years || 'Unknown Year'; // Use 'years' instead of 'year_heading'
     if (!acc[year]) {
       acc[year] = [];
     }

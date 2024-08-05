@@ -4,18 +4,30 @@ import axios from 'axios';
 
 const OutcomeAGM = () => {
   const [agmOutcomes, setAgmOutcomes] = useState({});
-
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/InvestorPage`, { Id: 11 }); // Assuming 8 is the Id for AGM Outcomes
-        setAgmOutcomes(JSON.parse(response.data.results[0].content));
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/GetInvestor`, {type: 'outcome'});
+        const parsedData = response.data.results.reduce((acc, item) => {
+          acc[item.years] = JSON.parse('[' + item.documents + ']');
+          return acc;
+        }, {});
+        
+        console.log('response', parsedData)
+        
+        setAgmOutcomes(parsedData); 
       } catch (error) {
-        console.error('Error fetching AGM outcome data:', error);
+        console.error('Error fetching Corporate results data:', error);
+        setError('Failed to load data. Please try again later.');
+      } finally {
+        setIsLoading(false);
       }
     };
-
+  
     fetchData();
+  
   }, []);
 
   return (

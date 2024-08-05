@@ -5,9 +5,10 @@ export async function GET(request){
        
         const results = await query({
             // query:"select * from navitems",
-            query:"SELECT * from navitems;",
+            query:"SELECT * from navitems",
             values:[],
         })
+
         return new Response(
             JSON.stringify({
                 results: results

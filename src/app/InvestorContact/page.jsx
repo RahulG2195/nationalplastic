@@ -8,25 +8,24 @@ const InvestorContact = () => {
   useEffect(() => {
     // Fetch data from the API
     axios.get('/api/investorsContact')
-      .then(response => {
-        setInvestorContacts(response.data.investorContacts);
-      })
-      .catch(error => {
-        console.error('Error fetching investor contacts:', error);
-      });
+    .then(response => {
+      setInvestorContacts(response.data.investorContact)  // Note: it's investorContact, not investorContacts
+    })
+    .catch(error => {
+      console.error('Error fetching investor contacts:', error);
+    });
   }, []);
 
   // Separate data by id
-  const investorServices = investorContacts.find(contact => contact.id === 1);
-  const investorRelations = investorContacts.find(contact => contact.id === 2);
-  const registrarsAndAgents = investorContacts.find(contact => contact.id === 3);
-
+  const investorServices = investorContacts?.find(contact => contact.id === 1) || {};
+  const investorRelations = investorContacts?.find(contact => contact.id === 2) || {};
+  const registrarsAndAgents = investorContacts?.find(contact => contact.id === 3) || {};
   return (
     <section className="investor-sec custom-section p-0 p-md-5">
       <div className="container">
         <div className="row">
           {/* Investor Services Section */}
-          {investorServices && (
+          {investorServices && investorServices.heading && (
             <div className="col-12">
               <div className="inn-content-wrap custom-content p-4 shadow-sm rounded">
                 <h3 className="custom-title">{investorServices.heading}</h3>

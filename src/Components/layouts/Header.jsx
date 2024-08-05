@@ -106,11 +106,13 @@ export default function Header() {
   }, [FirstName, LastName]);
 
   const [investorConfig, setInvestorConfig] = useState(staticInvestorConfig);
+  // console.log('investorConfig', investorConfig);
 
   useEffect(() => {
     async function loadConfig() {
       try {
         const config = await fetchInvestorConfig();
+
         setInvestorConfig(config);
       } catch (error) {
         console.error("Failed to fetch investor config, using static config", error);
@@ -210,9 +212,9 @@ export default function Header() {
 
       {!hideLayout ? (
         <>
-          <div className="container-fluid p-0 header menbg">
+          <div className="container-fluid p-0 header menbg ">
             {/* <TopBar /> */}
-            <nav className="navbar navbar-expand-lg main_header px-3">
+            <nav className="navbar navbar-expand-lg main_header py-5">
               <div className="container-fluid ">
                 <div className="navbar-brand">
                   <button
@@ -230,7 +232,7 @@ export default function Header() {
                   <Link href="/">
                     <Image
                       src={`/Assets/uploads/${basicInfo.logo}`}
-                      className="Image-fluid py-3"
+                      className="Image-fluid"
                       alt="Landscape picture"
                       height={100}
                       width={100}
