@@ -10,6 +10,11 @@ const nextConfig = {
     domains: ['localhost', 'nationalplastic.com'],
   },
 
+  api: {
+    bodyParser: {
+      sizeLimit: '100mb', // Set this to match your needs
+    },
+  },
 };
 
 
