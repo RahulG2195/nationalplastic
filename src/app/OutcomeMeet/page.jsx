@@ -52,9 +52,11 @@ const OutcomeMeet = () => {
                             groupedData[year].map((meeting, meetingIndex) => (
                               <tr key={meetingIndex}>
                                 <td>
-                                  <a target='_blank' href={meeting.file_name} rel="noopener noreferrer" className='d-block'>
-                                    <i className="fa fa-file-pdf-o" aria-hidden="true"></i> {meeting.title}
-                                  </a>
+                                  {meeting.pdf.split(',').map((pdf, pdfIndex) => (
+                                    <a key={pdfIndex} target='_blank' href={`Assets/uploads/${pdf}`} rel="noopener noreferrer" className='d-block'>
+                                      <i className="fa fa-file-pdf-o" aria-hidden="true"></i> {pdf}
+                                    </a>
+                                  ))}
                                 </td>
                               </tr>
                             ))
@@ -81,3 +83,5 @@ const OutcomeMeet = () => {
 };
 
 export default OutcomeMeet;
+
+

@@ -212,9 +212,9 @@ export default function Header() {
 
       {!hideLayout ? (
         <>
-          <div className="container-fluid p-0 header menbg">
+          <div className="container-fluid p-0 header menbg ">
             {/* <TopBar /> */}
-            <nav className="navbar navbar-expand-lg main_header px-3">
+            <nav className="navbar navbar-expand-lg main_header py-5">
               <div className="container-fluid ">
                 <div className="navbar-brand">
                   <button
