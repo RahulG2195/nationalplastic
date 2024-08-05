@@ -1,16 +1,19 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Form, Input, Button, InputNumber, Spin } from 'antd';
+import { Form, Input, Button, InputNumber, Spin,Select } from 'antd';
 import "./EditProduct.css";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast, Bounce } from "react-toastify";
+const { Option } = Select;
 
 export default function App() {
   const { control, handleSubmit, setValue, reset, formState: { errors } } = useForm();
   const [imagePreviews, setImagePreviews] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [categories, setCategories] = useState([]);
+
   const navigate = useNavigate();
 
   const handleNavigation = () => {
@@ -106,6 +109,19 @@ export default function App() {
       }
     }
   }, [setValue]);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/adminValidationP`);
+        setCategories(response.data.categories || []);
+      } catch (error) {
+        console.error('Failed to fetch categories:', error);
+        toast.error('Failed to load categories');
+      }
+    };
+  
+    fetchCategories();
+  }, []);
 
   return (
     <Spin spinning={isLoading} tip="Updating product...">
@@ -123,7 +139,7 @@ export default function App() {
           <Controller
             name="product_name"
             control={control}
-            rules={{ required: true, minLength: 1, maxLength: 65, pattern: /^[a-zA-Z0-9\s-]+$/i }}
+            rules={{ minLength: 1, maxLength: 65, pattern: /^[a-zA-Z0-9\s-]+$/i }}
             render={({ field }) => <Input {...field} />}
           />
         </Form.Item>
@@ -176,23 +192,31 @@ export default function App() {
           <Controller
             name="seo_url"
             control={control}
-            rules={{ required: true }}
             render={({ field }) => <Input {...field} />}
           />
         </Form.Item>
 
         <Form.Item
-          label="Category Name"
-          validateStatus={errors.category_name ? 'error' : ''}
-          help={errors.category_name ? 'Please input the category name!' : ''}
-        >
-          <Controller
-            name="category_name"
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => <Input {...field} />}
-          />
-        </Form.Item>
+  label="Category"
+  validateStatus={errors.category_id ? 'error' : ''}
+  help={errors.category_id ? 'Please select a category!' : ''}
+>
+  <Controller
+    name="category_name"
+    control={control}
+    rules={{ required: true }}
+    render={({ field }) => (
+      <Select {...field} placeholder="Select a category">
+        {categories.map((category) => (
+          <Option key={category.category_name} value={category.category_name}>
+            {category.category_name}
+          </Option>
+        ))}
+      </Select>
+    )}
+  />
+</Form.Item>
+
 
         <Form.Item
           label="Images"
@@ -225,7 +249,6 @@ export default function App() {
           <Controller
             name="price"
             control={control}
-            rules={{ required: true }}
             render={({ field }) => <InputNumber {...field} style={{ width: '100%' }} />}
           />
         </Form.Item>
@@ -238,7 +261,6 @@ export default function App() {
           <Controller
             name="discount_price"
             control={control}
-            rules={{ required: true }}
             render={({ field }) => <InputNumber {...field} style={{ width: '100%' }} />}
           />
         </Form.Item>
@@ -251,7 +273,6 @@ export default function App() {
           <Controller
             name="discount_percentage"
             control={control}
-            rules={{ required: true }}
             render={({ field }) => <InputNumber {...field} style={{ width: '100%' }} />}
           />
         </Form.Item>
@@ -272,7 +293,6 @@ export default function App() {
           <Controller
             name="InstallationCharges"
             control={control}
-            rules={{ required: true }}
             render={({ field }) => <Input {...field} />}
           />
         </Form.Item>
@@ -285,7 +305,6 @@ export default function App() {
           <Controller
             name="color"
             control={control}
-            rules={{ required: true }}
             render={({ field }) => <Input {...field} />}
           />
         </Form.Item>
@@ -298,7 +317,6 @@ export default function App() {
           <Controller
             name="armType"
             control={control}
-            rules={{ required: true }}
             render={({ field }) => <Input {...field} />}
           />
         </Form.Item>
@@ -311,7 +329,6 @@ export default function App() {
           <Controller
             name="prod_status"
             control={control}
-            rules={{ required: true }}
             render={({ field }) => <Input {...field} />}
           />
         </Form.Item>

@@ -58,7 +58,6 @@ export async function POST(request) {
       "InstallationCharges",
       "color",
       "armType",
-      "prod_status",
     ];
     const data = {};
     const missingFields = [];
@@ -79,6 +78,7 @@ export async function POST(request) {
       "short_description",
       "long_description",
       "duration",
+      "prod_status",
     ];
     optionalFields.forEach((field) => {
       const value = formData.get(field);
@@ -205,7 +205,6 @@ export async function PUT(request) {
       "discount_price",
       "color",
       "armType",
-      "prod_status",
       "product_id",
     ];
     const data = {};
@@ -275,7 +274,7 @@ export async function PUT(request) {
         data.color,
         color_code,
         data.armType,
-        data.prod_status,
+        data.prod_status || 1,
         data.product_id,
       ],
     });

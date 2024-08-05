@@ -37,6 +37,14 @@ export async function POST(request) {
       results = await query({
         query: `SELECT years, GROUP_CONCAT( JSON_OBJECT( 'title', title, 'file_name', file_name ) ) AS documents FROM outcomes GROUP BY years ORDER BY years DESC;`,
       });
+    }else if (type == "notice") {
+      results = await query({
+        query: `SELECT years, GROUP_CONCAT( JSON_OBJECT( 'title', title, 'file_name', file_name ) ) AS documents FROM notice GROUP BY years ORDER BY years DESC;`,
+      });
+    }else if (type == "transfer") {
+      results = await query({
+        query: `SELECT years, GROUP_CONCAT( JSON_OBJECT( 'title', title, 'file_name', file_name ) ) AS documents FROM transfer GROUP BY years ORDER BY years DESC;`,
+      });
     }
 
     return new Response(
