@@ -6,13 +6,10 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
 
-  source: "/favicon.ico",
-  headers: [
-    {
-      key: "Cache-Control",
-      value: "public, max-age=86400, must-revalidate",
-    },
-  ],
+  images: {
+    domains: ['localhost', 'nationalplastic.com'],
+  },
+
 };
 
 

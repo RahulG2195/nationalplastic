@@ -7,6 +7,7 @@ import axios from "axios";
 import { notify } from "@/utils/notify";
 import GetQuoteForm from "@/Components/BulkOrder/GetQuoteForm.jsx";
 import numberWithCommas from '@/utils/formatnumber';
+import Image from "next/image";
 
 const PreChairsCard = (props) => {
   const [inWishlist, setInWishlist] = useState(false);
@@ -67,10 +68,13 @@ const PreChairsCard = (props) => {
             </div>
           </div>
           <Link href={`/ProductDetail/${props.id}`}>
-            <img
-              src={props.ChairImg}
-              className="img-fluid rounded thumbnail-image"
-            />
+            <Image 
+            src={props.ChairImg} 
+            className="img-fluid rounded thumbnail-image"
+            height={100}
+            width={100}
+            layout="responsive"
+            objectFit="cover"/>
           </Link>
         </div>
 
