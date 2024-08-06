@@ -308,7 +308,7 @@ function ProdData({ category_id }) {
                     </p>
 
                     {dataToShow.map((val, index) => {
-                      const baseImageUrl = "/Assets/images/products";
+                      const baseImageUrl = "/Assets/uploads/products";
                       const imageSrc = `${baseImageUrl}/${val.image_name}`;
                       return (
                         <label
