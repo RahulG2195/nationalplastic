@@ -76,6 +76,7 @@
     "react-tooltip": "^5.26.4",
     "reactstrap": "^9.2.2",
     "redux-persist": "^6.0.0",
+    "resend": "^3.5.0",
     "resolve-url": "^0.2.1",
     "rimraf": "^5.0.7",
     "saas": "^1.0.0",

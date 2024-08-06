@@ -11,7 +11,7 @@ const OutcomeMeet = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get('/api/admin/Investors/Outcome');
-        setOutcomeData(response.data.outcomeData); // Access the outcomeData property
+        setOutcomeData(response.data.outcomeData);
       } catch (error) {
         console.error('Error fetching data:', error);
         setError('Error fetching data');
@@ -27,7 +27,7 @@ const OutcomeMeet = () => {
   if (error) return <p>{error}</p>;
 
   const groupedData = outcomeData.reduce((acc, item) => {
-    const year = item.years || 'Unknown Year'; // Use 'years' instead of 'year_heading'
+    const year = item.years || 'Unknown Year';
     if (!acc[year]) {
       acc[year] = [];
     }
@@ -52,11 +52,9 @@ const OutcomeMeet = () => {
                             groupedData[year].map((meeting, meetingIndex) => (
                               <tr key={meetingIndex}>
                                 <td>
-                                  {meeting.pdf.split(',').map((pdf, pdfIndex) => (
-                                    <a key={pdfIndex} target='_blank' href={`Assets/uploads/${pdf}`} rel="noopener noreferrer" className='d-block'>
-                                      <i className="fa fa-file-pdf-o" aria-hidden="true"></i> {pdf}
-                                    </a>
-                                  ))}
+                                  <a target='_blank' href={meeting.file_name} rel="noopener noreferrer" className='d-block'>
+                                    <i className="fa fa-file-pdf-o" aria-hidden="true"></i> {meeting.title}
+                                  </a>
                                 </td>
                               </tr>
                             ))
@@ -83,5 +81,3 @@ const OutcomeMeet = () => {
 };
 
 export default OutcomeMeet;
-
-

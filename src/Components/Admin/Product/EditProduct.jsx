@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Form, Input, Button, InputNumber, Spin,Select } from 'antd';
+import { Form, Input, Button, InputNumber, Spin, Select } from 'antd';
 import "./EditProduct.css";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -9,11 +9,12 @@ import { toast, Bounce } from "react-toastify";
 const { Option } = Select;
 
 export default function App() {
-  const { control, handleSubmit, setValue, reset, formState: { errors } } = useForm();
+  const { control, handleSubmit, setValue, getValues, reset, formState: { errors } } = useForm();
   const [imagePreviews, setImagePreviews] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState([]);
-
+  const [calculatedDiscountPrice, setCalculatedDiscountPrice] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState({ id: null, name: '' });
   const navigate = useNavigate();
 
   const handleNavigation = () => {
@@ -34,13 +35,17 @@ export default function App() {
       throw error;
     }
   };
-
+  const calculateDiscountPrice = (price, discountPercentage) => {
+    if (!price || !discountPercentage) return 0;
+    const discountAmount = price * (discountPercentage / 100);
+    return Number((price - discountAmount).toFixed(2));
+  };
   const onSubmit = async (data) => {
     setIsLoading(true);
     const submitLoader = async () => {
       try {
         const formData = new FormData();
-        
+
         Object.keys(data).forEach(key => {
           if (key === 'image') {
             data[key].forEach(file => {
@@ -50,7 +55,15 @@ export default function App() {
             formData.append(key, data[key]);
           }
         });
+        formData.append('discount_price', calculatedDiscountPrice);
+        formData.append('category_id_edited', selectedCategory.id);
 
+        let formDataString = '';
+        formData.forEach((value, key) => {
+          formDataString += `${key}: ${value}\n`;
+        });
+
+        console.log("formData:\n" + formDataString);
         await updateProduct(formData);
 
         reset();
@@ -79,12 +92,12 @@ export default function App() {
       }
     );
   };
-  
+
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
     setValue('image', files);
     setValue('image_name', files.map(file => file.name).join(','));
-    
+
     const newPreviews = files.map(file => {
       return new Promise((resolve) => {
         const reader = new FileReader();
@@ -107,6 +120,8 @@ export default function App() {
         const previews = images.map(img => `/Assets/uploads/products/${img.trim()}`);
         setImagePreviews(previews);
       }
+      // Calculate initial discount price
+      setCalculatedDiscountPrice(calculateDiscountPrice(data.price || 0, data.discount_percentage || 0));
     }
   }, [setValue]);
   useEffect(() => {
@@ -119,7 +134,7 @@ export default function App() {
         toast.error('Failed to load categories');
       }
     };
-  
+
     fetchCategories();
   }, []);
 
@@ -139,7 +154,7 @@ export default function App() {
           <Controller
             name="product_name"
             control={control}
-            rules={{ minLength: 1, maxLength: 65, pattern: /^[a-zA-Z0-9\s-]+$/i }}
+            rules={{ required: true,minLength: 1, maxLength: 65, pattern: /^[a-zA-Z0-9\s-]+$/i }}
             render={({ field }) => <Input {...field} />}
           />
         </Form.Item>
@@ -192,30 +207,38 @@ export default function App() {
           <Controller
             name="seo_url"
             control={control}
+            rules={{ required: true }}
             render={({ field }) => <Input {...field} />}
           />
         </Form.Item>
 
         <Form.Item
-  label="Category"
-  validateStatus={errors.category_id ? 'error' : ''}
-  help={errors.category_id ? 'Please select a category!' : ''}
->
-  <Controller
-    name="category_name"
-    control={control}
-    rules={{ required: true }}
-    render={({ field }) => (
-      <Select {...field} placeholder="Select a category">
-        {categories.map((category) => (
-          <Option key={category.category_name} value={category.category_name}>
-            {category.category_name}
-          </Option>
-        ))}
-      </Select>
-    )}
-  />
-</Form.Item>
+          label="Category"
+          validateStatus={errors.category_name ? 'error' : ''}
+          help={errors.category_name ? 'Please select a category!' : ''}
+        >
+          <Controller
+            name="category_name"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <Select
+                {...field}
+                placeholder="Select a category"
+                onChange={(value, option) => {
+                  setSelectedCategory({ id: option.key, name: value });
+                  field.onChange(value);
+                }}
+              >
+                {categories.map((category) => (
+                  <Option key={category.category_id} value={category.category_name}>
+                    {category.category_name}
+                  </Option>
+                ))}
+              </Select>
+            )}
+          />
+        </Form.Item>
 
 
         <Form.Item
@@ -225,12 +248,12 @@ export default function App() {
         >
           <div className="image-previews">
             {imagePreviews.map((preview, index) => (
-              <img 
+              <img
                 key={index}
-                src={preview} 
-                alt={`Product image ${index + 1}`} 
+                src={preview}
+                alt={`Product image ${index + 1}`}
                 title={`Product Image ${index + 1}`}
-                style={{ maxWidth: '40px', marginRight: '10px', marginBottom: '10px' }} 
+                style={{ maxWidth: '40px', marginRight: '10px', marginBottom: '10px' }}
               />
             ))}
           </div>
@@ -249,19 +272,18 @@ export default function App() {
           <Controller
             name="price"
             control={control}
-            render={({ field }) => <InputNumber {...field} style={{ width: '100%' }} />}
-          />
-        </Form.Item>
-
-        <Form.Item
-          label="Discount Price"
-          validateStatus={errors.discount_price ? 'error' : ''}
-          help={errors.discount_price ? 'Please input the discount price!' : ''}
-        >
-          <Controller
-            name="discount_price"
-            control={control}
-            render={({ field }) => <InputNumber {...field} style={{ width: '100%' }} />}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <InputNumber
+                {...field}
+                style={{ width: '100%' }}
+                onChange={(value) => {
+                  field.onChange(value);
+                  const discountPercentage = getValues('discount_percentage') || 0;
+                  setCalculatedDiscountPrice(calculateDiscountPrice(value || 0, discountPercentage));
+                }}
+              />
+            )}
           />
         </Form.Item>
 
@@ -273,27 +295,45 @@ export default function App() {
           <Controller
             name="discount_percentage"
             control={control}
-            render={({ field }) => <InputNumber {...field} style={{ width: '100%' }} />}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <InputNumber
+                {...field}
+                style={{ width: '100%' }}
+                onChange={(value) => {
+                  field.onChange(value);
+                  const price = getValues('price') || 0;
+                  setCalculatedDiscountPrice(calculateDiscountPrice(price, value || 0));
+                }}
+              />
+            )}
           />
         </Form.Item>
 
-        <Form.Item label="Duration">
-          <Controller
-            name="duration"
-            control={control}
-            render={({ field }) => <InputNumber {...field} style={{ width: '100%' }} />}
+        <Form.Item label="Discount Price">
+          <InputNumber
+            value={calculatedDiscountPrice}
+            readOnly
+            style={{ width: '100%' }}
           />
         </Form.Item>
 
-        <Form.Item
-          label="Installation Charges"
-          validateStatus={errors.InstallationCharges ? 'error' : ''}
-          help={errors.InstallationCharges ? 'Please input the installation charges!' : ''}
-        >
+
+        <Form.Item label="Installation Charges">
           <Controller
             name="InstallationCharges"
             control={control}
-            render={({ field }) => <Input {...field} />}
+            defaultValue={0}
+            render={({ field }) => (
+              <InputNumber
+                {...field}
+                style={{ width: '100%' }}
+                min={0}
+                max={999}
+                precision={2}
+                step={1}
+              />
+            )}
           />
         </Form.Item>
 
@@ -305,6 +345,8 @@ export default function App() {
           <Controller
             name="color"
             control={control}
+            rules={{ required: true }}
+
             render={({ field }) => <Input {...field} />}
           />
         </Form.Item>
@@ -312,12 +354,18 @@ export default function App() {
         <Form.Item
           label="Arm Type"
           validateStatus={errors.armType ? 'error' : ''}
-          help={errors.armType ? 'Please input the arm type!' : ''}
+          help={errors.armType ? 'Please select the arm type!' : ''}
         >
           <Controller
             name="armType"
             control={control}
-            render={({ field }) => <Input {...field} />}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <Select {...field} style={{ width: '100%' }}>
+                <Option value="with_arm_tent">With Arm Tent</Option>
+                <Option value="without_arm_tent">Without Arm Tent</Option>
+              </Select>
+            )}
           />
         </Form.Item>
 
