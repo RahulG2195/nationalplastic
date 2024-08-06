@@ -142,11 +142,11 @@ color: #05276C !important;
         /* outline: none;  */
         box-shadow: none;
     }
-    .navbar-brand img {
+    /* .navbar-brand img {
         height: 40px !important;
         width: 80px !important;
         object-fit: contain;
-    }
+    } */
     .navbar-brand {
         margin: 0 !important;
         padding: 0 !important;
@@ -307,9 +307,9 @@ color: #05276C !important;
 }
 
 .navbar-brand img {
-    height: 80px;
-    width: 123px;
-    object-fit: contain;
+    /* height: 50px; */
+    /* width: 123px; */
+    /* object-fit: contain; */
     /* margin-top: 10px ;
       margin-bottom: 10px ; */
 }
