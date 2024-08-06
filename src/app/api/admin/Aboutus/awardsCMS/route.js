@@ -62,7 +62,7 @@ async function saveAwardOrCertificate(formData, action) {
       const filename = file.name;
       const filepath = `./public/Assets/uploads/Aboutus/${filename}`
       await writeFile(filepath, buffer);
-      image_url = `${filename}`;
+      image_url = `/${filename}`;
     }
 
     if (action === 'ADD') {

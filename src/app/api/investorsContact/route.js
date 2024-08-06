@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 export async function GET(request) {
   try {
     const results = await query({
-      query: 'SELECT * FROM investorContact',
+      query: 'SELECT * FROM investorcontact',
     //   values: [], // Assuming you want to fetch the data for the first row
     });
 
@@ -52,7 +52,7 @@ export async function PUT(request) {
       values.push(row.id); // Add ID to the end of the values for WHERE clause
   
       const dynamicQuery = `
-        UPDATE investorContact
+        UPDATE investorcontact
         SET ${queryParts.join(', ')}
         WHERE id = ?
       `;
