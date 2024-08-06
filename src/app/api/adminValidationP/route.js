@@ -3,7 +3,7 @@ import { query } from '@/lib/db';
 export async function POST(request) {
     try {
       const categories = await query({
-        query: "SELECT category_name FROM categories",
+        query: "SELECT category_name , category_id FROM categories",
         values: [],
       });
       // If categories exist, return them
