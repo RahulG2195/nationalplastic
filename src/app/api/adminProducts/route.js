@@ -26,23 +26,6 @@ const uploadImage = async (file) => {
   }
 };
 
-const convertCategoryID = async (category_name) => {
-  try {
-    const category = await query({
-      query: "SELECT category_id FROM categories WHERE category_name = ?",
-      values: [category_name],
-    });
-
-    if (category.length > 0) {
-      return category[0].category_id;
-    } else {
-      return false;
-    }
-  } catch (error) {
-    console.error("Error querying the database:", error);
-    return false;
-  }
-};
 // formData:
 // product_name: Tester 
 // meta_title: undefined
