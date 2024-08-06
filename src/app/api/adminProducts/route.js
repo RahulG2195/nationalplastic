@@ -26,24 +26,22 @@ const uploadImage = async (file) => {
   }
 };
 
-const convertCategoryID = async (category_name) => {
-  try {
-    const category = await query({
-      query: "SELECT category_id FROM categories WHERE category_name = ?",
-      values: [category_name],
-    });
-
-    if (category.length > 0) {
-      return category[0].category_id;
-    } else {
-      return false;
-    }
-  } catch (error) {
-    console.error("Error querying the database:", error);
-    return false;
-  }
-};
-
+// formData:
+// product_name: Tester 
+// meta_title: undefined
+// meta_description: undefined
+// short_description: undefined
+// long_description: undefined
+// seo_title: undefined
+// seo_url: tester
+// category_name: Office Chair
+// price: 22
+// discount_percentage: 20
+// InstallationCharges: 0
+// color: red
+// armType: with_arm_tent
+// discount_price: 17.6
+// category_id: 40
 export async function POST(request) {
   try {
     const formData = await request.formData();
@@ -51,7 +49,7 @@ export async function POST(request) {
     const requiredFields = [
       "product_name",
       "seo_url",
-      "category_name",
+      "category_id",
       "price",
       "discount_price",
       "discount_percentage",
@@ -81,9 +79,11 @@ export async function POST(request) {
       "prod_status",
     ];
     optionalFields.forEach((field) => {
-      const value = formData.get(field);
-      if (value) {
+      let value = formData.get(field);
+      if (value && value !== 'undefined') {
         data[field] = value;
+      } else {
+        data[field] = null;
       }
     });
 
@@ -121,8 +121,7 @@ export async function POST(request) {
     }
     data.image_name = imageNames.join(",");
 
-    const category_id = await convertCategoryID(data.category_name);
-    data.category_id = category_id;
+
 
     // Convert color name to color code
     let color_code;
@@ -134,6 +133,8 @@ export async function POST(request) {
         { status: 400 }
       );
     }
+    console.log("Data to be inserted:", data);
+
 
     // Insert the new product
     const result = await query({
@@ -163,7 +164,7 @@ export async function POST(request) {
         data.color,
         color_code,
         data.armType,
-        data.prod_status,
+        data.prod_status || 1,
       ],
     });
 
@@ -236,6 +237,8 @@ export async function PUT(request) {
       imageNames.length > 0 ? imageNames.join(",") : formData.get("image_name");
 
     // Convert color name to color code
+    const categoryId = formData.get("category_id_edited") || formData.get("category_id");
+data.category_id = categoryId;
     let color_code;
     try {
       color_code = convertColorToCode(data.color);

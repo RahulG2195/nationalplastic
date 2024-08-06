@@ -100,7 +100,7 @@ const AwardsCMS = () => {
         title: 'Image',
         dataIndex: 'image_url',
         key: 'image_url',
-        render: (text) => text ? <img src={`/Assets/uploads/Aboutus/${text}`} alt="certificate" style={{ width: 50 }} /> : 'No image',
+        render: (text) => text ? <img src={`/Assets/uploads/Aboutus${text}`} alt="certificate" style={{ width: 50 }} /> : 'No image',
       },
       {
         title: 'Display Order',

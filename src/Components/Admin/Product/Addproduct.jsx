@@ -9,9 +9,12 @@ import { toast, Bounce } from "react-toastify";
 
 const { Option } = Select;
 export default function App() {
-  const { control, handleSubmit, setValue, reset, formState: { errors } } = useForm();
+  const { control, handleSubmit, setValue, getValues, reset, formState: { errors } } = useForm();
   const [imagePreviews, setImagePreviews] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [calculatedDiscountPrice, setCalculatedDiscountPrice] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState({ id: null, name: '' });
+
   const navigate = useNavigate();
   const handleNavigation = () => {
     navigate('/admin/product', { replace: true });
@@ -27,45 +30,57 @@ export default function App() {
         toast.error('Failed to load categories');
       }
     };
-  
+
     fetchCategories();
   }, []);
+  const calculateDiscountPrice = (price, discountPercentage) => {
+    const discountAmount = price * (discountPercentage / 100);
+    return price - discountAmount;
+  };
 
   const onSubmit = async (data) => {
     const submitLoader = async () => {
       try {
         // Validate category name and get category_id
-     
 
-          // Prepare the form data
-          const formData = new FormData();
-          Object.keys(data).forEach(key => {
-            if (key === 'images') {
-              data[key].forEach((file, index) => {
-                formData.append(`image${index}`, file);
-              });
-            } else {
-              formData.append(key, data[key]);
-            }
-          });
-          // Send data to the API
-          const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/adminProducts`, formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          });
 
-          reset();
-          handleNavigation();
-          return 'Product created successfully';
-  
+        // Prepare the form data
+        const formData = new FormData();
+        Object.keys(data).forEach(key => {
+          if (key === 'images') {
+            data[key].forEach((file, index) => {
+              formData.append(`image${index}`, file);
+            });
+          } else {
+            formData.append(key, data[key]);
+          }
+        });
+        formData.append('discount_price', calculatedDiscountPrice);
+        formData.append('category_id', selectedCategory.id);
+        let formDataString = '';
+        formData.forEach((value, key) => {
+          formDataString += `${key}: ${value}\n`;
+        });
+        
+        console.log("formData:\n" + formDataString);
+
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/adminProducts`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+
+        reset();
+        handleNavigation();
+        return 'Product created successfully';
+
       } catch (error) {
-        
+
         throw new Error(error.response ? error.response.data.error : 'Failed to create product');
-        
+
       }
     };
-  
+
     toast.promise(
       submitLoader(),
       {
@@ -83,16 +98,16 @@ export default function App() {
       }
     );
   };
-  
+
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
     setValue('images', files);
-    
+
     // Create previews
     const newPreviews = files.map(file => URL.createObjectURL(file));
     setImagePreviews(newPreviews);
   };
-  
+
   return (
     <Form
       onFinish={handleSubmit(onSubmit)}
@@ -168,17 +183,24 @@ export default function App() {
 
       <Form.Item
   label="Category"
-  validateStatus={errors.category_id ? 'error' : ''}
-  help={errors.category_id ? 'Please select a category!' : ''}
+  validateStatus={errors.category_name ? 'error' : ''}
+  help={errors.category_name ? 'Please select a category!' : ''}
 >
   <Controller
     name="category_name"
     control={control}
     rules={{ required: true }}
     render={({ field }) => (
-      <Select {...field} placeholder="Select a category">
+      <Select
+        {...field}
+        placeholder="Select a category"
+        onChange={(value, option) => {
+          setSelectedCategory({ id: option.key, name: value });
+          field.onChange(value);
+        }}
+      >
         {categories.map((category) => (
-          <Option key={category.category_name} value={category.category_name}>
+          <Option key={category.category_id} value={category.category_name}>
             {category.category_name}
           </Option>
         ))}
@@ -186,6 +208,7 @@ export default function App() {
     )}
   />
 </Form.Item>
+
 
       <Form.Item
         label="Images"
@@ -199,11 +222,11 @@ export default function App() {
         />
         <div style={{ marginTop: '10px' }}>
           {imagePreviews.map((preview, index) => (
-            <img 
-              key={index} 
-              src={preview} 
-              alt={`Preview ${index + 1}`} 
-              style={{ width: '100px', height: '100px', objectFit: 'cover', marginRight: '10px' }} 
+            <img
+              key={index}
+              src={preview}
+              alt={`Preview ${index + 1}`}
+              style={{ width: '100px', height: '100px', objectFit: 'cover', marginRight: '10px' }}
             />
           ))}
         </div>
@@ -217,47 +240,69 @@ export default function App() {
         <Controller
           name="price"
           control={control}
-          rules={{ required: true }}
-          render={({ field }) => <InputNumber {...field} style={{ width: '100%' }} />}
+    rules={{ required: true }}
+          render={({ field }) => (
+            <InputNumber
+              {...field}
+              style={{ width: '100%' }}
+              onChange={(value) => {
+                field.onChange(value);
+                const discountPercentage = getValues('discount_percentage') || 0;
+                setCalculatedDiscountPrice(calculateDiscountPrice(value, discountPercentage));
+              }}
+            />
+          )}
         />
       </Form.Item>
 
       <Form.Item
-        label="Discount Price"
-        validateStatus={errors.discount_price ? 'error' : ''}
-        help={errors.discount_price ? 'Please input the discount price!' : ''}
+        label="Discount Percentage"
+        validateStatus={errors.discount_percentage ? 'error' : ''}
+        help={errors.discount_percentage ? 'Please input the discount percentage!' : ''}
       >
-        <Controller
-          name="discount_price"
-          control={control}
-          rules={{ required: true }}
-          render={({ field }) => <InputNumber {...field} style={{ width: '100%' }} />}
-        />
-      </Form.Item>
-
-      <Form.Item label="Discount Percentage">
         <Controller
           name="discount_percentage"
           control={control}
-          render={({ field }) => <InputNumber {...field} style={{ width: '100%' }} />}
+    rules={{ required: true }}
+
+          render={({ field }) => (
+            <InputNumber
+              {...field}
+              style={{ width: '100%' }}
+              onChange={(value) => {
+                field.onChange(value);
+                const price = getValues('price') || 0;
+                setCalculatedDiscountPrice(calculateDiscountPrice(price, value));
+              }}
+            />
+          )}
         />
       </Form.Item>
-
-      <Form.Item label="Duration">
-        <Controller
-          name="duration"
-          control={control}
-          render={({ field }) => <InputNumber {...field} style={{ width: '100%' }} />}
+      <Form.Item label="Discount Price">
+        <InputNumber
+          value={calculatedDiscountPrice}
+          readOnly
+          style={{ width: '100%' }}
         />
       </Form.Item>
 
       <Form.Item label="Installation Charges">
-        <Controller
-          name="InstallationCharges"
-          control={control}
-          render={({ field }) => <Input {...field} />}
-        />
-      </Form.Item>
+  <Controller
+    name="InstallationCharges"
+    control={control}
+    defaultValue={0}
+    render={({ field }) => (
+      <InputNumber
+        {...field}
+        style={{ width: '100%' }}
+        min={0}
+        max={999}
+        precision={2}
+        step={1}
+      />
+    )}
+  />
+</Form.Item>
 
       <Form.Item
         label="Color"
@@ -273,17 +318,22 @@ export default function App() {
       </Form.Item>
 
       <Form.Item
-        label="Arm Type"
-        validateStatus={errors.armType ? 'error' : ''}
-        help={errors.armType ? 'Please input the arm type!' : ''}
-      >
-        <Controller
-          name="armType"
-          control={control}
-          rules={{ required: true }}
-          render={({ field }) => <Input {...field} />}
-        />
-      </Form.Item>
+  label="Arm Type"
+  validateStatus={errors.armType ? 'error' : ''}
+  help={errors.armType ? 'Please select the arm type!' : ''}
+>
+  <Controller
+    name="armType"
+    control={control}
+    rules={{ required: true }}
+    render={({ field }) => (
+      <Select {...field} style={{ width: '100%' }}>
+        <Option value="with_arm_tent">With Arm Tent</Option>
+        <Option value="without_arm_tent">Without Arm Tent</Option>
+      </Select>
+    )}
+  />
+</Form.Item>
 
       {/* <Form.Item
         label="Product Status"
