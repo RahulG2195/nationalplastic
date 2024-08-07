@@ -232,7 +232,7 @@ export default function Header() {
                   <Link href="/">
                     <Image
                       src={`/Assets/uploads/${basicInfo.logo}`}
-                      className="Image-fluid"
+                      className="Image-fluid w-75"
                       alt="Landscape picture"
                       height={100}
                       width={100}

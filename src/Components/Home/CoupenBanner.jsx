@@ -21,7 +21,7 @@ function CoupenBanner() {
               <div className="d-flex dSup">
                 <div className="">
                   <p className="coupen_code px-3 py-1">
-                    <strong className="diwali fw-bolder">DIWALI20</strong>
+                    <strong className="diwali fw-bolder">MANSOON</strong>
                   </p>
                 </div>
                 <div className="">
