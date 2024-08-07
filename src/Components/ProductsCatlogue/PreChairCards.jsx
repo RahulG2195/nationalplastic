@@ -44,7 +44,7 @@ const PreChairsCards = () => {
   const [FetchClr, setFetchClr] = useState([]);
   const [FetchType, setFetchType] = useState([]);
   const Np = "National Plastic"
-  
+const BaseUrl = "https://nationalplastic.com";
   // const [page, setPage] = useState(1);
   // const [hasMore, setHasMore] = useState(true);
   // const [length, setlength] = useState([]);
@@ -283,7 +283,7 @@ const PreChairsCards = () => {
                   className="PreCardSm col-12 col-sm-6 col-xs-4 col-md-6 col-lg-3 newProdCard"
                 >
                   <PreChairsCard
-                    ChairImg={`${process.env.NEXTAUTH_URL}${process.env.PRODUCTS_PATH_DIR}${images[0]}`}
+                    ChairImg={`${BaseUrl}/uploads/uploads/products/${images[0]}`}
                     id={product.seo_url}
                     Title={`${product.product_name}`}
                     Color= {`${product.color}`}

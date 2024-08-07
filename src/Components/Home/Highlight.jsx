@@ -84,7 +84,7 @@ export default function Highlight() {
                       <div className="card highlightcard">
                         <Image
                           className="imagetop"
-                          src={`${process.env.NEXTAUTH_URL}${process.env.PRODUCTS_PATH_DIR}${images[0]}`}
+                          src={`/Assets/uploads/products/${images[0]}`}
                           alt={product.image}
                           width={50}
                           height={100}

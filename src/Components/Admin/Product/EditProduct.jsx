@@ -117,7 +117,7 @@ export default function App() {
       });
       if (data.image_name) {
         const images = data.image_name.split(',');
-        const previews = images.map(img => `${process.env.NEXTAUTH_URL}${process.env.PRODUCTS_PATH_DIR}${img.trim()}`);
+        const previews = images.map(img => `/Assets/uploads/products/${img.trim()}`);
         setImagePreviews(previews);
       }
       // Calculate initial discount price
