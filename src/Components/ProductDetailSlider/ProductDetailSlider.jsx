@@ -80,6 +80,11 @@ const ProductDetailSlider = ({ imageurl }) => {
             {images.map((imageName, index) => (
               <SwiperSlide key={`${imageName}-${index}`}>
                 <Image
+               loader={({ src }) => {
+                const fullUrl = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${src}`;
+                console.log("Full image URL:", fullUrl);
+                return fullUrl;
+              }}
                   src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${imageName}`}
                   alt={`Product ${index + 1}`}
                   width={500}
@@ -106,6 +111,11 @@ const ProductDetailSlider = ({ imageurl }) => {
             {images.map((imageName, index) => (
               <SwiperSlide key={`thumb-${imageName}-${index}`}>
                 <Image
+              loader={({ src }) => {
+                const fullUrl = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${src}`;
+                console.log("Full image URL:", fullUrl);
+                return fullUrl;
+              }}
                   src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${imageName}`}
                   alt={`Product Thumbnail ${index + 1}`}
                   width={100}
@@ -119,6 +129,11 @@ const ProductDetailSlider = ({ imageurl }) => {
         </>
       ) : (
         <Image
+        loader={({ src }) => {
+          const fullUrl = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${src}`;
+          console.log("Full image URL:", fullUrl);
+          return fullUrl;
+        }}
           src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${images[0]}`}
           alt="Product"
           width={500}
