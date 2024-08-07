@@ -80,7 +80,7 @@ const ProductDetailSlider = ({ imageurl }) => {
             {images.map((imageName, index) => (
               <SwiperSlide key={`${imageName}-${index}`}>
                 <Image
-                  src={`/Assets/uploads/products/${imageName}`}
+                  src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${imageName}`}
                   alt={`Product ${index + 1}`}
                   width={500}
                   height={500}
@@ -106,7 +106,7 @@ const ProductDetailSlider = ({ imageurl }) => {
             {images.map((imageName, index) => (
               <SwiperSlide key={`thumb-${imageName}-${index}`}>
                 <Image
-                  src={`/Assets/uploads/products/${imageName}`}
+                  src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${imageName}`}
                   alt={`Product Thumbnail ${index + 1}`}
                   width={100}
                   height={100}
@@ -119,7 +119,7 @@ const ProductDetailSlider = ({ imageurl }) => {
         </>
       ) : (
         <Image
-          src={`/Assets/uploads/products/${images[0]}`}
+          src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${images[0]}`}
           alt="Product"
           width={500}
           height={500}

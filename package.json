@@ -60,6 +60,7 @@
     "next-iron-session": "^4.2.0",
     "npm": "^10.4.0",
     "owl.carousel": "^2.3.4",
+    "path": "^0.12.7",
     "popper": "^1.0.1",
     "razorpay": "^2.9.2",
     "react": "^18.2.0",

@@ -273,7 +273,7 @@ const Search = (props) => {
                   key={index}
                   className="col-12 col-sm-6 col-xs-4 col-md-6 col-lg-3 newProdCard">
                   <PreChairsCard
-                    ChairImg={`/Assets/uploads/products/${images[0]}`}
+                    ChairImg={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${images[0]}`}
                     id={product.seo_url}
                     Title={product.product_name}
                     // Discription={product.short_description}
