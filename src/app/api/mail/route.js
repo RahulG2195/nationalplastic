@@ -1,23 +1,14 @@
-// WOKRS perfect;y from postman
-
-import nodemailer from "nodemailer";
+import { Resend } from 'resend';
 import { NextRequest, NextResponse } from "next/server";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request, res) {
   try {
     const data = await request.formData();
     const email = data.get("email");
     const resetToken = data.get("resetToken");
-    const url =
-      "https://nationalplastic.com/new-password/1?resetToken=" + resetToken;
-
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "webDevs2024@gmail.com",
-        pass: "fkbt nnro yfnk ngmc", // Replace with your Gmail App Password (not account password)
-      },
-    });
+    const url = "https://nationalplastic.com/new-password/1?resetToken=" + resetToken;
 
     // Create HTML email content dynamically for personalization
     const HtmlFormat = `
@@ -28,14 +19,12 @@ export async function POST(request, res) {
     <p>If you didn't request a password reset, you can ignore this email.</p>
     <p>Regards,</p>
     <p>Your Team</p>
-  `;
+    `;
 
-    // Attach the file content as base64 encoded string if file exists
-    // Send email with attachment (if a file was uploaded)
-    const info = await transporter.sendMail({
-      from: "webDevs2024@gmail.com", // Consider using a more descriptive sender address
+    const info = await resend.emails.send({
+      from: 'Your Name <onboarding@resend.dev>', // Replace with your verified domain
       to: email,
-      subject: "Reset - Password", // Using the reason as the subject
+      subject: "Reset - Password",
       html: HtmlFormat,
     });
 

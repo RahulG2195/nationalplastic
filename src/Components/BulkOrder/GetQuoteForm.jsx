@@ -12,8 +12,7 @@ import {
   isValidMobile,
   isValidProduct,
 } from "@/utils/validation";
-import { Input, Button, Tag } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { Input,Tag } from 'antd';
 
 const GetQuoteForm = (props) => {
   const [products, setProducts] = useState([]);
@@ -109,7 +108,7 @@ const GetQuoteForm = (props) => {
     if (!isValid) return;
 
     try {
-      await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/BulkOrderForm`, submissionData);
+      await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/bulkOrderEmail`, submissionData);
       notify("Mail Sent Successfully");
       // ... rest of your submission logic
     } catch (error) {
