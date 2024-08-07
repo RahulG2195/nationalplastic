@@ -308,8 +308,7 @@ function ProdData({ category_id }) {
                     </p>
 
                     {dataToShow.map((val, index) => {
-                      const baseImageUrl = "/Assets/uploads/products";
-                      const imageSrc = `${baseImageUrl}/${val.image_name}`;
+                      const imageSrc = `${process.env.NEXTAUTH_URL}${process.env.PRODUCTS_PATH_DIR}${val.image_name}`;
                       return (
                         <label
                           key={index}
