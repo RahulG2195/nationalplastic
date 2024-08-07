@@ -132,11 +132,15 @@ function BottomBar() {
               ))}
               <div className="barImgCont py-3">
                 <Image
+<<<<<<< HEAD:src-old/Components/layouts/BottomBar.jsx
 <<<<<<< HEAD
                   src={`/Assets/uploads/products/${currentImage}`}
 =======
                   src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${currentImage}`}
 >>>>>>> c9dc16bd27d0be8bc934d7ae7e21cd77021b2599
+=======
+                  src={`${process.env.NEXTAUTH_URL}${process.env.PRODUCTS_PATH_DIR}${currentImage}`}
+>>>>>>> parent of c9dc16b (base path change for all prod images):src/Components/layouts/BottomBar.jsx
                   alt=""
                   height={100}
                   width={100}

@@ -182,11 +182,15 @@ const BoughtTogether = () => {
             const images = card.image_name ? card.image_name.split(', ').map(image => image.trim()) : [];
             return <SwiperSlide key={card.product_id} className="newProdCard">
             <PreChairsCard
+<<<<<<< HEAD:src-old/Components/ProductsCatlogue/BoughtTogether.jsx
 <<<<<<< HEAD
                     ChairImg={`/Assets/uploads/products/${images[0]}`}
 =======
                     ChairImg={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${images[0]}`}
 >>>>>>> c9dc16bd27d0be8bc934d7ae7e21cd77021b2599
+=======
+                    ChairImg={`${process.env.NEXTAUTH_URL}${process.env.PRODUCTS_PATH_DIR}${images[0]}`}
+>>>>>>> parent of c9dc16b (base path change for all prod images):src/Components/ProductsCatlogue/BoughtTogether.jsx
                     id={card.seo_url}
                     Title={card.product_name}
                     Discription={card.short_description}

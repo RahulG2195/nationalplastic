@@ -395,11 +395,15 @@ const AddBody = () => {
                           return (
                             <div className="row" key={val.product_id}>
                               <OrderSummaryCard
+<<<<<<< HEAD:src-old/Components/Address/AddBody.jsx
 <<<<<<< HEAD
                                 imgSrc={`/Assets/uploads/products/${images[0]}`}
 =======
                                 imgSrc={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${images[0]}`}
 >>>>>>> c9dc16bd27d0be8bc934d7ae7e21cd77021b2599
+=======
+                                imgSrc={`${process.env.NEXTAUTH_URL}${process.env.PRODUCTS_PATH_DIR}${images[0]}`}
+>>>>>>> parent of c9dc16b (base path change for all prod images):src/Components/Address/AddBody.jsx
                                 description={val.product_name}
                                 quantity={val.quantity}
                               />

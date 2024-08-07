@@ -738,11 +738,15 @@ function ProfilePage() {
                               <td>
                                 <Link href={`/ProductDetail/${data.seo_url}`}>
                                   <Image
+<<<<<<< HEAD:src-old/app/ProfilePage/page.jsx
 <<<<<<< HEAD
                                     src={images && images.length > 0 ? `/Assets/uploads/products/${images[0]}` : '/Altis-chair-Black-(45)-white bg.webp'}
 =======
                                     src={images && images.length > 0 ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${images[0]}` : '/Altis-chair-Black-(45)-white bg.webp'}
 >>>>>>> c9dc16bd27d0be8bc934d7ae7e21cd77021b2599
+=======
+                                    src={images && images.length > 0 ? `${process.env.NEXTAUTH_URL}${process.env.PRODUCTS_PATH_DIR}${images[0]}` : '/Altis-chair-Black-(45)-white bg.webp'}
+>>>>>>> parent of c9dc16b (base path change for all prod images):src/app/ProfilePage/page.jsx
                                     height={50}
                                     width={50}
                                     alt="prod_image"

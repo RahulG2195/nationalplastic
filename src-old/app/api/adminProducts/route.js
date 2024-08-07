@@ -18,11 +18,15 @@ const uploadImage = async (file) => {
     await upload.single(file);
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
+<<<<<<< HEAD:src-old/app/api/adminProducts/route.js
 <<<<<<< HEAD
     const path = `./public/Assets/uploads/products/${file.name}`;
 =======
     const path = `./public${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${file.name}`;
 >>>>>>> c9dc16bd27d0be8bc934d7ae7e21cd77021b2599
+=======
+    const path = `${process.env.NEXTAUTH_URL}${process.env.PRODUCTS_PATH_DIR}${file.name}`;
+>>>>>>> parent of c9dc16b (base path change for all prod images):src/app/api/adminProducts/route.js
 
     await writeFile(path, buffer);
   } catch (error) {

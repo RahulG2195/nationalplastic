@@ -117,11 +117,15 @@ export default function App() {
       });
       if (data.image_name) {
         const images = data.image_name.split(',');
+<<<<<<< HEAD:src-old/Components/Admin/Product/EditProduct.jsx
 <<<<<<< HEAD
         const previews = images.map(img => `/Assets/uploads/products/${img.trim()}`);
 =======
         const previews = images.map(img => `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${img.trim()}`);
 >>>>>>> c9dc16bd27d0be8bc934d7ae7e21cd77021b2599
+=======
+        const previews = images.map(img => `${process.env.NEXTAUTH_URL}${process.env.PRODUCTS_PATH_DIR}${img.trim()}`);
+>>>>>>> parent of c9dc16b (base path change for all prod images):src/Components/Admin/Product/EditProduct.jsx
         setImagePreviews(previews);
       }
       // Calculate initial discount price

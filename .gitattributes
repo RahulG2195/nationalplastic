@@ -1,6 +1,10 @@
 removedComments.zip filter=lfs diff=lfs merge=lfs -text
 <<<<<<< HEAD
+<<<<<<< HEAD
 public/Assets/uploads/products/Shagun[[:space:]]Chair/Shagun[[:space:]]chair.psd filter=lfs diff=lfs merge=lfs -text
 =======
 public${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Shagun[[:space:]]Chair/Shagun[[:space:]]chair.psd filter=lfs diff=lfs merge=lfs -text
 >>>>>>> c9dc16bd27d0be8bc934d7ae7e21cd77021b2599
+=======
+public${process.env.NEXTAUTH_URL}${process.env.PRODUCTS_PATH_DIR}Shagun[[:space:]]Chair/Shagun[[:space:]]chair.psd filter=lfs diff=lfs merge=lfs -text
+>>>>>>> parent of c9dc16b (base path change for all prod images)

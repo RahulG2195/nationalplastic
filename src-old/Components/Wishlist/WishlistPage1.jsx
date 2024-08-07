@@ -96,11 +96,15 @@ const WishlistPage1 = () => {
                 return <WishlistCard
                   key={item.product_id}
                   id={item.product_id}
+<<<<<<< HEAD:src-old/Components/Wishlist/WishlistPage1.jsx
 <<<<<<< HEAD
                   WishlistImg={`/Assets/uploads/products/${images[0]}`}
 =======
                   WishlistImg={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${images[0]}`}
 >>>>>>> c9dc16bd27d0be8bc934d7ae7e21cd77021b2599
+=======
+                  WishlistImg={`${process.env.NEXTAUTH_URL}${process.env.PRODUCTS_PATH_DIR}${images[0]}`}
+>>>>>>> parent of c9dc16b (base path change for all prod images):src/Components/Wishlist/WishlistPage1.jsx
                   productName={item.product_name}
                   producDiscription={item.short_description}
                   Price={item.price}
