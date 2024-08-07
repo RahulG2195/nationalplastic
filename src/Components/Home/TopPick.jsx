@@ -100,7 +100,7 @@ export default function TopPick() {
                       <CatCards
                         hovereffect={"TopPickHover"}
                         catid={product.seo_url}
-                        image={`${process.env.NEXTAUTH_URL}${process.env.PRODUCTS_PATH_DIR}${product.image_name}`}
+                        image={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${product.image_name}`}
                         title={product.category_name}
                         url={product.url}
                       />

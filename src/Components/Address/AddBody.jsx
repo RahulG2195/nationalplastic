@@ -395,7 +395,7 @@ const AddBody = () => {
                           return (
                             <div className="row" key={val.product_id}>
                               <OrderSummaryCard
-                                imgSrc={`${process.env.NEXTAUTH_URL}${process.env.PRODUCTS_PATH_DIR}${images[0]}`}
+                                imgSrc={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${images[0]}`}
                                 description={val.product_name}
                                 quantity={val.quantity}
                               />
