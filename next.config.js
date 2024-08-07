@@ -8,14 +8,23 @@ const nextConfig = {
   },
 
   images: {
+<<<<<<< HEAD
     domains: ['nationalplastic.com'],
     remotePatterns: [ 
+=======
+    domains: ['localhost', 'nationalplastic.com'],
+    /* remotePatterns: [ 
+>>>>>>> c9dc16bd27d0be8bc934d7ae7e21cd77021b2599
 	{ 
 	  protocol: 'https', 
 	  hostname: 'nationalplastic.com', 
 	  pathname: '/uploads/**', 
 	}
+<<<<<<< HEAD
     ],
+=======
+    ], */
+>>>>>>> c9dc16bd27d0be8bc934d7ae7e21cd77021b2599
 },
     api: {
 	bodyParser:{
@@ -30,4 +39,7 @@ const nextConfig = {
 }
 module.exports = nextConfig;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c9dc16bd27d0be8bc934d7ae7e21cd77021b2599
