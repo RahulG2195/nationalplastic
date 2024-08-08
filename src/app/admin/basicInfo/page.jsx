@@ -106,7 +106,7 @@ const BasicInfoEditor = () => {
         setErrors({});
     };
 
-    return (
+ return (
         <Container>
             <div className="d-flex justify-content-between align-items-center">
                 <h1>Basic Information</h1>
