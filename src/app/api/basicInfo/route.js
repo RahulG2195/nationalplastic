@@ -1,7 +1,8 @@
 import { query } from '@/lib/db';
 import { NextResponse } from 'next/server';
 import { writeFile } from 'fs/promises';
-
+const fs = require("fs").promises;
+const path = require("path");
 /* const uploadImage = async (file) => {
   try {
     const bytes = await file.arrayBuffer();
