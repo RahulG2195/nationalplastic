@@ -4,8 +4,8 @@ import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 import upload from "@/utils/multer.middleware";
 
-const fs = require('fs').promises;
-const path = require('path');
+const fs = require("fs").promises;
+const path = require("path");
 
 function convertColorToCode(color) {
   const colorEntry = colorNameList.find(
@@ -16,7 +16,6 @@ function convertColorToCode(color) {
   }
   return colorEntry.hex;
 }
-
 
 /*const uploadImage = async (file) => {
   try {
@@ -33,15 +32,15 @@ function convertColorToCode(color) {
 
 const uploadImage = async (file) => {
   try {
-    console.log('Received file object:', file);
-    if (!file || typeof file.arrayBuffer !== 'function') {
+    console.log("Received file object:", file);
+    if (!file || typeof file.arrayBuffer !== "function") {
       throw new Error("Invalid file object");
     }
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const uploadDir = '/var/www/uploads/uploads/products';
-    
+    const uploadDir = "/var/www/uploads/uploads/products";
+
     // Check if the directory exists, if not, create it
     try {
       await fs.access(uploadDir);
@@ -58,7 +57,6 @@ const uploadImage = async (file) => {
     throw new Error(`Image upload failed: ${error.message}`);
   }
 };
-
 
 export async function POST(request) {
   try {
@@ -99,7 +97,7 @@ export async function POST(request) {
 
     optionalFields.forEach((field) => {
       let value = formData.get(field);
-      if (value && value !== 'undefined') {
+      if (value && value !== "undefined") {
         data[field] = value;
       } else {
         data[field] = null;
@@ -121,35 +119,35 @@ export async function POST(request) {
     // Create seo_url_clr
     data.seo_url_clr = `${data.seo_url}-${data.color}`.toUpperCase();
 
+    // Handle multiple image uploads
+    //    const imageNames = [];
 
     // Handle multiple image uploads
-//    const imageNames = [];
-
-
-// Handle multiple image uploads
-const imageNames = [];
-for (let [key, value] of formData.entries()) {
-  if (key.startsWith("image")) {
-    console.log(`Processing ${key}:`, value);
-    try {
-      if (!value || !value.name) {
-        console.error(`Invalid file object for ${key}:`, value);
-        throw new Error("Invalid file object");
+    const imageNames = [];
+    for (let [key, value] of formData.entries()) {
+      if (key.startsWith("image")) {
+        console.log(`Processing ${key}:`, value);
+        try {
+          if (!value || !value.name) {
+            console.error(`Invalid file object for ${key}:`, value);
+            throw new Error("Invalid file object");
+          }
+          const imageName = await uploadImage(value);
+          imageNames.push(imageName);
+          console.log(`Successfully uploaded: ${imageName}`);
+        } catch (error) {
+          console.error(`Error uploading image ${value.name}:`, error);
+          return NextResponse.json(
+            {
+              success: false,
+              error: `Failed to upload image ${value.name}: ${error.message}`,
+            },
+            { status: 500 }
+          );
+        }
       }
-      const imageName = await uploadImage(value);
-      imageNames.push(imageName);
-      console.log(`Successfully uploaded: ${imageName}`);
-    } catch (error) {
-      console.error(`Error uploading image ${value.name}:`, error);
-      return NextResponse.json(
-        { success: false, error: `Failed to upload image ${value.name}: ${error.message}` },
-        { status: 500 }
-      );
     }
-  }
-}
-data.image_name = imageNames.join(", ")
-
+    data.image_name = imageNames.join(", ");
 
     // Convert color name to color code
     let color_code;
@@ -162,7 +160,6 @@ data.image_name = imageNames.join(", ")
       );
     }
     console.log("Data to be inserted:", data);
-
 
     // Insert the new product
     const result = await query({
@@ -206,14 +203,14 @@ data.image_name = imageNames.join(", ")
   }
 }
 
-
 export async function PUT(request) {
   try {
     const formData = await request.formData();
     const images = formData.getAll("image");
     // Handle multiple image uploads
+
     const imageNames = [];
-    if (images && images.length > 0) {
+    /* if (images && images.length > 0) {
       for (const image of images) {
         try {
           await uploadImage(image); // Ensure this function handles image upload and returns the image name
@@ -224,6 +221,29 @@ export async function PUT(request) {
           throw new Error(
             `Failed to upload image ${image.name}: ${error.message}`
           );
+        }
+      }
+    } */
+
+      if (images && images.length > 0) {
+      for (let [key, value] of formData.entries()) {
+        if (key.startsWith("image")) {
+          console.log(`Processing ${key}:`, value);
+          try {
+            if (!value || !value.name) {
+              console.error(`Invalid file object for ${key}:`, value);
+              throw new Error("Invalid file object");
+            }
+            const imageName = await uploadImage(value);
+            imageNames.push(imageName);
+            console.log(`Successfully uploaded: ${imageName}`);
+          } catch (error) {
+            console.error(`Error uploading image ${value.name}:`, error);
+            return NextResponse.json(
+              { success: false, error: `Failed to upload image ${value.name}: ${error.message}` },
+              { status: 500 }
+            );
+          }
         }
       }
     }
@@ -263,12 +283,12 @@ export async function PUT(request) {
     }
 
     // Set image_name to the new image names if uploaded, otherwise keep the existing ones
-    data.image_name =
-      imageNames.length > 0 ? imageNames.join(",") : formData.get("image_name");
+    data.image_name = imageNames.length > 0 ? imageNames.join(", ") : formData.get("image_name");
 
     // Convert color name to color code
-    const categoryId = formData.get("category_id_edited") || formData.get("category_id");
-data.category_id = categoryId;
+    const categoryId =
+      formData.get("category_id_edited") || formData.get("category_id");
+    data.category_id = categoryId;
     let color_code;
     try {
       color_code = convertColorToCode(data.color);
@@ -329,7 +349,6 @@ export async function GET(request) {
         "SELECT p.*,c.category_id,c.category_name FROM products p JOIN categories c ON p.category_id = c.category_id",
       values: [],
     });
-
 
     return new Response(
       JSON.stringify({
