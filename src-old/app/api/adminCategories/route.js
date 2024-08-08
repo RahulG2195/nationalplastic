@@ -1,7 +1,8 @@
 import { query } from '@/lib/db';
 import { writeFile } from "fs/promises";
 import { uploadFile } from "@/utils/fileUploader";
-// import { query } from "@/lib/db";
+const fs = require("fs").promises;
+const path = require("path");
 
 export async function POST(request) {
   try {
@@ -18,8 +19,12 @@ export async function POST(request) {
       try {
         const bytes = await image.arrayBuffer();
         const buffer = Buffer.from(bytes);
-    
-        const path = `./public/Assets/uploads/category_banner/${image.name}`;
+        const path = "/var/www/uploads/uploads/category_banner";
+        try {
+          await fs.access(path);
+        } catch {
+          await fs.mkdir(path, { recursive: true });
+        }
         await writeFile(path, buffer);
       } catch (uploadError) {
         return new Response(
@@ -89,8 +94,12 @@ export async function PUT(request) {
 
         const bytes = await image.arrayBuffer();
         const buffer = Buffer.from(bytes);
-    
-        const path = `./public/Assets/uploads/category_banner/${image.name}`;
+        const path = "/var/www/uploads/uploads/category_banner";
+        try {
+          await fs.access(path);
+        } catch {
+          await fs.mkdir(path, { recursive: true });
+        }
         await writeFile(path, buffer);
       } catch (uploadError) {
         return new Response(

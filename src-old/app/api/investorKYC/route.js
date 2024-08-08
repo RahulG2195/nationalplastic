@@ -7,7 +7,12 @@ const uploadFile = async (file) => {
   try {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const path = `public/Assets/uploads/${file.name}`; // Save the file with its original name
+    const path = "/var/www/uploads/uploads/investors";
+    try {
+      await fs.access(path);
+    } catch {
+      await fs.mkdir(path, { recursive: true });
+    }
     await writeFile(path, buffer);
     return file.name; // Return the filename for storing in the database
   } catch (error) {

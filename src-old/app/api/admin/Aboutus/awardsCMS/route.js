@@ -1,6 +1,7 @@
 import { query } from '@/lib/db';
 import { writeFile } from 'fs/promises';
-import path from 'path';
+const fs = require("fs").promises;
+const path = require("path");
 
 export async function POST(request) {
   const formData = await request.formData();
@@ -60,9 +61,18 @@ async function saveAwardOrCertificate(formData, action) {
     if (file && file.size > 0) {
       const buffer = Buffer.from(await file.arrayBuffer());
       const filename = file.name;
-      const filepath = `./public/Assets/uploads/Aboutus/${filename}`
+      image_url = `${filename}`;
+      const filepath = "/var/www/uploads/uploads/products";
+
+      // Check if the directory exists, if not, create it
+      try {
+        await fs.access(filepath);
+      } catch {
+        await fs.mkdir(filepath, { recursive: true });
+      }
       await writeFile(filepath, buffer);
-      image_url = `/${filename}`;
+
+
     }
 
     if (action === 'ADD') {

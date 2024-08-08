@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 
 import upload from "@/utils/multer.middleware";
+
 export async function POST(req, res) {
   try {
     // Parse form data using NextRequest.formData()
@@ -24,6 +25,8 @@ export async function POST(req, res) {
 
     const path = `./public/Assets/uploads/${file.name}`;
     await writeFile(path, buffer);
+
+    
 
     // Extract other form fields
     const { name, email, message, reason, mobile } = Object.fromEntries(

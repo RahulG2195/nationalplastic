@@ -1,6 +1,7 @@
 import { query } from '@/lib/db';
 import { writeFile } from 'fs/promises';
-import path from 'path';
+const fs = require("fs").promises;
+const path = require("path");
 
 export async function GET(request) {
   return await getTeamMembers();
@@ -54,10 +55,13 @@ async function saveTeamMember(formData, action) {
 
     let image_url = '';
     if (image) {
-      const filename = `${Date.now()}-${image.name}`;
-      const uploadPath = path.join(process.cwd(), 'public', 'Assets', 'uploads', 'Aboutus', filename);
-      await writeFile(uploadPath, Buffer.from(await image.arrayBuffer()));
-      image_url = `/Assets/uploads/Aboutus/${filename}`;
+       image_url = "/var/www/uploads/uploads/Aboutus";
+      try {
+        await fs.access(image_url);
+      } catch {
+        await fs.mkdir(image_url, { recursive: true });
+      }
+      await writeFile(image_url, Buffer.from(await image.arrayBuffer()));
     }
 
     let sql, values;

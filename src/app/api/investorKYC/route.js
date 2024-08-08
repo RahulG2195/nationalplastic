@@ -1,13 +1,20 @@
 import { NextResponse } from 'next/server';
 import { query } from '@/lib/db';
 import { writeFile } from 'fs/promises';
+const fs = require("fs").promises;
+const path = require("path");
 
 // Function to handle file uploads
 const uploadFile = async (file) => {
   try {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const path = `public/Assets/uploads/${file.name}`; // Save the file with its original name
+    const path = "/var/www/uploads/uploads/products";
+    try {
+      await fs.access(path);
+    } catch {
+      await fs.mkdir(path, { recursive: true });
+    }
     await writeFile(path, buffer);
     return file.name; // Return the filename for storing in the database
   } catch (error) {

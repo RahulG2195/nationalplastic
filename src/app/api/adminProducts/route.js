@@ -17,19 +17,6 @@ function convertColorToCode(color) {
   return colorEntry.hex;
 }
 
-/*const uploadImage = async (file) => {
-  try {
-    await upload.single(file);
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-    const path = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${file.name}`;
-
-    await writeFile(path, buffer);
-  } catch (error) {
-    throw new Error("Image upload failed: " + error.message);
-  }
-};*/
-
 const uploadImage = async (file) => {
   try {
     console.log("Received file object:", file);

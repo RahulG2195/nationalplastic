@@ -82,7 +82,7 @@ export async function POST(request) {
     const document_type = formData.get('document_type');
     const file = formData.get('file');
     await uploadFile(file); 
-    const pdfPath = `/Assets/uploads/Investors/${file.name}`;
+    const pdfPath = file.name;
     
     const result = await query({
       query: "INSERT INTO disclosures (year, quarter, document_type, document_url) VALUES (?, ?, ?, ?)",

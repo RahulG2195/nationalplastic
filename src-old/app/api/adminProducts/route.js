@@ -18,38 +18,18 @@ const uploadImage = async (file) => {
     await upload.single(file);
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-<<<<<<< HEAD:src-old/app/api/adminProducts/route.js
-<<<<<<< HEAD
-    const path = `./public/Assets/uploads/products/${file.name}`;
-=======
-    const path = `./public${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${file.name}`;
->>>>>>> c9dc16bd27d0be8bc934d7ae7e21cd77021b2599
-=======
-    const path = `${process.env.NEXTAUTH_URL}${process.env.PRODUCTS_PATH_DIR}${file.name}`;
->>>>>>> parent of c9dc16b (base path change for all prod images):src/app/api/adminProducts/route.js
-
-    await writeFile(path, buffer);
+    const uploadDir = "/var/www/uploads/uploads/products";
+    try {
+      await fs.access(uploadDir);
+    } catch {
+      await fs.mkdir(uploadDir, { recursive: true });
+    }
+    await writeFile(uploadDir, buffer);
   } catch (error) {
     throw new Error("Image upload failed: " + error.message);
   }
 };
 
-// formData:
-// product_name: Tester 
-// meta_title: undefined
-// meta_description: undefined
-// short_description: undefined
-// long_description: undefined
-// seo_title: undefined
-// seo_url: tester
-// category_name: Office Chair
-// price: 22
-// discount_percentage: 20
-// InstallationCharges: 0
-// color: red
-// armType: with_arm_tent
-// discount_price: 17.6
-// category_id: 40
 export async function POST(request) {
   try {
     const formData = await request.formData();
