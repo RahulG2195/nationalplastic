@@ -231,7 +231,7 @@ export default function Header() {
                   </button>
                   <Link href="/">
                     <Image
-                      src={`/Assets/uploads/${basicInfo.logo}`}
+                      src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}${basicInfo.logo}`}
                       className="Image-fluid w-75"
                       alt="Landscape picture"
                       height={100}
@@ -544,7 +544,7 @@ export default function Header() {
 
                       <Link href="/">
                         <Image
-                          src={`/Assets/uploads/${basicInfo.logo}`}
+                          src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}${basicInfo.logo}`}
                           className="Image-fluid"
                           alt="Landscape picture"
                           height={34}

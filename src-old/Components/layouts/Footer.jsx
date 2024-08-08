@@ -210,7 +210,7 @@ export default function Footer() {
               <div className="comp_logo">
                 <Link href='/'>
                   <Image
-                    src={`/Assets/uploads/${basicInfo.logo}`}
+                    src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}${basicInfo.logo}`}
                     alt='logo'
                     fill
                   />
