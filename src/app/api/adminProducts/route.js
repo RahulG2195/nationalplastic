@@ -226,27 +226,25 @@ export async function PUT(request) {
     } */
 
       if (images && images.length > 0) {
-      for (let [key, value] of formData.entries()) {
-        if (key.startsWith("image")) {
-          console.log(`Processing ${key}:`, value);
+        for (let image of images) {
+          console.log(`Processing image:`, image);
           try {
-            if (!value || !value.name) {
-              console.error(`Invalid file object for ${key}:`, value);
+            if (!image || !image.name) {
+              console.error(`Invalid file object:`, image);
               throw new Error("Invalid file object");
             }
-            const imageName = await uploadImage(value);
+            const imageName = await uploadImage(image);
             imageNames.push(imageName);
             console.log(`Successfully uploaded: ${imageName}`);
           } catch (error) {
-            console.error(`Error uploading image ${value.name}:`, error);
+            console.error(`Error uploading image ${image.name}:`, error);
             return NextResponse.json(
-              { success: false, error: `Failed to upload image ${value.name}: ${error.message}` },
+              { success: false, error: `Failed to upload image ${image.name}: ${error.message}` },
               { status: 500 }
             );
           }
         }
       }
-    }
 
     const requiredFields = [
       "product_name",
