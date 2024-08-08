@@ -137,7 +137,7 @@ export async function POST(request) {
         console.log(`Successfully uploaded: ${imageName}`);
 	    } catch (error) {
 	      console.error(`Error uploading image ${value.name}:`, error);
-	      return NextResponse.join(
+	      return NextResponse.json(
 	      {success: false, error: `Failed to upload image ${value.name}: ${error.message}`},
 	      {status: 500}
         );
