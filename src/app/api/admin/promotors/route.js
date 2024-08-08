@@ -57,7 +57,7 @@ async function saveTeamMember(formData, action) {
       const filename = `${Date.now()}-${image.name}`;
       const uploadPath = path.join(process.cwd(), 'public', 'Assets', 'uploads', 'Aboutus', filename);
       await writeFile(uploadPath, Buffer.from(await image.arrayBuffer()));
-      image_url = `/Assets/uploads/Aboutus/${filename}`;
+      image_url = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_ABOUT_PATH_DIR}${filename}`;
     }
 
     let sql, values;

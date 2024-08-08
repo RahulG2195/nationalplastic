@@ -60,7 +60,7 @@ async function saveAwardOrCertificate(formData, action) {
     if (file && file.size > 0) {
       const buffer = Buffer.from(await file.arrayBuffer());
       const filename = file.name;
-      const filepath = `./public/Assets/uploads/Aboutus/${filename}`
+      const filepath = `./public${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_ABOUT_PATH_DIR}${filename}`
       await writeFile(filepath, buffer);
       image_url = `/${filename}`;
     }

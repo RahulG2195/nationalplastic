@@ -19,7 +19,7 @@ export async function POST(request) {
         const bytes = await image.arrayBuffer();
         const buffer = Buffer.from(bytes);
     
-        const path = `./public/Assets/uploads/category_banner/${image.name}`;
+        const path = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}${image.name}`;
         await writeFile(path, buffer);
       } catch (uploadError) {
         return new Response(
@@ -91,7 +91,7 @@ export async function PUT(request) {
         const bytes = await image.arrayBuffer();
         const buffer = Buffer.from(bytes);
     
-        const path = `./public/Assets/uploads/category_banner/${image.name}`;
+        const path = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}${image.name}`;
         await writeFile(path, buffer);
       } catch (uploadError) {
         return new Response(

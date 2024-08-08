@@ -82,7 +82,7 @@ export async function POST(request) {
     const document_type = formData.get('document_type');
     const file = formData.get('file');
     await uploadFile(file); 
-    const pdfPath = `/Assets/uploads/Investors/${file.name}`;
+    const pdfPath = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${file.name}`;
     
     const result = await query({
       query: "INSERT INTO disclosures (year, quarter, document_type, document_url) VALUES (?, ?, ?, ?)",
@@ -117,7 +117,7 @@ export async function PUT(request) {
 
    if(file){
     await uploadFile(file); 
-    const pdfPath = `/Assets/uploads/Investors/${file.name}`;
+    const pdfPath = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${file.name}`;
     await query({
       query: "UPDATE disclosures SET year = ?, quarter = ?, document_type = ?, document_url = ? WHERE id = ?",
       values: [year, quarter, document_type, pdfPath, id],

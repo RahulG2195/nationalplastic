@@ -54,7 +54,7 @@ async function addInfrastructureData(formData) {
         try{
         const bytes = await image.arrayBuffer();
         const buffer = Buffer.from(bytes);
-        const path = `./public/Assets/uploads/Aboutus/${image.name}`;
+        const path = `.${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_ABOUT_PATH_DIR}${image.name}`;
         imagePath = image.name;
         await writeFile(path, buffer);
         } catch (error) {
@@ -87,7 +87,7 @@ async function addInfrastructureData(formData) {
         try{
         const bytes = await image.arrayBuffer();
         const buffer = Buffer.from(bytes);
-        const path = `./public/Assets/uploads/Aboutus/${image.name}`;
+        const path = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_ABOUT_PATH_DIR}${image.name}`;
         imagePath = image.name;
         await writeFile(path, buffer);
         } catch (error) {

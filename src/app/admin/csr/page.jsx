@@ -159,7 +159,7 @@ const EditCSR = ({ newsId }) => {
                                 {images.map((img, index) => (
                                     <Col md="2" key={index} className="mb-3">
                                         <Card>
-                                            <CardImg top width="50%" src={`/Assets/uploads/${img}`} alt={`img-${index}`} />
+                                            <CardImg top width="50%" src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_ABOUT_PATH_DIR}${img}`} alt={`img-${index}`} />
                                             <CardBody>
                                                 <Input
                                                     type="file"
@@ -194,7 +194,7 @@ const EditCSR = ({ newsId }) => {
                                 {images.map((img, index) => (
                                     <Col md="2" key={index} className="mb-3">
                                         <Card>
-                                            <CardImg top width="100%" src={`/Assets/uploads/${img}`} alt={`img-${index}`} />
+                                            <CardImg top width="100%" src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}${img}`} alt={`img-${index}`} />
                                         </Card>
                                     </Col>
                                 ))}

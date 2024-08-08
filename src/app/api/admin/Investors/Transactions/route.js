@@ -48,7 +48,7 @@ export async function POST(request) {
   }
   try {
     await uploadFile(file); 
-    const pdfPath = `/Assets/uploads/Investors/${file.name}`;
+    const pdfPath = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${file.name}`;
     const result = await query({
       query: "INSERT INTO rp_transaction (document, url) VALUES (?, ?)",
       values: [document, pdfPath],
@@ -88,7 +88,7 @@ export async function PUT(request, { params }) {
   let url;
   if (file) {
     await uploadFile(file); 
-    url = `/Assets/uploads/Investors/${file.name}`;
+    url = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${file.name}`;
 
     // Delete old file if it exists
     const oldTransaction = await query({

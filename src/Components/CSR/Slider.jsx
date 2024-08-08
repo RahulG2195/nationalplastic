@@ -51,7 +51,7 @@ const Slider = () => {
           >
             <img
               style={{ width: "100%" }}
-              src={`/Assets/uploads/${img}`}
+              src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}${img}`}
               alt={`slide-${index}`}
             />
           </SwiperSlide>

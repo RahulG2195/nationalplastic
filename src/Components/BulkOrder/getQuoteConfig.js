@@ -173,11 +173,11 @@ export const PEimageData = [
 
 // export const OldimageData = [
 //     {
-//         imgSrc: "/Assets/uploads/category/Premium Event CHair.jpg",
+//         imgSrc: "${process.env.NEXT_PUBLIC_BASE_URL}${process.env.NEXT_PUBLIC_CATEGORY_PATH_DIR}Premium Event CHair.jpg",
 //         imgText: "PREMIUM EVENT CHAIR",
 //     },
 //     {
-//         imgSrc: "/Assets/uploads/category/Premium CHair.jpg",
+//         imgSrc: "${process.env.NEXT_PUBLIC_BASE_URL}${process.env.NEXT_PUBLIC_CATEGORY_PATH_DIR}Premium CHair.jpg",
 //         imgText: "PREMIUM CHAIR",
 //     },
 //     {
