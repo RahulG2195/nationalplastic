@@ -9,13 +9,13 @@ const nextConfig = {
 
   images: {
     domains: ['localhost', 'nationalplastic.com'],
-    /* remotePatterns: [ 
+    remotePatterns: [ 
 	{ 
 	  protocol: 'https', 
 	  hostname: 'nationalplastic.com', 
 	  pathname: '/uploads/**', 
 	}
-    ], */
+    ],
 },
     api: {
 	bodyParser:{

@@ -13,35 +13,20 @@ function convertColorToCode(color) {
   }
   return colorEntry.hex;
 }
+
 const uploadImage = async (file) => {
   try {
     await upload.single(file);
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const path = `./public${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${file.name}`;
-
+    const path = `./public/${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${file.name}`;
+    console.log('path', path);
     await writeFile(path, buffer);
   } catch (error) {
     throw new Error("Image upload failed: " + error.message);
   }
 };
 
-// formData:
-// product_name: Tester 
-// meta_title: undefined
-// meta_description: undefined
-// short_description: undefined
-// long_description: undefined
-// seo_title: undefined
-// seo_url: tester
-// category_name: Office Chair
-// price: 22
-// discount_percentage: 20
-// InstallationCharges: 0
-// color: red
-// armType: with_arm_tent
-// discount_price: 17.6
-// category_id: 40
 export async function POST(request) {
   try {
     const formData = await request.formData();
@@ -119,7 +104,7 @@ export async function POST(request) {
         }
       }
     }
-    data.image_name = imageNames.join(",");
+    data.image_name = imageNames.join(", ");
 
 
 
@@ -177,6 +162,8 @@ export async function POST(request) {
     );
   }
 }
+
+
 export async function PUT(request) {
   try {
     const formData = await request.formData();
