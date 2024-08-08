@@ -32,32 +32,32 @@ function convertColorToCode(color) {
 };*/
 
 const uploadImage = async (file) => {
-try{
+  try {
+    console.log('Received file object:', file);
+    if (!file || typeof file.arrayBuffer !== 'function') {
+      throw new Error("Invalid file object");
+    }
 
- if(!file || !(file instanceof File)){
-  throw new Error("Invalid file object");
- }
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    const uploadDir = '/var/www/uploads/uploads/products';
+    
+    // Check if the directory exists, if not, create it
+    try {
+      await fs.access(uploadDir);
+    } catch {
+      await fs.mkdir(uploadDir, { recursive: true });
+    }
 
- const bytes = await file.arrayBuffer();
- const buffer = Buffer.from(bytes);
- const uploadDir = '/var/www/uploads';
-
- try{
-	await fs.access(uploadDir);
-   } catch{
-	await fs.mkdir(uploadDir, { recursive: true});
-   }
-
- const filePath = path.join(uploadDir, file.name);
- await fs.writeFile(filePath, buffer);
- console.log(`File successfully uploaded to $filePath}`);
- return file.name;
-
-} catch (error){
-	throw new Error("Image upload failed: " + error.message);
- }
-
-}
+    const filePath = path.join(uploadDir, file.name);
+    await fs.writeFile(filePath, buffer);
+    console.log(`File successfully uploaded to ${filePath}`);
+    return file.name;
+  } catch (error) {
+    console.error("Detailed upload error:", error);
+    throw new Error(`Image upload failed: ${error.message}`);
+  }
+};
 
 
 export async function POST(request) {
@@ -123,29 +123,32 @@ export async function POST(request) {
 
 
     // Handle multiple image uploads
-    const imageNames = [];
-    for (let [key, value] of formData.entries()) {
-      if (key.startsWith("image")) {
-	    try{
-	      console.log(`Attempting to upload file: ${value.name}`)
-        if(!(value instanceof file)){
-          console.error(`imvalid file object for ${key}:`, value);	
-          throw new Error("Invalid file object");
-        }
-        const imageName = await uploadImage(value);
-        imageNames.push(imageName);
-        console.log(`Successfully uploaded: ${imageName}`);
-	    } catch (error) {
-	      console.error(`Error uploading image ${value.name}:`, error);
-	      return NextResponse.json(
-	      {success: false, error: `Failed to upload image ${value.name}: ${error.message}`},
-	      {status: 500}
-        );
+//    const imageNames = [];
+
+
+// Handle multiple image uploads
+const imageNames = [];
+for (let [key, value] of formData.entries()) {
+  if (key.startsWith("image")) {
+    console.log(`Processing ${key}:`, value);
+    try {
+      if (!value || !value.name) {
+        console.error(`Invalid file object for ${key}:`, value);
+        throw new Error("Invalid file object");
       }
+      const imageName = await uploadImage(value);
+      imageNames.push(imageName);
+      console.log(`Successfully uploaded: ${imageName}`);
+    } catch (error) {
+      console.error(`Error uploading image ${value.name}:`, error);
+      return NextResponse.json(
+        { success: false, error: `Failed to upload image ${value.name}: ${error.message}` },
+        { status: 500 }
+      );
     }
   }
-    data.image_name = imageNames.join(", ");
-
+}
+data.image_name = imageNames.join(", ")
 
 
     // Convert color name to color code
