@@ -1,0 +1,316 @@
+.mblBnner {
+    display: none;
+}
+
+.container.text-center {
+    /* display: flex; */
+}
+
+.dSupMobile {
+    position: absolute;
+    top: 57%;
+    right: 6%;
+}
+
+.coupen-row {
+    display: inline-flex;
+}
+
+.coupen-row>* {
+    flex: 0 0 auto;
+}
+
+.yellowcpn {
+    margin-top: -50px;
+}
+
+.dSup {
+    position: absolute;
+    top: 25%;
+    right: 5%;
+    gap: 3vw;
+    font-weight: 800;
+}
+
+
+.extra-isc h {
+    color: #2e3192;
+    font-weight: 800;
+    font-size: 31px;
+    position: relative;
+    font-weight: 900 !important;
+}
+
+.extra-isc small {
+    text-align: left !important;
+    /* position: absolute; */
+    left: 35%;
+    font-size: 12px;
+    font-weight: 500;
+    color: #000;
+}
+
+.divelerycol {
+    align-items: center;
+}
+
+.divelerycol p {
+    color: #2E3192;
+    font-weight: 600;
+    /* font-size: 18px; */
+}
+
+.coupen-row {
+    align-items: center;
+    padding: 12px 0;
+}
+
+.offers h5 {
+    color: #CC0008;
+    font-size: 25px;
+    font-weight: 800;
+
+}
+
+.del_img {
+    background-color: #EAEAF4;
+    border-radius: 50%;
+    position: relative;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.offers small {
+    font-size: 13px;
+}
+
+.coupen_code {
+    background: #fff;
+    text-align: center;
+    padding: 5px;
+    border: 3px dashed gray;
+    cursor: pointer;
+    color: #262262;
+}
+
+
+.signup {
+    background: #CC0008;
+    color: #fff;
+    padding: 5px 18px;
+    border: none;
+    box-shadow: 0px 0px 12px 120x currentColor;
+    /* border-radius: 10px; */
+}
+
+.signup:hover {
+    color: #CC0008;
+    background-color: #fff;
+    border: 1px solid #CC0008;
+}
+
+.signup_div p {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.divelerycol {
+    align-items: center;
+    margin: 10px auto;
+    font-weight: 700;
+}
+
+.diwali {
+    font-size: 20px;
+
+}
+
+/* Responsive */
+@media only screen and (min-width: 1502) {}
+
+@media only screen and (min-width: 1367px) and (max-width: 1501px) {}
+
+@media only screen and (min-width: 1201px) and (max-width: 1366px) {}
+
+@media only screen and (min-width: 1025px) and (max-width: 1200px) {}
+
+@media only screen and (min-width: 992px) and (max-width: 1024px) {}
+
+@media only screen and (min-width: 769px) and (max-width: 991px) {}
+
+/* Mobile: */
+
+@media (max-width:740px) {
+    .featuresFour{
+        gap: 0 !important;
+    }
+}
+
+@media (max-width:1255px) {
+
+    .diwali {
+        font-size: 15px !important;
+        padding: 0px !important;
+    }
+
+    .coupen_code {
+        padding: 2px !important;
+    }
+
+    .signup{
+        font-size: 12px !important;
+        padding: 2px !important;
+    }
+}
+
+@media (max-width:992px) {
+    .divelerycol p {
+        font-size: 10px !important;
+    }
+
+}
+
+@media (max-width:490px) {
+    .divelerycol p {
+        font-size: 13px !important;
+    }
+
+}
+
+@media (max-width:542px) {
+    .dSupMobile {
+        position: absolute;
+        top: 51% !important;
+        right: 14%;
+        gap: 5px !important;
+    }
+
+    .diwaliM {
+        font-size: 12px !important;
+        padding: 1px !important;
+
+    }
+
+    .coupen_code {
+        padding: 5px !important;
+        font-size: x-small !important;
+    }
+
+    .signup {
+        font-size: 12px !important;
+        padding: 5px;
+    }
+
+    .ltcM {
+        font-size: 8px !important;
+    }
+
+}
+
+@media (max-width:350px) {
+    .dSupMobile {
+        position: absolute;
+        top: 59%;
+        right: 8%;
+    }
+
+    .diwaliM {
+        font-size: 10px !important;
+        padding: 1px !important;
+
+    }
+
+    .coupen_code {
+        padding: 5px !important;
+        font-size: x-small !important;
+    }
+
+    .signup {
+        font-size: 10px !important;
+        padding: 3px;
+    }
+
+    .ltcM {
+        font-size: 5px !important;
+    }
+
+}
+
+@media (max-width:768px) {
+    .mblBnner {
+        margin-top: 66px;
+
+        display: block;
+    }
+
+    .diwali {
+        font-size: 15px;
+
+    }
+
+    .coupen_code {
+        padding: 5px !important;
+    }
+
+    .signup {
+        font-size: 15px;
+    }
+
+    .ltc {
+        font-size: 15px !important;
+
+    }
+
+    .dsktpbnr {
+        display: none;
+    }
+}
+
+@media (max-width:1060px) {
+    /* .diwali {
+        font-size: 10px;
+
+    } */
+
+    .coupen_code {
+        padding: 2px !important;
+    }
+
+    /* 
+    .signup {
+        font-size: 10px;
+    } */
+
+    .ltc {
+        font-size: 10px !important;
+
+    }
+
+
+
+}
+
+@media only screen and (min-width: 601px) and (max-width: 768px) {
+    .divelerycol {
+        margin: 10px auto;
+    }
+   
+}
+
+@media only screen and (min-width: 481px) and (max-width: 600px) {
+    .divelerycol {
+        margin: 10px auto;
+    }
+}
+
+@media only screen and (min-width: 361px) and (max-width: 480px) {
+    .divelerycol {
+        margin: 10px auto;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    .divelerycol {
+        margin: 10px auto;
+    }
+}

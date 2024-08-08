@@ -1,8 +1,9 @@
 import { query } from '@/lib/db';
 import { NextResponse } from 'next/server';
 import { writeFile } from 'fs/promises';
-
-const uploadImage = async (file) => {
+const fs = require("fs").promises;
+const path = require("path");
+/* const uploadImage = async (file) => {
   try {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
@@ -11,6 +12,33 @@ const uploadImage = async (file) => {
     return path; // Return the path or filename for storing in the database
   } catch (error) {
     throw new Error('Image upload failed: ' + error.message);
+  }
+}; */
+const uploadImage = async (file) => {
+  try {
+    console.log("Received file object:", file);
+    if (!file || typeof file.arrayBuffer !== "function") {
+      throw new Error("Invalid file object");
+    }
+
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    const uploadDir = "/var/www/uploads/uploads";
+
+    // Check if the directory exists, if not, create it
+    try {
+      await fs.access(uploadDir);
+    } catch {
+      await fs.mkdir(uploadDir, { recursive: true });
+    }
+
+    const filePath = path.join(uploadDir, file.name);
+    await fs.writeFile(filePath, buffer);
+    console.log(`File successfully uploaded to ${filePath}`);
+    return file.name;
+  } catch (error) {
+    console.error("Detailed upload error:", error);
+    throw new Error(`Image upload failed: ${error.message}`);
   }
 };
 

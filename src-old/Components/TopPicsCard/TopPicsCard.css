@@ -1,0 +1,69 @@
+.circularimg {
+    overflow: hidden;
+    width: 100%;
+    
+}
+
+.circularimg .image:hover {
+    transform: scale(1.1);
+    transition: all 1s;
+
+}
+
+.circularCard{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 10px;
+    width: 100% !important;
+    
+}
+.circularCard {
+    position: relative;
+    overflow: hidden;
+}
+
+.get-quote-btn {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.936);
+    color: white;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    transform: translateY(100%);
+    transition: transform 3s linear;
+}
+
+.circularCard:hover .get-quote-btn {
+    transform: translateY(0);
+    
+}
+
+
+@media (max-width: 991px) {
+
+    .circularimg {
+
+        width: 150px;
+        height: 150px;
+    }
+
+}
+
+@media only screen and (min-width: 991px) and (max-width: 1256px) {
+    .GqRmbtnRes button {
+        font-size: x-small !important;
+        padding: 2px !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .circularimg {
+        width: 100%;
+        height: 100%;
+    }
+
+}

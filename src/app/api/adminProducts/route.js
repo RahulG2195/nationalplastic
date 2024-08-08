@@ -4,6 +4,9 @@ import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 import upload from "@/utils/multer.middleware";
 
+const fs = require("fs").promises;
+const path = require("path");
+
 function convertColorToCode(color) {
   const colorEntry = colorNameList.find(
     (entry) => entry.name.toLowerCase() === color.toLowerCase()
@@ -13,35 +16,48 @@ function convertColorToCode(color) {
   }
   return colorEntry.hex;
 }
-const uploadImage = async (file) => {
+
+/*const uploadImage = async (file) => {
   try {
     await upload.single(file);
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const path = `./public${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${file.name}`;
+    const path = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${file.name}`;
 
     await writeFile(path, buffer);
   } catch (error) {
     throw new Error("Image upload failed: " + error.message);
   }
+};*/
+
+const uploadImage = async (file) => {
+  try {
+    console.log("Received file object:", file);
+    if (!file || typeof file.arrayBuffer !== "function") {
+      throw new Error("Invalid file object");
+    }
+
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    const uploadDir = "/var/www/uploads/uploads/products";
+
+    // Check if the directory exists, if not, create it
+    try {
+      await fs.access(uploadDir);
+    } catch {
+      await fs.mkdir(uploadDir, { recursive: true });
+    }
+
+    const filePath = path.join(uploadDir, file.name);
+    await fs.writeFile(filePath, buffer);
+    console.log(`File successfully uploaded to ${filePath}`);
+    return file.name;
+  } catch (error) {
+    console.error("Detailed upload error:", error);
+    throw new Error(`Image upload failed: ${error.message}`);
+  }
 };
 
-// formData:
-// product_name: Tester 
-// meta_title: undefined
-// meta_description: undefined
-// short_description: undefined
-// long_description: undefined
-// seo_title: undefined
-// seo_url: tester
-// category_name: Office Chair
-// price: 22
-// discount_percentage: 20
-// InstallationCharges: 0
-// color: red
-// armType: with_arm_tent
-// discount_price: 17.6
-// category_id: 40
 export async function POST(request) {
   try {
     const formData = await request.formData();
@@ -78,9 +94,10 @@ export async function POST(request) {
       "duration",
       "prod_status",
     ];
+
     optionalFields.forEach((field) => {
       let value = formData.get(field);
-      if (value && value !== 'undefined') {
+      if (value && value !== "undefined") {
         data[field] = value;
       } else {
         data[field] = null;
@@ -103,25 +120,34 @@ export async function POST(request) {
     data.seo_url_clr = `${data.seo_url}-${data.color}`.toUpperCase();
 
     // Handle multiple image uploads
+    //    const imageNames = [];
+
+    // Handle multiple image uploads
     const imageNames = [];
     for (let [key, value] of formData.entries()) {
       if (key.startsWith("image")) {
+        console.log(`Processing ${key}:`, value);
         try {
-          await uploadImage(value);
-          const imageName = value.name;
+          if (!value || !value.name) {
+            console.error(`Invalid file object for ${key}:`, value);
+            throw new Error("Invalid file object");
+          }
+          const imageName = await uploadImage(value);
           imageNames.push(imageName);
+          console.log(`Successfully uploaded: ${imageName}`);
         } catch (error) {
-          console.error("Error uploading image:", error);
+          console.error(`Error uploading image ${value.name}:`, error);
           return NextResponse.json(
-            { success: false, error: "Failed to upload image" },
+            {
+              success: false,
+              error: `Failed to upload image ${value.name}: ${error.message}`,
+            },
             { status: 500 }
           );
         }
       }
     }
-    data.image_name = imageNames.join(",");
-
-
+    data.image_name = imageNames.join(", ");
 
     // Convert color name to color code
     let color_code;
@@ -134,7 +160,6 @@ export async function POST(request) {
       );
     }
     console.log("Data to be inserted:", data);
-
 
     // Insert the new product
     const result = await query({
@@ -177,13 +202,15 @@ export async function POST(request) {
     );
   }
 }
+
 export async function PUT(request) {
   try {
     const formData = await request.formData();
     const images = formData.getAll("image");
     // Handle multiple image uploads
+
     const imageNames = [];
-    if (images && images.length > 0) {
+    /* if (images && images.length > 0) {
       for (const image of images) {
         try {
           await uploadImage(image); // Ensure this function handles image upload and returns the image name
@@ -196,7 +223,28 @@ export async function PUT(request) {
           );
         }
       }
-    }
+    } */
+
+      if (images && images.length > 0) {
+        for (let image of images) {
+          console.log(`Processing image:`, image);
+          try {
+            if (!image || !image.name) {
+              console.error(`Invalid file object:`, image);
+              throw new Error("Invalid file object");
+            }
+            const imageName = await uploadImage(image);
+            imageNames.push(imageName);
+            console.log(`Successfully uploaded: ${imageName}`);
+          } catch (error) {
+            console.error(`Error uploading image ${image.name}:`, error);
+            return NextResponse.json(
+              { success: false, error: `Failed to upload image ${image.name}: ${error.message}` },
+              { status: 500 }
+            );
+          }
+        }
+      }
 
     const requiredFields = [
       "product_name",
@@ -233,8 +281,7 @@ export async function PUT(request) {
     }
 
     // Set image_name to the new image names if uploaded, otherwise keep the existing ones
-    data.image_name =
-      imageNames.length > 0 ? imageNames.join(",") : formData.get("image_name");
+    data.image_name = imageNames.length > 0 ? imageNames.join(", ") : formData.get("image_name");
 
     // Convert color name to color code
     data.category_id = formData.get('category_id');
@@ -298,7 +345,6 @@ export async function GET(request) {
         "SELECT p.*,c.category_id,c.category_name FROM products p JOIN categories c ON p.category_id = c.category_id",
       values: [],
     });
-
 
     return new Response(
       JSON.stringify({

@@ -106,7 +106,7 @@ const BasicInfoEditor = () => {
         setErrors({});
     };
 
-    return (
+ return (
         <Container>
             <div className="d-flex justify-content-between align-items-center">
                 <h1>Basic Information</h1>
@@ -133,7 +133,7 @@ const BasicInfoEditor = () => {
                                         <FormFeedback>{errors.logo}</FormFeedback>
                                     </>
                                 ) : (
-                                    basicInfo.logo && <img className='w-25 mx-3' src={`/Assets/uploads/${basicInfo.logo}`} alt="Logo" style={{ maxWidth: '100%' }} />
+                                    basicInfo.logo && <img className='w-25 mx-3' src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}${basicInfo.logo}`} alt="Logo" style={{ maxWidth: '100%' }} />
                                 )}
                             </FormGroup>
                         </Col>

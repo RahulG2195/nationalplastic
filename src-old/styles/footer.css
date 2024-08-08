@@ -1,0 +1,121 @@
+
+
+.back-to-top{
+    position: fixed;
+    right: 2%;
+    top: 73% ;
+    background-color: red !important;
+    padding: 10px;
+    border-radius: 100%;
+}
+.footer{
+    /* background-color: var(--secondary-color); */
+    padding: 55px 0;
+    border-top: 1px solid lightgray;
+    box-shadow: 0 0 14px 1px rgba(0, 0, 0, 0.4);
+}
+
+.footer .footer_heading h5{
+    color: #2E3192 ;
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.footer ul{
+    list-style: none;
+    padding: 0;
+}
+
+.footer ul li{
+    padding: 5px 0;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.bottom_footer{
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 35px 0 10px 0;
+}
+
+.footer_social {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    margin: 30px;
+}
+
+.comp_logo{
+    position: relative;
+    height: 60px;
+    width: 160px;
+}
+
+.comp_logo::after{
+    content: "";
+  position: absolute;
+  top: 2px;
+    right: 11%;
+    width: 2px;
+    height: 85%; /* Adjust the height as needed */
+  background-color: #fff; 
+}
+.comp_logo img{
+    object-fit: contain;
+}
+.social_icons a i{
+    color: #fff;
+    transition: all 0.5s linear;
+}
+
+.social_icons a i:hover{
+    color: yellow;
+    /* background-color:gray; */
+    border-radius: 3px;
+}
+.social_icons img{
+    margin: 0 6px;
+    /* width: 20% !important; */
+}
+.social_icons img:nth-child(1){
+    margin-left: 0;
+}
+.footer_term a{
+    color: #fff;
+}
+.footer_term a:hover{
+    color: #fff;
+}
+.footer_term p span{
+    padding: 0 4px;
+}
+
+.footer_term a p {
+    font-size: 14px;
+}
+
+.paymentImg{
+    margin-top: 15px;
+}
+.gatewayimg{
+    position: relative;
+    height: 50px;
+    width: 100px;
+}
+
+.gatewayimg img{
+    object-fit: cover;
+}
+
+.otherLogo{ 
+    height: 60px;
+    width: 164px;
+    position: relative;
+}
+
+@media (max-width:768px) {
+    .footercaption{
+        width: 100% !important;
+    }
+}

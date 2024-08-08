@@ -1,0 +1,243 @@
+.locationIcon,
+.LocationIconPin,
+.LocationPin, .InstallationCharges, .CouponApplied, .productPrice {
+    display: flex;
+}
+.locationIcon{
+    padding: 8px;
+}
+/* .CartQuantity .{
+    
+    line-height: ;
+} */
+.CouponApplied p{
+
+    line-height: 1 !important;
+}
+
+.CouponApplied:hover{
+
+    cursor: pointer;
+}
+.iconImage img {
+    display: flex;
+    height: auto;
+    width: 18px;
+    position: relative;
+    padding: 4px;
+}
+
+.input-group-append button{
+    border: none;
+    background-color: #C9070F;
+    padding: 7px;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.ATCflow {
+    display: flex;
+    justify-content: center;
+    background-color: #F6F6F6;
+    padding: 20px;
+    font-weight: 600;
+}
+
+.ATCflow p {
+    color: #262262;
+}
+
+.ATCflow p span {
+    color: #C9070F;
+}
+
+.cartView {
+    margin: 50px auto;
+}
+.my-cart{
+    background-color: #fff;
+    box-shadow: 0 0 12px 2px lightgrey;
+    border-radius: 5px;
+    padding: 19px 10px;
+    margin: 10px;
+}
+
+.coupenDiv{
+    background-color: #fff;
+    box-shadow: 0 0 12px 2px lightgrey;
+    border-radius: 5px;
+    padding: 19px 10px;
+    margin: 10px;
+}
+
+.coupon_btn{
+    background-color: #C9070F;
+    color: #fff;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.coupon_btn:focus-visible{
+    border: 1px solid lightgray;
+    outline: 1px;
+}
+.locationPin .input-group input{
+    font-size: 12px;
+    width: 140px;
+}
+
+.search-pin {
+    display: inline-flex;
+    justify-content: right;
+
+}
+.my-cart h5{
+    color: #262262;
+}
+
+.CartQuantity .input-group{
+    width: 120px !important;
+    margin: 0px 10px;
+}
+.CartQuantity{
+    display: flex;
+}
+
+.CouponApplied img {
+    vertical-align: middle;
+    width: 18px;
+    height: 14px;
+    margin-right: 5px;
+    object-fit: contain;
+}
+
+.CouponApplied i{
+    vertical-align: middle;
+    margin: auto;
+}
+
+
+
+.CouponApplied .Coupontext{
+    color: #CC0008;
+}
+
+.InstallationCharges{
+    margin: 10px 0px;
+}
+    
+.productPrice p span {
+    color: #0EA313;
+    font-size: 12px;
+    font-weight: 700;
+    margin: 0 12px;
+}
+.productPrice p{
+    margin: 0 12px;
+}
+
+ .card-Quantity-section p{
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 3;
+}
+ /* .CouponApplied{
+    margin: 0 20px;
+ } */
+ .SaveForLater{
+    margin: 0 0px;
+ }
+
+ .SaveForLater p{
+    margin-left: 4px;
+ }
+
+ .form-control:focus{
+/* border: none !important; */
+box-shadow:none !important;
+ }
+ span button{
+    border: none;
+    background-color: #f8f9fa;
+ }
+ 
+ .place-order .PriceDetail{ 
+    margin: 10px;
+    padding: 25px;
+    background-color: #fff;
+    box-shadow: 0 0 12px 2px lightgrey;
+    border-radius: 5px;
+ }
+
+
+
+ @media only screen and (min-width: 1502) {}
+ @media only screen and (min-width: 1367px) and (max-width: 1501px) {} 
+ @media only screen and (min-width: 1201px) and (max-width: 1366px) {}
+ @media only screen and (min-width: 1025px) and (max-width: 1200px) {}
+ @media only screen and (min-width: 992px) and (max-width: 1024px) {}
+ @media only screen and (min-width: 769px) and (max-width: 991px) {
+    /* .CartQuantity .input-group {
+        width: 24% !important;
+     } */
+ }
+ 
+ /* Mobile: */
+ @media (max-width:768px) {
+    
+    .RowCont{
+        padding: 0 !important;
+    }
+    
+ }
+
+ @media (max-width:400px) {
+    .cartView, .my-cart{
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .InstallationCharges .Icmargin{
+        margin: 0 !important;
+    }
+    .ATCflow p{
+        font-size: 12px !important;
+    }
+    
+ }
+ @media only screen and (min-width: 601px) and (max-width: 768px) {
+    .card-Quantity-section{
+        margin-top: 20px;
+     }
+     /* .CartQuantity .input-group {
+        width: 24% !important;
+     } */
+ }
+ @media only screen and (min-width: 481px) and (max-width: 600px) {
+    .card-Quantity-section {
+        margin-top: 20px;
+    }
+ }
+ @media only screen and (min-width: 361px) and (max-width: 480px) {
+    .card-Quantity-section {
+        margin-top: 20px;
+    }
+ }
+ @media only screen and (max-width: 360px) {
+    .card-Quantity-section {
+        margin-top: 20px;
+    }
+
+    .card-Quantity-section p {
+        font-size: 16px;
+    }
+ }
+
+ @media (max-width:796px) {
+
+    .InstallationCharges > p{
+      line-height: 1;
+      font-size: 10px;
+    }
+ }
+ 
+
