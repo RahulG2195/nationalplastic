@@ -84,6 +84,7 @@ export async function PUT(request) {
     const { category_id, seo_url, category_name, image_name, navshow, status, image , topPick=0} = Object.fromEntries(
       data.entries()
     );
+    
     if (image) {
       try {
 
