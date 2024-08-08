@@ -237,8 +237,7 @@ export async function PUT(request) {
       imageNames.length > 0 ? imageNames.join(",") : formData.get("image_name");
 
     // Convert color name to color code
-    const categoryId = formData.get("category_id_edited") || formData.get("category_id");
-data.category_id = categoryId;
+    data.category_id = formData.get('category_id');
     let color_code;
     try {
       color_code = convertColorToCode(data.color);

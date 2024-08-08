@@ -8,22 +8,32 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(req, res) {
   try {
     // Parse form data using NextRequest.formData()
-    console.log("Request object:", JSON.stringify(req, null, 2));
     const data = await req.formData();
 
     // Extract files and other form data
     const productImage = data.get("productImage");
     const damageImage = data.get("damageImage");
-    const reason = data.get("reason");
-    const productId = data.get("productId");
-    const customerId = data.get("customerId");
-    const orderId = data.get("orderId");
 
-    // Use multer to handle file uploads
-    await upload.fields([
-      { name: 'productImage', maxCount: 1 },
-      { name: 'damageImage', maxCount: 1 }
-    ])(req, res);
+    if (!productImage || !damageImage) {
+      return NextResponse.json({ success: false, error: "Missing required images" });
+    }
+try{
+    await upload.single(productImage);
+    await upload.single(damageImage);
+}catch(error){
+  console.log("Error uploading damage image ------");
+  console.log("Error uploading product image ------"+ error.message);
+}
+
+    // Save files
+    const productImagePath = `./public/Assets/uploads/${productImage.name}`;
+    const damageImagePath = `./public/Assets/uploads/${damageImage.name}`;
+
+    await writeFile(productImagePath, Buffer.from(await productImage.arrayBuffer()));
+    await writeFile(damageImagePath, Buffer.from(await damageImage.arrayBuffer()));
+
+    // Extract other form fields
+    const { reason, productId, customerId, orderId } = Object.fromEntries(data.entries());
 
     // Create HTML email content dynamically for personalization
     const HtmlFormat = `
@@ -36,22 +46,22 @@ export async function POST(req, res) {
     `;
 
     // Read the file contents
-    const productImageContent = await readFile(productImage.path);
-    const damageImageContent = await readFile(damageImage.path);
+    const productImageContent = await readFile(productImagePath);
+    const damageImageContent = await readFile(damageImagePath);
 
     // Send email with attachments using Resend
     const info = await resend.emails.send({
       from: 'Your Company <onboarding@resend.dev>', // Replace with your verified domain
-      to: 'returns@yourcompany.com', // Replace with the appropriate email address
+      to: "dinesh.crezvatic@gmail.com", // Replace with the appropriate email address
       subject: `Product Return Request - Order ${orderId}`,
       html: HtmlFormat,
       attachments: [
         {
-          filename: 'product.jpg',
+          filename: productImage.name,
           content: productImageContent,
         },
         {
-          filename: 'damage.jpg',
+          filename: damageImage.name,
           content: damageImageContent,
         },
       ],

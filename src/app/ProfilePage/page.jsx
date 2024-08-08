@@ -5,7 +5,6 @@ import Wishlist from "../Wishlist/page";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-// import { useRouter } from "next/router";
 import { notify, notifyError } from "@/utils/notify.js";
 import { useSelector } from "react-redux";
 import Link from "next/link";
@@ -17,12 +16,9 @@ import {
   isValidPassword,
   isValidReason, // Address validations
 } from "@/utils/validation";
-// import ProdEmail from "@/Components/ReturnProdEmail/prodEmail";
-import Cookies from 'js-cookie';
 import { signOut } from "next-auth/react";
 import { Modal } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-
 const { confirm } = Modal;
 function ProfilePage() {
   const [FirstName, setFirstName] = useState('');
@@ -39,27 +35,36 @@ function ProfilePage() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [orderData, setOrderData] = useState([]);
+  const [ModelData, setModelData] = useState([]);
   const [ReturnSingleProd, setReturnSingleProd] = useState([]);
   const [VerifyReturnDays, setVerifyReturnDays] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  // const [firstImage , setFirstImage] = useState("Altis-chair-Black-(45)-white bg.webp");
-  // redirect to admin to admin panel 
   const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleModalClose = () => {
-    setIsModalVisible(false);
-  };
+  const [formData, setFormData] = useState({
+    email: "",
+    phone: "",
+    address: "",
+  });
+  const [formErrors, setFormErrors] = useState({
+    email: "",
+    phone: "",
+    address: "",
+  });
+  const cust_id = messages.length > 0 ? messages[0].customer_id : null;
+  const [editedData, setEditedData] = useState({
+    Id: "",
+    Phone: "",
+    Address: "",
+  });
+  const [basicInfo, setBasicInfo] = useState({
+    mobile_number1: '',
+    email: ''
+  });
   useEffect(() => {
     const IsAdmin = localStorage.getItem('isAdmin');
     if (IsAdmin == 'true') {
       router.push("/admin")
     }
   }, []);
-
   useEffect(() => {
     localStorage.getItem("isLoggedIn") === "true"
       ? true
@@ -81,113 +86,12 @@ function ProfilePage() {
     // setIsLoggedIn(isLoggedIn);
     setData(storedData);
   }, []);
-
-
-  // Get user ID from context (replace with your logic)
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setError(null);
-    setSuccess(null);
-
-    if (!newPassword || !confirmPassword) {
-      setError("Missing required fields (newPassword, confirmPassword)");
-      return;
-    }
-
-    if (newPassword !== confirmPassword) {
-      setError("Passwords do not match");
-      return;
-    }
-
-    try {
-      const requestData = {
-        newPassword: newPassword,
-        confirmPassword: confirmPassword,
-        Id: cust_id,
-      };
-
-      // Send DELETE request to the API endpoint
-      const response = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/Users`, requestData);
-
-      if (response.data.status === 200) {
-        setSuccess("Password updated successfully!");
-        setNewPassword("");
-        setConfirmPassword("");
-      } else {
-        setError(response.data.message);
-      }
-    } catch (error) {
-      console.error("Error updating password:", error);
-      setError("Internal server error");
-    }
-  };
-
-  const handleInputAddressChange = (event) => {
-    setAdress2(event.target.value);
-  };
-
-  const updateAddressTwo = async (event) => {
-    event.preventDefault();
-    const data = {
-      Adress2: adress2,
-      Id: cust_id,
-    };
-    if (!isValidReason(adress2)) {
-      toast.error("Please enter a  Valid address.");
-      return;
-    }
-    const response = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/UserProfile`, data);
-    const status = response.statusCode || response.status;
-    if (status === 200) {
-      notify("Updated address");
-    } else {
-      notifyError(response.message);
-    }
-
-    setAdress2("");
-  };
-
-  const allowEdit = () => {
-    setEditable(!editable);
-  };
-
-  const [idd, setIdd] = useState(null);
-  const [formData, setFormData] = useState({
-    email: "",
-    phone: "",
-    address: "",
-  });
-
-  const [formErrors, setFormErrors] = useState({
-    email: "",
-    phone: "",
-    address: "",
-  });
-
-
-  const cust_id = messages.length > 0 ? messages[0].customer_id : null;
-  const email_id = messages.length > 0 ? messages[0].Email : null;
-
-  const [editedData, setEditedData] = useState({
-    Id: "",
-    Phone: "",
-    Address: "",
-  });
-
-  const [basicInfo, setBasicInfo] = useState({
-    mobile_number1: '',
-    email: ''
-  });
-  const [initialBasicInfo, setInitialBasicInfo] = useState({});
-
   useEffect(() => {
     const fetchBasicInfo = async () => {
       try {
         const response = await axios.get('/api/basicInfo');
         const basicInfoData = response.data.basicInfo;
         setBasicInfo(basicInfoData);
-        setInitialBasicInfo(basicInfoData);
       } catch (error) {
         console.error('There was an error fetching the basic info!', error);
       }
@@ -195,8 +99,6 @@ function ProfilePage() {
 
     fetchBasicInfo();
   }, []);
-
-
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -228,7 +130,6 @@ function ProfilePage() {
 
     fetchUserData();
   }, [userEmail]);
-
   useEffect(() => {
 
     if (FirstName && LastName) {
@@ -238,8 +139,6 @@ function ProfilePage() {
       setInitialName('N' + 'P');
     }
   }, [FirstName, LastName]);
-
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setEditedData((prevData) => ({
@@ -366,42 +265,113 @@ function ProfilePage() {
   }
 
   const ReturnProduct = async (prod_id, user_id, od_id) => {
-   
-    showModal();
-    try {
+   const getSingleData = orderData.find((od) => od.prod_id == prod_id && od.customer_id == user_id && od.od_id == od_id);
+    setModelData(getSingleData);
+    if(getSingleData.order_status != 8)
+      {
+        try {
 
-      const GetSingleData = orderData.filter((od) => od.prod_id == prod_id && od.customer_id == user_id && od.od_id == od_id)
-      const fourteendayvalidate = ReturnProductBeforeFourteenDays(GetSingleData[0]['order_status_date']);
-
-      setReturnSingleProd(GetSingleData);
-      setVerifyReturnDays(fourteendayvalidate)
-
-      if (fourteendayvalidate > 1000000000000000) {
-        const ProdData = { prod_id: prod_id, user_id: user_id, order_id: GetSingleData[0].order_id, type: 'return' };
-        var res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, ProdData);
-
-        if (res.data.message === 'Order status Updated') {
-
-          notify("Your order Return Request has been sent");
-          toast.success("Your order Return Request has been sent");
-
-        } else {
-
-          notify("Your order Return Request fail");
-          toast.success("Your order Return Request fail");
-
+          const GetSingleData = orderData.find((od) => od.prod_id == prod_id && od.customer_id == user_id && od.od_id == od_id)
+          const fourteendayvalidate = ReturnProductBeforeFourteenDays(GetSingleData[0]['order_status_date']);
+        
+          setReturnSingleProd(GetSingleData);
+          setVerifyReturnDays(fourteendayvalidate)
+    
+          if (fourteendayvalidate > 1000000000000000) {
+            const ProdData = { prod_id: prod_id, user_id: user_id, order_id: GetSingleData[0].order_id, type: 'return' };
+            var res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, ProdData);
+    
+            if (res.data.message === 'Order status Updated') {
+    
+              notify("Your order Return Request has been sent");
+              toast.success("Your order Return Request has been sent");
+    
+            } else {
+    
+              notify("Your order Return Request fail");
+              toast.success("Your order Return Request fail");
+    
+            }
+          }
+    
+    
+        } catch (error) {
+          console.error('Error:', error);
         }
+      }else{
+
+        showModal();
+
       }
 
-
-    } catch (error) {
-      console.error('Error:', error);
-    }
   }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError(null);
+    setSuccess(null);
+    if (!newPassword || !confirmPassword) {
+      setError("Missing required fields (newPassword, confirmPassword)");
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+    try {
+      const requestData = {
+        newPassword: newPassword,
+        confirmPassword: confirmPassword,
+        Id: cust_id,
+      };
+      // Send DELETE request to the API endpoint
+      const response = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/Users`, requestData);
+      if (response.data.status === 200) {
+        setSuccess("Password updated successfully!");
+        setNewPassword("");
+        setConfirmPassword("");
+      } else {
+        setError(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error updating password:", error);
+      setError("Internal server error");
+    }
+  };
+  const handleInputAddressChange = (event) => {
+    setAdress2(event.target.value);
+  };
 
+  const updateAddressTwo = async (event) => {
+    event.preventDefault();
+    const data = {
+      Adress2: adress2,
+      Id: cust_id,
+    };
+    if (!isValidReason(adress2)) {
+      toast.error("Please enter a  Valid address.");
+      return;
+    }
+    const response = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/UserProfile`, data);
+    const status = response.statusCode || response.status;
+    if (status === 200) {
+      notify("Updated address");
+    } else {
+      notifyError(response.message);
+    }
 
+    setAdress2("");
+  };
 
-
+  const allowEdit = () => {
+    setEditable(!editable);
+  };
+  
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+  const handleModalClose = () => {
+    setIsModalVisible(false);
+  };
   return (
     <>
       <div className="container profile-page-container mb-5">
@@ -718,7 +688,7 @@ function ProfilePage() {
                               if (data['per_order_status'] == 0 && data['return_order'] == 0) {
                                 ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Return confirmation Sent</button>
                               } else {
-                                ReturnCancelBtn = <button className="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#ReturnProd" onClick={() => ReturnProduct(data.product_id, data.customer_id, data.od_id)}>Return order</button>
+                                ReturnCancelBtn = <button className="btn btn-danger btn-rounded"  onClick={() => ReturnProduct(data.product_id, data.customer_id, data.od_id)}>Return order</button>
                                 
                                 
                               }
@@ -845,9 +815,7 @@ function ProfilePage() {
       {/* popup */}
 
       <ReturnProductModal
-        productId="123"
-        customerId="456"
-        orderId="789"
+        data={ModelData}
         visible={isModalVisible}
         onClose={handleModalClose}
       />

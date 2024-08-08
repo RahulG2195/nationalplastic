@@ -56,8 +56,9 @@ export default function App() {
           }
         });
         formData.append('discount_price', calculatedDiscountPrice);
-        formData.append('category_id_edited', selectedCategory.id);
-
+        if(selectedCategory.id){
+          formData.set('category_id', selectedCategory.id);
+        }
         let formDataString = '';
         formData.forEach((value, key) => {
           formDataString += `${key}: ${value}\n`;

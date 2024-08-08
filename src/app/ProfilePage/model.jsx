@@ -4,7 +4,8 @@ import { Modal, Form, Input, Button, message } from 'antd';
 
 const { TextArea } = Input;
 
-const ReturnProductModal = ({ productId, customerId, orderId, visible, onClose }) => {
+const ReturnProductModal = ({ data, visible, onClose }) => {
+  console.log("dat From MDeL", JSON.stringify(data));
   const [form] = Form.useForm();
   const [productImage, setProductImage] = useState(null);
   const [damageImage, setDamageImage] = useState(null);
@@ -14,18 +15,20 @@ const ReturnProductModal = ({ productId, customerId, orderId, visible, onClose }
       message.error('Please upload both product and damage images');
       return;
     }
+    console.log("values" + values);
+    console.log("values" + JSON.stringify(values));
 
     const formData = new FormData();
     formData.append('reason', values.reason);
     formData.append('productImage', productImage);
     formData.append('damageImage', damageImage);
-    formData.append('productId', productId);
-    formData.append('customerId', customerId);
-    formData.append('orderId', orderId);
-
+    formData.append('productId', data.prod_id);
+    formData.append('customerId', data.customer_id);
+    formData.append('orderId', data.order_id);
+    console.log('Form Data:', formData);
     try {
       console.log("resendFile before calling the api ");
-      const response = await axios.post('/api/resendFile', formData, {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/resendFile`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
