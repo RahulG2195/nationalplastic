@@ -1,17 +1,16 @@
-// WOKRS perfect;y from postman
-
-import nodemailer from "nodemailer";
+import { Resend } from 'resend';
 import { NextRequest, NextResponse } from "next/server";
-import { writeFile } from "fs/promises";
-
+import { writeFile, readFile } from "fs/promises";
 import upload from "@/utils/multer.middleware";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 export async function POST(req, res) {
   try {
     // Parse form data using NextRequest.formData()
     const data = await req.formData();
 
     // Extract file and other form data
-    // const file = data.get("file");
     const file = data.get("file");
     upload.single(file);
 
@@ -30,15 +29,6 @@ export async function POST(req, res) {
       data.entries()
     );
 
-    // Create a Nodemailer transporter using SMTP
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "webDevs2024@gmail.com",
-        pass: "fkbt nnro yfnk ngmc", // Replace with your Gmail App Password (not account password)
-      },
-    });
-
     // Create HTML email content dynamically for personalization
     const HtmlFormat = `
       <p>Hello ${name},</p>
@@ -50,19 +40,21 @@ export async function POST(req, res) {
       <p>${name}.</p>
     `;
 
-    // Attach the file content as base64 encoded string if file exists
-    // Send email with attachment (if a file was uploaded)
-    const info = await transporter.sendMail({
-      from: "webDevs2024@gmail.com", // Consider using a more descriptive sender address
+    // Read the file content
+    const fileContent = await readFile(path);
+
+    // Send email with attachment using Resend
+    const info = await resend.emails.send({
+      from: 'Your Company <onboarding@resend.dev>', // Replace with your verified domain
       to: email,
-      subject: reason, // Using the reason as the subject
+      subject: reason,
       html: HtmlFormat,
       attachments: [
         {
-          filename: file.name, // Name of the attachment
-          path: path, // Path to the attachment
+          filename: file.name,
+          content: fileContent,
         },
-      ], // Attachments array with conditional file attachment
+      ],
     });
 
     return NextResponse.json({ success: true });

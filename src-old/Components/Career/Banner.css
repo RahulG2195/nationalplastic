@@ -1,0 +1,18 @@
+.Img_cont .CareerButton {
+    background-color: #CC0008;
+    color:white;
+    position: absolute;
+    right: 45%;
+    top: 62%;
+    width: 15%;
+    height: 8%;
+    font-size: 1.3vw;
+    border: none;
+    border-radius: 10px;
+}
+
+.Img_cont {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}

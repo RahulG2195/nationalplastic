@@ -4,6 +4,9 @@ import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 import upload from "@/utils/multer.middleware";
 
+const fs = require('fs').promises;
+const path = require('path');
+
 function convertColorToCode(color) {
   const colorEntry = colorNameList.find(
     (entry) => entry.name.toLowerCase() === color.toLowerCase()
@@ -14,18 +17,48 @@ function convertColorToCode(color) {
   return colorEntry.hex;
 }
 
-const uploadImage = async (file) => {
+
+/*const uploadImage = async (file) => {
   try {
     await upload.single(file);
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const path = `./public/${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${file.name}`;
-    console.log('path', path);
+    const path = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${file.name}`;
+
     await writeFile(path, buffer);
   } catch (error) {
     throw new Error("Image upload failed: " + error.message);
   }
-};
+};*/
+
+const uploadImage = async (file) => {
+try{
+
+ if(!file || !(file instanceof File)){
+  throw new Error("Invalid file object");
+ }
+
+ const bytes = await file.arrayBuffer();
+ const buffer = Buffer.from(bytes);
+ const uploadDir = '/var/www/uploads';
+
+ try{
+	await fs.access(uploadDir);
+   } catch{
+	await fs.mkdir(uploadDir, { recursive: true});
+   }
+
+ const filePath = path.join(uploadDir, file.name);
+ await fs.writeFile(filePath, buffer);
+ console.log(`File successfully uploaded to $filePath}`);
+ return file.name;
+
+} catch (error){
+	throw new Error("Image upload failed: " + error.message);
+ }
+
+}
+
 
 export async function POST(request) {
   try {
@@ -63,6 +96,7 @@ export async function POST(request) {
       "duration",
       "prod_status",
     ];
+
     optionalFields.forEach((field) => {
       let value = formData.get(field);
       if (value && value !== 'undefined') {
@@ -87,23 +121,29 @@ export async function POST(request) {
     // Create seo_url_clr
     data.seo_url_clr = `${data.seo_url}-${data.color}`.toUpperCase();
 
+
     // Handle multiple image uploads
     const imageNames = [];
     for (let [key, value] of formData.entries()) {
       if (key.startsWith("image")) {
-        try {
-          await uploadImage(value);
-          const imageName = value.name;
-          imageNames.push(imageName);
-        } catch (error) {
-          console.error("Error uploading image:", error);
-          return NextResponse.json(
-            { success: false, error: "Failed to upload image" },
-            { status: 500 }
-          );
+	    try{
+	      console.log(`Attempting to upload file: ${value.name}`)
+        if(!(value instanceof file)){
+          console.error(`imvalid file object for ${key}:`, value);	
+          throw new Error("Invalid file object");
         }
+        const imageName = await uploadImage(value);
+        imageNames.push(imageName);
+        console.log(`Successfully uploaded: ${imageName}`);
+	    } catch (error) {
+	      console.error(`Error uploading image ${value.name}:`, error);
+	      return NextResponse.join(
+	      {success: false, error: `Failed to upload image ${value.name}: ${error.message}`},
+	      {status: 500}
+        );
       }
     }
+  }
     data.image_name = imageNames.join(", ");
 
 

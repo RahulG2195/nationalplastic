@@ -1,0 +1,123 @@
+/* body {
+    background-color: #f0f2f5;
+  } */
+
+.customer-review-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f2f5;
+  }
+  
+  .review-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .review-header h1 {
+    font-size: 2.5rem;
+    color: #333;
+  }
+  
+  .review-header .highlight {
+    color: #f5222d;
+  }
+  
+  .review-header p {
+    font-size: 1.1rem;
+    color: #666;
+  }
+  
+  .review-content {
+    display: flex;
+    gap: 2rem;
+  }
+  
+  .review-summary {
+    flex: 1;
+  }
+  
+  .review-list {
+    flex: 2;
+  }
+  
+  .overall-rating {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+ 
+  .write-review-btn {
+    width: 100%;
+    margin-top: 1rem;
+    background-color: #1890ff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .write-review-btn:hover {
+    background-color: #40a9ff;
+  }
+  
+  .review-card {
+    margin-bottom: 1rem;
+  }
+  
+  .review-card .review-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .review-card .review-info {
+    margin-left: 1rem;
+  }
+  
+  .review-card h3 {
+    margin: 0;
+  }
+  
+  .review-card .review-text {
+    color: #666;
+  }
+  
+  .review-form {
+    margin-bottom: 1rem;
+  }
+  
+  .review-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .large-stars {
+    font-size: 48px; /* Adjust this value to change the size of the stars */
+  }
+  
+  .large-stars .ant-rate-star {
+    margin-right: 12px; /* Adjust spacing between stars if needed */
+  }
+
+  .InitialName.profileInitialName {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: medium;
+    background-color: #f0f0f0;
+    color: #333;
+    font-weight: bold;
+  }
+  @media (max-width: 768px) {
+    .review-content {
+      flex-direction: column;
+    }
+  }

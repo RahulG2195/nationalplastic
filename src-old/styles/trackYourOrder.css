@@ -1,0 +1,147 @@
+
+.headingTYO {
+    color: #2E3192;
+    font-weight: 800;
+}
+.TYODesc {
+    color: #CC0008;
+    line-height: 30px;
+}
+
+.TYOdiv{
+    margin: auto;
+    display: grid;
+    justify-content: center;
+}
+
+.TOInnerDiv{
+    padding: 50px;
+    margin: 40px auto;
+    background-color: #F7F7F7;
+}
+
+.TOInnerDiv .DataInnerDiv{
+    background-color: #FFFFFF;
+    padding: 50px;
+}
+
+.input-group-text{
+    background-color: #CC0008;
+    border-radius: 0px;
+    color: #fff;
+    font-weight: 600;
+    padding: 10px 32px;
+}
+
+.radioBtn{
+    display: flex;
+    padding: 17px 0px;
+}
+
+.radioBtn input{
+    margin: 0px 20px;
+}
+
+/* RESPONSIVE */
+
+@media only screen and (min-width: 1502) {
+    .TrackOrder{
+        padding: 25px 0px 0;
+    }
+}
+@media only screen and (min-width: 1367px) and (max-width: 1501px) {
+    .TrackOrder{
+        padding: 25px 0px 0;
+    }
+} 
+@media only screen and (min-width: 1201px) and (max-width: 1366px) {
+    .TrackOrder{
+        padding: 25px 0px 0;
+    }
+}
+@media only screen and (min-width: 1025px) and (max-width: 1200px) {
+    .TrackOrder{
+        padding: 25px 0px 0;
+    }
+}
+@media only screen and (min-width: 992px) and (max-width: 1024px) {
+    .TrackOrder{
+        padding: 25px 0px 0;
+    }
+}
+@media only screen and (min-width: 769px) and (max-width: 991px) {
+    .TrackOrder{
+        padding: 25px 0px 0;
+    }
+}
+
+/* Mobile: */
+@media only screen and (min-width: 601px) and (max-width: 768px) {
+    .TOInnerDiv {
+        padding: 10px;
+        margin: 40px auto;
+        background-color: #F7F7F7;
+    }
+    .TrackOrder{
+        padding: 25px 5px 0;
+    }
+}
+@media only screen and (min-width: 481px) and (max-width: 600px) {
+    .TOInnerDiv {
+        padding: 10px;
+        margin: 40px auto;
+        background-color: #F7F7F7;
+    }
+    .TrackOrder{
+        padding: 25px 5px 0;
+    }
+}
+@media only screen and (min-width: 361px) and (max-width: 480px) {
+    .TOInnerDiv {
+        padding: 10px;
+        margin: 40px auto;
+        background-color: #F7F7F7;
+    }
+    .radioBtn input {
+        margin: 0px 2px 0 10px;
+    }
+    .TYODesc {
+        line-height: 22px;
+        font-size: 18px;
+    }
+    .TrackOrder{
+        padding: 25px 5px 0;
+    }
+    .TOInnerDiv .DataInnerDiv {
+        padding: 22px;
+    }
+
+    .radioBtn label, .radioBtn p {
+        font-size: 12px;
+    }
+}
+@media only screen and (max-width: 360px) {
+    .TOInnerDiv {
+        padding: 10px;
+        margin: 40px auto;
+        background-color: #F7F7F7;
+    }
+    .radioBtn input {
+        margin: 0px 7px 0 17px;
+    }
+    .TYODesc {
+        line-height: 22px;
+        font-size: 18px;
+    }
+
+    .TrackOrder{
+        padding: 25px 5px 0;
+    }
+    .TOInnerDiv .DataInnerDiv {
+        padding: 22px;
+    }
+
+    .radioBtn label, .radioBtn p {
+        font-size: 12px;
+    }
+}

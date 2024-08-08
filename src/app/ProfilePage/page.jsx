@@ -11,13 +11,13 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from 'next/image';
-
+import ReturnProductModal from './model';
 import CancelProdChargeAfterTwentyFourHr, { ReturnProductBeforeFourteenDays } from "@/utils/CancelProduct";
 import {
   isValidPassword,
   isValidReason, // Address validations
 } from "@/utils/validation";
-import ProdEmail from "@/Components/ReturnProdEmail/prodEmail";
+// import ProdEmail from "@/Components/ReturnProdEmail/prodEmail";
 import Cookies from 'js-cookie';
 import { signOut } from "next-auth/react";
 import { Modal } from 'antd';
@@ -41,8 +41,18 @@ function ProfilePage() {
   const [orderData, setOrderData] = useState([]);
   const [ReturnSingleProd, setReturnSingleProd] = useState([]);
   const [VerifyReturnDays, setVerifyReturnDays] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   // const [firstImage , setFirstImage] = useState("Altis-chair-Black-(45)-white bg.webp");
   // redirect to admin to admin panel 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalVisible(false);
+  };
   useEffect(() => {
     const IsAdmin = localStorage.getItem('isAdmin');
     if (IsAdmin == 'true') {
@@ -356,7 +366,8 @@ function ProfilePage() {
   }
 
   const ReturnProduct = async (prod_id, user_id, od_id) => {
-
+   
+    showModal();
     try {
 
       const GetSingleData = orderData.filter((od) => od.prod_id == prod_id && od.customer_id == user_id && od.od_id == od_id)
@@ -365,7 +376,7 @@ function ProfilePage() {
       setReturnSingleProd(GetSingleData);
       setVerifyReturnDays(fourteendayvalidate)
 
-      if (fourteendayvalidate > 0) {
+      if (fourteendayvalidate > 1000000000000000) {
         const ProdData = { prod_id: prod_id, user_id: user_id, order_id: GetSingleData[0].order_id, type: 'return' };
         var res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, ProdData);
 
@@ -708,6 +719,8 @@ function ProfilePage() {
                                 ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Return confirmation Sent</button>
                               } else {
                                 ReturnCancelBtn = <button className="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#ReturnProd" onClick={() => ReturnProduct(data.product_id, data.customer_id, data.od_id)}>Return order</button>
+                                
+                                
                               }
 
 
@@ -830,35 +843,14 @@ function ProfilePage() {
       </div>
 
       {/* popup */}
-      <div>
-        <div
-          className="modal fade"
-          id="ReturnProd"
-          tabIndex={-1}
-          aria-labelledby="ReturnProdLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog">
-            <div className="modal-content modal-content-mypopup">
-              <div className="modal-body">
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                />
-                {
-                  ReturnSingleProd.length > 0 ?
-                    <ProdEmail OId={ReturnSingleProd[0]['od_id']} cID={ReturnSingleProd[0]['customer_id']} cEmail={ReturnSingleProd[0]['customer_email']} cPhone={ReturnSingleProd[0]['Phone']} pID={ReturnSingleProd[0]['prod_id']} price={ReturnSingleProd[0]['prod_price']} qty={ReturnSingleProd[0]['quantity']}></ProdEmail>
-                    : ''
-                }
 
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <ReturnProductModal
+        productId="123"
+        customerId="456"
+        orderId="789"
+        visible={isModalVisible}
+        onClose={handleModalClose}
+      />
     </>
   );
 }
