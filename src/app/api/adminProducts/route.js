@@ -18,7 +18,7 @@ const uploadImage = async (file) => {
     await upload.single(file);
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const path = `./public/Assets/uploads/products/${file.name}`;
+    const path = `./public${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${file.name}`;
 
     await writeFile(path, buffer);
   } catch (error) {

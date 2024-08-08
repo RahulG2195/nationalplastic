@@ -132,7 +132,7 @@ function BottomBar() {
               ))}
               <div className="barImgCont py-3">
                 <Image
-                  src={`/Assets/uploads/products/${currentImage}`}
+                  src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${currentImage}`}
                   alt=""
                   height={100}
                   width={100}

@@ -182,7 +182,7 @@ const BoughtTogether = () => {
             const images = card.image_name ? card.image_name.split(', ').map(image => image.trim()) : [];
             return <SwiperSlide key={card.product_id} className="newProdCard">
             <PreChairsCard
-                    ChairImg={`/Assets/uploads/products/${images[0]}`}
+                    ChairImg={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${images[0]}`}
                     id={card.seo_url}
                     Title={card.product_name}
                     Discription={card.short_description}

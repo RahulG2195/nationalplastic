@@ -347,6 +347,11 @@ function ProdData({ category_id }) {
                             }}
                           >
                             <Image
+ loader={({ src }) => {
+  const fullUrl = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${src}`;
+  console.log("Full image URL:", fullUrl);
+  return fullUrl;
+}}
                               src={imageSrc}
                               alt={val.color}
                               width={3}

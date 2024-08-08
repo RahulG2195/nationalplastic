@@ -751,7 +751,7 @@ function ProfilePage() {
                               <td>
                                 <Link href={`/ProductDetail/${data.seo_url}`}>
                                   <Image
-                                    src={images && images.length > 0 ? `/Assets/uploads/products/${images[0]}` : '/Altis-chair-Black-(45)-white bg.webp'}
+                                    src={images && images.length > 0 ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${images[0]}` : '/Altis-chair-Black-(45)-white bg.webp'}
                                     height={50}
                                     width={50}
                                     alt="prod_image"

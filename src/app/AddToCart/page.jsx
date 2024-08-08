@@ -376,7 +376,7 @@ function AddToCart() {
                       const images = val ? val.image_name.split(', ').map(image => image.trim()) : [];
                       return <div className="row" key={val.product_id}>
                         <CartProduct
-                          src={`/Assets/uploads/products/${images[0]}`}
+                          src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${images[0]}`}
                           productId={val.product_id}
                           productName={val.product_name}
                           productPrice={val.price}

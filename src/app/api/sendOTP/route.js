@@ -1,5 +1,5 @@
 
-import { sendMail } from '@/utils/nodemailer';
+import { sendMail } from '@/utils/mailOtp';
 import crypto from 'crypto';
 
 export async function POST(request) {

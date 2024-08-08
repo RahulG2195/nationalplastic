@@ -96,7 +96,7 @@ const WishlistPage1 = () => {
                 return <WishlistCard
                   key={item.product_id}
                   id={item.product_id}
-                  WishlistImg={`/Assets/uploads/products/${images[0]}`}
+                  WishlistImg={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${images[0]}`}
                   productName={item.product_name}
                   producDiscription={item.short_description}
                   Price={item.price}
