@@ -2,6 +2,8 @@ import { query } from '@/lib/db';
 import { writeFile } from "fs/promises";
 import { uploadFile } from "@/utils/fileUploader";
 // import { query } from "@/lib/db";
+const fs = require("fs").promises;
+const path = require("path");
 
 export async function POST(request) {
   try {
@@ -18,9 +20,14 @@ export async function POST(request) {
       try {
         const bytes = await image.arrayBuffer();
         const buffer = Buffer.from(bytes);
-    
-        const path = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}${image.name}`;
+        const path = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}`;
+        try {
+          await fs.access(path);
+        } catch {
+          await fs.mkdir(path, { recursive: true });
+        }
         await writeFile(path, buffer);
+
       } catch (uploadError) {
         return new Response(
           JSON.stringify({ success: false, error: uploadError.message }),
@@ -91,7 +98,12 @@ export async function PUT(request) {
         const bytes = await image.arrayBuffer();
         const buffer = Buffer.from(bytes);
     
-        const path = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}${image.name}`;
+        const path = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}`;
+        try {
+          await fs.access(path);
+        } catch {
+          await fs.mkdir(path, { recursive: true });
+        }
         await writeFile(path, buffer);
       } catch (uploadError) {
         return new Response(

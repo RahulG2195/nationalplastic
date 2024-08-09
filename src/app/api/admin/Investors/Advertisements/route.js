@@ -24,7 +24,7 @@ export async function POST(request) {
       console.log("GOooodllYYY");
       // Assume uploadFile function is defined elsewhere and handles the file upload
       await uploadFile(file); // Make sure uploadFile returns a Promise
-      pdfPath = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${file.name}`;
+      pdfPath = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
     } catch (error) {
       console.error('File upload error:', error);
       return NextResponse.json({ message: "Error saving file" }, { status: 500 });

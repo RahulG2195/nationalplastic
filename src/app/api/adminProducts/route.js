@@ -17,19 +17,6 @@ function convertColorToCode(color) {
   return colorEntry.hex;
 }
 
-/*const uploadImage = async (file) => {
-  try {
-    await upload.single(file);
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-    const path = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${file.name}`;
-
-    await writeFile(path, buffer);
-  } catch (error) {
-    throw new Error("Image upload failed: " + error.message);
-  }
-};*/
-
 const uploadImage = async (file) => {
   try {
     console.log("Received file object:", file);
@@ -39,7 +26,7 @@ const uploadImage = async (file) => {
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const uploadDir = "/var/www/uploads/uploads/products";
+    const uploadDir = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}`;
 
     // Check if the directory exists, if not, create it
     try {
@@ -284,11 +271,7 @@ export async function PUT(request) {
     data.image_name = imageNames.length > 0 ? imageNames.join(", ") : formData.get("image_name");
 
     // Convert color name to color code
-    const categoryId = 
-      formData.get("category_id_edited") || formData.get("category_id");
-    data.category_id = categoryId;
-
-    
+    data.category_id = formData.get('category_id');
     let color_code;
     try {
       color_code = convertColorToCode(data.color);

@@ -1,5 +1,6 @@
 import { writeFile } from 'fs/promises';
-import path from 'path';
+const fs = require("fs").promises;
+const path = require("path");
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
 const ALLOWED_FILE_TYPES = ['.jpg', '.jpeg', '.png', '.webp', '.mp4','.pdf'];
@@ -25,7 +26,12 @@ export async function uploadFile(file) {
   const buffer = Buffer.from(bytes);
 
   const fileName = file.name;
-  const filePath = path.join(UPLOAD_DIR, fileName);
+  const filePath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
+  try {
+    await fs.access(filePath);
+  } catch {
+    await fs.mkdir(filePath, { recursive: true });
+  }
 
   await writeFile(filePath, buffer);
 

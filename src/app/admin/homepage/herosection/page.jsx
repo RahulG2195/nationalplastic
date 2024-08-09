@@ -62,7 +62,6 @@ const HeroSectionPage = () => {
   const columns = [
     { title: 'Redirect URL', dataIndex: 'redirect_url', key: 'redirect_url' },
     { title: 'Image Name', dataIndex: 'image_name', key: 'image_name' },
-    { title: 'Image Location', dataIndex: 'image_location', key: 'image_location' },
     { title: 'SEO', dataIndex: 'seo', key: 'seo' },
     {
       title: 'Actions',
@@ -93,9 +92,6 @@ const HeroSectionPage = () => {
             <Input />
           </Form.Item>
           <Form.Item name="image_name" label="Image Name" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item name="image_location" label="Image Location" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
           <Form.Item name="seo" label="SEO" rules={[{ required: true }]}>

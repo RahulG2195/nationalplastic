@@ -24,6 +24,8 @@ export async function POST(req, res) {
     const path = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}/${file.name}`;
     await writeFile(path, buffer);
 
+    
+
     // Extract other form fields
     const { name, email, message, reason, mobile } = Object.fromEntries(
       data.entries()
