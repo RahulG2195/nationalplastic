@@ -123,7 +123,7 @@ const DisclosureCMS = () => {
             title: 'Document URL',
             dataIndex: 'document_url',
             key: 'document_url',
-            render: (text) => <a href={text} target="_blank" rel="noopener noreferrer">View Document</a>
+            render: (text) => <a href={`${process.env.NEXT_PUBLIC_BASE_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${text}`} target="_blank" rel="noopener noreferrer">View Document</a>
         },
         {
             title: 'Actions',
