@@ -85,7 +85,7 @@ export async function POST(request) {
     const file = formData.get('file');
 
 
-    const pdfPath = "/var/www/uploads/uploads/investors";
+    const pdfPath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
 
     // Check if the directory exists, if not, create it
     try {
@@ -127,7 +127,7 @@ export async function PUT(request) {
 
    if(file){
 
-    const pdfPath = "/var/www/uploads/uploads/investors";
+    const pdfPath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
     // Check if the directory exists, if not, create it
     try {
       await fs.access(pdfPath);

@@ -20,7 +20,7 @@ export async function POST(request) {
       try {
         const bytes = await image.arrayBuffer();
         const buffer = Buffer.from(bytes);
-        const path = "/var/www/uploads/uploads/category_banner";
+        const path = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}`;
         try {
           await fs.access(path);
         } catch {
@@ -91,13 +91,14 @@ export async function PUT(request) {
     const { category_id, seo_url, category_name, image_name, navshow, status, image , topPick=0} = Object.fromEntries(
       data.entries()
     );
+    
     if (image) {
       try {
 
         const bytes = await image.arrayBuffer();
         const buffer = Buffer.from(bytes);
     
-        const path = "/var/www/uploads/uploads/category_banner";
+        const path = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}`;
         try {
           await fs.access(path);
         } catch {

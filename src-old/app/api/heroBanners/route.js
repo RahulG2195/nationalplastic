@@ -9,7 +9,7 @@ const uploadImage = async (file) => {
     try {
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
-        const path = "/var/www/uploads/uploads/banners/";
+        const path = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}`;
         try {
           await fs.access(path);
         } catch {

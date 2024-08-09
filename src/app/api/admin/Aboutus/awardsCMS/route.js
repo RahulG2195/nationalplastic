@@ -61,7 +61,7 @@ async function saveAwardOrCertificate(formData, action) {
 
     if (file && file.size > 0) {
       const buffer = Buffer.from(await file.arrayBuffer());
-      const filepath = "/var/www/uploads/uploads/Aboutus";
+      const filepath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_ABOUT_PATH_DIR}`;
       try {
         await fs.access(filepath);
       } catch {

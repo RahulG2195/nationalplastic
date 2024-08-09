@@ -54,12 +54,7 @@ async function addInfrastructureData(formData) {
         try{
         const bytes = await image.arrayBuffer();
         const buffer = Buffer.from(bytes);
-        const path = "/var/www/uploads/uploads/products";
-        try {
-          await fs.access(path);
-        } catch {
-          await fs.mkdir(path, { recursive: true });
-        }
+        const path = `./public/Assets/uploads/Aboutus/${image.name}`;
         imagePath = image.name;
         await writeFile(path, buffer);
         } catch (error) {
@@ -92,15 +87,9 @@ async function addInfrastructureData(formData) {
         try{
         const bytes = await image.arrayBuffer();
         const buffer = Buffer.from(bytes);
-        const path = "/var/www/uploads/uploads/Aboutus";
-        try {
-          await fs.access(path);
-        } catch {
-          await fs.mkdir(path, { recursive: true });
-        }
+        const path = `./public/Assets/uploads/Aboutus/${image.name}`;
         imagePath = image.name;
         await writeFile(path, buffer);
-
         } catch (error) {
           console.error('Error in writing image file:', error);
           return NextResponse.json({ status: 500, message: "Unable to add image", error: error.message }, { status: 500 });

@@ -62,7 +62,7 @@ async function saveAwardOrCertificate(formData, action) {
       const buffer = Buffer.from(await file.arrayBuffer());
       const filename = file.name;
       image_url = `${filename}`;
-      const filepath = "/var/www/uploads/uploads/products";
+      const filepath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}`;
 
       // Check if the directory exists, if not, create it
       try {

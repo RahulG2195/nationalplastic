@@ -55,7 +55,7 @@ async function saveTeamMember(formData, action) {
 
     let image_url = '';
     if (image) {
-       image_url = "/var/www/uploads/uploads/Aboutus";
+       image_url = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_ABOUT_PATH_DIR}`;
       try {
         await fs.access(image_url);
       } catch {

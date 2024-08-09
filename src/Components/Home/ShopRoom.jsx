@@ -18,7 +18,7 @@ export default function ShopRoom() {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/Category`
+          `${process.env.NEXT_PUBLIC_URL}/Category`
         );
         const filteredData = response.data.ShopRooms;
         // (item) =>
@@ -97,7 +97,7 @@ export default function ShopRoom() {
                         }
                         manfacthover="manfact"
                         style="manfTitle"
-                        image={`/Assets/uploads/category/${product.image_name}`}
+                        image={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_CATEGORY_PATH_DIR}${product.image_name}`}
                         title={product.category_name}
                         categoryType={product.categoryType}
                         onCategoryChange={() =>

@@ -21,7 +21,7 @@ export async function POST(req, res) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    const path = `./public/Assets/uploads/${file.name}`;
+    const path = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}/${file.name}`;
     await writeFile(path, buffer);
 
     

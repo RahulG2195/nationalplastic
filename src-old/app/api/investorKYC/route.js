@@ -7,7 +7,7 @@ const uploadFile = async (file) => {
   try {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const path = "/var/www/uploads/uploads/investors";
+    const path = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
     try {
       await fs.access(path);
     } catch {

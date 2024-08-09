@@ -48,7 +48,7 @@ export async function POST(request) {
     return new Response(JSON.stringify({ error: 'No file uploaded' }), { status: 400 });
   }
   try {
-    const pdfPath = "/var/www/uploads/uploads/investors";
+    const pdfPath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
     try {
       await fs.access(pdfPath);
     } catch {
@@ -93,7 +93,7 @@ export async function PUT(request, { params }) {
   const id = formData.get('id');
   let url;
   if (file) {
-    const pdfPath = "/var/www/uploads/uploads/investors";
+    const pdfPath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
     try {
       await fs.access(pdfPath);
     } catch {

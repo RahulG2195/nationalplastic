@@ -18,7 +18,7 @@ const uploadImage = async (file) => {
     await upload.single(file);
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const uploadDir = "/var/www/uploads/uploads/products";
+    const uploadDir = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}`;
     try {
       await fs.access(uploadDir);
     } catch {

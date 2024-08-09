@@ -35,7 +35,7 @@ const TopPics = () => {
               <div className="card text-center border-0 shadow-sm">
                 <Link href={`/ProductCatlogue/${category.seo_url}`}>
                   <img
-                    src={`/Assets/uploads/category/${category.image_name}`}
+                    src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_CATEGORY_PATH_DIR}${category.image_name}`}
                     className="card-img-top"
                     alt={category.category_name}
                   />

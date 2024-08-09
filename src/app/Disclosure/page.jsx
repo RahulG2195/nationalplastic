@@ -59,7 +59,7 @@ const Disclosure = () => {
   const renderLinks = (links) => (
     <Space direction="vertical">
       {links.map((link, index) => (
-        <a key={index} href={link.url} target="_blank" rel="noopener noreferrer">
+        <a key={index} href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${link.url}`} target="_blank" rel="noopener noreferrer">
           <FilePdfOutlined /> {link.text}
         </a>
       ))}

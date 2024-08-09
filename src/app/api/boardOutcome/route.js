@@ -10,7 +10,7 @@ const uploadFile = async (file) => {
   try {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const filePath = "/var/www/uploads/uploads/products";
+    const filePath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}`;
     try {
       await fs.access(filePath);
     } catch {

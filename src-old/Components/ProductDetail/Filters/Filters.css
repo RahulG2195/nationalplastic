@@ -1,8 +1,0 @@
-/* Filters.css */
-.filters .form-check-input:checked {
-    background-color: var(--header-secondary-clr);
-    border-color: var(--header-secondary-clr); 
-    outline: none !important;
-}
-
-
