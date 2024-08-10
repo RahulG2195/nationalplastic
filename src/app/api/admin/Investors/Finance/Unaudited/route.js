@@ -3,6 +3,9 @@ import { NextResponse } from 'next/server';
 import formidable from 'formidable';
 // import { savefile_name } from '@/utils/file_nameHandlers';
 import {uploadFile} from "@/utils/fileUploader";
+const fs = require("fs").promises;
+const path = require("path");
+
 
 
 export async function POST(request) {
@@ -21,7 +24,16 @@ export async function POST(request) {
       console.log("file_name", file_name.name);
       console.log("file_namename", file_name);
       // Set the pdfPath based on where the file_name is saved
-      pdfPath = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${file_name.name}`;
+      pdfPath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}`;
+
+     try{
+	await fs.access(uploadDir);
+} catch {
+await fs.mkdir(uploadDir, {recursive: true});
+}
+
+const filePath = path.join(uploadDir, file_name.name);
+await fs.writeFile(filePath, buffer);
 
     } catch (error) {
 
