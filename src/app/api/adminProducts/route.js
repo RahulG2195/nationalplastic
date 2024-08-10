@@ -7,6 +7,8 @@ import upload from "@/utils/multer.middleware";
 const fs = require("fs").promises;
 const path = require("path");
 
+
+
 function convertColorToCode(color) {
   const colorEntry = colorNameList.find(
     (entry) => entry.name.toLowerCase() === color.toLowerCase()

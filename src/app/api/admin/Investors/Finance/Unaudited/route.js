@@ -2,11 +2,39 @@ import { query } from "@/lib/db";
 import { NextResponse } from 'next/server';
 import formidable from 'formidable';
 // import { savefile_name } from '@/utils/file_nameHandlers';
-import {uploadFile} from "@/utils/fileUploader";
+import { uploadFile } from "@/utils/fileUploader";
 const fs = require("fs").promises;
 const path = require("path");
 
+const uploadPDF = async (file) => {
+  try {
+    console.log("Received file object:", file);
+    if (!file || typeof file.arrayBuffer !== "function") {
+      throw new Error("Invalid file object");
+    }
 
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    
+    // Update this path to where you want to store PDFs
+    const uploadDir = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
+
+    // Check if the directory exists, if not, create it
+    try {
+      await fs.access(uploadDir);
+    } catch {
+      await fs.mkdir(uploadDir, { recursive: true });
+    }
+
+    const filePath = path.join(uploadDir, file.name);
+    await fs.writeFile(filePath, buffer);
+    console.log(`File successfully uploaded to ${filePath}`);
+    return file.name;
+  } catch (error) {
+    console.error("Detailed upload error:", error);
+    throw new Error(`PDF upload failed: ${error.message}`);
+  }
+};
 
 export async function POST(request) {
   const formData = await request.formData();
@@ -14,39 +42,21 @@ export async function POST(request) {
   const title = formData.get('title');
   const quarter = formData.get('quarter');
   const file_name = formData.get('file_name');
-  
-  let pdfPath = '';
 
-  if (file_name) {
-    try {
-      // Assume uploadFile function is defined elsewhere and handles the file_name upload
-      await uploadFile(file_name); // Make sure uploadFile returns a Promise
-      console.log("file_name", file_name.name);
-      console.log("file_namename", file_name);
-      // Set the pdfPath based on where the file_name is saved
-      pdfPath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}`;
+  // let pdfPath = '';
 
-     try{
-	await fs.access(uploadDir);
-} catch {
-await fs.mkdir(uploadDir, {recursive: true});
-}
-
-const filePath = path.join(uploadDir, file_name.name);
-await fs.writeFile(filePath, buffer);
-
-    } catch (error) {
-
-      console.error('file_name upload error:', error);
-      return NextResponse.json({ message: "Error saving file_name" }, { status: 500 });
-    }
+  if (!file) {
+    return NextResponse.json({ message: "No file provided" }, { status: 400 });
   }
+  
+  const fileName = await uploadPDF(file_name);
+  // const pdfPath = fileName;
 
   try {
     await query({
       query: `INSERT INTO unaudited (years, title, quarter, file_name) 
               VALUES (?, ?, ?, ?)`,
-      values: [years, title, quarter, pdfPath],
+      values: [years, title, quarter, fileName],
     });
 
     return NextResponse.json({ message: "Unaudited added successfully" }, { status: 201 });
@@ -62,7 +72,7 @@ export async function PUT(request) {
   const title = formData.get('title');
   const quarter = formData.get('quarter');
   const file_name = formData.get('file_name');
-  
+
   let pdfPath = '';
 
   if (file_name) {
@@ -103,22 +113,22 @@ export async function PUT(request) {
 }
 
 export async function GET() {
-    try {
-      const Unauditeds = await query({
-        query: `SELECT una_id, years, title, quarter, file_name
+  try {
+    const Unauditeds = await query({
+      query: `SELECT una_id, years, title, quarter, file_name
                 FROM unaudited 
                 ORDER BY una_id`,
-      });
-  
-      return NextResponse.json({ UnauditedData: Unauditeds });
-    } catch (error) {
-      console.error('Database query error:', error);
-      return NextResponse.json(
-        { message: "Internal server error" },
-        { status: 500 }
-      );
-    }
+    });
+
+    return NextResponse.json({ UnauditedData: Unauditeds });
+  } catch (error) {
+    console.error('Database query error:', error);
+    return NextResponse.json(
+      { message: "Internal server error" },
+      { status: 500 }
+    );
   }
+}
 
 
 export async function DELETE(request) {
