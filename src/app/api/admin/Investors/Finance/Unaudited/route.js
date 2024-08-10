@@ -81,6 +81,8 @@ export async function POST(request) {
     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
   }
 }
+
+
 export async function PUT(request) {
   const formData = await request.formData();
   const editingId = formData.get('editingId');
@@ -89,17 +91,19 @@ export async function PUT(request) {
   const quarter = formData.get('quarter');
   const file_name = formData.get('file_name');
 
-  let pdfPath = '';
+  console.log("Received POST request");
 
-  if (file_name) {
-    try {
-      await uploadFile(file_name);
-      pdfPath = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${file_name.name}`;
-    } catch (error) {
-      console.error('file_name upload error:', error);
-      return NextResponse.json({ message: "Error saving file_name" }, { status: 500 });
+    if (!file_name) {
+      console.error("No file provided in form data");
+      return NextResponse.json({ message: "No file provided" }, { status: 400 });
     }
-  }
+
+    console.log("File received:", file_name.name);
+
+    const fileName = await uploadPDF(file_name);
+    // const pdfPath = `${process.env.NEXT_PUBLIC_PDF_PATH_DIR}/${fileName}`;
+
+    console.log("PDF uploaded successfully. Path:", fileName);
 
   try {
     let updateQuery = `
