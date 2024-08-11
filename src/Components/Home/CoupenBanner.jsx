@@ -2,8 +2,23 @@ import React from "react";
 import Image from "next/image";
 import "../../styles/coupen.css";
 import Link from "next/link";
-
+import { notify , notifyError } from "@/utils/notify";
 function CoupenBanner() {
+
+
+      const couponCode = 'DIWALI20';
+    
+      const copyToClipboard = async () => {
+         
+        try {
+          notify("Copied to clipboard!")
+
+          await navigator.clipboard.writeText(couponCode);
+        } catch (err) {
+          notifyError('Failed to copy text: ', err.message);
+        }
+      };
+
   return (
     <>
       {/* <section> */}
@@ -20,7 +35,7 @@ function CoupenBanner() {
               />
               <div className="d-flex dSup">
                 <div className="">
-                  <p className="coupen_code px-3 py-1">
+                  <p className="coupen_code px-3 py-1" onClick={copyToClipboard}>
                     <strong className="diwali fw-bolder">MANSOON</strong>
                   </p>
                 </div>
