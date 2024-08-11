@@ -54,7 +54,7 @@ async function addInfrastructureData(formData) {
         try{
         const bytes = await image.arrayBuffer();
         const buffer = Buffer.from(bytes);
-        const path = "/var/www/uploads/uploads/Aboutus";
+        const path = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_ABOUT_PATH_DIR}`;
         try {
           await fs.access(path);
         } catch {
@@ -93,7 +93,7 @@ async function addInfrastructureData(formData) {
         const bytes = await image.arrayBuffer();
         const buffer = Buffer.from(bytes);
         imagePath = image.name;
-        const path = "/var/www/uploads/uploads/Aboutus";
+        const path = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_ABOUT_PATH_DIR}`;
         try {
           await fs.access(path);
         } catch {

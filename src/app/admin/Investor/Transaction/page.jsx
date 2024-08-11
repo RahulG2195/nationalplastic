@@ -124,7 +124,7 @@ const TransactionCMS = () => {
             render: (_, record) => (
                 <Button
                     type="primary"
-                    onClick={() => window.open(record.url, '_blank')}
+                    onClick={() => window.open(`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${text}`, '_blank')}
                 >
                     PDF
                 </Button>

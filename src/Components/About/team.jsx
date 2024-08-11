@@ -7,7 +7,7 @@ const TeamSection = ({ image, name , disignation }) => {
     <div className="TeamMemCard">
       <div className='TemMemImg'>
             <Image
-              src={image}
+              src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_ABOUT_PATH_DIR}${image}`}
               className="img-fluid d-block w-100" 
               alt="Team Member"
               width={100}

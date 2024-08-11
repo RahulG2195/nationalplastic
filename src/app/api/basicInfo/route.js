@@ -23,7 +23,7 @@ const uploadImage = async (file) => {
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const uploadDir = "/var/www/uploads/uploads";
+    const uploadDir = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}`;
 
     // Check if the directory exists, if not, create it
     try {

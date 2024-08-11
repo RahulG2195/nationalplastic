@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 06, 2024 at 10:40 AM
+-- Generation Time: Aug 09, 2024 at 07:18 AM
 -- Server version: 8.0.39
 -- PHP Version: 8.3.8
 
@@ -50,41 +50,6 @@ INSERT INTO `aboutus_pages` (`id`, `page_name`, `section_name`, `content`, `crea
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ads`
---
-
-CREATE TABLE `ads` (
-  `ads_id` int NOT NULL,
-  `years` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `q1` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `image_name1` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `q2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `image_name2` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `q3` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `image_name3` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `q4` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `image_name4` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `status` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `agm`
---
-
-CREATE TABLE `agm` (
-  `ad_id` int NOT NULL,
-  `agm_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `years` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `names` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `image_name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `status` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `annual_report_return`
 --
 
@@ -102,27 +67,27 @@ CREATE TABLE `annual_report_return` (
 --
 
 INSERT INTO `annual_report_return` (`arr_id`, `cat_name`, `years`, `title`, `file_name`, `status`) VALUES
-(3, 'Annual Report', 'Year 2022-23', 'Annual Report', '/Assets/pdf/Annual%20Report%202022-2023.pdf', 1),
-(4, 'Annual Report', 'Year 2021-22', 'Annual Report', '/Assets/pdf/Annual%20Report(3).pdf', 1),
-(5, 'Annual Report', 'Year 2020-21', 'Annual Report', '/Assets/pdf/Annual%20Report.pdf', 1),
-(6, 'Annual Report', 'Year 2019-20', 'Annual Report', '/Assets/pdf/NATIONAL%20PLASTIC%20INDUSTRIES%20LIMITED%2019-20.pdf', 1),
-(7, 'Annual Report', 'Year 2018-19', 'Annual Report', '/Assets/pdf/Annual%20Report-2018-19.pdf', 1),
-(8, 'Annual Report', 'Year 2017-18', 'Annual Report', '/Assets/pdf/Annual%20Report%202017-18.pdf', 1),
-(9, 'Annual Report', 'Year 2016-17', 'Annual Report', '/Assets/pdf/NPIL_Annual_Report_2016-17.pdf', 1),
-(10, 'Annual Report', 'Year 2015-16', 'Annual Report', '/Assets/pdf/NPIL_Annual_Report_2015-16.pdf', 1),
-(11, 'Annual Report', 'Year 2014-15', 'Annual Report', '/Assets/pdf/NPIL_Annual_Report_2014-15.pdf', 1),
-(12, 'Annual Report', 'Year 2013-14', 'Annual Report', '/Assets/pdf/NPIL_Annual_Report_2013-14.pdf', 1),
-(13, 'Annual Report', 'Year 2012-13', 'Annual Report', '/Assets/pdf/NPIL_Annual_Report_2012-13.pdf', 1),
-(14, 'Annual Report', 'Year 2011-12', 'Annual Report', '/Assets/pdf/NPIL_Annual_Report_2011-12.pdf', 1),
-(15, 'Annual Report', 'Year 2010-11', 'Annual Report', '/Assets/pdf/NPIL_Annual_Report_2010-11.pdf', 1),
-(16, 'Annual Report', 'Year 2009-10', 'Annual Report', '/Assets/pdf/NPIL_Annual_Report_2009-10.pdf', 1),
-(17, 'Annual Report', 'Year 2008-09', 'Annual Report', '/Assets/pdf/NPIL_Annual_Report_2008-09.pdf', 1),
-(18, 'Annual Return', 'Year 2022-23', 'Draft Annual Return', '/Assets/pdf/draft%20annual%20return_compressed.pdf', 1),
-(19, 'Annual Return', 'Year 2022-23', 'Annual Return', '/Assets/pdf/annual%20return_compressed.pdf', 1),
-(20, 'Annual Return', 'Year 2021-22', 'Draft Annual Return', '/Assets/pdf/Draft%20Annual%20Return.pdf', 1),
-(21, 'Annual Return', 'Year 2021-22', 'Annual Return', '/Assets/pdf/Annual%20Return(1).pdf', 1),
-(22, 'Annual Return', 'Year 2020-21', 'Draft Annual Return', '/Assets/pdf/Draft%20Annual%20Return_%202020-21.pdf', 1),
-(23, 'Annual Return', 'Year 2020-21', 'Annual Return', '/Assets/pdf/Annual%20Return.pdf', 1);
+(3, 'Annual Report', 'Year 2022-23', 'Annual Report', 'Annual%20Report%202022-2023.pdf', 1),
+(4, 'Annual Report', 'Year 2021-22', 'Annual Report', 'Annual%20Report(3).pdf', 1),
+(5, 'Annual Report', 'Year 2020-21', 'Annual Report', 'Annual%20Report.pdf', 1),
+(6, 'Annual Report', 'Year 2019-20', 'Annual Report', 'NATIONAL%20PLASTIC%20INDUSTRIES%20LIMITED%2019-20.pdf', 1),
+(7, 'Annual Report', 'Year 2018-19', 'Annual Report', 'Annual%20Report-2018-19.pdf', 1),
+(8, 'Annual Report', 'Year 2017-18', 'Annual Report', 'Annual%20Report%202017-18.pdf', 1),
+(9, 'Annual Report', 'Year 2016-17', 'Annual Report', 'NPIL_Annual_Report_2016-17.pdf', 1),
+(10, 'Annual Report', 'Year 2015-16', 'Annual Report', 'NPIL_Annual_Report_2015-16.pdf', 1),
+(11, 'Annual Report', 'Year 2014-15', 'Annual Report', 'NPIL_Annual_Report_2014-15.pdf', 1),
+(12, 'Annual Report', 'Year 2013-14', 'Annual Report', 'NPIL_Annual_Report_2013-14.pdf', 1),
+(13, 'Annual Report', 'Year 2012-13', 'Annual Report', 'NPIL_Annual_Report_2012-13.pdf', 1),
+(14, 'Annual Report', 'Year 2011-12', 'Annual Report', 'NPIL_Annual_Report_2011-12.pdf', 1),
+(15, 'Annual Report', 'Year 2010-11', 'Annual Report', 'NPIL_Annual_Report_2010-11.pdf', 1),
+(16, 'Annual Report', 'Year 2009-10', 'Annual Report', 'NPIL_Annual_Report_2009-10.pdf', 1),
+(17, 'Annual Report', 'Year 2008-09', 'Annual Report', 'NPIL_Annual_Report_2008-09.pdf', 1),
+(18, 'Annual Return', 'Year 2022-23', 'Draft Annual Return', 'draft%20annual%20return_compressed.pdf', 1),
+(19, 'Annual Return', 'Year 2022-23', 'Annual Return', 'annual%20return_compressed.pdf', 1),
+(20, 'Annual Return', 'Year 2021-22', 'Draft Annual Return', 'Draft%20Annual%20Return.pdf', 1),
+(21, 'Annual Return', 'Year 2021-22', 'Annual Return', 'Annual%20Return(1).pdf', 1),
+(22, 'Annual Return', 'Year 2020-21', 'Draft Annual Return', 'Draft%20Annual%20Return_%202020-21.pdf', 1),
+(23, 'Annual Return', 'Year 2020-21', 'Annual Return', 'Annual%20Return.pdf', 1);
 
 -- --------------------------------------------------------
 
@@ -143,8 +108,8 @@ CREATE TABLE `audited` (
 --
 
 INSERT INTO `audited` (`aud_id`, `years`, `title`, `file_name`, `status`) VALUES
-(3, 'Year 2023', 'Audited Financial Results - 31st March 2023', '/Assets/uploads/Investors/Audited Financial Results 2020.pdf', 1),
-(4, 'test', 'test', '/Assets/uploads/Investors/4.Dup Sh Cert. Reg. 39(3)_March2020.pdf', 1);
+(3, 'Year 2023', 'Audited Financial Results - 31st March 2023', 'Audited Financial Results 2020.pdf', 1),
+(4, 'test', 'test', '4.Dup Sh Cert. Reg. 39(3)_March2020.pdf', 1);
 
 -- --------------------------------------------------------
 
@@ -251,7 +216,7 @@ INSERT INTO `categories` (`category_id`, `category_name`, `image_name`, `navshow
 (36, 'Shoe Rack', '', 0, NULL, 1, '2024-04-30 03:40:56', 0, '', 'shoe_rack'),
 (37, 'Shell', '', 0, NULL, 1, '2024-04-30 03:45:31', 0, '', 'shell'),
 (38, 'Utility', '', 0, NULL, 1, '2024-04-30 04:02:48', 0, '', 'utility'),
-(40, 'Office Chair', 'office_chair_header.jpeg', 1, 2, 1, '2024-07-05 06:46:05', 0, 'office_chair_header.jpeg', 'office_chair');
+(40, 'Office Chair', 'office_chair_header.jpg', 1, 2, 1, '2024-07-05 06:46:05', 0, 'office_chair_header.jpg', 'office_chair');
 
 -- --------------------------------------------------------
 
@@ -288,20 +253,6 @@ INSERT INTO `committees_and_management` (`id`, `category`, `type`, `name`, `posi
 (14, 'Stakeholders Relationship Committee', 'committee', 'Mrs. Ranganayaki Rangachari', 'Non-Executive Independent Director, Member'),
 (15, 'Management', 'management', 'Mr. Umesh Shenoy', 'Chief Financial Officer'),
 (16, 'Management', 'management', 'Mr. Amit Jain', 'Company Secretary and Compliance Officer');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `corporate`
---
-
-CREATE TABLE `corporate` (
-  `cid` int NOT NULL,
-  `corp_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `corp_name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `image_name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `status` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -450,23 +401,7 @@ CREATE TABLE `customer` (
 INSERT INTO `customer` (`customer_id`, `FirstName`, `LasttName`, `Email`, `Phone`, `Address`, `Adress2`, `Password`, `google_id`, `role`) VALUES
 (1, 'Rahul', 'Gupta', 'Rahul@crezvatic.com', '9518595869', 'test, thane, maharashtra, 400604', NULL, '$2a$12$CWxzBx.OwzdkngsXD1PuUuOm4B1mSWXvdw1zgny3Lh9TZ3zls1rNm', NULL, 'admin'),
 (2, 'Dinesh', 'Nadar', 'dineshndr02@gmail.com', '9281928788', 'Kalyan, thane , maharashtra , 421308', NULL, '$2a$12$xQj82ZGBGB7KKtdx.2Dd9evB4h/xSveiPH4XjdAeEdFNrMoSVwM72', NULL, 'admin'),
-(3, 'Dinesh', 'crezvatic', 'dinesh.crezvatic@gmail.com', '9128928911', 'Wagle Estate, Thane, Maharashtra, 431333', NULL, '$2a$12$sHBtGiSwPdbWZZAr5CyEkOzTDmkqnlLW15v0O6luyCujo8ljZc3Je', NULL, 'user');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `customer_detail`
---
-
-CREATE TABLE `customer_detail` (
-  `Id` int NOT NULL,
-  `FirstName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `LastName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `ConfirmPassword` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(3, 'Dinesh', 'crezvatic', 'dinesh.crezvatic@gmail.com', '9128928911', 'Wagle Estate, Thane, Maharashtra, 431333', NULL, '$2a$12$sHBtGiSwPdbWZZAr5CyEkOzTDmkqnlLW15v0O6luyCujo8ljZc3Je', NULL, 'admin');
 
 -- --------------------------------------------------------
 
@@ -488,52 +423,52 @@ CREATE TABLE `disclosures` (
 --
 
 INSERT INTO `disclosures` (`id`, `year`, `quarter`, `document_type`, `document_url`, `created_at`) VALUES
-(1, '2020-2021', 1, 'Board Meeting Intimation', '/Assets/pdf/Board%20Meeting%20Intimation%2030.06.2020.pdf', '2024-07-30 09:07:19'),
-(2, '2020-2021', 1, 'Board Meeting Notice Business Standard', '/Assets/pdf/National%20Plastic_BS_Epaper_23.06.2020.pdf', '2024-07-30 09:07:19'),
-(3, '2020-2021', 1, 'Board Meeting Notice Mumbai Lakshdeep', '/Assets/pdf/National%20Plastic_ML_Epaper_23.06.2020.pdf', '2024-07-30 09:07:19'),
-(4, '2020-2021', 2, 'Board Meeting Intimation', '/Assets/pdf/BSE%20Intimation%20for%20BM%2006.08.2020.pdf', '2024-07-30 09:07:19'),
-(5, '2020-2021', 2, 'Board Meeting Notice Business Standard', '/Assets/pdf/National%20Plastic_BS_07.08.2020.pdf', '2024-07-30 09:07:19'),
-(6, '2020-2021', 2, 'Board Meeting Notice Mumbai Lakshdeep', '/Assets/pdf/National_ML_07.08.2020.pdf', '2024-07-30 09:07:19'),
-(7, '2020-2021', 3, 'Board Meeting Intimation', '/Assets/pdf/BSE_intimation_sw.pdf', '2024-07-30 09:07:19'),
-(8, '2020-2021', 3, 'Board Meeting Notice Business Standard', '/Assets/pdf/Business%20Standards_03.11.2020.pdf', '2024-07-30 09:07:19'),
-(9, '2020-2021', 3, 'Board Meeting Notice Mumbai Lakshdeep', '/Assets/pdf/Mumbai%20Lakshadeep_03.11.2020.pdf', '2024-07-30 09:07:19'),
-(10, '2020-2021', 4, 'Board Meeting Intimation', '/Assets/pdf/Board%20Meeting%20Intimation%20-BSE(1).PDF', '2024-07-30 09:07:19'),
-(11, '2020-2021', 4, 'Board Meeting Notice Business Standard', '/Assets/pdf/Board%20Meeting%20Intimation%20-Business%20Standards.pdf', '2024-07-30 09:07:19'),
-(12, '2020-2021', 4, 'Board Meeting Notice Mumbai Lakshdeep', '/Assets/pdf/Board%20Meeting%20Intimation%20-%20Mumbai%20Lakshadeep.pdf', '2024-07-30 09:07:19'),
-(13, '2019-2020', 1, 'Board Meeting Intimation', '/Assets/pdf/30th%20June,%202019.pdf', '2024-07-30 09:07:19'),
-(14, '2019-2020', 1, 'Board Meeting Notice Business Standard', '/Assets/pdf/30th%20June,%202019.pdf', '2024-07-30 09:07:19'),
-(15, '2019-2020', 1, 'Board Meeting Notice Mumbai Lakshdeep', '/Assets/pdf/30th%20June,%202019.pdf', '2024-07-30 09:07:19'),
-(16, '2019-2020', 2, 'Board Meeting Intimation', '/Assets/pdf/BSE%20Meeting%20Intimation(1).pdf', '2024-07-30 09:07:19'),
-(17, '2019-2020', 2, 'Board Meeting Notice Business Standard', '/Assets/pdf/Business%20Standard.pdf', '2024-07-30 09:07:19'),
-(18, '2019-2020', 2, 'Board Meeting Notice Mumbai Lakshdeep', '/Assets/pdf/Mumbai%20Lakshdeep.pdf', '2024-07-30 09:07:19'),
-(19, '2019-2020', 3, 'Board Meeting Intimation', '/Assets/pdf/BSE%20Intimation.pdf', '2024-07-30 09:07:19'),
-(20, '2019-2020', 3, 'Board Meeting Notice Business Standard', '/Assets/pdf/National%20Plastic_BM_BUSINESS%20STANDARD.pdf', '2024-07-30 09:07:19'),
-(21, '2019-2020', 3, 'Board Meeting Notice Mumbai Lakshdeep', '/Assets/pdf/Mumbai%20Lakshdeep.pdf', '2024-07-30 09:07:19'),
-(22, '2018-2019', 1, 'Board Meeting Intimation', '/Assets/pdf/BM-Intimation-Q1-FY-18-19.pdf', '2024-07-30 09:07:19'),
-(23, '2018-2019', 1, 'Board Meeting Notice Business Standard', '/Assets/pdf/BMNotice_BusinessStandard24%2007%202018.pdf', '2024-07-30 09:07:19'),
-(24, '2018-2019', 1, 'Board Meeting Notice Mumbai Lakshdeep', '/Assets/pdf/BMNotice_MumbaiLakshadeep_25%2007%202018.pdf', '2024-07-30 09:07:19'),
-(25, '2018-2019', 2, 'Board Meeting Intimation', '/Assets/pdf/Board-Meeting-intimation.pdf', '2024-07-30 09:07:19'),
-(26, '2018-2019', 2, 'Board Meeting Notice Business Standard', '/Assets/pdf/National%20Plastics_BMN_Business%20Standard_01%2011%202018.pdf', '2024-07-30 09:07:19'),
-(27, '2018-2019', 2, 'Board Meeting Notice Mumbai Lakshdeep', '/Assets/pdf/National%20Plastics_BMN_ML_01%2011%202018.pdf', '2024-07-30 09:07:19'),
-(28, '2018-2019', 3, 'Board Meeting Intimation', '/Assets/pdf/Board-Meeting-Intimation-29-01-19.pdf', '2024-07-30 09:07:19'),
-(29, '2018-2019', 3, 'Board Meeting Notice Business Standard', '/Assets/pdf/National-Plastics_BMN_BS_29-01-2019.pdf', '2024-07-30 09:07:19'),
-(30, '2018-2019', 3, 'Board Meeting Notice Mumbai Lakshdeep', '/Assets/pdf/National-Plastics_BMN_ML_29-01-2019.pdf', '2024-07-30 09:07:19'),
-(31, '2018-2019', 4, 'Board Meeting Intimation', '/Assets/pdf/BSE_Intimation_Board-Meeting_10.05.2019.pdf', '2024-07-30 09:07:19'),
-(32, '2018-2019', 4, 'Board Meeting Notice Business Standard', '/Assets/pdf/National_Plastic_BMN_BS_10.05.2019.pdf', '2024-07-30 09:07:19'),
-(33, '2018-2019', 4, 'Board Meeting Notice Mumbai Lakshdeep', '/Assets/pdf/National_Plastic_BMN_ML_10.05.2019.pdf', '2024-07-30 09:07:19'),
-(34, '2017-2018', 1, 'Notice of Board Meeting for Q1 Results on 13 MAY 2017', '/Assets/pdf/Notice_of_Board_Meeting_for_Q1_Results_on_13-May-2017.pdf', '2024-07-30 09:07:19'),
-(35, '2017-2018', 2, 'Notice of Board Meeting for Q2 Results on 10 Aug 2017', '/Assets/pdf/Notice_of_Board_Meeting_for_Q2_Results_on_10-Aug-2017.pdf', '2024-07-30 09:07:19'),
-(36, '2017-2018', 3, 'Notice of Board Meeting for Q3 Results on 8 Nov 2017', '/Assets/pdf/Notice_of_Board_Meeting_for_Q3_Results_on_08-Nov-2017.pdf', '2024-07-30 09:07:19'),
-(37, '2017-2018', 4, 'Notice of Board Meeting for Q4 Results on 13 Feb 2018', '/Assets/pdf/Notice_of_Board_Meeting_for_Q4_Results_on_13-Feb-2018.pdf', '2024-07-30 09:07:19'),
-(38, '2017-2018', 4, 'Board Meeting Intimation', '/Assets/pdf/Intimation_of_Board_Meeting_29.05.2018.pdf', '2024-07-30 09:07:19'),
-(39, '2017-2018', 4, 'Board Meeting Notice Business Standard', '/Assets/pdf/BMNotice_BusinessStandard_19%2005%202018.pdf', '2024-07-30 09:07:19'),
-(40, '2017-2018', 4, 'Board Meeting Notice Mumbai Lakshdeep', '/Assets/pdf/BMNotice_MumbaiLakshdeep_19.05.2018.pdf', '2024-07-30 09:07:19'),
-(41, '2016-2017', 1, 'Notice of Board Meeting for Q1 Results on 10 Aug 2016', '/Assets/pdf/Notice_of_Board_Meeting_for_Q1_Results_on_10-Aug-2016.pdf', '2024-07-30 09:07:19'),
-(42, '2016-2017', 2, 'Notice of Board Meeting for Q2 Results on 9 Nov 2016', '/Assets/pdf/Notice_of_Board_Meeting_for_Q2_Results_on_09-Nov-2016.pdf', '2024-07-30 09:07:19'),
-(43, '2016-2017', 3, 'Notice of Board Meeting for Q3 Results on 9 Feb 2017', '/Assets/pdf/Notice_of_Board_Meeting_for_Q3_Results_on_9-Feb-2017.pdf', '2024-07-30 09:07:19'),
-(44, '2015-2016', 2, 'Notice of Board Meeting for Q2 Results on 7 Nov 2015', '/Assets/pdf/Notice_of_Board_Meeting_for_Q2_Results_on_7-Nov-2015.pdf', '2024-07-30 09:07:19'),
-(45, '2015-2016', 3, 'Notice of Board Meeting for Q3 Results on 12 Feb 2016', '/Assets/pdf/Notice_of_Board_Meeting_for_Q3_Results_on_12-Feb-2016.pdf', '2024-07-30 09:07:19'),
-(46, '2015-2016', 4, 'Notice of Board Meeting for Q4 Results on 27 May 2016', '/Assets/pdf/Notice_of_Board_Meeting_for_Q4_Results_on_27-May-2016.pdf', '2024-07-30 09:07:19');
+(1, '2020-2021', 1, 'Board Meeting Intimation', 'Board%20Meeting%20Intimation%2030.06.2020.pdf', '2024-07-30 09:07:19'),
+(2, '2020-2021', 1, 'Board Meeting Notice Business Standard', 'National%20Plastic_BS_Epaper_23.06.2020.pdf', '2024-07-30 09:07:19'),
+(3, '2020-2021', 1, 'Board Meeting Notice Mumbai Lakshdeep', 'National%20Plastic_ML_Epaper_23.06.2020.pdf', '2024-07-30 09:07:19'),
+(4, '2020-2021', 2, 'Board Meeting Intimation', 'BSE%20Intimation%20for%20BM%2006.08.2020.pdf', '2024-07-30 09:07:19'),
+(5, '2020-2021', 2, 'Board Meeting Notice Business Standard', 'National%20Plastic_BS_07.08.2020.pdf', '2024-07-30 09:07:19'),
+(6, '2020-2021', 2, 'Board Meeting Notice Mumbai Lakshdeep', 'National_ML_07.08.2020.pdf', '2024-07-30 09:07:19'),
+(7, '2020-2021', 3, 'Board Meeting Intimation', 'BSE_intimation_sw.pdf', '2024-07-30 09:07:19'),
+(8, '2020-2021', 3, 'Board Meeting Notice Business Standard', 'Business%20Standards_03.11.2020.pdf', '2024-07-30 09:07:19'),
+(9, '2020-2021', 3, 'Board Meeting Notice Mumbai Lakshdeep', 'Mumbai%20Lakshadeep_03.11.2020.pdf', '2024-07-30 09:07:19'),
+(10, '2020-2021', 4, 'Board Meeting Intimation', 'Board%20Meeting%20Intimation%20-BSE(1).PDF', '2024-07-30 09:07:19'),
+(11, '2020-2021', 4, 'Board Meeting Notice Business Standard', 'Board%20Meeting%20Intimation%20-Business%20Standards.pdf', '2024-07-30 09:07:19'),
+(12, '2020-2021', 4, 'Board Meeting Notice Mumbai Lakshdeep', 'Board%20Meeting%20Intimation%20-%20Mumbai%20Lakshadeep.pdf', '2024-07-30 09:07:19'),
+(13, '2019-2020', 1, 'Board Meeting Intimation', '30th%20June,%202019.pdf', '2024-07-30 09:07:19'),
+(14, '2019-2020', 1, 'Board Meeting Notice Business Standard', '30th%20June,%202019.pdf', '2024-07-30 09:07:19'),
+(15, '2019-2020', 1, 'Board Meeting Notice Mumbai Lakshdeep', '30th%20June,%202019.pdf', '2024-07-30 09:07:19'),
+(16, '2019-2020', 2, 'Board Meeting Intimation', 'BSE%20Meeting%20Intimation(1).pdf', '2024-07-30 09:07:19'),
+(17, '2019-2020', 2, 'Board Meeting Notice Business Standard', 'Business%20Standard.pdf', '2024-07-30 09:07:19'),
+(18, '2019-2020', 2, 'Board Meeting Notice Mumbai Lakshdeep', 'Mumbai%20Lakshdeep.pdf', '2024-07-30 09:07:19'),
+(19, '2019-2020', 3, 'Board Meeting Intimation', 'BSE%20Intimation.pdf', '2024-07-30 09:07:19'),
+(20, '2019-2020', 3, 'Board Meeting Notice Business Standard', 'National%20Plastic_BM_BUSINESS%20STANDARD.pdf', '2024-07-30 09:07:19'),
+(21, '2019-2020', 3, 'Board Meeting Notice Mumbai Lakshdeep', 'Mumbai%20Lakshdeep.pdf', '2024-07-30 09:07:19'),
+(22, '2018-2019', 1, 'Board Meeting Intimation', 'BM-Intimation-Q1-FY-18-19.pdf', '2024-07-30 09:07:19'),
+(23, '2018-2019', 1, 'Board Meeting Notice Business Standard', 'BMNotice_BusinessStandard24%2007%202018.pdf', '2024-07-30 09:07:19'),
+(24, '2018-2019', 1, 'Board Meeting Notice Mumbai Lakshdeep', 'BMNotice_MumbaiLakshadeep_25%2007%202018.pdf', '2024-07-30 09:07:19'),
+(25, '2018-2019', 2, 'Board Meeting Intimation', 'Board-Meeting-intimation.pdf', '2024-07-30 09:07:19'),
+(26, '2018-2019', 2, 'Board Meeting Notice Business Standard', 'National%20Plastics_BMN_Business%20Standard_01%2011%202018.pdf', '2024-07-30 09:07:19'),
+(27, '2018-2019', 2, 'Board Meeting Notice Mumbai Lakshdeep', 'National%20Plastics_BMN_ML_01%2011%202018.pdf', '2024-07-30 09:07:19'),
+(28, '2018-2019', 3, 'Board Meeting Intimation', 'Board-Meeting-Intimation-29-01-19.pdf', '2024-07-30 09:07:19'),
+(29, '2018-2019', 3, 'Board Meeting Notice Business Standard', 'National-Plastics_BMN_BS_29-01-2019.pdf', '2024-07-30 09:07:19'),
+(30, '2018-2019', 3, 'Board Meeting Notice Mumbai Lakshdeep', 'National-Plastics_BMN_ML_29-01-2019.pdf', '2024-07-30 09:07:19'),
+(31, '2018-2019', 4, 'Board Meeting Intimation', 'BSE_Intimation_Board-Meeting_10.05.2019.pdf', '2024-07-30 09:07:19'),
+(32, '2018-2019', 4, 'Board Meeting Notice Business Standard', 'National_Plastic_BMN_BS_10.05.2019.pdf', '2024-07-30 09:07:19'),
+(33, '2018-2019', 4, 'Board Meeting Notice Mumbai Lakshdeep', 'National_Plastic_BMN_ML_10.05.2019.pdf', '2024-07-30 09:07:19'),
+(34, '2017-2018', 1, 'Notice of Board Meeting for Q1 Results on 13 MAY 2017', 'Notice_of_Board_Meeting_for_Q1_Results_on_13-May-2017.pdf', '2024-07-30 09:07:19'),
+(35, '2017-2018', 2, 'Notice of Board Meeting for Q2 Results on 10 Aug 2017', 'Notice_of_Board_Meeting_for_Q2_Results_on_10-Aug-2017.pdf', '2024-07-30 09:07:19'),
+(36, '2017-2018', 3, 'Notice of Board Meeting for Q3 Results on 8 Nov 2017', 'Notice_of_Board_Meeting_for_Q3_Results_on_08-Nov-2017.pdf', '2024-07-30 09:07:19'),
+(37, '2017-2018', 4, 'Notice of Board Meeting for Q4 Results on 13 Feb 2018', 'Notice_of_Board_Meeting_for_Q4_Results_on_13-Feb-2018.pdf', '2024-07-30 09:07:19'),
+(38, '2017-2018', 4, 'Board Meeting Intimation', 'Intimation_of_Board_Meeting_29.05.2018.pdf', '2024-07-30 09:07:19'),
+(39, '2017-2018', 4, 'Board Meeting Notice Business Standard', 'BMNotice_BusinessStandard_19%2005%202018.pdf', '2024-07-30 09:07:19'),
+(40, '2017-2018', 4, 'Board Meeting Notice Mumbai Lakshdeep', 'BMNotice_MumbaiLakshdeep_19.05.2018.pdf', '2024-07-30 09:07:19'),
+(41, '2016-2017', 1, 'Notice of Board Meeting for Q1 Results on 10 Aug 2016', 'Notice_of_Board_Meeting_for_Q1_Results_on_10-Aug-2016.pdf', '2024-07-30 09:07:19'),
+(42, '2016-2017', 2, 'Notice of Board Meeting for Q2 Results on 9 Nov 2016', 'Notice_of_Board_Meeting_for_Q2_Results_on_09-Nov-2016.pdf', '2024-07-30 09:07:19'),
+(43, '2016-2017', 3, 'Notice of Board Meeting for Q3 Results on 9 Feb 2017', 'Notice_of_Board_Meeting_for_Q3_Results_on_9-Feb-2017.pdf', '2024-07-30 09:07:19'),
+(44, '2015-2016', 2, 'Notice of Board Meeting for Q2 Results on 7 Nov 2015', 'Notice_of_Board_Meeting_for_Q2_Results_on_7-Nov-2015.pdf', '2024-07-30 09:07:19'),
+(45, '2015-2016', 3, 'Notice of Board Meeting for Q3 Results on 12 Feb 2016', 'Notice_of_Board_Meeting_for_Q3_Results_on_12-Feb-2016.pdf', '2024-07-30 09:07:19'),
+(46, '2015-2016', 4, 'Notice of Board Meeting for Q4 Results on 27 May 2016', 'Notice_of_Board_Meeting_for_Q4_Results_on_27-May-2016.pdf', '2024-07-30 09:07:19');
 
 -- --------------------------------------------------------
 
@@ -555,130 +490,130 @@ CREATE TABLE `disclosure_data` (
 --
 
 INSERT INTO `disclosure_data` (`id`, `year`, `title`, `file_path`, `status`, `created_at`) VALUES
-(1, 2024, 'Investor Complaints_31.12.2023', '/Assets/pdf/Investor%20Complaints(1).pdf', 1, '2024-07-17 07:13:04'),
-(2, 2024, 'Certificate under Regulation 74(5)_31.12.2023', '/Assets/pdf/BSE%20Upload(9).pdf', 1, '2024-07-17 07:13:04'),
-(3, 2024, 'Certificate under Regulation 76_31.12.2023', '/Assets/pdf/BSE%20Upload(10).pdf', 1, '2024-07-17 07:13:04'),
-(4, 2024, 'Certificate for Structured Digital Database_31.12.2023', '/Assets/pdf/BSE%20Upload(11).pdf', 1, '2024-07-17 07:13:04'),
-(5, 2024, 'BSE intimation - Board Meeting_12.02.2024', '/Assets/pdf/BSE%20intimation%20-%20Board%20Meeting_12.02.2024.pdf', 1, '2024-07-17 07:13:04'),
-(6, 2024, 'BSE intimation - BM Outcome_12.02.2024', '/Assets/pdf/BSE%20Upload(12).pdf', 1, '2024-07-17 07:13:04'),
-(7, 2024, 'Trading Window Closure_31.03.2024', '/Assets/pdf/Trading%20Window%20Closure_signed(2).pdf', 1, '2024-07-17 07:13:04'),
-(8, 2024, 'Investor Complaint_31.03.2024', '/Assets/pdf/IG-REPORT-526616-NIEQ_National%20Plastic%20Industries%20Limited_03Apr24_12_5_56.pdf', 1, '2024-07-17 07:13:04'),
-(9, 2024, 'Certificate under Regulation-7(3)_31.03.2024', '/Assets/pdf/BSE%20Upload(13).pdf', 1, '2024-07-17 07:13:04'),
-(10, 2024, 'Certificate under Regulation-40(10)_31.03.2024', '/Assets/pdf/BSE%20upload(14).pdf', 1, '2024-07-17 07:13:04'),
-(11, 2024, 'BSE Intimation- Board Meeting_21.05.2024', '/Assets/pdf/BSE%20intimation%20-%20Board%20Meeting_signed.pdf', 1, '2024-07-17 07:13:04'),
-(12, 2024, 'BSE Intimation- BM Outcome_21.05.2024', '/Assets/pdf/BSE%20Upload-3-13_merged(1).pdf', 1, '2024-07-17 07:13:04'),
-(13, 2024, 'BSE Intimation - Book Closure Date_21.05.2024', '/Assets/pdf/BSE%20Intimation%20-%20Book%20Closure%20datesinged.pdf', 1, '2024-07-17 07:13:04'),
-(14, 2020, 'Closure of Trading Window_Jan2020', '/Assets/pdf/2020/1.Closure%20of%20Trading%20Window%20_Jan2020.pdf', 1, '2024-07-17 07:15:35'),
-(15, 2020, 'Certificate under regulation 74(5)_Jan2020', '/Assets/pdf/2020/2.Certificate%20under%20regulation%2074(5)_Jan2020.pdf', 1, '2024-07-17 07:15:35'),
-(16, 2020, 'RTP Reg.23(9)_Jan2020', '/Assets/pdf/2020/3.%20RTP%20Reg.%2023%20(9)_Jan2020.pdf', 1, '2024-07-17 07:15:35'),
-(17, 2020, 'Dup Sh Cert.Reg.39(3)_March2020', '/Assets/pdf/2020/4.Dup%20Sh%20Cert.%20Reg.%2039(3)_March2020.pdf', 1, '2024-07-17 07:15:35'),
-(18, 2020, 'Closure of Trading Window_March2020', '/Assets/pdf/2020/5.Closure%20of%20Trading%20Window%20_March2020.pdf', 1, '2024-07-17 07:15:35'),
-(19, 2020, 'Certificate under regulation 74(5)_May2020', '/Assets/pdf/2020/6.Certificate%20under%20regulation%2074(5)_May2020.pdf', 1, '2024-07-17 07:15:35'),
-(20, 2020, 'Certificate under Regulation 7(3)_May2020', '/Assets/pdf/2020/7.Certificate%20under%20Regulation%207(3)_May2020.pdf', 1, '2024-07-17 07:15:35'),
-(21, 2020, 'Certificate under Regulation 40(9)_May2020', '/Assets/pdf/2020/8.Certificate%20under%20Regulation%2040(9)_May2020.pdf', 1, '2024-07-17 07:15:35'),
-(22, 2020, 'Closure of Trading Window_Jul2020', '/Assets/pdf/2020/9.Closure%20of%20Trading%20Window%20_Jul2020.pdf', 1, '2024-07-17 07:15:35'),
-(23, 2020, 'Annul Sec.Com.Report_Jul2020', '/Assets/pdf/2020/10.Annul%20Sec.%20Com.%20Report_Jul2020.pdf', 1, '2024-07-17 07:15:35'),
-(24, 2020, 'Certificate under regulation 74(5)_Jul2020', '/Assets/pdf/2020/11.Certificate%20under%20regulation%2074(5)_Jul2020.pdf', 1, '2024-07-17 07:15:35'),
-(25, 2020, 'RTP Reg.23(9)_Jul2020', '/Assets/pdf/2020/12.RTP%20Reg.%2023%20(9)_Jul2020.pdf', 1, '2024-07-17 07:15:35'),
-(26, 2020, 'Closure of Trading Window_Sept2020', '/Assets/pdf/2020/13.Closure%20of%20Trading%20Window%20_Sept2020.pdf', 1, '2024-07-17 07:15:35'),
-(27, 2020, 'Certificate under regulation 74(5)_Oct2020', '/Assets/pdf/2020/14.Certificate%20under%20regulation%2074(5)_Oct2020.pdf', 1, '2024-07-17 07:15:35'),
-(28, 2020, 'Certificate under Regulation 7(3)_Oct2020', '/Assets/pdf/2020/15.Certificate%20under%20Regulation%207(3)_Oct2020.pdf', 1, '2024-07-17 07:15:35'),
-(29, 2020, 'Certificate under Regulation 40(9)_Oct2020', '/Assets/pdf/2020/16.Certificate%20under%20Regulation%2040(9)_Oct2020.pdf', 1, '2024-07-17 07:15:35'),
-(30, 2020, 'RTP Reg. 23(9)_Nov2020', '/Assets/pdf/2020/17.RTP%20Reg.%2023%20(9)_Nov2020.pdf', 1, '2024-07-17 07:15:35'),
-(31, 2020, 'Closure of Trading Window _Dec2020', '/Assets/pdf/2020/18.Closure%20of%20Trading%20Window%20_Dec2020.pdf', 1, '2024-07-17 07:15:35'),
-(32, 2021, 'Certificate under regulation 74(5)_Jan2021', '/Assets/pdf/2021/12.BSE%20intimation%20-%20Board.pdf', 1, '2024-07-17 07:16:49'),
-(33, 2021, 'Dup Sh Cert.Reg.39(3)_Jan2021', '/Assets/pdf/2021/2.Dup%20Sh%20Cert.%20Reg.%2039(3)_Jan2021.pdf', 1, '2024-07-17 07:16:49'),
-(34, 2021, 'Dup Sh Cert.Reg.39(3)_Feb2021', '/Assets/pdf/2021/3.Dup%20Sh%20Cert.%20Reg.%2039(3)_Feb2021.pdf', 1, '2024-07-17 07:16:49'),
-(35, 2021, 'Appointment of Vipul Desai_Feb2021', '/Assets/pdf/2021/4.Appointment%20of%20Vipul%20Desai_Feb2021.pdf', 1, '2024-07-17 07:16:49'),
-(36, 2021, 'Closure of Trading Window_March2021', '/Assets/pdf/2021/5.Closure%20of%20Trading%20Window%20_March2021.pdf', 1, '2024-07-17 07:16:49'),
-(37, 2021, 'Initial Disclosure as Large Entities_Apr2021', '/Assets/pdf/2021/6.Initial%20Disclosure%20as%20Large%20Entities_Apr2021.pdf', 1, '2024-07-17 07:16:49'),
-(38, 2021, 'Certificate under regulation 74(5)_Apr2021', '/Assets/pdf/2021/7.Certificate%20under%20regulation%2074(5)_Apr2021.pdf', 1, '2024-07-17 07:16:49'),
-(39, 2021, 'Certificate under Regulation 7(3)_Apr2021', '/Assets/pdf/2021/8.Certificate%20under%20Regulation%207(3)_Apr2021.pdf', 1, '2024-07-17 07:16:49'),
-(40, 2021, 'Certificate under Regulation 40(9)_Apr2021', '/Assets/pdf/2021/9.Certificate%20under%20Regulation%2040(9)_Apr2021.pdf', 1, '2024-07-17 07:16:49'),
-(41, 2021, 'Resignation of CS_Apr2021', '/Assets/pdf/2021/10.Resignation%20of%20CS_Apr2021.pdf', 1, '2024-07-17 07:16:49'),
-(42, 2021, 'Dup Sh Cert.Reg.39(3)_May2021', '/Assets/pdf/2021/11.Dup%20Sh%20Cert.%20Reg.%2039(3)_May2021.pdf', 1, '2024-07-17 07:16:49'),
-(43, 2021, 'BSE intimation - Board', '/Assets/pdf/2021/12.BSE%20intimation%20-%20Board.pdf', 1, '2024-07-17 07:16:49'),
-(44, 2021, 'BSE Intimation - Outcome', '/Assets/pdf/2021/13.BSE%20Intimation%20-%20Outcome.pdf', 1, '2024-07-17 07:16:49'),
-(45, 2021, 'Newspaper_Financial Results', '/Assets/pdf/2021/14.%20Newspaper_Financial%20Results.pdf', 1, '2024-07-17 07:16:49'),
-(46, 2021, 'BSE Intimation- AGM Notice', '/Assets/pdf/15.%20BSE%20Intimation-%20AGM%20Notice.pdf', 1, '2024-07-17 07:16:49'),
-(47, 2021, 'Intimation for Book Closure for AGM', '/Assets/pdf/16.%20Intimation%20for%20Book%20Closure%20for%20AGM.PDF', 1, '2024-07-17 07:16:49'),
-(48, 2021, 'Trading Window Closure', '/Assets/pdf/17.%20Trading%20Window%20Closure.pdf', 1, '2024-07-17 07:16:49'),
-(49, 2021, 'Advertisement-AGM, Book Clouser and Evoting', '/Assets/pdf/18.%20Advertisement%20-%20AGM%20,%20Book%20Clouser%20and%20Evoting.pdf', 1, '2024-07-17 07:16:49'),
-(50, 2021, 'Reconciliation of Share Capital Audit_June 2021', '/Assets/pdf/19.Reconciliation%20of%20Share%20Capital%20Audit_June%202021.pdf', 1, '2024-07-17 07:16:49'),
-(51, 2021, 'Certificate under Reg 74(5) June2021', '/Assets/pdf/20.%20Certificate%20under%20Reg%2074(5)%20June2021.pdf', 1, '2024-07-17 07:16:49'),
-(52, 2021, 'BSE intimation - Board Meeting', '/Assets/pdf/21.%20BSE%20intimation%20-%20Board%20Meeting.pdf', 1, '2024-07-17 07:16:49'),
-(53, 2021, 'BSE Intimation Outcome', '/Assets/pdf/22.%20BSE%20Intimation%20-%20Outcome.pdf', 1, '2024-07-17 07:16:49'),
-(54, 2021, 'Certificate Under Regulation 74(5)_Sept2021', '/Assets/pdf/23.Certificate%20Under%20Regulation%2074(5)_Sept2021.pdf', 1, '2024-07-17 07:16:49'),
-(55, 2021, 'BSE intimation - Board Meeting', '/Assets/pdf/24.%20BSE%20intimation%20-%20Board%20Meeting.pdf', 1, '2024-07-17 07:16:49'),
-(56, 2021, 'BSE Intimation - BM Outcome', '/Assets/pdf/25.%20BSE%20Intimation%20-%20BM%20Outcome.pdf', 1, '2024-07-17 07:16:49'),
-(57, 2021, 'Reconciliation of share capital audit', '/Assets/pdf/26.%20Reconciliation%20of%20share%20capital%20audit.pdf', 1, '2024-07-17 07:16:49'),
-(58, 2021, 'Trading Window Closure_Dec2021', '/Assets/pdf/27.Trading%20Window%20Closure_Dec2021.pdf', 1, '2024-07-17 07:16:49'),
-(59, 2021, 'Clarification sought by BSE_Dec2021', '/Assets/pdf/28.Clarification%20sought%20by%20BSE_Dec2021.pdf', 1, '2024-07-17 07:16:49'),
-(60, 2022, 'Certificate under Reg.74(5)_Jan2022', '/Assets/pdf/1.Certificate%20under%20Reg.74(5)_Jan2022.pdf', 1, '2024-07-17 07:25:06'),
-(61, 2022, 'Certificate under Reg.76_Jan2022', '/Assets/pdf/2.Certificate%20under%20Reg.76_Jan2022.pdf', 1, '2024-07-17 07:25:06'),
-(62, 2022, 'Dup.Shr.Cert_Reg.39(3)_Jan2022', '/Assets/pdf/3.Dup.Shr.Cert_Reg.%2039(3)_Jan2022.pdf', 1, '2024-07-17 07:25:06'),
-(63, 2022, 'BSE intimation - Board Meeting_14.02.2022', '/Assets/pdf/4.%20BSE%20intimation%20-%20Board%20Meeting_14.02.2022.pdf', 1, '2024-07-17 07:25:06'),
-(64, 2022, 'BSE intimation - BM Outcome_14.02.2022', '/Assets/pdf/5.%20BSE%20intimation%20-%20BM%20Outcome_14.02.2022.pdf', 1, '2024-07-17 07:25:06'),
-(65, 2022, 'Certificate under Regulation-74(5)_31.03.2022', '/Assets/pdf/6.%20Certificate%20under%20Regulation-74(5)_31.03.2022.pdf', 1, '2024-07-17 07:25:06'),
-(66, 2022, 'Certificate under Regulation-76_31.03.2022', '/Assets/pdf/7.%20Certificate%20under%20Regulation-76_31.03.2022.pdf', 1, '2024-07-17 07:25:06'),
-(67, 2022, 'Certificate under Regulation-7(3)_31.03.2022', '/Assets/pdf/8.%20Certificate%20under%20Regulation-7(3)_31.03.2022.pdf', 1, '2024-07-17 07:25:06'),
-(68, 2022, 'Certificate under Regulation-40(10)_31.03.2022', '/Assets/pdf/9.%20Certificate%20under%20Regulation-40(10)_31.03.2022.pdf', 1, '2024-07-17 07:25:06'),
-(69, 2022, 'Trading Window Closure_31.03.2022', '/Assets/pdf/10.%20Trading%20Window%20Closure_31.03.2022.pdf', 1, '2024-07-17 07:25:06'),
-(70, 2022, 'BSE intimation - Board Meeting_28.05.2022', '/Assets/pdf/11.%20BSE%20intimation%20-%20Board%20Meeting_28.05.2022.pdf', 1, '2024-07-17 07:25:06'),
-(71, 2022, 'BSE intimation - BM Outcome_28.05.2022', '/Assets/pdf/12.%20BSE%20intimation%20-%20BM%20Outcome_28.05.2022.pdf', 1, '2024-07-17 07:25:06'),
-(72, 2022, 'BSE intimation - Change in Directorate', '/Assets/pdf/13.%20BSE%20intimation%20-%20Change%20in%20Directorate.pdf', 1, '2024-07-17 07:25:06'),
-(73, 2022, 'BSE Intimation - Re-appointment of Statutory Auditors', '/Assets/pdf/14.%20BSE%20Intimation%20%20-%20Re-appointment%20of%20Statutory%20Auditors.pdf', 1, '2024-07-17 07:25:06'),
-(74, 2022, 'BSE Intimation - Book Closure Date', '/Assets/pdf/15.%20BSE%20Intimation%20-%20Book%20Closure%20Date.pdf', 1, '2024-07-17 07:25:06'),
-(75, 2022, 'Trading Window Closure_30.06.2022', '/Assets/pdf/16.%20Trading%20Window%20Closure_30.06.2022.pdf', 1, '2024-07-17 07:25:06'),
-(76, 2022, 'Investor Complaints_30.06.2022', '/Assets/pdf/17.%20Investor%20Complaints_30.06.2022.pdf', 1, '2024-07-17 07:25:06'),
-(77, 2022, 'Certificate under Regulation-74(5)_30.06.2022', '/Assets/pdf/18.%20Certificate%20under%20Regulation-74(5)_30.06.2022.pdf', 1, '2024-07-17 07:25:06'),
-(78, 2022, 'Certificate under Regulation-76_30.06.2022', '/Assets/pdf/19.%20Certificate%20under%20Regulation-76_30.06.2022.pdf', 1, '2024-07-17 07:25:06'),
-(79, 2022, 'Dup_SH_Certificate_Jun 2022', '/Assets/pdf/20.%20Dup_SH_Certificate_Jun%202022.pdf', 1, '2024-07-17 07:25:06'),
-(80, 2022, 'BSE intimation - Board Meeting_11.08.2022', '/Assets/pdf/21.%20BSE%20intimation%20-%20Board%20Meeting_11.08.2022.pdf', 1, '2024-07-17 07:25:06'),
-(81, 2022, 'BSE intimation - BM Outcome_11.08.2022', '/Assets/pdf/22.%20BSE%20intimation%20-%20BM%20Outcome_11.08.2022.pdf', 1, '2024-07-17 07:25:06'),
-(82, 2022, 'Dup_SH_Certificate_Jul 2022', '/Assets/pdf/23.%20Dup_SH_Certificate_Jul%202022.pdf', 1, '2024-07-17 07:25:06'),
-(83, 2022, 'Dup_SH_Certificate_Aug 2022', '/Assets/pdf/24.%20Dup_SH_Certificate_Aug%202022.pdf', 1, '2024-07-17 07:25:06'),
-(84, 2022, 'Dup_SH_Certificate_Sept 2022', '/Assets/pdf/25.%20Dup_SH_Certificate_Sept%202022.pdf', 1, '2024-07-17 07:25:06'),
-(85, 2022, 'Trading Window Closure_30.09.2022', '/Assets/pdf/26.%20Trading%20Window%20Closure_30.09.2022.pdf', 1, '2024-07-17 07:25:06'),
-(86, 2022, 'Investor Compliants_30.09.2022', '/Assets/pdf/27.%20Investor%20Compliants_30.09.2022.pdf', 1, '2024-07-17 07:25:06'),
-(87, 2022, 'Certificate under Regulation-74(5)_30.09.2022', '/Assets/pdf/28.%20Certificate%20under%20Regulation-74(5)_30.09.2022.pdf', 1, '2024-07-17 07:25:06'),
-(88, 2022, 'Certificate under Regulation-76_30.09.2022', '/Assets/pdf/29.%20Certificate%20under%20Regulation-76_30.09.2022.pdf', 1, '2024-07-17 07:25:06'),
-(89, 2022, 'BSE intimation - Board Meeting_14.11.2022', '/Assets/pdf/30.%20BSE%20intimation%20-%20Board%20Meeting_14.11.2022.pdf', 1, '2024-07-17 07:25:06'),
-(90, 2022, 'BSE intimation - BM Outcome_14.11.2022', '/Assets/pdf/31.%20BSE%20intimation%20-%20BM%20Outcome_14.11.2022.pdf', 1, '2024-07-17 07:25:06'),
-(91, 2022, 'SDD Compliance Certificate_30.09.2022', '/Assets/pdf/32.%20SDD%20Compliance%20Certificate_30.09.2022.pdf', 1, '2024-07-17 07:25:06'),
-(92, 2022, 'Trading Window Closure_31.12.2022', '/Assets/pdf/33.%20Trading%20Window%20Closure_31.12.2022.pdf', 1, '2024-07-17 07:25:06'),
-(93, 2023, 'Investor Complaints_31.12.2022', '/Assets/pdf/1.%20Investor%20Complaints_31.12.2022.pdf', 1, '2024-07-17 07:25:29'),
-(94, 2023, 'Certificate under Regulation 74(5)_31.12.2022', '/Assets/pdf/2.%20Certificate%20under%20Regulation%2074(5)_31.12.2022.pdf', 1, '2024-07-17 07:25:29'),
-(95, 2023, 'Certificate under Regulation 76_31.12.2022', '/Assets/pdf/3.%20Certificate%20under%20Regulation%2076_31.12.2022.pdf', 1, '2024-07-17 07:25:29'),
-(96, 2023, 'Certificate for Structured Digital Database_31.12.2022', '/Assets/pdf/4.%20Certificate%20for%20Structured%20Digital%20Database_31.12.2022.pdf', 1, '2024-07-17 07:25:29'),
-(97, 2023, 'BSE intimation - Board Meeting_13.02.2023', '/Assets/pdf/5.%20BSE%20intimation%20-%20Board%20Meeting_13.02.2023.pdf', 1, '2024-07-17 07:25:29'),
-(98, 2023, 'BSE intimation - BM Outcome_13.02.2023', '/Assets/pdf/6.%20BSE%20intimation%20-%20BM%20Outcome_13.02.2023.pdf', 1, '2024-07-17 07:25:29'),
-(99, 2023, 'Trading Window Closure_31.03.2023', '/Assets/pdf/7.%20Trading%20Window%20Closure_31.03.2023.pdf', 1, '2024-07-17 07:25:29'),
-(100, 2023, 'Investor Complaint_31.03.2023', '/Assets/pdf/8.%20Investor%20Complaint_31.03.2023.pdf', 1, '2024-07-17 07:25:29'),
-(101, 2023, 'Certificate under Regulation-7(3)_31.03.2023', '/Assets/pdf/9.%20Certificate%20under%20Regulation-7(3)_31.03.2023.pdf', 1, '2024-07-17 07:25:29'),
-(102, 2023, 'Certificate under Regulation-40(10)_31.03.2023', '/Assets/pdf/10.%20Certificate%20under%20Regulation-40(10)_31.03.2023.pdf', 1, '2024-07-17 07:25:29'),
-(103, 2023, 'Intimation of Resignation of Neeta K. Parekh_15.05.2023', '/Assets/pdf/11.%20Intimation%20of%20Resignation%20of%20Neeta%20K.%20Parekh_15.05.2023.pdf', 1, '2024-07-17 07:25:29'),
-(104, 2023, 'Intimation of Resignation of Rajeevrajan Kapur_18.05.2023', '/Assets/pdf/12.%20Intimation%20of%20Resignation%20of%20Rajeevrajan%20Kapur_18.05.2023.pdf', 1, '2024-07-17 07:25:29'),
-(105, 2023, 'BSE intimation - Board Meeting_26.05.2023', '/Assets/pdf/13.%20BSE%20intimation%20-%20Board%20Meeting_26.05.2023.pdf', 1, '2024-07-17 07:25:29'),
-(106, 2023, 'BSE intimation - BM Outcome_26.05.2023', '/Assets/pdf/14.%20BSE%20intimation%20-%20BM%20Outcome_26.05.2023.pdf', 1, '2024-07-17 07:25:29'),
-(107, 2023, 'BSE intimation - Appointment of Directors_26.05.2023', '/Assets/pdf/15.%20BSE%20intimation%20-%20Appointment%20of%20Directors_26.05.2023.pdf', 1, '2024-07-17 07:25:29'),
-(108, 2023, 'BSE Intimation - Book Closure Date_26.05.2023', '/Assets/pdf/16.%20BSE%20Intimation%20-%20Book%20Closure%20Date_26.05.2023.pdf', 1, '2024-07-17 07:25:29'),
-(109, 2023, 'Trading Window Closure_30.06.2023', '/Assets/pdf/Trading%20Window%20Closure_signed.pdf', 1, '2024-07-17 07:25:29'),
-(110, 2023, 'Investor Complaint_30.06.2023', '/Assets/pdf/Investor%20Complaints.pdf', 1, '2024-07-17 07:25:29'),
-(111, 2023, 'Certificate under Regulation-74(5)_30.06.2023', '/Assets/pdf/BSE%20Upload.pdf', 1, '2024-07-17 07:25:29'),
-(112, 2023, 'Certificate under Regulation-76_30.06.2023', '/Assets/pdf/BSE%20Upload(1).pdf', 1, '2024-07-17 07:25:29'),
-(113, 2023, 'Certificate for Structured Digital Database_30.06.2023', '/Assets/pdf/BSE%20Upload(2).pdf', 1, '2024-07-17 07:25:29'),
-(114, 2023, 'BSE intimation - Board Meeting_11.08.2023', '/Assets/pdf/BSE%20intimation%20-%20Board%20Meeting_01.08.2023.pdf', 1, '2024-07-17 07:25:29'),
-(115, 2023, 'BSE Intimation- BM Outcome_11.08.2023', '/Assets/pdf/BSE%20Upload(4).pdf', 1, '2024-07-17 07:25:29'),
-(116, 2023, 'BSE Intimation- Shifting of Registered Office', '/Assets/pdf/Outcome%20of%20the%20BM_signed.pdf', 1, '2024-07-17 07:25:29'),
-(117, 2023, 'Trading Window Closure_30.09.2023', '/Assets/pdf/Trading%20Window%20Closure.pdf', 1, '2024-07-17 07:25:29'),
-(118, 2023, 'Investor Complaint_30.09.2023', '/Assets/pdf/Investor%20Complaints_30.09.2023.pdf', 1, '2024-07-17 07:25:29'),
-(119, 2023, 'Certificate under Regulation-74(5)_30.09.2023', '/Assets/pdf/BSE%20Upload(7).pdf', 1, '2024-07-17 07:25:29'),
-(120, 2023, 'Certificate under Regulation-76_30.09.2023', '/Assets/pdf/BSE%20Upload(5).pdf', 1, '2024-07-17 07:25:29'),
-(121, 2023, 'Certificate for Structured Digital Database_30.09.2023', '/Assets/pdf/BSE%20Upload(6).pdf', 1, '2024-07-17 07:25:29'),
-(122, 2023, 'BSE intimation - Board Meeting_09.11.2023', '/Assets/pdf/BSE%20intimation%20-%20Board%20Meeting_09.11.2023.pdf', 1, '2024-07-17 07:25:29'),
-(123, 2023, 'BSE Intimation- BM Outcome_09.11.2023', '/Assets/pdf/BSE%20Upload(8).pdf', 1, '2024-07-17 07:25:29'),
-(124, 2023, 'Trading Window Closure_31.12.2023', '/Assets/pdf/Trading%20Window%20Closure_signed(1).pdf', 1, '2024-07-17 07:25:29');
+(1, 2024, 'Investor Complaints_31.12.2023', 'Investor%20Complaints(1).pdf', 1, '2024-07-17 07:13:04'),
+(2, 2024, 'Certificate under Regulation 74(5)_31.12.2023', 'BSE%20Upload(9).pdf', 1, '2024-07-17 07:13:04'),
+(3, 2024, 'Certificate under Regulation 76_31.12.2023', 'BSE%20Upload(10).pdf', 1, '2024-07-17 07:13:04'),
+(4, 2024, 'Certificate for Structured Digital Database_31.12.2023', 'BSE%20Upload(11).pdf', 1, '2024-07-17 07:13:04'),
+(5, 2024, 'BSE intimation - Board Meeting_12.02.2024', 'BSE%20intimation%20-%20Board%20Meeting_12.02.2024.pdf', 1, '2024-07-17 07:13:04'),
+(6, 2024, 'BSE intimation - BM Outcome_12.02.2024', 'BSE%20Upload(12).pdf', 1, '2024-07-17 07:13:04'),
+(7, 2024, 'Trading Window Closure_31.03.2024', 'Trading%20Window%20Closure_signed(2).pdf', 1, '2024-07-17 07:13:04'),
+(8, 2024, 'Investor Complaint_31.03.2024', 'IG-REPORT-526616-NIEQ_National%20Plastic%20Industries%20Limited_03Apr24_12_5_56.pdf', 1, '2024-07-17 07:13:04'),
+(9, 2024, 'Certificate under Regulation-7(3)_31.03.2024', 'BSE%20Upload(13).pdf', 1, '2024-07-17 07:13:04'),
+(10, 2024, 'Certificate under Regulation-40(10)_31.03.2024', 'BSE%20upload(14).pdf', 1, '2024-07-17 07:13:04'),
+(11, 2024, 'BSE Intimation- Board Meeting_21.05.2024', 'BSE%20intimation%20-%20Board%20Meeting_signed.pdf', 1, '2024-07-17 07:13:04'),
+(12, 2024, 'BSE Intimation- BM Outcome_21.05.2024', 'BSE%20Upload-3-13_merged(1).pdf', 1, '2024-07-17 07:13:04'),
+(13, 2024, 'BSE Intimation - Book Closure Date_21.05.2024', 'BSE%20Intimation%20-%20Book%20Closure%20datesinged.pdf', 1, '2024-07-17 07:13:04'),
+(14, 2020, 'Closure of Trading Window_Jan2020', '1.Closure%20of%20Trading%20Window%20_Jan2020.pdf', 1, '2024-07-17 07:15:35'),
+(15, 2020, 'Certificate under regulation 74(5)_Jan2020', '2.Certificate%20under%20regulation%2074(5)_Jan2020.pdf', 1, '2024-07-17 07:15:35'),
+(16, 2020, 'RTP Reg.23(9)_Jan2020', '3.%20RTP%20Reg.%2023%20(9)_Jan2020.pdf', 1, '2024-07-17 07:15:35'),
+(17, 2020, 'Dup Sh Cert.Reg.39(3)_March2020', '4.Dup%20Sh%20Cert.%20Reg.%2039(3)_March2020.pdf', 1, '2024-07-17 07:15:35'),
+(18, 2020, 'Closure of Trading Window_March2020', '5.Closure%20of%20Trading%20Window%20_March2020.pdf', 1, '2024-07-17 07:15:35'),
+(19, 2020, 'Certificate under regulation 74(5)_May2020', '6.Certificate%20under%20regulation%2074(5)_May2020.pdf', 1, '2024-07-17 07:15:35'),
+(20, 2020, 'Certificate under Regulation 7(3)_May2020', '7.Certificate%20under%20Regulation%207(3)_May2020.pdf', 1, '2024-07-17 07:15:35'),
+(21, 2020, 'Certificate under Regulation 40(9)_May2020', '8.Certificate%20under%20Regulation%2040(9)_May2020.pdf', 1, '2024-07-17 07:15:35'),
+(22, 2020, 'Closure of Trading Window_Jul2020', '9.Closure%20of%20Trading%20Window%20_Jul2020.pdf', 1, '2024-07-17 07:15:35'),
+(23, 2020, 'Annul Sec.Com.Report_Jul2020', '10.Annul%20Sec.%20Com.%20Report_Jul2020.pdf', 1, '2024-07-17 07:15:35'),
+(24, 2020, 'Certificate under regulation 74(5)_Jul2020', '11.Certificate%20under%20regulation%2074(5)_Jul2020.pdf', 1, '2024-07-17 07:15:35'),
+(25, 2020, 'RTP Reg.23(9)_Jul2020', '12.RTP%20Reg.%2023%20(9)_Jul2020.pdf', 1, '2024-07-17 07:15:35'),
+(26, 2020, 'Closure of Trading Window_Sept2020', '2020/13.Closure%20of%20Trading%20Window%20_Sept2020.pdf', 1, '2024-07-17 07:15:35'),
+(27, 2020, 'Certificate under regulation 74(5)_Oct2020', '2020/14.Certificate%20under%20regulation%2074(5)_Oct2020.pdf', 1, '2024-07-17 07:15:35'),
+(28, 2020, 'Certificate under Regulation 7(3)_Oct2020', '2020/15.Certificate%20under%20Regulation%207(3)_Oct2020.pdf', 1, '2024-07-17 07:15:35'),
+(29, 2020, 'Certificate under Regulation 40(9)_Oct2020', '2020/16.Certificate%20under%20Regulation%2040(9)_Oct2020.pdf', 1, '2024-07-17 07:15:35'),
+(30, 2020, 'RTP Reg. 23(9)_Nov2020', '2020/17.RTP%20Reg.%2023%20(9)_Nov2020.pdf', 1, '2024-07-17 07:15:35'),
+(31, 2020, 'Closure of Trading Window _Dec2020', '2020/18.Closure%20of%20Trading%20Window%20_Dec2020.pdf', 1, '2024-07-17 07:15:35'),
+(32, 2021, 'Certificate under regulation 74(5)_Jan2021', '2021/12.BSE%20intimation%20-%20Board.pdf', 1, '2024-07-17 07:16:49'),
+(33, 2021, 'Dup Sh Cert.Reg.39(3)_Jan2021', '2021/2.Dup%20Sh%20Cert.%20Reg.%2039(3)_Jan2021.pdf', 1, '2024-07-17 07:16:49'),
+(34, 2021, 'Dup Sh Cert.Reg.39(3)_Feb2021', '2021/3.Dup%20Sh%20Cert.%20Reg.%2039(3)_Feb2021.pdf', 1, '2024-07-17 07:16:49'),
+(35, 2021, 'Appointment of Vipul Desai_Feb2021', '2021/4.Appointment%20of%20Vipul%20Desai_Feb2021.pdf', 1, '2024-07-17 07:16:49'),
+(36, 2021, 'Closure of Trading Window_March2021', '2021/5.Closure%20of%20Trading%20Window%20_March2021.pdf', 1, '2024-07-17 07:16:49'),
+(37, 2021, 'Initial Disclosure as Large Entities_Apr2021', '2021/6.Initial%20Disclosure%20as%20Large%20Entities_Apr2021.pdf', 1, '2024-07-17 07:16:49'),
+(38, 2021, 'Certificate under regulation 74(5)_Apr2021', '2021/7.Certificate%20under%20regulation%2074(5)_Apr2021.pdf', 1, '2024-07-17 07:16:49'),
+(39, 2021, 'Certificate under Regulation 7(3)_Apr2021', '2021/8.Certificate%20under%20Regulation%207(3)_Apr2021.pdf', 1, '2024-07-17 07:16:49'),
+(40, 2021, 'Certificate under Regulation 40(9)_Apr2021', '2021/9.Certificate%20under%20Regulation%2040(9)_Apr2021.pdf', 1, '2024-07-17 07:16:49'),
+(41, 2021, 'Resignation of CS_Apr2021', '2021/10.Resignation%20of%20CS_Apr2021.pdf', 1, '2024-07-17 07:16:49'),
+(42, 2021, 'Dup Sh Cert.Reg.39(3)_May2021', '2021/11.Dup%20Sh%20Cert.%20Reg.%2039(3)_May2021.pdf', 1, '2024-07-17 07:16:49'),
+(43, 2021, 'BSE intimation - Board', '2021/12.BSE%20intimation%20-%20Board.pdf', 1, '2024-07-17 07:16:49'),
+(44, 2021, 'BSE Intimation - Outcome', '2021/13.BSE%20Intimation%20-%20Outcome.pdf', 1, '2024-07-17 07:16:49'),
+(45, 2021, 'Newspaper_Financial Results', '2021/14.%20Newspaper_Financial%20Results.pdf', 1, '2024-07-17 07:16:49'),
+(46, 2021, 'BSE Intimation- AGM Notice', '15.%20BSE%20Intimation-%20AGM%20Notice.pdf', 1, '2024-07-17 07:16:49'),
+(47, 2021, 'Intimation for Book Closure for AGM', '16.%20Intimation%20for%20Book%20Closure%20for%20AGM.PDF', 1, '2024-07-17 07:16:49'),
+(48, 2021, 'Trading Window Closure', '17.%20Trading%20Window%20Closure.pdf', 1, '2024-07-17 07:16:49'),
+(49, 2021, 'Advertisement-AGM, Book Clouser and Evoting', '18.%20Advertisement%20-%20AGM%20,%20Book%20Clouser%20and%20Evoting.pdf', 1, '2024-07-17 07:16:49'),
+(50, 2021, 'Reconciliation of Share Capital Audit_June 2021', '19.Reconciliation%20of%20Share%20Capital%20Audit_June%202021.pdf', 1, '2024-07-17 07:16:49'),
+(51, 2021, 'Certificate under Reg 74(5) June2021', '20.%20Certificate%20under%20Reg%2074(5)%20June2021.pdf', 1, '2024-07-17 07:16:49'),
+(52, 2021, 'BSE intimation - Board Meeting', '21.%20BSE%20intimation%20-%20Board%20Meeting.pdf', 1, '2024-07-17 07:16:49'),
+(53, 2021, 'BSE Intimation Outcome', '22.%20BSE%20Intimation%20-%20Outcome.pdf', 1, '2024-07-17 07:16:49'),
+(54, 2021, 'Certificate Under Regulation 74(5)_Sept2021', '23.Certificate%20Under%20Regulation%2074(5)_Sept2021.pdf', 1, '2024-07-17 07:16:49'),
+(55, 2021, 'BSE intimation - Board Meeting', '24.%20BSE%20intimation%20-%20Board%20Meeting.pdf', 1, '2024-07-17 07:16:49'),
+(56, 2021, 'BSE Intimation - BM Outcome', '25.%20BSE%20Intimation%20-%20BM%20Outcome.pdf', 1, '2024-07-17 07:16:49'),
+(57, 2021, 'Reconciliation of share capital audit', '26.%20Reconciliation%20of%20share%20capital%20audit.pdf', 1, '2024-07-17 07:16:49'),
+(58, 2021, 'Trading Window Closure_Dec2021', '27.Trading%20Window%20Closure_Dec2021.pdf', 1, '2024-07-17 07:16:49'),
+(59, 2021, 'Clarification sought by BSE_Dec2021', '28.Clarification%20sought%20by%20BSE_Dec2021.pdf', 1, '2024-07-17 07:16:49'),
+(60, 2022, 'Certificate under Reg.74(5)_Jan2022', '1.Certificate%20under%20Reg.74(5)_Jan2022.pdf', 1, '2024-07-17 07:25:06'),
+(61, 2022, 'Certificate under Reg.76_Jan2022', '2.Certificate%20under%20Reg.76_Jan2022.pdf', 1, '2024-07-17 07:25:06'),
+(62, 2022, 'Dup.Shr.Cert_Reg.39(3)_Jan2022', '3.Dup.Shr.Cert_Reg.%2039(3)_Jan2022.pdf', 1, '2024-07-17 07:25:06'),
+(63, 2022, 'BSE intimation - Board Meeting_14.02.2022', '4.%20BSE%20intimation%20-%20Board%20Meeting_14.02.2022.pdf', 1, '2024-07-17 07:25:06'),
+(64, 2022, 'BSE intimation - BM Outcome_14.02.2022', '5.%20BSE%20intimation%20-%20BM%20Outcome_14.02.2022.pdf', 1, '2024-07-17 07:25:06'),
+(65, 2022, 'Certificate under Regulation-74(5)_31.03.2022', '6.%20Certificate%20under%20Regulation-74(5)_31.03.2022.pdf', 1, '2024-07-17 07:25:06'),
+(66, 2022, 'Certificate under Regulation-76_31.03.2022', '7.%20Certificate%20under%20Regulation-76_31.03.2022.pdf', 1, '2024-07-17 07:25:06'),
+(67, 2022, 'Certificate under Regulation-7(3)_31.03.2022', '8.%20Certificate%20under%20Regulation-7(3)_31.03.2022.pdf', 1, '2024-07-17 07:25:06'),
+(68, 2022, 'Certificate under Regulation-40(10)_31.03.2022', '9.%20Certificate%20under%20Regulation-40(10)_31.03.2022.pdf', 1, '2024-07-17 07:25:06'),
+(69, 2022, 'Trading Window Closure_31.03.2022', '10.%20Trading%20Window%20Closure_31.03.2022.pdf', 1, '2024-07-17 07:25:06'),
+(70, 2022, 'BSE intimation - Board Meeting_28.05.2022', '11.%20BSE%20intimation%20-%20Board%20Meeting_28.05.2022.pdf', 1, '2024-07-17 07:25:06'),
+(71, 2022, 'BSE intimation - BM Outcome_28.05.2022', '12.%20BSE%20intimation%20-%20BM%20Outcome_28.05.2022.pdf', 1, '2024-07-17 07:25:06'),
+(72, 2022, 'BSE intimation - Change in Directorate', '13.%20BSE%20intimation%20-%20Change%20in%20Directorate.pdf', 1, '2024-07-17 07:25:06'),
+(73, 2022, 'BSE Intimation - Re-appointment of Statutory Auditors', '14.%20BSE%20Intimation%20%20-%20Re-appointment%20of%20Statutory%20Auditors.pdf', 1, '2024-07-17 07:25:06'),
+(74, 2022, 'BSE Intimation - Book Closure Date', '15.%20BSE%20Intimation%20-%20Book%20Closure%20Date.pdf', 1, '2024-07-17 07:25:06'),
+(75, 2022, 'Trading Window Closure_30.06.2022', '16.%20Trading%20Window%20Closure_30.06.2022.pdf', 1, '2024-07-17 07:25:06'),
+(76, 2022, 'Investor Complaints_30.06.2022', '17.%20Investor%20Complaints_30.06.2022.pdf', 1, '2024-07-17 07:25:06'),
+(77, 2022, 'Certificate under Regulation-74(5)_30.06.2022', '18.%20Certificate%20under%20Regulation-74(5)_30.06.2022.pdf', 1, '2024-07-17 07:25:06'),
+(78, 2022, 'Certificate under Regulation-76_30.06.2022', '19.%20Certificate%20under%20Regulation-76_30.06.2022.pdf', 1, '2024-07-17 07:25:06'),
+(79, 2022, 'Dup_SH_Certificate_Jun 2022', '20.%20Dup_SH_Certificate_Jun%202022.pdf', 1, '2024-07-17 07:25:06'),
+(80, 2022, 'BSE intimation - Board Meeting_11.08.2022', '21.%20BSE%20intimation%20-%20Board%20Meeting_11.08.2022.pdf', 1, '2024-07-17 07:25:06'),
+(81, 2022, 'BSE intimation - BM Outcome_11.08.2022', '22.%20BSE%20intimation%20-%20BM%20Outcome_11.08.2022.pdf', 1, '2024-07-17 07:25:06'),
+(82, 2022, 'Dup_SH_Certificate_Jul 2022', '23.%20Dup_SH_Certificate_Jul%202022.pdf', 1, '2024-07-17 07:25:06'),
+(83, 2022, 'Dup_SH_Certificate_Aug 2022', '24.%20Dup_SH_Certificate_Aug%202022.pdf', 1, '2024-07-17 07:25:06'),
+(84, 2022, 'Dup_SH_Certificate_Sept 2022', '25.%20Dup_SH_Certificate_Sept%202022.pdf', 1, '2024-07-17 07:25:06'),
+(85, 2022, 'Trading Window Closure_30.09.2022', '26.%20Trading%20Window%20Closure_30.09.2022.pdf', 1, '2024-07-17 07:25:06'),
+(86, 2022, 'Investor Compliants_30.09.2022', '27.%20Investor%20Compliants_30.09.2022.pdf', 1, '2024-07-17 07:25:06'),
+(87, 2022, 'Certificate under Regulation-74(5)_30.09.2022', '28.%20Certificate%20under%20Regulation-74(5)_30.09.2022.pdf', 1, '2024-07-17 07:25:06'),
+(88, 2022, 'Certificate under Regulation-76_30.09.2022', '29.%20Certificate%20under%20Regulation-76_30.09.2022.pdf', 1, '2024-07-17 07:25:06'),
+(89, 2022, 'BSE intimation - Board Meeting_14.11.2022', '30.%20BSE%20intimation%20-%20Board%20Meeting_14.11.2022.pdf', 1, '2024-07-17 07:25:06'),
+(90, 2022, 'BSE intimation - BM Outcome_14.11.2022', '31.%20BSE%20intimation%20-%20BM%20Outcome_14.11.2022.pdf', 1, '2024-07-17 07:25:06'),
+(91, 2022, 'SDD Compliance Certificate_30.09.2022', '32.%20SDD%20Compliance%20Certificate_30.09.2022.pdf', 1, '2024-07-17 07:25:06'),
+(92, 2022, 'Trading Window Closure_31.12.2022', '33.%20Trading%20Window%20Closure_31.12.2022.pdf', 1, '2024-07-17 07:25:06'),
+(93, 2023, 'Investor Complaints_31.12.2022', '1.%20Investor%20Complaints_31.12.2022.pdf', 1, '2024-07-17 07:25:29'),
+(94, 2023, 'Certificate under Regulation 74(5)_31.12.2022', '2.%20Certificate%20under%20Regulation%2074(5)_31.12.2022.pdf', 1, '2024-07-17 07:25:29'),
+(95, 2023, 'Certificate under Regulation 76_31.12.2022', '3.%20Certificate%20under%20Regulation%2076_31.12.2022.pdf', 1, '2024-07-17 07:25:29'),
+(96, 2023, 'Certificate for Structured Digital Database_31.12.2022', '4.%20Certificate%20for%20Structured%20Digital%20Database_31.12.2022.pdf', 1, '2024-07-17 07:25:29'),
+(97, 2023, 'BSE intimation - Board Meeting_13.02.2023', '5.%20BSE%20intimation%20-%20Board%20Meeting_13.02.2023.pdf', 1, '2024-07-17 07:25:29'),
+(98, 2023, 'BSE intimation - BM Outcome_13.02.2023', '6.%20BSE%20intimation%20-%20BM%20Outcome_13.02.2023.pdf', 1, '2024-07-17 07:25:29'),
+(99, 2023, 'Trading Window Closure_31.03.2023', '7.%20Trading%20Window%20Closure_31.03.2023.pdf', 1, '2024-07-17 07:25:29'),
+(100, 2023, 'Investor Complaint_31.03.2023', '8.%20Investor%20Complaint_31.03.2023.pdf', 1, '2024-07-17 07:25:29'),
+(101, 2023, 'Certificate under Regulation-7(3)_31.03.2023', '9.%20Certificate%20under%20Regulation-7(3)_31.03.2023.pdf', 1, '2024-07-17 07:25:29'),
+(102, 2023, 'Certificate under Regulation-40(10)_31.03.2023', '10.%20Certificate%20under%20Regulation-40(10)_31.03.2023.pdf', 1, '2024-07-17 07:25:29'),
+(103, 2023, 'Intimation of Resignation of Neeta K. Parekh_15.05.2023', '11.%20Intimation%20of%20Resignation%20of%20Neeta%20K.%20Parekh_15.05.2023.pdf', 1, '2024-07-17 07:25:29'),
+(104, 2023, 'Intimation of Resignation of Rajeevrajan Kapur_18.05.2023', '12.%20Intimation%20of%20Resignation%20of%20Rajeevrajan%20Kapur_18.05.2023.pdf', 1, '2024-07-17 07:25:29'),
+(105, 2023, 'BSE intimation - Board Meeting_26.05.2023', '13.%20BSE%20intimation%20-%20Board%20Meeting_26.05.2023.pdf', 1, '2024-07-17 07:25:29'),
+(106, 2023, 'BSE intimation - BM Outcome_26.05.2023', '14.%20BSE%20intimation%20-%20BM%20Outcome_26.05.2023.pdf', 1, '2024-07-17 07:25:29'),
+(107, 2023, 'BSE intimation - Appointment of Directors_26.05.2023', '15.%20BSE%20intimation%20-%20Appointment%20of%20Directors_26.05.2023.pdf', 1, '2024-07-17 07:25:29'),
+(108, 2023, 'BSE Intimation - Book Closure Date_26.05.2023', '16.%20BSE%20Intimation%20-%20Book%20Closure%20Date_26.05.2023.pdf', 1, '2024-07-17 07:25:29'),
+(109, 2023, 'Trading Window Closure_30.06.2023', 'Trading%20Window%20Closure_signed.pdf', 1, '2024-07-17 07:25:29'),
+(110, 2023, 'Investor Complaint_30.06.2023', 'Investor%20Complaints.pdf', 1, '2024-07-17 07:25:29'),
+(111, 2023, 'Certificate under Regulation-74(5)_30.06.2023', 'BSE%20Upload.pdf', 1, '2024-07-17 07:25:29'),
+(112, 2023, 'Certificate under Regulation-76_30.06.2023', 'BSE%20Upload(1).pdf', 1, '2024-07-17 07:25:29'),
+(113, 2023, 'Certificate for Structured Digital Database_30.06.2023', 'BSE%20Upload(2).pdf', 1, '2024-07-17 07:25:29'),
+(114, 2023, 'BSE intimation - Board Meeting_11.08.2023', 'BSE%20intimation%20-%20Board%20Meeting_01.08.2023.pdf', 1, '2024-07-17 07:25:29'),
+(115, 2023, 'BSE Intimation- BM Outcome_11.08.2023', 'BSE%20Upload(4).pdf', 1, '2024-07-17 07:25:29'),
+(116, 2023, 'BSE Intimation- Shifting of Registered Office', 'Outcome%20of%20the%20BM_signed.pdf', 1, '2024-07-17 07:25:29'),
+(117, 2023, 'Trading Window Closure_30.09.2023', 'Trading%20Window%20Closure.pdf', 1, '2024-07-17 07:25:29'),
+(118, 2023, 'Investor Complaint_30.09.2023', 'Investor%20Complaints_30.09.2023.pdf', 1, '2024-07-17 07:25:29'),
+(119, 2023, 'Certificate under Regulation-74(5)_30.09.2023', 'BSE%20Upload(7).pdf', 1, '2024-07-17 07:25:29'),
+(120, 2023, 'Certificate under Regulation-76_30.09.2023', 'BSE%20Upload(5).pdf', 1, '2024-07-17 07:25:29'),
+(121, 2023, 'Certificate for Structured Digital Database_30.09.2023', 'BSE%20Upload(6).pdf', 1, '2024-07-17 07:25:29'),
+(122, 2023, 'BSE intimation - Board Meeting_09.11.2023', 'BSE%20intimation%20-%20Board%20Meeting_09.11.2023.pdf', 1, '2024-07-17 07:25:29'),
+(123, 2023, 'BSE Intimation- BM Outcome_09.11.2023', 'BSE%20Upload(8).pdf', 1, '2024-07-17 07:25:29'),
+(124, 2023, 'Trading Window Closure_31.12.2023', 'Trading%20Window%20Closure_signed(1).pdf', 1, '2024-07-17 07:25:29');
 
 -- --------------------------------------------------------
 
@@ -699,9 +634,31 @@ CREATE TABLE `herosection` (
 --
 
 INSERT INTO `herosection` (`id`, `redirect_url`, `image_name`, `image_location`, `seo`) VALUES
-(1, 'https://example.com/summer-sale', 'summer_banner.jpg', '/images/banners/', 'Summer Sale 2024 - Up to 50% off on all items'),
-(2, 'https://example.com/new-collection', 'spring_collection.png', '/images/collections/', 'New Spring Collection 2024 - Fresh Styles Available Now'),
-(3, 'https://example.com/holiday-deals', 'holiday_special.webp', '/images/promotions/', 'Holiday Special Deals - Limited Time Offers on Premium Products');
+(1, 'https://example.com/summer-sale', 'summer_banner.jpg', NULL, 'Summer Sale 2024 - Up to 50% off on all items'),
+(2, 'https://example.com/new-collection', 'spring_collection.png', NULL, 'New Spring Collection 2024 - Fresh Styles Available Now'),
+(3, 'https://example.com/holiday-deals', 'holiday_special.webp', NULL, 'Holiday Special Deals - Limited Time Offers on Premium Products');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hero_banners`
+--
+
+CREATE TABLE `hero_banners` (
+  `id` int NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `redirection_link` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `pageName` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `hero_banners`
+--
+
+INSERT INTO `hero_banners` (`id`, `image`, `redirection_link`, `pageName`) VALUES
+(1, 'CSR-Banner.png', '/#', 'CSR page '),
+(2, 'Media_-News-banner.png', '/#', 'News and Media'),
+(3, 'Bulk-Orders-pg-banner.png', '/#', 'Bulk Order');
 
 -- --------------------------------------------------------
 
@@ -866,30 +823,30 @@ CREATE TABLE `newspaper_advertisements` (
 --
 
 INSERT INTO `newspaper_advertisements` (`id`, `fiscal_year`, `quarter`, `newspaper`, `pdf_link`) VALUES
-(1, '2023-24', 'Q1', 'Business Standard', '/Assets/pdf/plastic%20bs.pdf'),
-(2, '2023-24', 'Q1', 'Mumbai Lakshdeep', '/Assets/pdf/plastic%20ml.pdf'),
-(3, '2023-24', 'Q2', 'Business Standard', '/Assets/pdf/Newspaper_English.pdf'),
-(4, '2023-24', 'Q2', 'Mumbai Lakshdeep', '/Assets/pdf/Newspaper_%20Marathi.pdf'),
-(5, '2023-24', 'Q3', 'Business Standard', '/Assets/pdf/Newspaper_English(1).pdf'),
-(6, '2023-24', 'Q3', 'Mumbai Lakshdeep', '/Assets/pdf/Newspaper_%20Marathi(1).pdf'),
-(7, '2023-24', 'Q4', 'Business Standard', '/Assets/pdf/Newspaper%20-%20English-22.05.2024.pdf'),
-(8, '2023-24', 'Q4', 'Mumbai Lakshdeep', '/Assets/pdf/Newspaper%20-%20Marathi-%2022.05.2024.pdf'),
-(9, '2022-23', 'Q1', 'Business Standard', '/Assets/pdf/Q1%20Business%20Standard(2).pdf'),
-(10, '2022-23', 'Q1', 'Mumbai Lakshdeep', '/Assets/pdf/Q1%20Mumbai%20Lakshdeep(2).pdf'),
-(11, '2022-23', 'Q2', 'Business Standard', '/Assets/pdf/Q2%20Business%20Standard(2).pdf'),
-(12, '2022-23', 'Q2', 'Mumbai Lakshdeep', '/Assets/pdf/Q2%20Mumbai%20Lakshdeep(1).pdf'),
-(13, '2022-23', 'Q3', 'Business Standard', '/Assets/pdf/Q3%20Business%20Standard(2).pdf'),
-(14, '2022-23', 'Q3', 'Mumbai Lakshdeep', '/Assets/pdf/Q3%20Mumbai%20Lakshdeep.pdf'),
-(15, '2022-23', 'Q4', 'Business Standard', '/Assets/pdf/Q4%20Business%20Standrard(1).pdf'),
-(16, '2022-23', 'Q4', 'Mumbai Lakshdeep', '/Assets/pdf/Q4%20Mumbai%20Lakshadeep(1).pdf'),
-(17, '2021-22', 'Q1', 'Business Standard', '/Assets/pdf/Q1%20Business%20Standard(1).pdf'),
-(18, '2021-22', 'Q1', 'Mumbai Lakshdeep', '/Assets/pdf/Q1%20Mumbai%20Lakshdeep(1).pdf'),
-(19, '2021-22', 'Q2', 'Business Standard', '/Assets/pdf/Q2%20Business%20Standard(1).pdf'),
-(20, '2021-22', 'Q2', 'Mumbai Lakshdeep', '/Assets/pdf/Q2%20Mumbai%20Lakshdeep.pdf'),
-(21, '2021-22', 'Q3', 'Business Standard', '/Assets/pdf/Q3%20Business%20Standard.pdf'),
-(22, '2021-22', 'Q3', 'Mumbai Lakshdeep', '/Assets/pdf/Q3%20Mumbai%20Lakshadeep.pdf'),
-(23, '2021-22', 'Q4', 'Business Standard', '/Assets/pdf/Q4%20Business%20Standrard.pdf'),
-(24, '2021-22', 'Q4', 'Mumbai Lakshdeep', '/Assets/pdf/Q4%20Mumbai%20Lakshadeep.pdf');
+(1, '2023-24', 'Q1', 'Business Standard', 'plastic%20bs.pdf'),
+(2, '2023-24', 'Q1', 'Mumbai Lakshdeep', 'plastic%20ml.pdf'),
+(3, '2023-24', 'Q2', 'Business Standard', 'Newspaper_English.pdf'),
+(4, '2023-24', 'Q2', 'Mumbai Lakshdeep', 'Newspaper_%20Marathi.pdf'),
+(5, '2023-24', 'Q3', 'Business Standard', 'Newspaper_English(1).pdf'),
+(6, '2023-24', 'Q3', 'Mumbai Lakshdeep', 'Newspaper_%20Marathi(1).pdf'),
+(7, '2023-24', 'Q4', 'Business Standard', 'Newspaper%20-%20English-22.05.2024.pdf'),
+(8, '2023-24', 'Q4', 'Mumbai Lakshdeep', 'Newspaper%20-%20Marathi-%2022.05.2024.pdf'),
+(9, '2022-23', 'Q1', 'Business Standard', 'Q1%20Business%20Standard(2).pdf'),
+(10, '2022-23', 'Q1', 'Mumbai Lakshdeep', 'Q1%20Mumbai%20Lakshdeep(2).pdf'),
+(11, '2022-23', 'Q2', 'Business Standard', 'Q2%20Business%20Standard(2).pdf'),
+(12, '2022-23', 'Q2', 'Mumbai Lakshdeep', 'Q2%20Mumbai%20Lakshdeep(1).pdf'),
+(13, '2022-23', 'Q3', 'Business Standard', 'Q3%20Business%20Standard(2).pdf'),
+(14, '2022-23', 'Q3', 'Mumbai Lakshdeep', 'Q3%20Mumbai%20Lakshdeep.pdf'),
+(15, '2022-23', 'Q4', 'Business Standard', 'Q4%20Business%20Standrard(1).pdf'),
+(16, '2022-23', 'Q4', 'Mumbai Lakshdeep', 'Q4%20Mumbai%20Lakshadeep(1).pdf'),
+(17, '2021-22', 'Q1', 'Business Standard', 'Q1%20Business%20Standard(1).pdf'),
+(18, '2021-22', 'Q1', 'Mumbai Lakshdeep', 'Q1%20Mumbai%20Lakshdeep(1).pdf'),
+(19, '2021-22', 'Q2', 'Business Standard', 'Q2%20Business%20Standard(1).pdf'),
+(20, '2021-22', 'Q2', 'Mumbai Lakshdeep', 'Q2%20Mumbai%20Lakshdeep.pdf'),
+(21, '2021-22', 'Q3', 'Business Standard', 'Q3%20Business%20Standard.pdf'),
+(22, '2021-22', 'Q3', 'Mumbai Lakshdeep', 'Q3%20Mumbai%20Lakshadeep.pdf'),
+(23, '2021-22', 'Q4', 'Business Standard', 'Q4%20Business%20Standrard.pdf'),
+(24, '2021-22', 'Q4', 'Mumbai Lakshdeep', 'Q4%20Mumbai%20Lakshadeep.pdf');
 
 -- --------------------------------------------------------
 
@@ -929,43 +886,43 @@ CREATE TABLE `notice` (
 --
 
 INSERT INTO `notice` (`ad_id`, `years`, `title`, `file_name`, `status`) VALUES
-(3, '2022-2023', 'AGM Notice 2022-2023', '/Assets/pdf/Notice%20of%2036th%20AGM.pdf', 1),
-(4, '2022-2023', 'AGM Notice Business Standard Mumbai_21.07.2023', '/Assets/pdf/Newspaper%20-%20English(2).pdf', 1),
-(5, '2022-2023', 'AGM Notice Mumbai Lakshadeep Mumbai_21.07.2023', '/Assets/pdf/Newspaper%20-%20Marathi(2).pdf', 1),
-(6, '2021-2022', 'AGM Notice 2021-2022', '/Assets/pdf/AGM%20Notice%202021-2022(2).pdf', 1),
-(7, '2021-2022', 'AGM Notice BusinessStandard Mumbai_26.07.2022', '/Assets/pdf/AGM%20Notice%20BusinessStandard%20Mumbai_26.07.2022(1).pdf', 1),
-(8, '2021-2022', 'AGM Notice MumbaiLakshadeep Mumbai_26.07.2022', '/Assets/pdf/AGM%20Notice%20MumbaiLakshadeep%20Mumbai_26.07.2022(1).pdf', 1),
-(9, '2020-2021', 'AGM Notice 2020 - 2021', '/Assets/pdf/AGM%20Notice%202020%20-%202021.pdf', 1),
-(10, '2020-2021', 'AGM Notice BusinessStandard Mumbai_02.07.2021', '/Assets/pdf/AGM%20Notice%20BusinessStandard%20Mumbai_02.07.2021.pdf', 1),
-(11, '2020-2021', 'AGM Notice BusinessStandard Mumbai_02.07.2021', '/Assets/pdf/AGM%20Notice%20BusinessStandard%20Mumbai.pdf', 1),
-(12, '2019-2020', 'AGM Notice 2019-2020', '/Assets/pdf/Notice(1).pdf', 1),
-(13, '2019-2020', 'AGM Notice BusinessStandard Mumbai 22.08.2019', '/Assets/pdf/National%20Plastic_BS_22%2008%202020.pdf', 1),
-(14, '2019-2020', 'AGM Notice MumbaiLakshadeep Mumbai 24.08.2019', '/Assets/pdf/NP_ML_Epaper_24.08.2020.pdf', 1),
-(15, '2018-2019', 'AGM Notice-2018-2019', '/Assets/pdf/AGM%20Notice%20-2018-19.pdf', 1),
-(16, '2018-2019', 'Venue_Route_Map_AGM_2019-20', '/Assets/pdf/30th%20June,%202019.pdf', 1),
-(17, '2018-2019', 'AGM Notice BusinessStandard Mumbai 26.08.2018', '/Assets/pdf/AGM%20Notice%20BusinessStandard%20Mumbai%2026.08.2018.pdf', 1),
-(18, '2018-2019', 'AGM Notice MumbaiLakshadeep Mumbai 26.08.2018', '/Assets/pdf/30th%20June,%202019.pdf', 1),
-(19, '2017-2018', 'AGM Notice 2017-18', '/Assets/pdf/NPIL_AGM_Notice_2017-18.pdf', 1),
-(20, '2017-2018', 'Route Map to the Venue of AGM', '/Assets/pdf/Venue_Route_Map_AGM_2017-18.pdf', 1),
-(21, '2017-2018', 'AGM Notice BusinessStandard Mumbai 24.08.2018', '/Assets/pdf/AGM_Notice_BusinessStandard_Mumbai_24.08.2018.pdf', 1),
-(22, '2017-2018', 'AGM Notice MumbaiLakshadeep Mumbai 24.08.2018', '/Assets/pdf/AGM_Notice_MumbaiLakshadeep_Mumbai_24.08.2018.pdf', 1),
-(23, '2017-2018', 'Notice of Candidature for Appointment as an Independent Director', '/Assets/pdf/Notice-of-Candidature-for-Appointment-as-an-Independent-Director.pdf', 1),
-(24, '2016-2017', 'AGM Notice 2016-17', '/Assets/pdf/NPIL_AGM_Notice_2016-17.pdf', 1),
-(25, '2016-2017', 'Route Map to the Venue of AGM', '/Assets/pdf/Venue_Route_Map_AGM_2016-17.pdf', 1),
-(26, '2016-2017', 'Notice of Candidature for Appointment as Director', '/Assets/pdf/Notice_of_Candidature_for_Appointment_as_Director-2016-17.pdf', 1),
-(27, '2016-2017', 'Notice for AGM, E-Voting Information and Book Closure', '/Assets/pdf/Notice_for_AGM_E-Voting_Information_and_Book_Closure-2016-17.pdf', 1),
-(28, '2015-2016', 'AGM Notice 2015-16', '/Assets/pdf/NPIL_AGM_Notice_2015-16.pdf', 1),
-(29, '2015-2016', 'Route Map to the Venue of AGM', '/Assets/pdf/Venue_Route_Map_AGM_2015-16.pdf', 1),
-(30, '2015-2016', 'Notice of Candidature for Appointment as Director', '/Assets/pdf/Notice_of_Candidature_for_Appointment_as_Director-2015-16.pdf', 1),
-(31, '2014-2015', 'AGM Notice 2014-15', '/Assets/pdf/NPIL_AGM_Notice_2014-15.pdf', 1),
-(32, '2014-2015', 'Notice of Candidature for Appointment as Director', '/Assets/pdf/Notice_of_Candidature_for_Appointment_as_Director-2014-15.pdf', 1),
-(33, '2014-2015', 'Route Map to the Venue of AGM', '/Assets/pdf/Venue_Route_Map_AGM_2014-15.pdf', 1),
-(34, '2014-2015', 'Draft Articles of Association', '/Assets/pdf/Draft_Articles_of_Association_2014-15.pdf', 1),
-(35, '2014-2015', 'Draft Letter of Appointment - Mrs. Jyoti Palekar', '/Assets/pdf/Letter_of_Appointment_Independent_Director_Mrs-Jyoti-Palekar.pdf', 1),
-(36, '2014-2015', 'Draft Letter of Appointment - Mr. Dilip M. Thaker', '/Assets/pdf/Letter_of_Appointment_Independent_Director_Mr-Dilip-M-Thaker.pdf', 1),
+(3, '2022-2023', 'AGM Notice 2022-2023', 'Notice%20of%2036th%20AGM.pdf', 1),
+(4, '2022-2023', 'AGM Notice Business Standard Mumbai_21.07.2023', 'Newspaper%20-%20English(2).pdf', 1),
+(5, '2022-2023', 'AGM Notice Mumbai Lakshadeep Mumbai_21.07.2023', 'Newspaper%20-%20Marathi(2).pdf', 1),
+(6, '2021-2022', 'AGM Notice 2021-2022', 'AGM%20Notice%202021-2022(2).pdf', 1),
+(7, '2021-2022', 'AGM Notice BusinessStandard Mumbai_26.07.2022', 'AGM%20Notice%20BusinessStandard%20Mumbai_26.07.2022(1).pdf', 1),
+(8, '2021-2022', 'AGM Notice MumbaiLakshadeep Mumbai_26.07.2022', 'AGM%20Notice%20MumbaiLakshadeep%20Mumbai_26.07.2022(1).pdf', 1),
+(9, '2020-2021', 'AGM Notice 2020 - 2021', 'AGM%20Notice%202020%20-%202021.pdf', 1),
+(10, '2020-2021', 'AGM Notice BusinessStandard Mumbai_02.07.2021', 'AGM%20Notice%20BusinessStandard%20Mumbai_02.07.2021.pdf', 1),
+(11, '2020-2021', 'AGM Notice BusinessStandard Mumbai_02.07.2021', 'AGM%20Notice%20BusinessStandard%20Mumbai.pdf', 1),
+(12, '2019-2020', 'AGM Notice 2019-2020', 'Notice(1).pdf', 1),
+(13, '2019-2020', 'AGM Notice BusinessStandard Mumbai 22.08.2019', 'National%20Plastic_BS_22%2008%202020.pdf', 1),
+(14, '2019-2020', 'AGM Notice MumbaiLakshadeep Mumbai 24.08.2019', 'NP_ML_Epaper_24.08.2020.pdf', 1),
+(15, '2018-2019', 'AGM Notice-2018-2019', 'AGM%20Notice%20-2018-19.pdf', 1),
+(16, '2018-2019', 'Venue_Route_Map_AGM_2019-20', '30th%20June,%202019.pdf', 1),
+(17, '2018-2019', 'AGM Notice BusinessStandard Mumbai 26.08.2018', 'AGM%20Notice%20BusinessStandard%20Mumbai%2026.08.2018.pdf', 1),
+(18, '2018-2019', 'AGM Notice MumbaiLakshadeep Mumbai 26.08.2018', '30th%20June,%202019.pdf', 1),
+(19, '2017-2018', 'AGM Notice 2017-18', 'NPIL_AGM_Notice_2017-18.pdf', 1),
+(20, '2017-2018', 'Route Map to the Venue of AGM', 'Venue_Route_Map_AGM_2017-18.pdf', 1),
+(21, '2017-2018', 'AGM Notice BusinessStandard Mumbai 24.08.2018', 'AGM_Notice_BusinessStandard_Mumbai_24.08.2018.pdf', 1),
+(22, '2017-2018', 'AGM Notice MumbaiLakshadeep Mumbai 24.08.2018', 'AGM_Notice_MumbaiLakshadeep_Mumbai_24.08.2018.pdf', 1),
+(23, '2017-2018', 'Notice of Candidature for Appointment as an Independent Director', 'Notice-of-Candidature-for-Appointment-as-an-Independent-Director.pdf', 1),
+(24, '2016-2017', 'AGM Notice 2016-17', 'NPIL_AGM_Notice_2016-17.pdf', 1),
+(25, '2016-2017', 'Route Map to the Venue of AGM', 'Venue_Route_Map_AGM_2016-17.pdf', 1),
+(26, '2016-2017', 'Notice of Candidature for Appointment as Director', 'Notice_of_Candidature_for_Appointment_as_Director-2016-17.pdf', 1),
+(27, '2016-2017', 'Notice for AGM, E-Voting Information and Book Closure', 'Notice_for_AGM_E-Voting_Information_and_Book_Closure-2016-17.pdf', 1),
+(28, '2015-2016', 'AGM Notice 2015-16', 'NPIL_AGM_Notice_2015-16.pdf', 1),
+(29, '2015-2016', 'Route Map to the Venue of AGM', 'Venue_Route_Map_AGM_2015-16.pdf', 1),
+(30, '2015-2016', 'Notice of Candidature for Appointment as Director', 'Notice_of_Candidature_for_Appointment_as_Director-2015-16.pdf', 1),
+(31, '2014-2015', 'AGM Notice 2014-15', 'NPIL_AGM_Notice_2014-15.pdf', 1),
+(32, '2014-2015', 'Notice of Candidature for Appointment as Director', 'Notice_of_Candidature_for_Appointment_as_Director-2014-15.pdf', 1),
+(33, '2014-2015', 'Route Map to the Venue of AGM', 'Venue_Route_Map_AGM_2014-15.pdf', 1),
+(34, '2014-2015', 'Draft Articles of Association', 'Draft_Articles_of_Association_2014-15.pdf', 1),
+(35, '2014-2015', 'Draft Letter of Appointment - Mrs. Jyoti Palekar', 'Letter_of_Appointment_Independent_Director_Mrs-Jyoti-Palekar.pdf', 1),
+(36, '2014-2015', 'Draft Letter of Appointment - Mr. Dilip M. Thaker', 'Letter_of_Appointment_Independent_Director_Mr-Dilip-M-Thaker.pdf', 1),
 (37, '2013-2014', 'AGM Notice 2013-14', '', 1),
-(38, '2013-2014', 'Letter of Appointment Mr. Ashwin J. Goradia - Independent Director', '/Assets/pdf/Letter_of_Appointment_Independent_Director_Mr-Ashwin-Goradia.pdf', 1),
-(39, '2013-2014', 'Letter of Appointment Mr. Dhirajlal J. Shanghavi - Independent Director', '/Assets/pdf/Letter_of_Appointment_Independent_Director_Mr-Dhirajlal-Shanghavi.pdf', 1);
+(38, '2013-2014', 'Letter of Appointment Mr. Ashwin J. Goradia - Independent Director', 'Letter_of_Appointment_Independent_Director_Mr-Ashwin-Goradia.pdf', 1),
+(39, '2013-2014', 'Letter of Appointment Mr. Dhirajlal J. Shanghavi - Independent Director', 'Letter_of_Appointment_Independent_Director_Mr-Dhirajlal-Shanghavi.pdf', 1);
 
 -- --------------------------------------------------------
 
@@ -994,9 +951,9 @@ CREATE TABLE `order_detail` (
 --
 
 INSERT INTO `order_detail` (`od_id`, `order_id`, `user_id`, `prod_id`, `quantity`, `prod_price`, `cancel_order`, `per_order_status`, `return_order`, `cancel_comment`, `extraCharge`, `last_modified`, `added_on`) VALUES
-(1, 1, 10, 10, 19, 478, 0, 0, 1, NULL, 0, '2024-07-23 06:53:19', '2024-06-13 05:24:47'),
-(2, 1, 10, 58, 19, 598, 0, 0, 1, NULL, 0, '2024-07-23 06:53:19', '2024-06-13 05:24:47'),
-(3, 1, 10, 74, 19, 570, 0, 0, 1, NULL, 50, '2024-06-26 09:42:02', '2024-06-13 05:24:47'),
+(1, 1, 10, 10, 19, 478, 0, 0, 0, NULL, 0, '2024-08-06 11:31:52', '2024-06-13 05:24:47'),
+(2, 1, 10, 58, 19, 598, 0, 0, 0, NULL, 0, '2024-08-06 11:31:52', '2024-06-13 05:24:47'),
+(3, 1, 10, 74, 19, 570, 0, 0, 0, NULL, 50, '2024-08-06 11:31:52', '2024-06-13 05:24:47'),
 (4, 2, 10, 77, 4, 2090, 1, 0, 0, NULL, 0, '2024-06-28 08:35:23', '2024-06-13 11:36:00'),
 (5, 2, 10, 46, 1, 816, 0, 0, 0, NULL, 0, '2024-07-23 11:35:39', '2024-06-13 11:36:01'),
 (6, 2, 10, 68, 1, 922, 1, 0, 0, NULL, 0, '2024-06-28 08:44:12', '2024-06-13 11:36:01'),
@@ -1009,7 +966,10 @@ INSERT INTO `order_detail` (`od_id`, `order_id`, `user_id`, `prod_id`, `quantity
 (13, 5, 10, 46, 2, 816, 0, 0, 0, NULL, 0, '2024-07-23 11:35:39', '2024-07-17 11:20:23'),
 (14, 5, 10, 68, 2, 922, 1, 0, 0, NULL, 0, '2024-07-23 11:35:37', '2024-07-17 11:20:23'),
 (15, 5, 10, 77, 1, 2090, 1, 0, 0, NULL, 0, '2024-07-23 11:34:34', '2024-07-17 11:20:23'),
-(16, 5, 10, 94, 1, 1929, 0, 0, 0, NULL, 0, '2024-07-23 11:34:13', '2024-07-17 11:20:23');
+(16, 5, 10, 94, 1, 1929, 1, 0, 0, NULL, 0, '2024-08-08 03:51:29', '2024-07-17 11:20:23'),
+(17, 6, 2, 1, 1, 510, 1, 0, 0, NULL, NULL, '2024-08-08 03:30:04', '2024-08-08 02:43:07'),
+(18, 8, 3, 30, 1, 1327, 1, 1, 1, NULL, NULL, '2024-08-08 04:28:31', '2024-08-08 04:28:31'),
+(19, 8, 3, 444, 1, 7877, 0, 0, 1, NULL, 0, '2024-08-08 04:30:35', '2024-08-08 04:28:31');
 
 -- --------------------------------------------------------
 
@@ -1040,10 +1000,13 @@ CREATE TABLE `order_list` (
 --
 
 INSERT INTO `order_list` (`order_id`, `razorpay_order_id`, `customer_id`, `customer_email`, `Phone`, `order_address`, `order_pincode`, `order_city`, `order_amount`, `order_status`, `order_payment_type`, `payment_status`, `razor_payment_id`, `order_status_date`, `added_on`) VALUES
-(1, 'order_OM82LQxGWgY0Xv', '10', 'rahul@gmail.com', '+919518595869', 'opal squal, near midc', 'opal squal, near midc', 'opal squal, near midc', 176600.00, 5, 'wallet', 'captured', 'pay_OM82TF1h1iGb0v', '2024-07-24 11:28:10', '2024-06-13 07:05:16'),
-(2, 'order_OMEMXmHEy3Vets', '10', 'rahul@gmail.com', '+919518595869', 'opal squal, near midc', 'opal squal, near midc', 'opal squal, near midc', 1021800.00, 5, 'paylater', 'captured', 'pay_OMEMhc70dw9aq0', '2024-07-24 11:06:02', '2024-06-13 11:36:00'),
-(4, 'order_ORLYLHYnad3xHi', '10', 'rahul@gmail.com', '+919518595869', 'opal squal, near midc', 'opal squal, near midc', 'opal squal, near midc', 602300.00, 6, 'paylater', 'captured', 'pay_ORLYbDVxWqD1nx', '2024-07-23 10:32:00', '2024-06-26 09:53:07'),
-(5, 'order_OZgG8GYJUBjSdo', '10', 'rahul@gmail.com', '+919518595869', 'opal squal, near midc', 'opal squal, near midc', 'opal squal, near midc', 7218.00, 7, 'paylater', 'captured', 'pay_OZgGIVAWgWtTXz', '2024-07-23 11:36:36', '2024-07-17 11:20:23');
+(1, 'order_OM82LQxGWgY0Xv', '3', 'dinesh.crezvatic@gmail.com', '+919518595869', 'opal squal, near midc', 'opal squal, near midc', 'opal squal, near midc', 176600.00, 5, 'wallet', 'captured', 'pay_OM82TF1h1iGb0v', '2024-08-07 15:04:34', '2024-06-13 07:05:16'),
+(2, 'order_OMEMXmHEy3Vets', '1', 'rahul@gmail.com', '+919518595869', 'opal squal, near midc', 'opal squal, near midc', 'opal squal, near midc', 1021800.00, 7, 'paylater', 'captured', 'pay_OMEMhc70dw9aq0', '2024-08-07 14:56:17', '2024-06-13 11:36:00'),
+(4, 'order_ORLYLHYnad3xHi', '1', 'rahul@gmail.com', '+919518595869', 'opal squal, near midc', 'opal squal, near midc', 'opal squal, near midc', 602300.00, 6, 'paylater', 'captured', 'pay_ORLYbDVxWqD1nx', '2024-08-07 14:32:38', '2024-06-26 09:53:07'),
+(5, 'order_OZgG8GYJUBjSdo', '1', 'rahul@gmail.com', '+919518595869', 'opal squal, near midc', 'opal squal, near midc', 'opal squal, near midc', 7218.00, 7, 'paylater', 'captured', 'pay_OZgGIVAWgWtTXz', '2024-08-07 14:32:42', '2024-07-17 11:20:23'),
+(6, 'order_OiFCHVctNtXXx6', '2', 'dineshndr02@gmail.com', '+919281928788', 'Kalyan, thane , maharashtra , 421308', 'Kalyan, thane , maharashtra , 421308', 'Kalyan, thane , maharashtra , 421308', 550.00, 5, 'netbanking', 'captured', 'pay_OiFCQo0FAKV4p0', '2024-08-08 04:32:29', '2024-08-08 02:43:06'),
+(7, 'order_OiGHl6kSkClHHL', '2', 'dineshndr02@gmail.com', '+919281928788', 'Kalyan, thane , maharashtra , 421308', 'Kalyan, thane , maharashtra , 421308', 'Kalyan, thane , maharashtra , 421308', 518.00, 5, 'netbanking', 'captured', 'pay_OiGHskshiSsO1l', '2024-08-08 04:32:21', '2024-08-08 03:46:58'),
+(8, 'order_OiGzTS3H6KwAO3', '3', 'dinesh.crezvatic@gmail.com', '+919128928911', 'Wagle Estate, Thane, Maharashtra, 431333', 'Wagle Estate, Thane, Maharashtra, 431333', 'Wagle Estate, Thane, Maharashtra, 431333', 9284.00, 5, 'netbanking', 'captured', 'pay_OiGzgWOAhT7c4z', '2024-08-08 04:32:13', '2024-08-08 04:28:30');
 
 -- --------------------------------------------------------
 
@@ -1067,7 +1030,8 @@ INSERT INTO `order_status` (`status_id`, `status_name`) VALUES
 (4, 'Shipped'),
 (5, 'Delivered'),
 (6, 'Canceled'),
-(7, 'Return');
+(7, 'Return'),
+(8, 'Request_to_return_order');
 
 -- --------------------------------------------------------
 
@@ -1088,31 +1052,31 @@ CREATE TABLE `outcomes` (
 --
 
 INSERT INTO `outcomes` (`ad_id`, `years`, `title`, `file_name`, `status`) VALUES
-(2, '2024-2025', 'Outcome of Board Meeting 21st May 2024', '/Assets/pdf/BSE%20Upload-3-13_merged.pdf', 1),
-(3, '2023-2024', 'Outcome of Board Meeting 12th February 2024', '/Assets/pdf/BSE%20Upload(15).pdf', 1),
-(4, '2023-2024', 'Outcome of Board Meeting 9th November 2023', '/Assets/pdf/BSE%20Upload(8).pdf', 1),
-(5, '2023-2024', 'Outcome of Board Meeting 11th August 2023', '/Assets/pdf/BSE%20Upload(3).pdf', 1),
-(6, '2023-2024', 'Outcome of Board Meeting 26th May 2023', '/Assets/pdf/Outcome%20of%20Board%20Meeting%2026th%20May%202023(2).pdf', 1),
-(7, '2022-2023', 'Outcome of Board Meeting 13th February 2023', '/Assets/pdf/Outcome%20of%20Board%20Meeting%20February%2013,%202023.pdf', 1),
-(8, '2022-2023', 'Outcome of Board Meeting 28th May 2022', '/Assets/pdf/Outcome%20of%20Board%20Meeting%2028th%20May%202022.pdf', 1),
-(9, '2022-2023', 'Outcome of Board Meeting 11th August 2022', '/Assets/pdf/Outcome%20of%20Board%20Meeting%20August%2011,%202022.pdf', 1),
-(10, '2022-2023', 'Outcome of Board Meeting 14th November 2022', '/Assets/pdf/Outcome%20of%20Board%20Meeting%20November%2014,%202022.pdf', 1),
-(11, '2021-2022', 'Outcome of Board Meeting 14th February 2022', '/Assets/pdf/Outcome%20of%20Board%20Meeting%2014th%20February%202022.pdf', 1),
-(12, '2021-2022', 'Outcome of Board Meeting 11th Nov 2021', '/Assets/pdf/Outcome%20of%20Board%20Meeting%2011th%20Nov%202021.pdf', 1),
-(13, '2021-2022', 'Outcome of Board Meeting 11th Aug 2021', '/Assets/pdf/Outcome%20of%20Board%20Meeting%20-%2011th%20Aug.%202021.pdf', 1),
-(14, '2021-2022', 'Outcome of the Board Meeting 10th June 2021', '/Assets/pdf/Outcome%20of%20the%20Board%20Meeting%20-%2010th%20June%202021(2).pdf', 1),
-(15, '2020-2021', 'Outcome of Board Meeting 12th Feb 2020', '/Assets/pdf/Outcome%20Board%20Mtg-11%20Nov%202019.pdf', 1),
-(16, '2020-2021', 'Outcome of Board Meeting 12 Nov 2020', '/Assets/pdf/Outcome%20Board%20Mtg-11%20Nov%202019.pdf', 1),
-(17, '2020-2021', 'Outcome of Board Meeting 12th Aug 2020', '/Assets/pdf/Outcome%20Board%20Mtg-11%20Nov%202019.pdf', 1),
-(18, '2020-2021', 'Outcome of Board Meeting 30th june 2020', '/Assets/pdf/Outcome%20Board%20Mtg-11%20Nov%202019.pdf', 1),
-(19, '2019-2020', 'Outcome of Board Meeting -11 nov 2019', '/Assets/pdf/Outcome%20Board%20Mtg-11%20Nov%202019.pdf', 1),
-(20, '2019-2020', 'Outcome of Board Meeting - 20 May 2019', '/Assets/pdf/Outcome-of-BM_20.5.2019.pdf', 1),
-(21, '2019-2020', 'Outcome of Board Meeting-12-Aug-2019', '/Assets/pdf/Outcome%20of%20Board%20Meeting%20-%2012.08.2019.pdf', 1),
-(22, '2019-2020', 'Outcome of Board Meeting-05-Feb-2020', '/Assets/pdf/Outcome%20of%20Board%20Meeting%20on%2005.02.2020.pdf', 1),
-(23, '2018-2019', 'Outcome of Board Meeting - 07 February 2019', '/Assets/pdf/outcome-of-meeting-7-feb-2019.pdf', 1),
-(24, '2018-2019', 'Outcome of Board Meeting - 13 November 2018', '/Assets/pdf/Outcome-of-Board-Meeting_30_Nov_2018.pdf', 1),
-(25, '2018-2019', 'Outcome of Board Meeting - 29 May 2018', '/Assets/pdf/Outcome-of-Board-Meeting-29.05.2018.pdf', 1),
-(26, '2018-2019', 'Outcome of Board Meeting - 03 August 2018', '/Assets/pdf/Outcome-of-the-BM-03-aug-18.pdf', 1),
+(2, '2024-2025', 'Outcome of Board Meeting 21st May 2024', 'BSE%20Upload-3-13_merged.pdf', 1),
+(3, '2023-2024', 'Outcome of Board Meeting 12th February 2024', 'BSE%20Upload(15).pdf', 1),
+(4, '2023-2024', 'Outcome of Board Meeting 9th November 2023', 'BSE%20Upload(8).pdf', 1),
+(5, '2023-2024', 'Outcome of Board Meeting 11th August 2023', 'BSE%20Upload(3).pdf', 1),
+(6, '2023-2024', 'Outcome of Board Meeting 26th May 2023', 'Outcome%20of%20Board%20Meeting%2026th%20May%202023(2).pdf', 1),
+(7, '2022-2023', 'Outcome of Board Meeting 13th February 2023', 'Outcome%20of%20Board%20Meeting%20February%2013,%202023.pdf', 1),
+(8, '2022-2023', 'Outcome of Board Meeting 28th May 2022', 'Outcome%20of%20Board%20Meeting%2028th%20May%202022.pdf', 1),
+(9, '2022-2023', 'Outcome of Board Meeting 11th August 2022', 'Outcome%20of%20Board%20Meeting%20August%2011,%202022.pdf', 1),
+(10, '2022-2023', 'Outcome of Board Meeting 14th November 2022', 'Outcome%20of%20Board%20Meeting%20November%2014,%202022.pdf', 1),
+(11, '2021-2022', 'Outcome of Board Meeting 14th February 2022', 'Outcome%20of%20Board%20Meeting%2014th%20February%202022.pdf', 1),
+(12, '2021-2022', 'Outcome of Board Meeting 11th Nov 2021', 'Outcome%20of%20Board%20Meeting%2011th%20Nov%202021.pdf', 1),
+(13, '2021-2022', 'Outcome of Board Meeting 11th Aug 2021', 'Outcome%20of%20Board%20Meeting%20-%2011th%20Aug.%202021.pdf', 1),
+(14, '2021-2022', 'Outcome of the Board Meeting 10th June 2021', 'Outcome%20of%20the%20Board%20Meeting%20-%2010th%20June%202021(2).pdf', 1),
+(15, '2020-2021', 'Outcome of Board Meeting 12th Feb 2020', 'Outcome%20Board%20Mtg-11%20Nov%202019.pdf', 1),
+(16, '2020-2021', 'Outcome of Board Meeting 12 Nov 2020', 'Outcome%20Board%20Mtg-11%20Nov%202019.pdf', 1),
+(17, '2020-2021', 'Outcome of Board Meeting 12th Aug 2020', 'Outcome%20Board%20Mtg-11%20Nov%202019.pdf', 1),
+(18, '2020-2021', 'Outcome of Board Meeting 30th june 2020', 'Outcome%20Board%20Mtg-11%20Nov%202019.pdf', 1),
+(19, '2019-2020', 'Outcome of Board Meeting -11 nov 2019', 'Outcome%20Board%20Mtg-11%20Nov%202019.pdf', 1),
+(20, '2019-2020', 'Outcome of Board Meeting - 20 May 2019', 'Outcome-of-BM_20.5.2019.pdf', 1),
+(21, '2019-2020', 'Outcome of Board Meeting-12-Aug-2019', 'Outcome%20of%20Board%20Meeting%20-%2012.08.2019.pdf', 1),
+(22, '2019-2020', 'Outcome of Board Meeting-05-Feb-2020', 'Outcome%20of%20Board%20Meeting%20on%2005.02.2020.pdf', 1),
+(23, '2018-2019', 'Outcome of Board Meeting - 07 February 2019', 'outcome-of-meeting-7-feb-2019.pdf', 1),
+(24, '2018-2019', 'Outcome of Board Meeting - 13 November 2018', 'Outcome-of-Board-Meeting_30_Nov_2018.pdf', 1),
+(25, '2018-2019', 'Outcome of Board Meeting - 29 May 2018', 'Outcome-of-Board-Meeting-29.05.2018.pdf', 1),
+(26, '2018-2019', 'Outcome of Board Meeting - 03 August 2018', 'Outcome-of-the-BM-03-aug-18.pdf', 1),
 (27, 'Testing ', 'l', '/Assets/uploads/Investors/invoice-1021 (1).pdf', 1);
 
 -- --------------------------------------------------------
@@ -1173,7 +1137,7 @@ CREATE TABLE `products` (
   `price` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `discount_price` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `discount_percentage` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `categoryType` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `categoryType` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `duration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `InstallationCharges` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -2179,15 +2143,15 @@ CREATE TABLE `rp_transaction` (
 --
 
 INSERT INTO `rp_transaction` (`id`, `document`, `url`) VALUES
-(1, 'Disclosure on Related Party Transactions - BSE', '/Assets/pdf/Disclosure-on-Related-Party-Transactions-BSE.pdf'),
-(2, 'Disclosure on Related Party Transactions_Sept.2020', '/Assets/pdf/Disclosure%20on%20Related%20Party%20Transactions_Sept.%202020.pdf'),
-(3, 'Disclosure on Related Party Transactions_March.2021', '/Assets/pdf/Disclosure%20on%20Related%20Party%20Transactions_March%202021.pdf'),
-(4, 'Disclosure of Related Party Transaction_Sept.2021', '/Assets/pdf/Disclosure%20of%20Related%20Party%20Transaction_Sept.2021.pdf'),
-(5, 'Disclosure of Related Party Transaction_March.2022', '/Assets/pdf/Disclosure%20of%20Related%20Party%20Transaction_March.2022.pdf'),
-(6, 'Disclosure of Related Party Transaction_Sept.2022', '/Assets/pdf/Disclosure%20of%20Related%20Party%20Transaction_Sept.2022.pdf'),
-(7, 'Disclosure of Related Party Transaction_March 2023', '/Assets/pdf/Disclosure%20of%20Related%20Party%20Transaction_March%202023.pdf'),
-(8, 'Disclosure of Related Party Transaction_Sept 2023', '/Assets/pdf/Related%20Party%20Transaction%20Report.pdf'),
-(9, 'Disclosure of Related Party Transaction_March 2024', '/Assets/pdf/31.03.2024(1).pdf');
+(1, 'Disclosure on Related Party Transactions - BSE', 'Disclosure-on-Related-Party-Transactions-BSE.pdf'),
+(2, 'Disclosure on Related Party Transactions_Sept.2020', 'Disclosure%20on%20Related%20Party%20Transactions_Sept.%202020.pdf'),
+(3, 'Disclosure on Related Party Transactions_March.2021', 'Disclosure%20on%20Related%20Party%20Transactions_March%202021.pdf'),
+(4, 'Disclosure of Related Party Transaction_Sept.2021', 'Disclosure%20of%20Related%20Party%20Transaction_Sept.2021.pdf'),
+(5, 'Disclosure of Related Party Transaction_March.2022', 'Disclosure%20of%20Related%20Party%20Transaction_March.2022.pdf'),
+(6, 'Disclosure of Related Party Transaction_Sept.2022', 'Disclosure%20of%20Related%20Party%20Transaction_Sept.2022.pdf'),
+(7, 'Disclosure of Related Party Transaction_March 2023', 'Disclosure%20of%20Related%20Party%20Transaction_March%202023.pdf'),
+(8, 'Disclosure of Related Party Transaction_Sept 2023', 'Related%20Party%20Transaction%20Report.pdf'),
+(9, 'Disclosure of Related Party Transaction_March 2024', '31.03.2024(1).pdf');
 
 -- --------------------------------------------------------
 
@@ -2209,30 +2173,30 @@ CREATE TABLE `shareholding` (
 --
 
 INSERT INTO `shareholding` (`sc_id`, `years`, `title`, `quarter`, `file_name`, `status`) VALUES
-(3, '2023-2024', '30th June 2023', 'Q1', '/Assets/pdf/30th%20June%202023.pdf', 1),
-(4, '2023-2024', '30th September 2023', 'Q2', '/Assets/pdf/shreholding%20pattern.pdf', 1),
-(5, '2023-2024', '31st December 2023', 'Q3', '/Assets/pdf/shreholding%20pattern(1).pdf', 1),
-(6, '2023-2024', '31st March 2024', 'Q4', '/Assets/pdf/31st%20March%202024(1).pdf', 1),
-(7, '2022-2023', '30th June 2022', 'Q1', '/Assets/pdf/30th%20June%202022.pdf', 1),
-(8, '2022-2023', '30th september 2022', 'Q2', '/Assets/pdf/30th%20September%202022(1).pdf', 1),
-(9, '2022-2023', '31st December 2022', 'Q3', '/Assets/pdf/31st%20December%202022(4).pdf', 1),
-(10, '2022-2023', '31st March 2023', 'Q4', '/Assets/pdf/31st%20March%202023%20(1).pdf', 1),
-(11, '2021-2022', '30th June 2021', 'Q1', '/Assets/pdf/30th%20June%202021(1).pdf', 1),
-(12, '2021-2022', '30th September 2021', 'Q2', '/Assets/pdf/30th%20September%202021(2).pdf', 1),
-(13, '2021-2022', '31st December 2021', 'Q3', '/Assets/pdf/31st%20December%202021(1).pdf', 1),
-(14, '2021-2022', '31st March 2022', 'Q4', '/Assets/pdf/31st%20March%202022.pdf', 1),
-(15, '2020-2021', '30th June 2020', 'Q1', '/Assets/pdf/2020/30th%20June%202020.pdf', 1),
-(16, '2020-2021', '30th September 2020', 'Q2', '/Assets/pdf/30th%20September%202020.pdf', 1),
-(17, '2020-2021', '30th December 2020', 'Q3', '/Assets/pdf/31st%20December%202020.pdf', 1),
-(18, '2020-2021', '31st March 2021', 'Q4', '/Assets/pdf/31st%20March%202021(1).pdf', 1),
-(19, '2019-2020', '30th June 2019', 'Q1', '/Assets/pdf/30th%20June,%202019.pdf', 1),
-(20, '2019-2020', '30th September2019', 'Q2', '/Assets/pdf/Shareholding-Pattern-Q2-2018.pdf', 1),
-(21, '2019-2020', '31st December 2019', 'Q3', '/Assets/pdf/Shareholding-Pattern-Q3-2018.pdf', 1),
-(22, '2019-2020', '31st March 2020', 'Q4', '/Assets/pdf/31st%20March%202020.pdf', 1),
-(23, '2018-2019', '30th June 2018', 'Q1', '/Assets/pdf/Shareholding-Pattern-as-on-June_30_2018.pdf', 1),
-(24, '2018-2019', '30th September 2018', 'Q2', '/Assets/pdf/Shareholding-Pattern-Q2-2018.pdf', 1),
-(25, '2018-2019', '31st December 2018', 'Q3', '/Assets/pdf/Shareholding-Pattern-Q3-2018.pdf', 1),
-(26, '2018-2019', '31st March 2019', 'Q4', '/Assets/pdf/Shareholding-pattern-March-31-2019.pdf', 1);
+(3, '2023-2024', '30th June 2023', 'Q1', '30th%20June%202023.pdf', 1),
+(4, '2023-2024', '30th September 2023', 'Q2', 'shreholding%20pattern.pdf', 1),
+(5, '2023-2024', '31st December 2023', 'Q3', 'shreholding%20pattern(1).pdf', 1),
+(6, '2023-2024', '31st March 2024', 'Q4', '31st%20March%202024(1).pdf', 1),
+(7, '2022-2023', '30th June 2022', 'Q1', '30th%20June%202022.pdf', 1),
+(8, '2022-2023', '30th september 2022', 'Q2', '30th%20September%202022(1).pdf', 1),
+(9, '2022-2023', '31st December 2022', 'Q3', '31st%20December%202022(4).pdf', 1),
+(10, '2022-2023', '31st March 2023', 'Q4', '31st%20March%202023%20(1).pdf', 1),
+(11, '2021-2022', '30th June 2021', 'Q1', '30th%20June%202021(1).pdf', 1),
+(12, '2021-2022', '30th September 2021', 'Q2', '30th%20September%202021(2).pdf', 1),
+(13, '2021-2022', '31st December 2021', 'Q3', '31st%20December%202021(1).pdf', 1),
+(14, '2021-2022', '31st March 2022', 'Q4', '31st%20March%202022.pdf', 1),
+(15, '2020-2021', '30th June 2020', 'Q1', '2020/30th%20June%202020.pdf', 1),
+(16, '2020-2021', '30th September 2020', 'Q2', '30th%20September%202020.pdf', 1),
+(17, '2020-2021', '30th December 2020', 'Q3', '31st%20December%202020.pdf', 1),
+(18, '2020-2021', '31st March 2021', 'Q4', '31st%20March%202021(1).pdf', 1),
+(19, '2019-2020', '30th June 2019', 'Q1', '30th%20June,%202019.pdf', 1),
+(20, '2019-2020', '30th September2019', 'Q2', 'Shareholding-Pattern-Q2-2018.pdf', 1),
+(21, '2019-2020', '31st December 2019', 'Q3', 'Shareholding-Pattern-Q3-2018.pdf', 1),
+(22, '2019-2020', '31st March 2020', 'Q4', '31st%20March%202020.pdf', 1),
+(23, '2018-2019', '30th June 2018', 'Q1', 'Shareholding-Pattern-as-on-June_30_2018.pdf', 1),
+(24, '2018-2019', '30th September 2018', 'Q2', 'Shareholding-Pattern-Q2-2018.pdf', 1),
+(25, '2018-2019', '31st December 2018', 'Q3', 'Shareholding-Pattern-Q3-2018.pdf', 1),
+(26, '2018-2019', '31st March 2019', 'Q4', 'Shareholding-pattern-March-31-2019.pdf', 1);
 
 -- --------------------------------------------------------
 
@@ -2252,12 +2216,12 @@ CREATE TABLE `share_transfer` (
 --
 
 INSERT INTO `share_transfer` (`id`, `year`, `document_name`, `document_link`) VALUES
-(1, '2024-2025', 'Notice - Transfer of shares of IEPF - Mumbai Lakshdeep (2024-2025)', '/Assets/pdf/2024-2025_Mumbai_Lakshadeep.pdf'),
-(2, '2024-2025', 'Notice - Transfer of Shares of IEPF - Business Standard (2024-2025)', '/Assets/pdf/2024-2025_Business_Standard.pdf'),
-(3, '2024-2025', 'List of Shareholders 2024-2025', '/Assets/pdf/2024-2025_Shareholders_List.pdf'),
-(4, '2023-2024', 'Notice - Transfer of shares of IEPF - Mumbai Lakshdeep (2023-2024)', '/Assets/pdf/2023-2024_Mumbai_Lakshadeep.pdf'),
-(5, '2023-2024', 'Notice - Transfer of Shares of IEPF - Business Standard (2023-2024)', '/Assets/pdf/2023-2024_Business_Standard.pdf'),
-(6, '2023-2024', 'List of Shareholders 2023-2024', '/Assets/pdf/2023-2024_Shareholders_List.pdf');
+(1, '2024-2025', 'Notice - Transfer of shares of IEPF - Mumbai Lakshdeep (2024-2025)', '2024-2025_Mumbai_Lakshadeep.pdf'),
+(2, '2024-2025', 'Notice - Transfer of Shares of IEPF - Business Standard (2024-2025)', '2024-2025_Business_Standard.pdf'),
+(3, '2024-2025', 'List of Shareholders 2024-2025', '2024-2025_Shareholders_List.pdf'),
+(4, '2023-2024', 'Notice - Transfer of shares of IEPF - Mumbai Lakshdeep (2023-2024)', '2023-2024_Mumbai_Lakshadeep.pdf'),
+(5, '2023-2024', 'Notice - Transfer of Shares of IEPF - Business Standard (2023-2024)', '2023-2024_Business_Standard.pdf'),
+(6, '2023-2024', 'List of Shareholders 2023-2024', '2023-2024_Shareholders_List.pdf');
 
 -- --------------------------------------------------------
 
@@ -2279,13 +2243,13 @@ CREATE TABLE `team_members` (
 --
 
 INSERT INTO `team_members` (`id`, `name`, `designation`, `description`, `image_url`, `display_order`) VALUES
-(1, 'Mr. Paresh V Parekh', 'Managing Director', 'Mr. Paresh Vinod Parekh has graduated from NM College with a degree in Bachelor of Commerce (BCOM). He then went on to pursue his masters from Dowling College in the United States. Using his expertise from his educational field he successfully applied his knowledge work-wise and currently has over 30+ years of experience at National. Through his guidance in the exports and finance division of the company - National has soared to great heights by becoming the #1 exporter in India. Further, he was the President of the OPPI from 2012-2014 and is a member of the PlastIndia Managing Committee.', '/Assets/uploads/Aboutus/Mr-Paresh-V-Parekh.jpg', 1),
-(2, 'Mr. Ketan V Parekh', 'Joint Managing Director', 'Mr. Ketan Vinod Parekh has graduated from Dowling College in the United States with a degree in Business Administration. He has been instrumental in helping National Plastic grow for the past 30 years. His role as the head of product development has been extremely fruitful as National started with their successful cooler and fans division. Besides this, his production management techniques based on the Japanese Kaizen philosophy is reflected in our factories as one can see a standard of continuous improvement. Under his guidance, he set up the ERP management system for the company helping processes become streamlined.', '/Assets/uploads/Aboutus/Mr-Ketan-V-Parekh.jpg', 2),
-(3, 'Mr. Harsh Parekh', 'Whole Time Director', 'Mr. Harsh Paresh Parekh graduated with a degree in B.sc and holds a Masters in Global Management from Regents College, UK. He has been associated with the company for the past 10 years. He has covered various positions in the company including Marketing Advisor and Chief Financial Officer of the Company. He has been handling the business operations of the Nellore unit of the Company since the past five years. He was instrumental in the setting up the Nellore division which deals in plastic flooring products and has a pan India presence. Prior to starting his career at National Plastic Industries Limited, he has been associated as an intern with companies like Parle Agro and Keter (Israel) and has acquired practical experience in the area of Marketing and Product development', '/Assets/uploads/Aboutus/Mr-Harsh-Parekh.jpg', 3),
-(4, 'Mrs. Ranganayaki Rangachari', 'Independent Director', 'Mrs. Ranganayaki Rangachari have reach education background and she is Bachelor of Commerce, Chartered Accountants, Company Secretary, Cost and Management Accountants. She has vast and varied experience of more than 20 years as working India and China in diverse sectors of Retail, Offshore survey, Shipping, Private Equity and Print media in corporate like Oswal Group, RPG Foodworld, Elcome Group of Companies, General Atlantic Partners, ILX Media Group and EGS group. She is currently in Practice as a Partner in Ritu Ranganayaki & Co., Chartered Accountants in Navi Mumbai specialising in areas of FEMA , GST and Valuation and IP consultancy.', '/Assets/uploads/Aboutus/Mrs. Ranganayaki Rangachari.png', 4),
-(5, 'Mr. Mishaal Ketan Parekh', 'Executive Director', 'Mr. Mishaal Parekh is Bachelor of Science in Industrial Systems Engineering from University of Southern California, Los Angeles, California. He has expertise in Lean Operations, Systems Analysis, Six Sigma, Statistical Quality Control, Project Management, Human Factors Analysis, Supply Chain Design, Facilities Design, NX, Solid Works, Auto CAD, Arena Simulation, MATLAB, House of Quality, Injection Molding, MS Project, Asana. He was also associated with the Company as Design and Quality Engineer, in this profile he worked and led and executed market research with cross-functional team consisting of members R&D department, Marketing, and Manufacturing, on the attractiveness of the bathroom fitting industry.', '/Assets/uploads/Aboutus/user.png', 5),
-(6, 'Mr. D. Purnachandra Rao', 'Independent Director', 'Mr. D. Purnachandra Rao has more than 40 years of experience in the Banking industry. He was associated with Corporation Bank. He retired from Corporation Bank as General Manager. He has also done CAIIB from Indian Institute of Bankers. During his tenure in the Bank, he has been awarded with about 15 awards which includes Best Branch award, Chairmans Club (6 times), Super Ordinate Goal Achiever (4 times), Productivity Linked Incentive award etc.', '/Assets/uploads/Aboutus/user.png', 6),
-(7, 'Mr. Vipul Desai', 'Independent Director', 'Mr. Vipul A. Desai is B.COM(HONS), LLB, FCS, ACMA, HON. ACIA (FLORIDA, USA) and a mature strategist, economist, fiscal and governance professional and he has served with fair success in progressive roles from finance manager & company secretary to president-corporate affairs & biz development in corporate for more than 30+ years.', '/Assets/uploads/Aboutus/Mr. Vipul A. Desai.jpg', 7);
+(1, 'Mr. Paresh V Parekh', 'Managing Director', 'Mr. Paresh Vinod Parekh has graduated from NM College with a degree in Bachelor of Commerce (BCOM). He then went on to pursue his masters from Dowling College in the United States. Using his expertise from his educational field he successfully applied his knowledge work-wise and currently has over 30+ years of experience at National. Through his guidance in the exports and finance division of the company - National has soared to great heights by becoming the #1 exporter in India. Further, he was the President of the OPPI from 2012-2014 and is a member of the PlastIndia Managing Committee.', 'Mr-Paresh-V-Parekh.jpg', 1),
+(2, 'Mr. Ketan V Parekh', 'Joint Managing Director', 'Mr. Ketan Vinod Parekh has graduated from Dowling College in the United States with a degree in Business Administration. He has been instrumental in helping National Plastic grow for the past 30 years. His role as the head of product development has been extremely fruitful as National started with their successful cooler and fans division. Besides this, his production management techniques based on the Japanese Kaizen philosophy is reflected in our factories as one can see a standard of continuous improvement. Under his guidance, he set up the ERP management system for the company helping processes become streamlined.', 'Mr-Ketan-V-Parekh.jpg', 2),
+(3, 'Mr. Harsh Parekh', 'Whole Time Director', 'Mr. Harsh Paresh Parekh graduated with a degree in B.sc and holds a Masters in Global Management from Regents College, UK. He has been associated with the company for the past 10 years. He has covered various positions in the company including Marketing Advisor and Chief Financial Officer of the Company. He has been handling the business operations of the Nellore unit of the Company since the past five years. He was instrumental in the setting up the Nellore division which deals in plastic flooring products and has a pan India presence. Prior to starting his career at National Plastic Industries Limited, he has been associated as an intern with companies like Parle Agro and Keter (Israel) and has acquired practical experience in the area of Marketing and Product development', 'Mr-Harsh-Parekh.jpg', 3),
+(4, 'Mrs. Ranganayaki Rangachari', 'Independent Director', 'Mrs. Ranganayaki Rangachari have reach education background and she is Bachelor of Commerce, Chartered Accountants, Company Secretary, Cost and Management Accountants. She has vast and varied experience of more than 20 years as working India and China in diverse sectors of Retail, Offshore survey, Shipping, Private Equity and Print media in corporate like Oswal Group, RPG Foodworld, Elcome Group of Companies, General Atlantic Partners, ILX Media Group and EGS group. She is currently in Practice as a Partner in Ritu Ranganayaki & Co., Chartered Accountants in Navi Mumbai specialising in areas of FEMA , GST and Valuation and IP consultancy.', 'Mrs. Ranganayaki Rangachari.png', 4),
+(5, 'Mr. Mishaal Ketan Parekh', 'Executive Director', 'Mr. Mishaal Parekh is Bachelor of Science in Industrial Systems Engineering from University of Southern California, Los Angeles, California. He has expertise in Lean Operations, Systems Analysis, Six Sigma, Statistical Quality Control, Project Management, Human Factors Analysis, Supply Chain Design, Facilities Design, NX, Solid Works, Auto CAD, Arena Simulation, MATLAB, House of Quality, Injection Molding, MS Project, Asana. He was also associated with the Company as Design and Quality Engineer, in this profile he worked and led and executed market research with cross-functional team consisting of members R&D department, Marketing, and Manufacturing, on the attractiveness of the bathroom fitting industry.', 'user.png', 5),
+(6, 'Mr. D. Purnachandra Rao', 'Independent Director', 'Mr. D. Purnachandra Rao has more than 40 years of experience in the Banking industry. He was associated with Corporation Bank. He retired from Corporation Bank as General Manager. He has also done CAIIB from Indian Institute of Bankers. During his tenure in the Bank, he has been awarded with about 15 awards which includes Best Branch award, Chairmans Club (6 times), Super Ordinate Goal Achiever (4 times), Productivity Linked Incentive award etc.', 'user.png', 6),
+(7, 'Mr. Vipul Desai', 'Independent Director', 'Mr. Vipul A. Desai is B.COM(HONS), LLB, FCS, ACMA, HON. ACIA (FLORIDA, USA) and a mature strategist, economist, fiscal and governance professional and he has served with fair success in progressive roles from finance manager & company secretary to president-corporate affairs & biz development in corporate for more than 30+ years.', 'Mr. Vipul A. Desai.jpg', 7);
 
 -- --------------------------------------------------------
 
@@ -2337,48 +2301,48 @@ CREATE TABLE `unaudited` (
 --
 
 INSERT INTO `unaudited` (`una_id`, `years`, `title`, `quarter`, `file_name`, `status`) VALUES
-(17, 'Year 2023-2024', '30th June 2023', 'Q1', '/Assets/pdf/Financial%20Results%20-%20Ind%20AS.pdf', 1),
-(18, 'Year 2023-2024', '30th September 2023', 'Q2', '/Assets/pdf/financials.pdf', 1),
-(19, 'Year 2023-2024', '31st December 2023', 'Q3', '/Assets/pdf/31st%20December%202023.pdf', 1),
-(20, 'Year 2022-2023', '30th June 2022', 'Q1', '/Assets/pdf/30th%20June%202022(1).pdf', 1),
-(21, 'Year 2022-2023', '30th September 2022', 'Q2', '/Assets/pdf/30th%20September%202022(3).pdf', 1),
-(22, 'Year 2022-2023', '31st December 2022', 'Q3', '/Assets/pdf/31st%20December%202022(3).pdf', 1),
+(17, 'Year 2023-2024', '30th June 2023', 'Q1', 'Financial%20Results%20-%20Ind%20AS.pdf', 1),
+(18, 'Year 2023-2024', '30th September 2023', 'Q2', 'financials.pdf', 1),
+(19, 'Year 2023-2024', '31st December 2023', 'Q3', '31st%20December%202023.pdf', 1),
+(20, 'Year 2022-2023', '30th June 2022', 'Q1', '30th%20June%202022(1).pdf', 1),
+(21, 'Year 2022-2023', '30th September 2022', 'Q2', '30th%20September%202022(3).pdf', 1),
+(22, 'Year 2022-2023', '31st December 2022', 'Q3', '31st%20December%202022(3).pdf', 1),
 (23, 'Year 2021-2022', '30th June 2021', 'Q1', '', 1),
 (24, 'Year 2021-2022', '30th September 2021', 'Q2', '', 1),
-(25, 'Year 2021-2022', '31st December 2021', 'Q3', '/Assets/pdf/31st%20December,%202021.pdf', 1),
-(26, 'Year 2020-2021', '30th June 2020', 'Q1', '/Assets/pdf/Q1(1).pdf', 1),
-(27, 'Year 2020-2021', '30th September 2020', 'Q2', '/Assets/pdf/30th%20Sept%202020.pdf', 1),
-(28, 'Year 2020-2021', '31st December 2020', 'Q3', '/Assets/pdf/31th%20Dec%202020.pdf', 1),
-(29, 'Year 2019-2020', '30th June 2019', 'Q1', '/Assets/pdf/Q1(1).pdf', 1),
-(30, 'Year 2019-2020', '30th September 2019', 'Q2', '/Assets/pdf/Unaudited_Financial_Results_30_Sept_2018.pdf', 1),
-(31, 'Year 2019-2020', '31st December 2019', 'Q3', '/Assets/pdf/31st%20December%202019.pdf', 1),
-(32, 'Year 2018-2019', '30th June 2018', 'Q1', '/Assets/pdf/Unaudited_Financial_Results_30.06.2018.pdf', 1),
-(33, 'Year 2018-2019', '30th September 2018', 'Q2', '/Assets/pdf/Unaudited_Financial_Results_30_Sept_2018.pdf', 1),
-(34, 'Year 2018-2019', '31st December 2018', 'Q3', '/Assets/pdf/Unaudited_Financial_Results_31_December%202018.pdf', 1),
-(35, 'Year 2017-2018', '30th June 2017', 'Q1', '/Assets/pdf/Unaudited_Financial_Results_30.06.2017.pdf', 1),
-(36, 'Year 2017-2018', '30th September 2017', 'Q2', '/Assets/pdf/Unaudited_Financial_Results_30.09.2017.pdf', 1),
-(37, 'Year 2017-2018', '31st December 2017', 'Q3', '/Assets/pdf/Unaudited_Financial_Results_31.12.2017.pdf', 1),
-(38, 'Year 2016-2017', '30th June 2016', 'Q1', '/Assets/pdf/Unaudited_Financial_Results_30.06.2016.pdf', 1),
-(39, 'Year 2016-2017', '30th September 2016', 'Q2', '/Assets/pdf/Unaudited_Financial_Results_30.09.2016.pdf', 1),
-(40, 'Year 2016-2017', '31st December 2016', 'Q3', '/Assets/pdf/Unaudited_Financial_Results_31.12.2016.pdf', 1),
-(41, 'Year 2015-2016', '30th June 2015', 'Q1', '/Assets/pdf/Unaudited_Financial_Results_30.06.2015.pdf', 1),
-(42, 'Year 2015-2016', '30th September 2015', 'Q2', '/Assets/pdf/Unaudited_Financial_Results_30.09.2015.pdf', 1),
-(43, 'Year 2015-2016', '31st December 2015', 'Q3', '/Assets/pdf/Unaudited_Financial_Results_31.12.2015.pdf', 1),
-(44, 'Year 2014-2015', '30th June 2014', 'Q1', '/Assets/pdf/Unaudited_Financial_Results_30.06.2014.pdf', 1),
-(45, 'Year 2014-2015', '30th September 2014', 'Q2', '/Assets/pdf/Unaudited_Financial_Results_30.09.2014.pdf', 1),
-(46, 'Year 2014-2015', '31st December 2014', 'Q3', '/Assets/pdf/Unaudited_Financial_Results_31.12.2014.pdf', 1),
-(47, 'Year 2013-2014', '30th June 2013', 'Q1', '/Assets/pdf/Unaudited_Financial_Results_30.06.2013.pdf', 1),
-(48, 'Year 2013-2014', '30th September 2013', 'Q2', '/Assets/pdf/Unaudited_Financial_Results_30.09.2013.pdf', 1),
-(49, 'Year 2013-2014', '31st December 2013', 'Q3', '/Assets/pdf/Unaudited_Financial_Results_31.12.2013.pdf', 1),
-(50, 'Year 2012-2013', '30th June 2012', 'Q1', '/Assets/pdf/Unaudited_Financial_Results_30.06.2012.pdf', 1),
-(51, 'Year 2012-2013', '30th September 2012', 'Q2', '/Assets/pdf/Unaudited_Financial_Results_30.09.2012.pdf', 1),
-(52, 'Year 2012-2013', '31st December 2012', 'Q3', '/Assets/pdf/Unaudited_Financial_Results_31.12.2012.pdf', 1),
-(53, 'Year 2011-2012', '30th June 2011', 'Q1', '/Assets/pdf/Unaudited_Financial_Results_30.06.2011.pdf', 1),
-(54, 'Year 2011-2012', '30th September 2011', 'Q2', '/Assets/pdf/Unaudited_Financial_Results_30.09.2011.pdf', 1),
-(55, 'Year 2011-2012', '31st December 2011', 'Q3', '/Assets/pdf/Unaudited_Financial_Results_31.12.2011.pdf', 1),
-(56, 'Year 2010-2011', '30th June 2010', 'Q1', '/Assets/pdf/Unaudited_Financial_Results_30.06.2010.pdf', 1),
-(57, 'Year 2010-2011', '30th September 2010', 'Q2', '/Assets/pdf/Unaudited_Financial_Results_30.09.2010.pdf', 1),
-(58, 'Year 2010-2011', '31st December 2010', 'Q3', '/Assets/pdf/Unaudited_Financial_Results_31.12.2010.pdf', 1);
+(25, 'Year 2021-2022', '31st December 2021', 'Q3', '31st%20December,%202021.pdf', 1),
+(26, 'Year 2020-2021', '30th June 2020', 'Q1', 'Q1(1).pdf', 1),
+(27, 'Year 2020-2021', '30th September 2020', 'Q2', '30th%20Sept%202020.pdf', 1),
+(28, 'Year 2020-2021', '31st December 2020', 'Q3', '31th%20Dec%202020.pdf', 1),
+(29, 'Year 2019-2020', '30th June 2019', 'Q1', 'Q1(1).pdf', 1),
+(30, 'Year 2019-2020', '30th September 2019', 'Q2', 'Unaudited_Financial_Results_30_Sept_2018.pdf', 1),
+(31, 'Year 2019-2020', '31st December 2019', 'Q3', '31st%20December%202019.pdf', 1),
+(32, 'Year 2018-2019', '30th June 2018', 'Q1', 'Unaudited_Financial_Results_30.06.2018.pdf', 1),
+(33, 'Year 2018-2019', '30th September 2018', 'Q2', 'Unaudited_Financial_Results_30_Sept_2018.pdf', 1),
+(34, 'Year 2018-2019', '31st December 2018', 'Q3', 'Unaudited_Financial_Results_31_December%202018.pdf', 1),
+(35, 'Year 2017-2018', '30th June 2017', 'Q1', 'Unaudited_Financial_Results_30.06.2017.pdf', 1),
+(36, 'Year 2017-2018', '30th September 2017', 'Q2', 'Unaudited_Financial_Results_30.09.2017.pdf', 1),
+(37, 'Year 2017-2018', '31st December 2017', 'Q3', 'Unaudited_Financial_Results_31.12.2017.pdf', 1),
+(38, 'Year 2016-2017', '30th June 2016', 'Q1', 'Unaudited_Financial_Results_30.06.2016.pdf', 1),
+(39, 'Year 2016-2017', '30th September 2016', 'Q2', 'Unaudited_Financial_Results_30.09.2016.pdf', 1),
+(40, 'Year 2016-2017', '31st December 2016', 'Q3', 'Unaudited_Financial_Results_31.12.2016.pdf', 1),
+(41, 'Year 2015-2016', '30th June 2015', 'Q1', 'Unaudited_Financial_Results_30.06.2015.pdf', 1),
+(42, 'Year 2015-2016', '30th September 2015', 'Q2', 'Unaudited_Financial_Results_30.09.2015.pdf', 1),
+(43, 'Year 2015-2016', '31st December 2015', 'Q3', 'Unaudited_Financial_Results_31.12.2015.pdf', 1),
+(44, 'Year 2014-2015', '30th June 2014', 'Q1', 'Unaudited_Financial_Results_30.06.2014.pdf', 1),
+(45, 'Year 2014-2015', '30th September 2014', 'Q2', 'Unaudited_Financial_Results_30.09.2014.pdf', 1),
+(46, 'Year 2014-2015', '31st December 2014', 'Q3', 'Unaudited_Financial_Results_31.12.2014.pdf', 1),
+(47, 'Year 2013-2014', '30th June 2013', 'Q1', 'Unaudited_Financial_Results_30.06.2013.pdf', 1),
+(48, 'Year 2013-2014', '30th September 2013', 'Q2', 'Unaudited_Financial_Results_30.09.2013.pdf', 1),
+(49, 'Year 2013-2014', '31st December 2013', 'Q3', 'Unaudited_Financial_Results_31.12.2013.pdf', 1),
+(50, 'Year 2012-2013', '30th June 2012', 'Q1', 'Unaudited_Financial_Results_30.06.2012.pdf', 1),
+(51, 'Year 2012-2013', '30th September 2012', 'Q2', 'Unaudited_Financial_Results_30.09.2012.pdf', 1),
+(52, 'Year 2012-2013', '31st December 2012', 'Q3', 'Unaudited_Financial_Results_31.12.2012.pdf', 1),
+(53, 'Year 2011-2012', '30th June 2011', 'Q1', 'Unaudited_Financial_Results_30.06.2011.pdf', 1),
+(54, 'Year 2011-2012', '30th September 2011', 'Q2', 'Unaudited_Financial_Results_30.09.2011.pdf', 1),
+(55, 'Year 2011-2012', '31st December 2011', 'Q3', 'Unaudited_Financial_Results_31.12.2011.pdf', 1),
+(56, 'Year 2010-2011', '30th June 2010', 'Q1', 'Unaudited_Financial_Results_30.06.2010.pdf', 1),
+(57, 'Year 2010-2011', '30th September 2010', 'Q2', 'Unaudited_Financial_Results_30.09.2010.pdf', 1),
+(58, 'Year 2010-2011', '31st December 2010', 'Q3', 'Unaudited_Financial_Results_31.12.2010.pdf', 1);
 
 -- --------------------------------------------------------
 
@@ -2399,13 +2363,12 @@ CREATE TABLE `unclaimed_dividend` (
 --
 
 INSERT INTO `unclaimed_dividend` (`id`, `content`, `year`, `report_title`, `report_link`) VALUES
-(1, 'Pursuant to Section 124 and 125 of the Companies Act, 2013, the Company is required to transfer the amount of dividend remained unclaimed for a period of seven years from the date of transfer to the unpaid dividend account and Investor Education and Protection Fund (IEPF).\n\nMinistry of Corporate Affairs has issued a Circular notifying the Rule \"Investor Education and Protection Fund (Uploading of information regarding unpaid and unclaimed amounts lying with Companies) Rules, 2012\". As per this Rule, companies have to identify and upload details of unclaimed dividend on their website.\n\nAccordingly detailed information in respect of the relevant financial years is provided for the benefit of the Companys Investors.', '2018-19', 'FY 2018-19 (as on 31st March 2024)', '/Assets/pdf/2018-19.pdf'),
-(2, NULL, '2017-18', 'FY 2017-18 (as on 31st March 2024)', '/Assets/pdf/2017-18.pdf'),
-(3, NULL, '2016-17', 'Details of Shareholders whose shares are liable for transfer to IEPF', '/Assets/pdf/2016-17.pdf'),
-(4, NULL, '2015-16', 'Details of Shareholders whose dividend transferred to IEPF', '/Assets/pdf/2015-16.pdf'),
-(5, NULL, '2014-15', 'Details of Shareholders whose dividend transferred to IEPF', '/Assets/pdf/2014-15.pdf'),
-(6, NULL, '2011-12', 'Details of Shareholders whose dividend transferred to IEPF', '/Assets/pdf/2011-12.pdf'),
-(8, NULL, '3030-35', 'just file edit left ', '/Assets/uploads/Investors/lighthouseReview.pdf');
+(1, 'Pursuant to Section 124 and 125 of the Companies Act, 2013, the Company is required to transfer the amount of dividend remained unclaimed for a period of seven years from the date of transfer to the unpaid dividend account and Investor Education and Protection Fund (IEPF).\n\nMinistry of Corporate Affairs has issued a Circular notifying the Rule \"Investor Education and Protection Fund (Uploading of information regarding unpaid and unclaimed amounts lying with Companies) Rules, 2012\". As per this Rule, companies have to identify and upload details of unclaimed dividend on their website.\n\nAccordingly detailed information in respect of the relevant financial years is provided for the benefit of the Companys Investors.', '2018-19', 'FY 2018-19 (as on 31st March 2024)', '2018-19.pdf'),
+(2, NULL, '2017-18', 'FY 2017-18 (as on 31st March 2024)', '2017-18.pdf'),
+(3, NULL, '2016-17', 'Details of Shareholders whose shares are liable for transfer to IEPF', '2016-17.pdf'),
+(4, NULL, '2015-16', 'Details of Shareholders whose dividend transferred to IEPF', '2015-16.pdf'),
+(5, NULL, '2014-15', 'Details of Shareholders whose dividend transferred to IEPF', '2014-15.pdf'),
+(6, NULL, '2011-12', 'Details of Shareholders whose dividend transferred to IEPF', '2011-12.pdf');
 
 -- --------------------------------------------------------
 
@@ -2445,12 +2408,6 @@ ALTER TABLE `aboutus_pages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ads`
---
-ALTER TABLE `ads`
-  ADD PRIMARY KEY (`ads_id`);
-
---
 -- Indexes for table `annual_report_return`
 --
 ALTER TABLE `annual_report_return`
@@ -2487,12 +2444,6 @@ ALTER TABLE `committees_and_management`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `corporate`
---
-ALTER TABLE `corporate`
-  ADD PRIMARY KEY (`cid`);
-
---
 -- Indexes for table `corporate1`
 --
 ALTER TABLE `corporate1`
@@ -2515,12 +2466,6 @@ ALTER TABLE `coupons`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`customer_id`);
-
---
--- Indexes for table `customer_detail`
---
-ALTER TABLE `customer_detail`
-  ADD PRIMARY KEY (`Id`);
 
 --
 -- Indexes for table `disclosures`
@@ -2695,12 +2640,6 @@ ALTER TABLE `aboutus_pages`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `ads`
---
-ALTER TABLE `ads`
-  MODIFY `ads_id` int NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `annual_report_return`
 --
 ALTER TABLE `annual_report_return`
@@ -2737,12 +2676,6 @@ ALTER TABLE `committees_and_management`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT for table `corporate`
---
-ALTER TABLE `corporate`
-  MODIFY `cid` int NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `corporate1`
 --
 ALTER TABLE `corporate1`
@@ -2765,12 +2698,6 @@ ALTER TABLE `coupons`
 --
 ALTER TABLE `customer`
   MODIFY `customer_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `customer_detail`
---
-ALTER TABLE `customer_detail`
-  MODIFY `Id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `disclosures`
@@ -2812,7 +2739,7 @@ ALTER TABLE `investorkyc`
 -- AUTO_INCREMENT for table `mycart`
 --
 ALTER TABLE `mycart`
-  MODIFY `cart_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `cart_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `navitems`
@@ -2842,19 +2769,19 @@ ALTER TABLE `notice`
 -- AUTO_INCREMENT for table `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `od_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `od_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `order_list`
 --
 ALTER TABLE `order_list`
-  MODIFY `order_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `order_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `order_status`
 --
 ALTER TABLE `order_status`
-  MODIFY `status_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `status_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `outcomes`
@@ -2872,7 +2799,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=454;
+  MODIFY `product_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=455;
 
 --
 -- AUTO_INCREMENT for table `product_detail`
