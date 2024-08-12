@@ -72,10 +72,10 @@ export async function PUT(request) {
 
   console.log("Received POST request");
 
-    if (!file_name) {
+   /* if (!file_name) {
       console.error("No file provided in form data");
       return NextResponse.json({ message: "No file provided" }, { status: 400 });
-    }
+    }*/
 
     console.log("File received:", file_name.name);
 
@@ -91,9 +91,9 @@ export async function PUT(request) {
     `;
     let values = [years, title, quarter];
 
-    if (pdfPath) {
+    if (fileName) {
       updateQuery += `, file_name = ?`;
-      values.push(pdfPath);
+      values.push(fileName);
     }
 
     updateQuery += ` WHERE una_id = ?`;
