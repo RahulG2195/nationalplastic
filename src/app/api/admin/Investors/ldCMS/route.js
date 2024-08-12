@@ -85,7 +85,8 @@ export async function POST(request) {
     const file = formData.get('file');
 
 
-    const pdfPath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
+    const pdfPath = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
+    const file_name = file.name;
 
     // Check if the directory exists, if not, create it
     try {
@@ -96,7 +97,7 @@ export async function POST(request) {
     await uploadFile(file); 
     const result = await query({
       query: "INSERT INTO disclosures (year, quarter, document_type, document_url) VALUES (?, ?, ?, ?)",
-      values: [year, quarter, document_type, pdfPath],
+      values: [year, quarter, document_type, file_name],
     });
 
     return new Response(
@@ -127,8 +128,8 @@ export async function PUT(request) {
 
    if(file){
 
-    const pdfPath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
-    // Check if the directory exists, if not, create it
+    const pdfPath = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
+    const file_name = file.name;
     try {
       await fs.access(pdfPath);
     } catch {
@@ -137,7 +138,7 @@ export async function PUT(request) {
     await uploadFile(file); 
     await query({
       query: "UPDATE disclosures SET year = ?, quarter = ?, document_type = ?, document_url = ? WHERE id = ?",
-      values: [year, quarter, document_type, pdfPath, id],
+      values: [year, quarter, document_type, file_name, id],
     });
    }else{
     await query({

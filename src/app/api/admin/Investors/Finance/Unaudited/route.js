@@ -1,47 +1,26 @@
 import { query } from "@/lib/db";
 import { NextResponse } from 'next/server';
-import formidable from 'formidable';
-// import { savefile_name } from '@/utils/file_nameHandlers';
-import { uploadFile } from "@/utils/fileUploader";
 const fs = require("fs").promises;
 const path = require("path");
 
 const uploadPDF = async (file) => {
   try {
-    console.log("Starting PDF upload process");
-    console.log("Received file object:", file);
-    
     if (!file || typeof file.arrayBuffer !== "function") {
       console.error("Invalid file object received");
       throw new Error("Invalid file object");
     }
-
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    
-    console.log("NEXT_PUBLIC_EXTERNAL_PATH_DIR:", process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR);
-    console.log("NEXT_PUBLIC_PDF_PATH_DIR:", process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR);
-    
     const uploadDir = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
-    console.log("Upload directory:", uploadDir);
-
     try {
       await fs.access(uploadDir);
-      console.log("Upload directory exists");
     } catch {
-      console.log("Creating upload directory");
       await fs.mkdir(uploadDir, { recursive: true });
     }
-
     const filePath = path.join(uploadDir, file.name);
-    console.log("File will be saved to:", filePath);
-    
     await fs.writeFile(filePath, buffer);
-    console.log(`File successfully uploaded to ${filePath}`);
-    
     return file.name;
   } catch (error) {
-    console.error("Detailed upload error:", error);
     throw new Error(`PDF upload failed: ${error.message}`);
   }
 };
@@ -93,10 +72,10 @@ export async function PUT(request) {
 
   console.log("Received POST request");
 
-    if (!file_name) {
+   /* if (!file_name) {
       console.error("No file provided in form data");
       return NextResponse.json({ message: "No file provided" }, { status: 400 });
-    }
+    }*/
 
     console.log("File received:", file_name.name);
 
@@ -112,9 +91,9 @@ export async function PUT(request) {
     `;
     let values = [years, title, quarter];
 
-    if (pdfPath) {
+    if (fileName) {
       updateQuery += `, file_name = ?`;
-      values.push(pdfPath);
+      values.push(fileName);
     }
 
     updateQuery += ` WHERE una_id = ?`;

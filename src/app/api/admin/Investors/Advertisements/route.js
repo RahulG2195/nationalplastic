@@ -4,12 +4,6 @@ import formidable from 'formidable';
 // import { saveFile } from '@/utils/fileHandlers';
 import {uploadFile} from "@/utils/fileUploader";
 
-// fiscalYear: 2222-2223
-// quarter: Q2
-// newspaper: Q2
-// pdf: (binary)
-
-
 export async function POST(request) {
   const formData = await request.formData();
   const fiscalYear = formData.get('fiscalYear');
@@ -24,7 +18,7 @@ export async function POST(request) {
       console.log("GOooodllYYY");
       // Assume uploadFile function is defined elsewhere and handles the file upload
       await uploadFile(file); // Make sure uploadFile returns a Promise
-      pdfPath = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
+      pdfPath = file.name
     } catch (error) {
       console.error('File upload error:', error);
       return NextResponse.json({ message: "Error saving file" }, { status: 500 });
@@ -57,7 +51,7 @@ export async function PUT(request) {
   if (file) {
     try {
       await uploadFile(file);
-      pdfPath = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${file.name}`;
+      pdfPath = file.name;
     } catch (error) {
       console.error('File upload error:', error);
       return NextResponse.json({ message: "Error saving file" }, { status: 500 });

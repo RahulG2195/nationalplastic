@@ -7,20 +7,27 @@ const path = require("path");
 // Function to handle file uploads
 const uploadFile = async (file) => {
   try {
+    if (!file || typeof file.arrayBuffer !== "function") {
+      console.error("Invalid file object received");
+      throw new Error("Invalid file object");
+    }
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const path = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}`;
+    const path = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
     try {
       await fs.access(path);
     } catch {
       await fs.mkdir(path, { recursive: true });
     }
-    await writeFile(path, buffer);
+    const filePath = path.join(path, file.name);
+    await fs.writeFile(filePath, buffer);
     return file.name; // Return the filename for storing in the database
   } catch (error) {
     throw new Error('File upload failed: ' + error.message);
   }
 };
+
+
 
 // Handle GET request
 export async function GET() {
