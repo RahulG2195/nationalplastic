@@ -26,6 +26,8 @@ export async function uploadFile(file) {
 
   const fileName = file.name;
   const filePath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
+  // const filePath = path.join(process.cwd(), 'public', process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR);
+      
   try {
     await fs.access(filePath);
   } catch {

@@ -24,6 +24,8 @@ export default function MyComponent() {
   const [modalVisible, setModalVisible] = useState(false);
   const [editingRecord, setEditingRecord] = useState(null);
   const [form] = Form.useForm();
+  const [newYearModalVisible, setNewYearModalVisible] = useState(false);
+  const [newYearForm] = Form.useForm();
 
   useEffect(() => {
     fetchYears();
@@ -32,10 +34,14 @@ export default function MyComponent() {
   const fetchYears = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/Investor/adminGC`
+        `${process.env.NEXT_PUBLIC_BASE_URL}/Investor/disclosure`
       );
-      const data = response.data.results;
+      console.log("response: " + JSON.stringify(response));
+     
       const yearLabels = data.map((item) => item.label);
+      console.log("response: " + JSON.stringify(yearLabels));
+
+
       setYears(yearLabels);
       if (yearLabels.length > 0) {
         setSelectedYear(yearLabels[0]);
@@ -56,6 +62,7 @@ export default function MyComponent() {
         `${process.env.NEXT_PUBLIC_BASE_URL}/Investor/disclosure?year=${year}`
       );
       setYearData(response.data.results);
+      const data = response.data.yearsList;
     } catch (error) {
       console.error("Error fetching year data:", error);
       message.error("Failed to fetch year data");
@@ -121,6 +128,8 @@ export default function MyComponent() {
 
       // Add action to formData
       formData.append("action", editingRecord ? "editRecord" : "addRecord");
+      selectedYear
+      formData.append("year", selectedYear);
 
       // Add id if editing
       if (editingRecord) {
@@ -190,6 +199,33 @@ export default function MyComponent() {
     },
   ];
 
+
+// New functions
+const showNewYearModal = () => {
+  newYearForm.resetFields();
+  setNewYearModalVisible(true);
+};
+
+const handleNewYearOk = async () => {
+  try {
+    const values = await newYearForm.validateFields();
+    await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/disclosure`, {
+      action: "insertDisclosure",
+      label: values.year,
+    });
+    message.success("New financial year added successfully");
+    setNewYearModalVisible(false);
+    fetchYears(); // Refresh the years list
+  } catch (error) {
+    console.error("Error adding new year:", error);
+    message.error("Failed to add new financial year");
+  }
+};
+
+const handleNewYearCancel = () => {
+  setNewYearModalVisible(false);
+};
+
   if (loading) {
     return (
       <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
@@ -201,21 +237,25 @@ export default function MyComponent() {
       <h1>General Disclosure Data</h1>
 
       <div style={{ marginBottom: 16 }}>
-        <Select
-          style={{ width: 200, marginRight: 16 }}
-          value={selectedYear}
-          onChange={handleYearChange}
-        >
-          {years.map((year) => (
-            <Option key={year} value={year}>
-              {year}
-            </Option>
-          ))}
-        </Select>
-        <Button onClick={() => showModal()} type="primary">
-          Add New Record
-        </Button>
-      </div>
+  <Select
+    style={{ width: 200, marginRight: 16 }}
+    value={selectedYear}
+    onChange={handleYearChange}
+  >
+    {years.map((year) => (
+      <Option key={year} value={year}>
+        {year}
+      </Option>
+    ))}
+  </Select>
+  <Button onClick={() => showModal()} type="primary" style={{ marginRight: 16 }}>
+    Add New Record
+  </Button>
+  <Button onClick={showNewYearModal} type="primary">
+    Add New Financial Year
+  </Button>
+</div>
+
 
       <Table dataSource={yearData} columns={columns} rowKey="id" />
 
@@ -260,6 +300,23 @@ export default function MyComponent() {
           </Form.Item>
         </Form>
       </Modal>
+
+      <Modal
+  title="Add New Financial Year"
+  visible={newYearModalVisible}
+  onOk={handleNewYearOk}
+  onCancel={handleNewYearCancel}
+>
+  <Form form={newYearForm} layout="vertical">
+    <Form.Item
+      name="year"
+      label="Financial Year"
+      rules={[{ required: true, message: "Please input the financial year!" }]}
+    >
+      <Input placeholder="e.g., 2024-2025" />
+    </Form.Item>
+  </Form>
+</Modal>
     </div>
   );
 }

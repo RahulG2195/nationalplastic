@@ -85,7 +85,8 @@ export async function POST(request) {
     const file = formData.get('file');
 
 
-    const pdfPath = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
+    const pdfPath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
+      
     const file_name = file.name;
 
     // Check if the directory exists, if not, create it
@@ -111,7 +112,7 @@ export async function POST(request) {
     return new Response(
       JSON.stringify({
         status: 500,
-        message: "Internal Server Error",
+        message: error.message,
       })
     );
   }
@@ -128,12 +129,14 @@ export async function PUT(request) {
 
    if(file){
 
-    const pdfPath = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
+    const uploadDir = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
+
+      
     const file_name = file.name;
     try {
-      await fs.access(pdfPath);
+      await fs.access(uploadDir);
     } catch {
-      await fs.mkdir(pdfPath, { recursive: true });
+      await fs.mkdir(uploadDir, { recursive: true });
     }
     await uploadFile(file); 
     await query({
