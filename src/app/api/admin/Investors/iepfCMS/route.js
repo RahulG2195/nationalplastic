@@ -37,7 +37,7 @@ export async function POST(request) {
   const year = formData.get('year');
   const documentNameOrReportTitle = formData.get('document_name') || formData.get('report_title');
   await uploadFile(file); 
-  const url = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
+  const url = file.name;
 
   switch (section) {
     case 'ShareTransfer':

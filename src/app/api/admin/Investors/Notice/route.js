@@ -18,7 +18,7 @@ export async function POST(request) {
       // Assume uploadFile function is defined elsewhere and handles the file_name upload
       await uploadFile(file_name); // Make sure uploadFile returns a Promise
       // Set the pdfPath based on where the file_name is saved
-      pdfPath = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${file_name.name}`;
+      pdfPath = file_name.name;
 
     } catch (error) {
 
@@ -53,7 +53,7 @@ export async function PUT(request) {
   if (file_name) {
     try {
       await uploadFile(file_name);
-      pdfPath = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${file_name.name}`;
+      pdfPath = file_name.name;
     } catch (error) {
       console.error('file_name upload error:', error);
       return NextResponse.json({ message: "Error saving file_name" }, { status: 500 });

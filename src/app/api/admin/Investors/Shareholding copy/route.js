@@ -1,7 +1,5 @@
 import { query } from "@/lib/db";
 import { NextResponse } from 'next/server';
-import formidable from 'formidable';
-// import { savefile_name } from '@/utils/file_nameHandlers';
 import {uploadFile} from "@/utils/fileUploader";
 
 
@@ -28,10 +26,10 @@ export async function POST(request) {
       // Assume uploadFile function is defined elsewhere and handles the file_name1 upload
       await uploadFile(file_name1); // Make sure uploadFile returns a Promise
       // Set the pdfPath based on where the file_name1 is saved
-      pdfPath1 = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${file_name1.name}`;
-      pdfPath2 = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${file_name2.name}`;
-      pdfPath3 = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${file_name3.name}`;
-      pdfPath4 = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${file_name4.name}`;
+      pdfPath1 = file_name1.name;
+      pdfPath2 = file_name2.name;
+      pdfPath3 = file_name3.name;
+      pdfPath4 = file_name4.name;
 
     } catch (error) {
 
@@ -74,10 +72,10 @@ export async function PUT(request) {
   if (file_name1) {
     try {
       await uploadFile(file_name1);
-      pdfPath1 = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${file_name1.name}`;
-      pdfPath2 = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${file_name2.name}`;
-      pdfPath3 = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${file_name3.name}`;
-      pdfPath4 = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${file_name4.name}`;
+      pdfPath1 = file_name1.name;
+      pdfPath2 = file_name2.name;
+      pdfPath3 = file_name3.name;
+      pdfPath4 = file_name4.name;
 
     } catch (error) {
       console.error('file name upload error:', error);

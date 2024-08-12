@@ -4,7 +4,6 @@ const path = require("path");
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
 const ALLOWED_FILE_TYPES = ['.jpg', '.jpeg', '.png', '.webp', '.mp4','.pdf'];
-const UPLOAD_DIR = path.join(process.cwd(), 'public', 'Assets', 'uploads','Investors');
 
 export async function validateFile(file) {
   if (file.size > MAX_FILE_SIZE) {
@@ -32,8 +31,8 @@ export async function uploadFile(file) {
   } catch {
     await fs.mkdir(filePath, { recursive: true });
   }
-
-  await writeFile(filePath, buffer);
-
+  const uploadDir = path.join(filePath, fileName);
+  await fs.writeFile(uploadDir, buffer);
   return fileName;
 }
+
