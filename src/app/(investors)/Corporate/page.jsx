@@ -9,18 +9,18 @@ const CorporateGovernance = () => {
   const [reports, setReports] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/CorporateFront`, {type: 'corp'});
-        
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/CorporateFront`, { type: 'corp' });
+
         const policys = response.data.results.filter(item => item.cor_type === 'Policy');
         console.log('policy', policys);
         const cert = response.data.results.filter(item => item.cor_type === 'Compliance Certifica');
-        setPolics(policys); 
-        setCertificate(cert); 
-        setReports(response.data.reports); 
+        setPolics(policys);
+        setCertificate(cert);
+        setReports(response.data.reports);
       } catch (error) {
         console.error('Error fetching Corporate results data:', error);
         setError('Failed to load data. Please try again later.');
@@ -28,9 +28,9 @@ const CorporateGovernance = () => {
         setIsLoading(false);
       }
     };
-  
+
     fetchData();
-  
+
   }, []);
 
   if (!polics) {
@@ -67,7 +67,7 @@ const CorporateGovernance = () => {
                   {certificate.map((certificate, index) => (
                     <tr key={index}>
                       <td>
-                        <a href={certificate.file_name} target='_blank' rel="noopener noreferrer">
+                        <a href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${certificate.file_name}`} target='_blank' rel="noopener noreferrer">
                           {certificate.title}
                         </a>
                       </td>
@@ -93,10 +93,39 @@ const CorporateGovernance = () => {
                   {reports.map((result, index) => (
                     <tr key={index}>
                       <td><strong>{result.years}</strong></td>
-                      <td><Link href={result.Q1?.file_name ? result.Q1?.file_name : ''} target='_blank'>{result.Q1?.title}</Link></td>
-                      <td><Link href={result.Q2?.file_name ? result.Q2?.file_name : ''} target='_blank'>{result.Q2?.title}</Link></td>
-                      <td><Link href={result.Q3?.file_name ? result.Q3?.file_name : ''} target='_blank'>{result.Q3?.title}</Link></td>
-                      <td><Link href={result.Q4?.file_name ? result.Q4?.file_name : ''} target='_blank'>{result.Q4?.title}</Link></td>
+                      <td>
+                        <Link
+                          href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${result.Q1?.file_name || ''}`}
+                          target='_blank'
+                          rel="noopener noreferrer">
+                          {result.Q1?.title}
+                        </Link>
+                      </td>
+                      <td>
+                        <Link
+                          href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${result.Q2?.file_name || ''}`}
+                          target='_blank'
+                          rel="noopener noreferrer">
+                          {result.Q2?.title}
+                        </Link>
+                      </td>
+                      <td>
+                        <Link
+                          href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${result.Q3?.file_name || ''}`}
+                          target='_blank'
+                          rel="noopener noreferrer">
+                          {result.Q3?.title}
+                        </Link>
+                      </td>
+                      <td>
+                        <Link
+                          href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${result.Q4?.file_name || ''}`}
+                          target='_blank'
+                          rel="noopener noreferrer">
+                          {result.Q4?.title}
+                        </Link>
+                      </td>
+
                     </tr>
                   ))}
                 </tbody>

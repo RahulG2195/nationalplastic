@@ -147,7 +147,7 @@ const IEPFCMS = () => {
         title: 'Document',
         dataIndex: 'document_link',
         key: 'document_link',
-        render: (text) => <Button href={text} target="_blank">View File</Button>
+        render: (text) => <a href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${text}`} target="_blank" rel="noopener noreferrer">View File</a>
       },
       {
         title: 'Action',
@@ -173,7 +173,7 @@ const IEPFCMS = () => {
         title: 'Report',
         dataIndex: 'report_link',
         key: 'report_link',
-        render: (text) => <Button href={text} target="_blank">View File</Button>
+        render: (text) => <a href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${text}`} target="_blank" rel="noopener noreferrer">View File</a>
       },
       {
         title: 'Action',
