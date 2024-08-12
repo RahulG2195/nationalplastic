@@ -1,111 +1,111 @@
 export const imageData = [
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Altis-chair-Black-(45)-white bg.webp",
+        imgSrc: "Altis-chair-Black-(45)-white bg.webp",
         imgText: "Altis",
         color: "Black"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Atlantis-chair-MATT BROWN-(45)-white bg.webp",
+        imgSrc: "Atlantis-chair-MATT BROWN-(45)-white bg.webp",
         imgText: "Atlantis",
         color: "Matt Brown"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Bentely Chair-SWOOD-(45) white bg.webp",
+        imgSrc: "Bentely Chair-SWOOD-(45) white bg.webp",
         imgText: "Bentley",
         color: "Wood"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Boss chair-Red-(45)-Lifestyle.webp",
+        imgSrc: "Boss chair-Red-(45)-Lifestyle.webp",
         imgText: "Boss",
         color: "Red"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Ant Green.jpg",
+        imgSrc: "Ant Green.jpg",
         imgText: "Ferrari .S.",
         color: "Green"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Hector chair-Bottle green-(45)-Lifestyle.webp",
+        imgSrc: "Hector chair-Bottle green-(45)-Lifestyle.webp",
         imgText: "Hector",
         color: "Bottle Green"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Leisure-chair-PLAIN BEIGE-(45)-white bg.webp",
+        imgSrc: "Leisure-chair-PLAIN BEIGE-(45)-white bg.webp",
         imgText: "Leisure",
         color: "Beige"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Linea-chair-WENGE & BEIGE-(45)-white bg.webp",
+        imgSrc: "Linea-chair-WENGE & BEIGE-(45)-white bg.webp",
         imgText: "Linea",
         color: "Wenge & Beige"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Magna-Matt brown-(45)-Lifestyle.webp",
+        imgSrc: "Magna-Matt brown-(45)-Lifestyle.webp",
         imgText: "Magna",
         color: "Matt Brown"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Merc Sofa-MBG-(45)-Lifestyle.webp",
+        imgSrc: "Merc Sofa-MBG-(45)-Lifestyle.webp",
         imgText: "Merc Sofa",
         color: "Brown"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Milano-chair-WENGE-&-BEIGE-45)-white bg.webp",
+        imgSrc: "Milano-chair-WENGE-&-BEIGE-45)-white bg.webp",
         imgText: "Milano",
         color: "Wenge & Beige"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Omega Chair-Matt brown-(45)-Lifestyle.webp",
+        imgSrc: "Omega Chair-Matt brown-(45)-Lifestyle.webp",
         imgText: "Omega",
         color: "Matt Brown"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Orca Brown-Matt brown-(45)-Lifestyle.webp",
+        imgSrc: "Orca Brown-Matt brown-(45)-Lifestyle.webp",
         imgText: "Orca",
         color: "Brown"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Queen chair-DWT & Orange-(45)-Lifestyle.webp",
+        imgSrc: "Queen chair-DWT & Orange-(45)-Lifestyle.webp",
         imgText: "QUEEN",
         color: "Orange"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Relax-chair-I.grey-(45)-white bg.webp",
+        imgSrc: "Relax-chair-I.grey-(45)-white bg.webp",
         imgText: "Relax",
         color: "Grey"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Saab Brown-Matt brown-(45)-Lifestyle.webp",
+        imgSrc: "Saab Brown-Matt brown-(45)-Lifestyle.webp",
         imgText: "SAAB",
         color: "Brown"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Solace Chair-Mangowood-(45)-white bg.webp",
+        imgSrc: "Solace Chair-Mangowood-(45)-white bg.webp",
         imgText: "Solace",
         color: "Mangowood"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Spinex Chair-Matt brown-(45)-lifestyle.webp",
+        imgSrc: "Spinex Chair-Matt brown-(45)-lifestyle.webp",
         imgText: "Spinex",
         color: "Matt Brown"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Star Chair-Mangowood-(45)-Lifestyle.webp",
+        imgSrc: "Star Chair-Mangowood-(45)-Lifestyle.webp",
         imgText: "STAR",
         color: "Mangowood"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Stylo-shell-Mattbrown-(front)-white bg.webp",
+        imgSrc: "Stylo-shell-Mattbrown-(front)-white bg.webp",
         imgText: "Stylo Shell",
         color: "Matt Brown"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}The Boss Chair-IRWD-(45)-Lifestyle.webp",
+        imgSrc: "The Boss Chair-IRWD-(45)-Lifestyle.webp",
         imgText: "The Boss",
         color: "Brown"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Victoria Chair-IRWD-(45)-Lifestyle.webp",
+        imgSrc: "Victoria Chair-IRWD-(45)-Lifestyle.webp",
         imgText: "Victoria",
         color: "Brown"
     }
@@ -113,57 +113,57 @@ export const imageData = [
 
 export const PEimageData = [
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Bada Shagun-Gold (right 45)-white bg.webp",
+        imgSrc: "Bada Shagun-Gold (right 45)-white bg.webp",
         imgText: "Bada Shagun",
         color: "Gold"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Cambridge Chair- Gold-(45)-white bg.webp",
+        imgSrc: "Cambridge Chair- Gold-(45)-white bg.webp",
         imgText: "Cambridge",
         color: "Gold"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Crown-NATURAL-(45)-white-bg.webp",
+        imgSrc: "Crown-NATURAL-(45)-white-bg.webp",
         imgText: "Crown",
         color: "Natural"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Diamond Chair-Natural (45)-white bg.webp",
+        imgSrc: "Diamond Chair-Natural (45)-white bg.webp",
         imgText: "Diamond Chair",
         color: "Natural"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Glass Chair- Natural-(45)-white bg.webp",
+        imgSrc: "Glass Chair- Natural-(45)-white bg.webp",
         imgText: "GLASS",
         color: "Natural"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Ice Chair-Natural-(45)-white bg.webp",
+        imgSrc: "Ice Chair-Natural-(45)-white bg.webp",
         imgText: "ICE",
         color: "Natural"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Karen Chairs- DWT-(45)-white bg.webp",
+        imgSrc: "Karen Chairs- DWT-(45)-white bg.webp",
         imgText: "Karen",
         color: "DWT"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}karnival Chairs- DWT-(front)-white bg.webp",
+        imgSrc: "karnival Chairs- DWT-(front)-white bg.webp",
         imgText: "Karnival",
         color: "DWT"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Kia Chair-DWT (Front)-white bg.webp",
+        imgSrc: "Kia Chair-DWT (Front)-white bg.webp",
         imgText: "Kia",
         color: "DWT"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Leon Chair-DWT-(45)-white bg.webp",
+        imgSrc: "Leon Chair-DWT-(45)-white bg.webp",
         imgText: "Leon",
         color: "DWT"
     },
     {
-        imgSrc: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}Marble-NATURAL-(45)-white-bg.webp",
+        imgSrc: "Marble-NATURAL-(45)-white-bg.webp",
         imgText: "Marble",
         color: "Natural"
     }

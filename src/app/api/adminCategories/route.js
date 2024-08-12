@@ -1,7 +1,5 @@
 import { query } from '@/lib/db';
 import { writeFile } from "fs/promises";
-import { uploadFile } from "@/utils/fileUploader";
-// import { query } from "@/lib/db";
 const fs = require("fs").promises;
 const path = require("path");
 

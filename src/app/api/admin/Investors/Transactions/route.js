@@ -54,10 +54,11 @@ export async function POST(request) {
     } catch {
       await fs.mkdir(pdfPath, { recursive: true });
     }
+    const file_name = file.name;
     await uploadFile(file); 
     const result = await query({
       query: "INSERT INTO rp_transaction (document, url) VALUES (?, ?)",
-      values: [document, pdfPath],
+      values: [document, file_name],
     });
 
     return new Response(
@@ -100,6 +101,8 @@ export async function PUT(request, { params }) {
       await fs.mkdir(pdfPath, { recursive: true });
     }
     await uploadFile(file); 
+    const file_name = file.name;
+
 
     // Delete old file if it exists
     const oldTransaction = await query({

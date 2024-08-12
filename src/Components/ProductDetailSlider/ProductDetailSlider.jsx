@@ -71,7 +71,7 @@ const ProductDetailSlider = ({ imageurl }) => {
             freeMode={true}
             watchSlidesProgress={true}
             modules={[FreeMode, Navigation, Thumbs]}
-            className="mySwiper mt-4"
+            className="mySwiper mt-5"
           >
             {images.map((imageName, index) => (
               <SwiperSlide key={`thumb-${imageName}-${index}`}>

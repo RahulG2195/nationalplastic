@@ -10,7 +10,6 @@ import { notifyError } from "@/utils/notify";
 
 const BulkOrder = () => {
   const [ProdData, setProdData] = useState([]);
-
   useEffect(() => {
     const fetchdata = async () => {
       try {

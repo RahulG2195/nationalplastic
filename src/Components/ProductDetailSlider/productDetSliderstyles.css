@@ -36,8 +36,12 @@
 }
 
 .mySwiper2 {
-    max-height: 450px;
+    /* max-height: 330px; */
     max-width: 100%;
+}
+
+.topSliderRes{
+    height: auto !important;
 }
 
 .mySwiper2 img {
@@ -83,12 +87,15 @@
 
 @media (max-width: 600px) {
     .mySwiper2 {
-        max-height: 250px;
+        max-height: 390px;
         max-width: 100%;
     }
     .mySwiper2 img {
         object-fit: contain;
         border-radius: 0;
+    }
+    .mySwiper {
+        height: 100% !important;
     }
     /* .product-ccount .input-group {
         width: 32%;
