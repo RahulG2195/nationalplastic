@@ -170,6 +170,8 @@ const CorpReport = () => {
             <Select>
               <Option value="Corporate Governance">Corporate Governance</Option>
               <Option value="Corporate Report">Corporate Report</Option>
+              <Option value="Policy">Policy</Option>
+
             </Select>
           </Form.Item>
           <Form.Item name="file_name" label="Pdf File" rules={[{ required: !editingId }]}>
