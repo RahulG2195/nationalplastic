@@ -27,6 +27,7 @@ const nextConfig = {
 		config.resolve.alias['@uploads'] = path.resolve('/var/www/uploads'); 
 		return config;
 	 },
+	 
 }
 module.exports = nextConfig;
 
