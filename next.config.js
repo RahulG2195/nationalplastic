@@ -22,12 +22,15 @@ const nextConfig = {
     },
   },
 
-//   webpack: (config) => {
-//     config.resolve.alias["@uploads"] = path.resolve("/var/www/uploads");
-//     return config;
-//   },
+  //   webpack: (config) => {
+  //     config.resolve.alias["@uploads"] = path.resolve("/var/www/uploads");
+  //     return config;
+  //   },
   webpack: (config, { dev, isServer }) => {
-	config.resolve.alias["@uploads"] = path.resolve("/var/www/uploads");
+    // Add alias
+    config.resolve.alias["@uploads"] = path.resolve("/var/www/uploads");
+
+    // Add image handling rules
     config.module.rules.push({
       test: /\.(jpe?g|png|gif|webp)$/i,
       use: [
@@ -42,8 +45,8 @@ const nextConfig = {
         {
           loader: "string-replace-loader",
           options: {
-            search: /\.(JPG|JPEG|PNG|GIF|WEBP)$/i,
-            replace: (match) => match.toLowerCase(),
+            search: /(\s|\+|%20)\.(JPG|JPEG|PNG|GIF|WEBP)$/i,
+            replace: (match, space, ext) => `${space}${ext.toLowerCase()}`,
             flags: "g",
           },
         },
