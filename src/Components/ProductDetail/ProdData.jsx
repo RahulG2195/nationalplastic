@@ -311,7 +311,6 @@ function ProdData({ category_id }) {
                     </p>
 
                     {dataToShow.map((val, index) => {
-                      // const baseImageUrl = "/Assets/uploads/products";
                       const imageSrc = `${process.env.NEXT_PUBLIC_BASE_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${val.image_name}`;
                       return (
                         <label
@@ -329,7 +328,7 @@ function ProdData({ category_id }) {
                             value={val.color}
                             checked={selectedColor === val.color}
                             onChange={handleColorChange}
-                            style={{ display: "none" }} // Hide the actual radio button
+                            style={{ display: "none" }}
                           />
                           <div
                             style={{
@@ -337,35 +336,23 @@ function ProdData({ category_id }) {
                               height: "48px",
                               position: "relative",
                               borderRadius: "50%",
-                              border:
-                                selectedColor === val.color
-                                  ? "2px solid #000"
-                                  : "2px solid transparent",
+                              border: selectedColor === val.color ? "2px solid #000" : "2px solid transparent",
                               transition: "all 0.3s ease",
-                              ...(selectedColor === val.color
-                                ? {
-                                    boxShadow: "0 0 0 2px #fff, 0 0 0 4px #000",
-                                  }
-                                : {}),
+                              ...(selectedColor === val.color ? {
+                                boxShadow: "0 0 0 2px #fff, 0 0 0 4px #000",
+                              } : {}),
                             }}
                           >
                             <Image
-                              loader={({ src }) => {
-                                const fullUrl = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${src}`;
-                                console.log("Full image URL:", fullUrl);
-                                return fullUrl;
-                              }}
                               src={imageSrc}
                               alt={val.color}
-                              width={3}
-                              height={3}
+                              width={48}
+                              height={48}
                               layout="responsive"
                               objectFit="cover"
-                              // layout="fill"
-                              // objectFit="cover"
                               style={{
                                 borderRadius: "50%",
-                                height: "100% !important",
+                                height: "100%",
                                 width: "100%",
                               }}
                             />
@@ -406,9 +393,8 @@ function ProdData({ category_id }) {
 
                 <Link
                   href={userState ? "/Address" : "#"}
-                  className={`btn m-2 px-md-5 ProdbtnRes ${
-                    !userState ? "disabled-button" : ""
-                  }`}
+                  className={`btn m-2 px-md-5 ProdbtnRes ${!userState ? "disabled-button" : ""
+                    }`}
                   onClick={() => handleBuyNow(productId)}
                 >
                   Buy Now
