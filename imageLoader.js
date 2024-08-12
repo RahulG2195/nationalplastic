@@ -1,13 +1,8 @@
 export default function imageLoader({ src, width, quality }) {
-    // Normalize the source URL
-    const normalizedSrc = src.replace(/(\s|\+|%20)\.(JPG|JPEG|PNG|GIF|WEBP)$/i, (match, space, ext) => {
-      // Replace encoded spaces with actual spaces
-      const decodedSpace = space === '%20' ? ' ' : space;
-      return `${decodedSpace}${ext.toLowerCase()}`;
-    });
+    // Normalize the source URL by only converting the file extension to lowercase
+    const normalizedSrc = src.replace(/\.(JPG|JPEG|PNG|GIF|WEBP)$/i, (match) => match.toLowerCase());
   
-    // Encode the URL properly
-    const encodedSrc = encodeURI(normalizedSrc);
-  
-    return `${encodedSrc}?w=${width}&q=${quality || 75}`;
+    // Return the URL without encoding spaces
+    return `${normalizedSrc}?w=${width}&q=${quality || 75}`;
   }
+  
