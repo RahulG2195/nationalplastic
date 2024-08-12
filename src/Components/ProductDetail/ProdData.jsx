@@ -311,7 +311,7 @@ function ProdData({ category_id }) {
                     </p>
 
                     {dataToShow.map((val, index) => {
-                      const imageSrc = `${process.env.NEXT_PUBLIC_BASE_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${val.image_name}`;
+                      const imageSrc = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${val.image_name}`;
                       return (
                         <label
                           key={index}
