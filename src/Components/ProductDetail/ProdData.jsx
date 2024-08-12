@@ -272,11 +272,11 @@ function ProdData({ category_id }) {
               catlogue={catlogue}
             />
           </div>
-          <div className="col-md-6">
+          <div className="col-md-5  ">
             <ProductDetailSlider imageurl={image} />
           </div>
 
-          <div className="col-md-6">
+          <div className="col-md-6 mt-5 mt-md-0">
             <div className="product-dtl">
               <div className="product-info">
                 <div className="product-name">
@@ -343,19 +343,21 @@ function ProdData({ category_id }) {
                               } : {}),
                             }}
                           >
-                            <Image
-                              src={imageSrc}
-                              alt={val.color}
-                              width={48}
-                              height={48}
-                              layout="responsive"
-                              objectFit="cover"
-                              style={{
-                                borderRadius: "50%",
-                                height: "100%",
-                                width: "100%",
-                              }}
-                            />
+                            <div style={{ width: '100%', height: '100%', display: 'flex' }}>
+                              <Image
+                                src={imageSrc}
+                                alt={val.color}
+                                height={100}
+                                width={100}
+                                layout="responsive"
+                                objectFit="cover"
+                                style={{
+                                  borderRadius: "50%",
+                                  width: '100%',
+                                  height: '100%',
+                                }}
+                              />
+                            </div>
                           </div>
                         </label>
                       );
