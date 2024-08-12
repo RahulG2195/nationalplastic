@@ -52,11 +52,10 @@ function ProdData({ category_id }) {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`
-        );
-        const { product, productDetails, colors, category, short_description } =
-          response.data;
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`);
+        // console.log('response', response);
+        const { product, productDetails, colors, category, short_description } = response.data;
+
         localStorage.setItem("product_id", product.product_id);
         if (!product) {
           setErrorMessage("Sorry, this product is not available");
