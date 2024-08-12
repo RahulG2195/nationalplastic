@@ -75,6 +75,7 @@ const GetQuote = ({ proddata }) => {
                   className="col-lg-4 col-xl-4 col-md-4 col-sm-12 col-xs-12 col-12 mt-5 d-flex justify-content-center"
                 >
                   <TopPicsCard
+                    // imgSrc={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${data.imgSrc}`}
                     imgSrc={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${data.imgSrc}`}
                     imgtext={data.imgText}
                     color={data.color}
