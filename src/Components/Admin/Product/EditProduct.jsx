@@ -56,8 +56,9 @@ export default function App() {
           }
         });
         formData.append('discount_price', calculatedDiscountPrice);
-        formData.append('category_id_edited', selectedCategory.id);
-
+        if(selectedCategory.id){
+          formData.set('category_id', selectedCategory.id);
+        }
         let formDataString = '';
         formData.forEach((value, key) => {
           formDataString += `${key}: ${value}\n`;
@@ -117,7 +118,7 @@ export default function App() {
       });
       if (data.image_name) {
         const images = data.image_name.split(',');
-        const previews = images.map(img => `/Assets/uploads/products/${img.trim()}`);
+        const previews = images.map(img => `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${img.trim()}`);
         setImagePreviews(previews);
       }
       // Calculate initial discount price

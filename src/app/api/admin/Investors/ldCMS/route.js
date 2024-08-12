@@ -2,7 +2,9 @@ import { query } from '@/lib/db';
 import { writeFile, unlink } from 'fs/promises';
 import { join } from 'path';
 import {uploadFile} from "@/utils/fileUploader";
-import path from 'path';
+
+const fs = require("fs").promises;
+const path = require("path");
 
 export async function DELETE(request) {
   const { searchParams } = new URL(request.url);
@@ -81,9 +83,17 @@ export async function POST(request) {
     const quarter = formData.get('quarter');
     const document_type = formData.get('document_type');
     const file = formData.get('file');
+
+
+    const pdfPath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
+
+    // Check if the directory exists, if not, create it
+    try {
+      await fs.access(pdfPath);
+    } catch {
+      await fs.mkdir(pdfPath, { recursive: true });
+    }
     await uploadFile(file); 
-    const pdfPath = `/Assets/uploads/Investors/${file.name}`;
-    
     const result = await query({
       query: "INSERT INTO disclosures (year, quarter, document_type, document_url) VALUES (?, ?, ?, ?)",
       values: [year, quarter, document_type, pdfPath],
@@ -116,8 +126,15 @@ export async function PUT(request) {
     const file = formData.get('file');
 
    if(file){
+
+    const pdfPath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
+    // Check if the directory exists, if not, create it
+    try {
+      await fs.access(pdfPath);
+    } catch {
+      await fs.mkdir(pdfPath, { recursive: true });
+    }
     await uploadFile(file); 
-    const pdfPath = `/Assets/uploads/Investors/${file.name}`;
     await query({
       query: "UPDATE disclosures SET year = ?, quarter = ?, document_type = ?, document_url = ? WHERE id = ?",
       values: [year, quarter, document_type, pdfPath, id],

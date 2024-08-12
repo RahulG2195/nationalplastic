@@ -66,11 +66,11 @@ export async function PUT(request) {
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { redirect_url, image_name, image_location, seo } = body;
+    const { redirect_url, image_name,  seo } = body;
     
     const result = await query({
-      query: "INSERT INTO herosection (redirect_url, image_name, image_location, seo) VALUES (?, ?, ?, ?)",
-      values: [redirect_url, image_name, image_location, seo],
+      query: "INSERT INTO herosection (redirect_url, image_name,  seo) VALUES (?, ?, ?)",
+      values: [redirect_url, image_name,  seo],
     });
     
     return new Response(

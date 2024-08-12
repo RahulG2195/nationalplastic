@@ -28,7 +28,7 @@ export async function POST(request) {
 async function updateUnclaimedDividendFile({ id, file }) {
   try {
     await uploadFile(file);
-    const report_link = `/Assets/uploads/Investors/${file.name}`;
+    const report_link = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${file.name}`;
     await query({
       query: "UPDATE unclaimed_dividend SET report_link = ? WHERE id = ?",
       values: [report_link, id],
@@ -42,7 +42,7 @@ async function updateUnclaimedDividendFile({ id, file }) {
 async function updateShareTransferFile({ id, file }) {
   try {
     await uploadFile(file);
-    const document_link = `/Assets/uploads/Investors/${file.name}`;
+    const document_link = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${file.name}`;
     await query({
       query: "UPDATE share_transfer SET document_link = ? WHERE id = ?",
       values: [document_link, id],

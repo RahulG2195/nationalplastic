@@ -97,7 +97,7 @@ const InfrastructureCMS = () => {
       dataIndex: 'image_url', 
       key: 'image_url',
       render: (image_url) => image_url ? 
-        <Image src={`/Assets/uploads/Aboutus/${image_url}`} alt="Infrastructure" width={100} /> : 
+        <Image src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_ABOUT_PATH_DIR}${image_url}`} alt="Infrastructure" width={100} /> : 
         <span>Not uploaded</span>,
     },
     {

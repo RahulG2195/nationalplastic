@@ -24,7 +24,7 @@ const UnclaimedDividend = ({ data }) => {
             <tr key={item.id}>
               <td>{item.year}</td>
               <td>
-                <a href={item.report_link}>{item.report_title}</a>
+                <a href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${item.report_link}`}>{item.report_title}</a>
               </td>
             </tr>
           ))}

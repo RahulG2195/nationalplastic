@@ -2,7 +2,8 @@ import { query } from '@/lib/db';
 import { writeFile, unlink } from 'fs/promises';
 import { join } from 'path';
 import {uploadFile} from "@/utils/fileUploader";
-import path from 'path';
+const fs = require("fs").promises;
+const path = require("path");
 
 const UPLOAD_DIR = join(process.cwd(), 'public','Assets', 'uploads','Investors');
 const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
@@ -47,8 +48,13 @@ export async function POST(request) {
     return new Response(JSON.stringify({ error: 'No file uploaded' }), { status: 400 });
   }
   try {
+    const pdfPath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
+    try {
+      await fs.access(pdfPath);
+    } catch {
+      await fs.mkdir(pdfPath, { recursive: true });
+    }
     await uploadFile(file); 
-    const pdfPath = `/Assets/uploads/Investors/${file.name}`;
     const result = await query({
       query: "INSERT INTO rp_transaction (document, url) VALUES (?, ?)",
       values: [document, pdfPath],
@@ -87,8 +93,13 @@ export async function PUT(request, { params }) {
   const id = formData.get('id');
   let url;
   if (file) {
+    const pdfPath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
+    try {
+      await fs.access(pdfPath);
+    } catch {
+      await fs.mkdir(pdfPath, { recursive: true });
+    }
     await uploadFile(file); 
-    url = `/Assets/uploads/Investors/${file.name}`;
 
     // Delete old file if it exists
     const oldTransaction = await query({

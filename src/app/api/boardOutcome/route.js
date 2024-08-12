@@ -1,14 +1,21 @@
 import { NextResponse } from 'next/server';
 import { query } from '@/lib/db';
 import { writeFile } from 'fs/promises';
-import path from 'path';
+
+const fs = require("fs").promises;
+const path = require("path");
 
 // Function to handle file uploads
 const uploadFile = async (file) => {
   try {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const filePath = path.join(process.cwd(), 'public/Assets/uploads', file.name); // Save the file with its original name
+    const filePath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}`;
+    try {
+      await fs.access(filePath);
+    } catch {
+      await fs.mkdir(filePath, { recursive: true });
+    }
     await writeFile(filePath, buffer);
     return file.name; // Return the filename for storing in the database
   } catch (error) {

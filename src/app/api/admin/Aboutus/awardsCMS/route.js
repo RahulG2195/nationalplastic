@@ -1,6 +1,8 @@
 import { query } from '@/lib/db';
 import { writeFile } from 'fs/promises';
-import path from 'path';
+
+const fs = require("fs").promises;
+const path = require("path");
 
 export async function POST(request) {
   const formData = await request.formData();
@@ -59,11 +61,16 @@ async function saveAwardOrCertificate(formData, action) {
 
     if (file && file.size > 0) {
       const buffer = Buffer.from(await file.arrayBuffer());
-      const filename = file.name;
-      const filepath = `./public/Assets/uploads/Aboutus/${filename}`
-      await writeFile(filepath, buffer);
-      image_url = `/${filename}`;
+      const filepath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_ABOUT_PATH_DIR}`;
+      try {
+        await fs.access(filepath);
+      } catch {
+        await fs.mkdir(filepath, { recursive: true });
+      }
+    await fs.writeFile(filepath, buffer);
+
     }
+    image_url = `${file.name}`;
 
     if (action === 'ADD') {
       const insertQuery = `

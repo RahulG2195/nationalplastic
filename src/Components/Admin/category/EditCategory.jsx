@@ -103,7 +103,7 @@ export default function EditCategory() {
         setValue(key, data[key]);
       });
       if (data.image_name) {
-        setImagePreview(`/Assets/uploads/category_banner/${data.image_name}`);
+        setImagePreview(`${process.env.NEXT_PUBLIC_BASE_URL}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}${data.image_name}`);
       }
     }
   }, [setValue]);

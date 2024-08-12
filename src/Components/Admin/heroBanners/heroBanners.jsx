@@ -76,7 +76,7 @@ const EditableBanner = ({ data }) => {
                     </Form>
                 ) : (
                     <div className="text-center">
-                        <img src={`/Assets/uploads/${formData.image}`} alt="Banner" className="img-fluid mb-3" style={{ maxWidth: '300px' }} />
+                        <img src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}${formData.image}`} alt="Banner" className="img-fluid mb-3" style={{ maxWidth: '300px' }} />
                         <p className='fw-bold'>Redirection Link: <span className='fw-normal'>{formData.redirection_link}</span></p>
                         <Button color="primary" onClick={() => setIsEditMode(true)}>
                             Edit

@@ -148,7 +148,7 @@ const CategoryList = () => {
       key: 'image_name',
       render: (text) => (
         <Image
-          src={`/Assets/uploads/category_banner/${text}`}
+          src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}${text}`}
           className='admin-product-img'
           alt={text}
           style={{ width: '100px', height: '50px' }}

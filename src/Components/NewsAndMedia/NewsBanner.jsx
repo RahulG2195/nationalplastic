@@ -29,7 +29,7 @@ const Banner = () => {
             {error && <p>{error}</p>}
             {bannerData && (
                 <Image
-                    src={`/Assets/uploads/${bannerData.image}`}
+                    src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}${bannerData.image}`}
                     width={100}
                     height={80}
                     layout='responsive'

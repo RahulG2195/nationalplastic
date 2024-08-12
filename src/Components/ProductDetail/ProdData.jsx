@@ -21,7 +21,7 @@ function ProdData({ category_id }) {
   const userState = useSelector((state) => state.userData.isLoggedIn);
   const [seo_url, setSeo_url] = useState(null);
   const [categoryName, setCategoryName] = useState(null);
-  const [catlogue, setCatlogue] = useState(null)
+  const [catlogue, setCatlogue] = useState(null);
   const [short_description, setShort_description] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [productId, setProductId] = useState(null);
@@ -55,7 +55,8 @@ function ProdData({ category_id }) {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`
         );
-        const { product, productDetails, colors, category, short_description } = response.data;
+        const { product, productDetails, colors, category, short_description } =
+          response.data;
         localStorage.setItem("product_id", product.product_id);
         if (!product) {
           setErrorMessage("Sorry, this product is not available");
@@ -66,8 +67,8 @@ function ProdData({ category_id }) {
           setSelectedColor(product.color);
           setProduct_id(product.product_id);
           setSeo_url(product.cat_seo_url);
-          setCatlogue(product.category_name)
-          setShort_description(product.descp)
+          setCatlogue(product.category_name);
+          setShort_description(product.descp);
           // CleanCateogoryName(category);
           const allColors = colors.map((color) => color.color);
           colorBasedProductsImages(allColors);
@@ -143,23 +144,24 @@ function ProdData({ category_id }) {
     }
   };
 
-
-  // image change of product on select of radio button 
+  // image change of product on select of radio button
   const handleColorChange = async (event) => {
     setSelectedColor(event.target.value);
     const colorBasedProduct = { color: event.target.value, name: id };
 
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/colorBasedProduct`,colorBasedProduct);
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/colorBasedProduct`,
+        colorBasedProduct
+      );
 
       const dataBasedOnColor = response.data?.data;
       const isImageAvailable = dataBasedOnColor[0].seo_url_clr;
       const newProductID = dataBasedOnColor[0].product_id;
       setProduct_id(newProductID);
       const NoOfImages = dataBasedOnColor[0].image_name;
-      
+
       if (NoOfImages || NoOfImages.includes(", ")) {
-        
         setProdData(dataBasedOnColor);
         setData(dataBasedOnColor);
       } else {
@@ -252,8 +254,9 @@ function ProdData({ category_id }) {
   const name = data.length > 0 ? data[0].product_name : null;
   const price = data.length > 0 ? data[0].price : null;
   const orignalPrice = data.length > 0 ? data[0].discount_price : null;
-  const baseImageNames = data.length > 0 ? data[0].image_name : "default_chair_img.webp";
-    
+  const baseImageNames =
+    data.length > 0 ? data[0].image_name : "default_chair_img.webp";
+
   const image = baseImageNames;
 
   const saving = (orignalPrice - price).toFixed(2);
@@ -267,7 +270,6 @@ function ProdData({ category_id }) {
               category_name={categoryName}
               product_name={name}
               catlogue={catlogue}
-
             />
           </div>
           <div className="col-md-6">
@@ -293,13 +295,14 @@ function ProdData({ category_id }) {
                   </div>
                 </div>
                 <div>
-                  <i className="fa fa-star-o rating-star pr-2" style={{color:'gold'}} />
+                  <i
+                    className="fa fa-star-o rating-star pr-2"
+                    style={{ color: "gold" }}
+                  />
                   <span className="rating-number">4.8</span>
                 </div>
                 <div className="shortProdDesc">
-                  <p>
-                    {short_description}
-                  </p>
+                  <p>{short_description}</p>
                 </div>
                 <div className="prod_type mt-4">
                   <div className="prod_clr">
@@ -308,8 +311,8 @@ function ProdData({ category_id }) {
                     </p>
 
                     {dataToShow.map((val, index) => {
-                      const baseImageUrl = "/Assets/uploads/products";
-                      const imageSrc = `${baseImageUrl}/${val.image_name}`;
+                      // const baseImageUrl = "/Assets/uploads/products";
+                      const imageSrc = `${process.env.NEXT_PUBLIC_BASE_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${val.image_name}`;
                       return (
                         <label
                           key={index}
@@ -341,12 +344,17 @@ function ProdData({ category_id }) {
                               transition: "all 0.3s ease",
                               ...(selectedColor === val.color
                                 ? {
-                                  boxShadow: "0 0 0 2px #fff, 0 0 0 4px #000",
-                                }
+                                    boxShadow: "0 0 0 2px #fff, 0 0 0 4px #000",
+                                  }
                                 : {}),
                             }}
                           >
                             <Image
+                              loader={({ src }) => {
+                                const fullUrl = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${src}`;
+                                console.log("Full image URL:", fullUrl);
+                                return fullUrl;
+                              }}
                               src={imageSrc}
                               alt={val.color}
                               width={3}
@@ -384,9 +392,9 @@ function ProdData({ category_id }) {
                       onClick={() => handleMoveToCart(productId, initialCount)}
                       className="m-2 px-md-5 btn "
                       style={{
-                        backgroundColor: isHovered ? '#fff' : '#cc0008',
-                        color: isHovered ? '#cc0008' : '#fff',
-                        border: '1px solid #cc0008'
+                        backgroundColor: isHovered ? "#fff" : "#cc0008",
+                        color: isHovered ? "#cc0008" : "#fff",
+                        border: "1px solid #cc0008",
                       }}
                       onMouseEnter={() => setIsHovered(true)}
                       onMouseLeave={() => setIsHovered(false)}
@@ -398,8 +406,9 @@ function ProdData({ category_id }) {
 
                 <Link
                   href={userState ? "/Address" : "#"}
-                  className={`btn m-2 px-md-5 ProdbtnRes ${!userState ? "disabled-button" : ""
-                    }`}
+                  className={`btn m-2 px-md-5 ProdbtnRes ${
+                    !userState ? "disabled-button" : ""
+                  }`}
                   onClick={() => handleBuyNow(productId)}
                 >
                   Buy Now
@@ -420,7 +429,6 @@ function ProdData({ category_id }) {
               </p> */}
 
               {/* terms and conditions */}
-
 
               {/* <div className="terms fw-medium term_and_condition">
                 <Link href="/TermsAndConditions">Terms and Conditions</Link>

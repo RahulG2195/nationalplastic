@@ -52,7 +52,7 @@ const EnvironmentalConservation = () => {
                 <div className="row">
                     {cardImages.map((imgsrc, index) => (
                         <div className="col-md-4 col-sm-6 my-3" key={index}>
-                            <Card imgsrc={`/Assets/uploads/${imgsrc}`} />
+                            <Card imgsrc={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}${imgsrc}`} />
                         </div>
                     ))}
                 </div>

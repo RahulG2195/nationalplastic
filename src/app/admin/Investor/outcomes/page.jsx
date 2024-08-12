@@ -134,7 +134,7 @@ const Outcome = () => {
       title: 'file_name',
       dataIndex: 'file_name',
       key: 'file_name',
-      render: (text) => <a href={text} target="_blank" rel="noopener noreferrer">View File</a>,
+      render: (text) => <a href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${text}`} target="_blank" rel="noopener noreferrer">View File</a>,
     },
     {
       title: 'Actions',

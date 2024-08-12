@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 const { Option } = Select;
 
 const OrderTable = () => {
-  
+
   const [orders, setOrders] = useState([]);
   const [ordersDetail, setordersDetail] = useState([]);
   const [AllOrderData, setAllOrderData] = useState([]);
@@ -21,6 +21,7 @@ const OrderTable = () => {
   const [newStatus, setNewStatus] = useState("");
   const [cancelReason, setCancelReason] = useState("");
 
+
   const router = useRouter();
 
   useEffect(() => {
@@ -31,18 +32,13 @@ const OrderTable = () => {
     try {
       setLoading(true);
       const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`);
-      
+
       const orderData = response.data.orderData;
       const UserOrderListDetail = response.data.orderDetailData;
       const OrderStatusApi = response.data.OrderStatus;
-
-      // const data = await response.json();
       if (response.data.status === 200) {
         setOrders(orderData);
         setOrderStatus(OrderStatusApi)
-        // setordersDetail(UserOrderListDetail);
-        
-            
       } else {
         throw new Error(data.message || "Failed to fetch orders");
       }
@@ -58,14 +54,27 @@ const OrderTable = () => {
     setIsStatusModalVisible(true);
   };
 
-
   const updateOrderStatus = async () => {
     try {
       const data = {newStatus: newStatus, order_id: selectedOrder}
       const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, data);
-
+  
       message.success(`Order status has been updated`);
       setIsStatusModalVisible(false);
+      console.log("orders" + JSON.stringify( orders));
+      
+      // Send email notification
+      const order = orders.find(o => o.order_id === selectedOrder);
+      console.log("order" +  JSON.stringify(order));
+
+      if (order) {
+        await sendEmail(
+          order.customer_email, // Assuming the order object has an email field
+          'Order Status Update',
+          `Your order (ID: ${order.order_id}) status has been updated to ${newStatus}.`
+        );
+      }
+  
       // After successful update, refetch the orders
       await fetchOrders();
     } catch (error) {
@@ -73,15 +82,53 @@ const OrderTable = () => {
     }
   };
 
+
+  const handleCancelOrder = (orderId) => {
+    setSelectedOrder(orderId);
+    setIsCancelModalVisible(true);
+  };
+
   const cancelOrder = async () => {
     try {
-     
+      const data = { order_id: selectedOrder, cancelReason: cancelReason };
+      await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/CancelOrder`, data);
+      
       message.success("Order cancelled successfully");
       setIsCancelModalVisible(false);
+      
+      // Send email notification
+      const order = orders.find(o => o.order_id === selectedOrder);
+      if (order) {
+        await sendEmail(
+          order.email, // Assuming the order object has an email field
+          'Order Cancellation',
+          `Your order (ID: ${order.order_id}) has been cancelled. Reason: ${cancelReason}`
+        );
+      }
+  
+      setCancelReason("");
       // After successful cancellation, refetch the orders
       await fetchOrders();
     } catch (error) {
       message.error("Failed to cancel order");
+    }
+  };
+
+  const sendEmail = async (to, subject, text) => {
+    try {
+      const response = await axios.post('/api/resend', {
+        to,
+        subject,
+        text
+      });
+      if (response.data.status === 200) {
+        console.log('Email sent successfully');
+      } else {
+        throw new Error('Failed to send email');
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      message.error('Failed to send notification email');
     }
   };
 
@@ -96,14 +143,14 @@ const OrderTable = () => {
       title: "Name",
       dataIndex: "FirstName",
       key: "FirstName",
-        // render: (FirstName, LasttName) => {
-        //   const fullName = FirstName + ' ' + LasttName;
-        //   return fullName;
-        // },
+      render: (_, record) => {
+        console.log("Name record:", record); // Add this line
+        return `${record.FirstName || record.customer_email} `;
+      },
     },
     {
       title: "Mobile No",
-      dataIndex: "Phone",
+      dataIndex: "Phone", // Make sure this matches the field name in your API response
       key: "mobile",
     },
     {
@@ -143,13 +190,13 @@ const OrderTable = () => {
           router.push(`/admin/Order_detail/${record.order_id}`);
         };
         return (
-            <Button
-              icon={<EditOutlined />}
-              style={{ marginRight: 8 }}
-              onClick={ShowOrderDetail}
-            >
-              View Detail
-            </Button>
+          <Button
+            icon={<EditOutlined />}
+            style={{ marginRight: 8 }}
+            onClick={ShowOrderDetail}
+          >
+            View Detail
+          </Button>
         );
       },
     },
@@ -165,13 +212,13 @@ const OrderTable = () => {
           >
             Update Status
           </Button>
-          {/* <Button
+          <Button
             icon={<DeleteOutlined />}
-            onClick={() => handleCancelOrder(record)}
+            onClick={() => handleCancelOrder(record.order_id)}
             danger
           >
             Cancel Order
-          </Button> */}
+          </Button>
         </>
       ),
     },
@@ -197,13 +244,13 @@ const OrderTable = () => {
         >
           {
             OrderStatus.map(data => {
-              return  <Option value={data.status_id}>{data.status_name}</Option>
+              return <Option key={data.status_id} value={data.status_id}>{data.status_name}</Option>
             })
           }
         </Select>
       </Modal>
 
-      {/* <Modal
+      <Modal
         title="Cancel Order"
         open={isCancelModalVisible}
         onOk={cancelOrder}
@@ -215,7 +262,7 @@ const OrderTable = () => {
           value={cancelReason}
           onChange={(e) => setCancelReason(e.target.value)}
         />
-      </Modal> */}
+      </Modal>
     </>
   );
 };

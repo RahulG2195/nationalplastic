@@ -36,7 +36,7 @@ const YearPage = ({ params }) => {
             {data.map((item, index) => (
               <p key={item.id} className="mb-2">
                 <a 
-                  href={item.file_path} 
+                  href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${item.file_path}`} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:underline"
