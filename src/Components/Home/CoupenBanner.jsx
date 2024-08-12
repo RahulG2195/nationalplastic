@@ -26,7 +26,7 @@ function CoupenBanner() {
           <div className="">
             <div className="position-relative dsktpbnr">
               <Image
-                src="/Assets/svg/Group 944/Group 94.png"
+                src="/Assets/svg/Group 944/Group 944.png"
                 alt="gift image"
                 width={100}
                 height={100}
