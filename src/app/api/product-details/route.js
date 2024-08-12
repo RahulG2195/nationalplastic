@@ -3,19 +3,26 @@ import { query } from "@/lib/db";
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get('id');
-
+/* SELECT p.*, c.category_name, pd.descp, c.seo_url AS cat_seo_url
+      FROM products p
+      LEFT JOIN categories c ON p.category_id = c.category_id
+      RIGHT JOIN product_detail pd ON p.product_id = pd.prod_id
+      WHERE p.product_id = ? OR LOWER(p.seo_url) = LOWER(?)
+      LIMIT 1 */
   try {
     const [product] = await query({
+      
       query: `
-        SELECT p.*, c.category_name, pd.descp, c.seo_url AS cat_seo_url
+        SELECT p.*, c.category_name, c.seo_url AS cat_seo_url
         FROM products p
-        LEFT JOIN categories c ON p.category_id = c.category_id
-        RIGHT JOIN product_detail pd ON p.product_id = pd.prod_id
+        LEFT JOIN categories c ON p.category_id = c.category_id 
         WHERE p.product_id = ? OR LOWER(p.seo_url) = LOWER(?)
         LIMIT 1
       `,
       values: [id, id],
     });
+
+  // console.log('product', product);
     
 
     if (!product) {

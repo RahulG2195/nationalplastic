@@ -52,11 +52,10 @@ function ProdData({ category_id }) {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`
-        );
-        const { product, productDetails, colors, category, short_description } =
-          response.data;
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`);
+        // console.log('response', response);
+        const { product, productDetails, colors, category, short_description } = response.data;
+
         localStorage.setItem("product_id", product.product_id);
         if (!product) {
           setErrorMessage("Sorry, this product is not available");
@@ -272,11 +271,11 @@ function ProdData({ category_id }) {
               catlogue={catlogue}
             />
           </div>
-          <div className="col-md-6">
+          <div className="col-md-5  ">
             <ProductDetailSlider imageurl={image} />
           </div>
 
-          <div className="col-md-6">
+          <div className="col-md-6 mt-5 mt-md-0">
             <div className="product-dtl">
               <div className="product-info">
                 <div className="product-name">
@@ -343,19 +342,21 @@ function ProdData({ category_id }) {
                               } : {}),
                             }}
                           >
-                            <Image
-                              src={imageSrc}
-                              alt={val.color}
-                              width={48}
-                              height={48}
-                              layout="responsive"
-                              objectFit="cover"
-                              style={{
-                                borderRadius: "50%",
-                                height: "100%",
-                                width: "100%",
-                              }}
-                            />
+                            <div style={{ width: '100%', height: '100%', display: 'flex' }}>
+                              <Image
+                                src={imageSrc}
+                                alt={val.color}
+                                height={100}
+                                width={100}
+                                layout="responsive"
+                                objectFit="cover"
+                                style={{
+                                  borderRadius: "50%",
+                                  width: '100%',
+                                  height: '100%',
+                                }}
+                              />
+                            </div>
                           </div>
                         </label>
                       );
