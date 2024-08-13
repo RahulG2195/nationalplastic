@@ -51,16 +51,19 @@ const Register = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
     setFormErrors(prev => ({ ...prev, [name]: "" }));
   };
-  const handleOtpChange = (element, index) => {
-    if (isNaN(element.value)) return false;
+  const handleOtpChange = (target, index) => {
+    const value = target.value.replace(/\D/g, '');
+    setFormData(prevData => {
+      const newOtp = prevData.otp.split('');
+      newOtp[index] = value;
+      return {
+        ...prevData,
+        otp: newOtp.join('').slice(0, 6)
+      };
+    });
 
-    setFormData(prev => ({
-      ...prev,
-      otp: prev.otp.substring(0, index) + element.value + prev.otp.substring(index + 1)
-    }));
-
-    if (element.nextSibling) {
-      element.nextSibling.focus();
+    if (value && index < 5) {
+      otpInputs.current[index + 1].focus();
     }
   };
 
@@ -71,9 +74,9 @@ const Register = () => {
   };
   const validateForm = () => {
     const errors = {};
-    if (!isValidState(formData.state)){errors.state = "Invalid state";}
-    if (!isValidCity(formData.city)){errors.city = "Invalid city";}
-    if (!isValidPincode(formData.pincode)){errors.pincode = "Invalid pincode";}
+    if (!isValidState(formData.state)) { errors.state = "Invalid state"; }
+    if (!isValidCity(formData.city)) { errors.city = "Invalid city"; }
+    if (!isValidPincode(formData.pincode)) { errors.pincode = "Invalid pincode"; }
     if (!isValidName(formData.firstName)) errors.firstName = "Invalid first name";
     if (!isValidName(formData.lastName)) errors.lastName = "Invalid last name";
     if (!isValidEmail(formData.email)) errors.email = "Invalid email address";
@@ -85,7 +88,7 @@ const Register = () => {
   };
   const combineAddressFields = (formData) => {
     // Combine address fields
-    
+
     const fullAddress = `${formData.address}, ${formData.city}, ${formData.state}, ${formData.pincode}`.trim();
 
     // Create updated formData with combined address
@@ -123,6 +126,9 @@ const Register = () => {
           throw new Error('OTP has expired.');
         }
         if (storedOtp !== formData.otp) {
+          console.log("sotp" + storedOtp)
+          console.log("sotp2 " + formData.otp)
+
           throw new Error('Invalid OTP.');
         }
         // If OTP is valid, proceed with user registration
@@ -142,6 +148,19 @@ const Register = () => {
       setMessage(error.message || 'An error occurred. Please try again.');
       throw error;
     }
+  };
+  const handleOtpPaste = (e) => {
+    e.preventDefault();
+    const pastedData = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6);
+
+    setFormData(prevData => ({
+      ...prevData,
+      otp: pastedData
+    }));
+
+    // Focus on the next empty input or the last input if all are filled
+    const focusIndex = Math.min(pastedData.length, 5);
+    otpInputs.current[focusIndex].focus();
   };
 
   const handleSubmit = async (event) => {
@@ -189,6 +208,7 @@ const Register = () => {
     "Mobile No": "phone", "State": "state", "City": "city", "Pincode": "pincode",
     "Password": "password", "Confirm Password": "confirmPassword", "Address": "address",
   };
+
 
   return (
     <div className="container">
@@ -260,6 +280,7 @@ const Register = () => {
                           value={formData.otp[index] || ''}
                           onChange={e => handleOtpChange(e.target, index)}
                           onKeyDown={e => handleOtpKeyDown(e, index)}
+                          onPaste={handleOtpPaste}
                         />
                       ))}
                     </div>
