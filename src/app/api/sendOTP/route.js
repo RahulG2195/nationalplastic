@@ -1,5 +1,5 @@
-
-import { sendMail } from '@/utils/mailOtp';
+import nodemailer from "nodemailer";
+import { NextRequest, NextResponse } from "next/server";
 import crypto from 'crypto';
 
 export async function POST(request) {
@@ -7,26 +7,49 @@ export async function POST(request) {
     const { email } = await request.json();
 
     if (!email) {
-      return new Response(
-        JSON.stringify({ status: 400, message: 'Email is required' }),
-        { status: 400 }
-      );
+      return NextResponse.json({ success: false, message: 'Email is required' }, { status: 400 });
     }
 
     const otp = crypto.randomInt(100000, 999999).toString(); // Generate a 6-digit OTP
     const otpExpiry = new Date(Date.now() + 15 * 60 * 1000).toISOString(); // OTP valid for 15 minutes
 
-    const mailText = `Your OTP is ${otp}. It is valid for the next 15 minutes.`;
-    await sendMail(email, 'Your OTP Code', mailText);
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "webDevs2024@gmail.com",
+        pass: "fkbt nnro yfnk ngmc", // Replace with your Gmail App Password
+      },
+    });
 
-    return new Response(
-      JSON.stringify({ status: 200, otp, otpExpiry, message: 'OTP sent successfully' }),
-      { status: 200 }
-    );
+    // Create HTML email content
+    const htmlContent = `
+    <p>Hello,</p>
+    <p>Your OTP is <strong>${otp}</strong>.</p>
+    <p>It is valid for the next 15 minutes.</p>
+    <p>If you didn't request this OTP, please ignore this email.</p>
+    <p>Regards,</p>
+    <p>Your Team</p>
+    `;
+
+    const info = await transporter.sendMail({
+      from: "webDevs2024@gmail.com",
+      to: email,
+      subject: "Your OTP Code",
+      html: htmlContent,
+    });
+
+    return NextResponse.json({ 
+      success: true, 
+      otp, 
+      otpExpiry, 
+      message: 'OTP sent successfully' 
+    }, { status: 200 });
+
   } catch (error) {
-    return new Response(
-      JSON.stringify({ status: 500, error: error.message }),
-      { status: 500 }
-    );
+    console.error("Error sending email:", error);
+    return NextResponse.json({ 
+      success: false, 
+      error: "Email sending failed" 
+    }, { status: 500 });
   }
 }
