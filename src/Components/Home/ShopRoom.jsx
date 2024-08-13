@@ -18,7 +18,7 @@ export default function ShopRoom() {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_URL}/Category`
+          `${process.env.NEXT_PUBLIC_BASE_URL}/Category`
         );
         const filteredData = response.data.ShopRooms;
         // (item) =>
