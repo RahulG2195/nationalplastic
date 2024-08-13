@@ -5,6 +5,9 @@
     --header-secondary-clr: #262262;
     --header-font-size: 35px;
 }
+.text-danger{
+    color: #CC0008 !important;
+}
 
 .fw-large {
     font-size: 70px;

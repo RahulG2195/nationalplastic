@@ -60,6 +60,16 @@
     border-radius: 20px 20px 0 0;
     border-bottom: 1px solid lightgray;
 }
+.product-detail-container .getQouteButton{
+    background-color: #CC0008 ;
+}
+.product-detail-container .getQouteButton:hover{
+    background-color: transparent !important;
+    border: 1px solid #CC0008 !important;
+    color: #CC0008 !important;
+
+
+}
 
 @media (max-width:576px) {
     .preCont {
