@@ -12,7 +12,7 @@ import {
   message,
   Spin,
 } from "antd";
-import { UploadOutlined, LoadingOutlined } from "@ant-design/icons";
+import { UploadOutlined, LoadingOutlined,DeleteOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 
@@ -37,6 +37,7 @@ export default function MyComponent() {
         `${process.env.NEXT_PUBLIC_BASE_URL}/Investor/disclosure`
       );
       console.log("response: " + JSON.stringify(response));
+      const data = response.data.yearsList;
      
       const yearLabels = data.map((item) => item.label);
       console.log("response: " + JSON.stringify(yearLabels));
@@ -62,7 +63,6 @@ export default function MyComponent() {
         `${process.env.NEXT_PUBLIC_BASE_URL}/Investor/disclosure?year=${year}`
       );
       setYearData(response.data.results);
-      const data = response.data.yearsList;
     } catch (error) {
       console.error("Error fetching year data:", error);
       message.error("Failed to fetch year data");
@@ -174,7 +174,12 @@ export default function MyComponent() {
     { title: "ID", dataIndex: "id", key: "id" },
     { title: "Year", dataIndex: "year", key: "year" },
     { title: "Title", dataIndex: "title", key: "title" },
-    { title: "File Path", dataIndex: "filePath", key: "filePath" },
+    {
+      title: 'file_name',
+      dataIndex: 'file_path',
+      key: 'file_path',
+      render: (text) => <a href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${text}`} target="_blank" rel="noopener noreferrer">View File</a>,
+    },
     {
       title: "Status",
       dataIndex: "status",
@@ -192,9 +197,13 @@ export default function MyComponent() {
       title: "Actions",
       key: "actions",
       render: (_, record) => (
+        <>
         <Button onClick={() => showModal(record)} type="link">
           Edit
         </Button>
+        <Button icon={<DeleteOutlined />} onClick={() => handleDelete(record)} danger />
+        </>
+
       ),
     },
   ];
@@ -204,6 +213,20 @@ export default function MyComponent() {
 const showNewYearModal = () => {
   newYearForm.resetFields();
   setNewYearModalVisible(true);
+};
+const handleDelete = async (record) => {
+  try {
+    console.log("record"+ JSON.stringify( record));
+    const id = record.id;
+
+    await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/disclosure`,{ 
+      data: { id: id } 
+    });
+    message.success('CorpReport deleted successfully');
+    fetchYearData(selectedYear);
+  } catch (error) {
+    message.error('Failed to delete CorpReport');
+  }
 };
 
 const handleNewYearOk = async () => {
