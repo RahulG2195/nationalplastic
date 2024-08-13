@@ -12,7 +12,7 @@ import {
   message,
   Spin,
 } from "antd";
-import { UploadOutlined, LoadingOutlined } from "@ant-design/icons";
+import { UploadOutlined, LoadingOutlined,DeleteOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 
@@ -197,9 +197,13 @@ export default function MyComponent() {
       title: "Actions",
       key: "actions",
       render: (_, record) => (
+        <>
         <Button onClick={() => showModal(record)} type="link">
           Edit
         </Button>
+        <Button icon={<DeleteOutlined />} onClick={() => handleDelete(record)} danger />
+        </>
+
       ),
     },
   ];
@@ -209,6 +213,20 @@ export default function MyComponent() {
 const showNewYearModal = () => {
   newYearForm.resetFields();
   setNewYearModalVisible(true);
+};
+const handleDelete = async (record) => {
+  try {
+    console.log("record"+ JSON.stringify( record));
+    const id = record.id;
+
+    await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/disclosure`,{ 
+      data: { id: id } 
+    });
+    message.success('CorpReport deleted successfully');
+    fetchYearData(selectedYear);
+  } catch (error) {
+    message.error('Failed to delete CorpReport');
+  }
 };
 
 const handleNewYearOk = async () => {

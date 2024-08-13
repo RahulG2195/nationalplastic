@@ -24,7 +24,18 @@ export async function GET(request) {
         return new Response(JSON.stringify({ success: false, message: e.message }), { status: 500 });
     }
 }
-
+export async function DELETE(request) {
+    try {
+        const { id } = await request.json();
+        const result = await query({
+            query: "DELETE FROM disclosure_data WHERE id = ?;",
+            values: [id],
+        });
+        return new Response(JSON.stringify({ success: true, message: "Record deleted successfully" }), { status: 200 });
+    } catch (e) {
+        return new Response(JSON.stringify({ success: false, message: e.message }), { status: 500 });
+    }
+}
 // PUT method for handling form data (file uploads)
 export async function PUT(request) {
     try {
