@@ -41,7 +41,7 @@ const OutcomeAGM = () => {
               <div className="inn-content-wrap">
                 {Object.entries(agmOutcomes).map(([year, yearData]) => (
                   <div key={year}>
-                    <h3>Year {year}</h3>
+                    <h3>{year}</h3>
                     <table className="table table-responsive table-striped table-light">
                       <tbody>
                         {yearData.map((item, index) => (

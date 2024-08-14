@@ -199,21 +199,6 @@ export async function PUT(request) {
     // Handle multiple image uploads
 
     const imageNames = [];
-    /* if (images && images.length > 0) {
-      for (const image of images) {
-        try {
-          await uploadImage(image); // Ensure this function handles image upload and returns the image name
-          const imageName = image.name;
-          imageNames.push(imageName);
-        } catch (error) {
-          console.error(`Error uploading image ${image.name}:`, error);
-          throw new Error(
-            `Failed to upload image ${image.name}: ${error.message}`
-          );
-        }
-      }
-    } */
-
       if (images && images.length > 0) {
         for (let image of images) {
           console.log(`Processing image:`, image);
@@ -271,7 +256,7 @@ export async function PUT(request) {
 
     // Set image_name to the new image names if uploaded, otherwise keep the existing ones
     data.image_name = imageNames.length > 0 ? imageNames.join(", ") : formData.get("image_name");
-
+    
     // Convert color name to color code
     data.category_id = formData.get('category_id');
     let color_code;
