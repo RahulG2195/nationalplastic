@@ -34,7 +34,7 @@ function Catalogue() {
       <div className="container">
         <div className="">
           <Image
-            src="/Assets/images/banner/Catalouge-page-banner.png"
+            src="/Assets/uploads/Catalouge-page-banner-V2.jpg"
             className="img-fluid d-block w-100"
             alt="ProdCatalouge image"
             width={100}
