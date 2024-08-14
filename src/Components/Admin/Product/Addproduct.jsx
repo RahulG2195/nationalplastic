@@ -2,13 +2,16 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
-import { Form, Input, Button, InputNumber, Select, message } from 'antd';
+import { Form, Input, Button, InputNumber, Select, message,Space } from 'antd';
 import "./EditProduct.css";
 import axios from 'axios';
 import { toast, Bounce } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const { Option } = Select;
 export default function App() {
+  const router = useRouter();
+
   const { control, handleSubmit, setValue, getValues, reset, formState: { errors } } = useForm();
   const [imagePreviews, setImagePreviews] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -20,6 +23,10 @@ export default function App() {
     navigate('/admin/product', { replace: true });
     window.location.reload();
   };
+  const handleCancel = () => {
+    router.push("/admin/product");
+  };
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -335,23 +342,17 @@ export default function App() {
   />
 </Form.Item>
 
-      {/* <Form.Item
-        label="Product Status"
-        validateStatus={errors.prod_status ? 'error' : ''}
-        help={errors.prod_status ? 'Please input the product status!' : ''}
-      >
-        <Controller
-          name="prod_status"
-          control={control}
-          rules={{ required: true }}
-          render={({ field }) => <Input {...field} />}
-        />
-      </Form.Item> */}
+
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+        <Space>
+        <Button onClick={handleCancel}>
+            Cancel
+          </Button>
         <Button type="primary" htmlType="submit">
           Submit
         </Button>
+        </Space>
       </Form.Item>
     </Form>
   );

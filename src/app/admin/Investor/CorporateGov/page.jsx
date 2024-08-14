@@ -159,6 +159,7 @@ const CorporateGov = () => {
 
   return (
     <div style={{ padding: '20px' }}>
+       <h1>Corporate Report</h1>
       <Button icon={<PlusOutlined />} onClick={() => showModal()} style={{ marginBottom: '20px' }}>
         Add Corporate
       </Button>

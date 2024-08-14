@@ -2,7 +2,6 @@
 import React, { useEffect } from 'react';
 import { useForm, Controller, useWatch } from 'react-hook-form';
 import { Form, Input, Button, InputNumber, DatePicker, Switch, Select, Space } from 'antd';
-import moment from 'moment';
 import axios from 'axios';
 import { notify, notifyError } from '@/utils/notify';
 import { useRouter } from "next/navigation";
@@ -55,6 +54,9 @@ export default function AddCoupon() {
       console.error('Submission Error:', error.message);
       // Handle error (e.g., show error message)
     }
+  };
+  const handleCancel = () => {
+    router.push("/admin/CouponList");
   };
 
   return (
@@ -173,9 +175,14 @@ export default function AddCoupon() {
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+        <Space >
+      <Button onClick={handleCancel}>
+            Cancel
+          </Button>
         <Button type="primary" htmlType="submit">
           Add Coupon
         </Button>
+        </Space >
       </Form.Item>
     </Form>
   );

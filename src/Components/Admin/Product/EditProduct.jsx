@@ -1,14 +1,16 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Form, Input, Button, InputNumber, Spin, Select } from 'antd';
+import { Form, Input, Button, InputNumber, Spin, Select ,Space} from 'antd';
 import "./EditProduct.css";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast, Bounce } from "react-toastify";
+import { useRouter } from "next/navigation";
 const { Option } = Select;
 
 export default function App() {
+  const router = useRouter();
   const { control, handleSubmit, setValue, getValues, reset, formState: { errors } } = useForm();
   const [imagePreviews, setImagePreviews] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -21,6 +23,11 @@ export default function App() {
     navigate('/admin/product', { replace: true });
     window.location.reload();
   };
+  const handleCancel = () => {
+    localStorage.removeItem("productToEdit");
+    router.push("/admin/product");
+  };
+
 
   const updateProduct = async (formData) => {
     try {
@@ -378,14 +385,24 @@ export default function App() {
           <Controller
             name="prod_status"
             control={control}
-            render={({ field }) => <Input {...field} />}
+            render={({ field }) => (
+              <Select {...field} style={{ width: '100%' }}>
+                <Option value="0">Disable</Option>
+                <Option value="1">Active</Option>
+              </Select>
+            )}
           />
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+            <Space>
+            <Button onClick={handleCancel}>
+            Cancel
+          </Button>
           <Button type="primary" htmlType="submit" disabled={isLoading}>
             {isLoading ? 'Updating...' : 'Update'}
           </Button>
+          </Space>
         </Form.Item>
       </Form>
     </Spin>

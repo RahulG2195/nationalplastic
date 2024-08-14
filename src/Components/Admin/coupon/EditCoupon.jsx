@@ -76,7 +76,10 @@ export default function EditCoupon() {
       });
     }
   }, [setValue]);
-
+  const handleCancel = () => {
+    localStorage.removeItem("couponToEdit");
+    router.push("/admin/CouponList");
+  };
   return (
     <Form
       onFinish={handleSubmit(onSubmit)}
@@ -193,9 +196,14 @@ export default function EditCoupon() {
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+        <Space>  
+        <Button onClick={handleCancel}>
+            Cancel
+          </Button>          
         <Button type="primary" htmlType="submit">
           Update
         </Button>
+        </Space>
       </Form.Item>
     </Form>
   );

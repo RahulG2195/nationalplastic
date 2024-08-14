@@ -105,14 +105,33 @@ const Register = () => {
     return updatedFormData;
   };
 
+  function encrypt(text, key) {
+    let result = '';
+    for (let i = 0; i < text.length; i++) {
+      result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+    }
+    return btoa(result); // Convert to base64
+  }
+  function decrypt(encoded, key) {
+    const text = atob(encoded); // Convert from base64
+    let result = '';
+    for (let i = 0; i < text.length; i++) {
+      result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+    }
+    return result;
+  }
+
   const handleOTP = async (action) => {
     try {
       if (action === 'send') {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/sendOTP`, { email: formData.email });
         if (response.status === 200) {
           const { otp, otpExpiry } = response.data;
-          localStorage.setItem('otp', otp);
-          localStorage.setItem('otpExpiry', otpExpiry);
+          const secretKey = 'Saving_the 0tp Locally'; // Manage this securely
+          const encryptedOTP = encrypt(otp.toString(), secretKey);
+          const encryptedExpiry = encrypt(otpExpiry.toString(), secretKey);
+          localStorage.setItem('otp', encryptedOTP);
+          localStorage.setItem('otpExpiry', encryptedExpiry);
           setMessage('Please check your email, OTP sent successfully.');
           setOtpSent(true);
         } else {
@@ -120,18 +139,16 @@ const Register = () => {
         }
         // ... (keep the existing 'send' logic)
       } else if (action === 'verify') {
-        const storedOtp = localStorage.getItem('otp');
-        const storedOtpExpiry = localStorage.getItem('otpExpiry');
+        const storedEncryptedOTP = localStorage.getItem('otp');
+        const storedEncryptedExpiry = localStorage.getItem('otpExpiry');
+        const storedOtp = decrypt(storedEncryptedOTP, secretKey);
+        const storedOtpExpiry = decrypt(storedEncryptedExpiry, secretKey);
         if (new Date(storedOtpExpiry) < new Date()) {
           throw new Error('OTP has expired.');
         }
         if (storedOtp !== formData.otp) {
-          console.log("sotp" + storedOtp)
-          console.log("sotp2 " + formData.otp)
-
           throw new Error('Invalid OTP.');
         }
-        // If OTP is valid, proceed with user registration
         const updatedFormData = combineAddressFields(formData);
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Users`, updatedFormData);
         localStorage.removeItem('otp');
@@ -293,6 +310,9 @@ const Register = () => {
                   </button>
                 </div>
                 {message && <div className="alert alert-info">{message}</div>}
+                <div className="mt-3 text-center">
+                  <p>Already Registered? <a href="/Login">Login</a></p>
+                </div>
               </div>
             </form>
           </div>

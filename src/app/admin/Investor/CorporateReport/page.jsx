@@ -152,6 +152,7 @@ const CorpReport = () => {
 
   return (
     <div style={{ padding: '20px' }}>
+      <h1>Corporate Policies and Compliance</h1>
       <Button icon={<PlusOutlined />} onClick={() => showModal()} style={{ marginBottom: '20px' }}>
         Add CorpReport
       </Button>
@@ -168,10 +169,8 @@ const CorpReport = () => {
           </Form.Item>
           <Form.Item name="cor_type" label="cor_type" rules={[{ required: true }]}>
             <Select>
-              <Option value="Corporate Governance">Corporate Governance</Option>
-              <Option value="Corporate Report">Corporate Report</Option>
+              <Option value="Compliance Certifica">Corporate Compliance Report</Option>
               <Option value="Policy">Policy</Option>
-
             </Select>
           </Form.Item>
           <Form.Item name="file_name" label="Pdf File" rules={[{ required: !editingId }]}>
