@@ -154,7 +154,7 @@ const AuditedPage = () => {
       <Button icon={<PlusOutlined />} onClick={() => showModal()} style={{ marginBottom: '20px' }}>
         Add Audited
       </Button>
-      <Table columns={columns} dataSource={Audited} />
+      <Table columns={columns}  dataSource={[...Audited].sort((a, b) => b.years - a.years)} />
       <Modal
         title={editingId ? 'Edit Audited' : 'Add Audited'}
         open={isModalVisible}

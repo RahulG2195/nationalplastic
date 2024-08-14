@@ -12,7 +12,8 @@ const Annual = () => {
       try {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/GetInvestor`, { type: 'report' });
         console.log('response', response);
-        setAnnualReports(response.data.results); 
+        const sortedReports = response.data.results.sort((a, b) => b.years - a.years);
+        setAnnualReports(sortedReports); 
       } catch (error) {
         console.error('Error fetching Audited financial results data:', error);
         setError('Failed to load data. Please try again later.');

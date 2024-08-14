@@ -225,12 +225,6 @@ const navigation = [
     ],
     icon: "bi bi-hdd-stack",
   },
-
-  {
-    title: "Table",
-    href: "/ui/tables",
-    icon: "bi bi-layout-split",
-  },
 ];
 
 const Sidebar = ({ showMobilemenu }) => {
