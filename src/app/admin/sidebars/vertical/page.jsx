@@ -120,7 +120,7 @@ const navigation = [
     items:[
       {
         title: "Outcome Of Agm",
-        href: "/admin/Investor/outcomes",
+        href: "/admin/Investor/OutcomeAGMcms",
       },
       {
         title: "Notice",
