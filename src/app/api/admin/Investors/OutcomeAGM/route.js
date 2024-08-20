@@ -1,6 +1,8 @@
 import { query } from "@/lib/db";
 import { NextResponse } from 'next/server';
 import { uploadFile } from "@/utils/fileUploader";
+const path = require("path");
+
 
 export async function POST(request) {
   const formData = await request.formData();
@@ -12,8 +14,8 @@ export async function POST(request) {
   let filePath = '';
   if (file) {
     try {
-      await uploadFile(file);
-      filePath = file.name;
+      const toLowerCase = await uploadFile(file);
+      filePath = toLowerCase;
     } catch (error) {
       console.error('File upload error:', error);
       return NextResponse.json({ message: "Error saving file" }, { status: 500 });
@@ -44,8 +46,8 @@ export async function PUT(request) {
   let filePath = '';
   if (file) {
     try {
-      await uploadFile(file);
-      filePath = file.name;
+      const toLowerCase = await uploadFile(file);
+      filePath = toLowerCase;
     } catch (error) {
       console.error('File upload error:', error);
       return NextResponse.json({ message: "Error saving file" }, { status: 500 });

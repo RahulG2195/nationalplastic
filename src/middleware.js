@@ -6,7 +6,6 @@ const secret = 'national_plastic';
 
 export const config = {
   matcher: ['/admin/:path*'],
-  // runtime: 'nodejs' // Specify Node.js runtime here
 };
 
 export async function middleware(request) {

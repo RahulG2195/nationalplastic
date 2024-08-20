@@ -12,7 +12,7 @@ export const notify = (message) => {
     draggable: true,
     progress: undefined,
     theme: "light",
-    transition: Bounce, // Assuming Bounce is already defined somewhere
+    transition: Bounce,
   });
 };
 
@@ -26,6 +26,6 @@ export const notifyError = (errorMessage) => {
     draggable: true,
     progress: undefined,
     theme: "light",
-    transition: Bounce, // Assuming Bounce is already defined somewhere
+    transition: Bounce,
   });
 };

@@ -1,5 +1,7 @@
 import { query } from '@/lib/db';
 import { uploadFile } from "@/utils/fileUploader";
+const path = require("path");
+
 
 export async function POST(request) {
   try {
@@ -27,8 +29,8 @@ export async function POST(request) {
 
 async function updateUnclaimedDividendFile({ id, file }) {
   try {
-    await uploadFile(file);
-    const report_link = file.name;
+    const toLowerCase = await uploadFile(file);
+    const report_link = toLowerCase;
     await query({
       query: "UPDATE unclaimed_dividend SET report_link = ? WHERE id = ?",
       values: [report_link, id],
@@ -41,8 +43,9 @@ async function updateUnclaimedDividendFile({ id, file }) {
 
 async function updateShareTransferFile({ id, file }) {
   try {
-    await uploadFile(file);
-    const document_link = file.name;
+    const toLowerCase = await uploadFile(file);
+    const document_link = toLowerCase;
+
     await query({
       query: "UPDATE share_transfer SET document_link = ? WHERE id = ?",
       values: [document_link, id],

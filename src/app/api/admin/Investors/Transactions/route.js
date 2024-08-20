@@ -54,8 +54,9 @@ export async function POST(request) {
     } catch {
       await fs.mkdir(pdfPath, { recursive: true });
     }
-    const file_name = file.name;
-    await uploadFile(file); 
+    let file_name = file.name;
+    const toLowerCase = await uploadFile(file); 
+    file_name = toLowerCase;
     const result = await query({
       query: "INSERT INTO rp_transaction (document, url) VALUES (?, ?)",
       values: [document, file_name],
@@ -93,6 +94,7 @@ export async function PUT(request, { params }) {
   const file = formData.get('file');
   const id = formData.get('id');
   let url;
+
   if (file) {
     const pdfPath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
     try {
@@ -100,23 +102,26 @@ export async function PUT(request, { params }) {
     } catch {
       await fs.mkdir(pdfPath, { recursive: true });
     }
-    await uploadFile(file); 
-    const file_name = file.name;
 
+    // Upload file and get normalized file name
+    const normalizedFileName = await uploadFile(file);
+    
+    // Set url to the normalized file name
+    url = normalizedFileName;
 
     // Delete old file if it exists
     const oldTransaction = await query({
       query: "SELECT url FROM rp_transaction WHERE id = ?",
       values: [id],
     });
-    
 
     if (oldTransaction.length > 0) {
-      const oldFilename = oldTransaction[0].url.split('/').pop();
-      const oldFilePath = join(UPLOAD_DIR, oldFilename);
+      const oldFilename = oldTransaction[0].url;
+      const oldFilePath = join(pdfPath, oldFilename);
       await unlink(oldFilePath).catch(() => {});
     }
   }
+
   try {
     if (url) {
       await query({
@@ -140,8 +145,9 @@ export async function PUT(request, { params }) {
   } catch (error) {
     console.error('Error updating transaction:', error);
     if (url) {
-      // Use the same path as set during upload
-      await unlink(url).catch(() => {});
+      // Delete the newly uploaded file if there's an error
+      const newFilePath = join(pdfPath, url);
+      await unlink(newFilePath).catch(() => {});
     }
     return new Response(
       JSON.stringify({
