@@ -21,8 +21,7 @@ try{
     await upload.single(productImage);
     await upload.single(damageImage);
 }catch(error){
-  console.log("Error uploading damage image ------");
-  console.log("Error uploading product image ------"+ error.message);
+  console.log("Error uploading damage image ");
 }
 
     // Save files

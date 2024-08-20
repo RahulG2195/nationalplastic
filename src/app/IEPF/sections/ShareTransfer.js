@@ -6,7 +6,6 @@ const ShareTransfer = ({ data }) => {
     return <div>Loading...</div>;
   }
 
-  // Group the data by year
   const groupedData = data.reduce((acc, item) => {
     if (!acc[item.year]) {
       acc[item.year] = [];

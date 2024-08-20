@@ -24,7 +24,6 @@ const WishlistPage1 = () => {
         });
         
         const wishlistData = response.data.products.map((item) => {
-          // Calculate discount percentage
           const discountPercentage =
             item.discount_price && item.price
               ? Math.floor(
@@ -52,8 +51,6 @@ const WishlistPage1 = () => {
     try {
       const userDataString = localStorage.getItem("userData");
       const userData = JSON.parse(userDataString);
-      // const product_id = await JSON.parse(product_id);
-
       const customerId = userData.customer_id;
       const formData = new FormData();
       formData.append("customer_id", customerId);
@@ -73,7 +70,6 @@ const WishlistPage1 = () => {
   };
 
   const handleAddToCart = (productId, price, discount_price) => {
-    // Dispatch addToCart action to add item to cart
     dispatch(
       addToCart({
         product_id: productId,

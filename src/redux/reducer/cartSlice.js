@@ -9,9 +9,9 @@ import { notify  } from "@/utils/notify";
 export const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    products: [], // Initially empty array for products
-    total_price: 0, //price after discount and calculation
-    discount_price: 0, //original price
+    products: [], 
+    total_price: 0, 
+    discount_price: 0, 
   },
 
   reducers: {
@@ -37,28 +37,23 @@ export const cartSlice = createSlice({
         state.total_price += parseFloat(price) * quantity;
         state.discount_price += parseFloat(discount_price) * quantity;
         localStorage.setItem("products", JSON.stringify(action.payload));
-
-        // alert("Added");
       } else if (from) {
         const existingProduct = state.products.find(
           (product) => product.product_id === product_id
         );
         existingProduct.quantity += quantity;
         state.discount_price += parseFloat(discount_price) * quantity;
-        state.total_price += parseFloat(price) * quantity; // Update total price
+        state.total_price += parseFloat(price) * quantity; 
       }
     },
     removeItemFromCart: (state, action) => {
       const { product_id } = action.payload;
-      // Find the existing product in the cart
       const existingProductIndex = state.products.findIndex(
         (product) => product.product_id === product_id
       );
 
       if (existingProductIndex !== -1) {
         const existingProduct = state.products[existingProductIndex];
-
-        // Create a new state without the product
         const newState = {
           ...state,
           products: [
@@ -73,39 +68,27 @@ export const cartSlice = createSlice({
             parseFloat(existingProduct.discount_price) *
               existingProduct.quantity,
         };
-
-        // Update localStorage (assuming you're using it for persistence)
         localStorage.setItem("products", JSON.stringify(newState.products));
         const userDataString = localStorage.getItem("userData");
         const userData = JSON.parse(userDataString);
         const customerId = userData.customer_id;
-
-        // Return the new state (assuming you're using a state management library)
         return newState;
       }
-
-      // Handle the case where the product is not found
       return state;
     },
 
     increaseQuantity: (state, action) => {
       const { product_id } = action.payload;
-
-      // Find the existing product in the cart
       const existingProductIndex = state.products.findIndex(
         (product) => product.product_id === product_id
       );
 
       if (existingProductIndex !== -1) {
         const existingProduct = state.products[existingProductIndex];
-
-        // Create a new product object with updated quantity
         const updatedProduct = {
-          ...existingProduct, // Spread operator to copy existing product properties
+          ...existingProduct, 
           quantity: existingProduct.quantity + 1,
         };
-
-        // Update the state with the new product object
         const newState = {
           ...state,
           products: [
@@ -117,8 +100,6 @@ export const cartSlice = createSlice({
           discount_price:
             state.discount_price + parseFloat(existingProduct.discount_price),
         };
-
-        // Update localStorage (assuming you're using it for persistence)
         localStorage.setItem("products", JSON.stringify(newState.products));
         const userDataString = localStorage.getItem("userData");
         const userData = JSON.parse(userDataString);
@@ -128,29 +109,19 @@ export const cartSlice = createSlice({
           product_id: product_id,
           quantity: 1,
         });
-
-        // Return the new state (assuming you're using a state management library)
         return newState;
       }
-
-      // Handle the case where the product is not found
       return state;
     },
     decreaseQuantity: (state, action) => {
       const { product_id } = action.payload;
-
-      // Find the existing product in the cart
       const existingProductIndex = state.products.findIndex(
         (product) => product.product_id === product_id
       );
 
       if (existingProductIndex !== -1) {
         const existingProduct = state.products[existingProductIndex];
-
-        // Check if quantity is already 0, avoid negative quantities
         if (existingProduct.quantity === 0) {
-          // Notify user about minimum quantity reached (optional)
-          // notifyError('Minimum quantity reached');
           return state;
         }
 
@@ -158,8 +129,6 @@ export const cartSlice = createSlice({
           ...existingProduct,
           quantity: existingProduct.quantity - 1,
         };
-
-        // Update the state with the new product object
         const newState = {
           ...state,
           products: [
@@ -171,8 +140,6 @@ export const cartSlice = createSlice({
           discount_price:
             state.discount_price - parseFloat(existingProduct.discount_price),
         };
-
-        // Update localStorage (assuming you're using it for persistence)
         localStorage.setItem("products", JSON.stringify(newState.products));
         const userDataString = localStorage.getItem("userData");
         const userData = JSON.parse(userDataString);
@@ -182,12 +149,8 @@ export const cartSlice = createSlice({
           product_id: product_id,
           quantity: -1,
         });
-
-        // Return the new state (assuming you're using a state management library)
         return newState;
       }
-
-      // Handle the case where the product is not found
       return state;
     },
     emptyCart: (state) => {
@@ -213,8 +176,7 @@ export const {
 } = cartSlice.actions;
 
 export const addToCart = (item) => async (dispatch, getState) => {
-  // const {color, from = true} = action;
-  const { initialCount, items } = getState().wishlist; // Access state through the second parameter
+  const { initialCount, items } = getState().wishlist; 
   const userDataString = localStorage.getItem("userData");
   const userData = JSON.parse(userDataString);
   const customerId = userData.customer_id;

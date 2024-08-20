@@ -130,31 +130,9 @@ const Order_detail = ({params}) => {
             }else{
               return record.status_name;
             }
-            // console.log('record', record.per_order_status);
           },
         },
-       /*  {
-          title: "Actions",
-          key: "actions",
-          render: (_, record) => (
-            <>
-              <Button
-                icon={<EditOutlined />}
-                onClick={() => handleStatusUpdate(record)}
-                style={{ marginRight: 8 }}
-              >
-                Update Status
-              </Button>
-              <Button
-                icon={<DeleteOutlined />}
-                onClick={() => handleCancelOrder(record)}
-                danger
-              >
-                Cancel Order
-              </Button>
-            </>
-          ),
-        }, */
+     
       ];
   return (
     <>
@@ -162,36 +140,7 @@ const Order_detail = ({params}) => {
         <Table columns={columns} dataSource={orders} rowKey="order_id" />
       </Spin>
 
-     {/*  <Modal
-        title="Update Order Status"
-        open={isStatusModalVisible}
-        onOk={updateOrderStatus}
-        onCancel={() => setIsStatusModalVisible(false)}
-      >
-        <Select
-          style={{ width: "100%" }}
-          placeholder="Select new status"
-          onChange={(value) => setNewStatus(value)}
-        >
-          <Option value="order_confirmed">Order Confirmed</Option>
-          <Option value="order_delivered">Order Delivered</Option>
-          <Option value="delivered">Delivered</Option>
-        </Select>
-      </Modal>
-
-      <Modal
-        title="Cancel Order"
-        open={isCancelModalVisible}
-        onOk={cancelOrder}
-        onCancel={() => setIsCancelModalVisible(false)}
-      >
-        <Input.TextArea
-          rows={4}
-          placeholder="Enter reason for cancellation"
-          value={cancelReason}
-          onChange={(e) => setCancelReason(e.target.value)}
-        />
-      </Modal> */}
+   
     </>
   );
 };

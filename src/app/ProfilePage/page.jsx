@@ -265,15 +265,11 @@ function ProfilePage() {
   }
 
   const ReturnProduct = async (prod_id, user_id, od_id) => {
-    console.log("model", )
    const getSingleData = orderData.find((od) => od.prod_id == prod_id && od.customer_id == user_id && od.od_id == od_id);
-   console.log("model", getSingleData)
-
     setModelData(getSingleData);
     if(getSingleData.order_status != 8)
       {
         try {
-          console.log("model", getSingleData)
           const GetSingleData = orderData.find((od) => od.prod_id == prod_id && od.customer_id == user_id && od.od_id == od_id)
           const fourteendayvalidate = ReturnProductBeforeFourteenDays(GetSingleData[0]['order_status_date']);
         

@@ -45,13 +45,9 @@ const CorpReport = () => {
   };
 
   const showModal = (record = null) => {
-      // console.log('record', record);
       if (record) {
-      console.log('record1', record.key);
-
       form.setFieldsValue(record);
       setEditingId(record.key);
-      console.log('key', record.key);
       setFileList([]);
     } else {
       form.resetFields();
@@ -88,7 +84,6 @@ const CorpReport = () => {
         fetchCorpReport();
       } catch (error) {
         message.error('Failed to save Corp Report');
-        console.log('error', error);
       }
     });
   };

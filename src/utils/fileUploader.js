@@ -31,11 +31,9 @@ export async function uploadFile(file) {
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
 
-  // Normalize the file name and ensure lowercase extension
   const normalizedFileName = normalizeFileNameAndLowercaseExtension(file.name);
   
   const filePath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
-  // const filePath = path.join(process.cwd(), 'public', process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR);
       
   try {
     await fs.access(filePath);
@@ -43,10 +41,7 @@ export async function uploadFile(file) {
     await fs.mkdir(filePath, { recursive: true });
   }
 
-  // Use the normalized file name when creating the upload path
   const uploadDir = path.join(filePath, normalizedFileName);
   await fs.writeFile(uploadDir, buffer);
-
-  // Return the normalized file name
   return normalizedFileName;
 }

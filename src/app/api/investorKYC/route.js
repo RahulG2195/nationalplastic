@@ -52,9 +52,6 @@ export async function PUT(request) {
       const circularLink = formData.get('circularLink') || '';
       const rta_heading = formData.getAll('rta_headings[]') || [];
       const pdfFiles = formData.getAll('rtaFiles[]') || [];
-      
-      console.log("pdfFiles", pdfFiles);
-      console.log("headings", rta_heading);
   
       const pdfFileNames = [];
       for (const pdfFile of pdfFiles) {
@@ -62,7 +59,6 @@ export async function PUT(request) {
           try {
             const fileName = await uploadFile(pdfFile);
             pdfFileNames.push(fileName);
-            console.log("uploaded fileName", fileName);
           } catch (error) {
             console.error('Error uploading PDF file:', error);
             return NextResponse.json({ success: false, error: 'Failed to upload PDF' }, { status: 500 });
@@ -90,14 +86,10 @@ export async function PUT(request) {
         queryStr += 'rta_link = ?, ';
         values.push(pdfFileNames.join(','));
       }
-  
-      // Remove trailing comma and space
       queryStr = queryStr.slice(0, -2);
   
-      // Add WHERE clause
       queryStr += ' WHERE id = 1';
   
-      console.log("dynamic query", queryStr);
   
       // Execute the query
       await query({

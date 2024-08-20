@@ -22,8 +22,6 @@ const OutcomeAGM = () => {
           return acc;
         }, {});
 
-        console.log("response", parsedData);
-
         setAgmOutcomes(parsedData);
       } catch (error) {
         console.error("Error fetching OutcomeAGM data:", error);

@@ -49,7 +49,6 @@ const Notice = () => {
 
       form.setFieldsValue(record);
       setEditingId(record.key);
-      console.log('key', record.key);
       setFileList([]);
     } else {
       form.resetFields();
@@ -68,8 +67,6 @@ const Notice = () => {
         if (fileList[0]) {
           formData.append('file_name', fileList[0].originFileObj);
         }
-        
-        console.log('formData', formData);
         if (editingId) {
 
           formData.append('editingId', editingId);

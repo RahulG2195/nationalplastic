@@ -1,5 +1,4 @@
 import mysql from "mysql2/promise";
-// import "../../envConfig.js";
 
 const pool = mysql.createPool({
   host: process.env.MYSQL_HOST,
@@ -23,7 +22,6 @@ export async function query({ query, values = [] }) {
     if (connection) connection.release();
   }
 }
-// // db.js file
 // import mysql from "mysql2/promise";
 
 // export async function query({ query, values = [] }) {

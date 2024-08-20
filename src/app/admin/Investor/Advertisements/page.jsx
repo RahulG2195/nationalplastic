@@ -42,7 +42,6 @@ const AdvertisementCMS = () => {
   };
 
   const showModal = (record = null) => {
-    console.log("Rescords::"+ JSON.stringify(record))
     if (record) {
       form.setFieldsValue(record);
       setEditingId(record.id);
@@ -88,9 +87,6 @@ const AdvertisementCMS = () => {
 
   const handleDelete = async (record) => {
     try {
-      console.log("Deleting advertisement" , record);
-      console.log("ID::"+ JSON.stringify(record));
-      console.log("ID::"+ JSON.stringify(record.key));
       const id = record.key;
 
       await axios.delete('/api/admin/Investors/Advertisements',{ 

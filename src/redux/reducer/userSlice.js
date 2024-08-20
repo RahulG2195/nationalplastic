@@ -1,7 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import axios from "axios";
-// import "react-toastify/dist/ReactToastify.css";
-// import { isLoggedIn } from "@/utils/validation";
 export const isLoggedIn = () => {
   try {
     if (typeof localStorage !== "undefined") {
@@ -11,11 +8,8 @@ export const isLoggedIn = () => {
         return storedValue === "true";
       }
     }
-
-    // Return false if localStorage is not available or value is null
     return false;
   } catch (err) {
-    // Handle error if needed
     initializeLocalStorage();
   }
 };
@@ -27,7 +21,6 @@ export const initializeLocalStorage = () => {
     customer_id: "",
   };
 
-  // Check if localStorage is available before using it
   if (typeof localStorage !== "undefined") {
     localStorage.setItem("userData", JSON.stringify(defaultUserData));
   }
@@ -63,11 +56,9 @@ export const userSlice = createSlice({
       state.customer_id = action.payload.customer_id;
       localStorage.setItem("userData", JSON.stringify(action.payload));
       localStorage.setItem("isLoggedIn", true);
-      // alert();
     },
   },
 });
-// });
 export const { setUserData } = userSlice.actions;
 
 export default userSlice.reducer;

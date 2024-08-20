@@ -22,70 +22,9 @@ import { useRef } from "react";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
 import { isLoggedIn } from "@/utils/validation";
 import { useRouter } from "next/navigation";
-const notify = () => {
-  toast.error("Login To Add to CART", {
-    position: "top-center",
-    autoClose: 2000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-    transition: Bounce,
-  });
-};
-const RecentlyViewed = () => {
-  /* const RecentlyViewedDatas = [
-      { ChairImg: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}products.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-      { ChairImg: "/Assets/images/New-launches-2/New-launches-2.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-      { ChairImg: "/Assets/images/New-launches-3/New-launches-3.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-      { ChairImg: "/Assets/images/New-launches-4/New-launches-4.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-      { ChairImg: "${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}products.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-      { ChairImg: "/Assets/images/New-launches-2/New-launches-2.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-      { ChairImg: "/Assets/images/New-launches-3/New-launches-3.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-      { ChairImg: "/Assets/images/New-launches-4/New-launches-4.png", Title: "SHAMIYANA", Discription: "Lorem ipsum dolor sit amet.", Price: "00,000", orignalPrice: "00,000", Discount: "20%" },
-  ]; */
+import { notify , notifyError } from "@/utils/notify";
 
-  // const notify = () => {
-  //   toast.success("ADDED TO WISHLIST", {
-  //     position: "top-center",
-  //     autoClose: 2000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //     theme: "dark",
-  //     transition: Bounce,
-  //   });
-  // };
-  const notifyinfo = () => {
-    toast.success("Already in WISHLIST", {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-      transition: Bounce,
-    });
-  };
-  const notifyError = () => {
-    toast.error("Login To Add To WishList", {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-      transition: Bounce,
-    });
-  };
+const RecentlyViewed = () => {
   const [RecentlyViewedData, setRecentlyViewedData] = useState([]);
   const [wishlistItems, setWishlistItems] = useState([]);
   const [autoplay, setAutoplay] = useState(true);
@@ -116,14 +55,12 @@ const RecentlyViewed = () => {
   
           setRecentlyViewedData(products);
         } else {
-          // If no searched products, use the original API
           const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/Products`);
           const filteredproducts = response.data.limitProd;
           setRecentlyViewedData(filteredproducts);
         }
       } catch (error) {
         console.error("Error fetching data", error);
-        // Optionally, set an error state here instead of using an alert
       }
     };
     
@@ -157,7 +94,7 @@ const RecentlyViewed = () => {
     try {
       const isLoggedInResult = await isLoggedIn();
       if (!isLoggedInResult) {
-        notifyError();
+      notifyError("Login to add to WISHLIST")
         router.push("/Login");
       } else {
         dispatch(
@@ -165,11 +102,11 @@ const RecentlyViewed = () => {
             product_id: product_id,
           })
         );
-        notify();
+        notify("Login To Add to CART");
         fetchWishlistItems();
       }
     } catch (error) {
-      notifyinfo();
+      notifyError("Already in WISHLIST")
       console.error("Error:", error);
     }
   };
@@ -194,7 +131,6 @@ const RecentlyViewed = () => {
     }
   };
 
-  // const handleAddToCart = async(product_name, short_description, price, discount_price, discount, ChairImg)
   const handleMoveToCart = async (product_id) => {
     const isLoggedInResult = await isLoggedIn();
     const data = await fetchPrice(product_id);
@@ -226,7 +162,6 @@ const RecentlyViewed = () => {
           "Unexpected login state. Please handle appropriately.",
           isLoggedInResult
         );
-      // Consider additional actions for unexpected login states
     }
   };
 
@@ -259,7 +194,6 @@ const RecentlyViewed = () => {
           slidesPerView={5}
           navigation
           loop={true}
-          // pagination={{ clickable: true }}
           autoplay={autoplay ? { delay: 4000 } : false}
           breakpoints={{
             425: {
@@ -291,7 +225,6 @@ const RecentlyViewed = () => {
                 ChairImg={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${images[0]}`}
                 id={chair.seo_url}
                 Title={chair.product_name}
-                // Discription={chair.short_description}
                 Price={chair.price}
                 orignalPrice={chair.discount_price}
                 Discount={chair.discount_percentage}
@@ -318,4 +251,3 @@ const RecentlyViewed = () => {
   );
 };
 export default RecentlyViewed;
-//Commented Prechaircard issue

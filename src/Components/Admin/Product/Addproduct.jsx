@@ -69,8 +69,6 @@ export default function App() {
           formDataString += `${key}: ${value}\n`;
         });
 
-        console.log("formData:\n" + formDataString);
-
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/adminProducts`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data'

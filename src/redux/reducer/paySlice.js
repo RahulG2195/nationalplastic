@@ -10,7 +10,7 @@ const orderSlice = createSlice({
   initialState,
   reducers: {
     createOrderRequest(state) {
-      state.error = null; // Clear previous error
+      state.error = null; 
     },
     createOrderSuccess(state, action) {
       state.order = action.payload;

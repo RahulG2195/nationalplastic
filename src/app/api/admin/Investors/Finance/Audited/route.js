@@ -15,11 +15,8 @@ export async function POST(request) {
   let pdfPath = '';
 
   if (file_name) {
-    console.log('file_name', file_name);
     try {
-      // Assume uploadFile function is defined elsewhere and handles the file_name upload
       const toLowerCase = await uploadFile(file_name); 
-      // Set the pdfPath based on where the file_name is saved
       pdfPath = toLowerCase;
 
     } catch (error) {
@@ -36,7 +33,6 @@ export async function POST(request) {
       values: [years, title, pdfPath],
     });
 
-    console.log('result', result);
     return NextResponse.json({ message: "audited added successfully" }, { status: 201 });
   } catch (error) {
     console.error('Database query error:', error);

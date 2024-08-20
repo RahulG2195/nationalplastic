@@ -54,11 +54,8 @@ const TransactionCMS = () => {
     const handleCreate = async (values) => {
         try {
             const formData = new FormData();
-            // console.log("FormData", JSON.stringify(values.file)); 
             formData.append('document', values.document);
-            //   formData.append('file', values.file[0]);
             formData.append('file', image);
-
             await axios.post('/api/admin/Investors/Transactions', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });

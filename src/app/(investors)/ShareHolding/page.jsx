@@ -13,7 +13,6 @@ const ShareholdingPattern = () => {
     const fetchData = async () => {
       try {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Shareholding`, { type: 'shareholdings' });
-        console.log('response', response.data.results);
         setShareholdingData(response.data.results); 
       } catch (error) {
         console.error('Error fetching Shareholding results data:', error);

@@ -65,14 +65,7 @@ export default async function handler(req) {
         ));
       }
 
-      // console.log('CMS Entry:', {
-      //   title,
-      //   subCategory: subCategory || null,
-      //   year: year || null,
-      //   name,
-      //   description,
-      //   file: file.newFilename,
-      // });
+
 
       const newPath = `./public/uploads/${file.newFilename}`;
       fs.renameSync(file.filepath, newPath);

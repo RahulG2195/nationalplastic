@@ -3,20 +3,9 @@ import { NextResponse } from 'next/server';
 import { writeFile } from 'fs/promises';
 const fs = require("fs").promises;
 const path = require("path");
-/* const uploadImage = async (file) => {
-  try {
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-    const path = `public/Assets/uploads/${file.name}`;
-    await writeFile(path, buffer);
-    return path; // Return the path or filename for storing in the database
-  } catch (error) {
-    throw new Error('Image upload failed: ' + error.message);
-  }
-}; */
+
 const uploadImage = async (file) => {
   try {
-    console.log("Received file object:", file);
     if (!file || typeof file.arrayBuffer !== "function") {
       throw new Error("Invalid file object");
     }
@@ -24,8 +13,6 @@ const uploadImage = async (file) => {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
     const uploadDir = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}`;
-
-    // Check if the directory exists, if not, create it
     try {
       await fs.access(uploadDir);
     } catch {
@@ -34,7 +21,6 @@ const uploadImage = async (file) => {
 
     const filePath = path.join(uploadDir, file.name);
     await fs.writeFile(filePath, buffer);
-    console.log(`File successfully uploaded to ${filePath}`);
     return file.name;
   } catch (error) {
     console.error("Detailed upload error:", error);

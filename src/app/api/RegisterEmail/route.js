@@ -24,8 +24,6 @@ export async function POST(request, res) {
       subject: "Registration Successful",
       html: userEmailTemplate,
     });
-
-    console.log('Email sent successfully:', data);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error sending email:", error);

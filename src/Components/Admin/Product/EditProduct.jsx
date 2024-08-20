@@ -66,12 +66,7 @@ export default function App() {
         if (selectedCategory.id) {
           formData.set('category_id', selectedCategory.id);
         }
-        let formDataString = '';
-        formData.forEach((value, key) => {
-          formDataString += `${key}: ${value}\n`;
-        });
 
-        console.log("formData:\n" + formDataString);
         await updateProduct(formData);
 
         reset();

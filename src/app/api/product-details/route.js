@@ -22,9 +22,6 @@ export async function GET(request) {
       values: [id, id],
     });
 
-  // console.log('product', product);
-    
-
     if (!product) {
       return new Response(JSON.stringify({ status: 404, message: "Product not found" }), { status: 404 });
     }

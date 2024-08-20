@@ -44,13 +44,9 @@ const AuditedPage = () => {
   };
 
   const showModal = (record = null) => {
-      // console.log('record', record);
       if (record) {
-      console.log('record1', record.key);
-
       form.setFieldsValue(record);
       setEditingId(record.key);
-      
       setFileList([]);
     } else {
       form.resetFields();
@@ -69,8 +65,6 @@ const AuditedPage = () => {
         if (fileList[0]) {
           formData.append('file_name', fileList[0].originFileObj);
         }
-        
-        console.log('editingId', editingId);
         if (editingId) {
 
           formData.append('editingId', editingId);
@@ -95,7 +89,6 @@ const AuditedPage = () => {
   const handleDelete = async (record) => {
     try {
       const id = record.key;
-      console.log('id', record);
       await axios.delete('/api/admin/Investors/Finance/Audited',{ 
         data: { id: id } 
       });
