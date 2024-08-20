@@ -51,8 +51,8 @@ try{
 
     // Send email with attachments using Resend
     const info = await resend.emails.send({
-      from: 'Your Company <onboarding@resend.dev>', // Replace with your verified domain
-      to: "dinesh.crezvatic@gmail.com", // Replace with the appropriate email address
+      from: 'nationalplastic.com', // Replace with your verified domain
+      to: email, // Replace with the appropriate email address
       subject: `Product Return Request - Order ${orderId}`,
       html: HtmlFormat,
       attachments: [

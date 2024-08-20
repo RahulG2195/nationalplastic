@@ -19,7 +19,7 @@ export async function POST(request, res) {
     `;
 
     const data = await resend.emails.send({
-      from: 'National Plastic <onboarding@resend.dev>', // Replace with your verified domain
+      from: 'nationalplastic.com', // Replace with your verified domain
       to: email,
       subject: "Registration Successful",
       html: userEmailTemplate,
@@ -78,7 +78,7 @@ export async function PUT(request, res) {
 
     // Send email to the user
     await resend.emails.send({
-      from: 'National Plastic <onboarding@resend.dev>', // Replace with your verified domain
+      from: 'nationalplastic.com', // Replace with your verified domain
       to: email,
       subject: "Payment Successful",
       html: userEmailTemplate,
@@ -86,7 +86,7 @@ export async function PUT(request, res) {
 
     // Send email to the client (your company)
     await resend.emails.send({
-      from: 'National Plastic <onboarding@resend.dev>', // Replace with your verified domain
+      from: 'nationalplastic.com', // Replace with your verified domain
       to: "webDevs2024@gmail.com", // Your company email
       subject: "Product Order Details",
       html: clientEmailTemplate,

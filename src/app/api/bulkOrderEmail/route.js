@@ -41,7 +41,7 @@ export async function POST(request) {
 
     // Send email to customer
     await resend.emails.send({
-      from: 'onboarding@resend.dev', // Replace with your verified domain
+      from: 'nationalplastic.com', // Replace with your verified domain
       to: Email,
       subject: "Bulk Order Request Confirmation",
       html: customerHtmlContent,
@@ -49,7 +49,7 @@ export async function POST(request) {
 
     // Send email to client (your company)
     await resend.emails.send({
-      from: 'onboarding@resend.dev', // Replace with your verified domain
+      from: 'nationalplastic.com', // Replace with your verified domain
       to: 'your-company-email@example.com', // Replace with your company's email
       subject: "New Bulk Order Request",
       html: clientHtmlContent,

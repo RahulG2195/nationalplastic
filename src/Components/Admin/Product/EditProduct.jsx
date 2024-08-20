@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Form, Input, Button, InputNumber, Spin, Select ,Space} from 'antd';
+import { Form, Input, Button, InputNumber, Spin, Select, Space } from 'antd';
 import "./EditProduct.css";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -63,7 +63,7 @@ export default function App() {
           }
         });
         formData.append('discount_price', calculatedDiscountPrice);
-        if(selectedCategory.id){
+        if (selectedCategory.id) {
           formData.set('category_id', selectedCategory.id);
         }
         let formDataString = '';
@@ -162,7 +162,7 @@ export default function App() {
           <Controller
             name="product_name"
             control={control}
-            rules={{ required: true,minLength: 1, maxLength: 65, pattern: /^[a-zA-Z0-9\s-]+$/i }}
+            rules={{ required: true, minLength: 1, maxLength: 65, pattern: /^[a-zA-Z0-9\s-]+$/i }}
             render={({ field }) => <Input {...field} />}
           />
         </Form.Item>
@@ -298,16 +298,29 @@ export default function App() {
         <Form.Item
           label="Discount Percentage"
           validateStatus={errors.discount_percentage ? 'error' : ''}
-          help={errors.discount_percentage ? 'Please input the discount percentage!' : ''}
+          help={errors.discount_percentage?.message || ''}
         >
           <Controller
             name="discount_percentage"
             control={control}
-            rules={{ required: true }}
+            rules={{
+              required: 'Please input the discount percentage!',
+              min: {
+                value: 1,
+                message: 'Discount percentage must be at least 1%',
+              },
+              max: {
+                value: 100,
+                message: 'Discount percentage cannot exceed 100%',
+              },
+            }}
             render={({ field }) => (
               <InputNumber
                 {...field}
                 style={{ width: '100%' }}
+                min={1}
+                max={100}
+                precision={0}
                 onChange={(value) => {
                   field.onChange(value);
                   const price = getValues('price') || 0;
@@ -395,13 +408,13 @@ export default function App() {
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Space>
+          <Space>
             <Button onClick={handleCancel}>
-            Cancel
-          </Button>
-          <Button type="primary" htmlType="submit" disabled={isLoading}>
-            {isLoading ? 'Updating...' : 'Update'}
-          </Button>
+              Cancel
+            </Button>
+            <Button type="primary" htmlType="submit" disabled={isLoading}>
+              {isLoading ? 'Updating...' : 'Update'}
+            </Button>
           </Space>
         </Form.Item>
       </Form>

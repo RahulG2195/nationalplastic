@@ -2,7 +2,6 @@
 import Link from "next/link";
 import "./PriceDetailsCard.css";
 import { useDispatch, useSelector } from "react-redux";
-// import { setTotalPrice} from '@/redux/reducer/counterSlice';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { createOrderSuccess } from "@/redux/reducer/paySlice";
@@ -216,6 +215,8 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
       paymentData
     );
   };
+
+  
   return (
     <>
       <div className="PriceDetail">
@@ -242,8 +243,8 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
             className={`d-flex justify-content-between mt-1 fw-semibold text-success`}
           >
             <div className="text-secondary">
-  Coupon ({couponCode ? couponCode : 'NONE'})
-</div>
+              Coupon ({couponCode ? couponCode : 'NONE'})
+            </div>
             <div>{couponCode ? discountPercentage + '%' : "0000"}</div>
           </div>
           <div className={`d-flex justify-content-between mt-1 fw-semibold`}>
@@ -272,8 +273,6 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
             : "0000"}{" "}
           on your order
         </div>
-        {/* <div className="small text-center">EMI starts with Rs 10,000</div> */}
-
         <div className="d-flex justify-content-center mt-2">
           {redirect ? (
             <Link href={`${userState ? "/Address" : "/Login"}`}>
