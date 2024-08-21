@@ -33,7 +33,7 @@ const uploadFile = async (file) => {
 export async function GET() {
   try {
     const result = await query({
-      query: 'SELECT * FROM investorKYC LIMIT 1',
+      query: 'SELECT * FROM investorkyc LIMIT 1',
       values: [],
     });
     const data = result[0] || {};

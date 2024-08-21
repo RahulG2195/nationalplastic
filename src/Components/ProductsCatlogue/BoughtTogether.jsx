@@ -29,15 +29,7 @@ const BoughtTogether = () => {
   const route = useRouter();
 
   const dispatch = useDispatch();
-  // const togetherCardsData = [
-  //     { imgSrc: "/Assets/images/Magna/Magna.png", price: "00,000" },
-  //     { imgSrc: "/Assets/images/The-boss/The-boss.png", price: "00,000" },
-  //     { imgSrc: "/Assets/images/Top-selling-product/Top-selling-product.png", price: "00,000" },
-  //     { imgSrc: "/Assets/images/Magna/Magna.png", price: "00,000" },
-  //     { imgSrc: "/Assets/images/The-boss/The-boss.png", price: "00,000" },
-  //     { imgSrc: "/Assets/images/Top-selling-product/Top-selling-product.png", price: "00,000" },
 
-  // ];
 
   const [togetherCardsData, setTogetherCardsData] = useState([]);
 

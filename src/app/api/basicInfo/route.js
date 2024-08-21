@@ -12,7 +12,7 @@ const uploadImage = async (file) => {
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const uploadDir = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}`;
+    const uploadDir = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}`;
     try {
       await fs.access(uploadDir);
     } catch {
@@ -101,6 +101,7 @@ export async function POST(request) {
 
     // Handle logo upload
     const logoFile = formData.get('logo');
+    console.log("logo ",logoFile)
     if (logoFile && logoFile.size > 0) {
       try {
         const logoPath = await uploadImage(logoFile);

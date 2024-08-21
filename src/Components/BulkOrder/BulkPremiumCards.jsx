@@ -1,7 +1,17 @@
 import PreChairsCard from "@/Components/preChairsCard/preChairsCard.jsx";
+import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
+import axios from "axios";
+import { useState } from "react";
 import { Bounce, toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { isLoggedIn } from "@/utils/validation";
+import { useRouter } from "next/navigation";
 
 const BulkPremiumCards = ({ proddata }) => {
+  const [wishlistItems, setWishlistItems] = useState([]);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   const chairData = [
     {
       ChairImg:
@@ -114,10 +124,24 @@ const BulkPremiumCards = ({ proddata }) => {
   ];
   const Np = "National Plastic";
 
-  const handleAddToWishlist = async (
-    product_id,
-  
-  ) => {
+ const fetchWishlistItems = async () => {
+    try {
+      const userDataString = localStorage.getItem("userData");
+      const userData = JSON.parse(userDataString);
+      const customerId = userData.customer_id;
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/wishListUser`,
+        {
+          customer_id: customerId,
+        }
+      );
+      setWishlistItems(response.data.Wishlist);
+    } catch (error) {
+      console.error("Error fetching wishlist items:", error);
+    }
+  };
+
+  const handleAddToWishlist = async (product_id) => {
     try {
       const isLoggedInResult = await isLoggedIn();
       if (!isLoggedInResult) {
@@ -151,7 +175,19 @@ const BulkPremiumCards = ({ proddata }) => {
     });
   };
 
-
+  const notifyError = () => {
+    toast.error("Login To Add To WishList", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+  };
 
   return (
     <>
@@ -174,12 +210,7 @@ const BulkPremiumCards = ({ proddata }) => {
                   Discription={chair.short_description}
                   Discount={chair.discount_percentage}
                   showGetQuote={true}
-                  onaddToWishlist={() =>
-                    handleAddToWishlist(
-                      chair.product_id,
-        
-                    )
-                  }
+                  onaddToWishlist={() => handleAddToWishlist(chair.product_id)}
                 />
               </div>
             );
