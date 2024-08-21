@@ -5,27 +5,27 @@ const fs = require("fs").promises;
 const path = require("path");
 
 // Function to handle file uploads
-const uploadFile = async (file) => {
-  try {
-    if (!file || typeof file.arrayBuffer !== "function") {
-      console.error("Invalid file object received");
-      throw new Error("Invalid file object");
-    }
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-    const path = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
+  const uploadFile = async (file) => {
     try {
-      await fs.access(path);
-    } catch {
-      await fs.mkdir(path, { recursive: true });
+      if (!file || typeof file.arrayBuffer !== "function") {
+        console.error("Invalid file object received");
+        throw new Error("Invalid file object");
+      }
+      const bytes = await file.arrayBuffer();
+      const buffer = Buffer.from(bytes);
+      const uploadDir = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
+      try {
+        await fs.access(uploadDir);
+      } catch {
+        await fs.mkdir(uploadDir, { recursive: true });
+      }
+      const filePath = path.join(uploadDir, file.name);
+      await fs.writeFile(filePath, buffer);
+      return file.name;
+    } catch (error) {
+      throw new Error(`PDF upload failed: ${error.message}`);
     }
-    const filePath = path.join(path, file.name);
-    await fs.writeFile(filePath, buffer);
-    return file.name; // Return the filename for storing in the database
-  } catch (error) {
-    throw new Error('File upload failed: ' + error.message);
-  }
-};
+  };
 
 
 
