@@ -5,7 +5,11 @@ const path = require("path");
 
 export const dynamic = 'force-dynamic';
 export const bodyParser = false;
-
+function FileNameLowercaseExtension(fileName) {
+    const ext = path.extname(fileName).toLowerCase();
+    const name = path.basename(fileName, path.extname(fileName));
+    return `${name}${ext}`;
+  }
 // GET method for fetching records
 export async function GET(request) {
     try {
@@ -120,10 +124,12 @@ async function handleEditRecord(fields, files) {
     if (!id || !title || !year) {
         return new Response(JSON.stringify({ message: 'ID, title, and year are required' }), { status: 400 });
     }
+    
 
-    let fileName = fields.currentFilePath || '';
+    let fileName = await FileNameLowercaseExtension(fields.currentFilePath) || '';
 
     if (files.file) {
+        
         fileName = await handleFileUpload(files.file);
     }
 

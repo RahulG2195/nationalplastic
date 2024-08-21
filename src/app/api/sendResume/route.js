@@ -45,7 +45,7 @@ export async function POST(req, res) {
 
     // Send email with attachment using Resend
     const info = await resend.emails.send({
-      from: 'Your Company <onboarding@resend.dev>', // Replace with your verified domain
+      from: 'nationalplastic.com', // Replace with your verified domain
       to: email,
       subject: JobProfile,
       html: HtmlFormat,

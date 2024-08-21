@@ -69,7 +69,7 @@ const InvestorKYC = () => {
                     {heading} –{" "}
                     <a
                       target='_blank'
-                      href={`/UploadedFiles/Files/${rtaLinks[index]}`}
+                      href={`/Assets/uploads//${rtaLinks[index]}`}
                     >
                       {rtaLinks[index]}
                     </a>

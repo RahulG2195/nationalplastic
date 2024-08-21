@@ -46,13 +46,9 @@ const CorporateGov = () => {
   };
 
   const showModal = (record = null) => {
-      // console.log('record', record);
       if (record) {
-      console.log('record1', record.key);
-
       form.setFieldsValue(record);
       setEditingId(record.key);
-      console.log('key', record.key);
       setFileList([]);
     } else {
       form.resetFields();
@@ -66,14 +62,12 @@ const CorporateGov = () => {
     form.validateFields().then(async (values) => {
       try {
         const formData = new FormData();
-        formData.append('years', values.years);
+        formData.append('years', "Year" + values.years);
         formData.append('title', values.title);
         formData.append('quarter', values.quarter);
         if (fileList[0]) {
           formData.append('file_name', fileList[0].originFileObj);
         }
-        
-        console.log('editingId', editingId);
         if (editingId) {
 
           formData.append('editingId', editingId);
@@ -159,6 +153,7 @@ const CorporateGov = () => {
 
   return (
     <div style={{ padding: '20px' }}>
+       <h1>Corporate Report</h1>
       <Button icon={<PlusOutlined />} onClick={() => showModal()} style={{ marginBottom: '20px' }}>
         Add Corporate
       </Button>

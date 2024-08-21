@@ -1,5 +1,3 @@
-// middleware/auth.js
-
 import { verifyToken } from '@/utils/jwtAuth';
 
 export function authenticate(req, res, next) {
@@ -15,6 +13,6 @@ export function authenticate(req, res, next) {
     return res.status(401).json({ message: 'Unauthorized' });
   }
 
-  req.user = decoded; // Attach decoded user information to request object
+  req.user = decoded; 
   next();
 }

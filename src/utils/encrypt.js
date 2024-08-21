@@ -1,14 +1,7 @@
-// Importing bcrypt library
-// import { bcrypt } from "bcrypt";
-
-// Function to encrypt password
 async function encryptPassword(password) {
   try {
-    // Generate a salt
     const saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
-
-    // Hash the password with the salt
     const hashedPassword = await bcrypt.hash(password, salt);
 
     return hashedPassword;
@@ -18,5 +11,4 @@ async function encryptPassword(password) {
   }
 }
 
-// Exporting the function
 module.exports = encryptPassword;

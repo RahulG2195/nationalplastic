@@ -7,7 +7,7 @@ import paySliceReducer from "./reducer/paySlice";
 import couponReducer from "@/redux/reducer/couponSlice";
 import { combineReducers } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage"; // Use browser storage by default
+import storage from "redux-persist/lib/storage"; 
 import {
   FLUSH,
   REHYDRATE,

@@ -45,13 +45,9 @@ const CorpReport = () => {
   };
 
   const showModal = (record = null) => {
-      // console.log('record', record);
       if (record) {
-      console.log('record1', record.key);
-
       form.setFieldsValue(record);
       setEditingId(record.key);
-      console.log('key', record.key);
       setFileList([]);
     } else {
       form.resetFields();
@@ -88,7 +84,6 @@ const CorpReport = () => {
         fetchCorpReport();
       } catch (error) {
         message.error('Failed to save Corp Report');
-        console.log('error', error);
       }
     });
   };
@@ -152,6 +147,7 @@ const CorpReport = () => {
 
   return (
     <div style={{ padding: '20px' }}>
+      <h1>Corporate Policies and Compliance</h1>
       <Button icon={<PlusOutlined />} onClick={() => showModal()} style={{ marginBottom: '20px' }}>
         Add CorpReport
       </Button>
@@ -168,10 +164,8 @@ const CorpReport = () => {
           </Form.Item>
           <Form.Item name="cor_type" label="cor_type" rules={[{ required: true }]}>
             <Select>
-              <Option value="Corporate Governance">Corporate Governance</Option>
-              <Option value="Corporate Report">Corporate Report</Option>
+              <Option value="Compliance Certifica">Corporate Compliance Report</Option>
               <Option value="Policy">Policy</Option>
-
             </Select>
           </Form.Item>
           <Form.Item name="file_name" label="Pdf File" rules={[{ required: !editingId }]}>

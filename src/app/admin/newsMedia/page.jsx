@@ -9,10 +9,7 @@ const EditNews = ({ newsId }) => {
     const [images, setImages] = useState([]);
     const [imageFiles, setImageFiles] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
-    console.log("All images are here ", images)
     const id = 1;
-
-    // Fetch initial data when component mounts
     useEffect(() => {
         const fetchData = async () => {
             try {

@@ -36,6 +36,21 @@ const Header = () => {
       notifyError("Logout failed", error.message);
     }
   };
+  function encrypt(text, key) {
+    let result = '';
+    for (let i = 0; i < text.length; i++) {
+      result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+    }
+    return btoa(result); // Convert to base64
+  }
+  function decrypt(encoded, key) {
+    const text = atob(encoded); // Convert from base64
+    let result = '';
+    for (let i = 0; i < text.length; i++) {
+      result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+    }
+    return result;
+  }
 
   const handleReset = () => {
     setIsResettingPassword(true);
@@ -44,8 +59,11 @@ const Header = () => {
         setIsResettingPassword(false);
         if (res.data.status === 200) {
           const { otp, otpExpiry } = res.data;
-          localStorage.setItem('otp', otp);
-          localStorage.setItem('otpExpiry', otpExpiry);
+          const secretKey = 'Saving_the 0tp Locally Admin'; // Manage this securely
+          const encryptedOTP = encrypt(otp.toString(), secretKey);
+          const encryptedExpiry = encrypt(otpExpiry.toString(), secretKey);
+          localStorage.setItem('otp', encryptedOTP);
+          localStorage.setItem('otpExpiry', encryptedExpiry);
           notify("Please check your email, OTP sent successfully.");
           setIsModalVisible(true);
         } else {
@@ -67,7 +85,13 @@ const Header = () => {
 
   const verifyOTP = async (otp) =>{
     try{
-      const storedOtp = localStorage.getItem('otp');
+      const storedEncryptedOTP = localStorage.getItem('otp');
+      const storedOtp = decrypt(storedEncryptedOTP, secretKey);
+      const storedEncryptedExpiry = localStorage.getItem('otpExpiry');
+      const storedOtpExpiry = decrypt(storedEncryptedExpiry, secretKey);
+      if (new Date(storedOtpExpiry) < new Date()) {
+        throw new Error('OTP has expired.');
+      }
       if (storedOtp !== otp) {
         throw new Error('Invalid OTP.');
       }

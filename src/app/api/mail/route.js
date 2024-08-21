@@ -22,7 +22,7 @@ export async function POST(request, res) {
     `;
 
     const info = await resend.emails.send({
-      from: 'Your Name <onboarding@resend.dev>', // Replace with your verified domain
+      from: 'nationalplastic.com', // Replace with your verified domain
       to: email,
       subject: "Reset - Password",
       html: HtmlFormat,

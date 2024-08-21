@@ -43,18 +43,14 @@ const Shareholding = () => {
       key: item.sc_id,
       years: item.years,
       q1: item.q1,
-      // title: item.title,
       file_name1: item.file_name1
     }));
   };
 
   const showModal = (record = null) => {
-      console.log('record', record);
       if (record) {
-
       form.setFieldsValue(record);
       setEditingId(record.key);
-      
       setFileList1([]);
       setFileList2([]);
       setFileList3([]);
@@ -74,17 +70,11 @@ const Shareholding = () => {
     form.validateFields().then(async (values) => {
       try {
         const formData = new FormData();
-        console.log('formData', formData);
-
         formData.append('years', values.years);
         formData.append('q1', values.q1);
         formData.append('q2', values.q2);
         formData.append('q3', values.q3);
         formData.append('q4', values.q4);
-        console.log('File List 1:', fileList1);
-        console.log('File List 2:', fileList2);
-        console.log('File List 3:', fileList3);
-        console.log('File List 4:', fileList4);
         if (fileList1[0]) {
           formData.append('file_name1', fileList1[0].originFileObj);
         }

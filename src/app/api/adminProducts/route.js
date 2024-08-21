@@ -21,7 +21,6 @@ function convertColorToCode(color) {
 
 const uploadImage = async (file) => {
   try {
-    console.log("Received file object:", file);
     if (!file || typeof file.arrayBuffer !== "function") {
       throw new Error("Invalid file object");
     }
@@ -39,10 +38,8 @@ const uploadImage = async (file) => {
 
     const filePath = path.join(uploadDir, file.name);
     await fs.writeFile(filePath, buffer);
-    console.log(`File successfully uploaded to ${filePath}`);
     return file.name;
   } catch (error) {
-    console.error("Detailed upload error:", error);
     throw new Error(`Image upload failed: ${error.message}`);
   }
 };
@@ -115,17 +112,13 @@ export async function POST(request) {
     const imageNames = [];
     for (let [key, value] of formData.entries()) {
       if (key.startsWith("image")) {
-        console.log(`Processing ${key}:`, value);
         try {
           if (!value || !value.name) {
-            console.error(`Invalid file object for ${key}:`, value);
             throw new Error("Invalid file object");
           }
           const imageName = await uploadImage(value);
           imageNames.push(imageName);
-          console.log(`Successfully uploaded: ${imageName}`);
         } catch (error) {
-          console.error(`Error uploading image ${value.name}:`, error);
           return NextResponse.json(
             {
               success: false,
@@ -148,7 +141,6 @@ export async function POST(request) {
         { status: 400 }
       );
     }
-    console.log("Data to be inserted:", data);
 
     // Insert the new product
     const result = await query({
@@ -184,7 +176,6 @@ export async function POST(request) {
 
     return NextResponse.json({ success: true, data: result }, { status: 201 });
   } catch (error) {
-    console.error("Error creating product:", error);
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 500 }
@@ -196,51 +187,34 @@ export async function PUT(request) {
   try {
     const formData = await request.formData();
     const images = formData.getAll("image");
-    // Handle multiple image uploads
-
     const imageNames = [];
-    /* if (images && images.length > 0) {
-      for (const image of images) {
+    if (images && images.length > 0) {
+      for (let image of images) {
         try {
-          await uploadImage(image); // Ensure this function handles image upload and returns the image name
-          const imageName = image.name;
+          if (!image || !image.name) {
+            throw new Error("Invalid file object");
+          }
+          const imageName = await uploadImage(image);
           imageNames.push(imageName);
         } catch (error) {
-          console.error(`Error uploading image ${image.name}:`, error);
-          throw new Error(
-            `Failed to upload image ${image.name}: ${error.message}`
+          return NextResponse.json(
+            { 
+              success: false, 
+              error: `Failed to upload image ${image.name}: ${error.message}`,
+              step: "Image upload"
+            },
+            { status: 500 }
           );
         }
       }
-    } */
-
-      if (images && images.length > 0) {
-        for (let image of images) {
-          console.log(`Processing image:`, image);
-          try {
-            if (!image || !image.name) {
-              console.error(`Invalid file object:`, image);
-              throw new Error("Invalid file object");
-            }
-            const imageName = await uploadImage(image);
-            imageNames.push(imageName);
-            console.log(`Successfully uploaded: ${imageName}`);
-          } catch (error) {
-            console.error(`Error uploading image ${image.name}:`, error);
-            return NextResponse.json(
-              { success: false, error: `Failed to upload image ${image.name}: ${error.message}` },
-              { status: 500 }
-            );
-          }
-        }
-      }
+    }
 
     const requiredFields = [
       "product_name",
       "seo_url",
       "category_id",
       "price",
-      "discount_price",
+      "discount_percentage",
       "color",
       "armType",
       "product_id",
@@ -261,30 +235,31 @@ export async function PUT(request) {
       return NextResponse.json(
         {
           success: false,
-          error: `The following fields are required: ${missingFields.join(
-            ", "
-          )}`,
+          error: `The following fields are required: ${missingFields.join(", ")}`,
+          step: "Field validation"
         },
         { status: 400 }
       );
     }
 
-    // Set image_name to the new image names if uploaded, otherwise keep the existing ones
     data.image_name = imageNames.length > 0 ? imageNames.join(", ") : formData.get("image_name");
 
-    // Convert color name to color code
     data.category_id = formData.get('category_id');
+
     let color_code;
     try {
       color_code = convertColorToCode(data.color);
     } catch (error) {
       return NextResponse.json(
-        { success: false, error: error.message },
+        { 
+          success: false, 
+          error: error.message,
+          step: "Color conversion"
+        },
         { status: 400 }
       );
     }
 
-    // Updating the product
     const result = await query({
       query: `
         UPDATE products 
@@ -294,11 +269,12 @@ export async function PUT(request) {
           category_id = ?,
           image_name = ?,
           price = ?,
-          discount_price = ?,
+          discount_percentage = ?,
           color = ?,
           color_code = ?,
           armType = ?,
           prod_status = ?
+          
         WHERE 
           product_id = ?
       `,
@@ -308,7 +284,7 @@ export async function PUT(request) {
         data.category_id,
         data.image_name,
         data.price,
-        data.discount_price,
+        data.discount_percentage,
         data.color,
         color_code,
         data.armType,
@@ -316,12 +292,22 @@ export async function PUT(request) {
         data.product_id,
       ],
     });
+    return NextResponse.json({ 
+      success: true, 
+      data: result,
+      message: "Product updated successfully",
+      updatedFields: Object.keys(data),
+      imageNames: imageNames
+    }, { status: 200 });
 
-    return NextResponse.json({ success: true, data: result }, { status: 200 });
   } catch (error) {
-    console.error("Error updating product:", error);
     return NextResponse.json(
-      { success: false, error: error.message },
+      { 
+        success: false, 
+        error: error.message,
+        stack: error.stack,
+        step: "General error"
+      },
       { status: 500 }
     );
   }
@@ -388,7 +374,6 @@ export async function DELETE(request) {
       );
     }
   } catch (e) {
-    console.error("Error processing DELETE request:", e.message);
     return new Response(
       JSON.stringify({
         status: 500,

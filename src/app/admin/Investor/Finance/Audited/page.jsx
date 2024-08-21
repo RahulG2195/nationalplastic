@@ -44,13 +44,9 @@ const AuditedPage = () => {
   };
 
   const showModal = (record = null) => {
-      // console.log('record', record);
       if (record) {
-      console.log('record1', record.key);
-
       form.setFieldsValue(record);
       setEditingId(record.key);
-      
       setFileList([]);
     } else {
       form.resetFields();
@@ -64,13 +60,11 @@ const AuditedPage = () => {
     form.validateFields().then(async (values) => {
       try {
         const formData = new FormData();
-        formData.append('years', values.years);
+        formData.append('years', "Year" + values.years);
         formData.append('title', values.title);
         if (fileList[0]) {
           formData.append('file_name', fileList[0].originFileObj);
         }
-        
-        console.log('editingId', editingId);
         if (editingId) {
 
           formData.append('editingId', editingId);
@@ -95,7 +89,6 @@ const AuditedPage = () => {
   const handleDelete = async (record) => {
     try {
       const id = record.key;
-      console.log('id', record);
       await axios.delete('/api/admin/Investors/Finance/Audited',{ 
         data: { id: id } 
       });
@@ -163,7 +156,7 @@ const AuditedPage = () => {
       >
         <Form form={form} layout="vertical">
           <Form.Item name="years" label="Years" rules={[{ required: true }]}>
-            <Input />
+            <Input placeholder="e.g., 2024-2025 " />
           </Form.Item>
           <Form.Item name="title" label="Title" rules={[{ required: true }]}>
             <Input />

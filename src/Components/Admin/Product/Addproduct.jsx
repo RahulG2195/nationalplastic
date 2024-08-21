@@ -2,13 +2,16 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
-import { Form, Input, Button, InputNumber, Select, message } from 'antd';
+import { Form, Input, Button, InputNumber, Select, message, Space } from 'antd';
 import "./EditProduct.css";
 import axios from 'axios';
 import { toast, Bounce } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const { Option } = Select;
 export default function App() {
+  const router = useRouter();
+
   const { control, handleSubmit, setValue, getValues, reset, formState: { errors } } = useForm();
   const [imagePreviews, setImagePreviews] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -20,6 +23,10 @@ export default function App() {
     navigate('/admin/product', { replace: true });
     window.location.reload();
   };
+  const handleCancel = () => {
+    router.push("/admin/product");
+  };
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -61,8 +68,6 @@ export default function App() {
         formData.forEach((value, key) => {
           formDataString += `${key}: ${value}\n`;
         });
-        
-        console.log("formData:\n" + formDataString);
 
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/adminProducts`, formData, {
           headers: {
@@ -182,32 +187,32 @@ export default function App() {
       </Form.Item>
 
       <Form.Item
-  label="Category"
-  validateStatus={errors.category_name ? 'error' : ''}
-  help={errors.category_name ? 'Please select a category!' : ''}
->
-  <Controller
-    name="category_name"
-    control={control}
-    rules={{ required: true }}
-    render={({ field }) => (
-      <Select
-        {...field}
-        placeholder="Select a category"
-        onChange={(value, option) => {
-          setSelectedCategory({ id: option.key, name: value });
-          field.onChange(value);
-        }}
+        label="Category"
+        validateStatus={errors.category_name ? 'error' : ''}
+        help={errors.category_name ? 'Please select a category!' : ''}
       >
-        {categories.map((category) => (
-          <Option key={category.category_id} value={category.category_name}>
-            {category.category_name}
-          </Option>
-        ))}
-      </Select>
-    )}
-  />
-</Form.Item>
+        <Controller
+          name="category_name"
+          control={control}
+          rules={{ required: true }}
+          render={({ field }) => (
+            <Select
+              {...field}
+              placeholder="Select a category"
+              onChange={(value, option) => {
+                setSelectedCategory({ id: option.key, name: value });
+                field.onChange(value);
+              }}
+            >
+              {categories.map((category) => (
+                <Option key={category.category_id} value={category.category_name}>
+                  {category.category_name}
+                </Option>
+              ))}
+            </Select>
+          )}
+        />
+      </Form.Item>
 
 
       <Form.Item
@@ -240,7 +245,7 @@ export default function App() {
         <Controller
           name="price"
           control={control}
-    rules={{ required: true }}
+          rules={{ required: true }}
           render={({ field }) => (
             <InputNumber
               {...field}
@@ -258,17 +263,29 @@ export default function App() {
       <Form.Item
         label="Discount Percentage"
         validateStatus={errors.discount_percentage ? 'error' : ''}
-        help={errors.discount_percentage ? 'Please input the discount percentage!' : ''}
+        help={errors.discount_percentage?.message || ''}
       >
         <Controller
           name="discount_percentage"
           control={control}
-    rules={{ required: true }}
-
+          rules={{
+            required: 'Please input the discount percentage!',
+            min: {
+              value: 1,
+              message: 'Discount percentage must be at least 1%',
+            },
+            max: {
+              value: 100,
+              message: 'Discount percentage cannot exceed 100%',
+            },
+          }}
           render={({ field }) => (
             <InputNumber
               {...field}
               style={{ width: '100%' }}
+              min={1}
+              max={100}
+              precision={0}
               onChange={(value) => {
                 field.onChange(value);
                 const price = getValues('price') || 0;
@@ -287,22 +304,22 @@ export default function App() {
       </Form.Item>
 
       <Form.Item label="Installation Charges">
-  <Controller
-    name="InstallationCharges"
-    control={control}
-    defaultValue={0}
-    render={({ field }) => (
-      <InputNumber
-        {...field}
-        style={{ width: '100%' }}
-        min={0}
-        max={999}
-        precision={2}
-        step={1}
-      />
-    )}
-  />
-</Form.Item>
+        <Controller
+          name="InstallationCharges"
+          control={control}
+          defaultValue={0}
+          render={({ field }) => (
+            <InputNumber
+              {...field}
+              style={{ width: '100%' }}
+              min={0}
+              max={999}
+              precision={2}
+              step={1}
+            />
+          )}
+        />
+      </Form.Item>
 
       <Form.Item
         label="Color"
@@ -318,40 +335,34 @@ export default function App() {
       </Form.Item>
 
       <Form.Item
-  label="Arm Type"
-  validateStatus={errors.armType ? 'error' : ''}
-  help={errors.armType ? 'Please select the arm type!' : ''}
->
-  <Controller
-    name="armType"
-    control={control}
-    rules={{ required: true }}
-    render={({ field }) => (
-      <Select {...field} style={{ width: '100%' }}>
-        <Option value="with_arm_tent">With Arm Tent</Option>
-        <Option value="without_arm_tent">Without Arm Tent</Option>
-      </Select>
-    )}
-  />
-</Form.Item>
-
-      {/* <Form.Item
-        label="Product Status"
-        validateStatus={errors.prod_status ? 'error' : ''}
-        help={errors.prod_status ? 'Please input the product status!' : ''}
+        label="Arm Type"
+        validateStatus={errors.armType ? 'error' : ''}
+        help={errors.armType ? 'Please select the arm type!' : ''}
       >
         <Controller
-          name="prod_status"
+          name="armType"
           control={control}
           rules={{ required: true }}
-          render={({ field }) => <Input {...field} />}
+          render={({ field }) => (
+            <Select {...field} style={{ width: '100%' }}>
+              <Option value="with_arm_tent">With Arm Tent</Option>
+              <Option value="without_arm_tent">Without Arm Tent</Option>
+            </Select>
+          )}
         />
-      </Form.Item> */}
+      </Form.Item>
+
+
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
+        <Space>
+          <Button onClick={handleCancel}>
+            Cancel
+          </Button>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Space>
       </Form.Item>
     </Form>
   );

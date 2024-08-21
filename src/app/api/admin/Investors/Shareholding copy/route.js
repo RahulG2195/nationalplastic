@@ -1,12 +1,11 @@
 import { query } from "@/lib/db";
 import { NextResponse } from 'next/server';
 import {uploadFile} from "@/utils/fileUploader";
-
+const path = require("path");
 
 export async function POST(request) {
   const formData = await request.formData();
   const years = formData.get('years');
-  // const title = formData.get('title');
   const q1 = formData.get('q1');
   const q2 = formData.get('q2');
   const q3 = formData.get('q3');
@@ -15,42 +14,46 @@ export async function POST(request) {
   const file_name2 = formData.get('file_name2');
   const file_name3 = formData.get('file_name3');
   const file_name4 = formData.get('file_name4');
-  
+
   let pdfPath1 = '';
   let pdfPath2 = '';
   let pdfPath3 = '';
   let pdfPath4 = '';
 
-  if (file_name1 && file_name2 && file_name3 && file_name4) {
-    try {
-      // Assume uploadFile function is defined elsewhere and handles the file_name1 upload
-      await uploadFile(file_name1); // Make sure uploadFile returns a Promise
-      // Set the pdfPath based on where the file_name1 is saved
-      pdfPath1 = file_name1.name;
-      pdfPath2 = file_name2.name;
-      pdfPath3 = file_name3.name;
-      pdfPath4 = file_name4.name;
-
-    } catch (error) {
-
-      console.error('file name upload error:', error);
-      return NextResponse.json({ message: "Error saving file name" }, { status: 500 });
+  try {
+    // Handle file uploads and save the returned paths
+    if (file_name1) {
+      pdfPath1 = await uploadFile(file_name1); // Assuming uploadFile returns the path
     }
+    if (file_name2) {
+      pdfPath2 = await uploadFile(file_name2); // Assuming uploadFile returns the path
+    }
+    if (file_name3) {
+      pdfPath3 = await uploadFile(file_name3); // Assuming uploadFile returns the path
+    }
+    if (file_name4) {
+      pdfPath4 = await uploadFile(file_name4); // Assuming uploadFile returns the path
+    }
+  } catch (error) {
+    console.error('File upload error:', error);
+    return NextResponse.json({ message: "Error saving file" }, { status: 500 });
   }
 
   try {
+    // Insert the form data and file paths into the database
     await query({
       query: `INSERT INTO shareholding_corporate (years, q1, file_name1, q2, file_name2, q3, file_name3, q4, file_name4) 
-              VALUES (?, ?, ?, ?)`,
-      values: [years,  q1, pdfPath1, q2, pdfPath2, q3, pdfPath3, q4, pdfPath4],
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      values: [years, q1, pdfPath1, q2, pdfPath2, q3, pdfPath3, q4, pdfPath4],
     });
 
-    return NextResponse.json({ message: "Sharholding added successfully" }, { status: 201 });
+    return NextResponse.json({ message: "Shareholding added successfully" }, { status: 201 });
   } catch (error) {
     console.error('Database query error:', error);
     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
   }
 }
+
 export async function PUT(request) {
   const formData = await request.formData();
   const editingId = formData.get('editingId');
@@ -64,61 +67,35 @@ export async function PUT(request) {
   const file_name3 = formData.get('file_name3');
   const file_name4 = formData.get('file_name4');
   
-  let pdfPath1 = '';
-  let pdfPath2 = '';
-  let pdfPath3 = '';
-  let pdfPath4 = '';
+  let pdfPath1 = '', pdfPath2 = '', pdfPath3 = '', pdfPath4 = '';
 
-  if (file_name1) {
-    try {
-      await uploadFile(file_name1);
-      pdfPath1 = file_name1.name;
-      pdfPath2 = file_name2.name;
-      pdfPath3 = file_name3.name;
-      pdfPath4 = file_name4.name;
-
-    } catch (error) {
-      console.error('file name upload error:', error);
-      return NextResponse.json({ message: "Error saving file_name1" }, { status: 500 });
-    }
+  try {
+    if (file_name1) pdfPath1 = await uploadFile(file_name1);
+    if (file_name2) pdfPath2 = await uploadFile(file_name2);
+    if (file_name3) pdfPath3 = await uploadFile(file_name3);
+    if (file_name4) pdfPath4 = await uploadFile(file_name4);
+  } catch (error) {
+    console.error('File upload error:', error);
+    return NextResponse.json({ message: "Error uploading files" }, { status: 500 });
   }
 
   try {
-    let updateQuery = `
-      UPDATE shareholding_corporate SET years = ?, title = ?, q1 = ?`;
-    let values = [years, q1];
-
-    if (pdfPath1) {
-      updateQuery += `, file_name1 = ?`;
-      values.push(pdfPath1);
-    }
-    if (pdfPath2) {
-      updateQuery += `, file_name2 = ?`;
-      values.push(pdfPath2);
-    }
-    if (pdfPath3) {
-      updateQuery += `, file_name3 = ?`;
-      values.push(pdfPath3);
-    }
-    if (pdfPath4) {
-      updateQuery += `, file_name4 = ?`;
-      values.push(pdfPath4);
-    }
-
+    let updateQuery = `UPDATE shareholding_corporate SET years = ?, q1 = ?, q2 = ?, q3 = ?, q4 = ?`;
+    let values = [years, q1, q2, q3, q4];
+    if (pdfPath1) { updateQuery += `, file_name1 = ?`; values.push(pdfPath1); }
+    if (pdfPath2) { updateQuery += `, file_name2 = ?`; values.push(pdfPath2); }
+    if (pdfPath3) { updateQuery += `, file_name3 = ?`; values.push(pdfPath3); }
+    if (pdfPath4) { updateQuery += `, file_name4 = ?`; values.push(pdfPath4); }
     updateQuery += ` WHERE sc_id = ?`;
     values.push(editingId);
-
-    await query({
-      query: updateQuery,
-      values: values,
-    });
-
-    return NextResponse.json({ message: "Sharholding updated successfully" }, { status: 200 });
+    await query({ query: updateQuery, values: values });
+    return NextResponse.json({ message: "Shareholding updated successfully" }, { status: 200 });
   } catch (error) {
     console.error('Database query error:', error);
     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
   }
 }
+
 
 export async function GET() {
     try {

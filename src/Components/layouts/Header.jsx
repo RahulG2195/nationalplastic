@@ -106,7 +106,6 @@ export default function Header() {
   }, [FirstName, LastName]);
 
   const [investorConfig, setInvestorConfig] = useState(staticInvestorConfig);
-  // console.log('investorConfig', investorConfig);
 
   useEffect(() => {
     async function loadConfig() {

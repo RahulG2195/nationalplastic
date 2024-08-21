@@ -60,12 +60,8 @@ const AddBody = () => {
       companyName,
       gstNumber
     };
-
-    console.log("buisness data ",data)
-
     try {
       const response = await axios.patch('/api/customersForBuisness', data);
-      console.log('Form submitted successfully:', response.data);
       toast.success('Data updated successfully!', { autoClose: 1000 });
       setCompanyName('');
       setGstNumber('');
@@ -97,7 +93,6 @@ const AddBody = () => {
       setFirstName(FirstName);
       setPhone(Phone);
     } catch (e) {
-      console.log(e.message);
       notifyError(e.message);
     }
   };

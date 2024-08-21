@@ -3,6 +3,8 @@ import { NextResponse } from 'next/server';
 import formidable from 'formidable';
 // import { saveFile } from '@/utils/fileHandlers';
 import {uploadFile} from "@/utils/fileUploader";
+const path = require("path");
+
 
 export async function POST(request) {
   const formData = await request.formData();
@@ -15,10 +17,8 @@ export async function POST(request) {
 
   if (file) {
     try {
-      console.log("GOooodllYYY");
-      // Assume uploadFile function is defined elsewhere and handles the file upload
-      await uploadFile(file); // Make sure uploadFile returns a Promise
-      pdfPath = file.name
+      const toLowerCase = await uploadFile(file); 
+      pdfPath = toLowerCase
     } catch (error) {
       console.error('File upload error:', error);
       return NextResponse.json({ message: "Error saving file" }, { status: 500 });
@@ -50,8 +50,8 @@ export async function PUT(request) {
 
   if (file) {
     try {
-      await uploadFile(file);
-      pdfPath = file.name;
+     const toLowerCase =  await uploadFile(file);
+      pdfPath = toLowerCase;
     } catch (error) {
       console.error('File upload error:', error);
       return NextResponse.json({ message: "Error saving file" }, { status: 500 });

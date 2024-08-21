@@ -11,6 +11,8 @@ import {
 } from './functions';
 
 import {uploadFile} from "@/utils/fileUploader";
+const path = require("path");
+
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
@@ -36,8 +38,8 @@ export async function POST(request) {
   const file = formData.get('file');
   const year = formData.get('year');
   const documentNameOrReportTitle = formData.get('document_name') || formData.get('report_title');
-  await uploadFile(file); 
-  const url = file.name;
+  const toLowerCase = await uploadFile(file); 
+  const url = toLowerCase;
 
   switch (section) {
     case 'ShareTransfer':

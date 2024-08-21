@@ -16,7 +16,6 @@ const CorporateGovernance = () => {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/CorporateFront`, { type: 'corp' });
 
         const policys = response.data.results.filter(item => item.cor_type === 'Policy');
-        console.log('policy', policys);
         const cert = response.data.results.filter(item => item.cor_type === 'Compliance Certifica');
         setPolics(policys);
         setCertificate(cert);

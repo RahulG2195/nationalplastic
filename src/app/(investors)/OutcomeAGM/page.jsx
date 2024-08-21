@@ -6,23 +6,25 @@ const OutcomeAGM = () => {
   const [agmOutcomes, setAgmOutcomes] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/GetInvestor`,
-          { type: "outcome" }
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/admin/Investors/OutcomeAGM`
         );
-        const parsedData = response.data.results.reduce((acc, item) => {
-          acc[item.years] = JSON.parse("[" + item.documents + "]");
+        
+        const parsedData = response.data.outcomeAGMData.reduce((acc, item) => {
+          if (!acc[item.financial_year]) {
+            acc[item.financial_year] = [];
+          }
+          acc[item.financial_year].push(item);
           return acc;
         }, {});
 
-        console.log("response", parsedData);
-
         setAgmOutcomes(parsedData);
       } catch (error) {
-        console.error("Error fetching Corporate results data:", error);
+        console.error("Error fetching OutcomeAGM data:", error);
         setError("Failed to load data. Please try again later.");
       } finally {
         setIsLoading(false);
@@ -31,6 +33,9 @@ const OutcomeAGM = () => {
 
     fetchData();
   }, []);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <>
@@ -41,18 +46,18 @@ const OutcomeAGM = () => {
               <div className="inn-content-wrap">
                 {Object.entries(agmOutcomes).map(([year, yearData]) => (
                   <div key={year}>
-                    <h3>Year {year}</h3>
+                    <h3>{year}</h3>
                     <table className="table table-responsive table-striped table-light">
                       <tbody>
                         {yearData.map((item, index) => (
                           <tr key={index}>
                             <td>
-                              <a target="_blank" href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${item.file_name}`}>
+                              <a target="_blank" href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${item.file_path}`}>
                                 <i
                                   className="fa fa-file-pdf-o"
                                   aria-hidden="true"
                                 ></i>{" "}
-                                {item.title}
+                                {item.notice_title}
                               </a>
                             </td>
                           </tr>

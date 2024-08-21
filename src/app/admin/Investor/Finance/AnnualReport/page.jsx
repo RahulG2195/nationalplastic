@@ -46,13 +46,9 @@ const AnnualReport = () => {
   };
 
   const showModal = (record = null) => {
-      // console.log('record', record);
       if (record) {
-      console.log('record1', record.key);
-
       form.setFieldsValue(record);
       setEditingId(record.key);
-      console.log('key', record.key);
       setFileList([]);
     } else {
       form.resetFields();
@@ -72,8 +68,6 @@ const AnnualReport = () => {
         if (fileList[0]) {
           formData.append('file_name', fileList[0].originFileObj);
         }
-        
-        console.log('editingId', editingId);
         if (editingId) {
 
           formData.append('editingId', editingId);
@@ -171,7 +165,7 @@ const AnnualReport = () => {
       >
         <Form form={form} layout="vertical">
           <Form.Item name="years" label="Years" rules={[{ required: true }]}>
-            <Input />
+            <Input placeholder="e.g., 2024-2025" />
           </Form.Item>
           <Form.Item name="title" label="Title" rules={[{ required: true }]}>
             <Input />

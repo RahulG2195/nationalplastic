@@ -96,7 +96,6 @@ async function updateUnclaimedDividendContent(body) {
 async function updateShareTransfer(body) {
   try {
     const { id, year, document_name, document_link = "Update" } = body;
-    console.log("id");
     const result = await query({
       query: "UPDATE share_transfer SET year = ?, document_name = ?, document_link = ? WHERE id = ?",
       values: [year, document_name, document_link, id],

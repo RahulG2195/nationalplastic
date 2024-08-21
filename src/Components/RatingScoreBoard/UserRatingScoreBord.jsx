@@ -7,7 +7,6 @@ const UserRatingScoreBord = () => {
         { stars: 3, progress: 50, count: '1,112' },
         { stars: 2, progress: 30, count: '1,112' },
         { stars: 1, progress: 20, count: '1,112' },
-        // Add more ratings data as needed
     ];
 
     return (

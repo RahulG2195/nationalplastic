@@ -45,13 +45,9 @@ const Outcome = () => {
   };
 
   const showModal = (record = null) => {
-      console.log('record', record);
       if (record) {
-      console.log('record1', record.key);
-
       form.setFieldsValue(record);
       setEditingId(record.key);
-      console.log('key', record.key);
       setFileList([]);
     } else {
       form.resetFields();
@@ -70,8 +66,6 @@ const Outcome = () => {
         if (fileList[0]) {
           formData.append('file_name', fileList[0].originFileObj);
         }
-        
-        console.log('formData', formData);
         if (editingId) {
 
           formData.append('editingId', editingId);

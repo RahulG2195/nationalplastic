@@ -51,7 +51,6 @@ function Login() {
           }
         })
         .catch(error => {
-          console.log('Error sending data to API:', error);
           notifyError(error.message);
         });
       //  hasSentRequest.current = true; 
@@ -91,7 +90,6 @@ function Login() {
         // router.push("/"); // Redirect to homepage
       }
     } catch (error) {
-      console.log('Error sending data to API:', error);
       notifyError(error.message);
     }
   }

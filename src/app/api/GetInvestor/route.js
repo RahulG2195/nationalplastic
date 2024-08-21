@@ -23,25 +23,25 @@ export async function POST(request) {
       });
     } else if (type == "audited") {
       results = await query({
-        query: `SELECT * FROM audited where status = 1`,
+        query: `SELECT * FROM audited WHERE status = 1 ORDER BY SUBSTRING_INDEX(Years, '-', -1) DESC`,
       });
     } else if (type == "report") {
       results = await query({
-        query: `SELECT * FROM annual_report_return where cat_name = 'Annual Report' AND status = 1`,
+        query: `SELECT * FROM annual_report_return WHERE cat_name = 'Annual Report' AND status = 1 ORDER BY SUBSTRING_INDEX(Years, '-', -1) DESC`,
       });
     } else if (type == "returns") {
       results = await query({
-        query: `SELECT * FROM annual_report_return where cat_name = 'Annual Return' AND status = 1`,
+        query: `SELECT * FROM annual_report_return WHERE cat_name = 'Annual Return' AND status = 1 ORDER BY SUBSTRING_INDEX(Years, '-', -1) DESC`,
       });
     } else if (type == "outcome") {
       results = await query({
         query: `SELECT years, GROUP_CONCAT( JSON_OBJECT( 'title', title, 'file_name', file_name ) ) AS documents FROM outcomes GROUP BY years ORDER BY years DESC;`,
       });
-    }else if (type == "notice") {
+    } else if (type == "notice") {
       results = await query({
         query: `SELECT years, GROUP_CONCAT( JSON_OBJECT( 'title', title, 'file_name', file_name ) ) AS documents FROM notice GROUP BY years ORDER BY years DESC;`,
       });
-    }else if (type == "transfer") {
+    } else if (type == "transfer") {
       results = await query({
         query: `SELECT years, GROUP_CONCAT( JSON_OBJECT( 'title', title, 'file_name', file_name ) ) AS documents FROM transfer GROUP BY years ORDER BY years DESC;`,
       });

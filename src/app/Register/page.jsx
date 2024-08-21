@@ -51,16 +51,19 @@ const Register = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
     setFormErrors(prev => ({ ...prev, [name]: "" }));
   };
-  const handleOtpChange = (element, index) => {
-    if (isNaN(element.value)) return false;
+  const handleOtpChange = (target, index) => {
+    const value = target.value.replace(/\D/g, '');
+    setFormData(prevData => {
+      const newOtp = prevData.otp.split('');
+      newOtp[index] = value;
+      return {
+        ...prevData,
+        otp: newOtp.join('').slice(0, 6)
+      };
+    });
 
-    setFormData(prev => ({
-      ...prev,
-      otp: prev.otp.substring(0, index) + element.value + prev.otp.substring(index + 1)
-    }));
-
-    if (element.nextSibling) {
-      element.nextSibling.focus();
+    if (value && index < 5) {
+      otpInputs.current[index + 1].focus();
     }
   };
 
@@ -71,9 +74,9 @@ const Register = () => {
   };
   const validateForm = () => {
     const errors = {};
-    if (!isValidState(formData.state)){errors.state = "Invalid state";}
-    if (!isValidCity(formData.city)){errors.city = "Invalid city";}
-    if (!isValidPincode(formData.pincode)){errors.pincode = "Invalid pincode";}
+    if (!isValidState(formData.state)) { errors.state = "Invalid state"; }
+    if (!isValidCity(formData.city)) { errors.city = "Invalid city"; }
+    if (!isValidPincode(formData.pincode)) { errors.pincode = "Invalid pincode"; }
     if (!isValidName(formData.firstName)) errors.firstName = "Invalid first name";
     if (!isValidName(formData.lastName)) errors.lastName = "Invalid last name";
     if (!isValidEmail(formData.email)) errors.email = "Invalid email address";
@@ -85,7 +88,7 @@ const Register = () => {
   };
   const combineAddressFields = (formData) => {
     // Combine address fields
-    
+
     const fullAddress = `${formData.address}, ${formData.city}, ${formData.state}, ${formData.pincode}`.trim();
 
     // Create updated formData with combined address
@@ -102,14 +105,33 @@ const Register = () => {
     return updatedFormData;
   };
 
+  function encrypt(text, key) {
+    let result = '';
+    for (let i = 0; i < text.length; i++) {
+      result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+    }
+    return btoa(result); // Convert to base64
+  }
+  function decrypt(encoded, key) {
+    const text = atob(encoded); // Convert from base64
+    let result = '';
+    for (let i = 0; i < text.length; i++) {
+      result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+    }
+    return result;
+  }
+
   const handleOTP = async (action) => {
     try {
       if (action === 'send') {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/sendOTP`, { email: formData.email });
         if (response.status === 200) {
           const { otp, otpExpiry } = response.data;
-          localStorage.setItem('otp', otp);
-          localStorage.setItem('otpExpiry', otpExpiry);
+          const secretKey = 'Saving_the 0tp Locally'; // Manage this securely
+          const encryptedOTP = encrypt(otp.toString(), secretKey);
+          const encryptedExpiry = encrypt(otpExpiry.toString(), secretKey);
+          localStorage.setItem('otp', encryptedOTP);
+          localStorage.setItem('otpExpiry', encryptedExpiry);
           setMessage('Please check your email, OTP sent successfully.');
           setOtpSent(true);
         } else {
@@ -117,15 +139,16 @@ const Register = () => {
         }
         // ... (keep the existing 'send' logic)
       } else if (action === 'verify') {
-        const storedOtp = localStorage.getItem('otp');
-        const storedOtpExpiry = localStorage.getItem('otpExpiry');
+        const storedEncryptedOTP = localStorage.getItem('otp');
+        const storedEncryptedExpiry = localStorage.getItem('otpExpiry');
+        const storedOtp = decrypt(storedEncryptedOTP, secretKey);
+        const storedOtpExpiry = decrypt(storedEncryptedExpiry, secretKey);
         if (new Date(storedOtpExpiry) < new Date()) {
           throw new Error('OTP has expired.');
         }
         if (storedOtp !== formData.otp) {
           throw new Error('Invalid OTP.');
         }
-        // If OTP is valid, proceed with user registration
         const updatedFormData = combineAddressFields(formData);
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Users`, updatedFormData);
         localStorage.removeItem('otp');
@@ -142,6 +165,19 @@ const Register = () => {
       setMessage(error.message || 'An error occurred. Please try again.');
       throw error;
     }
+  };
+  const handleOtpPaste = (e) => {
+    e.preventDefault();
+    const pastedData = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6);
+
+    setFormData(prevData => ({
+      ...prevData,
+      otp: pastedData
+    }));
+
+    // Focus on the next empty input or the last input if all are filled
+    const focusIndex = Math.min(pastedData.length, 5);
+    otpInputs.current[focusIndex].focus();
   };
 
   const handleSubmit = async (event) => {
@@ -189,6 +225,7 @@ const Register = () => {
     "Mobile No": "phone", "State": "state", "City": "city", "Pincode": "pincode",
     "Password": "password", "Confirm Password": "confirmPassword", "Address": "address",
   };
+
 
   return (
     <div className="container">
@@ -260,6 +297,7 @@ const Register = () => {
                           value={formData.otp[index] || ''}
                           onChange={e => handleOtpChange(e.target, index)}
                           onKeyDown={e => handleOtpKeyDown(e, index)}
+                          onPaste={handleOtpPaste}
                         />
                       ))}
                     </div>
@@ -272,6 +310,9 @@ const Register = () => {
                   </button>
                 </div>
                 {message && <div className="alert alert-info">{message}</div>}
+                <div className="mt-3 text-center">
+                  <p>Already Registered? <a href="/Login">Login</a></p>
+                </div>
               </div>
             </form>
           </div>

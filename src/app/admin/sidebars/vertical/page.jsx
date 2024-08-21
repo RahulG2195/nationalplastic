@@ -47,13 +47,14 @@ const navigation = [
         href: "/admin/Investor/Shareholding",
       },
       {
-        title: "Corporate Governance",
-        href: "/admin/Investor/CorporateGov",
-      },
-      {
-        title: "Corporate Reports",
+        title: "Corporate Policies & Compliance",
         href: "/admin/Investor/CorporateReport",
       },
+      {
+        title: "Corporate Report",
+        href: "/admin/Investor/CorporateGov",
+      },
+
       {
         title: "General Disclosure",
         href: "/admin/Investor/General",
@@ -119,7 +120,7 @@ const navigation = [
     items:[
       {
         title: "Outcome Of Agm",
-        href: "/admin/Investor/outcomes",
+        href: "/admin/Investor/OutcomeAGMcms",
       },
       {
         title: "Notice",
@@ -223,12 +224,6 @@ const navigation = [
     
     ],
     icon: "bi bi-hdd-stack",
-  },
-
-  {
-    title: "Table",
-    href: "/ui/tables",
-    icon: "bi bi-layout-split",
   },
 ];
 

@@ -11,14 +11,10 @@ const TransferShare = () => {
     const fetchData = async () => {
       try {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/GetInvestor`,{ type: "transfer" });
-        console.log('response', response);
-
         const parsedData = response.data.results.reduce((acc, item) => {
           acc[item.years] = JSON.parse("[" + item.documents + "]");
           return acc;
         }, {});
-
-        console.log('parsedData', parsedData);
         setTransferShareData(parsedData);
       } catch (error) {
         console.error("Error fetching transfers results data:", error);

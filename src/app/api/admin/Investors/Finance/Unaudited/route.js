@@ -32,20 +32,12 @@ export async function POST(request) {
   const quarter = formData.get('quarter');
   const file_name = formData.get('file_name');
 
-  console.log("Received POST request");
-
     if (!file_name) {
       console.error("No file provided in form data");
       return NextResponse.json({ message: "No file provided" }, { status: 400 });
     }
 
-    console.log("File received:", file_name.name);
-
     const fileName = await uploadPDF(file_name);
-    // const pdfPath = `${process.env.NEXT_PUBLIC_PDF_PATH_DIR}/${fileName}`;
-
-    console.log("PDF uploaded successfully. Path:", fileName);
-  // const pdfPath = fileName;
 
   try {
     await query({
@@ -70,19 +62,9 @@ export async function PUT(request) {
   const quarter = formData.get('quarter');
   const file_name = formData.get('file_name');
 
-  console.log("Received POST request");
 
-   /* if (!file_name) {
-      console.error("No file provided in form data");
-      return NextResponse.json({ message: "No file provided" }, { status: 400 });
-    }*/
-
-    console.log("File received:", file_name.name);
 
     const fileName = await uploadPDF(file_name);
-    // const pdfPath = `${process.env.NEXT_PUBLIC_PDF_PATH_DIR}/${fileName}`;
-
-    console.log("PDF uploaded successfully. Path:", fileName);
 
   try {
     let updateQuery = `

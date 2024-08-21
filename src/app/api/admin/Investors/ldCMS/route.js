@@ -6,6 +6,12 @@ import {uploadFile} from "@/utils/fileUploader";
 const fs = require("fs").promises;
 const path = require("path");
 
+function FileNameLowercaseExtension(fileName) {
+  const ext = path.extname(fileName).toLowerCase();
+  const name = path.basename(fileName, path.extname(fileName));
+  return `${name}${ext}`;
+}
+
 export async function DELETE(request) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get('id');
@@ -86,8 +92,8 @@ export async function POST(request) {
 
 
     const pdfPath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
-      
-    const file_name = file.name;
+    const fileName = await FileNameLowercaseExtension(file.name);
+    const file_name = fileName;
 
     // Check if the directory exists, if not, create it
     try {
@@ -131,8 +137,8 @@ export async function PUT(request) {
 
     const uploadDir = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
 
-      
-    const file_name = file.name;
+    const fileName = await FileNameLowercaseExtension(file.name); 
+    const file_name = fileName;
     try {
       await fs.access(uploadDir);
     } catch {

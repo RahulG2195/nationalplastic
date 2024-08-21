@@ -36,8 +36,6 @@ function ProfilePage() {
   const [success, setSuccess] = useState(null);
   const [orderData, setOrderData] = useState([]);
   const [ModelData, setModelData] = useState([]);
-  const [ReturnSingleProd, setReturnSingleProd] = useState([]);
-  const [VerifyReturnDays, setVerifyReturnDays] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -60,85 +58,72 @@ function ProfilePage() {
     email: ''
   });
   useEffect(() => {
-    const IsAdmin = localStorage.getItem('isAdmin');
-    if (IsAdmin == 'true') {
-      router.push("/admin")
+    const isAdmin = localStorage.getItem('isAdmin') === 'true';
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    if (!isLoggedIn) {
+      router.push("/Login");
+      return;
     }
+    if (isAdmin) {
+      router.push('/admin');
+      return;
+    }
+    const userDataString = localStorage.getItem('userData');
+    const userData = JSON.parse(userDataString || '{}');
+    setData(userData);
   }, []);
-  useEffect(() => {
-    localStorage.getItem("isLoggedIn") === "true"
-      ? true
-      : (window.location.href = "Login");
-
-    const isLoggedIn =
-      localStorage.getItem("isLoggedIn") === "true"
-        ? true
-        : (window.location.href = "Login");
-
-    const storedData = JSON.parse(localStorage.getItem("userData")) || {};
-    // Retrieve data from local storage
-    const userDataString = localStorage.getItem("userData");
-    // Convert the retrieved data from string to JSON object
-    const userDataID = JSON.parse(userDataString);
-
-    // Example: Accessing the email property
-
-    // setIsLoggedIn(isLoggedIn);
-    setData(storedData);
-  }, []);
+  // Effect for fetching basic info
   useEffect(() => {
     const fetchBasicInfo = async () => {
       try {
         const response = await axios.get('/api/basicInfo');
-        const basicInfoData = response.data.basicInfo;
-        setBasicInfo(basicInfoData);
+        setBasicInfo(response.data.basicInfo);
       } catch (error) {
-        console.error('There was an error fetching the basic info!', error);
+        console.error('Error fetching the basic info:', error);
       }
     };
-
     fetchBasicInfo();
   }, []);
+  // Effect for fetching user data
   useEffect(() => {
     const fetchUserData = async () => {
+      if (!userEmail) {
+        console.log("No userEmail, skipping fetchUserData.");
+        return;
+      }
       try {
-        const formData = { email: userEmail, getProfile: true, };
-
+        const formData = { email: userEmail, getProfile: true };
         const response = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/Users`, formData);
 
-        const userData = response.data.message[0]; // Directly access response.data.message
-        const { customer_id, Email, FirstName, LasttName } = userData; // Destructure from userData, not from JSON.stringify
-        setFirstName(FirstName)
-        setLastName(LasttName)
-        const UpdateData = { email: Email, customer_id: customer_id, };
+        if (!response.data || !response.data.message || response.data.message.length === 0) {
+          throw new Error("Unexpected response format for user data");
+        }
 
-        // get order data 
-        const OrderResponse = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, UpdateData);
-        setOrderData(OrderResponse.data.orderData);
+        const userData = response.data.message[0];
+        const { customer_id, Email, FirstName, LasttName } = userData;
+        setFirstName(FirstName);
+        setLastName(LasttName);
 
-        localStorage.setItem("userData", JSON.stringify(UpdateData));
-        const responseData = response.data;
-        const messageArray = responseData.message;
-        setMessages(messageArray);
-        setIsLoading(false);
-
-
+        const updateData = { email: Email, customer_id: customer_id };
+        const orderResponse = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, updateData);
+        setOrderData(orderResponse.data.orderData);
+        localStorage.setItem("userData", JSON.stringify(updateData));
+        setMessages(response.data.message);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     };
-
     fetchUserData();
   }, [userEmail]);
+  // Effect for setting initial name
   useEffect(() => {
-
-    if (FirstName && LastName) {
-      setInitialName(FirstName[0].toUpperCase() + LastName[0].toUpperCase());
-    }
-    else {
-      setInitialName('N' + 'P');
-    }
+    setInitialName(
+      FirstName && LastName
+        ? (FirstName[0] + LastName[0]).toUpperCase()
+        : 'NP'
+    );
   }, [FirstName, LastName]);
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setEditedData((prevData) => ({
@@ -147,26 +132,21 @@ function ProfilePage() {
       Id: cust_id,
     }));
     let errorMessage = "";
-
-    // Validate phone number
     if (name === "phone") {
-      const phoneNumber = value.replace(/\D/g, ""); // Remove non-digit characters
+      const phoneNumber = value.replace(/\D/g, "");
       if (phoneNumber.length !== 10) {
         errorMessage = "Phone number must be 10 digits";
       }
     }
     if (name === "address") {
-      const allowedChars = /^[a-zA-Z0-9\s]+$/; // Regular expression for allowed characters
+      const allowedChars = /^[a-zA-Z0-9\s]+$/;
       if (!allowedChars.test(value)) {
         errorMessage =
           "Address can only contain spaces, numbers, and letters (a-z, A-Z).";
       }
     }
-
-    // Update the form data state and the error message for the current input field
     setFormData((prev) => ({
       ...prev,
-      // [name]: name === 'image' ? files[0] : value,
     }));
 
     setFormErrors((prev) => ({
@@ -174,7 +154,6 @@ function ProfilePage() {
       [name]: errorMessage,
     }));
   };
-
   const handleEdit = async (e) => {
     e.preventDefault();
     try {
@@ -193,7 +172,6 @@ function ProfilePage() {
       toast.error("Error updating data. Please try again.");
     }
   };
-
   const handleLogout = (e) => {
     e.preventDefault();
 
@@ -220,7 +198,6 @@ function ProfilePage() {
       },
     });
   };
-
   const CancelProduct = async (prod_id, user_id, od_id) => {
     try {
 
@@ -263,49 +240,39 @@ function ProfilePage() {
       console.error('Error:', error);
     }
   }
-
   const ReturnProduct = async (prod_id, user_id, od_id) => {
-    console.log("model", )
-   const getSingleData = orderData.find((od) => od.prod_id == prod_id && od.customer_id == user_id && od.od_id == od_id);
-   console.log("model", getSingleData)
-
+    const getSingleData = orderData.find((od) => od.prod_id == prod_id && od.customer_id == user_id && od.od_id == od_id);
     setModelData(getSingleData);
-    if(getSingleData.order_status != 8)
-      {
-        try {
-          console.log("model", getSingleData)
-          const GetSingleData = orderData.find((od) => od.prod_id == prod_id && od.customer_id == user_id && od.od_id == od_id)
-          const fourteendayvalidate = ReturnProductBeforeFourteenDays(GetSingleData[0]['order_status_date']);
-        
-          setReturnSingleProd(GetSingleData);
-          setVerifyReturnDays(fourteendayvalidate)
-    
-          if (fourteendayvalidate > 1000000000000000) {
-            const ProdData = { prod_id: prod_id, user_id: user_id, order_id: GetSingleData[0].order_id, type: 'return' };
-            var res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, ProdData);
-    
-            if (res.data.message === 'Order status Updated') {
-    
-              notify("Your order Return Request has been sent");
-              toast.success("Your order Return Request has been sent");
-    
-            } else {
-    
-              notify("Your order Return Request fail");
-              toast.success("Your order Return Request fail");
-    
-            }
+    if (getSingleData.order_status != 8) {
+      try {
+        const GetSingleData = orderData.find((od) => od.prod_id == prod_id && od.customer_id == user_id && od.od_id == od_id)
+        const fourteendayvalidate = ReturnProductBeforeFourteenDays(GetSingleData[0]['order_status_date']);
+        if (fourteendayvalidate > 1000000000000000) {
+          const ProdData = { prod_id: prod_id, user_id: user_id, order_id: GetSingleData[0].order_id, type: 'return' };
+          var res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, ProdData);
+
+          if (res.data.message === 'Order status Updated') {
+
+            notify("Your order Return Request has been sent");
+            toast.success("Your order Return Request has been sent");
+
+          } else {
+
+            notify("Your order Return Request fail");
+            toast.success("Your order Return Request fail");
+
           }
-    
-    
-        } catch (error) {
-          console.error('Error:', error);
         }
-      }else{
 
-        showModal();
 
+      } catch (error) {
+        console.error('Error:', error);
       }
+    } else {
+
+      showModal();
+
+    }
 
   }
   const handleSubmit = async (event) => {
@@ -341,10 +308,11 @@ function ProfilePage() {
     }
   };
   const handleInputAddressChange = (event) => {
+    console.log("handleInputAddress")
     setAdress2(event.target.value);
   };
-
   const updateAddressTwo = async (event) => {
+    console.log("CLickede")
     event.preventDefault();
     const data = {
       Adress2: adress2,
@@ -364,17 +332,207 @@ function ProfilePage() {
 
     setAdress2("");
   };
-
   const allowEdit = () => {
     setEditable(!editable);
   };
-  
   const showModal = () => {
     setIsModalVisible(true);
   };
   const handleModalClose = () => {
     setIsModalVisible(false);
   };
+  const renderOrderList = (orderData) => {
+    return (
+      <table className="table table-bordered table-responsive border-primary table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Sr No</th>
+            <th scope="col">Image</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        {orderData && orderData.length > 0 ? (
+          <tbody>
+            {orderData.map((data, index) => {
+              let vdate = ReturnProductBeforeFourteenDays(data['order_status_date']);
+              if (data.image_name) {
+                var images = data ? data.image_name.split(', ').map(image => image.trim()) : [];
+              }
+              let ReturnCancelBtn;
+              if (data.order_status === 5 && vdate <= 14) {
+
+                if (data['per_order_status'] == 0 && data['return_order'] == 0) {
+                  ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Return confirmation Sent</button>
+                } else {
+                  ReturnCancelBtn = <button className="btn btn-danger btn-rounded" onClick={() => ReturnProduct(data.product_id, data.customer_id, data.od_id)}>Return order</button>
+
+
+                }
+
+
+              } else if (data.order_status === 1 || data.order_status === 2 || data.order_status === 3 || data.order_status === 4) {
+
+                if (data.per_order_status === 1) {
+
+                  ReturnCancelBtn = <button className="btn btn-warning btn-rounded" onClick={() => CancelProduct(data.product_id, data.customer_id, data.od_id)}>Cancel order</button>
+
+                } else {
+
+                  {/* once order status get 0 in db it will show order cancelled  */ }
+                  ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>
+
+                }
+
+              } else if (data.order_status == 6) {
+
+                ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>
+
+              } else if (data.order_status == 7) {
+                ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Returned</button>
+              } else {
+                ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Placed</button>;
+              }
+
+              return (
+                <tr key={index}>
+                  <th scope="row">{index + 1}</th>
+                  <td>
+                    <Link href={`/ProductDetail/${data.seo_url}`}>
+                      <Image
+                        src={images && images.length > 0 ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${images[0]}` : '/Altis-chair-Black-(45)-white bg.webp'}
+                        height={50}
+                        width={50}
+                        alt="prod_image"
+                      />
+                    </Link>
+                  </td>
+                  <td><Link href={`/ProductDetail/${data.seo_url}`}>{data.product_name}</Link></td>
+                  <td>{data.quantity}</td>
+                  <td>₹ {data.quantity * data.prod_price} </td>
+                  <td>
+                    {ReturnCancelBtn}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        ) : (
+          <tbody>
+            <tr>
+              <td colSpan="6" className="text-center">No order data available</td>
+            </tr>
+          </tbody>
+        )}
+      </table>
+    );
+  }
+  const LeftProfileNav = ({ initialName, data, allowEdit, handleLogout }) => {
+    const navItems = [
+      { id: 'home', label: 'My Profile', active: true },
+      { id: 'order', label: 'Order List' },
+      { id: 'password', label: 'Change Password' },
+      { id: 'messages', label: 'Wishlist' },
+      { id: 'settings', label: 'Help Desk' },
+    ];
+
+    return (
+      <div className="flex flex-col space-y-4">
+        <div className="bg-white p-4 rounded-lg shadow">
+          <div className="flex items-center space-x-4">
+            <span className="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center text-xl font-bold">
+              {initialName}
+            </span>
+            <div>
+              <p className="text-gray-600 font-semibold">Hello,</p>
+              <p className="font-bold">{data.email}</p>
+            </div>
+          </div>
+          <hr className="my-4" />
+          <div className="EditAccount " onClick={allowEdit}>
+            <div>
+              <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </div>
+            <p className="fw-semibold">Edit Account</p>
+          </div>
+        </div>
+
+        <nav className="bg-white rounded-lg shadow">
+          <ul className="divide-y divide-gray-200">
+            {navItems.map((item) => (
+              <li key={item.id}>
+                <a
+                  href={`#list-${item.id}`}
+                  className={`block px-4 py-2 hover:bg-gray-50 ${item.active ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
+                    }`}
+                  role="tab"
+                  aria-controls={`list-${item.id}`}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a
+                className="d-flex list-group-item list-group-item-action fw-semibold logout_btn"
+                id="list-settings-lists"
+                data-bs-toggle="list"
+                onClick={handleLogout}
+              >
+                <div>
+                  <i className="fa fa-sign-out" aria-hidden="true"></i>
+                </div>
+                <p className="fw-semibold">Logout</p>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    );
+  };
+
+  function ChangePasswordForm({ newPassword, setNewPassword, confirmPassword, setConfirmPassword, handleSubmit, error, success }) {
+    return (
+      <form onSubmit={handleSubmit}>
+        <div className="row user-data">
+          <div className="col">
+            <label htmlFor="">New Password</label>
+            <input
+              type="password"
+              required
+              className="form-control fw-semibold"
+              placeholder="New Password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+          </div>
+          <div className="col">
+            <label htmlFor="">Confirm Password</label>
+            <input
+              type="password"
+              required
+              className="form-control fw-semibold"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </div>
+        </div>
+        {error && <div className="alert alert-danger">{error}</div>}
+        {success && <div className="alert alert-success">{success}</div>}
+        <div className="form-group row">
+          <div className="col-sm-10">
+            <button type="submit" className="btn form-btn">
+              Update Password
+            </button>
+          </div>
+        </div>
+      </form>
+    );
+  }
+
   return (
     <>
       <div className="container profile-page-container mb-5">
@@ -574,7 +732,6 @@ function ProfilePage() {
                   </div>
                   <h3 className="fs-4 fw-semibold">Add Secondary Address</h3>
                   <hr />
-
                   <div>
                     {(Array.isArray(messages) && messages.length > 0) ||
                       messages !== null ? (
@@ -583,18 +740,14 @@ function ProfilePage() {
                           <div className="row user-data">
                             <div className="col">
                               <label htmlFor="">Secondary Address</label>
-
                               <textarea
                                 required
                                 type="text"
                                 className="form-control fw-semibold"
-                                placeholder="Please Enter Address"
-                                // placeholder={
-                                //   message.Adress2 || "Please enter Address"
-                                // }
-                                // defaultValue={
-                                //   message.Adress2 || "Please enter Address"
-                                // }
+                                placeholder={message.Adress2 ? message.Adress2 : "Please Enter Address"}
+                                defaultValue={
+                                  message.Adress2 || "Please enter Addrsssess"
+                                }
                                 onChange={handleInputAddressChange}
                               ></textarea>
                             </div>
@@ -615,8 +768,6 @@ function ProfilePage() {
                   </div>
                 </div>
               </div>
-
-              {/* Wishlist */}
               <div
                 className="tab-pane fade"
                 id="list-messages"
@@ -625,7 +776,6 @@ function ProfilePage() {
               >
                 <Wishlist />
               </div>
-              {/* Help Desk */}
               <div
                 className="tab-pane fade"
                 id="list-settings"
@@ -661,94 +811,7 @@ function ProfilePage() {
                 <div className="Right-Profile">
                   <h3>Order List </h3>
                   <hr />
-
-                  <table className="table table-bordered table-responsive border-primary table-striped">
-                    <thead>
-                      <tr>
-                        <th scope="col">Sr No</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Product Name</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Action</th>
-                      </tr>
-                    </thead>
-                    {orderData && orderData.length > 0 ? (
-                      <tbody>
-                        {
-                          orderData.map((data, index) => {
-                            let vdate = ReturnProductBeforeFourteenDays(data['order_status_date']);
-                            if (data.image_name) {
-                              var images = data ? data.image_name.split(', ').map(image => image.trim()) : [];
-                              // setFirstImage(images[0]);
-                            }
-
-                            let ReturnCancelBtn;
-
-                            {/* order status == delivered  */ }
-                            if (data.order_status === 5 && vdate <= 14) {
-
-                              if (data['per_order_status'] == 0 && data['return_order'] == 0) {
-                                ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Return confirmation Sent</button>
-                              } else {
-                                ReturnCancelBtn = <button className="btn btn-danger btn-rounded"  onClick={() => ReturnProduct(data.product_id, data.customer_id, data.od_id)}>Return order</button>
-                                
-                                
-                              }
-
-
-                            } else if (data.order_status === 1 || data.order_status === 2 || data.order_status === 3 || data.order_status === 4) {
-
-                              if (data.per_order_status === 1) {
-
-                                ReturnCancelBtn = <button className="btn btn-warning btn-rounded" onClick={() => CancelProduct(data.product_id, data.customer_id, data.od_id)}>Cancel order</button>
-
-                              } else {
-
-                                {/* once order status get 0 in db it will show order cancelled  */ }
-                                ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>
-
-                              }
-
-                            } else if (data.order_status == 6) {
-
-                              ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>
-
-                            } else if (data.order_status == 7) {
-                              ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Returned</button>
-                            } else {
-                              ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Placed</button>;
-                            }
-                            return <tr key={index}>
-                              <th scope="row">{index + 1}</th>
-                              <td>
-                                <Link href={`/ProductDetail/${data.seo_url}`}>
-                                  <Image
-                                    src={images && images.length > 0 ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${images[0]}` : '/Altis-chair-Black-(45)-white bg.webp'}
-                                    height={50}
-                                    width={50}
-                                    alt="prod_image"
-                                  />
-                                </Link>
-                              </td>
-                              <td><Link href={`/ProductDetail/${data.seo_url}`}>{data.product_name}</Link></td>
-                              <td>{data.quantity}</td>
-                              <td>₹ {data.quantity * data.prod_price} </td>
-                              <td>
-                                {ReturnCancelBtn}
-                              </td>
-                            </tr>
-                          })
-                        }
-                      </tbody>
-                    ) : (
-                      <tbody>
-                        <tr>
-                          <td colSpan="6" className="text-center">No order data available</td>
-                        </tr>
-                      </tbody>
-                    )}
-                  </table>
+                  {renderOrderList(orderData)}
                   <hr />
                 </div>
               </div>
@@ -761,49 +824,15 @@ function ProfilePage() {
                 <div className="Right-Profile">
                   <h3>Change Password</h3>
                   <hr />
-                  <div>
-                    <form onSubmit={handleSubmit}>
-                      <div className="row user-data">
-                        <div className="col">
-                          <label htmlFor="">New Password</label>
-                          <input
-                            type="password"
-                            required
-                            className="form-control fw-semibold"
-                            placeholder="New Password"
-                            value={newPassword}
-                            onChange={(e) => setNewPassword(e.target.value)}
-                          />
-                        </div>
-                        <div className="col">
-                          <label htmlFor="">Confirm Password</label>
-                          <input
-                            type="password"
-                            required
-                            className="form-control fw-semibold"
-                            placeholder="Confirm Password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                          />
-                        </div>
-                      </div>
-
-                      {error && (
-                        <div className="alert alert-danger">{error}</div>
-                      )}
-                      {success && (
-                        <div className="alert alert-success">{success}</div>
-                      )}
-
-                      <div className="form-group row">
-                        <div className="col-sm-10">
-                          <button type="submit" className="btn form-btn">
-                            Update Password
-                          </button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
+                  <ChangePasswordForm
+                    newPassword={newPassword}
+                    setNewPassword={setNewPassword}
+                    confirmPassword={confirmPassword}
+                    setConfirmPassword={setConfirmPassword}
+                    handleSubmit={handleSubmit}
+                    error={error}
+                    success={success}
+                  />
                 </div>
               </div>
             </div>

@@ -61,21 +61,15 @@ const OrderTable = () => {
   
       message.success(`Order status has been updated`);
       setIsStatusModalVisible(false);
-      console.log("orders" + JSON.stringify( orders));
-      
-      // Send email notification
       const order = orders.find(o => o.order_id === selectedOrder);
-      console.log("order" +  JSON.stringify(order));
 
       if (order) {
         await sendEmail(
-          order.customer_email, // Assuming the order object has an email field
+          order.customer_email, 
           'Order Status Update',
           `Your order (ID: ${order.order_id}) status has been updated to ${newStatus}.`
         );
       }
-  
-      // After successful update, refetch the orders
       await fetchOrders();
     } catch (error) {
       message.error("Failed to update order status");
@@ -127,7 +121,6 @@ const OrderTable = () => {
         throw new Error('Failed to send email');
       }
     } catch (error) {
-      console.error('Error sending email:', error);
       message.error('Failed to send notification email');
     }
   };
@@ -144,13 +137,12 @@ const OrderTable = () => {
       dataIndex: "FirstName",
       key: "FirstName",
       render: (_, record) => {
-        console.log("Name record:", record); // Add this line
         return `${record.FirstName || record.customer_email} `;
       },
     },
     {
       title: "Mobile No",
-      dataIndex: "Phone", // Make sure this matches the field name in your API response
+      dataIndex: "Phone",
       key: "mobile",
     },
     {
@@ -160,7 +152,7 @@ const OrderTable = () => {
       render: (added_on) => {
         if (!added_on) return "-";
         const date = new Date(added_on);
-        return date.toDateString(); // You can change the format as needed
+        return date.toDateString(); 
       },
     },
     {
@@ -224,7 +216,6 @@ const OrderTable = () => {
     },
   ];
 
-  // console.log('AllOrderData', AllOrderData);
   return (
     <>
       <Spin spinning={loading}>

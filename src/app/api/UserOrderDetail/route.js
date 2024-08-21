@@ -1,17 +1,11 @@
 import { query } from "@/lib/db"; 
-// const router = useRouter();
 import axios from "axios";
 
 import { NextRequest, NextResponse } from "next/server";
-// import "../../../../envConfig.js";
-
-// Define your API endpoint handler for GET request
-// import { useRouter } from 'next/navigation'
 export async function POST(req) {
 
   try {
       const { orderid } = await req.json();  
-      console.log('orderid', orderid);
       const orderResult = await query({
         query: `
           SELECT ol.*, od.*, p.product_id, p.product_name, p.color, p.image_name, cm.customer_id, cm.FirstName, cm.LasttName, cm.Phone, cm.Address, os.*

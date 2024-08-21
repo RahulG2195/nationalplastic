@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Form, Input, Button, InputNumber, Spin } from 'antd';
+import { Form, Input, Button, InputNumber, Spin,Space } from 'antd';
 import axios from 'axios';
 import "./EditCategory.css";
 import { useNavigate } from 'react-router-dom';
@@ -206,9 +206,12 @@ export default function EditCategory() {
           />
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+          <Space>
+            <Button onClick={handleNavigation}>Cancel</Button>
           <Button type="primary" htmlType="submit">
             Update
           </Button>
+          </Space>
         </Form.Item>
       </Form>
     </Spin>

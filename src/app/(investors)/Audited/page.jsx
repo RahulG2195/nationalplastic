@@ -11,7 +11,6 @@ const Audited = () => {
     const fetchData = async () => {
       try {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/GetInvestor`, { type: 'audited' });
-        console.log('response', response);
         setAuditedData(response.data.results); 
       } catch (error) {
         console.error('Error fetching Audited financial results data:', error);

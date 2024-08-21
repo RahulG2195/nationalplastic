@@ -14,17 +14,11 @@ const WishlistCard = (props) => {
   const handleMoveToCart = () => {
     props.onAddToCart(
       props.id
-      // props.Title,
-      // props.Discription,
-      // props.Price,
-      // props.orignalPrice,
-      // props.Discount
-      // props.ChairImg
     );
   };
   const Np = "National Plastic";
   const handleOnClick = async () => {
-    toast.dismiss(); // Close any existing toast notifications
+    toast.dismiss(); 
     toast.dark(
       <div>
         <p>Are you sure you want to delete this item from the wishlist?</p>
@@ -44,14 +38,14 @@ const WishlistCard = (props) => {
         closeOnClick: false,
         draggable: false,
         closeButton: false,
-        onClose: () => { }, // Do nothing on close
+        onClose: () => { }, 
       }
     );
   };
   const handleDelete = () => {
     try {
       props.onDeleteSuccess(props.id);
-      toast.dismiss(); // Close the toast after deletion
+      toast.dismiss(); 
     } catch (error) {
       notifyErrorti("Can't delete");
     }
@@ -86,7 +80,6 @@ const WishlistCard = (props) => {
              <span style={{ color: "#CC0008" }}>{Np} </span>{props.productName} ({props.color}) 
             </h5>
           </Link>
-          {/* <p className="card-text productSubTitle">{props.producDiscription}</p> */}
         </div>
         <div className="">
           <div className="price m-1 fw-bold WishpriceRsp">
@@ -110,7 +103,6 @@ const WishlistCard = (props) => {
                MOVE TO CART
             </button>
             <button type="button" className="btn btn-danger moveTocartResp ms-1 me-3" onClick={handleOnClick}>
-              {/* <img src="/Assets/svg/Icon core-trash.svg" alt="" /> */}
               <i className="shoppingCartIcon"><DeleteTwoToneIcon/></i>
               Delete
             </button>

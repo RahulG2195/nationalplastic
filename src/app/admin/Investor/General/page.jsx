@@ -36,13 +36,8 @@ export default function MyComponent() {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_BASE_URL}/Investor/disclosure`
       );
-      console.log("response: " + JSON.stringify(response));
       const data = response.data.yearsList;
-     
       const yearLabels = data.map((item) => item.label);
-      console.log("response: " + JSON.stringify(yearLabels));
-
-
       setYears(yearLabels);
       if (yearLabels.length > 0) {
         setSelectedYear(yearLabels[0]);
@@ -117,7 +112,6 @@ export default function MyComponent() {
         }
       });
 
-      // Append the file if it exists
       if (
         values.file &&
         values.file.length > 0 &&
@@ -125,24 +119,13 @@ export default function MyComponent() {
       ) {
         formData.append("file", values.file[0].originFileObj);
       }
-
-      // Add action to formData
       formData.append("action", editingRecord ? "editRecord" : "addRecord");
       selectedYear
       formData.append("year", selectedYear);
 
-      // Add id if editing
       if (editingRecord) {
         formData.append("id", editingRecord.id);
       }
-      for (let [key, value] of formData.entries()) {
-        if (key === "file") {
-          console.log(key, value.name); // Log file name instead of the whole File object
-        } else {
-          console.log(key, value);
-        }
-      }
-      // Make the API call
       await axios.put(
         `${process.env.NEXT_PUBLIC_BASE_URL}/Investor/disclosure`,
         formData,
@@ -216,7 +199,7 @@ const showNewYearModal = () => {
 };
 const handleDelete = async (record) => {
   try {
-    console.log("record"+ JSON.stringify( record));
+    ("record"+ JSON.stringify( record));
     const id = record.id;
 
     await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/disclosure`,{ 

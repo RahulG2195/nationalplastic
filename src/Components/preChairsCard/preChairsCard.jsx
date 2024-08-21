@@ -52,7 +52,7 @@ const PreChairsCard = (props) => {
         <div className="image-container">
           <div className="first">
             <div className="d-flex justify-content-between align-items-center">
-              <span className="discount">{props.Discount}%</span>
+              {!props.showGetQuote && (<span className="discount">{props.Discount}%</span>)}
               <span className="wishlist">
                 <i
                   onClick={handleAddWishlist}
@@ -78,14 +78,14 @@ const PreChairsCard = (props) => {
           </Link>
         </div>
 
-        <div className="product-detail-container p-2">
+        <div className="product-detail-container p-2 pb-0">
           <div className="align-items-center">
             <Link href={`/ProductDetail/${props.id}`} className="">
               <h5 className="dress-name"><span>{Np}</span> {props.Title} <span className="text-black">({props.Color})</span></h5>
             </Link>
-            <div className="d-md-flex flex-column mb-2">
+            <div className="d-md-flex flex-column ">
               {props.showGetQuote && (
-                <button onClick={handleGetQuote} className="new-price pr-2 pr-md-0">
+                <button onClick={handleGetQuote} className="getQouteButton my-3 border-0 rounded shadow text-white fw-bold px-3 py-2">
                   Get Quote
                 </button>
               )}
@@ -107,16 +107,16 @@ const PreChairsCard = (props) => {
             </div>
           </div> */}
           <div className="d-flex justify-content-between align-items-center pt-1">
-            <div>
+           {!props.showGetQuote && ( <div>
 
               <i className="fa fa-star-o rating-star" style={{color:'gold '}} />
               <span className="rating-number">4.8</span>
-            </div>
-            <span className="buy">
+            </div>)}
+            {!props.showGetQuote && (<span className="buy">
               <i onClick={handleAddToCart} className="shoppingCartIcon text-black">
                 <ShoppingCartOutlinedIcon />
               </i>
-            </span>
+            </span>)}
           </div>
           {props.showGetQuote && (
             <div className="invisible-component"><GetQuoteForm product={selectedImage} /></div>

@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Form, Input, Button, Select, Spin } from 'antd';
+import { Form, Input, Button, Select, Spin, Space } from 'antd';
 import axios from 'axios';
 import "./EditCategory.css";
 import { useNavigate } from 'react-router-dom';
@@ -166,9 +166,12 @@ export default function AddCategory() {
           />
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+          <Space> 
+            <Button onClick={handleNavigation}>Cancel</Button>  
           <Button type="primary" htmlType="submit">
             Submit
           </Button>
+          </Space>
         </Form.Item>
       </Form>
     </Spin>

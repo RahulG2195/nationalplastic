@@ -46,8 +46,6 @@ const IEPFCMS = () => {
   };
 
   const handleEdit = (record, section) => {
-    console.log("record ", record.content);
-    console.log("section ", section);
     const dataContent = record.content
     if (section === 'UnclaimedDividendContent') {
       setEditingRecord({ content: typeof record.content === 'string' ? record.content : JSON.stringify(record.content) });

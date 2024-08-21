@@ -44,7 +44,7 @@ const OutcomeMeet = () => {
               {Object.keys(groupedData).length > 0 ? (
                 Object.keys(groupedData).map((year, index) => (
                   <div key={index}>
-                    <h3>Year {year}</h3>
+                    <h3>{year}</h3>
                     <div className="investor-table">
                       <table className='table table-responsive table-striped table-light table-bordered'>
                         <tbody>

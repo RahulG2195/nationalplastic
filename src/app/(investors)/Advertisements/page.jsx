@@ -21,7 +21,7 @@ const Advertisements = () => {
 
   const renderQuarterData = (yearData) => {
     return ['Q1', 'Q2', 'Q3', 'Q4'].map((quarter) => (
-      <td key={quarter}>
+      <td key={quarter} style={{ width: '25%', maxWidth: '25%' }}>
         <ul className='list-unstyled'>
           {yearData[quarter]?.map((ad, index) => (
             <li key={index}>
@@ -34,7 +34,7 @@ const Advertisements = () => {
       </td>
     ));
   };
-
+  
   return (
     <section className='investor_sec my-5 py-5'>
       <div className='container'>
@@ -42,18 +42,18 @@ const Advertisements = () => {
           <div className='col-12'>
             <div className='bg-light p-4 rounded shadow-sm'>
               <h3 className='mb-4'>Newspaper Advertisements</h3>
-
+  
               {Object.entries(advertisementData).map(([year, yearData]) => (
                 <div className='mb-4' key={year}>
                   <h4 className='mb-3'>{`FY ${year}`}</h4>
                   <div className='table-responsive'>
-                    <table className='table table-striped table-bordered'>
+                    <table className='table table-striped table-bordered' style={{ tableLayout: 'fixed' }}>
                       <thead>
                         <tr>
-                          <th>Q1</th>
-                          <th>Q2</th>
-                          <th>Q3</th>
-                          <th>Q4</th>
+                          <th style={{ width: '25%' }}>Q1</th>
+                          <th style={{ width: '25%' }}>Q2</th>
+                          <th style={{ width: '25%' }}>Q3</th>
+                          <th style={{ width: '25%' }}>Q4</th>
                         </tr>
                       </thead>
                       <tbody>
