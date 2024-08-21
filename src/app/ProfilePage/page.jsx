@@ -533,11 +533,6 @@ function ProfilePage() {
     );
   }
 
-
-
-
-
-
   return (
     <>
       <div className="container profile-page-container mb-5">
