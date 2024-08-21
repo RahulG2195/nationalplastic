@@ -31,7 +31,7 @@ export async function uploadFile(file) {
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
 
-  const normalizedFileName = normalizeFileNameAndLowercaseExtension(file.name);
+  const normalizedFileName = file.name;
   
   const filePath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
       
