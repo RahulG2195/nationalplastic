@@ -341,6 +341,46 @@ function ProfilePage() {
   const handleModalClose = () => {
     setIsModalVisible(false);
   };
+
+  function ChangePasswordForm({ newPassword, setNewPassword, confirmPassword, setConfirmPassword, handleSubmit, error, success }) {
+    return (
+      <form onSubmit={handleSubmit}>
+        <div className="row user-data">
+          <div className="col">
+            <label htmlFor="">New Password</label>
+            <input
+              type="password"
+              required
+              className="form-control fw-semibold"
+              placeholder="New Password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+          </div>
+          <div className="col">
+            <label htmlFor="">Confirm Password</label>
+            <input
+              type="password"
+              required
+              className="form-control fw-semibold"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </div>
+        </div>
+        {error && <div className="alert alert-danger">{error}</div>}
+        {success && <div className="alert alert-success">{success}</div>}
+        <div className="form-group row">
+          <div className="col-sm-10">
+            <button type="submit" className="btn form-btn">
+              Update Password
+            </button>
+          </div>
+        </div>
+      </form>
+    );
+  }
   const renderOrderList = (orderData) => {
     return (
       <table className="table table-bordered table-responsive border-primary table-striped">
@@ -429,46 +469,19 @@ function ProfilePage() {
       </table>
     );
   }
-  function ChangePasswordForm({ newPassword, setNewPassword, confirmPassword, setConfirmPassword, handleSubmit, error, success }) {
-    return (
-      <form onSubmit={handleSubmit}>
-        <div className="row user-data">
-          <div className="col">
-            <label htmlFor="">New Password</label>
-            <input
-              type="password"
-              required
-              className="form-control fw-semibold"
-              placeholder="New Password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-          </div>
-          <div className="col">
-            <label htmlFor="">Confirm Password</label>
-            <input
-              type="password"
-              required
-              className="form-control fw-semibold"
-              placeholder="Confirm Password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-          </div>
-        </div>
-        {error && <div className="alert alert-danger">{error}</div>}
-        {success && <div className="alert alert-success">{success}</div>}
-        <div className="form-group row">
-          <div className="col-sm-10">
-            <button type="submit" className="btn form-btn">
-              Update Password
-            </button>
-          </div>
-        </div>
-      </form>
-    );
-  }
 
+
+
+
+
+
+
+
+
+
+
+
+  
   return (
     <>
       <div className="container profile-page-container mb-5">
