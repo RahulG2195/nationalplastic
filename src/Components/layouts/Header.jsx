@@ -476,7 +476,7 @@ export default function Header() {
                       ) : (
                         <Link
                           className="nav-link"
-                          href="/Register"
+                          href="/Login"
                           onClick={isClicked ? handleShow : null}>
                           <Image
                             height={100}

@@ -11,18 +11,18 @@ export async function POST(req, res) {
     const data = await req.formData();
 
     // Extract file and other form data
-    const file = data.get("file");
-    upload.single(file);
+    // const file = data.get("file");
+    // upload.single(file);
 
-    if (!file) {
-      return NextResponse.json({ success: false });
-    }
+    // if (!file) {
+    //   return NextResponse.json({ success: false });
+    // }
 
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    // const bytes = await file.arrayBuffer();
+    // const buffer = Buffer.from(bytes);
 
-    const path = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}/${file.name}`;
-    await writeFile(path, buffer);
+    // const path = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}/${file.name}`;
+    // await writeFile(path, buffer);
 
     
 
@@ -43,7 +43,7 @@ export async function POST(req, res) {
     `;
 
     // Read the file content
-    const fileContent = await readFile(path);
+    // const fileContent = await readFile(path);
 
     // Send email with attachment using Resend
     const info = await resend.emails.send({
@@ -51,14 +51,14 @@ export async function POST(req, res) {
       to: email,
       subject: reason,
       html: HtmlFormat,
-      attachments: [
-        {
-          filename: file.name,
-          content: fileContent,
-        },
-      ],
+      // attachments: [
+      //   {
+      //     filename: file.name,
+      //     content: fileContent,
+      //   },
+      // ],
     });
-
+    console.log(JSON.stringify(info));
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error sending email:", error);
