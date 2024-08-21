@@ -17,6 +17,8 @@ export async function POST(request) {
     try {
       const toLowerCase = await uploadFile(file_name); // Make sure uploadFile returns a Promise
       // Set the pdfPath based on where the file_name is saved
+      console.log("WY ???", toLowerCase);
+
       pdfPath = toLowerCase;
 
     } catch (error) {
@@ -52,6 +54,7 @@ export async function PUT(request) {
   if (file_name) {
     try {
       const toLowerCase = await uploadFile(file_name);
+      console.log("WY ???", toLowerCase);
       pdfPath = toLowerCase;
     } catch (error) {
       console.error('file_name upload error:', error);

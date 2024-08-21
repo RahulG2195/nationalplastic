@@ -67,7 +67,7 @@ export async function PUT(request) {
       }
   
       // Building dynamic query
-      let queryStr = 'UPDATE investorKYC SET ';
+      let queryStr = 'UPDATE investorKyc SET ';
       const values = [];
       
       if (message) {
