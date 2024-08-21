@@ -21,7 +21,7 @@ const OutcomeAGM = () => {
           acc[item.financial_year].push(item);
           return acc;
         }, {});
-
+        
         setAgmOutcomes(parsedData);
       } catch (error) {
         console.error("Error fetching OutcomeAGM data:", error);
