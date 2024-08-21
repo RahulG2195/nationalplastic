@@ -138,7 +138,7 @@ const Outcome = () => {
     },
     {
       title: 'Actions',
-      key: 'actions',
+      key: 'actions', 
       render: (_, record) => (
         <>
           <Button icon={<EditOutlined />} onClick={() => showModal(record)} />
