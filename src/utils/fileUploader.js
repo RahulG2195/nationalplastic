@@ -42,6 +42,6 @@ export async function uploadFile(file) {
   }
 
   const uploadDir = path.join(filePath, normalizedFileName);
-  await fs.writeFile(uploadDir, buffer);
+  await fs.writeFile(filePath, buffer);
   return normalizedFileName;
 }
