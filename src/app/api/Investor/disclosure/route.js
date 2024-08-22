@@ -5,11 +5,7 @@ const path = require("path");
 
 export const dynamic = 'force-dynamic';
 export const bodyParser = false;
-function FileNameLowercaseExtension(fileName) {
-    const ext = path.extname(fileName).toLowerCase();
-    const name = path.basename(fileName, path.extname(fileName));
-    return `${name}${ext}`;
-  }
+
 // GET method for fetching records
 export async function GET(request) {
     try {
@@ -126,7 +122,7 @@ async function handleEditRecord(fields, files) {
     }
     
 
-    let fileName = await FileNameLowercaseExtension(fields.currentFilePath) || '';
+    let fileName = fields.currentFilePath || '';
 
     if (files.file) {
         
