@@ -12,7 +12,7 @@ import {
   message,
   Spin,
 } from "antd";
-import { UploadOutlined, LoadingOutlined,DeleteOutlined } from "@ant-design/icons";
+import { UploadOutlined, LoadingOutlined, DeleteOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 
@@ -93,7 +93,17 @@ export default function MyComponent() {
   const showModal = (record = null) => {
     setEditingRecord(record);
     if (record) {
-      form.setFieldsValue(record);
+      form.setFieldsValue({
+        ...record,
+        file: record.file_path ? [
+          {
+            uid: '-1',
+            name: record.file_path.split('/').pop(),
+            status: 'done',
+            url: `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${record.file_path}`
+          }
+        ] : []
+      });
     } else {
       form.resetFields();
     }
@@ -112,20 +122,23 @@ export default function MyComponent() {
         }
       });
 
-      if (
-        values.file &&
-        values.file.length > 0 &&
-        values.file[0].originFileObj
-      ) {
-        formData.append("file", values.file[0].originFileObj);
+      if (values.file && values.file.length > 0) {
+        if (values.file[0].originFileObj) {
+          // New file uploaded
+          formData.append("file", values.file[0].originFileObj);
+        } else if (editingRecord && values.file[0].url) {
+          // Existing file, no change
+          formData.append("file_path", editingRecord.file_path);
+        }
       }
+
       formData.append("action", editingRecord ? "editRecord" : "addRecord");
-      selectedYear
       formData.append("year", selectedYear);
 
       if (editingRecord) {
         formData.append("id", editingRecord.id);
       }
+
       await axios.put(
         `${process.env.NEXT_PUBLIC_BASE_URL}/Investor/disclosure`,
         formData,
@@ -148,7 +161,6 @@ export default function MyComponent() {
       message.error("Failed to save record");
     }
   };
-
   const handleCancel = () => {
     setModalVisible(false);
   };
@@ -181,10 +193,10 @@ export default function MyComponent() {
       key: "actions",
       render: (_, record) => (
         <>
-        <Button onClick={() => showModal(record)} type="link">
-          Edit
-        </Button>
-        <Button icon={<DeleteOutlined />} onClick={() => handleDelete(record)} danger />
+          <Button onClick={() => showModal(record)} type="link">
+            Edit
+          </Button>
+          <Button icon={<DeleteOutlined />} onClick={() => handleDelete(record)} danger />
         </>
 
       ),
@@ -192,45 +204,45 @@ export default function MyComponent() {
   ];
 
 
-// New functions
-const showNewYearModal = () => {
-  newYearForm.resetFields();
-  setNewYearModalVisible(true);
-};
-const handleDelete = async (record) => {
-  try {
-    ("record"+ JSON.stringify( record));
-    const id = record.id;
+  // New functions
+  const showNewYearModal = () => {
+    newYearForm.resetFields();
+    setNewYearModalVisible(true);
+  };
+  const handleDelete = async (record) => {
+    try {
+      ("record" + JSON.stringify(record));
+      const id = record.id;
 
-    await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/disclosure`,{ 
-      data: { id: id } 
-    });
-    message.success('CorpReport deleted successfully');
-    fetchYearData(selectedYear);
-  } catch (error) {
-    message.error('Failed to delete CorpReport');
-  }
-};
+      await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/disclosure`, {
+        data: { id: id }
+      });
+      message.success('CorpReport deleted successfully');
+      fetchYearData(selectedYear);
+    } catch (error) {
+      message.error('Failed to delete CorpReport');
+    }
+  };
 
-const handleNewYearOk = async () => {
-  try {
-    const values = await newYearForm.validateFields();
-    await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/disclosure`, {
-      action: "insertDisclosure",
-      label: values.year,
-    });
-    message.success("New financial year added successfully");
+  const handleNewYearOk = async () => {
+    try {
+      const values = await newYearForm.validateFields();
+      await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/disclosure`, {
+        action: "insertDisclosure",
+        label: values.year,
+      });
+      message.success("New financial year added successfully");
+      setNewYearModalVisible(false);
+      fetchYears(); // Refresh the years list
+    } catch (error) {
+      console.error("Error adding new year:", error);
+      message.error("Failed to add new financial year");
+    }
+  };
+
+  const handleNewYearCancel = () => {
     setNewYearModalVisible(false);
-    fetchYears(); // Refresh the years list
-  } catch (error) {
-    console.error("Error adding new year:", error);
-    message.error("Failed to add new financial year");
-  }
-};
-
-const handleNewYearCancel = () => {
-  setNewYearModalVisible(false);
-};
+  };
 
   if (loading) {
     return (
@@ -243,24 +255,24 @@ const handleNewYearCancel = () => {
       <h1>General Disclosure Data</h1>
 
       <div style={{ marginBottom: 16 }}>
-  <Select
-    style={{ width: 200, marginRight: 16 }}
-    value={selectedYear}
-    onChange={handleYearChange}
-  >
-    {years.map((year) => (
-      <Option key={year} value={year}>
-        {year}
-      </Option>
-    ))}
-  </Select>
-  <Button onClick={() => showModal()} type="primary" style={{ marginRight: 16 }}>
-    Add New Record
-  </Button>
-  <Button onClick={showNewYearModal} type="primary">
-    Add New Financial Year
-  </Button>
-</div>
+        <Select
+          style={{ width: 200, marginRight: 16 }}
+          value={selectedYear}
+          onChange={handleYearChange}
+        >
+          {years.map((year) => (
+            <Option key={year} value={year}>
+              {year}
+            </Option>
+          ))}
+        </Select>
+        <Button onClick={() => showModal()} type="primary" style={{ marginRight: 16 }}>
+          Add New Record
+        </Button>
+        <Button onClick={showNewYearModal} type="primary">
+          Add New Financial Year
+        </Button>
+      </div>
 
 
       <Table dataSource={yearData} columns={columns} rowKey="id" />
@@ -282,7 +294,7 @@ const handleNewYearCancel = () => {
           <Form.Item
             name="file"
             label="File"
-            rules={[{ required: true, message: "Please upload a file!" }]}
+            rules={[{ required: !editingRecord, message: "Please upload a file!" }]}
             valuePropName="fileList"
             getValueFromEvent={(e) => {
               if (Array.isArray(e)) {
@@ -295,7 +307,9 @@ const handleNewYearCancel = () => {
               beforeUpload={() => false}
               accept=".pdf,.doc,.docx,.xls,.xlsx"
             >
-              <Button icon={<UploadOutlined />}>Click to Upload</Button>
+              <Button icon={<UploadOutlined />}>
+                {editingRecord ? 'Change File' : 'Click to Upload'}
+              </Button>
             </Upload>
           </Form.Item>
           <Form.Item name="status" label="Status" initialValue={1}>
@@ -308,21 +322,21 @@ const handleNewYearCancel = () => {
       </Modal>
 
       <Modal
-  title="Add New Financial Year"
-  visible={newYearModalVisible}
-  onOk={handleNewYearOk}
-  onCancel={handleNewYearCancel}
->
-  <Form form={newYearForm} layout="vertical">
-    <Form.Item
-      name="year"
-      label="Financial Year"
-      rules={[{ required: true, message: "Please input the financial year!" }]}
-    >
-      <Input placeholder="e.g., 2024-2025" />
-    </Form.Item>
-  </Form>
-</Modal>
+        title="Add New Financial Year"
+        visible={newYearModalVisible}
+        onOk={handleNewYearOk}
+        onCancel={handleNewYearCancel}
+      >
+        <Form form={newYearForm} layout="vertical">
+          <Form.Item
+            name="year"
+            label="Financial Year"
+            rules={[{ required: true, message: "Please input the financial year!" }]}
+          >
+            <Input placeholder="e.g., 2024-2025" />
+          </Form.Item>
+        </Form>
+      </Modal>
     </div>
   );
 }

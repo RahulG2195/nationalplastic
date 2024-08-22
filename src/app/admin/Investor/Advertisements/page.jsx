@@ -44,7 +44,7 @@ const AdvertisementCMS = () => {
   const showModal = (record = null) => {
     if (record) {
       form.setFieldsValue(record);
-      setEditingId(record.id);
+      setEditingId(record.key);
       setFileList([]);
     } else {
       form.resetFields();
