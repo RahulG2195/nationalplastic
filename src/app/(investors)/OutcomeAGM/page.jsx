@@ -27,7 +27,7 @@ const OutcomeAGM = () => {
         // sortedYears.forEach(year => {
         //   sortedData[year] = groupedData[year];
         // });
-        // console.log('sortedData', sortedData);
+        // console.log('sortedData', groupedData);
         setAgmOutcomes(groupedData);
       } catch (error) {
         console.error("Error fetching OutcomeAGM data:", error);

@@ -102,7 +102,7 @@ export async function GET() {
   try {
     const outcomeAGMData = await query({
       query: `SELECT * FROM OutcomeAGM ORDER BY CAST(SUBSTRING(financial_year, 1, 4) AS SIGNED) DESC,
-         CAST(SUBSTRING(financial_year, 6, 4) AS SIGNED) DESC,
+         CAST(SUBSTRING(financial_year, 6, 4) AS SIGNED) DESC, notice_title ASC,
          id DESC`,
     });
 
