@@ -63,15 +63,27 @@ const CorporateGovernance = () => {
               <h4>Annual Secretarial Compliance Certificate</h4>
               <table className='table table-striped table-light table-bordered'>
                 <tbody>
-                  {certificate.map((certificate, index) => (
-                    <tr key={index}>
-                      <td>
-                        <a href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${certificate.file_name}`} target='_blank' rel="noopener noreferrer">
-                          {certificate.title}
-                        </a>
-                      </td>
-                    </tr>
-                  ))}
+                  {certificate
+                    .map(cert => ({
+                      ...cert,
+                      year: parseInt(cert.title.match(/\d{4}/)[0])
+                    }))
+                    .sort((a, b) => b.year - a.year)
+                    .map((certificate, index) => {
+                      return (
+                        <tr key={index}>
+                          <td>
+                            <a
+                              href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${certificate.file_name}`}
+                              target='_blank'
+                              rel="noopener noreferrer"
+                            >
+                              {certificate.title}
+                            </a>
+                          </td>
+                        </tr>
+                      );
+                    })}
                 </tbody>
               </table>
             </div>

@@ -60,7 +60,7 @@ const AuditedPage = () => {
     form.validateFields().then(async (values) => {
       try {
         const formData = new FormData();
-        formData.append('years', "Year " + values.years);
+        formData.append('years', values.years);
         formData.append('title', values.title);
         if (fileList[0]) {
           formData.append('file_name', fileList[0].originFileObj);

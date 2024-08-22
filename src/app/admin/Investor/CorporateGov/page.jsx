@@ -62,7 +62,7 @@ const CorporateGov = () => {
     form.validateFields().then(async (values) => {
       try {
         const formData = new FormData();
-        formData.append('years', "Year" + values.years);
+        formData.append('years', values.years);
         formData.append('title', values.title);
         formData.append('quarter', values.quarter);
         if (fileList[0]) {

@@ -14,7 +14,7 @@ const OutcomeAGM = () => {
           `${process.env.NEXT_PUBLIC_BASE_URL}/admin/Investors/OutcomeAGM`
         );
         
-        const parsedData = response.data.outcomeAGMData.reduce((acc, item) => {
+        const groupedData = response.data.outcomeAGMData.reduce((acc, item) => {
           if (!acc[item.financial_year]) {
             acc[item.financial_year] = [];
           }
@@ -22,7 +22,13 @@ const OutcomeAGM = () => {
           return acc;
         }, {});
 
-        setAgmOutcomes(parsedData);
+        const sortedYears = Object.keys(groupedData).sort();
+        const sortedData = {};
+        sortedYears.forEach(year => {
+          sortedData[year] = groupedData[year];
+        });
+
+        setAgmOutcomes(sortedData);
       } catch (error) {
         console.error("Error fetching OutcomeAGM data:", error);
         setError("Failed to load data. Please try again later.");
@@ -30,7 +36,6 @@ const OutcomeAGM = () => {
         setIsLoading(false);
       }
     };
-
     fetchData();
   }, []);
 
@@ -38,41 +43,39 @@ const OutcomeAGM = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <>
-      <section className="investor_sec my-5 py-5">
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <div className="inn-content-wrap">
-                {Object.entries(agmOutcomes).map(([year, yearData]) => (
-                  <div key={year}>
-                    <h3>{year}</h3>
-                    <table className="table table-responsive table-striped table-light">
-                      <tbody>
-                        {yearData.map((item, index) => (
-                          <tr key={index}>
-                            <td>
-                              <a target="_blank" href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${item.file_path}`}>
-                                <i
-                                  className="fa fa-file-pdf-o"
-                                  aria-hidden="true"
-                                ></i>{" "}
-                                {item.notice_title}
-                              </a>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                    <p>&nbsp;</p>
-                  </div>
-                ))}
-              </div>
+    <section className="investor_sec my-5 py-5">
+      <div className="container">
+        <div className="row">
+          <div className="col-12">
+            <div className="inn-content-wrap">
+              {Object.entries(agmOutcomes).map(([year, yearData]) => (
+                <div key={year}>
+                  <h3>{year}</h3>
+                  <table className="table table-responsive table-striped table-light">
+                    <tbody>
+                      {yearData.map((item, index) => (
+                        <tr key={index}>
+                          <td>
+                            <a 
+                              target="_blank" 
+                              href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${item.file_path}`}
+                            >
+                              <i className="fa fa-file-pdf-o" aria-hidden="true"></i>{" "}
+                              {item.notice_title}
+                            </a>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <p>&nbsp;</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 
