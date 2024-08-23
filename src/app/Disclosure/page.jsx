@@ -13,7 +13,7 @@ const Disclosure = () => {
   useEffect(() => {
     const fetchDisclosures = async () => {
       try {
-        const response = await axios.get('/api/admin/Investors/l_disclosures');
+        const response = await axios.get('/api/admin/Investors/ldCMS');
         if (response.status === 200) {
           setDisclosures(response.data.disclosures);
         } else {
