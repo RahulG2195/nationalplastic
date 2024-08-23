@@ -159,7 +159,7 @@ const Notice = () => {
       >
         <Form form={form} layout="vertical">
           <Form.Item name="years" label="Years" rules={[{ required: true }]}>
-            <Input />
+            <Input placeholder='2000-2001'/>
           </Form.Item>
           <Form.Item name="title" label="Title" rules={[{ required: true }]}>
             <Input />

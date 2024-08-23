@@ -51,7 +51,7 @@ const navigation = [
         href: "/admin/Investor/CorporateReport",
       },
       {
-        title: "Corporate Report",
+        title: "Corporate Quarterly  Compliance Report",
         href: "/admin/Investor/CorporateGov",
       },
 

@@ -153,7 +153,7 @@ const CorporateGov = () => {
 
   return (
     <div style={{ padding: '20px' }}>
-       <h1>Corporate Report</h1>
+       <h1>Corporate Governance: Quarterly Compliance Reports</h1>
       <Button icon={<PlusOutlined />} onClick={() => showModal()} style={{ marginBottom: '20px' }}>
         Add Corporate
       </Button>
@@ -166,7 +166,7 @@ const CorporateGov = () => {
       >
         <Form form={form} layout="vertical">
           <Form.Item name="years" label="Years" rules={[{ required: true }]}>
-            <Input />
+            <Input placeholder='Year 2001-2002' />
           </Form.Item>
           <Form.Item name="title" label="Title" rules={[{ required: true }]}>
             <Input />

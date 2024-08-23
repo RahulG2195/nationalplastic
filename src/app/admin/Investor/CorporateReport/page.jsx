@@ -147,7 +147,7 @@ const CorpReport = () => {
 
   return (
     <div style={{ padding: '20px' }}>
-      <h1>Corporate Policies and Compliance</h1>
+      <h1>Corporate Governance: Policies and Annual Secretarial Compliance</h1>
       <Button icon={<PlusOutlined />} onClick={() => showModal()} style={{ marginBottom: '20px' }}>
         Add CorpReport
       </Button>
@@ -159,12 +159,12 @@ const CorpReport = () => {
         onCancel={() => setIsModalVisible(false)}
       >
         <Form form={form} layout="vertical">
-          <Form.Item name="title" label="Title" rules={[{ required: true }]}>
-            <Input />
+          <Form.Item name="title" label="Title/Year" rules={[{ required: true }]}>
+            <Input placeholder='Enter Year IN the end For Annual Secretarial Compliance - 2001-02'/>
           </Form.Item>
           <Form.Item name="cor_type" label="cor_type" rules={[{ required: true }]}>
             <Select>
-              <Option value="Compliance Certifica">Corporate Compliance Report</Option>
+              <Option value="Compliance Certifica">Annual Secretarial Compliance Certificate</Option>
               <Option value="Policy">Policy</Option>
             </Select>
           </Form.Item>

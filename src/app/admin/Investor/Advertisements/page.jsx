@@ -155,7 +155,7 @@ const AdvertisementCMS = () => {
       >
         <Form form={form} layout="vertical">
           <Form.Item name="fiscalYear" label="Fiscal Year" rules={[{ required: true }]}>
-            <Input />
+            <Input placeholder='2000-01'/>
           </Form.Item>
           <Form.Item name="quarter" label="Quarter" rules={[{ required: true }]}>
             <Select>
