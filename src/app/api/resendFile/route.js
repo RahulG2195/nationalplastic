@@ -4,7 +4,7 @@ import { writeFile, readFile } from "fs/promises";
 import upload from "@/utils/multer.middleware";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-
+const adminEMail = process.env.ADMIN_EMAIL;
 export async function POST(req, res) {
   try {
     // Parse form data using NextRequest.formData()
@@ -50,8 +50,8 @@ try{
 
     // Send email with attachments using Resend
     const info = await resend.emails.send({
-      from: 'nationalplastic.com', // Replace with your verified domain
-      to: email, // Replace with the appropriate email address
+      from: 'National Plastic <noreply@nationalplastic.com>',
+      to: adminEMail, // Replace with the appropriate email address
       subject: `Product Return Request - Order ${orderId}`,
       html: HtmlFormat,
       attachments: [

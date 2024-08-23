@@ -1,7 +1,9 @@
-import nodemailer from "nodemailer";
+import { Resend } from 'resend';
 import { NextRequest, NextResponse } from "next/server";
 import crypto from 'crypto';
 
+const resend = new Resend(process.env.RESEND_API_KEY);
+const adminEMail = process.env.ADMIN_EMAIL;
 export async function POST(request) {
   try {
     const { email } = await request.json();
@@ -13,14 +15,6 @@ export async function POST(request) {
     const otp = crypto.randomInt(100000, 999999).toString(); // Generate a 6-digit OTP
     const otpExpiry = new Date(Date.now() + 15 * 60 * 1000).toISOString(); // OTP valid for 15 minutes
 
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "webDevs2024@gmail.com",
-        pass: "fkbt nnro yfnk ngmc", // Replace with your Gmail App Password
-      },
-    });
-
     // Create HTML email content
     const htmlContent = `
     <p>Hello,</p>
@@ -31,8 +25,8 @@ export async function POST(request) {
     <p>Your Team</p>
     `;
 
-    const info = await transporter.sendMail({
-      from: "webDevs2024@gmail.com",
+    const info = await resend.emails.send({
+      from: 'National Plastic <noreply@nationalplastic.com>',
       to: email,
       subject: "Your OTP Code",
       html: htmlContent,
