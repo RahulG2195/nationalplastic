@@ -62,10 +62,10 @@ export async function PUT(request) {
   const quarter = formData.get('quarter');
   const file_name = formData.get('file_name');
 
-
-
-    const fileName = await uploadPDF(file_name);
-
+  let fileName;
+  if(file_name){
+    fileName = await uploadPDF(file_name);
+  }
   try {
     let updateQuery = `
       UPDATE unaudited 
