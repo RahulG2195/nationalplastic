@@ -7,21 +7,12 @@ export async function GET(request) {
       values: [],
     });
 
-    // Group disclosures by year
     const groupedDisclosures = disclosures.reduce((acc, disclosure) => {
-      if (!acc[disclosure.year]) {
-        acc[disclosure.year] = {
-          year: disclosure.year,
-          quarter1: [],
-          quarter2: [],
-          quarter3: [],
-          quarter4: [],
-        };
+      const key = disclosure.year;
+      if (!acc[key]) {
+        acc[key] = [];
       }
-      acc[disclosure.year][`quarter${disclosure.quarter}`].push({
-        text: disclosure.document_type,
-        url: disclosure.document_url,
-      });
+      acc[key].push(disclosure);
       return acc;
     }, {});
 

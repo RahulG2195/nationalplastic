@@ -3,19 +3,19 @@ import React, { useEffect, useState } from 'react';
 import { Table, Typography, Space, Card, Row, Col, Spin } from 'antd';
 import { FilePdfOutlined } from '@ant-design/icons';
 import styles from './Disclosure.css';
+import axios from 'axios';
 const { Title } = Typography;
 
 const Disclosure = () => {
-  const [disclosures, setDisclosures] = useState([]);
+  const [disclosures, setDisclosures] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchDisclosures = async () => {
       try {
-        const response = await fetch('/api/admin/Investors/l_disclosures');
-        const data = await response.json();
-        if (data.status === 200) {
-          setDisclosures(data.disclosures);
+        const response = await axios.get('/api/admin/Investors/l_disclosures');
+        if (response.status === 200) {
+          setDisclosures(response.data.disclosures);
         } else {
           console.error('Failed to fetch disclosures');
         }
@@ -66,6 +66,28 @@ const Disclosure = () => {
     </Space>
   );
 
+  const processDisclosures = (yearDisclosures) => {
+    if (yearDisclosures.length === 0) return null;
+
+    const year = yearDisclosures[0].year;
+    const processedData = {
+      year: year,
+      quarter1: [],
+      quarter2: [],
+      quarter3: [],
+      quarter4: [],
+    };
+
+    yearDisclosures.forEach(disclosure => {
+      processedData[`quarter${disclosure.quarter}`].push({
+        text: disclosure.document_type,
+        url: disclosure.document_url,
+      });
+    });
+
+    return processedData;
+  };
+
   if (loading) {
     return <Spin size="large" />;
   }
@@ -73,21 +95,25 @@ const Disclosure = () => {
   return (
     <div className="disclosure-container" style={{ padding: '24px' }}>
       <Row gutter={[16, 16]}>
-        {disclosures.map((yearData, index) => (
-          <Col xs={24} key={index}>
-            <Card>
-              <Title level={3}>{yearData.year}</Title>
-              <Table
-  columns={columns}
-  dataSource={[yearData]}
-  pagination={false}
-  scroll={{ x: true }}
-  bordered
-  className={styles.disclosureTable}
-/>
-            </Card>
-          </Col>
-        ))}
+        {Object.entries(disclosures).map(([year, yearDisclosures]) => {
+          const processedYearData = processDisclosures(yearDisclosures);
+          if (!processedYearData) return null;
+          return (
+            <Col xs={24} key={year}>
+              <Card>
+                <Title level={3}>{processedYearData.year}</Title>
+                <Table
+                  columns={columns}
+                  dataSource={[processedYearData]}
+                  pagination={false}
+                  scroll={{ x: true }}
+                  bordered
+                  className={styles.disclosureTable}
+                />
+              </Card>
+            </Col>
+          );
+        })}
       </Row>
     </div>
   );
