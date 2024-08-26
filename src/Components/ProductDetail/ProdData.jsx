@@ -5,7 +5,7 @@ import Image from "next/image";
 import ProductDetailSlider from "../ProductDetailSlider/ProductDetailSlider";
 import MoreProduct from "./MoreProducts/MoreProduct";
 import IncrementDecrement from "@/Components/AddToCart/IncrementDecrement";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/redux/reducer/cartSlice";
@@ -33,6 +33,7 @@ function ProdData({ category_id }) {
   const [availableColor, setAvailableColor] = useState([]);
   const [dataToShow, setdataToShow] = useState([]);
   const [isHovered, setIsHovered] = useState(false);
+  const modalRef = useRef(null);
 
   const dispatch = useDispatch();
   const router = useParams();
@@ -440,6 +441,7 @@ function ProdData({ category_id }) {
           tabindex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
+          ref={modalRef}
         >
           <div className="modal-dialog">
             <div className="modal-content modal-content-mypopup">
@@ -453,7 +455,7 @@ function ProdData({ category_id }) {
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
-                <GetQuoteCustomForm prodName={name} read={"true"} />
+                <GetQuoteCustomForm prodName={name} read={"true"} modalRef={modalRef}/>
               </div>
               {/* <div className="modal-footer">
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
