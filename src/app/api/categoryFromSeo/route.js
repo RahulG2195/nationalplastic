@@ -13,10 +13,16 @@ export async function GET(request) {
       values: sqlValues,
     });
 
+    const shopbyroom = await query({
+      query: `SELECT tag_id, tag_name, tag_seo, tag_sub_banner from tags_cat where tag_seo = ?`,
+      values: [queryParams],
+    });
+
     return new Response(
       JSON.stringify({
         status: 200,
         allCategories: allCategories,
+        shopbyroom: shopbyroom,
       }),
       {
         status: 200,

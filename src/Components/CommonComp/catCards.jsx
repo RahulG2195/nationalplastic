@@ -20,7 +20,7 @@ function CatCards({
   return (
     <>
       <div className={`cards sbr_card`}>
-        <Link onClick={sendCategory} href={`/ProductCatlogue/${catid}`}>
+        <Link onClick={sendCategory} href={`/ShopByRoom/${catid}`}>
           <div
             className={`"card_img" ${hovereffect} ${manfacthover} ${hoverglow} `}
           >
@@ -43,26 +43,9 @@ function CatCards({
           </div>
         </Link>
       </div>
-      {/* <div className="cards TopPick-Card">
-        <Link href="/ProductCatlogue">
-          <div className="card_img">
-            <Image
-              src={image}
-              alt="product card images"
-              width={100}
-              height={100}
-              layout="responsive"
-              objectFit="cover"
-            />
-          </div>
-          <div className={`prodname d-flex justify-content-between px-2 ${style}`}>
-            <h4>{title}</h4>
-            <i className="fa fa-arrow-right" aria-hidden="true"></i>
-          </div>
-        </Link>
-      </div> */}
     </>
   );
 }
 
-export default CatCards;
+export default CatCards
+// export {ShopCards};

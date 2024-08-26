@@ -9,7 +9,7 @@ import { addToCart } from "@/redux/reducer/cartSlice";
 import { addToCartD } from "@/redux/reducer/tempSlice";
 
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
-import PremiumChairs from "./PremiumChairs";
+import PremiumChairs from "../ProductsCatlogue/PremiumChairs";
 import PreChairsCard from "../preChairsCard/preChairsCard";
 import { useParams } from "next/navigation";
 import { Bounce, toast } from "react-toastify";
@@ -52,7 +52,6 @@ const PreChairsCards = () => {
 
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     fetchData();
   }, [selectedColor, selectedArmType, selectedPriceSort, categoryType,]);
@@ -61,15 +60,22 @@ const PreChairsCards = () => {
     try {
 
       const catResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/categoryFromSeo?query=${seo_url}`);
-      const data = catResponse.data.allCategories[0];
-      setCategoryType(data.category_name)
-      setCat_id(data.category_id);
+      const data = catResponse.data.shopbyroom[0];
+      // console.log('data', data);
+      
+      setCategoryType(data.tag_name)
+      setCat_id(data.tag_id);
+
       const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/ProductsCat?query=${cat_id}`);
+
       const fetchedData = response.data;
       setFetchClr(fetchedData.color);
       setFetchType(fetchedData.armType);
-      if (fetchedData?.products) {
-        let filteredData = fetchedData.products;
+      console.log('fetchedData', fetchedData);
+      
+      if (fetchedData?.ShopByroomData) {
+        let filteredData = fetchedData.ShopByroomData;
+        console.log('filteredData', filteredData);
 
         if (selectedColor) {
           filteredData = filteredData.filter(
@@ -114,6 +120,10 @@ const PreChairsCards = () => {
     }
   };
 
+
+  console.log('FetchClr', FetchClr);
+  console.log('FetchType', FetchType);
+  
   const handleAddToWishlist = async (product_id) => {
     const isLoggedInResult = await isLoggedIn();
     if (!isLoggedInResult) {
