@@ -131,3 +131,6 @@ export async function PUT(request) {
     );
   }
 }
+
+
+INSERT INTO `tags_cat`(`tag_seo`, `tag_name`, `tag_image`) VALUES ('Living-Room','Living Room','Living-Room.png'), ('Baby-Room','Baby Room','Kids-room.png'), ('Store-Room','Store Room','Store-room.png'), ('Bedroom','Bedroom','Bedroom.png'), ('Dining-Room','Dining Room','Dining-Room.png'), ('Balcony','Balcony','Balcony-Room.png')
