@@ -1,6 +1,11 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Typography, Layout, Space, Card, List, Alert, Spin } from 'antd';
+import { FileOutlined, WarningOutlined } from '@ant-design/icons';
+
+const { Title, Paragraph, Link } = Typography;
+const { Content } = Layout;
 
 const InvestorKYC = () => {
   const [data, setData] = useState({
@@ -9,105 +14,88 @@ const InvestorKYC = () => {
     rta_heading: '',
     rta_link: ''
   });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch data from API when component mounts
-    axios.get('/api/investorKYC')  // Replace with your API endpoint
+    axios.get('/api/investorKYC')
       .then(response => {
         const { message, circularLink, rta_heading, rta_link } = response.data;
-        setData({
-          message,
-          circularLink,
-          rta_heading,
-          rta_link
-        });
+        setData({ message, circularLink, rta_heading, rta_link });
+        setLoading(false);
       })
-      .catch(error => console.error('Error fetching data:', error));
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+      });
   }, []);
 
   const rtaHeadings = data.rta_heading.split(',').map(heading => heading.trim());
   const rtaLinks = data.rta_link.split(',').map(link => link.trim());
 
-  return (
-    <section className='investor_sec my-5 py-5'>
-      <div className='container'>
-        <div className='row'>
-          <div className="inn-content-wrap">
-            <p style={{ margin: "0cm 0cm 0.0001pt" }}>
-              <span style={{ fontSize: "11pt" }}>
-                <span style={{ color: "#494949" }}>{data.message}</span>
-              </span>
-            </p>
-            <p style={{ margin: "0cm 0cm 0.0001pt" }}>&nbsp;</p>
-            <p style={{ margin: "0cm 0cm 0.0001pt" }}>
-              <span style={{ fontSize: "11pt" }}>
-                <span style={{ color: "#494949" }}>
-                  The said circular can be accessed through link -{" "}
-                  <a
-                    href={data.circularLink}
-                    style={{ color: "blue", textDecoration: "underline" }}
-                  >
-                    {data.circularLink}
-                  </a>{" "}
-                </span>
-              </span>
-            </p>
-            <p style={{ margin: "0cm 0cm 0.0001pt" }}>&nbsp;</p>
-            <p style={{ margin: "0cm 0cm 0.0001pt" }}>
-              <span style={{ fontSize: "11pt" }}>
-                <span style={{ color: "#494949" }}>
-                  Forms to be filed with Company / RTA :{" "}
-                </span>
-              </span>
-            </p>
-            <p style={{ margin: "0cm 0cm 0.0001pt" }}>&nbsp;</p>
-
-            {rtaHeadings.map((heading, index) => (
-              <p key={index} style={{ margin: "0cm 0cm 0.0001pt" }}>
-                <span style={{ fontSize: "11pt" }}>
-                  <span style={{ color: "#494949" }}>
-                    {heading} –{" "}
-                    <a
-                      target='_blank'
-                      href={`/Assets/uploads/${rtaLinks[index]}`}
-                    >
-                      {rtaLinks[index]}
-                    </a>
-                  </span>
-                </span>
-              </p>
-            ))}
-
-            <p style={{ margin: "0cm 0cm 0.0001pt" }}>&nbsp;</p>
-            <p>
-              <b>
-                <span style={{ fontSize: "14.0pt" }}>
-                  <span style={{ fontSize: "12pt" }}>
-                    <span style={{ color: "#494949" }}>
-                      If you fail to update the above-mentioned details, in terms of
-                      the aforesaid circular, your shares shall be frozen from October 01,
-                      2023.&nbsp;
-                    </span>
-                  </span>
-                </span>
-              </b>
-              <b>
-                <span style={{ fontSize: "14.0pt" }}>
-                  <span style={{ fontSize: "12pt" }}>
-                    <span style={{ color: "#494949" }}>
-                      Frozen folios shall be referred by the RTA / listed Company to the
-                      administering authority under the Benami Transactions (Prohibitions)
-                      Act, 1988 and/or Prevention of Money Laundering Act, 2002, if they
-                      continue to remain frozen as on December 31, 2025.
-                    </span>
-                  </span>
-                </span>
-              </b>
-            </p>
-          </div>
-        </div>
+  if (loading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <Spin size="large" />
       </div>
-    </section>
+    );
+  }
+
+  return (
+    <Layout>
+      <Content style={{ padding: '50px' }}>
+        <Space direction="vertical" size="large" style={{ display: 'flex' }}>
+          <Card>
+            <Title level={2}>Investor KYC Information</Title>
+            <Paragraph>{data.message}</Paragraph>
+            <Paragraph>
+              The said circular can be accessed through this link:{' '}
+              <Link href={data.circularLink} target="_blank">
+                {data.circularLink}
+              </Link>
+            </Paragraph>
+          </Card>
+
+          <Card title="Forms to be filed with Company / RTA">
+            <List
+              dataSource={rtaHeadings}
+              renderItem={(heading, index) => (
+                <List.Item>
+                  <Space>
+                    <FileOutlined />
+                    <span>{heading} – </span>
+                    <Link href={`/Assets/uploads/${rtaLinks[index]}`} target="_blank">
+                      {rtaLinks[index]}
+                    </Link>
+                  </Space>
+                </List.Item>
+              )}
+            />
+          </Card>
+
+          <Alert
+            message="Important Notice"
+            description={
+              <div>
+                <Paragraph strong>
+                  If you fail to update the above-mentioned details, in terms of
+                  the aforesaid circular, your shares shall be frozen from October 01,
+                  2023.
+                </Paragraph>
+                <Paragraph strong>
+                  Frozen folios shall be referred by the RTA / listed Company to the
+                  administering authority under the Benami Transactions (Prohibitions)
+                  Act, 1988 and/or Prevention of Money Laundering Act, 2002, if they
+                  continue to remain frozen as on December 31, 2025.
+                </Paragraph>
+              </div>
+            }
+            type="warning"
+            showIcon
+            icon={<WarningOutlined />}
+          />
+        </Space>
+      </Content>
+    </Layout>
   );
 }
 

@@ -2,7 +2,7 @@ import { Resend } from 'resend';
 import { NextRequest, NextResponse } from "next/server";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-
+const adminEMail = process.env.ADMIN_EMAIL;
 export async function POST(request, res) {
   try {
     const { firstName, lastName, email, phone } = await request.json();
@@ -19,7 +19,7 @@ export async function POST(request, res) {
     `;
 
     const data = await resend.emails.send({
-      from: 'nationalplastic.com', // Replace with your verified domain
+      from: 'National Plastic <noreply@nationalplastic.com>',
       to: email,
       subject: "Registration Successful",
       html: userEmailTemplate,
@@ -76,7 +76,7 @@ export async function PUT(request, res) {
 
     // Send email to the user
     await resend.emails.send({
-      from: 'nationalplastic.com', // Replace with your verified domain
+      from: 'National Plastic <noreply@nationalplastic.com>',
       to: email,
       subject: "Payment Successful",
       html: userEmailTemplate,
@@ -84,8 +84,8 @@ export async function PUT(request, res) {
 
     // Send email to the client (your company)
     await resend.emails.send({
-      from: 'nationalplastic.com', // Replace with your verified domain
-      to: "webDevs2024@gmail.com", // Your company email
+      from: 'National Plastic <noreply@nationalplastic.com>',
+      to: adminEMail, // Your company email
       subject: "Product Order Details",
       html: clientEmailTemplate,
     });

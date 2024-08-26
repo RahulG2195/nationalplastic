@@ -262,7 +262,7 @@ const IEPFCMS = () => {
           {(editingSection === 'ShareTransfer' || editingSection === 'UnclaimedDividend') && (
             <>
               <Form.Item name="year" label="Year" rules={[{ required: true }]}>
-                <Input />
+                <Input placeholder='2000-2001'/>
               </Form.Item>
               <Form.Item
                 name={editingSection === 'ShareTransfer' ? 'document_name' : 'report_title'}

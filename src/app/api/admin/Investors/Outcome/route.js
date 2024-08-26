@@ -1,6 +1,6 @@
 import { query } from "@/lib/db";
 import { NextResponse } from 'next/server';
-import {uploadFile} from "@/utils/fileUploader";
+import { uploadFile } from "@/utils/fileUploader";
 const path = require("path");
 
 
@@ -9,12 +9,13 @@ export async function POST(request) {
   const title = formData.get('title');
   const years = formData.get('years');
   const file_name = formData.get('file_name');
-  
+
   let pdfPath = '';
 
   if (file_name) {
     try {
-      const toLowerCase = await uploadFile(file_name); // Make sure uploadFile returns a Promise
+      const toLowerCase = await uploadFile(file_name);
+      // Make sure uploadFile returns a Promise
       // Set the pdfPath based on where the file_name is saved
       pdfPath = toLowerCase;
 
@@ -45,7 +46,7 @@ export async function PUT(request) {
   const title = formData.get('title');
   const years = formData.get('years');
   const file_name = formData.get('file_name');
-  
+
   let pdfPath = '';
 
   if (file_name) {
@@ -86,22 +87,25 @@ export async function PUT(request) {
 }
 
 export async function GET() {
-    try {
-      const outcomeData = await query({
-        query: `SELECT *
-                FROM outcomes 
-                ORDER BY ad_id`,
-      });
-  
-      return NextResponse.json({ outcomeData: outcomeData });
-    } catch (error) {
-      console.error('Database query error:', error);
-      return NextResponse.json(
-        { message: "Internal server error" },
-        { status: 500 }
-      );
-    }
+  try {
+    const outcomeData = await query({
+      query: `SELECT * 
+FROM outcomes 
+ORDER BY CAST(SUBSTRING(years, 1, 4) AS SIGNED) DESC,
+         CAST(SUBSTRING(years, 6, 4) AS SIGNED) DESC, 
+         title ASC,
+         ad_id DESC`,
+    });
+
+    return NextResponse.json({ outcomeData: outcomeData });
+  } catch (error) {
+    console.error('Database query error:', error);
+    return NextResponse.json(
+      { message: "Internal server error" },
+      { status: 500 }
+    );
   }
+}
 
 
 export async function DELETE(request) {

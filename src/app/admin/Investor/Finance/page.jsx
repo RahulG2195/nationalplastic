@@ -206,7 +206,7 @@ export default function FinancialResults() {
             label="Year"
             rules={[{ required: true, message: 'Please input the year!' }]}
           >
-            <Input placeholder="e.g., 2024-2025" />
+            <Input/>
           </Form.Item>
           <Form.Item
             name="title"

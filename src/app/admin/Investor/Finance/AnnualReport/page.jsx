@@ -165,7 +165,7 @@ const AnnualReport = () => {
       >
         <Form form={form} layout="vertical">
           <Form.Item name="years" label="Years" rules={[{ required: true }]}>
-            <Input placeholder="e.g., 2024-2025" />
+            <Input placeholder="Eg: Year 2000-01" />
           </Form.Item>
           <Form.Item name="title" label="Title" rules={[{ required: true }]}>
             <Input />

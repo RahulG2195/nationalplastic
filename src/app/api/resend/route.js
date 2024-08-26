@@ -8,7 +8,7 @@ export async function POST(req, res) {
       const requestData = await req.json();
       const { to, subject, text } = requestData;
       const data = await resend.emails.send({
-        from: 'nationalplastic.com', // Replace with your verified domain
+        from: 'National Plastic <noreply@nationalplastic.com>',
         to,
         subject,
         text,
