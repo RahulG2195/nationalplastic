@@ -13,6 +13,7 @@ import {
   isValidProduct,
   // isValidFile,
 } from "@/utils/validation";
+import { Modal } from "bootstrap/dist/js/bootstrap.bundle.min";
 
 const GetQuoteCustomForm = (props) => {
   const [formData, setFromData] = useState({
@@ -55,7 +56,11 @@ const GetQuoteCustomForm = (props) => {
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/bulkOrderEmail`, formData);
       notify("Mail sent successfully");
-
+      if (props.modalRef.current) {
+        const modalElement = props.modalRef.current;
+        const modalInstance = Modal.getInstance(modalElement); // Get the modal instance
+        modalInstance.hide(); // Hide the modal
+      }
     } catch (error) {
       notifyError(error.message);
     }
