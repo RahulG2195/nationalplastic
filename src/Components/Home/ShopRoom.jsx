@@ -12,24 +12,17 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function ShopRoom() {
-  const [productArr, setProductArr] = useState([]);
+  const [Tags, setTags] = useState([]);
 
   useEffect(() => {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/Category`
+          `${process.env.NEXT_PUBLIC_BASE_URL}/adminProdTag`
         );
-        const filteredData = response.data.ShopRooms;
-        // (item) =>
-        //     item.category_id === 30 ||
-        //     item.category_id === 31 ||
-        //     item.category_id === 32 ||
-        //     item.category_id === 33 ||
-        //     item.category_id === 34 ||
-        //     item.category_id === 35
-        // );
-        setProductArr(filteredData);
+        const filteredData = response.data.AllTag;
+        console.log('filteredData', filteredData);
+        setTags(filteredData);
       } catch (error) {
         console.error("Error fetching data:", error);
         // Handle error gracefully, e.g., display an error message
@@ -38,14 +31,15 @@ export default function ShopRoom() {
     fetchdata();
   }, []);
 
+  console.log('Tags', Tags);
   return (
     <section className="shop_room_sec common_section">
       <div className="container">
         <div className="row">
           <div className="text-center mb-5">
             <div className="darkBlue fs-1 fw-medium">
-              Shop By{" "}
-              <span className="fs-1 lh-small fw-bold text-danger ">Rooms</span>{" "}
+              Shop By
+              <span className="fs-1 lh-small fw-bold text-danger ">Rooms</span>
             </div>
             <div className="mt-1 fw-medium subCptRes w-50">
               <p>
@@ -85,45 +79,37 @@ export default function ShopRoom() {
                   },
                 }}
               >
-                {productArr.map((product) => (
+                {Tags.map((tag) => (
                   <div
                     className="col-md-4 shop_col my-md-4 my-2"
-                    key={product.product_id}
+                    key={tag.tag_id}
                   >
-                    <SwiperSlide key={product.category_id}>
+                    <SwiperSlide key={tag.tag_id}>
                     <CatCards
-                         catid={
-                          product.seo_url
-                        }
+                        tag_id={tag.tag_id}
+                        tag_seo={tag.tag_seo}
                         manfacthover="manfact"
                         style="manfTitle"
-                        image={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_CATEGORY_PATH_DIR}${product.image_name}`}
-                        title={product.category_name}
-                        categoryType={product.categoryType}
-                        onCategoryChange={() =>
-                          sendCategory(product.product_name)
-                        }
+                        image={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${tag.tag_image}`}
+                        title={tag.tag_name}
+                        // onCategoryChange={() => sendCategory(tag.tag_name)}
                       />
                     </SwiperSlide>
                   </div>
                 ))}
               </Swiper>
 
-              {productArr.map((product) => (
+              {Tags.map((tag) => (
                 <div
                   className="col-xs-12 col-sm-6 col-md-4 shop_col my-md-4 my-2 hideswiper"
-                  key={product.key}
+                  key={tag.key}
                 >
                   <CatCards
                     hoverglow="yellowGlow"
-                    catid={
-                      product.seo_url
-                    }
+                    catid={tag.tag_seo}
                     style="manfTitle pt-4 px-4 d-flex gap-5  justify-content-arround"
-                    image={`/Assets/images/Home-page/${product.image_name}`}
-                    title={product.category_name}
-                    categoryType={product.categoryType}
-                    onCategoryChange={() => sendCategory(product.product_name)}
+                    image={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${tag.tag_image}`}
+                    title={tag.tag_name}
                   />                 
                 </div>
               ))}

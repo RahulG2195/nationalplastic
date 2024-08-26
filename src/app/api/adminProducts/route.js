@@ -317,14 +317,24 @@ export async function GET(request) {
   try {
     const allProducts = await query({
       query:
-        "SELECT p.*,c.category_id,c.category_name FROM products p JOIN categories c ON p.category_id = c.category_id",
+        `SELECT p.*,c.category_id,c.category_name, t.tag_id, t.tag_name, t.tag_status 
+        FROM products p 
+        LEFT JOIN categories c ON p.category_id = c.category_id 
+        LEFT JOIN tags_cat as t ON p.tag_cat = t.tag_id`,
       values: [],
     });
+
+    const tags = await query({
+      query: `SELECT * FROM tags_cat WHERE tag_status = 1`,
+      value: [],
+    });
+
 
     return new Response(
       JSON.stringify({
         status: 200,
         allProducts: allProducts,
+        prod_tags_api_data: tags,
       })
     );
   } catch (e) {

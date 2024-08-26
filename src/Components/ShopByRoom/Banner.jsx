@@ -1,5 +1,5 @@
 import Image from "next/image"
-import './CatlogueBanner.css'
+import '@/Components/ProductsCatlogue/CatlogueBanner.css'
 
 const CatlogueBanner = () => {
     return (
