@@ -143,14 +143,14 @@ const ProdList = () => {
 
   const handleTagRemove = async (tagId, record) => {
     try {
-      const currentTags = record.tag_cat ? record.tag_cat.split(", ") : [];
+      const currentTags = record.tag_cat ? record.tag_cat.split(",") : [];
       const updatedTags = currentTags.filter((id) => Number(id) !== tagId);
 
       const response = await axios.put(
         `${process.env.NEXT_PUBLIC_BASE_URL}/adminProdTag`,
         {
           productId: record.product_id,
-          tags: updatedTags.join(", "),
+          tags: updatedTags.join(","),
         }
       );
 

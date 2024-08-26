@@ -51,7 +51,7 @@ export async function POST(req) {
     }
 
     let currentTags = currentTagsResult[0].tag_cat
-      ? currentTagsResult[0].tag_cat.split(", ")
+      ? currentTagsResult[0].tag_cat.split(",")
       : [];
 
     // Add the new tag if it doesn't exist
@@ -60,7 +60,7 @@ export async function POST(req) {
     }
 
     // Join the tags back into a comma-separated string
-    const updatedTags = currentTags.join(", ");
+    const updatedTags = currentTags.join(",");
 
     // Update the product with the new tags
     const updateResult = await query({
