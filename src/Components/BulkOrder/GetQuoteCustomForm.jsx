@@ -23,7 +23,7 @@ const GetQuoteCustomForm = (props) => {
     Requirements: "",
     city: "",
   });
-  
+
   const validation = (userInput) => {
     if (!isValidName(userInput.city)) {
       toast.error("Please enter a valid  city name.");
@@ -54,6 +54,8 @@ const GetQuoteCustomForm = (props) => {
     if (!isValid) return;
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/bulkOrderEmail`, formData);
+      notify("Mail sent successfully");
+
     } catch (error) {
       notifyError(error.message);
     }
