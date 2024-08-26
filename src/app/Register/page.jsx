@@ -31,6 +31,7 @@ const Register = () => {
   const [message, setMessage] = useState('');
   const [otpSent, setOtpSent] = useState(false);
   const otpInputs = useRef([]);
+  const secretKey = process.env.NEXT_PUBLIC_secretKey
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const storedOtpSent = localStorage.getItem('otp');
@@ -127,7 +128,6 @@ const Register = () => {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/sendOTP`, { email: formData.email });
         if (response.status === 200) {
           const { otp, otpExpiry } = response.data;
-          const secretKey = 'Saving_the 0tp Locally'; // Manage this securely
           const encryptedOTP = encrypt(otp.toString(), secretKey);
           const encryptedExpiry = encrypt(otpExpiry.toString(), secretKey);
           localStorage.setItem('otp', encryptedOTP);

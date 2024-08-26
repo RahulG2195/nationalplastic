@@ -31,19 +31,19 @@ export async function POST(request) {
       subject: "Your OTP Code",
       html: htmlContent,
     });
-
-    return NextResponse.json({ 
-      success: true, 
-      otp, 
-      otpExpiry, 
-      message: 'OTP sent successfully' 
+    console.log("info", JSON.stringify(info));
+    return NextResponse.json({
+      success: true,
+      otp,
+      otpExpiry,
+      message: 'OTP sent successfully'
     }, { status: 200 });
 
   } catch (error) {
     console.error("Error sending email:", error);
-    return NextResponse.json({ 
-      success: false, 
-      error: "Email sending failed" 
+    return NextResponse.json({
+      success: false,
+      error: "Email sending failed"
     }, { status: 500 });
   }
 }
