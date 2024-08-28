@@ -311,7 +311,7 @@ const ProdList = () => {
           </Select>
           <div>
             {record.tag_cat &&
-              record.tag_cat.split(", ").map((tagId) => {
+              record.tag_cat.split(",").map((tagId) => {
                 const tag = ProdTagsData.find(
                   (t) => t.tag_id === Number(tagId)
                 );
