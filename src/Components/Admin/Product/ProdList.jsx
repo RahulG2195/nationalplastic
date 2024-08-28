@@ -108,7 +108,7 @@ const ProdList = () => {
     try {
       // Remove duplicates and convert to comma-separated string
       const uniqueTagIds = [...new Set(tagIds)];
-      const tagString = uniqueTagIds.join(", ");
+      const tagString = uniqueTagIds.join(",");
 
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/adminProdTag`,
@@ -311,7 +311,7 @@ const ProdList = () => {
           </Select>
           <div>
             {record.tag_cat &&
-              record.tag_cat.split(", ").map((tagId) => {
+              record.tag_cat.split(",").map((tagId) => {
                 const tag = ProdTagsData.find(
                   (t) => t.tag_id === Number(tagId)
                 );
