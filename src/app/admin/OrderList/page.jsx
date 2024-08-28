@@ -100,22 +100,29 @@ const OrderTable = () => {
       const data = { order_id: selectedOrder, cancelReason: cancelReason, email: email };
       try {
         await cancelOrderMail(data);
-        // Handle successful cancellation
       } catch (error) {
         message.error("Failed to cancel order Mail");
         return;
       }
 
+      // New code starts here
+      const cancelStatusId = OrderStatus.find(status => status.status_name === "Canceled")?.status_id;
+      if (!cancelStatusId) {
+        throw new Error("Cancelled status not found");
+      }
+
+      const updateData = { newStatus: cancelStatusId, order_id: selectedOrder };
+      await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, updateData);
+      // New code ends here
+
       message.success("Order cancelled successfully");
       setIsCancelModalVisible(false);
       setCancelReason("");
-      // After successful cancellation, refetch the orders
       await fetchOrders();
     } catch (error) {
-      message.error("Failed to cancel order");
+      message.error("Failed to cancel order: " + error.message);
     }
   };
-
   const sendEmail = async (to, subject, text) => {
     try {
       const response = await axios.post('/api/resend', {
