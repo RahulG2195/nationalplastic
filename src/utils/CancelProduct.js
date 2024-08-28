@@ -89,7 +89,43 @@ async function sendCancellationEmailToClient(ProdData) {
     return false;
   }
 }
+async function cancelOrderMail(orderData) {
+  const { order_id, cancelReason, email } = orderData;
+
+  const htmlContent = `
+    <html>
+      <body>
+        <h1>Order Cancellation Notification</h1>
+        <p>Dear Customer,</p>
+        <p>This is to inform you that your order has been cancelled. Here are the details:</p>
+        <ul>
+          <li>Order ID: ${order_id}</li>
+          <li>Cancellation Reason: ${cancelReason}</li>
+        </ul>
+        <p>If you have any questions or concerns, please don't hesitate to contact our customer support.</p>
+        <p>Thank you for your understanding.</p>
+        <p>Best regards,<br>National Plastic System</p>
+      </body>
+    </html>
+  `;
+
+  // Prepare the email data
+  const emailData = {
+    to: email, // Use an environment variable for the customer's email
+    subject: 'Order Cancellation Notification',
+    htmlContent: htmlContent
+  };
+
+  try {
+    // Send the email using the Resend API
+    const response = await axios.post(`/api/resend`, emailData);
 
 
+  } catch (error) {
+    console.error('Error in cancelOrderMail:', error);
+    throw error;
+  }
+}
 
-export { ReturnProductBeforeFourteenDays, CancelProdChargeAfterTwentyFourHr, sendCancellationEmailToClient };
+
+export { ReturnProductBeforeFourteenDays, CancelProdChargeAfterTwentyFourHr, sendCancellationEmailToClient, cancelOrderMail };
