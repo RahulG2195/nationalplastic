@@ -5,7 +5,7 @@ import { EditOutlined, DeleteOutlined, SearchOutlined } from "@ant-design/icons"
 import axios from "axios";
 import { useRouter } from 'next/navigation';
 import moment from 'moment';
-import { cancelOrderMail } from "@/utils/CancelProduct"
+import { cancelOrderMail, sendOrderStatusUpdateEmail } from "@/utils/CancelProduct"
 const { Option } = Select;
 
 const OrderTable = () => {
@@ -78,11 +78,11 @@ const OrderTable = () => {
       const order = orders.find(o => o.order_id === selectedOrder);
 
       if (order) {
-        await sendEmail(
-          order.customer_email,
-          'Order Status Update',
-          `Your order (ID: ${order.order_id}) status has been updated to ${newStatus}.`
-        );
+        await sendOrderStatusUpdateEmail({
+          order_id: order.order_id,
+          newStatus: newStatus,
+          customer_email: order.customer_email
+        });
       }
       await fetchOrders();
     } catch (error) {
@@ -121,22 +121,6 @@ const OrderTable = () => {
       await fetchOrders();
     } catch (error) {
       message.error("Failed to cancel order: " + error.message);
-    }
-  };
-  const sendEmail = async (to, subject, text) => {
-    try {
-      const response = await axios.post('/api/resend', {
-        to,
-        subject,
-        text
-      });
-      if (response.data.status === 200) {
-        console.log('Email sent successfully');
-      } else {
-        throw new Error('Failed to send email');
-      }
-    } catch (error) {
-      message.error('Failed to send notification email');
     }
   };
 

@@ -128,4 +128,42 @@ async function cancelOrderMail(orderData) {
 }
 
 
-export { ReturnProductBeforeFourteenDays, CancelProdChargeAfterTwentyFourHr, sendCancellationEmailToClient, cancelOrderMail };
+async function sendOrderStatusUpdateEmail(orderData) {
+  const { order_id, newStatus, customer_email } = orderData;
+
+  const htmlContent = `
+    <html>
+      <body>
+        <h1>Order Status Update</h1>
+        <p>Dear Customer,</p>
+        <p>We're writing to inform you that the status of your order has been updated. Here are the details:</p>
+        <ul>
+          <li>Order ID: ${order_id}</li>
+          <li>New Status: ${newStatus}</li>
+        </ul>
+        <p>If you have any questions about this update or need further information, please don't hesitate to contact our customer support.</p>
+        <p>Thank you for choosing our service.</p>
+        <p>Best regards,<br>National Plastic System</p>
+      </body>
+    </html>
+  `;
+
+  // Prepare the email data
+  const emailData = {
+    to: customer_email,
+    subject: 'Order Status Update',
+    htmlContent: htmlContent
+  };
+
+  try {
+    // Send the email using the Resend API
+    const response = await axios.post(`/api/resend`, emailData);
+    console.log('Status update email sent successfully');
+    return response.data;
+  } catch (error) {
+    console.error('Error in sendOrderStatusUpdateEmail:', error);
+    throw error;
+  }
+}
+
+export { ReturnProductBeforeFourteenDays, CancelProdChargeAfterTwentyFourHr, sendCancellationEmailToClient, cancelOrderMail, sendOrderStatusUpdateEmail };
