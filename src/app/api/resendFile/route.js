@@ -4,7 +4,7 @@ import { writeFile, readFile } from "fs/promises";
 import upload from "@/utils/multer.middleware";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const adminEMail = process.env.ADMIN_EMAIL;
+const adminEMail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
 export async function POST(req, res) {
   try {
     // Parse form data using NextRequest.formData()

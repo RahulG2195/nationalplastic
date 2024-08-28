@@ -11,7 +11,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from 'next/image';
 import ReturnProductModal from './model';
-import CancelProdChargeAfterTwentyFourHr, { ReturnProductBeforeFourteenDays } from "@/utils/CancelProduct";
+import { sendCancellationEmailToClient, CancelProdChargeAfterTwentyFourHr, ReturnProductBeforeFourteenDays } from "@/utils/CancelProduct";
 import {
   isValidPassword,
   isValidReason, // Address validations
@@ -168,7 +168,6 @@ function ProfilePage() {
       toast.success("Data updated successfully");
     } catch (error) {
       notifyError(error.message);
-      console.error("Error updating data:", error);
       toast.error("Error updating data. Please try again.");
     }
   };
@@ -190,7 +189,6 @@ function ProfilePage() {
             window.location.href = "/";
           })
           .catch((error) => {
-            console.error("Error during logout:", error.message);
             notifyError("logout", error.message);
           });
       },
@@ -200,42 +198,45 @@ function ProfilePage() {
   };
   const CancelProduct = async (prod_id, user_id, od_id) => {
     try {
-
       const checkorderStatus = orderData.filter((od) => od.prod_id == prod_id && od.customer_id == user_id && od.od_id == od_id);
+
+      if (checkorderStatus.length === 0) {
+        console.error("Debug: No matching order found");
+        return;
+      }
 
       const extraAmt = CancelProdChargeAfterTwentyFourHr(checkorderStatus[0]['order_status_date']);
       const orderStatus = checkorderStatus[0]['order_status'];
 
+
       if (extraAmt > 0 && orderStatus >= 2) {
         const confirm = window.confirm('Cancelling the order will incur a fee of ₹50. Do you want to proceed?');
-
         if (!confirm) {
-          // User chose not to proceed
           return;
-
-        } else {
-          const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: extraAmt, order_id: checkorderStatus[0].order_id, type: 'Cancel' };
-          var res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, ProdData);
         }
-
-      } else {
-        const ProdData = { prod_id: prod_id, user_id: user_id, extraCharge: extraAmt, order_id: checkorderStatus[0].order_id, type: 'Cancel' };
-        var res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, ProdData);
       }
 
+      const ProdData = {
+        prod_id: prod_id,
+        user_id: user_id,
+        extraCharge: extraAmt,
+        order_id: checkorderStatus[0].order_id,
+        type: 'Cancel'
+      };
 
-      // setCancelProdCharge()
+
+      const res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, ProdData);
+
       if (res.data.message === 'Order status Updated') {
-
         notify("Your order cancel Request has been sent");
+
         toast.success("Your order cancel Request has been sent");
-
+        sendCancellationEmailToClient(ProdData);
       } else {
-
         notify("Your order cancel Request fail");
-        toast.success("Your order cancel Request fail");
-
+        toast.error("Your order cancel Request fail");
       }
+
     } catch (error) {
       console.error('Error:', error);
     }
@@ -250,31 +251,23 @@ function ProfilePage() {
         if (fourteendayvalidate > 1000000000000000) {
           const ProdData = { prod_id: prod_id, user_id: user_id, order_id: GetSingleData[0].order_id, type: 'return' };
           var res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, ProdData);
-
           if (res.data.message === 'Order status Updated') {
-
             notify("Your order Return Request has been sent");
             toast.success("Your order Return Request has been sent");
-
           } else {
-
             notify("Your order Return Request fail");
             toast.success("Your order Return Request fail");
-
           }
         }
-
-
       } catch (error) {
         console.error('Error:', error);
       }
     } else {
-
       showModal();
-
     }
-
   }
+
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError(null);
@@ -308,11 +301,9 @@ function ProfilePage() {
     }
   };
   const handleInputAddressChange = (event) => {
-    console.log("handleInputAddress")
     setAdress2(event.target.value);
   };
   const updateAddressTwo = async (event) => {
-    console.log("CLickede")
     event.preventDefault();
     const data = {
       Adress2: adress2,
@@ -481,7 +472,7 @@ function ProfilePage() {
 
 
 
-  
+
   return (
     <>
       <div className="container profile-page-container mb-5">
@@ -708,7 +699,7 @@ function ProfilePage() {
                         </form>
                       ))
                     ) : (
-                      <div className="text-danger">No messages available.</div>
+                      <div className="text-danger">Loading...</div>
                     )}
                   </div>
                 </div>
