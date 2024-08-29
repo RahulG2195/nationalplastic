@@ -122,12 +122,12 @@
       setDeleteModalOpen(!deleteModalOpen);
     };
 
-    //   add toggle in prod table
-    const handleTagChange = async (tagIds, record) => {
-      try {
-        // Remove duplicates and convert to comma-separated string
-        const uniqueTagIds = [...new Set(tagIds)];
-        const tagString = uniqueTagIds.join(", ");
+  //   add toggle in prod table
+  const handleTagChange = async (tagIds, record) => {
+    try {
+      // Remove duplicates and convert to comma-separated string
+      const uniqueTagIds = [...new Set(tagIds)];
+      const tagString = uniqueTagIds.join(",");
 
         const response = await axios.post(
           `${process.env.NEXT_PUBLIC_BASE_URL}/adminProdTag`,
@@ -220,104 +220,88 @@
       }
     };
 
-    const columns = [
-      {
-        title: "Index",
-        key: "index",
-        render: (text, record, index) => index + 1,
-      },
-      {
-        title: "Product ID",
-        dataIndex: "product_id",
-        key: "product_id",
-        fixed: "left",
-        hidden: true,
-      },
-      {
-        title: "Product Name",
-        dataIndex: "product_name",
-        key: "product_name",
-        render: (text) => (
-          <Highlighter
-            highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
-            searchWords={[searchText]}
-            autoEscape
-            textToHighlight={text ? text.toString() : ""}
-          />
-        ),
-      },
-      {
-        title: "SEO URL",
-        dataIndex: "seo_url",
-        key: "seo_url",
-      },
-      {
-        title: "Category Name",
-        dataIndex: "category_name",
-        key: "category_name",
-      },
-      {
-        title: "Price",
-        dataIndex: "price",
-        key: "price",
-      },
-      {
-        title: "Color",
-        dataIndex: "color",
-        key: "color",
-      },
-      {
-        title: "Arm Type",
-        dataIndex: "armType",
-        key: "armType",
-      },
-      {
-        title: "Product Status",
-        dataIndex: "prod_status",
-        key: "prod_status",
-        render: (status, record) => (
-          <Switch
-            checked={record.prod_status === 1}
-            onChange={(checked) => handleToggleStatus(record.product_id, checked)}
-          />
-        ),
-      },
-      {
-        title: "Image",
-        dataIndex: "image_name",
-        key: "image_name",
-        render: (text) => {
-          const images = text.split(",");
-          return (
-            <div style={{ display: "flex", gap: "5px" }}>
-              {images.map((image, index) => (
-                <Tooltip
-                  key={`image-${index}`}
-                  overlayInnerStyle={{ backgroundColor: "transparent" }}
-                  color="transparent"
-                  arrowPointAtCenter={false}
-                  title={
-                    <div
-                      style={{
-                        width: "200px",
-                        height: "300px",
-                        position: "relative",
-                      }}
-                    >
-                      <Image
-                        src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR
-                          }${image.trim()}`}
-                        alt={image}
-                        layout="fill"
-                        objectFit="contain"
-                      />
-                    </div>
-                  }
-                >
+  const columns = [
+    {
+      title: "Index",
+      key: "index",
+      render: (text, record, index) => index + 1,
+      fixed: "left",
+    },
+    {
+      title: "Product ID",
+      dataIndex: "product_id",
+      key: "product_id",
+      fixed: "left",
+      hidden: true,
+    },
+    {
+      title: "Product Name",
+      dataIndex: "product_name",
+      key: "product_name",
+      render: (text) => (
+        <Highlighter
+          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
+          searchWords={[searchText]}
+          autoEscape
+          textToHighlight={text ? text.toString() : ""}
+        />
+      ),
+    },
+    {
+      title: "SEO URL",
+      dataIndex: "seo_url",
+      key: "seo_url",
+    },
+    {
+      title: "Category Name",
+      dataIndex: "category_name",
+      key: "category_name",
+    },
+    {
+      title: "Price",
+      dataIndex: "price",
+      key: "price",
+    },
+    {
+      title: "Color",
+      dataIndex: "color",
+      key: "color",
+    },
+    {
+      title: "Arm Type",
+      dataIndex: "armType",
+      key: "armType",
+    },
+    {
+      title: "Product Status",
+      dataIndex: "prod_status",
+      key: "prod_status",
+      render: (status, record) => (
+        <Switch
+          checked={record.prod_status === 1}
+          onChange={(checked) => handleToggleStatus(record.product_id, checked)}
+        />
+      ),
+    },
+    {
+      title: "Image",
+      dataIndex: "image_name",
+      key: "image_name",
+      render: (text) => {
+        const images = text.split(",");
+        return (
+          <div style={{ display: "flex", gap: "5px" }}>
+            {images.map((image, index) => (
+              <Tooltip
+                key={`image-${index}`}
+                overlayInnerStyle={{ backgroundColor: "transparent" }}
+                color="transparent"
+                arrowPointAtCenter={false}
+                title={
                   <div
                     style={{
-                      width: "30px",
-                      height: "30px",
+                      width: "200px",
+                      height: "300px",
                       position: "relative",
                     }}
                   >
@@ -326,88 +310,96 @@
                         }${image.trim()}`}
                       alt={image}
                       layout="fill"
-                      objectFit="cover"
-                      className="admin-product-img"
+                      objectFit="contain"
                     />
                   </div>
-                </Tooltip>
-              ))}
-            </div>
-          );
-        },
-      },
-      {
-        title: "Tags",
-        key: "tags",
-        render: (text, record) => (
-          <div>
-            <Select
-              mode="tags"
-              style={{ width: 150, marginBottom: 8 }}
-              placeholder="Select Tags"
-              value={[]} // Always empty to prevent showing selected tags in dropdown
-              onChange={(values) => handleTagChange(values, record)}
-              onDeselect={(tagId) => handleTagRemove(tagId, record)}
-            >
-              {ProdTagsData.map((tag) => (
-                <Select.Option key={tag.tag_id} value={tag.tag_id}>
-                  {tag.tag_name}
-                </Select.Option>
-              ))}
-            </Select>
-            <div>
-              {record.tag_cat &&
-                record.tag_cat.split(", ").map((tagId) => {
-                  const tag = ProdTagsData.find(
-                    (t) => t.tag_id === Number(tagId)
-                  );
-                  return tag ? (
-                    <Tag
-                      key={`${record.product_id}-${tag.tag_id}`}
-                      closable
-                      onClose={() => handleTagRemove(tag.tag_id, record)}
-                      style={{ marginBottom: 4 }}
-                    >
-                      {tag.tag_name}
-                    </Tag>
-                  ) : null;
-                })}
-            </div>
+                }
+              >
+                <div
+                  style={{
+                    width: "30px",
+                    height: "30px",
+                    position: "relative",
+                  }}
+                >
+                  <Image
+                    src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR
+                      }${image.trim()}`}
+                    alt={image}
+                    layout="fill"
+                    objectFit="cover"
+                    className="admin-product-img"
+                  />
+                </div>
+              </Tooltip>
+            ))}
           </div>
-        ),
+        );
       },
-      {
-        title: "Action",
-        key: "action",
-        fixed: 'right',
-        render: (text, record, index) => (
-          <Space size="small">
-            <Tooltip title="View More">
-              <Button
-                onClick={() => handleOnclick("View", record.product_id)}
-                icon={<EyeOutlined />}
-                type="primary"
-              />
-            </Tooltip>
-            <Tooltip title="Edit">
-              <Button
-                onClick={() => handleOnclick("Edit", record.product_id)}
-                icon={<EditOutlined />}
-                type="default"
-              />
-            </Tooltip>
-            <Tooltip title="Delete">
-              <Button
-                onClick={() => handleOnclick("Delete", record.product_id)}
-                icon={<DeleteOutlined />}
-                type="default"
-                danger
-              />
-            </Tooltip>
-          </Space>
-        ),
-      },
-    ];
+    },
+    {
+      title: "Tags",
+      key: "tags",
+      render: (text, record) => (
+        <div>
+          <Select
+            mode="tags"
+            style={{ width: 150, marginBottom: 8 }}
+            placeholder="Select Tags"
+            value={[]} // Always empty to prevent showing selected tags in dropdown
+            onChange={(values) => handleTagChange(values, record)}
+            onDeselect={(tagId) => handleTagRemove(tagId, record)}
+          >
+            {ProdTagsData.map((tag) => (
+              <Select.Option key={tag.tag_id} value={tag.tag_id}>
+                {tag.tag_name}
+              </Select.Option>
+            ))}
+          </Select>
+          <div>
+            {record.tag_cat &&
+              record.tag_cat.split(",").map((tagId) => {
+                const tag = ProdTagsData.find(
+                  (t) => t.tag_id === Number(tagId)
+                );
+                return tag ? (
+                  <Tag
+                    key={`${record.product_id}-${tag.tag_id}`}
+                    closable
+                    onClose={() => handleTagRemove(tag.tag_id, record)}
+                    style={{ marginBottom: 4 }}
+                  >
+                    {tag.tag_name}
+                  </Tag>
+                ) : null;
+              })}
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "Action",
+      key: "action",
+      //   fixed: 'right',
+      render: (text, record, index) => (
+        <div className="d-flex justify-content-between gap-2">
+          <Button
+            onClick={() => handleOnclick("Edit", record.product_id)}
+            color="primary"
+            className="mr-2"
+          >
+            Edit
+          </Button>
+          <Button
+            onClick={() => handleOnclick("Delete", record.product_id)}
+            color="danger"
+          >
+            Delete
+          </Button>
+        </div>
+      ),
+    },
+  ];
 
     return (
       <Container fluid>

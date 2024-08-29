@@ -243,7 +243,7 @@ export async function PATCH(request) {
     }
 
     // Ensure navshow is either 0 or 1
-    const validatedNavshow = navshow ? 1 : 0;
+    // const validatedNavshow = navshow ? 1 : 0;
 
     // Update the navshow status
     const result = await query({
@@ -252,7 +252,7 @@ export async function PATCH(request) {
         SET navshow = ?
         WHERE category_id = ?
       `,
-      values: [validatedNavshow, category_id],
+      values: [navshow, category_id],
     });
 
     if (result.affectedRows === 0) {
@@ -263,7 +263,7 @@ export async function PATCH(request) {
     }
 
     return new Response(
-      JSON.stringify({ success: true, data: { category_id, navshow: validatedNavshow } }),
+      JSON.stringify({ success: true, data: { category_id, navshow: navshow } }),
       { status: 200 }
     );
 

@@ -30,8 +30,10 @@ const CategoryList = () => {
   }, []);
 
   const handleToggleNavshow = async (categoryId, checked) => {
+    
     try {
       const newNavshowValue = checked ? 1 : 0;
+
       const response = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/adminCategories`, {
         category_id: categoryId,
         navshow: newNavshowValue
