@@ -20,7 +20,7 @@ const TagList = () => {
 
   const fetchTags = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/adminProdTag`);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/adminProdTag/crud`);
       if (response.data && response.data.AllTag) {
         const formattedData = formatDataForTable(response.data.AllTag);
         setTagArray(formattedData);
@@ -70,33 +70,47 @@ const TagList = () => {
       try {
         const formData = new FormData();
         formData.append('tag_name', values.tag_name);
-        formData.append('tag_seo', values.tag_seo);
+        formData.append('tag_seo', values.tag_seo || '');
         formData.append('tag_status', values.tag_status ? 1 : 0);
         formData.append('visible', values.visible ? 1 : 0);
+        
         if (fileList[0]) {
           formData.append('tag_image', fileList[0].originFileObj);
         }
         if (subBannerFileList[0]) {
           formData.append('tag_sub_banner', subBannerFileList[0].originFileObj);
         }
-
+  
+        let response;
         if (editingId) {
           formData.append('tag_id', editingId);
-          await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/adminProdTag/crud`, formData, {
+          response = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/adminProdTag/crud`, formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
           });
-          message.success('Tag updated successfully');
         } else {
-          await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/adminProdTag/crud`, formData, {
+          response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/adminProdTag/crud`, formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
           });
-          message.success('Tag added successfully');
         }
-        setIsModalVisible(false);
-        fetchTags();
+  
+        if (response.status === 200) {
+          message.success(editingId ? 'Tag updated successfully' : 'Tag added successfully');
+          setIsModalVisible(false);
+          fetchTags();
+        } else {
+          throw new Error(response.data.error || 'Failed to save tag');
+        }
       } catch (error) {
-        message.error('Failed to save tag');
+        if (error.response) {
+          message.error(`Error: ${error.response.data.error || 'Failed to save tag'}`);
+        } else if (error.request) {
+          message.error('No response received from server. Please try again.');
+        } else {
+          message.error(`Error: ${error.message}`);
+        }
       }
+    }).catch(info => {
+      console.log('Validate Failed:', info);
     });
   };
 

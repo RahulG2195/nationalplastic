@@ -14,7 +14,11 @@ git pull
 # Sync images for each path
 for path in "${IMAGE_PATHS[@]}"
 do
-  rsync -av --delete "$GIT_REPO_PATH/$path/" "$UPLOAD_FOLDER/"
+  # Create the destination directory if it doesn't exist
+  mkdir -p "$UPLOAD_FOLDER/$(dirname "$path")"
+  
+  # Use rsync without --delete to copy files from Git repo to upload folder
+  rsync -av "$GIT_REPO_PATH/$path/" "$UPLOAD_FOLDER/$path/"
 done
 
 # Set correct permissions
