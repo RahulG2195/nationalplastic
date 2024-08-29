@@ -7,7 +7,7 @@ import "./EditProduct.css";
 import axios from 'axios';
 import { toast, Bounce } from "react-toastify";
 import { useRouter } from "next/navigation";
-
+import ProdetailAddEdit from "./ProdetailAddEdit";
 const { Option } = Select;
 export default function App() {
   const router = useRouter();
@@ -17,7 +17,7 @@ export default function App() {
   const [categories, setCategories] = useState([]);
   const [calculatedDiscountPrice, setCalculatedDiscountPrice] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState({ id: null, name: '' });
-
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const navigate = useNavigate();
   const handleNavigation = () => {
     navigate('/admin/product', { replace: true });
@@ -44,7 +44,6 @@ export default function App() {
     const discountAmount = price * (discountPercentage / 100);
     return price - discountAmount;
   };
-
   const onSubmit = async (data) => {
     const submitLoader = async () => {
       try {
@@ -103,7 +102,6 @@ export default function App() {
       }
     );
   };
-
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
     setValue('images', files);
@@ -112,8 +110,41 @@ export default function App() {
     const newPreviews = files.map(file => URL.createObjectURL(file));
     setImagePreviews(newPreviews);
   };
-
+  const handleAddData = async (data) => {
+    try {
+      console.log("handledata", data);
+      console.log("handledata", JSON.stringify(data));
+  
+      // Create a new FormData object
+      const formData = new FormData();
+  
+      // Append each key-value pair to the formData object
+      formData.append("image", data.image);
+      formData.append("features", data.features);
+      formData.append("description", data.description);
+      formData.append("careInstructions", data.careInstructions);
+      formData.append("deliveryInstructions", data.deliveryInstructions);
+      formData.append("manufacturing", data.manufacturing);
+      formData.append("warranty", data.warranty);
+      formData.append("pd_id", data.pd_id);
+  
+      // Make the POST request to the API
+      await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/adminCategories`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+  
+      // Handle the response as needed
+      console.log("Response:", response.data);
+  
+    } catch (error) {
+      console.error("Error submitting form data:", error);
+    }
+  };
+  
   return (
+    <>
     <Form
       onFinish={handleSubmit(onSubmit)}
       className='Form'
@@ -365,5 +396,15 @@ export default function App() {
         </Space>
       </Form.Item>
     </Form>
+    <Button onClick={() => setIsModalVisible(true)}>Add product Detail</Button>
+<ProdetailAddEdit
+  visible={isModalVisible}
+  onCancel={() => setIsModalVisible(false)}
+  onSubmit={handleAddData}
+  initialValues={null}
+  pd_id={null} // Pass null for adding new product
+/>
+</>    
   );
+
 }
