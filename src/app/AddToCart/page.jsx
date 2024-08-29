@@ -7,11 +7,19 @@ import PriceDetailsCard from "../../Components/PriceDetails/PriceDetailsCard";
 import FooterRow from "../../Components/FooterRow/FooterRow.jsx";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { addItemToCart, removeItemFromCart, addToCart, } from "@/redux/reducer/cartSlice";
+import {
+  addItemToCart,
+  removeItemFromCart,
+  addToCart,
+} from "@/redux/reducer/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 // import { useSelector } from "react-redux";
 import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
-import { addItemToCartD, removeItemFromCartD, setInitialCountD, } from "@/redux/reducer/tempSlice";
+import {
+  addItemToCartD,
+  removeItemFromCartD,
+  setInitialCountD,
+} from "@/redux/reducer/tempSlice";
 import { prod } from "../ConstantURL";
 import { isLoggedIn } from "@/utils/validation";
 import { emptyTempSlice } from "@/redux/reducer/tempSlice";
@@ -21,7 +29,6 @@ import { applyDiscount } from "@/redux/reducer/couponSlice";
 import AddHeader from "@/Components/Address/Adress";
 
 function AddToCart() {
-
   const CartStates = useSelector((state) => state.cart);
   const tempCartStates = useSelector((state) => state.temp);
   const userState = useSelector((state) => state.userData.isLoggedIn);
@@ -46,26 +53,27 @@ function AddToCart() {
   const dispatch = useDispatch();
   const StoreGuestData = async (products) => {
     // Check if user is logged in and products array has items
-    if (await isLoggedIn() && products.length > 0) {
+    if ((await isLoggedIn()) && products.length > 0) {
       try {
         // Use Promise.all to await all dispatch calls in parallel
         await products.map(async (product) => {
-          await dispatch(addToCart({
-            product_id: product.product_id,
-            quantity: product.quantity || 1,
-            price: product.price,
-            discount_price: product.discount_price,
-            color: product.color,
-            from: 0,
-          }));
+          await dispatch(
+            addToCart({
+              product_id: product.product_id,
+              quantity: product.quantity || 1,
+              price: product.price,
+              discount_price: product.discount_price,
+              color: product.color,
+              from: 0,
+            })
+          );
         });
 
         // After all products are added to the cart, perform final actions
         dispatch(emptyTempSlice());
         setUpdated(false);
-
       } catch (error) {
-        console.error('Error while storing guest data:', error);
+        console.error("Error while storing guest data:", error);
         throw error; // Propagate the error further if necessary
       }
     }
@@ -79,14 +87,17 @@ function AddToCart() {
     let cartData;
     const tempOrUserData = async () => {
       if (userID) {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/UserCart`, {
-          customer_id: userID,
-        });
+        const response = await axios.post(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/UserCart`,
+          {
+            customer_id: userID,
+          }
+        );
         cartData = response.data.products;
 
         if (tempCartStates.products.length > 0 && Updated) {
           const tempData = tempCartStates.products;
-          StoreGuestData(tempData)
+          StoreGuestData(tempData);
         }
         fetchData(cartData);
       } else {
@@ -97,9 +108,12 @@ function AddToCart() {
           : [];
         // If else to send request to API depending upon No of Product count
         if (productIds.length === 1) {
-          const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/tempData`, {
-            product_id: productIds[0],
-          });
+          const response = await axios.post(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/tempData`,
+            {
+              product_id: productIds[0],
+            }
+          );
           const products = response.data.products;
           let obj = products[0];
           obj.quantity = tempData.products[0].quantity;
@@ -111,9 +125,12 @@ function AddToCart() {
           fetchData(objToArray);
         } else if (productIds.length > 1) {
           // Send request with multiple product IDs
-          const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/tempData`, {
-            product_ids: productIds,
-          });
+          const response = await axios.post(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/tempData`,
+            {
+              product_ids: productIds,
+            }
+          );
           // const product = response.data.products;
           const products = response.data.products;
           const tempProducts = tempData.products;
@@ -133,7 +150,6 @@ function AddToCart() {
           // If you need to convert the updated products into an array
           const updatedProductsArray = Object.values(products);
 
-
           fetchData(updatedProductsArray);
         }
       }
@@ -146,7 +162,7 @@ function AddToCart() {
       );
       const dataBasedOnColor = response.data?.data;
       const NoOfImages = dataBasedOnColor[0].image_name;
-    }
+    };
 
     const fetchData = async (cartData) => {
       try {
@@ -192,7 +208,7 @@ function AddToCart() {
                 parseFloat(product.price) * parseFloat(product.quantity);
               const discountedProductTotal = product.discount_price
                 ? parseFloat(product.discount_price) *
-                parseFloat(product.quantity)
+                  parseFloat(product.quantity)
                 : productTotal;
 
               totals.totalPriceWithoutDiscount += productTotal;
@@ -226,9 +242,12 @@ function AddToCart() {
     try {
       // Fetch updated cart data
 
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/UserCart`, {
-        customer_id: userID,
-      });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/UserCart`,
+        {
+          customer_id: userID,
+        }
+      );
       const cartData = response.data.products;
       // Extracting relevant data from the cart data
       const products = cartData.map((item) => ({
@@ -294,12 +313,15 @@ function AddToCart() {
         const formData = new FormData();
         formData.append("customer_id", userID);
         formData.append("product_id", product_id);
-        const response = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/UserCart`, {
-          data: formData,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
+        const response = await axios.delete(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/UserCart`,
+          {
+            data: formData,
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
         // If all products are removed, update the state to reflect empty cart
         if (productDetailArr.length === 1) {
           setProductDetailArr([]);
@@ -335,29 +357,36 @@ function AddToCart() {
   };
 
   const applyCouponCode = async (message) => {
-    const discount_percentage = parseInt(message)
-    dispatch(applyDiscount({discountPercentage: discount_percentage, couponCode: couponCode}));
-  }
+    const discount_percentage = parseInt(message);
+    dispatch(
+      applyDiscount({
+        discountPercentage: discount_percentage,
+        couponCode: couponCode,
+      })
+    );
+  };
 
   const validateCouponCode = async (event) => {
     event.preventDefault();
-    try{
-      const response = await axios.post("api/couponValidation", { code:couponCode })
-      if(response.data.status === 200) {
+    try {
+      const response = await axios.post("api/couponValidation", {
+        code: couponCode,
+      });
+      if (response.data.status === 200) {
         await applyCouponCode(response?.data?.message);
         notify("Coupon code Applied!");
-      }else{
-      notifyError(response.data.message)}
-    }catch(e){
-      notifyError("failed to validate coupon code")
-
+      } else {
+        notifyError(response.data.message);
+      }
+    } catch (e) {
+      notifyError("failed to validate coupon code");
     }
-  }
+  };
   return (
     <>
       <div className="row">
         <div>
-          <AddHeader/>
+          <AddHeader />
         </div>
       </div>
       <div className="container cartView">
@@ -376,38 +405,44 @@ function AddToCart() {
                 ) : (
                   <div className="container RowCont">
                     {productDetailArr.map((val) => {
-                      const images = val ? val.image_name.split(', ').map(image => image.trim()) : [];
-                      return <div className="row" key={val.product_id}>
-                        <CartProduct
-                          src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${images[0]}`}
-                          productId={val.product_id}
-                          productName={val.product_name}
-                          productPrice={val.price}
-                          discountedPrice={val.discount_price}
-                          productDesc={val.description}
-                          seourl={val.seo_url}
-                          discPer={Math.floor(
-                            ((val.discount_price - val.price) /
-                              val.discount_price) *
-                            100
-                          )}
-                          color={val.color}
-                          installationCharges={val.InstallationCharges}
-                          quantity={val.quantity}
-                          onRemoveSuccess={() => {
-                            if (isLoggedIn()) {
-                              onRemoveSuccess(val.product_id);
-                            } else {
-                              onRemoveSuccess(val.product_id);
+                      const images = val
+                        ? val.image_name
+                            .split(", ")
+                            .map((image) => image.trim())
+                        : [];
+                      return (
+                        <div className="row" key={val.product_id}>
+                          <CartProduct
+                            src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${images[0]}`}
+                            productId={val.product_id}
+                            productName={val.product_name}
+                            productPrice={val.price}
+                            discountedPrice={val.discount_price}
+                            productDesc={val.description}
+                            seourl={val.seo_url}
+                            discPer={Math.floor(
+                              ((val.discount_price - val.price) /
+                                val.discount_price) *
+                                100
+                            )}
+                            color={val.color}
+                            installationCharges={val.InstallationCharges}
+                            quantity={val.quantity}
+                            onRemoveSuccess={() => {
+                              if (isLoggedIn()) {
+                                onRemoveSuccess(val.product_id);
+                              } else {
+                                onRemoveSuccess(val.product_id);
 
-                              dispatch(removeItemFromCartD(val.product_id));
+                                dispatch(removeItemFromCartD(val.product_id));
+                              }
+                            }}
+                            onAddtowishlist={() =>
+                              onAddtowishlist(val.product_id)
                             }
-                          }}
-                          onAddtowishlist={() =>
-                            onAddtowishlist(val.product_id)
-                          }
-                        />
-                      </div>
+                          />
+                        </div>
+                      );
                     })}
                   </div>
                 )}
@@ -415,20 +450,20 @@ function AddToCart() {
             </div>
           </div>
           <div className="col-sm-12 col-md-4 col-lg-4 col-xl-4 place-order">
-            <div className="coupenDiv p-4">
+            {/* <div className="coupenDiv p-4">
               <h6 className="pb-2">Have a coupon Code?</h6>
               <form onSubmit={validateCouponCode}>
                 <div className="input-group mb-3">
-                <input
-  type="text"
-  className="form-control"
-  placeholder="Enter coupon code"
-  aria-label="coupon code"
-  aria-describedby="basic-addon2"
-  onChange={handleInputChange}
-  value={displayCouponCode}
-  maxLength={7}
-/>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter coupon code"
+                    aria-label="coupon code"
+                    aria-describedby="basic-addon2"
+                    onChange={handleInputChange}
+                    value={displayCouponCode}
+                    maxLength={7}
+                  />
                   <div className="input-group-append">
                     <Button className="input-group-text coupon_btn" id="basic-addon2" type="submit" disabled={isDisabled}>
                       Apply
@@ -436,7 +471,7 @@ function AddToCart() {
                   </div>
                 </div>
               </form>
-            </div>
+            </div> */}
             <PriceDetailsCard
               itemCount={totalCount}
               cartPrice={totalPrice}

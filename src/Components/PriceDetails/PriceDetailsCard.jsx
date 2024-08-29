@@ -43,7 +43,7 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
     fetchUserData();
   }, []);
   const userState = useSelector((state) => state.userData.isLoggedIn);
-  const [InstallationCharge, setInstallationCharge] = useState(40);
+  const [InstallationCharge, setInstallationCharge] = useState(0);
   const productCount = useSelector((state) => {
     let who;
     if (!userState) {
@@ -98,8 +98,7 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
         return;
       }
 
-      const baseAmount =
-        parseFloat(totalPrice) + parseFloat(InstallationCharge);
+      const baseAmount = parseFloat(totalPrice) + parseFloat(InstallationCharge);
       const discountAmount = baseAmount * (discountPercentage / 100);
       const finalTotal = baseAmount - discountAmount;
       setFinalAmount(finalTotal.toFixed(2));
@@ -243,12 +242,12 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
           <div
             className={`d-flex justify-content-between mt-1 fw-semibold text-success`}
           >
-            <div className="text-secondary">
+            {/* <div className="text-secondary">
               Coupon ({couponCode ? couponCode : 'NONE'})
             </div>
-            <div>{couponCode ? discountPercentage + '%' : "0000"}</div>
+            <div>{couponCode ? discountPercentage + '%' : "0000"}</div> */}
           </div>
-          <div className={`d-flex justify-content-between mt-1 fw-semibold`}>
+          {/* <div className={`d-flex justify-content-between mt-1 fw-semibold`}>
             <div className="text-secondary ">Installation Charge</div>
             <div>
               {" "}
@@ -257,7 +256,7 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
                 ? numberWithCommas(InstallationCharge)
                 : "0000"}
             </div>
-          </div>
+          </div> */}
           <div className="border-bottom border-secondary mt-2"></div>
         </div>
 

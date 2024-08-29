@@ -20,20 +20,6 @@ export default function Manufacture() {
     const fetchdata = async () => {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/Category`);
       const filteredData = response.data.Manufacture;
-      /* const filteredData = response.data.categories.filter(
-        (item) =>
-          item.category_id === 24 ||
-          item.category_id === 25 ||
-          item.category_id === 26 ||
-          item.category_id === 27 ||
-          item.category_id === 28 ||
-          item.category_id === 24 ||
-          item.category_id === 25 ||
-          item.category_id === 26 ||
-          item.category_id === 27 ||
-          item.category_id === 28 ||
-          item.category_id === 29
-      ); */
 
       setHousehold(filteredData);
     };

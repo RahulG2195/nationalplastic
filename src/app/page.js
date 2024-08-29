@@ -35,11 +35,11 @@ export default function Home() {
       <main>
         {/* <CommingSoon /> */}
         <Banner />
-        <Features />
+        {/* <Features /> */}
 
         {/* show only when user is not login  */}
         {
-          (!ValidateLogin) && <CoupenBanner />
+          // (!ValidateLogin) && <CoupenBanner />
         }
 {/* <CoupenBanner /> */}
         <TopPick />

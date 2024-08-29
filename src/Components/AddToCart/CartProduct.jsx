@@ -139,7 +139,7 @@ const CartProduct = ({
             </p>
           </div>
         </div>
-        <div className="InstallationCharges align-items-center">
+        {/* <div className="InstallationCharges align-items-center">
           <p className="text-secondary me-2">
             {" "}
             Installation Charges : ₹ {installationCharges}
@@ -154,7 +154,7 @@ const CartProduct = ({
             />
             <p className="text-danger">Coupon Applied</p>
           </div>
-        </div>
+        </div> */}
 
         <div className="InstallationCharges align-items-center my-5">
           <div

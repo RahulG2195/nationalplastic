@@ -178,6 +178,11 @@ const CategoryList = () => {
       key: 'topPick',
     },
     {
+      title: 'HouseHold',
+      dataIndex: 'household',
+      key: 'household',
+    },
+    {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
