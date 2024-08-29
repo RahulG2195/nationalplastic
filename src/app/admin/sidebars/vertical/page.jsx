@@ -177,8 +177,8 @@ const navigation = [
     icon: "bi bi-card-text",
   },
   {
-    title: "News and Media ", //news and media page of NP
-    href: "/admin/newsMedia",
+    title: "Tag", //news and media page of NP
+    href: "/admin/tag",
     icon: "bi bi-layout-split",
   },
   {

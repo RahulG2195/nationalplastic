@@ -64,7 +64,7 @@ const Dashboard = () => {
 
           if (title === "Total Revenue") {
             // Convert the value to a number, then format it as currency with commas and two decimal places
-            formattedValue = `Rs ${numberWithCommas(parseFloat(value).toFixed(2))}`;
+            formattedValue = `${numberWithCommas(parseFloat(value).toFixed(2))}`;
           } else {
             // Round the value for "Total Orders" and remove decimals for other statistics
             formattedValue = Math.round(value);
