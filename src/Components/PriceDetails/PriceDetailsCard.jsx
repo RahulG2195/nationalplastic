@@ -75,7 +75,7 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
   const [DiscountCard, setDiscountCard] = useState(0);
   const [productsData, setProductsData] = useState(null);
 
-  const testing = async () => {
+  const settingProductData = async () => {
     const userCartData = await axios.post(
       `${process.env.NEXT_PUBLIC_BASE_URL}/UserCart`,
       {
@@ -85,7 +85,7 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
     setProductsData(userCartData.data.productps);
   };
   useEffect(() => {
-    testing();
+    settingProductData();
 
     setTotalPrice(priceFromState.toFixed(2));
     setMRPPrice(MRPvalue.toFixed(2));
@@ -188,7 +188,7 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
       coupon_code: couponCode,
       status: values.status,
     };
-    await axios.put(
+    axios.put(
       `${process.env.NEXT_PUBLIC_BASE_URL}/RegisterEmail`,
       paymentData
     );
@@ -214,9 +214,10 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
       `${process.env.NEXT_PUBLIC_BASE_URL}/paymentVerify`,
       paymentData
     );
+    console.log("Payment {paymentVerify} Data", JSON.stringify(resData));
   };
 
-  
+
   return (
     <>
       <div className="PriceDetail">

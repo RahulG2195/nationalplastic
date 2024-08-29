@@ -2,36 +2,7 @@ import { Resend } from 'resend';
 import { NextRequest, NextResponse } from "next/server";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const adminEMail = process.env.ADMIN_EMAIL;
-export async function POST(request, res) {
-  try {
-    const { firstName, lastName, email, phone } = await request.json();
-
-    // Create HTML email content dynamically for personalization
-    const userEmailTemplate = `
-    <h2>Dear ${firstName} ${lastName},</h2>
-    <p>Congratulations on a successful login to our platform!</p>
-    <p>We're excited to have you on board and look forward to providing you with our top-notch services.</p>
-    <p>If you have any questions or need assistance, please don't hesitate to reach out to us.</p>
-    <p>Thank you for choosing our platform!</p>
-    <p>Best regards,</p>
-    <p>National Plastic Team</p>
-    `;
-
-    const data = await resend.emails.send({
-      from: 'National Plastic <noreply@nationalplastic.com>',
-      to: email,
-      subject: "Registration Successful",
-      html: userEmailTemplate,
-    });
-    return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error("Error sending email:", error);
-    return NextResponse.json({ success: false, error: "Email sending failed" });
-  }
-}
-
-
+const adminEMail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
 
 export async function PUT(request, res) {
   try {

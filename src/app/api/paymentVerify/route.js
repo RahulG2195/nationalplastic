@@ -63,8 +63,6 @@ export async function PUT(request) {
       razor_payment_id,
       order_detail,
     } = requestData;
-
-
     // Insert order_list
     const orderListValues = [
       razorpay_order_id,
@@ -79,7 +77,6 @@ export async function PUT(request) {
       payment_status,
       razor_payment_id,
     ];
-
     // Replace undefined with null
     const sanitizedOrderListValues = orderListValues.map((value) =>
       value !== undefined ? value : null
@@ -95,11 +92,8 @@ export async function PUT(request) {
 
     // Retrieve the last inserted ID
     const lastInsertedId = res.insertId;
+
     // Insert order_detail
-
-    
-
-
     const orderDetailQuery = "INSERT INTO order_detail (order_id, user_id, prod_id, quantity, prod_price) VALUES (?, ?, ?, ?, ?)";
 
     const DeleteCartDataAfterOrderPlaced = "DELETE FROM mycart WHERE user_id = ? AND product_id = ?";
@@ -110,16 +104,35 @@ export async function PUT(request) {
       try {
 
         // Prepare values for the SQL query
+        console.log('Last Inserted ID:', lastInsertedId);
+        console.log('Customer ID:', customer_id);
+        console.log('Product ID:', product.product_id);
+        console.log('Product Quantity:', product.quantity);
+        console.log('Product Price:', product.prod_price);
         const orderDetailValues = [lastInsertedId, customer_id, product.product_id, product.quantity, product.prod_price];
 
         const DeleteCartDataAfterOrderPlacedData = [customer_id, product.product_id];
+        console.log("ordersValues: " + JSON.stringify(orderDetailValues))
+
         // Execute the SQL query
-        const [detailRes] = await query({query: orderDetailQuery, values: orderDetailValues});
+        const [detailRes] = await query({ query: orderDetailQuery, values: orderDetailValues });
+        let insertQueryData;
+        if (detailRes.affectedRows > 0) {
+          console.log("Order detail inserted successfully");
+          insertQueryData = "Successfully inserted"
+
+          // You can add more logic here for successful insertion
+        } else {
+          insertQueryData = "Failed to insert the data"
+          console.log("Order detail insertion failed");
+          // You can add more logic here for failed insertion
+        }
 
         // delete cart data after order placed
-        const [deteleCart] = await query({query: DeleteCartDataAfterOrderPlaced, values: DeleteCartDataAfterOrderPlacedData});
-        
-        
+        const [deteleCart] = await query({ query: DeleteCartDataAfterOrderPlaced, values: DeleteCartDataAfterOrderPlacedData });
+
+
+
       } catch (error) {
         // Handle any errors that occur during the execution
         console.error(`${error} inserting into order_detail for product ID ${product.product_id}:, error`);
@@ -130,6 +143,7 @@ export async function PUT(request) {
       JSON.stringify({
         message: "success",
         status: 200,
+        insertQueryData: insertQueryData
       })
     );
   } catch (error) {

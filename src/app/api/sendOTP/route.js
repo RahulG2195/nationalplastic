@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 import crypto from 'crypto';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const adminEMail = process.env.ADMIN_EMAIL;
 export async function POST(request) {
   try {
     const { email } = await request.json();
@@ -24,26 +23,25 @@ export async function POST(request) {
     <p>Regards,</p>
     <p>Your Team</p>
     `;
-
     const info = await resend.emails.send({
       from: 'National Plastic <noreply@nationalplastic.com>',
       to: email,
       subject: "Your OTP Code",
       html: htmlContent,
     });
-
-    return NextResponse.json({ 
-      success: true, 
-      otp, 
-      otpExpiry, 
-      message: 'OTP sent successfully' 
+    console.log("info", JSON.stringify(info));
+    return NextResponse.json({
+      success: true,
+      otp,
+      otpExpiry,
+      message: 'OTP sent successfully'
     }, { status: 200 });
 
   } catch (error) {
     console.error("Error sending email:", error);
-    return NextResponse.json({ 
-      success: false, 
-      error: "Email sending failed" 
+    return NextResponse.json({
+      success: false,
+      error: "Email sending failed"
     }, { status: 500 });
   }
 }

@@ -16,7 +16,9 @@ const Header = () => {
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
   const [isResettingPassword, setIsResettingPassword] = useState(false);
-  const [isPasswordModalVisible , setIsPasswordModalVisible] = useState(false);
+  const [isPasswordModalVisible, setIsPasswordModalVisible] = useState(false);
+  const secretKey = process.env.NEXT_PUBLIC_secretKey
+
   useEffect(() => {
     const storedUsername = localStorage.getItem('userData');
     if (storedUsername) {
@@ -59,7 +61,6 @@ const Header = () => {
         setIsResettingPassword(false);
         if (res.data.status === 200) {
           const { otp, otpExpiry } = res.data;
-          const secretKey = 'Saving_the 0tp Locally Admin'; // Manage this securely
           const encryptedOTP = encrypt(otp.toString(), secretKey);
           const encryptedExpiry = encrypt(otpExpiry.toString(), secretKey);
           localStorage.setItem('otp', encryptedOTP);
@@ -83,8 +84,8 @@ const Header = () => {
     verifyOTP(otp)
   };
 
-  const verifyOTP = async (otp) =>{
-    try{
+  const verifyOTP = async (otp) => {
+    try {
       const storedEncryptedOTP = localStorage.getItem('otp');
       const storedOtp = decrypt(storedEncryptedOTP, secretKey);
       const storedEncryptedExpiry = localStorage.getItem('otpExpiry');
@@ -99,7 +100,7 @@ const Header = () => {
       localStorage.removeItem('otpExpiry');
       return true;
 
-    }catch(err){
+    } catch (err) {
       setIsLoading(false);
       notifyError("Not a valid OTP", err.message);
       return false;
@@ -112,11 +113,11 @@ const Header = () => {
       password: values.password,
     }
     axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/profile`, { data })
-    .then(res => {
-      // setIsLoading(false);
-      notify("Password reset successfully.");
-      // setIsPasswordModalVisible(false);
-    })
+      .then(res => {
+        // setIsLoading(false);
+        notify("Password reset successfully.");
+        // setIsPasswordModalVisible(false);
+      })
     // Here you would typically send the password to your backend
     setTimeout(() => {
       setIsLoading(false);
@@ -150,9 +151,9 @@ const Header = () => {
 
   return (
     <>
-      <AntHeader style={{ 
-        display: 'flex', 
-        justifyContent: 'space-between', 
+      <AntHeader style={{
+        display: 'flex',
+        justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: 'white',
         boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
@@ -168,9 +169,9 @@ const Header = () => {
           </Dropdown>
         </div>
       </AntHeader>
-      
-      <OTPModal 
-        visible={isModalVisible} 
+
+      <OTPModal
+        visible={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
         onSubmit={handleOTPSubmit}
         form={form}
@@ -216,35 +217,35 @@ const OTPModal = ({ visible, onCancel, onSubmit, form, isLoading }) => {
 };
 
 const OTPInput = () => {
-    const [form] = Form.useForm();
-    const inputRefs = Array(6).fill(0).map(() => React.createRef());
-  
-    // Initialize the 'otp' field
-    React.useEffect(() => {
-      form.setFieldsValue({ otp: Array(6).fill('') });
-    }, [form]);
-  
-    const handleChange = (e, index) => {
-      const value = e.target.value;
-      if (value.length > 1) {
-        return;
-      }
-      
-      const currentOtp = form.getFieldValue('otp') || Array(6).fill('');
-      form.setFieldsValue({
-        otp: currentOtp.map((v, i) => i === index ? value : v)
-      });
-  
-      if (value && index < 5) {
-        inputRefs[index + 1].current.focus();
-      }
-  
-      if (index === 5 && value) {
-        form.submit();
-      }
-    };
-  
-    // ... rest of the component code
+  const [form] = Form.useForm();
+  const inputRefs = Array(6).fill(0).map(() => React.createRef());
+
+  // Initialize the 'otp' field
+  React.useEffect(() => {
+    form.setFieldsValue({ otp: Array(6).fill('') });
+  }, [form]);
+
+  const handleChange = (e, index) => {
+    const value = e.target.value;
+    if (value.length > 1) {
+      return;
+    }
+
+    const currentOtp = form.getFieldValue('otp') || Array(6).fill('');
+    form.setFieldsValue({
+      otp: currentOtp.map((v, i) => i === index ? value : v)
+    });
+
+    if (value && index < 5) {
+      inputRefs[index + 1].current.focus();
+    }
+
+    if (index === 5 && value) {
+      form.submit();
+    }
+  };
+
+  // ... rest of the component code
 
 
   const handleKeyDown = (e, index) => {
@@ -254,30 +255,30 @@ const OTPInput = () => {
   };
 
   return (
-      <Space size="small" style={{ display: 'flex', justifyContent: 'center' }}>
-        {[0, 1, 2, 3, 4, 5].map((index) => (
-          <Form.Item
-            key={index}
-            name={['otp', index]}
-            noStyle
-          >
-            <Input
-              ref={inputRefs[index]}
-              style={{
-                width: '40px',
-                height: '40px',
-                textAlign: 'center',
-                fontSize: '18px',
-                borderRadius: '8px'
-              }}
-              maxLength={1}
-              onChange={(e) => handleChange(e, index)}
-              onKeyDown={(e) => handleKeyDown(e, index)}
-            />
-          </Form.Item>
-        ))}
-      </Space>
-    );
+    <Space size="small" style={{ display: 'flex', justifyContent: 'center' }}>
+      {[0, 1, 2, 3, 4, 5].map((index) => (
+        <Form.Item
+          key={index}
+          name={['otp', index]}
+          noStyle
+        >
+          <Input
+            ref={inputRefs[index]}
+            style={{
+              width: '40px',
+              height: '40px',
+              textAlign: 'center',
+              fontSize: '18px',
+              borderRadius: '8px'
+            }}
+            maxLength={1}
+            onChange={(e) => handleChange(e, index)}
+            onKeyDown={(e) => handleKeyDown(e, index)}
+          />
+        </Form.Item>
+      ))}
+    </Space>
+  );
 };
 
 const PasswordModal = ({ visible, onCancel, onSubmit, form, isLoading }) => {
