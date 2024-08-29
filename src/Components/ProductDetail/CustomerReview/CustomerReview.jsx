@@ -202,6 +202,13 @@ const CustomerReview = () => {
       return true;
   }
   }
+  const toggleReviews = () => {
+    if (visibleReviews === reviews.length) {
+      setVisibleReviews(4);
+    } else {
+      setVisibleReviews(reviews.length);
+    }
+  };
   return (
     <div className="container py-5">
       <div className="text-center mb-5">
@@ -255,13 +262,11 @@ const CustomerReview = () => {
         })}
       </div>
   
-      {visibleReviews < reviews.length && (
-        <div className="text-center">
-          <button className="btn btn-outline-danger" onClick={loadMoreReviews}>
-            Load More Reviews
-          </button>
-        </div>
-      )}
+      <div className="text-center">
+    <button className="btn btn-outline-danger" onClick={toggleReviews}>
+      {visibleReviews === reviews.length ? "Show Less Reviews" : "Load More Reviews"}
+    </button>
+  </div>
   
       <Modal
         title="Write a Review"
