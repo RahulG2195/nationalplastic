@@ -12,7 +12,7 @@ export async function GET(request) {
         });
 
         const Manufacture = await query({
-            query: "SELECT * FROM categories where category_id IN(40, 16, 15)",
+            query: "SELECT * FROM categories where household = 1 AND status = 1",
             values: [],
         });
         const ShopRooms = await query({
