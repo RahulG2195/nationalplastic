@@ -17,7 +17,7 @@ do
 # Create the destination directory if it doesn't exist
   mkdir -p "$UPLOAD_FOLDER/$(dirname "$path")"
 
-# Use rsync without --delete to copy files from Git repo to upload folder
+  # Use rsync without --delete to copy files from Git repo to upload folder
   rsync -av "$GIT_REPO_PATH/$path/" "$UPLOAD_FOLDER/$path/"
 done
 

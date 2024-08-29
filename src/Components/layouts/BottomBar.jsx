@@ -75,6 +75,7 @@ function BottomBar() {
     return () => window.removeEventListener("resize", handleDropdownPosition);
   }, []);
 
+  
   return (
     
     <div className="mainrow px-md-5  bottom_nav position-relative ">

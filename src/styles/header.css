@@ -56,6 +56,12 @@ color: #05276C !important;
 
 .HeadSearch {
     /* padding: 10px 30px 30px 30px; */
+    position: relative;
+}
+
+.HeadSearch::before{
+    position: absolute;
+    content: '';
     padding-bottom: 0;
     border-radius: 10px !important;
     background-image: url('/Assets/images/search-svgrepo-com.svg');
