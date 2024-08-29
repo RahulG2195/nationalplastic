@@ -14,7 +14,7 @@ import {
   ModalFooter,
 } from "reactstrap";
 import axios from "axios";
-import { Table, Tooltip, Select, Tag } from "antd";
+import { Table, Tooltip, Select, Tag, Switch } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 import { useRouter } from "next/navigation";
@@ -176,6 +176,30 @@ const ProdList = () => {
       // Handle error (e.g., show a notification to the user)
     }
   };
+  // New function to handle toggling product status
+  const handleToggleStatus = async (productId, checked) => {
+    try {
+      const newStatus = checked ? 1 : 0;
+      const response = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/adminProducts`, {
+        product_id: productId,
+        prod_status: newStatus
+      });
+      if (response.data.success) {
+        // Update local state
+        const updatedProducts = productArray.map(product =>
+          product.product_id === productId
+            ? { ...product, prod_status: newStatus }
+            : product
+        );
+        setProductArray(updatedProducts);
+        setFilteredProductArray(updatedProducts);
+      } else {
+        console.error('Failed to update product status');
+      }
+    } catch (error) {
+      console.error('Failed to update product status', error);
+    }
+  };
 
   const columns = [
     {
@@ -233,6 +257,12 @@ const ProdList = () => {
       title: "Product Status",
       dataIndex: "prod_status",
       key: "prod_status",
+      render: (status, record) => (
+        <Switch
+          checked={record.prod_status === 1}
+          onChange={(checked) => handleToggleStatus(record.product_id, checked)}
+        />
+      ),
     },
     {
       title: "Image",
@@ -257,9 +287,8 @@ const ProdList = () => {
                     }}
                   >
                     <Image
-                      src={`${process.env.NEXT_PUBLIC_URL}${
-                        process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR
-                      }${image.trim()}`}
+                      src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR
+                        }${image.trim()}`}
                       alt={image}
                       layout="fill"
                       objectFit="contain"
@@ -275,9 +304,8 @@ const ProdList = () => {
                   }}
                 >
                   <Image
-                    src={`${process.env.NEXT_PUBLIC_URL}${
-                      process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR
-                    }${image.trim()}`}
+                    src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR
+                      }${image.trim()}`}
                     alt={image}
                     layout="fill"
                     objectFit="cover"

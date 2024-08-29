@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 import crypto from 'crypto';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const adminEMail = process.env.ADMIN_EMAIL;
 export async function POST(request) {
   try {
     const { email } = await request.json();
@@ -24,7 +23,6 @@ export async function POST(request) {
     <p>Regards,</p>
     <p>Your Team</p>
     `;
-
     const info = await resend.emails.send({
       from: 'National Plastic <noreply@nationalplastic.com>',
       to: email,

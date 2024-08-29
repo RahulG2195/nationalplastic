@@ -198,8 +198,8 @@ export async function PUT(request) {
           imageNames.push(imageName);
         } catch (error) {
           return NextResponse.json(
-            { 
-              success: false, 
+            {
+              success: false,
               error: `Failed to upload image ${image.name}: ${error.message}`,
               step: "Image upload"
             },
@@ -251,8 +251,8 @@ export async function PUT(request) {
       color_code = convertColorToCode(data.color);
     } catch (error) {
       return NextResponse.json(
-        { 
-          success: false, 
+        {
+          success: false,
           error: error.message,
           step: "Color conversion"
         },
@@ -292,8 +292,8 @@ export async function PUT(request) {
         data.product_id,
       ],
     });
-    return NextResponse.json({ 
-      success: true, 
+    return NextResponse.json({
+      success: true,
       data: result,
       message: "Product updated successfully",
       updatedFields: Object.keys(data),
@@ -302,8 +302,8 @@ export async function PUT(request) {
 
   } catch (error) {
     return NextResponse.json(
-      { 
-        success: false, 
+      {
+        success: false,
         error: error.message,
         stack: error.stack,
         step: "General error"
@@ -390,6 +390,53 @@ export async function DELETE(request) {
         message: "Internal Server Error",
         error: e.message,
       }),
+      { status: 500 }
+    );
+  }
+}
+
+export async function PATCH(request) {
+  try {
+    const { product_id, prod_status } = await request.json();
+
+    // Validate inputs
+    if (product_id === undefined || prod_status === undefined) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'product_id and prod_status are required' }),
+        { status: 400 }
+      );
+    }
+
+    // Ensure prod_status is either 0 or 1
+    const validatedStatus = prod_status ? 1 : 0;
+
+    // Update the product status
+    const result = await query({
+      query: `
+        UPDATE products 
+        SET prod_status = ?
+        WHERE product_id = ?
+      `,
+      values: [validatedStatus, product_id],
+    });
+
+    if (result.affectedRows === 0) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'Product not found' }),
+        { status: 404 }
+      );
+    }
+
+    return new Response(
+      JSON.stringify({ success: true, data: { product_id, prod_status: validatedStatus } }),
+      { status: 200 }
+    );
+
+  } catch (error) {
+    console.error('Error updating product status:', error);
+
+    return new Response(
+      JSON.stringify({ success: false, error: error.message }),
       { status: 500 }
     );
   }
