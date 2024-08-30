@@ -273,7 +273,7 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
             : "0000"}{" "}
           on your order
         </div> */}
-        {/* <div className="d-flex justify-content-center mt-2">
+        <div className="d-flex justify-content-center mt-2">
           {redirect ? (
             <Link href={`${userState ? "/Address" : "/Login"}`}>
               <button
@@ -288,8 +288,11 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
             <button
               type="submit"
               className="btn btn-danger px-md-5 placeOrderResp"
+              // onClick={() => {
+              //   makePayment({ productId: "example_ebook" });
+              // }}
               onClick={() => {
-                makePayment({ productId: "example_ebook" });
+                console.log("Payment");
               }}
               // disabled={!userState || count === 0}
               disabled ="true"
@@ -298,7 +301,7 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
               Place Order
             </button>
           )}
-        </div> */}
+        </div>
       </div>
     </>
   );
