@@ -19,6 +19,8 @@ import {
 import { signOut } from "next-auth/react";
 import { Modal } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
+
 const { confirm } = Modal;
 function ProfilePage() {
   const [FirstName, setFirstName] = useState('');
@@ -37,6 +39,8 @@ function ProfilePage() {
   const [orderData, setOrderData] = useState([]);
   const [ModelData, setModelData] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [showPasswords, setShowPasswords] = useState(false);
+
   const [formData, setFormData] = useState({
     email: "",
     phone: "",
@@ -57,6 +61,8 @@ function ProfilePage() {
     mobile_number1: '',
     email: ''
   });
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   useEffect(() => {
     const isAdmin = localStorage.getItem('isAdmin') === 'true';
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
@@ -339,27 +345,41 @@ function ProfilePage() {
         <div className="row user-data">
           <div className="col">
             <label htmlFor="">New Password</label>
-            <input
-              type="password"
-              required
-              className="form-control fw-semibold"
-              placeholder="New Password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
+            <div className="input-group">
+              <input
+                type={showPasswords ? 'text' : 'password'}
+                required
+                className="form-control fw-semibold"
+                placeholder="New Password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+              />
+            </div>
           </div>
           <div className="col">
             <label htmlFor="">Confirm Password</label>
-            <input
-              type="password"
-              required
-              className="form-control fw-semibold"
-              placeholder="Confirm Password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
+            <div className="input-group">
+              <input
+                type={showPasswords ? 'text' : 'password'}
+                required
+                className="form-control fw-semibold"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </div>
           </div>
         </div>
+        <div className="d-flex justify-content-end mt-2">
+          <span
+            className="input-group-text"
+            onClick={() => setShowPasswords(!showPasswords)}
+            style={{ cursor: 'pointer' }}
+          >
+            {showPasswords ? <EyeInvisibleOutlined /> : <EyeOutlined />}
+          </span>
+        </div>
+
         {error && <div className="alert alert-danger">{error}</div>}
         {success && <div className="alert alert-success">{success}</div>}
         <div className="form-group row">
@@ -686,14 +706,16 @@ function ProfilePage() {
                                 placeholder="Please Enter Address"
                                 defaultValue={message.Adress2 || ""}
                                 onChange={handleInputAddressChange}
+                                readOnly={!editable}
                               />
                             </div>
+
                           </div>
                           <div className="form-group row">
                             <div className="col-sm-10">
-                              <button type="submit" className="btn form-btn">
+                              {editable && (<button type="submit" className="btn form-btn"   >
                                 {message.Adress2 ? "Update" : "Add"}
-                              </button>
+                              </button>)}
                             </div>
                           </div>
                         </form>

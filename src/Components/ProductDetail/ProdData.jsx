@@ -285,14 +285,14 @@ function ProdData({ category_id }) {
                   </h2>
                 </div>
 
-                <div className="reviews-counter d-flex flex-wrap gap-2">
-                  <div className="mrp">
+                {/* <div className="reviews-counter d-flex flex-wrap gap-2"> */}
+                  {/* <div className="mrp">
                     <h6>
                       <strong className="text-danger"> ₹{price}</strong>
                     </h6>
                     <del> ₹{orignalPrice}</del>
                   </div>
-                </div>
+                </div> */}
                 <div>
                   <i
                     className="fa fa-star-o rating-star pr-2"

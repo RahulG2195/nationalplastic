@@ -9,7 +9,7 @@ import axios from "axios";
 import { addItemToCart } from "@/redux/reducer/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { isLoggedIn } from "@/utils/validation";
-import { notifyError } from "@/utils/notify";
+import { notify, notifyError } from "@/utils/notify";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -62,7 +62,16 @@ const AddBody = () => {
     };
     try {
       const response = await axios.patch('/api/customersForBuisness', data);
-      toast.success('Data updated successfully!', { autoClose: 1000 });
+      console.log(JSON.stringify(response));
+      console.log(JSON.stringify(response.data));
+      console.log(JSON.stringify(response.message));
+      console.log(JSON.stringify(response.data.message));
+      if(response.data.status == 201){
+        notify("Successfully Added")
+        return;
+      }
+      const responseData = response.data.message;
+      notifyError(responseData);
       setCompanyName('');
       setGstNumber('');
       setShowFields(false);

@@ -26,52 +26,59 @@ const CustomerReview = () => {
   const product_id = router.productId;
   const [review_product_id, setReviewProduct_id] = useState(localStorage.getItem("product_id") || null);
   const [InitialName, setInitialName] = useState('');
+  const userEmail = useSelector((state) => state.userData.email);
 
 
   useEffect(() => {
-    gettingIdBasedReviews(product_id).then(fetchedReviews => {
+
+    gettingIdBasedReviews(review_product_id).then(fetchedReviews => {
       setReviews(fetchedReviews);
       updateOverallRating(fetchedReviews);
     });
 
-  }, [product_id]);
+  }, [review_product_id]);
 
   const gettingIdBasedReviews = async (product_id) => {
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/reviews`, JSON.stringify({ action: 'getProductReviews', product_id: product_id }));
       const data = response.data;
-
+  
       let reviewsToReturn = [];
-
+      console.log("response " + JSON.stringify(data));
+      const review = data.review
       const mapReview = (review) => ({
         id: review.review_id,
-        name: review.username,
+        name: review.username || 'Anonymous',
         rating: review.review_rate,
         review: review.review_message,
-        avatar: review.username ? review.username[0].toUpperCase() :"https://xsgames.co/randomusers/avatar.php?g=pixel"
+        avatar: review.username ? review.username[0].toUpperCase() : "https://xsgames.co/randomusers/avatar.php?g=pixel"
       });
-
+      console.log("mapreviw"+JSON.stringify(mapReview));
+      // Mapping real reviews if they exist
       if (data.review && Array.isArray(data.review)) {
         reviewsToReturn = data.review.map(mapReview);
       }
-
+      console.log("Real reviews to return: " + JSON.stringify(reviewsToReturn));
+  
+      // Fill with dummy reviews only if needed
       if (reviewsToReturn.length < 5 && data.dummyReviews && Array.isArray(data.dummyReviews)) {
         const remainingCount = 5 - reviewsToReturn.length;
         const dummyReviewsToAdd = data.dummyReviews.slice(0, remainingCount).map(mapReview);
         reviewsToReturn = [...reviewsToReturn, ...dummyReviewsToAdd];
       }
-
+      console.log("Final reviews to return (with dummy if needed): " + JSON.stringify(reviewsToReturn));
+  
       if (reviewsToReturn.length === 0) {
         console.warn("No reviews or dummy reviews found in the response");
       }
-
+  
       return reviewsToReturn;
     } catch (error) {
       console.error("Error fetching reviews:", error);
       return [];
     }
   };
-
+  
   const updateOverallRating = (reviewsToRate) => {
     if (reviewsToRate.length > 0) {
       const newOverallRating = reviewsToRate.reduce((sum, review) => sum + review.rating, 0) / reviewsToRate.length;
@@ -84,9 +91,6 @@ const CustomerReview = () => {
     if (canReview && valid) {
       setIsModalVisible(true);
     }
-    //  else {
-    //   message.warning("You can only review after a successful order and haven't reviewed yet.");
-    // }
   };
 
   const handleOk = async () => {
@@ -106,16 +110,12 @@ const CustomerReview = () => {
       customer_id: customer_id,
       product_id:review_product_id,
       review_message:newReview.text,
-      review_rate:newReview.rating
+      review_rate:newReview.rating,
+     userEmail: userEmail
     };
-    try{
+
     const response = await submitReview(reviewData);
-    if(!response){
-      message.error("Failed to add a review");
-    }
-    }catch(error){
-      message.error("Failed to add a review");
-    }
+  
     const updatedReviews = [reviewToAdd, ...reviews];
     setReviews(updatedReviews);
     setIsModalVisible(false);
@@ -130,6 +130,7 @@ const CustomerReview = () => {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/reviews`, reviewData);
       return response.data.success;
     } catch (error) {
+      notifyError(error.message);
       console.error("Error submitting review:", error);
       return false;
     }
@@ -149,16 +150,6 @@ const CustomerReview = () => {
         notifyError("Login to add a review");
         return false;
       }
-      const isOrderValid = await validateOrder(customer_id);
-      if (!isOrderValid) {
-        notifyError("Only available after completing an order");
-        return false;
-      }
-      const isReviewed = await isAlreadyReviewed(customer_id);
-      if (isReviewed) {
-        notifyError("Already reviewed the product");
-        return false;
-      }
       return true;
     } catch (error) {
       console.log("Error validating user: ", error.message);
@@ -166,42 +157,14 @@ const CustomerReview = () => {
 
     }
   }
-  const validateOrder = async (customer_id) => {
-    try {
-      const value = {
-        action: "validateOrder",
-        customer_id: customer_id,
-        product_id: review_product_id
-      };
-      const isValidOrder = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/reviews`, value)
-      const { data } = isValidOrder;
-      if (data.canReview) {
-        return true;
-      }
-      return false;
-    } catch (error) {
-      return false;
 
+  const toggleReviews = () => {
+    if (visibleReviews === reviews.length) {
+      setVisibleReviews(4);
+    } else {
+      setVisibleReviews(reviews.length);
     }
-  }
-  const isAlreadyReviewed = async (customer_id) => {
-    try {
-      const value = {
-        action: "alreadyReviewed",
-        customer_id: customer_id,
-        product_id: review_product_id
-      };
-      const isAlreadyReviewed = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/reviews`, value)
-      const { data } = isAlreadyReviewed;
-      const truRfalse = data.alreadyReviewed
-      if(!truRfalse){
-      return false;
-      }
-      return true;
-    } catch (error) {
-      return true;
-  }
-  }
+  };
   return (
     <div className="container py-5">
       <div className="text-center mb-5">
@@ -255,13 +218,11 @@ const CustomerReview = () => {
         })}
       </div>
   
-      {visibleReviews < reviews.length && (
-        <div className="text-center">
-          <button className="btn btn-outline-danger" onClick={loadMoreReviews}>
-            Load More Reviews
-          </button>
-        </div>
-      )}
+      <div className="text-center">
+    <button className="btn btn-outline-danger" onClick={toggleReviews}>
+      {visibleReviews === reviews.length ? "Show Less Reviews" : "Load More Reviews"}
+    </button>
+  </div>
   
       <Modal
         title="Write a Review"

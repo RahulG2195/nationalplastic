@@ -78,15 +78,29 @@ export async function GET(request) {
 export async function PATCH(request) {
   try {
     const { userEmail, companyName, gstNumber } = await request.json();
-
+    if (!companyName || companyName.trim().length < 3 || companyName.trim().length > 50) {
+      return new Response(
+        JSON.stringify({ status: 400, message: "Invalid company name. It should be between 3 and 50 characters." }),
+        { status: 200 }
+      );
+    }
+    
+    // Validation for gstNumber (assuming Indian GST format)
+    const gstRegex = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
+    if (!gstNumber || !gstRegex.test(gstNumber)) {
+      return new Response(
+        JSON.stringify({ status: 400, message: "Invalid GST number format." }),
+        { status: 200 }
+      );
+    }
     await query({
       query: "UPDATE customer SET companyName = ?, gstNumber = ? WHERE Email = ?",
       values: [companyName, gstNumber, userEmail],
     });
 
     return new Response(
-      JSON.stringify({ status: 200, message: "buisness data updated successfully" }),
-      { status: 200 }
+      JSON.stringify({ status: 201, message: "buisness data updated successfully" }),
+      { status: 201 }
     );
   } catch (error) {
     console.error("Error updating buisness data:", error);

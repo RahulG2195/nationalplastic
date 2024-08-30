@@ -227,17 +227,17 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
         <div className="mt-4">
           <div className={`d-flex justify-content-between mt-1 fw-semibold`}>
             <div className="text-secondary">MRP</div>
-            <div> ₹ {MRPPrice ? numberWithCommas(MRPPrice) : "0000.00"}</div>
+            {/* <div> ₹ {MRPPrice ? numberWithCommas(MRPPrice) : "0000.00"}</div> */}
           </div>
           <div
             className={`d-flex justify-content-between mt-1 fw-semibold text-success`}
           >
             <div className="text-secondary">Discount</div>
-            <div>
+            {/* <div>
               {" "}
               - ₹{" "}
               {totalDiscount ? numberWithCommas(discount.toFixed(2)) : "0000"}
-            </div>
+            </div> */}
           </div>
           <div
             className={`d-flex justify-content-between mt-1 fw-semibold text-success`}
@@ -260,7 +260,7 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
           <div className="border-bottom border-secondary mt-2"></div>
         </div>
 
-        <div className="d-flex justify-content-between mt-3">
+        {/* <div className="d-flex justify-content-between mt-3">
           <div>Total Payable</div>
           <div className="fw-bold">
             ₹{totalPrice ? numberWithCommas(finalAmount) : "0000.00"}
@@ -272,8 +272,8 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
             ? numberWithCommas((MRPPrice - finalAmount).toFixed(2))
             : "0000"}{" "}
           on your order
-        </div>
-        <div className="d-flex justify-content-center mt-2">
+        </div> */}
+        {/* <div className="d-flex justify-content-center mt-2">
           {redirect ? (
             <Link href={`${userState ? "/Address" : "/Login"}`}>
               <button
@@ -291,12 +291,14 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
               onClick={() => {
                 makePayment({ productId: "example_ebook" });
               }}
-              disabled={!userState || count === 0}
+              // disabled={!userState || count === 0}
+              disabled ="true"
+
             >
               Place Order
             </button>
           )}
-        </div>
+        </div> */}
       </div>
     </>
   );

@@ -47,8 +47,9 @@ function AddToCart() {
   const [totalPayble, setTotalPayble] = useState(0);
   const [installationCharges, setInstallationCharges] = useState(0);
   const [Updated, setUpdated] = useState(true);
-  const [couponCode, setCouponCode] = useState("");
-  const [displayCouponCode, setDisplayCouponCode] = useState("");
+  const [couponCode, setCouponCode] = useState('');
+  const [displayCouponCode, setDisplayCouponCode] = useState('');
+  const [isDisabled, setIsDisabled] = useState(true);
   const dispatch = useDispatch();
   const StoreGuestData = async (products) => {
     // Check if user is logged in and products array has items
@@ -346,13 +347,15 @@ function AddToCart() {
   };
   const handleInputChange = (event) => {
     // event.target.value;
-    const data = event.target.value;
+    setIsDisabled(false);
+    const data = event.target.value
     setCouponCode(data.toUpperCase());
     setDisplayCouponCode(data.toUpperCase());
     if (data.length > 6) {
       validateCouponCode(data);
     }
   };
+
   const applyCouponCode = async (message) => {
     const discount_percentage = parseInt(message);
     dispatch(
@@ -462,11 +465,7 @@ function AddToCart() {
                     maxLength={7}
                   />
                   <div className="input-group-append">
-                    <Button
-                      className="input-group-text coupon_btn"
-                      id="basic-addon2"
-                      type="submit"
-                    >
+                    <Button className="input-group-text coupon_btn" id="basic-addon2" type="submit" disabled={isDisabled}>
                       Apply
                     </Button>
                   </div>
