@@ -22,10 +22,6 @@ function Houseware() {
                     <div className="houseImg">
                         <Image
                         src = "/Assets/images/Home-page/CTA-banner.jpg-industry-image.png"
-                        // width={100}
-                        // height={100}
-                        // layout="responsive"
-                        // objectFit="cover"
                         fill
                         alt="houseware banner"
                         />

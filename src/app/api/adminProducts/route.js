@@ -7,8 +7,6 @@ import upload from "@/utils/multer.middleware";
 const fs = require("fs").promises;
 const path = require("path");
 
-
-
 function convertColorToCode(color) {
   const colorEntry = colorNameList.find(
     (entry) => entry.name.toLowerCase() === color.toLowerCase()
@@ -201,7 +199,7 @@ export async function PUT(request) {
             {
               success: false,
               error: `Failed to upload image ${image.name}: ${error.message}`,
-              step: "Image upload"
+              step: "Image upload",
             },
             { status: 500 }
           );
@@ -235,16 +233,21 @@ export async function PUT(request) {
       return NextResponse.json(
         {
           success: false,
-          error: `The following fields are required: ${missingFields.join(", ")}`,
-          step: "Field validation"
+          error: `The following fields are required: ${missingFields.join(
+            ", "
+          )}`,
+          step: "Field validation",
         },
         { status: 400 }
       );
     }
 
-    data.image_name = imageNames.length > 0 ? imageNames.join(", ") : formData.get("image_name");
+    data.image_name =
+      imageNames.length > 0
+        ? imageNames.join(", ")
+        : formData.get("image_name");
 
-    data.category_id = formData.get('category_id');
+    data.category_id = formData.get("category_id");
 
     let color_code;
     try {
@@ -254,7 +257,7 @@ export async function PUT(request) {
         {
           success: false,
           error: error.message,
-          step: "Color conversion"
+          step: "Color conversion",
         },
         { status: 400 }
       );
@@ -292,21 +295,23 @@ export async function PUT(request) {
         data.product_id,
       ],
     });
-    return NextResponse.json({
-      success: true,
-      data: result,
-      message: "Product updated successfully",
-      updatedFields: Object.keys(data),
-      imageNames: imageNames
-    }, { status: 200 });
-
+    return NextResponse.json(
+      {
+        success: true,
+        data: result,
+        message: "Product updated successfully",
+        updatedFields: Object.keys(data),
+        imageNames: imageNames,
+      },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json(
       {
         success: false,
         error: error.message,
         stack: error.stack,
-        step: "General error"
+        step: "General error",
       },
       { status: 500 }
     );
@@ -316,8 +321,7 @@ export async function PUT(request) {
 export async function GET(request) {
   try {
     const allProducts = await query({
-      query:
-        `SELECT p.*,c.category_id,c.category_name, t.tag_id, t.tag_name, t.tag_status 
+      query: `SELECT p.*,c.category_id,c.category_name, t.tag_id, t.tag_name, t.tag_status 
         FROM products p 
         LEFT JOIN categories c ON p.category_id = c.category_id 
         LEFT JOIN tags_cat as t ON p.tag_cat = t.tag_id`,
@@ -328,7 +332,6 @@ export async function GET(request) {
       query: `SELECT * FROM tags_cat WHERE tag_status = 1`,
       value: [],
     });
-
 
     return new Response(
       JSON.stringify({
@@ -397,43 +400,75 @@ export async function DELETE(request) {
 
 export async function PATCH(request) {
   try {
-    const { product_id, prod_status } = await request.json();
+    const { product_id, prod_status, collections, type } = await request.json();
 
     // Validate inputs
-    if (product_id === undefined || prod_status === undefined) {
+    console.log('collections1', collections);
+    console.log('type', type);
+    
+    
+    if(type == 'collection'){
+
+      const result = await query({
+        query: `UPDATE products SET categoryType = ? WHERE product_id = ?`,
+        values: [collections, product_id],
+      });
+
+      if (result.affectedRows === 0) {
+        return new Response(
+          JSON.stringify({ success: false, error: "Product not found" }),
+          { status: 404 }
+        );
+      }
+
       return new Response(
-        JSON.stringify({ success: false, error: 'product_id and prod_status are required' }),
+        JSON.stringify({
+          success: true,
+          data: { product_id, collectionsOutput: collections },
+        }),
+        { status: 200 }
+      );
+
+    }else if (type == 'status') {
+
+      if(product_id != undefined && prod_status != undefined){
+        
+      // Ensure prod_status is either 0 or 1
+      const validatedStatus = prod_status ? 1 : 0;
+
+      // Update the product status
+      const result = await query({
+        query: `UPDATE products SET prod_status = ? WHERE product_id = ?`,
+        values: [validatedStatus, product_id],
+      });
+
+      if (result.affectedRows === 0) {
+        return new Response(
+          JSON.stringify({ success: false, error: "Product not found" }),
+          { status: 404 }
+        );
+      }
+
+      return new Response(
+        JSON.stringify({
+          success: true,
+          data: { product_id, prod_status: validatedStatus },
+        }),
+        { status: 200 }
+      );
+    } else {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: "product_id and prod_status are required",
+        }),
         { status: 400 }
       );
     }
-
-    // Ensure prod_status is either 0 or 1
-    const validatedStatus = prod_status ? 1 : 0;
-
-    // Update the product status
-    const result = await query({
-      query: `
-        UPDATE products 
-        SET prod_status = ?
-        WHERE product_id = ?
-      `,
-      values: [validatedStatus, product_id],
-    });
-
-    if (result.affectedRows === 0) {
-      return new Response(
-        JSON.stringify({ success: false, error: 'Product not found' }),
-        { status: 404 }
-      );
-    }
-
-    return new Response(
-      JSON.stringify({ success: true, data: { product_id, prod_status: validatedStatus } }),
-      { status: 200 }
-    );
-
+  }
+    
   } catch (error) {
-    console.error('Error updating product status:', error);
+    console.error("Error updating product status:", error);
 
     return new Response(
       JSON.stringify({ success: false, error: error.message }),

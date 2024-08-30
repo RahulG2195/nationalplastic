@@ -16,7 +16,7 @@ export async function GET(request) {
             values: [],
         });
         const ShopRooms = await query({
-            query: "SELECT * FROM categories where category_id IN(30, 31, 32, 33, 34, 35)",
+            query: "SELECT * FROM tags_cat where visible = 1 and tag_status = 1",
             values: [],
         });
 
