@@ -52,7 +52,7 @@ const PreChairsCard = (props) => {
         <div className="image-container">
           <div className="first">
             <div className="d-flex justify-content-between align-items-center">
-              {!props.showGetQuote && (<span className="discount">{props.Discount}%</span>)}
+              {/* {!props.showGetQuote && (<span className="discount">{props.Discount}%</span>)} */}
               <span className="wishlist">
                 <i
                   onClick={handleAddWishlist}
@@ -89,14 +89,14 @@ const PreChairsCard = (props) => {
                   Get Quote
                 </button>
               )}
-              {props.Price && (
+              {/* {props.Price && (
                 <>
                   <span className="new-price pr-2 pr-md-0">₹{numberWithCommas(props.Price)}</span>
                   {props.orignalPrice && (
                     <small className="old-price text-right"><del>₹{numberWithCommas(props.orignalPrice)}</del></small>
                   )}
                 </>
-              )}
+              )} */}
             </div>
           </div>
           {/* <div className="d-flex justify-content-between align-items-center pt-1">
