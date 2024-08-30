@@ -195,13 +195,105 @@
         // Handle error (e.g., show a notification to the user)
       }
     };
+
+
+    const collectionOptions = [
+      { value: 'highlight', label: 'Highlights' },
+      { value: 'frequently', label: 'Frequently Bought' }
+    ];
+    // add collections, frequently brought prods 
+    
+      const handleCollectionChange = async (values, record) => {
+        try {
+          const uniqueValues = [...new Set(values)];
+          const valueString = uniqueValues.join(',');
+          console.log('valueString', valueString);
+          
+          const response = await axios.patch(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/adminProducts`,
+            {
+              product_id: record.product_id,
+              collections: valueString,
+              type: 'collection'
+            }
+          );
+    
+          if (response.data.collectionsOutput) {
+            // Update local state
+            setProductArray((prevArray) =>
+              prevArray.map((product) =>
+                product.product_id === record.product_id
+                  ? { ...product, categoryType: response.data.collectionsOutput }
+                  : product
+              )
+            );
+            setFilteredProductArray((prevArray) =>
+              prevArray.map((product) =>
+                product.product_id === record.product_id
+                  ? { ...product, categoryType: response.data.collectionsOutput }
+                  : product
+              )
+            );
+          }
+        } catch (error) {
+          console.error("Error updating product collections:", error);
+          // Handle error (e.g., show a notification to the user)
+        }
+      };
+    
+      const handleCollectionRemove = async (value, record) => {
+        try {
+          const currentCollections = record.categoryType ? record.categoryType.split(',') : [];
+          console.log('currentCollections', currentCollections);
+          
+          const updatedCollections = currentCollections.filter((v) => v !== value);
+          console.log('updatedCollections', updatedCollections);
+          
+          const response = await axios.patch(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/adminProducts`,
+            {
+              product_id: record.product_id,
+              collections: updatedCollections.join(','),
+              type: 'collection'
+            },
+            {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            }
+          );
+    
+          if (response.data.collectionsOutput) {
+            // Update local state
+            setProductArray((prevArray) =>
+              prevArray.map((product) =>
+                product.product_id === record.product_id
+                  ? { ...product, categoryType: response.data.collectionsOutput }
+                  : product
+              )
+            );
+            setFilteredProductArray((prevArray) =>
+              prevArray.map((product) =>
+                product.product_id === record.product_id
+                  ? { ...product, categoryType: response.data.collectionsOutput }
+                  : product
+              )
+            );
+          }
+        } catch (error) {
+          console.error("Error removing product collection:", error);
+          // Handle error (e.g., show a notification to the user)
+        }
+      };
+
     // New function to handle toggling product status
     const handleToggleStatus = async (productId, checked) => {
       try {
         const newStatus = checked ? 1 : 0;
         const response = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/adminProducts`, {
           product_id: productId,
-          prod_status: newStatus
+          prod_status: newStatus,
+          type: 'status'
         });
         if (response.data.success) {
           // Update local state
@@ -219,6 +311,7 @@
         console.error('Failed to update product status', error);
       }
     };
+
 
   const columns = [
     {
@@ -281,6 +374,43 @@
           checked={record.prod_status === 1}
           onChange={(checked) => handleToggleStatus(record.product_id, checked)}
         />
+      ),
+    },
+    {
+      title: "Collections",
+      key: "Collections",
+      render: (text, record) => (
+        <div>
+          <Select
+        mode="multiple"
+        style={{ width: 200, marginBottom: 8 }}
+        placeholder="Select Collections"
+        value={record.categoryType ? record.categoryType.split(',') : []}
+        onChange={(values) => handleCollectionChange(values, record)}
+        onDeselect={(value) => handleCollectionRemove(value, record)}
+      >
+        {collectionOptions.map(option => (
+          <Select.Option key={option.value} value={option.value}>
+            {option.label}
+          </Select.Option>
+        ))}
+      </Select>
+      <div>
+        {record.categoryType && record.categoryType.split(',').map((value) => {
+          const option = collectionOptions.find(opt => opt.value === value);
+          return option ? (
+            <Tag
+              key={`${record.product_id}-${value}`}
+              closable
+              onClose={() => handleCollectionRemove(value, record)}
+              style={{ marginBottom: 4 }}
+            >
+              {option.label}
+            </Tag>
+          ) : null;
+        })}
+          </div>
+        </div>
       ),
     },
     {

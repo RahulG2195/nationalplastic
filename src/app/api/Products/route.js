@@ -10,7 +10,12 @@ export async function GET(request) {
 
 
     const heighlightProd = await query({
-      query: "SELECT * FROM products where categoryType = 'highlights'",
+      query: "SELECT * FROM products where FIND_IN_SET('highlight', categoryType)",
+      values: [],
+    });
+
+    const frequent = await query({
+      query: "SELECT * FROM products where FIND_IN_SET('frequently', categoryType)",
       values: [],
     });
 
@@ -50,6 +55,7 @@ export async function GET(request) {
         heighlightProd: heighlightProd,
         Blog: Blog,
         prod_clr: prod_clr,
+        frequent: frequent,
       })
     );
   } catch (error) {

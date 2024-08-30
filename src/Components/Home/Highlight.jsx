@@ -13,29 +13,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Highlight() {
-  // const productArr = [
-  //   {
-  //     key : 1,
-  //     image : '/Assets/images/Home-page/1st-section-kids-chair.jpg',
-  //     title : 'Lorem Ipsum is simply dummy text',
-  //     short_desc : 'Lorem Ipsum is simply dummy text',
-  //     url : '#'
-  //   },
-  //   {
-  //     key : 2,
-  //     image : '/Assets/images/Home-page/1st-section-kids-chair.jpg',
-  //     title : 'Lorem Ipsum is simply dummy text',
-  //     short_desc : 'Lorem Ipsum is simply dummy text',
-  //     url : '#'
-  //   },
-  //   {
-  //     key : 3,
-  //     image : '/Assets/images/Home-page/1st-section-kids-chair.jpg',
-  //     title : 'Lorem Ipsum is simply dummy text',
-  //     short_desc : 'Lorem Ipsum is simply dummy text',
-  //     url : '#'
-  //   },
-  // ];
 
   const [productArr, setProductArr] = useState([]);
   // const [isLoading, setIsLoading] = useState(true);
@@ -44,9 +21,6 @@ export default function Highlight() {
     const fetchdata = async () => {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/Products`);
 
-      // const filteredData = response.data.heighlightProd.filter(
-      //   (item) => item.categoryType === "highlights"
-      // );
       setProductArr(response.data.heighlightProd);
       // setIsLoading(false);
     };

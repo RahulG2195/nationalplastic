@@ -39,7 +39,7 @@ const BoughtTogether = () => {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_BASE_URL}/Products`
         );
-        setTogetherCardsData(response.data.products);
+        setTogetherCardsData(response.data.frequent);
       } catch (error) {
         alert("error");
       }
@@ -170,7 +170,7 @@ const BoughtTogether = () => {
             },
           }}
         >
-          {togetherCardsData.slice(0, 5).map((card) => {
+          {togetherCardsData.map((card) => {
             const images = card.image_name ? card.image_name.split(', ').map(image => image.trim()) : [];
             return <SwiperSlide key={card.product_id} className="newProdCard">
             <PreChairsCard
@@ -181,11 +181,6 @@ const BoughtTogether = () => {
                     Price={card.price}
                     orignalPrice={card.discount_price}
                     Color={card.color}
-                    // Discount={Math.floor(
-                    //   ((card.discount_price - card.price) /
-                    //     card.discount_price) *
-                    //   100
-                    // )}
                     Discount={card.discount_percentage}
                     onaddToWishlist={() =>
                       handleAddToWishlist(card.product_id)

@@ -41,6 +41,7 @@
 
 .moveTocartResp {
     margin-right: 0.5rem;
+    text-transform: uppercase !important;
 }
 
 .delete {
@@ -78,7 +79,7 @@
         flex-direction: column;
         align-items: center;
         max-width: 500px;
-        margin: auto;
+        margin: 10px auto;
     }
     .wishlist-image {
         flex: 0 0 auto;
@@ -164,6 +165,7 @@
         font-size: 12px !important;
         padding: 8px 12px !important;
         font-weight: 700;
+        text-transform: uppercase;
     }
 
     .wishCptResp h5 {

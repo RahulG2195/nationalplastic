@@ -541,6 +541,23 @@ p {
     z-index: 111111 !important;
 }
 
+.scroll_top {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    font-size: 1.5rem !important;
+    cursor: pointer;
+    border-radius: 50%;
+    background: #262262 !important;
+    border: 2px solid #FFFFFF !important;
+    color: #FFFFFF !important;
+    padding: 5px 15px !important;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 0.5s ease;
+    font-weight: 700;
+}
+
 @media (max-width:992px) {
     .subCptRes {
         width: 75% !important;
