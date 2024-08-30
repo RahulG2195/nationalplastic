@@ -4,7 +4,7 @@ import "./PreChairsCard.css";
 import { useEffect, useState } from "react";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import axios from "axios";
-import { notify } from "@/utils/notify";
+import { notify , notifyError} from "@/utils/notify";
 import GetQuoteForm from "@/Components/BulkOrder/GetQuoteForm.jsx";
 import numberWithCommas from '@/utils/formatnumber';
 import Image from "next/image";
@@ -12,14 +12,12 @@ import Image from "next/image";
 const PreChairsCard = (props) => {
   const [inWishlist, setInWishlist] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-
-
   const handleAddToCart = () => {
     props.onAddToCart(props.id);
   };
   const handleGetQuote = () => {
     if (props.showGetQuote) {
-      notify(props.Title)
+      // notify(props.Title)
       handleImageClick(props.Title);
       // setSelectedImage(props.product_name);
 

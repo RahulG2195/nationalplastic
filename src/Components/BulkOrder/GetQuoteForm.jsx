@@ -111,6 +111,16 @@ const GetQuoteForm = (props) => {
       await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/bulkOrderEmail`, submissionData);
       notify("Mail Sent Successfully");
       // ... rest of your submission logic
+      setFormData({
+        fullName: "",
+        Email: "",
+        Mobile: "",
+        Requirements: "",
+        city: "",
+        organisation: "",
+      });
+      setProducts([]);
+      setInputValue('');
     } catch (error) {
       console.error("Error:", error);
       notifyError("Failed to send");
