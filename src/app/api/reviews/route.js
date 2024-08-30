@@ -12,10 +12,6 @@ async function handleAction(request) {
         switch (action) {
             case 'postReview':
                 return await postReview(body);
-            case 'validateOrder':
-                return await validateOrder(body);
-            case 'alreadyReviewed':
-                return await checkAlreadyReviewed(body);
             case 'getProductReviews':
                 return await getProductReviews(body);
             default:
@@ -30,10 +26,10 @@ async function handleAction(request) {
 }
 
 async function postReview(body) {
-    const { customer_id, product_id, review_message, review_rate } = body;
+    const { customer_id, product_id, review_message, review_rate ,userEmail = "User"} = body;
 
     // Validate input
-    if (!customer_id || !product_id || !review_message || !review_rate) {
+    if (!customer_id || !product_id || !review_message || !review_rate ) {
         return Response.json({ message: 'Missing required fields' }, { status: 400 });
     }
     if (!isValidReason(review_message)) {
@@ -46,9 +42,9 @@ async function postReview(body) {
     
     try {
         const result = await query({
-            query: `INSERT INTO review (user_id, product_id, review_message, review_rate)
-                    VALUES (?, ?, ?, ?)`,
-            values: [customer_id, product_id, review_message, review_rate]
+            query: `INSERT INTO review (user_id, product_id, review_message, review_rate, username)
+                    VALUES (?, ?, ?, ?, ?)`,
+            values: [customer_id, product_id, review_message, review_rate, userEmail]
         });
 
         if (result.affectedRows > 0) {
@@ -64,60 +60,7 @@ async function postReview(body) {
     }
 }
 
-async function validateOrder(body) {
-    const { customer_id, product_id } = body;
-    if (!customer_id || !product_id) {
-        return Response.json({ message: 'Missing required fields' }, { status: 400 });
-    }
 
-    const perOrderStatus = await query({
-        query: "SELECT per_order_status FROM order_detail WHERE user_id = ? AND prod_id = ?",
-        values: [customer_id, product_id],
-    });
-    if (!perOrderStatus || perOrderStatus.length === 0) {
-        return new Response(JSON.stringify({
-            result: "No order found",
-            canReview: false
-        }), { status: 200 });
-    }
-    const status = perOrderStatus[0].per_order_status ?? 0;
-    if(status === 1){
-        return new Response(JSON.stringify({
-            result: "Order validated",
-            canReview: true
-        }), { status: 200 });
-    } else {
-        return new Response(JSON.stringify({
-            result: "No valid order found",
-            canReview: false
-        }), { status: 200 });
-    }
-}
-
-async function checkAlreadyReviewed(body) {
-    const { customer_id, product_id } = body;
-
-    if (!customer_id || !product_id) {
-        return Response.json({ message: 'Missing required fields' }, { status: 400 });
-    }
-
-    const result = await query({
-        query: `SELECT * FROM review WHERE user_id = ? AND product_id = ?`,
-        values: [customer_id, product_id]
-    });
-
-    if (result.length > 0) {
-        return new Response(JSON.stringify({
-            result: "User has already reviewed this product",
-            alreadyReviewed: true
-        }), { status: 200 });
-    } else {
-        return new Response(JSON.stringify({
-            result: "User has not reviewed this product yet",
-            alreadyReviewed: false
-        }), { status: 200 });
-    }
-}
 
 async function getProductReviews(body) {
     const { product_id } = body;

@@ -53,7 +53,7 @@ export default function RootLayout({ children }) {
           <BrowserRouter>
             <Provider store={store}>
               <PersistGate loading={null} persistor={persistor}>
-                 {!isAdmin && <Header />}
+                 {/* {!isAdmin && <Header />} */}
                 <div className={`${isAdmin ? "pt-0 mt-0" : "mobile__top"}`}>
                   {children}
                   {/* <BackToTopButton /> */}
