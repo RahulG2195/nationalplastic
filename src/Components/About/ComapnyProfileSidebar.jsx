@@ -9,7 +9,7 @@ const ComapnyProfileSidebar = ({title}) => {
             <div className="company-profile-sidebar">
                 <h3 className="sidebar-title">{title}</h3>
                 <ul className="sidebar-list">
-                    <li className="sidebar-item border p-1"><Link href="/">Company Profile</Link></li>
+                    <li className="sidebar-item border p-1"><Link href="/Companyprofile">Company Profile</Link></li>
                     <li className="sidebar-item border p-1"><Link href="/Infrastructure">Infrastructure</Link></li>
                     <li className="sidebar-item border p-1"><Link href="/Promoters">Promoters/Directors</Link></li>
                     <li className="sidebar-item border p-1"><Link href="/Management">Management and Board Committees</Link></li>

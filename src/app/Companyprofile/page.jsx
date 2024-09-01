@@ -45,7 +45,7 @@ function Company() {
     <>
       <div className="container company-profile-container my-5">
         <div className="row pt-5 gap-5 justify-content-center">
-          <div className="col-12 col-md-8 order-2 order-md-1 order-lg-1 company-profile-content">
+          <div className="col-12 col-md-8 order-2 order-md-1 order-lg-1 company-profile-content mob_content">
             <div className="mb-4">
               <h2 className="company-profile-title">Our History</h2>
               <div dangerouslySetInnerHTML={{ __html: content.history || '' }} />

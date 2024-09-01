@@ -202,7 +202,7 @@ export default function Footer() {
         <div className="container">
           <div className="col-12 text-center">
 
-            <div className="footer_social d-flex align-items-center">
+            <div className="footer_social d-md-flex align-items-center">
               <div className="comp_logo">
                 <Link href='/'>
                   <Image

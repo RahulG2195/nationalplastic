@@ -37,11 +37,11 @@ function TermsAndConditions() {
   return (
     <div className="container mt-4 py-5">
       <div className="row">
-        <div className="col-12 col-md-8">
+        <div className="col-12 col-md-8  order-2 order-md-1 order-lg-1 mob_content">
           <h2 className="company-profile-title">Terms and Conditions</h2>
           <div dangerouslySetInnerHTML={{ __html: content }} />
         </div>
-        <div className="col-12 col-md-4">
+        <div className="col-12 col-md-4 order-1 order-md-2 order-lg-2">
           <ComapnyProfileSidebar title={'Terms & Conditions'} />
         </div>
       </div>

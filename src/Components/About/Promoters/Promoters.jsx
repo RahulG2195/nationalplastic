@@ -27,15 +27,14 @@ const Promoters = () => {
   return (
     <>
       <div className="py-5" id="managementBoardCommittees">
-        <div className="row section_header team-header">
-          <h2>Team</h2>
-          <h3 className='text-danger'>PROMOTERS/DIRECTORS</h3>
-        </div>
-  
         <div className="row mx-auto team-members justify-content-center">
           <div className="col-12 col-md-8 order-2 order-md-1 order-lg-1">
+            <div className="row section_header team-header">
+              <h2>Team</h2>
+              <h3 className='text-danger'>PROMOTERS/DIRECTORS</h3>
+            </div>
             {teamMembers.map((member, index) => (
-              <div key={member.id}>
+              <div key={member.id} className='mob_content'>
                 <div className="team-members-container">
                   <div className={`row team-member align-items-center ${index % 2 === 0 ? "left-image" : "right-image"}`}>
                     <div className={`col-md-4 ${index % 2 === 0 ? "order-md-1 order-xs-1" : "order-md-2 order-xs-2"}`}>

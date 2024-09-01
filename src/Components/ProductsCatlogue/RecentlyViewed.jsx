@@ -191,7 +191,7 @@ const RecentlyViewed = () => {
           ref={swiperRef}
           modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
           spaceBetween={15}
-          slidesPerView={5}
+          slidesPerView={4}
           navigation
           loop={true}
           autoplay={autoplay ? { delay: 4000 } : false}

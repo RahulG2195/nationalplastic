@@ -39,21 +39,21 @@ function Manage() {
   return (
     <div className="container">
       <div className="row py-5 justify-content-center">
-        <div className="col-12 col-md-7">
+        <div className="col-12 col-md-7 order-2 order-md-1 order-lg-1 mob_content">
           <div className="committee-section mb-4">
             <h2>Committee</h2>
           </div>
           {committees.map((committee, index) => (
             <Committee key={index} title={committee.category} members={committee.members} />
           ))}
-          <div className="management-section">
+          <div className="management-section my-4">
             <h2>Management</h2>
             {management.map((item, index) => (
               <p key={index}>{item.members.join(', ')}</p>
             ))}
           </div>
         </div>
-        <div className="col-12 col-md-3">
+        <div className="col-12 col-md-3 order-1 order-md-2 order-lg-2">
           <ComapnyProfileSidebar title="MANAGEMENT AND BOARD COMMITTEES" />
         </div>
       </div>

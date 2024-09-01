@@ -98,6 +98,7 @@ export default function TopPick() {
                   <div className="col-md-4" key={product.key}>
                     <SwiperSlide key={product.category_id}>
                       <CatCards
+                        redirection={"ProductCatlogue"}
                         hovereffect={"TopPickHover"}
                         catid={product.seo_url}
                         image={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${product.image_name}`}
