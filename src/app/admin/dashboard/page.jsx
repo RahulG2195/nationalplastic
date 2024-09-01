@@ -19,9 +19,8 @@ const Header = () => {
       localStorage.clear();
 
       // Make a request to the server to handle server-side logout
-      await axios.post("/api/logout");
 
-      window.location.href = "/";
+      window.location.href = "/adminlogin";
     } catch (error) {
       console.error("Logout error:", error);
     }
