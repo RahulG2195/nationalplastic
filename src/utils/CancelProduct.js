@@ -75,7 +75,7 @@ async function sendCancellationEmailToClient(ProdData) {
 
   try {
     // Send the email using the Resend API
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/resend`, emailData);
+    const response = await axios.post(`/api/resend`, emailData);
 
     if (response.data.status === 200) {
       console.log('Cancellation email sent successfully to client');

@@ -204,22 +204,42 @@ function ProfilePage() {
   };
   const CancelProduct = async (prod_id, user_id, od_id) => {
     try {
-      const checkorderStatus = orderData.filter((od) => od.prod_id == prod_id && od.customer_id == user_id && od.od_id == od_id);
+      const checkorderStatus = orderData.filter((od) => od.prod_id === prod_id && od.customer_id === user_id && od.od_id === od_id);
 
       if (checkorderStatus.length === 0) {
         console.error("Debug: No matching order found");
+        toast.error("No matching order found");
         return;
       }
 
-      const extraAmt = CancelProdChargeAfterTwentyFourHr(checkorderStatus[0]['order_status_date']);
-      const orderStatus = checkorderStatus[0]['order_status'];
+      const extraAmt = CancelProdChargeAfterTwentyFourHr(checkorderStatus[0].order_status_date);
+      const orderStatus = checkorderStatus[0].order_status;
 
+      console.log("orderStatus:", orderStatus);
+      console.log("extraAmt:", extraAmt);
 
-      if (extraAmt > 0 && orderStatus >= 2) {
-        const confirm = window.confirm('Cancelling the order will incur a fee of ₹50. Do you want to proceed?');
-        if (!confirm) {
-          return;
+      const proceedWithCancellation = await new Promise((resolve) => {
+        if (extraAmt > 0 && orderStatus >= 2) {
+          console.log("Showing confirmation modal");
+          confirm({
+            title: 'Confirm Cancellation',
+            icon: <ExclamationCircleOutlined />,
+            content: 'Cancelling the order will incur a fee of ₹50. Do you want to proceed?',
+            onOk() {
+              resolve(true);
+            },
+            onCancel() {
+              resolve(false);
+            },
+          });
+        } else {
+          resolve(true);
         }
+      });
+
+      if (!proceedWithCancellation) {
+        console.log("Cancellation aborted by user");
+        return;
       }
 
       const ProdData = {
@@ -230,23 +250,22 @@ function ProfilePage() {
         type: 'Cancel'
       };
 
-
       const res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/UserOrder`, ProdData);
 
       if (res.data.message === 'Order status Updated') {
-        notify("Your order cancel Request has been sent");
-
-        toast.success("Your order cancel Request has been sent");
-        sendCancellationEmailToClient(ProdData);
+        notify("Your order cancel request has been sent");
+        toast.success("Your order cancel request has been sent");
+        await sendCancellationEmailToClient(ProdData);
       } else {
-        notify("Your order cancel Request fail");
-        toast.error("Your order cancel Request fail");
+        throw new Error("Order cancellation failed");
       }
 
     } catch (error) {
       console.error('Error:', error);
+      notify("Your order cancel request failed");
+      toast.error("Your order cancel request failed");
     }
-  }
+  };
   const ReturnProduct = async (prod_id, user_id, od_id) => {
     const getSingleData = orderData.find((od) => od.prod_id == prod_id && od.customer_id == user_id && od.od_id == od_id);
     setModelData(getSingleData);
@@ -273,39 +292,6 @@ function ProfilePage() {
     }
   }
 
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setError(null);
-    setSuccess(null);
-    if (!newPassword || !confirmPassword) {
-      setError("Missing required fields (newPassword, confirmPassword)");
-      return;
-    }
-    if (newPassword !== confirmPassword) {
-      setError("Passwords do not match");
-      return;
-    }
-    try {
-      const requestData = {
-        newPassword: newPassword,
-        confirmPassword: confirmPassword,
-        Id: cust_id,
-      };
-      // Send DELETE request to the API endpoint
-      const response = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/Users`, requestData);
-      if (response.data.status === 200) {
-        setSuccess("Password updated successfully!");
-        setNewPassword("");
-        setConfirmPassword("");
-      } else {
-        setError(response.data.message);
-      }
-    } catch (error) {
-      console.error("Error updating password:", error);
-      setError("Internal server error");
-    }
-  };
   const handleInputAddressChange = (event) => {
     setAdress2(event.target.value);
   };
@@ -339,59 +325,43 @@ function ProfilePage() {
     setIsModalVisible(false);
   };
 
-  function ChangePasswordForm({ newPassword, setNewPassword, confirmPassword, setConfirmPassword, handleSubmit, error, success }) {
-    return (
-      <form onSubmit={handleSubmit}>
-        <div className="row user-data">
-          <div className="col">
-            <label htmlFor="">New Password</label>
-            <div className="input-group">
-              <input
-                type={showPasswords ? 'text' : 'password'}
-                required
-                className="form-control fw-semibold"
-                placeholder="New Password"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-              />
-            </div>
-          </div>
-          <div className="col">
-            <label htmlFor="">Confirm Password</label>
-            <div className="input-group">
-              <input
-                type={showPasswords ? 'text' : 'password'}
-                required
-                className="form-control fw-semibold"
-                placeholder="Confirm Password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="d-flex justify-content-end mt-2">
-          <span
-            className="input-group-text"
-            onClick={() => setShowPasswords(!showPasswords)}
-            style={{ cursor: 'pointer' }}
-          >
-            {showPasswords ? <EyeInvisibleOutlined /> : <EyeOutlined />}
-          </span>
-        </div>
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError(null);
+    setSuccess(null);
 
-        {error && <div className="alert alert-danger">{error}</div>}
-        {success && <div className="alert alert-success">{success}</div>}
-        <div className="form-group row">
-          <div className="col-sm-10">
-            <button type="submit" className="btn form-btn">
-              Update Password
-            </button>
-          </div>
-        </div>
-      </form>
-    );
-  }
+    if (!newPassword || !confirmPassword) {
+      setError("Missing required fields (newPassword, confirmPassword)");
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    try {
+      const requestData = {
+        newPassword: newPassword,
+        confirmPassword: confirmPassword,
+        Id: cust_id,
+      };
+
+      // Send DELETE request to the API endpoint
+      const response = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/Users`, requestData);
+
+      if (response.data.status === 200) {
+        setSuccess("Password updated successfully!");
+        setNewPassword("");
+        setConfirmPassword("");
+      } else {
+        setError(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error updating password:", error);
+      setError("Internal server error");
+    }
+  };
   const renderOrderList = (orderData) => {
     return (
       <table className="table table-bordered table-responsive border-primary table-striped">
@@ -782,15 +752,49 @@ function ProfilePage() {
                 <div className="Right-Profile">
                   <h3>Change Password</h3>
                   <hr />
-                  <ChangePasswordForm
-                    newPassword={newPassword}
-                    setNewPassword={setNewPassword}
-                    confirmPassword={confirmPassword}
-                    setConfirmPassword={setConfirmPassword}
-                    handleSubmit={handleSubmit}
-                    error={error}
-                    success={success}
-                  />
+                  <div>
+                    <form onSubmit={handleSubmit}>
+                      <div className="row user-data">
+                        <div className="col">
+                          <label htmlFor="">New Password</label>
+                          <input
+                            type="password"
+                            required
+                            className="form-control fw-semibold"
+                            placeholder="New Password"
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
+                          />
+                        </div>
+                        <div className="col">
+                          <label htmlFor="">Confirm Password</label>
+                          <input
+                            type="password"
+                            required
+                            className="form-control fw-semibold"
+                            placeholder="Confirm Password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                          />
+                        </div>
+                      </div>
+
+                      {error && (
+                        <div className="alert alert-danger">{error}</div>
+                      )}
+                      {success && (
+                        <div className="alert alert-success">{success}</div>
+                      )}
+
+                      <div className="form-group row">
+                        <div className="col-sm-10">
+                          <button type="submit" className="btn form-btn">
+                            Update Password
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
