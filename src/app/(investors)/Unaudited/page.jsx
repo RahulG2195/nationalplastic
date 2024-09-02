@@ -34,7 +34,7 @@ const Unaudited = () => {
       <div className='container'>
         <div className='row'>
           <div className='col-12'>
-            <div className="table-responsive">
+            <div className="table-responsive w-100">
               <table className="table table-striped table-light table-bordered table-hover">
                 <thead>
                   <tr>

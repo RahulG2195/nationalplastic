@@ -1,11 +1,14 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import AwardsCertificates from "@/Components/About/AwardsCertificates";
-import ComapnyProfileSidebar from '@/Components/About/ComapnyProfileSidebar';
+import ComapnyProfileSidebar from "@/Components/About/ComapnyProfileSidebar";
 
 const Awards = () => {
-  const [pageContent, setPageContent] = useState({ title: '', description: '' });
+  const [pageContent, setPageContent] = useState({
+    title: "",
+    description: "",
+  });
   const [certificates, setCertificates] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,12 +17,12 @@ const Awards = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('/api/admin/Aboutus/awards');
+        const response = await axios.get("/api/admin/Aboutus/awards");
         setPageContent(response.data.pageContent[0]);
         setCertificates(response.data.certificates);
       } catch (err) {
-        setError('An error occurred while fetching data');
-        console.error('Error fetching data:', err);
+        setError("An error occurred while fetching data");
+        console.error("Error fetching data:", err);
       } finally {
         setLoading(false);
       }
