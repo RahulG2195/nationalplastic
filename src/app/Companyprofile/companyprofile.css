@@ -49,3 +49,16 @@
 .sidebar-item {
     padding: 5px 0;
 }
+
+@media (max-width: 600px){
+    .company-profile-sidebar{
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+    .mob_content div, .mob_content p{
+        text-align: justify;
+    }
+    .india-map-text p{
+        font-size: 14px !important;
+    }
+}

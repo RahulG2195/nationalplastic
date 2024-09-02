@@ -1,13 +1,13 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Form, Input, Button, InputNumber, Spin,Space } from 'antd';
+import { Form, Input, Button, InputNumber, Spin,Space,Select } from 'antd';
 import axios from 'axios';
 import "./EditCategory.css";
 import { useNavigate } from 'react-router-dom';
 import { toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+const { Option } = Select;
 export default function EditCategory() {
   const { control, handleSubmit, setValue, formState: { errors } } = useForm();
   const [imagePreview, setImagePreview] = useState('');
@@ -179,7 +179,13 @@ export default function EditCategory() {
             name="navshow"
             control={control}
             rules={{ required: true }}
-            render={({ field }) => <InputNumber {...field} style={{ width: '100%' }} />}
+            render={({ field }) => (
+              <Select {...field} style={{ width: '100%' }}>
+                <Option value="0">Disable</Option>
+                <Option value="1">Active</Option>
+              </Select>
+            )}
+            style={{ width: '100%' }}
           />
         </Form.Item>
         <Form.Item
@@ -191,7 +197,13 @@ export default function EditCategory() {
             name="status"
             control={control}
             rules={{ required: true }}
-            render={({ field }) => <InputNumber {...field} style={{ width: '100%' }} />}
+            render={({ field }) => (
+              <Select {...field} style={{ width: '100%' }}>
+                <Option value="0">Disable</Option>
+                <Option value="1">Active</Option>
+              </Select>
+            )}
+            style={{ width: '100%' }}
           />
         </Form.Item>
         <Form.Item
@@ -202,7 +214,13 @@ export default function EditCategory() {
           <Controller
             name="topPick"
             control={control}
-            render={({ field }) => <InputNumber {...field} style={{ width: '100%' }} />}
+            render={({ field }) => (
+              <Select {...field} style={{ width: '100%' }}>
+                <Option value="0">Disable</Option>
+                <Option value="1">Active</Option>
+              </Select>
+            )}
+            style={{ width: '100%' }}
           />
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

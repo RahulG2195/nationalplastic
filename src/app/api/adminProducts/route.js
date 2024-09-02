@@ -45,7 +45,6 @@ const uploadImage = async (file) => {
 export async function POST(request) {
   try {
     const formData = await request.formData();
-
     const requiredFields = [
       "product_name",
       "seo_url",
@@ -77,6 +76,14 @@ export async function POST(request) {
       "long_description",
       "duration",
       "prod_status",
+      "features",
+      "dimenions",
+      "descp",
+      "careAndInstruct",
+      "deliveryInsct",
+      "manufacturing",
+      "warranty",
+      "dimension_img",
     ];
 
     optionalFields.forEach((field) => {
@@ -139,7 +146,8 @@ export async function POST(request) {
         { status: 400 }
       );
     }
-
+    console.log('data', data);
+    
     // Insert the new product
     const result = await query({
       query: `
@@ -171,6 +179,32 @@ export async function POST(request) {
         data.prod_status || 1,
       ],
     });
+
+    // get last insert id 
+    const lastInsertedId = result.insertId;
+
+    if (lastInsertedId) {
+      await query({
+        query: `
+      INSERT INTO product_detail (
+        prod_id, features, dimenions, descp, careAndInstruct,
+        deliveryInsct, manufacturing, warranty, dimension_img
+      )
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `,
+        values: [
+          lastInsertedId,
+          data.features || '',
+          data.dimenions || '',
+          data.descp || '',
+          data.careAndInstruct || '',
+          data.deliveryInsct || '',
+          data.manufacturing || '',
+          data.warranty || '',
+          data.dimension_img || ''
+        ],
+      });
+    }
 
     return NextResponse.json({ success: true, data: result }, { status: 201 });
   } catch (error) {
@@ -403,12 +437,10 @@ export async function PATCH(request) {
     const { product_id, prod_status, collections, type } = await request.json();
 
     // Validate inputs
-    console.log('collections1', collections);
-    console.log('type', type);
-    
-    
-    if(type == 'collection'){
+    console.log("collections1", collections);
+    console.log("type", type);
 
+    if (type == "collection") {
       const result = await query({
         query: `UPDATE products SET categoryType = ? WHERE product_id = ?`,
         values: [collections, product_id],
@@ -428,45 +460,41 @@ export async function PATCH(request) {
         }),
         { status: 200 }
       );
+    } else if (type == "status") {
+      if (product_id != undefined && prod_status != undefined) {
+        // Ensure prod_status is either 0 or 1
+        const validatedStatus = prod_status ? 1 : 0;
 
-    }else if (type == 'status') {
+        // Update the product status
+        const result = await query({
+          query: `UPDATE products SET prod_status = ? WHERE product_id = ?`,
+          values: [validatedStatus, product_id],
+        });
 
-      if(product_id != undefined && prod_status != undefined){
-        
-      // Ensure prod_status is either 0 or 1
-      const validatedStatus = prod_status ? 1 : 0;
+        if (result.affectedRows === 0) {
+          return new Response(
+            JSON.stringify({ success: false, error: "Product not found" }),
+            { status: 404 }
+          );
+        }
 
-      // Update the product status
-      const result = await query({
-        query: `UPDATE products SET prod_status = ? WHERE product_id = ?`,
-        values: [validatedStatus, product_id],
-      });
-
-      if (result.affectedRows === 0) {
         return new Response(
-          JSON.stringify({ success: false, error: "Product not found" }),
-          { status: 404 }
+          JSON.stringify({
+            success: true,
+            data: { product_id, prod_status: validatedStatus },
+          }),
+          { status: 200 }
+        );
+      } else {
+        return new Response(
+          JSON.stringify({
+            success: false,
+            error: "product_id and prod_status are required",
+          }),
+          { status: 400 }
         );
       }
-
-      return new Response(
-        JSON.stringify({
-          success: true,
-          data: { product_id, prod_status: validatedStatus },
-        }),
-        { status: 200 }
-      );
-    } else {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          error: "product_id and prod_status are required",
-        }),
-        { status: 400 }
-      );
     }
-  }
-    
   } catch (error) {
     console.error("Error updating product status:", error);
 

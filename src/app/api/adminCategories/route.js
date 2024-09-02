@@ -232,27 +232,39 @@ export async function DELETE(request) {
 
 export async function PATCH(request) {
   try {
-    const { category_id, navshow } = await request.json();
+    const { category_id, field, value } = await request.json();
 
     // Validate inputs
-    if (category_id === undefined || navshow === undefined) {
+    if (category_id === undefined || field === undefined || value === undefined) {
       return new Response(
-        JSON.stringify({ success: false, error: 'category_id and navshow are required' }),
+        JSON.stringify({ success: false, error: 'category_id, field, and value are required' }),
         { status: 400 }
       );
     }
 
-    // Ensure navshow is either 0 or 1
-    // const validatedNavshow = navshow ? 1 : 0;
+    let queryField;
+    switch (field) {
+      case 'navshow':
+      case 'status':
+      case 'household':
+      case 'topPick':
+        queryField = field;
+        break;
+      default:
+        return new Response(
+          JSON.stringify({ success: false, error: 'Invalid update field' }),
+          { status: 400 }
+        );
+    }
 
-    // Update the navshow status
+    // Update the category
     const result = await query({
       query: `
         UPDATE categories 
-        SET navshow = ?
+        SET ${queryField} = ?
         WHERE category_id = ?
       `,
-      values: [navshow, category_id],
+      values: [value, category_id],
     });
 
     if (result.affectedRows === 0) {
@@ -263,12 +275,12 @@ export async function PATCH(request) {
     }
 
     return new Response(
-      JSON.stringify({ success: true, data: { category_id, navshow: navshow } }),
+      JSON.stringify({ success: true, data: { category_id, [field]: value } }),
       { status: 200 }
     );
 
   } catch (error) {
-    console.error('Error updating navshow status:', error);
+    console.error('Error updating category:', error);
 
     return new Response(
       JSON.stringify({ success: false, error: error.message }),

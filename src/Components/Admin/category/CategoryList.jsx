@@ -29,27 +29,28 @@ const CategoryList = () => {
     fetchData();
   }, []);
 
-  const handleToggleNavshow = async (categoryId, checked) => {
-    
+  const handleToggleNavshow = async (categoryId, checked, data) => {
+
     try {
       const newNavshowValue = checked ? 1 : 0;
 
       const response = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/adminCategories`, {
         category_id: categoryId,
-        navshow: newNavshowValue
+        value: newNavshowValue,
+        field: data
       });
-
+      console.log("data saved", JSON.stringify(response.data.data[1]));
       if (response.data.success) {
         const updatedCategories = categoryArray.map(category =>
           category.category_id === categoryId
-            ? { ...category, navshow: newNavshowValue }
+            ? { ...category, [data] : newNavshowValue }
             : category
         );
         setCategoryArray(updatedCategories);
         setFilteredCategoryArray(updatedCategories);
-        notify("Navshow status updated successfully");
+        notify("status updated successfully");
       } else {
-        notifyError('Failed to update navshow status');
+        notifyError('Failed to update  status');
       }
     } catch (error) {
       console.error('Failed to update navshow', error);
@@ -168,7 +169,7 @@ const CategoryList = () => {
       render: (navshow, record) => (
         <Switch
           checked={navshow === 1}
-          onChange={(checked) => handleToggleNavshow(record.category_id, checked)}
+          onChange={(checked) => handleToggleNavshow(record.category_id, checked, "navshow")}
         />
       ),
     },
@@ -176,16 +177,34 @@ const CategoryList = () => {
       title: 'Top Pick',
       dataIndex: 'topPick',
       key: 'topPick',
+      render: (topPick, record) => (
+        <Switch
+          checked={topPick === 1}
+          onChange={(checked) => handleToggleNavshow(record.category_id, checked, "topPick")}
+        />
+      ),
     },
     {
       title: 'HouseHold',
       dataIndex: 'household',
       key: 'household',
+      render: (household, record) => (
+        <Switch
+          checked={household === 1}
+          onChange={(checked) => handleToggleNavshow(record.category_id, checked, "household")}
+        />
+      ),
     },
     {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
+      render: (status, record) => (
+        <Switch
+          checked={status === 1}
+          onChange={(checked) => handleToggleNavshow(record.category_id, checked, "status")}
+        />
+      ),
     },
     {
       title: 'Action',

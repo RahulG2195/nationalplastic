@@ -52,31 +52,36 @@ async function saveTeamMember(formData, action) {
     const description = formData.get('description');
     const display_order = formData.get('display_order');
     const image = formData.get('image');
-
+    const imageName = image.name;
     let image_url = '';
     if (image) {
-       image_url = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_ABOUT_PATH_DIR}`;
+      const imageDir = path.join(
+        process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
+        process.env.NEXT_PUBLIC_ABOUT_PATH_DIR
+      );
       try {
-        await fs.access(image_url);
+        await fs.access(imageDir);
       } catch {
-        await fs.mkdir(image_url, { recursive: true });
+        await fs.mkdir(imageDir, { recursive: true });
       }
-      await writeFile(image_url, Buffer.from(await image.arrayBuffer()));
+      const imageFileName = imageName;
+      image_url = path.join(imageDir, imageFileName);
+      await fs.writeFile(image_url, Buffer.from(await image.arrayBuffer()));
     }
 
     let sql, values;
 
     if (action === 'ADD') {
       sql = 'INSERT INTO team_members (name, designation, description, image_url, display_order) VALUES (?, ?, ?, ?, ?)';
-      values = [name, designation, description, image_url, display_order];
+      values = [name, designation, description, imageName, display_order];
     } else {
       const id = formData.get('id');
       sql = 'UPDATE team_members SET name = ?, designation = ?, description = ?, display_order = ? WHERE id = ?';
       values = [name, designation, description, display_order, id];
 
-      if (image_url) {
+      if (imageName) {
         sql = 'UPDATE team_members SET name = ?, designation = ?, description = ?, image_url = ?, display_order = ? WHERE id = ?';
-        values = [name, designation, description, image_url, display_order, id];
+        values = [name, designation, description, imageName, display_order, id];
       }
     }
 

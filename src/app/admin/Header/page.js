@@ -31,8 +31,7 @@ const Header = () => {
     try {
       localStorage.clear();
       signOut();
-      await axios.post("/api/logout");
-      window.location.href = "/";
+      window.location.href = "/adminlogin";
     } catch (error) {
       console.error("Logout error:", error);
       notifyError("Logout failed", error.message);
@@ -59,17 +58,13 @@ const Header = () => {
     axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/sendOTP`, { email: username })
       .then(res => {
         setIsResettingPassword(false);
-        if (res.data.status === 200) {
-          const { otp, otpExpiry } = res.data;
-          const encryptedOTP = encrypt(otp.toString(), secretKey);
-          const encryptedExpiry = encrypt(otpExpiry.toString(), secretKey);
-          localStorage.setItem('otp', encryptedOTP);
-          localStorage.setItem('otpExpiry', encryptedExpiry);
-          notify("Please check your email, OTP sent successfully.");
-          setIsModalVisible(true);
-        } else {
-          notifyError("Unexpected response status");
-        }
+        const { otp, otpExpiry } = res.data;
+        const encryptedOTP = encrypt(otp.toString(), secretKey);
+        const encryptedExpiry = encrypt(otpExpiry.toString(), secretKey);
+        localStorage.setItem('otp', encryptedOTP);
+        localStorage.setItem('otpExpiry', encryptedExpiry);
+        notify("Please check your email, OTP sent successfully.");
+        setIsModalVisible(true);
       })
       .catch(err => {
         setIsResettingPassword(false);
@@ -86,21 +81,37 @@ const Header = () => {
 
   const verifyOTP = async (otp) => {
     try {
+
       const storedEncryptedOTP = localStorage.getItem('otp');
+      console.log('Stored encrypted OTP:', storedEncryptedOTP);
+
       const storedOtp = decrypt(storedEncryptedOTP, secretKey);
+      console.log('Decrypted stored OTP:', storedOtp);
+
       const storedEncryptedExpiry = localStorage.getItem('otpExpiry');
+
       const storedOtpExpiry = decrypt(storedEncryptedExpiry, secretKey);
-      if (new Date(storedOtpExpiry) < new Date()) {
+
+      const currentTime = new Date();
+      const expiryTime = new Date(storedOtpExpiry);
+
+      if (expiryTime < currentTime) {
+        console.log('OTP has expired');
         throw new Error('OTP has expired.');
       }
       if (storedOtp !== otp) {
+        console.log('OTP mismatch');
         throw new Error('Invalid OTP.');
       }
       localStorage.removeItem('otp');
       localStorage.removeItem('otpExpiry');
+      setIsLoading(false);
+
+      setIsPasswordModalVisible(true)
       return true;
 
     } catch (err) {
+      console.error('Error in verifyOTP:', err);
       setIsLoading(false);
       notifyError("Not a valid OTP", err.message);
       return false;
@@ -116,7 +127,7 @@ const Header = () => {
       .then(res => {
         // setIsLoading(false);
         notify("Password reset successfully.");
-        // setIsPasswordModalVisible(false);
+        setIsPasswordModalVisible(false);
       })
     // Here you would typically send the password to your backend
     setTimeout(() => {
@@ -303,7 +314,7 @@ const PasswordModal = ({ visible, onCancel, onSubmit, form, isLoading }) => {
               }
             ]}
           >
-            <PasswordInput />
+            <PasswordInput form={form} />
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" loading={isLoading} block>
@@ -316,22 +327,14 @@ const PasswordModal = ({ visible, onCancel, onSubmit, form, isLoading }) => {
   );
 };
 
-const PasswordInput = () => {
-  const [form] = Form.useForm();
+const PasswordInput = ({ form }) => {
   const [password, setPassword] = useState('');
-  const [isValid, setIsValid] = useState(false);
-
-  const validatePassword = (value) => {
-    const isLengthValid = value.length >= 8;
-    const hasNumber = /\d/.test(value);
-    const hasSymbol = /[!@#$%^&*]/.test(value);
-    return isLengthValid && hasNumber && hasSymbol;
-  };
 
   const handleChange = (e) => {
     const value = e.target.value;
     setPassword(value);
-    setIsValid(validatePassword(value));
+    form.setFieldsValue({ password: value });
+    form.validateFields(['password']);
   };
 
   return (
@@ -342,14 +345,10 @@ const PasswordInput = () => {
         style={{ width: '100%' }}
         placeholder="Enter new password"
       />
-      <div style={{ marginTop: '8px' }}>
-        <Text type={isValid ? 'success' : 'danger'}>
-          {isValid ? 'Password is valid' : 'Password must be at least 8 characters long and include a number and a symbol'}
-        </Text>
-      </div>
     </div>
   );
 };
+
 
 
 export default Header;

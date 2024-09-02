@@ -31,8 +31,8 @@ function Infrastructure() {
 
   return (
     <div className="py-5 mx-auto row justify-content-center">
-      <div className="col-12 col-md-8 order-2 order-md-1 order-lg-1">
-        <div className="text-center mb-md-5">
+      <div className="col-12 col-md-8 order-2 order-md-1 order-lg-1 mob_content">
+        <div className="text-center mb-md-5 py-md-5 py-2">
           <div className="fs-1 darkBlue fw-normal">
             Infra<span className="fs-1 fw-bold text-danger">structure</span>{" "}
           </div>

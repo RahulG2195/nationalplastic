@@ -18,6 +18,7 @@ import { PlaceholderBar } from "./Placeholder";
 import { useDelayedRender } from "@/utils/useDelayedRender";
 import { staticInvestorConfig, fetchInvestorConfig } from "./investorConfig";
 import ScrollToTop from "scroll-to-top-react";
+import { Search, X } from 'lucide-react';
 
 export default function Header() {
   const shouldRenderBottomBar = useDelayedRender(2000);
@@ -40,6 +41,7 @@ export default function Header() {
   const userEmail = useSelector((state) => state.userData.email);
   const [dropdownIndex, setDropdownIndex] = useState(null);
   const [subDropdownIndex, setSubDropdownIndex] = useState(null);
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
   const productCount = useSelector((state) => {
     let who;
 
@@ -152,9 +154,8 @@ export default function Header() {
   // Search Function
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    setSearchResults([]);
     try {
-      const searchTerm2 = e.target.querySelector(".HeadSearch").value;
+      console.log('searchTerm', searchTerm);
       router.push(`/search/${searchTerm}`);
     } catch (error) {
       console.error("Error searching products:", error);
@@ -163,6 +164,11 @@ export default function Header() {
 
   const handleShow = (e) => {
     setIsClicked(!isClicked);
+  };
+
+  const handleCloseSearch = (e) => {
+    e.preventDefault(); // Prevent form submission
+    toggleSearch();
   };
 
   useEffect(() => {
@@ -205,6 +211,10 @@ export default function Header() {
     fetchBasicInfo();
   }, []);
 
+  const toggleSearch = () => {
+    setIsSearchVisible(!isSearchVisible);
+  };
+
   return (
     <div>
       {/* <ScrollToTop displayType="htmlArrow" /> */}
@@ -239,19 +249,43 @@ export default function Header() {
                       objectFit="contain"
                     />
                   </Link>
-
+                  <div className="d-md-none">
+                    <button onClick={toggleSearch} className="btn btn-link">
+                      <Search size={24} />
+                    </button>
+                  </div>
+                </div>
+                <div className="d-none d-md-block">
+                  <form onSubmit={handleSearchSubmit} className="d-flex nav-search">
+                    <input
+                      className="form-control text-center HeadSearch fw-semibold"
+                      type="search"
+                      placeholder="Search products"
+                      aria-label="Search"
+                      value={searchTerm}
+                      onChange={handleSearchChange}
+                    />
+                  </form>
                 </div>
 
-                <form onSubmit={handleSearchSubmit} className="d-flex nav-search">
-                  <input
-                    className="form-control text-center HeadSearch fw-semibold"
-                    type="search"
-                    placeholder="Search products"
-                    aria-label="Search"
-                    value={searchTerm}
-                    onChange={handleSearchChange}
-                  />
-                </form>
+                {isSearchVisible && (
+                  <div className="container-fluid mt-3 d-lg-none">
+                    <form onSubmit={handleSearchSubmit} className="d-flex nav-search">
+                      <input
+                        className="form-control text-center HeadSearch fw-semibold"
+                        type="search"
+                        placeholder="Search products"
+                        aria-label="Search"
+                        value={searchTerm}
+                        onChange={handleSearchChange}
+                      />
+                      <button type="submit" className="btn btn-primary ms-2 d-none">Search</button>
+                      <button onClick={handleCloseSearch} className="btn btn-link ms-2">
+                        <X size={24} />
+                      </button>
+                    </form>
+                  </div>
+                )}
                 <div
                   className={`${isClicked
                     ? " collapse navbar-collapse show menubg"

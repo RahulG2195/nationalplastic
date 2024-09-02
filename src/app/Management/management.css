@@ -78,3 +78,9 @@
     padding: 5px 0;
   }
   
+
+  @media (max-width: 600px){
+    .mob_content div, .mob_content p{
+        text-align: justify;
+    }
+}
