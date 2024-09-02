@@ -223,7 +223,7 @@ export default function Header() {
         <>
           <div className="container-fluid p-0 header menbg ">
             {/* <TopBar /> */}
-            <nav className="navbar navbar-expand-lg main_header py-5">
+            <nav className="navbar navbar-expand-lg main_header py-md-5">
               <div className="container-fluid ">
                 <div className="navbar-brand">
                   <button

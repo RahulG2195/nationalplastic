@@ -71,7 +71,7 @@ const ProductsAccr = ({ handleShow }) => {
                   id={`panel${index + 1}bh-header`}
                 >
                   <Typography className="fw-semibold fs-6">
-                    <Link href={`/ProductCatlogue/${category.seo_url}`}>{category.category_name}</Link>
+                    <Link href={`/ProductCatlogue/${category.seo_url}`} onClick={() => handleShow()}>{category.category_name}</Link>
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>

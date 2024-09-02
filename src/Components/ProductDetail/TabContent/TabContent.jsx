@@ -19,51 +19,50 @@ const TabContent = ({ activeTab, prodDetail }) => {
   
   If you have any further questions, please feel free to contact us.
   `;
-  
   switch (activeTab) {
     case "description":
       heading = "Description";
       content = prodDetail?.descp || "NA";
-      img = "/Assets/images/Image 5/Image 5.png";
+      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : '/Assets/images/Image 5/Image 5.png'
       break;
     case "merchant-details":
       heading = "Merchant Details";
       content = prodDetail?.features || "NA";
-      img = "/Assets/images/Image 5/Image 5.png";
+      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : '/Assets/images/Image 5/Image 5.png'
       break;
     case "care-instruction":
       heading = "Care & Instruction";
       content = prodDetail?.careAndInstruct || "NA";
-      img = "/Assets/images/Image 5/Image 5.png";
+      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : '/Assets/images/Image 5/Image 5.png'
       break;
     case "delivery-instructions":
       heading = "Delivery Instructions";
       content = prodDetail?.deliveryInsct || "NA";
-      img = "/Assets/images/Image 5/Image 5.png";
+      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : '/Assets/images/Image 5/Image 5.png'
       break;
     case "warranty":
       heading = "Warranty";
       content = prodDetail?.warranty || "2 Year WARRANTY";
-      img = "/Assets/images/Image 5/Image 5.png";
+      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : '/Assets/images/Image 5/Image 5.png'
 
       break;
     case "t-and-c":
       heading = "T & C";
       content = prodDetail?.descp || "NA";
-      img = "/Assets/images/Image 5/Image 5.png";
+      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : '/Assets/images/Image 5/Image 5.png'
 
       break;
     case "faqs":
       heading = "FAQ'S";
       content = faq_disclaimer || "NA";
 
-      img = "/Assets/images/Image 5/Image 5.png";
+      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : '/Assets/images/Image 5/Image 5.png'
       break;
     case "disclaimer":
       heading = "Disclaimer";
       content =
         "Environment: Avoid placing the chair on uneven surfaces or on slippery floors to prevent accidents.";
-      img = "/Assets/images/Image 5/Image 5.png";
+      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : '/Assets/images/Image 5/Image 5.png'
 
       break;
     default:
