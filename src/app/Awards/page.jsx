@@ -34,20 +34,19 @@ const Awards = () => {
   return (
     <section className="awards-certificates">
       <div className="container mt-4 mb-4">
-        <header className="text-center mb-5">
-          <h1 className="fs-1 darkBlue fw-normal">
-            {pageContent.title?.split('&')[0]}&nbsp;
-            <span className="fw-bold text-danger">
-              {pageContent.title?.split('&')[1]}
-            </span>
-          </h1>
-          <p className="mt-1 fw-medium subCptRes w-70 certificate-para">
-            {pageContent.description}
-          </p>
-        </header>
-
         <div className="row gap-4 team-members">
-          <div className='row col-12 col-md-8 order-2 order-md-1 order-lg-1'>
+          <div className='col-12 col-md-8 order-2 order-md-1 order-lg-1'>
+            <header className="text-center mb-5">
+              <h1 className="fs-1 darkBlue fw-normal">
+                {pageContent.title?.split('&')[0]}&nbsp;
+                <span className="fw-bold text-danger">
+                  {pageContent.title?.split('&')[1]}
+                </span>
+              </h1>
+              <p className="mt-1 fw-medium subCptRes w-70 certificate-para">
+                {pageContent.description}
+              </p>
+            </header>
             {certificates.map(({ id, image_url, alt_text }) => (
               <div className="col-md-6" key={id}>
                 <AwardsCertificates image={image_url} alt={alt_text} />
@@ -55,7 +54,7 @@ const Awards = () => {
             ))}
           </div>
           <div className='col-12 col-md-4 order-1 order-md-2 order-lg-2'>
-            <ComapnyProfileSidebar title={pageContent.title || ''}/>
+            <ComapnyProfileSidebar title={pageContent.title || ''} />
           </div>
         </div>
       </div>

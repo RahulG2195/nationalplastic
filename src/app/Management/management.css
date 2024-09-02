@@ -35,7 +35,7 @@
 }
 
 .sidebar-title {
-    background-color: #FF5733;
+    background-color: #262262;
     color: white;
     padding: 10px;
     margin-bottom: 10px;
@@ -78,3 +78,9 @@
     padding: 5px 0;
   }
   
+
+  @media (max-width: 600px){
+    .mob_content div, .mob_content p{
+        text-align: justify;
+    }
+}

@@ -86,10 +86,11 @@ export default function ShopRoom() {
                   >
                     <SwiperSlide key={tag.tag_id}>
                     <CatCards
+                        redirection={"ShopByRoom"}
                         tag_id={tag.tag_id}
                         tag_seo={tag.tag_seo}
-                        manfacthover="manfact"
-                        style="manfTitle"
+                        manfacthover={"manfact"}
+                        style={"manfTitle"}
                         image={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${tag.tag_image}`}
                         title={tag.tag_name}
                         // onCategoryChange={() => sendCategory(tag.tag_name)}

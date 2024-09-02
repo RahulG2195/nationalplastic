@@ -12,6 +12,7 @@ function CatCards({
   hovereffect,
   manfacthover,
   hoverglow,
+  redirection,
 }) {
   const sendCategory = () => {
     localStorage.setItem("category", title);
@@ -20,9 +21,9 @@ function CatCards({
   return (
     <>
       <div className={`cards sbr_card`}>
-        <Link onClick={sendCategory} href={`/ShopByRoom/${catid}`}>
+        <Link onClick={sendCategory} href={`/${redirection}/${catid}`}>
           <div
-            className={`"card_img" ${hovereffect} ${manfacthover} ${hoverglow} `}
+            className={`card_img ${hovereffect ? hovereffect : ''} ${manfacthover ? manfacthover : ''} ${hoverglow ? hoverglow : ''} `}
           >
             <Image
               src={image}

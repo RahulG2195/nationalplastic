@@ -76,7 +76,7 @@ const PreChairsCard = (props) => {
           </Link>
         </div>
 
-        <div className="product-detail-container p-2 pb-0">
+        <div className="product-detail-container p-2 pb-2">
           <div className="align-items-center">
             <Link href={`/ProductDetail/${props.id}`} className="">
               <h5 className="dress-name"><span>{Np}</span> {props.Title} <span className="text-black">({props.Color})</span></h5>

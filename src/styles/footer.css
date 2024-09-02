@@ -119,3 +119,37 @@
         width: 100% !important;
     }
 }
+
+@media (max-width:600px) {
+    .footer_social {
+        display: block;
+        margin: auto;
+    }
+    .comp_logo {
+        position: relative;
+        height: 60px;
+        width: 160px;
+        text-align: center;
+        margin: 10px auto;
+    }
+    .comp_logo::after {
+        content: "";
+        background-color: transparent;
+        padding: 10px 0;
+    }
+
+    .footer_social .social_icons{
+        justify-content: center;
+        text-align: center;
+    }
+
+    .social_icons a i {
+        font-size: 28px !important;
+        padding-top: 10px;
+        letter-spacing: 15px;
+    }
+    .footer_term{
+        margin: 50px 0;
+        border-top: 1px solid lightgrey;
+    }
+}
