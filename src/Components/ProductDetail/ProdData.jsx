@@ -55,7 +55,7 @@ function ProdData({ category_id }) {
         setIsLoading(true);
         const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`);
         const { product, productDetails, colors, category, short_description } = response.data;
-
+console.log("console description ",response.data)
         localStorage.setItem("product_id", product.product_id);
         if (!product) {
           setErrorMessage("Sorry, this product is not available");
@@ -301,7 +301,8 @@ function ProdData({ category_id }) {
                   <span className="rating-number">4.8</span>
                 </div>
                 <div className="shortProdDesc">
-                  <p>{short_description}</p>
+                  {/* <p>{short_description}</p> */}
+                  <p>{prodData.descp}</p>
                 </div>
                 <div className="prod_type mt-4">
                   <div className="prod_clr">

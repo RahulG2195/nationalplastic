@@ -36,6 +36,10 @@ function AdminLogin() {
         throw new Error("Not authorized as admin");
       }
     } catch (error) {
+      console.log(error.message);
+      console.log(JSON.stringify(error.message));
+
+
       message.error(error.response?.data?.message || "Admin login failed. Please check your credentials.");
     } finally {
       setLoading(false);
