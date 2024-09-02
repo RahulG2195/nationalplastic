@@ -1,5 +1,6 @@
 import { query } from '@/lib/db';
-
+import fs from 'fs/promises';
+import path from 'path';
 export async function GET(request) {
   try {
     const allHeroSections = await query({
@@ -28,20 +29,48 @@ export async function GET(request) {
 
 export async function PUT(request) {
   try {
-    const body = await request.json();
-    const { id, ...updateFields } = body;
-    
+    const formData = await request.formData();
+    const id = formData.get('id');
+    const redirect_url = formData.get('redirect_url');
+    const seo = formData.get('seo');
+    const image = formData.get('image');
+    let imageName;
+    if (image) {
+      imageName = image.name;
+      const imageDir = path.join(
+        process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
+        process.env.NEXT_PUBLIC_BANNERS_PATH_DIR 
+      );
+      try {
+        await fs.access(imageDir);
+      } catch {
+        await fs.mkdir(imageDir, { recursive: true });
+      }
+
+      // Save the new image file
+      const imageFilePath = path.join(imageDir, imageName);
+      await fs.writeFile(imageFilePath, Buffer.from(await image.arrayBuffer()));
+    }
+
+    // Build the set clause dynamically
+    const updateFields = { redirect_url, seo };
+if (image) {
+  updateFields.image_name = imageName;
+}
+
     const setClause = Object.keys(updateFields)
       .map(key => `${key} = ?`)
       .join(', ');
-    
-    const values = [...Object.values(updateFields), id];
-    
+
+      const values = [...Object.values(updateFields), id];
+
+
+    // Update the data in the database
     const result = await query({
       query: `UPDATE herosection SET ${setClause} WHERE id = ?`,
       values: values,
     });
-    
+
     return new Response(
       JSON.stringify({
         status: 200,
@@ -65,14 +94,38 @@ export async function PUT(request) {
 
 export async function POST(request) {
   try {
-    const body = await request.json();
-    const { redirect_url, image_name,  seo } = body;
-    
+    const formData = await request.formData();
+    const redirect_url = formData.get('redirect_url');
+    const seo = formData.get('seo');
+    const image = formData.get('image');
+    let imageName = '';
+
+    if (image) {
+      imageName = image.name;
+      const imageDir = path.join(
+        process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
+        process.env.NEXT_PUBLIC_BANNERS_PATH_DIR 
+        // Assuming you want to save the images in an "uploads" directory
+      );
+
+      // Ensure the directory exists
+      try {
+        await fs.access(imageDir);
+      } catch {
+        await fs.mkdir(imageDir, { recursive: true });
+      }
+
+      // Save the image file
+      const imageFilePath = path.join(imageDir, imageName);
+      await fs.writeFile(imageFilePath, Buffer.from(await image.arrayBuffer()));
+    }
+
+    // Save the data to the database
     const result = await query({
-      query: "INSERT INTO herosection (redirect_url, image_name,  seo) VALUES (?, ?, ?)",
-      values: [redirect_url, image_name,  seo],
+      query: "INSERT INTO herosection (redirect_url, image_name, seo) VALUES (?, ?, ?)",
+      values: [redirect_url, imageName, seo],
     });
-    
+
     return new Response(
       JSON.stringify({
         status: 201,
@@ -97,21 +150,21 @@ export async function POST(request) {
 export async function DELETE(request) {
   try {
     const { searchParams } = new URL(request.url);
-    const image_name = searchParams.get('image_name');
+    const id = searchParams.get('id');
     
-    if (!image_name) {
+    if (!id) {
       return new Response(
         JSON.stringify({
           status: 400,
-          message: "image_name is required",
+          message: "id is required",
         }),
         { status: 400 }
       );
     }
     
     const result = await query({
-      query: "DELETE FROM herosection WHERE image_name = ?",
-      values: [image_name],
+      query: "DELETE FROM herosection WHERE id = ?",
+      values: [id],
     });
     
     return new Response(
