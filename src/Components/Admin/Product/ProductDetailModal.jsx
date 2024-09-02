@@ -55,7 +55,7 @@ const ProductDetailModal = ({ visible, onCancel, onSubmit, initialValues, mode =
           >
             {isViewMode ? (
               <Image
-                src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}${data.dimension_img}`}
+                src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${data.dimension_img}`}
                 alt="Dimension Image"
                 style={{ maxWidth: '100%', height: 'auto' }}
               />

@@ -83,8 +83,9 @@ export async function POST(request) {
       "deliveryInsct",
       "manufacturing",
       "warranty",
-      "dimension_img",
     ];
+
+
 
     optionalFields.forEach((field) => {
       let value = formData.get(field);
@@ -183,6 +184,12 @@ export async function POST(request) {
     // get last insert id 
     const lastInsertedId = result.insertId;
 
+    const dimension_img_file = formData.get('dimension_img');
+    if (dimension_img_file) {
+      await uploadImage(dimension_img_file);
+    }
+
+
     if (lastInsertedId) {
       await query({
         query: `
@@ -201,7 +208,7 @@ export async function POST(request) {
           data.deliveryInsct || '',
           data.manufacturing || '',
           data.warranty || '',
-          data.dimension_img || ''
+          dimension_img_file.name || ''
         ],
       });
     }
@@ -329,6 +336,60 @@ export async function PUT(request) {
         data.product_id,
       ],
     });
+
+    const product_detail_data = [
+      "features",
+      "dimenions",
+      "descp",
+      "careAndInstruct",
+      "deliveryInsct",
+      "manufacturing",
+      "warranty",
+    ]
+    product_detail_data.forEach((field) => {
+      let value = formData.get(field);
+      if (value && value !== "undefined") {
+        data[field] = value;
+      } else {
+        data[field] = null;
+      }
+    });
+    const dimension_img_file = formData.get('dimension_img');
+    if (dimension_img_file) {
+      await uploadImage(dimension_img_file);
+    }
+
+
+
+    await query({
+      query: `
+        UPDATE product_detail
+        SET
+          features = ?,
+          dimenions = ?,
+          descp = ?,
+          careAndInstruct = ?,
+          deliveryInsct = ?,
+          manufacturing = ?,
+          warranty = ?,
+          dimension_img = ?
+        WHERE
+          prod_id = ?
+      `,
+      values: [
+        data.features || '',
+        data.dimenions || '',
+        data.descp || '',
+        data.careAndInstruct || '',
+        data.deliveryInsct || '',
+        data.manufacturing || '',
+        data.warranty || '',
+        dimension_img_file?.name || '',
+        data.product_id,
+      ],
+    });
+    
+
     return NextResponse.json(
       {
         success: true,
@@ -366,6 +427,11 @@ export async function GET(request) {
       query: `SELECT * FROM tags_cat WHERE tag_status = 1`,
       value: [],
     });
+
+    // const product_detail =  await query({
+    //   query: `SELECT * FROM product_detail WHERE tag_status = 1`,
+    //   value: [],
+    // });
 
     return new Response(
       JSON.stringify({

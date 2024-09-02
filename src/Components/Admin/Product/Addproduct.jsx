@@ -81,7 +81,7 @@ export default function App() {
         });
 
         if (DimensionFile) {
-          formData.append("image", DimensionFile); // file itself
+          formData.append("dimension_img", DimensionFile); // file itself
         }
         formData.append("discount_price", calculatedDiscountPrice);
         formData.append("category_id", selectedCategory.id);

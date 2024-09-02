@@ -3,6 +3,11 @@ import Image from "next/image";
 import "../../../styles/TabContent.css";
 
 const TabContent = ({ activeTab, prodDetail }) => {
+  console.log("TabContent" + activeTab);
+  console.log("TabContent NOJSON " + prodDetail);
+  console.log("TabContent JSON " + JSON.stringify(prodDetail));
+  const dimension_img =`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail?.dimension_img}` || "/Assets/images/Image 5/Image 5.png";
+  console.log("dimension_img" + dimension_img)
   let heading = "";
   let content = "";
   let img = "";
