@@ -57,34 +57,39 @@ async function saveAwardOrCertificate(formData, action) {
     const display_order = formData.get('display_order');
     const file = formData.get('image');
 
+    const imageName = file.name;
     let image_url = '';
+    let filepath = '';
+
 
     if (file && file.size > 0) {
       const buffer = Buffer.from(await file.arrayBuffer());
-      const filepath = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_ABOUT_PATH_DIR}`;
+      filepath = path.join(
+        process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
+        process.env.NEXT_PUBLIC_ABOUT_PATH_DIR
+      );;
       try {
         await fs.access(filepath);
       } catch {
         await fs.mkdir(filepath, { recursive: true });
       }
-    await fs.writeFile(filepath, buffer);
-
     }
-    image_url = `${file.name}`;
+    image_url = path.join(filepath, imageName);
+    await fs.writeFile(image_url, Buffer.from(await file.arrayBuffer()));
 
     if (action === 'ADD') {
       const insertQuery = `
         INSERT INTO awards_page (title, description, image_url, content_type, display_order)
         VALUES (?, ?, ?, ?, ?)
       `;
-      await query({ query: insertQuery, values: [title, description, image_url, content_type, display_order] });
+      await query({ query: insertQuery, values: [title, description, imageName, content_type, display_order] });
     } else {
       const updateQuery = `
         UPDATE awards_page
         SET title = ?, description = ?, image_url = ?, content_type = ?, display_order = ?
         WHERE id = ?
       `;
-      await query({ query: updateQuery, values: [title, description, image_url, content_type, display_order, id] });
+      await query({ query: updateQuery, values: [title, description, imageName, content_type, display_order, id] });
     }
 
     return new Response(
