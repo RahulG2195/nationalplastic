@@ -96,7 +96,7 @@ p {
 
 .section_header {
     /* margin-top: 80px; */
-    margin: 80px 0;
+    margin: 0 0 0 80px;
     width: 100%;
     text-align: center;
 }
@@ -568,7 +568,8 @@ p {
 @media (max-width:501px) {
     .subCptRes {
         width: 90% !important;
-        font-size: x-small;
+        font-size: 13px;
+        text-align: justify;
     }
 }
 
