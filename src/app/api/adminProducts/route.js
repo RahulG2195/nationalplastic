@@ -83,7 +83,6 @@ export async function POST(request) {
       "deliveryInsct",
       "manufacturing",
       "warranty",
-      "dimension_img",
     ];
 
 
@@ -185,6 +184,12 @@ export async function POST(request) {
     // get last insert id 
     const lastInsertedId = result.insertId;
 
+    const dimension_img_file = formData.get('dimension_img');
+    if (dimension_img_file) {
+      await uploadImage(dimension_img_file);
+    }
+
+
     if (lastInsertedId) {
       await query({
         query: `
@@ -203,7 +208,7 @@ export async function POST(request) {
           data.deliveryInsct || '',
           data.manufacturing || '',
           data.warranty || '',
-          data.dimension_img || ''
+          dimension_img_file.name || ''
         ],
       });
     }
@@ -340,7 +345,6 @@ export async function PUT(request) {
       "deliveryInsct",
       "manufacturing",
       "warranty",
-      "dimension_img",
     ]
     product_detail_data.forEach((field) => {
       let value = formData.get(field);
@@ -350,6 +354,12 @@ export async function PUT(request) {
         data[field] = null;
       }
     });
+    const dimension_img_file = formData.get('dimension_img');
+    if (dimension_img_file) {
+      await uploadImage(dimension_img_file);
+    }
+
+
 
     await query({
       query: `
@@ -374,7 +384,7 @@ export async function PUT(request) {
         data.deliveryInsct || '',
         data.manufacturing || '',
         data.warranty || '',
-        data.dimension_img || '',
+        dimension_img_file?.name || '',
         data.product_id,
       ],
     });

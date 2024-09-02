@@ -57,17 +57,17 @@ const ProdList = () => {
     setProdDetailData(null);
   };
   const handleOnclick  = async (type, index) => {
-    await MoreProductDetail(index);
+    const dataBack= await MoreProductDetail(index);
     if (type == "Edit") {
       const productToEdit = productArray.find(
         (product) => product.product_id === index
       );
-      console.log("ProdDetailData" + JSON.stringify(ProdDetailData));
-      console.log("ProdDetailData" + JSON.stringify(ProdDetailData[0]));
-
-      if (ProdDetailData) {
-        const detailData = ProdDetailData[0]; // Assuming there's only one object in the array
+      const ProdDetailDatas = dataBack;
+      console.log("Updated ProdDetailDatas:", ProdDetailDatas);
       
+      if (ProdDetailDatas) {
+        const detailData = ProdDetailDatas[0]; // Assuming there's only one object in the array
+        console.log
         productToEdit.features = detailData.features;
         productToEdit.dimensions = detailData.dimenions; // Typo in "dimenions" field?
         productToEdit.descp = detailData.descp; // Typo in "descp" field?
@@ -93,8 +93,8 @@ const ProdList = () => {
   const MoreProductDetail = async (prod_id) => {
     const productDetailData = await axios.get(`/api/admin/productDetailCMS?p_id=${prod_id}`);
     const ProperData = await productDetailData.data.product_details
-    setProdDetailData(ProperData);
-    return true
+    await setProdDetailData(ProperData);
+    return ProperData
   };
 
   const handleConfirmDelete = async () => {

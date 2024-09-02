@@ -73,6 +73,9 @@ export default function App() {
         if (selectedCategory.id) {
           formData.set('category_id', selectedCategory.id);
         }
+        if (DimensionFile) {
+          formData.append("dimension_img", DimensionFile); // file itself
+        }
 
         await updateProduct(formData);
 
