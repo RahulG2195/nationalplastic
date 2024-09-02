@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux";
 import { setUserData } from "@/redux/reducer/userSlice";
 // import { useNavigate } from "react-router-dom";
 import { toast, Bounce } from "react-toastify";
-import { signIn, useSession } from "next-auth/react";
+import { signIn, useSession, getSession } from "next-auth/react";
 import { notify, notifyError } from "@/utils/notify";
 import { useSelector } from "react-redux";
 
@@ -30,32 +30,6 @@ function Login() {
     const cart = state.temp;
     return cart.products?.length || 0;
   });
-  useEffect(() => {
-    if (session) {
-      // Send session data to your backend
-      axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/googleProvider`, session.user)
-        .then(response => {
-          const email = response.data.email
-          const customer_id = response.data.customer_id
-
-
-          if (status === "authenticated" && session?.user) {
-            notify("Successfull login!")
-            dispatch(
-              setUserData({
-                email: email,
-                customer_id: customer_id,
-              })
-            );
-            router.push("/"); // Redirect to homepage
-          }
-        })
-        .catch(error => {
-          notifyError(error.message);
-        });
-      //  hasSentRequest.current = true; 
-    }
-  }, [session, refresh]);
 
 
   const handleInputChange = (event) => {
@@ -77,7 +51,15 @@ function Login() {
   async function sendDataToBackend() {
     try {
       await signIn("google")
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/googleProvider`, session.user);
+      const session = await getSession();
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/googleProvider`, {
+        name: session.user.name,
+        email: session.user.email,
+        id: session.user.id,
+      });
+      console.log("response" +  JSON.stringify(response));
+
+
       const { email, customer_id } = response.data;
       if (status === "authenticated" && session?.user) {
         dispatch(
@@ -268,17 +250,7 @@ function Login() {
               <div className="row ContinueWithgoogle">
                 <p className="d-flex justify-content-center">
                   OR Continue With
-                  {/* <Image
-                    src="/Assets/images/search.png"
-                    width={20}
-                    height={20}
-                    alt="google"
-                    className="mx-2"
-                  /> */}
-                  {/* <button
-                    className="btn btn-light mt-3"
-                    onClick={() => sendDataToBackend()}
-                  > */}
+                 
                   <Image
                     src="/Assets/images/search.png"
                     width={20}
@@ -287,7 +259,6 @@ function Login() {
                     className="mx-2"
                     onClick={() => sendDataToBackend()}
                   />
-                  {/* </button> */}
                 </p>
               </div>
             </form>
