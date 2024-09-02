@@ -17,6 +17,8 @@ export default function App() {
   const [categories, setCategories] = useState([]);
   const [calculatedDiscountPrice, setCalculatedDiscountPrice] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState({ id: null, name: '' });
+  const [DimensionFile, setDimensionFile] = useState(null);
+
   const navigate = useNavigate();
 
   const handleNavigation = () => {
@@ -27,7 +29,12 @@ export default function App() {
     localStorage.removeItem("productToEdit");
     router.push("/admin/product");
   };
-
+  const handleDimChange = (e) => {
+    const file = e.target.files[0];
+   if (file) {
+     setDimensionFile(file);
+   }
+ };
 
   const updateProduct = async (formData) => {
     try {
@@ -399,6 +406,65 @@ export default function App() {
                 <Option value="1">Active</Option>
               </Select>
             )}
+          />
+        </Form.Item>
+
+        {/* prod detaill page  */}
+        <Form.Item
+          label="Dimenions Image"
+          name="dimension_img"
+        >
+          <input
+            type="file"
+            onChange={handleDimChange}
+          />
+          {/* {imageFile && <p>Selected file: {imageFile.name}</p>} */}
+        </Form.Item>
+
+        <Form.Item label="Features">
+          <Controller
+            name="features"
+            control={control}
+            render={({ field }) => <Input.TextArea {...field} />}
+          />
+        </Form.Item>
+        <Form.Item label="Description">
+          <Controller
+            name="descp"
+            control={control}
+            render={({ field }) => <Input.TextArea {...field} />}
+          />
+        </Form.Item>
+
+        <Form.Item label="Care Instructions">
+          <Controller
+            name="careAndInstruct"
+            control={control}
+            render={({ field }) => <Input.TextArea {...field} />}
+          />
+        </Form.Item>
+
+        <Form.Item label="Delivery Instructions">
+          <Controller
+            name="deliveryInsct"
+            control={control}
+            render={({ field }) => <Input.TextArea {...field} />}
+          />
+        </Form.Item>
+
+        <Form.Item label="Manufacturing">
+          <Controller
+            name="manufacturing"
+            control={control}
+            render={({ field }) => <Input.TextArea {...field} />}
+          />
+        </Form.Item>
+
+        <Form.Item label="Warranty">
+          <Controller
+            name="warranty"
+            control={control}
+            render={({ field }) => <Input.TextArea {...field} />}
           />
         </Form.Item>
 

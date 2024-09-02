@@ -86,6 +86,8 @@ export async function POST(request) {
       "dimension_img",
     ];
 
+
+
     optionalFields.forEach((field) => {
       let value = formData.get(field);
       if (value && value !== "undefined") {
@@ -329,6 +331,55 @@ export async function PUT(request) {
         data.product_id,
       ],
     });
+
+    const product_detail_data = [
+      "features",
+      "dimenions",
+      "descp",
+      "careAndInstruct",
+      "deliveryInsct",
+      "manufacturing",
+      "warranty",
+      "dimension_img",
+    ]
+    product_detail_data.forEach((field) => {
+      let value = formData.get(field);
+      if (value && value !== "undefined") {
+        data[field] = value;
+      } else {
+        data[field] = null;
+      }
+    });
+
+    await query({
+      query: `
+        UPDATE product_detail
+        SET
+          features = ?,
+          dimenions = ?,
+          descp = ?,
+          careAndInstruct = ?,
+          deliveryInsct = ?,
+          manufacturing = ?,
+          warranty = ?,
+          dimension_img = ?
+        WHERE
+          prod_id = ?
+      `,
+      values: [
+        data.features || '',
+        data.dimenions || '',
+        data.descp || '',
+        data.careAndInstruct || '',
+        data.deliveryInsct || '',
+        data.manufacturing || '',
+        data.warranty || '',
+        data.dimension_img || '',
+        data.product_id,
+      ],
+    });
+    
+
     return NextResponse.json(
       {
         success: true,
@@ -366,6 +417,11 @@ export async function GET(request) {
       query: `SELECT * FROM tags_cat WHERE tag_status = 1`,
       value: [],
     });
+
+    // const product_detail =  await query({
+    //   query: `SELECT * FROM product_detail WHERE tag_status = 1`,
+    //   value: [],
+    // });
 
     return new Response(
       JSON.stringify({
