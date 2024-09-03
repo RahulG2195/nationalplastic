@@ -157,31 +157,6 @@ const navigation = [
     icon: "bi bi-hdd-stack",
   },
   {
-    title: "Products",
-    href: "/admin/product",
-    icon: "bi bi-p-square",
-  },
-  {
-    title: "category",
-    href: "/admin/category",
-    icon: "bi bi-c-square",
-  },
-  {
-    title: "Coupon Code",
-    href: "/admin/CouponList",
-    icon: "bi bi-patch-check",
-  },
-  {
-    title: "Order List",
-    href: "/admin/OrderList",
-    icon: "bi bi-card-text",
-  },
-  {
-    title: "Tag", //news and media page of NP
-    href: "/admin/tag",
-    icon: "bi bi-layout-split",
-  },
-  {
     type: "accordion",
     title: "News and Media",
     items: [
@@ -213,6 +188,32 @@ const navigation = [
     ],
     icon: "bi bi-hdd-stack",
   },
+  {
+    title: "Products",
+    href: "/admin/product",
+    icon: "bi bi-p-square",
+  },
+  {
+    title: "category",
+    href: "/admin/category",
+    icon: "bi bi-c-square",
+  },
+  {
+    title: "Coupon Code",
+    href: "/admin/CouponList",
+    icon: "bi bi-patch-check",
+  },
+  {
+    title: "Order List",
+    href: "/admin/OrderList",
+    icon: "bi bi-card-text",
+  },
+  {
+    title: "Tag", //news and media page of NP
+    href: "/admin/tag",
+    icon: "bi bi-layout-split",
+  },
+
   {
 
     title: "Bulk Order Banner",

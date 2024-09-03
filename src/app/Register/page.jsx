@@ -32,6 +32,9 @@ const Register = () => {
   const [otpSent, setOtpSent] = useState(false);
   const otpInputs = useRef([]);
   const secretKey = process.env.NEXT_PUBLIC_secretKey
+  const [countdown, setCountdown] = useState(0);
+  const [resendEnabled, setResendEnabled] = useState(false);
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const storedOtpSent = localStorage.getItem('otp');
@@ -68,6 +71,11 @@ const Register = () => {
     }
   };
 
+  const handleResendOTP = () => {
+    handleOTP('send');
+    notify("OTP sent");
+  };
+
   const handleOtpKeyDown = (e, index) => {
     if (e.key === 'Backspace' && !formData.otp[index] && index > 0) {
       otpInputs.current[index - 1].focus();
@@ -88,17 +96,11 @@ const Register = () => {
     return errors;
   };
   const combineAddressFields = (formData) => {
-    // Combine address fields
-
     const fullAddress = `${formData.address}, ${formData.city}, ${formData.state}, ${formData.pincode}`.trim();
-
-    // Create updated formData with combined address
     const updatedFormData = {
       ...formData,
-      address: fullAddress, // Update the address field with the combined address
+      address: fullAddress,
     };
-
-    // Remove individual address fields
     delete updatedFormData.state;
     delete updatedFormData.city;
     delete updatedFormData.pincode;
@@ -111,10 +113,10 @@ const Register = () => {
     for (let i = 0; i < text.length; i++) {
       result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
     }
-    return btoa(result); // Convert to base64
+    return btoa(result); 
   }
   function decrypt(encoded, key) {
-    const text = atob(encoded); // Convert from base64
+    const text = atob(encoded); 
     let result = '';
     for (let i = 0; i < text.length; i++) {
       result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
@@ -123,6 +125,7 @@ const Register = () => {
   }
 
   const handleOTP = async (action) => {
+    console.log(`handleOTP called with action: ${action}`); 
     try {
       if (action === 'send') {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/sendOTP`, { email: formData.email });
@@ -134,11 +137,24 @@ const Register = () => {
           localStorage.setItem('otpExpiry', encryptedExpiry);
           setMessage('Please check your email, OTP sent successfully.');
           setOtpSent(true);
+          setCountdown(60); // Countdown in seconds
+          setResendEnabled(false);
+
+          const timer = setInterval(() => {
+            setCountdown(prevCountdown => {
+              if (prevCountdown <= 1) {
+                clearInterval(timer);
+                setResendEnabled(true);
+                return 0;
+              }
+              return prevCountdown - 1;
+            });
+          }, 1000);
         } else {
           throw new Error(response.data.message || 'Failed to send OTP');
         }
-        // ... (keep the existing 'send' logic)
       } else if (action === 'verify') {
+        console.log("verify"+ "why it comes here");
         const storedEncryptedOTP = localStorage.getItem('otp');
         const storedEncryptedExpiry = localStorage.getItem('otpExpiry');
         const storedOtp = decrypt(storedEncryptedOTP, secretKey);
@@ -174,8 +190,6 @@ const Register = () => {
       ...prevData,
       otp: pastedData
     }));
-
-    // Focus on the next empty input or the last input if all are filled
     const focusIndex = Math.min(pastedData.length, 5);
     otpInputs.current[focusIndex].focus();
   };
@@ -183,7 +197,6 @@ const Register = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!otpSent) {
-      // This is the initial registration attempt
       const errors = validateForm();
       if (Object.keys(errors).length === 0) {
         try {
@@ -302,6 +315,7 @@ const Register = () => {
                       ))}
                     </div>
                     {formErrors.otp && <div className="text-danger mt-2">{formErrors.otp}</div>}
+
                   </div>
                 )}
                 <div className="form-btn-login-div">
@@ -316,6 +330,8 @@ const Register = () => {
               </div>
             </form>
           </div>
+          {otpSent && !resendEnabled && <p>Resend OTP in {countdown}s</p>}
+          {resendEnabled && <button onClick={()=>handleResendOTP()}>Resend OTP</button>}
         </div>
       </div>
     </div>

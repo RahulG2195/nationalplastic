@@ -11,8 +11,9 @@ function convertColorToCode(color) {
   const colorEntry = colorNameList.find(
     (entry) => entry.name.toLowerCase() === color.toLowerCase()
   );
+  const defaultColor = "#000"
   if (!colorEntry) {
-    throw new Error(`Invalid color name: ${color}`);
+    return defaultColor
   }
   return colorEntry.hex;
 }
