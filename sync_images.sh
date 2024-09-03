@@ -22,7 +22,7 @@ do
 done
 
 # Set correct permissions
-chown -R www-data:www-data "$UPLOAD_FOLDER"
+chown -R nginx:nginx "$UPLOAD_FOLDER"
 find "$UPLOAD_FOLDER" -type d -exec chmod 755 {} \;
 find "$UPLOAD_FOLDER" -type f -exec chmod 644 {} \;
 
