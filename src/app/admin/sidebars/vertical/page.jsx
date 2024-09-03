@@ -23,18 +23,18 @@ const navigation = [
         title: "Hero Section",
         href: "/admin/homepage/herosection",
       },
-      {
-        title: "Cards Section",
-        href: "/admin/homepage/cards",
-      },
-      {
-        title: "Offer Banner",
-        href: "/admin/homepage/offersection",
-      },
-      {
-        title: "house section",
-        href: "/admin/homepage/house section",
-      },
+      // {
+      //   title: "Cards Section",
+      //   href: "/admin/homepage/cards",
+      // },
+      // {
+      //   title: "Offer Banner",
+      //   href: "/admin/homepage/offersection",
+      // },
+      // {
+      //   title: "house section",
+      //   href: "/admin/homepage/house section",
+      // },
     ],
     icon: "bi bi-hdd-stack",
   },
@@ -91,14 +91,14 @@ const navigation = [
         title: "IEPF",
         href: "/admin/Investor/IEPF",
       },
-     
+
     ],
     icon: "bi bi-hdd-stack",
   },
   {
     type: "accordion",
     title: "Financial",
-    items:[
+    items: [
       {
         title: "Unaudited",
         href: "/admin/Investor/Finance/Unaudited",
@@ -117,7 +117,7 @@ const navigation = [
   {
     type: "accordion",
     title: "AGM Compilance",
-    items:[
+    items: [
       {
         title: "Outcome Of Agm",
         href: "/admin/Investor/OutcomeAGMcms",
@@ -186,14 +186,14 @@ const navigation = [
     title: "News and Media",
     items: [
       {
-        title: "edit Hero banner",
+        title: "Editing Newsmedia Hero banner",
         href: "/admin/newsMedia/heroBanner",
       },
       {
-        title: "edit content",
+        title: "Edit content",
         href: "/admin/newsMedia",
       },
-    
+
     ],
     icon: "bi bi-hdd-stack",
   },
@@ -202,27 +202,21 @@ const navigation = [
     title: "CSR",
     items: [
       {
-        title: "edit Hero banner",
+        title: "Editing CSR Hero banner",
         href: "/admin/csr/heroBanner",
       },
       {
-        title: "edit content",
+        title: "EDiting CSR content",
         href: "/admin/csr",
       },
-    
+
     ],
     icon: "bi bi-hdd-stack",
   },
   {
-    type: "accordion",
-    title: "Bulk Order",
-    items: [
-      {
-        title: "edit Hero banner",
-        href: "/admin/bulkOrder/heroBanner",
-      }
-    
-    ],
+
+    title: "Bulk Order Banner",
+    href: "/admin/bulkOrder/heroBanner",
     icon: "bi bi-hdd-stack",
   },
 ];
@@ -233,9 +227,9 @@ const Sidebar = ({ showMobilemenu }) => {
 
   return (
     <div className="p-3">
-      <div className="d-flex align-items-center" style={{ justifyContent:"center"}}>
+      <div className="d-flex align-items-center" style={{ justifyContent: "center" }}>
         <img src="/Assets/images/nation_logo.png" alt="REMO" />
-        <div className="ms-auto d-lg-none"> 
+        <div className="ms-auto d-lg-none">
           <Button
             close
             size="sm"
