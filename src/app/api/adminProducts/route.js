@@ -11,8 +11,10 @@ function convertColorToCode(color) {
   const colorEntry = colorNameList.find(
     (entry) => entry.name.toLowerCase() === color.toLowerCase()
   );
+	const defaultColor = "#000";
   if (!colorEntry) {
-    throw new Error(`Invalid color name: ${color}`);
+ return defaultColor;
+   // throw new Error(`Invalid color name: ${color}`);
   }
   return colorEntry.hex;
 }
@@ -45,7 +47,6 @@ const uploadImage = async (file) => {
 export async function POST(request) {
   try {
     const formData = await request.formData();
-
     const requiredFields = [
       "product_name",
       "seo_url",
@@ -77,7 +78,16 @@ export async function POST(request) {
       "long_description",
       "duration",
       "prod_status",
+      "features",
+      "dimenions",
+      "descp",
+      "careAndInstruct",
+      "deliveryInsct",
+      "manufacturing",
+      "warranty",
     ];
+
+
 
     optionalFields.forEach((field) => {
       let value = formData.get(field);
@@ -139,7 +149,8 @@ export async function POST(request) {
         { status: 400 }
       );
     }
-
+    console.log('data', data);
+    
     // Insert the new product
     const result = await query({
       query: `
@@ -171,6 +182,38 @@ export async function POST(request) {
         data.prod_status || 1,
       ],
     });
+
+    // get last insert id 
+    const lastInsertedId = result.insertId;
+
+    const dimension_img_file = formData.get('dimension_img');
+    if (dimension_img_file) {
+      await uploadImage(dimension_img_file);
+    }
+
+
+    if (lastInsertedId) {
+      await query({
+        query: `
+      INSERT INTO product_detail (
+        prod_id, features, dimenions, descp, careAndInstruct,
+        deliveryInsct, manufacturing, warranty, dimension_img
+      )
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `,
+        values: [
+          lastInsertedId,
+          data.features || '',
+          data.dimenions || '',
+          data.descp || '',
+          data.careAndInstruct || '',
+          data.deliveryInsct || '',
+          data.manufacturing || '',
+          data.warranty || '',
+          dimension_img_file.name || ''
+        ],
+      });
+    }
 
     return NextResponse.json({ success: true, data: result }, { status: 201 });
   } catch (error) {
@@ -295,6 +338,60 @@ export async function PUT(request) {
         data.product_id,
       ],
     });
+
+    const product_detail_data = [
+      "features",
+      "dimenions",
+      "descp",
+      "careAndInstruct",
+      "deliveryInsct",
+      "manufacturing",
+      "warranty",
+    ]
+    product_detail_data.forEach((field) => {
+      let value = formData.get(field);
+      if (value && value !== "undefined") {
+        data[field] = value;
+      } else {
+        data[field] = null;
+      }
+    });
+    const dimension_img_file = formData.get('dimension_img');
+    if (dimension_img_file) {
+      await uploadImage(dimension_img_file);
+    }
+
+
+
+    await query({
+      query: `
+        UPDATE product_detail
+        SET
+          features = ?,
+          dimenions = ?,
+          descp = ?,
+          careAndInstruct = ?,
+          deliveryInsct = ?,
+          manufacturing = ?,
+          warranty = ?,
+          dimension_img = ?
+        WHERE
+          prod_id = ?
+      `,
+      values: [
+        data.features || '',
+        data.dimenions || '',
+        data.descp || '',
+        data.careAndInstruct || '',
+        data.deliveryInsct || '',
+        data.manufacturing || '',
+        data.warranty || '',
+        dimension_img_file?.name || '',
+        data.product_id,
+      ],
+    });
+    
+
     return NextResponse.json(
       {
         success: true,
@@ -332,6 +429,11 @@ export async function GET(request) {
       query: `SELECT * FROM tags_cat WHERE tag_status = 1`,
       value: [],
     });
+
+    // const product_detail =  await query({
+    //   query: `SELECT * FROM product_detail WHERE tag_status = 1`,
+    //   value: [],
+    // });
 
     return new Response(
       JSON.stringify({
@@ -403,12 +505,10 @@ export async function PATCH(request) {
     const { product_id, prod_status, collections, type } = await request.json();
 
     // Validate inputs
-    console.log('collections1', collections);
-    console.log('type', type);
-    
-    
-    if(type == 'collection'){
+    console.log("collections1", collections);
+    console.log("type", type);
 
+    if (type == "collection") {
       const result = await query({
         query: `UPDATE products SET categoryType = ? WHERE product_id = ?`,
         values: [collections, product_id],
@@ -428,45 +528,41 @@ export async function PATCH(request) {
         }),
         { status: 200 }
       );
+    } else if (type == "status") {
+      if (product_id != undefined && prod_status != undefined) {
+        // Ensure prod_status is either 0 or 1
+        const validatedStatus = prod_status ? 1 : 0;
 
-    }else if (type == 'status') {
+        // Update the product status
+        const result = await query({
+          query: `UPDATE products SET prod_status = ? WHERE product_id = ?`,
+          values: [validatedStatus, product_id],
+        });
 
-      if(product_id != undefined && prod_status != undefined){
-        
-      // Ensure prod_status is either 0 or 1
-      const validatedStatus = prod_status ? 1 : 0;
+        if (result.affectedRows === 0) {
+          return new Response(
+            JSON.stringify({ success: false, error: "Product not found" }),
+            { status: 404 }
+          );
+        }
 
-      // Update the product status
-      const result = await query({
-        query: `UPDATE products SET prod_status = ? WHERE product_id = ?`,
-        values: [validatedStatus, product_id],
-      });
-
-      if (result.affectedRows === 0) {
         return new Response(
-          JSON.stringify({ success: false, error: "Product not found" }),
-          { status: 404 }
+          JSON.stringify({
+            success: true,
+            data: { product_id, prod_status: validatedStatus },
+          }),
+          { status: 200 }
+        );
+      } else {
+        return new Response(
+          JSON.stringify({
+            success: false,
+            error: "product_id and prod_status are required",
+          }),
+          { status: 400 }
         );
       }
-
-      return new Response(
-        JSON.stringify({
-          success: true,
-          data: { product_id, prod_status: validatedStatus },
-        }),
-        { status: 200 }
-      );
-    } else {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          error: "product_id and prod_status are required",
-        }),
-        { status: 400 }
-      );
     }
-  }
-    
   } catch (error) {
     console.error("Error updating product status:", error);
 

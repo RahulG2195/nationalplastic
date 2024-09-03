@@ -170,7 +170,7 @@ const BoughtTogether = () => {
             },
           }}
         >
-          {togetherCardsData.map((card) => {
+          {togetherCardsData?.map((card) => {
             const images = card.image_name ? card.image_name.split(', ').map(image => image.trim()) : [];
             return <SwiperSlide key={card.product_id} className="newProdCard">
             <PreChairsCard

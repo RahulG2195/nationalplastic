@@ -1,12 +1,12 @@
 /* src/CompanyProfile.css */
 .company-profile-container {
     display: flex;
-    padding: 50px;
+    /* padding: 50px; */
   }
   
   .company-profile-content {
     flex: 3; /* Increase the flex value to make it take more space */
-    margin-right: 50px;
+    /* margin-right: 50px; */
   }
 
   .company-profile-title {

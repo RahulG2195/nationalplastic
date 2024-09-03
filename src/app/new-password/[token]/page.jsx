@@ -5,20 +5,8 @@ import axios from "axios";
 import { Bounce, toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import "../PasswordPage.css";
+import { notify, notifyError } from "@/utils/notify";
 
-const TOAST_CONFIG = {
-  position: "top-center",
-  autoClose: 2000,
-  hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: true,
-  progress: undefined,
-  theme: "light",
-  transition: Bounce,
-};
-
-const notify = (message, type) => toast[type](message, TOAST_CONFIG);
 
 const PasswordToken = () => {
   const router = useRouter();
@@ -82,7 +70,7 @@ const PasswordToken = () => {
       localStorage.clear();
       setTimeout(() => router.push("/Login"), 2000);
     } catch (error) {
-      notify("Process Failed. Try Again!", "error");
+      notifyError("Process Failed. Try Again!", "error");
       console.error("Error submitting form:", error);
     }
   };

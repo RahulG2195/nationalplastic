@@ -21,7 +21,7 @@ export default function ShopRoom() {
           `${process.env.NEXT_PUBLIC_BASE_URL}/adminProdTag`
         );
         const filteredData = response.data.AllTag;
-        console.log('filteredData', filteredData);
+        
         setTags(filteredData);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -31,7 +31,7 @@ export default function ShopRoom() {
     fetchdata();
   }, []);
 
-  console.log('Tags', Tags);
+  
   return (
     <section className="shop_room_sec common_section">
       <div className="container">
@@ -106,6 +106,7 @@ export default function ShopRoom() {
                   key={tag.key}
                 >
                   <CatCards
+                    redirection={"ShopByRoom"}
                     hoverglow="yellowGlow"
                     catid={tag.tag_seo}
                     style="manfTitle pt-4 px-4 d-flex gap-5  justify-content-arround"

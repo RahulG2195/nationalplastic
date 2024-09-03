@@ -55,7 +55,7 @@ function ProdData({ category_id }) {
         setIsLoading(true);
         const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`);
         const { product, productDetails, colors, category, short_description } = response.data;
-console.log("console description ",response.data)
+        
         localStorage.setItem("product_id", product.product_id);
         if (!product) {
           setErrorMessage("Sorry, this product is not available");
@@ -432,7 +432,7 @@ console.log("console description ",response.data)
       </div>
 
       {/* product info  */}
-      {/* <MoreProduct prod_detail={prodData} /> */}
+      <MoreProduct prod_detail={prodData} />
 
       <div>
         {/* <!-- Modal --> */}
