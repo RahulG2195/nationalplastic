@@ -302,7 +302,7 @@ console.log("console description ",response.data)
                 </div>
                 <div className="shortProdDesc">
                   {/* <p>{short_description}</p> */}
-                  <p>{prodData.descp}</p>
+                  <p>{prodData.descpg}</p>
                 </div>
                 <div className="prod_type mt-4">
                   <div className="prod_clr">
