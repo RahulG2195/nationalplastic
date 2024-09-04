@@ -27,16 +27,18 @@ const BasicInfoEditor = () => {
     const [errors, setErrors] = useState({});
     const [message, setMessage] = useState('');
 
+    const fetchBasicInfo = async () => {
+        try {
+            const response = await axios.get('/api/basicInfo');
+            setBasicInfo(response.data.basicInfo);
+            setInitialBasicInfo(response.data.basicInfo);
+        } catch (error) {
+            console.error('There was an error fetching the basic info!', error);
+        }
+    };
+
     useEffect(() => {
-        // Fetch the existing basic info
-        axios.get('/api/basicInfo')
-            .then(response => {
-                setBasicInfo(response.data.basicInfo);
-                setInitialBasicInfo(response.data.basicInfo);
-            })
-            .catch(error => {
-                console.error('There was an error fetching the basic info!', error);
-            });
+        fetchBasicInfo();
     }, []);
 
     const handleChange = (e) => {
@@ -94,6 +96,8 @@ const BasicInfoEditor = () => {
             setMessage('Basic info updated successfully');
             setEditMode(false);
             setInitialBasicInfo(basicInfo); // Update initial state
+            await fetchBasicInfo();
+
         } catch (error) {
             console.error('There was an error updating the basic info!', error);
             setMessage('There was an error updating the basic info');
