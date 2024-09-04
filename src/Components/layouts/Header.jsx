@@ -241,7 +241,7 @@ export default function Header() {
                   <Link href="/">
                     <Image
                       src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}${basicInfo.logo}`}
-                      className="Image-fluid w-75"
+                      className="Image-fluid"
                       alt="Landscape picture"
                       height={100}
                       width={100}

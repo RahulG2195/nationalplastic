@@ -21,7 +21,7 @@ function Houseware() {
                 <div className="col-md-5 houseDiv">
                     <div className="houseImg">
                         <Image
-                        src = "/Assets/images/Home-page/CTA-banner.jpg-industry-image.png"
+                        src = "/Assets/images/Home-page/NPIL.jpg"
                         fill
                         alt="houseware banner"
                         />

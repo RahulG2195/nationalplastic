@@ -195,9 +195,9 @@ export default function Footer() {
 
         </button> */}
       </section >
-      <div className='text-center py-5 ' style={{backgroundColor:'#ECECEC'}}>
+     {/*  <div className='text-center py-5 ' style={{backgroundColor:'#ECECEC'}}>
         <p className='w-md-50 mx-auto fw-semibold footercaption'>We Deliver in Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer</p>
-      </div>
+      </div> */}
       <section className='bottom_footer '>
         <div className="container">
           <div className="col-12 text-center">

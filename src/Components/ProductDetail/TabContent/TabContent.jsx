@@ -3,11 +3,11 @@ import Image from "next/image";
 import "../../../styles/TabContent.css";
 
 const TabContent = ({ activeTab, prodDetail }) => {
-  console.log("TabContent" + activeTab);
-  console.log("TabContent NOJSON " + prodDetail);
-  console.log("TabContent JSON " + JSON.stringify(prodDetail));
-  const dimension_img =`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail?.dimension_img}` || "/Assets/images/Image 5/Image 5.png";
-  console.log("dimension_img" + dimension_img)
+  // console.log("TabContent" + activeTab);
+  // console.log("TabContent NOJSON " + prodDetail);
+  // console.log("TabContent JSON " + JSON.stringify(prodDetail));
+  // const dimension_img =`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail?.dimension_img}` || "/Assets/images/Image 5/Image 5.png";
+  
   let heading = "";
   let content = "";
   let img = "";
@@ -28,46 +28,46 @@ const TabContent = ({ activeTab, prodDetail }) => {
     case "description":
       heading = "Description";
       content = prodDetail?.descp || "NA";
-      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : '/Assets/images/Image 5/Image 5.png'
+      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : ''
       break;
     case "merchant-details":
       heading = "Merchant Details";
       content = prodDetail?.features || "NA";
-      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : '/Assets/images/Image 5/Image 5.png'
+      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : ''
       break;
     case "care-instruction":
       heading = "Care & Instruction";
       content = prodDetail?.careAndInstruct || "NA";
-      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : '/Assets/images/Image 5/Image 5.png'
+      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : ''
       break;
     case "delivery-instructions":
       heading = "Delivery Instructions";
       content = prodDetail?.deliveryInsct || "NA";
-      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : '/Assets/images/Image 5/Image 5.png'
+      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : ''
       break;
     case "warranty":
       heading = "Warranty";
       content = prodDetail?.warranty || "2 Year WARRANTY";
-      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : '/Assets/images/Image 5/Image 5.png'
+      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : ''
 
       break;
     case "t-and-c":
       heading = "T & C";
       content = prodDetail?.descp || "NA";
-      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : '/Assets/images/Image 5/Image 5.png'
+      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : ''
 
       break;
     case "faqs":
       heading = "FAQ'S";
       content = faq_disclaimer || "NA";
 
-      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : '/Assets/images/Image 5/Image 5.png'
+      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : ''
       break;
     case "disclaimer":
       heading = "Disclaimer";
       content =
         "Environment: Avoid placing the chair on uneven surfaces or on slippery floors to prevent accidents.";
-      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : '/Assets/images/Image 5/Image 5.png'
+      img = prodDetail.dimension_img ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDetail.dimension_img}` : ''
 
       break;
     default:
@@ -91,14 +91,14 @@ const TabContent = ({ activeTab, prodDetail }) => {
           </div>
 
           <div className="col-sm-12 col-md-6 imgCont">
-            <Image
+            {img && <Image
               src={img}
               width={100}
               height={100}
               layout="responsive"
               objectFit="cover"
               alt="img"
-            />
+            />}
           </div>
         </div>
       </div>
