@@ -269,6 +269,10 @@ function ProfilePage() {
   const ReturnProduct = async (prod_id, user_id, od_id) => {
     const getSingleData = orderData.find((od) => od.prod_id == prod_id && od.customer_id == user_id && od.od_id == od_id);
     setModelData(getSingleData);
+    if (getSingleData.order_status == 5) {
+      showModal();
+      return
+    }
     if (getSingleData.order_status != 8) {
       try {
         const GetSingleData = orderData.find((od) => od.prod_id == prod_id && od.customer_id == user_id && od.od_id == od_id)
@@ -288,7 +292,7 @@ function ProfilePage() {
         console.error('Error:', error);
       }
     } else {
-      showModal();
+      console.log("Error:" + getSingleData.order_status)
     }
   }
 
@@ -389,31 +393,28 @@ function ProfilePage() {
                   ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Return confirmation Sent</button>
                 } else {
                   ReturnCancelBtn = <button className="btn btn-danger btn-rounded" onClick={() => ReturnProduct(data.product_id, data.customer_id, data.od_id)}>Return order</button>
-
-
                 }
-
-
               } else if (data.order_status === 1 || data.order_status === 2 || data.order_status === 3 || data.order_status === 4) {
-
                 if (data.per_order_status === 1) {
-
                   ReturnCancelBtn = <button className="btn btn-warning btn-rounded" onClick={() => CancelProduct(data.product_id, data.customer_id, data.od_id)}>Cancel order</button>
-
                 } else {
-
+                  if(data.order_status === 1){
+                    ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>
+                  }else{
                   {/* once order status get 0 in db it will show order cancelled  */ }
-                  ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>
-
+                  ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>}
                 }
-
               } else if (data.order_status == 6) {
 
-                ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>
+                ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Cancel </button>
 
               } else if (data.order_status == 7) {
                 ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Returned</button>
-              } else {
+              } else if (data.order_status == 9) {
+
+                ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Cancel Request send</button>
+              }
+              else {
                 ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Placed</button>;
               }
 
