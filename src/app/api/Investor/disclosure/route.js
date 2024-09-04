@@ -1,10 +1,12 @@
 import { query } from '@/lib/db';
 import { uploadFile } from "@/utils/fileUploader";
+import { writeFile } from 'fs/promises';
 const fs = require("fs").promises;
 const path = require("path");
 
 export const dynamic = 'force-dynamic';
 export const bodyParser = false;
+const local_UPLOAD_DIR = path.join(process.cwd(), 'public', 'Assets', 'uploads','Investors');
 
 // GET method for fetching records
 export async function GET(request) {
@@ -184,6 +186,14 @@ async function handleFileUpload(file) {
     }
     
     await uploadFile(file);
+    try{
+        const bytes = await file.arrayBuffer();
+        const buffer = Buffer.from(bytes);
+        const filePath = path.join(local_UPLOAD_DIR, buffer);
+        await writeFile(filePath, buffer);
+      }catch(error){
+        console.log("error writing file locally", error)
+      }
     return file.name;
 }
 
