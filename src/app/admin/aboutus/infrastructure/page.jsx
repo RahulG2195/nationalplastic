@@ -149,14 +149,3 @@ const InfrastructureCMS = () => {
 export default InfrastructureCMS;
 
 
-// http://localhost:3000/Assets/images/aboutIcons/map-image.jpeg
-
-// http://localhost:3000/public/Assets/uploads/Aboutus/amazon_logo.png
-// C:\Office\national\public\Assets\uploads\Aboutus
-// http://localhost:3000/A
-// http://localhost:3000/Assets/uploads/Aboutus/two.jpg
-
-// /Assets/uploads
-
-
-// http://localhost:3000/admin/aboutus/public/Assets/uploads/Aboutus/box1_image.jpg

@@ -213,12 +213,15 @@ const navigation = [
     href: "/admin/tag",
     icon: "bi bi-layout-split",
   },
-
   {
-
     title: "Bulk Order Banner",
     href: "/admin/bulkOrder/heroBanner",
     icon: "bi bi-hdd-stack",
+  },
+  {
+    title: "Terms & condition",
+    href: "/admin/TermsandconditionCMS",
+    icon: "bi bi-file-earmark-word",
   },
 ];
 

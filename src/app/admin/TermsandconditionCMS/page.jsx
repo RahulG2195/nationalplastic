@@ -7,6 +7,8 @@ import { Table } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { useRouter } from "next/navigation";
 import moment from 'moment';
+import Image from "next/image";
+import { notifyError } from '@/utils/notify';
 
 const TermsandconditionCMS = () => {
   const router = useRouter();
@@ -27,9 +29,25 @@ const TermsandconditionCMS = () => {
   const handleOnclick = (id) => {
     const termsToEdit = termsData.find(item => item.id === id);
     localStorage.setItem('termsToEdit', JSON.stringify(termsToEdit));
-    router.push("/admin/EditTermsAndConditions");
+    console.log("termsToEdit" + JSON.stringify(termsToEdit) );
+    router.push("/admin/TextEditor");
   };
+  const handleImageUpdate = async (id, file) => {
+    console.log("file"+ file);
+    console.log("id"+ id);
 
+    const formData = new FormData();
+    formData.append('banner_image', file);
+    formData.append('id', id);
+
+  
+      const response =  await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/TermsandconditionCMS`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log("data " +  response)
+  }
 
   const columns = [
     {
@@ -54,14 +72,32 @@ const TermsandconditionCMS = () => {
       title: 'Banner Image',
       dataIndex: 'banner_image',
       key: 'banner_image',
+      render: (banner_image) => banner_image ? 
+        <Image src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}${banner_image}`} alt="Infrastructure" width={100}  height={100}/> : 
+        <span>Not uploaded</span>,
     },
     {
       title: 'Action',
       key: 'action',
       render: (text, record) => (
-        <Button onClick={() => handleOnclick(record.id)} color="primary">
-          Edit
-        </Button>
+        <>
+          <Button onClick={() => handleOnclick(record.id)} color="primary">
+            Edit Content
+          </Button>
+          <input
+            type="file"
+            style={{ display: 'none' }}
+            id={`upload_${record.id}`}
+            onChange={(e) => handleImageUpdate(record.id, e.target.files[0])}
+          />
+          <Button
+            color="secondary"
+            onClick={() => document.getElementById(`upload_${record.id}`).click()}
+            className="ml-2"
+          >
+            Update Image
+          </Button>
+        </>
       ),
     },
   ];
