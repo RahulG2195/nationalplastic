@@ -28,7 +28,7 @@ function BottomBar() {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
-
+  console.log('navbar', navbar)
   const sendCategory = useCallback((title) => {
     localStorage.setItem("category", title);
   }, []);
