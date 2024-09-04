@@ -6,6 +6,7 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
 const ALLOWED_FILE_TYPES = ['.jpg', '.jpeg', '.png', '.webp', '.mp4', '.pdf'];
 
 // Function to normalize file name and convert extension to lowercase
+const local_UPLOAD_DIR = path.join(process.cwd(), 'public', 'Assets', 'uploads','Investors');
 
 
 export async function validateFile(file) {
@@ -41,6 +42,12 @@ export async function uploadFile(file){
     }
     const filePath = path.join(uploadDir, file.name);
     await fs.writeFile(filePath, buffer);
+    try{
+      const filePath = path.join(local_UPLOAD_DIR, buffer);
+      await writeFile(filePath, buffer);
+    }catch(error){
+      console.log("error writing file locally", error)
+    }
     return file.name;
   } catch (error) {
     throw new Error(`PDF upload failed: ${error.message}`);

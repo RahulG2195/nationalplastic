@@ -68,7 +68,6 @@ export default function App() {
 
         // Prepare the form data
         const formData = new FormData();
-        console.log("formData1", formData);
 
         Object.keys(data).forEach((key) => {
           if (key === "images") {
@@ -90,7 +89,6 @@ export default function App() {
           formDataString += `${key}: ${value}\n`;
         });
 
-        console.log("formData", formData);
         const response = await axios.post(
           `${process.env.NEXT_PUBLIC_BASE_URL}/adminProducts`,
           formData,
@@ -149,8 +147,6 @@ export default function App() {
 
   const handleAddData = async (data) => {
     try {
-      console.log("handledata", data);
-      console.log("handledata", JSON.stringify(data));
 
       // Create a new FormData object
       const formData = new FormData();
@@ -175,9 +171,6 @@ export default function App() {
           },
         }
       );
-
-      // Handle the response as needed
-      console.log("Response:", response.data);
     } catch (error) {
       console.error("Error submitting form data:", error);
     }
