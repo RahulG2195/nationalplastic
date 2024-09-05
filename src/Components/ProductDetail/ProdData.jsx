@@ -55,7 +55,7 @@ function ProdData({ category_id }) {
         setIsLoading(true);
         const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`);
         const { product, productDetails, colors, category, short_description } = response.data;
-        
+
         localStorage.setItem("product_id", product.product_id);
         if (!product) {
           setErrorMessage("Sorry, this product is not available");
@@ -280,13 +280,14 @@ function ProdData({ category_id }) {
               <div className="product-info">
                 <div className="product-name">
                   <h2 className="prod_nameh2">
-                    National Plastic {name}{" "}
-                    {selectedColor ? `(${selectedColor})` : ""}
+                  National Plastic </h2>
+                  <h2>{name}{" "}
+                    {/* {selectedColor ? `(${selectedColor})` : ""} */}
                   </h2>
                 </div>
 
                 {/* <div className="reviews-counter d-flex flex-wrap gap-2"> */}
-                  {/* <div className="mrp">
+                {/* <div className="mrp">
                     <h6>
                       <strong className="text-danger"> ₹{price}</strong>
                     </h6>
@@ -456,7 +457,7 @@ function ProdData({ category_id }) {
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
-                <GetQuoteCustomForm prodName={name} read={"true"} modalRef={modalRef}/>
+                <GetQuoteCustomForm prodName={name} read={"true"} modalRef={modalRef} />
               </div>
               {/* <div className="modal-footer">
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -94,13 +94,20 @@
 .product-thumb .item img {
   height: 100px;
 }
-
+.product-name{
+  display: flex;
+  gap: 6px;
+}
 .product-name h2 {
   /* font-size: 22px; */
   font-weight: 600;
   /* line-height: 22px; */
   margin-bottom: 4px;
   color: #2e3192;
+}
+.prod_nameh2{
+  color: #cc0008 !important;
+  display: inline-block !important;
 }
 
 .product-ccount {

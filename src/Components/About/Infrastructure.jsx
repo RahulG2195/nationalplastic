@@ -50,7 +50,7 @@ function Infrastructure() {
                 width={100}
                 height={100}
                 layout="responsive"
-                objectFit="cover"
+                objectFit="cover  "
               />
             </div>
           </div>
