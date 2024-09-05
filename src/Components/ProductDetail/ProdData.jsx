@@ -53,9 +53,12 @@ function ProdData({ category_id }) {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`);
-        const { product, productDetails, colors, category, short_description } = response.data;
-        
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`
+        );
+        const { product, productDetails, colors, category, short_description } =
+          response.data;
+
         localStorage.setItem("product_id", product.product_id);
         if (!product) {
           setErrorMessage("Sorry, this product is not available");
@@ -286,7 +289,7 @@ function ProdData({ category_id }) {
                 </div>
 
                 {/* <div className="reviews-counter d-flex flex-wrap gap-2"> */}
-                  {/* <div className="mrp">
+                {/* <div className="mrp">
                     <h6>
                       <strong className="text-danger"> ₹{price}</strong>
                     </h6>
@@ -336,14 +339,25 @@ function ProdData({ category_id }) {
                               height: "48px",
                               position: "relative",
                               borderRadius: "50%",
-                              border: selectedColor === val.color ? "2px solid #000" : "2px solid transparent",
+                              border:
+                                selectedColor === val.color
+                                  ? "2px solid #000"
+                                  : "2px solid transparent",
                               transition: "all 0.3s ease",
-                              ...(selectedColor === val.color ? {
-                                boxShadow: "0 0 0 2px #fff, 0 0 0 4px #000",
-                              } : {}),
+                              ...(selectedColor === val.color
+                                ? {
+                                    boxShadow: "0 0 0 2px #fff, 0 0 0 4px #000",
+                                  }
+                                : {}),
                             }}
                           >
-                            <div style={{ width: '100%', height: '100%', display: 'flex' }}>
+                            <div
+                              style={{
+                                width: "100%",
+                                height: "100%",
+                                display: "flex",
+                              }}
+                            >
                               <Image
                                 src={imageSrc}
                                 alt={val.color}
@@ -353,8 +367,8 @@ function ProdData({ category_id }) {
                                 objectFit="cover"
                                 style={{
                                   borderRadius: "50%",
-                                  width: '100%',
-                                  height: '100%',
+                                  width: "100%",
+                                  height: "100%",
                                 }}
                               />
                             </div>
@@ -395,8 +409,9 @@ function ProdData({ category_id }) {
 
                 <Link
                   href={userState ? "/Address" : "#"}
-                  className={`btn m-2 px-md-5 ProdbtnRes ${!userState ? "disabled-button" : ""
-                    }`}
+                  className={`btn m-2 px-md-5 ProdbtnRes ${
+                    !userState ? "disabled-button" : ""
+                  }`}
                   onClick={() => handleBuyNow(productId)}
                 >
                   Buy Now
@@ -432,7 +447,30 @@ function ProdData({ category_id }) {
       </div>
 
       {/* product info  */}
-      <MoreProduct prod_detail={prodData} />
+      {/* <MoreProduct prod_detail={prodData} /> */}
+      <div className="prod_detail_sec my-md-5 my-3">
+        <div className="container">
+          <div className="row">
+            <div className="pd_heading">
+              <h4>Description</h4>
+              <hr />
+            </div>
+            <div className="col-md-9">{prodData.descp}</div>
+            <div className="col-md-3">
+              {prodData.dimension_img ? (
+                <Image
+              src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodData.dimension_img}`}
+              width={100}
+              height={100}
+              layout="responsive"
+              objectFit="cover"
+              alt="Dimension image"
+            />
+              ) : ''}
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div>
         {/* <!-- Modal --> */}
@@ -456,7 +494,11 @@ function ProdData({ category_id }) {
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
-                <GetQuoteCustomForm prodName={name} read={"true"} modalRef={modalRef}/>
+                <GetQuoteCustomForm
+                  prodName={name}
+                  read={"true"}
+                  modalRef={modalRef}
+                />
               </div>
               {/* <div className="modal-footer">
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
