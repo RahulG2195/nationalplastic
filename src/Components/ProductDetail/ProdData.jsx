@@ -281,7 +281,7 @@ function ProdData({ category_id }) {
                 <div className="product-name">
                   <h2 className="prod_nameh2">
                     National Plastic {name}{" "}
-                    {selectedColor ? `(${selectedColor})` : ""}
+                    {/* {selectedColor ? `(${selectedColor})` : ""} */}
                   </h2>
                 </div>
 

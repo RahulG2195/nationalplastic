@@ -80,14 +80,20 @@ function BottomBar() {
     
     <div className="mainrow px-md-5  bottom_nav position-relative ">
       {navbar.map((val, index) => (
+        // <div
+        //   key={val.category_id}
+        //   className={`px-2 py-2 custom-dropdown-css ${
+        //     ["Stools", "Tables", "Drawer", "Box", "Office Chair"].includes(val.category_name)
+        //       ? `${val.category_name} position-relative`
+        //       : "second"
+        //   }`}
+        // >
         <div
-          key={val.category_id}
-          className={`px-2 py-2 custom-dropdown-css ${
-            ["Stools", "Tables", "Drawer", "Box", "Office Chair"].includes(val.category_name)
-              ? `${val.category_name} position-relative`
-              : "second"
-          }`}
-        >
+        key={val.category_id}
+        className={`px-2 py-2 custom-dropdown-css ${
+          index <= 5 ? 'custom-dropdown-css second' : ''
+        } ${index >= 5 ? 'after-5th ' : ''}`}
+      >
           <Link
             onClick={() => sendCategory(val.category_name)}
             href={`/ProductCatlogue/${val.seo_url}`}
