@@ -155,7 +155,7 @@ export default function Header() {
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log('searchTerm', searchTerm);
+      // console.log('searchTerm', searchTerm);
       router.push(`/search/${searchTerm}`);
     } catch (error) {
       console.error("Error searching products:", error);
