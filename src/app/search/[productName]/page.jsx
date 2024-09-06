@@ -55,16 +55,9 @@ const Search = (props) => {
 
   const storeSearchedProduct = (productName) => {
     if (typeof window !== 'undefined') {
-      // Get the existing searched products from localStorage
       const existingSearches = JSON.parse(localStorage.getItem('searchedProducts') || '[]');
-      
-      // Add the new search to the beginning of the array
       const updatedSearches = [productName, ...existingSearches.filter(item => item !== productName)];
-      
-      // Limit the array to a maximum of 10 items (or any other number you prefer)
       const limitedSearches = updatedSearches.slice(0, 10);
-      
-      // Store the updated list back in localStorage
       localStorage.setItem('searchedProducts', JSON.stringify(limitedSearches));
     }
   };
@@ -92,26 +85,32 @@ const Search = (props) => {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Search`, {
           productName: query,
         });
-        const newProducts = response.data.products;
+        // const newProducts = response.data.products;
         const all = response.data.allproducts;
-        setAllproducts(all);
-        setProducts((prevProducts) => [...prevProducts, ...newProducts]);
-        setHasMore(newProducts.length > 0);
-        const calculatedDiscounts = newProducts.map((product) => {
-          const discountPercentage =
-            product.discount_price && product.price
-              ? Math.floor(
-                ((product.discount_price - product.price) /
-                  product.discount_price) *
-                100
-              )
-              : 0;
-          return discountPercentage;
-        });
-        setDiscounts((prevDiscounts) => [
-          ...prevDiscounts,
-          ...calculatedDiscounts,
-        ]);
+
+
+
+
+      setAllproducts(all);
+        setProducts(all);
+        // setProducts((prevProducts) => [...prevProducts, ...newProducts]);
+
+        // setHasMore(all.length > 0);
+        // const calculatedDiscounts = all.map((product) => {
+        //   const discountPercentage =
+        //     product.discount_price && product.price
+        //       ? Math.floor(
+        //         ((product.discount_price - product.price) /
+        //           product.discount_price) *
+        //         100
+        //       )
+        //       : 0;
+        //   return discountPercentage;
+        // });
+        // setDiscounts((prevDiscounts) => [
+        //   ...prevDiscounts,
+        //   ...calculatedDiscounts,
+        // ]);
         setLoading(false);
       }
     } catch (error) {
@@ -208,7 +207,7 @@ const Search = (props) => {
       const isLoggedInResult = await isLoggedIn();
       if (!isLoggedInResult) {
         notifyError();
-        router.push("/Login");
+        return;
       } else {
         dispatch(
           addItemToWishlist({
@@ -299,12 +298,12 @@ const Search = (props) => {
               })}
             </div>
 
-            <InfiniteScroll
+            {/* <InfiniteScroll
               dataLength={products.length}
               next={() => setPage(page + 1)}
               hasMore={hasMore}
               endMessage={<p>No more products to load</p>}
-            />
+            /> */}
           </>
         )}
       </div>
