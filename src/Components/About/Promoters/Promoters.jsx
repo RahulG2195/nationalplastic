@@ -60,7 +60,7 @@ const Promoters = () => {
                         <h4 className="team-designation">
                           {member.designation}
                         </h4>
-                        <p className="team-description">{member.description}</p>
+                        <p className=" text-justify team-description">{member.description}</p>
                       </div>
                     </div>
                   </div>

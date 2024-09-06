@@ -954,3 +954,6 @@ p {
     right: auto;
     left: 0;
 }
+.text-justify {
+    text-align: justify !important;
+}
