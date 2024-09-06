@@ -23,6 +23,10 @@ const navigation = [
         title: "Hero Section",
         href: "/admin/homepage/herosection",
       },
+            {
+        title: "Youtube Section",
+        href: "/admin/homepage/youtubeSection",
+      },
       // {
       //   title: "Cards Section",
       //   href: "/admin/homepage/cards",

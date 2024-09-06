@@ -168,14 +168,14 @@ function ContactUs() {
       title: "Silvassa",
       location:
         "Plot No. 263, Village Dadra, Silvassa Union Territory of Dadra Nagarhaveli, (Near Dadra 66 KVA Sub-station, 6 KM from Vapi)",
-      phone: "9978444982",
+      phone: "+91-9978444982",
       email: "info@nationalplastic.com",
     },
     {
       key: 2,
       title: "Patna",
       location: "Plot No. B-1 to B-7, Industrial Area,Fatuha, Patna",
-      phone: "8929813491",
+      phone: "+91-8929813491",
       email: "info@nationalplastic.com",
     },
     {
@@ -183,16 +183,16 @@ function ContactUs() {
       title: "Nellore",
       location:
         "SY. No. 283, 297, 298, APIIC Indl. Park, Menakur, Village Naidupeth Mandal, SPSR, Nellore - 524126.",
-      phone: "9908798433",
+      phone: "+91-9908798433",
       email: "info@nationalplastic.com",
     },
-    {
-      key: 4,
-      title: "Lorem ipsum",
-      location: "D-92, Meerut Road, Indl Area, Ghaziabad, U.P. India",
-      phone: "+91-9219220368, +91- 9213090354",
-      email: "info@nationalplastic.com",
-    },
+    // {
+    //   key: 4,
+    //   title: "Lorem ipsum",
+    //   location: "D-92, Meerut Road, Indl Area, Ghaziabad, U.P. India",
+    //   phone: "+91-9219220368, +91- 9213090354",
+    //   email: "info@nationalplastic.com",
+    // },
   ];
 
 
@@ -456,7 +456,7 @@ function ContactUs() {
         </h2>
         <div className="row BranchOfficescards">
           {FactoryUnitsArr.map((val) => (
-            <div className="col-md-6" key={val.key}>
+            <div className="col-md-4" key={val.key}>
               <ContactUsCard
                 title={val.title}
                 location={val.location}

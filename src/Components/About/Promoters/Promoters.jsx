@@ -68,7 +68,7 @@ const Promoters = () => {
               </div>
             ))}
           </div>
-          <div className="col-12 col-md-3 order-1 order-md-2 order-lg-2 justify-content-end">
+          <div className="col-12 col-md-3 order-1 order-md-2 order-lg-2 d-flex d-md-block d-lg-block justify-content-center">
             <ComapnyProfileSidebar title={"PROMOTERS/DIRECTORS"} />
           </div>
         </div>

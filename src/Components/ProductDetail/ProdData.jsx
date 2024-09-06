@@ -303,7 +303,7 @@ function ProdData({ category_id }) {
                 </div>
                 <div className="shortProdDesc">
                   {/* <p>{short_description}</p> */}
-                  <p>{prodData.descpg}</p>
+                  <p>{prodData.descp}</p>
                 </div>
                 <div className="prod_type mt-4">
                   <div className="prod_clr">
@@ -337,14 +337,25 @@ function ProdData({ category_id }) {
                               height: "48px",
                               position: "relative",
                               borderRadius: "50%",
-                              border: selectedColor === val.color ? "2px solid #000" : "2px solid transparent",
+                              border:
+                                selectedColor === val.color
+                                  ? "2px solid #000"
+                                  : "2px solid transparent",
                               transition: "all 0.3s ease",
-                              ...(selectedColor === val.color ? {
-                                boxShadow: "0 0 0 2px #fff, 0 0 0 4px #000",
-                              } : {}),
+                              ...(selectedColor === val.color
+                                ? {
+                                    boxShadow: "0 0 0 2px #fff, 0 0 0 4px #000",
+                                  }
+                                : {}),
                             }}
                           >
-                            <div style={{ width: '100%', height: '100%', display: 'flex' }}>
+                            <div
+                              style={{
+                                width: "100%",
+                                height: "100%",
+                                display: "flex",
+                              }}
+                            >
                               <Image
                                 src={imageSrc}
                                 alt={val.color}
@@ -354,8 +365,8 @@ function ProdData({ category_id }) {
                                 objectFit="cover"
                                 style={{
                                   borderRadius: "50%",
-                                  width: '100%',
-                                  height: '100%',
+                                  width: "100%",
+                                  height: "100%",
                                 }}
                               />
                             </div>
@@ -396,8 +407,9 @@ function ProdData({ category_id }) {
 
                 <Link
                   href={userState ? "/Address" : "#"}
-                  className={`btn m-2 px-md-5 ProdbtnRes ${!userState ? "disabled-button" : ""
-                    }`}
+                  className={`btn m-2 px-md-5 ProdbtnRes ${
+                    !userState ? "disabled-button" : ""
+                  }`}
                   onClick={() => handleBuyNow(productId)}
                 >
                   Buy Now
@@ -433,7 +445,30 @@ function ProdData({ category_id }) {
       </div>
 
       {/* product info  */}
-      <MoreProduct prod_detail={prodData} />
+      {/* <MoreProduct prod_detail={prodData} /> */}
+      <div className="prod_detail_sec my-md-5 my-3">
+        <div className="container">
+          <div className="row">
+            <div className="pd_heading">
+              <h4>Description</h4>
+              <hr />
+            </div>
+            <div className="col-md-9">{prodData.descp}</div>
+            <div className="col-md-3">
+              {prodData.dimension_img ? (
+                <Image
+              src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodData.dimension_img}`}
+              width={100}
+              height={100}
+              layout="responsive"
+              objectFit="cover"
+              alt="Dimension image"
+            />
+              ) : ''}
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div>
         {/* <!-- Modal --> */}

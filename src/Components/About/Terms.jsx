@@ -41,7 +41,7 @@ function TermsAndConditions() {
           <h2 className="company-profile-title">Terms and Conditions</h2>
           <div className='text-justify' dangerouslySetInnerHTML={{ __html: content }} />
         </div>
-        <div className="col-12 col-md-4 order-1 order-md-2 order-lg-2">
+        <div className="col-12 col-md-4 order-1 order-md-2 order-lg-2 d-flex d-md-block d-lg-block justify-content-center">
           <ComapnyProfileSidebar title={'Terms & Conditions'} />
         </div>
       </div>

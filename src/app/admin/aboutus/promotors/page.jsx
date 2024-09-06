@@ -90,7 +90,7 @@ const TeamMembersCMS = () => {
       title: 'Image',
       dataIndex: 'image_url',
       key: 'image_url',
-      render: (text) => text ? <img src={text} alt="team member" style={{ width: 50 }} /> : 'No image',
+      render: (text) => text ? <img src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_ABOUT_PATH_DIR}${text}`} alt="team member" style={{ width: 50 }} /> : 'No image',
     },
     {
       title: 'Display Order',
@@ -112,7 +112,7 @@ const TeamMembersCMS = () => {
   return (
     <div style={{ padding: 24 }}>
       <h1>Team Members CMS</h1>
-      
+
       <Button onClick={() => showModal()} style={{ marginBottom: 16 }}>
         Add Team Member
       </Button>
