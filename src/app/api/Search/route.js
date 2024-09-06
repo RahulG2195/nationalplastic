@@ -13,28 +13,108 @@ export async function POST(request) {
     const limit = 12;
     const offset = (page - 1) * limit;
 
-    const products = await query({
-      query:
-        "SELECT *,product_id FROM products WHERE LOWER(product_name) REGEXP ? OR LOWER(categoryType) REGEXP ? OR LOWER(short_description) REGEXP ? GROUP BY product_name LIMIT ? OFFSET ?",
-      values: [
-        `${searchTerm}`,
-        `${searchTerm}`,
-        `${searchTerm}`,
-        `${limit}`,
-        `${offset}`,
-      ],
-    });
+    // const products = await query({
+    //   query:
+    //     `SELECT 
+    //       product_id,
+    //       seo_url,
+    //       product_name,
+    //       price,
+    //       discount_price,
+    //       discount_percentage,
+    //       image_name,
+    //       color
+    //     FROM products 
+    //     WHERE 
+    //       (LOWER(product_name) REGEXP ? 
+    //       OR LOWER(categoryType) REGEXP ? 
+    //       OR LOWER(short_description) REGEXP ?)
+    //       AND prod_status = 1
+    //     ORDER BY price ASC -- change 'ASC' to 'DESC' for descending order
+    //     LIMIT ? OFFSET ?`,
+    //   values: [
+    //     `${searchTerm}`,
+    //     `${searchTerm}`,
+    //     `${searchTerm}`,
+    //     `${limit}`,
+    //     `${offset}`,
+    //   ],
+    // });
+
+
+    //  console.log("results: " + products);
+    //    console.log("results: " + JSON.stringify(products));
+
 
     const allproducts = await query({
-      query:
-        "SELECT p.product_id, p.product_name, p.seo_url, p.seo_url_clr, p.short_description,  p.category_id, p.image_name, p.price, p.discount_price, p.discount_percentage, p.categoryType, p.duration, p.InstallationCharges, p.color, p.color_code, p.armType, p.prod_status FROM products p JOIN ( SELECT product_name, MIN(product_id) AS min_product_id FROM products WHERE prod_status = 1 GROUP BY product_name ) sub ON p.product_name = sub.product_name AND p.product_id = sub.min_product_id WHERE LOWER(p.product_name) REGEXP ? OR LOWER(categoryType) REGEXP ? OR LOWER(short_description) REGEXP ? AND p.prod_status = 1",
-      values: [`${searchTerm}`, `${searchTerm}`, `${searchTerm}`],
+      query: `
+WITH initial_search AS (
+  SELECT 
+    p.product_id, 
+    p.product_name, 
+    p.category_id
+  FROM products p
+ WHERE LOWER(p.product_name) LIKE LOWER(CONCAT('%', ?, '%'))
+    AND p.prod_status = 1
+),
+ranked_products AS (
+  SELECT 
+    p.product_id,
+    p.product_name, 
+    p.seo_url, 
+    p.seo_url_clr, 
+    p.short_description,
+    p.category_id, 
+    p.image_name, 
+    p.price, 
+    p.discount_price, 
+    p.discount_percentage,
+    p.categoryType, 
+    p.duration, 
+    p.InstallationCharges, 
+    p.color, 
+    p.color_code,
+    p.armType, 
+    p.prod_status,
+    ROW_NUMBER() OVER (PARTITION BY p.product_name ORDER BY p.product_id) AS row_num,
+    -- Adding a proximity score for better ordering
+    CASE 
+      WHEN LOWER(p.product_name) = ? THEN 1
+      ELSE 4
+    END AS proximity_rank
+  FROM products p
+  JOIN initial_search i ON p.category_id = i.category_id
+  WHERE p.prod_status = 1
+)
+SELECT 
+  product_id, 
+  product_name, 
+  seo_url, 
+  seo_url_clr, 
+  short_description,
+  category_id, 
+  image_name, 
+  price, 
+  discount_price, 
+  discount_percentage,
+  categoryType, 
+  duration, 
+  InstallationCharges, 
+  color, 
+  color_code,
+  armType, 
+  prod_status
+FROM ranked_products
+WHERE row_num = 1
+ORDER BY proximity_rank, product_name;
+      `,
+      values: [searchTerm, searchTerm],
     });
 
     return new Response(
       JSON.stringify({
         status: 200,
-        products: products,
+        // products: products,
         allproducts: allproducts,
       })
     );
