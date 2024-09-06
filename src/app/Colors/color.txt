@@ -1,0 +1,158 @@
+
+const colour=[
+    {
+        id : "1",
+        colorname:"MGR",
+        imgurl:"/Assets/colors/MGR_Color-01.webp",
+    },
+    {
+        id : "2",
+        colorname:"Coffee",
+        imgurl:"/Assets/colors/Coffee_Color-01.webp",
+    },
+    {
+        id : "3",
+        colorname:"I Grey",
+        imgurl:"/Assets/colors/I_Grey_Color-01.webp"
+        },
+    {
+        id : "4",
+        colorname:"IRWD",
+        imgurl:"/Assets/colors/I_RWD_Color-01.webp",
+    },
+    {
+        id : "5",
+        colorname:"Mat Blue",
+        imgurl:"/Assets/colors/Mat_Blue-01.webp",
+    },
+    {
+        id : "6",
+        colorname:"D Blue",
+        imgurl:"/Assets/colors/D_Blue_Color-01.webp",
+    },
+    {
+        id : "7",
+        colorname:"Mat Brown",
+        imgurl:"/Assets/colors/Mat_Brown_Color-01.webp",
+    },
+    {
+        id : "8",
+        colorname:"Red",
+        imgurl:"/Assets/colors/Red_Color-01.webp",
+    },
+    {
+        id : "9",
+        colorname:"Voilet",
+        imgurl:"/Assets/colors/Voilet_Color-01.webp",
+    },
+    {
+        id : "10",
+        colorname:"Eagle Gray",
+        imgurl:"/Assets/colors/Grey_Eagle-01.webp",
+    },
+    {
+        id : "11",
+        colorname:"Sandle Wood",
+        imgurl:"/Assets/colors/SandleWood_Color-01.webp",
+    },
+    {
+        id : "12",
+        colorname:"Sp. Green",
+        imgurl:"/Assets/colors/SP_Green_Color-01.webp",
+    },
+    {
+        id : "13",
+        colorname:"Yellow",
+        imgurl:"/Assets/colors/Yellow_Color-01.webp",
+    },
+    {
+        id : "14",
+        colorname:"Cappuccion",
+        imgurl:"/Assets/colors/Cappacino_Color-01.webp",
+    },
+
+    {
+        id : "15",
+        colorname:"Anti Green",
+        imgurl:"/Assets/colors/Anti_Green_Color-01.webp",
+    },
+    {
+        id : "16",
+        colorname:"Anti Orange",
+        imgurl:"/Assets/colors/Anti_Orange_Color-01.webp",
+    },{
+        id : "17",
+        colorname:"Fusia",
+        imgurl:"/Assets/colors/Fusia_Color-01.webp",
+    },{
+        id : "18",
+        colorname:"P Beige",
+        imgurl:"/Assets/colors/P_Beige_Color.webp",
+    },{
+        id : "19",
+        colorname:"Grey White",
+        imgurl:"/Assets/colors/Grey_White_Color-01.webp",
+    },{
+        id : "20",
+        colorname:"Mango Wood",
+        imgurl:"/Assets/colors/Mango_Wood_Color-01.webp",
+    },{
+        id : "21",
+        colorname:"Orange",
+        imgurl:"/Assets/colors/Orange_Color-01.webp",
+    },{
+        id : "22",
+        colorname:"Pink",
+        imgurl:"/Assets/colors/Pink_Color-01.webp",
+    },{
+        id : "23",
+        colorname:"Aqua Green",
+        imgurl:"/Assets/colors/Aqua_Green_Color-01.webp",
+    },{
+        id : "24",
+        colorname:"Amber",
+        imgurl:"/Assets/colors/Amber_Color-01.webp",
+    },{
+        id : "25",
+        colorname:"Gold",
+        imgurl:"/Assets/colors/Gold_Color-01.webp",
+    },{
+        id : "26",
+        colorname:"GMR",
+        imgurl:"/Assets/colors/GMR_Color-01.webp",
+    },{
+        id : "27",
+        colorname:"T.Wood",
+        imgurl:"/Assets/colors/T_Wood_Color-01.webp",
+    },{
+        id : "28",
+        colorname:"MBG",
+        imgurl:"/Assets/colors/MGB_Color-01.webp",
+    },{
+        id : "29",
+        colorname:"PBL",
+        imgurl:"/Assets/colors/PBL_Color-01.webp",
+    },{
+        id : "30",
+        colorname:"DWT",
+        imgurl:"/Assets/colors/DWT_Color-01.webp",
+    },{
+        id : "31",
+        colorname:"Natural Color",
+        imgurl:"/Assets/colors/Natural_Color-01.webp",
+    },{
+        id : "32",
+        colorname:"Black",
+        imgurl:"/Assets/colors/Black_Color.webp",
+    },{
+        id : "33",
+        colorname:"Buff Ivory ",
+        imgurl:"/Assets/colors/Buff_Ivory-01.webp",
+    },{
+        id : "34",
+        colorname:"Term Green",
+        imgurl:"/Assets/colors/TermGreen_Color-01.webp",
+    }
+]
+
+export default colour

@@ -43,7 +43,7 @@ function Awards() {
             Awards & <span className="fw-bold text-danger">Certificates</span>{" "}
           </div>
           <div className="mt-1 fw-medium subCptRes w-100 certificate-para">
-            <p>
+            <p className="text-justify">
               National has been awarded as the number one exporter in the
               Plastic Furniture category by The Plastics Export Promotion
               Council (popularly known as PLEXCONCIL) sponsored by the Ministry
