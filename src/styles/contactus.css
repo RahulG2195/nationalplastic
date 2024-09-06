@@ -34,7 +34,7 @@
 }
 
 .contactCTA {
-    margin: 65px 0;
+    /* margin: 65px 0; */
     position: relative;
     /* background-color: #F6E35D; */
 }
@@ -221,10 +221,10 @@
 @media (max-width:412px) {
     .location-image {
         left: -1%;
-        width: 176px !important;
+        width: 113px !important;
         position: absolute;
         z-index: 999;
-        top: 49%;
+        top: 38% !important;
     }
 }
 
@@ -235,21 +235,30 @@
         left: 0px;
         /* position: relative; */
         /* top: -15%; */
-        margin-top: 733px;
+        /* margin-top: 733px; */
+        margin-top: 376px;
     }
     .RegisteredOffice .ROtitle h1 {
         font-size: 40px;
     }
+    .RegisteredOffice .ROtitle {
+        z-index: 999 !important;
+    }
     .GTA {
-        left: 0;
+        position: relative;
+        left: 0; 
         right: 0;
+        margin-right:  10%;
+        margin-left:  10%;
+        margin-bottom:170px ;
+
     }
     .location-image {
         left: -1%;
         width: 205px;
         position: absolute;
         z-index: 2;
-        top: 49%;
+        top: 37%;
     }
 }
 
@@ -295,14 +304,14 @@
 }
 
 @media only screen and (min-width: 769px) and (max-width: 991px) {
-    .GTA {
+    /* .GTA {
         position: absolute;
         top: 4%;
-        /* width: 100%; */
+        width: 100%;
         bottom: 20%;
         left: 5%;
         right: 10%;
-    }
+    } */
     .LocationSection {
         margin-top: 50px;
     }
