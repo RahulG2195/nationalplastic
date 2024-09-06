@@ -238,7 +238,7 @@ export default function Header() {
                     aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon" />
                   </button>
-                  <Link href="/">
+                  <Link href="/" className="moblogo">
                     <Image
                       src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}${basicInfo.logo}`}
                       className="Image-fluid"
@@ -269,7 +269,7 @@ export default function Header() {
                 </div>
 
                 {isSearchVisible && (
-                  <div className="container-fluid mt-3 d-lg-none">
+                  <div className="container-fluid mt-3 d-lg-none d-flex justify-content-center">
                     <form onSubmit={handleSearchSubmit} className="d-flex nav-search">
                       <input
                         className="form-control text-center HeadSearch fw-semibold"
@@ -554,7 +554,7 @@ export default function Header() {
 
                 {/* footer menu */}
                 <div className="lower-mobile-menu">
-                  <ul className="list-unstyled">
+                  <ul className="list-unstyled align-items-center">
                     <li>
                       <Link href="/#">
                         <Image
@@ -615,7 +615,7 @@ export default function Header() {
                       )}
                     </li>
                     <li>
-                      <Link href="/AddToCart">
+                      <Link href="/AddToCart" className=" position-relative">
                         <Image
                           src="/Assets/svg/Group 5.svg"
                           height={50}

@@ -43,15 +43,18 @@ function Infrastructure() {
         <div className="row infrastructure-row">
           <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div className="india-map-image float-end">
+              <a href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_ABOUT_PATH_DIR}${mainInfo.image_url}`} target="blank">
+              {/* <a href={`/#`}> */}
               <Image
                 src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_ABOUT_PATH_DIR}${mainInfo.image_url}`}
-                className="img-fluid d-block w-70"
+                className="img-fluid d-block w-100"
                 alt="map image"
                 width={100}
                 height={100}
                 layout="responsive"
                 objectFit="cover  "
               />
+              </a>
             </div>
           </div>
           <div className="col-xl-6 col-lg-6 col-md-6 col-sm-8 col-xs-8 india-map-text float-start w-20">
@@ -63,7 +66,7 @@ function Infrastructure() {
           </div>
         </div>
       </div>
-      <div className="col-12 col-md-4 order-1 order-md-2 order-lg-2">
+      <div className="col-12 col-md-4 order-1 order-md-2 order-lg-2 d-flex d-md-block d-lg-block justify-content-center">
         <ComapnyProfileSidebar title={mainInfo.title} />
       </div>
     </div>

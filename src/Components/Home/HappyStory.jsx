@@ -90,7 +90,7 @@ export default function HappyStory() {
                         >
                           <Image
                             className="rounded-top-5"
-                            src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${product.image}`}
+                            src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}${product.image}`}
                             alt={product.title}
                             width={100}
                             height={50}

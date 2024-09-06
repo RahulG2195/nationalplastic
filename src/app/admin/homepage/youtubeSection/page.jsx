@@ -1,123 +1,193 @@
 "use client";
-import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Input, Button } from 'reactstrap';
+import { Table, Input, Button, Modal, Form, Upload, message, Space } from 'antd';
+import { SearchOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import axios from 'axios';
-import { Table } from 'antd';
-import Highlighter from 'react-highlight-words';
-import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { notifyError } from '@/utils/notify';
 
 const YouTubeCMS = () => {
-    const router = useRouter();
     const [youtubeData, setYoutubeData] = useState([]);
     const [filteredYoutubeData, setFilteredYoutubeData] = useState([]);
     const [searchText, setSearchText] = useState('');
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [form] = Form.useForm();
+    const [editingVideo, setEditingVideo] = useState(null);
+    const [selectedFile, setSelectedFile] = useState(null);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const rawData = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/YouTubeCMS`);
-            const { results } = rawData.data;
-            setYoutubeData(results);
-            setFilteredYoutubeData(results);
-        };
         fetchData();
     }, []);
 
-    const handleOnclick = (id) => {
-        const videoToEdit = youtubeData.find(item => item.id === id);
-        localStorage.setItem('videoToEdit', JSON.stringify(videoToEdit));
-        router.push("/admin/YouTubeEditor"); // Make sure you have a YouTubeEditor page for editing content
-    };
-
-    const handleThumbnailUpdate = async (id, file) => {
-        const formData = new FormData();
-        formData.append('thumbnail', file);
-        formData.append('id', id);
-
+    const fetchData = async () => {
         try {
-            const response = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/YouTubeCMS`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-            console.log("Thumbnail updated: ", response.data);
-            // Optionally, refresh data after successful upload
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/Youtube`);
+            const { results } = response.data;
+            setYoutubeData(results);
+            setFilteredYoutubeData(results);
         } catch (error) {
-            notifyError('Error uploading thumbnail');
-            console.error("Error uploading thumbnail", error);
+            message.error('Failed to fetch video data');
         }
     };
 
+    const handleSearch = (value) => {
+        setSearchText(value);
+        const filtered = youtubeData.filter(item =>
+            item.title.toLowerCase().includes(value.toLowerCase())
+        );
+        setFilteredYoutubeData(filtered);
+    };
+
+    const handleAdd = () => {
+        setEditingVideo(null);
+        form.resetFields();
+        setIsModalVisible(true);
+    };
+
+    const handleEdit = (record) => {
+        setEditingVideo(record);
+        form.setFieldsValue(record);
+        setIsModalVisible(true);
+    };
+
+    const handleFileChange = (e) => {
+        setSelectedFile(e.target.files[0]);
+    };
+
+    const handleModalOk = () => {
+        form.validateFields().then(async (values) => {
+            try {
+                const formData = new FormData();
+                Object.keys(values).forEach(key => {
+                    formData.append(key, values[key]);
+                });
+
+                if (selectedFile) {
+                    formData.append('images', selectedFile);
+                }
+
+                let response;
+                if (editingVideo) {
+                    response = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/Youtube?id=${editingVideo.id}`, formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    });
+                    message.success('Video updated successfully');
+                } else {
+                    response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/Youtube`, formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    });
+                    message.success('Video added successfully');
+                }
+                setIsModalVisible(false);
+                fetchData();
+            } catch (error) {
+                message.error('Failed to save video');
+            }
+        });
+    };
+
+    const handleModalCancel = () => {
+        setIsModalVisible(false);
+    };
+    const handleDelete = async (id) => {
+        try {
+          await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/Youtube?id=${id}`);
+          message.success('Youtube  section deleted successfully');
+          fetchData();
+        } catch (error) {
+          message.error('Delete operation failed');
+        }
+      };
+
     const columns = [
         {
-            title: 'Index',
-            key: 'index',
-            render: (text, record, index) => index + 1,
+            title: 'ID',
+            dataIndex: 'id',
+            key: 'id',
         },
         {
-            title: 'Video Title',
+            title: 'Image',
+            dataIndex: 'image',
+            key: 'image',
+            render: (image) => (
+                <Image src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}${image}`} alt="Video thumbnail" width={100} height={100} />
+            ),
+        },
+        {
+            title: 'Title',
             dataIndex: 'title',
             key: 'title',
-            render: (text) => (
-                <Highlighter
-                    highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
-                    searchWords={[searchText]}
-                    autoEscape
-                    textToHighlight={text ? text.toString() : ''}
-                />
-            ),
+            filteredValue: [searchText],
+            onFilter: (value, record) => record.title.toLowerCase().includes(value.toLowerCase()),
+        },
+        {
+            title: 'Short Description',
+            dataIndex: 'short_desc',
+            key: 'short_desc',
+            ellipsis: true,
         },
         {
             title: 'YouTube URL',
             dataIndex: 'url',
             key: 'url',
-            render: (url) => <a href={url} target="_blank" rel="noopener noreferrer">{url}</a>,
+            render: (url) => <a href={url} target="_blank" rel="noopener noreferrer">Watch Video</a>,
         },
         {
-            title: 'Thumbnail',
-            dataIndex: 'thumbnail',
-            key: 'thumbnail',
-            render: (thumbnail) => thumbnail ?
-                <Image src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_THUMBNAILS_PATH_DIR}${thumbnail}`} alt="Thumbnail" width={100} height={100} /> :
-                <span>Not uploaded</span>,
-        },
-        {
-            title: 'Action',
-            key: 'action',
-            render: (text, record) => (
-                <>
-                    <Button onClick={() => handleOnclick(record.id)} color="primary">
-                        Edit Video
-                    </Button>
-                    <input
-                        type="file"
-                        style={{ display: 'none' }}
-                        id={`upload_thumbnail_${record.id}`}
-                        onChange={(e) => handleThumbnailUpdate(record.id, e.target.files[0])}
-                    />
-                    <Button
-                        color="secondary"
-                        onClick={() => document.getElementById(`upload_thumbnail_${record.id}`).click()}
-                        className="ml-2"
-                    >
-                        Update Thumbnail
-                    </Button>
-                </>
+            title: 'Actions',
+            key: 'actions',
+            render: (_, record) => (
+              <Space>
+                <Button onClick={() => handleEdit(record)}>Edit</Button>
+                <Button onClick={() => handleDelete(record.id)}>Delete</Button>
+              </Space>
             ),
-        },
+          },
     ];
 
     return (
-        <Container fluid>
-            <h1 className="my-4">YouTube Video Management</h1>
-            <Table
-                columns={columns}
-                dataSource={filteredYoutubeData.map(item => ({ ...item, key: item.id }))}
+        <div>
+            <h1>National Plastic YouTube Video Management</h1>
+            <Input
+                placeholder="Search videos"
+                onChange={(e) => handleSearch(e.target.value)}
+                style={{ width: 200, marginBottom: 16 }}
+                prefix={<SearchOutlined />}
             />
-        </Container>
+            <Button onClick={handleAdd} type="primary" style={{ marginBottom: 16, marginLeft: 16 }}>
+                <PlusOutlined /> Add Video
+            </Button>
+            <Table columns={columns} dataSource={filteredYoutubeData} />
+
+            <Modal
+                title={editingVideo ? "Edit Video" : "Add Video"}
+                visible={isModalVisible}
+                onOk={handleModalOk}
+                onCancel={handleModalCancel}
+            >
+                <Form form={form} layout="vertical">
+                    <Form.Item name="title" label="Video Title" rules={[{ required: true }]}>
+                        <Input />
+                    </Form.Item>
+                    <Form.Item name="short_desc" label="Short Description" rules={[{ required: true }]}>
+                        <Input.TextArea />
+                    </Form.Item>
+                    <Form.Item name="url" label="YouTube URL" rules={[{ required: true, type: 'url' }]}>
+                        <Input />
+                    </Form.Item>
+                    <Form.Item label="Image">
+                        <input
+                            type="file"
+                            onChange={handleFileChange}
+                            key={editingVideo ? 'edit' : 'add'}
+                        />
+                    </Form.Item>
+                </Form>
+            </Modal>
+        </div>
     );
-}
+};
 
 export default YouTubeCMS;

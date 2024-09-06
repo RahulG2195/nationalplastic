@@ -59,7 +59,7 @@ function Manage() {
           ))}
 
         </div>
-        <div className="col-12 col-md-3 order-1 order-md-2 order-lg-2">
+        <div className="col-12 col-md-3 order-1 order-md-2 order-lg-2 d-flex d-md-block d-lg-block justify-content-center">
           <ComapnyProfileSidebar title="MANAGEMENT AND BOARD COMMITTEES" />
         </div>
       </div>
