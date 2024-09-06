@@ -1,3 +1,22 @@
+
+.after-5th .SecondDrop {
+    right: 0% !important;
+    top: 100% !important;
+    width: max-content !important;
+    /* padding: 5% !important; */
+    position: absolute;
+}
+
+.mainrow .after-5th:hover .SecondDrop {
+    display: block !important;
+}
+
+
+
+
+
+
+
 .mainrow .col:hover {
     background-color: white;
     cursor: pointer;

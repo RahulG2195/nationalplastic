@@ -42,7 +42,7 @@ function Awards() {
           <div className="fs-1 darkBlue fw-normal">
             Awards & <span className="fw-bold text-danger">Certificates</span>{" "}
           </div>
-          <div className="mt-1 fw-medium subCptRes w-70 certificate-para">
+          <div className="mt-1 fw-medium subCptRes w-100 certificate-para">
             <p>
               National has been awarded as the number one exporter in the
               Plastic Furniture category by The Plastics Export Promotion
@@ -58,7 +58,7 @@ function Awards() {
         <div className="row team-members">
           {certificatesarr.map((val) => (
             <div
-              className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6"
+              className="col-xl-2 col-lg-2 col-md-2 col-sm-6 col-xs-6 col-6"
               key={val.key}>
               {" "}
               <AwardsCertificates image={val.image} />

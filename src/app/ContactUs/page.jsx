@@ -129,37 +129,37 @@ function ContactUs() {
     }
   }
 
-  const RegisteredOfficeCardArr = [
-    {
-      key: 1,
-      title: "North - Regional Offices",
-      location: "D-92, Meerut Road, Indl Area, Ghaziabad, U.P. India",
-      phone: "+91-9219220368, +91- 9213090354",
-      email: "info@nationalplastic.com",
-    },
-    {
-      key: 2,
-      title: "South - Regional Offices",
-      location:
-        "21, New Timber Yard Layout, Off. Mysore Road, Near Satellite Bus Stand & Big Bazar, Banglore- 560 026",
-      phone: "080-26742855",
-      email: "info@nationalplastic.com",
-    },
-    {
-      key: 3,
-      title: "Punjab - Branch Office",
-      location: "D-92, Meerut Road, Indl Area, Ghaziabad, U.P. India",
-      phone: "+91-9219220368, +91- 9213090354",
-      email: "info@nationalplastic.com",
-    },
-    {
-      key: 4,
-      title: "Kerala - Branch Office",
-      location: "D-92, Meerut Road, Indl Area, Ghaziabad, U.P. India",
-      phone: "+91-9219220368, +91- 9213090354",
-      email: "info@nationalplastic.com",
-    },
-  ];
+  // const RegisteredOfficeCardArr = [
+  //   {
+  //     key: 1,
+  //     title: "North - Regional Offices",
+  //     location: "D-92, Meerut Road, Indl Area, Ghaziabad, U.P. India",
+  //     phone: "+91-9219220368, +91- 9213090354",
+  //     email: "info@nationalplastic.com",
+  //   },
+  //   {
+  //     key: 2,
+  //     title: "South - Regional Offices",
+  //     location:
+  //       "21, New Timber Yard Layout, Off. Mysore Road, Near Satellite Bus Stand & Big Bazar, Banglore- 560 026",
+  //     phone: "080-26742855",
+  //     email: "info@nationalplastic.com",
+  //   },
+  //   {
+  //     key: 3,
+  //     title: "Punjab - Branch Office",
+  //     location: "D-92, Meerut Road, Indl Area, Ghaziabad, U.P. India",
+  //     phone: "+91-9219220368, +91- 9213090354",
+  //     email: "info@nationalplastic.com",
+  //   },
+  //   {
+  //     key: 4,
+  //     title: "Kerala - Branch Office",
+  //     location: "D-92, Meerut Road, Indl Area, Ghaziabad, U.P. India",
+  //     phone: "+91-9219220368, +91- 9213090354",
+  //     email: "info@nationalplastic.com",
+  //   },
+  // ];
 
   // **************FactoryUnitsArr Array************
   const FactoryUnitsArr = [
@@ -168,14 +168,14 @@ function ContactUs() {
       title: "Silvassa",
       location:
         "Plot No. 263, Village Dadra, Silvassa Union Territory of Dadra Nagarhaveli, (Near Dadra 66 KVA Sub-station, 6 KM from Vapi)",
-      phone: "+91-9219220368, +91- 9213090354",
+      phone: "+91-9978444982",
       email: "info@nationalplastic.com",
     },
     {
       key: 2,
       title: "Patna",
-      location: "Plot No. B-1 to B-7, Industrial Area, Fatuha, Patna.",
-      phone: "+91-9219220368, +91- 9213090354",
+      location: "Plot No. B-1 to B-7, Industrial Area,Fatuha, Patna",
+      phone: "+91-8929813491",
       email: "info@nationalplastic.com",
     },
     {
@@ -183,16 +183,16 @@ function ContactUs() {
       title: "Nellore",
       location:
         "SY. No. 283, 297, 298, APIIC Indl. Park, Menakur, Village Naidupeth Mandal, SPSR, Nellore - 524126.",
-      phone: "+91-9219220368, +91- 9213090354",
+      phone: "+91-9908798433",
       email: "info@nationalplastic.com",
     },
-    {
-      key: 4,
-      title: "Lorem ipsum",
-      location: "D-92, Meerut Road, Indl Area, Ghaziabad, U.P. India",
-      phone: "+91-9219220368, +91- 9213090354",
-      email: "info@nationalplastic.com",
-    },
+    // {
+    //   key: 4,
+    //   title: "Lorem ipsum",
+    //   location: "D-92, Meerut Road, Indl Area, Ghaziabad, U.P. India",
+    //   phone: "+91-9219220368, +91- 9213090354",
+    //   email: "info@nationalplastic.com",
+    // },
   ];
 
 
@@ -240,23 +240,25 @@ function ContactUs() {
     <>
       <div className="container-flude">
         <div className="row">
-          <Image
+          {/* <Image
             src="/Assets/images/ContactUs/Contact-Us-pg-banner.png"
             alt="Contact Us Page Banner"
             width={100}
             height={100}
             layout="responsive"
             objectFit="cover"
-          />
+          /> */}
         </div>
         <div className="row">
-          <div className="clip-path-element">
+        <h1 className="text-center pt-5 fw-bold darkBlue "> CONTACT US</h1>
+
+          {/* <div className="clip-path-element">
             <h1>CONTACT US</h1>
             <div className="contact-btn pb-5">
               <button onClick={() => scrollToSection(branchOfficesRef)}>Branch Offices</button>
               <button onClick={() => scrollToSection(factoryUnitsRef)}>Factory Units</button>
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="row position-relative pb-5 ">
@@ -429,7 +431,7 @@ function ContactUs() {
       </div>
 
       {/* Branch Offices */}
-      <div className="container BranchOffices pt-5 mt-5" ref={branchOfficesRef}>
+      {/* <div className="container BranchOffices pt-5 mt-5" ref={branchOfficesRef}>
         <h2 className="fs-1">
           Branch <span>Offices</span>
         </h2>
@@ -445,7 +447,7 @@ function ContactUs() {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
       {/* Factory Units */}
 
       <div className="container BranchOffices py-5" ref={factoryUnitsRef}>
@@ -454,7 +456,7 @@ function ContactUs() {
         </h2>
         <div className="row BranchOfficescards">
           {FactoryUnitsArr.map((val) => (
-            <div className="col-md-6" key={val.key}>
+            <div className="col-md-4" key={val.key}>
               <ContactUsCard
                 title={val.title}
                 location={val.location}

@@ -284,7 +284,7 @@ function ProdData({ category_id }) {
                 <div className="product-name">
                   <h2 className="prod_nameh2">
                     National Plastic {name}{" "}
-                    {selectedColor ? `(${selectedColor})` : ""}
+                    {/* {selectedColor ? `(${selectedColor})` : ""} */}
                   </h2>
                 </div>
 
@@ -305,7 +305,7 @@ function ProdData({ category_id }) {
                 </div>
                 <div className="shortProdDesc">
                   {/* <p>{short_description}</p> */}
-                  <p>{prodData.descpg}</p>
+                  <p>{prodData.descp}</p>
                 </div>
                 <div className="prod_type mt-4">
                   <div className="prod_clr">

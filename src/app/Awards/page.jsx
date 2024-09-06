@@ -37,7 +37,7 @@ const Awards = () => {
   return (
     <section className="awards-certificates">
       <div className="container mt-4 mb-4">
-        <div className="row gap-4 team-members">
+        <div className="row team-members justify-content-center">
           <div className='col-12 col-md-8 order-2 order-md-1 order-lg-1'>
             <header className="text-center mb-5">
               <h1 className="fs-1 darkBlue fw-normal">
@@ -50,11 +50,13 @@ const Awards = () => {
                 {pageContent.description}
               </p>
             </header>
-            {certificates.map(({ id, image_url, alt_text }) => (
-              <div className="col-md-6" key={id}>
-                <AwardsCertificates image={image_url} alt={alt_text} />
-              </div>
-            ))}
+            <div className="row">
+              {certificates.map(({ id, image_url, alt_text }) => (
+                <div className="col-md-6 col-6" key={id}>
+                  <AwardsCertificates image={image_url} alt={alt_text} />
+                </div>
+              ))}
+            </div>
           </div>
           <div className='col-12 col-md-4 order-1 order-md-2 order-lg-2'>
             <ComapnyProfileSidebar title={pageContent.title || ''} />
