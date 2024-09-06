@@ -11,6 +11,9 @@ function BottomBar() {
   const [allProducts, setAllProducts] = useState([]);
   const [currentImage, setCurrentImage] = useState("");
   const dropdownRefs = useRef([]);
+  const [hoverenabled, setHoverenabled] = useState(true)
+
+
 
   const fetchData = useCallback(async () => {
     try {
@@ -31,6 +34,8 @@ function BottomBar() {
   console.log('navbar', navbar)
   const sendCategory = useCallback((title) => {
     localStorage.setItem("category", title);
+    setHoverenabled(false);
+
   }, []);
 
   const chunkArray = useCallback((arr, size) => {
@@ -48,7 +53,7 @@ function BottomBar() {
     const imageName = isCategory
       ? item?.image_name
       : item?.image_name?.split(", ")[0].trim();
-  
+
     setCurrentImage(imageName || "");
   }, [navbar, allProducts]);
 
@@ -75,9 +80,27 @@ function BottomBar() {
     return () => window.removeEventListener("resize", handleDropdownPosition);
   }, []);
 
+
+  const toggleHover = () => {
+    setHoverenabled(false);
+
+  };
   
+  useEffect(() => {
+    let timer;
+
+    if (!hoverenabled) {
+      timer = setTimeout(() => {
+        setHoverenabled(true);
+      }, 1000); // 2000 milliseconds = 2 seconds
+    }
+
+    return () => clearTimeout(timer);
+  }, [hoverenabled]); 
+
+
   return (
-    
+
     <div className="mainrow px-md-5  bottom_nav position-relative ">
       {navbar.map((val, index) => (
         // <div
@@ -89,16 +112,15 @@ function BottomBar() {
         //   }`}
         // >
         <div
-        key={val.category_id}
-        className={`px-2 py-2 custom-dropdown-css ${
-          index <= 5 ? 'custom-dropdown-css second' : ''
-        } ${index >= 5 ? 'after-5th ' : ''}`}
-      >
+          key={val.category_id}
+          className={`px-2 py-2 custom-dropdown-css ${index <= 5 && hoverenabled ? 'custom-dropdown-css second' : 'nohover'
+            } ${index >= 5 && hoverenabled ? 'after-5th ' : 'nohover'}`}
+        >
           <Link
             onClick={() => sendCategory(val.category_name)}
             href={`/ProductCatlogue/${val.seo_url}`}
           >
-            <p className="m-0" onMouseOver={() => changeImage(val.category_id, true)}>
+            <p className="m-0" onMouseOver={() => changeImage(val.category_id, true)} >
               {val.category_name}
             </p>
           </Link>
@@ -123,6 +145,7 @@ function BottomBar() {
                       onMouseOver={() => changeImage(product.product_name)}
                     >
                       <Link
+                        onClick={toggleHover}
                         className="nav-link"
                         href={`/ProductDetail/${product.seo_url}`}
                       >
