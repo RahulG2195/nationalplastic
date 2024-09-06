@@ -48,6 +48,14 @@ function ProdData({ category_id }) {
       setInitialCount(initialCount - 1);
     }
   };
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    // Ensure input is a valid number
+    console.log("Input" + value);
+    if (/^\d*$/.test(value)) {
+      setInitialCount(Number(value));
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -169,6 +177,10 @@ function ProdData({ category_id }) {
     } catch (err) {
       notifyError("Opps! somethings is wrong");
     }
+  };
+  const handleCountChange = (newCount) => {
+    console.log("newcoutn"+ newCount);
+    setInitialCount(newCount);
   };
 
   const handleMoveToCart = async (storedId, quantity) => {
@@ -382,11 +394,12 @@ function ProdData({ category_id }) {
                 <label htmlFor="size">Quantity</label>
                 <div className="pb-md-3 row align-items-center">
                   <div className="col-6 col-md-4 col-lg-3">
-                    <IncrementDecrement
-                      initialCount={initialCount}
-                      onIncrement={handleIncrement}
-                      onDecrement={handleDecrement}
-                    />
+                  <IncrementDecrement
+  initialCount={initialCount}
+  onIncrement={handleIncrement}
+  onDecrement={handleDecrement}
+  onCountChange={handleInputChange}  // New prop for manual input change
+/>
                   </div>
                   <div className="col-6 col-md-8 col-lg-6">
                     <button
