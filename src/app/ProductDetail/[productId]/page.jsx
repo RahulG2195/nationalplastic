@@ -13,7 +13,7 @@ function page() {
         <RecentlyViewedDetails />
         <CustomerReview />
         <Faqs />
-        <FooterRow />
+        {/* <FooterRow /> */}
       </div>
     </>
   );
