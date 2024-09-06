@@ -52,9 +52,14 @@ async function saveTeamMember(formData, action) {
     const description = formData.get('description');
     const display_order = formData.get('display_order');
     const image = formData.get('image');
-    const imageName = image.name;
-    let image_url = '';
-    if (image) {
+
+    if (!name || !designation || !description || !display_order) {
+      throw new Error("Missing required fields");
+    }
+
+    let imageName = '';
+    if (image && image.name) {
+      imageName = image.name;
       const imageDir = path.join(
         process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
         process.env.NEXT_PUBLIC_ABOUT_PATH_DIR
@@ -65,25 +70,41 @@ async function saveTeamMember(formData, action) {
         await fs.mkdir(imageDir, { recursive: true });
       }
       const imageFileName = imageName;
-      image_url = path.join(imageDir, imageFileName);
-      await fs.writeFile(image_url, Buffer.from(await image.arrayBuffer()));
+      const imagePath = path.join(imageDir, imageFileName);
+      await fs.writeFile(imagePath, Buffer.from(await image.arrayBuffer()));
     }
 
     let sql, values;
 
     if (action === 'ADD') {
-      sql = 'INSERT INTO team_members (name, designation, description, image_url, display_order) VALUES (?, ?, ?, ?, ?)';
+      sql = `
+        INSERT INTO team_members (name, designation, description, image_url, display_order) 
+        VALUES (?, ?, ?, ?, ?)
+      `;
       values = [name, designation, description, imageName, display_order];
     } else {
       const id = formData.get('id');
-      sql = 'UPDATE team_members SET name = ?, designation = ?, description = ?, display_order = ? WHERE id = ?';
+      if (!id) {
+        throw new Error("ID is required for updating");
+      }
+
+      sql = `
+        UPDATE team_members 
+        SET name = ?, designation = ?, description = ?, display_order = ? 
+        WHERE id = ?
+      `;
       values = [name, designation, description, display_order, id];
 
       if (imageName) {
-        sql = 'UPDATE team_members SET name = ?, designation = ?, description = ?, image_url = ?, display_order = ? WHERE id = ?';
+        sql = `
+          UPDATE team_members 
+          SET name = ?, designation = ?, description = ?, image_url = ?, display_order = ? 
+          WHERE id = ?
+        `;
         values = [name, designation, description, imageName, display_order, id];
       }
     }
+
 
     await query({ query: sql, values });
 
@@ -95,12 +116,14 @@ async function saveTeamMember(formData, action) {
       { status: 200 }
     );
   } catch (error) {
+    console.error("Error:", error.message);
     return new Response(
       JSON.stringify({ status: 500, message: error.message }),
       { status: 500 }
     );
   }
 }
+
 
 async function deleteTeamMember(formData) {
   try {
