@@ -37,7 +37,7 @@ function Infrastructure() {
             Infra<span className="fs-1 fw-bold text-danger">structure</span>{" "}
           </div>
           <div className="mt-1 fw-medium subCptRes w-70">
-            <p className="p-0">{mainInfo.description}</p>
+            <p className="mx-5 my-5 text-justify ">{mainInfo.description}</p>
           </div>
         </div>
         <div className="row infrastructure-row">
@@ -59,7 +59,7 @@ function Infrastructure() {
           </div>
           <div className="col-xl-6 col-lg-6 col-md-6 col-sm-8 col-xs-8 india-map-text float-start w-20">
             {additionalInfo.map((info, index) => (
-              <p key={index} className="fs-6 fw-semibold infraTextrsp">
+              <p key={index} className=" text-justify fs-6 fw-semibold infraTextrsp">
                 {info.description}
               </p>
             ))}

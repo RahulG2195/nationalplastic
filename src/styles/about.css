@@ -1,6 +1,3 @@
-
-  
-
 .cta {
     background-color: #262262;
     /* margin: 200px; */
@@ -127,19 +124,20 @@
 }
 
 
-.slide-content  {
+.slide-content {
     /* background-color: #FFE000; */
     text-align: center;
     border-radius: 10px;
     position: relative;
 }
 
-.slide-content  p {
+.slide-content p {
     font-size: 10px;
     font-weight: 600;
     padding: 12px;
 }
-.backblue{
+
+.backblue {
     background-color: #E5E4EC;
     top: 22%;
     left: 5%;
@@ -190,23 +188,27 @@
     color: #CC0008;
 }
 
-.even{
+.even {
     background-color: #262262;
 }
-.odd{
-       background-color: #FFE000;
- 
+
+.odd {
+    background-color: #FFE000;
+
 }
+
 .odd h2 {
     color: #CC0008;
     padding-top: 95px;
     font-size: large !important;
 }
+
 .even h2 {
     color: white;
     padding-top: 95px;
-    font-size:large !important;
+    font-size: large !important;
 }
+
 .even p {
     color: #9c9ca5;
 }
@@ -248,7 +250,8 @@
 .TemMemImg:hover+.TeamMemNames {
     display: block;
 }
-.AwardsCertificatesImg{
+
+.AwardsCertificatesImg {
     margin-bottom: 25px;
 }
 
@@ -257,57 +260,70 @@
 /* RESPONSIVE */
 
 @media (max-width:992px) {
-    .aboutsliderCont{
+    .aboutsliderCont {
         padding: 0 !important;
     }
-    .about_section{
+
+    .about_section {
         padding: 0 !important;
         width: 100% !important;
     }
-    .cta{
+
+    .cta {
         padding: 2px !important;
         font-size: small;
     }
-    .p0{
+
+    .p0 {
         padding: 0 !important;
     }
-    .p0 .row{
+
+    .p0 .row {
         padding: 0 !important;
     }
-    .ctatitle{
+
+    .ctatitle {
         font-size: 14px;
     }
-    .vmcont{
+
+    .vmcont {
         font-size: 10px;
         padding: 0 !important;
         margin: 0 !important;
     }
-    .backblue{
+
+    .backblue {
         display: none;
     }
-    .about_text h5,.about_text p{
+
+    .about_text h5,
+    .about_text p {
         font-size: 10px !important;
     }
-    .about_icons img{
-        width: 50px ;
-        height:50px ;
+
+    .about_icons img {
+        width: 50px;
+        height: 50px;
     }
-    
+
 }
 
 
 @media (max-width:768px) {
-    .india-map-text{
+    .india-map-text {
         width: 100% !important;
     }
-    .btntextInfra{
-    font-size: 10px !important;
-    padding: 15px !important;
+
+    .btntextInfra {
+        font-size: 10px !important;
+        padding: 15px !important;
     }
-    .infraTextrsp{
+
+    .infraTextrsp {
         font-size: 12px !important;
     }
 }
+
 @media only screen and (min-width: 1502) {}
 
 @media only screen and (min-width: 1367px) and (max-width: 1501px) {}
@@ -317,14 +333,20 @@
         margin: 0px;
         padding: 18px;
     }
+
     .section_header p {
-        padding: 0px 150px; 
+        padding: 0px 150px;
         font-size: 18px;
     }
-    .section_header_Infra h2, .team-header h2, .section_header_Certificates h2{
+
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
         padding: 0 0 10px 0;
     }
-    .row1, .row2 {
+
+    .row1,
+    .row2 {
         padding: 30px 45px 0px;
     }
 }
@@ -334,14 +356,20 @@
         margin: 0px;
         padding: 18px;
     }
+
     .section_header p {
-        padding: 0px 150px; 
+        padding: 0px 150px;
         font-size: 18px;
     }
-    .section_header_Infra h2, .team-header h2, .section_header_Certificates h2{
+
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
         padding: 0 0 10px 0;
     }
-    .row1, .row2 {
+
+    .row1,
+    .row2 {
         padding: 30px 45px 0px;
     }
 }
@@ -353,41 +381,57 @@
     }
 
     .section_header p {
-        padding: 0px 150px; 
+        padding: 0px 150px;
         font-size: 18px;
     }
-    .section_header_Infra h2, .team-header h2, .section_header_Certificates h2{
+
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
         padding: 0 0 10px 0;
     }
-    .row1, .row2 {
+
+    .row1,
+    .row2 {
         padding: 30px 45px 0px;
     }
 }
 
 @media only screen and (min-width: 769px) and (max-width: 991px) {
-    .row1, .row2 {
+
+    .row1,
+    .row2 {
         padding: 45px 25px 0px;
     }
+
     .row3 {
         padding: 70px 30px 70px;
     }
+
     .vmcontainer {
         margin: 0px;
         padding: 18px;
     }
+
     .section_header p {
         padding: 0px;
         font-size: 18px;
     }
-.section_header_Infra h2, .team-header h2, .section_header_Certificates h2{
-    padding: 0 0 10px 0;
-}
-.india-map-text { 
-    padding: 30px;
-}
-.row1, .row2 {
-    padding: 30px 45px 0px;
-}
+
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
+        padding: 0 0 10px 0;
+    }
+
+    .india-map-text {
+        padding: 30px;
+    }
+
+    .row1,
+    .row2 {
+        padding: 30px 45px 0px;
+    }
 }
 
 
@@ -398,7 +442,7 @@
 @media only screen and (min-width: 601px) and (max-width: 768px) {
 
     .india-map-image {
-        width: 100%;        
+        width: 100%;
     }
 
     .row1,
@@ -427,10 +471,14 @@
     .india-map-text {
         padding: 5px;
     }
-    .section_header_Infra h2, .team-header h2, .section_header_Certificates h2 {
+
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
         padding: 0 0 10px 0;
     }
-    .AwardsCertificatesImg{
+
+    .AwardsCertificatesImg {
         margin-bottom: 25px;
     }
 }
@@ -439,7 +487,7 @@
 @media only screen and (min-width: 481px) and (max-width: 600px) {
 
     .india-map-image {
-        width: 100%;        
+        width: 100%;
     }
 
     .row1,
@@ -465,16 +513,20 @@
         font-size: 18px;
     }
 
-    .section_header_Infra h2, .team-header h2, .section_header_Certificates h2{
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
         padding: 0 0 10px 0;
     }
 
     .india-map-text {
         padding: 5px;
     }
-    .AwardsCertificatesImg{
+
+    .AwardsCertificatesImg {
         margin-bottom: 25px;
     }
+
     .about_icons {
         justify-content: left;
     }
@@ -482,7 +534,7 @@
 
 @media only screen and (min-width: 361px) and (max-width: 480px) {
     .india-map-image {
-        width: 100%;        
+        width: 100%;
     }
 
     .row1,
@@ -497,23 +549,31 @@
     .about_icons {
         padding: 10px;
     }
+
     .vmcontainer {
         margin: 20px;
         padding: 25px;
     }
+
     .section_header p {
         padding: 0px;
         font-size: 18px;
     }
+
     .india-map-text {
         padding: 5px;
     }
-    .section_header_Infra h2, .team-header h2, .section_header_Certificates h2{
+
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
         padding: 0 0 10px 0;
     }
+
     .AwardsCertificatesImg {
         margin-bottom: 25px;
     }
+
     .about_icons {
         justify-content: left;
     }
@@ -523,7 +583,7 @@
 @media only screen and (max-width: 360px) {
 
     .india-map-image {
-        width: 100%;        
+        width: 100%;
     }
 
     .row1,
@@ -548,26 +608,41 @@
         padding: 0px;
         font-size: 18px;
     }
+
     .india-map-text {
         padding: 5px;
     }
-    .section_header_Infra h2 , .team-header h2, .section_header_Certificates h2{
+
+    .section_header_Infra h2,
+    .team-header h2,
+    .section_header_Certificates h2 {
         padding: 0 0 10px 0;
     }
 
-    .AwardsCertificatesImg{
+    .AwardsCertificatesImg {
         margin-bottom: 25px;
-    } 
-    .section_header h3{
+    }
+
+    .section_header h3 {
         font-size: 30px;
     }
+
     .about_icons {
         justify-content: left;
     }
-    .ctatitle{
+
+    .ctatitle {
         font-size: 18px;
     }
-    .medium{
+
+    .medium {
         font-size: 14px;
     }
 }
+
+/* .text-justify {
+    text-align: justify !important;
+    display: flex !important;
+    justify-content: center !important;
+    background-color: #CC0008 !important;
+} */

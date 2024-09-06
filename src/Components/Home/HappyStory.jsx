@@ -46,8 +46,8 @@ export default function HappyStory() {
         <div className="row">
           <div className="text-center mb-5">
             <div className="darkBlue fs-1 fw-medium">
-              Happy
-              <span className="fs-1 lh-small fw-bolder text-danger">
+              Happy 
+               <span className="fs-1 lh-small fw-bolder text-danger">
                 Stories
               </span>
             </div>

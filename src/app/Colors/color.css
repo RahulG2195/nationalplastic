@@ -1,0 +1,42 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 items per row */
+    gap: 16px; /* Adds spacing between items */
+    margin: 50px;
+  }
+  
+  .grid-item {
+    padding: 20px;
+    text-align: center;
+    font-size: 20px;
+}
+.colname{
+      margin-top: 15px;
+
+  }
+  
+  /* Make it responsive */
+  @media (max-width: 1200px) {
+    .grid-container {
+      grid-template-columns: repeat(4, 1fr); /* 4 items per row on medium screens */
+    }
+  }
+  
+  @media (max-width: 900px) {
+    .grid-container {
+      grid-template-columns: repeat(3, 1fr); /* 3 items per row on smaller screens */
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .grid-container {
+      grid-template-columns: repeat(2, 1fr); /* 2 items per row on mobile screens */
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .grid-container {
+      grid-template-columns: 1fr; /* 1 item per row on very small screens */
+    }
+  }
+  
