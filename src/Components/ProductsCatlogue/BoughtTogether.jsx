@@ -192,7 +192,7 @@ const BoughtTogether = () => {
         </Swiper>
       </div>
 
-      <div className="mt-md-5 mt-2">
+      {/* <div className="mt-md-5 mt-2">
         <Image
           className="mt-md-5 mt-2"
           src={"/Assets/images/CTA-banner-1.jpg-V2/CTA-banner-1.jpg-V2.png"}
@@ -202,7 +202,7 @@ const BoughtTogether = () => {
           objectFit="cover"
           alt="Picture of the author"
         />
-      </div>
+      </div> */}
     </>
   );
 };

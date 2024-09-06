@@ -46,8 +46,8 @@ export default function HappyStory() {
         <div className="row">
           <div className="text-center mb-5">
             <div className="darkBlue fs-1 fw-medium">
-              Happy
-              <span className="fs-1 lh-small fw-bolder text-danger">
+              Happy 
+               <span className="fs-1 lh-small fw-bolder text-danger">
                 Stories
               </span>
             </div>
@@ -90,7 +90,7 @@ export default function HappyStory() {
                         >
                           <Image
                             className="rounded-top-5"
-                            src={product.image}
+                            src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${product.image}`}
                             alt={product.title}
                             width={100}
                             height={50}

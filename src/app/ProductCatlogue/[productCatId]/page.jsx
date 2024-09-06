@@ -16,8 +16,8 @@ const ProductCatlogue = () => {
       <PreChairsCards />
       <BoughtTogether />
       <RecentlyViewed />
-      <FooterRow />
-      <BottomCTABanner />
+      {/* <FooterRow /> */}
+      {/* <BottomCTABanner /> */}
     </>
   );
 };
