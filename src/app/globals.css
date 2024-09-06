@@ -700,7 +700,7 @@ p {
     }
 }
 
-@media (max-width: 600px){
+@media (max-width: 768px){
 
     .main_header {
         height: auto !important;
@@ -714,8 +714,12 @@ p {
         align-items: center;
     }
     .navbar-brand a{
+        display:  block !important;
         /* margin: auto; */
         text-align: center;
+    }
+    .side-icons{
+        display: none !important;
     }
 }
 

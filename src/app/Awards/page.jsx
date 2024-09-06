@@ -58,7 +58,7 @@ const Awards = () => {
               ))}
             </div>
           </div>
-          <div className='col-12 col-md-4 order-1 order-md-2 order-lg-2'>
+          <div className='col-12 col-md-4 order-1 order-md-2 order-lg-2 d-flex d-md-block d-lg-block justify-content-center'>
             <ComapnyProfileSidebar title={pageContent.title || ''} />
           </div>
         </div>
