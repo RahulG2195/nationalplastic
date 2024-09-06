@@ -60,7 +60,7 @@ const Promoters = () => {
                         <h4 className="team-designation">
                           {member.designation}
                         </h4>
-                        <p className="team-description">{member.description}</p>
+                        <p className=" text-justify team-description">{member.description}</p>
                       </div>
                     </div>
                   </div>
@@ -68,7 +68,7 @@ const Promoters = () => {
               </div>
             ))}
           </div>
-          <div className="col-12 col-md-3 order-1 order-md-2 order-lg-2 justify-content-end">
+          <div className="col-12 col-md-3 order-1 order-md-2 order-lg-2 d-flex d-md-block d-lg-block justify-content-center">
             <ComapnyProfileSidebar title={"PROMOTERS/DIRECTORS"} />
           </div>
         </div>

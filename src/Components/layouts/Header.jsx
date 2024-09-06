@@ -238,7 +238,7 @@ export default function Header() {
                     aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon" />
                   </button>
-                  <Link href="/">
+                  <Link href="/" className="moblogo">
                     <Image
                       src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}${basicInfo.logo}`}
                       className="Image-fluid"
@@ -269,7 +269,7 @@ export default function Header() {
                 </div>
 
                 {isSearchVisible && (
-                  <div className="container-fluid mt-3 d-lg-none">
+                  <div className="container-fluid mt-3 d-lg-none d-flex justify-content-center">
                     <form onSubmit={handleSearchSubmit} className="d-flex nav-search">
                       <input
                         className="form-control text-center HeadSearch fw-semibold"
@@ -438,14 +438,22 @@ export default function Header() {
                         CSR
                       </Link>
                     </li>
-                    <li className="nav-item brdr bulk_ord">
+                    <li className="nav-item brdr">
+                      <Link
+                        className="nav-link"
+                        href="/ContactUs"
+                        onClick={isClicked ? handleShow : null}>
+                        Contact Us
+                      </Link>
+                    </li>
+                    {/* <li className="nav-item brdr bulk_ord">
                       <Link
                         className="nav-link"
                         href="/BulkOrder"
                         onClick={isClicked ? handleShow : null}>
                         Bulk Orders
                       </Link>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
                 <div className="row">
@@ -468,7 +476,7 @@ export default function Header() {
                         />
                       </Link>
                     </li>
-                    <li className="nav-item brdr d-none d-md-none d-xl-block">
+                    {/* <li className="nav-item brdr d-none d-md-none d-xl-block">
                       <Link
                         className="nav-link"
                         href="/ContactUs"
@@ -483,7 +491,7 @@ export default function Header() {
                           alt="location"
                         />
                       </Link>
-                    </li>
+                    </li> */}
                     <li className="nav-item brdr d-none d-md-none d-xl-block">
                       <Link
                         className="nav-link"
@@ -546,7 +554,7 @@ export default function Header() {
 
                 {/* footer menu */}
                 <div className="lower-mobile-menu">
-                  <ul className="list-unstyled">
+                  <ul className="list-unstyled align-items-center">
                     <li>
                       <Link href="/#">
                         <Image
@@ -607,7 +615,7 @@ export default function Header() {
                       )}
                     </li>
                     <li>
-                      <Link href="/AddToCart">
+                      <Link href="/AddToCart" className=" position-relative">
                         <Image
                           src="/Assets/svg/Group 5.svg"
                           height={50}

@@ -11,7 +11,9 @@
     display: block !important;
 }
 
-
+.nohover .SecondDrop {
+display: none !important;
+}
 
 
 
@@ -569,7 +571,11 @@ p {
     }
 
     .lower-mobile-menu {
-        display: none;
+        display: block;
+        padding: 3px 38px !important;
+    }
+    .AddToCartNav-link{
+        position: relative !important;
     }
 
     .cartCount {

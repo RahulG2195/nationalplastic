@@ -46,7 +46,7 @@ const Awards = () => {
                   {pageContent.title?.split('&')[1]}
                 </span>
               </h1>
-              <p className="mt-1 fw-medium subCptRes w-70 certificate-para">
+              <p className="mx-5 my-5 text-justify mt-1 fw-medium subCptRes w-70 certificate-para">
                 {pageContent.description}
               </p>
             </header>
@@ -58,7 +58,7 @@ const Awards = () => {
               ))}
             </div>
           </div>
-          <div className='col-12 col-md-4 order-1 order-md-2 order-lg-2'>
+          <div className='col-12 col-md-4 order-1 order-md-2 order-lg-2 d-flex d-md-block d-lg-block justify-content-center'>
             <ComapnyProfileSidebar title={pageContent.title || ''} />
           </div>
         </div>

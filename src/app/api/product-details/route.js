@@ -16,7 +16,7 @@ export async function GET(request) {
         SELECT p.*, c.category_name, c.seo_url AS cat_seo_url
         FROM products p
         LEFT JOIN categories c ON p.category_id = c.category_id 
-        WHERE p.product_id = ? OR LOWER(p.seo_url) = LOWER(?)
+        WHERE p.product_id = ? OR LOWER(p.seo_url) = LOWER(?) AND prod_status = 1
         LIMIT 1
       `,
       values: [id, id],
