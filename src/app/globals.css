@@ -235,7 +235,10 @@ p {
 
 .subCptRes {
     margin: auto;
-    text-wrap: balance;
+    text-wrap: wrap;
+}
+.spacing{
+    text-wrap: wrap;
 }
 
 .fa-arrow-circle-left,
@@ -961,3 +964,4 @@ p {
 .text-justify {
     text-align: justify !important;
 }
+    

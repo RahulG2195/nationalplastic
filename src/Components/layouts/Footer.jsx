@@ -55,7 +55,7 @@ export default function Footer() {
               </div>
               <ul>
                 <li>
-                  <Link className="nav-link fw-bold" href="/About">
+                  <Link className="nav-link fw-bold" href="/Companyprofile">
                     About Us
                   </Link>
                 </li>
@@ -96,11 +96,11 @@ export default function Footer() {
               <ul>
                 <li className='fw-bold'>Custom Furniture</li>
                 <li className='fw-bold'>Exporters</li>
-                <li>
+                {/* <li>
                   <Link className='nav-link fw-bold' href="/BulkOrder">
                     Buy in Bulk
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link className='nav-link fw-bold' href="/Investor">
                     Investor Desk
@@ -120,6 +120,7 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li className='fw-bold'><Link className='nav-link fw-bold' href='/ContactUs'>Ask Experts</Link> </li>
+                <li className='fw-bold'><Link className='nav-link fw-bold' href='/Colors'>Colors</Link> </li>
 
                 {/* <li>
                   <Link className='nav-link fw-bold' href="/TrackYourOrder">Track your order</Link>

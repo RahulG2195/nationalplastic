@@ -18,15 +18,20 @@ export async function POST(request) {
 
     if (image && image instanceof File) {
       try {
-        const bytes = await image.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-        const path = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}`;
+        const imageDir = path.join(
+          process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
+          process.env.NEXT_PUBLIC_BANNERS_PATH_DIR 
+        );
+
         try {
-          await fs.access(path);
+          await fs.access(imageDir);
         } catch {
-          await fs.mkdir(path, { recursive: true });
+          await fs.mkdir(imageDir, { recursive: true });
         }
-        await writeFile(path, buffer);
+  
+        // Save the new image file
+        const imageFilePath = path.join(imageDir, uploadedImageName);
+        await fs.writeFile(imageFilePath, Buffer.from(await image.arrayBuffer()));
 
       } catch (uploadError) {
         return new Response(
@@ -94,17 +99,19 @@ export async function PUT(request) {
     
     if (image) {
       try {
-
-        const bytes = await image.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-    
-        const path = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}`;
+        const imageDir = path.join(
+          process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
+          process.env.NEXT_PUBLIC_BANNERS_PATH_DIR 
+        );
         try {
-          await fs.access(path);
+          await fs.access(imageDir);
         } catch {
-          await fs.mkdir(path, { recursive: true });
+          await fs.mkdir(imageDir, { recursive: true });
         }
-        await writeFile(path, buffer);
+  
+        // Save the new image file
+        const imageFilePath = path.join(imageDir, image_name);
+        await fs.writeFile(imageFilePath, Buffer.from(await image.arrayBuffer()));
       } catch (uploadError) {
         return new Response(
           JSON.stringify({ success: false, error: uploadError.message }),

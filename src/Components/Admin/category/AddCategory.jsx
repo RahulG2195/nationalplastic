@@ -24,10 +24,10 @@ export default function AddCategory() {
     setIsLoading(true);
     const submitLoader = async () => {
       try {
-        const { category_name, image_name, navshow, status, image, topPick } = data;
+        const { category_name, image_name, navshow, status, image, topPick,seo_url } = data;
         
         const formData = new FormData();
-        const entries = { category_name, image_name, navshow, status, image, topPick };
+        const entries = { category_name, image_name, navshow, status, image, topPick ,seo_url};
     
         for (const [key, value] of Object.entries(entries)) {
           formData.append(key, value);
@@ -90,6 +90,23 @@ export default function AddCategory() {
             render={({ field }) => (
               <Input {...field} />
             )}
+          />
+        </Form.Item>
+        <Form.Item
+          label="SEO URL"
+          validateStatus={errors.seo_url ? 'error' : ''}
+          help={errors.seo_url ? 'SEO URL is invalid! Dont add space between words only underscore or hyphens are allowed.' : ''}
+        >
+          <Controller
+            name="seo_url"
+            control={control}
+            rules={{
+              required: true,
+              pattern: /^[a-zA-Z0-9-_]+$/,
+              minLength: 1,
+              maxLength: 255,
+            }}
+            render={({ field }) => <Input {...field} />}
           />
         </Form.Item>
         <Form.Item
