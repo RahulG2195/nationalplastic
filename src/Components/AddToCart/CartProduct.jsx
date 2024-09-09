@@ -1,11 +1,9 @@
 import Image from "next/image";
-import IncrementDecrement from "./IncrementDecrement";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addItemToWishlist } from "../../redux/reducer/wishlistSlice";
 import Link from "next/link";
 import numberWithCommas from '@/utils/formatnumber';
-// import axios from "axios";
 import {
   increaseQuantity,
   decreaseQuantity,
@@ -20,7 +18,6 @@ import { isLoggedIn } from "../../utils/validation";
 import { Bounce, toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { notifyError } from "../../utils/notify";
-
 
 const CartProduct = ({
   src,
@@ -37,10 +34,9 @@ const CartProduct = ({
   color,
 }) => {
   const router = useRouter();
-
   const [initialCount, setInitialCount] = useState(quantity);
   const dispatch = useDispatch();
-  const Np = "National Plastic"
+  const Np = "National Plastic";
 
   const handleIncrement = async () => {
     const isLoggedInResult = await isLoggedIn();
@@ -52,19 +48,35 @@ const CartProduct = ({
       setInitialCount(initialCount + 1);
     }
   };
+
   const handleDecrement = async () => {
     const isLoggedInResult = await isLoggedIn();
-
-    if (initialCount > 0) {
+    if (initialCount > 1) { // Adjusted to prevent negative quantity
       if (!isLoggedInResult) {
-        dispatch(decreaseQuantityD({ product_id: productId }));
+        await dispatch(decreaseQuantityD({ product_id: productId }));
         setInitialCount(initialCount - 1);
       } else {
-        dispatch(decreaseQuantity({ product_id: productId }));
+        await dispatch(decreaseQuantity({ product_id: productId }));
         setInitialCount(initialCount - 1);
       }
     }
   };
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    const numericValue = Number(value);
+
+    if (!isNaN(numericValue) && numericValue > 0) {
+      setInitialCount(numericValue);
+    }
+    logit();
+
+  };
+
+  const logit = () => {
+    console.log("numeric" + typeof(initialCount));
+    console.log("numeric " + initialCount);
+  }
 
   const handleAddtoWishlist = async (product_id) => {
     const isLoggedInResult = await isLoggedIn();
@@ -72,21 +84,16 @@ const CartProduct = ({
       notifyError("Login to Add to cart");
       router.push("/Login");
     } else {
-      dispatch(
-        addItemToWishlist({
-          product_id: product_id,
-        })
-      );
+      dispatch(addItemToWishlist({ product_id: product_id }));
     }
   };
 
   const handleRemove = async (product_id) => {
     const isLoggedInResult = await isLoggedIn();
+    onRemoveSuccess(productId);
     if (!isLoggedInResult) {
-      onRemoveSuccess(productId);
       dispatch(removeItemFromCartD({ product_id: product_id }));
     } else {
-      onRemoveSuccess(productId);
       dispatch(removeItemFromCart({ product_id: product_id }));
     }
   };
@@ -101,8 +108,8 @@ const CartProduct = ({
         <Link onClick={setid} href={`/ProductDetail/${seourl}`}>
           <Image
             src={src}
-            className="img-fluid d-block w-100" // Use w-100 to make the image fill the entire col-lg col-md-3 col-sm-12umn
-            alt="Team Member"
+            className="img-fluid d-block w-100"
+            alt="Product Image"
             width={100}
             height={100}
             layout="responsive"
@@ -114,23 +121,39 @@ const CartProduct = ({
       <div className="col-md-8 card-Quantity-section">
         <Link onClick={setid} href={`/ProductDetail/${seourl}`}>
           <div style={{ display: "flex" }}>
-            <h6 style={{ marginRight: "7px" }}><span className="text-danger" >{Np}</span> {productName}</h6>
+            <h6 style={{ marginRight: "7px" }}>
+              <span className="text-danger">{Np}</span> {productName}
+            </h6>
           </div>
-          <h6 className="py-2">color: {color}</h6>
+          <h6 className="py-2">Color: {color}</h6>
         </Link>
-        {/* <p>{productDesc}</p> */}
 
         <div className="CartQuantity d-flex flex-wrap">
           <p>Quantity</p>
-          {/* Increment Decrement start */}
 
-          <IncrementDecrement
-            initialCount={initialCount}
-            onIncrement={handleIncrement}
-            onDecrement={handleDecrement}
-          />
+          {/* Inline Increment/Decrement */}
+          <div className="input-group">
+            <span className="input-group-text">
+              <button
+                onClick={handleDecrement}
+                disabled={initialCount <= 1} // Prevent going below 1
+              >
+                -
+              </button>
+            </span>
+            <input
+              type="text"
+              value={initialCount}
+              className="form-control p-0 text-center"
+              aria-label="Quantity"
+              onChange={handleInputChange}
+            />
+            <span className="input-group-text">
+              <button onClick={handleIncrement}>+</button>
+            </span>
+          </div>
 
-          {/* Increment Decrement end */}
+          {/* Price Section */}
           {/* <div className="productPrice">
             <p className="fw-bold">₹ {numberWithCommas(productPrice)}</p>
             <p>
@@ -139,43 +162,21 @@ const CartProduct = ({
             </p>
           </div> */}
         </div>
-        {/* <div className="InstallationCharges align-items-center">
-          <p className="text-secondary me-2">
-            {" "}
-            Installation Charges : ₹ {installationCharges}
-          </p>
-          <div className="CouponApplied">
-            <Image
-              src="/Assets/images/AddTOCart/percentage.png"
-              className="img-fluid d-block "
-              alt="ome banner 1"
-              width={100}
-              height={80}
-            />
-            <p className="text-danger">Coupon Applied</p>
-          </div>
-        </div> */}
 
         <div className="InstallationCharges align-items-center my-5">
-          <div
-            onClick={() => handleAddtoWishlist(productId)}
-            className="CouponApplied mx-3"
-          >
+          <div onClick={() => handleAddtoWishlist(productId)} className="CouponApplied mx-3">
             <img
               src="/Assets/images/AddTOCart/core-heart.png"
               className="img-fluid d-block"
-              alt="ome banner 1"
+              alt="Wishlist"
             />
             <p>Save For Later</p>
           </div>
-          <div
-            onClick={() => handleRemove(productId)}
-            className="CouponApplied "
-          >
+          <div onClick={() => handleRemove(productId)} className="CouponApplied">
             <Image
               src="/Assets/images/AddTOCart/Icon-core-trash.png"
               className="img-fluid d-block w-100"
-              alt="ome banner 1"
+              alt="Remove"
               width={100}
               height={80}
             />
@@ -187,4 +188,5 @@ const CartProduct = ({
     </>
   );
 };
+
 export default CartProduct;
