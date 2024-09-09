@@ -56,28 +56,28 @@ function BottomBar() {
     setCurrentImage(imageName || "");
   }, [navbar, allProducts]);
 
-  useEffect(() => {
-    const handleDropdownPosition = () => {
-      dropdownRefs.current.forEach((dropdown) => {
-        if (dropdown) {
-          const rect = dropdown.getBoundingClientRect();
-          const viewportWidth = window.innerWidth;
+  // useEffect(() => {
+  //   const handleDropdownPosition = () => {
+  //     dropdownRefs.current.forEach((dropdown) => {
+  //       if (dropdown) {
+  //         const rect = dropdown.getBoundingClientRect();
+  //         const viewportWidth = window.innerWidth;
 
-          dropdown.style.left = rect.right > viewportWidth ? "auto" : "0";
-          dropdown.style.right = rect.right > viewportWidth ? "0" : "auto";
+  //         dropdown.style.left = rect.right > viewportWidth ? "auto" : "0";
+  //         dropdown.style.right = rect.right > viewportWidth ? "0" : "auto";
 
-          if (rect.left < 0) {
-            dropdown.style.left = `${-dropdown.parentElement.getBoundingClientRect().left}px`;
-          }
-        }
-      });
-    };
+  //         if (rect.left < 0) {
+  //           dropdown.style.left = `${-dropdown.parentElement.getBoundingClientRect().left}px`;
+  //         }
+  //       }
+  //     });
+  //   };
 
-    handleDropdownPosition();
-    window.addEventListener("resize", handleDropdownPosition);
+  //   handleDropdownPosition();
+  //   window.addEventListener("resize", handleDropdownPosition);
 
-    return () => window.removeEventListener("resize", handleDropdownPosition);
-  }, []);
+  //   return () => window.removeEventListener("resize", handleDropdownPosition);
+  // }, []);
 
 
   const toggleHover = () => {
@@ -112,7 +112,7 @@ function BottomBar() {
         // >
         <div
           key={val.category_id}
-          className={`px-2 py-2 custom-dropdown-css ${index <= 5 && hoverenabled ? 'custom-dropdown-css second' : 'nohover'
+          className={`px-2 py-2 custom-dropdown-css ${index <= 4 && hoverenabled ? 'custom-dropdown-css second' : 'nohover'
             } ${index >= 5 && hoverenabled ? 'after-5th ' : 'nohover'}`}
         >
           <Link
