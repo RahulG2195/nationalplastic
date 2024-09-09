@@ -454,9 +454,9 @@ function ContactUs() {
         <h2>
           Factory <span>Units</span>
         </h2>
-        <div className="row BranchOfficescards">
+        <div className="row BranchOfficescards ">
           {FactoryUnitsArr.map((val) => (
-            <div className="col-md-4" key={val.key}>
+            <div className="col-md-6 col-lg-4 col-12" key={val.key}>
               <ContactUsCard
                 title={val.title}
                 location={val.location}
