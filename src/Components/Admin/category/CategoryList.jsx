@@ -39,7 +39,7 @@ const CategoryList = () => {
         value: newNavshowValue,
         field: data
       });
-      console.log("data saved", JSON.stringify(response.data.data[1]));
+      
       if (response.data.success) {
         const updatedCategories = categoryArray.map(category =>
           category.category_id === categoryId
@@ -48,6 +48,7 @@ const CategoryList = () => {
         );
         setCategoryArray(updatedCategories);
         setFilteredCategoryArray(updatedCategories);
+        
         notify("status updated successfully");
       } else {
         notifyError('Failed to update  status');
