@@ -529,3 +529,29 @@
   font-size: 15px !important;
 }
 }
+.dot{
+  overflow: hidden;
+  height: auto;
+}
+.dot p{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical ;
+  -webkit-line-clamp: 3;
+  text-overflow: ellipsis;
+}
+.dot p:hover{
+  overflow: visible;
+  -webkit-line-clamp: 15;
+}
+.dot h5{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical ;
+  -webkit-line-clamp: 1;
+  text-overflow: ellipsis;
+}
+.dot h5:hover{
+  overflow: visible;
+  -webkit-line-clamp: 3;
+}

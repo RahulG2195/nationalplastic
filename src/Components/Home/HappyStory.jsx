@@ -47,9 +47,7 @@ export default function HappyStory() {
           <div className="text-center mb-5">
             <div className="darkBlue fs-1 fw-medium">
               Happy
-              <span className="fs-1 lh-small fw-bolder text-danger">
-                Stories
-              </span>
+              <span className="fs-1 lh-small fw-bolder text-danger"> Stories</span>
             </div>
             <div className="mt-1 fw-medium subCptRes w-50">
               <p>Their Words, Our Pride</p>
@@ -99,7 +97,7 @@ export default function HappyStory() {
                           />
                         </a>
                       </div>
-                      <div className="respswpr card-body rounded-bottom-5">
+                      <div className="respswpr card-body rounded-bottom-5 dot">
                         <h5 className="card-title">{product.title}</h5>
                         <p className="card-text">{product.short_desc}</p>
                       </div>

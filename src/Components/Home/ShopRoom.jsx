@@ -39,7 +39,7 @@ export default function ShopRoom() {
           <div className="text-center mb-5">
             <div className="darkBlue fs-1 fw-medium">
               Shop By
-              <span className="fs-1 lh-small fw-bold text-danger ">Rooms</span>
+              <span className="fs-1 lh-small fw-bold text-danger "> Rooms</span>
             </div>
             <div className="mt-1 fw-medium subCptRes w-50">
               <p>

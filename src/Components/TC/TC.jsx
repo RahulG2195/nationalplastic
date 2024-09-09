@@ -18,7 +18,7 @@ const TC = ({ bannerImage, content }) => {
       </div>
 
       <div
-        className="px-md-5 fw-semibold TCTxt"
+        className="px-md-5 fw-semibold TCTxt spacing"
         dangerouslySetInnerHTML={{ __html: content }}
       />
     </>
