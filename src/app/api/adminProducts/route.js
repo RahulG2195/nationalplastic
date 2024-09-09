@@ -227,6 +227,24 @@ export async function POST(request) {
 export async function PUT(request) {
   try {
     const formData = await request.formData();
+    const product_id = formData.get("product_id");
+
+    if (!product_id) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Product ID is required",
+          step: "Field validation",
+        },
+        { status: 400 }
+      );
+    }
+
+    const updateData = {};
+    const updateFields = [];
+    const updateValues = [];
+
+    // Handle image uploads
     const images = formData.getAll("image");
     const imageNames = [];
     if (images && images.length > 0) {
@@ -248,9 +266,13 @@ export async function PUT(request) {
           );
         }
       }
+      updateData.image_name = imageNames.join(", ");
+      updateFields.push("image_name = ?");
+      updateValues.push(updateData.image_name);
     }
 
-    const requiredFields = [
+    // Handle other fields
+    const fields = [
       "product_name",
       "seo_url",
       "category_id",
@@ -258,88 +280,51 @@ export async function PUT(request) {
       "discount_percentage",
       "color",
       "armType",
-      "product_id",
+      "prod_status",
     ];
-    const data = {};
-    const missingFields = [];
 
-    requiredFields.forEach((field) => {
+    fields.forEach((field) => {
       const value = formData.get(field);
-      if (!value) {
-        missingFields.push(field);
-      } else {
-        data[field] = value;
+      if (value !== null && value !== undefined && value !== "") {
+        updateData[field] = value;
+        updateFields.push(`${field} = ?`);
+        updateValues.push(value);
       }
     });
 
-    if (missingFields.length > 0) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: `The following fields are required: ${missingFields.join(
-            ", "
-          )}`,
-          step: "Field validation",
-        },
-        { status: 400 }
-      );
+    // Handle color code
+    if (updateData.color) {
+      try {
+        const color_code = convertColorToCode(updateData.color);
+        updateFields.push("color_code = ?");
+        updateValues.push(color_code);
+      } catch (error) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: error.message,
+            step: "Color conversion",
+          },
+          { status: 400 }
+        );
+      }
     }
 
-    data.image_name =
-      imageNames.length > 0
-        ? imageNames.join(", ")
-        : formData.get("image_name");
-
-    data.category_id = formData.get("category_id");
-
-    let color_code;
-    try {
-      color_code = convertColorToCode(data.color);
-    } catch (error) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: error.message,
-          step: "Color conversion",
-        },
-        { status: 400 }
-      );
+    // Update products table if there are changes
+    let result;
+    if (updateFields.length > 0) {
+      result = await query({
+        query: `
+          UPDATE products 
+          SET ${updateFields.join(", ")}
+          WHERE product_id = ?
+        `,
+        values: [...updateValues, product_id],
+      });
     }
 
-    const result = await query({
-      query: `
-        UPDATE products 
-        SET 
-          product_name = ?,
-          seo_url = ?,
-          category_id = ?,
-          image_name = ?,
-          price = ?,
-          discount_percentage = ?,
-          color = ?,
-          color_code = ?,
-          armType = ?,
-          prod_status = ?
-          
-        WHERE 
-          product_id = ?
-      `,
-      values: [
-        data.product_name,
-        data.seo_url,
-        data.category_id,
-        data.image_name,
-        data.price,
-        data.discount_percentage,
-        data.color,
-        color_code,
-        data.armType,
-        data.prod_status || 1,
-        data.product_id,
-      ],
-    });
-
-    const product_detail_data = [
+    // Handle product_detail fields
+    const detailFields = [
       "features",
       "dimenions",
       "descp",
@@ -347,57 +332,44 @@ export async function PUT(request) {
       "deliveryInsct",
       "manufacturing",
       "warranty",
-    ]
-    product_detail_data.forEach((field) => {
-      let value = formData.get(field);
+    ];
+    const detailUpdateFields = [];
+    const detailUpdateValues = [];
+
+    detailFields.forEach((field) => {
+      const value = formData.get(field);
       if (value && value !== "undefined") {
-        data[field] = value;
-      } else {
-        data[field] = null;
+        detailUpdateFields.push(`${field} = ?`);
+        detailUpdateValues.push(value);
       }
     });
+
+    // Handle dimension image
     const dimension_img_file = formData.get('dimension_img');
     if (dimension_img_file) {
       await uploadImage(dimension_img_file);
+      detailUpdateFields.push("dimension_img = ?");
+      detailUpdateValues.push(dimension_img_file.name);
     }
 
-
-
-    await query({
-      query: `
-        UPDATE product_detail
-        SET
-          features = ?,
-          dimenions = ?,
-          descp = ?,
-          careAndInstruct = ?,
-          deliveryInsct = ?,
-          manufacturing = ?,
-          warranty = ?,
-          dimension_img = ?
-        WHERE
-          prod_id = ?
-      `,
-      values: [
-        data.features || '',
-        data.dimenions || '',
-        data.descp || '',
-        data.careAndInstruct || '',
-        data.deliveryInsct || '',
-        data.manufacturing || '',
-        data.warranty || '',
-        dimension_img_file?.name || '',
-        data.product_id,
-      ],
-    });
-    
+    // Update product_detail table if there are changes
+    if (detailUpdateFields.length > 0) {
+      await query({
+        query: `
+          UPDATE product_detail
+          SET ${detailUpdateFields.join(", ")}
+          WHERE prod_id = ?
+        `,
+        values: [...detailUpdateValues, product_id],
+      });
+    }
 
     return NextResponse.json(
       {
         success: true,
         data: result,
         message: "Product updated successfully",
-        updatedFields: Object.keys(data),
+        updatedFields: Object.keys(updateData),
         imageNames: imageNames,
       },
       { status: 200 }
@@ -414,7 +386,6 @@ export async function PUT(request) {
     );
   }
 }
-
 export async function GET(request) {
   try {
     const allProducts = await query({

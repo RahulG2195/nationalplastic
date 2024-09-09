@@ -18,6 +18,7 @@ export default function App() {
   const [calculatedDiscountPrice, setCalculatedDiscountPrice] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState({ id: null, name: '' });
   const [DimensionFile, setDimensionFile] = useState(null);
+  const [initialData, setInitialData] = useState({});
 
   const navigate = useNavigate();
 
@@ -59,22 +60,42 @@ export default function App() {
     const submitLoader = async () => {
       try {
         const formData = new FormData();
+        let hasChanges = false;
+        formData.append('product_id', initialData.product_id);
 
         Object.keys(data).forEach(key => {
           if (key === 'image') {
-            data[key].forEach(file => {
-              formData.append('image', file);
-            });
-          } else {
+            if (data[key] && data[key].length > 0) {
+              data[key].forEach(file => {
+                formData.append('image', file);
+              });
+              hasChanges = true;
+            }
+          } else if (data[key] !== initialData[key]) {
             formData.append(key, data[key]);
+            hasChanges = true;
           }
         });
-        formData.append('discount_price', calculatedDiscountPrice);
-        if (selectedCategory.id) {
-          formData.set('category_id', selectedCategory.id);
+
+        if (calculatedDiscountPrice !== initialData.discount_price) {
+          formData.append('discount_price', calculatedDiscountPrice);
+          hasChanges = true;
         }
+
+        if (selectedCategory.id && selectedCategory.id !== initialData.category_id) {
+          formData.set('category_id', selectedCategory.id);
+          hasChanges = true;
+        }
+
         if (DimensionFile) {
-          formData.append("dimension_img", DimensionFile); // file itself
+          formData.append("dimension_img", DimensionFile);
+          hasChanges = true;
+        }
+
+        if (!hasChanges) {
+          toast.info("No changes detected");
+          setIsLoading(false);
+          return;
         }
 
         await updateProduct(formData);
@@ -105,7 +126,6 @@ export default function App() {
       }
     );
   };
-
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
     setValue('image', files);
@@ -125,6 +145,7 @@ export default function App() {
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("productToEdit"));
     if (data) {
+      setInitialData(data);
       Object.keys(data).forEach(key => {
         setValue(key, data[key]);
       });
