@@ -4,7 +4,6 @@ import "../../styles/prod_detail.css";
 import Image from "next/image";
 import ProductDetailSlider from "../ProductDetailSlider/ProductDetailSlider";
 import MoreProduct from "./MoreProducts/MoreProduct";
-import IncrementDecrement from "@/Components/AddToCart/IncrementDecrement";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,17 +43,13 @@ function ProdData({ category_id }) {
   };
 
   const handleDecrement = async () => {
+    console.log("its coming herre toh Y")
     if (initialCount > 0) {
       setInitialCount(initialCount - 1);
     }
   };
   const handleInputChange = (e) => {
-    const value = e.target.value;
-    // Ensure input is a valid number
-    console.log("Input" + value);
-    if (/^\d*$/.test(value)) {
-      setInitialCount(Number(value));
-    }
+    setInitialCount(initialCount)
   };
 
   useEffect(() => {
@@ -179,7 +174,7 @@ function ProdData({ category_id }) {
     }
   };
   const handleCountChange = (newCount) => {
-    console.log("newcoutn"+ newCount);
+    console.log("newcoutn" + newCount);
     setInitialCount(newCount);
   };
 
@@ -292,7 +287,7 @@ function ProdData({ category_id }) {
               <div className="product-info">
                 <div className="product-name">
                   <h2 className="prod_nameh2">
-                  National Plastic </h2>
+                    National Plastic </h2>
                   <h2>{name}{" "}
                     {/* {selectedColor ? `(${selectedColor})` : ""} */}
                   </h2>
@@ -356,8 +351,8 @@ function ProdData({ category_id }) {
                               transition: "all 0.3s ease",
                               ...(selectedColor === val.color
                                 ? {
-                                    boxShadow: "0 0 0 2px #fff, 0 0 0 4px #000",
-                                  }
+                                  boxShadow: "0 0 0 2px #fff, 0 0 0 4px #000",
+                                }
                                 : {}),
                             }}
                           >
@@ -394,12 +389,35 @@ function ProdData({ category_id }) {
                 <label htmlFor="size">Quantity</label>
                 <div className="pb-md-3 row align-items-center">
                   <div className="col-6 col-md-4 col-lg-3">
-                  <IncrementDecrement
-  initialCount={initialCount}
-  onIncrement={handleIncrement}
-  onDecrement={handleDecrement}
-  onCountChange={handleInputChange}  // New prop for manual input change
-/>
+                    <div className="input-group">
+                      <span className="input-group-text">
+                        <button onClick={() => {
+                          if (initialCount > 1) {
+                            handleDecrement(); // Call the onDecrement handler
+                          }
+                        }}>-</button>
+                      </span>
+
+                      <input
+                        type="text"
+                        value={initialCount}
+                        className="form-control p-0 text-center"
+                        aria-label="Amount (to the nearest dollar)"
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          const numericValue = Number(value);
+                          if (!isNaN(numericValue)) {
+                            setInitialCount(numericValue);
+                          }
+                        }}
+                      />
+
+                      <span className="input-group-text">
+                        <button onClick={() => {
+                          handleIncrement(); // Call the onIncrement handler
+                        }}>+</button>
+                      </span>
+                    </div>
                   </div>
                   <div className="col-6 col-md-8 col-lg-6">
                     <button
@@ -420,9 +438,8 @@ function ProdData({ category_id }) {
 
                 <Link
                   href={userState ? "/Address" : "#"}
-                  className={`btn m-2 px-md-5 ProdbtnRes ${
-                    !userState ? "disabled-button" : ""
-                  }`}
+                  className={`btn m-2 px-md-5 ProdbtnRes ${!userState ? "disabled-button" : ""
+                    }`}
                   onClick={() => handleBuyNow(productId)}
                 >
                   Buy Now
@@ -470,13 +487,13 @@ function ProdData({ category_id }) {
             <div className="col-md-3">
               {prodData.dimension_img ? (
                 <Image
-              src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodData.dimension_img}`}
-              width={100}
-              height={100}
-              layout="responsive"
-              objectFit="cover"
-              alt="Dimension image"
-            />
+                  src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodData.dimension_img}`}
+                  width={100}
+                  height={100}
+                  layout="responsive"
+                  objectFit="cover"
+                  alt="Dimension image"
+                />
               ) : ''}
             </div>
           </div>
