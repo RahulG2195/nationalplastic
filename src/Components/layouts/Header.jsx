@@ -438,14 +438,22 @@ export default function Header() {
                         CSR
                       </Link>
                     </li>
-                    <li className="nav-item brdr bulk_ord">
+                    <li className="nav-item brdr">
+                      <Link
+                        className="nav-link"
+                        href="/ContactUs"
+                        onClick={isClicked ? handleShow : null}>
+                        Contact Us
+                      </Link>
+                    </li>
+                    {/* <li className="nav-item brdr bulk_ord">
                       <Link
                         className="nav-link"
                         href="/BulkOrder"
                         onClick={isClicked ? handleShow : null}>
                         Bulk Orders
                       </Link>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
                 <div className="row">
@@ -468,7 +476,7 @@ export default function Header() {
                         />
                       </Link>
                     </li>
-                    <li className="nav-item brdr d-none d-md-none d-xl-block">
+                    {/* <li className="nav-item brdr d-none d-md-none d-xl-block">
                       <Link
                         className="nav-link"
                         href="/ContactUs"
@@ -483,7 +491,7 @@ export default function Header() {
                           alt="location"
                         />
                       </Link>
-                    </li>
+                    </li> */}
                     <li className="nav-item brdr d-none d-md-none d-xl-block">
                       <Link
                         className="nav-link"

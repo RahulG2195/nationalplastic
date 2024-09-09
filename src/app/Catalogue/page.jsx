@@ -6,28 +6,30 @@ function Catalogue() {
     const Cataloguearr = [
         {
           key: 1,
-          image: "/Assets/images/catalogue/dummy.png",
-          title: "Lorem ipsum",
-          desc: "Updated on 10 oct, 2023",
+          image: "/Assets/images/catalogue/Front Page-01.jpg",
+          title: "Product Catalogue",
+          desc: "Updated on 06 sep, 2024",
+          pdf: '/Assets/images/catalogue/pdf/NPIL Product Catalogue.pdf',
         },
         {
           key: 2,
-          image: "/Assets/images/catalogue/dummy.png",
-          title: "Lorem ipsum",
-          desc: "Updated on 10 oct, 2023",
+          image: "/Assets/images/catalogue/Office Chair Catalogue-01.jpg",
+          title: "Office Chair Catalogue",
+          desc: "Updated on 06 sep, 2024",
+          pdf: '/Assets/images/catalogue/pdf/Office Chair Catalogue.pdf',
         },
-        {
-          key: 3,
-          image: "/Assets/images/catalogue/dummy.png",
-          title: "Lorem ipsum",
-          desc: "Updated on 10 oct, 2023",
-        },
-        {
-          key: 4,
-          image: "/Assets/images/catalogue/dummy.png",
-          title: "Lorem ipsum",
-          desc: "Updated on 10 oct, 2023",
-        },
+        // {
+        //   key: 3,
+        //   image: "/Assets/images/catalogue/dummy.png",
+        //   title: "Lorem ipsum",
+        //   desc: "Updated on 10 oct, 2023",
+        // },
+        // {
+        //   key: 4,
+        //   image: "/Assets/images/catalogue/dummy.png",
+        //   title: "Lorem ipsum",
+        //   desc: "Updated on 10 oct, 2023",
+        // },
       ];
   return (
     <>
@@ -64,9 +66,9 @@ function Catalogue() {
                   <div className="col-md-8 productCatalogueData">
                     <h2>{val.title}</h2>
                     <p>
-                      <i>Updated on 10 oct, 2023</i>
+                      <i>{val.desc}</i>
                     </p>
-                    <button className="catalogueButton">View Brochure</button>
+                    <a href={val.pdf} target="_blank"><button className="catalogueButton">View Brochure</button></a>
                   </div>
                 </div>
               </div>

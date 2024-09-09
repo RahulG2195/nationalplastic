@@ -5,7 +5,7 @@ const ContactUsCard = ({ title, location, phone, email }) => {
   return (
     <div className="BranchOfficesCardCont">
       <h5>{title}</h5>
-      <div className="BranchOfficesCard">
+      <div className="BranchOfficesCard pt-4">
         <div className="BranchOfficesCardIcon">
           <i className="fa fa-map-marker fa-icons" aria-hidden="true"></i>
           <p>

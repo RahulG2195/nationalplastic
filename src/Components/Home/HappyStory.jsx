@@ -86,9 +86,10 @@ export default function HappyStory() {
                           href={product.url}
                           data-type="video"
                         >
+                          {/* src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}${product.image}`} */}
                           <Image
                             className="rounded-top-5"
-                            src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}${product.image}`}
+                            src={`/Assets/images/Home-page/${product.image}`}
                             alt={product.title}
                             width={100}
                             height={50}
