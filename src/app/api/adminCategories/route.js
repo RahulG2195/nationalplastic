@@ -1,3 +1,5 @@
+import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { query } from '@/lib/db';
 import { writeFile } from "fs/promises";
 const fs = require("fs").promises;
@@ -236,8 +238,8 @@ export async function PATCH(request) {
 
     // Validate inputs
     if (category_id === undefined || field === undefined || value === undefined) {
-      return new Response(
-        JSON.stringify({ success: false, error: 'category_id, field, and value are required' }),
+      return NextResponse.json(
+        { success: false, error: 'category_id, field, and value are required' },
         { status: 400 }
       );
     }
@@ -251,8 +253,8 @@ export async function PATCH(request) {
         queryField = field;
         break;
       default:
-        return new Response(
-          JSON.stringify({ success: false, error: 'Invalid update field' }),
+        return NextResponse.json(
+          { success: false, error: 'Invalid update field' },
           { status: 400 }
         );
     }
@@ -268,22 +270,25 @@ export async function PATCH(request) {
     });
 
     if (result.affectedRows === 0) {
-      return new Response(
-        JSON.stringify({ success: false, error: 'Category not found' }),
+      return NextResponse.json(
+        { success: false, error: 'Category not found' },
         { status: 404 }
       );
     }
 
-    return new Response(
-      JSON.stringify({ success: true, data: { category_id, [field]: value } }),
+    // Revalidate the home page and any other pages that display categories
+    revalidatePath('/', 'layout');
+
+    return NextResponse.json(
+      { success: true, data: { category_id, [field]: value } },
       { status: 200 }
     );
 
   } catch (error) {
     console.error('Error updating category:', error);
 
-    return new Response(
-      JSON.stringify({ success: false, error: error.message }),
+    return NextResponse.json(
+      { success: false, error: error.message },
       { status: 500 }
     );
   }
