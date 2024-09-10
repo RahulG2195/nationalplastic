@@ -32,11 +32,33 @@ function ProdData({ category_id }) {
   const [availableColor, setAvailableColor] = useState([]);
   const [dataToShow, setdataToShow] = useState([]);
   const [isHovered, setIsHovered] = useState(false);
+  const cartData = useSelector((state) => state.cart.products);
+  const tempCartData = useSelector((state) => state.temp.products);
+
+
   const modalRef = useRef(null);
 
   const dispatch = useDispatch();
   const router = useParams();
   const id = router.productId;
+
+  const ProductCount = () => {
+    if(!userState){
+
+      console.log("Its here it should not be i think " + userState);
+      const idToBeCompared = Number(localStorage.getItem('product_id'));
+      const product = tempCartData.find(item => item.product_id === idToBeCompared);
+      const quantity = product ? product.quantity : 1;
+      setInitialCount(quantity)
+    return;
+  }
+  const idToBeCompared = Number(localStorage.getItem('product_id'));
+  const product = cartData.find(item => item.product_id === idToBeCompared);
+  const quantity = product ? product.quantity : 1;
+  setInitialCount(quantity)
+  }
+
+
 
   const handleIncrement = async () => {
     setInitialCount(initialCount + 1);
@@ -72,6 +94,7 @@ function ProdData({ category_id }) {
           setCatlogue(product.category_name);
           setShort_description(product.descp);
           // CleanCateogoryName(category);
+          ProductCount();
           const allColors = colors.map((color) => color.color);
           colorBasedProductsImages(allColors);
         }
