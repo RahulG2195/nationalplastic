@@ -71,6 +71,7 @@ export default function Dealers() {
               <span>National Plastic </span> Dealers
             </h2>
             <p>We deliver quality products across multiple states.</p>
+            <br />
           </div>
           <div className="col-12 view_all_sec">
             <Link href="#" className="my-3">

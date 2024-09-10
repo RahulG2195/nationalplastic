@@ -7,12 +7,21 @@ export async function POST(request) {
     // Default limit to 10 products per page
     const data = await request.json(); // Parse incoming JSON data
     const { productName } = data;
-    const searchTerm = productName.toLocaleLowerCase();
+   const productNameDecode = decodeURIComponent(productName);
+
+    // Sanitize to remove any unexpected special characters
+    const sanitizedProductName = productNameDecode.replace(/[^a-zA-Z0-9 ]/g, '');
+
+    // Convert to lowercase
+    const searchTerm = sanitizedProductName.toLowerCase();
+    
     const page = 1;
     // Default to page 1
     const limit = 12;
     const offset = (page - 1) * limit;
 
+    console.log('searchTerm', searchTerm);
+    
     // const products = await query({
     //   query:
     //     `SELECT 
@@ -48,13 +57,19 @@ export async function POST(request) {
 
     const allproducts = await query({
       query: `
-WITH initial_search AS (
+WITH category_search AS (
+  SELECT DISTINCT c.category_id
+  FROM categories c
+  WHERE LOWER(c.category_name) LIKE LOWER(CONCAT('%', ?, '%'))
+),
+initial_search AS (
   SELECT 
     p.product_id, 
     p.product_name, 
     p.category_id
   FROM products p
- WHERE LOWER(p.product_name) LIKE LOWER(CONCAT('%', ?, '%'))
+  WHERE (LOWER(p.product_name) LIKE LOWER(CONCAT('%', ?, '%'))
+    OR p.category_id IN (SELECT category_id FROM category_search))
     AND p.prod_status = 1
 ),
 ranked_products AS (
@@ -76,14 +91,18 @@ ranked_products AS (
     p.color_code,
     p.armType, 
     p.prod_status,
+    c.category_name,
     ROW_NUMBER() OVER (PARTITION BY p.product_name ORDER BY p.product_id) AS row_num,
-    -- Adding a proximity score for better ordering
     CASE 
-      WHEN LOWER(p.product_name) = ? THEN 1
-      ELSE 4
+      WHEN LOWER(p.product_name) = LOWER(?) THEN 1
+      WHEN LOWER(c.category_name) = LOWER(?) THEN 2
+      WHEN LOWER(p.product_name) LIKE LOWER(CONCAT('%', ?, '%')) THEN 3
+      WHEN LOWER(c.category_name) LIKE LOWER(CONCAT('%', ?, '%')) THEN 4
+      ELSE 5
     END AS proximity_rank
   FROM products p
-  JOIN initial_search i ON p.category_id = i.category_id
+  JOIN initial_search i ON p.product_id = i.product_id
+  JOIN categories c ON p.category_id = c.category_id
   WHERE p.prod_status = 1
 )
 SELECT 
@@ -93,6 +112,7 @@ SELECT
   seo_url_clr, 
   short_description,
   category_id, 
+  category_name,
   image_name, 
   price, 
   discount_price, 
@@ -108,7 +128,7 @@ FROM ranked_products
 WHERE row_num = 1
 ORDER BY proximity_rank, product_name;
       `,
-      values: [searchTerm, searchTerm],
+      values: [searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm],
     });
 
     return new Response(

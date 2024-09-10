@@ -46,7 +46,7 @@ const Awards = () => {
                   {pageContent.title?.split('&')[1]}
                 </span>
               </h1>
-              <p className="mx-5 my-5 text-justify mt-1 fw-medium subCptRes w-70 certificate-para">
+              <p className=" my-5 text-justify mt-1 fw-medium subCptRes w-70 certificate-para">
                 {pageContent.description}
               </p>
             </header>

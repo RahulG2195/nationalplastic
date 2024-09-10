@@ -90,7 +90,7 @@ const Search = (props) => {
 
 
 
-
+        console.log(all)
       setAllproducts(all);
         setProducts(all);
         // setProducts((prevProducts) => [...prevProducts, ...newProducts]);

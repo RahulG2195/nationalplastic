@@ -136,7 +136,8 @@ export default function Header() {
 
   // useEffect(async () => {
   const handleSearchChange = async (e) => {
-    setSearchTerm(e.target.value);
+    const sanitizedInput = e.target.value.replace(/[^a-zA-Z0-9 ]/g, '');
+    setSearchTerm(sanitizedInput);
 
     if (!searchTerm) {
       setSearchResults([]);
@@ -154,11 +155,18 @@ export default function Header() {
   // Search Function
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    try {
-      // console.log('searchTerm', searchTerm);
-      router.push(`/search/${searchTerm}`);
-    } catch (error) {
-      console.error("Error searching products:", error);
+
+    var sanitizedTerm = searchTerm.replace(/[^a-zA-Z0-9 ]/g, '').trim();
+    if (sanitizedTerm) {
+      const formattedTerm = encodeURIComponent(sanitizedTerm); // Convert spaces to %20
+      try {
+        // Navigate to the search page with the sanitized search term
+        router.push(`/search/${formattedTerm}`);
+      } catch (error) {
+        console.error("Error searching products:", error);
+      }
+    } else {
+      console.log("Search term is invalid.");
     }
   };
 
