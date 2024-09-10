@@ -31,7 +31,6 @@ function Login() {
     return cart.products?.length || 0;
   });
 
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevState) => ({
@@ -47,34 +46,38 @@ function Login() {
   const handleRegisterClick = async (event) => {
     router.push("/Register");
   };
+  
+  useEffect(() => {
+    async function sendDataToBackend() {
+      try {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/googleProvider`, {
+          name: session.user.name,
+          email: session.user.email,
+          id: session.user.id,
+        });
+        console.log("response" +  JSON.stringify(response));
+        const { email, customer_id } = response.data;
+        if (status === "authenticated" && session?.user) {
+          dispatch(
+            setUserData({
+              email: email,
+              customer_id: customer_id,
+            })
+          );
+          SetRefresh(true);
+          router.push("/")
 
-  async function sendDataToBackend() {
-    try {
-      await signIn("google")
-      const session = await getSession();
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/googleProvider`, {
-        name: session.user.name,
-        email: session.user.email,
-        id: session.user.id,
-      });
-      console.log("response" +  JSON.stringify(response));
-
-
-      const { email, customer_id } = response.data;
-      if (status === "authenticated" && session?.user) {
-        dispatch(
-          setUserData({
-            email: email,
-            customer_id: customer_id,
-          })
-        );
-        SetRefresh(true);
-        // router.push("/"); // Redirect to homepage
+        }
+      } catch (error) {
+        notifyError(error.message);
       }
-    } catch (error) {
-      notifyError(error.message);
     }
-  }
+    if(session){
+    sendDataToBackend();
+    }
+  }, []);
+
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -257,7 +260,7 @@ function Login() {
                     height={20}
                     alt="google"
                     className="mx-2"
-                    onClick={() => sendDataToBackend()}
+                    onClick={() => signIn('google')}
                   />
                 </p>
               </div>
