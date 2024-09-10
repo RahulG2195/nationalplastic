@@ -14,13 +14,13 @@ function BottomBar() {
   const [hoverenabled, setHoverenabled] = useState(true)
 
 
-
   const fetchData = useCallback(async () => {
     try {
       const [productsRes, navRes] = await Promise.all([
         axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/Products`),
-        axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/NavCategory`)
+        axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/NavCategory`),
       ]);
+  
       setAllProducts(productsRes.data.products);
       setNavbar(navRes.data.navshow);
     } catch (error) {
@@ -31,6 +31,7 @@ function BottomBar() {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+  
   const sendCategory = useCallback((title) => {
     localStorage.setItem("category", title);
     setHoverenabled(false);
