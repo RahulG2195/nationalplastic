@@ -25,7 +25,7 @@ const handler = NextAuth({
       return session;
     },
     async redirect({ url, baseUrl }) {
-      return baseUrl;
+      return `${baseUrl}/Login`;
     },
     async jwt({ token, user, account }) {
       if (user) {
