@@ -24,10 +24,10 @@ export default function AddCategory() {
     setIsLoading(true);
     const submitLoader = async () => {
       try {
-        const { category_name, image_name, navshow, status, image, topPick,seo_url } = data;
+        const { category_name, image_name, navshow, status, image, topPick,seo_url,banner} = data;
         
         const formData = new FormData();
-        const entries = { category_name, image_name, navshow, status, image, topPick ,seo_url};
+        const entries = { category_name, image_name, navshow, status, image, topPick ,seo_url, banner};
     
         for (const [key, value] of Object.entries(entries)) {
           formData.append(key, value);
@@ -68,6 +68,11 @@ export default function AddCategory() {
     const file = e.target.files[0];
     setValue('image', file);
     setValue('image_name', file ? file.name : '');
+  };
+
+  const handleBannerChange = (e) => {
+    const file = e.target.files[0];
+    setValue('banner', file);
   };
 
   return (
@@ -129,6 +134,16 @@ export default function AddCategory() {
           control={control}
           render={({ field }) => <input {...field} type="hidden" />}
         />
+        <Form.Item
+          label="banner"
+          validateStatus={errors.image ? 'error' : ''}
+          help={errors.image ? 'Please upload an image!' : ''}
+        >
+          <input
+            type="file"
+            onChange={handleBannerChange}
+          />
+        </Form.Item>
         <Form.Item
           label="Nav Show"
           validateStatus={errors.navshow ? 'error' : ''}

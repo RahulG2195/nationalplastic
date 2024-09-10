@@ -175,6 +175,23 @@ const CategoryList = () => {
       ),
     },
     {
+      title: 'Image',
+      dataIndex: 'banner_image',
+      key: 'banner_image',
+      render: (text) => (
+        <Image
+          src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}${text}`}
+          className='admin-product-img'
+          alt={text}
+          style={{ width: '100px', height: '50px' }}
+          width={3}
+          height={3}
+          layout="responsive"
+          objectFit="cover"
+        />
+      ),
+    },
+    {
       title: 'Top Pick',
       dataIndex: 'topPick',
       key: 'topPick',

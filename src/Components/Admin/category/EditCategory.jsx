@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Form, Input, Button, InputNumber, Spin,Space,Select } from 'antd';
+import { Form, Input, Button, InputNumber, Spin, Space, Select } from 'antd';
 import axios from 'axios';
 import "./EditCategory.css";
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +11,8 @@ const { Option } = Select;
 export default function EditCategory() {
   const { control, handleSubmit, setValue, formState: { errors } } = useForm();
   const [imagePreview, setImagePreview] = useState('');
+  const [bannerPreview, setBannerPreview] = useState('');
+
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -39,6 +41,9 @@ export default function EditCategory() {
 
       if (data.image) {
         formData.append('image', data.image);
+      }
+      if (data.banner) {
+        formData.append('banner', data.banner);
       }
 
       const response = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/adminCategories`, formData, {
@@ -96,6 +101,18 @@ export default function EditCategory() {
     }
   };
 
+  const handleBannerChange = (e) => {
+    const file = e.target.files[0];
+    setValue('banner', file);
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setBannerPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("categoryToEdit"));
     if (data) {
@@ -158,6 +175,21 @@ export default function EditCategory() {
           <input
             type="file"
             onChange={handleFileChange}
+          />
+        </Form.Item>
+        <Form.Item
+          label="Banner Image"
+          validateStatus={errors.banner ? 'error' : ''}
+          help={errors.banner ? 'Please upload a banner image!' : ''}
+        >
+          {bannerPreview && (
+            <div className="banner-preview">
+              <img src={bannerPreview} alt="Current banner image" title={control._formValues.banner} style={{ maxWidth: '200px', marginBottom: '10px' }} />
+            </div>
+          )}
+          <input
+            type="file"
+            onChange={handleBannerChange}
           />
         </Form.Item>
         <Controller
@@ -226,9 +258,9 @@ export default function EditCategory() {
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Space>
             <Button onClick={handleNavigation}>Cancel</Button>
-          <Button type="primary" htmlType="submit">
-            Update
-          </Button>
+            <Button type="primary" htmlType="submit">
+              Update
+            </Button>
           </Space>
         </Form.Item>
       </Form>

@@ -15,8 +15,20 @@ export async function POST(request) {
 
     const image = data.get('image');
     const uploadedImageName = image.name;
+    const banner = data.get('banner');
+    const bannerIMageName = banner?.name || null;
+    console.log("image" + image);
+    console.log("banner" + banner);
 
-    if (image && image instanceof File) {
+    if (!banner || !image ) {
+      console.log("why its cming here")
+      return new Response(
+        JSON.stringify({ success: false, error: "Banner and category Image should be there" }),
+        { status: 500 }
+      );
+    }
+
+    if (image && image instanceof File || banner && banner instanceof File) {
       try {
         const imageDir = path.join(
           process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
@@ -28,10 +40,16 @@ export async function POST(request) {
         } catch {
           await fs.mkdir(imageDir, { recursive: true });
         }
-  
+        if(uploadedImageName){
+          const imageFilePath = path.join(imageDir, uploadedImageName);
+          await fs.writeFile(imageFilePath, Buffer.from(await image.arrayBuffer()));
+        }
+        if(bannerIMageName){
+          const imageFilePath = path.join(imageDir, bannerIMageName);
+          await fs.writeFile(imageFilePath, Buffer.from(await banner.arrayBuffer()));
+        }
         // Save the new image file
-        const imageFilePath = path.join(imageDir, uploadedImageName);
-        await fs.writeFile(imageFilePath, Buffer.from(await image.arrayBuffer()));
+
 
       } catch (uploadError) {
         return new Response(
@@ -70,10 +88,10 @@ export async function POST(request) {
     // Insert the new category
     const result = await query({
       query: `
-        INSERT INTO categories (category_name, seo_url, image_name, navshow, status, topPick)
-        VALUES (?, ?, ?, ?, ?, ?)
+        INSERT INTO categories (category_name, seo_url, image_name, navshow, status, topPick,banner_image)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
       `,
-      values: [category_name, seo_url, uploadedImageName, navshow, status, topPick],
+      values: [category_name, seo_url, uploadedImageName, navshow, status, topPick, bannerIMageName],
     });
 
     return new Response(
@@ -93,11 +111,16 @@ export async function POST(request) {
 export async function PUT(request) {
   try {
     const data = await request.formData();
-    const { category_id, seo_url, category_name, image_name, navshow, status, image , topPick=0} = Object.fromEntries(
+    const { category_id, seo_url, category_name, image_name, navshow, status, image, topPick = 0, banner } = Object.fromEntries(
       data.entries()
     );
     
-    if (image) {
+    // Initialize variables to store new image names
+    let newImageName = null;
+    let newBannerImageName = null;
+
+    // Handle image uploads if present
+    if (image || banner) {
       try {
         const imageDir = path.join(
           process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
@@ -109,9 +132,19 @@ export async function PUT(request) {
           await fs.mkdir(imageDir, { recursive: true });
         }
   
-        // Save the new image file
-        const imageFilePath = path.join(imageDir, image_name);
-        await fs.writeFile(imageFilePath, Buffer.from(await image.arrayBuffer()));
+        // Save the new image file if present
+        if (image) {
+          newImageName = image.name; // Use the original file name
+          const imageFilePath = path.join(imageDir, newImageName);
+          await fs.writeFile(imageFilePath, Buffer.from(await image.arrayBuffer()));
+        }
+        
+        // Save the new banner file if present
+        if (banner) {
+          newBannerImageName = banner.name; // Use the original file name
+          const bannerFilePath = path.join(imageDir, newBannerImageName);
+          await fs.writeFile(bannerFilePath, Buffer.from(await banner.arrayBuffer()));
+        }
       } catch (uploadError) {
         return new Response(
           JSON.stringify({ success: false, error: uploadError.message }),
@@ -121,7 +154,7 @@ export async function PUT(request) {
     }
 
     // Manual validation
-    const requiredFields = { category_id, seo_url, category_name, image_name, navshow, status };
+    const requiredFields = { category_id, seo_url, category_name, navshow, status };
     const missingFields = Object.entries(requiredFields).filter(([key, value]) => !value).map(([key]) => key);
 
     if (missingFields.length > 0) {
@@ -131,21 +164,38 @@ export async function PUT(request) {
       );
     }
 
+    // Prepare the update query and values
+    let updateQuery = `
+      UPDATE categories 
+      SET 
+        category_name = ?,
+        seo_url = ?,
+        navshow = ?,
+        status = ?,
+        topPick = ?
+    `;
+    let updateValues = [category_name, seo_url, navshow, status, topPick];
+
+    // Add image_name to the update if a new image was uploaded
+    if (newImageName) {
+      updateQuery += `, image_name = ?`;
+      updateValues.push(newImageName);
+    }
+
+    // Add banner_image to the update if a new banner was uploaded
+    if (newBannerImageName) {
+      updateQuery += `, banner_image = ?`;
+      updateValues.push(newBannerImageName);
+    }
+
+    // Add the WHERE clause
+    updateQuery += ` WHERE category_id = ?`;
+    updateValues.push(category_id);
+
     // Update the category
     const result = await query({
-      query: `
-        UPDATE categories 
-        SET 
-          category_name = ?,
-          seo_url = ?,
-          image_name = ?,
-          navshow = ?,
-          status = ?,
-          topPick=?
-        WHERE 
-          category_id = ?
-      `,
-      values: [category_name, seo_url, image_name, navshow, status,topPick, category_id],
+      query: updateQuery,
+      values: updateValues,
     });
 
     return new Response(
@@ -162,6 +212,12 @@ export async function PUT(request) {
     );
   }
 }
+
+
+
+
+
+
 export async function GET(request) {
   try {
     const allCategories = await query({
