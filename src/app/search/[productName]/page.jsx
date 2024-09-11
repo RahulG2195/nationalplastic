@@ -89,8 +89,6 @@ const Search = (props) => {
         const all = response.data.allproducts;
 
 
-
-        console.log(all)
       setAllproducts(all);
         setProducts(all);
         // setProducts((prevProducts) => [...prevProducts, ...newProducts]);

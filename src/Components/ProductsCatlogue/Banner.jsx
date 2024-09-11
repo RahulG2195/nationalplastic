@@ -1,30 +1,47 @@
-import Image from "next/image"
-import './CatlogueBanner.css'
+"use client";
+import React, { useEffect, useState } from "react";
+import "./PreChairCards.css";
+import axios from "axios";
+import Image from "next/image";
+import "./CatlogueBanner.css";
 
-const CatlogueBanner = () => {
-    return (
-        <>
-            <div className="main_continer">
+const CatlogueBanner = ({ catName }) => {
+  const [CatBanner, setCatBanner] = useState("");
 
-                <div className="karen_container position-relative">
-                    <Image
-                        src="/Assets/images/Header-banner-1-(Karen-chair-)/Header-banner-1-(Karen-chair-).png"
-                        width={100}
-                        height={60}
-                        layout='responsive'
-                        objectFit='cover'
-                        alt="Picture of the author"
-                    />
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-                </div>
+  const fetchData = async () => {
+    try {
+      const response = await axios.patch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/Category`,
+        { seo_url: catName }
+      );
+      const bannerName = response.data.banner_name;
+      setCatBanner(bannerName);
+    } catch (error) {
+      console.error("Error fetching cat banner:", error);
+    }
+  };
 
-
-            </div>
-
-
-
-        </>
-    )
-
-}
-export default CatlogueBanner
+  return (
+    <>
+      {CatBanner && (
+        <div className="main_continer">
+          <div className="karen_container position-relative">
+            <Image
+              src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}${CatBanner}`}
+              width={100}
+              height={60}
+              layout="responsive"
+              objectFit="cover"
+              alt="Picture of the author"
+            />
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+export default CatlogueBanner;

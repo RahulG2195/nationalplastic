@@ -5,6 +5,7 @@ import FooterRow from "@/Components/FooterRow/FooterRow";
 import BottomCTABanner from "@/Components/ProductsCatlogue/BottomCTABanner";
 
 const ProductCatlogue = () => {
+  
   return (
     <>
       {/* <CatlogueBanner /> */}

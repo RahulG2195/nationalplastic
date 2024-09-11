@@ -7,12 +7,12 @@ import "./EditCategory.css";
 import { useNavigate } from 'react-router-dom';
 import { toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 const { Option } = Select;
 
 export default function AddCategory() {
   const { control, handleSubmit, setValue, getValues, reset, formState: { errors } } = useForm();
   const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const handleNavigation = () => {
@@ -74,6 +74,7 @@ export default function AddCategory() {
     const file = e.target.files[0];
     setValue('banner', file);
   };
+
 
   return (
     <Spin spinning={isLoading}>

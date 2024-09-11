@@ -63,6 +63,31 @@ export async function POST(request) {
     }
 }
 
+export async function PATCH(request) {
+    try {
+      const { seo_url } = await request.json();
+      const result = await query({
+        query: "SELECT banner_image FROM categories WHERE seo_url = ?",
+        values: [seo_url],
+      });
+
+      const banner_name = result.length > 0 ? result[0].banner_image : null;
+
+      const message = banner_name ? "success" : "error";
+
+      return new Response(JSON.stringify({
+        message: message,
+        status: 200,
+        banner_name: banner_name
+      }));
+    } catch (error) {
+      return new Response(JSON.stringify({
+        status: 500,
+        data: error.message
+      }));
+    }
+  }
+
 export async function PUT(request) {
     try {
         const { category_id, category_name } = await request.json();

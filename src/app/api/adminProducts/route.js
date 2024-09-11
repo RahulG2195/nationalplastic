@@ -69,7 +69,7 @@ export async function POST(request) {
         data[field] = value;
       }
     });
-
+    // description
     // Add non-required fields
     const optionalFields = [
       "meta_title",
@@ -85,6 +85,7 @@ export async function POST(request) {
       "deliveryInsct",
       "manufacturing",
       "warranty",
+      "description"
     ];
 
 
@@ -192,24 +193,36 @@ export async function POST(request) {
     }
 
 
+  //   INSERT INTO product_detail (
+  //     prod_id, features, dimenions, descp, careAndInstruct,
+  //     deliveryInsct, manufacturing, warranty, dimension_img
+  //   )
+  //   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+  // `,
+  //     values: [
+  //       lastInsertedId,
+  //       data.features || '',
+  //       data.dimenions || '',
+  //       data.description || '',
+  //       data.careAndInstruct || '',
+  //       data.deliveryInsct || '',
+  //       data.manufacturing || '',
+  //       data.warranty || '',
+  //       dimension_img_file.name || ''
+
+    
+
     if (lastInsertedId) {
       await query({
         query: `
       INSERT INTO product_detail (
-        prod_id, features, dimenions, descp, careAndInstruct,
-        deliveryInsct, manufacturing, warranty, dimension_img
+        prod_id,descp,dimension_img
       )
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+      VALUES (?, ?, ?)
     `,
         values: [
           lastInsertedId,
-          data.features || '',
-          data.dimenions || '',
-          data.descp || '',
-          data.careAndInstruct || '',
-          data.deliveryInsct || '',
-          data.manufacturing || '',
-          data.warranty || '',
+          data.description || '',
           dimension_img_file.name || ''
         ],
       });
@@ -324,14 +337,17 @@ export async function PUT(request) {
     }
 
     // Handle product_detail fields
-    const detailFields = [
-      "features",
-      "dimenions",
+    // const detailFields = [
+    //   "features",
+    //   "dimenions",
+    //   "descp",
+    //   "careAndInstruct",
+    //   "deliveryInsct",
+    //   "manufacturing",
+    //   "warranty",
+    // ];
+        const detailFields = [
       "descp",
-      "careAndInstruct",
-      "deliveryInsct",
-      "manufacturing",
-      "warranty",
     ];
     const detailUpdateFields = [];
     const detailUpdateValues = [];
@@ -440,6 +456,10 @@ export async function DELETE(request) {
 
     const result = await query({
       query: "DELETE FROM products WHERE product_id = ?",
+      values: [product_id],
+    });
+    const resultPD = await query({
+      query: "DELETE FROM product_detail WHERE prod_id = ?",
       values: [product_id],
     });
     if (result.affectedRows > 0) {

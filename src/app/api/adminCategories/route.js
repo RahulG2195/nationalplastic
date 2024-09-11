@@ -32,7 +32,7 @@ export async function POST(request) {
       try {
         const imageDir = path.join(
           process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
-          process.env.NEXT_PUBLIC_BANNERS_PATH_DIR 
+          process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR 
         );
 
         try {
@@ -124,7 +124,7 @@ export async function PUT(request) {
       try {
         const imageDir = path.join(
           process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
-          process.env.NEXT_PUBLIC_BANNERS_PATH_DIR 
+          process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR 
         );
         try {
           await fs.access(imageDir);
