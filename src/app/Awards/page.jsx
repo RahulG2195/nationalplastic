@@ -18,7 +18,6 @@ const Awards = () => {
       try {
         setLoading(true);
         const response = await axios.get("/api/admin/Aboutus/awards");
-        console.log('certificates', response);
         setPageContent(response.data.pageContent[0]);
         setCertificates(response.data.certificates);
       } catch (err) {
