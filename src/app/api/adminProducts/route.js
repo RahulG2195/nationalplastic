@@ -347,7 +347,7 @@ export async function PUT(request) {
     //   "warranty",
     // ];
         const detailFields = [
-      "description",
+      "descp",
     ];
     const detailUpdateFields = [];
     const detailUpdateValues = [];

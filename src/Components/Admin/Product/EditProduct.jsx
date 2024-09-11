@@ -66,7 +66,7 @@ export default function App() {
         const formData = new FormData();
         let hasChanges = false;
         formData.append('product_id', initialData.product_id);
-      formData.append("description", description);
+      formData.append("descp", description);
 
 
         Object.keys(data).forEach(key => {
@@ -473,16 +473,16 @@ export default function App() {
             render={({ field }) => <Input.TextArea {...field} />}
           />
         </Form.Item> */}
-        <Form.Item label="Description">
+        {/* <Form.Item label="Description">
           <Controller
             name="descp"
             control={control}
             render={({ field }) => <Input.TextArea {...field} />}
           />
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button onClick={handleOpenModal}>
-            Add Description
+            EDit Description
           </Button>
         </Form.Item>
 
