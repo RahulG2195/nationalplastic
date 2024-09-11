@@ -30,10 +30,17 @@ export async function POST(request) {
 
     if (image && image instanceof File || banner && banner instanceof File) {
       try {
-        const imageDir = path.join(
-          process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
-          process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR 
-        );
+        const imageDir = image && image instanceof File
+        ? path.join(
+            process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
+            process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR
+          )
+        : banner && banner instanceof File
+        ? path.join(
+            process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
+            process.env.NEXT_PUBLIC_BANNERS_PATH_DIR
+          )
+        : null;
 
         try {
           await fs.access(imageDir);
@@ -122,10 +129,17 @@ export async function PUT(request) {
     // Handle image uploads if present
     if (image || banner) {
       try {
-        const imageDir = path.join(
-          process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
-          process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR 
-        );
+        const imageDir = image && image instanceof File
+        ? path.join(
+            process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
+            process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR
+          )
+        : banner && banner instanceof File
+        ? path.join(
+            process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
+            process.env.NEXT_PUBLIC_BANNERS_PATH_DIR
+          )
+        : null;
         try {
           await fs.access(imageDir);
         } catch {

@@ -17,6 +17,7 @@ import { notifyError } from "@/utils/notify";
 function ProdData({ category_id }) {
   const [data, setData] = useState([]);
   const [prodData, setProdData] = useState([]);
+  const [prodDataDetail, setProdDataDetail] = useState([]);
   const userState = useSelector((state) => state.userData.isLoggedIn);
   const [seo_url, setSeo_url] = useState(null);
   const [categoryName, setCategoryName] = useState(null);
@@ -43,19 +44,19 @@ function ProdData({ category_id }) {
   const id = router.productId;
 
   const ProductCount = () => {
-    if(!userState){
+    if (!userState) {
 
       console.log("Its here it should not be i think " + userState);
       const idToBeCompared = Number(localStorage.getItem('product_id'));
       const product = tempCartData.find(item => item.product_id === idToBeCompared);
       const quantity = product ? product.quantity : 1;
       setInitialCount(quantity)
-    return;
-  }
-  const idToBeCompared = Number(localStorage.getItem('product_id'));
-  const product = cartData.find(item => item.product_id === idToBeCompared);
-  const quantity = product ? product.quantity : 1;
-  setInitialCount(quantity)
+      return;
+    }
+    const idToBeCompared = Number(localStorage.getItem('product_id'));
+    const product = cartData.find(item => item.product_id === idToBeCompared);
+    const quantity = product ? product.quantity : 1;
+    setInitialCount(quantity)
   }
 
 
@@ -87,6 +88,8 @@ function ProdData({ category_id }) {
         } else {
           setData([product]);
           setProdData(productDetails);
+          setProdDataDetail(productDetails);
+
           setProductColor(colors);
           setSelectedColor(product.color);
           setProduct_id(product.product_id);
@@ -333,7 +336,7 @@ function ProdData({ category_id }) {
                 </div>
                 <div className="shortProdDesc">
                   {/* <p>{short_description}</p> */}
-                  <p>{prodData.descp}</p>
+                  <p>{prodData.descp || prodDataDetail.descp}</p>
                 </div>
                 <div className="prod_type mt-4">
                   <div className="prod_clr">
@@ -506,11 +509,20 @@ function ProdData({ category_id }) {
               <h4>Description</h4>
               <hr />
             </div>
-            <div className="col-md-9">{prodData.descp}</div>
+            {
+              prodDataDetail.descp?.includes('<') ? (
+                <div
+                  className="col-md-9"
+                  dangerouslySetInnerHTML={{ __html: prodDataDetail.descp }}
+                />
+              ) : (
+                <div className="col-md-9">{prodDataDetail.descp}</div>
+              )
+            }
             <div className="col-md-3">
-              {prodData.dimension_img ? (
+              {prodDataDetail.dimension_img ? (
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodData.dimension_img}`}
+                  src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${prodDataDetail.dimension_img}`}
                   width={100}
                   height={100}
                   layout="responsive"

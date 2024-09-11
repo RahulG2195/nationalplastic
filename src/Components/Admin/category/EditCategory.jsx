@@ -122,6 +122,9 @@ export default function EditCategory() {
       if (data.image_name) {
         setImagePreview(`${process.env.NEXT_PUBLIC_BASE_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${data.image_name}`);
       }
+      if (data.banner_image) {
+        setBannerPreview(`${process.env.NEXT_PUBLIC_BASE_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${data.banner_image}`);
+      }
     }
   }, [setValue]);
 
