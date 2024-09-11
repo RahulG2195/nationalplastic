@@ -1,6 +1,7 @@
 
 .after-5th .SecondDrop {
-    right: 0% !important;
+    right:-50% !important;
+    /* left: 0% !important; */
     top: 100% !important;
     width: max-content !important;
     /* padding: 5% !important; */

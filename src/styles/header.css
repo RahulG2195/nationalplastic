@@ -42,6 +42,7 @@ color: #05276C !important;
     transition: all 0.5s;
 }
 
+
 .HeadSearch::placeholder {
     color: #1E1F1E;
     opacity: 80%;
@@ -49,14 +50,31 @@ color: #05276C !important;
 
 .HeadSearch:focus {
     background-color: transparent !important;
-    /* border: 1px solid gray !important; */
-    /* border-radius: 20px; */
-    /* transition: all 0.5s; */
+ 
+}
+
+.darkShadow{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .HeadSearch {
     /* padding: 10px 30px 30px 30px; */
     position: relative;
+    border-radius: 10px;
+    border-right: none !important;
+    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+    
+}
+.HeadSearch .submit-button {
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.HeadSearch .submit-button i {
+    margin-right: 8px;
 }
 
 .HeadSearch::before{

@@ -113,7 +113,7 @@ function BottomBar() {
         // >
         <div
           key={val.category_id}
-          className={`px-2 py-2 custom-dropdown-css ${index <= 4 && hoverenabled ? 'custom-dropdown-css second' : 'nohover'
+          className={`px-2 py-2 custom-dropdown-css position-relative ${index <= 4 && hoverenabled ? 'custom-dropdown-css second' : 'nohover'
             } ${index >= 5 && hoverenabled ? 'after-5th ' : 'nohover'}`}
         >
           <Link
