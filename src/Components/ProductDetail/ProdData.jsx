@@ -281,6 +281,7 @@ function ProdData({ category_id }) {
   }
 
   const name = data.length > 0 ? data[0].product_name : null;
+  const name_cat = data.length > 0 ? data[0].product_name2 : null;
   const price = data.length > 0 ? data[0].price : null;
   const orignalPrice = data.length > 0 ? data[0].discount_price : null;
   const baseImageNames =
@@ -297,7 +298,7 @@ function ProdData({ category_id }) {
             <Breadcrump
               category_id={seo_url}
               category_name={categoryName}
-              product_name={name}
+              product_name={name_cat}
               catlogue={catlogue}
             />
           </div>
@@ -311,7 +312,7 @@ function ProdData({ category_id }) {
                 <div className="product-name">
                   <h2 className="prod_nameh2">
                     National Plastic </h2>
-                  <h2>{name}{" "}
+                  <h2>{name_cat}{" "}
                     {/* {selectedColor ? `(${selectedColor})` : ""} */}
                   </h2>
                 </div>
