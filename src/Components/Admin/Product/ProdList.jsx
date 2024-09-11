@@ -68,13 +68,13 @@ const ProdList = () => {
       if (ProdDetailDatas) {
         const detailData = ProdDetailDatas[0]; // Assuming there's only one object in the array
         console.log
-        productToEdit.features = detailData.features;
-        productToEdit.dimensions = detailData.dimenions; // Typo in "dimenions" field?
+        // productToEdit.features = detailData.features;
+        // productToEdit.dimensions = detailData.dimenions; // Typo in "dimenions" field?
         productToEdit.descp = detailData.descp; // Typo in "descp" field?
-        productToEdit.careAndInstruct = detailData.careAndInstruct; // Typo in "careAndInstruct" field?
-        productToEdit.deliveryInsct = detailData.deliveryInsct; // Typo in "deliveryInsct" field?
-        productToEdit.manufacturing = detailData.manufacturing;
-        productToEdit.warranty = detailData.warranty;
+        // productToEdit.careAndInstruct = detailData.careAndInstruct; // Typo in "careAndInstruct" field?
+        // productToEdit.deliveryInsct = detailData.deliveryInsct; // Typo in "deliveryInsct" field?
+        // productToEdit.manufacturing = detailData.manufacturing;
+        // productToEdit.warranty = detailData.warranty;
         productToEdit.dimension_img = detailData.dimension_img;
       } 
       

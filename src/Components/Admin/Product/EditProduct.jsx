@@ -7,6 +7,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast, Bounce } from "react-toastify";
 import { useRouter } from "next/navigation";
+import ModalEditor from "./TextEditorModel";
+
 const { Option } = Select;
 
 export default function App() {
@@ -19,9 +21,11 @@ export default function App() {
   const [selectedCategory, setSelectedCategory] = useState({ id: null, name: '' });
   const [DimensionFile, setDimensionFile] = useState(null);
   const [initialData, setInitialData] = useState({});
+  const [isTextVisible, setIsTextVisible] = useState(false);
+  const [description, setDescription] = useState('');
+
 
   const navigate = useNavigate();
-
   const handleNavigation = () => {
     navigate('/admin/product', { replace: true });
     window.location.reload();
@@ -62,6 +66,8 @@ export default function App() {
         const formData = new FormData();
         let hasChanges = false;
         formData.append('product_id', initialData.product_id);
+      formData.append("description", description);
+
 
         Object.keys(data).forEach(key => {
           if (key === 'image') {
@@ -155,9 +161,11 @@ export default function App() {
         setImagePreviews(previews);
       }
       // Calculate initial discount price
+      setDescription(data.descp)
       setCalculatedDiscountPrice(calculateDiscountPrice(data.price || 0, data.discount_percentage || 0));
     }
   }, [setValue]);
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -171,6 +179,19 @@ export default function App() {
 
     fetchCategories();
   }, []);
+
+
+  const handleOpenModal = () => {
+    setIsTextVisible(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsTextVisible(false);
+  };
+  const handleSaveDescription = (content) => {
+    setDescription(content);
+    setIsTextVisible(false);
+  };
 
   return (
     <Spin spinning={isLoading} tip="Updating product...">
@@ -445,13 +466,13 @@ export default function App() {
           {/* {imageFile && <p>Selected file: {imageFile.name}</p>} */}
         </Form.Item>
 
-        <Form.Item label="Features">
+        {/* <Form.Item label="Features">
           <Controller
             name="features"
             control={control}
             render={({ field }) => <Input.TextArea {...field} />}
           />
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item label="Description">
           <Controller
             name="descp"
@@ -459,8 +480,13 @@ export default function App() {
             render={({ field }) => <Input.TextArea {...field} />}
           />
         </Form.Item>
+        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+          <Button onClick={handleOpenModal}>
+            Add Description
+          </Button>
+        </Form.Item>
 
-        <Form.Item label="Care Instructions">
+        {/* <Form.Item label="Care Instructions">
           <Controller
             name="careAndInstruct"
             control={control}
@@ -490,7 +516,7 @@ export default function App() {
             control={control}
             render={({ field }) => <Input.TextArea {...field} />}
           />
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Space>
@@ -502,7 +528,15 @@ export default function App() {
             </Button>
           </Space>
         </Form.Item>
+
+
       </Form>
+      <ModalEditor
+        isOpen={isTextVisible}
+        onClose={handleCloseModal}
+        onSave={handleSaveDescription}
+        initialValue={description}
+      />
     </Spin>
   );
 }
