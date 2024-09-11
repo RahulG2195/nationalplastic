@@ -1,31 +1,24 @@
 "use client";
-// import { useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-// import { useNavigate } from 'next/router'; // Import useRouter from 'next/router'
-// import { useRouter } from 'next/router';
 import "../../styles/profilepage.css";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { setUserData } from "@/redux/reducer/userSlice";
-// import { useNavigate } from "react-router-dom";
 import { toast, Bounce } from "react-toastify";
 import { signIn, useSession, getSession } from "next-auth/react";
 import { notify, notifyError } from "@/utils/notify";
 import { useSelector } from "react-redux";
 
-
 function Login() {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [login, setLogin] = useState(false);
-  const router = useRouter(); 
+  const router = useRouter();
   const { data: session, status } = useSession();
   const [formData, setFormData] = useState({ email: "", password: "", });
-  const [refresh, SetRefresh] = useState(false);
   const productCount = useSelector((state) => {
     const cart = state.temp;
     return cart.products?.length || 0;
@@ -46,38 +39,18 @@ function Login() {
   const handleRegisterClick = async (event) => {
     router.push("/Register");
   };
-  
+
   useEffect(() => {
-    async function sendDataToBackend() {
-      try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/googleProvider`, {
-          name: session.user.name,
-          email: session.user.email,
-          id: session.user.id,
-        });
-        console.log("response" +  JSON.stringify(response));
-        const { email, customer_id } = response.data;
-        if (status === "authenticated" && session?.user) {
-          dispatch(
-            setUserData({
-              email: email,
-              customer_id: customer_id,
-            })
-          );
-          SetRefresh(true);
-          router.push("/")
-
-        }
-      } catch (error) {
-        notifyError(error.message);
-      }
+    if (status === "authenticated" && session?.user) {
+      notify("Login successful");
+      router.push("/");
     }
-    if(session){
-    sendDataToBackend();
-    }
-  }, []);
+  }, [status, session, router]);
 
-  
+
+  const handleGoogleSignIn = () => {
+    signIn("google");
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -90,17 +63,12 @@ function Login() {
         const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/Users`, formData);
         const userData = res.data.message[0];
         const { customer_id } = userData;
-
-        const isAdmin = userData.role;
-
         if (res.data.status === 500) {
-
           const errorMsg = res.data.message;
           setErrorMessage(errorMsg);
           throw new Error(errorMsg || "Failed to Login");
 
         } else {
-          // setLogin(true);
           dispatch(
             setUserData({
               email: formData.email,
@@ -108,19 +76,15 @@ function Login() {
             })
           );
           localStorage.setItem("isAdmin", "false");
-          if(productCount > 1){
+          if (productCount > 1) {
             router.push("/AddToCart");
           }
           router.push("/")
-
         }
-
-
       } catch (error) {
         setErrorMessage(
           error.message || "An error occurred during login. Please try again."
         );
-
         throw new Error(error.message || "Failed to Login");
       }
     };
@@ -227,9 +191,7 @@ function Login() {
                 </div>
               </div>
               <div className="form-btn-login-div">
-                {/* <Link href="#!" className="login_link"> */}
                 <button type="submit" className="btn form-btn-login">Login</button>
-                {/* </Link> */}
               </div>
               {errorMessage && (
                 <div className="alert alert-danger">{errorMessage}</div>
@@ -253,14 +215,14 @@ function Login() {
               <div className="row ContinueWithgoogle">
                 <p className="d-flex justify-content-center">
                   OR Continue With
-                 
                   <Image
                     src="/Assets/images/search.png"
                     width={20}
                     height={20}
                     alt="google"
                     className="mx-2"
-                    onClick={() => signIn('google')}
+                    onClick={() => handleGoogleSignIn()}
+                    style={{ cursor: 'pointer' }}
                   />
                 </p>
               </div>
