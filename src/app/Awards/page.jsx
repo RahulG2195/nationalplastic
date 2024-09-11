@@ -40,9 +40,9 @@ const Awards = () => {
 
   return (
     <section className="awards-certificates">
-      <div className="container mt-4 mb-4">
-        <div className="row team-members justify-content-center">
-          <div className='col-12 col-md-8 order-2 order-md-1 order-lg-1'>
+      <div className="container mt-5 mb-5">
+        <div className="row team-members justify-content-evenly">
+          <div className='col-12 col-md-6 order-2 order-md-1 order-lg-1'>
             <header className="text-center mb-5">
               <h1 className="fs-1 darkBlue fw-normal">
                 {pageContent.title?.split('&')[0]}&nbsp;

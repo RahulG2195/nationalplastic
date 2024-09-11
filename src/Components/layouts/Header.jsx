@@ -263,16 +263,21 @@ export default function Header() {
                     </button>
                   </div>
                 </div>
-                <div className="d-none d-md-block">
+                <div className="d-none d-md-block" style={{ width: '20%' }}>
                   <form onSubmit={handleSearchSubmit} className="d-flex nav-search">
-                    <input
-                      className="form-control text-center HeadSearch fw-semibold"
-                      type="search"
-                      placeholder="Search products"
-                      aria-label="Search"
-                      value={searchTerm}
-                      onChange={handleSearchChange}
-                    />
+                    <div className="HeadSearch d-flex w-100 darkShadow">
+                      <input
+                        className="form-control text-cente HeadSearch fw-semibold"
+                        type="search"
+                        placeholder="Search products"
+                        aria-label="Search"
+                        value={searchTerm}
+                        onChange={handleSearchChange}
+                      />
+                      <button type="submit" class="submit-button">
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                      </button>
+                    </div>
                   </form>
                 </div>
 
@@ -280,7 +285,7 @@ export default function Header() {
                   <div className="container-fluid mt-3 d-lg-none d-flex justify-content-center">
                     <form onSubmit={handleSearchSubmit} className="d-flex nav-search">
                       <input
-                        className="form-control text-center HeadSearch fw-semibold"
+                        className="form-control text-center HeadSearch fw-semibold rounded-pill"
                         type="search"
                         placeholder="Search products"
                         aria-label="Search"

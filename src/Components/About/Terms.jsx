@@ -36,8 +36,8 @@ function TermsAndConditions() {
 
   return (
     <div className="container mt-4 py-5">
-      <div className="row">
-        <div className="col-12 col-md-8  order-2 order-md-1 order-lg-1 mob_content">
+      <div className="row justify-content-evenly">
+        <div className="col-12 col-md-6  order-2 order-md-1 order-lg-1 mob_content">
           <h2 className="company-profile-title">Terms and Conditions</h2>
           <div className='text-justify' dangerouslySetInnerHTML={{ __html: content }} />
         </div>
