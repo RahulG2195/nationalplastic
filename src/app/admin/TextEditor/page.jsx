@@ -8,7 +8,7 @@ import axios from 'axios';
 import { notify, notifyError } from '@/utils/notify';
 import { useRouter } from "next/navigation";
 
-// Dynamically import ReactQuill with SSR disabled
+
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 function MyEditor() {

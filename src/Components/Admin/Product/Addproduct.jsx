@@ -8,6 +8,8 @@ import axios from "axios";
 import { toast, Bounce } from "react-toastify";
 import { useRouter } from "next/navigation";
 import ProdetailAddEdit from "./ProdetailAddEdit";
+import ModalEditor from "./TextEditorModel";
+
 const { Option } = Select;
 export default function App() {
   const router = useRouter();
@@ -29,6 +31,9 @@ export default function App() {
   });
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [DimensionFile, setDimensionFile] = useState(null);
+  const [isTextVisible, setIsTextVisible] = useState(false);
+  const [description, setDescription] = useState('');
+
 
   const navigate = useNavigate();
   const handleNavigation = () => {
@@ -84,6 +89,8 @@ export default function App() {
         }
         formData.append("discount_price", calculatedDiscountPrice);
         formData.append("category_id", selectedCategory.id);
+      formData.append("description", description);
+
         let formDataString = "";
         formData.forEach((value, key) => {
           formDataString += `${key}: ${value}\n`;
@@ -154,12 +161,14 @@ export default function App() {
       // Append each key-value pair to the formData object
       formData.append("image", data.image);
       formData.append("features", data.features);
-      formData.append("description", data.description);
+      // formData.append("description", data.description);
       formData.append("careInstructions", data.careInstructions);
       formData.append("deliveryInstructions", data.deliveryInstructions);
       formData.append("manufacturing", data.manufacturing);
       formData.append("warranty", data.warranty);
       formData.append("pd_id", data.pd_id);
+      formData.append("description", description);
+
 
       // Make the POST request to the API
       await axios.post(
@@ -174,6 +183,19 @@ export default function App() {
     } catch (error) {
       console.error("Error submitting form data:", error);
     }
+  };
+
+
+  const handleOpenModal = () => {
+    setIsTextVisible(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsTextVisible(false);
+  };
+  const handleSaveDescription = (content) => {
+    setDescription(content);
+    setIsTextVisible(false);
   };
 
   return (
@@ -437,30 +459,30 @@ export default function App() {
           {/* {imageFile && <p>Selected file: {imageFile.name}</p>} */}
         </Form.Item>
 
-        <Form.Item label="Features">
+        {/* <Form.Item label="Features">
           <Controller
             name="features"
             control={control}
             render={({ field }) => <Input.TextArea {...field} />}
           />
-        </Form.Item>
-        <Form.Item label="Dimenions">
+        </Form.Item> */}
+        {/* <Form.Item label="Dimenions">
           <Controller
             name="dimenions"
             control={control}
             render={({ field }) => <Input.TextArea {...field} />}
           />
-        </Form.Item>
+        </Form.Item> */}
 
-        <Form.Item label="Description">
+        {/* <Form.Item label="Description">
           <Controller
             name="descp"
             control={control}
             render={({ field }) => <Input.TextArea {...field} />}
           />
-        </Form.Item>
+        </Form.Item> */}
 
-        <Form.Item label="Care Instructions">
+        {/* <Form.Item label="Care Instructions">
           <Controller
             name="careAndInstruct"
             control={control}
@@ -474,9 +496,9 @@ export default function App() {
             control={control}
             render={({ field }) => <Input.TextArea {...field} />}
           />
-        </Form.Item>
+        </Form.Item> */}
 
-        <Form.Item label="Manufacturing">
+        {/* <Form.Item label="Manufacturing">
           <Controller
             name="manufacturing"
             control={control}
@@ -490,6 +512,11 @@ export default function App() {
             control={control}
             render={({ field }) => <Input.TextArea {...field} />}
           />
+        </Form.Item> */}
+          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+          <Button onClick={handleOpenModal}>
+            Add Description
+          </Button>
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
@@ -501,6 +528,15 @@ export default function App() {
           </Space>
         </Form.Item>
       </Form>
+    
+
+
+      <ModalEditor
+        isOpen={isTextVisible}
+        onClose={handleCloseModal}
+        onSave={handleSaveDescription}
+        initialValue={description}
+      />
       {/* <Button onClick={() => setIsModalVisible(true)}>
         Add product Detail
       </Button>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, Form, Input, Button, Typography, Space, Divider, Image } from 'antd';
-import { EditOutlined, EyeOutlined } from '@ant-design/icons';
+import { EditOutlined } from '@ant-design/icons';
 
 const { Title, Text } = Typography;
 
@@ -16,12 +16,7 @@ const ProductDetailModal = ({ visible, onCancel, onSubmit, initialValues, mode =
   const title = `${mode.charAt(0).toUpperCase() + mode.slice(1)} Product`;
 
   const fieldMappings = {
-    features: 'features',
     descp: 'description',
-    careAndInstruct: 'careInstructions',
-    deliveryInsct: 'deliveryInstructions',
-    manufacturing: 'manufacturing',
-    warranty: 'warranty',
   };
 
   return (
@@ -79,14 +74,21 @@ const ProductDetailModal = ({ visible, onCancel, onSubmit, initialValues, mode =
                 label={<Text strong>{capitalizeLabel(formKey)}</Text>}
                 initialValue={data[dataKey]}
               >
-                <Input.TextArea
-                  rows={4}
-                  readOnly={isViewMode}
-                  style={{ 
-                    backgroundColor: isViewMode ? '#f5f5f5' : 'white',
-                    border: isViewMode ? 'none' : '1px solid #d9d9d9'
-                  }}
-                />
+                {isViewMode ? (
+                  <div
+                    dangerouslySetInnerHTML={{ __html: data[dataKey] }}
+                    style={{ whiteSpace: 'pre-line' }}
+                  />
+                ) : (
+                  <Input.TextArea
+                    rows={4}
+                    readOnly={isViewMode}
+                    style={{ 
+                      backgroundColor: isViewMode ? '#f5f5f5' : 'white',
+                      border: isViewMode ? 'none' : '1px solid #d9d9d9'
+                    }}
+                  />
+                )}
               </Form.Item>
               <Divider style={{ margin: '12px 0' }} />
             </React.Fragment>
