@@ -127,6 +127,8 @@ const PreChairsCards = () => {
       );
     }
   };
+
+  
   const fetchPrice = async (id) => {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/ProductsCat`, {
@@ -200,6 +202,7 @@ const PreChairsCards = () => {
     );
   };
 
+  
   return (
     <>
 
