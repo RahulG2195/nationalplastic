@@ -15,29 +15,36 @@ const handler = NextAuth({
   callbacks: {
     async signIn({ user, account }) {
       if (account.provider === "google") {
+        const { email, name, id } = user;
         try {
-          const { email, name, id } = user;
           const existingUser = await query({
             query: "SELECT * FROM customer WHERE Email = ?",
             values: [email],
           });
-
+          
+          let customerId;
+          
           if (existingUser.length > 0) {
             const userRecord = existingUser[0];
+            customerId = userRecord.customer_id;
             if (!userRecord.google_id) {
               await query({
                 query: "UPDATE customer SET google_id = ? WHERE Email = ?",
                 values: [id, email],
               });
             }
-            return true;
           } else {
-            await query({
+            const result = await query({
               query: "INSERT INTO customer (Email, FirstName, google_id) VALUES (?, ?, ?)",
               values: [email, name, id],
             });
-            return true;
+            customerId = result.insertId;
           }
+          
+          // Add customer_id to the user object
+          user.customerId = customerId;
+          
+          return true;
         } catch (error) {
           console.error("Error during Google sign-in:", error);
           return false;

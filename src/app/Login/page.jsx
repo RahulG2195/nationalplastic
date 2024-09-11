@@ -40,16 +40,43 @@ function Login() {
     router.push("/Register");
   };
 
-  useEffect(() => {
-    if (status === "authenticated" && session?.user) {
-      notify("Login successful");
-      router.push("/");
-    }
-  }, [status, session, router]);
+  // useEffect(() => {
+  //   if (status === "authenticated" && session?.user) {
+  //     notify("Login successful");
+  //     router.push("/");
+  //   }
+  // }, [status, session, router]);
 
 
   const handleGoogleSignIn = () => {
     signIn("google");
+  };
+
+  useEffect(() => {
+    console.log("session: " + session)
+    console.log("session: " +JSON.stringify(session))
+
+    if (status === "authenticated" && session?.user) {
+      updateUserData(session.user.email, session.user.customerId);
+    }
+  }, [status, session]);
+
+  const updateUserData = async (email, customerId) => {
+    try {
+      const formData = { email, customer_id: customerId };
+      const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/Users`, formData);
+      const userData = res.data.message[0];
+      const { customer_id } = userData;
+      
+      dispatch(
+        setUserData({
+          email: formData.email,
+          customer_id: customer_id,
+        })
+      );
+    } catch (error) {
+      console.error("Error updating user data:", error);
+    }
   };
 
   const handleSubmit = async (event) => {
