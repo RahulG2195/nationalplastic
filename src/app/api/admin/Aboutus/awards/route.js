@@ -2,6 +2,7 @@ import { query } from "@/lib/db";
 
 export async function GET(request) {
   try {
+  
     const pageContentQuery = "SELECT * FROM awards_page WHERE content_type = 'page_content' LIMIT 1";
     const certificatesQuery = "SELECT * FROM awards_page WHERE content_type = 'certificate' ORDER BY display_order";
 
