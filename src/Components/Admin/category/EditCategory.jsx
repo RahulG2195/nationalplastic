@@ -24,13 +24,16 @@ export default function EditCategory() {
   const updateCategory = async (data) => {
     try {
       const formData = new FormData();
+
+      console.log("Updating category" + JSON.stringify(data)); //
+
       const entries = {
         category_name: data.category_name,
         image_name: data.image_name,
-        navshow: data.navshow,
-        status: data.status,
+        navshow: data.navshow === "1" || data.navshow === "Active" ? "1" : "0",
+        status: data.status === "1" || data.status === "Active" ? "1" : "0",
+        topPick: data.topPick === "1" || data.topPick === "Active" ? "1" : "0",
         category_id: data.category_id,
-        topPick: data.topPick,
         seo_url: data.seo_url
 
       };
@@ -116,8 +119,13 @@ export default function EditCategory() {
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("categoryToEdit"));
     if (data) {
+      const statusFields = ['navshow', 'topPick', 'status'];
       Object.keys(data).forEach(key => {
-        setValue(key, data[key]);
+        if (statusFields.includes(key)) {
+          setValue(key, data[key] == "0" ? "Disable" : "Active");
+        } else {
+          setValue(key, data[key]);
+        }
       });
       if (data.image_name) {
         setImagePreview(`${process.env.NEXT_PUBLIC_BASE_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${data.image_name}`);
@@ -127,7 +135,6 @@ export default function EditCategory() {
       }
     }
   }, [setValue]);
-
   return (
     <Spin spinning={isLoading}>
       <Form

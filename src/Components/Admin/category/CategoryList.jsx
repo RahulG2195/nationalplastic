@@ -119,7 +119,6 @@ const CategoryList = () => {
       title: 'Index',
       key: 'index',
       render: (text, record, index) => index + 1,
-      fixed: 'left',
     },
     {
       title: 'Category ID',
