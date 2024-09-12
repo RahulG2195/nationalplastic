@@ -55,6 +55,8 @@ export default function Header() {
   });
 
   const [count, setCount] = useState(productCount);
+  const [currentProductIndex, setCurrentProductIndex] = useState(0);
+
 
 
   // redirect to admin to admin panel 
@@ -222,6 +224,14 @@ export default function Header() {
   const toggleSearch = () => {
     setIsSearchVisible(!isSearchVisible);
   };
+  const products = ['Chairs', 'Tables', 'Stools', 'Cabinates' , 'Sets']; // Array of products
+  useEffect(() => {
+    const typingInterval = setInterval(() => {
+      setCurrentProductIndex((prevIndex) => (prevIndex + 1) % products.length);
+    }, 4000); // Change product every 4 seconds
+
+    return () => clearInterval(typingInterval); // Clean up interval on component unmount
+  }, []);
 
   return (
     <div>
@@ -265,19 +275,32 @@ export default function Header() {
                 </div>
                 <div className="d-none d-md-block" style={{ width: '20%' }}>
                   <form onSubmit={handleSearchSubmit} className="d-flex nav-search">
-                    <div className="HeadSearch d-flex w-100 darkShadow">
-                      <input
-                        className="form-control text-cente HeadSearch fw-semibold"
-                        type="search"
-                        placeholder="Search products"
+
+                    <div className="text-container py-2 HeadSearch px-3 w-100 position-relative">
+                    <span className="position-absolute">Search for {products[currentProductIndex]}</span>
+                    <input
+                        id="search-input"
+                        className=""
+                        type="text"
+                        // placeholder="Search products"
                         aria-label="Search"
                         value={searchTerm}
                         onChange={handleSearchChange}
                       />
                       <button type="submit" class="submit-button">
-                      <i class="fa fa-search" aria-hidden="true"></i>
+                        <i class="fa fa-search" aria-hidden="true"></i>
                       </button>
                     </div>
+
+
+                    {/* <div class="text-container py-2 HeadSearch px-3">
+                      <input className="" type="text" id="search-input" value={searchTerm} aria-label="Search" onChange={handleSearchChange}
+                      />
+                      <button type="submit" class="submit-button p-0">
+                        <i class="fa fa-search " aria-hidden="true"></i>
+                      </button>
+
+                    </div> */}
                   </form>
                 </div>
 
