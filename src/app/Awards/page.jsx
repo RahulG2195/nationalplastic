@@ -17,8 +17,9 @@ const Awards = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("/api/admin/Aboutus/awards");
-        console.log('certificates', response);
+        const formData = new FormData();
+      formData.append('action', 'GET');
+      const response = await axios.post('/api/admin/Aboutus/awardsCMS', formData);
         setPageContent(response.data.pageContent[0]);
         setCertificates(response.data.certificates);
       } catch (err) {

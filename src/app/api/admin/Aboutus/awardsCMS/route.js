@@ -56,8 +56,10 @@ async function saveAwardOrCertificate(formData, action) {
     const content_type = formData.get('content_type');
     const display_order = formData.get('display_order');
     const file = formData.get('image');
-
-    const imageName = file.name;
+    let imageName;
+    if(file){
+     imageName = file.name;
+    }
     let image_url = '';
     let filepath = '';
 
@@ -73,9 +75,10 @@ async function saveAwardOrCertificate(formData, action) {
       } catch {
         await fs.mkdir(filepath, { recursive: true });
       }
+      image_url = path.join(filepath, imageName);
+      await fs.writeFile(image_url, Buffer.from(await file.arrayBuffer()));
+  
     }
-    image_url = path.join(filepath, imageName);
-    await fs.writeFile(image_url, Buffer.from(await file.arrayBuffer()));
 
     if (action === 'ADD') {
       const insertQuery = `
@@ -84,12 +87,43 @@ async function saveAwardOrCertificate(formData, action) {
       `;
       await query({ query: insertQuery, values: [title, description, imageName, content_type, display_order] });
     } else {
+      let updateFields = [];
+      let updateValues = [];
+
+      if (title !== null) {
+        updateFields.push('title = ?');
+        updateValues.push(title);
+      }
+
+      if (description !== null) {
+        updateFields.push('description = ?');
+        updateValues.push(description);
+      }
+
+      if (imageName) {
+        updateFields.push('image_url = ?');
+        updateValues.push(imageName);
+      }
+
+      if (content_type !== null) {
+        updateFields.push('content_type = ?');
+        updateValues.push(content_type);
+      }
+
+      if (display_order !== null) {
+        updateFields.push('display_order = ?');
+        updateValues.push(display_order);
+      }
+
+      updateValues.push(id); // Add the ID as the last value for the WHERE clause
+
       const updateQuery = `
         UPDATE awards_page
-        SET title = ?, description = ?, image_url = ?, content_type = ?, display_order = ?
+        SET ${updateFields.join(', ')}
         WHERE id = ?
       `;
-      await query({ query: updateQuery, values: [title, description, imageName, content_type, display_order, id] });
+
+      await query({ query: updateQuery, values: updateValues });
     }
 
     return new Response(

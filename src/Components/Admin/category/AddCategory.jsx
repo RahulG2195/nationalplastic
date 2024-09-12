@@ -32,7 +32,10 @@ export default function AddCategory() {
         for (const [key, value] of Object.entries(entries)) {
           formData.append(key, value);
         }
-    
+        
+
+
+
         await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/adminCategories`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
@@ -157,8 +160,8 @@ export default function AddCategory() {
             rules={{ required: true }}
             render={({ field }) => (
               <Select {...field}>
-                <Option value={1}>Yes (1)</Option>
-                <Option value={0}>No (0)</Option>
+                <Option value={1}>Active </Option>
+                <Option value={0}>Disable</Option>
               </Select>
             )}
           />
@@ -175,8 +178,8 @@ export default function AddCategory() {
             rules={{ required: true }}
             render={({ field }) => (
               <Select {...field}>
-                <Option value={1}>Active (1)</Option>
-                <Option value={0}>Inactive (0)</Option>
+                <Option value={1}>Active </Option>
+                <Option value={0}>Inactive </Option>
               </Select>
             )}
           />
@@ -192,8 +195,8 @@ export default function AddCategory() {
             defaultValue={1}
             render={({ field }) => (
               <Select {...field}>
-                <Option value={1}>Yes (1)</Option>
-                <Option value={0}>No (0)</Option>
+                <Option value={1}>Active </Option>
+                <Option value={0}>Disable</Option>
               </Select>
             )}
           />
