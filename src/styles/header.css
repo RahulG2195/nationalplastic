@@ -68,7 +68,7 @@ h6 {
     /* width: 25; */
     border: 1px solid gray;
     border-radius: 20px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px inset, rgba(0, 0, 0, 0.1) 0px 4px 6px -4px;
+    /* box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px inset, rgba(0, 0, 0, 0.1) 0px 4px 6px -4px; */
 }
 
 .HeadSearch input {
