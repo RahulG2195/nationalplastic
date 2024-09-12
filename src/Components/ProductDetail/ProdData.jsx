@@ -79,8 +79,10 @@ function ProdData({ category_id }) {
     const fetchData = async () => {
       try {
         setIsLoading(true);
+        console.log("id " +  id);
         const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`);
         const { product, productDetails, colors, category, short_description } = response.data;
+        console.log("Response + Response + Response " + JSON.stringify(response));
 
         localStorage.setItem("product_id", product.product_id);
         if (!product) {
