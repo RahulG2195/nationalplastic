@@ -81,9 +81,11 @@ export default function Header() {
 
   // get user data to show initial name after login
   useEffect(() => {
-
-    if(session?.user){
+    console.log("status" + status);
+    const fromLogin = localStorage.getItem('fromLogin');
+    if(session?.user && fromLogin === 'true'){
       updateUser()
+      localStorage.removeItem('fromLogin');
     }
     const fetchUserData = async () => {
       try {
@@ -688,7 +690,7 @@ export default function Header() {
                 </div>
               </div>
             </nav>
-            {/* {shouldRenderBottomBar ? <BottomBar /> : <PlaceholderBar />} */}
+            {shouldRenderBottomBar ? <BottomBar /> : <PlaceholderBar />}
 
           </div>
         </>

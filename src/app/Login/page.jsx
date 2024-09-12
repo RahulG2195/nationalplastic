@@ -48,8 +48,24 @@ function Login() {
   // }, [status, session, router]);
 
 
-  const handleGoogleSignIn = () => {
-    signIn("google");
+
+  const handleGoogleSignIn = async () => {
+    try {
+      localStorage.setItem('fromLogin', 'true');
+// Then redirect to the page with the Header component
+      const result = await signIn("google");
+    
+      
+      if (result?.error) {
+        console.error("Sign-in failed:", result.error);
+        // You can show a failure notification here
+      } else {
+notify("Successfully signed in")
+      }
+    } catch (error) {
+      console.error("Error during sign-in:", error);
+      // Handle any other errors, like network issues
+    }
   };
 
   useEffect(() => {
