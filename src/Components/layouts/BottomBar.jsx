@@ -20,7 +20,7 @@ function BottomBar() {
         axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/Products`),
         axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/NavCategory`),
       ]);
-  
+
       setAllProducts(productsRes.data.products);
       setNavbar(navRes.data.navshow);
     } catch (error) {
@@ -31,7 +31,7 @@ function BottomBar() {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
-  
+
   const sendCategory = useCallback((title) => {
     localStorage.setItem("category", title);
     setHoverenabled(false);
@@ -85,7 +85,7 @@ function BottomBar() {
     setHoverenabled(false);
 
   };
-  
+
   useEffect(() => {
     let timer;
 
@@ -96,9 +96,19 @@ function BottomBar() {
     }
 
     return () => clearTimeout(timer);
-  }, [hoverenabled]); 
+  }, [hoverenabled]);
 
 
+  const breakText = (text, maxWords) => {
+    const words = text.split(' ');
+    const lines = [];
+
+    for (let i = 0; i < words.length; i += maxWords) {
+      lines.push(words.slice(i, i + maxWords).join(' '));
+    }
+
+    return lines.join('<br/>');
+  };
   return (
 
     <div className="mainrow px-md-5  bottom_nav position-relative ">
@@ -137,22 +147,20 @@ function BottomBar() {
                 allProducts.filter((product) => product.category_id === val.category_id),
                 6
               ).map((chunk, columnIndex) => (
-                <div key={columnIndex} className="column pt-3">
-                  {chunk.map((product) => (
-                    <p
-                      className="px-3 py-2 fw-semibold"
-                      key={product.product_name}
-                      onMouseOver={() => changeImage(product.product_name)}
-                    >
+                <div key={columnIndex} className="column pt-3 ">
+                {chunk.map((product) => {
+                  const formattedProductName = breakText(product.product_name, 4);
+                  return (
+                    <p className="py-2 fw-semibold" key={product.product_name} onMouseOver={() => changeImage(product.product_name)}>
                       <Link
                         onClick={toggleHover}
-                        className="nav-link"
+                        className="nav-link product-name px-2"
                         href={`/ProductDetail/${product.seo_url}`}
-                      >
-                        {product.product_name}
-                      </Link>
-                    </p>
-                  ))}
+                        dangerouslySetInnerHTML={{ __html: formattedProductName }}
+                      />
+                   </p>
+                    );
+                  })}
                 </div>
               ))}
               <div className="barImgCont py-3">
