@@ -188,11 +188,19 @@ function ProfilePage() {
       cancelText: 'No, stay logged in',
       onOk() {
         localStorage.clear();
-        signOut();
+        sessionStorage.clear();
+        document.cookie.split(";").forEach((c) => {
+          if (!c.trim().startsWith("next-auth")) {
+            document.cookie = c
+              .replace(/^ +/, "")
+              .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+          }
+        });
         setData({}); // Clear user data
         axios.delete("api/Users")
           .then(() => {
             window.location.href = "/";
+            signOut();
           })
           .catch((error) => {
             notifyError("logout", error.message);
@@ -202,6 +210,9 @@ function ProfilePage() {
       },
     });
   };
+
+
+
   const CancelProduct = async (prod_id, user_id, od_id) => {
     try {
       const checkorderStatus = orderData.filter((od) => od.prod_id === prod_id && od.customer_id === user_id && od.od_id === od_id);

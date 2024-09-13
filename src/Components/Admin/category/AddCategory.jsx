@@ -24,16 +24,18 @@ export default function AddCategory() {
     setIsLoading(true);
     const submitLoader = async () => {
       try {
-        const { category_name, image_name, navshow, status, image, topPick,seo_url,banner} = data;
-        
+        const { category_name, image_name, navshow, status, image, topPick, seo_url, banner, header_position } = data;
+
         const formData = new FormData();
-        const entries = { category_name, image_name, navshow, status, image, topPick ,seo_url, banner};
-    
+        const entries = { category_name, image_name, navshow, status, image, topPick, seo_url, banner, header_position };
+
         for (const [key, value] of Object.entries(entries)) {
           formData.append(key, value);
         }
-        
 
+        for (let pair of formData.entries()) {
+          console.log(`${pair[0]}: ${pair[1]}`);
+        }
 
 
         await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/adminCategories`, formData, {
@@ -201,12 +203,39 @@ export default function AddCategory() {
             )}
           />
         </Form.Item>
+        <Form.Item
+          label="Header positioning"
+          validateStatus={errors.header_position ? 'error' : ''}
+          help={errors.header_position ? 'Please enter a valid number!' : ''}
+        >
+          <Controller
+            name="header_position"
+            control={control}
+            rules={{
+              required: true,
+              validate: (value) => !isNaN(value) && value.trim() !== '',
+            }}
+            render={({ field }) => (
+              <Input
+                {...field}
+                type="number"
+                min={0}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (value === '' || /^\d+$/.test(value)) {
+                    field.onChange(value);
+                  }
+                }}
+              />
+            )}
+          />
+        </Form.Item>
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Space> 
-            <Button onClick={handleNavigation}>Cancel</Button>  
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
+          <Space>
+            <Button onClick={handleNavigation}>Cancel</Button>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
           </Space>
         </Form.Item>
       </Form>

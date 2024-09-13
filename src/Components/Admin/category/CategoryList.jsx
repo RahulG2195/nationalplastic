@@ -30,16 +30,13 @@ const CategoryList = () => {
   }, []);
 
   const handleToggleNavshow = async (categoryId, checked, data) => {
-
     try {
       const newNavshowValue = checked ? 1 : 0;
-
       const response = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/adminCategories`, {
         category_id: categoryId,
         value: newNavshowValue,
         field: data
       });
-      
       if (response.data.success) {
         const updatedCategories = categoryArray.map(category =>
           category.category_id === categoryId
@@ -48,7 +45,6 @@ const CategoryList = () => {
         );
         setCategoryArray(updatedCategories);
         setFilteredCategoryArray(updatedCategories);
-        
         notify("status updated successfully");
       } else {
         notifyError('Failed to update  status');
@@ -103,16 +99,7 @@ const CategoryList = () => {
     setDeleteModalOpen(!deleteModalOpen);
   };
 
-  const handleSeoUrlChange = (e) => {
-    const value = e.target.value;
-    const isValid = /^[a-zA-Z0-9-_]+$/.test(value);
 
-    if (isValid || value === '') {
-      setSeoUrl(value);
-    } else {
-      notifyError('SEO URL can only contain letters, numbers, underscores, and hyphens.');
-    }
-  };
 
   const columns = [
     {
@@ -144,6 +131,11 @@ const CategoryList = () => {
       title: 'SEO URL',
       dataIndex: 'seo_url',
       key: 'seo_url',
+    },
+    {
+      title: 'Header Position',
+      dataIndex: 'header_position',
+      key: 'header_position',
     },
     {
       title: 'Image',

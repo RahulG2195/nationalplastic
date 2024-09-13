@@ -19,6 +19,8 @@ import { useDelayedRender } from "@/utils/useDelayedRender";
 import { staticInvestorConfig, fetchInvestorConfig } from "./investorConfig";
 import ScrollToTop from "scroll-to-top-react";
 import { Search, X } from 'lucide-react';
+import { signIn, useSession, getSession } from "next-auth/react";
+import { setUserData } from "@/redux/reducer/userSlice";
 
 export default function Header() {
   const shouldRenderBottomBar = useDelayedRender(2000);
@@ -28,6 +30,7 @@ export default function Header() {
   const [dropdown, setDropdown] = useState(false);
   const [aboutDropdown, setAboutDropdown] = useState(false);
   const [subDropdown, setSubDropdown] = useState(false);
+  const { data: session, status } = useSession();
 
   const [windowSize, setWindowSize] = useState({ width: undefined, });
   const [FirstName, setFirstName] = useState("");
@@ -35,7 +38,7 @@ export default function Header() {
   const [InitialName, setInitialName] = useState("");
   const [hideLayout, setHideLayout] = useState(false);
   const router = useRouter();
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
   const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
   const userState = useSelector((state) => state.userData.isLoggedIn);
   const userEmail = useSelector((state) => state.userData.email);
@@ -70,6 +73,7 @@ export default function Header() {
 
 
 
+
   // Use useEffect to keep local count in sync with Redux state
   useEffect(() => {
     setCount(productCount); // Update localCount whenever productCount changes
@@ -77,6 +81,12 @@ export default function Header() {
 
   // get user data to show initial name after login
   useEffect(() => {
+    console.log("status" + status);
+    const fromLogin = localStorage.getItem('fromLogin');
+    if(session?.user && fromLogin === 'true'){
+      updateUser()
+      localStorage.removeItem('fromLogin');
+    }
     const fetchUserData = async () => {
       try {
         const formData = {
@@ -100,6 +110,15 @@ export default function Header() {
 
     fetchUserData();
   }, [userEmail]);
+  const updateUser = async () => {
+    dispatch(
+      setUserData({
+        email: session.user.email,
+        customer_id: session.user.customerId,
+      })
+    )
+  }
+
 
   useEffect(() => {
     if (FirstName && LastName) {
@@ -232,6 +251,7 @@ export default function Header() {
 
     return () => clearInterval(typingInterval); // Clean up interval on component unmount
   }, []);
+
 
   return (
     <div>

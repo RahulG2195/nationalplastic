@@ -34,7 +34,8 @@ export default function EditCategory() {
         status: data.status === "1" || data.status === "Active" ? "1" : "0",
         topPick: data.topPick === "1" || data.topPick === "Active" ? "1" : "0",
         category_id: data.category_id,
-        seo_url: data.seo_url
+        seo_url: data.seo_url,
+        header_position: data.header_position
 
       };
 
@@ -170,6 +171,31 @@ export default function EditCategory() {
               maxLength: 255,
             }}
             render={({ field }) => <Input {...field} />}
+          />
+        </Form.Item>
+        <Form.Item
+          label="Header Positioning"
+          validateStatus={errors.header_position ? 'error' : ''}
+          help={errors.header_position ? 'header_position only Numbers' : ''}
+        >
+          <Controller
+            name="header_position"
+            control={control}
+            rules={{
+              required: true,
+              pattern: /^[a-zA-Z0-9-_]+$/,
+              minLength: 1,
+              maxLength: 255,
+            }}
+            render={({ field }) => (
+              <InputNumber
+                {...field}
+                style={{ width: '100%' }}
+                min={0}
+                max={999}
+                step={1}
+              />
+            )}
           />
         </Form.Item>
         <Form.Item

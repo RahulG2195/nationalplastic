@@ -9,7 +9,7 @@ export async function POST(request) {
   try {
     const data = await request.formData();
 
-    const { category_name, seo_url, navshow, status, topPick = 0 } = Object.fromEntries(
+    const { category_name, seo_url, navshow, status, topPick = 0,header_position=null } = Object.fromEntries(
       data.entries()
     );
 
@@ -95,10 +95,10 @@ export async function POST(request) {
     // Insert the new category
     const result = await query({
       query: `
-        INSERT INTO categories (category_name, seo_url, image_name, navshow, status, topPick,banner_image)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO categories (category_name, seo_url, image_name, navshow, status, topPick,banner_image,header_position)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
       `,
-      values: [category_name, seo_url, uploadedImageName, navshow, status, topPick, bannerIMageName],
+      values: [category_name, seo_url, uploadedImageName, navshow, status, topPick, bannerIMageName, header_position],
     });
 
     return new Response(
@@ -118,7 +118,7 @@ export async function POST(request) {
 export async function PUT(request) {
   try {
     const data = await request.formData();
-    const { category_id, seo_url, category_name, image_name, navshow, status, image, topPick = 0, banner } = Object.fromEntries(
+    const { category_id, seo_url, category_name, image_name, navshow, status, image, topPick = 0, banner,header_position } = Object.fromEntries(
       data.entries()
     );
     
@@ -127,48 +127,54 @@ export async function PUT(request) {
     let newBannerImageName = null;
 
     // Handle image uploads if present
-    if (image || banner) {
-      try {
-        const imageDir = image && image instanceof File
-        ? path.join(
-            process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
-            process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR
-          )
-        : banner && banner instanceof File
-        ? path.join(
-            process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
-            process.env.NEXT_PUBLIC_BANNERS_PATH_DIR
-          )
-        : null;
+    try {
+      // Handle image upload
+      if (image && image instanceof File) {
+        const imageDir = path.join(
+          process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
+          process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR
+        );
+    
         try {
           await fs.access(imageDir);
         } catch {
           await fs.mkdir(imageDir, { recursive: true });
         }
-  
-        // Save the new image file if present
-        if (image) {
-          newImageName = image.name; // Use the original file name
-          const imageFilePath = path.join(imageDir, newImageName);
-          await fs.writeFile(imageFilePath, Buffer.from(await image.arrayBuffer()));
-        }
-        
-        // Save the new banner file if present
-        if (banner) {
-          newBannerImageName = banner.name; // Use the original file name
-          const bannerFilePath = path.join(imageDir, newBannerImageName);
-          await fs.writeFile(bannerFilePath, Buffer.from(await banner.arrayBuffer()));
-        }
-      } catch (uploadError) {
-        return new Response(
-          JSON.stringify({ success: false, error: uploadError.message }),
-          { status: 400 }
-        );
+    
+        // Save the new image file
+         newImageName = image.name; // Use the original file name
+        const imageFilePath = path.join(imageDir, newImageName);
+        await fs.writeFile(imageFilePath, Buffer.from(await image.arrayBuffer()));
       }
+    
+      // Handle banner upload
+      if (banner && banner instanceof File) {
+        const bannerDir = path.join(
+          process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
+          process.env.NEXT_PUBLIC_BANNERS_PATH_DIR
+        );
+    
+        try {
+          await fs.access(bannerDir);
+        } catch {
+          await fs.mkdir(bannerDir, { recursive: true });
+        }
+    
+        // Save the new banner file
+         newBannerImageName = banner.name; // Use the original file name
+        const bannerFilePath = path.join(bannerDir, newBannerImageName);
+        await fs.writeFile(bannerFilePath, Buffer.from(await banner.arrayBuffer()));
+      }
+    } catch (uploadError) {
+      return new Response(
+        JSON.stringify({ success: false, error: uploadError.message }),
+        { status: 400 }
+      );
     }
+    
 
     // Manual validation
-    const requiredFields = { category_id, seo_url, category_name, navshow, status };
+    const requiredFields = { category_id, seo_url, category_name, navshow, status,header_position };
     const missingFields = Object.entries(requiredFields).filter(([key, value]) => !value).map(([key]) => key);
 
     if (missingFields.length > 0) {
@@ -186,9 +192,10 @@ export async function PUT(request) {
         seo_url = ?,
         navshow = ?,
         status = ?,
-        topPick = ?
+        topPick = ?,
+        header_position = ?
     `;
-    let updateValues = [category_name, seo_url, navshow, status, topPick];
+    let updateValues = [category_name, seo_url, navshow, status, topPick, header_position];
 
     // Add image_name to the update if a new image was uploaded
     if (newImageName) {
