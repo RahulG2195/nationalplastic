@@ -1,4 +1,13 @@
 
+
+
+.product-name {
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+}
+
+
 .after-5th .SecondDrop {
     right:-50% !important;
     /* left: 0% !important; */
