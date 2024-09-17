@@ -43,7 +43,7 @@ export async function uploadFile(file){
     const filePath = path.join(uploadDir, file.name);
     await fs.writeFile(filePath, buffer);
     try{
-      const filePath = path.join(local_UPLOAD_DIR, buffer);
+      const filePath = path.join(local_UPLOAD_DIR, file.name);
       await writeFile(filePath, buffer);
     }catch(error){
       console.log("error writing file locally", error)

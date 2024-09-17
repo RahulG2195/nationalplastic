@@ -1,5 +1,3 @@
-"use client";
-
 import Banner from "@/Components/Home/Banner";
 import CoupenBanner from "@/Components/Home/CoupenBanner";
 import Features from "@/Components/Home/Features";
@@ -13,47 +11,59 @@ import Dealers from "@/Components/Home/Dealers";
 import Blog from "@/Components/Home/Blog";
 import Catalogue from "@/Components/Home/Catalogue";
 import "../styles/home_prod.css";
-import { React, useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import CommingSoon from "./CommingSoon/page";
 
+export const metadata = {
+  title: 'Nationalplastic - Home | Quality Plastic Furniture & Household Items',
+  description: 'Discover our wide range of affordable plastic chairs, stools, and household items. Quality products from Nationalplastic, a trusted, listed company.',
+  keywords: 'Nationalplastic, plastic chairs, stools, household items, affordable furniture, listed company',
+  openGraph: {
+    title: 'Nationalplastic - Affordable Plastic Furniture & Household Items',
+    description: 'Browse Nationalplastic\'s selection of durable plastic chairs, stools, and household essentials. Quality products from a trusted, listed company.',
+    images: [
+      {
+        url: 'https://nationalplastic.com/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Nationalplastic Product Showcase',
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Nationalplastic - Affordable Plastic Furniture & Household Items',
+    description: 'Browse Nationalplastic\'s selection of durable plastic chairs, stools, and household essentials. Quality products from a trusted, listed company.',
+    images: ['https://nationalplastic.com/twitter-image.jpg'],
+  },
+};
+
 export default function Home() {
-  const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
-  const [ValidateLogin, setValidateLogin] = useState(false)
-  // alert(pool)
-  useEffect(() => {
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
-    (isLoggedIn == 'true') && setValidateLogin(true);
-    AOS.init({
-      duration: 700,
-      once: false,
-    });
-  }, []);
+
+
   return (
-    <>
-      <main>
-        {/* <CommingSoon /> */}
-        <Banner />
-        {/* <Features /> */}
+    <main>
+      {/* <CommingSoon /> */}
+      <Banner />
+      {/* <Features /> */}
 
-        {/* show only when user is not login  */}
-        {
-          // (!ValidateLogin) && <CoupenBanner />
-        }
-{/* <CoupenBanner /> */}
-        <TopPick />
-        <Manufacture />
-        <ShopRoom />
-        <Houseware />
-        <Highlight />
-        <HappyStory />
-        <Dealers />
-        {/* <Blog /> */}
-        <Catalogue />
-        {/* <ScrollToTop displayType="htmlArrow" /> */}
-
-      </main>
-    </>
+      {/* show only when user is not login  */}
+      {
+        // (!ValidateLogin) && <CoupenBanner />
+      }
+      {/* <CoupenBanner /> */}
+      <TopPick />
+      <Manufacture />
+      <ShopRoom />
+      <Houseware />
+      <Highlight />
+      <HappyStory />
+      <Dealers />
+      {/* <Blog /> */}
+      <Catalogue />
+      {/* <ScrollToTop displayType="htmlArrow" /> */}
+    </main>
   );
 }
