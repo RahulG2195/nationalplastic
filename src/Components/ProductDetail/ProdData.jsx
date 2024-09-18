@@ -79,9 +79,9 @@ function ProdData({ category_id }) {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        console.log("id " +  id);
+        console.log("id " + id);
         const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`);
-        const { product, productDetails, colors, category, short_description } = response.data;
+        const { product, productDetails, colors, category, short_description, meta_description, meta_title } = response.data;
         console.log("Response + Response + Response " + JSON.stringify(response));
 
         localStorage.setItem("product_id", product.product_id);
@@ -338,8 +338,13 @@ function ProdData({ category_id }) {
                   <span className="rating-number">4.8</span>
                 </div>
                 <div className="shortProdDesc">
-                  {/* <p>{short_description}</p> */}
-                  <p>{prodData.descp || prodDataDetail.descp}</p>
+                  {prodDataDetail.descp?.includes('<') ? (
+                    <div
+                      dangerouslySetInnerHTML={{ __html: prodDataDetail.descp }}
+                    />
+                  ) : (
+                    <p>{prodData.descp || prodDataDetail.descp}</p>
+                  )}
                 </div>
                 <div className="prod_type mt-4">
                   <div className="prod_clr">
@@ -575,3 +580,4 @@ function ProdData({ category_id }) {
 }
 
 export default ProdData;
+
