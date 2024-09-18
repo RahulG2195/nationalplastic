@@ -1,3 +1,4 @@
+"use client";
 import CatCards from "../CommonComp/catCards";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "../../styles/home_prod.css";

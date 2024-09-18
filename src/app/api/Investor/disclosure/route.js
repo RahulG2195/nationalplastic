@@ -189,7 +189,7 @@ async function handleFileUpload(file) {
     try{
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
-        const filePath = path.join(local_UPLOAD_DIR, buffer);
+        const filePath = path.join(local_UPLOAD_DIR, file.name);
         await writeFile(filePath, buffer);
       }catch(error){
         console.log("error writing file locally", error)

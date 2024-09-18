@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import CatCards from "../CommonComp/catCards";
 import { Swiper, SwiperSlide } from "swiper/react";
