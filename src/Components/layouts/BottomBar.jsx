@@ -155,7 +155,7 @@ function BottomBar() {
                       <Link
                         onClick={toggleHover}
                         className="nav-link product-name px-2"
-                        href={`/ProductDetail/${product.seo_url}`}
+                        href={`/product-detail/${product.seo_url}`}
                         dangerouslySetInnerHTML={{ __html: formattedProductName }}
                       />
                    </p>

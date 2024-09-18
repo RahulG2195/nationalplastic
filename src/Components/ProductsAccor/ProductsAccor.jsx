@@ -82,7 +82,7 @@ const ProductsAccr = ({ handleShow }) => {
                         <p key={product.product_name} className="border">
                           <Link
                             className="nav-link"
-                            href={`/ProductDetail/${product.seo_url}`}
+                            href={`/product-detail/${product.seo_url}`}
                             onClick={() => {
                               handleOnClick(product.product_name);
                               handleShow();

@@ -105,7 +105,7 @@ const CartProduct = ({
   return (
     <>
       <div className="col-md-4">
-        <Link onClick={setid} href={`/ProductDetail/${seourl}`}>
+        <Link onClick={setid} href={`/product-detail/${seourl}`}>
           <Image
             src={src}
             className="img-fluid d-block w-100"
@@ -119,7 +119,7 @@ const CartProduct = ({
       </div>
 
       <div className="col-md-8 card-Quantity-section">
-        <Link onClick={setid} href={`/ProductDetail/${seourl}`}>
+        <Link onClick={setid} href={`/product-detail/${seourl}`}>
           <div style={{ display: "flex" }}>
             <h6 style={{ marginRight: "7px" }}>
               <span className="text-danger">{Np}</span> {productName}

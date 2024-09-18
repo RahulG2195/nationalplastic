@@ -72,7 +72,7 @@ const TopPicsCard = (props) => {
       {props.ReDirect ? (
         <CardContent />
       ) : (
-        <Link href="/ProductDetail" id="nav-link">
+        <Link href="/product-detail" id="nav-link">
           <CardContent />
         </Link>
       )}

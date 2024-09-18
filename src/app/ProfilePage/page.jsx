@@ -433,7 +433,7 @@ function ProfilePage() {
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
                   <td>
-                    <Link href={`/ProductDetail/${data.seo_url}`}>
+                    <Link href={`/product-detail/${data.seo_url}`}>
                       <Image
                         src={images && images.length > 0 ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${images[0]}` : '/Altis-chair-Black-(45)-white bg.webp'}
                         height={50}
@@ -442,7 +442,7 @@ function ProfilePage() {
                       />
                     </Link>
                   </td>
-                  <td><Link href={`/ProductDetail/${data.seo_url}`}>{data.product_name}</Link></td>
+                  <td><Link href={`/product-detail/${data.seo_url}`}>{data.product_name}</Link></td>
                   <td>{data.quantity}</td>
                   <td>₹ {data.quantity * data.prod_price} </td>
                   <td>
