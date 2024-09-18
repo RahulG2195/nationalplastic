@@ -82,11 +82,11 @@ export default function Footer() {
                 <h5 className='fw-bolder'>RETAIL</h5>
               </div>
               <ul>
-                <li><Link className="nav-link fw-bold" href="/ProductCatlogue/premium_event_chair">Premium Event Chair</Link></li>
-                <li className='fw-bold'><Link className="nav-link fw-bold" href="/ProductCatlogue/premium_chair">Premium Chair</Link> </li>
-                <li className='fw-bold'><Link className="nav-link fw-bold" href="/ProductCatlogue/popular_chair">Popular Chair</Link> </li>
-                <li className='fw-bold'><Link className="nav-link fw-bold" href="/ProductCatlogue/without_arm_tent">Without Arm Chair</Link></li>
-                <li className='fw-bold'><Link className="nav-link fw-bold" href="/ProductCatlogue/office_chair">Office Chair</Link></li>
+                <li><Link className="nav-link fw-bold" href="/product-catalogue/premium_event_chair">Premium Event Chair</Link></li>
+                <li className='fw-bold'><Link className="nav-link fw-bold" href="/product-catalogue/premium_chair">Premium Chair</Link> </li>
+                <li className='fw-bold'><Link className="nav-link fw-bold" href="/product-catalogue/popular_chair">Popular Chair</Link> </li>
+                <li className='fw-bold'><Link className="nav-link fw-bold" href="/product-catalogue/without_arm_tent">Without Arm Chair</Link></li>
+                <li className='fw-bold'><Link className="nav-link fw-bold" href="/product-catalogue/office_chair">Office Chair</Link></li>
               </ul>
             </div>
             <div className="col-md-2">

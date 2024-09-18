@@ -98,7 +98,7 @@ export default function Manufacture() {
                   key={product.key}
                 >
                   <CatCards
-                        redirection={"ProductCatlogue"}
+                        redirection={"product-catalogue"}
 
                         catid={
                           product.seo_url

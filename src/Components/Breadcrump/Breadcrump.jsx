@@ -10,7 +10,7 @@ const Breadcrump = ({ category_id, category_name, product_name, catlogue }) => {
             <Link href="/">Home</Link>
           </li>
           <li className="breadcrumb-item">
-            <Link href={`/ProductCatlogue/${category_id}`}>
+            <Link href={`/product-catalogue/${category_id}`}>
               {category_name || catlogue || "Product Catelgoue"}
             </Link>
           </li>
