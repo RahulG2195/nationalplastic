@@ -51,6 +51,10 @@ h6 {
     opacity: 80%;
 }
 
+HeadSearch input:focus + .searchFor {
+    display: none;
+}
+
 .HeadSearch input:focus {
     /* display: none !important; */
     /* opacity: 0 !important; */

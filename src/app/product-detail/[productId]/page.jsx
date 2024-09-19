@@ -6,7 +6,6 @@ import Faqs from "@/Components/FAQs/Faqs";
 import FooterRow from "@/Components/FooterRow/FooterRow";
 
 async function getProductData(id) {
-  // Replace this with your actual API call
   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/productSeo?id=${id}`);
   if (!res.ok) {
     throw new Error('Failed to fetch product data');
@@ -15,21 +14,15 @@ async function getProductData(id) {
 }
 
 export async function generateMetadata({ params }) {
-  console.log('params' + params);
   const { productId } = params;
-
   const productData = await getProductData(productId);
-  console.log('productData' + productData);
-  console.log('productData' + JSON.stringify(productData));
-
   return {
-    title: productData.metaTitle || `Product: ${productData.product_name}`,
-    description: productData.metaDescription || `Details for ${productData.product_name}`,
+    title: productData.meta_title || `Product: ${productData.product_name}`,
+    description: productData.meta_description || `Details for ${productData.product_name}`,
   };
 }
 
-function page() {
-
+function page({params}) {
   return (
     <>
       <div className="pd-wrap">

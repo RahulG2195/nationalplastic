@@ -10,7 +10,7 @@ export async function GET(request) {
     
     if (isNumeric) {
         sqlQuery = `
-            SELECT *
+            SELECT meta_title, meta_description, product_name
             FROM products 
             WHERE product_id = ? 
             LIMIT 1
@@ -18,7 +18,7 @@ export async function GET(request) {
         param = id;
     } else {
         sqlQuery = `
-            SELECT meta_title, meta_description FROM products
+            SELECT meta_title, meta_description, product_name FROM products
             WHERE LOWER(seo_url) = LOWER(?) AND prod_status = 1
             LIMIT 1
         `;
@@ -31,6 +31,7 @@ export async function GET(request) {
         query: sqlQuery,
         values: [param],
     });
+   
   
       if (!product) {
         return new Response(JSON.stringify({ status: 404, message: "Product not found" }), { status: 404 });

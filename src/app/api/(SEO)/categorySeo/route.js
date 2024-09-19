@@ -7,39 +7,43 @@ export async function GET(request) {
   
     let sqlQuery;
     let param;
-    
+    try{
     if (isNumeric) {
         sqlQuery = `
-            SELECT p.*, c.category_name, c.seo_url AS cat_seo_url
-            FROM products p
-            LEFT JOIN categories c ON p.category_id = c.category_id 
-            WHERE p.product_id = ? AND prod_status = 1
-            LIMIT 1
+            SELECT meta_title, meta_description,category_name FROM categories
+            WHERE category_id = ?
         `;
         param = id;
     } else {
         sqlQuery = `
-            SELECT meta_title, meta_description FROM products
-            WHERE LOWER(seo_url) = LOWER(?) AND prod_status = 1
-            LIMIT 1
+            SELECT meta_title, meta_description,category_name FROM categories
+            WHERE LOWER(seo_url) = LOWER(?)
         `;
         param = id;
     }
+  }catch(e){
+    return new Response(JSON.stringify({ status: 500, message: e.message }), { status: 500 });
+  }
+
+
     try {
   
   
-      const [product] = await query({
+      const [data] = await query({
         query: sqlQuery,
         values: [param],
     });
+    console.log("jaons: " + JSON.stringify(data));
   
-      if (!product) {
+      if (!data) {
         return new Response(JSON.stringify({ status: 404, message: "Product not found" }), { status: 404 });
       }
   
       return new Response(JSON.stringify({
         status: 200,
-        product,
+        meta_title: data.meta_title,
+        meta_description: data.meta_description,
+        category_name: data.category_name,
       }));
     } catch (error) {
       return new Response(JSON.stringify({
