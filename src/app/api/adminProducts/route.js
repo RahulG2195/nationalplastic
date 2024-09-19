@@ -150,7 +150,6 @@ export async function POST(request) {
         { status: 400 }
       );
     }
-    console.log('data', data);
     
     // Insert the new product
     const result = await query({
@@ -496,8 +495,6 @@ export async function PATCH(request) {
     const { product_id, prod_status, collections, type } = await request.json();
 
     // Validate inputs
-    console.log("collections1", collections);
-    console.log("type", type);
 
     if (type == "collection") {
       const result = await query({

@@ -44,7 +44,6 @@ const CustomerReview = () => {
       const data = response.data;
   
       let reviewsToReturn = [];
-      console.log("response " + JSON.stringify(data));
       const review = data.review
       const mapReview = (review) => ({
         id: review.review_id,
@@ -53,12 +52,10 @@ const CustomerReview = () => {
         review: review.review_message,
         avatar: review.username ? review.username[0].toUpperCase() : "https://xsgames.co/randomusers/avatar.php?g=pixel"
       });
-      console.log("mapreviw"+JSON.stringify(mapReview));
       // Mapping real reviews if they exist
       if (data.review && Array.isArray(data.review)) {
         reviewsToReturn = data.review.map(mapReview);
       }
-      console.log("Real reviews to return: " + JSON.stringify(reviewsToReturn));
   
       // Fill with dummy reviews only if needed
       if (reviewsToReturn.length < 5 && data.dummyReviews && Array.isArray(data.dummyReviews)) {
@@ -66,7 +63,6 @@ const CustomerReview = () => {
         const dummyReviewsToAdd = data.dummyReviews.slice(0, remainingCount).map(mapReview);
         reviewsToReturn = [...reviewsToReturn, ...dummyReviewsToAdd];
       }
-      console.log("Final reviews to return (with dummy if needed): " + JSON.stringify(reviewsToReturn));
   
       if (reviewsToReturn.length === 0) {
         console.warn("No reviews or dummy reviews found in the response");

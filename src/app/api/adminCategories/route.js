@@ -17,11 +17,8 @@ export async function POST(request) {
     const uploadedImageName = image.name;
     const banner = data.get('banner');
     const bannerIMageName = banner?.name || null;
-    console.log("image" + image);
-    console.log("banner" + banner);
 
     if (!banner || !image ) {
-      console.log("why its cming here")
       return new Response(
         JSON.stringify({ success: false, error: "Banner and category Image should be there" }),
         { status: 500 }

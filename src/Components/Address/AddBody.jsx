@@ -62,10 +62,6 @@ const AddBody = () => {
     };
     try {
       const response = await axios.patch('/api/customersForBuisness', data);
-      console.log(JSON.stringify(response));
-      console.log(JSON.stringify(response.data));
-      console.log(JSON.stringify(response.message));
-      console.log(JSON.stringify(response.data.message));
       if(response.data.status == 201){
         notify("Successfully Added")
         return;

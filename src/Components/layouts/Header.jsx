@@ -81,7 +81,6 @@ export default function Header() {
 
   // get user data to show initial name after login
   useEffect(() => {
-    console.log("status" + status);
     const fromLogin = localStorage.getItem('fromLogin');
     if(session?.user && fromLogin === 'true'){
       updateUser()
