@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-import "../../app/Companyprofile/companyprofile.css";
+import "@/app/(Aboutus)/Companyprofile/companyprofile.css"
 
 
 const ComapnyProfileSidebar = ({title}) => {
