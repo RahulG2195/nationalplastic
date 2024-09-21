@@ -46,13 +46,11 @@ export async function GET(request) {
       query: "SELECT * FROM product_detail WHERE prod_id = ?",
       values: [product.product_id],
     });
-    console.log("product productDetails productDetails" + JSON.stringify(productDetails));
 
     const colors = await query({
       query: "SELECT color, color_code FROM products WHERE product_name = ? AND prod_status = 1",
       values: [product.product_name],
     });
-    console.log("product data" + JSON.stringify(colors));
 
     return new Response(JSON.stringify({
       status: 200,

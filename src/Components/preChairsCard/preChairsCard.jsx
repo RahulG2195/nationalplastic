@@ -65,7 +65,7 @@ const PreChairsCard = (props) => {
               </span>
             </div>
           </div>
-          <Link href={`/ProductDetail/${props.id}`}>
+          <Link href={`/product-detail/${props.id}`}>
             <Image 
             src={props.ChairImg} 
             className="img-fluid rounded thumbnail-image"
@@ -78,7 +78,7 @@ const PreChairsCard = (props) => {
 
         <div className="product-detail-container p-2 pb-2">
           <div className="align-items-center">
-            <Link href={`/ProductDetail/${props.id}`} className="">
+            <Link href={`/product-detail/${props.id}`} className="">
               <h5 className="dress-name"><span>{Np}</span> {props.Title} <span className="text-black">({props.Color})</span></h5>
             </Link>
             <div className="d-md-flex flex-column ">

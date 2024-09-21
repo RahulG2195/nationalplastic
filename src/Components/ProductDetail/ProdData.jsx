@@ -45,8 +45,6 @@ function ProdData({ category_id }) {
 
   const ProductCount = () => {
     if (!userState) {
-
-      console.log("Its here it should not be i think " + userState);
       const idToBeCompared = Number(localStorage.getItem('product_id'));
       const product = tempCartData.find(item => item.product_id === idToBeCompared);
       const quantity = product ? product.quantity : 1;
@@ -66,7 +64,6 @@ function ProdData({ category_id }) {
   };
 
   const handleDecrement = async () => {
-    console.log("its coming herre toh Y")
     if (initialCount > 0) {
       setInitialCount(initialCount - 1);
     }
@@ -79,10 +76,8 @@ function ProdData({ category_id }) {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        console.log("id " + id);
         const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`);
-        const { product, productDetails, colors, category, short_description, meta_description, meta_title } = response.data;
-        console.log("Response + Response + Response " + JSON.stringify(response));
+        const { product, productDetails, colors, category, short_description } = response.data;
 
         localStorage.setItem("product_id", product.product_id);
         if (!product) {
@@ -202,7 +197,6 @@ function ProdData({ category_id }) {
     }
   };
   const handleCountChange = (newCount) => {
-    console.log("newcoutn" + newCount);
     setInitialCount(newCount);
   };
 

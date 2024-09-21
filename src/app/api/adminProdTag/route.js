@@ -28,10 +28,7 @@ export async function GET() {
 export async function POST(req) {
   try {
     const body = await req.json();
-    // console.log('body', body);
     const { productId, tagId } = body;
-    // console.log('productId', productId);
-    // console.log('tagId', tagId);
 
     if (!productId || !tagId) {
       return NextResponse.json(

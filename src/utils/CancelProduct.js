@@ -2,30 +2,24 @@ import axios from 'axios';
 const adminEMail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
 function CancelProdChargeAfterTwentyFourHr(orderStatusDate) {
   try {
-    console.log(`Received orderStatusDate: ${orderStatusDate}`);
 
     const orderDate = new Date(orderStatusDate);
-    console.log(`Parsed orderDate: ${orderDate}`);
 
     if (isNaN(orderDate.getTime())) {
       throw new Error('Invalid date format');
     }
 
     const currentDate = new Date();
-    console.log(`Current date: ${currentDate}`);
 
     const diffInMs = currentDate - orderDate;
     const diffInHours = diffInMs / (1000 * 60 * 60);
-    console.log(`Time difference in hours: ${diffInHours.toFixed(2)}`);
 
     const CHARGE_THRESHOLD_HOURS = 24;
     const CANCELLATION_CHARGE = 50;
 
     if (diffInHours > CHARGE_THRESHOLD_HOURS) {
-      console.log(`Time difference exceeds ${CHARGE_THRESHOLD_HOURS} hours. Applying cancellation charge.`);
       return CANCELLATION_CHARGE;
     } else {
-      console.log(`Time difference is within ${CHARGE_THRESHOLD_HOURS} hours. No cancellation charge.`);
       return 0;
     }
   } catch (error) {

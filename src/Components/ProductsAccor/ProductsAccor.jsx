@@ -71,7 +71,7 @@ const ProductsAccr = ({ handleShow }) => {
                   id={`panel${index + 1}bh-header`}
                 >
                   <Typography className="fw-semibold fs-6">
-                    <Link href={`/ProductCatlogue/${category.seo_url}`} onClick={() => handleShow()}>{category.category_name}</Link>
+                    <Link href={`/product-catalogue/${category.seo_url}`} onClick={() => handleShow()}>{category.category_name}</Link>
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -82,7 +82,7 @@ const ProductsAccr = ({ handleShow }) => {
                         <p key={product.product_name} className="border">
                           <Link
                             className="nav-link"
-                            href={`/ProductDetail/${product.seo_url}`}
+                            href={`/product-detail/${product.seo_url}`}
                             onClick={() => {
                               handleOnClick(product.product_name);
                               handleShow();

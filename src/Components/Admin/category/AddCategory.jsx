@@ -33,9 +33,7 @@ export default function AddCategory() {
           formData.append(key, value);
         }
 
-        for (let pair of formData.entries()) {
-          console.log(`${pair[0]}: ${pair[1]}`);
-        }
+      
 
 
         await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/adminCategories`, formData, {

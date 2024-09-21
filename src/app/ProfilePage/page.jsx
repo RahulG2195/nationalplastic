@@ -94,7 +94,6 @@ function ProfilePage() {
   useEffect(() => {
     const fetchUserData = async () => {
       if (!userEmail) {
-        console.log("No userEmail, skipping fetchUserData.");
         return;
       }
       try {
@@ -226,12 +225,9 @@ function ProfilePage() {
       const extraAmt = CancelProdChargeAfterTwentyFourHr(checkorderStatus[0].order_status_date);
       const orderStatus = checkorderStatus[0].order_status;
 
-      console.log("orderStatus:", orderStatus);
-      console.log("extraAmt:", extraAmt);
 
       const proceedWithCancellation = await new Promise((resolve) => {
         if (extraAmt > 0 && orderStatus >= 2) {
-          console.log("Showing confirmation modal");
           confirm({
             title: 'Confirm Cancellation',
             icon: <ExclamationCircleOutlined />,
@@ -433,7 +429,7 @@ function ProfilePage() {
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
                   <td>
-                    <Link href={`/ProductDetail/${data.seo_url}`}>
+                    <Link href={`/product-detail/${data.seo_url}`}>
                       <Image
                         src={images && images.length > 0 ? `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${images[0]}` : '/Altis-chair-Black-(45)-white bg.webp'}
                         height={50}
@@ -442,7 +438,7 @@ function ProfilePage() {
                       />
                     </Link>
                   </td>
-                  <td><Link href={`/ProductDetail/${data.seo_url}`}>{data.product_name}</Link></td>
+                  <td><Link href={`/product-detail/${data.seo_url}`}>{data.product_name}</Link></td>
                   <td>{data.quantity}</td>
                   <td>₹ {data.quantity * data.prod_price} </td>
                   <td>

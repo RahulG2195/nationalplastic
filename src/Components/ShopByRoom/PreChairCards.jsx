@@ -61,7 +61,6 @@ const PreChairsCards = () => {
 
       const catResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/categoryFromSeo?query=${seo_url}`);
       const data = catResponse.data.shopbyroom[0];
-      // console.log('data', data);
       
       setCategoryType(data.tag_name)
       setCat_id(data.tag_id);
@@ -71,12 +70,9 @@ const PreChairsCards = () => {
       const fetchedData = response.data;
       setFetchClr(fetchedData.color);
       setFetchType(fetchedData.armType);
-      console.log('fetchedData', fetchedData);
       
       if (fetchedData?.ShopByroomData) {
         let filteredData = fetchedData.ShopByroomData;
-        console.log('filteredData', filteredData);
-
         if (selectedColor) {
           filteredData = filteredData.filter(
             (item) =>
@@ -120,9 +116,6 @@ const PreChairsCards = () => {
     }
   };
 
-
-  console.log('FetchClr', FetchClr);
-  console.log('FetchType', FetchType);
   
   const handleAddToWishlist = async (product_id) => {
     const isLoggedInResult = await isLoggedIn();

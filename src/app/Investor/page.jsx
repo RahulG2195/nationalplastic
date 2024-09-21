@@ -7,6 +7,12 @@ import InvestorsSlider from "@/Components/Investors/InvestorsSlider";
 import AboutSlider from "@/Components/About/AboutSlider";
 import SliderCard from "@/Components/About/SliderCard";
 // import InvestorSliderCard from "@/Components/Investors/investorSliderCard";
+export const metadata = {
+  title: 'Investor Relations | National Plastic Industries Ltd',
+  description: 'Access key financial information, annual reports, and corporate governance details for National Plastic Industries Ltd. Stay informed about our plastic manufacturing business performance and growth.',
+  keywords: ['investor relations', 'financial reports', 'National Plastic Industries Ltd', 'shareholder information', 'plastic industry investment'],
+};
+
 
 
 function Investor() {

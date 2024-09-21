@@ -81,7 +81,6 @@ export default function Header() {
 
   // get user data to show initial name after login
   useEffect(() => {
-    console.log("status" + status);
     const fromLogin = localStorage.getItem('fromLogin');
     if(session?.user && fromLogin === 'true'){
       updateUser()
@@ -297,7 +296,8 @@ export default function Header() {
                   <form onSubmit={handleSearchSubmit} className="d-flex nav-search">
 
                     <div className="text-container py-2 HeadSearch px-3 w-100 position-relative">
-                    <span className="position-absolute">Search for {products[currentProductIndex]}</span>
+                    {!searchTerm && (<span className="position-absolute searchFor">Search for {products[currentProductIndex]}</span>
+                      )}
                     <input
                         id="search-input"
                         className=""

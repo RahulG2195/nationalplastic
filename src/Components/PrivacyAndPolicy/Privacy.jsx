@@ -1,8 +1,6 @@
 import Image from "next/image";
 
 const Privacy = ({ bannerImage, content }) => {
-  console.log("bannerImage"+ bannerImage)
-  console.log("bannerImage"+ content)
 
   return (
     <>

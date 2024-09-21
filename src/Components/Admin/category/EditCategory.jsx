@@ -25,8 +25,6 @@ export default function EditCategory() {
     try {
       const formData = new FormData();
 
-      console.log("Updating category" + JSON.stringify(data)); //
-
       const entries = {
         category_name: data.category_name,
         image_name: data.image_name,

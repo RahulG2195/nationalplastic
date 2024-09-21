@@ -41,8 +41,6 @@ const ProdetailAddEdit = ({ visible, onCancel, initialValues, pd_id }) => {
         }
       });
 
-      // Handle the response as needed
-      console.log("Response:", response.data);
       onCancel(); // Close the modal after successful submission
     } catch (error) {
       console.error("Error submitting form data:", error);

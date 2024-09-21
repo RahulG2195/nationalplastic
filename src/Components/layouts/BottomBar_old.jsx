@@ -70,7 +70,7 @@ function BottomBar() {
   return (
     <div className=" px-md-5  d-flex align-items-center bottom_nav position-relative mainrow">
       <div className="col second px-3 py-2">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/13`}>
+        <Link onClick={sendCategory} href={`/product-catalogue/13`}>
           <p className="">Premium Event Chairs</p>
         </Link>
         <div className="ulCont SecondDrop mx-4 secondHover p-3 ">
@@ -101,7 +101,7 @@ function BottomBar() {
       </div>
 
       <div className="col second py-2">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/14`}>
+        <Link onClick={sendCategory} href={`/product-catalogue/14`}>
           {" "}
           <p>Without Arm Tent</p>
         </Link>
@@ -131,7 +131,7 @@ function BottomBar() {
       </div>
 
       <div className="col second  py-2">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/15`}>
+        <Link onClick={sendCategory} href={`/product-catalogue/15`}>
           <p>Premium Chairs</p>
         </Link>
         <div className="ulCont SecondDrop mx-4 px-3">
@@ -160,7 +160,7 @@ function BottomBar() {
       </div>
 
       <div className="col second py-2 ">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/16`}>
+        <Link onClick={sendCategory} href={`/product-catalogue/16`}>
           <p>Popular Chairs</p>
         </Link>
         <div className="ulCont SecondDrop mx-4 p-3">
@@ -189,7 +189,7 @@ function BottomBar() {
       </div>
 
       <div className="col second py-2 ">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/17`}>
+        <Link onClick={sendCategory} href={`/product-catalogue/17`}>
           <p>Cabinet</p>
         </Link>
         <div className="ulCont SecondDrop mx-4 p-3">
@@ -218,7 +218,7 @@ function BottomBar() {
       </div>
 
       <div className="col second py-2 ">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/18`}>
+        <Link onClick={sendCategory} href={`/product-catalogue/18`}>
           <p>Baby Chairs</p>
         </Link>
         <div className="ulCont SecondDrop mx-4 p-3">
@@ -247,7 +247,7 @@ function BottomBar() {
       </div>
 
       <div className="col drp Stool position-relative py-2">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/28`}>
+        <Link onClick={sendCategory} href={`/product-catalogue/28`}>
           <p> Stool</p>
         </Link>
         <div className="ulCont SecondDrop mx-4 ">
@@ -276,7 +276,7 @@ function BottomBar() {
       </div>
 
       <div className="col drp Table position-relative py-2">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/25`}>
+        <Link onClick={sendCategory} href={`/product-catalogue/25`}>
           <p>Table</p>
         </Link>
         <div className="ulCont SecondDrop mx-4 p-3">
@@ -305,7 +305,7 @@ function BottomBar() {
       </div>
 
       <div className="col drp Box position-relative py-2">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/21`}>
+        <Link onClick={sendCategory} href={`/product-catalogue/21`}>
           <p>Box</p>
         </Link>
         <div className="ulCont SecondDrop mx-4 p-3">
@@ -334,7 +334,7 @@ function BottomBar() {
       </div>
 
       <div className="col drp Drawer position-relative py-2">
-        <Link onClick={sendCategory} href={`/ProductCatlogue/22`}>
+        <Link onClick={sendCategory} href={`/product-catalogue/22`}>
           <p>Drawer</p>
         </Link>
         <div className="ulCont SecondDrop mx-4 p-3">

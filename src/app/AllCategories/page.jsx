@@ -33,7 +33,7 @@ const TopPics = () => {
               className="col col-lg-3 d-flex justify-content-center"
             >
               <div className="card text-center border-0 shadow-sm">
-                <Link href={`/ProductCatlogue/${category.seo_url}`}>
+                <Link href={`/product-catalogue/${category.seo_url}`}>
                   <img
                     src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_CATEGORY_PATH_DIR}${category.image_name}`}
                     className="card-img-top"
@@ -42,7 +42,7 @@ const TopPics = () => {
                 </Link>
 
                 <div className="card-body">
-                  <Link href={`/ProductCatlogue/${category.seo_url}`}>
+                  <Link href={`/product-catalogue/${category.seo_url}`}>
                     <h5 className="card-title">{category.category_name}</h5>
                   </Link>
                 </div>
