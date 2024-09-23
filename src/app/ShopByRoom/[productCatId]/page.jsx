@@ -21,8 +21,8 @@ export async function generateMetadata({ params }) {
   const { productCatId } = params;
   const categoryData = await getData(productCatId);
   return {
-    title: categoryData.meta_title || `Product: ${categoryData.id}`,
-    description: categoryData.meta_description || `Details for ${id}`,
+    title: categoryData.meta_title || `Product: ${categoryData?.id}`,
+    description: categoryData.meta_description || `Details for ${categoryData?.id}`,
   };
 }
 

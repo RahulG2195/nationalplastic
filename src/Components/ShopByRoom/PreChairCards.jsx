@@ -61,11 +61,10 @@ const PreChairsCards = () => {
 
       const catResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/categoryFromSeo?query=${seo_url}`);
       const data = catResponse.data.shopbyroom[0];
-      
       setCategoryType(data.tag_name)
       setCat_id(data.tag_id);
 
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/ProductsCat?query=${cat_id}`);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/ProductsCat?query=${data.tag_id}`);
 
       const fetchedData = response.data;
       setFetchClr(fetchedData.color);
