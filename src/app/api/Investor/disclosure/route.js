@@ -18,7 +18,7 @@ export async function GET(request) {
             values: [year],
         });
         const yearsList = await query({
-          query: "SELECT label from navitems where parentId = 17;",
+          query: "SELECT label, id from navitems where parentId = 17;",
           values: [],
       });
         return new Response(JSON.stringify({ results , yearsList: yearsList }), { status: 200 });
@@ -54,6 +54,7 @@ export async function PUT(request) {
                 return await handleAddRecord(fields, files);
             case 'editRecord':
                 return await handleEditRecord(fields, files);
+
             default:
                 return new Response(JSON.stringify({ message: 'Invalid action' }), { status: 400 });
         }
@@ -69,10 +70,10 @@ export async function POST(request) {
         const { action } = body;
 
         switch (action) {
-            case 'updateStatus':
-                return await handleUpdateStatus(body);
             case 'insertDisclosure':
                 return await handleInsertDisclosure(body);
+            case 'deleteDisclosure':
+                return await handleDeleteDisclosure(body);
             default:
                 return new Response(JSON.stringify({ message: 'Invalid action' }), { status: 400 });
         }
@@ -84,7 +85,6 @@ export async function POST(request) {
 // Helper function for adding a record
 async function handleAddRecord(fields, files) {
     const { title, year } = fields;
-    const status = fields.status ? parseInt(fields.status) : 1;
 
     if (!title || !year) {
         return new Response(JSON.stringify({ message: 'Title and year are required' }), { status: 400 });
@@ -98,8 +98,8 @@ async function handleAddRecord(fields, files) {
 
     try {
         const result = await query({
-            query: "INSERT INTO disclosure_data (title, file_path, status, year) VALUES (?, ?, ?, ?)",
-            values: [title, fileName, status, year],
+            query: "INSERT INTO disclosure_data (title, file_path,  year) VALUES (?, ?, ?)",
+            values: [title, fileName,  year],
         });
 
         return new Response(JSON.stringify({
@@ -116,25 +116,46 @@ async function handleAddRecord(fields, files) {
 
 // Helper function for editing a record
 async function handleEditRecord(fields, files) {
-    const { id, title, year } = fields;
-    const status = fields.status ? parseInt(fields.status) : 1;
+    const { id } = fields;
 
-    if (!id || !title || !year) {
-        return new Response(JSON.stringify({ message: 'ID, title, and year are required' }), { status: 400 });
+    if (!id) {
+        return new Response(JSON.stringify({ message: 'ID is required' }), { status: 400 });
     }
-    
 
-    let fileName = fields.currentFilePath || '';
+    let updateFields = [];
+    let updateValues = [];
+
+    if (fields.title) {
+        updateFields.push('title = ?');
+        updateValues.push(fields.title);
+    }
+
+    if (fields.year) {
+        updateFields.push('year = ?');
+        updateValues.push(fields.year);
+    }
+
+   
+
+    let fileName = fields.currentFilePath;
 
     if (files.file) {
-        
         fileName = await handleFileUpload(files.file);
+        updateFields.push('file_path = ?');
+        updateValues.push(fileName);
+    }
+
+    if (updateFields.length === 0) {
+        return new Response(JSON.stringify({ message: 'No fields to update' }), { status: 400 });
     }
 
     try {
+        const updateQuery = `UPDATE disclosure_data SET ${updateFields.join(', ')} WHERE id = ?`;
+        updateValues.push(id);
+
         const result = await query({
-            query: "UPDATE disclosure_data SET title = ?, file_path = ?, status = ?, year = ? WHERE id = ?",
-            values: [title, fileName, status, year, id],
+            query: updateQuery,
+            values: updateValues,
         });
 
         return new Response(JSON.stringify({
@@ -144,32 +165,6 @@ async function handleEditRecord(fields, files) {
     } catch (error) {
         return new Response(JSON.stringify({
             message: 'Error updating record',
-            error: error.message
-        }), { status: 500 });
-    }
-}
-
-// Helper function for updating status
-async function handleUpdateStatus(body) {
-    const { Id, status = 1 } = body;
-
-    if (!Id) {
-        return new Response(JSON.stringify({ message: 'ID is required' }), { status: 400 });
-    }
-
-    try {
-        const result = await query({
-            query: "UPDATE disclosure_data SET status = ? WHERE id = ?",
-            values: [status, Id],
-        });
-
-        return new Response(JSON.stringify({
-            message: 'Status updated successfully',
-            affectedRows: result.affectedRows
-        }), { status: 200 });
-    } catch (error) {
-        return new Response(JSON.stringify({
-            message: 'Error updating status',
             error: error.message
         }), { status: 500 });
     }
@@ -187,8 +182,11 @@ async function handleFileUpload(file) {
     
     await uploadFile(file);
     try{
+        const uploadDirSEcond = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
+        const filePathSecond = path.join(uploadDirSEcond, file.name);
+        await fs.writeFile(filePathSecond, buffer);
         const filePath = path.join(local_UPLOAD_DIR, file.name);
         await writeFile(filePath, buffer);
       }catch(error){
@@ -229,3 +227,68 @@ async function handleInsertDisclosure(body) {
       }), { status: 500 });
   }
 }
+
+
+// New function for editing a disclosure
+async function handleEditDisclosure(body) {
+    const { id, label } = body;
+    if (!id || !label) {
+      return new Response(JSON.stringify({ message: 'ID and year are required' }), { status: 400 });
+    }
+    
+    if (!validateYear(label)) {
+      return new Response(JSON.stringify({ message: 'Invalid year format. Year must be a 4-digit number.' }), { status: 400 });
+    }
+    
+    try {
+      const result = await query({
+        query: "UPDATE navitems SET label = ?, link = ? WHERE id = ? AND parentId = 17",
+        values: [label, `/generalDisclosure/${label}`, id],
+      });
+      
+      if (result.affectedRows === 0) {
+        return new Response(JSON.stringify({ message: 'No disclosure found with the given ID' }), { status: 404 });
+      }
+      
+      return new Response(JSON.stringify({
+        message: 'Disclosure data updated successfully',
+        affectedRows: result.affectedRows
+      }), { status: 200 });
+    } catch (error) {
+      return new Response(JSON.stringify({
+        message: 'Error updating disclosure data',
+        error: error.message
+      }), { status: 500 });
+    }
+  }
+  
+  // New function for deleting a disclosure
+  async function handleDeleteDisclosure(body) {
+    const { id } = body;
+    if (!id) {
+      return new Response(JSON.stringify({ message: 'ID is required' }), { status: 400 });
+    }
+    
+    try {
+      const result = await query({
+        query: "DELETE FROM navitems WHERE id = ? AND parentId = 17",
+        values: [id],
+      });
+      
+      if (result.affectedRows === 0) {
+        return new Response(JSON.stringify({ message: 'No disclosure found with the given ID' }), { status: 404 });
+      }
+      
+      return new Response(JSON.stringify({
+        message: 'Disclosure data deleted successfully',
+        affectedRows: result.affectedRows
+      }), { status: 200 });
+    } catch (error) {
+      return new Response(JSON.stringify({
+        message: 'Error deleting disclosure data',
+        error: error.message
+      }), { status: 500 });
+    }
+  }
+  
+ 
