@@ -24,10 +24,10 @@ export default function AddCategory() {
     setIsLoading(true);
     const submitLoader = async () => {
       try {
-        const { category_name, image_name, navshow, status, image, topPick, seo_url, banner, header_position } = data;
+        const { category_name, image_name, navshow, status, image, topPick, seo_url, banner, header_position ,meta_title,meta_description} = data;
 
         const formData = new FormData();
-        const entries = { category_name, image_name, navshow, status, image, topPick, seo_url, banner, header_position };
+        const entries = { category_name, image_name, navshow, status, image, topPick, seo_url, banner, header_position ,meta_title,meta_description};
 
         for (const [key, value] of Object.entries(entries)) {
           formData.append(key, value);
@@ -119,7 +119,42 @@ export default function AddCategory() {
           />
         </Form.Item>
         <Form.Item
+          label="meta_description"
+          validateStatus={errors.meta_description ? 'error' : ''}
+          help={errors.meta_description ? 'meta_description is invalid! Dont add space between words only underscore or hyphens are allowed.' : ''}
+        >
+          <Controller
+            name="meta_description"
+            control={control}
+            rules={{
+              required: true,
+              pattern: /^[a-zA-Z0-9-_\s.,!?'"()]+$/,
+              minLength: 1,
+              maxLength: 255,
+            }}
+            render={({ field }) => <Input {...field} />}
+          />
+        </Form.Item> 
+        <Form.Item
+          label="meta_title"
+          validateStatus={errors.meta_title ? 'error' : ''}
+          help={errors.meta_title ? 'meta_title is invalid! Dont add space between words only underscore or hyphens are allowed.' : ''}
+        >
+          <Controller
+            name="meta_title"
+            control={control}
+            rules={{
+              required: true,
+              pattern: /^[a-zA-Z0-9-_\s.,!?'"()]+$/,
+              minLength: 1,
+              maxLength: 255,
+            }}
+            render={({ field }) => <Input {...field} />}
+          />
+        </Form.Item>
+        <Form.Item
           label="Image"
+          rules={{ required: true }}
           validateStatus={errors.image ? 'error' : ''}
           help={errors.image ? 'Please upload an image!' : ''}
         >
@@ -135,16 +170,19 @@ export default function AddCategory() {
         />
         <Controller
           name="image"
+          rules={{ required: true }}
           control={control}
           render={({ field }) => <input {...field} type="hidden" />}
         />
         <Form.Item
           label="banner"
+          rules={{ required: true }}
           validateStatus={errors.image ? 'error' : ''}
           help={errors.image ? 'Please upload an image!' : ''}
         >
           <input
             type="file"
+          rules={{ required: true }}
             onChange={handleBannerChange}
           />
         </Form.Item>

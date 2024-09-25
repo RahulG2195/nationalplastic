@@ -33,6 +33,8 @@ export default function EditCategory() {
         topPick: data.topPick === "1" || data.topPick === "Active" ? "1" : "0",
         category_id: data.category_id,
         seo_url: data.seo_url,
+        meta_title:data.meta_title,
+        meta_description:data.meta_description,
         header_position: data.header_position
 
       };
@@ -165,6 +167,40 @@ export default function EditCategory() {
             rules={{
               required: true,
               pattern: /^[a-zA-Z0-9-_]+$/,
+              minLength: 1,
+              maxLength: 255,
+            }}
+            render={({ field }) => <Input {...field} />}
+          />
+        </Form.Item>
+        <Form.Item
+          label="Meta Title"
+          validateStatus={errors.meta_title ? 'error' : ''}
+          help={errors.meta_title ? 'SEO URL is invalid! Dont add space between words only underscore or hyphens are allowed.' : ''}
+        >
+          <Controller
+            name="meta_title"
+            control={control}
+            rules={{
+              required: true,
+              pattern: /^[a-zA-Z0-9-_\s.,!?'"()]+$/,
+              minLength: 1,
+              maxLength: 255,
+            }}
+            render={({ field }) => <Input {...field} />}
+          />
+        </Form.Item>
+        <Form.Item
+          label="SEO URL"
+          validateStatus={errors.meta_description ? 'error' : ''}
+          help={errors.meta_description ? 'SEO URL is invalid! Dont add space between words only underscore or hyphens are allowed.' : ''}
+        >
+          <Controller
+            name="meta_description"
+            control={control}
+            rules={{
+              required: true,
+              pattern: /^[a-zA-Z0-9-_\s.,!?'"()]+$/,
               minLength: 1,
               maxLength: 255,
             }}

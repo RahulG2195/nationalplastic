@@ -9,7 +9,7 @@ export async function POST(request) {
   try {
     const data = await request.formData();
 
-    const { category_name, seo_url, navshow, status, topPick = 0,header_position=null } = Object.fromEntries(
+    const { category_name, seo_url, navshow, status, topPick = 0,header_position=null,meta_description,meta_title } = Object.fromEntries(
       data.entries()
     );
 
@@ -92,10 +92,10 @@ export async function POST(request) {
     // Insert the new category
     const result = await query({
       query: `
-        INSERT INTO categories (category_name, seo_url, image_name, navshow, status, topPick,banner_image,header_position)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO categories (category_name, seo_url, image_name, navshow, status, topPick,banner_image,header_position,meta_title,meta_description)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `,
-      values: [category_name, seo_url, uploadedImageName, navshow, status, topPick, bannerIMageName, header_position],
+      values: [category_name, seo_url, uploadedImageName, navshow, status, topPick, bannerIMageName, header_position, meta_title, meta_description],
     });
 
     return new Response(
@@ -115,7 +115,7 @@ export async function POST(request) {
 export async function PUT(request) {
   try {
     const data = await request.formData();
-    const { category_id, seo_url, category_name, image_name, navshow, status, image, topPick = 0, banner,header_position } = Object.fromEntries(
+    const { category_id, seo_url, category_name, image_name, navshow, status, image, topPick = 0, banner,header_position,meta_title,meta_description  } = Object.fromEntries(
       data.entries()
     );
     
@@ -171,7 +171,7 @@ export async function PUT(request) {
     
 
     // Manual validation
-    const requiredFields = { category_id, seo_url, category_name, navshow, status,header_position };
+    const requiredFields = { category_id, seo_url, category_name, navshow, status,header_position, meta_title , meta_description};
     const missingFields = Object.entries(requiredFields).filter(([key, value]) => !value).map(([key]) => key);
 
     if (missingFields.length > 0) {
@@ -190,9 +190,11 @@ export async function PUT(request) {
         navshow = ?,
         status = ?,
         topPick = ?,
-        header_position = ?
+        header_position = ?,
+        meta_title = ?,
+        meta_description =?
     `;
-    let updateValues = [category_name, seo_url, navshow, status, topPick, header_position];
+    let updateValues = [category_name, seo_url, navshow, status, topPick, header_position, meta_title, meta_description];
 
     // Add image_name to the update if a new image was uploaded
     if (newImageName) {

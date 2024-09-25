@@ -133,6 +133,16 @@ const CategoryList = () => {
       key: 'seo_url',
     },
     {
+      title: 'Meta Description',
+      dataIndex: 'meta_description',
+      key: 'meta_description',
+    },
+    {
+      title: 'Meta Title',
+      dataIndex: 'meta_title',
+      key: 'meta_title',
+    },
+    {
       title: 'Header Position',
       dataIndex: 'header_position',
       key: 'header_position',
