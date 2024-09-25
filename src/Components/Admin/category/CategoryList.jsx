@@ -161,6 +161,17 @@ const CategoryList = () => {
       key: 'meta_title',
     },
     {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+      render: (status, record) => (
+        <Switch
+          checked={status === 1}
+          onChange={(checked) => handleToggleNavshow(record.category_id, checked, "status")}
+        />
+      ),
+    },
+    {
       title: 'Header Position',
       dataIndex: 'header_position',
       key: 'header_position',
@@ -194,7 +205,7 @@ const CategoryList = () => {
       ),
     },
     {
-      title: 'Image',
+      title: 'Banner Image',
       dataIndex: 'banner_image',
       key: 'banner_image',
       render: (text) => (
@@ -229,17 +240,6 @@ const CategoryList = () => {
         <Switch
           checked={household === 1}
           onChange={(checked) => handleToggleNavshow(record.category_id, checked, "household")}
-        />
-      ),
-    },
-    {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
-      render: (status, record) => (
-        <Switch
-          checked={status === 1}
-          onChange={(checked) => handleToggleNavshow(record.category_id, checked, "status")}
         />
       ),
     },
