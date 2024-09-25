@@ -128,7 +128,6 @@ export default function AddCategory() {
             control={control}
             rules={{
               required: true,
-              pattern: /^[a-zA-Z0-9-_\s.,!?'"()]+$/,
               minLength: 1,
               maxLength: 255,
             }}
@@ -145,7 +144,6 @@ export default function AddCategory() {
             control={control}
             rules={{
               required: true,
-              pattern: /^[a-zA-Z0-9-_\s.,!?'"()]+$/,
               minLength: 1,
               maxLength: 255,
             }}

@@ -3,12 +3,15 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Container, Row, Col, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from 'axios';
-import { Table, Switch } from 'antd';
+import { Table, Switch,Typography } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import "./CategoryList.css";
 import { notify, notifyError } from '@/utils/notify';
+const { Paragraph } = Typography;
+
+
 
 const CategoryList = () => {
   const router = useRouter();
@@ -18,6 +21,8 @@ const CategoryList = () => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [currentItemToDelete, setCurrentItemToDelete] = useState(null);
   const [seoUrl, setSeoUrl] = useState('');
+  const [expanded, setExpanded] = useState(false);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -136,6 +141,19 @@ const CategoryList = () => {
       title: 'Meta Description',
       dataIndex: 'meta_description',
       key: 'meta_description',
+      render: (text) => (
+        <Paragraph
+          ellipsis={{
+            rows: 2,
+            expandable: true,
+            symbol: 'Read more',
+            onExpand: () => {},
+            onEllipsis: () => {}
+          }}
+        >
+          {text}
+        </Paragraph>
+      ),
     },
     {
       title: 'Meta Title',

@@ -166,7 +166,6 @@ export default function EditCategory() {
             control={control}
             rules={{
               required: true,
-              pattern: /^[a-zA-Z0-9-_]+$/,
               minLength: 1,
               maxLength: 255,
             }}
@@ -176,14 +175,13 @@ export default function EditCategory() {
         <Form.Item
           label="Meta Title"
           validateStatus={errors.meta_title ? 'error' : ''}
-          help={errors.meta_title ? 'SEO URL is invalid! Dont add space between words only underscore or hyphens are allowed.' : ''}
+          help={errors.meta_title ? 'Title is invalid! Dont add space between words only underscore or hyphens are allowed.' : ''}
         >
           <Controller
             name="meta_title"
             control={control}
             rules={{
               required: true,
-              pattern: /^[a-zA-Z0-9-_\s.,!?'"()]+$/,
               minLength: 1,
               maxLength: 255,
             }}
@@ -191,16 +189,15 @@ export default function EditCategory() {
           />
         </Form.Item>
         <Form.Item
-          label="SEO URL"
+          label="Meta Description"
           validateStatus={errors.meta_description ? 'error' : ''}
-          help={errors.meta_description ? 'SEO URL is invalid! Dont add space between words only underscore or hyphens are allowed.' : ''}
+          help={errors.meta_description ? 'meta_description is invalid! Dont add space between words only underscore or hyphens are allowed.' : ''}
         >
           <Controller
             name="meta_description"
             control={control}
             rules={{
               required: true,
-              pattern: /^[a-zA-Z0-9-_\s.,!?'"()]+$/,
               minLength: 1,
               maxLength: 255,
             }}
