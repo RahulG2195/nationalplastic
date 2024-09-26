@@ -4,7 +4,7 @@ import axios from "axios";
 import "../../styles/about.css";
 import Image from "next/image";
 import ComapnyProfileSidebar from "./ComapnyProfileSidebar";
-import "@/app/(Aboutus)/Companyprofile/companyprofile.css"
+import "@/app/(Aboutus)/company-profile/companyprofile.css"
 
 function Infrastructure() {
   const [infrastructureData, setInfrastructureData] = useState([]);
