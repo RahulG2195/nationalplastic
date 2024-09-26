@@ -57,7 +57,7 @@ const InvestorAccor = ({ handleShow }) => {
                   <p style={{ borderBottom: "1px solid lightgrey" }}>
                     <Link
                       className="nav-link"
-                      href={`/Unaudited`}
+                      href={`/unaudited-financial-results`}
                       onClick={() => {
                         handleOnClick("Unaudited Financial Results");
                         handleShow();
@@ -69,7 +69,7 @@ const InvestorAccor = ({ handleShow }) => {
                   <p style={{ borderBottom: "1px solid lightgrey" }}>
                     <Link
                       className="nav-link darkBlue"
-                      href={`/Audited`}
+                      href={`/audited-financial-results`}
                       onClick={() => {
                         handleOnClick("Audited Financial Results");
                         handleShow();
@@ -81,7 +81,7 @@ const InvestorAccor = ({ handleShow }) => {
                   <p style={{ borderBottom: "1px solid lightgrey" }}>
                     <Link
                       className="nav-link darkBlue"
-                      href={`/Annual`}
+                      href={`/annual-report`}
                       onClick={() => {
                         handleOnClick("Annual Report");
                         handleShow();
@@ -93,7 +93,7 @@ const InvestorAccor = ({ handleShow }) => {
                   <p>
                     <Link
                       className="nav-link darkBlue"
-                      href={`/AnnualReturn`}
+                      href={`/annual-return`}
                       onClick={() => {
                         handleOnClick("Annual Return");
                         handleShow();
@@ -111,7 +111,7 @@ const InvestorAccor = ({ handleShow }) => {
               <p>
                 <Link
                   className="nav-link darkBlue"
-                  href={`/ShareHolding`}
+                  href={`/share-holding-pattern`}
                   onClick={() => {
                     handleShow();
                   }}
@@ -126,7 +126,7 @@ const InvestorAccor = ({ handleShow }) => {
               <p>
                 <Link 
                   className="nav-link darkBlue"
-                  href={`/Corporate`}
+                  href={`/corporate-governance`}
                   onClick={() => {
                     handleShow();
                   }}
@@ -141,7 +141,7 @@ const InvestorAccor = ({ handleShow }) => {
               <p>
                 <Link
                   className="nav-link darkBlue"
-                  href={`/InvestorContact`}
+                  href={`/investor-contact`}
                   onClick={() => {
                     handleShow();
                   }}
@@ -169,7 +169,7 @@ const InvestorAccor = ({ handleShow }) => {
                   <p style={{ borderBottom: "1px solid lightgrey" }}>
                     <Link
                       className="nav-link darkBlue"
-                      href={`/OutcomeAGM`}
+                      href={`/outcome-of-agm`}
                       onClick={() => {
                         handleOnClick("Outcome of AGM");
                         handleShow();
@@ -181,7 +181,7 @@ const InvestorAccor = ({ handleShow }) => {
                   <p>
                     <Link
                       className="nav-link darkBlue"
-                      href={`/Notice`}
+                      href={`/notices`}
                       onClick={() => {
                         handleOnClick("Notices");
                         handleShow();
@@ -199,7 +199,7 @@ const InvestorAccor = ({ handleShow }) => {
               <p>
                 <Link
                   className="nav-link darkBlue"
-                  href={`/TransferShare`}
+                  href={`/transfer-of-share-notices`}
                   onClick={() => {
                     handleShow();
                   }}
@@ -214,7 +214,7 @@ const InvestorAccor = ({ handleShow }) => {
               <p>
                 <Link 
                   className="nav-link darkBlue"
-                  href={`/OutcomeMeet`}
+                  href={`/outcome-of-board-meeting`}
                   onClick={() => {
                     handleShow();
                   }}
@@ -229,7 +229,7 @@ const InvestorAccor = ({ handleShow }) => {
               <p>
                 <Link
                   className="nav-link darkBlue"
-                  href={`/Disclosure`}
+                  href={`/listing-disclosure`}
                   onClick={() => {
                     handleShow();
                   }}
@@ -244,7 +244,7 @@ const InvestorAccor = ({ handleShow }) => {
               <p>
                 <Link
                   className="nav-link darkBlue"
-                  href={`/Transaction`}
+                  href={`/related-party-transaction`}
                   onClick={() => {
                     handleShow();
                   }}
@@ -338,7 +338,7 @@ const InvestorAccor = ({ handleShow }) => {
               <p>
                 <Link
                   className="nav-link darkBlue"
-                  href={`/InvestorKYC`}
+                  href={`/investor-kyc`}
                   onClick={() => {
                     handleShow();
                   }}
@@ -368,7 +368,7 @@ const InvestorAccor = ({ handleShow }) => {
               <p>
                 <Link
                   className="nav-link darkBlue  "
-                  href={`/Advertisements`}
+                  href={`/advertisements`}
                   onClick={() => {
                     handleShow();
                   }}

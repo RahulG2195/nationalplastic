@@ -60,12 +60,12 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link className="nav-link fw-bold" href="/Career">
+                  <Link className="nav-link fw-bold" href="/careers">
                     Career
                   </Link>
                 </li>
                 <li>
-                  <Link className="nav-link fw-bold" href="/NewsAndMedia">
+                  <Link className="nav-link fw-bold" href="/news-and-media">
                     Media & News
                   </Link>
                 </li>
@@ -102,7 +102,7 @@ export default function Footer() {
                   </Link>
                 </li> */}
                 <li>
-                  <Link className='nav-link fw-bold' href="/Investor">
+                  <Link className='nav-link fw-bold' href="/unaudited-financial-results">
                     Investor Desk
                   </Link>
                 </li>
@@ -113,13 +113,13 @@ export default function Footer() {
                 <h5 className='fw-bolder'>NEED HELP</h5>
               </div>
               <ul>
-                <li className='fw-bold'><Link className='nav-link fw-bold' href='/ContactUs'>Help Center</Link> </li>
+                <li className='fw-bold'><Link className='nav-link fw-bold' href='/contact-us'>Help Center</Link> </li>
                 <li>
-                  <Link className='nav-link fw-bold' href="/ContactUs">
+                  <Link className='nav-link fw-bold' href="/contact-us">
                     Contact Us
                   </Link>
                 </li>
-                <li className='fw-bold'><Link className='nav-link fw-bold' href='/ContactUs'>Ask Experts</Link> </li>
+                <li className='fw-bold'><Link className='nav-link fw-bold' href='/contact-us'>Ask Experts</Link> </li>
                 <li className='fw-bold'><Link className='nav-link fw-bold' href='/Colors'>Colors</Link> </li>
 
                 {/* <li>

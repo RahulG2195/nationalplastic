@@ -481,7 +481,7 @@ export default function Header() {
                     <li className="nav-item brdr">
                       <Link
                         className="nav-link"
-                        href="/NewsAndMedia"
+                        href="/news-and-media"
                         onClick={isClicked ? handleShow : null}>
                         News/Media
                       </Link>
@@ -489,7 +489,7 @@ export default function Header() {
                     <li className="nav-item brdr">
                       <Link
                         className="nav-link"
-                        href="/CSR"
+                        href="/csr"
                         onClick={isClicked ? handleShow : null}>
                         CSR
                       </Link>
@@ -497,7 +497,7 @@ export default function Header() {
                     <li className="nav-item brdr">
                       <Link
                         className="nav-link"
-                        href="/ContactUs"
+                        href="/contact-us"
                         onClick={isClicked ? handleShow : null}>
                         Contact Us
                       </Link>
@@ -517,7 +517,7 @@ export default function Header() {
                     <li className="nav-item brdr d-none d-md-none d-xl-block ">
                       <Link
                         className="nav-link"
-                        href={`tel:+91${basicInfo.wpNumber}`}
+                        href={`https://wa.me/91${basicInfo.wpNumber}`}
                         target="_blank"
                         onClick={isClicked ? handleShow : null}
                         style={{ width: '30px' }}
@@ -535,7 +535,7 @@ export default function Header() {
                     {/* <li className="nav-item brdr d-none d-md-none d-xl-block">
                       <Link
                         className="nav-link"
-                        href="/ContactUs"
+                        href="/contact-us"
                         onClick={isClicked ? handleShow : null}
                       >
                         <Image

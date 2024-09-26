@@ -214,7 +214,7 @@ async function handleInsertDisclosure(body) {
   try {
       const result = await query({
           query: "INSERT INTO navitems (label, link, parentId) VALUES (?, ?, ?)",
-          values: [label, `/generalDisclosure/${label}`, 17],
+          values: [label, `/general-disclosure/${label}`, 17],
       });
       return new Response(JSON.stringify({
           message: 'Disclosure data inserted successfully',
@@ -243,7 +243,7 @@ async function handleEditDisclosure(body) {
     try {
       const result = await query({
         query: "UPDATE navitems SET label = ?, link = ? WHERE id = ? AND parentId = 17",
-        values: [label, `/generalDisclosure/${label}`, id],
+        values: [label, `/general-disclosure/${label}`, id],
       });
       
       if (result.affectedRows === 0) {
