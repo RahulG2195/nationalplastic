@@ -235,8 +235,8 @@ export default function Footer() {
             </div>
             <div className="footer_term d-flex justify-content-center">
               <Link href='/terms-and-conditions'><p className='text-white'>Terms and Conditions <span> | </span> </p></Link>
-              <Link href='/PrivacyAndPolicy'><p className='text-white'> Privacy Policy <span> | </span> </p></Link>
-              <Link href='/ShippingAndDelivery'><p className='text-white'> Shipping Policy <span> | </span> </p></Link>
+              <Link href='/privacy-policy'><p className='text-white'> Privacy Policy <span> | </span> </p></Link>
+              <Link href='/shipping-and-delivery'><p className='text-white'> Shipping Policy <span> | </span> </p></Link>
               <Link href='/Refund'><p className='text-white'> Refund Policy </p></Link>
             </div>
           </div>

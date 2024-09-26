@@ -87,7 +87,7 @@ export default function ShopRoom() {
                   >
                     <SwiperSlide key={tag.tag_id}>
                     <CatCards
-                        redirection={"ShopByRoom"}
+                        redirection={"shop-by-room"}
                         tag_id={tag.tag_id}
                         tag_seo={tag.tag_seo}
                         manfacthover={"manfact"}
@@ -107,7 +107,7 @@ export default function ShopRoom() {
                   key={tag.key}
                 >
                   <CatCards
-                    redirection={"ShopByRoom"}
+                    redirection={"shop-by-room"}
                     hoverglow="yellowGlow"
                     catid={tag.tag_seo}
                     style="manfTitle pt-4 px-4 d-flex gap-5  justify-content-arround"
