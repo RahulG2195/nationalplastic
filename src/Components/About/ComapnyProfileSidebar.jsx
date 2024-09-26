@@ -15,7 +15,7 @@ const ComapnyProfileSidebar = ({title}) => {
                     <li className="sidebar-item border p-1"><Link href="/management-and-board-committees">Management and Board Committees</Link></li>
                     <li className="sidebar-item border p-1"><Link href="/awards">Awards/Exports</Link></li>
                     {/* <li className="sidebar-item border p-1"><Link href="/About">Introduction</Link></li> */}
-                    <li className="sidebar-item border p-1"><Link href="/terms-and-conditions">Terms & Conditions</Link></li>
+                    <li className="sidebar-item border p-1"><Link href="/terms-and-conditions-investors">Terms & Conditions</Link></li>
                 </ul>
             </div>
         </>

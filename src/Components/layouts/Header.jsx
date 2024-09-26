@@ -410,7 +410,7 @@ export default function Header() {
                           </li>
                           <li className={styles.dropdownItem}>
                             <Link
-                              href="/terms-and-conditions"
+                              href="/terms-and-conditions-investors"
                               onClick={isClicked ? handleShow : null}>
                               Terms & Conditions
                             </Link>
