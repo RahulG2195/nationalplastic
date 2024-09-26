@@ -490,7 +490,7 @@ function ProdData({ category_id }) {
               {/* terms and conditions */}
 
               {/* <div className="terms fw-medium term_and_condition">
-                <Link href="/TermsAndConditions">Terms and Conditions</Link>
+                <Link href="/terms-and-conditions">Terms and Conditions</Link>
                 <ul>
                   <li>Lorem ipsum</li>
                   <li>Lorem ipsum</li>

@@ -9,13 +9,13 @@ const ComapnyProfileSidebar = ({title}) => {
             <div className="company-profile-sidebar">
                 <h3 className="sidebar-title">{title}</h3>
                 <ul className="sidebar-list">
-                    <li className="sidebar-item border p-1"><Link href="/Companyprofile">Company Profile</Link></li>
-                    <li className="sidebar-item border p-1"><Link href="/Infrastructure">Infrastructure</Link></li>
-                    <li className="sidebar-item border p-1"><Link href="/Promoters">Promoters/Directors</Link></li>
-                    <li className="sidebar-item border p-1"><Link href="/Management">Management and Board Committees</Link></li>
-                    <li className="sidebar-item border p-1"><Link href="/Awards">Awards/Exports</Link></li>
+                    <li className="sidebar-item border p-1"><Link href="/company-profile">Company Profile</Link></li>
+                    <li className="sidebar-item border p-1"><Link href="/infrastructure">Infrastructure</Link></li>
+                    <li className="sidebar-item border p-1"><Link href="/promoters">Promoters/Directors</Link></li>
+                    <li className="sidebar-item border p-1"><Link href="/management-and-board-committees">Management and Board Committees</Link></li>
+                    <li className="sidebar-item border p-1"><Link href="/awards">Awards/Exports</Link></li>
                     {/* <li className="sidebar-item border p-1"><Link href="/About">Introduction</Link></li> */}
-                    <li className="sidebar-item border p-1"><Link href="/Term">Terms & Conditions</Link></li>
+                    <li className="sidebar-item border p-1"><Link href="/terms-and-conditions">Terms & Conditions</Link></li>
                 </ul>
             </div>
         </>

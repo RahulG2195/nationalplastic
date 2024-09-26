@@ -373,21 +373,21 @@ export default function Header() {
                         <ul className={`${styles.dropdown} ms-2 p-2 `}>
                           <li className={styles.dropdownItem}>
                             <Link
-                              href="/Companyprofile"
+                              href="/company-profile"
                               onClick={isClicked ? handleShow : null}>
                               Company Profile
                             </Link>
                           </li>
                           <li className={styles.dropdownItem}>
                             <Link
-                              href="/Infrastructure"
+                              href="/infrastructure"
                               onClick={isClicked ? handleShow : null}>
                               Infrastructure
                             </Link>
                           </li>
                           <li className={styles.dropdownItem}>
                             <Link
-                              href="/Promoters"
+                              href="/promoters"
                               onClick={isClicked ? handleShow : null}>
                               Promoters/Directors
                             </Link>
@@ -395,7 +395,7 @@ export default function Header() {
 
                           <li className={styles.dropdownItem}>
                             <Link
-                              href="/Management"
+                              href="/management-and-board-committees"
                               onClick={isClicked ? handleShow : null}>
                               Management and Board Committees
                             </Link>
@@ -403,14 +403,14 @@ export default function Header() {
 
                           <li className={styles.dropdownItem}>
                             <Link
-                              href="/Awards"
+                              href="/awards"
                               onClick={isClicked ? handleShow : null}>
                               Awards/Exports
                             </Link>
                           </li>
                           <li className={styles.dropdownItem}>
                             <Link
-                              href="/Term"
+                              href="/terms-and-conditions"
                               onClick={isClicked ? handleShow : null}>
                               Terms & Conditions
                             </Link>
