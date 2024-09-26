@@ -353,7 +353,7 @@ const InvestorAccor = ({ handleShow }) => {
               <p>
                 <Link
                   className="nav-link darkBlue"
-                  href={`/IEPF`}
+                  href={`/iepf`}
                   onClick={() => {
                     handleShow();
                   }}

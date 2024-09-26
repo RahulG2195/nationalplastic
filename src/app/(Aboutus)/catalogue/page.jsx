@@ -1,7 +1,11 @@
 import Image from "next/image";
 import "../../styles/productCatalogue.css";
 import CatalogueCard from "@/Components/CatalogueCard/CatalogueCard";
-
+export const metadata = {
+  title: 'Product Catalogue | National Plastic Industries Ltd',
+  description: 'Browse our comprehensive catalogue of quality plastic products including chairs, stools, and household items. Discover affordable solutions from National Plastic Industries Ltd.',
+  keywords: ['product catalogue', 'plastic products', 'National Plastic Industries Ltd', 'plastic chairs', 'plastic stools', 'household items', 'Mumbai manufacturer'],
+};
 function Catalogue() {
     const Cataloguearr = [
         {
