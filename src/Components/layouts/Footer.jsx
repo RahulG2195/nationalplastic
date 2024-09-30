@@ -82,8 +82,8 @@ export default function Footer() {
                 <h5 className='fw-bolder'>RETAIL</h5>
               </div>
               <ul>
-                <li><Link className="nav-link fw-bold" href="/product-catalogue/premium_event_chair">Premium Event Chair</Link></li>
-                <li className='fw-bold'><Link className="nav-link fw-bold" href="/product-catalogue/premium_chair">Premium Chair</Link> </li>
+                <li><Link className="nav-link fw-bold" href="/product-catalogue/premium-event-chair">Premium Event Chair</Link></li>
+                <li className='fw-bold'><Link className="nav-link fw-bold" href="/product-catalogue/premium-chair">Premium Chair</Link> </li>
                 <li className='fw-bold'><Link className="nav-link fw-bold" href="/product-catalogue/popular-chair">Popular Chair</Link> </li>
                 <li className='fw-bold'><Link className="nav-link fw-bold" href="/product-catalogue/without-arm-tent-chairs">Without Arm Chair</Link></li>
                 <li className='fw-bold'><Link className="nav-link fw-bold" href="/product-catalogue/office-chairs">Office Chair</Link></li>
@@ -179,7 +179,7 @@ export default function Footer() {
                 <h5 className='fw-bolder'>WE ARE ALSO ON</h5>
               </div>
               <div className="otherLogo">
-                <a href={basicInfo.indiamart}>
+                <a href={basicInfo.indiamart} target="_blank">
                   <Image
                     src="/Assets/images/indiamart.svg"
                     alt='logo'
@@ -230,6 +230,8 @@ export default function Footer() {
 
                 <a href={basicInfo.google} target="_blank"><i class="fa fa-google fs-1" aria-hidden="true"></i>
                 </a>
+                <a href="https://in.pinterest.com/NationalPlastic1952/" target="_blank"><i class="fa fa-pinterest fs-1" aria-hidden="true"></i>
+                </a>
               </div>
 
             </div>
@@ -237,7 +239,7 @@ export default function Footer() {
               <Link href='/terms-and-conditions'><p className='text-white'>Terms and Conditions <span> | </span> </p></Link>
               <Link href='/privacy-policy'><p className='text-white'> Privacy Policy <span> | </span> </p></Link>
               <Link href='/shipping-and-delivery'><p className='text-white'> Shipping Policy <span> | </span> </p></Link>
-              <Link href='/Refund'><p className='text-white'> Refund Policy </p></Link>
+              <Link href='/refund-and-return-policy'><p className='text-white'> Refund Policy </p></Link>
             </div>
           </div>
         </div>

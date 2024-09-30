@@ -4,14 +4,14 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     const tags = await query({
-      query: `SELECT * FROM tags_cat WHERE tag_status = 1 LIMIT 6`,
+      query: `SELECT * FROM tags_cat WHERE visible = 1 LIMIT 6`,
       value: [],
     });
 
     return new Response(
       JSON.stringify({
         status: 200,
-        AllTag: tags,
+        AllTagY: tags,
       })
     );
   } catch (e) {

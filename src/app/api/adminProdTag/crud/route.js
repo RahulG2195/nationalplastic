@@ -37,10 +37,10 @@ export async function GET() {
     const tags_cat = await query({
       query: "SELECT * FROM tags_cat",
     });
-    return NextResponse.json({ status: 200, AllTag: tags_cat });
+    return NextResponse.json({ status: 200, AllTagss: tags_cat });
   } catch (error) {
     console.error('Error fetching tags_cat:', error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });  
   }
 }
 
