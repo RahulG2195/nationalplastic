@@ -11,7 +11,7 @@ export async function GET() {
     return new Response(
       JSON.stringify({
         status: 200,
-        AllTagY: tags,
+        AllTag: tags,
       })
     );
   } catch (e) {
