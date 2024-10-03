@@ -308,10 +308,10 @@ function ProdData({ category_id }) {
           <div className="col-md-6 mt-5 mt-md-0">
             <div className="product-dtl">
               <div className="product-info">
-                <div className="product-name">
-                  <h2 className="prod_nameh2">
-                    National Plastic </h2>
-                  <h2>{name_cat}{" "}
+                <div className="spacing-products">
+                  <h2 className="prod_nameh2 d-inline">
+                    National Plastic  </h2>
+                  <h2 className="d-inline"> {name_cat}{" "}
                     {/* {selectedColor ? `(${selectedColor})` : ""} */}
                   </h2>
                 </div>

@@ -495,3 +495,15 @@ input:focus-visible {
     border: 1px solid lightgray;
   } */
 }
+
+
+.spacing-products {
+  /* display: flex; */
+  text-align: left;
+  gap: 6px;
+}
+.spacing-products h2 {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #2e3192;
+}
