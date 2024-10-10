@@ -408,7 +408,7 @@ function ContactUs() {
               </div>
               <div className="RegisteredOfficeIcon">
                 <i className="fa fa-phone" aria-hidden="true"></i>
-                <p>+91-{basicInfo.mobile_number1}/ +91-{basicInfo.mobile_number2}</p>
+                <a href={`tel:+91-${basicInfo.mobile_number1}`}>+91-{basicInfo.mobile_number1}</a>
               </div>
               <div className="RegisteredOfficeIcon">
                 <i className="fa fa-envelope-open" aria-hidden="true"></i>
