@@ -227,6 +227,11 @@ const navigation = [
     href: "/admin/TermsandconditionCMS",
     icon: "bi bi-file-earmark-word",
   },
+  {
+    title: "News letter",
+    href: "/admin/newsletterCMS",
+    icon: "bi bi-file-earmark-word",
+  },
 ];
 
 const Sidebar = ({ showMobilemenu }) => {
