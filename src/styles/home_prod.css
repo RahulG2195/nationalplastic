@@ -250,7 +250,8 @@
 
 .catalogue_sec .cataImg {
   position: relative;
-  height: 330px;
+  /* height: 330px; */
+  height: 100%;
   width: 100%;
 }
 
