@@ -208,7 +208,7 @@ notify("Successfully signed in")
                       onChange={handleInputChange}
                     />
                     <i
-                      class={`fa ${showPassword ? "fa-eye-slash" : "fa-eye"}`}
+                      className={`fa ${showPassword ? "fa-eye-slash" : "fa-eye"}`}
                       id="togglePassword"
                       onClick={() => setShowPassword((prevShow) => !prevShow)}
                     ></i>

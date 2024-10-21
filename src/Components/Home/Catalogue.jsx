@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import Newslatter from "../Newslatter/newslatter"
 
 function Catalogue() {
   return (
@@ -27,6 +28,10 @@ function Catalogue() {
                         <Link href='/catalogue' className="catalogue-know-more">
                             <button className="btn view_btn py-2 px-3 fs-5">View More</button>
                         </Link>
+
+                        {/* <span className="my-3 d-flex justify-content-center text-bold"> -- <h5> OR </h5> -- </span>
+                        <p className="fw-bold">Stay updated with the latest news, exclusive offers, and insightful tips delivered right to your inbox!</p>
+                        <Newslatter/> */}
                     </div>
                 </div>
                 

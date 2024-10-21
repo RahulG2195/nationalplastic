@@ -1,28 +1,28 @@
 "use client";
-import Image from 'next/image';
-import '../../styles/footer.css';
-import Link from 'next/link';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { Form, Input, Button, message } from 'antd';
-import { MailOutlined } from '@ant-design/icons';
+import Image from "next/image";
+import "../../styles/footer.css";
+import Link from "next/link";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Form, Input, Button, message } from "antd";
+import { MailOutlined } from "@ant-design/icons";
+import ScrollToTop from "scroll-to-top-react";
 
 export default function Footer() {
-
   const [basicInfo, setBasicInfo] = useState({
-    logo: '',
-    brand1_link: '',
-    brand2_link: '',
-    instagram: '',
-    youtube: '',
-    twitter: '',
-    facebook: '',
-    google: '',
-    mobile_number1: '',
-    mobile_number2: '',
-    address: '',
-    email: '',
-    indiamart: '',
+    logo: "",
+    brand1_link: "",
+    brand2_link: "",
+    instagram: "",
+    youtube: "",
+    twitter: "",
+    facebook: "",
+    google: "",
+    mobile_number1: "",
+    mobile_number2: "",
+    address: "",
+    email: "",
+    indiamart: "",
   });
   const [initialBasicInfo, setInitialBasicInfo] = useState({});
 
@@ -31,12 +31,12 @@ export default function Footer() {
   useEffect(() => {
     const fetchBasicInfo = async () => {
       try {
-        const response = await axios.get('/api/basicInfo');
+        const response = await axios.get("/api/basicInfo");
         const basicInfoData = response.data.basicInfo;
         setBasicInfo(basicInfoData);
         setInitialBasicInfo(basicInfoData);
       } catch (error) {
-        console.error('There was an error fetching the basic info!', error);
+        console.error("There was an error fetching the basic info!", error);
       }
     };
 
@@ -44,32 +44,9 @@ export default function Footer() {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
-  const handleSubmit = async (values) => {
-    setSubmitting(true);
-    try {
-      // Validate email
-      if (!values.email || !/\S+@\S+\.\S+/.test(values.email)) {
-        throw new Error('Invalid email address');
-      }
-
-      // Send data to API
-      const response = await axios.post('api/newsletter', {
-        email: values.email,
-      });
-
-      if (!response.data.success ) {
-        throw new Error('Failed to subscribe');
-      }
-      message.success('Subscribed successfully!');
-      form.resetFields();
-    } catch (error) {
-      message.error(error.message || 'Failed to subscribe. Please try again.');
-    } finally {
-      setSubmitting(false);
-    }
-  };
+  
   return (
     <>
       <section className="footer pb-4">
@@ -77,7 +54,7 @@ export default function Footer() {
           <div className="row">
             <div className="col-md-2">
               <div className="footer_heading ">
-                <h5 className='fw-bolder'>OUR COMPANY</h5>
+                <h5 className="fw-bolder">OUR COMPANY</h5>
               </div>
               <ul>
                 <li>
@@ -100,35 +77,73 @@ export default function Footer() {
                     Blog
                   </Link>
                 </li> */}
-                <li className='fw-bold'>Customer Stories</li>
+                <li className="fw-bold">Customer Stories</li>
               </ul>
             </div>
             <div className="col-md-2">
               <div className="footer_heading">
-                <h5 className='fw-bolder'>RETAIL</h5>
+                <h5 className="fw-bolder">RETAIL</h5>
               </div>
               <ul>
-                <li><Link className="nav-link fw-bold" href="/product-catalogue/premium-event-chair">Premium Event Chair</Link></li>
-                <li className='fw-bold'><Link className="nav-link fw-bold" href="/product-catalogue/premium-chair">Premium Chair</Link> </li>
-                <li className='fw-bold'><Link className="nav-link fw-bold" href="/product-catalogue/popular-chair">Popular Chair</Link> </li>
-                <li className='fw-bold'><Link className="nav-link fw-bold" href="/product-catalogue/without-arm-tent-chairs">Without Arm Chair</Link></li>
-                <li className='fw-bold'><Link className="nav-link fw-bold" href="/product-catalogue/office-chairs">Office Chair</Link></li>
+                <li>
+                  <Link
+                    className="nav-link fw-bold"
+                    href="/product-catalogue/premium-event-chair"
+                  >
+                    Premium Event Chair
+                  </Link>
+                </li>
+                <li className="fw-bold">
+                  <Link
+                    className="nav-link fw-bold"
+                    href="/product-catalogue/premium-chair"
+                  >
+                    Premium Chair
+                  </Link>{" "}
+                </li>
+                <li className="fw-bold">
+                  <Link
+                    className="nav-link fw-bold"
+                    href="/product-catalogue/popular-chair"
+                  >
+                    Popular Chair
+                  </Link>{" "}
+                </li>
+                <li className="fw-bold">
+                  <Link
+                    className="nav-link fw-bold"
+                    href="/product-catalogue/without-arm-tent-chairs"
+                  >
+                    Without Arm Chair
+                  </Link>
+                </li>
+                <li className="fw-bold">
+                  <Link
+                    className="nav-link fw-bold"
+                    href="/product-catalogue/office-chairs"
+                  >
+                    Office Chair
+                  </Link>
+                </li>
               </ul>
             </div>
             <div className="col-md-2">
               <div className="footer_heading">
-                <h5 className='fw-bolder'>BUSINESS</h5>
+                <h5 className="fw-bolder">BUSINESS</h5>
               </div>
               <ul>
-                <li className='fw-bold'>Custom Furniture</li>
-                <li className='fw-bold'>Exporters</li>
+                <li className="fw-bold">Custom Furniture</li>
+                <li className="fw-bold">Exporters</li>
                 {/* <li>
                   <Link className='nav-link fw-bold' href="/BulkOrder">
                     Buy in Bulk
                   </Link>
                 </li> */}
                 <li>
-                  <Link className='nav-link fw-bold' href="/unaudited-financial-results">
+                  <Link
+                    className="nav-link fw-bold"
+                    href="/unaudited-financial-results"
+                  >
                     Investor Desk
                   </Link>
                 </li>
@@ -136,17 +151,29 @@ export default function Footer() {
             </div>
             <div className="col-md-2">
               <div className="footer_heading">
-                <h5 className='fw-bolder'>NEED HELP</h5>
+                <h5 className="fw-bolder">NEED HELP</h5>
               </div>
               <ul>
-                <li className='fw-bold'><Link className='nav-link fw-bold' href='/contact-us'>Help Center</Link> </li>
+                <li className="fw-bold">
+                  <Link className="nav-link fw-bold" href="/contact-us">
+                    Help Center
+                  </Link>{" "}
+                </li>
                 <li>
-                  <Link className='nav-link fw-bold' href="/contact-us">
+                  <Link className="nav-link fw-bold" href="/contact-us">
                     Contact Us
                   </Link>
                 </li>
-                <li className='fw-bold'><Link className='nav-link fw-bold' href='/contact-us'>Ask Experts</Link> </li>
-                <li className='fw-bold'><Link className='nav-link fw-bold' href='/colors'>Colors</Link> </li>
+                <li className="fw-bold">
+                  <Link className="nav-link fw-bold" href="/contact-us">
+                    Ask Experts
+                  </Link>{" "}
+                </li>
+                <li className="fw-bold">
+                  <Link className="nav-link fw-bold" href="/colors">
+                    Colors
+                  </Link>{" "}
+                </li>
 
                 {/* <li>
                   <Link className='nav-link fw-bold' href="/TrackYourOrder">Track your order</Link>
@@ -155,7 +182,7 @@ export default function Footer() {
             </div>
             <div className="col-md-4">
               <div className="footer_heading">
-                <h5 className='fw-bolder'>WE ACCEPT</h5>
+                <h5 className="fw-bolder">WE ACCEPT</h5>
               </div>
               <div className="paymentImg d-flex py-3 px-2">
                 <div className="gatewayimg">
@@ -163,9 +190,9 @@ export default function Footer() {
                     width={75}
                     height={40}
                     src="/Assets/images/visa-payment-card1873@2x.png"
-                    alt='logo'
-                    objectFit='cover'
-                  // fill
+                    alt="logo"
+                    objectFit="cover"
+                    // fill
                   />
                 </div>
                 <div className="gatewayimg">
@@ -173,10 +200,10 @@ export default function Footer() {
                     width={75}
                     height={40}
                     src="/Assets/images/mastercard.png"
-                    alt='logo'
-                    objectFit='cover'
+                    alt="logo"
+                    objectFit="cover"
 
-                  // fill
+                    // fill
                   />
                 </div>
                 <div className="gatewayimg">
@@ -184,9 +211,9 @@ export default function Footer() {
                     width={75}
                     height={40}
                     src="/Assets/images/Group 697.png"
-                    alt='logo'
-                    objectFit='cover'
-                  // fill
+                    alt="logo"
+                    objectFit="cover"
+                    // fill
                   />
                 </div>
                 <div className="gatewayimg">
@@ -194,139 +221,100 @@ export default function Footer() {
                     width={75}
                     height={40}
                     src="/Assets/images/Maestro.png"
-                    alt='logo'
-                    objectFit='contain'
-                  // fill
+                    alt="logo"
+                    objectFit="contain"
+                    // fill
                   />
                 </div>
-
               </div>
               <div className="footer_heading">
-                <h5 className='fw-bolder'>WE ARE ALSO ON</h5>
+                <h5 className="fw-bolder">WE ARE ALSO ON</h5>
               </div>
               <div className="otherLogo">
                 <a href={basicInfo.indiamart} target="_blank">
-                  <Image
-                    src="/Assets/images/indiamart.svg"
-                    alt='logo'
-                    fill
-                  />
+                  <Image src="/Assets/images/indiamart.svg" alt="logo" fill />
                 </a>
-
               </div>
             </div>
           </div>
         </div>
         {/* <button onClick={scrollToTop} className="back-to-top">
-        <i class="fa fa-arrow-up fa-2x" aria-hidden="true"></i>
+        <i className="fa fa-arrow-up fa-2x" aria-hidden="true"></i>
 
         </button> */}
-      </section >
-     {/*  <div className='text-center py-5 ' style={{backgroundColor:'#ECECEC'}}>
+      </section>
+      {/*  <div className='text-center py-5 ' style={{backgroundColor:'#ECECEC'}}>
         <p className='w-md-50 mx-auto fw-semibold footercaption'>We Deliver in Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer</p>
       </div> */}
-      <section className='bottom_footer '>
+      <section className="bottom_footer ">
         <div className="container">
           <div className="col-12 text-center">
-
             <div className="footer_social d-md-flex align-items-center">
               <div className="comp_logo">
-                <Link href='/'>
+                <Link href="/">
                   <Image
                     src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}${basicInfo.logo}`}
-                    alt='logo'
+                    alt="logo"
                     fill
                   />
                 </Link>
               </div>
               <div className="social_icons d-flex gap-3">
-
-                <a href={basicInfo.instagram} target="_blank"><i class="fa fa-instagram  fs-1" aria-hidden="true"></i>
+                <a href={basicInfo.instagram} target="_blank">
+                  <i className="fa fa-instagram  fs-1" aria-hidden="true"></i>
                 </a>
 
-                <a href={basicInfo.youtube} target="_blank"><i class="fa fa-youtube-play  fs-1" aria-hidden="true"></i>
+                <a href={basicInfo.youtube} target="_blank">
+                  <i className="fa fa-youtube-play  fs-1" aria-hidden="true"></i>
                 </a>
 
-                <a href={basicInfo.twitter} target="_blank"><i class="fa fa-twitter fs-1" aria-hidden="true"></i>
+                <a href={basicInfo.twitter} target="_blank">
+                  <i className="fa fa-twitter fs-1" aria-hidden="true"></i>
                 </a>
 
-
-                <a href={basicInfo.facebook} target="_blank"><i class="fa fa-facebook fa-flip fs-1" aria-hidden="true"></i>
+                <a href={basicInfo.facebook} target="_blank">
+                  <i className="fa fa-facebook fa-flip fs-1" aria-hidden="true"></i>
                 </a>
 
-                <a href={basicInfo.google} target="_blank"><i class="fa fa-google fs-1" aria-hidden="true"></i>
+                <a href={basicInfo.google} target="_blank">
+                  <i className="fa fa-google fs-1" aria-hidden="true"></i>
                 </a>
-                <a href="https://in.pinterest.com/NationalPlastic1952/" target="_blank"><i class="fa fa-pinterest fs-1" aria-hidden="true"></i>
+                <a
+                  href="https://in.pinterest.com/NationalPlastic1952/"
+                  target="_blank"
+                >
+                  <i className="fa fa-pinterest fs-1" aria-hidden="true"></i>
                 </a>
               </div>
-
             </div>
             <div className="footer_term d-flex justify-content-center">
-              <Link href='/terms-and-conditions'><p className='text-white'>Terms and Conditions <span> | </span> </p></Link>
-              <Link href='/privacy-policy'><p className='text-white'> Privacy Policy <span> | </span> </p></Link>
-              <Link href='/shipping-and-delivery'><p className='text-white'> Shipping Policy <span> | </span> </p></Link>
-              <Link href='/refund-and-return-policy'><p className='text-white'> Refund Policy </p></Link>
+              <Link href="/terms-and-conditions">
+                <p className="text-white">
+                  Terms and Conditions <span> | </span>{" "}
+                </p>
+              </Link>
+              <Link href="/privacy-policy">
+                <p className="text-white">
+                  {" "}
+                  Privacy Policy <span> | </span>{" "}
+                </p>
+              </Link>
+              <Link href="/shipping-and-delivery">
+                <p className="text-white">
+                  {" "}
+                  Shipping Policy <span> | </span>{" "}
+                </p>
+              </Link>
+              <Link href="/refund-and-return-policy">
+                <p className="text-white"> Refund Policy </p>
+              </Link>
             </div>
           </div>
         </div>
-        <div style={{ marginTop: '1rem' }}>
-      <Form
-        form={form}
-        onFinish={handleSubmit}
-        layout="inline"
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '0.5rem',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <Form.Item
-          name="email"
-          rules={[
-            { required: true, message: 'Please enter your email' },
-            { type: 'email', message: 'Please enter a valid email' },
-          ]}
-          style={{ flex: 1, minWidth: '200px', maxWidth: '400px' }}
-        >
-          <Input
-            prefix={<MailOutlined />}
-            placeholder="Enter your email for Newsletter"
-            style={{
-              backgroundColor: 'white',
-              borderColor: 'white',
-              borderWidth: '2px',
-              borderRadius: '50px',
-              color: 'black',
-            }}
-          />
-        </Form.Item>
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            loading={submitting}
-            style={{
-              borderColor: 'white',
-              borderWidth: '2px',
-              borderRadius: '50px',
-              backgroundColor: 'transparent',
-              color: 'white',
-            }}
-          >
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
-    </div>
-
       </section>
-  
 
-
-      <div className='social_icon_for_mob'>
-        <div className='icon-wrapper call_icon'>
+      <div className="social_icon_for_mob">
+        <div className="icon-wrapper call_icon">
           <a href="tel:+912267669922">
             <Image
               height={48}
@@ -338,8 +326,8 @@ export default function Footer() {
             />
           </a>
         </div>
-        <div className='icon-wrapper wp_icon'>
-          <a href=''>
+        <div className="icon-wrapper wp_icon">
+          <a href="">
             <Image
               height={100}
               width={100}
@@ -351,7 +339,7 @@ export default function Footer() {
           </a>
         </div>
       </div>
-
+      <ScrollToTop displayType="htmlArrow" />
     </>
-  )
+  );
 }

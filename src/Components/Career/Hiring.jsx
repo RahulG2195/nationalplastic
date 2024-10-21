@@ -14,7 +14,7 @@ const Hiring = () => {
                 </div>
 
 
-                <div class='d-flex justify-content-evenly gap-5 my-5 respHiringCards Hiringheight mb-5'>
+                <div className='d-flex justify-content-evenly gap-5 my-5 respHiringCards Hiringheight mb-5'>
 
 
                     <div className="HC1">
