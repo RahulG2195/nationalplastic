@@ -101,6 +101,13 @@ p {
     text-align: center;
 }
 
+.mobile__top{
+    margin-top: 127px;
+}
+
+.header {
+    padding: 0 16px 0 0;
+}
 .section_header h2 {
     font-size: 40px;
     color: var(--header-secondary-clr);

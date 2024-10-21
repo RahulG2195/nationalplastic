@@ -16,7 +16,7 @@ import Script from "next/script";
 import { SessionProvider } from "next-auth/react";
 import { Metadata } from 'next'
 import BackToTopButton from "@/Components/BackToTopButton/BackToTopButton";
-import ScrollToTop from "scroll-to-top-react";
+import Newslatter from "@/Components/Newslatter/newslatter";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -60,8 +60,9 @@ export default function RootLayout({ children }) {
 
                 </div>
                 <ToastContainer />
+                {!isAdmin && <Newslatter />}
                 {!isAdmin && <Footer />}
-                <ScrollToTop displayType="htmlArrow" />
+                
               </PersistGate>
             </Provider>
           </BrowserRouter>

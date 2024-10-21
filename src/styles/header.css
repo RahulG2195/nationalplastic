@@ -410,7 +410,9 @@ HeadSearch input:focus + .searchFor {
 
 .header {
     margin: 0;
-    padding: 0;
+    padding: 0 16px 0 0;
+    position: fixed;
+    z-index: 9999;
 }
 
 .main_header {

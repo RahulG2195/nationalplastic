@@ -6,6 +6,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Form, Input, Button, message } from "antd";
 import { MailOutlined } from "@ant-design/icons";
+import ScrollToTop from "scroll-to-top-react";
 
 export default function Footer() {
   const [basicInfo, setBasicInfo] = useState({
@@ -238,7 +239,7 @@ export default function Footer() {
           </div>
         </div>
         {/* <button onClick={scrollToTop} className="back-to-top">
-        <i class="fa fa-arrow-up fa-2x" aria-hidden="true"></i>
+        <i className="fa fa-arrow-up fa-2x" aria-hidden="true"></i>
 
         </button> */}
       </section>
@@ -260,29 +261,29 @@ export default function Footer() {
               </div>
               <div className="social_icons d-flex gap-3">
                 <a href={basicInfo.instagram} target="_blank">
-                  <i class="fa fa-instagram  fs-1" aria-hidden="true"></i>
+                  <i className="fa fa-instagram  fs-1" aria-hidden="true"></i>
                 </a>
 
                 <a href={basicInfo.youtube} target="_blank">
-                  <i class="fa fa-youtube-play  fs-1" aria-hidden="true"></i>
+                  <i className="fa fa-youtube-play  fs-1" aria-hidden="true"></i>
                 </a>
 
                 <a href={basicInfo.twitter} target="_blank">
-                  <i class="fa fa-twitter fs-1" aria-hidden="true"></i>
+                  <i className="fa fa-twitter fs-1" aria-hidden="true"></i>
                 </a>
 
                 <a href={basicInfo.facebook} target="_blank">
-                  <i class="fa fa-facebook fa-flip fs-1" aria-hidden="true"></i>
+                  <i className="fa fa-facebook fa-flip fs-1" aria-hidden="true"></i>
                 </a>
 
                 <a href={basicInfo.google} target="_blank">
-                  <i class="fa fa-google fs-1" aria-hidden="true"></i>
+                  <i className="fa fa-google fs-1" aria-hidden="true"></i>
                 </a>
                 <a
                   href="https://in.pinterest.com/NationalPlastic1952/"
                   target="_blank"
                 >
-                  <i class="fa fa-pinterest fs-1" aria-hidden="true"></i>
+                  <i className="fa fa-pinterest fs-1" aria-hidden="true"></i>
                 </a>
               </div>
             </div>
@@ -338,6 +339,7 @@ export default function Footer() {
           </a>
         </div>
       </div>
+      <ScrollToTop displayType="htmlArrow" />
     </>
   );
 }

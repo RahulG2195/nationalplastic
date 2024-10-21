@@ -20,7 +20,7 @@ function Catalogue() {
                         />
                     </div>
                 </div>
-                <div className="col-md-6 catalogueConntentDiv text-center spacing-catalogue ms-4">
+                <div className="col-md-6 catalogueConntentDiv spacing-catalogue ms-4">
 
                     <h2 className="fs-1 fw-bold mt-5 mb-3">Catalogue</h2>
                     <p className="fw-bold">Explore our comprehensive catalogue for a wide range of durable and versatile plastic products designed to meet your everyday needs.</p>
@@ -29,9 +29,9 @@ function Catalogue() {
                             <button className="btn view_btn py-2 px-3 fs-5">View More</button>
                         </Link>
 
-                        <span className="my-3 d-flex justify-content-center text-bold"> -- <h5> OR </h5> -- </span>
+                        {/* <span className="my-3 d-flex justify-content-center text-bold"> -- <h5> OR </h5> -- </span>
                         <p className="fw-bold">Stay updated with the latest news, exclusive offers, and insightful tips delivered right to your inbox!</p>
-                        <Newslatter/>
+                        <Newslatter/> */}
                     </div>
                 </div>
                 

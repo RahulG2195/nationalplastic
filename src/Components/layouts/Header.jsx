@@ -253,14 +253,14 @@ export default function Header() {
 
 
   return (
-    <div>
+    <>
       {/* <ScrollToTop displayType="htmlArrow" /> */}
 
       {!hideLayout ? (
         <>
           <div className="container-fluid p-0 header menbg ">
             {/* <TopBar /> */}
-            <nav className="navbar navbar-expand-lg main_header py-md-5 my-md-3">
+            <nav className="navbar navbar-expand-lg main_header py-md-5">
               <div className="container-fluid ">
                 <div className="navbar-brand">
                   <button
@@ -279,7 +279,7 @@ export default function Header() {
                     <Image
                       src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}${basicInfo.logo}`}
                       className="Image-fluid"
-                      alt="Landscape picture"
+                      alt="National Logo"
                       height={100}
                       width={100}
                       layout="responsive"
@@ -307,17 +307,17 @@ export default function Header() {
                         value={searchTerm}
                         onChange={handleSearchChange}
                       />
-                      <button type="submit" class="submit-button">
-                        <i class="fa fa-search" aria-hidden="true"></i>
+                      <button type="submit" className="submit-button">
+                        <i className="fa fa-search" aria-hidden="true"></i>
                       </button>
                     </div>
 
 
-                    {/* <div class="text-container py-2 HeadSearch px-3">
+                    {/* <div className="text-container py-2 HeadSearch px-3">
                       <input className="" type="text" id="search-input" value={searchTerm} aria-label="Search" onChange={handleSearchChange}
                       />
-                      <button type="submit" class="submit-button p-0">
-                        <i class="fa fa-search " aria-hidden="true"></i>
+                      <button type="submit" className="submit-button p-0">
+                        <i className="fa fa-search " aria-hidden="true"></i>
                       </button>
 
                     </div> */}
@@ -643,7 +643,7 @@ export default function Header() {
                         <Image
                           src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}${basicInfo.logo}`}
                           className="Image-fluid"
-                          alt="Landscape picture"
+                          alt="National logo"
                           height={34}
                           width={52}
                         // layout="responsive"
@@ -695,7 +695,7 @@ export default function Header() {
           </div>
         </>
       ) : null}
-    </div>
+    </>
   );
 }
 
