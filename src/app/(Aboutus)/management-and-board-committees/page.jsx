@@ -43,8 +43,8 @@ function Manage() {
           <div className="management-section my-4">
             <h2>Management</h2>
             {management.map((item, index) => (
-              <div class="mt-3">
-                <ul class="committee-list">
+              <div className="mt-3">
+                <ul className="committee-list">
                   <li key={index}>{item.members[0]}</li>
                   <li key={index}>{item.members[1]}</li>
                 </ul>

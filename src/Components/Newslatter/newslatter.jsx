@@ -35,7 +35,11 @@ function Newslatter() {
         }
       };
   return (
-    <div style={{ marginTop: "1rem" }}>
+    <div style={{ marginTop: "1rem" }} className="newslatter_sec">
+        <div className="section_header mx-auto text-center text-capitalize ">
+            <h2><span>our  </span> newslatter</h2>
+            <p>Join our newslatter to receive updates on products annoucements and sales.</p>
+        </div>
       <Form
         form={form}
         onFinish={handleSubmit}
@@ -46,6 +50,7 @@ function Newslatter() {
           gap: "0.5rem",
           justifyContent: "center",
           alignItems: "center",
+          
         }}
       >
         <Form.Item
@@ -65,12 +70,13 @@ function Newslatter() {
               borderWidth: "2px",
               borderRadius: "50px",
               color: "black",
+              border: "1px solid",
             }}
           />
         </Form.Item>
         <Form.Item>
           <Button
-            type="primary"
+            // type="primary"
             htmlType="submit"
             loading={submitting}
             // style={{
