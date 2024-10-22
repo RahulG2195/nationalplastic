@@ -23,7 +23,6 @@ const NewsletterCMS = () => {
 
   const fetchSubscribedUsers = async () => {
     const response = await axios.get('/api/newsletter');
-    console.log("response" + JSON.stringify(response.data));
     setUsers(response.data.results);
     setJustMail(response.data.justEmails);
   }
@@ -51,7 +50,6 @@ const NewsletterCMS = () => {
 
   const handleDelete = async (id) => {
     try{
-        console.log("id" + id);
     const response = await axios.delete(`/api/newsletter?id=${id}`)
       if (!response.data.success ) {
         throw new Error('Failed to Delete');
@@ -60,7 +58,6 @@ const NewsletterCMS = () => {
     fetchSubscribedUsers();
 
     }catch(e){
-        console.log(e);
         message.error('Failed To delete');
     }
   };
@@ -75,13 +72,7 @@ const NewsletterCMS = () => {
   };
 
   const handleSendEmail = async (values) => {
-    console.log('Sending email:', values.content);
-    console.log('Sending email:', values.subject);
-
-    // F:\Dinesh\NationalPlastic\src\app\api\send-newsletter.js\route.js
-    console.log("just+" + justMail)
     const response = await axios.post('/api/send-newsletter', { data: values , email: justMail})
-    console.log("weirdoooooooooooooooooooooh"+JSON.stringify(response));
     message.success('Email sent successfully');
     setIsModalVisible(false);
     form.resetFields();

@@ -21,8 +21,6 @@ const Faqs = () => {
     const fetchFaqs = async () => {
       try {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/faqs`);
-        console.log("FetchINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGgg"+JSON.stringify(response));
-        // Transform the flat array into a nested structure
         const transformedData = transformFaqData(response.data.faqs);
         setFaqData(transformedData);
       } catch (error) {
