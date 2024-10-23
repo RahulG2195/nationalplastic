@@ -83,10 +83,8 @@ const Header = () => {
     try {
 
       const storedEncryptedOTP = localStorage.getItem('otp');
-      console.log('Stored encrypted OTP:', storedEncryptedOTP);
 
       const storedOtp = decrypt(storedEncryptedOTP, secretKey);
-      console.log('Decrypted stored OTP:', storedOtp);
 
       const storedEncryptedExpiry = localStorage.getItem('otpExpiry');
 
@@ -96,11 +94,9 @@ const Header = () => {
       const expiryTime = new Date(storedOtpExpiry);
 
       if (expiryTime < currentTime) {
-        console.log('OTP has expired');
         throw new Error('OTP has expired.');
       }
       if (storedOtp !== otp) {
-        console.log('OTP mismatch');
         throw new Error('Invalid OTP.');
       }
       localStorage.removeItem('otp');

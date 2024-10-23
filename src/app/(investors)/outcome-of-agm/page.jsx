@@ -22,12 +22,7 @@ const OutcomeAGM = () => {
           return acc;
         }, {});
 
-        // const sortedYears = Object.keys(groupedData).sort();
-        // const sortedData = {};
-        // sortedYears.forEach(year => {
-        //   sortedData[year] = groupedData[year];
-        // });
-        // console.log('sortedData', groupedData);
+
         setAgmOutcomes(groupedData);
       } catch (error) {
         console.error("Error fetching OutcomeAGM data:", error);

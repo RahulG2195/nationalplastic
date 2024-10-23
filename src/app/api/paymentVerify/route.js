@@ -104,21 +104,14 @@ export async function PUT(request) {
       try {
 
         // Prepare values for the SQL query
-        console.log('Last Inserted ID:', lastInsertedId);
-        console.log('Customer ID:', customer_id);
-        console.log('Product ID:', product.product_id);
-        console.log('Product Quantity:', product.quantity);
-        console.log('Product Price:', product.prod_price);
         const orderDetailValues = [lastInsertedId, customer_id, product.product_id, product.quantity, product.prod_price];
 
         const DeleteCartDataAfterOrderPlacedData = [customer_id, product.product_id];
-        console.log("ordersValues: " + JSON.stringify(orderDetailValues))
 
         // Execute the SQL query
         const [detailRes] = await query({ query: orderDetailQuery, values: orderDetailValues });
         let insertQueryData;
         if (detailRes.affectedRows > 0) {
-          console.log("Order detail inserted successfully");
           insertQueryData = "Successfully inserted"
 
           // You can add more logic here for successful insertion

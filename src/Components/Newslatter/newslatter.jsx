@@ -6,7 +6,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Form, Input, Button, message } from "antd";
 import { MailOutlined } from "@ant-design/icons";
-
+import { notify, notifyError } from "@/utils/notify";
 function Newslatter() {
     const [form] = Form.useForm();
     const [submitting, setSubmitting] = useState(false);
@@ -18,7 +18,6 @@ function Newslatter() {
             throw new Error("Invalid email address");
           }
     
-          // Send data to API
           const response = await axios.post("api/newsletter", {
             email: values.email,
           });
@@ -26,10 +25,10 @@ function Newslatter() {
           if (!response.data.success) {
             throw new Error("Failed to subscribe");
           }
-          message.success("Subscribed successfully!");
+          notify("Subscribed successfully!");
           form.resetFields();
         } catch (error) {
-          message.error(error.message || "Failed to subscribe. Please try again.");
+          notifyError(error.message || "Failed to subscribe. Please try again.");
         } finally {
           setSubmitting(false);
         }

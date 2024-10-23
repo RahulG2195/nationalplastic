@@ -1,0 +1,41 @@
+{
+    "data": {
+        "faqs": [
+            {
+                "id": 1,
+                "root_id": null,
+                "question": "General Information",
+                "answer": null,
+                "status": 1
+            },
+            {
+                "id": 2,
+                "root_id": null,
+                "question": "Products",
+                "answer": null,
+                "status": 1
+            },
+            {
+                "id": 6,
+                "root_id": 1,
+                "question": "What types of products does National Plastic Industries Ltd offer?",
+                "answer": "We offer a wide range of household products, including, Various types of Chairs, storage solutions, Tables, Stools, Drawer, and Much household product designed for durability and comfort.",
+                "status": 1
+            },
+            {
+                "id": 7,
+                "root_id": 1,
+                "question": "Where is National Plastic Industries Ltd located?",
+                "answer": "Our headquarters is located in Mumbai, India. We have manufacturing facilities across the country (Silvassa, Patna, Nellore) to serve our customers efficiently.",
+                "status": 1
+            },
+            {
+                "id": 8,
+                "root_id": 2,
+                "question": "Are your products environmentally friendly?",
+                "answer": "Yes, we are committed to sustainability. Our products are made from recyclable materials, and we continuously strive to minimize our environmental impact.",
+                "status": 1
+            }
+        ]
+    }
+}

@@ -33,7 +33,6 @@ export async function GET(request) {
         query: sqlQuery,
         values: [param],
     });
-    console.log("jaons: " + JSON.stringify(data));
   
       if (!data) {
         return new Response(JSON.stringify({ status: 404, message: "Product not found" }), { status: 404 });

@@ -33,9 +33,6 @@ const OrderTable = () => {
 
       const orderData = response.data.orderData;
       const OrderStatusApi = response.data.OrderStatus;
-      console.log("data")
-      console.log("ALl data " + JSON.stringify(orderData));
-      console.log("data" + JSON.stringify(OrderStatusApi));
       if (response.data.status === 200) {
         setOrders(orderData);
         setOrderStatus(OrderStatusApi);

@@ -232,6 +232,11 @@ const navigation = [
     href: "/admin/newsletterCMS",
     icon: "bi bi-file-earmark-word",
   },
+  {
+    title: "Frequenlty Asked Question",
+    href: "/admin/faqs",
+    icon: "bi bi-file-earmark-word",
+  },
 ];
 
 const Sidebar = ({ showMobilemenu }) => {

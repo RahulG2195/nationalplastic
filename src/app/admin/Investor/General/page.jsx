@@ -72,9 +72,7 @@ export default function MyComponent() {
   };
 
   const handleYearChange = (value) => {
-    console.log("changes yearrrrrrrrrrr")
     const selectedYearObj = years.find((year) => year.id === value);
-    console.log("-" + JSON.stringify(selectedYearObj))
     setSelectedYear(selectedYearObj.label);
     fetchYearData(selectedYearObj.label);
   };
