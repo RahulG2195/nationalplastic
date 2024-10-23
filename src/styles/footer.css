@@ -55,9 +55,15 @@
     text-align: center;
     background-color: #262262;
 }
+@media (max-width: 768px) {
+    .copyrightsdiv {
+        margin-bottom: 80px;
+        border-top: 1px solid lightgrey;
+    }
 
+}
 .copyrightsdiv p{
-    font-size: 12px;
+    font-size: 10px;
     color: #fff;
 }
 
