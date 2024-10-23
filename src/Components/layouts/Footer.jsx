@@ -339,6 +339,9 @@ export default function Footer() {
           </a>
         </div>
       </div>
+      <div className="copyrightsdiv">
+        <p>Copyright © 2024 National Plastic Industries Ltd . All Rights Reserved.</p>
+      </div>
       <ScrollToTop displayType="htmlArrow" />
     </>
   );

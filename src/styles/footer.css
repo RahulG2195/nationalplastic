@@ -21,7 +21,6 @@
 }
 
 
-
 .newslatter_sec button{
     background-color: var(--header-primary-clr);
     color: #fff;
@@ -49,6 +48,17 @@
     height: auto !important;
 }
 /* newslatter sec end */
+
+
+.copyrightsdiv{
+    padding: 5px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.copyrightsdiv p{
+    font-size: 12px;
+}
 
 .back-to-top{
     position: fixed;
