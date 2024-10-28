@@ -51,13 +51,15 @@
 
 
 .copyrightsdiv{
-    padding: 5px;
+    padding: 7px;
     text-align: center;
-    background-color: #fff;
+    background-color: #262262;
+border-top: 1px solid lightgrey;
 }
 
 .copyrightsdiv p{
     font-size: 12px;
+    color: #fff;
 }
 
 .back-to-top{
