@@ -52,31 +52,43 @@ function Login() {
   const handleGoogleSignIn = async () => {
     try {
       localStorage.setItem('fromLogin', 'true');
-// Then redirect to the page with the Header component
-      const result = await signIn("google");
-    
       
+      const result = await signIn("google", {
+        callbackUrl: window.location.origin,
+        redirect: false // Don't redirect automatically, we'll handle it
+      });
+  
       if (result?.error) {
         console.error("Sign-in failed:", result.error);
-        // You can show a failure notification here
+        notify("Sign-in failed. Please try again.", "error");
       } else {
-notify("Successfully signed in")
+        // Check if the session exists and update user data
+        const session = await getSession();
+        if (session?.user) {
+          await updateUserData(session.user.email, session.user.customerId);
+          notify("Successfully signed in");
+          
+          // Redirect to the appropriate page
+          const returnUrl = localStorage.getItem('returnUrl') || '/';
+          router.push(returnUrl);
+        }
       }
     } catch (error) {
       console.error("Error during sign-in:", error);
-      // Handle any other errors, like network issues
+      notify("An error occurred during sign-in. Please try again.", "error");
     }
   };
-
+  
+  // Update the useEffect hook
   useEffect(() => {
-    console.log("session: " + session)
-    console.log("session: " +JSON.stringify(session))
-
     if (status === "authenticated" && session?.user) {
       updateUserData(session.user.email, session.user.customerId);
+      
+      // Clear any stored return URLs
+      localStorage.removeItem('returnUrl');
     }
   }, [status, session]);
-
+  
   const updateUserData = async (email, customerId) => {
     try {
       const formData = { email, customer_id: customerId };
@@ -92,6 +104,7 @@ notify("Successfully signed in")
       );
     } catch (error) {
       console.error("Error updating user data:", error);
+      notify("Error updating user data. Please try again.", "error");
     }
   };
 
