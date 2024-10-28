@@ -9,26 +9,16 @@ const ContactUsCard = ({ title, location, phone, email }) => {
         <div className="BranchOfficesCardIcon">
           <i className="fa fa-map-marker fa-icons" aria-hidden="true"></i>
           <p>
-            <a href={`https://maps.google.com/?q=${encodeURIComponent(location)}`}>
-              {location}
-            </a>
+            {location}
           </p>
         </div>
         <div className="BranchOfficesCardIcon">
           <i className="fa fa-phone fa-icons2" aria-hidden="true"></i>
-          <p>
-            <a href={`tel:${phone.replace(/\D/g, '')}`}>
-              {phone}
-            </a>
-          </p>
+          <p>{phone}</p>
         </div>
         <div className="BranchOfficesCardIcon">
           <i className="fa fa-envelope-open fa-icons2" aria-hidden="true"></i>
-          <p>
-            <a href={`mailto:${email}`}>
-              {email}
-            </a>
-          </p>
+          <p>{email}</p>
         </div>
       </div>
     </div>
