@@ -74,3 +74,17 @@ export const isValidPincode = (pincode) => {
 };
 
 // We'll use the existing isValidAddress function for the address field
+export const isValidAddress = (address) => {
+  // Return false if address is null, undefined or empty
+  if (!address || typeof address !== 'string') {
+    return false;
+  }
+
+  const trimmedAddress = address.trim();
+  if (trimmedAddress.length < 3 || trimmedAddress.length > 500) {
+    return false;
+  }
+  const safeAddressPattern = /^[\p{L}0-9\s,./#&°´'"\-@()]+$/u;
+  const sqlInjectionPattern = /['";]--|union\s+select|exec\s*\(|drop\s+table|insert\s+into|delete\s+from|update\s+\w+\s+set|select\s+\*\s+from/i;
+  return safeAddressPattern.test(trimmedAddress) && !sqlInjectionPattern.test(trimmedAddress);
+};

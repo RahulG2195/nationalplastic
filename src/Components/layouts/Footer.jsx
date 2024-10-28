@@ -312,6 +312,7 @@ export default function Footer() {
           </div>
         </div>
       </section>
+      <ScrollToTop displayType="htmlArrow" />
 
       <div className="social_icon_for_mob">
         <div className="icon-wrapper call_icon">
@@ -327,7 +328,7 @@ export default function Footer() {
           </a>
         </div>
         <div className="icon-wrapper wp_icon">
-          <a href="">
+          <a href={`https://wa.me/91${basicInfo.wpNumber}`}>
             <Image
               height={100}
               width={100}
@@ -342,7 +343,6 @@ export default function Footer() {
       <div className="copyrightsdiv">
         <p>Copyright © 2024 National Plastic Industries Ltd . All Rights Reserved.</p>
       </div>
-      <ScrollToTop displayType="htmlArrow" />
     </>
   );
 }
