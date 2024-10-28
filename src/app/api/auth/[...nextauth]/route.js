@@ -13,9 +13,14 @@ const handler = NextAuth({
   debug: true,
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({ user, account, profile }) {
       if (account.provider === "google") {
-        const { email, name, id } = user;
+        const { email } = user;
+        const googleId = account.providerAccountId;
+        // Extract first and last name from OAuth profile
+        const firstName = profile.given_name || user.name?.split(' ')[0] || '';
+        const lastName = profile.family_name || user.name?.split(' ').slice(1).join(' ') || '';
+        
         try {
           const existingUser = await query({
             query: "SELECT * FROM customer WHERE Email = ?",
@@ -29,24 +34,38 @@ const handler = NextAuth({
             customerId = userRecord.customer_id;
             if (!userRecord.google_id) {
               await query({
-                query: "UPDATE customer SET google_id = ? WHERE Email = ?",
-                values: [id, email],
+                query: `UPDATE customer 
+                        SET google_id = ?, 
+                            FirstName = ?,
+                            LastName = ?
+                        WHERE Email = ?`,
+                values: [googleId, firstName, lastName, email],
               });
             }
           } else {
             const result = await query({
-              query: "INSERT INTO customer (Email, FirstName, google_id) VALUES (?, ?, ?)",
-              values: [email, name, id],
+              query: `INSERT INTO customer 
+                      (Email, FirstName, LastName, google_id) 
+                      VALUES (?, ?, ?, ?)`,
+              values: [email, firstName, lastName, googleId],
             });
             customerId = result.insertId;
           }
           
-          // Add customer_id to the user object
           user.customerId = customerId;
-          
           return true;
         } catch (error) {
           console.error("Error during Google sign-in:", error);
+          // Log detailed error information for debugging
+          console.error({
+            message: "Google sign-in database error",
+            email,
+            firstName,
+            lastName,
+            googleId,
+            error: error.message,
+            stack: error.stack,
+          });
           return false;
         }
       }
