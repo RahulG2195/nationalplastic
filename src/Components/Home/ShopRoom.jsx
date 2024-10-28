@@ -42,7 +42,7 @@ export default function ShopRoom() {
               Shop By
               <span className="fs-1 lh-small fw-bold text-danger "> Rooms</span>
             </div>
-            <div className="mt-1 fw-medium subCptRes w-50">
+            <div className="mt-1 fw-medium subCptRes w-md-50">
               <p>
                 Easily furnish every room in your home! Check out our Shop By Rooms section for furniture and accessories tailored to your living room, dining room, bedroom, balcony, baby room, and more.
               </p>

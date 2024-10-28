@@ -38,7 +38,7 @@ export default function Highlight() {
               Collection!
               </span>
             </div>
-            <div className="mt-1 fw-medium subCptRes w-50">
+            <div className="mt-1 fw-medium subCptRes w-md-50">
               <p>
               Upgrade your seating with our unique designs! Discover our range of Popular Chairs.
               </p>

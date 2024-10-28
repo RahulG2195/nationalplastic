@@ -49,7 +49,7 @@ export default function HappyStory() {
               Happy
               <span className="fs-1 lh-small fw-bolder text-danger"> Stories</span>
             </div>
-            <div className="mt-1 fw-medium subCptRes w-50">
+            <div className="mt-1 fw-medium subCptRes w-md-50">
               <p>Their Words, Our Pride</p>
             </div>
           </div>

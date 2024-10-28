@@ -56,9 +56,10 @@
     background-color: #262262;
 border-top: 1px solid lightgrey;
 }
+
 @media (max-width: 768px) {
     .copyrightsdiv {
-        margin-bottom: 80px;
+        margin-bottom: 53px;
         border-top: 1px solid lightgrey;
     }
 
