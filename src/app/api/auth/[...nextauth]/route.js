@@ -37,7 +37,7 @@ const handler = NextAuth({
                 query: `UPDATE customer 
                         SET google_id = ?, 
                             FirstName = ?,
-                            LastName = ?
+                            LasttName = ?
                         WHERE Email = ?`,
                 values: [googleId, firstName, lastName, email],
               });
@@ -45,7 +45,7 @@ const handler = NextAuth({
           } else {
             const result = await query({
               query: `INSERT INTO customer 
-                      (Email, FirstName, LastName, google_id) 
+                      (Email, FirstName, LasttName, google_id) 
                       VALUES (?, ?, ?, ?)`,
               values: [email, firstName, lastName, googleId],
             });
