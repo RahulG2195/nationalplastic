@@ -14,7 +14,8 @@ import {
   isValidEmail,
   isValidMobile as isValidPhone,
   isValidPassword,
-  isValidReason as isValidAddress,
+  isValidReason,
+  isValidAddress,
   isValidCity, isValidState, isValidPincode
 } from "@/utils/validation";
 import { notifyError } from "@/utils/notify";
