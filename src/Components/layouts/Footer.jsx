@@ -287,7 +287,7 @@ export default function Footer() {
                 </a>
               </div>
             </div>
-            <div className="footer_term d-flex justify-content-center">
+            <div className="footer_term d-flex justify-content-center twoby2">
               <Link href="/terms-and-conditions">
                 <p className="text-white">
                   Terms and Conditions <span> | </span>{" "}
@@ -296,7 +296,7 @@ export default function Footer() {
               <Link href="/privacy-policy">
                 <p className="text-white">
                   {" "}
-                  Privacy Policy <span> | </span>{" "}
+                  Privacy Policy <span className="hideitnow"> | </span>{" "}
                 </p>
               </Link>
               <Link href="/shipping-and-delivery">

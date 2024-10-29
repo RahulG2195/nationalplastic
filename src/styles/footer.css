@@ -218,7 +218,18 @@ border-top: 1px solid lightgrey;
         letter-spacing: 15px;
     }
     .footer_term{
-        margin: 50px 0;
-        border-top: 1px solid lightgrey;
+        margin: 20px 0;
+        /* border-top: 1px solid lightgrey; */
+    }
+    .twoby2 {
+    isplay: flex !important;
+    align-items: baseline;
+    align-content: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    }
+    .hideitnow {
+        display: none;
     }
 }

@@ -19,7 +19,7 @@ import Highlighter from "react-highlight-words";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons';
-
+import { notify } from "@/utils/notify";
 import ProductDetailModal from "./ProductDetailModal"
 const ProdList = () => {
   const router = useRouter();
@@ -250,6 +250,7 @@ const ProdList = () => {
           )
         );
       }
+      notify("Success");
     } catch (error) {
       console.error("Error updating product collections:", error);
       // Handle error (e.g., show a notification to the user)
@@ -293,6 +294,7 @@ const ProdList = () => {
           )
         );
       }
+      notify("Success");
     } catch (error) {
       console.error("Error removing product collection:", error);
       // Handle error (e.g., show a notification to the user)
