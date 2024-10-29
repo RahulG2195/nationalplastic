@@ -551,6 +551,9 @@ p {
     z-index: 111111 !important;
 }
 
+.happy_Story_sec .swiper-slide{
+    border: none;
+}
 .swiper-slide{
     border: 1px solid lightgrey;
 }
