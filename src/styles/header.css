@@ -471,6 +471,7 @@ HeadSearch input:focus + .searchFor {
     padding: 0px 6px;
     top: -5px;
     right: -5px;
+    
     color: #fff;
 }
 
