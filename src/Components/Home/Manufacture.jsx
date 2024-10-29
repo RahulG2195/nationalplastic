@@ -78,6 +78,7 @@ export default function Manufacture() {
                         catid={
                           product.seo_url
                         }
+                        redirection={"product-catalogue"}
                         manfacthover="manfact"
                         style="manfTitle"
                         image={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${product.image_name}`}
