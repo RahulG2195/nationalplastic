@@ -474,10 +474,10 @@ p {
         width: 17px;
         height: 17px;
         padding: 0 0px;
-        top: 4px;
+        top: -8px;
         right: 0;
         color: #fff;
-        left: 89%;
+        left: 58%;
     }
 
     .footer-icon {
