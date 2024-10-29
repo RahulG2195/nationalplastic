@@ -42,7 +42,7 @@ const InvestorKYC = () => {
 
   return (
     <Layout>
-      <Content style={{ padding: '50px' }}>
+      <Content>
         <Space direction="vertical" size="large" style={{ display: 'flex' }}>
           <Card>
             <Title level={2}>Investor KYC Information</Title>

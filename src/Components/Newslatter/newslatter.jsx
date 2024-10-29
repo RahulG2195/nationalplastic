@@ -49,6 +49,7 @@ function Newslatter() {
           gap: "0.5rem",
           justifyContent: "center",
           alignItems: "center",
+          padding: "0 0 0 10px",
           
         }}
       >

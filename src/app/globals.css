@@ -131,10 +131,14 @@ p {
 }
 
 .section_header p {
-    padding: 0px 267px;
+    /* padding: 0px 267px; */
     font-weight: 500;
     font-size: 13px;
     line-height: normal;
+}
+
+.rounded-circle{
+    padding: 8px 10px;
 }
 
 .section_header h3 {
@@ -514,6 +518,10 @@ p {
     bottom: 5px
 }
 
+.search_div{
+    margin-top: 150px;
+}
+
 .shoppingCartIcon {
     cursor: pointer;
 }
@@ -551,12 +559,12 @@ p {
     z-index: 111111 !important;
 }
 
-.happy_Story_sec .swiper-slide{
+/* .happy_Story_sec .swiper-slide{
     border: none;
 }
 .swiper-slide{
     border: 1px solid lightgrey;
-}
+} */
 
 .scroll_top {
     position: fixed;
@@ -917,7 +925,7 @@ p {
     }
 
     .sbr_card {
-        margin: 0 15px;
+        margin: 0 9px;
         width: 95%;
     }
 

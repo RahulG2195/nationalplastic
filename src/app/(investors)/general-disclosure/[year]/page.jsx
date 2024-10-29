@@ -51,7 +51,7 @@ const YearPage = ({ params }) => {
   if (error) return <Alert message="Error" description={error.message} type="error" showIcon />;
 
   return (
-    <Layout className="min-h-screen bg-white">
+    <Layout className="min-h-screen bg-white mt-5">
       <Content className="container mx-auto px-4 py-8">
         <Title level={2} className="mb-6 text-center">Investor Disclosures - {year}</Title>
         <Table

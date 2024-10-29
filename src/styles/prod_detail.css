@@ -11,6 +11,9 @@
   font-family: "Poppins", sans-serif;
 }
 
+.prod_detail_slider{
+  border: 1px solid lightgrey;
+}
 .heading-section {
   text-align: center;
   margin-bottom: 20px;

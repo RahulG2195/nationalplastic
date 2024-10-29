@@ -77,7 +77,7 @@ const ProductDetailSlider = ({ imageurl }) => {
               className="mySwiper mt-5"
             >
               {images.map((imageName, index) => (
-                <SwiperSlide key={`thumb-${imageName}-${index}`}>
+                <SwiperSlide key={`thumb-${imageName}-${index}`} className="prod_detail_slider">
                   <Image
                     src={getImageUrl(imageName)}
                     alt={`Product Thumbnail ${index + 1}`}

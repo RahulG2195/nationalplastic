@@ -252,7 +252,7 @@ const Search = (props) => {
 
   return (
     <>
-      <div className="container newProdCard">
+      <div className="container newProdCard search_div">
         {loading ? (
           <p>Loading...</p>
         ) : error ? (

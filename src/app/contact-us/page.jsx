@@ -261,7 +261,7 @@ function ContactUs() {
           </div> */}
         </div>
 
-        <div className="row position-relative pb-5 ">
+        <div className="row position-relative pb-md-5 ">
           <div className="contactCTA pb-5">
             <Image
               src="/Assets/images/ContactUs/call-center-headphone-keyboard-table.png"
@@ -383,7 +383,7 @@ function ContactUs() {
           </div>
         </div>
 
-        <div className="row LocationSection mt-5 pt-5 my-5 py-5 position-relative">
+        <div className="row LocationSection mt-5 pt-5 my-md-5 py-md-5 position-relative">
           <div className="position-relative">
             <div className="location-image ">
               <Image
