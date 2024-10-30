@@ -72,8 +72,6 @@ export default function Header() {
 
 
 
-
-
   // Use useEffect to keep local count in sync with Redux state
   useEffect(() => {
     setCount(productCount); // Update localCount whenever productCount changes
@@ -82,6 +80,7 @@ export default function Header() {
   // get user data to show initial name after login
   useEffect(() => {
     const fromLogin = localStorage.getItem('fromLogin');
+
     if(session?.user && fromLogin === 'true'){
       updateUser()
       localStorage.removeItem('fromLogin');
@@ -120,9 +119,11 @@ export default function Header() {
 
 
   useEffect(() => {
+
     if (FirstName && LastName) {
       setInitialName(FirstName[0].toUpperCase() + LastName[0].toUpperCase());
     } else {
+
       setInitialName("N" + "P");
     }
   }, [FirstName, LastName]);

@@ -81,7 +81,7 @@ function Login() {
   
   // Update the useEffect hook
   useEffect(() => {
-    if (status === "authenticated" && session?.user) {
+    if (status === "authenticatedsss" && session?.user) {
       updateUserData(session.user.email, session.user.customerId);
       
       // Clear any stored return URLs
