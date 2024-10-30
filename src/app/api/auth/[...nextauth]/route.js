@@ -11,26 +11,9 @@ const authOptions = {
   ],
   debug: process.env.NODE_ENV !== 'production',
   secret: process.env.NEXTAUTH_SECRET,
-  cookies: {
-    sessionToken: {
-      name: `${process.env.NODE_ENV === 'production' ? '__Secure-' : ''}next-auth.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: process.env.NODE_ENV === 'production'
-      }
-    },
-    state: {
-      name: 'next-auth.state',
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: process.env.NODE_ENV === 'production',
-        maxAge: 900 // 15 minutes in seconds
-      }
-    }
+  session: {
+    strategy: 'jwt',
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   callbacks: {
     async signIn({ user, account, profile }) {
@@ -52,16 +35,16 @@ const authOptions = {
           if (existingUser.length > 0) {
             const userRecord = existingUser[0];
             customerId = userRecord.customer_id;
-            if (!userRecord.google_id) {
-              await query({
-                query: `UPDATE customer
-                        SET google_id = ?,
-                            FirstName = ?,
-                            LasttName = ?
-                        WHERE Email = ?`,
-                values: [googleId, firstName, lastName, email],
-              });
-            }
+            
+            // Update user info
+            await query({
+              query: `UPDATE customer
+                      SET google_id = ?,
+                          FirstName = COALESCE(?, FirstName),
+                          LasttName = COALESCE(?, LasttName),
+                      WHERE Email = ?`,
+              values: [googleId, firstName, lastName, email],
+            });
           } else {
             const result = await query({
               query: `INSERT INTO customer
@@ -73,49 +56,55 @@ const authOptions = {
             isNewUser = true;
           }
          
+          // Attach necessary data to the user object
           user.customerId = customerId;
           user.isNewUser = isNewUser;
+          user.firstName = firstName;
+          user.lastName = lastName;
+          user.lastLogin = new Date().toISOString();
           return true;
         } catch (error) {
           console.error("Error during Google sign-in:", error);
-          console.error({
-            message: "Google sign-in database error",
-            email,
-            firstName,
-            lastName,
-            googleId,
-            error: error.message,
-            stack: error.stack,
-          });
           return false;
         }
       }
       return true;
     },
+
     async jwt({ token, user, account }) {
-      if (user) {
+      // Initial sign in
+      if (account && user) {
         token.id = user.id;
+        token.customerId = user.customerId;
         token.isNewUser = user.isNewUser;
-        if (account?.provider === "google") {
-          token.customerId = user.customerId;
-        }
+        token.firstName = user.firstName;
+        token.lastName = user.lastName;
+        token.lastLogin = user.lastLogin;
+        token.email = user.email;
+        token.provider = account.provider;
       }
       return token;
     },
+
     async session({ session, token }) {
       if (token) {
         session.user.id = token.id;
         session.user.customerId = token.customerId;
         session.user.isNewUser = token.isNewUser;
+        session.user.firstName = token.firstName;
+        session.user.lastName = token.lastName;
+        session.user.lastLogin = token.lastLogin;
+        session.user.email = token.email;
+        session.user.provider = token.provider;
       }
       return session;
     },
+
     async redirect({ url, baseUrl }) {
-      // Allows relative callback URLs
-      if (url.startsWith("/")) return `${baseUrl}${url}`
-      // Allows callback URLs on the same origin
-      else if (new URL(url).origin === baseUrl) return url
-      return baseUrl
+      // Handle redirect logic
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      else if (new URL(url).origin === baseUrl) return url;
+      return baseUrl;
     },
   },
 };
