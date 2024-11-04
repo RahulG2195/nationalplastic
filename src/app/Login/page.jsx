@@ -81,43 +81,46 @@ function Login() {
     try {
       localStorage.setItem('fromLogin', 'true');
       
+      // Add state parameter
+      const state = Math.random().toString(36).substring(7);
+      sessionStorage.setItem('oauth_state', state);
+      
       const result = await signIn("google", {
         callbackUrl: window.location.origin,
-        redirect: false // Don't redirect automatically, we'll handle it
+        redirect: false,
+        state: state
       });
-      console.log("session+++++++++++++++++++++++REAMMTP________STAGEONE")
-
+  
       if (result?.error) {
         console.error("Sign-in failed:", result.error);
         notify("Sign-in failed. Please try again.", "error");
-      } else  {
-        // Check if the session exists and update user data
-      console.log("session+++++++++++++++++++++++REAMMTP________STAGEONE_TWI")
-
-        let session = null;
-        let attempts = 0;
-        const maxAttempts = 5;
-        if(session){
-        console.log("session+++++++++++++++++++++++REAMMTP________STAGEONE_session" + session)
-
+        return;
+      }
+  
+      // Implement exponential backoff for session checking
+      let session = null;
+      let attempts = 0;
+      const maxAttempts = 5;
+      const backoffDelay = 1000; // Start with 1 second
+  
+      while (!session && attempts < maxAttempts) {
+        session = await getSession();
+        if (!session) {
+          await new Promise(resolve => 
+            setTimeout(resolve, backoffDelay * Math.pow(2, attempts))
+          );
+          attempts++;
         }
-        while (!session && attempts < maxAttempts) {
-        console.log("session+++++++++++++++++++++++REAMMTP________STAGEONE_count" + maxAttempts)
-          session = await getSession();
-          if (!session) {
-            await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second
-            attempts++;
-          }
-        }
-        console.log("session+++++++++++++++++++++++REAMMTP" + JSON.stringify(session));
-        if (session?.user) {
-          await updateUserData(session.user.email, session.user.customerId);
-          notify("Successfully signed in");
-          
-          // Redirect to the appropriate page
-          const redirectPath = productCount > 1 ? "/AddToCart" : "/";
-          router.push(redirectPath);
-        }
+      }
+  
+      if (session?.user) {
+        await updateUserData(session.user.email, session.user.customerId);
+        notify("Successfully signed in");
+        
+        const redirectPath = productCount > 1 ? "/AddToCart" : "/";
+        router.push(redirectPath);
+      } else {
+        throw new Error("Session not established after multiple attempts");
       }
     } catch (error) {
       console.error("Error during sign-in:", error);
