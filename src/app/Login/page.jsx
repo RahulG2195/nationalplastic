@@ -92,6 +92,7 @@ function Login() {
       const result = await signIn("google", {
         callbackUrl: window.location.origin,
         redirect: false,
+        state: state,
       });
       console.log("Google sign-in result:", result);
   
