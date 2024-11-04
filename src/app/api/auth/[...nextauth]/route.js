@@ -43,6 +43,7 @@ export const authOptions = {
         secure: true
       }
     },
+  },
   callbacks: {
     async signIn({ user, account, profile }) {
       if (account?.provider === "google") {
