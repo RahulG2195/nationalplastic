@@ -25,39 +25,38 @@ function Login() {
   });
 
   // Handle session changes and automatic login
-  useEffect(() => {
-    const handleSessionChange = async () => {
-      if (status === "authenticated" && session?.user) {
-        try {
-          await updateUserData(session.user.email, session.user.customerId);
-          notify("Login successful");
+  // useEffect(() => {
+  //   const handleSessionChange = async () => {
+  //     if (status === "authenticated" && session?.user) {
+  //       try {
+  //         await updateUserData(session.user.email, session.user.customerId);
+  //         notify("Login successful");
           
-          // Determine redirect path
-          const returnUrl = localStorage.getItem('returnUrl');
-          const redirectPath = productCount > 1 ? "/AddToCart" : (returnUrl || "/");
+  //         // Determine redirect path
+  //         const returnUrl = localStorage.getItem('returnUrl');
+  //         const redirectPath = productCount > 1 ? "/AddToCart" : (returnUrl || "/");
           
-          // Clear storage items
-          localStorage.removeItem('returnUrl');
-          localStorage.removeItem('fromLogin');
+  //         // Clear storage items
+  //         localStorage.removeItem('returnUrl');
+  //         localStorage.removeItem('fromLogin');
           
-          // Redirect
-          router.push(redirectPath);
-        } catch (error) {
-          console.error("Error handling session change:", error);
-          notify("Error updating user data", "error");
-        }
-      }
-    };
+  //         // Redirect
+  //         router.push(redirectPath);
+  //       } catch (error) {
+  //         console.error("Error handling session change:", error);
+  //         notify("Error updating user data", "error");
+  //       }
+  //     }
+  //   };
 
-    handleSessionChange();
-  }, [status, session, router, productCount]);
+  //   handleSessionChange();
+  // }, [status, session, router, productCount]);
 
   const updateUserData = async (email, customerId) => {
     try {
       const formData = { 
         email, 
         customer_id: customerId,
-        last_login: new Date().toISOString() 
       };
       
       const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/Users`, formData);
@@ -84,22 +83,48 @@ function Login() {
       
       const result = await signIn("google", {
         callbackUrl: window.location.origin,
-        redirect: false
+        redirect: false // Don't redirect automatically, we'll handle it
       });
+      console.log("session+++++++++++++++++++++++REAMMTP________STAGEONE")
 
       if (result?.error) {
         console.error("Sign-in failed:", result.error);
         notify("Sign-in failed. Please try again.", "error");
+      } else  {
+        // Check if the session exists and update user data
+      console.log("session+++++++++++++++++++++++REAMMTP________STAGEONE_TWI")
+
+        let session = null;
+        let attempts = 0;
+        const maxAttempts = 5;
+        if(session){
+        console.log("session+++++++++++++++++++++++REAMMTP________STAGEONE_session" + session)
+
+        }
+        while (!session && attempts < maxAttempts) {
+        console.log("session+++++++++++++++++++++++REAMMTP________STAGEONE_count" + maxAttempts)
+          session = await getSession();
+          if (!session) {
+            await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second
+            attempts++;
+          }
+        }
+        console.log("session+++++++++++++++++++++++REAMMTP" + JSON.stringify(session));
+        if (session?.user) {
+          await updateUserData(session.user.email, session.user.customerId);
+          notify("Successfully signed in");
+          
+          // Redirect to the appropriate page
+          const redirectPath = productCount > 1 ? "/AddToCart" : "/";
+          router.push(redirectPath);
+        }
       }
-      
-      // Note: No need to manually handle success case here
-      // The useEffect hook will handle it when the session updates
-      
     } catch (error) {
       console.error("Error during sign-in:", error);
       notify("An error occurred during sign-in. Please try again.", "error");
     }
   };
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;

@@ -81,9 +81,16 @@ export default function Header() {
   useEffect(() => {
     const fromLogin = localStorage.getItem('fromLogin');
 
+    console.log("fromLogin sessionnnnnnnnnnnnnn"  + fromLogin);
+    console.log("session sessionnnnnnnnnnnnnn" + JSON.stringify(session));
     if(session?.user && fromLogin === 'true'){
+      console.log("session sessionnnnnnnnn87");
       updateUser()
+      console.log("session sessionnnnnnnnn87");
+
       localStorage.removeItem('fromLogin');
+      console.log("session sessionnnnnnnnn87");
+
     }
     const fetchUserData = async () => {
       try {
@@ -108,6 +115,7 @@ export default function Header() {
 
     fetchUserData();
   }, [userEmail]);
+
   const updateUser = async () => {
     dispatch(
       setUserData({
