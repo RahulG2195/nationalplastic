@@ -124,7 +124,29 @@ export default function Header() {
       })
     )
   }
+  // 
+  useEffect(() => {  
+  const initializeUser = async () => {
+      const session = await getSession();
+      console.log("Initializing----------------------------------------------------");
+      if (session?.user && localStorage.getItem("fromLogin") === "true") {
+      console.log("Initializing----------------------------------------------------22222222222222222222222222222222");
 
+        dispatch(
+          setUserData({
+            email: session.user.email,
+            customer_id: session.user.customerId,
+          })
+        );
+        localStorage.removeItem("fromLogin");
+      }
+    };
+    initializeUser();
+  }, [dispatch, router]);
+
+
+
+  // 
 
   useEffect(() => {
 
