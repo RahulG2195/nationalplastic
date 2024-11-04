@@ -43,16 +43,6 @@ export const authOptions = {
         secure: process.env.NODE_ENV === 'production'
       }
     },
-    state: {
-      name: process.env.NODE_ENV === 'production' ? '__Secure-next-auth.state' : 'next-auth.state',
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: process.env.NODE_ENV === 'production',
-        maxAge: 900 // 15 minutes in seconds
-      }
-    }
   },
   callbacks: {
     async signIn({ user, account, profile }) {

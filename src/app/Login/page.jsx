@@ -31,15 +31,15 @@ function Login() {
   //       try {
   //         await updateUserData(session.user.email, session.user.customerId);
   //         notify("Login successful");
-          
+
   //         // Determine redirect path
   //         const returnUrl = localStorage.getItem('returnUrl');
   //         const redirectPath = productCount > 1 ? "/AddToCart" : (returnUrl || "/");
-          
+
   //         // Clear storage items
   //         localStorage.removeItem('returnUrl');
   //         localStorage.removeItem('fromLogin');
-          
+
   //         // Redirect
   //         router.push(redirectPath);
   //       } catch (error) {
@@ -54,14 +54,14 @@ function Login() {
 
   const updateUserData = async (email, customerId) => {
     try {
-      const formData = { 
-        email, 
+      const formData = {
+        email,
         customer_id: customerId,
       };
-      
+
       const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/Users`, formData);
       const userData = res.data.message[0];
-      
+
       // Update Redux store
       dispatch(
         setUserData({
@@ -80,39 +80,46 @@ function Login() {
   const handleGoogleSignIn = async () => {
     try {
       console.log("Starting Google sign-in process...");
-  
+
       localStorage.setItem('fromLogin', 'true');
       console.log("Set 'fromLogin' in localStorage to 'true'");
-  
-      // Add state parameter
-      const state = Math.random().toString(36).substring(7);
-      sessionStorage.setItem('oauth_state', state);
-      console.log("Generated and stored OAuth state:", state);
-  
+
+
+
       const result = await signIn("google", {
         callbackUrl: window.location.origin,
         redirect: false,
-        state: state,
       });
       console.log("Google sign-in result:", result);
-  
+      let retryCount = 0;
+      const maxRetries = 3;
+      if (result?.error && result.error === "OAuthCallbackError" && retryCount < maxRetries) {
+        console.warn("OAuth error detected, clearing cookies and retrying...");
+        document.cookie = "__Secure-next-auth.state=; Max-Age=0; path=/;"; // Clear state cookie
+
+        retryCount++;
+        console.log(`Retry attempt ${retryCount} of ${maxRetries}`);
+        await signIn("google"); // Retry the sign-in
+        return;
+      }
+
       if (result?.error) {
         console.error("Sign-in failed:", result.error);
         notify("Sign-in failed. Please try again.", "error");
         return;
       }
-  
+
       // Implement exponential backoff for session checking
       console.log("Starting session check with exponential backoff...");
       let session = null;
       let attempts = 0;
       const maxAttempts = 5;
       const backoffDelay = 1000; // Start with 1 second
-  
+
       while (!session && attempts < maxAttempts) {
         session = await getSession();
         console.log(`Session attempt ${attempts + 1}/${maxAttempts}:`, session);
-  
+
         if (!session) {
           const delay = backoffDelay * Math.pow(2, attempts);
           console.log(`Session not found. Waiting for ${delay}ms before retrying...`);
@@ -120,15 +127,15 @@ function Login() {
           attempts++;
         }
       }
-  
+
       if (session?.user) {
         console.log("Session established. User data:", session.user);
-  
+
         await updateUserData(session.user.email, session.user.customerId);
         console.log("User data updated successfully");
-  
+
         notify("Successfully signed in");
-  
+
         const redirectPath = productCount > 1 ? "/AddToCart" : "/";
         console.log("Redirecting to:", redirectPath);
         router.push(redirectPath);
@@ -140,7 +147,7 @@ function Login() {
       notify("An error occurred during sign-in. Please try again.", "error");
     }
   };
-  
+
 
 
   const handleInputChange = (event) => {
@@ -184,11 +191,11 @@ function Login() {
         );
 
         localStorage.setItem("isAdmin", "false");
-        
+
         // Determine redirect path
         const redirectPath = productCount > 1 ? "/AddToCart" : "/";
         router.push(redirectPath);
-        
+
         return userData;
       } catch (error) {
         setErrorMessage(error.message || "An error occurred during login. Please try again.");
