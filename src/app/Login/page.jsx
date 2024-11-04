@@ -91,17 +91,17 @@ function Login() {
         redirect: false,
       });
       console.log("Google sign-in result:", result);
-      let retryCount = 0;
-      const maxRetries = 3;
-      if (result?.error && result.error === "OAuthCallbackError" && retryCount < maxRetries) {
-        console.warn("OAuth error detected, clearing cookies and retrying...");
-        document.cookie = "__Secure-next-auth.state=; Max-Age=0; path=/;"; // Clear state cookie
+      // let retryCount = 0;
+      // const maxRetries = 3;
+      // if (result?.error && result.error === "OAuthCallbackError" && retryCount < maxRetries) {
+      //   console.warn("OAuth error detected, clearing cookies and retrying...");
+      //   document.cookie = "__Secure-next-auth.state=; Max-Age=0; path=/;"; // Clear state cookie
 
-        retryCount++;
-        console.log(`Retry attempt ${retryCount} of ${maxRetries}`);
-        await signIn("google"); // Retry the sign-in
-        return;
-      }
+      //   retryCount++;
+      //   console.log(`Retry attempt ${retryCount} of ${maxRetries}`);
+      //   await signIn("google"); // Retry the sign-in
+      //   return;
+      // }
 
       if (result?.error) {
         console.error("Sign-in failed:", result.error);
