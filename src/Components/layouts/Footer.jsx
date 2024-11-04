@@ -7,7 +7,10 @@ import { useEffect, useState } from "react";
 import { Form, Input, Button, message } from "antd";
 import { MailOutlined } from "@ant-design/icons";
 import ScrollToTop from "scroll-to-top-react";
+import { Collapse, Typography } from 'antd';
+import { CaretRightOutlined } from '@ant-design/icons';
 
+const { Panel } = Collapse;
 export default function Footer() {
   const [basicInfo, setBasicInfo] = useState({
     logo: "",
@@ -24,6 +27,7 @@ export default function Footer() {
     email: "",
     indiamart: "",
   });
+
   const [initialBasicInfo, setInitialBasicInfo] = useState({});
 
   const [form] = Form.useForm();
@@ -46,203 +50,204 @@ export default function Footer() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-  
+  const footerSections = [
+    {
+      title: "OUR COMPANY",
+      links: [
+        { text: "About Us", href: "/company-profile" },
+        { text: "Career", href: "/careers" },
+        { text: "Media & News", href: "/news-and-media" },
+        // { text: "Customer Stories", href: "#" }
+      ]
+    },
+    {
+      title: "RETAIL",
+      links: [
+        { text: "Premium Event Chair", href: "/product-catalogue/premium-event-chair" },
+        { text: "Premium Chair", href: "/product-catalogue/premium-chair" },
+        { text: "Popular Chair", href: "/product-catalogue/popular-chair" },
+        { text: "Without Arm Chair", href: "/product-catalogue/without-arm-tent-chairs" },
+        { text: "Office Chair", href: "/product-catalogue/office-chairs" }
+      ]
+    },
+    {
+      title: "BUSINESS",
+      links: [
+        // { text: "Custom Furniture", href: "#" },
+        // { text: "Exporters", href: "#" },
+        { text: "Investor Desk", href: "/unaudited-financial-results" }
+      ]
+    },
+    {
+      title: "NEED HELP",
+      links: [
+        { text: "Help Center", href: "/contact-us" },
+        { text: "Contact Us", href: "/contact-us" },
+        { text: "Ask Experts", href: "/contact-us" },
+        { text: "Colors", href: "/colors" }
+      ]
+    }
+  ];
   return (
     <>
-      <section className="footer pb-4">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-2">
-              <div className="footer_heading ">
-                <h5 className="fw-bolder">OUR COMPANY</h5>
-              </div>
-              <ul>
-                <li>
-                  <Link className="nav-link fw-bold" href="/company-profile">
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link className="nav-link fw-bold" href="/careers">
-                    Career
-                  </Link>
-                </li>
-                <li>
-                  <Link className="nav-link fw-bold" href="/news-and-media">
-                    Media & News
-                  </Link>
-                </li>
-                {/* <li>
-                  <Link className="nav-link fw-bold" href="/BlogPage">
-                    Blog
-                  </Link>
-                </li> */}
-                <li className="fw-bold">Customer Stories</li>
-              </ul>
-            </div>
-            <div className="col-md-2">
-              <div className="footer_heading">
-                <h5 className="fw-bolder">RETAIL</h5>
-              </div>
-              <ul>
-                <li>
-                  <Link
-                    className="nav-link fw-bold"
-                    href="/product-catalogue/premium-event-chair"
-                  >
-                    Premium Event Chair
-                  </Link>
-                </li>
-                <li className="fw-bold">
-                  <Link
-                    className="nav-link fw-bold"
-                    href="/product-catalogue/premium-chair"
-                  >
-                    Premium Chair
-                  </Link>{" "}
-                </li>
-                <li className="fw-bold">
-                  <Link
-                    className="nav-link fw-bold"
-                    href="/product-catalogue/popular-chair"
-                  >
-                    Popular Chair
-                  </Link>{" "}
-                </li>
-                <li className="fw-bold">
-                  <Link
-                    className="nav-link fw-bold"
-                    href="/product-catalogue/without-arm-tent-chairs"
-                  >
-                    Without Arm Chair
-                  </Link>
-                </li>
-                <li className="fw-bold">
-                  <Link
-                    className="nav-link fw-bold"
-                    href="/product-catalogue/office-chairs"
-                  >
-                    Office Chair
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div className="col-md-2">
-              <div className="footer_heading">
-                <h5 className="fw-bolder">BUSINESS</h5>
-              </div>
-              <ul>
-                <li className="fw-bold">Custom Furniture</li>
-                <li className="fw-bold">Exporters</li>
-                {/* <li>
-                  <Link className='nav-link fw-bold' href="/BulkOrder">
-                    Buy in Bulk
-                  </Link>
-                </li> */}
-                <li>
-                  <Link
-                    className="nav-link fw-bold"
-                    href="/unaudited-financial-results"
-                  >
-                    Investor Desk
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div className="col-md-2">
-              <div className="footer_heading">
-                <h5 className="fw-bolder">NEED HELP</h5>
-              </div>
-              <ul>
-                <li className="fw-bold">
-                  <Link className="nav-link fw-bold" href="/contact-us">
-                    Help Center
-                  </Link>{" "}
-                </li>
-                <li>
-                  <Link className="nav-link fw-bold" href="/contact-us">
-                    Contact Us
-                  </Link>
-                </li>
-                <li className="fw-bold">
-                  <Link className="nav-link fw-bold" href="/contact-us">
-                    Ask Experts
-                  </Link>{" "}
-                </li>
-                <li className="fw-bold">
-                  <Link className="nav-link fw-bold" href="/colors">
-                    Colors
-                  </Link>{" "}
-                </li>
+    <section className="footer pb-4" style={{ backgroundColor: '#f5f5f5' }}>
+      <div className="container mx-auto px-4">
+        <div className="row">
+          {/* Mobile Accordion View */}
+          <div className="d-block d-lg-none col-12 pb-4">
+            <Collapse
+              expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
+              ghost
+              className="site-collapse-custom-collapse"
+            >
+              {footerSections.map((section, index) => (
+                <Panel 
+                  header={<span className="fw-bold">{section.title}</span>} 
+                  key={index}
+                  className="site-collapse-custom-panel"
+                >
+                  <ul className="list-unstyled">
+                    {section.links.map((link, linkIndex) => (
+                      <li key={linkIndex} className="mb-2">
+                        {link.href !== "#" ? (
+                          <Link 
+                            href={link.href} 
+                            className="text-decoration-none text-secondary"
+                            style={{ color: '#666' }}
+                          >
+                            {link.text}
+                          </Link>
+                        ) : (
+                          <span style={{ color: '#666' }}>{link.text}</span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </Panel>
+              ))}
+            </Collapse>
+          </div>
 
-                {/* <li>
-                  <Link className='nav-link fw-bold' href="/TrackYourOrder">Track your order</Link>
-                  </li> */}
-              </ul>
+          {/* Desktop View */}
+          <div className="d-none d-lg-flex col-lg-8">
+            <div className="row w-100">
+              {footerSections.map((section, index) => (
+                <div key={index} className="col-3">
+                  <div className="footer_heading">
+                    <h5 className="fw-bold mb-3">{section.title}</h5>
+                  </div>
+                  <ul className="list-unstyled">
+                    {section.links.map((link, linkIndex) => (
+                      <li key={linkIndex} className="mb-2">
+                        {link.href !== "#" ? (
+                          <Link 
+                            href={link.href} 
+                            className="text-decoration-none"
+                            style={{ color: '#666' }}
+                          >
+                            {link.text}
+                          </Link>
+                        ) : (
+                          <span style={{ color: '#666' }}>{link.text}</span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
-            <div className="col-md-4">
+          </div>
+
+          {/* Payment and Social Section - Same for both views */}
+          <div className="col-12 col-lg-4">
+            <div className="mb-4">
               <div className="footer_heading">
-                <h5 className="fw-bolder">WE ACCEPT</h5>
+                <h5 className="fw-bold mb-3">WE ACCEPT</h5>
               </div>
-              <div className="paymentImg d-flex py-3 px-2">
-                <div className="gatewayimg">
+              <div className="d-flex gap-2 py-3">
+                <div style={{ width: '75px', height: '40px', position: 'relative' }}>
                   <Image
-                    width={75}
-                    height={40}
                     src="/Assets/images/visa-payment-card1873@2x.png"
-                    alt="logo"
-                    objectFit="cover"
-                    // fill
-                  />
-                </div>
-                <div className="gatewayimg">
-                  <Image
+                    alt="Visa"
                     width={75}
                     height={40}
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+                <div style={{ width: '75px', height: '40px', position: 'relative' }}>
+                  <Image
                     src="/Assets/images/mastercard.png"
-                    alt="logo"
-                    objectFit="cover"
-
-                    // fill
-                  />
-                </div>
-                <div className="gatewayimg">
-                  <Image
+                    alt="Mastercard"
                     width={75}
                     height={40}
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+                <div style={{ width: '75px', height: '40px', position: 'relative' }}>
+                  <Image
                     src="/Assets/images/Group 697.png"
-                    alt="logo"
-                    objectFit="cover"
-                    // fill
-                  />
-                </div>
-                <div className="gatewayimg">
-                  <Image
+                    alt="Payment"
                     width={75}
                     height={40}
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+                <div style={{ width: '75px', height: '40px', position: 'relative' }}>
+                  <Image
                     src="/Assets/images/Maestro.png"
-                    alt="logo"
-                    objectFit="contain"
-                    // fill
+                    alt="Maestro"
+                    width={75}
+                    height={40}
+                    style={{ objectFit: 'contain' }}
                   />
                 </div>
               </div>
+            </div>
+            
+            <div>
               <div className="footer_heading">
-                <h5 className="fw-bolder">WE ARE ALSO ON</h5>
+                <h5 className="fw-bold mb-3">WE ARE ALSO ON</h5>
               </div>
-              <div className="otherLogo">
-                <a href={basicInfo.indiamart} target="_blank">
-                  <Image src="/Assets/images/indiamart.svg" alt="logo" fill />
+              <div style={{ height: '48px', position: 'relative' }}>
+                <a href={basicInfo.indiamart} target="_blank" rel="noopener noreferrer">
+                  <Image 
+                    src="/Assets/images/indiamart.svg" 
+                    alt="IndiaMART" 
+                    fill
+                    style={{ objectFit: 'contain' }}
+                  />
                 </a>
               </div>
             </div>
           </div>
         </div>
-        {/* <button onClick={scrollToTop} className="back-to-top">
-        <i className="fa fa-arrow-up fa-2x" aria-hidden="true"></i>
+      </div>
 
-        </button> */}
-      </section>
+      <style jsx>{`
+        .site-collapse-custom-collapse {
+          background: #f5f5f5;
+        }
+        
+        .site-collapse-custom-panel {
+          margin-bottom: 8px;
+          overflow: hidden;
+          border: none;
+          border-radius: 2px;
+        }
+
+        .site-collapse-custom-panel .ant-collapse-content {
+          background: #f5f5f5;
+        }
+
+        :global(.ant-collapse-ghost > .ant-collapse-item) {
+          border-bottom: 1px solid #d9d9d9 !important;
+        }
+
+        :global(.ant-collapse-ghost > .ant-collapse-item:last-child) {
+          border-bottom: none !important;
+        }
+      `}</style>
+    </section>
       {/*  <div className='text-center py-5 ' style={{backgroundColor:'#ECECEC'}}>
         <p className='w-md-50 mx-auto fw-semibold footercaption'>We Deliver in Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer</p>
       </div> */}

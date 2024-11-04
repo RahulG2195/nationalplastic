@@ -8,9 +8,10 @@ import "./Faqs.css";
 
 import React, { useState, useEffect } from 'react';
 import { Collapse, Typography } from 'antd';
-import axios from "axios";
 const { Panel } = Collapse;
 const { Title } = Typography;
+import axios from "axios";
+
 
 const Faqs = () => {
   const [faqData, setFaqData] = useState([]);

@@ -233,3 +233,33 @@ border-top: 1px solid lightgrey;
         display: none;
     }
 }
+
+
+/* ANTD */
+
+/* Footer Accordion Styles (Mobile) */
+.mobile-footer-accordion.ant-collapse {
+    background: transparent;
+  }
+  
+  .mobile-footer-accordion .ant-collapse-header {
+    padding: 12px 0 !important;
+  }
+  
+  .mobile-footer-accordion .ant-collapse-content-box {
+    padding: 0 0 12px 0 !important;
+  }
+  
+  .mobile-footer-accordion .ant-collapse-item {
+    border-bottom: 1px solid #f0f0f0 !important;
+  }
+  
+  /* Preserve your existing styles */
+  .nav-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .fw-bold, .fw-bolder {
+    font-weight: bold;
+  }
