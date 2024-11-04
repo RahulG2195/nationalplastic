@@ -79,17 +79,21 @@ function Login() {
 
   const handleGoogleSignIn = async () => {
     try {
+      console.log("Starting Google sign-in process...");
+  
       localStorage.setItem('fromLogin', 'true');
-      
+      console.log("Set 'fromLogin' in localStorage to 'true'");
+  
       // Add state parameter
       const state = Math.random().toString(36).substring(7);
       sessionStorage.setItem('oauth_state', state);
-      
+      console.log("Generated and stored OAuth state:", state);
+  
       const result = await signIn("google", {
         callbackUrl: window.location.origin,
         redirect: false,
-        state: state
       });
+      console.log("Google sign-in result:", result);
   
       if (result?.error) {
         console.error("Sign-in failed:", result.error);
@@ -98,6 +102,7 @@ function Login() {
       }
   
       // Implement exponential backoff for session checking
+      console.log("Starting session check with exponential backoff...");
       let session = null;
       let attempts = 0;
       const maxAttempts = 5;
@@ -105,19 +110,26 @@ function Login() {
   
       while (!session && attempts < maxAttempts) {
         session = await getSession();
+        console.log(`Session attempt ${attempts + 1}/${maxAttempts}:`, session);
+  
         if (!session) {
-          await new Promise(resolve => 
-            setTimeout(resolve, backoffDelay * Math.pow(2, attempts))
-          );
+          const delay = backoffDelay * Math.pow(2, attempts);
+          console.log(`Session not found. Waiting for ${delay}ms before retrying...`);
+          await new Promise(resolve => setTimeout(resolve, delay));
           attempts++;
         }
       }
   
       if (session?.user) {
+        console.log("Session established. User data:", session.user);
+  
         await updateUserData(session.user.email, session.user.customerId);
+        console.log("User data updated successfully");
+  
         notify("Successfully signed in");
-        
+  
         const redirectPath = productCount > 1 ? "/AddToCart" : "/";
+        console.log("Redirecting to:", redirectPath);
         router.push(redirectPath);
       } else {
         throw new Error("Session not established after multiple attempts");
@@ -127,6 +139,7 @@ function Login() {
       notify("An error occurred during sign-in. Please try again.", "error");
     }
   };
+  
 
 
   const handleInputChange = (event) => {
