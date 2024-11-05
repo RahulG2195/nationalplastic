@@ -26,7 +26,7 @@ const Promoters = () => {
 
   return (
     <>
-      <div className="py-5" id="managementBoardCommittees">
+      <div className="py-4" id="managementBoardCommittees">
         <div className="row mx-auto team-members justify-content-center">
           <div className="col-12 col-md-8 order-2 order-md-1 order-lg-1">
             <div className="row section_header team-header">

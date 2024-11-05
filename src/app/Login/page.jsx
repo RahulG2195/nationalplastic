@@ -198,7 +198,7 @@ function Login() {
   };
 
   return (
-    <div className="container">
+<div className="container" style={{ marginTop: "6rem" }}>
       <div className="row Login-Page-ImgForm">
         <div className="col-md-6 login-image">
           <Image

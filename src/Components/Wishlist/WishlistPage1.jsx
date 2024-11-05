@@ -81,7 +81,7 @@ const WishlistPage1 = () => {
   };
 
   return (
-    <div className="main_container mt-md-5 mt-3">
+    <div className="main_container mt-md-5 margin-to-top">
       <div className="d-flex justify-content-center">
         <div className="WCcontainer border-0">
           <h4 className="p-4 fw-bold">Wishlist</h4>
