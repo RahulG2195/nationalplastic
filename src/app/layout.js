@@ -6,6 +6,8 @@ import "font-awesome/css/font-awesome.min.css";
 import Header from "@/Components/layouts/Header";
 import Footer from "@/Components/layouts/Footer";
 import "./globals.css";
+import BackToTopButton from '@/Components/BackToTop/BackToTopButton';
+import ScrollToTop from "scroll-to-top-react";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { Provider } from "react-redux";
@@ -15,7 +17,6 @@ import dynamic from "next/dynamic";
 import Script from "next/script";
 import { SessionProvider } from "next-auth/react";
 import { Metadata } from 'next'
-import BackToTopButton from "@/Components/BackToTopButton/BackToTopButton";
 import Newslatter from "@/Components/Newslatter/newslatter";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -38,6 +39,10 @@ export default function RootLayout({ children }) {
     }
   }, []);
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
 
     <html lang="en">
@@ -56,13 +61,13 @@ export default function RootLayout({ children }) {
                  {!isAdmin && <Header />}
                 <div className={`${isAdmin ? "pt-0 mt-0" : "mobile__top"}`}>
                   {children}
-                  {/* <BackToTopButton /> */}
 
                 </div>
                 <ToastContainer />
                 {!isAdmin && <Newslatter />}
                 {!isAdmin && <Footer />}
-                
+                {/* <BackToTopButton /> */}
+
               </PersistGate>
             </Provider>
           </BrowserRouter>

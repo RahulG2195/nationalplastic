@@ -6,9 +6,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Form, Input, Button, message } from "antd";
 import { MailOutlined } from "@ant-design/icons";
-import ScrollToTop from "scroll-to-top-react";
 import { Collapse, Typography } from 'antd';
 import { CaretRightOutlined } from '@ant-design/icons';
+import BackToTopButton from '@/Components/BackToTop/BackToTopButton';
 
 const { Panel } = Collapse;
 export default function Footer() {
@@ -47,9 +47,7 @@ export default function Footer() {
     fetchBasicInfo();
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+
   const footerSections = [
     {
       title: "OUR COMPANY",
@@ -317,7 +315,6 @@ export default function Footer() {
           </div>
         </div>
       </section>
-      <ScrollToTop displayType="htmlArrow" />
 
       <div className="social_icon_for_mob">
         <div className="icon-wrapper call_icon">
@@ -345,6 +342,8 @@ export default function Footer() {
           </a>
         </div>
       </div>
+      {/* <BackToTopButton /> */}
+
       <div className="copyrightsdiv">
         <p>Copyright © 2024 National Plastic Industries Ltd . All Rights Reserved.</p>
       </div>

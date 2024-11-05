@@ -79,29 +79,12 @@ function Login() {
 
   const handleGoogleSignIn = async () => {
     try {
-      console.log("Starting Google sign-in process...");
-
       localStorage.setItem('fromLogin', 'true');
-      console.log("Set 'fromLogin' in localStorage to 'true'");
-
-
-
       const result = await signIn("google", {
         callbackUrl: window.location.origin,
         redirect: false,
       });
-      console.log("Google sign-in result:", result);
-      // let retryCount = 0;
-      // const maxRetries = 3;
-      // if (result?.error && result.error === "OAuthCallbackError" && retryCount < maxRetries) {
-      //   console.warn("OAuth error detected, clearing cookies and retrying...");
-      //   document.cookie = "__Secure-next-auth.state=; Max-Age=0; path=/;"; // Clear state cookie
 
-      //   retryCount++;
-      //   console.log(`Retry attempt ${retryCount} of ${maxRetries}`);
-      //   await signIn("google"); // Retry the sign-in
-      //   return;
-      // }
 
       if (result?.error) {
         console.error("Sign-in failed:", result.error);
@@ -109,8 +92,6 @@ function Login() {
         return;
       }
 
-      // Implement exponential backoff for session checking
-      console.log("Starting session check with exponential backoff...");
       let session = null;
       let attempts = 0;
       const maxAttempts = 5;
@@ -118,26 +99,21 @@ function Login() {
 
       while (!session && attempts < maxAttempts) {
         session = await getSession();
-        console.log(`Session attempt ${attempts + 1}/${maxAttempts}:`, session);
 
         if (!session) {
           const delay = backoffDelay * Math.pow(2, attempts);
-          console.log(`Session not found. Waiting for ${delay}ms before retrying...`);
           await new Promise(resolve => setTimeout(resolve, delay));
           attempts++;
         }
       }
 
       if (session?.user) {
-        console.log("Session established. User data:", session.user);
 
         await updateUserData(session.user.email, session.user.customerId);
-        console.log("User data updated successfully");
 
         notify("Successfully signed in");
 
         const redirectPath = productCount > 1 ? "/AddToCart" : "/";
-        console.log("Redirecting to:", redirectPath);
         router.push(redirectPath);
       } else {
         throw new Error("Session not established after multiple attempts");
