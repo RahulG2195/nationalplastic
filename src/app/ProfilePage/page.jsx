@@ -473,7 +473,7 @@ function ProfilePage() {
 
   return (
     <>
-      <div className="container profile-page-container mb-5">
+      <div className="container profile-page-container mb-5 mt-deskt">
         <div className="row">
           <div className="col-md-4">
             <div className="Left-Profile">

@@ -339,3 +339,16 @@
         font-size: 16px;
     }
 }
+
+@media (min-width: 768px) {
+    .mt-desk {
+    margin-top: 10rem !important;
+   }
+}
+
+
+@media (min-width: 768px) {
+    .mt-deskt {
+    margin-top: 165px !important;
+   }
+}

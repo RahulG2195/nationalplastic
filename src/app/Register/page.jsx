@@ -242,7 +242,7 @@ const Register = () => {
 
 
   return (
-    <div className="container">
+    <div className="container mt-desk">
       <div className="row Login-Page-ImgForm">
         <div className="col-md-5 login-image">
           <Image
