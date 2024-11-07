@@ -36,8 +36,8 @@ function Newslatter() {
   return (
     <div style={{ marginTop: "1rem" }} className="newslatter_sec">
         <div className="section_header mx-auto text-center text-capitalize ">
-            <h2><span>our  </span> newslatter</h2>
-            <p>Join our newslatter to receive updates on products annoucements and sales.</p>
+            <h2><span>our  </span> newsletter</h2>
+            <p>Join our newsletter to receive updates on products announcements and sales.</p>
         </div>
       <Form
         form={form}

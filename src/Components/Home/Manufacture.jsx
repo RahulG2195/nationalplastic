@@ -31,12 +31,12 @@ export default function Manufacture() {
         <div className="row">
           <div className="text-center mb-5 ">
             <div className="fs-1 lh-small fw-bolder manuf_head">
-              Indias Largest Manufacturer
+            India&apos;s Largest Manufacturer
               <p className="darkBlue fs-1 fw-medium">Of Household Products</p>{" "}
             </div>
             <div className="mt-1 fw-medium subCptRes w-md-50">
               <p>
-              Explore Indias largest variety of household products, including comfortable seating, functional tables, convenient storage solutions, adorable baby chairs, and more!
+              Explore India&apos;s largest variety of household products, including comfortable seating, functional tables, convenient storage solutions, adorable baby chairs, and more!
               </p>
             </div>
           </div>
