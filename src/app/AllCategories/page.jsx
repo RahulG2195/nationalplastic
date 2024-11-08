@@ -30,10 +30,10 @@ const AllCategory = () => {
 
   if (loading) {
     return (
-      <div style={{ 
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'center', 
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         height: '100vh',
         width: '100%'
       }}>
@@ -45,11 +45,11 @@ const AllCategory = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="text-center mb-8">
-        <Title level={1} style={{ 
-    fontSize: '2.5rem', 
-    fontWeight: 'bold',
-    marginBottom: '1rem' 
-  }}>
+        <Title level={1} style={{
+          fontSize: '2.5rem',
+          fontWeight: 'bold',
+          marginBottom: '1rem'
+        }}>
           <Text className="text-red-600">Categories</Text>
           <Text className="text-gray-800"> For You</Text>
         </Title>

@@ -76,8 +76,8 @@ export default function Footer() {
         // { text: "Custom Furniture", href: "#" },
         // { text: "Exporters", href: "#" },
         { text: "Investor Desk", href: "/unaudited-financial-results" },
-        { text: "Annual Report", href: "/Annual" },
-        { text: "Shareholding Pattern", href: "/ShareHolding" }
+        { text: "Annual Report", href: "/annual-report" },
+        { text: "Shareholding Pattern", href: "/share-holding-pattern" }
 
       ]
     },

@@ -645,7 +645,7 @@ export default function Header() {
                     <li>
                       <Link href="/#">
                         <Image
-                          src="Assets/images/home-icon-silhouette_69524.svg"
+                          src="/Assets/svg/home3.svg"
                           height={50}
                           width={50}
                           layout="responsive"
@@ -653,7 +653,7 @@ export default function Header() {
                           alt="Home"
                           className="footer-icon"
                         />
-                        <p className="icon-name">HOME</p>
+                        <p className="icon-name ">HOME</p>
                       </Link>
                     </li>
                     <li>
@@ -672,7 +672,7 @@ export default function Header() {
                     </li>
                     <li>
 
-                      <Link href="/">
+                      <Link href="/AllCategories">
                       <Image
                           src="/Assets/svg/categorysvg.svg"
                           height={50}
