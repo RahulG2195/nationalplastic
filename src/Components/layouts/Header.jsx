@@ -727,7 +727,7 @@ export default function Header() {
                 </div>
               </div>
             </nav>
-            {/* {shouldRenderBottomBar ? <BottomBar /> : <PlaceholderBar />} */}
+            {shouldRenderBottomBar ? <BottomBar /> : <PlaceholderBar />}
 
           </div>
         </>
