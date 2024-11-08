@@ -689,7 +689,7 @@ export default function Header() {
                       {isLoggedIn ? (
                         <Link href="/ProfilePage">
                           <span className="InitialName">{InitialName}</span>
-                          <p className="icon-name">ProfilePage</p>
+                          <p className="icon-name" style={{ marginTop: "5px" }}>ProfilePage</p>
                         </Link>
                       ) : (
                         <Link href="/Login">

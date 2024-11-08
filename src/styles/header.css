@@ -532,4 +532,5 @@ HeadSearch input:focus + .searchFor {
 
 .icon-name {
     font-size: 9px;
+    font-weight: 700;
 }

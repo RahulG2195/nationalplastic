@@ -198,7 +198,7 @@ function Login() {
   };
 
   return (
-<div className="container mt-desk" style={{ marginTop: "6rem" }}>
+    <div className="container mt-desk" style={{ marginTop: "6rem" }}>
       <div className="row Login-Page-ImgForm">
         <div className="col-md-6 login-image">
           <Image
@@ -303,20 +303,28 @@ function Login() {
                   </span>
                 </p>
               </div>
-              <div className="row ContinueWithgoogle">
-                <p className="d-flex justify-content-center">
-                  OR Continue With
+              <div className="row justify-content-center">
+                <button
+                  className="d-flex justify-content-center align-items-center"
+                  onClick={() => handleGoogleSignIn()}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    padding: 0
+                  }}
+                >
+                  OR Continue With{' '}
                   <Image
                     src="/Assets/images/search.png"
                     width={20}
                     height={20}
                     alt="google"
                     className="mx-2"
-                    onClick={() => handleGoogleSignIn()}
-                    style={{ cursor: 'pointer' }}
                   />
-                </p>
+                </button>
               </div>
+
             </form>
           </div>
         </div>
