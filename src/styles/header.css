@@ -529,3 +529,7 @@ HeadSearch input:focus + .searchFor {
 .multidropdown {
     z-index: 99;
 }
+
+.icon-name {
+    font-size: 9px;
+}

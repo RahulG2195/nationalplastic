@@ -2,9 +2,16 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import { Card, Row, Col, Typography, Spin, message } from "antd";
+import { ShoppingOutlined } from "@ant-design/icons";
 
-const TopPics = () => {
+const { Title, Text } = Typography;
+const { Meta } = Card;
+
+const AllCategory = () => {
   const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetchdata = async () => {
       try {
@@ -12,47 +19,84 @@ const TopPics = () => {
           `${process.env.NEXT_PUBLIC_BASE_URL}/Category`
         );
         setCategories(response.data.categories);
+        setLoading(false);
       } catch (error) {
-        alert("Error fetching data", error);
+        message.error("Error fetching categories");
+        setLoading(false);
       }
     };
     fetchdata();
   }, []);
 
-  return (
-    <>
-      <div className="container mt-5">
-        <div className="text-center mb-5">
-          <h1 className="display-4 text-danger">Categories <span className="text-dark">For You</span></h1>
-        </div>
-
-        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-          {categories.map((category) => (
-            <div
-              key={category.category_id}
-              className="col col-lg-3 d-flex justify-content-center"
-            >
-              <div className="card text-center border-0 shadow-sm">
-                <Link href={`/product-catalogue/${category.seo_url}`}>
-                  <img
-                    src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_CATEGORY_PATH_DIR}${category.image_name}`}
-                    className="card-img-top"
-                    alt={category.category_name}
-                  />
-                </Link>
-
-                <div className="card-body">
-                  <Link href={`/product-catalogue/${category.seo_url}`}>
-                    <h5 className="card-title">{category.category_name}</h5>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+  if (loading) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '100vh',
+        width: '100%'
+      }}>
+        <Spin size="large" />
       </div>
-    </>
+    );
+  }
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <div className="text-center mb-8">
+        <Title level={1} style={{ 
+    fontSize: '2.5rem', 
+    fontWeight: 'bold',
+    marginBottom: '1rem' 
+  }}>
+          <Text className="text-red-600">Categories</Text>
+          <Text className="text-gray-800"> For You</Text>
+        </Title>
+      </div>
+
+      <Row gutter={[16, 16]} justify="center">
+        {categories.map((category) => (
+          <Col
+            key={category.category_id}
+            xs={24}
+            sm={12}
+            md={8}
+            lg={6}
+            className="flex justify-center"
+          >
+            <Link href={`/product-catalogue/${category.seo_url}`}>
+              <Card
+                hoverable
+                className="w-full max-w-xs"
+                cover={
+                  <img
+                    alt={category.category_name}
+                    src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_CATEGORY_PATH_DIR}${category.image_name}`}
+                    className="object-cover h-48"
+                  />
+                }
+                actions={[
+                  <div key="view" className="flex items-center justify-center gap-2">
+                    <ShoppingOutlined /> View Products
+                  </div>
+                ]}
+              >
+                <Meta
+                  title={
+                    <Text strong className="text-lg">
+                      {category.category_name}
+                    </Text>
+                  }
+                  className="text-center"
+                />
+              </Card>
+            </Link>
+          </Col>
+        ))}
+      </Row>
+    </div>
   );
 };
 
-export default TopPics;
+export default AllCategory;

@@ -53,6 +53,8 @@ export default function Footer() {
       title: "OUR COMPANY",
       links: [
         { text: "About Us", href: "/company-profile" },
+        { text: "brochure", href: "/catalogue" },
+        { text: "blog", href: "#" },
         { text: "Career", href: "/careers" },
         { text: "Media & News", href: "/news-and-media" },
         // { text: "Customer Stories", href: "#" }
@@ -73,155 +75,159 @@ export default function Footer() {
       links: [
         // { text: "Custom Furniture", href: "#" },
         // { text: "Exporters", href: "#" },
-        { text: "Investor Desk", href: "/unaudited-financial-results" }
+        { text: "Investor Desk", href: "/unaudited-financial-results" },
+        { text: "Annual Report", href: "/Annual" },
+        { text: "Shareholding Pattern", href: "/ShareHolding" }
+
       ]
     },
     {
       title: "NEED HELP",
       links: [
-        { text: "Help Center", href: "/contact-us" },
         { text: "Contact Us", href: "/contact-us" },
-        { text: "Ask Experts", href: "/contact-us" },
-        { text: "Colors", href: "/colors" }
+        { text: "Terms and Conditions", href: "/terms-and-conditions" },
+        { text: "Shipping Policy", href: "/shipping-and-delivery" },
+        { text: "Privacy Policy", href: "/privacy-policy" },
+        { text: "Refund Policy", href: "/refund-and-return-policy" }
       ]
     }
   ];
   return (
     <>
-    <section className="footer pb-4" style={{ backgroundColor: '#f5f5f5' }}>
-      <div className="container mx-auto px-4">
-        <div className="row">
-          {/* Mobile Accordion View */}
-          <div className="d-block d-lg-none col-12 pb-4">
-            <Collapse
-              expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
-              ghost
-              className="site-collapse-custom-collapse"
-            >
-              {footerSections.map((section, index) => (
-                <Panel 
-                  header={<span className="fw-bold">{section.title}</span>} 
-                  key={index}
-                  className="site-collapse-custom-panel"
-                >
-                  <ul className="list-unstyled">
-                    {section.links.map((link, linkIndex) => (
-                      <li key={linkIndex} className="mb-2">
-                        {link.href !== "#" ? (
-                          <Link 
-                            href={link.href} 
-                            className="text-decoration-none text-secondary"
-                            style={{ color: '#666' }}
-                          >
-                            {link.text}
-                          </Link>
-                        ) : (
-                          <span style={{ color: '#666' }}>{link.text}</span>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </Panel>
-              ))}
-            </Collapse>
-          </div>
+      <section className="footer pb-4" style={{ backgroundColor: '#f5f5f5' }}>
+        <div className="container mx-auto px-4">
+          <div className="row">
+            {/* Mobile Accordion View */}
+            <div className="d-block d-lg-none col-12 pb-4">
+              <Collapse
+                expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
+                ghost
+                className="site-collapse-custom-collapse"
+              >
+                {footerSections.map((section, index) => (
+                  <Panel
+                    header={<span className="fw-bold">{section.title}</span>}
+                    key={index}
+                    className="site-collapse-custom-panel"
+                  >
+                    <ul className="list-unstyled">
+                      {section.links.map((link, linkIndex) => (
+                        <li key={linkIndex} className="mb-2">
+                          {link.href !== "#" ? (
+                            <Link
+                              href={link.href}
+                              className="text-decoration-none text-secondary"
+                              style={{ color: '#666' }}
+                            >
+                              {link.text}
+                            </Link>
+                          ) : (
+                            <span style={{ color: '#666' }}>{link.text}</span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </Panel>
+                ))}
+              </Collapse>
+            </div>
 
-          {/* Desktop View */}
-          <div className="d-none d-lg-flex col-lg-8">
-            <div className="row w-100">
-              {footerSections.map((section, index) => (
-                <div key={index} className="col-3">
-                  <div className="footer_heading">
-                    <h5 className="fw-bold mb-3">{section.title}</h5>
+            {/* Desktop View */}
+            <div className="d-none d-lg-flex col-lg-8">
+              <div className="row w-100">
+                {footerSections.map((section, index) => (
+                  <div key={index} className="col-3">
+                    <div className="footer_heading">
+                      <h5 className="fw-bold mb-3">{section.title}</h5>
+                    </div>
+                    <ul className="list-unstyled">
+                      {section.links.map((link, linkIndex) => (
+                        <li key={linkIndex} className="mb-2">
+                          {link.href !== "#" ? (
+                            <Link
+                              href={link.href}
+                              className="text-decoration-none"
+                              style={{ color: '#666' }}
+                            >
+                              {link.text}
+                            </Link>
+                          ) : (
+                            <span style={{ color: '#666' }}>{link.text}</span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <ul className="list-unstyled">
-                    {section.links.map((link, linkIndex) => (
-                      <li key={linkIndex} className="mb-2">
-                        {link.href !== "#" ? (
-                          <Link 
-                            href={link.href} 
-                            className="text-decoration-none"
-                            style={{ color: '#666' }}
-                          >
-                            {link.text}
-                          </Link>
-                        ) : (
-                          <span style={{ color: '#666' }}>{link.text}</span>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
 
-          {/* Payment and Social Section - Same for both views */}
-          <div className="col-12 col-lg-4">
-            <div className="mb-4">
-              <div className="footer_heading">
-                <h5 className="fw-bold mb-3">WE ACCEPT</h5>
+            {/* Payment and Social Section - Same for both views */}
+            <div className="col-12 col-lg-4">
+              <div className="mb-4">
+                <div className="footer_heading">
+                  <h5 className="fw-bold mb-3">WE ACCEPT</h5>
+                </div>
+                <div className="d-flex gap-2 py-3">
+                  <div style={{ width: '75px', height: '40px', position: 'relative' }}>
+                    <Image
+                      src="/Assets/images/visa-payment-card1873@2x.png"
+                      alt="Visa"
+                      width={75}
+                      height={40}
+                      style={{ objectFit: 'cover' }}
+                    />
+                  </div>
+                  <div style={{ width: '75px', height: '40px', position: 'relative' }}>
+                    <Image
+                      src="/Assets/images/mastercard.png"
+                      alt="Mastercard"
+                      width={75}
+                      height={40}
+                      style={{ objectFit: 'cover' }}
+                    />
+                  </div>
+                  <div style={{ width: '75px', height: '40px', position: 'relative' }}>
+                    <Image
+                      src="/Assets/images/Group 697.png"
+                      alt="Payment"
+                      width={75}
+                      height={40}
+                      style={{ objectFit: 'cover' }}
+                    />
+                  </div>
+                  <div style={{ width: '75px', height: '40px', position: 'relative' }}>
+                    <Image
+                      src="/Assets/images/Maestro.png"
+                      alt="Maestro"
+                      width={75}
+                      height={40}
+                      style={{ objectFit: 'contain' }}
+                    />
+                  </div>
+                </div>
               </div>
-              <div className="d-flex gap-2 py-3">
-                <div style={{ width: '75px', height: '40px', position: 'relative' }}>
-                  <Image
-                    src="/Assets/images/visa-payment-card1873@2x.png"
-                    alt="Visa"
-                    width={75}
-                    height={40}
-                    style={{ objectFit: 'cover' }}
-                  />
+
+              <div>
+                <div className="footer_heading">
+                  <h5 className="fw-bold mb-3">WE ARE ALSO ON</h5>
                 </div>
-                <div style={{ width: '75px', height: '40px', position: 'relative' }}>
-                  <Image
-                    src="/Assets/images/mastercard.png"
-                    alt="Mastercard"
-                    width={75}
-                    height={40}
-                    style={{ objectFit: 'cover' }}
-                  />
+                <div style={{ height: '48px', position: 'relative' }}>
+                  <a href={basicInfo.indiamart} target="_blank" rel="noopener noreferrer">
+                    <Image
+                      src="/Assets/images/indiamart.svg"
+                      alt="IndiaMART"
+                      fill
+                      style={{ objectFit: 'contain' }}
+                    />
+                  </a>
                 </div>
-                <div style={{ width: '75px', height: '40px', position: 'relative' }}>
-                  <Image
-                    src="/Assets/images/Group 697.png"
-                    alt="Payment"
-                    width={75}
-                    height={40}
-                    style={{ objectFit: 'cover' }}
-                  />
-                </div>
-                <div style={{ width: '75px', height: '40px', position: 'relative' }}>
-                  <Image
-                    src="/Assets/images/Maestro.png"
-                    alt="Maestro"
-                    width={75}
-                    height={40}
-                    style={{ objectFit: 'contain' }}
-                  />
-                </div>
-              </div>
-            </div>
-            
-            <div>
-              <div className="footer_heading">
-                <h5 className="fw-bold mb-3">WE ARE ALSO ON</h5>
-              </div>
-              <div style={{ height: '48px', position: 'relative' }}>
-                <a href={basicInfo.indiamart} target="_blank" rel="noopener noreferrer">
-                  <Image 
-                    src="/Assets/images/indiamart.svg" 
-                    alt="IndiaMART" 
-                    fill
-                    style={{ objectFit: 'contain' }}
-                  />
-                </a>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <style jsx>{`
+        <style jsx>{`
         .site-collapse-custom-collapse {
           background: #f5f5f5;
         }
@@ -245,7 +251,7 @@ export default function Footer() {
           border-bottom: none !important;
         }
       `}</style>
-    </section>
+      </section>
       {/*  <div className='text-center py-5 ' style={{backgroundColor:'#ECECEC'}}>
         <p className='w-md-50 mx-auto fw-semibold footercaption'>We Deliver in Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer</p>
       </div> */}
@@ -290,27 +296,9 @@ export default function Footer() {
                 </a>
               </div>
             </div>
+            {/* FROM HERE REMOVED THE TERMS & POLICY SECTION  */}
             <div className="footer_term d-flex justify-content-center twoby2">
-              <Link href="/terms-and-conditions">
-                <p className="text-white">
-                  Terms and Conditions <span> | </span>{" "}
-                </p>
-              </Link>
-              <Link href="/privacy-policy">
-                <p className="text-white">
-                  {" "}
-                  Privacy Policy <span className="hideitnow"> | </span>{" "}
-                </p>
-              </Link>
-              <Link href="/shipping-and-delivery">
-                <p className="text-white">
-                  {" "}
-                  Shipping Policy <span> | </span>{" "}
-                </p>
-              </Link>
-              <Link href="/refund-and-return-policy">
-                <p className="text-white"> Refund Policy </p>
-              </Link>
+              <p> India&apos;s Largest Manufacturer of household and event chairs </p>
             </div>
           </div>
         </div>
@@ -350,3 +338,27 @@ export default function Footer() {
     </>
   );
 }
+
+
+{/* <div className="footer_term d-flex justify-content-center twoby2">
+<Link href="/terms-and-conditions">
+  <p className="text-white">
+    Terms and Conditions <span> | </span>{" "}
+  </p>
+</Link>
+<Link href="/privacy-policy">
+  <p className="text-white">
+    {" "}
+    Privacy Policy <span className="hideitnow"> | </span>{" "}
+  </p>
+</Link>
+<Link href="/shipping-and-delivery">
+  <p className="text-white">
+    {" "}
+    Shipping Policy <span> | </span>{" "}
+  </p>
+</Link>
+<Link href="/refund-and-return-policy">
+  <p className="text-white"> Refund Policy </p>
+</Link>
+</div> */}

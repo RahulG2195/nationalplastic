@@ -653,6 +653,7 @@ export default function Header() {
                           alt="Home"
                           className="footer-icon"
                         />
+                        <p className="icon-name">HOME</p>
                       </Link>
                     </li>
                     <li>
@@ -666,26 +667,29 @@ export default function Header() {
                           alt="Wishlist"
                           className="footer-icon"
                         />
+                        <p className="icon-name">Wishlist</p>
                       </Link>
                     </li>
                     <li>
 
                       <Link href="/">
-                        <Image
-                          src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}${basicInfo.logo}`}
-                          className="Image-fluid"
-                          alt="National logo"
-                          height={34}
-                          width={52}
-                        // layout="responsive"
-                        // objectFit="contain"
+                      <Image
+                          src="/Assets/svg/categorysvg.svg"
+                          height={50}
+                          width={50}
+                          layout="responsive"
+                          objectFit="contain"
+                          alt="Wishlist"
+                          className="footer-icon"
                         />
                       </Link>
+                      <p className="icon-name">Category</p>
                     </li>
                     <li>
                       {isLoggedIn ? (
                         <Link href="/ProfilePage">
                           <span className="InitialName">{InitialName}</span>
+                          <p className="icon-name">ProfilePage</p>
                         </Link>
                       ) : (
                         <Link href="/Login">
@@ -698,6 +702,7 @@ export default function Header() {
                             alt="Profile"
                             className="footer-icon"
                           />
+                          <p className="icon-name">Login</p>
                         </Link>
                       )}
                     </li>
@@ -715,13 +720,14 @@ export default function Header() {
                         <div className="cartCount text-center medium">
                           {count}
                         </div>
+                        <p className="icon-name">Cart</p>
                       </Link>
                     </li>
                   </ul>
                 </div>
               </div>
             </nav>
-            {shouldRenderBottomBar ? <BottomBar /> : <PlaceholderBar />}
+            {/* {shouldRenderBottomBar ? <BottomBar /> : <PlaceholderBar />} */}
 
           </div>
         </>

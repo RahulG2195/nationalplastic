@@ -3,7 +3,7 @@ import { query } from "@/lib/db";
 export async function GET(request) {
     try {
         const Categories = await query({
-            query: "SELECT * FROM categories where status = 1",
+            query: "SELECT * FROM categories where status = 1 AND navshow = 1",
             values: [],
         });
         const topPick = await query({
@@ -36,6 +36,7 @@ export async function GET(request) {
         }));
     }
 }
+
 
 export async function POST(request) {
     try {
