@@ -278,7 +278,7 @@ const Search = (props) => {
                     Price={product.price}
                     orignalPrice={product.discount_price}
                     Discount={product.discount_percentage}
-                    color={product.color}
+                    Color={product.color}
                     onaddToWishlist={() =>
                       handleAddToWishlist(
                         product.product_id,
