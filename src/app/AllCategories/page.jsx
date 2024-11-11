@@ -4,7 +4,6 @@ import axios from "axios";
 import Link from "next/link";
 import { Card, Row, Col, Typography, Spin, message } from "antd";
 import { ShoppingOutlined } from "@ant-design/icons";
-
 const { Title, Text } = Typography;
 const { Meta } = Card;
 
@@ -43,15 +42,16 @@ const AllCategory = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="text-center mb-8">
+    <div className="container mx-auto py-4 py-md-5">
+      <div className="text-center">
         <Title level={1} style={{
           fontSize: '2.5rem',
           fontWeight: 'bold',
           marginBottom: '1rem'
         }}>
-          <Text className="text-red-600">Categories</Text>
-          <Text className="text-gray-800"> For You</Text>
+            <div className="fs-1 lh-small fw-bolder manuf_head">
+            Categories For You
+            </div>
         </Title>
       </div>
 
@@ -72,7 +72,7 @@ const AllCategory = () => {
                 cover={
                   <img
                     alt={category.category_name}
-                    src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_CATEGORY_PATH_DIR}${category.image_name}`}
+                    src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${category.image_name}`}
                     className="object-cover h-48"
                   />
                 }
