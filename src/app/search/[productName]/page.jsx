@@ -87,7 +87,8 @@ const Search = (props) => {
         });
         // const newProducts = response.data.products;
         const all = response.data.allproducts;
-
+        
+        console.log("products" + JSON.stringify(all));
 
       setAllproducts(all);
         setProducts(all);
