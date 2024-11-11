@@ -682,8 +682,8 @@ export default function Header() {
                           alt="Wishlist"
                           className="footer-icon"
                         />
-                      </Link>
                       <p className="icon-name">Category</p>
+                      </Link>
                     </li>
                     <li>
                       {isLoggedIn ? (
