@@ -1,61 +1,157 @@
+# HTTP redirect to HTTPS
 server {
     listen 80;
     server_name nationalplastic.com www.nationalplastic.com;
     return 301 https://$host$request_uri;
 }
 
+# WebSocket connection upgrade mapping
+map $http_upgrade $connection_upgrade {
+    default upgrade;
+    '' close;
+}
+
+# HTTPS server
 server {
-    listen 443 ssl;
+    listen 443 ssl http2;
     server_name nationalplastic.com www.nationalplastic.com;
 
+    # SSL Configuration
     ssl_certificate /etc/letsencrypt/live/nationalplastic.com/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/nationalplastic.com/privkey.pem;
 
+    # Enhanced SSL Security Settings
     ssl_protocols TLSv1.2 TLSv1.3;
-    ssl_ciphers HIGH:!aNULL:!MD5;
+    ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;
+    ssl_prefer_server_ciphers off;
+    ssl_session_timeout 1d;
+    ssl_session_cache shared:SSL:50m;
+    ssl_session_tickets off;
+    ssl_buffer_size 4k;
 
-    # Serve static files directly
+    # Security Headers
+    add_header Strict-Transport-Security "max-age=63072000" always;
+    add_header X-Frame-Options SAMEORIGIN;
+    add_header X-Content-Type-Options nosniff;
+    add_header X-XSS-Protection "1; mode=block";
+    add_header Referrer-Policy 'strict-origin-when-cross-origin';
+
+    # NextAuth Session Handling
+    location /api/auth {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        
+        # Headers for proper proxy handling
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header Host $host;
+        
+        # Buffer settings for handling authentication payloads
+        proxy_buffer_size 128k;
+        proxy_buffers 4 256k;
+        proxy_busy_buffers_size 256k;
+        
+        # Timeouts for authentication processes
+        proxy_read_timeout 60s;
+        proxy_connect_timeout 60s;
+        proxy_send_timeout 60s;
+        
+        # Cookie security settings for NextAuth
+        proxy_cookie_path / "/; secure; HttpOnly; SameSite=lax";
+        
+        # CORS Headers for authentication endpoints
+        add_header 'Access-Control-Allow-Origin' $http_origin always;
+        add_header 'Access-Control-Allow-Credentials' 'true' always;
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS' always;
+        add_header 'Access-Control-Allow-Headers' 'Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With' always;
+
+        # Handle OPTIONS method for CORS
+        if ($request_method = 'OPTIONS') {
+            add_header 'Access-Control-Allow-Origin' $http_origin always;
+            add_header 'Access-Control-Allow-Credentials' 'true' always;
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS' always;
+            add_header 'Access-Control-Allow-Headers' 'Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With' always;
+            add_header 'Access-Control-Max-Age' 1728000;
+            add_header 'Content-Type' 'text/plain charset=UTF-8';
+            add_header 'Content-Length' 0;
+            return 204;
+        }
+    }
+
+    # OAuth Callback Handling
+    location /api/auth/callback {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header Host $host;
+        
+        # Specific settings for OAuth callbacks
+        proxy_buffering off;
+        proxy_read_timeout 60s;
+    }
+
+    # Static files configuration
     location /_next/static/ {
         alias /var/www/nationalplastic/.next/static/;
         expires 1y;
         access_log off;
+        add_header Cache-Control "public, no-transform";
     }
 
     location /static/ {
         alias /var/www/nationalplastic/static/;
         expires 1y;
         access_log off;
+        add_header Cache-Control "public, no-transform";
     }
 
+    # Favicon handling
     location /favicon.ico {
         alias /var/www/nationalplastic/favicon.ico;
+        access_log off;
     }
 
-    # Proxy API requests to the backend
-    location /api/ {
-        proxy_pass http://127.0.0.1:3000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-    }
- # Proxy all other requests to the Next.js server
+    # Main application proxy
     location / {
         proxy_pass http://127.0.0.1:3000;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
+        proxy_set_header Connection $connection_upgrade;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
         proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
+        
+        # General proxy settings
+        proxy_read_timeout 60s;
+        proxy_connect_timeout 60s;
+        proxy_send_timeout 60s;
     }
 
-    # Error handling for missing files
+    # Error pages
     error_page 404 /404.html;
     location = /404.html {
         internal;
     }
+    
+    error_page 401 /api/auth/error?error=401;
+    error_page 403 /api/auth/error?error=403;
 
-    # Disable directory listing
+    # Security settings
     autoindex off;
+    client_max_body_size 50M;
+
+    # Additional security headers for the entire server
+    add_header Permissions-Policy "camera=(), microphone=(), geolocation=()";
+    add_header Content-Security-Policy "default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; frame-ancestors 'self';";
 }

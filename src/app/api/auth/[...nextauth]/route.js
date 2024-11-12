@@ -10,18 +10,6 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
-  debug: true,
-  logger: {
-    error(code, error) {
-      console.error(code, error);
-    },
-    warn(code) {
-      console.warn(code);
-    },
-    debug(code, ...message) {
-      console.debug(code, ...message);
-    },
-  },
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: 'jwt',

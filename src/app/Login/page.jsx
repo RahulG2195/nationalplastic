@@ -87,10 +87,7 @@ function Login() {
   
       // Attempt Google sign-in
       console.log('Initiating Google sign-in...');
-      const result = await signIn("google", {
-        callbackUrl: window.location.origin,
-        redirect: false,
-      });
+      const result = await signIn("google");
       console.log('Sign-in result received:', { success: !!result, error: result?.error });
   
       // Handle sign-in errors
