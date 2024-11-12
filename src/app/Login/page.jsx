@@ -78,122 +78,49 @@ function Login() {
   };
 
   const handleGoogleSignIn = async () => {
-    console.log('Starting Google sign-in process...');
-    
     try {
-      // Store login state
       localStorage.setItem('fromLogin', 'true');
-      console.log('Set login state in localStorage');
-  
-      // Attempt Google sign-in
-      console.log('Initiating Google sign-in...');
-      const result = await signIn("google");
-      console.log('Sign-in result received:', { success: !!result, error: result?.error });
-  
-      // Handle sign-in errors
+      const result = await signIn("google", {
+        callbackUrl: window.location.origin,
+        redirect: false,
+      });
+
+
       if (result?.error) {
-        console.error('Sign-in failed with error:', {
-          error: result.error,
-          timestamp: new Date().toISOString(),
-          origin: window.location.origin
-        });
+        console.error("Sign-in failed:", result.error);
         notify("Sign-in failed. Please try again.", "error");
         return;
       }
-  
-      // Session retrieval with exponential backoff
+
       let session = null;
       let attempts = 0;
       const maxAttempts = 5;
       const backoffDelay = 1000; // Start with 1 second
-  
-      console.log('Beginning session retrieval attempts...');
-      
+
       while (!session && attempts < maxAttempts) {
-        try {
-          session = await getSession();
-          console.log(`Session retrieval attempt ${attempts + 1}:`, {
-            success: !!session,
-            remainingAttempts: maxAttempts - attempts - 1
-          });
-  
-          if (!session) {
-            const delay = backoffDelay * Math.pow(2, attempts);
-            console.log(`No session found. Waiting ${delay}ms before next attempt...`);
-            await new Promise(resolve => setTimeout(resolve, delay));
-            attempts++;
-          }
-        } catch (sessionError) {
-          console.error(`Error retrieving session on attempt ${attempts + 1}:`, {
-            error: sessionError.message,
-            stack: sessionError.stack,
-            attempt: attempts + 1
-          });
+        session = await getSession();
+
+        if (!session) {
+          const delay = backoffDelay * Math.pow(2, attempts);
+          await new Promise(resolve => setTimeout(resolve, delay));
           attempts++;
-          if (attempts === maxAttempts) {
-            throw new Error(`Failed to retrieve session after ${maxAttempts} attempts: ${sessionError.message}`);
-          }
         }
       }
-  
-      // Handle successful session
+
       if (session?.user) {
-        console.log('Session established successfully:', {
-          email: session.user.email,
-          attempts: attempts + 1,
-          hasCustomerId: !!session.user.customerId
-        });
-  
-        try {
-          console.log('Updating user data...');
-          await updateUserData(session.user.email, session.user.customerId);
-          console.log('User data updated successfully');
-  
-          notify("Successfully signed in");
-  
-          const redirectPath = productCount > 1 ? "/AddToCart" : "/";
-          console.log(`Redirecting to ${redirectPath}`);
-          router.push(redirectPath);
-        } catch (updateError) {
-          console.error('Error updating user data:', {
-            error: updateError.message,
-            stack: updateError.stack,
-            email: session.user.email
-          });
-          throw new Error(`Failed to update user data: ${updateError.message}`);
-        }
+
+        await updateUserData(session.user.email, session.user.customerId);
+
+        notify("Successfully signed in");
+
+        const redirectPath = productCount > 1 ? "/AddToCart" : "/";
+        router.push(redirectPath);
       } else {
-        const error = new Error("Session not established after multiple attempts");
-        console.error('Session establishment failed:', {
-          attempts,
-          maxAttempts,
-          timestamp: new Date().toISOString()
-        });
-        throw error;
+        throw new Error("Session not established after multiple attempts");
       }
     } catch (error) {
-      // Detailed error logging
-      console.error('Fatal error during sign-in process:', {
-        error: error.message,
-        stack: error.stack,
-        timestamp: new Date().toISOString(),
-        browser: navigator.userAgent,
-        location: window.location.href
-      });
-  
-      // Handle specific error types
-      if (error.name === 'NetworkError') {
-        notify("Network error occurred. Please check your connection and try again.", "error");
-      } else if (error.message.includes('CORS')) {
-        notify("Security error occurred. Please try again in a different browser.", "error");
-      } else if (error.message.includes('timeout')) {
-        notify("The request timed out. Please try again.", "error");
-      } else {
-        notify("An error occurred during sign-in. Please try again.", "error");
-      }
-  
-      // Optionally report to error tracking service
-      // reportErrorToService(error);
+      console.error("Error during sign-in:", error);
+      notify("An error occurred during sign-in. Please try again.", "error");
     }
   };
 
