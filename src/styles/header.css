@@ -468,10 +468,9 @@ HeadSearch input:focus + .searchFor {
     border-radius: 50%;
     /* width: 17px; */
     /* height: 17px; */
-    padding: 0px 3px 1px 5px;
-    top: -12px;
-    right: -14px;
-    
+    padding: 1px 6px 1px 6px;
+    top: -11px;
+    right: -9px;
     color: #fff;
 }
 
