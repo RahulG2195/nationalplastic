@@ -201,8 +201,28 @@ const navigation = [
         href: "/admin/career/heroBanner",
       },
       {
+        title: "hiring process",
+        href: "/admin/career/hiringProces",
+      },
+      {
         title: "Jobs",
         href: "/admin/career/jobs",
+      },
+
+    ],
+    icon: "bi bi-hdd-stack",
+  },
+  {
+    type: "accordion",
+    title: "Catalogue",
+    items: [
+      {
+        title: "Catalogue Hero banner",
+        href: "/admin/catalogue/heroBanner",
+      },
+      {
+        title: "brochures",
+        href: "/admin/catalogue/brochures",
       },
 
     ],
