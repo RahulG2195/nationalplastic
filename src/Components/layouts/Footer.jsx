@@ -108,7 +108,7 @@ export default function Footer() {
                   <Panel
                     header={<span className="fw-bold">{section.title}</span>}
                     key={index}
-                    className="site-collapse-custom-panel"
+                    className="site-collapse-custom-panel border-bottom border-1 border-black"
                   >
                     <ul className="list-unstyled">
                       {section.links.map((link, linkIndex) => (
@@ -131,14 +131,18 @@ export default function Footer() {
 
                 ))}
                 <div className="px-4">
-                  <span className="fw-bold text-black fs-1">Support</span>
+                  <span className="fw-bold text-black fs-4">Support</span>
                   <div className="d-flex align-items-center gap-3 py-2">
                     <span><i class="fa fa-phone " aria-hidden="true"></i></span>
-                    <span className="fw-semibold "> <u>{basicInfo.mobile_number1}</u></span>
+                    <a href={`tel:${basicInfo.mobile_number1}`} className="fw-semibold">
+                      <u>{basicInfo.mobile_number1}</u>
+                    </a>
                   </div>
                   <div className="d-flex align-items-center gap-3 py-2">
                     <span><i class="fa fa-envelope-o " aria-hidden="true"></i></span>
-                    <span className="fw-semibold ">{basicInfo.email}</span>
+                    <a href={`mailto:${basicInfo.email}`} className="fw-semibold">
+                      {basicInfo.email}
+                    </a>
                   </div>
                   <div className="d-flex align-items-center gap-3 py-2">
                     <span><i class="fa fa-map-marker " aria-hidden="true"></i></span>
@@ -185,18 +189,22 @@ export default function Footer() {
             {/* Payment and Social Section - Same for both views */}
             <div className="col-12 col-lg-4">
               <div className="pb-3">
-                <div className="">
+              <div className="d-none d-lg-block">
                   <div className="footer_heading">
                     <h5 className="fw-bold mb-3">Support</h5>
                   </div>
                   {/* <span className="fw-bold text-black fs-1 m-0 p-0">Support</span> */}
                   <div className="d-flex align-items-center gap-3 py-1">
                     <span><i class="fa fa-phone text-black" aria-hidden="true"></i></span>
-                    <span className="fw-semibold "> <u>{basicInfo.mobile_number1}</u></span>
+                    <a href={`tel:${basicInfo.mobile_number1}`} className="fw-semibold">
+                      <u>{basicInfo.mobile_number1}</u>
+                    </a>
                   </div>
                   <div className="d-flex align-items-center gap-3 py-1">
                     <span><i class="fa fa-envelope-o text-black" aria-hidden="true"></i></span>
-                    <span className="fw-semibold ">{basicInfo.email}</span>
+                    <a href={`mailto:${basicInfo.email}`} className="fw-semibold">
+                      {basicInfo.email}
+                    </a>
                   </div>
                   <div className="d-flex align-items-center gap-3 py-1">
                     <span><i class="fa fa-map-marker text-black" aria-hidden="true"></i></span>
@@ -292,7 +300,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <style jsx>{`
+        {/* <style jsx>{`
         .site-collapse-custom-collapse {
           background: #f5f5f5;
         }
@@ -315,7 +323,8 @@ export default function Footer() {
         :global(.ant-collapse-ghost > .ant-collapse-item:last-child) {
           border-bottom: none !important;
         }
-      `}</style>
+      `}</style> */}
+
       </section >
       {/*  <div className='text-center py-5 ' style={{backgroundColor:'#ECECEC'}}>
         <p className='w-md-50 mx-auto fw-semibold footercaption'>We Deliver in Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer</p>
@@ -371,7 +380,7 @@ export default function Footer() {
 
       <div className="social_icon_for_mob">
         <div className="d-flex align-items-center gap-2 callIcon ">
-          <p className=" contactus ps-2  fw-bold">contact us </p>
+        <a href="tel:+912267669922" className=" contactus ps-2  fw-bold">contact us </a>
           <div className="icon-wrapper call_icon">
             <a href="tel:+912267669922">
               {/* <Image
@@ -389,8 +398,8 @@ export default function Footer() {
 
         </div>
         <div className="icon-wrapper wp_icon w-auto">
-          <div className="d-flex align-items-center gap-2 callIcon">
-            <a href={`https://wa.me/91${basicInfo.wpNumber}`}>
+          <div className=" callIcon">
+            <a className="d-flex align-items-center gap-2" href={`https://wa.me/91${basicInfo.wpNumber}`}>
               {/* <Image
                 height={100}
                 width={100}
@@ -402,9 +411,10 @@ export default function Footer() {
               /> */}
               {/* <img src="/Assets/images/whatsapp.png" alt=""  style={{width:'38px'}}/> */}
               <i class="fa fa-whatsapp whatsapp fs-3 p-2" aria-hidden="true"></i>
+              <p className="contactus pe-2  fw-bold">WhatsApp Us</p>
             </a>
 
-            <p className="contactus pe-2  fw-bold">whatsapp</p>
+            
           </div>
         </div>
       </div >

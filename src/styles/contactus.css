@@ -218,7 +218,13 @@
     }
 }
 
-@media (max-width:412px) {
+/* @media (max-width:412px) {
+   
+} */
+ @media (max-width:768px ) {
+    .RegisteredOffice{
+        left: 0;
+    }
     .location-image {
         left: 3%;
         width: 90px !important;
@@ -226,7 +232,8 @@
         z-index: 999;
         top: 4% !important;
     }
-}
+   
+ }
 
 @media (max-width:601px) {
     .section_header p{
