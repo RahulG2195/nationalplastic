@@ -380,7 +380,7 @@ export default function Footer() {
 
       <div className="social_icon_for_mob">
         <div className="d-flex align-items-center gap-2 callIcon ">
-          <p className=" contactus ps-2  fw-bold">contact us </p>
+        <a href="tel:+912267669922" className=" contactus ps-2  fw-bold">contact us </a>
           <div className="icon-wrapper call_icon">
             <a href="tel:+912267669922">
               {/* <Image
@@ -398,8 +398,8 @@ export default function Footer() {
 
         </div>
         <div className="icon-wrapper wp_icon w-auto">
-          <div className="d-flex align-items-center gap-2 callIcon">
-            <a href={`https://wa.me/91${basicInfo.wpNumber}`}>
+          <div className=" callIcon">
+            <a className="d-flex align-items-center gap-2" href={`https://wa.me/91${basicInfo.wpNumber}`}>
               {/* <Image
                 height={100}
                 width={100}
@@ -411,9 +411,10 @@ export default function Footer() {
               /> */}
               {/* <img src="/Assets/images/whatsapp.png" alt=""  style={{width:'38px'}}/> */}
               <i class="fa fa-whatsapp whatsapp fs-3 p-2" aria-hidden="true"></i>
+              <p className="contactus pe-2  fw-bold">WhatsApp Us</p>
             </a>
 
-            <p className="contactus pe-2  fw-bold">whatsapp</p>
+            
           </div>
         </div>
       </div >
