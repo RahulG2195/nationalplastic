@@ -77,8 +77,9 @@ const InvestorAccor = ({ handleShow }) => {
             key={panelKey}
             expanded={expandedPanels[panelKey] === panelKey}
             onChange={handleAccordionToggle(panelKey)}
+            className=""
           >
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <AccordionSummary className="px-2" expandIcon={<ExpandMoreIcon />}>
               <Typography className="m-0 p-0 darkBlue">
                 <li>
                   <p className="mobHeader fw-bold">{item.label}</p>

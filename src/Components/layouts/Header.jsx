@@ -81,9 +81,9 @@ export default function Header() {
   useEffect(() => {
     const fromLogin = localStorage.getItem('fromLogin');
 
-    console.log("fromLogin sessionnnnnnnnnnnnnn"  + fromLogin);
+    console.log("fromLogin sessionnnnnnnnnnnnnn" + fromLogin);
     console.log("session sessionnnnnnnnnnnnnn" + JSON.stringify(session));
-    if(session?.user && fromLogin === 'true'){
+    if (session?.user && fromLogin === 'true') {
       console.log("session sessionnnnnnnnn87");
       updateUser()
       console.log("session sessionnnnnnnnn87");
@@ -125,12 +125,12 @@ export default function Header() {
     )
   }
   // 
-  useEffect(() => {  
-  const initializeUser = async () => {
+  useEffect(() => {
+    const initializeUser = async () => {
       const session = await getSession();
       console.log("Initializing----------------------------------------------------");
       if (session?.user && localStorage.getItem("fromLogin") === "true") {
-      console.log("Initializing----------------------------------------------------22222222222222222222222222222222");
+        console.log("Initializing----------------------------------------------------22222222222222222222222222222222");
 
         dispatch(
           setUserData({
@@ -273,7 +273,7 @@ export default function Header() {
   const toggleSearch = () => {
     setIsSearchVisible(!isSearchVisible);
   };
-  const products = ['Chairs', 'Tables', 'Stools', 'Cabinates' , 'Sets']; // Array of products
+  const products = ['Chairs', 'Tables', 'Stools', 'Cabinates', 'Sets']; // Array of products
   useEffect(() => {
     const typingInterval = setInterval(() => {
       setCurrentProductIndex((prevIndex) => (prevIndex + 1) % products.length);
@@ -297,14 +297,26 @@ export default function Header() {
                   <button
                     onClick={handleShow}
                     id="navei"
-                    className="navbar-toggler "
+                    className="navbar-toggler"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent"
-                    aria-expanded="true"
-                    aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon" />
+                    aria-expanded={isClicked ? "true" : "false"} // Dynamically change aria-expanded
+                    aria-label="Toggle navigation"
+                  >
+                    {/* Conditionally render the "hamburger" or "X" icon */}
+                    {/* <span
+                      className={`${isClicked ? "navbar-toggler-icon-close" : "navbar-toggler-icon "}`}
+                    ></span> */}
+
+                    <span>
+                      {isClicked ? (
+                        <span className="fs-2 fw-normal px-1" aria-hidden="true">X</span> // "X" icon when clicked
+                      ) : (
+                        <span className="navbar-toggler-icon"></span> // Hamburger icon when not clicked
+                      )}
+                    </span>
                   </button>
                   <Link href="/" className="moblogo">
                     <Image
@@ -327,9 +339,9 @@ export default function Header() {
                   <form onSubmit={handleSearchSubmit} className="d-flex nav-search">
 
                     <div className="text-container py-2 HeadSearch px-3 w-100 position-relative">
-                    {!searchTerm && (<span className="position-absolute searchFor">Search for {products[currentProductIndex]}</span>
+                      {!searchTerm && (<span className="position-absolute searchFor">Search for {products[currentProductIndex]}</span>
                       )}
-                    <input
+                      <input
                         id="search-input"
                         className=""
                         type="text"
@@ -458,7 +470,7 @@ export default function Header() {
                           {investorConfig.map((item, index) => (
                             <li
                               key={index}
-                              className={`nav-item brdr ${styles.navItem}`}
+                              className={`nav-item brdr p-0 ${styles.navItem}`}
                               onMouseEnter={() => setDropdownIndex(index)}
                               onMouseLeave={() => setDropdownIndex(null)}
                             >
@@ -673,7 +685,7 @@ export default function Header() {
                     <li>
 
                       <Link href="/AllCategories">
-                      <Image
+                        <Image
                           src="/Assets/svg/categorysvg.svg"
                           height={50}
                           width={50}
@@ -682,7 +694,7 @@ export default function Header() {
                           alt="Wishlist"
                           className="footer-icon"
                         />
-                      <p className="icon-name">Category</p>
+                        <p className="icon-name">Category</p>
                       </Link>
                     </li>
                     <li>

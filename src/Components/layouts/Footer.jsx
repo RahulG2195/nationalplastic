@@ -128,8 +128,25 @@ export default function Footer() {
                       ))}
                     </ul>
                   </Panel>
+
                 ))}
+                <div className="px-4">
+                  <span className="fw-bold text-black fs-1">Support</span>
+                  <div className="d-flex align-items-center gap-3 py-2">
+                    <span><i class="fa fa-phone " aria-hidden="true"></i></span>
+                    <span className="fw-semibold "> <u>{basicInfo.mobile_number1}</u></span>
+                  </div>
+                  <div className="d-flex align-items-center gap-3 py-2">
+                    <span><i class="fa fa-envelope-o " aria-hidden="true"></i></span>
+                    <span className="fw-semibold ">{basicInfo.email}</span>
+                  </div>
+                  <div className="d-flex align-items-center gap-3 py-2">
+                    <span><i class="fa fa-map-marker " aria-hidden="true"></i></span>
+                    <span className="fw-semibold "> {basicInfo.address}</span>
+                  </div>
+                </div>
               </Collapse>
+
             </div>
 
             {/* Desktop View */}
@@ -157,16 +174,39 @@ export default function Footer() {
                         </li>
                       ))}
                     </ul>
+
+
                   </div>
                 ))}
               </div>
             </div>
 
+
             {/* Payment and Social Section - Same for both views */}
             <div className="col-12 col-lg-4">
+              <div className="pb-3">
+                <div className="">
+                  <div className="footer_heading">
+                    <h5 className="fw-bold mb-3">Support</h5>
+                  </div>
+                  {/* <span className="fw-bold text-black fs-1 m-0 p-0">Support</span> */}
+                  <div className="d-flex align-items-center gap-3 py-1">
+                    <span><i class="fa fa-phone text-black" aria-hidden="true"></i></span>
+                    <span className="fw-semibold "> <u>{basicInfo.mobile_number1}</u></span>
+                  </div>
+                  <div className="d-flex align-items-center gap-3 py-1">
+                    <span><i class="fa fa-envelope-o text-black" aria-hidden="true"></i></span>
+                    <span className="fw-semibold ">{basicInfo.email}</span>
+                  </div>
+                  <div className="d-flex align-items-center gap-3 py-1">
+                    <span><i class="fa fa-map-marker text-black" aria-hidden="true"></i></span>
+                    <span className="fw-semibold "> {basicInfo.address}</span>
+                  </div>
+                </div>
+              </div>
               <div className="mb-4">
                 <div className="footer_heading">
-                  <h5 className="fw-bold mb-3">WE ACCEPT</h5>
+                  <h5 className="fw-bold mb-0">WE ACCEPT SECURE PAYMENT</h5>
                 </div>
                 <div className="d-flex gap-2 py-3">
                   <div style={{ width: '75px', height: '40px', position: 'relative' }}>
@@ -210,17 +250,42 @@ export default function Footer() {
 
               <div>
                 <div className="footer_heading">
-                  <h5 className="fw-bold mb-3">WE ARE ALSO ON</h5>
+                  <h5 className="fw-bold mb-0">WE ARE ALSO ON</h5>
                 </div>
-                <div style={{ height: '48px', position: 'relative' }}>
-                  <a href={basicInfo.indiamart} target="_blank" rel="noopener noreferrer">
-                    <Image
-                      src="/Assets/images/indiamart.svg"
-                      alt="IndiaMART"
-                      fill
-                      style={{ objectFit: 'contain' }}
-                    />
-                  </a>
+                <div className="d-flex gap-3 align-items-center">
+                  <div style={{ height: '40px', position: 'relative' }}>
+                    <a href={basicInfo.indiamart} target="_blank" rel="noopener noreferrer">
+                      <Image
+                        className="position-relative "
+                        src="/Assets/images/indiamart.svg"
+                        alt="IndiaMART"
+                        fill
+                        style={{ objectFit: 'contain' }}
+                      />
+                    </a>
+                  </div>
+                  <div style={{ height: '40px', position: 'relative' }}>
+                    <a href={basicInfo.indiamart} target="_blank" rel="noopener noreferrer">
+                      <Image
+                        className="position-relative "
+                        src="/Assets/images/Meesho_logo.png"
+                        alt="IndiaMART"
+                        fill
+                        style={{ objectFit: 'contain' }}
+                      />
+                    </a>
+                  </div>
+                  <div style={{ height: '40px', position: 'relative' }}>
+                    <a href={basicInfo.indiamart} target="_blank" rel="noopener noreferrer">
+                      <Image
+                        className="position-relative "
+                        src="/Assets/images/fc_logo.png"
+                        alt="IndiaMART"
+                        fill
+                        style={{ objectFit: 'contain' }}
+                      />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -251,11 +316,11 @@ export default function Footer() {
           border-bottom: none !important;
         }
       `}</style>
-      </section>
+      </section >
       {/*  <div className='text-center py-5 ' style={{backgroundColor:'#ECECEC'}}>
         <p className='w-md-50 mx-auto fw-semibold footercaption'>We Deliver in Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer</p>
       </div> */}
-      <section className="bottom_footer ">
+      < section className="bottom_footer " >
         <div className="container">
           <div className="col-12 text-center">
             <div className="footer_social d-md-flex align-items-center">
@@ -302,39 +367,52 @@ export default function Footer() {
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
       <div className="social_icon_for_mob">
-        <div className="icon-wrapper call_icon">
-          <a href="tel:+912267669922">
-            <Image
-              height={48}
-              width={23}
-              layout="responsive"
-              objectFit="contain"
-              src="/Assets/svg/Path 2.svg"
-              alt="location"
-            />
-          </a>
+        <div className="d-flex align-items-center gap-2 callIcon ">
+          <p className=" contactus ps-2  fw-bold">contact us </p>
+          <div className="icon-wrapper call_icon">
+            <a href="tel:+912267669922">
+              {/* <Image
+                height={48}
+                width={23}
+                layout="responsive"
+                objectFit="contain"
+                src="/Assets/svg/Path 2.svg"
+                alt="location"
+              /> */}
+              <i class="fa fa-phone fs-3 p-1 " aria-hidden="true"></i>
+
+            </a>
+          </div>
+
         </div>
-        <div className="icon-wrapper wp_icon">
-          <a href={`https://wa.me/91${basicInfo.wpNumber}`}>
-            <Image
-              height={100}
-              width={100}
-              layout="responsive"
-              objectFit="contain"
-              src="/Assets/images/whatsapp.png"
-              alt="whatsapp icon"
-            />
-          </a>
+        <div className="icon-wrapper wp_icon w-auto">
+          <div className="d-flex align-items-center gap-2 callIcon">
+            <a href={`https://wa.me/91${basicInfo.wpNumber}`}>
+              {/* <Image
+                height={100}
+                width={100}
+                layout="responsive"
+                objectFit="contain"
+                src="/Assets/images/whatsapp.png"
+                alt="whatsapp icon"
+               
+              /> */}
+              {/* <img src="/Assets/images/whatsapp.png" alt=""  style={{width:'38px'}}/> */}
+              <i class="fa fa-whatsapp whatsapp fs-3 p-2" aria-hidden="true"></i>
+            </a>
+
+            <p className="contactus pe-2  fw-bold">whatsapp</p>
+          </div>
         </div>
-      </div>
+      </div >
       {/* <BackToTopButton /> */}
 
-      <div className="copyrightsdiv">
+      < div className="copyrightsdiv" >
         <p>Copyright © 2024 National Plastic Industries Ltd . All Rights Reserved.</p>
-      </div>
+      </div >
     </>
   );
 }

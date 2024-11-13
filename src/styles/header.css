@@ -306,7 +306,7 @@ HeadSearch input:focus + .searchFor {
         padding: 5px !important;
     }
 
-    .navbar-toggler-icon {
+    .navbar-toggler-icon, .navbar-toggler-icon {
         width: 20px !important;
         height: 20px !important;
     }

@@ -1,10 +1,19 @@
 "use client"
-import React from "react";
+import React, { useState } from "react";
 import Image from 'next/image'
 import './Banner.css'
 
 
 const Banner = () => {
+
+    const [banner, setBanner ] = useState([]);
+    useEffect(() => {
+        const fetchdata = () =>{
+            
+        }
+      
+    })
+    
 
     return (
         <>

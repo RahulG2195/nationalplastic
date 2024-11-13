@@ -193,6 +193,22 @@ const navigation = [
     icon: "bi bi-hdd-stack",
   },
   {
+    type: "accordion",
+    title: "Career",
+    items: [
+      {
+        title: "Career Hero banner",
+        href: "/admin/career/heroBanner",
+      },
+      {
+        title: "Jobs",
+        href: "/admin/career/jobs",
+      },
+
+    ],
+    icon: "bi bi-hdd-stack",
+  },
+  {
     title: "Products",
     href: "/admin/product",
     icon: "bi bi-p-square",
