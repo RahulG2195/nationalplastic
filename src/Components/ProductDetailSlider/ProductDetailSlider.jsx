@@ -15,6 +15,8 @@ import "./productDetSliderstyles.css";
 const ProductDetailSlider = ({ imageurl }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [images, setImages] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   const defaultImage = "default_chair_img.webp";
 
   useEffect(() => {
@@ -42,9 +44,12 @@ const ProductDetailSlider = ({ imageurl }) => {
               thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
               modules={[FreeMode, Navigation, Thumbs]}
               className="mySwiper2 topSliderRes"
+              onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex)}
             >
               {images.map((imageName, index) => (
-                <SwiperSlide key={`${imageName}-${index}`}>
+                <SwiperSlide
+                  key={`${imageName}-${index}`}
+                >
                   <ReactImageMagnify
                     {...{
                       smallImage: {
@@ -54,8 +59,8 @@ const ProductDetailSlider = ({ imageurl }) => {
                       },
                       largeImage: {
                         src: getImageUrl(imageName),
-                        width: 1200, // Ensure this matches the actual large image size
-                        height: 1800, // Ensure this matches the actual large image size
+                        width: 1200,
+                        height: 1800,
                       },
                       lensStyle: { backgroundColor: 'rgba(0,0,0,.6)' },
                       enlargedImageContainerStyle: { zIndex: 10 },
@@ -65,6 +70,7 @@ const ProductDetailSlider = ({ imageurl }) => {
                 </SwiperSlide>
               ))}
             </Swiper>
+
 
             <Swiper
               onSwiper={setThumbsSwiper}
@@ -77,7 +83,10 @@ const ProductDetailSlider = ({ imageurl }) => {
               className="mySwiper mt-5"
             >
               {images.map((imageName, index) => (
-                <SwiperSlide key={`thumb-${imageName}-${index}`} className="prod_detail_slider">
+                <SwiperSlide
+                  key={`thumb-${imageName}-${index}`}
+                  className={`prod_detail_slider ${index === currentIndex ? "active-slide" : ""}`}
+                >
                   <Image
                     src={getImageUrl(imageName)}
                     alt={`Product Thumbnail ${index + 1}`}
@@ -86,6 +95,7 @@ const ProductDetailSlider = ({ imageurl }) => {
                     layout="responsive"
                   />
                 </SwiperSlide>
+
               ))}
             </Swiper>
           </div>
