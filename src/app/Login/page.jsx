@@ -303,7 +303,8 @@ function Login() {
                   </span>
                 </p>
               </div>
-              <div className="row justify-content-center">
+            </form>
+            <div className="row justify-content-center">
                 <button
                   className="d-flex justify-content-center align-items-center"
                   onClick={() => handleGoogleSignIn()}
@@ -324,8 +325,6 @@ function Login() {
                   />
                 </button>
               </div>
-
-            </form>
           </div>
         </div>
       </div>
