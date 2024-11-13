@@ -107,3 +107,10 @@
         width: 32%;
     } */
 }
+
+
+.active-slide {
+    border: 2px solid #0070f3; /* Adjust color and thickness as needed */
+    border-radius: 4px; /* Optional: Adds rounded corners */
+  }
+  
