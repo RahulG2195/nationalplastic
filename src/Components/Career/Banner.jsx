@@ -6,13 +6,13 @@ import './Banner.css'
 
 const Banner = () => {
 
-    const [banner, setBanner ] = useState([]);
-    useEffect(() => {
-        const fetchdata = () =>{
+    // const [banner, setBanner ] = useState([]);
+    // useEffect(() => {
+    //     const fetchdata = () =>{
             
-        }
+    //     }
       
-    })
+    // })
     
 
     return (
