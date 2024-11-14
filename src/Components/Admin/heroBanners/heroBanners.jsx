@@ -86,5 +86,4 @@ const EditableBanner = ({ data }) => {
         </div>
     );
 };
-
 export default EditableBanner;

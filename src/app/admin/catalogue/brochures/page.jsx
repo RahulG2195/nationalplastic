@@ -127,7 +127,7 @@ const BrochureManagement = () => {
             key: 'image',
             render: (image) => image ? (
                 <Image
-                    src={`/Assets/uploads/${image}`}  // Path to the image
+                    src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BROCHURE}${image}`}  // Path to the image
                     alt={image}
                     width={100}  // Specify width for image
                     height={100} // Specify height for image
@@ -140,7 +140,7 @@ const BrochureManagement = () => {
             dataIndex: 'pdf',
             key: 'pdf',
             render: (pdf) => pdf ? (
-                <a href={`${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}/${pdf}`} target="_blank" rel="noopener noreferrer">
+                <a href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BROCHURE}${pdf}`} target="_blank" rel="noopener noreferrer">
                     View PDF
                 </a>
             ) : null,
@@ -226,7 +226,8 @@ const BrochureManagement = () => {
                         {editingBrochure?.image && (
                             <div>
                                 <Image
-                                    src={`/${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}/${editingBrochure.image}`}  // Path to the image
+                                    src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BROCHURE
+                                    }${editingBrochure.image}`}  // Path to the image
                                     alt="current-image"
                                     width={100}  // Specify the width
                                     height={100} // Specify the height
@@ -253,7 +254,7 @@ const BrochureManagement = () => {
                     >
                         {editingBrochure?.pdf && (
                             <div>
-                                <a href={`${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}/${editingBrochure.pdf}`} target="_blank" rel="noopener noreferrer">
+                                <a href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BROCHURE}${editingBrochure.pdf}`} target="_blank" rel="noopener noreferrer">
                                     Current PDF
                                 </a>
                                 <p>Current PDF</p>

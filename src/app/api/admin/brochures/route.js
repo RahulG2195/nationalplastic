@@ -3,41 +3,57 @@ import { query } from '@/lib/db';
 import { NextResponse } from 'next/server';
 // import { uploadFile } from '@/lib/uploadHelper'; // Use the upload helper function
 
+const fs = require("fs").promises;
+const path = require("path");
 
-
-import fs from 'fs';
-import path from 'path';
-
-const uploadFile = async (file, uploadType) => {
+const uploadFile = async (file) => {
   try {
-    if (!file || typeof file.arrayBuffer !== 'function') {
-      throw new Error('Invalid file object');
+    if (!file || typeof file.arrayBuffer !== "function") {
+      console.error("Invalid file object received");
+      throw new Error("Invalid file object");
+    }
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    const uploadDir = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_BROCHURE}`;
+    try {
+      await fs.access(uploadDir);
+    } catch {
+      await fs.mkdir(uploadDir, { recursive: true });
+    }
+    const filePath = path.join(uploadDir, file.name);
+    await fs.writeFile(filePath, buffer);
+    return file.name;
+  } catch (error) {
+    throw new Error(`PDF upload failed: ${error.message}`);
+  }
+};
+
+
+const uploadImage = async (file) => {
+  try {
+    if (!file || typeof file.arrayBuffer !== "function") {
+      throw new Error("Invalid file object");
     }
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
+    const uploadDir = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_BROCHURE}`;
 
-    // Set different upload directories based on file type
-    const uploadDir = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}/`;
 
-    // Check if the directory exists, if not create it
+    // Check if the directory exists, if not, create it
     try {
-      await fs.promises.access(uploadDir);
+      await fs.access(uploadDir);
     } catch {
-      await fs.promises.mkdir(uploadDir, { recursive: true });
+      await fs.mkdir(uploadDir, { recursive: true });
     }
 
-    // Define the file path (ensure each file gets a unique name)
     const filePath = path.join(uploadDir, file.name);
-    await fs.promises.writeFile(filePath, buffer);
-
-    return file.name; // Return the file name to be stored in the database
+    await fs.writeFile(filePath, buffer);
+    return file.name;
   } catch (error) {
-    console.error('Detailed upload error:', error);
-    throw new Error(`File upload failed: ${error.message}`);
+    throw new Error(`Image upload failed: ${error.message}`);
   }
 };
-
 
 
 export async function GET(request) {
@@ -80,8 +96,8 @@ export async function POST(request) {
     // Upload the image
     if (imageFile && imageFile.size > 0) {
       try {
-        const imagePath = await uploadFile(imageFile, 'image'); // Upload to 'images' folder
-        data.image = imagePath;
+        const imagePath = await uploadImage(imageFile, 'image'); // Upload to 'images' folder
+        data.image = imageFile.name;
       } catch (error) {
         return NextResponse.json(
           { success: false, error: 'Failed to upload image' },
