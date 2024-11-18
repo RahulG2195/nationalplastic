@@ -32,6 +32,13 @@ export async function PUT(req) {
                 { status: 400 }
             );
         }
+        if (status === undefined || ![0, 1].includes(status)) {
+            return new Response(
+                JSON.stringify({ success: false, message: "Invalid status value" }),
+                { status: 400 }
+            );
+        }
+        
 
         const updateQuery = `
             UPDATE customer 

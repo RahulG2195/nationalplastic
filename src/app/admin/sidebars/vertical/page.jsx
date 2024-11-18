@@ -248,15 +248,15 @@ const navigation = [
       },
       {
         title: "NL subscribers",
-        href: "/admin/aboutus/newsletterCMS",
+        href: "/admin/newsletterCMS",
       },
       {
-        title: "Newsletter data",
-        href: "/admin/aboutus/infrastructure",
+        title: "Newsletter data ..",
+        href: "/admin/newsletterCMS",
       },
       {
         title: "Reviews List",
-        href: "/admin/aboutus/awards",
+        href: "/admin/reviews",
       },
       {
         title: "F A Q",

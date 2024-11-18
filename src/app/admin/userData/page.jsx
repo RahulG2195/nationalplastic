@@ -180,7 +180,7 @@ const CustomerList = () => {
 
     return (
         <div className="p-6">
-            <h1 className="text-2xl mb-4">Customer Management</h1>
+            <h1 className="text-2xl mb-4">Customer list</h1>
 
             <div className="mb-4">
                 <Input

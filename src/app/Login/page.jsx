@@ -158,6 +158,11 @@ function Login() {
           throw new Error(res.data.message || "Failed to Login");
         }
 
+        if (res.data.status === 403) {
+          throw new Error(res.data.message || "Blocked by Admin");
+        }
+        
+
         dispatch(
           setUserData({
             email: formData.email,

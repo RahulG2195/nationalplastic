@@ -72,17 +72,117 @@ async function getProductReviews(body) {
     }
 
     const productReview = await query({
-        query: "SELECT * FROM review WHERE product_id = ?",
+        query: "SELECT * FROM review WHERE product_id = ? and review_status = 1",
         values: [product_id],
     });
-
+    console.log(productReview);
     const dummyReviews = await query({
-        query: "SELECT * FROM review WHERE product_id != ?",
+        query: "SELECT * FROM review WHERE product_id != ? and review_status = 1",
         values: [product_id],
     });
 
     return new Response(JSON.stringify({
-        review: productReview.length > 0 ? productReview[0] : null,
+        review: productReview.length > 0 ? productReview : null,
         dummyReviews: dummyReviews,
     }), { status: 200 });
+}
+
+export async function GET(req) {
+    try {
+        const review = await query({
+            query: `
+                SELECT * from review
+            `,
+            values: [],
+        });
+        
+        return new Response(
+            JSON.stringify({
+                success: true,
+                review: review
+            })
+        );
+    } catch (e) {
+        return new Response(
+            JSON.stringify({ success: false, message: e.message }),
+            { status: 500 }
+        );
+    }
+}
+
+export async function PUT(req) {
+    try {
+        const body = await req.json();
+        const { review_id, review_status } = body;
+
+        if (!review_id) {
+            return new Response(
+                JSON.stringify({ success: false, message: "Review ID is required" }),
+                { status: 400 }
+            );
+        }
+
+        const updateQuery = `
+            UPDATE review 
+            SET review_status = ?
+            WHERE review_id = ?
+        `;
+
+        await query({
+            query: updateQuery,
+            values: [review_status, review_id],
+        });
+
+        return new Response(
+            JSON.stringify({
+                success: true,
+                message: "Review status updated successfully"
+            })
+        );
+    } catch (e) {
+        return new Response(
+            JSON.stringify({ success: false, message: e.message }),
+            { status: 500 }
+        );
+    }
+}
+
+export async function DELETE(req) {
+    try {
+        const body = await req.json();
+        const { review_id } = body;
+
+        if (!review_id) {
+            return new Response(
+                JSON.stringify({ success: false, message: "Review ID is required" }),
+                { status: 400 }
+            );
+        }
+
+        const deleteQuery = "DELETE FROM review WHERE review_id = ?";
+
+        const result = await query({
+            query: deleteQuery,
+            values: [review_id],
+        });
+
+        if (result.affectedRows === 0) {
+            return new Response(
+                JSON.stringify({ success: false, message: "Review not found" }),
+                { status: 404 }
+            );
+        }
+
+        return new Response(
+            JSON.stringify({
+                success: true,
+                message: "Review deleted successfully"
+            })
+        );
+    } catch (e) {
+        return new Response(
+            JSON.stringify({ success: false, message: e.message }),
+            { status: 500 }
+        );
+    }
 }

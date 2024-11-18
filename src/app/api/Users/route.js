@@ -131,6 +131,18 @@ export async function PUT(request) {
       query: "SELECT * FROM customer WHERE email = ?",
       values: [email],
     });
+    console.log("existingUser:- "+ JSON.stringify(existingUser));
+    const { status } = existingUser[0];
+    if(status === 0){
+      return new Response(
+        JSON.stringify({
+          status: 403,
+          message: "Please Contact Admin",
+        }),
+        { status: 200 }
+      );
+    }
+
 
     if (existingUser.length > 0) {
       

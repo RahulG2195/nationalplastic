@@ -52,10 +52,17 @@ const CustomerReview = () => {
         review: review.review_message,
         avatar: review.username ? review.username[0].toUpperCase() : "https://xsgames.co/randomusers/avatar.php?g=pixel"
       });
+      console.log("data.review" + data.review);
+      console.log("data.review" + Array.isArray(data.review));
+
       // Mapping real reviews if they exist
-      if (data.review && Array.isArray(data.review)) {
-        reviewsToReturn = data.review.map(mapReview);
+      if (data.review) {
+        // Convert single review to array if it's not already an array
+        const reviewArray = Array.isArray(data.review) ? data.review : [data.review];
+        reviewsToReturn = reviewArray.map(mapReview);
       }
+
+      console.log("reviewsToreturn"+reviewsToReturn)
   
       // Fill with dummy reviews only if needed
       if (reviewsToReturn.length < 5 && data.dummyReviews && Array.isArray(data.dummyReviews)) {
