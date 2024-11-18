@@ -8,12 +8,7 @@ const navigation = [
   {
     title: "Dashboard",
     href: "/admin",
-    icon: "bi bi-speedometer2",
-  },
-  {
-    title: "Basic Info",
-    href: "/admin/basicInfo",
-    icon: "bi bi-speedometer2",
+    icon: "bi bi-clipboard-data",
   },
   {
     type: "accordion",
@@ -23,22 +18,14 @@ const navigation = [
         title: "Hero Section",
         href: "/admin/homepage/herosection",
       },
-            {
+      {
         title: "Youtube Section",
         href: "/admin/homepage/youtubeSection",
       },
-      // {
-      //   title: "Cards Section",
-      //   href: "/admin/homepage/cards",
-      // },
-      // {
-      //   title: "Offer Banner",
-      //   href: "/admin/homepage/offersection",
-      // },
-      // {
-      //   title: "house section",
-      //   href: "/admin/homepage/house section",
-      // },
+      {
+        title: "Basic Info",
+        href: "/admin/basicInfo",
+      },
     ],
     icon: "bi bi-hdd-stack",
   },
@@ -97,7 +84,7 @@ const navigation = [
       },
 
     ],
-    icon: "bi bi-hdd-stack",
+    icon: "bi bi-bank",
   },
   {
     type: "accordion",
@@ -116,7 +103,7 @@ const navigation = [
         href: "/admin/Investor/Finance/AnnualReport",
       },
     ],
-    icon: "bi bi-hdd-stack",
+    icon: "bi bi-bank2",
   },
   {
     type: "accordion",
@@ -131,7 +118,7 @@ const navigation = [
         href: "/admin/Investor/Notice",
       },
     ],
-    icon: "bi bi-hdd-stack",
+    icon: "bi bi-bank2",
   },
   {
     type: "accordion",
@@ -158,7 +145,7 @@ const navigation = [
         href: "/admin/aboutus/promotors",
       },
     ],
-    icon: "bi bi-hdd-stack",
+    icon: "bi bi-file-person",
   },
   {
     type: "accordion",
@@ -174,7 +161,7 @@ const navigation = [
       },
 
     ],
-    icon: "bi bi-hdd-stack",
+    icon: "bi bi-newspaper",
   },
   {
     type: "accordion",
@@ -190,7 +177,7 @@ const navigation = [
       },
 
     ],
-    icon: "bi bi-hdd-stack",
+    icon: "bi bi-globe",
   },
   {
     type: "accordion",
@@ -210,7 +197,7 @@ const navigation = [
       },
 
     ],
-    icon: "bi bi-hdd-stack",
+    icon: "bi bi-briefcase",
   },
   {
     type: "accordion",
@@ -226,52 +213,66 @@ const navigation = [
       },
 
     ],
-    icon: "bi bi-hdd-stack",
+    icon: "bi bi-ui-checks-grid",
   },
   {
-    title: "Products",
-    href: "/admin/product",
+    type: "accordion",
+    title: "Products and Categories",
+    items: [
+      {
+        title: "Products",
+        href: "/admin/product",
+      },
+      {
+        title: "category",
+        href: "/admin/category",
+      },
+      {
+        title: "Tag",
+        href: "/admin/tag",
+      },
+      {
+        title: "Order List",
+        href: "/admin/OrderList",
+      },
+    ],
     icon: "bi bi-p-square",
   },
   {
-    title: "category",
-    href: "/admin/category",
-    icon: "bi bi-c-square",
-  },
-  {
-    title: "Coupon Code",
-    href: "/admin/CouponList",
-    icon: "bi bi-patch-check",
-  },
-  {
-    title: "Order List",
-    href: "/admin/OrderList",
-    icon: "bi bi-card-text",
-  },
-  {
-    title: "Tag", //news and media page of NP
-    href: "/admin/tag",
-    icon: "bi bi-layout-split",
+    type: "accordion",
+    title: "website Data",
+    items: [
+      {
+        title: "User  List",
+        href: "/admin/aboutus/company",
+      },
+      {
+        title: "NL subscribers",
+        href: "/admin/aboutus/newsletterCMS",
+      },
+      {
+        title: "Newsletter data",
+        href: "/admin/aboutus/infrastructure",
+      },
+      {
+        title: "Reviews List",
+        href: "/admin/aboutus/awards",
+      },
+      {
+        title: "F A Q",
+        href: "/admin/faqs",
+      },
+      {
+        title: "Policies",
+        href: "/admin/TermsandconditionCMS",
+      },
+    ],
+    icon: "bi bi-database",
   },
   {
     title: "Bulk Order Banner",
     href: "/admin/bulkOrder/heroBanner",
-    icon: "bi bi-hdd-stack",
-  },
-  {
-    title: "Terms & condition",
-    href: "/admin/TermsandconditionCMS",
-    icon: "bi bi-file-earmark-word",
-  },
-  {
-    title: "News letter",
-    href: "/admin/newsletterCMS",
-    icon: "bi bi-file-earmark-word",
-  },
-  {
-    title: "Frequenlty Asked Question",
-    href: "/admin/faqs",
-    icon: "bi bi-file-earmark-word",
+    icon: "bi bi-basket3",
   },
 ];
 
@@ -348,3 +349,22 @@ const Sidebar = ({ showMobilemenu }) => {
 };
 
 export default Sidebar;
+
+
+// {
+//   title: "Cards Section",
+//   href: "/admin/homepage/cards",
+// },
+// {
+//   title: "Offer Banner",
+//   href: "/admin/homepage/offersection",
+// },
+// {
+//   title: "house section",
+//   href: "/admin/homepage/house section",
+// },
+// {
+//   title: "Coupon Code",
+//   href: "/admin/CouponList",
+//   icon: "bi bi-patch-check",
+// },
