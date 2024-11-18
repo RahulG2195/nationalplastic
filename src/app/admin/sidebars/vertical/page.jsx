@@ -244,7 +244,7 @@ const navigation = [
     items: [
       {
         title: "User  List",
-        href: "/admin/aboutus/company",
+        href: "/admin/userData",
       },
       {
         title: "NL subscribers",
