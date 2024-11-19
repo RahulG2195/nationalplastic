@@ -83,7 +83,7 @@ export default function Header() {
   useEffect(() => {
     console.log("status" + status);
     const fromLogin = localStorage.getItem('fromLogin');
-    if(session?.user && fromLogin === 'true'){
+    if (session?.user && fromLogin === 'true') {
       updateUser()
       localStorage.removeItem('fromLogin');
     }
@@ -243,7 +243,7 @@ export default function Header() {
   const toggleSearch = () => {
     setIsSearchVisible(!isSearchVisible);
   };
-  const products = ['Chairs', 'Tables', 'Stools', 'Cabinates' , 'Sets']; // Array of products
+  const products = ['Chairs', 'Tables', 'Stools', 'Cabinates', 'Sets']; // Array of products
   useEffect(() => {
     const typingInterval = setInterval(() => {
       setCurrentProductIndex((prevIndex) => (prevIndex + 1) % products.length);
@@ -297,8 +297,9 @@ export default function Header() {
                   <form onSubmit={handleSearchSubmit} className="d-flex nav-search">
 
                     <div className="text-container py-2 HeadSearch px-3 w-100 position-relative">
-                    <span className="position-absolute">Search for {products[currentProductIndex]}</span>
-                    <input
+                      {!searchTerm && (<span className="position-absolute searchFor">Search for {products[currentProductIndex]}</span>
+                      )}
+                      <input
                         id="search-input"
                         className=""
                         type="text"

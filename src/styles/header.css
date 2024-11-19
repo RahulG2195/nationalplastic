@@ -57,6 +57,9 @@ h6 {
     /* background-color: white; */
     z-index: 99;
 }
+.HeadSearch input:focus + .searchFor {
+    display: none;
+}
 
 .darkShadow {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
