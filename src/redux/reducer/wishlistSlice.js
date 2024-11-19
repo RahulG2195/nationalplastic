@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Bounce, toast } from "react-toastify";
 
 const notify = () => {
-  toast.success("added to wishlist", {
+  toast.success("Added to Wishlist", {
     position: "top-center",
     autoClose: 2000,
     hideProgressBar: false,
@@ -18,7 +18,7 @@ const notify = () => {
 };
 
 const notifyInfo = () => {
-  toast.info("already in wishlist", {
+  toast.info("Already in Wishlist", {
     position: "top-center",
     autoClose: 2000,
     hideProgressBar: false,

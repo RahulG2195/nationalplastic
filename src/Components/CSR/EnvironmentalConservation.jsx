@@ -42,7 +42,7 @@ const EnvironmentalConservation = () => {
                         <span className="text-danger">{heading}</span>
                     )}
                 </div>
-                <div className="mt-1 fw-medium subCptRes w-50 mx-auto">
+                <div className="mt-1 fw-medium subCptRes w-md-50 mx-auto">
                     <p>
                         {subheading}
                     </p>

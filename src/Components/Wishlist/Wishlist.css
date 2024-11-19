@@ -13,3 +13,16 @@
     font: normal normal bold;
     /* border-bottom: 1px solid #1E1F1E99; */
 }
+
+
+@media (max-width: 600px) {
+.margin-to-top {
+    margin-top: 6rem !important;
+}
+}
+@media (min-width: 768px) {
+    .mt-desk {
+    margin-top: 10rem !important;
+   }
+}
+

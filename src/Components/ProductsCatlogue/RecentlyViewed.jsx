@@ -102,7 +102,6 @@ const RecentlyViewed = () => {
             product_id: product_id,
           })
         );
-        notify("Login To Add to CART");
         fetchWishlistItems();
       }
     } catch (error) {

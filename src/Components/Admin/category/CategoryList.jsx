@@ -3,12 +3,15 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Container, Row, Col, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from 'axios';
-import { Table, Switch } from 'antd';
+import { Table, Switch,Typography } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import "./CategoryList.css";
 import { notify, notifyError } from '@/utils/notify';
+const { Paragraph } = Typography;
+
+
 
 const CategoryList = () => {
   const router = useRouter();
@@ -18,6 +21,8 @@ const CategoryList = () => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [currentItemToDelete, setCurrentItemToDelete] = useState(null);
   const [seoUrl, setSeoUrl] = useState('');
+  const [expanded, setExpanded] = useState(false);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -133,6 +138,40 @@ const CategoryList = () => {
       key: 'seo_url',
     },
     {
+      title: 'Meta Description',
+      dataIndex: 'meta_description',
+      key: 'meta_description',
+      render: (text) => (
+        <Paragraph
+          ellipsis={{
+            rows: 2,
+            expandable: true,
+            symbol: 'Read more',
+            onExpand: () => {},
+            onEllipsis: () => {}
+          }}
+        >
+          {text}
+        </Paragraph>
+      ),
+    },
+    {
+      title: 'Meta Title',
+      dataIndex: 'meta_title',
+      key: 'meta_title',
+    },
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+      render: (status, record) => (
+        <Switch
+          checked={status === 1}
+          onChange={(checked) => handleToggleNavshow(record.category_id, checked, "status")}
+        />
+      ),
+    },
+    {
       title: 'Header Position',
       dataIndex: 'header_position',
       key: 'header_position',
@@ -166,7 +205,7 @@ const CategoryList = () => {
       ),
     },
     {
-      title: 'Image',
+      title: 'Banner Image',
       dataIndex: 'banner_image',
       key: 'banner_image',
       render: (text) => (
@@ -201,17 +240,6 @@ const CategoryList = () => {
         <Switch
           checked={household === 1}
           onChange={(checked) => handleToggleNavshow(record.category_id, checked, "household")}
-        />
-      ),
-    },
-    {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
-      render: (status, record) => (
-        <Switch
-          checked={status === 1}
-          onChange={(checked) => handleToggleNavshow(record.category_id, checked, "status")}
         />
       ),
     },

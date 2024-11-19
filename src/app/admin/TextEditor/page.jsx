@@ -37,7 +37,6 @@ function MyEditor() {
             'Content-Type': 'application/json',
           },
         });
-        console.log(response.data);
         notify('Content saved successfully!');
         handleNavigation()
 

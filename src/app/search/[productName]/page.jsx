@@ -87,7 +87,8 @@ const Search = (props) => {
         });
         // const newProducts = response.data.products;
         const all = response.data.allproducts;
-
+        
+        console.log("products" + JSON.stringify(all));
 
       setAllproducts(all);
         setProducts(all);
@@ -252,7 +253,7 @@ const Search = (props) => {
 
   return (
     <>
-      <div className="container newProdCard">
+      <div className="container newProdCard search_div">
         {loading ? (
           <p>Loading...</p>
         ) : error ? (
@@ -277,7 +278,7 @@ const Search = (props) => {
                     Price={product.price}
                     orignalPrice={product.discount_price}
                     Discount={product.discount_percentage}
-                    color={product.color}
+                    Color={product.color}
                     onaddToWishlist={() =>
                       handleAddToWishlist(
                         product.product_id,

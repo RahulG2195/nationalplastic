@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 14, 2024 at 11:14 AM
+-- Generation Time: Sep 23, 2024 at 06:48 AM
 -- Server version: 8.0.39
--- PHP Version: 8.3.8
+-- PHP Version: 8.3.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,10 +29,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `OutcomeAGM` (
   `id` int NOT NULL,
-  `financial_year` varchar(9) COLLATE utf8mb4_general_ci NOT NULL,
-  `notice_type` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `notice_title` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `file_path` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `financial_year` varchar(9) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `notice_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `notice_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `file_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -69,7 +69,10 @@ INSERT INTO `OutcomeAGM` (`id`, `financial_year`, `notice_type`, `notice_title`,
 (27, '2014-2015', 'Scrutinizer Report', 'Scrutinizers Report(E-voting & Ballot)', 'Scrutinizers_Report_Evoting_National_Plastic-2014-15.pdf'),
 (28, '2013-2014', 'Voting Results', 'Voting Result - 11.09.2014', 'AGM_Voting_Result_11.09.2014.pdf'),
 (29, '2013-2014', 'Scrutinizer Report', 'Scrutinizers Report (E-voting & Poll) - 11.09.2014', 'Scrutinizers_Report_Evoting_National_Plastic-2013-14.pdf'),
-(30, '2013-2014', 'Outcome of AGM', 'Disclosure of Voting Results - Clause 35A', 'AGM_Disclosure_of_Voting_Results_Clause-35A_2013-14.pdf');
+(30, '2013-2014', 'Outcome of AGM', 'Disclosure of Voting Results - Clause 35A', 'AGM_Disclosure_of_Voting_Results_Clause-35A_2013-14.pdf'),
+(32, '2024-2025', 'Outcome of AGM', 'Testing it out', '3.pdf'),
+(33, '2021-2022', 'Outcome of AGM', 'Testing it out 2222', 'invoice-1021.pdf'),
+(34, '2025-2026', 'Outcome of AGM', 'test1', '31st December 2012.pdf');
 
 --
 -- Indexes for dumped tables
@@ -89,7 +92,7 @@ ALTER TABLE `OutcomeAGM`
 -- AUTO_INCREMENT for table `OutcomeAGM`
 --
 ALTER TABLE `OutcomeAGM`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

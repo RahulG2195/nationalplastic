@@ -1,76 +1,83 @@
-// Faqs.js
-import React from "react";
+"use client";
+
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
 import AddIcon from "@mui/icons-material/Add";
 import "./Faqs.css";
 
-const faqData = [
-  {
-    question: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt.",
-    answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
-  },
-  {
-    question: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt.",
-    answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
-  },
-  {
-    question: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt.",
-    answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
-  },
-  {
-    question: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt.",
-    answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
-  },
-  {
-    question: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt.",
-    answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
-  },
-];
+import React, { useState, useEffect } from 'react';
+import { Collapse, Typography } from 'antd';
+const { Panel } = Collapse;
+const { Title } = Typography;
+import axios from "axios";
+
 
 const Faqs = () => {
-  return (
-    <>
-      <div className="mt-5 ">
-        <div className="text-center">
-          <div className="fs-1 fw-bold darkBlue">
-            FAQ'<span className="text-danger">S</span>{" "}
-          </div>
-        </div>
-      </div>
+  const [faqData, setFaqData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [activeKey, setActiveKey] = useState(['1']); 
 
-      <div className="d-flex flex-column align-items-center">
-        {faqData.map((faq, index) => (
-          <div key={index} className="mt-2">
-            <Accordion className="py-2">
-              <AccordionSummary
-                expandIcon={
-                  <div className="border border-2 border-black rounded-circle text-black fw-bold">
-                    <AddIcon />
-                  </div>
-                }
-                aria-controls={`panel${index + 1}-content`}
-                id={`panel${index + 1}-header`}
-              >
-                <Typography className="fw-semibold FAQresponsive">
-                  {faq.question}
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography className="RespFAQans">{faq.answer}</Typography>
-              </AccordionDetails>
-            </Accordion>
-          </div>
-        ))}
+  useEffect(() => {
+    const fetchFaqs = async () => {
+      try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/faqs`);
+        const transformedData = transformFaqData(response.data.faqs);
+        setFaqData(transformedData);
+      } catch (error) {
+        console.error('Error fetching FAQs:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchFaqs();
+  }, []);
+  const onCollapseChange = (keys) => {
+    setActiveKey(keys);
+  };
+
+  // Transform flat data into nested structure
+  const transformFaqData = (faqs) => {
+    // Get root categories (where root_id is null)
+    const rootCategories = faqs.filter(faq => faq.root_id === null);
+    
+    // Create nested structure
+    return rootCategories.map(category => ({
+      ...category,
+      children: faqs.filter(faq => faq.root_id === category.id)
+    }));
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-[200px]">
+        <div className="text-lg">Loading FAQs...</div>
       </div>
-    </>
+    );
+  }
+
+  return (
+    <div className="container mt-5">
+    <Title level={2} className="text-center mb-4">Frequently Asked Questions</Title>
+    <div className="row">
+      <div className="col-md-10 offset-md-1">
+        <Collapse activeKey={activeKey} onChange={onCollapseChange}>
+          {faqData.map((category) => (
+            <Panel header={category.question} key={category.id}>
+              <Collapse accordion>
+                {category.children.map((faq) => (
+                  <Panel header={faq.question} key={faq.id}>
+                    <p>{faq.answer}</p>
+                  </Panel>
+                ))}
+              </Collapse>
+            </Panel>
+          ))}
+        </Collapse>
+      </div>
+    </div>
+  </div>
   );
 };
 

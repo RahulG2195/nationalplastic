@@ -51,6 +51,10 @@ h6 {
     opacity: 80%;
 }
 
+HeadSearch input:focus + .searchFor {
+    display: none;
+}
+
 .HeadSearch input:focus {
     /* display: none !important; */
     /* opacity: 0 !important; */
@@ -305,7 +309,7 @@ h6 {
         padding: 5px !important;
     }
 
-    .navbar-toggler-icon {
+    .navbar-toggler-icon, .navbar-toggler-icon {
         width: 20px !important;
         height: 20px !important;
     }
@@ -409,7 +413,9 @@ h6 {
 
 .header {
     margin: 0;
-    padding: 0;
+    padding: 0 16px 0 0;
+    position: fixed;
+    z-index: 9999;
 }
 
 .main_header {
@@ -465,9 +471,9 @@ h6 {
     border-radius: 50%;
     /* width: 17px; */
     /* height: 17px; */
-    padding: 0px 6px;
-    top: -5px;
-    right: -5px;
+    padding: 1px 6px 1px 6px;
+    top: -11px;
+    right: -9px;
     color: #fff;
 }
 
@@ -524,4 +530,9 @@ h6 {
 
 .multidropdown {
     z-index: 99;
+}
+
+.icon-name {
+    font-size: 9px;
+    font-weight: 700;
 }

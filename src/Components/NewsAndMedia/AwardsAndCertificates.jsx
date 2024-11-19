@@ -9,7 +9,7 @@ const AwardsAndCertificates = () => {
         <div className="fs-1 fw-bold text-danger">
           Awards & <span className="darkBlue fw-normal">Certifiactes</span>{" "}
         </div>
-        <div className="mt-1 fw-medium subCptRes w-50">
+        <div className="mt-1 fw-medium subCptRes w-md-50">
           <p>
             National has been awarded as the number one exporter in the Plastic
             Furniture category by The Plastics Export Promotion Council

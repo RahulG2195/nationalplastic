@@ -75,7 +75,8 @@
 .houseConntentDiv {
   background-color: var(--primary-color);
   color: #fff;
-  padding: 75px 40px;
+  /* padding: 75px 40px; */
+  padding: 48px 20px;
 }
 
 .houseConntentDiv h2 span {
@@ -251,6 +252,7 @@
 .catalogue_sec .cataImg {
   position: relative;
   height: 330px;
+  /* height: 100%; */
   width: 100%;
 }
 

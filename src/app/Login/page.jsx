@@ -18,11 +18,113 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
   const { data: session, status } = useSession();
-  const [formData, setFormData] = useState({ email: "", password: "", });
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const productCount = useSelector((state) => {
     const cart = state.temp;
     return cart.products?.length || 0;
   });
+
+  // Handle session changes and automatic login
+  // useEffect(() => {
+  //   const handleSessionChange = async () => {
+  //     if (status === "authenticated" && session?.user) {
+  //       try {
+  //         await updateUserData(session.user.email, session.user.customerId);
+  //         notify("Login successful");
+
+  //         // Determine redirect path
+  //         const returnUrl = localStorage.getItem('returnUrl');
+  //         const redirectPath = productCount > 1 ? "/AddToCart" : (returnUrl || "/");
+
+  //         // Clear storage items
+  //         localStorage.removeItem('returnUrl');
+  //         localStorage.removeItem('fromLogin');
+
+  //         // Redirect
+  //         router.push(redirectPath);
+  //       } catch (error) {
+  //         console.error("Error handling session change:", error);
+  //         notify("Error updating user data", "error");
+  //       }
+  //     }
+  //   };
+
+  //   handleSessionChange();
+  // }, [status, session, router, productCount]);
+
+  const updateUserData = async (email, customerId) => {
+    try {
+      const formData = {
+        email,
+        customer_id: customerId,
+      };
+
+      const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/Users`, formData);
+      const userData = res.data.message[0];
+
+      // Update Redux store
+      dispatch(
+        setUserData({
+          email: email,
+          customer_id: userData.customer_id,
+        })
+      );
+
+      return userData;
+    } catch (error) {
+      console.error("Error updating user data:", error);
+      throw new Error("Error updating user data. Please try again.");
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      localStorage.setItem('fromLogin', 'true');
+      const result = await signIn("google", {
+        callbackUrl: window.location.origin,
+        redirect: false,
+      });
+
+
+      if (result?.error) {
+        console.error("Sign-in failed:", result.error);
+        notify("Sign-in failed. Please try again.", "error");
+        return;
+      }
+
+      let session = null;
+      let attempts = 0;
+      const maxAttempts = 5;
+      const backoffDelay = 1000; // Start with 1 second
+
+      while (!session && attempts < maxAttempts) {
+        session = await getSession();
+
+        if (!session) {
+          const delay = backoffDelay * Math.pow(2, attempts);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          attempts++;
+        }
+      }
+
+      if (session?.user) {
+
+        await updateUserData(session.user.email, session.user.customerId);
+
+        notify("Successfully signed in");
+
+        const redirectPath = productCount > 1 ? "/AddToCart" : "/";
+        router.push(redirectPath);
+      } else {
+        throw new Error("Session not established after multiple attempts");
+      }
+    } catch (error) {
+      console.error("Error during sign-in:", error);
+      notify("An error occurred during sign-in. Please try again.", "error");
+    }
+  };
+
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -32,67 +134,12 @@ function Login() {
     }));
   };
 
-  const handleResetPassword = async (event) => {
+  const handleResetPassword = () => {
     router.push("/forgot-password");
   };
 
-  const handleRegisterClick = async (event) => {
+  const handleRegisterClick = () => {
     router.push("/Register");
-  };
-
-  // useEffect(() => {
-  //   if (status === "authenticated" && session?.user) {
-  //     notify("Login successful");
-  //     router.push("/");
-  //   }
-  // }, [status, session, router]);
-
-
-
-  const handleGoogleSignIn = async () => {
-    try {
-      localStorage.setItem('fromLogin', 'true');
-// Then redirect to the page with the Header component
-      const result = await signIn("google");
-    
-      
-      if (result?.error) {
-        console.error("Sign-in failed:", result.error);
-        // You can show a failure notification here
-      } else {
-notify("Successfully signed in")
-      }
-    } catch (error) {
-      console.error("Error during sign-in:", error);
-      // Handle any other errors, like network issues
-    }
-  };
-
-  useEffect(() => {
-    console.log("session: " + session)
-    console.log("session: " +JSON.stringify(session))
-
-    if (status === "authenticated" && session?.user) {
-      updateUserData(session.user.email, session.user.customerId);
-    }
-  }, [status, session]);
-
-  const updateUserData = async (email, customerId) => {
-    try {
-      const formData = { email, customer_id: customerId };
-      const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/Users`, formData);
-      const userData = res.data.message[0];
-      const { customer_id } = userData;
-      
-      dispatch(
-        setUserData({
-          email: formData.email,
-          customer_id: customer_id,
-        })
-      );
-    } catch (error) {
-      console.error("Error updating user data:", error);
-    }
   };
 
   const handleSubmit = async (event) => {
@@ -101,41 +148,47 @@ notify("Successfully signed in")
       setErrorMessage("Please enter both email and password.");
       return;
     }
+
     const loginLoader = async () => {
       try {
         const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/Users`, formData);
         const userData = res.data.message[0];
-        const { customer_id } = userData;
-        if (res.data.status === 500) {
-          const errorMsg = res.data.message;
-          setErrorMessage(errorMsg);
-          throw new Error(errorMsg || "Failed to Login");
 
-        } else {
-          dispatch(
-            setUserData({
-              email: formData.email,
-              customer_id: customer_id,
-            })
-          );
-          localStorage.setItem("isAdmin", "false");
-          if (productCount > 1) {
-            router.push("/AddToCart");
-          }
-          router.push("/")
+        if (res.data.status === 500) {
+          throw new Error(res.data.message || "Failed to Login");
         }
-      } catch (error) {
-        setErrorMessage(
-          error.message || "An error occurred during login. Please try again."
+
+        if (res.data.status === 403) {
+          throw new Error(res.data.message || "Blocked by Admin");
+        }
+        
+
+        dispatch(
+          setUserData({
+            email: formData.email,
+            customer_id: userData.customer_id,
+            isGoogleUser: false
+          })
         );
-        throw new Error(error.message || "Failed to Login");
+
+        localStorage.setItem("isAdmin", "false");
+
+        // Determine redirect path
+        const redirectPath = productCount > 1 ? "/AddToCart" : "/";
+        router.push(redirectPath);
+
+        return userData;
+      } catch (error) {
+        setErrorMessage(error.message || "An error occurred during login. Please try again.");
+        throw error;
       }
     };
+
     toast.promise(
       loginLoader(),
       {
         pending: "Logging In...",
-        success: "Login successfully!",
+        success: "Login successful!",
         error: {
           render({ data }) {
             return data.message || "Failed to Login";
@@ -150,7 +203,7 @@ notify("Successfully signed in")
   };
 
   return (
-    <div className="container">
+    <div className="container mt-desk" style={{ marginTop: "6rem" }}>
       <div className="row Login-Page-ImgForm">
         <div className="col-md-6 login-image">
           <Image
@@ -208,7 +261,7 @@ notify("Successfully signed in")
                       onChange={handleInputChange}
                     />
                     <i
-                      class={`fa ${showPassword ? "fa-eye-slash" : "fa-eye"}`}
+                      className={`fa ${showPassword ? "fa-eye-slash" : "fa-eye"}`}
                       id="togglePassword"
                       onClick={() => setShowPassword((prevShow) => !prevShow)}
                     ></i>
@@ -255,21 +308,28 @@ notify("Successfully signed in")
                   </span>
                 </p>
               </div>
-              <div className="row ContinueWithgoogle">
-                <p className="d-flex justify-content-center">
-                  OR Continue With
+            </form>
+            <div className="row justify-content-center">
+                <button
+                  className="d-flex justify-content-center align-items-center"
+                  onClick={() => handleGoogleSignIn()}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    padding: 0
+                  }}
+                >
+                  OR Continue With{' '}
                   <Image
                     src="/Assets/images/search.png"
                     width={20}
                     height={20}
                     alt="google"
                     className="mx-2"
-                    onClick={() => handleGoogleSignIn()}
-                    style={{ cursor: 'pointer' }}
                   />
-                </p>
+                </button>
               </div>
-            </form>
           </div>
         </div>
       </div>

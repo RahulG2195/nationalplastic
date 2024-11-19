@@ -7,21 +7,21 @@ export async function POST(request) {
     // Default limit to 10 products per page
     const data = await request.json(); // Parse incoming JSON data
     const { productName } = data;
-   const productNameDecode = decodeURIComponent(productName);
+    const productNameDecode = decodeURIComponent(productName);
 
     // Sanitize to remove any unexpected special characters
     const sanitizedProductName = productNameDecode.replace(/[^a-zA-Z0-9 ]/g, '');
 
     // Convert to lowercase
     const searchTerm = sanitizedProductName.toLowerCase();
-    
+
     const page = 1;
     // Default to page 1
     const limit = 12;
     const offset = (page - 1) * limit;
 
     console.log('searchTerm', searchTerm);
-    
+
     // const products = await query({
     //   query:
     //     `SELECT 
@@ -71,62 +71,38 @@ initial_search AS (
   WHERE (LOWER(p.product_name) LIKE LOWER(CONCAT('%', ?, '%'))
     OR p.category_id IN (SELECT category_id FROM category_search))
     AND p.prod_status = 1
-),
-ranked_products AS (
-  SELECT 
-    p.product_id,
-    p.product_name, 
-    p.seo_url, 
-    p.seo_url_clr, 
-    p.short_description,
-    p.category_id, 
-    p.image_name, 
-    p.price, 
-    p.discount_price, 
-    p.discount_percentage,
-    p.categoryType, 
-    p.duration, 
-    p.InstallationCharges, 
-    p.color, 
-    p.color_code,
-    p.armType, 
-    p.prod_status,
-    c.category_name,
-    ROW_NUMBER() OVER (PARTITION BY p.product_name ORDER BY p.product_id) AS row_num,
-    CASE 
-      WHEN LOWER(p.product_name) = LOWER(?) THEN 1
-      WHEN LOWER(c.category_name) = LOWER(?) THEN 2
-      WHEN LOWER(p.product_name) LIKE LOWER(CONCAT('%', ?, '%')) THEN 3
-      WHEN LOWER(c.category_name) LIKE LOWER(CONCAT('%', ?, '%')) THEN 4
-      ELSE 5
-    END AS proximity_rank
-  FROM products p
-  JOIN initial_search i ON p.product_id = i.product_id
-  JOIN categories c ON p.category_id = c.category_id
-  WHERE p.prod_status = 1
 )
 SELECT 
-  product_id, 
-  product_name, 
-  seo_url, 
-  seo_url_clr, 
-  short_description,
-  category_id, 
-  category_name,
-  image_name, 
-  price, 
-  discount_price, 
-  discount_percentage,
-  categoryType, 
-  duration, 
-  InstallationCharges, 
-  color, 
-  color_code,
-  armType, 
-  prod_status
-FROM ranked_products
-WHERE row_num = 1
-ORDER BY proximity_rank, product_name;
+  p.product_id,
+  p.product_name, 
+  p.seo_url, 
+  p.seo_url_clr, 
+  p.short_description,
+  p.category_id, 
+  p.image_name, 
+  p.price, 
+  p.discount_price, 
+  p.discount_percentage,
+  p.categoryType, 
+  p.duration, 
+  p.InstallationCharges, 
+  p.color, 
+  p.color_code,
+  p.armType, 
+  p.prod_status,
+  c.category_name,
+  CASE 
+    WHEN LOWER(p.product_name) = LOWER(?) THEN 1
+    WHEN LOWER(c.category_name) = LOWER(?) THEN 2
+    WHEN LOWER(p.product_name) LIKE LOWER(CONCAT('%', ?, '%')) THEN 3
+    WHEN LOWER(c.category_name) LIKE LOWER(CONCAT('%', ?, '%')) THEN 4
+    ELSE 5
+  END AS proximity_rank
+FROM products p
+JOIN initial_search i ON p.product_id = i.product_id
+JOIN categories c ON p.category_id = c.category_id
+WHERE p.prod_status = 1
+ORDER BY proximity_rank, product_name, color;
       `,
       values: [searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm],
     });

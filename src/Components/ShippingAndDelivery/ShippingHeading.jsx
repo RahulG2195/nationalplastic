@@ -20,7 +20,7 @@ const ShippingHeading = ({ bannerImage ,content }) => {
             </div>
           </div>
           <div
-            className="privacyText p-5 mt-5 px-md-5 TCTxt"
+            className="privacyText  mt-5 px-md-5 TCTxt"
             dangerouslySetInnerHTML={{ __html: content }}
           />
         </div>

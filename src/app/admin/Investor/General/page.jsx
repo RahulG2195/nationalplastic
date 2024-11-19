@@ -38,10 +38,15 @@ export default function MyComponent() {
       );
       const data = response.data.yearsList;
       const yearLabels = data.map((item) => item.label);
-      setYears(yearLabels);
-      if (yearLabels.length > 0) {
-        setSelectedYear(yearLabels[0]);
-        fetchYearData(yearLabels[0]);
+      const yearDetails = data.map((item) => ({
+        id: item.id,
+        label: item.label
+      }));
+
+      setYears(yearDetails);
+      if (yearDetails.length > 0) {
+        setSelectedYear(yearDetails[0]);
+        fetchYearData(yearDetails[0].id);
       }
     } catch (error) {
       console.error("Error fetching years:", error);
@@ -67,28 +72,11 @@ export default function MyComponent() {
   };
 
   const handleYearChange = (value) => {
-    setSelectedYear(value);
-    fetchYearData(value);
+    const selectedYearObj = years.find((year) => year.id === value);
+    setSelectedYear(selectedYearObj.label);
+    fetchYearData(selectedYearObj.label);
   };
 
-  const handleStatus = async (id, currentStatus) => {
-    const newStatus = currentStatus === 0 ? 1 : 0;
-    try {
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/Investor/disclosure`,
-        {
-          action: "updateStatus",
-          Id: id,
-          status: newStatus,
-        }
-      );
-      fetchYearData(selectedYear);
-      message.success("Status updated successfully");
-    } catch (error) {
-      console.error("Error updating status:", error);
-      message.error("Failed to update status");
-    }
-  };
 
   const showModal = (record = null) => {
     setEditingRecord(record);
@@ -176,19 +164,6 @@ export default function MyComponent() {
       render: (text) => <a href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${text}`} target="_blank" rel="noopener noreferrer">View File</a>,
     },
     {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-      render: (status, record) => (
-        <Button
-          onClick={() => handleStatus(record.id, status)}
-          type={status ? "primary" : "default"}
-        >
-          {status ? "Active" : "Inactive"}
-        </Button>
-      ),
-    },
-    {
       title: "Actions",
       key: "actions",
       render: (_, record) => (
@@ -222,6 +197,28 @@ export default function MyComponent() {
     } catch (error) {
       message.error('Failed to delete CorpReport');
     }
+  };
+  const handleDeleteYear = (year) => {
+    Modal.confirm({
+      title: 'Are you sure you want to delete this year?',
+      content: `This will delete the year and all associated data. This action cannot be undone.`,
+      okText: 'Yes, delete it',
+      okType: 'danger',
+      cancelText: 'No, keep it',
+      onOk: async () => {
+        try {
+          await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/Investor/disclosure`, {
+            action: "deleteDisclosure",
+            id: year, // Assuming the year is used as the ID. Adjust if needed.
+          });
+          message.success("Financial year deleted successfully");
+          fetchYears(); // Refresh the years list
+        } catch (error) {
+          console.error("Error deleting year:", error);
+          message.error("Failed to delete financial year");
+        }
+      },
+    });
   };
 
   const handleNewYearOk = async () => {
@@ -261,10 +258,20 @@ export default function MyComponent() {
           onChange={handleYearChange}
         >
           {years.map((year) => (
-            <Option key={year} value={year}>
-              {year}
+            <Option key={year.id} value={year.id}> {/* Use year.id as the value */}
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>{year.label}</span> {/* Display the label */}
+                <DeleteOutlined
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDeleteYear(year.id); {/* Send the id when deleting */ }
+                  }}
+                  style={{ color: 'red' }}
+                />
+              </div>
             </Option>
           ))}
+
         </Select>
         <Button onClick={() => showModal()} type="primary" style={{ marginRight: 16 }}>
           Add New Record
@@ -312,12 +319,6 @@ export default function MyComponent() {
               </Button>
             </Upload>
           </Form.Item>
-          <Form.Item name="status" label="Status" initialValue={1}>
-            <Select>
-              <Option value={1}>Active</Option>
-              <Option value={0}>Inactive</Option>
-            </Select>
-          </Form.Item>
         </Form>
       </Modal>
 
@@ -333,7 +334,7 @@ export default function MyComponent() {
             label="Financial Year"
             rules={[{ required: true, message: "Please input the financial year!" }]}
           >
-            <Input placeholder="e.g., 2024-2025" />
+            <Input placeholder="e.g. 2024" />
           </Form.Item>
         </Form>
       </Modal>

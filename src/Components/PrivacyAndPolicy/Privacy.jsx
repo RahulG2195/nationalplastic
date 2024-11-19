@@ -1,8 +1,6 @@
 import Image from "next/image";
 
 const Privacy = ({ bannerImage, content }) => {
-  console.log("bannerImage"+ bannerImage)
-  console.log("bannerImage"+ content)
 
   return (
     <>
@@ -19,10 +17,12 @@ const Privacy = ({ bannerImage, content }) => {
         <div className=" title2 fs-1 ">Privacy & <span className="fw-bold text-danger"> Policy</span> </div>
       </div>
 
-      <div
-        className="px-md-5 fw-semibold privacyTxt"
-        dangerouslySetInnerHTML={{ __html: content }}
-      />
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+          <div 
+            className="prose prose-lg max-w-none font-semibold"
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
+      </div>
     </>
   );
 };

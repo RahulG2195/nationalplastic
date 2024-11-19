@@ -31,7 +31,6 @@ const EditableBanner = ({ data }) => {
         updatedData.append('id', formData.id); // Add the ID to FormData
         updatedData.append('image', imageFile);
         updatedData.append('redirection_link', formData.redirection_link);
-
         try {
             await axios.post('/api/heroBanners', updatedData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
@@ -76,7 +75,7 @@ const EditableBanner = ({ data }) => {
                     </Form>
                 ) : (
                     <div className="text-center">
-                        <img src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}${formData.image}`} alt="Banner" className="img-fluid mb-3" style={{ maxWidth: '300px' }} />
+                        <img src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}${formData.image}`} alt="Banner" className="img-fluid mb-3" style={{ maxWidth: '300px' }} />
                         <p className='fw-bold'>Redirection Link: <span className='fw-normal'>{formData.redirection_link}</span></p>
                         <Button color="primary" onClick={() => setIsEditMode(true)}>
                             Edit
@@ -87,5 +86,4 @@ const EditableBanner = ({ data }) => {
         </div>
     );
 };
-
 export default EditableBanner;

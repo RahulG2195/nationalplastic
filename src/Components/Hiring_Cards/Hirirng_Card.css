@@ -19,7 +19,7 @@
 
 }
 
-.Apply {
+.process1 {
 
     color: #EFAF00 !important;
     border-bottom: 2px solid #EFAF00;
@@ -27,14 +27,14 @@
     padding-bottom: 1vh;
 }
 
-.Interview {
+.process2 {
     color: #333D7B !important;
     border-bottom: 2px solid #333D7B;
     margin: 2vh 0;
     padding-bottom: 1vh;
 }
 
-.Recruitment {
+.process3 {
     color: #CC0008 !important;
     border-bottom: 2px solid #CC0008;
     margin: 2vh 0;

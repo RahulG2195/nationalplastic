@@ -29,12 +29,9 @@ const TermsandconditionCMS = () => {
   const handleOnclick = (id) => {
     const termsToEdit = termsData.find(item => item.id === id);
     localStorage.setItem('termsToEdit', JSON.stringify(termsToEdit));
-    console.log("termsToEdit" + JSON.stringify(termsToEdit) );
     router.push("/admin/TextEditor");
   };
   const handleImageUpdate = async (id, file) => {
-    console.log("file"+ file);
-    console.log("id"+ id);
 
     const formData = new FormData();
     formData.append('banner_image', file);
@@ -46,7 +43,6 @@ const TermsandconditionCMS = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log("data " +  response)
   }
 
   const columns = [

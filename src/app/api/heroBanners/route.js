@@ -7,20 +7,28 @@ const path = require("path");
 // Function to handle image upload
 const uploadImage = async (file) => {
     try {
-        const bytes = await file.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-        const path = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}`;
-        try {
-          await fs.access(uploadDir);
-        } catch {
-          await fs.mkdir(uploadDir, { recursive: true });
-        }
-        await writeFile(path, buffer);
-        return file.name;
+      if (!file || typeof file.arrayBuffer !== "function") {
+        throw new Error("Invalid file object");
+      }
+  
+      const bytes = await file.arrayBuffer();
+      const buffer = Buffer.from(bytes);
+      const uploadDir = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}`;
+  
+      // Check if the directory exists, if not, create it
+      try {
+        await fs.access(uploadDir);
+      } catch {
+        await fs.mkdir(uploadDir, { recursive: true });
+      }
+  
+      const filePath = path.join(uploadDir, file.name);
+      await fs.writeFile(filePath, buffer);
+      return file.name;
     } catch (error) {
-        throw new Error('Image upload failed: ' + error.message);
+      throw new Error(`Image upload failed: ${error.message}`);
     }
-};
+  };
 
 // GET request to fetch hero banner data
 export async function GET(request) {

@@ -38,7 +38,7 @@ export default function Highlight() {
               Collection!
               </span>
             </div>
-            <div className="mt-1 fw-medium subCptRes w-50">
+            <div className="mt-1 fw-medium subCptRes w-md-50">
               <p>
               Upgrade your seating with our unique designs! Discover our range of Popular Chairs.
               </p>
@@ -55,7 +55,7 @@ export default function Highlight() {
                 {productArr.map((product) => {
                   const images = product.image_name ? product.image_name.split(', ').map(image => image.trim()) : [];
                   return <div key={product.product_name} className="col-md-4 col-4 my-2 prodHcard">
-                    <Link href={`/product-detail/${product.product_id}`}>
+                    <Link href={`/product-detail/${product.seo_url}`}>
                       <div className="card highlightcard">
                         <Image
                           className="imagetop"

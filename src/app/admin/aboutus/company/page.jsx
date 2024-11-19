@@ -133,8 +133,7 @@ export default function CMS() {
 
   return (
     <div style={{ maxWidth: 1200, margin: '0 auto', padding: 20 }}>
-      <h1>Company profile and terms and condition</h1>
-      <h2>To add new member select the following fields</h2>
+      <h1>Company profile and Terms and condition</h1>
       <PageSelector onPageChange={setSelectedPage} />
       <Button 
         type="primary" 

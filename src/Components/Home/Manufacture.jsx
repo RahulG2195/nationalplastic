@@ -31,12 +31,12 @@ export default function Manufacture() {
         <div className="row">
           <div className="text-center mb-5 ">
             <div className="fs-1 lh-small fw-bolder manuf_head">
-              Indias Largest Manufacturer
+            India&apos;s Largest Manufacturer
               <p className="darkBlue fs-1 fw-medium">Of Household Products</p>{" "}
             </div>
-            <div className="mt-1 fw-medium subCptRes w-50">
+            <div className="mt-1 fw-medium subCptRes w-md-50">
               <p>
-              Explore Indias largest variety of household products, including comfortable seating, functional tables, convenient storage solutions, adorable baby chairs, and more!
+              Explore India&apos;s largest variety of household products, including comfortable seating, functional tables, convenient storage solutions, adorable baby chairs, and more!
               </p>
             </div>
           </div>
@@ -78,9 +78,10 @@ export default function Manufacture() {
                         catid={
                           product.seo_url
                         }
+                        redirection={"product-catalogue"}
                         manfacthover="manfact"
                         style="manfTitle"
-                        image={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_CATEGORY_PATH_DIR}${product.image_name}`}
+                        image={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${product.image_name}`}
                         title={product.category_name}
                         categoryType={product.categoryType}
                         onCategoryChange={() =>
@@ -105,7 +106,7 @@ export default function Manufacture() {
                         }
                         manfacthover="manfact"
                         style="manfTitle"
-                        image={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_CATEGORY_PATH_DIR}${product.image_name}`}
+                        image={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${product.image_name}`}
                         title={product.category_name}
                         categoryType={product.categoryType}
                         onCategoryChange={() =>

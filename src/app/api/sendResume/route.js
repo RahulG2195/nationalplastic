@@ -1,65 +1,96 @@
 import { Resend } from 'resend';
 import { NextRequest, NextResponse } from "next/server";
-import { writeFile, readFile } from "fs/promises";
-import upload from "@/utils/multer.middleware";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const adminEMail = process.env.ADMIN_EMAIL;
-export async function POST(req, res) {
+const adminEmail = process.env.ADMIN_EMAIL;
+
+export async function POST(req) {
   try {
     // Parse form data using NextRequest.formData()
     const data = await req.formData();
-
-    // Extract file and other form data
+    
+    // Extract file first
     const file = data.get("file");
-    upload.single(file);
-
     if (!file) {
-      return NextResponse.json({ success: false });
+      return NextResponse.json({ success: false, error: "No Resume Found." });
     }
-
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-
-    const path = `${process.env.NEXT_PUBLIC_BASE_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}/${file.name}`;
-    await writeFile(path, buffer);
 
     // Extract other form fields
     const { FullName, email, JobProfile, MobileNumber } = Object.fromEntries(
       data.entries()
     );
 
-    // Create HTML email content dynamically for personalization
-    const HtmlFormat = `
+    // Convert file to buffer
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+
+    // Create HTML email content for the candidate
+    const candidateHtmlFormat = `
       <p>Hello ${FullName},</p>
-      <p>You have contacted us with the following details:</p>
-      <p>Reason for Contact: JOB </p> 
-      <p>Message: JOB CANDIDATE </p>
-      <p>Contact Number: ${MobileNumber}</p>
-      <p>Regards,</p>
-      <p>${FullName}</p>
+      <p>Thank you for applying to National Plastic. We have received your application for the following position:</p>
+      <p>Position: ${JobProfile}</p>
+      <p>Your Details:</p>
+      <ul>
+        <li>Name: ${FullName}</li>
+        <li>Email: ${email}</li>
+        <li>Contact Number: ${MobileNumber}</li>
+      </ul>
+      <p>We will review your application and get back to you soon.</p>
+      <p>Best Regards,</p>
+      <p>National Plastic HR Team</p>
     `;
 
-    // Read the file content
-    const fileContent = await readFile(path);
+    // Create HTML email content for the admin
+    const adminHtmlFormat = `
+      <p>New Job Application Received</p>
+      <p>Candidate Details:</p>
+      <ul>
+        <li>Name: ${FullName}</li>
+        <li>Email: ${email}</li>
+        <li>Position Applied: ${JobProfile}</li>
+        <li>Contact Number: ${MobileNumber}</li>
+      </ul>
+      <p>Please find the candidate's resume attached.</p>
+    `;
 
-    // Send email with attachment using Resend
-    const info = await resend.emails.send({
+    // Prepare email options for candidate
+    const candidateEmailOptions = {
       from: 'National Plastic <noreply@nationalplastic.com>',
-      to: adminEMail,
-      subject: JobProfile,
-      html: HtmlFormat,
+      to: email,
+      subject: `Application Received: ${JobProfile} Position`,
+      html: candidateHtmlFormat,
+    };
+
+    // Prepare email options for admin
+    const adminEmailOptions = {
+      from: 'National Plastic <noreply@nationalplastic.com>',
+      to: adminEmail,
+      subject: `New Job Application: ${JobProfile} - ${FullName}`,
+      html: adminHtmlFormat,
       attachments: [
         {
           filename: file.name,
-          content: fileContent,
+          content: buffer,
         },
       ],
+    };
+
+    // Send confirmation email to candidate
+    await resend.emails.send(candidateEmailOptions);
+    
+    // Send notification email to admin
+    await resend.emails.send(adminEmailOptions);
+
+    return NextResponse.json({ 
+      success: true, 
+      message: "Application submitted successfully" 
     });
 
-    return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Error sending email:", error);
-    return NextResponse.json({ success: false, error: "Email sending failed" });
+    console.error("Error processing application:", error);
+    return NextResponse.json({ 
+      success: false, 
+      error: "Failed to process application" 
+    });
   }
 }

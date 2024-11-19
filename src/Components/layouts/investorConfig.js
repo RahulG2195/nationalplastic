@@ -66,7 +66,7 @@ export const staticInvestorConfig = [
         label: "Financials",
         link: "#",
         subItems: [
-          { label: "Unaudited Financial Results", link: "/Unaudited" },
+          { label: "Unaudited Financial Results", link: "/unaudited-financial-results" },
           { label: "Audited Financial Results", link: "/Audited" },
           { label: "Annual Report", link: "/Annual" },
           { label: "Annual Return", link: "/AnnualReturn" },
@@ -74,13 +74,13 @@ export const staticInvestorConfig = [
       },
       { label: "Shareholding Pattern", link: "/ShareHolding" },
       { label: "Corporate Governance", link: "/Corporate" },
-      { label: "Investor Contact", link: "/InvestorContact" },
+      { label: "Investor Contact", link: "/investor-contact" },
       {
         label: "AGM Compliance",
         link: "#",
         subItems: [
-          { label: "Outcome of AGM", link: "/OutcomeAGM" },
-          { label: "Notices", link: "/Notice" },
+          { label: "Outcome of AGM", link: "/outcome-of-agm" },
+          { label: "Notices", link: "/notices" },
         ],
       },
       { label: "Transfer Of Share Notice", link: "/TransferShare" },
@@ -98,9 +98,9 @@ export const staticInvestorConfig = [
           { label: "2024", link: "/TwentyFour" },
         ],
       },
-      { label: "Investor KYC", link: "/InvestorKYC" },
-      { label: "IEPF", link: "/IEPF" },
-      { label: "Advertisements", link: "/Advertisements" },
+      { label: "Investor KYC", link: "/investor-kyc" },
+      { label: "IEPF", link: "/iepf" },
+      { label: "Advertisements", link: "/advertisements" },
     ],
   },
 ];

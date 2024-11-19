@@ -14,7 +14,8 @@ import {
   isValidEmail,
   isValidMobile as isValidPhone,
   isValidPassword,
-  isValidReason as isValidAddress,
+  isValidReason,
+  isValidAddress,
   isValidCity, isValidState, isValidPincode
 } from "@/utils/validation";
 import { notifyError } from "@/utils/notify";
@@ -241,7 +242,7 @@ const Register = () => {
 
 
   return (
-    <div className="container">
+    <div className="container mt-desk">
       <div className="row Login-Page-ImgForm">
         <div className="col-md-5 login-image">
           <Image

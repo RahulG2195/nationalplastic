@@ -22,17 +22,14 @@ export default function ShopRoom() {
           `${process.env.NEXT_PUBLIC_BASE_URL}/adminProdTag`
         );
         const filteredData = response.data.AllTag;
-        
         setTags(filteredData);
       } catch (error) {
         console.error("Error fetching data:", error);
-        // Handle error gracefully, e.g., display an error message
       }
     };
     fetchdata();
   }, []);
 
-  
   return (
     <section className="shop_room_sec common_section">
       <div className="container">
@@ -42,7 +39,7 @@ export default function ShopRoom() {
               Shop By
               <span className="fs-1 lh-small fw-bold text-danger "> Rooms</span>
             </div>
-            <div className="mt-1 fw-medium subCptRes w-50">
+            <div className="mt-1 fw-medium subCptRes w-md-50">
               <p>
                 Easily furnish every room in your home! Check out our Shop By Rooms section for furniture and accessories tailored to your living room, dining room, bedroom, balcony, baby room, and more.
               </p>
@@ -56,7 +53,6 @@ export default function ShopRoom() {
                 modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
                 spaceBetween={15}
                 loop={true}
-                // pagination={{ clickable: true }}
                 autoplay={{
                   delay: 2700,
                   disableOnInteraction: false,
@@ -81,36 +77,33 @@ export default function ShopRoom() {
                 }}
               >
                 {Tags.map((tag) => (
-                  <div
-                    className="col-md-4 shop_col my-md-4 my-2"
-                    key={tag.tag_id}
-                  >
-                    <SwiperSlide key={tag.tag_id}>
-                    <CatCards
-                        redirection={"ShopByRoom"}
+                  <SwiperSlide key={tag.tag_id}>
+                    <div className="col-md-4 shop_col my-md-4 my-2">
+                      <CatCards
+                        redirection={"shop-by-room"}
                         tag_id={tag.tag_id}
                         tag_seo={tag.tag_seo}
+                    catid={tag.tag_seo}
                         manfacthover={"manfact"}
                         style={"manfTitle"}
                         image={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${tag.tag_image}`}
                         title={tag.tag_name}
-                        // onCategoryChange={() => sendCategory(tag.tag_name)}
                       />
-                    </SwiperSlide>
-                  </div>
+                    </div>
+                  </SwiperSlide>
                 ))}
               </Swiper>
 
               {Tags.map((tag) => (
                 <div
                   className="col-xs-12 col-sm-6 col-md-4 shop_col my-md-4 my-2 hideswiper"
-                  key={tag.key}
+                  key={tag.tag_id}
                 >
                   <CatCards
-                    redirection={"ShopByRoom"}
+                    redirection={"shop-by-room"}
                     hoverglow="yellowGlow"
                     catid={tag.tag_seo}
-                    style="manfTitle pt-4 px-4 d-flex gap-5  justify-content-arround"
+                    style="manfTitle pt-4 px-4 d-flex gap-5 justify-content-arround"
                     image={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${tag.tag_image}`}
                     title={tag.tag_name}
                   />                 
@@ -123,5 +116,3 @@ export default function ShopRoom() {
     </section>
   );
 }
-// ./src/Components/Home/ShopRoom.jsx
-// 78:19  Error: Missing "key" prop for element in iterator  react/jsx-key

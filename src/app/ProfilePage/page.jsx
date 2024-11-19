@@ -94,7 +94,6 @@ function ProfilePage() {
   useEffect(() => {
     const fetchUserData = async () => {
       if (!userEmail) {
-        console.log("No userEmail, skipping fetchUserData.");
         return;
       }
       try {
@@ -226,12 +225,9 @@ function ProfilePage() {
       const extraAmt = CancelProdChargeAfterTwentyFourHr(checkorderStatus[0].order_status_date);
       const orderStatus = checkorderStatus[0].order_status;
 
-      console.log("orderStatus:", orderStatus);
-      console.log("extraAmt:", extraAmt);
 
       const proceedWithCancellation = await new Promise((resolve) => {
         if (extraAmt > 0 && orderStatus >= 2) {
-          console.log("Showing confirmation modal");
           confirm({
             title: 'Confirm Cancellation',
             icon: <ExclamationCircleOutlined />,
@@ -477,7 +473,7 @@ function ProfilePage() {
 
   return (
     <>
-      <div className="container profile-page-container mb-5">
+      <div className="container profile-page-container mb-5 mt-deskt">
         <div className="row">
           <div className="col-md-4">
             <div className="Left-Profile">

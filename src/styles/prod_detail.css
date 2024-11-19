@@ -11,6 +11,9 @@
   font-family: "Poppins", sans-serif;
 }
 
+.prod_detail_slider{
+  border: 1px solid lightgrey;
+}
 .heading-section {
   text-align: center;
   margin-bottom: 20px;
@@ -412,9 +415,9 @@ input:focus-visible {
 }
 
 @media (max-width: 600px) {
-  .pd-wrap{
+  /* .pd-wrap{
     padding: 0 !important;
-  }
+  } */
   .listTabContent {
     display: none;
   }
@@ -494,4 +497,16 @@ input:focus-visible {
   /* .swiper-slide{
     border: 1px solid lightgray;
   } */
+}
+
+
+.spacing-products {
+  /* display: flex; */
+  text-align: left;
+  gap: 6px;
+}
+.spacing-products h2 {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #2e3192;
 }

@@ -72,8 +72,6 @@ export default function Header() {
 
 
 
-
-
   // Use useEffect to keep local count in sync with Redux state
   useEffect(() => {
     setCount(productCount); // Update localCount whenever productCount changes
@@ -81,11 +79,18 @@ export default function Header() {
 
   // get user data to show initial name after login
   useEffect(() => {
-    console.log("status" + status);
     const fromLogin = localStorage.getItem('fromLogin');
+
+    console.log("fromLogin sessionnnnnnnnnnnnnn" + fromLogin);
+    console.log("session sessionnnnnnnnnnnnnn" + JSON.stringify(session));
     if (session?.user && fromLogin === 'true') {
+      console.log("session sessionnnnnnnnn87");
       updateUser()
+      console.log("session sessionnnnnnnnn87");
+
       localStorage.removeItem('fromLogin');
+      console.log("session sessionnnnnnnnn87");
+
     }
     const fetchUserData = async () => {
       try {
@@ -110,6 +115,7 @@ export default function Header() {
 
     fetchUserData();
   }, [userEmail]);
+
   const updateUser = async () => {
     dispatch(
       setUserData({
@@ -118,12 +124,36 @@ export default function Header() {
       })
     )
   }
+  // 
+  useEffect(() => {
+    const initializeUser = async () => {
+      const session = await getSession();
+      console.log("Initializing----------------------------------------------------");
+      if (session?.user && localStorage.getItem("fromLogin") === "true") {
+        console.log("Initializing----------------------------------------------------22222222222222222222222222222222");
 
+        dispatch(
+          setUserData({
+            email: session.user.email,
+            customer_id: session.user.customerId,
+          })
+        );
+        localStorage.removeItem("fromLogin");
+      }
+    };
+    initializeUser();
+  }, [dispatch, router]);
+
+
+
+  // 
 
   useEffect(() => {
+
     if (FirstName && LastName) {
       setInitialName(FirstName[0].toUpperCase() + LastName[0].toUpperCase());
     } else {
+
       setInitialName("N" + "P");
     }
   }, [FirstName, LastName]);
@@ -134,7 +164,7 @@ export default function Header() {
     async function loadConfig() {
       try {
         const config = await fetchInvestorConfig();
-
+        // console.log("clg" + JSON.stringify(config));
         setInvestorConfig(config);
       } catch (error) {
         console.error("Failed to fetch investor config, using static config", error);
@@ -254,33 +284,45 @@ export default function Header() {
 
 
   return (
-    <div>
+    <>
       {/* <ScrollToTop displayType="htmlArrow" /> */}
 
       {!hideLayout ? (
         <>
           <div className="container-fluid p-0 header menbg ">
             {/* <TopBar /> */}
-            <nav className="navbar navbar-expand-lg main_header py-md-5 my-md-3">
+            <nav className="navbar navbar-expand-lg main_header py-md-5">
               <div className="container-fluid ">
                 <div className="navbar-brand">
                   <button
                     onClick={handleShow}
                     id="navei"
-                    className="navbar-toggler "
+                    className="navbar-toggler"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent"
-                    aria-expanded="true"
-                    aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon" />
+                    aria-expanded={isClicked ? "true" : "false"} // Dynamically change aria-expanded
+                    aria-label="Toggle navigation"
+                  >
+                    {/* Conditionally render the "hamburger" or "X" icon */}
+                    {/* <span
+                      className={`${isClicked ? "navbar-toggler-icon-close" : "navbar-toggler-icon "}`}
+                    ></span> */}
+
+                    <span>
+                      {isClicked ? (
+                        <span className="fs-2 fw-normal px-1" aria-hidden="true">X</span> // "X" icon when clicked
+                      ) : (
+                        <span className="navbar-toggler-icon"></span> // Hamburger icon when not clicked
+                      )}
+                    </span>
                   </button>
                   <Link href="/" className="moblogo">
                     <Image
                       src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}${basicInfo.logo}`}
                       className="Image-fluid"
-                      alt="Landscape picture"
+                      alt="National Logo"
                       height={100}
                       width={100}
                       layout="responsive"
@@ -308,17 +350,17 @@ export default function Header() {
                         value={searchTerm}
                         onChange={handleSearchChange}
                       />
-                      <button type="submit" class="submit-button">
-                        <i class="fa fa-search" aria-hidden="true"></i>
+                      <button type="submit" className="submit-button">
+                        <i className="fa fa-search" aria-hidden="true"></i>
                       </button>
                     </div>
 
 
-                    {/* <div class="text-container py-2 HeadSearch px-3">
+                    {/* <div className="text-container py-2 HeadSearch px-3">
                       <input className="" type="text" id="search-input" value={searchTerm} aria-label="Search" onChange={handleSearchChange}
                       />
-                      <button type="submit" class="submit-button p-0">
-                        <i class="fa fa-search " aria-hidden="true"></i>
+                      <button type="submit" className="submit-button p-0">
+                        <i className="fa fa-search " aria-hidden="true"></i>
                       </button>
 
                     </div> */}
@@ -374,21 +416,21 @@ export default function Header() {
                         <ul className={`${styles.dropdown} ms-2 p-2 `}>
                           <li className={styles.dropdownItem}>
                             <Link
-                              href="/Companyprofile"
+                              href="/company-profile"
                               onClick={isClicked ? handleShow : null}>
                               Company Profile
                             </Link>
                           </li>
                           <li className={styles.dropdownItem}>
                             <Link
-                              href="/Infrastructure"
+                              href="/infrastructure"
                               onClick={isClicked ? handleShow : null}>
                               Infrastructure
                             </Link>
                           </li>
                           <li className={styles.dropdownItem}>
                             <Link
-                              href="/Promoters"
+                              href="/promoters"
                               onClick={isClicked ? handleShow : null}>
                               Promoters/Directors
                             </Link>
@@ -396,7 +438,7 @@ export default function Header() {
 
                           <li className={styles.dropdownItem}>
                             <Link
-                              href="/Management"
+                              href="/management-and-board-committees"
                               onClick={isClicked ? handleShow : null}>
                               Management and Board Committees
                             </Link>
@@ -404,14 +446,14 @@ export default function Header() {
 
                           <li className={styles.dropdownItem}>
                             <Link
-                              href="/Awards"
+                              href="/awards"
                               onClick={isClicked ? handleShow : null}>
                               Awards/Exports
                             </Link>
                           </li>
                           <li className={styles.dropdownItem}>
                             <Link
-                              href="/Term"
+                              href="/terms-and-conditions-investors"
                               onClick={isClicked ? handleShow : null}>
                               Terms & Conditions
                             </Link>
@@ -428,7 +470,7 @@ export default function Header() {
                           {investorConfig.map((item, index) => (
                             <li
                               key={index}
-                              className={`nav-item brdr ${styles.navItem}`}
+                              className={`nav-item brdr p-0 ${styles.navItem}`}
                               onMouseEnter={() => setDropdownIndex(index)}
                               onMouseLeave={() => setDropdownIndex(null)}
                             >
@@ -482,7 +524,7 @@ export default function Header() {
                     <li className="nav-item brdr">
                       <Link
                         className="nav-link"
-                        href="/NewsAndMedia"
+                        href="/news-and-media"
                         onClick={isClicked ? handleShow : null}>
                         News/Media
                       </Link>
@@ -490,7 +532,7 @@ export default function Header() {
                     <li className="nav-item brdr">
                       <Link
                         className="nav-link"
-                        href="/CSR"
+                        href="/csr"
                         onClick={isClicked ? handleShow : null}>
                         CSR
                       </Link>
@@ -498,7 +540,7 @@ export default function Header() {
                     <li className="nav-item brdr">
                       <Link
                         className="nav-link"
-                        href="/ContactUs"
+                        href="/contact-us"
                         onClick={isClicked ? handleShow : null}>
                         Contact Us
                       </Link>
@@ -518,7 +560,7 @@ export default function Header() {
                     <li className="nav-item brdr d-none d-md-none d-xl-block ">
                       <Link
                         className="nav-link"
-                        href={`tel:+91${basicInfo.wpNumber}`}
+                        href={`https://wa.me/91${basicInfo.wpNumber}`}
                         target="_blank"
                         onClick={isClicked ? handleShow : null}
                         style={{ width: '30px' }}
@@ -536,7 +578,7 @@ export default function Header() {
                     {/* <li className="nav-item brdr d-none d-md-none d-xl-block">
                       <Link
                         className="nav-link"
-                        href="/ContactUs"
+                        href="/contact-us"
                         onClick={isClicked ? handleShow : null}
                       >
                         <Image
@@ -615,7 +657,7 @@ export default function Header() {
                     <li>
                       <Link href="/#">
                         <Image
-                          src="Assets/images/home-icon-silhouette_69524.svg"
+                          src="/Assets/svg/home3.svg"
                           height={50}
                           width={50}
                           layout="responsive"
@@ -623,6 +665,7 @@ export default function Header() {
                           alt="Home"
                           className="footer-icon"
                         />
+                        <p className="icon-name ">HOME</p>
                       </Link>
                     </li>
                     <li>
@@ -636,26 +679,29 @@ export default function Header() {
                           alt="Wishlist"
                           className="footer-icon"
                         />
+                        <p className="icon-name">Wishlist</p>
                       </Link>
                     </li>
                     <li>
 
-                      <Link href="/">
+                      <Link href="/AllCategories">
                         <Image
-                          src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}${basicInfo.logo}`}
-                          className="Image-fluid"
-                          alt="Landscape picture"
-                          height={34}
-                          width={52}
-                        // layout="responsive"
-                        // objectFit="contain"
+                          src="/Assets/svg/categorysvg.svg"
+                          height={50}
+                          width={50}
+                          layout="responsive"
+                          objectFit="contain"
+                          alt="Wishlist"
+                          className="footer-icon"
                         />
+                        <p className="icon-name">Category</p>
                       </Link>
                     </li>
                     <li>
                       {isLoggedIn ? (
                         <Link href="/ProfilePage">
                           <span className="InitialName">{InitialName}</span>
+                          <p className="icon-name" style={{ marginTop: "5px" }}>ProfilePage</p>
                         </Link>
                       ) : (
                         <Link href="/Login">
@@ -668,6 +714,7 @@ export default function Header() {
                             alt="Profile"
                             className="footer-icon"
                           />
+                          <p className="icon-name">Login</p>
                         </Link>
                       )}
                     </li>
@@ -685,6 +732,7 @@ export default function Header() {
                         <div className="cartCount text-center medium">
                           {count}
                         </div>
+                        <p className="icon-name">Cart</p>
                       </Link>
                     </li>
                   </ul>
@@ -696,6 +744,6 @@ export default function Header() {
           </div>
         </>
       ) : null}
-    </div>
+    </>
   );
 }

@@ -45,8 +45,6 @@ function ProdData({ category_id }) {
 
   const ProductCount = () => {
     if (!userState) {
-
-      console.log("Its here it should not be i think " + userState);
       const idToBeCompared = Number(localStorage.getItem('product_id'));
       const product = tempCartData.find(item => item.product_id === idToBeCompared);
       const quantity = product ? product.quantity : 1;
@@ -66,7 +64,6 @@ function ProdData({ category_id }) {
   };
 
   const handleDecrement = async () => {
-    console.log("its coming herre toh Y")
     if (initialCount > 0) {
       setInitialCount(initialCount - 1);
     }
@@ -79,10 +76,8 @@ function ProdData({ category_id }) {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        console.log("id " +  id);
         const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`);
         const { product, productDetails, colors, category, short_description } = response.data;
-        console.log("Response + Response + Response " + JSON.stringify(response));
 
         localStorage.setItem("product_id", product.product_id);
         if (!product) {
@@ -202,7 +197,6 @@ function ProdData({ category_id }) {
     }
   };
   const handleCountChange = (newCount) => {
-    console.log("newcoutn" + newCount);
     setInitialCount(newCount);
   };
 
@@ -314,10 +308,10 @@ function ProdData({ category_id }) {
           <div className="col-md-6 mt-5 mt-md-0">
             <div className="product-dtl">
               <div className="product-info">
-                <div className="product-name">
-                  <h2 className="prod_nameh2">
-                    National Plastic </h2>
-                  <h2>{name_cat}{" "}
+                <div className="spacing-products">
+                  <h2 className="prod_nameh2 d-inline">
+                    National Plastic  </h2>
+                  <h2 className="d-inline"> {name_cat}{" "}
                     {/* {selectedColor ? `(${selectedColor})` : ""} */}
                   </h2>
                 </div>
@@ -338,8 +332,13 @@ function ProdData({ category_id }) {
                   <span className="rating-number">4.8</span>
                 </div>
                 <div className="shortProdDesc">
-                  {/* <p>{short_description}</p> */}
-                  <p>{prodData.descp || prodDataDetail.descp}</p>
+                  {prodDataDetail.descp?.includes('<') ? (
+                    <div
+                      dangerouslySetInnerHTML={{ __html: prodDataDetail.descp }}
+                    />
+                  ) : (
+                    <p>{prodData.descp || prodDataDetail.descp}</p>
+                  )}
                 </div>
                 <div className="prod_type mt-4">
                   <div className="prod_clr">
@@ -491,7 +490,7 @@ function ProdData({ category_id }) {
               {/* terms and conditions */}
 
               {/* <div className="terms fw-medium term_and_condition">
-                <Link href="/TermsAndConditions">Terms and Conditions</Link>
+                <Link href="/terms-and-conditions">Terms and Conditions</Link>
                 <ul>
                   <li>Lorem ipsum</li>
                   <li>Lorem ipsum</li>
@@ -575,3 +574,4 @@ function ProdData({ category_id }) {
 }
 
 export default ProdData;
+

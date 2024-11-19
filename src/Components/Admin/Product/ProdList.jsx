@@ -19,7 +19,7 @@ import Highlighter from "react-highlight-words";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons';
-
+import { notify } from "@/utils/notify";
 import ProductDetailModal from "./ProductDetailModal"
 const ProdList = () => {
   const router = useRouter();
@@ -63,11 +63,9 @@ const ProdList = () => {
         (product) => product.product_id === index
       );
       const ProdDetailDatas = dataBack;
-      console.log("Updated ProdDetailDatas:", ProdDetailDatas);
       
       if (ProdDetailDatas) {
         const detailData = ProdDetailDatas[0]; // Assuming there's only one object in the array
-        console.log
         // productToEdit.features = detailData.features;
         // productToEdit.dimensions = detailData.dimenions; // Typo in "dimenions" field?
         productToEdit.descp = detailData.descp; // Typo in "descp" field?
@@ -78,7 +76,6 @@ const ProdList = () => {
         productToEdit.dimension_img = detailData.dimension_img;
       } 
       
-      console.log("Updated productToEdit:", productToEdit);
 
       localStorage.setItem("productToEdit", JSON.stringify(productToEdit));
       localStorage.setItem("pDataToEdit", JSON.stringify(productToEdit));
@@ -226,7 +223,6 @@ const ProdList = () => {
     try {
       const uniqueValues = [...new Set(values)];
       const valueString = uniqueValues.join(',');
-      console.log('valueString', valueString);
 
       const response = await axios.patch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/adminProducts`,
@@ -254,6 +250,7 @@ const ProdList = () => {
           )
         );
       }
+      notify("Success");
     } catch (error) {
       console.error("Error updating product collections:", error);
       // Handle error (e.g., show a notification to the user)
@@ -263,10 +260,8 @@ const ProdList = () => {
   const handleCollectionRemove = async (value, record) => {
     try {
       const currentCollections = record.categoryType ? record.categoryType.split(',') : [];
-      console.log('currentCollections', currentCollections);
 
       const updatedCollections = currentCollections.filter((v) => v !== value);
-      console.log('updatedCollections', updatedCollections);
 
       const response = await axios.patch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/adminProducts`,
@@ -299,6 +294,7 @@ const ProdList = () => {
           )
         );
       }
+      notify("Success");
     } catch (error) {
       console.error("Error removing product collection:", error);
       // Handle error (e.g., show a notification to the user)

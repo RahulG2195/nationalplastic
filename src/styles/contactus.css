@@ -218,17 +218,27 @@
     }
 }
 
-@media (max-width:412px) {
+/* @media (max-width:412px) {
+   
+} */
+ @media (max-width:768px ) {
+    .RegisteredOffice{
+        left: 0;
+    }
     .location-image {
-        left: -1%;
-        width: 113px !important;
+        left: 3%;
+        width: 90px !important;
         position: absolute;
         z-index: 999;
-        top: 38% !important;
+        top: 4% !important;
     }
-}
+   
+ }
 
 @media (max-width:601px) {
+    .section_header p{
+        padding: 0;
+    }
     .RegisteredOffice {
         padding: 10px 20px;
         border-radius: 15px;
@@ -236,7 +246,7 @@
         /* position: relative; */
         /* top: -15%; */
         /* margin-top: 733px; */
-        margin-top: 376px;
+        /* margin-top: 376px; */
     }
     .RegisteredOffice .ROtitle h1 {
         font-size: 40px;
@@ -253,8 +263,11 @@
         margin-bottom:170px ;
 
     }
+    .map-image {
+        height: 280px;
+    }
     .location-image {
-        left: -1%;
+        left: 3%;
         width: 205px;
         position: absolute;
         z-index: 2;

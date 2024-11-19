@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     const tags = await query({
-      query: `SELECT * FROM tags_cat WHERE tag_status = 1 LIMIT 6`,
+      query: `SELECT * FROM tags_cat WHERE visible = 1 LIMIT 6`,
       value: [],
     });
 
@@ -28,10 +28,7 @@ export async function GET() {
 export async function POST(req) {
   try {
     const body = await req.json();
-    // console.log('body', body);
     const { productId, tagId } = body;
-    // console.log('productId', productId);
-    // console.log('tagId', tagId);
 
     if (!productId || !tagId) {
       return NextResponse.json(

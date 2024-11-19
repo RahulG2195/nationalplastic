@@ -56,7 +56,7 @@ export default function TopPick() {
             <div className="fs-1 fw-bold text-danger">
               Top Picks <span className="darkBlue fw-normal">For You</span>{" "}
             </div>
-            <div className="mt-1 fw-medium subCptRes w-50">
+            <div className="mt-1 fw-medium subCptRes w-md-50">
               <p>
                   Explore our top picks featuring the Premium Chair Collection, offering Quality, Comfort, and Style all in one place!
               </p>

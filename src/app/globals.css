@@ -5,7 +5,8 @@
     --header-secondary-clr: #262262;
     --header-font-size: 35px;
 }
-.text-danger{
+
+.text-danger {
     color: #CC0008 !important;
 }
 
@@ -101,6 +102,14 @@ p {
     text-align: center;
 }
 
+.mobile__top {
+    margin-top: 127px;
+}
+
+.header {
+    padding: 0 16px 0 0;
+}
+
 .section_header h2 {
     font-size: 40px;
     color: var(--header-secondary-clr);
@@ -124,10 +133,14 @@ p {
 }
 
 .section_header p {
-    padding: 0px 267px;
+    /* padding: 0px 267px; */
     font-weight: 500;
     font-size: 13px;
     line-height: normal;
+}
+
+.rounded-circle {
+    padding: 8px 10px;
 }
 
 .section_header h3 {
@@ -237,7 +250,8 @@ p {
     margin: auto;
     text-wrap: wrap;
 }
-.spacing{
+
+.spacing {
     text-wrap: wrap;
 }
 
@@ -507,6 +521,10 @@ p {
     bottom: 5px
 }
 
+.search_div {
+    margin-top: 150px;
+}
+
 .shoppingCartIcon {
     cursor: pointer;
 }
@@ -540,9 +558,17 @@ p {
     /* min-height: 200px; */
     height: 100%;
 }
+
 .scroll_top {
     z-index: 111111 !important;
 }
+
+/* .happy_Story_sec .swiper-slide{
+    border: none;
+}
+.swiper-slide{
+    border: 1px solid lightgrey;
+} */
 
 .scroll_top {
     position: fixed;
@@ -589,7 +615,7 @@ p {
     }
 
     .social_icon_for_mob {
-        position: fixed;
+        position: fixed !important;
         z-index: 9;
         bottom: 13%;
         display: flex;
@@ -598,6 +624,8 @@ p {
         /* left: 5%; */
         padding: 0 11px;
         align-items: center;
+        transition: all 0.5s ease-in-out;
+
     }
 
     .wp_icon {
@@ -610,7 +638,48 @@ p {
         padding: 5px;
         color: #fff;
         background: yellow;
-        box-shadow: 0 0 7px 4px rgba(0, 0, 0, 0.5);
+        /* box-shadow: 0 0 7px 4px rgba(0, 0, 0, 0.5); */
+        transition: all 0.5s ease-in-out;
+        
+    }
+
+    .callIcon {
+        display: flex;             
+        align-items: center;      
+        gap: 10px;                 
+        position: relative;        
+        /* transition: all 0.5s ease-in-out; */
+        /* flex-grow: 1;       */
+        background: yellow;
+        box-shadow: 0 0 7px 4px rgba(0  , 0, 0, 0.5);
+        border-radius: 100%;
+               
+    }
+    .contactus {
+        /* position: absolute; */
+        left: -20%;
+        visibility: hidden;
+        display: none;
+        opacity: 0;
+        transition:  opacity 0.5s ease-in, visibility 0.3s ease-in ;
+        transition :all 0.5s ease-in-out;
+    }
+
+    .callIcon:hover .contactus {
+        display: block;
+        left: 0;
+        position: relative;
+        /* margin-left: 0 ; */
+        opacity: 1;
+        visibility: visible;
+        color: black !important;
+    
+    }
+    .callIcon:hover{
+        /* background: yellow;
+        box-shadow: 0 0 7px 4px rgba(0  , 0, 0, 0.5); */
+        border-radius: 10px !important;
+        /* width: max-content; */
     }
 
 
@@ -667,12 +736,23 @@ p {
         margin: 40px 0 35px 0;
     }
 
- 
+
 
 }
 
 
+@media only screen and (min-width: 992px) and (max-width: 1120px) {
+    .mobile__top {
+        margin-top: 149px;
+    }
+}
+
 /* Mobile: */
+@media only screen and (min-width: 617px) and (max-width: 991px) {
+    .mobile__top {
+        margin-top: 92px;
+    }
+}
 
 @media only screen and (min-width: 601px) and (max-width: 616px) {
 
@@ -703,25 +783,28 @@ p {
     }
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
 
     .main_header {
         height: auto !important;
         padding: 8px 0 !important;
-        box-shadow: 0 0 22px -3px rgba(0,0,0,0.5);
+        box-shadow: 0 0 22px -3px rgba(0, 0, 0, 0.5);
     }
-    .navbar-brand{
+
+    .navbar-brand {
         display: flex;
         justify-content: space-between;
         width: 100%;
         align-items: center;
     }
-    .navbar-brand a{
-        display:  block !important;
+
+    .navbar-brand a {
+        display: block !important;
         /* margin: auto; */
         text-align: center;
     }
-    .side-icons{
+
+    .side-icons {
         display: none !important;
     }
 }
@@ -732,8 +815,9 @@ p {
         z-index: 111111 !important;
         bottom: 20% !important;
     }
+
     .mobile__top {
-        margin-top: 57px;
+        margin-top: 83px;
     }
 
     .banner {
@@ -773,8 +857,9 @@ p {
         z-index: 111111 !important;
         bottom: 20% !important;
     }
+
     .mobile__top {
-        margin-top: 57px;
+        margin-top: 83px;
     }
 
     .banner {
@@ -837,7 +922,7 @@ p {
     }
 
     .mobile__top {
-        margin-top: 57px;
+        margin-top: 83px;
     }
 
     .pacing-catalogue {
@@ -894,7 +979,7 @@ p {
     }
 
     .sbr_card {
-        margin: 0 15px;
+        margin: 0 9px;
         width: 95%;
     }
 
@@ -961,7 +1046,7 @@ p {
     right: auto;
     left: 0;
 }
+
 .text-justify {
     text-align: justify !important;
 }
-    

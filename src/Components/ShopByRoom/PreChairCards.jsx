@@ -17,7 +17,7 @@ import { isLoggedIn } from "@/utils/validation";
 import { useRouter } from "next/navigation";
 
 const notify = () => {
-  toast.error("Login To Add to CART", {
+  toast.error("Login To Add to WISHLIST", {
     position: "top-center",
     autoClose: 2000,
     hideProgressBar: false,
@@ -61,22 +61,17 @@ const PreChairsCards = () => {
 
       const catResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/categoryFromSeo?query=${seo_url}`);
       const data = catResponse.data.shopbyroom[0];
-      // console.log('data', data);
-      
       setCategoryType(data.tag_name)
       setCat_id(data.tag_id);
 
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/ProductsCat?query=${cat_id}`);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/ProductsCat?query=${data.tag_id}`);
 
       const fetchedData = response.data;
       setFetchClr(fetchedData.color);
       setFetchType(fetchedData.armType);
-      console.log('fetchedData', fetchedData);
       
       if (fetchedData?.ShopByroomData) {
         let filteredData = fetchedData.ShopByroomData;
-        console.log('filteredData', filteredData);
-
         if (selectedColor) {
           filteredData = filteredData.filter(
             (item) =>
@@ -120,44 +115,32 @@ const PreChairsCards = () => {
     }
   };
 
-
-  console.log('FetchClr', FetchClr);
-  console.log('FetchType', FetchType);
   
   const handleAddToWishlist = async (product_id) => {
     const isLoggedInResult = await isLoggedIn();
-    if (!isLoggedInResult) {
-      notify();
-      route.push("/Login");
-    } else {
-      dispatch(
-        addItemToWishlist({
-          product_id: product_id,
-        })
-      );
+    console.log("result: " + isLoggedInResult);
+    switch (isLoggedInResult) {
+      case false:
+        notify();
+        console.log("inside the false state");
+        route.push("/Login");
+        break;
+      case true:
+        console.log("inside the true state");
+        dispatch(
+          addItemToWishlist({
+            product_id: product_id,
+          })
+        );
+        break;
+      default:
+        console.warn(
+          "Unexpected login state. Please handle appropriately.",
+          isLoggedInResult
+        );
     }
   };
-  const fetchPrice = async (id) => {
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/ProductsCat`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ product_id: id }),
-      });
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch product data");
-      }
-
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("Error fetching product data:", error);
-      throw error;
-    }
-  };
 
   const handleMoveToCart = async (product_id) => {
     const isLoggedInResult = await isLoggedIn();
@@ -190,6 +173,27 @@ const PreChairsCards = () => {
           "Unexpected login state. Please handle appropriately.",
           isLoggedInResult
         );
+    }
+  };
+  const fetchPrice = async (id) => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/ProductsCat`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ product_id: id }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch product data");
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error fetching product data:", error);
+      throw error;
     }
   };
 
