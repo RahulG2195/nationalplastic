@@ -5,7 +5,8 @@ import FooterRow from "@/Components/FooterRow/FooterRow";
 import BottomCTABanner from "@/Components/ProductsCatlogue/BottomCTABanner";
 
 const ProductCatlogue = () => {
-  
+  const searchedProducts = JSON.parse(localStorage.getItem('searchedProducts') || '[]');
+  searchedProducts.length > 0
   return (
     <>
       {/* <CatlogueBanner /> */}
@@ -13,7 +14,7 @@ const ProductCatlogue = () => {
       {/* <PremiumChairs /> */}
       <PreChairsCards />
       <BoughtTogether />
-      <RecentlyViewed />
+      {searchedProducts.length > 0 && <RecentlyViewed />}
       <FooterRow />
       <BottomCTABanner />
     </>

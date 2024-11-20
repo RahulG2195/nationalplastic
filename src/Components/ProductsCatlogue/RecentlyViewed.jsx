@@ -34,9 +34,7 @@ const RecentlyViewed = ({id}) => {
 
   useEffect(() => {
     const idToBeCompared = Number(localStorage.getItem('product_id'));
-    notify(`id ${idToBeCompared}`)
     const local_id = Number(localStorage.getItem('category_id'));
-    console.log(`id ${id}`);
     const fetchdata = async () => {
       try {
         const searchedProducts = JSON.parse(localStorage.getItem('searchedProducts') || '[]');
@@ -48,26 +46,17 @@ const RecentlyViewed = ({id}) => {
           let products = response.data.products;
 
           if (products.length < 6) {
-          console.log("Products.length__inside " + products.length);
           const res = await axios.patch(`${process.env.NEXT_PUBLIC_URL}/api/ProductsCat`, {
             category_id: local_id
            });
-           console.log("res2: " + JSON.stringify(res.data));
-
-
-          console.log("res2: " + JSON.stringify(res.data.products));
           const cat_based_products = res.data.products;
-
             const additionalProducts = cat_based_products;
-            // console.log("Products.length__add " + JSON.stringify(additionalProducts));
             
             const newProducts = additionalProducts.filter(product => 
               !products.some(p => p.product_id === product.product_id)
             );
-            // console.log("Products.newProducts: " + JSON.stringify(newProducts));
 
             products = [...products, ...newProducts];
-            // console.log("Products.products_eod: " + JSON.stringify(products));
 
           }
   

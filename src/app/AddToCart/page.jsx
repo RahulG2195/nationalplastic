@@ -27,6 +27,7 @@ import { notify, notifyError } from "@/utils/notify";
 import { Button } from "reactstrap";
 import { applyDiscount } from "@/redux/reducer/couponSlice";
 import AddHeader from "@/Components/Address/Adress";
+import RecentlyViewed from "@/Components/ProductsCatlogue/RecentlyViewed";
 
 function AddToCart() {
   const CartStates = useSelector((state) => state.cart);
@@ -483,6 +484,8 @@ function AddToCart() {
           </div>
         </div>
       </div>
+ <RecentlyViewed />
+
       <FooterRow />
     </>
   );

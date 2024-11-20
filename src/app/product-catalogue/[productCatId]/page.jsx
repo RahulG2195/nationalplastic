@@ -24,7 +24,8 @@ export async function generateMetadata({ params }) {
 }
 const ProductCatlogue = ({ params}) => {
 
-  
+  const searchedProducts = JSON.parse(localStorage.getItem('searchedProducts') || '[]');
+
   return (
     <>
       <CatlogueBanner catName={params.productCatId}/>
@@ -32,7 +33,8 @@ const ProductCatlogue = ({ params}) => {
       {/* <PremiumChairs /> */}
       <PreChairsCards />
       <BoughtTogether />
-      <RecentlyViewed />
+      {searchedProducts.length > 0 && <RecentlyViewed />}
+
       {/* <FooterRow /> */}
       {/* <BottomCTABanner /> */}
     </>
