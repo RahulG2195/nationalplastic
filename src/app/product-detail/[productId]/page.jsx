@@ -23,13 +23,14 @@ export async function generateMetadata({ params }) {
 }
 
 function page({params}) {
+  const { productId } = params;
   return (
     <>
       <div className="pd-wrap">
         <ProdData />
-        <RecentlyViewedDetails />
-        <CustomerReview />
-        <Faqs />
+        <RecentlyViewedDetails id={productId} />
+        {/* <CustomerReview /> */}
+        {/* <Faqs /> */}
         {/* <FooterRow /> */}
       </div>
     </>

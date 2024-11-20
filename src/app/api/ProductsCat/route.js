@@ -131,3 +131,25 @@ export async function PUT(request) {
     );
   }
 }
+
+
+export async function PATCH(request) {
+  try {
+    const { category_id } = await request.json();
+    const products = await query({
+      query: "SELECT product_id, product_name, product_name2, seo_url, seo_url_clr, category_id, image_name, price, discount_price, discount_percentage, categoryType, duration, InstallationCharges, color, color_code, armType, prod_status FROM products WHERE category_id = ? AND prod_status = 1 AND image_name != 'default_chair_img.webp' LIMIT 7",
+      values: [category_id]
+  });
+
+
+    return new Response(JSON.stringify({
+      status: 200,
+      products: products
+    }));
+  } catch (error) {
+    return new Response(JSON.stringify({
+      status: 500,
+      data: error.message
+    }));
+  }
+}

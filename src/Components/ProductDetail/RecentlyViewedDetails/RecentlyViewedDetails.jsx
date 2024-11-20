@@ -3,12 +3,13 @@ import RecentlyViewed from "@/Components/ProductsCatlogue/RecentlyViewed";
 // import PreChairsCard from "@/Components/preChairsCard/PreChairsCard";
 // import "@/Components/preChairsCard/preChairsCard.css";
 
-const RecentlyViewedDetails = () => {
+const RecentlyViewedDetails = ({ id }) => {
   return (
     <>
-      <RecentlyViewed />
+      <RecentlyViewed id={id} />
     </>
   );
 };
+
 
 export default RecentlyViewedDetails;

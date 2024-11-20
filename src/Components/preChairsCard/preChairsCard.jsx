@@ -12,8 +12,6 @@ import Image from "next/image";
 const PreChairsCard = (props) => {
   const [inWishlist, setInWishlist] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  console.log("props------------------------------" + props);
-  console.log("props------------------------------" + JSON.stringify(props));
 
   const handleAddToCart = () => {
     props.onAddToCart(props.id);

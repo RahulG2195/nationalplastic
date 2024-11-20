@@ -78,8 +78,10 @@ function ProdData({ category_id }) {
         setIsLoading(true);
         const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`);
         const { product, productDetails, colors, category, short_description } = response.data;
-
+        console.log("is it having a catehory_id " + JSON.stringify(product));
         localStorage.setItem("product_id", product.product_id);
+        localStorage.setItem("category_id", product.category_id);
+
         if (!product) {
           setErrorMessage("Sorry, this product is not available");
         } else {
