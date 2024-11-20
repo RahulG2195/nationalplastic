@@ -1,12 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import axios from 'axios';
-import { Alert, Skeleton } from 'antd';
+import axios from "axios";
+import { Alert, Skeleton } from "antd";
 import "../../styles/productCatalogue.css";
-
-
 
 const Catalogue = () => {
   const [bannerData, setBannerData] = useState(null);
@@ -20,19 +18,23 @@ const Catalogue = () => {
       try {
         // Fetch banner data
         const id = 5;
-        const response = await axios.get(`/api/heroBanners`, { params: { id } });
-        console.log(" banner response: " + JSON.stringify(response.data.bannerData));
+        const response = await axios.get(`/api/heroBanners`, {
+          params: { id },
+        });
+        console.log(
+          " banner response: " + JSON.stringify(response.data.bannerData)
+        );
 
         setBannerData(response.data.bannerData);
 
         // Fetch brochures
-        const brochuresResponse = await axios.get('/api/admin/brochures');
+        const brochuresResponse = await axios.get("/api/admin/brochures");
         if (brochuresResponse.data.success) {
           setBrochures(brochuresResponse.data.brochures);
         }
       } catch (err) {
-        setError('Failed to load catalogue data');
-        console.error('Error fetching data:', err);
+        setError("Failed to load catalogue data");
+        console.error("Error fetching data:", err);
       } finally {
         setLoading(false);
       }
@@ -44,18 +46,21 @@ const Catalogue = () => {
   if (loading) {
     return (
       <div className="container">
-        <Skeleton.Image active style={{ width: '100%', height: '300px' }} />
+        <Skeleton.Image active style={{ width: "100%", height: "300px" }} />
         <div className="row mt-4">
           {[1, 2].map((item) => (
             <div className="col-md-6" key={item}>
               <div className="productCatalogue">
                 <div className="row">
                   <div className="col-md-4 productCatalogueImage">
-                    <Skeleton.Image active style={{ width: '100%', height: '150px' }} />
+                    <Skeleton.Image
+                      active
+                      style={{ width: "100%", height: "150px" }}
+                    />
                   </div>
                   <div className="col-md-8 productCatalogueData">
                     <Skeleton active paragraph={{ rows: 2 }} />
-                    <Skeleton.Button active style={{ width: '120px' }} />
+                    <Skeleton.Button active style={{ width: "120px" }} />
                   </div>
                 </div>
               </div>
@@ -69,12 +74,7 @@ const Catalogue = () => {
   if (error) {
     return (
       <div className="container py-4">
-        <Alert
-          message="Error"
-          description={error}
-          type="error"
-          showIcon
-        />
+        <Alert message="Error" description={error} type="error" showIcon />
       </div>
     );
   }
@@ -84,7 +84,7 @@ const Catalogue = () => {
       {bannerData && (
         <div className="">
           <Image
-            src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BROCHURE}${bannerData.image}` || "/Assets/uploads/Cat2alouge-page-banner-V2.jpg"}
+            src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}${bannerData.image}`}
             className="img-fluid d-block w-100"
             alt={bannerData.alt_text || "Product Catalogue Banner"}
             width={100}
@@ -93,6 +93,7 @@ const Catalogue = () => {
             objectFit="cover"
             priority
           />
+          
         </div>
       )}
 
@@ -114,15 +115,21 @@ const Catalogue = () => {
                 <div className="col-md-8 productCatalogueData">
                   <h2>{brochure.title}</h2>
                   <p>
-                    <i>Updated on {new Date(brochure.created_at).toLocaleDateString('en-US', {
-                      day: '2-digit',
-                      month: 'short',
-                      year: 'numeric'
-                    })}</i>
+                    <i>
+                      Updated on{" "}
+                      {new Date(brochure.created_at).toLocaleDateString(
+                        "en-US",
+                        {
+                          day: "2-digit",
+                          month: "short",
+                          year: "numeric",
+                        }
+                      )}
+                    </i>
                   </p>
-                  <a 
-                    href={`/Assets/images/catalogue/pdf/${brochure.pdf}`} 
-                    target="_blank" 
+                  <a
+                    href={`/Assets/images/catalogue/pdf/${brochure.pdf}`}
+                    target="_blank"
                     rel="noopener noreferrer"
                   >
                     <button className="catalogueButton">View Brochure</button>
