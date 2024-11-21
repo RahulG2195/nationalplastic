@@ -49,7 +49,7 @@ export async function GET(request) {
 }
 
 // Update an existing hiring process step
-export async function PUT(request) {
+export async function POST(request) {
     try {
       const formData = await request.formData();
       const id = formData.get("id");

@@ -50,7 +50,7 @@ const HiringProcessManagement = () => {
     }
 
     try {
-      const response = await axios.put("/api/admin/hiring-process", formData, {
+      const response = await axios.post("/api/admin/hiring-process", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       if (response.data.success) {
