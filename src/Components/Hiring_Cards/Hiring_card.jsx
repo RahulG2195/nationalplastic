@@ -1,5 +1,4 @@
 import './Hirirng_Card.css'
-import Image from "next/image";
 
 
 const Hirirng_Card = ({ className, TitleclassName, IMGclassName, ImgSrc, Title, Text }) => {
@@ -9,14 +8,12 @@ const Hirirng_Card = ({ className, TitleclassName, IMGclassName, ImgSrc, Title, 
             <div className={`card-group d-flex justify-content-center hiringCardResp`}>
                 <div className={`HiringCard p-3 d-flex flex-column ${className}`}>
                     <div className="d-flex justify-content-center">
-                        <Image
+                        <img
                             src={ImgSrc} // Path to the image
-                            alt="current-image"
-                            width={100} // Specify the width
-                            height={100} // Specify the height
-                            unoptimized 
-                            style={{ objectFit: "contain" }} // Optional: Ensure the image maintains aspect ratio
-                        />                    </div>
+                            alt="Description of image"
+                            width="100"
+                            height="100"
+                        />                 </div>
                     <div className="card-body text-center">
                         <h5 className={`${TitleclassName} respHiringCardTitle`}>{Title}</h5>
                         <p className="card-text HText respHiringCardCpt">{Text}</p>

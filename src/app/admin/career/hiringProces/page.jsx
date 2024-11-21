@@ -88,13 +88,11 @@ const HiringProcessManagement = () => {
       key: "image",
       render: (image) =>
         image ? (
-          <Image
+          <img
             src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}${image}`}
-            alt={image}
-            width={100}
-            height={100}
-            unoptimized 
-            style={{ objectFit: "contain" }} // Optional: Maintain aspect ratio
+            alt="Description of image"
+            width="100"
+            height="100"
           />
         ) : null,
     },
@@ -162,14 +160,11 @@ const HiringProcessManagement = () => {
           >
             {editingProcessStep?.image && (
               <div>
-                <Image
-                
+                <img
                   src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}${editingProcessStep.image}`} // Path to the image
-                  alt="current-image"
-                  width={100} // Specify the width
-                  height={100} // Specify the height
-                  unoptimized 
-                  style={{ objectFit: "contain" }} // Optional: Ensure the image maintains aspect ratio
+                  alt="Description of image"
+                  width="100"
+                  height="100"
                 />
                 <p>Current Image</p>
               </div>
