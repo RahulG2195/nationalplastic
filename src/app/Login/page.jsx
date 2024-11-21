@@ -119,7 +119,7 @@ function Login() {
         throw new Error("Session not established after multiple attempts");
       }
     } catch (error) {
-      console.error("Error during sign-in:", error);
+      console.error("Error during sign-in: ", error);
       notify("An error occurred during sign-in. Please try again.", "error");
     }
   };
