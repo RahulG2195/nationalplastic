@@ -93,6 +93,7 @@ const HiringProcessManagement = () => {
             alt={image}
             width={100}
             height={100}
+            unoptimized 
             style={{ objectFit: "contain" }} // Optional: Maintain aspect ratio
           />
         ) : null,
@@ -167,6 +168,7 @@ const HiringProcessManagement = () => {
                   alt="current-image"
                   width={100} // Specify the width
                   height={100} // Specify the height
+                  unoptimized 
                   style={{ objectFit: "contain" }} // Optional: Ensure the image maintains aspect ratio
                 />
                 <p>Current Image</p>

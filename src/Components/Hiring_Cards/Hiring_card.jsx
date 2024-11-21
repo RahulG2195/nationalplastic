@@ -14,6 +14,7 @@ const Hirirng_Card = ({ className, TitleclassName, IMGclassName, ImgSrc, Title, 
                             alt="current-image"
                             width={100} // Specify the width
                             height={100} // Specify the height
+                            unoptimized 
                             style={{ objectFit: "contain" }} // Optional: Ensure the image maintains aspect ratio
                         />                    </div>
                     <div className="card-body text-center">
