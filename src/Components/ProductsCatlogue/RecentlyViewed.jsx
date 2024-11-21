@@ -61,11 +61,7 @@ const RecentlyViewed = ({id}) => {
           }
   
           setRecentlyViewedData(products);
-        } else {
-          const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/Products`);
-          const filteredproducts = response.data.limitProd;
-          setRecentlyViewedData(filteredproducts);
-        }
+        } 
       } catch (error) {
         console.error("Error fetching data", error);
       }
@@ -170,7 +166,9 @@ const RecentlyViewed = ({id}) => {
         );
     }
   };
-
+  if (RecentlyViewedData.length === 0) {
+    return null; // Don't render anything if there's no data
+  }
   return (
     <>
       <div className="mt-5">
