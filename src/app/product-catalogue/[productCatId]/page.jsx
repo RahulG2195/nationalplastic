@@ -1,3 +1,4 @@
+"use client";
 import TopPics from "@/Components/ProductsCatlogue/TopPics";
 import CatlogueBanner from "../../../Components/ProductsCatlogue/Banner";
 import PremiumChairs from "@/Components/ProductsCatlogue/PremiumChairs";
@@ -5,6 +6,8 @@ import PreChairsCards from "@/Components/ProductsCatlogue/PreChairCards";
 import BoughtTogether from "@/Components/ProductsCatlogue/BoughtTogether";
 import RecentlyViewed from "@/Components/ProductsCatlogue/RecentlyViewed";
 import FooterRow from "@/Components/FooterRow/FooterRow";
+import { useState, useEffect } from 'react';
+
 import BottomCTABanner from "@/Components/ProductsCatlogue/BottomCTABanner";
 async function getCategoryData(id) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/categorySeo?id=${id}`);
@@ -24,8 +27,13 @@ export async function generateMetadata({ params }) {
 }
 const ProductCatlogue = ({ params}) => {
 
-  const searchedProducts = JSON.parse(localStorage.getItem('searchedProducts') || '[]');
+  const [searchedProducts, setSearchedProducts] = useState([]);
 
+  useEffect(() => {
+    const storedProducts = localStorage.getItem('searchedProducts');
+    setSearchedProducts(storedProducts ? JSON.parse(storedProducts) : []);
+  }, []);
+  
   return (
     <>
       <CatlogueBanner catName={params.productCatId}/>
