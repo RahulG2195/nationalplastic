@@ -49,7 +49,7 @@ const Opening = () => {
                 <div className="d-flex justify-content-center">
                     <div className="Card-container mt-4 border-top">
                         <h5 className="px-3 my-4 fw-bold d-inline-block">Full Time</h5>
-                        {/* <span className="px-3 py-2 bg-body-secondary rounded-pill small fw-bold">{jobs.length} JOBS</span> */}
+                        <span className="px-3 py-2 bg-body-secondary rounded-pill small fw-bold">{jobs.length} JOBS</span>
                         <div className="container text-center">
                             <div className="row">
                                 {jobs.map((job) => (

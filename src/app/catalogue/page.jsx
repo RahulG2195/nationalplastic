@@ -111,6 +111,7 @@ const Catalogue = () => {
                     objectFit="cover"
                     alt={brochure.title}
                   />
+                  {/* <img src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BROCHURE}${brochure.image}`} alt="" /> */}
                 </div>
                 <div className="col-md-8 productCatalogueData">
                   <h2>{brochure.title}</h2>
