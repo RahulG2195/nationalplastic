@@ -67,7 +67,7 @@ const Hiring = () => {
                                 className={className}
                                 TitleclassName={titleClassName}
                                 IMGclassName={imgClassName}
-                                ImgSrc={`/${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}/${stage.image}`}
+                                ImgSrc={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_UPLOAD_PATH_DIR}${stage.image}`}
                                 Title={stage.title}
                                 Text={stage.description}
                             />
