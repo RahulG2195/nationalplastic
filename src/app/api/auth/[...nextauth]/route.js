@@ -23,16 +23,21 @@ export const authOptions = {
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   cookies: {
-    csrfToken: {
-      name: `__Secure-next-auth.csrf-token`,
+    sessionToken: {
+      name: `__Secure-next-auth.session-token`,
       options: {
+        domain: "nationalplastic.com",
+        path: "/",
+        secure: true, // Ensure this is true for HTTPS
         httpOnly: true,
-        sameSite: "lax",
-        secure: true,
+        sameSite: "none", // Use "none" for cross-origin redirects
       },
     },
   },
   
+  csrf: {
+    useState: true, // Ensure state parameter is enabled
+  },
   callbacks: {
     async signIn({ user, account, profile }) {
       try {
