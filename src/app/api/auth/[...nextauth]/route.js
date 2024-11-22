@@ -40,40 +40,52 @@ export const authOptions = {
   },
   callbacks: {
     async signIn({ user, account, profile }) {
-      try {
-        if (!user.email || account.provider !== "google") {
-          return false;
-        }
-    
+      if (account?.provider === "google") {
         const { email } = user;
         const googleId = account.providerAccountId;
         const firstName = profile?.given_name || user.name?.split(' ')[0] || '';
         const lastName = profile?.family_name || user.name?.split(' ').slice(1).join(' ') || '';
     
-        // Use INSERT...ON DUPLICATE KEY UPDATE for upsert operation
         try {
-          await query({
-            query: `
-              INSERT INTO customer (Email, FirstName, LasttName, google_id) 
-              VALUES (?, ?, ?, ?)
-              ON DUPLICATE KEY UPDATE 
-                google_id = VALUES(google_id),
-                FirstName = COALESCE(VALUES(FirstName), FirstName),
-                LasttName = COALESCE(VALUES(LasttName), LasttName)
-            `,
-            values: [email, firstName, lastName, googleId],
+          const existingUser = await query({
+            query: "SELECT * FROM customer WHERE Email = ?",
+            values: [email],
           });
+          
+          let customerId;
+          let isNewUser = false;
+          
+          if (existingUser.length > 0) {
+            const userRecord = existingUser[0];
+            customerId = userRecord.customer_id;
+            
+            await query({
+              query: `UPDATE customer 
+                      SET google_id = ?,
+                          FirstName = COALESCE(?, FirstName),
+                          LasttName = COALESCE(?, LasttName)
+                      WHERE Email = ?`,
+              values: [googleId, firstName, lastName, email],
+            });
+          } else {
+            const result = await query({
+              query: `INSERT INTO customer 
+                      (Email, FirstName, LasttName, google_id) 
+                      VALUES (?, ?, ?, ?)`,
+              values: [email, firstName, lastName, googleId],
+            });
+            customerId = result.insertId;
+            isNewUser = true;
+          }
     
-          return true; // Allow sign-in
-        } catch (dbError) {
-          console.error("Database Error during Google Sign-In:", dbError);
-          return false; // Deny sign-in if database operation fails
+          return true;
+        } catch (error) {
+          console.error("Error during Google sign-in:", error);
+          return false;
         }
-      } catch (error) {
-        console.error("Error in Sign-In Callback:", error);
-        return false; // Deny sign-in on unexpected errors
       }
-    },    
+      return true;
+    },   
 
     async jwt({ token, user, account }) {
       console.log("JWT Callback: ", { token, user, account });
