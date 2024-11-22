@@ -19,16 +19,19 @@ server {
         alias /var/www/nationalplastic/.next/static/;
         expires 1y;
         access_log off;
+        add_header Cache-Control "public, max-age=31536000, immutable";
     }
 
     location /static/ {
         alias /var/www/nationalplastic/static/;
         expires 1y;
         access_log off;
+        add_header Cache-Control "public, max-age=31536000, immutable";
     }
 
     location /favicon.ico {
         alias /var/www/nationalplastic/favicon.ico;
+        access_log off;
     }
 
     # Proxy API requests to the backend
@@ -39,6 +42,7 @@ server {
         proxy_set_header Connection 'upgrade';
         proxy_set_header Host $host;
         proxy_cache_bypass $http_upgrade;
+        proxy_set_header Cookie $http_cookie;
     }
  # Proxy all other requests to the Next.js server
     location / {
@@ -48,6 +52,7 @@ server {
         proxy_set_header Connection 'upgrade';
         proxy_set_header Host $host;
         proxy_cache_bypass $http_upgrade;
+        proxy_set_header Cookie $http_cookie;
     }
 
     # Error handling for missing files
@@ -58,4 +63,14 @@ server {
 
     # Disable directory listing
     autoindex off;
+
+
+    # Increase header and body size limits for handling OAuth tokens (if needed)
+    client_max_body_size 10M; # Increase if you expect larger payloads
+    large_client_header_buffers 4 16k; # Ensure larger headers don't cause issues
+
+    # Debugging logs (enable during troubleshooting)
+    # Uncomment the following lines for more detailed logs
+    access_log /var/log/nginx/access.log;
+    error_log /var/log/nginx/error.log debug;
 }
