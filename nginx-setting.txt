@@ -14,19 +14,16 @@ server {
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_ciphers HIGH:!aNULL:!MD5;
 
-    location /api/ {
-        proxy_pass http://127.0.0.1:3000;
-        proxy_http_version 1.1;
-        proxy_set_header Host $host;
-        proxy_set_header Cookie $http_cookie;
-    }
+
 
     location /api/auth/ {
         proxy_pass http://127.0.0.1:3000/api/auth/;
         proxy_http_version 1.1;
         proxy_set_header Host $host;
         proxy_set_header Cookie $http_cookie;    
+        add_header Cache-Control "no-store";
     }
+
 
 
     # Serve static files directly
@@ -69,6 +66,17 @@ server {
         proxy_cache_bypass $http_upgrade;
         proxy_set_header Cookie $http_cookie;
     }
+    
+    location /robots.txt {
+        alias /var/www/nationalplastic/robots.txt;
+        access_log off;
+    }
+
+    location /sitemap.xml {
+        alias /var/www/nationalplastic/sitemap.xml;
+        access_log off;
+    }
+
 
     # Error handling for missing files
     error_page 404 /404.html;

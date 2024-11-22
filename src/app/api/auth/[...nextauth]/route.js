@@ -23,65 +23,55 @@ export const authOptions = {
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   cookies: {
-    sessionToken: {
-      name: `__Secure-next-auth.session-token`,
+    csrfToken: {
+      name: `__Secure-next-auth.csrf-token`,
       options: {
         httpOnly: true,
         sameSite: "lax",
-        secure: true, // Only send cookies over HTTPS
+        secure: true,
       },
     },
   },
+  
   callbacks: {
     async signIn({ user, account, profile }) {
       try {
-        if (!user.email) {
+        if (!user.email || account.provider !== "google") {
           return false;
         }
-
-        if (account?.provider === "google") {
-          const { email } = user;
-          const googleId = account.providerAccountId;
-          const firstName = profile?.given_name || user.name?.split(' ')[0] || '';
-          const lastName = profile?.family_name || user.name?.split(' ').slice(1).join(' ') || '';
-
-          try {
-            const existingUser = await query({
-              query: "SELECT * FROM customer WHERE Email = ?",
-              values: [email],
-            });
-            
-            if (existingUser.length > 0) {
-              await query({
-                query: `UPDATE customer 
-                        SET google_id = ?,
-                            FirstName = COALESCE(?, FirstName),
-                            LasttName = COALESCE(?, LasttName)
-                        WHERE Email = ?`,
-                values: [googleId, firstName, lastName, email],
-              });
-            } else {
-              await query({
-                query: `INSERT INTO customer 
-                        (Email, FirstName, LasttName, google_id) 
-                        VALUES (?, ?, ?, ?)`,
-                values: [email, firstName, lastName, googleId],
-              });
-            }
-
-            return true;
-          } catch (dbError) {
-            return handleAuthError(dbError, 'Google Sign-In Database Operation');
-          }
+    
+        const { email } = user;
+        const googleId = account.providerAccountId;
+        const firstName = profile?.given_name || user.name?.split(' ')[0] || '';
+        const lastName = profile?.family_name || user.name?.split(' ').slice(1).join(' ') || '';
+    
+        // Use INSERT...ON DUPLICATE KEY UPDATE for upsert operation
+        try {
+          await query({
+            query: `
+              INSERT INTO customer (Email, FirstName, LasttName, google_id) 
+              VALUES (?, ?, ?, ?)
+              ON DUPLICATE KEY UPDATE 
+                google_id = VALUES(google_id),
+                FirstName = COALESCE(VALUES(FirstName), FirstName),
+                LasttName = COALESCE(VALUES(LasttName), LasttName)
+            `,
+            values: [email, firstName, lastName, googleId],
+          });
+    
+          return true; // Allow sign-in
+        } catch (dbError) {
+          console.error("Database Error during Google Sign-In:", dbError);
+          return false; // Deny sign-in if database operation fails
         }
-
-        return true;
       } catch (error) {
-        return handleAuthError(error, 'Sign-In Callback');
+        console.error("Error in Sign-In Callback:", error);
+        return false; // Deny sign-in on unexpected errors
       }
-    },
+    },    
 
     async jwt({ token, user, account }) {
+      console.log("JWT Callback: ", { token, user, account });
       try {
         if (!account || !user) {
           return token;
