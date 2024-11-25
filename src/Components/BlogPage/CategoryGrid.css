@@ -1,11 +1,11 @@
+/* General Styles */
 .Grid-main_container {
-    height: auto !important;
+    height: auto; /* Avoid !important unless necessary */
 }
 
 .recentpostsContainer {
-    height: 200vh !important;
+    height: 200vh;
 }
-
 
 .litegray {
     color: #D4D4D4;
@@ -16,30 +16,41 @@
     width: 344px;
 }
 
-
-@media (max-width:1124px) {
+/* Media Queries */
+@media (max-width: 1125px) {
     .right-grid-cont {
-        margin-right: 20px !important;
+        margin-right: 20px;
         padding: 20px;
     }
 
     .BlogSvg {
-        height: 500%;
+        height: 500%; /* Ensure this is intentional */
     }
 }
 
-@media (max-width:1125px) {
-    .right-grid-cont {
-        margin-right: 390px !important;
-
-    }
-
-}
-
-@media (max-width:766px) {
-
+@media (max-width: 767px) {
     .BlogSvg {
         margin: auto;
     }
 
+    .categoryRespBtn {
+        padding: 5px;
+    }
+}
+
+@media (max-width: 550px) {
+    .categoryRespBtn {
+        font-size: small;
+    }
+}
+
+/* Custom Button Styles */
+.customButton {
+    border-color: #2E3192;
+    color: #2E3192;
+}
+
+.customButton:hover {
+    background-color: #2E3192;
+    color: white;
 }
