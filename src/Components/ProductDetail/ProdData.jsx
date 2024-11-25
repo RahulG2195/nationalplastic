@@ -33,6 +33,7 @@ function ProdData({ category_id }) {
   const [availableColor, setAvailableColor] = useState([]);
   const [dataToShow, setdataToShow] = useState([]);
   const [isHovered, setIsHovered] = useState(false);
+  const [descriptionToShow, setDescriptionToShow] = useState([]);
   const cartData = useSelector((state) => state.cart.products);
   const tempCartData = useSelector((state) => state.temp.products);
 
@@ -99,6 +100,8 @@ function ProdData({ category_id }) {
           ProductCount();
           const allColors = colors.map((color) => color.color);
           colorBasedProductsImages(allColors);
+          const descriptionToShowRaw = product.short_description || product.long_description || productDetails.descp;
+          setDescriptionToShow(descriptionToShowRaw)
         }
       } catch (error) {
         setErrorMessage(error.message || "Error fetching data");
@@ -334,12 +337,15 @@ function ProdData({ category_id }) {
                   <span className="rating-number">4.8</span>
                 </div>
                 <div className="shortProdDesc">
-                  {prodDataDetail.descp?.includes('<') ? (
-                    <div
-                      dangerouslySetInnerHTML={{ __html: prodDataDetail.descp }}
-                    />
-                  ) : (
-                    <p>{prodData.descp || prodDataDetail.descp}</p>
+                  {descriptionToShow && (
+                    descriptionToShow?.includes('<') ? (
+                      <div
+                        dangerouslySetInnerHTML={{ __html: descriptionToShow }}
+                        className="prose max-w-none" // Adding prose class for better typography
+                      />
+                    ) : (
+                      <p className="text-gray-700">{descriptionToShow}</p>
+                    )
                   )}
                 </div>
                 <div className="prod_type mt-4">
@@ -517,7 +523,7 @@ function ProdData({ category_id }) {
               prodDataDetail.descp?.includes('<') ? (
                 <div
                   className="col-md-9"
-                  dangerouslySetInnerHTML={{ __html: prodDataDetail.descp }}
+                  dangerouslySetInnerHTML={{ __html: val.short_description }}
                 />
               ) : (
                 <div className="col-md-9">{prodDataDetail.descp}</div>
