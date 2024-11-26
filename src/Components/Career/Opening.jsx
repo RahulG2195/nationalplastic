@@ -7,8 +7,6 @@ const Opening = () => {
 
 
     const [jobs, setJobs] = useState([]);
-    console.log("jobs are ",jobs)
-
     useEffect(() => {
         fetchJobs();
     }, []);
@@ -17,7 +15,6 @@ const Opening = () => {
         try {
             const response = await axios.get('/api/admin/jobs');
             setJobs(response.data.jobs);
-            console.log("jobs are ",response.data)
 
         } catch (error) {
             message.error('Failed to fetch jobs');

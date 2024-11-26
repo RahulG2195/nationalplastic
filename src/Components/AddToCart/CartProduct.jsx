@@ -69,14 +69,10 @@ const CartProduct = ({
     if (!isNaN(numericValue) && numericValue > 0) {
       setInitialCount(numericValue);
     }
-    logit();
 
   };
 
-  const logit = () => {
-    console.log("numeric" + typeof(initialCount));
-    console.log("numeric " + initialCount);
-  }
+
 
   const handleAddtoWishlist = async (product_id) => {
     const isLoggedInResult = await isLoggedIn();

@@ -1,8 +1,11 @@
+"use client";
 import DiningTableCard from '../DiningTableCard/DiningTableCard';
 import PopularCards from '../PopularPostsCards/PopularCards';
 import './CategoryGrid.css';
-
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { notify } from '@/utils/notify';
+import axios from 'axios';
 
 const CategoryGrid = () => {
     const productData = [
@@ -22,10 +25,28 @@ const CategoryGrid = () => {
             date: "DECEMBER 10, 2023",
         },
     ];
+    const [category, setCategory] = useState([]);
+    const [blogs, setBlogs] = useState([]);
+
+    useEffect(() => {
+        const fetchBlogsAndCategories = async () => {
+            try {
+                const { data } = await axios.get('/api/blog');
+                console.log("Categories: ", data.categories);
+                setCategory(data.categories);
+                setBlogs(data.blogs);
+            } catch (error) {
+                console.error("Error fetching blogs and categories: ", error);
+            }
+        };
+
+        fetchBlogsAndCategories();
+    }, []);
+
 
     return (
         <>
-         <div>
+            <div>
                 <p className="fw-bold fs-1 text-danger text-center mb-2">Category</p>
             </div>
             <div className="d-flex flex-wrap justify-content-center gap-3 mb-2">

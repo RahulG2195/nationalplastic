@@ -4,14 +4,22 @@ import { query } from '@/lib/db';
 export async function GET(request) {
     try {
         const blogs = await query({
-            query: 'SELECT * FROM blogs where status = 1',
+            query: 'SELECT * FROM blogs WHERE status = 1',
             values: [],
         });
+
+        const categories = await query({
+            query: 'SELECT DISTINCT category FROM blogs',
+            values: [],
+        });
+
+        const categoryList = categories.map((item) => item.category);
 
         return new Response(
             JSON.stringify({
                 status: 200,
                 blogs: blogs,
+                categories: categoryList,
             })
         );
     } catch (e) {
@@ -26,6 +34,7 @@ export async function GET(request) {
 }
 
 
+
 export async function POST(request) {
     try {
         const data = await request.json();
@@ -33,8 +42,8 @@ export async function POST(request) {
 
         switch (action) {
             case 'ADD':
-            case 'category_wise':
-                return await category_wise(data);
+            case 'categories':
+                return await categories(data);
             case 'DELETE':
                 return await deleteBlogPost(data);
             default:
@@ -51,24 +60,20 @@ export async function POST(request) {
     }
 }
 
-async function category_wise(data) {
-    const { category } = data;
-    if (!category) {
-        return new Response(
-            JSON.stringify({ status: 400, message: 'Category is required' }),
-            { status: 400 }
-        );
-    }
+async function categories() {
+
     try {
-        const blogs = await query({
-            query: 'select * from blogs where category = ?',
-            values: [category],
+        const category = await query({
+            query: 'select DISTINCT category from blogs',
+            values: [],
         });
+        const categoryString = `{${category.map(item => item.category).join(", ")}}`;
+
 
         return new Response(
             JSON.stringify({
                 status: 200,
-                blogs: blogs,
+                category: categoryString,
             })
         );
     } catch (e) {
@@ -80,4 +85,4 @@ async function category_wise(data) {
             })
         );
     }
-  }
+}

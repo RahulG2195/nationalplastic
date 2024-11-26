@@ -21,10 +21,6 @@ const Catalogue = () => {
         const response = await axios.get(`/api/heroBanners`, {
           params: { id },
         });
-        console.log(
-          " banner response: " + JSON.stringify(response.data.bannerData)
-        );
-
         setBannerData(response.data.bannerData);
 
         // Fetch brochures
@@ -93,7 +89,7 @@ const Catalogue = () => {
             objectFit="cover"
             priority
           />
-          
+
         </div>
       )}
 

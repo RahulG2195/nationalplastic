@@ -80,17 +80,9 @@ export default function Header() {
   // get user data to show initial name after login
   useEffect(() => {
     const fromLogin = localStorage.getItem('fromLogin');
-
-    console.log("fromLogin sessionnnnnnnnnnnnnn" + fromLogin);
-    console.log("session sessionnnnnnnnnnnnnn" + JSON.stringify(session));
     if (session?.user && fromLogin === 'true') {
-      console.log("session sessionnnnnnnnn87");
       updateUser()
-      console.log("session sessionnnnnnnnn87");
-
       localStorage.removeItem('fromLogin');
-      console.log("session sessionnnnnnnnn87");
-
     }
     const fetchUserData = async () => {
       try {
@@ -128,10 +120,7 @@ export default function Header() {
   useEffect(() => {
     const initializeUser = async () => {
       const session = await getSession();
-      console.log("Initializing----------------------------------------------------");
       if (session?.user && localStorage.getItem("fromLogin") === "true") {
-        console.log("Initializing----------------------------------------------------22222222222222222222222222222222");
-
         dispatch(
           setUserData({
             email: session.user.email,
@@ -164,7 +153,6 @@ export default function Header() {
     async function loadConfig() {
       try {
         const config = await fetchInvestorConfig();
-        // console.log("clg" + JSON.stringify(config));
         setInvestorConfig(config);
       } catch (error) {
         console.error("Failed to fetch investor config, using static config", error);

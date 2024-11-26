@@ -126,7 +126,6 @@ const Register = () => {
   }
 
   const handleOTP = async (action) => {
-    console.log(`handleOTP called with action: ${action}`); 
     try {
       if (action === 'send') {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/sendOTP`, { email: formData.email });
@@ -155,7 +154,6 @@ const Register = () => {
           throw new Error(response.data.message || 'Failed to send OTP');
         }
       } else if (action === 'verify') {
-        console.log("verify"+ "why it comes here");
         const storedEncryptedOTP = localStorage.getItem('otp');
         const storedEncryptedExpiry = localStorage.getItem('otpExpiry');
         const storedOtp = decrypt(storedEncryptedOTP, secretKey);

@@ -118,15 +118,12 @@ const PreChairsCards = () => {
   
   const handleAddToWishlist = async (product_id) => {
     const isLoggedInResult = await isLoggedIn();
-    console.log("result: " + isLoggedInResult);
     switch (isLoggedInResult) {
       case false:
         notify();
-        console.log("inside the false state");
         route.push("/Login");
         break;
       case true:
-        console.log("inside the true state");
         dispatch(
           addItemToWishlist({
             product_id: product_id,
