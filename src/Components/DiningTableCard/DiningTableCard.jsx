@@ -1,27 +1,44 @@
-import Image from 'next/image'
-import './DininigTableCard.css'
-import Link from 'next/link'
-const DiningTableCard = (props) => {
-    return (
-        <>
-            <div className="DTS my-3 mb-5">
-                <Link href="/BlogDetails">
-                    <Image
-                        src="/Assets/images/blog.jpg"
-                        width={100}
-                        height={100}
-                        layout='responsive'
-                        objectFit='contain'
-                    />
-                </Link>
-            </div>
-            <div className={props.BottomCardsCptn ? props.BottomCardsCptn + " small fw-semibold mt-5" : "small DTSCaption mt-4"}>
-                <p>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no.
-                </p>
-            </div>
-        </>
-    )
-}
-export default DiningTableCard
+import React from 'react';
+import { Typography } from 'antd';
+import Image from 'next/image';
+import Link from 'next/link';
 
+const { Paragraph } = Typography;
+
+const DiningTableCard = ({ content, imageUrl }) => {
+    // Sanitize HTML content to prevent XSS
+    const sanitizedContent = content
+
+    return (
+        <Link href="/BlogDetails" className="d-block text-decoration-none">
+            <div style={{
+                position: 'relative',
+                width: '100%',
+                paddingTop: '56.25%' // 16:9 Aspect Ratio
+            }}>
+                <Image
+                    src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_ABOUT_PATH_DIR}${imageUrl}` || "/path/to/default/image.jpg"}
+                    alt="Blog Featured Image"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    style={{
+                        objectFit: 'cover',
+                        borderRadius: '8px'
+                    }}
+                />
+            </div>
+            {/* <div className="mt-3">
+                <Paragraph
+                    ellipsis={{ rows: 3 }}
+                    style={{ color: '#333' }}
+                >
+                    <div
+                        dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+                    />
+                </Paragraph>
+            </div> */}
+        </Link>
+    );
+}
+
+export default DiningTableCard;

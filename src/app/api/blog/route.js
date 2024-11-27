@@ -41,11 +41,8 @@ export async function POST(request) {
         const { action } = data;
 
         switch (action) {
-            case 'ADD':
-            case 'categories':
-                return await categories(data);
-            case 'DELETE':
-                return await deleteBlogPost(data);
+            case 'get_blog':
+                return await get_blog(data);
             default:
                 return new Response(
                     JSON.stringify({ status: 405, message: 'Method not allowed' }),
@@ -60,20 +57,22 @@ export async function POST(request) {
     }
 }
 
-async function categories() {
+async function get_blog(data) {
+    const { id } = data;
+
+
 
     try {
-        const category = await query({
-            query: 'select DISTINCT category from blogs',
-            values: [],
+        const blog = await query({
+            query: 'select * from blogs where id = ?',
+            values: [id],
         });
-        const categoryString = `{${category.map(item => item.category).join(", ")}}`;
 
 
         return new Response(
             JSON.stringify({
                 status: 200,
-                category: categoryString,
+                blog: blog,
             })
         );
     } catch (e) {

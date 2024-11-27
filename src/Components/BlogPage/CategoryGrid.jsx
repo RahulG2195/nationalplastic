@@ -1,108 +1,216 @@
 "use client";
+import React, { useEffect, useState } from 'react';
+import { Row, Col, Card, Typography, Tag, Spin, Empty } from 'antd';
 import DiningTableCard from '../DiningTableCard/DiningTableCard';
-import PopularCards from '../PopularPostsCards/PopularCards';
-import './CategoryGrid.css';
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { notify } from '@/utils/notify';
 import axios from 'axios';
+import Image from 'next/image';
+import Link from 'next/link';
+
+const { Title, Paragraph } = Typography;
 
 const CategoryGrid = () => {
-    const productData = [
-        {
-            category: "CHAIRS",
-            title: "Dining Table Set",
-            date: "DECEMBER 10, 2023",
-        },
-        {
-            category: "MULTIPURPOSE",
-            title: "Multipurpose Storage",
-            date: "DECEMBER 10, 2023",
-        },
-        {
-            category: "CULTURE",
-            title: "Women's Day",
-            date: "DECEMBER 10, 2023",
-        },
-    ];
-    const [category, setCategory] = useState([]);
+    // State management
     const [blogs, setBlogs] = useState([]);
+    const [categories, setCategories] = useState([]);
 
+    const [loading, setLoading] = useState(true);
+    const [selectedCategory, setSelectedCategory] = useState(null);
+
+    // Fetch blogs on component mount
     useEffect(() => {
-        const fetchBlogsAndCategories = async () => {
+        const fetchBlogs = async () => {
             try {
+                setLoading(true);
                 const { data } = await axios.get('/api/blog');
-                console.log("Categories: ", data.categories);
-                setCategory(data.categories);
                 setBlogs(data.blogs);
+                setCategories(data.categories)
+                setLoading(false);
             } catch (error) {
-                console.error("Error fetching blogs and categories: ", error);
+                console.error("Error fetching blogs:", error);
+                setLoading(false);
             }
         };
 
-        fetchBlogsAndCategories();
+        fetchBlogs();
     }, []);
 
+    // Filter blogs based on selected category
+    const filteredBlogs = selectedCategory
+        ? blogs.filter(blog => blog.category === selectedCategory)
+        : blogs;
 
     return (
-        <>
-            <div>
-                <p className="fw-bold fs-1 text-danger text-center mb-2">Category</p>
-            </div>
-            <div className="d-flex flex-wrap justify-content-center gap-3 mb-2">
-                <button type="button" className="btn customButton btn-outline-primary fw-semibold px-4 py-2 rounded-0 categoryRespBtn">Chairs</button>
-                <button type="button" className="btn customButton btn-outline-primary fw-semibold px-4 py-2 rounded-0 categoryRespBtn">Storage</button>
-                <button type="button" className="btn customButton btn-outline-primary fw-semibold px-4 py-2 rounded-0 categoryRespBtn">Multipurpose</button>
-                <button type="button" className="btn customButton btn-outline-primary fw-semibold px-4 py-2 rounded-0 categoryRespBtn">Tables</button>
-                <button type="button" className="btn customButton btn-outline-primary fw-semibold px-4 py-2 rounded-0 categoryRespBtn">Culture</button>
-                <button type="button" className="btn customButton btn-outline-primary fw-semibold px-4 py-2 rounded-0 categoryRespBtn">Bulk Buy</button>
+        <div className="container-fluid px-md-5 py-4">
+            {/* Page Header */}
+            <Title
+                level={1}
+                className="text-center mb-4"
+                style={{ color: '#ff4d4f' }}
+            >
+                Blog Categories
+            </Title>
+
+            {/* Category Filter Tags */}
+            <div className="d-flex flex-wrap justify-content-center gap-3 mb-4">
+                {/* All Categories Tag */}
+                <Tag.CheckableTag
+                    checked={selectedCategory === null}
+                    onChange={() => setSelectedCategory(null)}
+                    style={{
+                        fontSize: '16px',
+                        padding: '5px 15px',
+                        backgroundColor: selectedCategory === null ? '#1890ff' : 'transparent',
+                        color: selectedCategory === null ? 'white' : 'black'
+                    }}
+                >
+                    All Categories
+                </Tag.CheckableTag>
+
+                {/* Dynamic Category Tags */}
+                {categories.map(cat => (
+                    <Tag.CheckableTag
+                        key={cat}
+                        checked={selectedCategory === cat}
+                        onChange={() => setSelectedCategory(cat)}
+                        style={{
+                            fontSize: '16px',
+                            padding: '5px 15px',
+                            backgroundColor: selectedCategory === cat ? '#1890ff' : 'transparent',
+                            color: selectedCategory === cat ? 'white' : 'black'
+                        }}
+                    >
+                        {cat}
+                    </Tag.CheckableTag>
+                ))}
             </div>
 
-            <div className="Grid-main_container ml-md-5 text-center text-sm-center text-xs-center responsive-container">
-                <div className="row mb-4 BlogGridCont">
-                    <div className="col-md-8 col-sm-12 col-12 gap-4 md-p-4 mx-auto">
-                        <div className="content-container">
-                            {productData.map((product, index) => (
-                                <div key={index} className="mt-5">
-                                    <p className="small text-danger fw-semibold">{product.category}</p>
-                                    <p className="darkBlue fw-bold fs-3">{product.title}</p>
-                                    <p className="small litegray">{product.date}</p>
-                                    <DiningTableCard />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="col-sm-4 col-md-4 col-12 mt-5 p-md-4 right-grid-cont mx-auto">
-                        <div className='BlogSvg mt-5 pt-5 mb-5'>
-                            <div>
-                                <div>
-                                    <Image
-                                        src="/Assets/svg/Group 725.svg"
-                                        width={50}
-                                        height={50}
-                                        layout='responsive'
-                                        objectFit='cover'
-                                    />
-                                </div>
-                                <div className='bg-darkBlue text-white fw-bold d-flex align-items-center justify-content-center recentPost p-3'>
-                                    Recent Posts
-                                </div>
-                                <div className='posts mt-3 fw-bold text-start small'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod</div>
-                                <div className='posts mt-3 fw-bold text-start small'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod</div>
-                                <div className='posts mt-3 fw-bold text-start small'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod</div>
-                                <div className='posts mt-3 fw-bold text-start small'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod</div>
-                                <div className='posts mt-3 fw-bold text-start small'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod</div>
-                                <div className='posts mt-3 fw-bold text-start small'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod</div>
-                            </div>
-                            <div><PopularCards /></div>
-                        </div>
-                    </div>
+            {/* Loading State */}
+            {loading ? (
+                <div className="text-center py-5">
+                    <Spin size="large" tip="Loading blogs..." />
                 </div>
-            </div>
-        </>
+            ) : (
+                <Row gutter={[16, 16]}>
+                    {/* Blog Posts Column */}
+                    <Col xs={24} md={16}>
+                        <Row gutter={[16, 16]}>
+                            {filteredBlogs.length > 0 ? (
+                                filteredBlogs.map(blog => (
+                                    <Col key={blog.id} xs={24} sm={12} md={12} lg={8}>
+                                        <Card
+                                            hoverable
+                                            cover={
+                                                <DiningTableCard
+                                                    content={blog.content}
+                                                    imageUrl={blog.featured_image}
+                                                />
+                                            }
+                                            onClick={() => router.push(`/BlogDetails/${blog.id}`)}
+                                        >
+                                            <Card.Meta
+                                                title={
+                                                    <div className="d-flex justify-content-between align-items-center">
+                                                        <span>{blog.title}</span>
+                                                        <Tag color="processing">{blog.category}</Tag>
+                                                    </div>
+                                                }
+                                                description={
+                                                    <div>
+                                                        <Paragraph ellipsis={{ rows: 2 }}>
+                                                            {blog.short_description}
+                                                        </Paragraph>
+                                                        <div className="d-flex justify-content-between">
+                                                            <small className="text-muted">
+                                                                {new Date(blog.published_at).toLocaleDateString()}
+                                                            </small>
+                                                            <small className="text-muted">
+                                                                {blog.reading_time} min read
+                                                            </small>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            />
+                                        </Card>
+                                    </Col>
+                                ))
+                            ) : (
+                                <Col span={24}>
+                                    <Empty
+                                        description="No blogs found in this category"
+                                        className="py-5"
+                                    />
+                                </Col>
+                            )}
+                        </Row>
+                    </Col>
 
+                    {/* Sidebar Column */}
+                    <Col xs={24} md={8}>
+                        <Card
+                            title="Recent Posts"
+                            extra={<a href="#" className="text-primary">View All</a>}
+                            bodyStyle={{ padding: 0 }}
+                        >
+                            {blogs.slice(0, 5).map(blog => (
+                                <Card.Grid
+                                    key={blog.id}
+                                    hoverable
+                                    style={{
+                                        width: '100%',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        padding: '12px'
+                                    }}
+                                >
+                                    {/* Small Thumbnail Image */}
+                                    <div style={{
+                                        width: 80,
+                                        height: 80,
+                                        marginRight: 12,
+                                        flexShrink: 0
+                                    }}>
+                                        <Image
+                                            src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_ABOUT_PATH_DIR}${blog.featured_image}` || "/path/to/default/image.jpg"}
+                                            alt={blog.title}
+                                            width={80}
+                                            height={80}
+                                            style={{
+                                                objectFit: 'cover',
+                                                borderRadius: 8
+                                            }}
+                                        />
+                                    </div>
+
+                                    {/* Post Details */}
+                                    <div style={{ flex: 1, overflow: 'hidden' }}>
+                                        <Typography.Text strong>
+                                            <Link href="/BlogDetails">
+                                                {blog.title}
+                                            </Link>
+                                        </Typography.Text>
+                                        <Typography.Paragraph
+                                            ellipsis={{ rows: 1 }}
+                                            type="secondary"
+                                            style={{ marginBottom: 0 }}
+                                        >
+                                            {blog.short_description}
+                                        </Typography.Paragraph>
+                                        <small className="text-muted">
+                                            {new Date(blog.published_at).toLocaleDateString()}
+                                        </small>
+                                    </div>
+                                </Card.Grid>
+                            ))}
+                        </Card>
+                    </Col>
+                </Row>
+            )}
+        </div>
     );
 }
 
 export default CategoryGrid;
+
+
+
+

@@ -38,3 +38,25 @@
     }
     
 }
+.blog-content {
+    line-height: 1.7;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.blog-content p {
+    margin-bottom: 1.5rem;
+}
+
+.blog-content h2, 
+.blog-content h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #1890ff;
+}
+
+@media (max-width: 768px) {
+    .blog-content {
+        font-size: 1rem;
+    }
+}
