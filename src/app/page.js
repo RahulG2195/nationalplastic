@@ -53,7 +53,7 @@ export default function Home() {
       {
         // (!ValidateLogin) && <CoupenBanner />
       }
-      {/* <CoupenBanner /> */}
+      <CoupenBanner />
       <TopPick />
       <Manufacture />
       <ShopRoom />

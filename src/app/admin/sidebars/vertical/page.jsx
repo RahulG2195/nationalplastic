@@ -235,6 +235,22 @@ const navigation = [
         title: "Order List",
         href: "/admin/OrderList",
       },
+      {
+        title: "Coupon Code",
+        href: "/admin/CouponList",
+      },
+      {
+        title: "Cards Section",
+        href: "/admin/homepage/cards",
+      },
+      {
+        title: "Offer Banner",
+        href: "/admin/homepage/offersection",
+      },
+      {
+        title: "house section",
+        href: "/admin/homepage/house section",
+      },
     ],
     icon: "bi bi-p-square",
   },
@@ -351,20 +367,4 @@ const Sidebar = ({ showMobilemenu }) => {
 export default Sidebar;
 
 
-// {
-//   title: "Cards Section",
-//   href: "/admin/homepage/cards",
-// },
-// {
-//   title: "Offer Banner",
-//   href: "/admin/homepage/offersection",
-// },
-// {
-//   title: "house section",
-//   href: "/admin/homepage/house section",
-// },
-// {
-//   title: "Coupon Code",
-//   href: "/admin/CouponList",
-//   icon: "bi bi-patch-check",
-// },
+

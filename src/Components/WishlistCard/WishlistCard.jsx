@@ -82,13 +82,13 @@ const WishlistCard = (props) => {
           </Link>
         </div>
         <div className="">
-          {/* <div className="price m-1 fw-bold WishpriceRsp">
+          <div className="price m-1 fw-bold WishpriceRsp">
             <div>₹{numberWithCommas(props.Price)}</div>
             <div className=" text-body-tertiary og_price">
               <del>₹{numberWithCommas(props.originalPrice)}</del>
               <span className="text-danger small">{props.discount}%</span>
             </div>
-          </div> */}
+          </div>
         </div>
         <div className="actions_btn">
           <div className="wishlist-buttons">

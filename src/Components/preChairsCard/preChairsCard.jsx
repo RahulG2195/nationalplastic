@@ -88,14 +88,14 @@ const PreChairsCard = (props) => {
                   Get Quote
                 </button>
               )}
-              {/* {props.Price && (
+              {props.Price && (
                 <>
                   <span className="new-price pr-2 pr-md-0">₹{numberWithCommas(props.Price)}</span>
                   {props.orignalPrice && (
-                    <small className="old-price text-right"><del>₹{numberWithCommas(props.orignalPrice)}</del></small>
+                    <small className="old-price text-right"><del style={{paddingLeft:"5px", fontSize:"14px"}}>₹{numberWithCommas(props.orignalPrice)}</del></small>
                   )}
                 </>
-              )} */}
+              )}
             </div>
           </div>
           {/* <div className="d-flex justify-content-between align-items-center pt-1">

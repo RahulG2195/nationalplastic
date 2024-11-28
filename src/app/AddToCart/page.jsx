@@ -368,7 +368,9 @@ function AddToCart() {
   };
 
   const validateCouponCode = async (event) => {
-    event.preventDefault();
+    if (event && event.preventDefault) {
+      event.preventDefault();
+    }
     try {
       const response = await axios.post("api/couponValidation", {
         code: couponCode,
@@ -451,7 +453,7 @@ function AddToCart() {
             </div>
           </div>
           <div className="col-sm-12 col-md-4 col-lg-4 col-xl-4 place-order">
-            {/* <div className="coupenDiv p-4">
+            <div className="coupenDiv p-4">
               <h6 className="pb-2">Have a coupon Code?</h6>
               <form onSubmit={validateCouponCode}>
                 <div className="input-group mb-3">
@@ -472,7 +474,7 @@ function AddToCart() {
                   </div>
                 </div>
               </form>
-            </div> */}
+            </div>
             <PriceDetailsCard
               itemCount={totalCount}
               cartPrice={totalPrice}

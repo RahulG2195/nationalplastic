@@ -150,13 +150,13 @@ const CartProduct = ({
           </div>
 
           {/* Price Section */}
-          {/* <div className="productPrice">
+          <div className="productPrice">
             <p className="fw-bold">₹ {numberWithCommas(productPrice)}</p>
             <p>
               <del className="fw-semibold">₹ {numberWithCommas(discountedPrice)}</del>
               <span>{discPer}% Off</span>
             </p>
-          </div> */}
+          </div>
         </div>
 
         <div className="InstallationCharges align-items-center my-5">
