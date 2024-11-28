@@ -297,29 +297,6 @@ export default function App() {
 
 
         <Form.Item
-          label="Images"
-          validateStatus={errors.image ? 'error' : ''}
-          help={errors.image ? 'Please upload at least one image!' : ''}
-        >
-          <div className="image-previews">
-            {imagePreviews.map((preview, index) => (
-              <img
-                key={index}
-                src={preview}
-                alt={`Product image ${index + 1}`}
-                title={`Product Image ${index + 1}`}
-                style={{ maxWidth: '40px', marginRight: '10px', marginBottom: '10px' }}
-              />
-            ))}
-          </div>
-          <input
-            type="file"
-            onChange={handleFileChange}
-            multiple
-          />
-        </Form.Item>
-
-        <Form.Item
           label="Price"
           validateStatus={errors.price ? 'error' : ''}
           help={errors.price ? 'Please input the price!' : ''}

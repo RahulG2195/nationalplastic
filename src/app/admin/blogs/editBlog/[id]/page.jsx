@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { Layout, Typography, message } from 'antd';
 import { useRouter, useParams } from 'next/navigation';
 import BlogForm from '@/app/admin/blogs/addBlog/BlogForm';
+import axios from "axios";
+
 const { Content } = Layout;
 const { Title } = Typography;
 
@@ -48,33 +50,27 @@ export default function EditBlogPage() {
         }
     }, [params.id, router]);
 
-    const handleUpdateBlog = async (blogData) => {
+    const handleUpdateBlog = async (formData) => {
+        setLoading(true);
+    
         try {
-            const response = await fetch('/api/blog', {
-                method: 'POST',
+            const response = await axios.put('/api/blog', formData, {
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'multipart/form-data',
                 },
-                body: JSON.stringify({
-                    action: 'update_blog',
-                    id: params.id,
-                    ...blogData
-                }),
             });
-
-            const result = await response.json();
-
-            if (result.status === 200) {
-                message.success('Blog updated successfully');
-                router.push('/blogs');
-            } else {
-                message.error(result.message || 'Failed to update blog');
-            }
+    
+            message.success('Blog updated successfully');
+            router.push('/admin/blogs/blogList');
         } catch (error) {
-            message.error('An error occurred while updating the blog');
+            message.error('Failed to update blog');
+            console.error('Blog update error:', error);
+        } finally {
+            setLoading(false);
         }
     };
-
+    
+    
     if (loading) {
         return <div>Loading...</div>;
     }

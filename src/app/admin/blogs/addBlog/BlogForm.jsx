@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState } from 'react';
 import {
     Form,
@@ -12,14 +11,16 @@ import {
     InputNumber
 } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
+import 'react-quill/dist/quill.snow.css';
+import dynamic from 'next/dynamic';
 
 const { TextArea } = Input;
 const { Option } = Select;
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 const BlogForm = ({ initialValues, onSubmit }) => {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
-
     const handleSubmit = async (values) => {
         setLoading(true);
         try {
@@ -31,15 +32,14 @@ const BlogForm = ({ initialValues, onSubmit }) => {
             setLoading(false);
         }
     };
-
     return (
         <Form
             form={form}
             layout="vertical"
             initialValues={initialValues || {
                 status: 1,
-                is_popular: 0,
-                is_featured: 0,
+                is_popular: false,
+                is_featured: false,
                 reading_time: 5
             }}
             onFinish={handleSubmit}
@@ -51,20 +51,22 @@ const BlogForm = ({ initialValues, onSubmit }) => {
             >
                 <Input />
             </Form.Item>
-
             <Form.Item
                 name="short_description"
                 label="Short Description"
             >
                 <TextArea rows={3} />
             </Form.Item>
-
             <Form.Item
                 name="content"
                 label="Content"
                 rules={[{ required: true, message: 'Please input blog content' }]}
             >
-                <TextArea rows={6} />
+                <ReactQuill
+                    value={form.getFieldValue('content') || ''}
+                    onChange={(value) => form.setFieldsValue({ content: value })}
+                    theme="snow"
+                />
             </Form.Item>
 
             <Form.Item name="featured_image" label="Featured Image">
@@ -72,11 +74,11 @@ const BlogForm = ({ initialValues, onSubmit }) => {
                     name="featured_image"
                     listType="picture"
                     maxCount={1}
+                    beforeUpload={() => false} // Prevent auto upload
                 >
                     <Button icon={<UploadOutlined />}>Upload Image</Button>
                 </Upload>
             </Form.Item>
-
             <Form.Item
                 name="author"
                 label="Author"
@@ -84,7 +86,6 @@ const BlogForm = ({ initialValues, onSubmit }) => {
             >
                 <Input />
             </Form.Item>
-
             <Form.Item
                 name="category"
                 label="Category"
@@ -96,19 +97,18 @@ const BlogForm = ({ initialValues, onSubmit }) => {
                     <Option value="Lifestyle">Lifestyle</Option>
                 </Select>
             </Form.Item>
-
             <Form.Item name="is_popular" label="Popular Blog" valuePropName="checked">
                 <Switch />
             </Form.Item>
-
             <Form.Item name="is_featured" label="Featured Blog" valuePropName="checked">
                 <Switch />
             </Form.Item>
-
+            <Form.Item name="status" label="status" valuePropName="checked">
+                <Switch />
+            </Form.Item>
             <Form.Item name="reading_time" label="Reading Time (minutes)">
                 <InputNumber min={1} max={30} />
             </Form.Item>
-
             <Form.Item>
                 <Button type="primary" htmlType="submit" loading={loading}>
                     Save Blog
@@ -117,5 +117,4 @@ const BlogForm = ({ initialValues, onSubmit }) => {
         </Form>
     );
 };
-
 export default BlogForm;

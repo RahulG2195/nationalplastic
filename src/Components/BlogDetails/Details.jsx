@@ -152,22 +152,11 @@ const BlogDetails = ({ blogId }) => {
             {/* Author Card */}
             <div className="card mb-4 shadow-sm">
               <div className="card-body text-center">
-                <Image
-                  src="/default-avatar.jpg"
-                  alt={blog.author}
-                  width={120}
-                  height={120}
-                  style={{
-                    borderRadius: '50%',
-                    objectFit: 'cover',
-                    marginBottom: '15px'
-                  }}
-                />
                 <Title level={4} className="mb-2">
                   {blog.author}
                 </Title>
                 <Text type="secondary">
-                  Technology Writer
+                   Writer
                 </Text>
               </div>
             </div>
