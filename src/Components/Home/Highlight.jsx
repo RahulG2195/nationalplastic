@@ -54,21 +54,21 @@ export default function Highlight() {
               <div className="row">
                 {productArr.map((product) => {
                   const images = product.image_name ? product.image_name.split(', ').map(image => image.trim()) : [];
-                  return <div key={product.product_name} className="col-md-4 col-4 my-2 prodHcard">
+                  return <div key={product.product_name} className="col-md-4 col-12 my-2 prodHcard">
                     <Link href={`/product-detail/${product.seo_url}`}>
                       <div className="card highlightcard">
                         <Image
                           className="imagetop"
                           src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${images[0]}`}
                           alt={product.image}
-                          width={50}
+                          width={100}
                           height={100}
                           layout="responsive"
                           objectFit="cover"
                         />
                         <div className="card-body cardbtm">
                           <h5 className="card-title">{product.product_name}</h5>
-                          <p className="card-text py-2">
+                          <p className="card-text py-2 d-none">
                             {product.short_description}
                           </p>
                           <div className="btn btn-dark text-white rounded-circle highArrow mt-md-5">
