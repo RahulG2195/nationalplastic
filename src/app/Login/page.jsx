@@ -161,7 +161,7 @@ function Login() {
         if (res.data.status === 403) {
           throw new Error(res.data.message || "Blocked by Admin");
         }
-        
+
 
         dispatch(
           setUserData({
@@ -309,7 +309,7 @@ function Login() {
                 </p>
               </div>
             </form>
-            <div className="row justify-content-center">
+            {/* <div className="row justify-content-center">
                 <button
                   className="d-flex justify-content-center align-items-center"
                   onClick={() => handleGoogleSignIn()}
@@ -329,7 +329,7 @@ function Login() {
                     className="mx-2"
                   />
                 </button>
-              </div>
+              </div> */}
           </div>
         </div>
       </div>
