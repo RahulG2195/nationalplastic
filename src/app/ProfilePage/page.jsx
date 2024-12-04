@@ -1,5 +1,5 @@
 "use client";
-import FooterRow from "@/Components/FooterRow/FooterRow";
+// import FooterRow from "@/Components/FooterRow/FooterRow";
 import "../../styles/profilepage.css";
 import Wishlist from "../Wishlist/page";
 import { useEffect, useState } from "react";
@@ -405,11 +405,12 @@ function ProfilePage() {
                 if (data.per_order_status === 1) {
                   ReturnCancelBtn = <button className="btn btn-warning btn-rounded" onClick={() => CancelProduct(data.product_id, data.customer_id, data.od_id)}>Cancel order</button>
                 } else {
-                  if(data.order_status === 1){
+                  if (data.order_status === 1) {
                     ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>
-                  }else{
-                  {/* once order status get 0 in db it will show order cancelled  */ }
-                  ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>}
+                  } else {
+                    {/* once order status get 0 in db it will show order cancelled  */ }
+                    ReturnCancelBtn = <button className="btn btn-light btn-rounded" disabled>Order Canceled</button>
+                  }
                 }
               } else if (data.order_status == 6) {
 
@@ -810,9 +811,9 @@ function ProfilePage() {
         </div>
       </div>
 
-      <div className="my-5">
+      {/* <div className="my-5">
         <FooterRow />
-      </div>
+      </div> */}
 
       {/* popup */}
 

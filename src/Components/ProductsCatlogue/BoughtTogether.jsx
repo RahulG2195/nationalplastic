@@ -126,12 +126,12 @@ const BoughtTogether = () => {
           </div>
           <div className="mt-1 fw-semibold subCptRes">
             <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has
+              Explore popular product combinations that customers often purchase together.
             </p>
-            <p>been the industriesstandard dummy text ever since the 1500s,</p>
+            <p>Find curated bundles to enhance your shopping experience.</p>
           </div>
         </div>
+
       </div>
 
       <div className="container my-5">
@@ -173,20 +173,20 @@ const BoughtTogether = () => {
           {togetherCardsData?.map((card) => {
             const images = card.image_name ? card.image_name.split(', ').map(image => image.trim()) : [];
             return <SwiperSlide key={card.product_id} className="newProdCard">
-            <PreChairsCard
-                    ChairImg={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${images[0]}`}
-                    id={card.seo_url}
-                    Title={card.product_name}
-                    Discription={card.short_description}
-                    Price={card.price}
-                    orignalPrice={card.discount_price}
-                    Color={card.color}
-                    Discount={card.discount_percentage}
-                    onaddToWishlist={() =>
-                      handleAddToWishlist(card.product_id)
-                    }
-                    onAddToCart={() => handleMoveToCart(card.product_id)}
-                  />
+              <PreChairsCard
+                ChairImg={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_PRODUCTS_PATH_DIR}${images[0]}`}
+                id={card.seo_url}
+                Title={card.product_name}
+                Discription={card.short_description}
+                Price={card.price}
+                orignalPrice={card.discount_price}
+                Color={card.color}
+                Discount={card.discount_percentage}
+                onaddToWishlist={() =>
+                  handleAddToWishlist(card.product_id)
+                }
+                onAddToCart={() => handleMoveToCart(card.product_id)}
+              />
             </SwiperSlide>
           })}
         </Swiper>
