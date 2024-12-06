@@ -75,6 +75,25 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
+        <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Corporation",
+            "name": "National Plastic",
+            "alternateName": "National Plastic",          
+            "url": "https://www.nationalplastic.com/",
+            "logo": "https://www.nationalplastic.com/_next/image?url=https%3A%2F%2Fnationalplastic.com%2Fuploads%2Fuploads%2FNational-Plastic-Logo-New_02.png&w=1920&q=75",
+            "sameAs": [
+              "https://www.instagram.com/nationalplastic1952/",
+              "https://www.youtube.com/@NationalPlastic1952",
+              "https://www.facebook.com/NationalPlastic1952/",
+              "https://in.pinterest.com/nationalplastic1952/"
+            ]          
+          }),
+        }}
+      />
       </head>
 
       <body className={inter.className}>

@@ -6,6 +6,8 @@ import BoughtTogether from "@/Components/ProductsCatlogue/BoughtTogether";
 import RecentlyViewed from "@/Components/ProductsCatlogue/RecentlyViewed";
 import FooterRow from "@/Components/FooterRow/FooterRow";
 import BottomCTABanner from "@/Components/ProductsCatlogue/BottomCTABanner";
+import Head from 'next/head';
+import PRODUCT_CATEGORIES from "./catSchema";
 async function getCategoryData(id) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/categorySeo?id=${id}`);
   if (!res.ok) {
@@ -22,20 +24,30 @@ export async function generateMetadata({ params }) {
     description: categoryData.meta_description || `Details for ${categoryData.category_name}`,
   };
 }
-const ProductCatlogue = ({ params}) => {
 
+
+const ProductCatlogue = ({ params}) => {
+  const { productCatId } = params;
+  const breadcrumbSchema = PRODUCT_CATEGORIES.getCategory(productCatId);
   return (
     <>
-      <CatlogueBanner catName={params.productCatId}/>
-      {/* <TopPics /> */}
-      {/* <PremiumChairs /> */}
-      <PreChairsCards />
-      <BoughtTogether />
-       <RecentlyViewed />
-
-      {/* <FooterRow /> */}
-      {/* <BottomCTABanner /> */}
-    </>
+    <Head>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema)
+        }}
+      />
+    </Head>
+    <CatlogueBanner catName={params.productCatId}/>
+    {/* <TopPics /> */}
+    {/* <PremiumChairs /> */}
+    <PreChairsCards />
+    <BoughtTogether />
+    <RecentlyViewed />
+    {/* <FooterRow /> */}
+    {/* <BottomCTABanner /> */}
+  </>
   );
 };
 export default ProductCatlogue;
