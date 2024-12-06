@@ -31,7 +31,7 @@ function page({params}) {
         <ProdData />
         <RecentlyViewedDetails id={productId} />
         
-        <CustomerReview />
+        {/* <CustomerReview /> */}
         <Faqs />
         {/* <FooterRow /> */}
       </div>
