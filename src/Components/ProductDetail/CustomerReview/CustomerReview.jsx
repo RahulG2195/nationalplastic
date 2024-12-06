@@ -5,6 +5,9 @@ import { useParams } from "next/navigation";
 import axios from "axios";
 import "./CustomerReview.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Upload, Button } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+
 import { useSelector } from "react-redux";
 import { notifyError } from "@/utils/notify";
 
@@ -42,7 +45,7 @@ const CustomerReview = () => {
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/reviews`, JSON.stringify({ action: 'getProductReviews', product_id: product_id }));
       const data = response.data;
-  
+
       let reviewsToReturn = [];
       const review = data.review
       const mapReview = (review) => ({
@@ -58,25 +61,25 @@ const CustomerReview = () => {
         const reviewArray = Array.isArray(data.review) ? data.review : [data.review];
         reviewsToReturn = reviewArray.map(mapReview);
       }
-  
+
       // Fill with dummy reviews only if needed
       if (reviewsToReturn.length < 5 && data.dummyReviews && Array.isArray(data.dummyReviews)) {
         const remainingCount = 5 - reviewsToReturn.length;
         const dummyReviewsToAdd = data.dummyReviews.slice(0, remainingCount).map(mapReview);
         reviewsToReturn = [...reviewsToReturn, ...dummyReviewsToAdd];
       }
-  
+
       if (reviewsToReturn.length === 0) {
         console.warn("No reviews or dummy reviews found in the response");
       }
-  
+
       return reviewsToReturn;
     } catch (error) {
       console.error("Error fetching reviews:", error);
       return [];
     }
   };
-  
+
   const updateOverallRating = (reviewsToRate) => {
     if (reviewsToRate.length > 0) {
       const newOverallRating = reviewsToRate.reduce((sum, review) => sum + review.rating, 0) / reviewsToRate.length;
@@ -84,7 +87,7 @@ const CustomerReview = () => {
     }
   };
 
-  const showModal =  async () => {
+  const showModal = async () => {
     const valid = await userValidation();
     if (canReview && valid) {
       setIsModalVisible(true);
@@ -96,43 +99,68 @@ const CustomerReview = () => {
       message.error("Please provide both a rating and a review.");
       return;
     }
+
     const reviewToAdd = {
       id: reviews.length + 1,
       name: "Current User",
       rating: newReview.rating,
       review: newReview.text,
-      avatar: newReview.username ? newReview.username[0].toUpperCase() : "https://xsgames.co/randomusers/avatar.php?g=pixel",
+      avatar: newReview.username
+        ? newReview.username[0].toUpperCase()
+        : "https://xsgames.co/randomusers/avatar.php?g=pixel",
+      image: newReview.image ? URL.createObjectURL(newReview.image) : null,
     };
+
     const reviewData = {
       action: "postReview",
       customer_id: customer_id,
-      product_id:review_product_id,
-      review_message:newReview.text,
-      review_rate:newReview.rating,
-     userEmail: userEmail
+      product_id: review_product_id,
+      review_message: newReview.text,
+      review_rate: newReview.rating,
+      userEmail: userEmail,
+      image: newReview.image, // Include the image file
     };
 
     const response = await submitReview(reviewData);
-  
-    const updatedReviews = [reviewToAdd, ...reviews];
-    setReviews(updatedReviews);
-    setIsModalVisible(false);
-    setNewReview({ rating: 0, text: "" });
-    message.success("Review submitted successfully!");
 
-    updateOverallRating(updatedReviews);
-    setCanReview(false);
+    if (response) {
+      const updatedReviews = [reviewToAdd, ...reviews];
+      setReviews(updatedReviews);
+      setIsModalVisible(false);
+      setNewReview({ rating: 0, text: "", image: null });
+      message.success("Review submitted successfully!");
+      updateOverallRating(updatedReviews);
+      setCanReview(false);
+    }
   };
-  const submitReview = async (reviewData) =>{
+
+  const submitReview = async (reviewData) => {
+    const formData = new FormData();
+    for (const key in reviewData) {
+      if (reviewData.hasOwnProperty(key)) {
+        formData.append(key, reviewData[key]);
+      }
+    }
+
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/reviews`, reviewData);
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/reviews`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
       return response.data.success;
     } catch (error) {
       notifyError(error.message);
       console.error("Error submitting review:", error);
       return false;
     }
-  }
+  };
+
+
   const handleCancel = () => {
     setIsModalVisible(false);
     setNewReview({ rating: 0, text: "" });
@@ -169,7 +197,7 @@ const CustomerReview = () => {
         <h1 className="display-4">Customer <span className="text-danger">Reviews</span></h1>
         <p className="lead">See what our customers are saying about their experience</p>
       </div>
-  
+
       <div className="row justify-content-center">
         <div className="col-md-6">
           <div className="card mb-4">
@@ -190,11 +218,11 @@ const CustomerReview = () => {
           </div>
         </div>
       </div>
-  
+
       <div className="row">
         {reviews.slice(0, visibleReviews).map((review) => {
           const initialName = review.username ? review.username[0].toUpperCase() : 'NP';
-  
+
           return (
             <div className="col-md-6 mb-4" key={review.id}>
               <div className="card">
@@ -215,13 +243,13 @@ const CustomerReview = () => {
           );
         })}
       </div>
-  
+
       <div className="text-center">
-    <button className="btn btn-outline-danger" onClick={toggleReviews}>
-      {visibleReviews === reviews.length ? "Show Less Reviews" : "Load More Reviews"}
-    </button>
-  </div>
-  
+        <button className="btn btn-outline-danger" onClick={toggleReviews}>
+          {visibleReviews === reviews.length ? "Show Less Reviews" : "Load More Reviews"}
+        </button>
+      </div>
+
       <Modal
         title="Write a Review"
         visible={isModalVisible}
@@ -243,6 +271,18 @@ const CustomerReview = () => {
             onChange={(e) => setNewReview({ ...newReview, text: e.target.value })}
             placeholder="Share your experience with this product..."
           />
+        </div>
+        <div className="form-group">
+          <label>Upload Image:</label>
+          <Upload
+            accept="image/*"
+            beforeUpload={(file) => {
+              setNewReview({ ...newReview, image: file });
+              return false; // Prevent automatic upload
+            }}
+          >
+            <Button icon={<UploadOutlined />}>Click to Upload</Button>
+          </Upload>
         </div>
       </Modal>
     </div>

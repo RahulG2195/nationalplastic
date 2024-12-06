@@ -1,5 +1,8 @@
 import { query } from "@/lib/db";
 import {isValidReason} from "@/utils/validation";
+const fs = require("fs").promises;
+const path = require("path");
+
 
 export async function POST(request) {
     return await handleAction(request);
@@ -7,44 +10,70 @@ export async function POST(request) {
 
 async function handleAction(request) {
     try {
-        const body = await request.json();
-        const { action } = body;
+        const formData = await request.formData();
+        const action = formData.get('action');
+        
         switch (action) {
             case 'postReview':
-                return await postReview(body);
+                return await postReview(formData);
             case 'getProductReviews':
-                return await getProductReviews(body);
+                return await getProductReviews(formData);
             default:
-                return Response.json({ message: 'Invalid action' }, { status: 400 });
+                return new Response(JSON.stringify({ message: 'Invalid action' }), { status: 400 });
         }
     } catch (error) {
         return new Response(JSON.stringify({
             status: 500,
             message: error.message
-        }));
+        }), { status: 500 });
     }
 }
 
-async function postReview(body) {
-    const { customer_id, product_id, review_message, review_rate ,userEmail = "User"} = body;
+async function postReview(formData) {
+    const customer_id = formData.get('customer_id');
+    const product_id = formData.get('product_id');
+    const review_message = formData.get('review_message');
+    const review_rate = parseInt(formData.get('review_rate'), 10);
+    const userEmail = formData.get('userEmail') || "User";
+    const image = formData.get('image') || "";
+
 
     // Validate input
-    if (!customer_id || !product_id || !review_message || !review_rate ) {
-        return Response.json({ message: 'Missing required fields' }, { status: 400 });
+    if (!customer_id || !product_id || !review_message || !review_rate) {
+        return new Response(JSON.stringify({ message: 'Missing required fields' }), { status: 400 });
     }
     if (!isValidReason(review_message)) {
-        return Response.json({ message: 'Not a valid review' }, { status: 403 });
-      }
-
-    if (review_rate < 1 || review_rate > 5) {
-        return Response.json({ message: 'Rating must be between 1 and 5' }, { status: 400 });
+        return new Response(JSON.stringify({ message: 'Not a valid review' }), { status: 403 });
     }
-    
+    if (review_rate < 1 || review_rate > 5) {
+        return new Response(JSON.stringify({ message: 'Rating must be between 1 and 5' }), { status: 400 });
+    }
+    let imageName = '';
+
+    // Handle file upload (similar to add_blog)
+    if (image && image.size > 0) {
+        const filepath = path.join(
+            process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
+            process.env.NEXT_PUBLIC_USER_PATH_DIR
+        );
+        
+        try {
+            await fs.access(filepath);
+        } catch {
+            await fs.mkdir(filepath, { recursive: true });
+        }
+
+        imageName = image.name;
+        const image_url = path.join(filepath, imageName);
+        await fs.writeFile(image_url, Buffer.from(await image.arrayBuffer()));
+        
+    }
+
     try {
         const result = await query({
-            query: `INSERT INTO review (user_id, product_id, review_message, review_rate, username)
-                    VALUES (?, ?, ?, ?, ?)`,
-            values: [customer_id, product_id, review_message, review_rate, userEmail]
+            query: `INSERT INTO review (user_id, product_id, review_message, review_rate, username, image)
+                    VALUES (?, ?, ?, ?, ?, ?)`,
+            values: [customer_id, product_id, review_message, review_rate, userEmail, imageName]
         });
 
         if (result.affectedRows > 0) {
@@ -52,18 +81,16 @@ async function postReview(body) {
                 result: "Successfully Added Review",
             }), { status: 200 });
         } else {
-            return Response.json({ message: 'Failed to add review' }, { status: 500 });
+            return new Response(JSON.stringify({ message: 'Failed to add review' }), { status: 500 });
         }
     } catch (error) {
         console.error('Error adding review:', error);
-        return Response.json({ message: 'Failed to add review' }, { status: 500 });
+        return new Response(JSON.stringify({ message: 'Failed to add review' }), { status: 500 });
     }
 }
 
-
-
-async function getProductReviews(body) {
-    const { product_id } = body;
+async function getProductReviews(formData) {
+    const product_id = formData.get('product_id');
     if (!product_id) {
         return new Response(JSON.stringify({
             status: 400,
@@ -71,20 +98,25 @@ async function getProductReviews(body) {
         }), { status: 400 });
     }
 
-    const productReview = await query({
-        query: "SELECT * FROM review WHERE product_id = ? and review_status = 1",
-        values: [product_id],
-    });
-    console.log(productReview);
-    const dummyReviews = await query({
-        query: "SELECT * FROM review WHERE product_id != ? and review_status = 1",
-        values: [product_id],
-    });
+    try {
+        const productReview = await query({
+            query: "SELECT * FROM review WHERE product_id = ? and review_status = 1",
+            values: [product_id],
+        });
 
-    return new Response(JSON.stringify({
-        review: productReview.length > 0 ? productReview : null,
-        dummyReviews: dummyReviews,
-    }), { status: 200 });
+        const dummyReviews = await query({
+            query: "SELECT * FROM review WHERE product_id != ? and review_status = 1",
+            values: [product_id],
+        });
+
+        return new Response(JSON.stringify({
+            review: productReview.length > 0 ? productReview : null,
+            dummyReviews: dummyReviews,
+        }), { status: 200 });
+    } catch (error) {
+        console.error('Error fetching reviews:', error);
+        return new Response(JSON.stringify({ message: 'Failed to fetch reviews' }), { status: 500 });
+    }
 }
 
 export async function GET(req) {
