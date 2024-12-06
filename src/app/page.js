@@ -55,7 +55,9 @@ export default function Home() {
       {
         // (!ValidateLogin) && <CoupenBanner />
       }
-      <CoupenBanner />
+      {
+        // <CoupenBanner /> 
+      }
       <TopPick />
       <Manufacture />
       <ShopRoom />
@@ -69,3 +71,4 @@ export default function Home() {
     </main>
   );
 }
+

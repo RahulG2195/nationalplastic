@@ -2,7 +2,7 @@
 import Image from "next/image";
 import "../../styles/addtocart.css";
 import CartProduct from "../../Components/AddToCart/CartProduct";
-import PriceDetailsCard from "../../Components/PriceDetails/PriceDetailsCard";
+// import PriceDetailsCard from "../../Components/PriceDetails/PriceDetailsCard";
 // import FooterRow from "@/Components/FooterRow/FooterRow";
 import FooterRow from "../../Components/FooterRow/FooterRow.jsx";
 import React, { useEffect, useState } from "react";
@@ -475,14 +475,14 @@ function AddToCart() {
                 </div>
               </form>
             </div>
-            <PriceDetailsCard
+            {/* <PriceDetailsCard
               itemCount={totalCount}
               cartPrice={totalPrice}
               totalDiscount={discount}
               totalPay={totalPayble}
               InstallationCharges={installationCharges}
               redirect={true}
-            />
+            /> */}
           </div>
         </div>
       </div>

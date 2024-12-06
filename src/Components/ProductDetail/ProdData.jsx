@@ -37,6 +37,8 @@ function ProdData({ category_id }) {
   const [dataToShow, setdataToShow] = useState([]);
   const [isHovered, setIsHovered] = useState(false);
   const [descriptionToShow, setDescriptionToShow] = useState([]);
+  const [fulldescription, setFulldescription] = useState([]);
+
   const [inWishlist, setInWishlist] = useState(false);
 
   const cartData = useSelector((state) => state.cart.products);
@@ -115,6 +117,8 @@ function ProdData({ category_id }) {
           colorBasedProductsImages(allColors);
           const descriptionToShowRaw =
             product.short_description || "Stylish, durable, and affordable plastic chairs and household items for modern homes."
+            const fulldescriptionToShowRaw = productDetails.descp || product.long_description ||  "Discover a stunning range of stylish, durable, and affordable plastic chairs and household items, designed to elevate the aesthetics of modern homes while offering unmatched practicality and comfort."
+            setFulldescription(fulldescriptionToShowRaw);
           setDescriptionToShow(descriptionToShowRaw);
         }
       } catch (error) {
@@ -354,12 +358,12 @@ function ProdData({ category_id }) {
                 </div>
 
                 <div className="reviews-counter d-flex flex-wrap gap-2">
-                  <div className="mrp">
+                  {/* <div className="mrp">
                     <h6>
                       <strong className="text-danger"> ₹{price}</strong>
                     </h6>
                     <del style={{ fontSize: "16px" }}> ₹{orignalPrice}</del>
-                  </div>
+                  </div> */}
                 </div>
                 <div>
                   <i
@@ -577,7 +581,7 @@ function ProdData({ category_id }) {
             {prodDataDetail.descp?.includes("<") ? (
               <div
                 className="col-md-9"
-                dangerouslySetInnerHTML={{ __html: val.short_description }}
+                dangerouslySetInnerHTML={{ __html: fulldescription }}
               />
             ) : (
               <div className="col-md-9">{prodDataDetail.descp}</div>
