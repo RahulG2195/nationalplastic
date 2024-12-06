@@ -16,27 +16,29 @@ import "aos/dist/aos.css";
 import CommingSoon from "./CommingSoon/page";
 
 export const metadata = {
-  title: 'Nationalplastic - Home | Quality Plastic Furniture & Household Items',
-  description: 'Discover our wide range of affordable plastic chairs, stools, and household items. Quality products from Nationalplastic, a trusted, listed company.',
-  keywords: 'Nationalplastic, plastic chairs, stools, household items, affordable furniture, listed company',
+  title: 'India\'s Largest House hold Product Manufacturers | High Quality Plastic Durable Products',
+  description: 'Discover premium plastic chairs, tables & cabinets for every space. Our durable, stylish furniture offers perfect solutions for homes, offices, and events. Browse our collection today!',
+  keywords: 'plastic chairs, tables, cabinets, durable furniture, home furniture, office furniture, event furniture',
   openGraph: {
-    title: 'Nationalplastic - Affordable Plastic Furniture & Household Items',
-    description: 'Browse Nationalplastic\'s selection of durable plastic chairs, stools, and household essentials. Quality products from a trusted, listed company.',
+    url: 'https://www.nationalplastic.com/',
+    type: 'website',
+    title: 'India\'s Largest House hold Product Manufacturers | High Quality Plastic Durable Products',
+    description: 'Discover premium plastic chairs, tables & cabinets for every space. Our durable, stylish furniture offers perfect solutions for homes, offices, and events. Browse our collection today!',
     images: [
       {
         url: 'https://nationalplastic.com/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Nationalplastic Product Showcase',
+        alt: 'National Plastic - Premium Plastic Furniture',
       },
     ],
-    type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nationalplastic - Affordable Plastic Furniture & Household Items',
-    description: 'Browse Nationalplastic\'s selection of durable plastic chairs, stools, and household essentials. Quality products from a trusted, listed company.',
-    images: ['https://nationalplastic.com/twitter-image.jpg'],
+    site: '@nationalplastic',
+    title: 'India\'s Largest House hold Product Manufacturers | High Quality Plastic Durable Products',
+    description: 'Discover premium plastic chairs, tables & cabinets for every space. Our durable, stylish furniture offers perfect solutions for homes, offices, and events. Browse our collection today!',
+    images: ['https://nationalplastic.com/og-image.jpg'],
   },
 };
 
