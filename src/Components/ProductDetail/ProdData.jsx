@@ -114,9 +114,7 @@ function ProdData({ category_id }) {
           const allColors = colors.map((color) => color.color);
           colorBasedProductsImages(allColors);
           const descriptionToShowRaw =
-            product.short_description ||
-            product.long_description ||
-            productDetails.descp;
+            product.short_description || "Stylish, durable, and affordable plastic chairs and household items for modern homes."
           setDescriptionToShow(descriptionToShowRaw);
         }
       } catch (error) {
@@ -355,12 +353,12 @@ function ProdData({ category_id }) {
                   </h2>
                 </div>
 
-                 <div className="reviews-counter d-flex flex-wrap gap-2"> 
-                <div className="mrp">
+                <div className="reviews-counter d-flex flex-wrap gap-2">
+                  <div className="mrp">
                     <h6>
                       <strong className="text-danger"> ₹{price}</strong>
                     </h6>
-                    <del style={{fontSize:"16px"}}> ₹{orignalPrice}</del>
+                    <del style={{ fontSize: "16px" }}> ₹{orignalPrice}</del>
                   </div>
                 </div>
                 <div>
@@ -370,38 +368,16 @@ function ProdData({ category_id }) {
                   />
                   <span className="rating-number">4.8</span>
                 </div>
-                <div className="shortProdDesc d-flex align-items-end">
+                <div className="shortProdDesc">
                   {descriptionToShow && (
-                    <>
+                    descriptionToShow?.includes('<') ? (
                       <div
-                        className={`${
-                          !isFullDescription
-                            ? "line-clamp-3" // Limits the description to 3 lines when collapsed
-                            : "" // No limit when expanded
-                        }`}
-                        dangerouslySetInnerHTML={{
-                          __html: descriptionToShow,
-                        }}
+                        dangerouslySetInnerHTML={{ __html: descriptionToShow }}
+                        className="prose max-w-none" // Adding prose class for better typograp
                       />
-
-                      {/* Show the arrow only if the description is more than 3 lines */}
-                      <button
-                        onClick={toggleDescription}
-                        className="text-blue-500 mt-2 border-0 d-inline bg-transperent"
-                        style={{
-                          display:
-                            descriptionToShow.length > 100 ? "block" : "none",
-                        }} // Optional: only show the button if the text is long
-                      >
-                        <i
-                          className={`fa ${
-                            isFullDescription
-                              ? "fa-chevron-up"
-                              : "fa-chevron-down"
-                          }`}
-                        />
-                      </button>
-                    </>
+                    ) : (
+                      <p className="text-gray-700">{descriptionToShow}</p>
+                    )
                   )}
                 </div>
                 <div className="prod_type mt-4">
@@ -443,8 +419,8 @@ function ProdData({ category_id }) {
                               transition: "all 0.3s ease",
                               ...(selectedColor === val.color
                                 ? {
-                                    boxShadow: "0 0 0 2px #fff, 0 0 0 4px #000",
-                                  }
+                                  boxShadow: "0 0 0 2px #fff, 0 0 0 4px #000",
+                                }
                                 : {}),
                             }}
                           >
@@ -524,9 +500,8 @@ function ProdData({ category_id }) {
                     <span className="wishlist me-2">
                       <i
                         onClick={() => handleAddToWishlist(productId)}
-                        className={` ${
-                          inWishlist ? "fa fa-heart" : "fa fa-heart-o"
-                        }`}
+                        className={` ${inWishlist ? "fa fa-heart" : "fa fa-heart-o"
+                          }`}
                         style={
                           inWishlist
                             ? { fontSize: "20px", color: "#DC3545" }
@@ -554,9 +529,8 @@ function ProdData({ category_id }) {
 
                 <Link
                   href={userState ? "/Address" : "#"}
-                  className={`btn m-2 px-md-5 ProdbtnRes ${
-                    !userState ? "disabled-button" : ""
-                  }`}
+                  className={`btn m-2 px-md-5 ProdbtnRes ${!userState ? "disabled-button" : ""
+                    }`}
                   onClick={() => handleBuyNow(productId)}
                 >
                   Buy Now
