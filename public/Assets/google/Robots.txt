@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+sitemap:https://www.nationalplastic.com/sitemap.xml

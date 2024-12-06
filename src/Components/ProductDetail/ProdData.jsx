@@ -13,6 +13,9 @@ import { useParams } from "next/navigation";
 import Breadcrump from "../Breadcrump/Breadcrump";
 import GetQuoteCustomForm from "../BulkOrder/GetQuoteCustomForm";
 import { notifyError } from "@/utils/notify";
+import { useRouter } from "next/navigation";
+import { addItemToWishlist } from "@/redux/reducer/wishlistSlice";
+import { isLoggedIn } from "@/utils/validation";
 
 function ProdData({ category_id }) {
   const [data, setData] = useState([]);
@@ -34,31 +37,39 @@ function ProdData({ category_id }) {
   const [dataToShow, setdataToShow] = useState([]);
   const [isHovered, setIsHovered] = useState(false);
   const [descriptionToShow, setDescriptionToShow] = useState([]);
+  const [inWishlist, setInWishlist] = useState(false);
+
   const cartData = useSelector((state) => state.cart.products);
   const tempCartData = useSelector((state) => state.temp.products);
-
 
   const modalRef = useRef(null);
 
   const dispatch = useDispatch();
   const router = useParams();
   const id = router.productId;
+  const route = useRouter();
+
+  const [isFullDescription, setIsFullDescription] = useState(false);
+
+  const toggleDescription = () => {
+    setIsFullDescription((prevState) => !prevState);
+  };
 
   const ProductCount = () => {
     if (!userState) {
-      const idToBeCompared = Number(localStorage.getItem('product_id'));
-      const product = tempCartData.find(item => item.product_id === idToBeCompared);
+      const idToBeCompared = Number(localStorage.getItem("product_id"));
+      const product = tempCartData.find(
+        (item) => item.product_id === idToBeCompared
+      );
       const quantity = product ? product.quantity : 1;
-      setInitialCount(quantity)
+      setInitialCount(quantity);
       return;
     }
-    const idToBeCompared = Number(localStorage.getItem('product_id'));
-    const product = cartData.find(item => item.product_id === idToBeCompared);
+    const idToBeCompared = Number(localStorage.getItem("product_id"));
+    const product = cartData.find((item) => item.product_id === idToBeCompared);
     const quantity = product ? product.quantity : 1;
-    setInitialCount(quantity)
-  }
-
-
+    setInitialCount(quantity);
+  };
 
   const handleIncrement = async () => {
     setInitialCount(initialCount + 1);
@@ -70,15 +81,18 @@ function ProdData({ category_id }) {
     }
   };
   const handleInputChange = (e) => {
-    setInitialCount(initialCount)
+    setInitialCount(initialCount);
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`);
-        const { product, productDetails, colors, category, short_description } = response.data;
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`
+        );
+        const { product, productDetails, colors, category, short_description } =
+          response.data;
         localStorage.setItem("product_id", product.product_id);
         localStorage.setItem("category_id", product.category_id);
 
@@ -99,8 +113,11 @@ function ProdData({ category_id }) {
           ProductCount();
           const allColors = colors.map((color) => color.color);
           colorBasedProductsImages(allColors);
-          const descriptionToShowRaw = product.short_description || product.long_description || productDetails.descp;
-          setDescriptionToShow(descriptionToShowRaw)
+          const descriptionToShowRaw =
+            product.short_description ||
+            product.long_description ||
+            productDetails.descp;
+          setDescriptionToShow(descriptionToShowRaw);
         }
       } catch (error) {
         setErrorMessage(error.message || "Error fetching data");
@@ -293,6 +310,23 @@ function ProdData({ category_id }) {
   const image = baseImageNames;
 
   const saving = (orignalPrice - price).toFixed(2);
+
+  const handleAddToWishlist = async (eproductId) => {
+    console.log("event data ", productId);
+    const isLoggedInResult = await isLoggedIn();
+    if (!isLoggedInResult) {
+      notify();
+      route.push("/Login");
+    } else {
+      dispatch(
+        addItemToWishlist({
+          product_id: product_id,
+        })
+      );
+      setInWishlist(true);
+    }
+  };
+
   return (
     <>
       <div className="container">
@@ -313,9 +347,10 @@ function ProdData({ category_id }) {
             <div className="product-dtl">
               <div className="product-info">
                 <div className="spacing-products">
-                  <h2 className="prod_nameh2 d-inline">
-                    National Plastic  </h2>
-                  <h2 className="d-inline"> {name_cat}{" "}
+                  <h2 className="prod_nameh2 d-inline">National Plastic </h2>
+                  <h2 className="d-inline">
+                    {" "}
+                    {name_cat}{" "}
                     {/* {selectedColor ? `(${selectedColor})` : ""} */}
                   </h2>
                 </div>
@@ -335,16 +370,38 @@ function ProdData({ category_id }) {
                   />
                   <span className="rating-number">4.8</span>
                 </div>
-                <div className="shortProdDesc">
+                <div className="shortProdDesc d-flex align-items-end">
                   {descriptionToShow && (
-                    descriptionToShow?.includes('<') ? (
+                    <>
                       <div
-                        dangerouslySetInnerHTML={{ __html: descriptionToShow }}
-                        className="prose max-w-none" // Adding prose class for better typography
+                        className={`${
+                          !isFullDescription
+                            ? "line-clamp-3" // Limits the description to 3 lines when collapsed
+                            : "" // No limit when expanded
+                        }`}
+                        dangerouslySetInnerHTML={{
+                          __html: descriptionToShow,
+                        }}
                       />
-                    ) : (
-                      <p className="text-gray-700">{descriptionToShow}</p>
-                    )
+
+                      {/* Show the arrow only if the description is more than 3 lines */}
+                      <button
+                        onClick={toggleDescription}
+                        className="text-blue-500 mt-2 border-0 d-inline bg-transperent"
+                        style={{
+                          display:
+                            descriptionToShow.length > 100 ? "block" : "none",
+                        }} // Optional: only show the button if the text is long
+                      >
+                        <i
+                          className={`fa ${
+                            isFullDescription
+                              ? "fa-chevron-up"
+                              : "fa-chevron-down"
+                          }`}
+                        />
+                      </button>
+                    </>
                   )}
                 </div>
                 <div className="prod_type mt-4">
@@ -386,8 +443,8 @@ function ProdData({ category_id }) {
                               transition: "all 0.3s ease",
                               ...(selectedColor === val.color
                                 ? {
-                                  boxShadow: "0 0 0 2px #fff, 0 0 0 4px #000",
-                                }
+                                    boxShadow: "0 0 0 2px #fff, 0 0 0 4px #000",
+                                  }
                                 : {}),
                             }}
                           >
@@ -426,11 +483,15 @@ function ProdData({ category_id }) {
                   <div className="col-6 col-md-4 col-lg-3">
                     <div className="input-group">
                       <span className="input-group-text">
-                        <button onClick={() => {
-                          if (initialCount > 1) {
-                            handleDecrement(); // Call the onDecrement handler
-                          }
-                        }}>-</button>
+                        <button
+                          onClick={() => {
+                            if (initialCount > 1) {
+                              handleDecrement(); // Call the onDecrement handler
+                            }
+                          }}
+                        >
+                          -
+                        </button>
                       </span>
 
                       <input
@@ -448,13 +509,33 @@ function ProdData({ category_id }) {
                       />
 
                       <span className="input-group-text">
-                        <button onClick={() => {
-                          handleIncrement(); // Call the onIncrement handler
-                        }}>+</button>
+                        <button
+                          onClick={() => {
+                            handleIncrement(); // Call the onIncrement handler
+                          }}
+                        >
+                          +
+                        </button>
                       </span>
                     </div>
                   </div>
-                  <div className="col-6 col-md-8 col-lg-6">
+
+                  <div className="col-6 col-md-8 col-lg-6 d-flex align-items-center">
+                    <span className="wishlist me-2">
+                      <i
+                        onClick={() => handleAddToWishlist(productId)}
+                        className={` ${
+                          inWishlist ? "fa fa-heart" : "fa fa-heart-o"
+                        }`}
+                        style={
+                          inWishlist
+                            ? { fontSize: "20px", color: "#DC3545" }
+                            : {}
+                        }
+                        aria-hidden="true"
+                      ></i>
+                      {/* <i className="fa fa-heart-o" /> */}
+                    </span>
                     <button
                       onClick={() => handleMoveToCart(productId, initialCount)}
                       className="m-2 px-md-5 btn "
@@ -473,8 +554,9 @@ function ProdData({ category_id }) {
 
                 <Link
                   href={userState ? "/Address" : "#"}
-                  className={`btn m-2 px-md-5 ProdbtnRes ${!userState ? "disabled-button" : ""
-                    }`}
+                  className={`btn m-2 px-md-5 ProdbtnRes ${
+                    !userState ? "disabled-button" : ""
+                  }`}
                   onClick={() => handleBuyNow(productId)}
                 >
                   Buy Now
@@ -518,16 +600,14 @@ function ProdData({ category_id }) {
               <h4>Description</h4>
               <hr />
             </div>
-            {
-              prodDataDetail.descp?.includes('<') ? (
-                <div
-                  className="col-md-9"
-                  dangerouslySetInnerHTML={{ __html: val.short_description }}
-                />
-              ) : (
-                <div className="col-md-9">{prodDataDetail.descp}</div>
-              )
-            }
+            {prodDataDetail.descp?.includes("<") ? (
+              <div
+                className="col-md-9"
+                dangerouslySetInnerHTML={{ __html: val.short_description }}
+              />
+            ) : (
+              <div className="col-md-9">{prodDataDetail.descp}</div>
+            )}
             <div className="col-md-3">
               {prodDataDetail.dimension_img ? (
                 <Image
@@ -538,7 +618,9 @@ function ProdData({ category_id }) {
                   objectFit="cover"
                   alt="Dimension image"
                 />
-              ) : ''}
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>
@@ -566,7 +648,11 @@ function ProdData({ category_id }) {
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
-                <GetQuoteCustomForm prodName={name} read={"true"} modalRef={modalRef} />
+                <GetQuoteCustomForm
+                  prodName={name}
+                  read={"true"}
+                  modalRef={modalRef}
+                />
               </div>
               {/* <div className="modal-footer">
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -581,4 +667,3 @@ function ProdData({ category_id }) {
 }
 
 export default ProdData;
-

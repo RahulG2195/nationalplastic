@@ -57,7 +57,7 @@ export default function Home() {
       <TopPick />
       <Manufacture />
       <ShopRoom />
-      <Houseware />
+      {/* <Houseware /> */}
       <Highlight />
       <HappyStory />
       <Dealers />

@@ -182,7 +182,9 @@ p {
     cursor: pointer;
     text-transform: capitalize;
 }
-
+.navbar-toggler:focus{
+    box-shadow: none !important;
+}
 .card-headers:hover .overlay {
     position: absolute;
     top: 0;
