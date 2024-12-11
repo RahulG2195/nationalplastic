@@ -136,8 +136,6 @@ export default function Footer() {
                     <span><i class="fa fa-phone " aria-hidden="true"></i></span>
                     <a href={`tel:${basicInfo.mobile_number1}`} className="fw-semibold">
                       <u style={{
-                        fontSize: '18px',
-                        fontWeight: '500',
                         textDecoration: 'none',
                       }}>{basicInfo.mobile_number1}</u>
                     </a>
@@ -202,8 +200,6 @@ export default function Footer() {
                     <span><i class="fa fa-phone text-black" aria-hidden="true"></i></span>
                     <a href={`tel:${basicInfo.mobile_number1}`} className="fw-semibold">
                       <u style={{
-                        fontSize: '18px',
-                        fontWeight: '500',
                         textDecoration: 'none',
                       }}>{basicInfo.mobile_number1}</u>
                     </a>
@@ -216,7 +212,7 @@ export default function Footer() {
                   </div>
                   <div className="d-flex align-items-center gap-3 py-1">
                     <span><i class="fa fa-map-marker text-black" aria-hidden="true"></i></span>
-                    <span className="fw-semibold "> {basicInfo.address}</span>
+                    <span className="fw-semibold " style={{color:"black"}}> {basicInfo.address}</span>
                   </div>
                 </div>
               </div>
