@@ -135,7 +135,11 @@ export default function Footer() {
                   <div className="d-flex align-items-center gap-3 py-2">
                     <span><i class="fa fa-phone " aria-hidden="true"></i></span>
                     <a href={`tel:${basicInfo.mobile_number1}`} className="fw-semibold">
-                      <u>{basicInfo.mobile_number1}</u>
+                      <u style={{
+                        fontSize: '18px',
+                        fontWeight: '500',
+                        textDecoration: 'none',
+                      }}>{basicInfo.mobile_number1}</u>
                     </a>
                   </div>
                   <div className="d-flex align-items-center gap-3 py-2">
@@ -189,7 +193,7 @@ export default function Footer() {
             {/* Payment and Social Section - Same for both views */}
             <div className="col-12 col-lg-4">
               <div className="pb-3">
-              <div className="d-none d-lg-block">
+                <div className="d-none d-lg-block">
                   <div className="footer_heading">
                     <h5 className="fw-bold mb-3">Support</h5>
                   </div>
@@ -197,7 +201,11 @@ export default function Footer() {
                   <div className="d-flex align-items-center gap-3 py-1">
                     <span><i class="fa fa-phone text-black" aria-hidden="true"></i></span>
                     <a href={`tel:${basicInfo.mobile_number1}`} className="fw-semibold">
-                      <u>{basicInfo.mobile_number1}</u>
+                      <u style={{
+                        fontSize: '18px',
+                        fontWeight: '500',
+                        textDecoration: 'none',
+                      }}>{basicInfo.mobile_number1}</u>
                     </a>
                   </div>
                   <div className="d-flex align-items-center gap-3 py-1">
@@ -212,49 +220,7 @@ export default function Footer() {
                   </div>
                 </div>
               </div>
-              <div className="mb-4">
-                <div className="footer_heading">
-                  <h5 className="fw-bold mb-0">WE ACCEPT SECURE PAYMENT</h5>
-                </div>
-                <div className="d-flex gap-2 py-3">
-                  <div style={{ width: '75px', height: '40px', position: 'relative' }}>
-                    <Image
-                      src="/Assets/images/visa-payment-card1873@2x.png"
-                      alt="Visa"
-                      width={75}
-                      height={40}
-                      style={{ objectFit: 'cover' }}
-                    />
-                  </div>
-                  <div style={{ width: '75px', height: '40px', position: 'relative' }}>
-                    <Image
-                      src="/Assets/images/mastercard.png"
-                      alt="Mastercard"
-                      width={75}
-                      height={40}
-                      style={{ objectFit: 'cover' }}
-                    />
-                  </div>
-                  <div style={{ width: '75px', height: '40px', position: 'relative' }}>
-                    <Image
-                      src="/Assets/images/Group 697.png"
-                      alt="Payment"
-                      width={75}
-                      height={40}
-                      style={{ objectFit: 'cover' }}
-                    />
-                  </div>
-                  <div style={{ width: '75px', height: '40px', position: 'relative' }}>
-                    <Image
-                      src="/Assets/images/Maestro.png"
-                      alt="Maestro"
-                      width={75}
-                      height={40}
-                      style={{ objectFit: 'contain' }}
-                    />
-                  </div>
-                </div>
-              </div>
+
 
               <div>
                 <div className="footer_heading">
@@ -380,7 +346,7 @@ export default function Footer() {
 
       <div className="social_icon_for_mob">
         <div className="d-flex align-items-center gap-2 callIcon ">
-        <a href="tel:+912267669922" className=" contactus ps-2  fw-bold">contact us </a>
+          <a href="tel:+912267669922" className=" contactus ps-2  fw-bold">contact us </a>
           <div className="icon-wrapper call_icon">
             <a href="tel:+912267669922">
               {/* <Image
@@ -414,7 +380,7 @@ export default function Footer() {
               <p className="contactus pe-2  fw-bold">WhatsApp Us</p>
             </a>
 
-            
+
           </div>
         </div>
       </div >
@@ -449,4 +415,51 @@ export default function Footer() {
 <Link href="/refund-and-return-policy">
   <p className="text-white"> Refund Policy </p>
 </Link>
+</div> */}
+
+
+// Footer Payment section should be Added Later once payment and price are updated
+
+{/* <div className="mb-4">
+<div className="footer_heading">
+  <h5 className="fw-bold mb-0">WE ACCEPT SECURE PAYMENT</h5>
+</div>
+<div className="d-flex gap-2 py-3">
+  <div style={{ width: '75px', height: '40px', position: 'relative' }}>
+    <Image
+      src="/Assets/images/visa-payment-card1873@2x.png"
+      alt="Visa"
+      width={75}
+      height={40}
+      style={{ objectFit: 'cover' }}
+    />
+  </div>
+  <div style={{ width: '75px', height: '40px', position: 'relative' }}>
+    <Image
+      src="/Assets/images/mastercard.png"
+      alt="Mastercard"
+      width={75}
+      height={40}
+      style={{ objectFit: 'cover' }}
+    />
+  </div>
+  <div style={{ width: '75px', height: '40px', position: 'relative' }}>
+    <Image
+      src="/Assets/images/Group 697.png"
+      alt="Payment"
+      width={75}
+      height={40}
+      style={{ objectFit: 'cover' }}
+    />
+  </div>
+  <div style={{ width: '75px', height: '40px', position: 'relative' }}>
+    <Image
+      src="/Assets/images/Maestro.png"
+      alt="Maestro"
+      width={75}
+      height={40}
+      style={{ objectFit: 'contain' }}
+    />
+  </div>
+</div>
 </div> */}
