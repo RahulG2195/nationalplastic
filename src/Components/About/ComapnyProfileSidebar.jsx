@@ -12,6 +12,7 @@ const ComapnyProfileSidebar = ({title}) => {
                     <li className="sidebar-item border p-1"><Link href="/company-profile">Company Profile</Link></li>
                     <li className="sidebar-item border p-1"><Link href="/infrastructure">Infrastructure</Link></li>
                     <li className="sidebar-item border p-1"><Link href="/promoters">Promoters/Directors</Link></li>
+                    <li className="sidebar-item border p-1"><Link href="/moa-and-aoa">Memorandum and Article of Association</Link></li>
                     <li className="sidebar-item border p-1"><Link href="/management-and-board-committees">Management and Board Committees</Link></li>
                     <li className="sidebar-item border p-1"><Link href="/awards">Awards/Exports</Link></li>
                     {/* <li className="sidebar-item border p-1"><Link href="/About">Introduction</Link></li> */}

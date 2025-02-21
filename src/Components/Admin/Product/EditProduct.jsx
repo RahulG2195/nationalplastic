@@ -66,8 +66,8 @@ export default function App() {
         const formData = new FormData();
         let hasChanges = false;
         formData.append('product_id', initialData.product_id);
-      formData.append("descp", description);
-
+        formData.append("descp", description);
+        formData.append("long_description", null);
 
         Object.keys(data).forEach(key => {
           if (key === 'image') {
@@ -87,6 +87,7 @@ export default function App() {
           formData.append('discount_price', calculatedDiscountPrice);
           hasChanges = true;
         }
+
 
         if (selectedCategory.id && selectedCategory.id !== initialData.category_id) {
           formData.set('category_id', selectedCategory.id);
@@ -238,13 +239,7 @@ export default function App() {
           />
         </Form.Item>
 
-        <Form.Item label="Long Description">
-          <Controller
-            name="long_description"
-            control={control}
-            render={({ field }) => <Input.TextArea {...field} />}
-          />
-        </Form.Item>
+
 
         <Form.Item label="SEO Title">
           <Controller
@@ -430,7 +425,29 @@ export default function App() {
             )}
           />
         </Form.Item>
-
+{/* Product Image */}
+<Form.Item
+          label="Images"
+          validateStatus={errors.image ? 'error' : ''}
+          help={errors.image ? 'Please upload at least one image!' : ''}
+        >
+          <div className="image-previews">
+            {imagePreviews.map((preview, index) => (
+              <img 
+                key={index}
+                src={preview} 
+                alt={`Product image ${index + 1}`} 
+                title={`Product Image ${index + 1}`}
+                style={{ maxWidth: '40px', marginRight: '10px', marginBottom: '10px' }} 
+              />
+            ))}
+          </div>
+          <input
+            type="file"
+            onChange={handleFileChange}
+            multiple
+          />
+        </Form.Item>
         {/* prod detaill page  */}
         <Form.Item
           label="Dimenions Image"

@@ -423,6 +423,13 @@ export default function Header() {
                               Promoters/Directors
                             </Link>
                           </li>
+                          <li className={styles.dropdownItem}>
+                            <Link
+                              href="/moa-and-aoa"
+                              onClick={isClicked ? handleShow : null}>
+                              Memorandum and Article of Association 
+                            </Link>
+                          </li>
 
                           <li className={styles.dropdownItem}>
                             <Link

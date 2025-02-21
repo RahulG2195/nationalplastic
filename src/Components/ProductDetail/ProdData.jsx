@@ -118,6 +118,9 @@ function ProdData({ category_id }) {
           const descriptionToShowRaw =
             product.short_description || "Stylish, durable, and affordable plastic chairs and household items for modern homes."
             const fulldescriptionToShowRaw = productDetails.descp || product.long_description ||  "Discover a stunning range of stylish, durable, and affordable plastic chairs and household items, designed to elevate the aesthetics of modern homes while offering unmatched practicality and comfort."
+            console.log("descriptionToShowRaw", descriptionToShowRaw);
+
+            console.log("fulldescriptionToShowRaw", fulldescriptionToShowRaw);
             setFulldescription(fulldescriptionToShowRaw);
           setDescriptionToShow(descriptionToShowRaw);
         }

@@ -3,7 +3,6 @@ import CatlogueBanner from "../../../Components/ShopByRoom/Banner";
 import PremiumChairs from "@/Components/ProductsCatlogue/PremiumChairs";
 import PreChairsCards from "@/Components/ShopByRoom/PreChairCards";
 import BoughtTogether from "@/Components/ProductsCatlogue/BoughtTogether";
-import RecentlyViewed from "@/Components/ProductsCatlogue/RecentlyViewed";
 import FooterRow from "@/Components/FooterRow/FooterRow";
 import BottomCTABanner from "@/Components/ProductsCatlogue/BottomCTABanner";
 
@@ -29,7 +28,7 @@ export async function generateMetadata({ params }) {
 
 
 const ProductCatlogue = () => {
-  const searchedProducts = JSON.parse(localStorage.getItem('searchedProducts') || '[]');
+  // const searchedProducts = JSON.parse(localStorage.getItem('searchedProducts') || '[]');
 
   return (
     <>
@@ -38,7 +37,7 @@ const ProductCatlogue = () => {
       {/* <PremiumChairs /> */}
       <PreChairsCards />
       <BoughtTogether />
-      {searchedProducts.length > 0 && <RecentlyViewed />}
+      {/* {searchedProducts.length > 0 && <RecentlyViewed />} */}
 
       <FooterRow />
       <BottomCTABanner />

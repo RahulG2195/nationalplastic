@@ -168,6 +168,8 @@ export default function App() {
       formData.append("warranty", data.warranty);
       formData.append("pd_id", data.pd_id);
       formData.append("description", description);
+      formData.append("long_description", null);
+
 
 
       // Make the POST request to the API
@@ -243,13 +245,6 @@ export default function App() {
           />
         </Form.Item>
 
-        <Form.Item label="Long Description">
-          <Controller
-            name="long_description"
-            control={control}
-            render={({ field }) => <Input.TextArea {...field} />}
-          />
-        </Form.Item>
 
         <Form.Item label="SEO Title">
           <Controller
