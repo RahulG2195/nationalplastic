@@ -7,27 +7,27 @@ export async function GET(request) {
 
   let sqlQuery;
   let param;
-  
+
   if (isNumeric) {
-      // If 'id' is numeric, search by product_id
-      sqlQuery = `
+    // If 'id' is numeric, search by product_id
+    sqlQuery = `
           SELECT p.*, c.category_name, c.seo_url AS cat_seo_url
           FROM products p
           LEFT JOIN categories c ON p.category_id = c.category_id 
           WHERE p.product_id = ? AND prod_status = 1
           LIMIT 1
       `;
-      param = id;
+    param = id;
   } else {
-      // If 'id' is not numeric, search by seo_url
-      sqlQuery = `
+    // If 'id' is not numeric, search by seo_url
+    sqlQuery = `
           SELECT p.*, c.category_name, c.seo_url AS cat_seo_url
           FROM products p
           LEFT JOIN categories c ON p.category_id = c.category_id 
           WHERE LOWER(p.seo_url) = LOWER(?) AND prod_status = 1
           LIMIT 1
       `;
-      param = id;
+    param = id;
   }
   try {
 
@@ -36,7 +36,9 @@ export async function GET(request) {
     const [product] = await query({
       query: sqlQuery,
       values: [param],
-  });
+    });
+
+    console.log(JSON.stringify(product));
 
     if (!product) {
       return new Response(JSON.stringify({ status: 404, message: "Product not found" }), { status: 404 });

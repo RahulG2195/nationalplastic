@@ -25,7 +25,6 @@ function ProdData({ category_id }) {
   const [seo_url, setSeo_url] = useState(null);
   const [categoryName, setCategoryName] = useState(null);
   const [catlogue, setCatlogue] = useState(null);
-  const [short_description, setShort_description] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [productId, setProductId] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -93,6 +92,7 @@ function ProdData({ category_id }) {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`
         );
+        console.log("response", JSON.stringify(response.data));
         const { product, productDetails, colors, category, short_description } =
           response.data;
         localStorage.setItem("product_id", product.product_id);
@@ -101,6 +101,8 @@ function ProdData({ category_id }) {
         if (!product) {
           setErrorMessage("Sorry, this product is not available");
         } else {
+          console.log("product", product);
+          console.log(JSON.stringify(productDetails));
           setData([product]);
           setProdData(productDetails);
           setProdDataDetail(productDetails);
@@ -110,21 +112,18 @@ function ProdData({ category_id }) {
           setProduct_id(product.product_id);
           setSeo_url(product.cat_seo_url);
           setCatlogue(product.category_name);
-          setShort_description(product.descp);
           // CleanCateogoryName(category);
           ProductCount();
           const allColors = colors.map((color) => color.color);
           colorBasedProductsImages(allColors);
           const descriptionToShowRaw =
-            product.short_description || "Stylish, durable, and affordable plastic chairs and household items for modern homes."
-            const fulldescriptionToShowRaw = productDetails.descp || product.long_description ||  "Discover a stunning range of stylish, durable, and affordable plastic chairs and household items, designed to elevate the aesthetics of modern homes while offering unmatched practicality and comfort."
-            console.log("descriptionToShowRaw", descriptionToShowRaw);
-
-            console.log("fulldescriptionToShowRaw", fulldescriptionToShowRaw);
-            setFulldescription(fulldescriptionToShowRaw);
+            product?.short_description || "Stylish, durable, and affordable plastic chairs and household items for modern homes."
+          const fulldescriptionToShowRaw = productDetails.descp || product.long_description || "Discover a stunning range of stylish, durable, and affordable plastic chairs and household items, designed to elevate the aesthetics of modern homes while offering unmatched practicality and comfort."
+          setFulldescription(fulldescriptionToShowRaw);
           setDescriptionToShow(descriptionToShowRaw);
         }
       } catch (error) {
+        console.log("is this error from here??????")
         setErrorMessage(error.message || "Error fetching data");
       } finally {
         setIsLoading(false);
