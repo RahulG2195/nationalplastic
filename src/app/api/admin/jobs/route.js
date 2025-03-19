@@ -35,28 +35,29 @@ const createJob = async (role, type, location) => {
         return result.insertId; // Returning the inserted job ID
     } catch (error) {
         console.error('Error creating job:', error.message);
-        return false;
+        throw error;
     }
 };
 
-// POST request for creating or adding a new job
 export async function POST(request) {
     try {
         const { role, type, location } = await request.json();
 
         // Create a job
         const jobId = await createJob(role, type, location);
+
         if (jobId) {
             return NextResponse.json(
                 { success: true, id: jobId },
                 { status: 201 }
             );
-        } else {
-            return NextResponse.json(
-                { success: false, message: 'Failed to create job' },
-                { status: 500 }
-            );
-        }
+        } 
+        
+        // Return a response if jobId is false (invalid input)
+        return NextResponse.json(
+            { success: false, message: 'Invalid job data provided.' },
+            { status: 400 }
+        );
     } catch (error) {
         return NextResponse.json(
             { success: false, error: error.message },

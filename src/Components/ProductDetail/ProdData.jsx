@@ -92,7 +92,6 @@ function ProdData({ category_id }) {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_BASE_URL}/product-details?id=${id}`
         );
-        console.log("response", JSON.stringify(response.data));
         const { product, productDetails, colors, category, short_description } =
           response.data;
         localStorage.setItem("product_id", product.product_id);
@@ -123,15 +122,17 @@ function ProdData({ category_id }) {
           setDescriptionToShow(descriptionToShowRaw);
         }
       } catch (error) {
-        console.log("is this error from here??????")
-        setErrorMessage(error.message || "Error fetching data");
+        console.log("error", error.message);
+        if(!errorMessage){
+          setErrorMessage("Product not found");
+        }
       } finally {
         setIsLoading(false);
       }
     };
 
     if (id) {
-      fetchData();
+      fetchData();  
     }
   }, [id]);
 

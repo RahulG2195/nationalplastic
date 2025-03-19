@@ -8,7 +8,7 @@ import FooterRow from "@/Components/FooterRow/FooterRow";
 async function getProductData(id) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/productSeo?id=${id}`);
   if (!res.ok) {
-    throw new Error('Failed to fetch product data');
+    console.log("No product found");
   }
   return res.json();
 }
