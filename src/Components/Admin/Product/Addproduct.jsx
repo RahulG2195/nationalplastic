@@ -89,7 +89,7 @@ export default function App() {
         }
         formData.append("discount_price", calculatedDiscountPrice);
         formData.append("category_id", selectedCategory.id);
-      formData.append("description", description);
+        formData.append("description", description);
 
         let formDataString = "";
         formData.forEach((value, key) => {
@@ -145,7 +145,7 @@ export default function App() {
   };
 
   const handleDimChange = (e) => {
-     const file = e.target.files[0];
+    const file = e.target.files[0];
     if (file) {
       setDimensionFile(file);
     }
@@ -220,6 +220,20 @@ export default function App() {
             render={({ field }) => <Input {...field} />}
           />
         </Form.Item>
+
+        <Form.Item
+          label="Display Name"
+          validateStatus={errors.product_name2 ? "error" : ""}
+          help={errors.product_name2 ? "Please input the Display product name!" : ""}
+        >
+          <Controller
+            name="product_name2"
+            control={control}
+            rules={{ required: true, minLength: 1, maxLength: 65 }}
+            render={({ field }) => <Input {...field} placeholder="Display Product Name" />}
+          />
+        </Form.Item>
+
 
         <Form.Item label="Meta Title">
           <Controller
@@ -442,7 +456,7 @@ export default function App() {
         </Form.Item>
 
 
-{/* prod detaill page  */}
+        {/* prod detaill page  */}
         <Form.Item
           label="Dimenions Image"
           name="dimension_img"
@@ -508,7 +522,7 @@ export default function App() {
             render={({ field }) => <Input.TextArea {...field} />}
           />
         </Form.Item> */}
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button onClick={handleOpenModal}>
             Add Description
           </Button>
@@ -523,7 +537,7 @@ export default function App() {
           </Space>
         </Form.Item>
       </Form>
-    
+
 
 
       <ModalEditor

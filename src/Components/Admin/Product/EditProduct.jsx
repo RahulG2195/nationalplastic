@@ -214,6 +214,18 @@ export default function App() {
             render={({ field }) => <Input {...field} />}
           />
         </Form.Item>
+        <Form.Item
+          label="Display Product Name"
+          validateStatus={errors.product_name2 ? 'error' : ''}
+          help={errors.product_name2 ? 'Please input the Display  product name!' : ''}
+        >
+          <Controller
+            name="product_name2"
+            control={control}
+            rules={{ required: true, minLength: 1, maxLength: 65, pattern: /^[a-zA-Z0-9\s-]+$/i }}
+            render={({ field }) => <Input {...field} />}
+          />
+        </Form.Item>
 
         <Form.Item label="Meta Title">
           <Controller

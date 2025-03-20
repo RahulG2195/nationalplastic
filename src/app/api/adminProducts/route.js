@@ -49,6 +49,7 @@ export async function POST(request) {
     const formData = await request.formData();
     const requiredFields = [
       "product_name",
+      "product_name2",
       "seo_url",
       "category_id",
       "price",
@@ -157,9 +158,9 @@ export async function POST(request) {
         INSERT INTO products (
           product_name, meta_title, meta_description, short_description, long_description,
           seo_url, seo_url_clr, category_id, image_name, price, discount_price, discount_percentage,
-          duration, InstallationCharges, color, color_code, armType, prod_status
+          duration, InstallationCharges, color, color_code, armType, prod_status, product_name2
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `,
       values: [
         data.product_name,
@@ -180,6 +181,7 @@ export async function POST(request) {
         color_code,
         data.armType,
         data.prod_status || 1,
+        data.product_name2 || data.product_name,
       ],
     });
 
@@ -286,6 +288,7 @@ export async function PUT(request) {
     // Handle other fields
     const fields = [
       "product_name",
+      "product_name2",
       "seo_url",
       "category_id",
       "price",
@@ -401,6 +404,9 @@ export async function PUT(request) {
     );
   }
 }
+
+
+
 export async function GET(request) {
   try {
     const allProducts = await query({
