@@ -42,6 +42,7 @@ import {
   isValidMobile,
   // isValidFile,
 } from "@/utils/validation";
+import { useRouter } from "next/navigation";
 function ContactUs() {
   const [userInput, setUserInput] = useState({
     name: "",
@@ -51,8 +52,8 @@ function ContactUs() {
     mobile: "",
     file: null,
   });
+  const router = useRouter();
   const [initialBasicInfo, setInitialBasicInfo] = useState({});
-
 
   async function handleInputChange(event) {
     const { name, value } = event.target;
@@ -109,11 +110,16 @@ function ContactUs() {
 
     //TryCatch For the Email Message
 
-    const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/sendEmail`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data", // Set content type for FormData
-      },
-    });
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/sendEmail`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data", // Set content type for FormData
+        },
+      }
+    );
+
     if (res.status === 200) {
       setUserInput({
         name: "",
@@ -124,6 +130,7 @@ function ContactUs() {
         file: null,
       });
       notify();
+      router.push("/ContactThankYou");
     } else {
       notifyError();
     }
@@ -195,38 +202,34 @@ function ContactUs() {
     // },
   ];
 
-
-
   const [basicInfo, setBasicInfo] = useState({
-    logo: '',
-    brand1_link: '',
-    brand2_link: '',
-    instagram: '',
-    youtube: '',
-    twitter: '',
-    facebook: '',
-    mobile_number1: '',
-    mobile_number2: '',
-    address: '',
-    email: ''
+    logo: "",
+    brand1_link: "",
+    brand2_link: "",
+    instagram: "",
+    youtube: "",
+    twitter: "",
+    facebook: "",
+    mobile_number1: "",
+    mobile_number2: "",
+    address: "",
+    email: "",
   });
 
   useEffect(() => {
     const fetchBasicInfo = async () => {
       try {
-        const response = await axios.get('/api/basicInfo');
+        const response = await axios.get("/api/basicInfo");
         const basicInfoData = response.data.basicInfo;
         setBasicInfo(basicInfoData);
         setInitialBasicInfo(basicInfoData);
       } catch (error) {
-        console.error('There was an error fetching the basic info!', error);
+        console.error("There was an error fetching the basic info!", error);
       }
     };
 
     fetchBasicInfo();
   }, []);
-
-
 
   const branchOfficesRef = useRef(null);
   const factoryUnitsRef = useRef(null);
@@ -234,7 +237,6 @@ function ContactUs() {
   const scrollToSection = (ref) => {
     ref.current.scrollIntoView({ behavior: "smooth" });
   };
-
 
   return (
     <>
@@ -250,7 +252,7 @@ function ContactUs() {
           /> */}
         </div>
         <div className="row">
-        <h1 className="text-center pt-5 fw-bold darkBlue "> CONTACT US</h1>
+          <h1 className="text-center pt-5 fw-bold darkBlue "> CONTACT US</h1>
 
           {/* <div className="clip-path-element">
             <h1>CONTACT US</h1>
@@ -402,13 +404,13 @@ function ContactUs() {
               </div>
               <div className="RegisteredOfficeIcon">
                 <i className="fa fa-map-marker" aria-hidden="true"></i>
-                <p>
-                  {basicInfo.address}
-                </p>
+                <p>{basicInfo.address}</p>
               </div>
               <div className="RegisteredOfficeIcon">
                 <i className="fa fa-phone" aria-hidden="true"></i>
-                <a href={`tel:+91-${basicInfo.mobile_number1}`}>+91-{basicInfo.mobile_number1}</a>
+                <a href={`tel:+91-${basicInfo.mobile_number1}`}>
+                  +91-{basicInfo.mobile_number1}
+                </a>
               </div>
               <div className="RegisteredOfficeIcon">
                 <i className="fa fa-envelope-open" aria-hidden="true"></i>
@@ -425,7 +427,14 @@ function ContactUs() {
               layout="responsive"
               objectFit="cover"
             /> */}
-            <iframe src={basicInfo.map_url} className="w-100 h-100" style={{border:'0'}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe
+              src={basicInfo.map_url}
+              className="w-100 h-100"
+              style={{ border: "0" }}
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
         </div>
       </div>

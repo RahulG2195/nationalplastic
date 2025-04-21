@@ -116,14 +116,18 @@ function ProdData({ category_id }) {
           const allColors = colors.map((color) => color.color);
           colorBasedProductsImages(allColors);
           const descriptionToShowRaw =
-            product?.short_description || "Stylish, durable, and affordable plastic chairs and household items for modern homes."
-          const fulldescriptionToShowRaw = productDetails.descp || product.long_description || "Discover a stunning range of stylish, durable, and affordable plastic chairs and household items, designed to elevate the aesthetics of modern homes while offering unmatched practicality and comfort."
+            product?.short_description ||
+            "Stylish, durable, and affordable plastic chairs and household items for modern homes.";
+          const fulldescriptionToShowRaw =
+            productDetails.descp ||
+            product.long_description ||
+            "Discover a stunning range of stylish, durable, and affordable plastic chairs and household items, designed to elevate the aesthetics of modern homes while offering unmatched practicality and comfort.";
           setFulldescription(fulldescriptionToShowRaw);
           setDescriptionToShow(descriptionToShowRaw);
         }
       } catch (error) {
         console.log("error", error.message);
-        if(!errorMessage){
+        if (!errorMessage) {
           setErrorMessage("Product not found");
         }
       } finally {
@@ -132,7 +136,7 @@ function ProdData({ category_id }) {
     };
 
     if (id) {
-      fetchData();  
+      fetchData();
     }
   }, [id]);
 
@@ -376,16 +380,15 @@ function ProdData({ category_id }) {
                   <span className="rating-number">4.8</span>
                 </div>
                 <div className="shortProdDesc">
-                  {descriptionToShow && (
-                    descriptionToShow?.includes('<') ? (
+                  {descriptionToShow &&
+                    (descriptionToShow?.includes("<") ? (
                       <div
                         dangerouslySetInnerHTML={{ __html: descriptionToShow }}
                         className="prose max-w-none" // Adding prose class for better typograp
                       />
                     ) : (
                       <p className="text-gray-700">{descriptionToShow}</p>
-                    )
-                  )}
+                    ))}
                 </div>
                 <div className="prod_type mt-4">
                   <div className="prod_clr">
@@ -426,8 +429,8 @@ function ProdData({ category_id }) {
                               transition: "all 0.3s ease",
                               ...(selectedColor === val.color
                                 ? {
-                                  boxShadow: "0 0 0 2px #fff, 0 0 0 4px #000",
-                                }
+                                    boxShadow: "0 0 0 2px #fff, 0 0 0 4px #000",
+                                  }
                                 : {}),
                             }}
                           >
@@ -507,8 +510,9 @@ function ProdData({ category_id }) {
                     <span className="wishlist me-2">
                       <i
                         onClick={() => handleAddToWishlist(productId)}
-                        className={` ${inWishlist ? "fa fa-heart" : "fa fa-heart-o"
-                          }`}
+                        className={` ${
+                          inWishlist ? "fa fa-heart" : "fa fa-heart-o"
+                        }`}
                         style={
                           inWishlist
                             ? { fontSize: "20px", color: "#DC3545" }
@@ -536,8 +540,9 @@ function ProdData({ category_id }) {
 
                 <Link
                   href={userState ? "/Address" : "#"}
-                  className={`btn m-2 px-md-5 ProdbtnRes ${!userState ? "disabled-button" : ""
-                    }`}
+                  className={`btn m-2 px-md-5 ProdbtnRes ${
+                    !userState ? "disabled-button" : ""
+                  }`}
                   onClick={() => handleBuyNow(productId)}
                 >
                   Buy Now
@@ -616,6 +621,7 @@ function ProdData({ category_id }) {
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
           ref={modalRef}
+          
         >
           <div className="modal-dialog">
             <div className="modal-content modal-content-mypopup">

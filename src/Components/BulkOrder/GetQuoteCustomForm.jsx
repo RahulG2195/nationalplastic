@@ -14,6 +14,7 @@ import {
   // isValidFile,
 } from "@/utils/validation";
 import { Modal } from "bootstrap/dist/js/bootstrap.bundle.min";
+import { useRouter } from "next/navigation";
 
 const GetQuoteCustomForm = (props) => {
   const [formData, setFromData] = useState({
@@ -24,6 +25,7 @@ const GetQuoteCustomForm = (props) => {
     Requirements: "",
     city: "",
   });
+  const router = useRouter();
 
   const validation = (userInput) => {
     if (!isValidName(userInput.city)) {
@@ -54,8 +56,12 @@ const GetQuoteCustomForm = (props) => {
     const isValid = await validation(formData);
     if (!isValid) return;
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/bulkOrderEmail`, formData);
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/bulkOrderEmail`,
+        formData
+      );
       notify("Mail sent successfully");
+      router.push("/BulkOrderThankYou");
       if (props.modalRef.current) {
         const modalElement = props.modalRef.current;
         const modalInstance = Modal.getInstance(modalElement); // Get the modal instance
@@ -136,7 +142,7 @@ const GetQuoteCustomForm = (props) => {
             ></textarea>
           </div>
           <div className="small text-white mb-4 reqCaptRes">
-            Please include details of product, quantity, type of service etc.*
+            Please include details of product, quantity, type of service etc.??*
           </div>
           <div className="mb-4">
             <input
