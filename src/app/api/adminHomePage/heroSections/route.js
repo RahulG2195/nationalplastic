@@ -31,41 +31,52 @@ export async function PUT(request) {
   try {
     const formData = await request.formData();
     const id = formData.get('id');
-    const redirect_url = formData.get('redirect_url');
-    const seo = formData.get('seo');
     const image = formData.get('image');
-    let imageName;
-    if (image) {
-      imageName = image.name;
-      const imageDir = path.join(
-        process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
-        process.env.NEXT_PUBLIC_BANNERS_PATH_DIR 
-      );
-      try {
-        await fs.access(imageDir);
-      } catch {
-        await fs.mkdir(imageDir, { recursive: true });
-      }
+    const mobileImage = formData.get('mobile_image');
 
-      // Save the new image file
-      const imageFilePath = path.join(imageDir, imageName);
-      await fs.writeFile(imageFilePath, Buffer.from(await image.arrayBuffer()));
+    let imageName;
+    let mobileImageName;
+
+    const imageDir = path.join(
+      process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
+      process.env.NEXT_PUBLIC_BANNERS_PATH_DIR
+    );
+
+    try {
+      await fs.access(imageDir);
+    } catch {
+      await fs.mkdir(imageDir, { recursive: true });
     }
 
-    // Build the set clause dynamically
-    const updateFields = { redirect_url, seo };
-if (image) {
-  updateFields.image_name = imageName;
-}
+    const updateFields = {};
+
+    if (image) {
+      imageName = image.name;
+      const imageFilePath = path.join(imageDir, imageName);
+      await fs.writeFile(imageFilePath, Buffer.from(await image.arrayBuffer()));
+      updateFields.image_name = imageName;
+    }
+
+    if (mobileImage) {
+      mobileImageName = mobileImage.name;
+      const mobileImagePath = path.join(imageDir, mobileImageName);
+      await fs.writeFile(mobileImagePath, Buffer.from(await mobileImage.arrayBuffer()));
+      updateFields.mobile_image_name = mobileImageName;
+    }
+
+    if (Object.keys(updateFields).length === 0) {
+      return new Response(
+        JSON.stringify({ status: 400, message: "No fields to update" }),
+        { status: 400 }
+      );
+    }
 
     const setClause = Object.keys(updateFields)
       .map(key => `${key} = ?`)
       .join(', ');
 
-      const values = [...Object.values(updateFields), id];
+    const values = [...Object.values(updateFields), id];
 
-
-    // Update the data in the database
     const result = await query({
       query: `UPDATE herosection SET ${setClause} WHERE id = ?`,
       values: values,
@@ -92,38 +103,42 @@ if (image) {
   }
 }
 
+
 export async function POST(request) {
   try {
     const formData = await request.formData();
-    const redirect_url = formData.get('redirect_url');
-    const seo = formData.get('seo');
     const image = formData.get('image');
+    const mobileImage = formData.get('mobile_image');
+
     let imageName = '';
+    let mobileImageName = '';
+
+    const imageDir = path.join(
+      process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
+      process.env.NEXT_PUBLIC_BANNERS_PATH_DIR
+    );
+
+    try {
+      await fs.access(imageDir);
+    } catch {
+      await fs.mkdir(imageDir, { recursive: true });
+    }
 
     if (image) {
       imageName = image.name;
-      const imageDir = path.join(
-        process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR,
-        process.env.NEXT_PUBLIC_BANNERS_PATH_DIR 
-        // Assuming you want to save the images in an "uploads" directory
-      );
-
-      // Ensure the directory exists
-      try {
-        await fs.access(imageDir);
-      } catch {
-        await fs.mkdir(imageDir, { recursive: true });
-      }
-
-      // Save the image file
       const imageFilePath = path.join(imageDir, imageName);
       await fs.writeFile(imageFilePath, Buffer.from(await image.arrayBuffer()));
     }
 
-    // Save the data to the database
+    if (mobileImage) {
+      mobileImageName = mobileImage.name;
+      const mobileImagePath = path.join(imageDir, mobileImageName);
+      await fs.writeFile(mobileImagePath, Buffer.from(await mobileImage.arrayBuffer()));
+    }
+
     const result = await query({
-      query: "INSERT INTO herosection (redirect_url, image_name, seo) VALUES (?, ?, ?)",
-      values: [redirect_url, imageName, seo],
+      query: "INSERT INTO herosection (image_name, mobile_image_name) VALUES (?, ?)",
+      values: [imageName, mobileImageName],
     });
 
     return new Response(
@@ -146,6 +161,7 @@ export async function POST(request) {
     );
   }
 }
+
 
 export async function DELETE(request) {
   try {
