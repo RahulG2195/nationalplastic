@@ -4,6 +4,8 @@ import { useState } from "react";
 import axios from "axios";
 import { Bounce, toast } from "react-toastify";
 import { isValidName, isValidMobile } from "../../utils/validation";
+import { useRouter } from "next/navigation";
+
 const notify = () => {
   toast.success("Mail Sended SucessFully", {
     position: "top-center",
@@ -38,11 +40,12 @@ const Registration = () => {
     resume: null,
     MobileNumber: "",
   });
+  const router = useRouter();
+
   const isValidEmail = (email) => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailPattern.test(email);
   };
-
 
   async function handleInputChange(event) {
     const { name, value } = event.target;
@@ -94,6 +97,7 @@ const Registration = () => {
       if (res.status === 200) {
         resetButton();
         notify();
+        router.push("/CareerThankYou");
       } else {
         notifyError();
       }

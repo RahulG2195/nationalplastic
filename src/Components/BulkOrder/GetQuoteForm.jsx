@@ -108,8 +108,8 @@ const GetQuoteForm = (props) => {
     if (!isValid) return;
 
     try {
-      await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/bulkOrderEmail`, submissionData);
-      notify("Mail Sent Successfully");
+      // await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/bulkOrderEmail`, submissionData);
+      notify("Mail Sent SuccessfullyP");
       // ... rest of your submission logic
       setFormData({
         fullName: "",
@@ -204,7 +204,7 @@ const GetQuoteForm = (props) => {
           ></textarea>
         </div>
         <div className="small text-white mb-4 reqCaptRes">
-          Please include details of product, quantity, type of service etc.*
+          Please include details of product, quantity, type of service etc.---*
         </div>
         <div className="mb-4">
           <input

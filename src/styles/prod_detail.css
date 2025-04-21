@@ -1,8 +1,9 @@
 
-.wishlist{
+
+.wishlist {
   cursor: pointer;
 }
-.wishlist:hover{
+.wishlist:hover {
   color: #cc0008;
 }
 .line-clamp-3 {
@@ -14,10 +15,10 @@
 }
 .shortProdDesc p {
   display: -webkit-box;
-  -webkit-line-clamp: 3; 
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow:clip;
+  text-overflow: clip;
 }
 
 .pd-wrap {
@@ -25,7 +26,7 @@
   font-family: "Nunito", sans-serif;
 }
 
-.prod_detail_slider{
+.prod_detail_slider {
   border: 1px solid lightgrey;
 }
 .heading-section {
@@ -111,7 +112,7 @@
 .product-thumb .item img {
   height: 100px;
 }
-.product-name{
+.product-name {
   display: flex;
   gap: 6px;
 }
@@ -122,13 +123,13 @@
   margin-bottom: 4px;
   color: #2e3192;
 }
-.prod_nameh2{
+.prod_nameh2 {
   color: #cc0008 !important;
   display: inline-block !important;
 }
 
 .product-ccount {
-    padding: 15px 0;
+  padding: 15px 0;
 }
 
 .product-price-discount {
@@ -332,12 +333,14 @@
   text-decoration: underline !important;
 }
 
-.ProdbtnRes, .ProdbtnRes_cart {
+.ProdbtnRes,
+.ProdbtnRes_cart {
   background-color: #cc0008;
   color: #fff !important;
 }
 
-.ProdbtnRes:hover, .ProdbtnRes_cart:hover {
+.ProdbtnRes:hover,
+.ProdbtnRes_cart:hover {
   color: #cc0008 !important;
   background-color: #fff;
   border: none;
@@ -441,26 +444,27 @@ input:focus-visible {
   .RespFAQans {
     font-size: small !important;
   }
-  .mySwiper2 img{
+  .mySwiper2 img {
     object-fit: cover !important;
   }
   /* .product-ccount .input-group{
     width: 40%;
   } */
-  .product-ccount .input-group.input-group-text{
+  .product-ccount .input-group.input-group-text {
     font-size: 21px;
   }
-  .prod_desc_sec{
+  .prod_desc_sec {
     padding: 30px 0;
   }
 }
 
 @media (max-width: 425px) {
-  .ProdbtnRes, .ProdbtnRes_cart {
+  .ProdbtnRes,
+  .ProdbtnRes_cart {
     padding: 7px 20px !important;
     font-size: 15px;
   }
-  .product-dtl label{
+  .product-dtl label {
     font-size: 16px;
   }
   .bulkRes {
@@ -482,14 +486,14 @@ input:focus-visible {
   }
   .prod_size {
     font-size: 15px;
-    max-width: 41%; 
+    max-width: 41%;
   }
   .prod_size input {
     text-align: center;
     width: 66% !important;
   }
 
-  .PreFoot .left{
+  .PreFoot .left {
     font-size: 16px;
   }
 }
@@ -512,7 +516,6 @@ input:focus-visible {
     border: 1px solid lightgray;
   } */
 }
-
 
 .spacing-products {
   /* display: flex; */
