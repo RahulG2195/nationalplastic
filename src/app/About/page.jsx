@@ -5,7 +5,7 @@ import Infrastructure from "@/Components/About/Infrastructure";
 import Team from "@/Components/About/team";
 import AwardsCertificates from "@/Components/About/AwardsCertificates";
 import SliderCard from "@/Components/About/SliderCard";
-import Header from "@/Components/layouts/Header";
+import Header from "@/Components/layouts/ok";
 import Footer from "@/Components/layouts/Footer";
 import Promoters from "@/Components/About/Promoters/Promoters";
 
