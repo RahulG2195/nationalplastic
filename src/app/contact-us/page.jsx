@@ -54,6 +54,8 @@ function ContactUs() {
   });
   const router = useRouter();
   const [initialBasicInfo, setInitialBasicInfo] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
 
   async function handleInputChange(event) {
     const { name, value } = event.target;
@@ -78,7 +80,7 @@ function ContactUs() {
 
   async function onFormSubmit(e) {
     e.preventDefault();
-
+    if (isSubmitting) return; 
     if (!isValidName(userInput.name)) {
       toast.error("Please enter a valid name.");
       return;
@@ -99,7 +101,7 @@ function ContactUs() {
       toast.error("Please enter a valid mobile number.");
       return;
     }
-
+    setIsSubmitting(true);
     const formData = new FormData();
     formData.append("name", userInput.name);
     formData.append("email", userInput.email);
@@ -119,7 +121,6 @@ function ContactUs() {
         },
       }
     );
-
     if (res.status === 200) {
       setUserInput({
         name: "",
@@ -130,43 +131,14 @@ function ContactUs() {
         file: null,
       });
       notify();
+    setIsSubmitting(false); // re-enable form
       router.push("/ContactThankYou");
     } else {
+    setIsSubmitting(false); // re-enable form
       notifyError();
     }
   }
 
-  // const RegisteredOfficeCardArr = [
-  //   {
-  //     key: 1,
-  //     title: "North - Regional Offices",
-  //     location: "D-92, Meerut Road, Indl Area, Ghaziabad, U.P. India",
-  //     phone: "+91-9219220368, +91- 9213090354",
-  //     email: "info@nationalplastic.com",
-  //   },
-  //   {
-  //     key: 2,
-  //     title: "South - Regional Offices",
-  //     location:
-  //       "21, New Timber Yard Layout, Off. Mysore Road, Near Satellite Bus Stand & Big Bazar, Banglore- 560 026",
-  //     phone: "080-26742855",
-  //     email: "info@nationalplastic.com",
-  //   },
-  //   {
-  //     key: 3,
-  //     title: "Punjab - Branch Office",
-  //     location: "D-92, Meerut Road, Indl Area, Ghaziabad, U.P. India",
-  //     phone: "+91-9219220368, +91- 9213090354",
-  //     email: "info@nationalplastic.com",
-  //   },
-  //   {
-  //     key: 4,
-  //     title: "Kerala - Branch Office",
-  //     location: "D-92, Meerut Road, Indl Area, Ghaziabad, U.P. India",
-  //     phone: "+91-9219220368, +91- 9213090354",
-  //     email: "info@nationalplastic.com",
-  //   },
-  // ];
 
   // **************FactoryUnitsArr Array************
   const FactoryUnitsArr = [
@@ -375,8 +347,9 @@ function ContactUs() {
                     <button
                       type="submit"
                       className="btn cta-contact-btn py-3 px-md-5 medium"
+                      disabled={isSubmitting}
                     >
-                      Submit Your Request
+                      {isSubmitting ? "Submitting..." : "Submit your request"}
                     </button>
                   </div>
                 </form>

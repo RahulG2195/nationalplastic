@@ -40,6 +40,8 @@ const Registration = () => {
     resume: null,
     MobileNumber: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const router = useRouter();
 
   const isValidEmail = (email) => {
@@ -70,6 +72,7 @@ const Registration = () => {
   async function onFormSubmit(e) {
     // toast
     e.preventDefault();
+    if (isSubmitting) return; // Prevent multiple submissions
     if (!isValidName(userInput.JobProfile)) {
       toast.error("Please enter a valid name.");
       return;
@@ -79,6 +82,7 @@ const Registration = () => {
       toast.error("Please enter a valid mobile number.");
       return;
     }
+    setIsSubmitting(true);
     const formData = new FormData();
     for (let key in userInput) {
       formData.append(key, userInput[key]);
@@ -93,6 +97,7 @@ const Registration = () => {
           },
         }
       );
+
       // toast("Your Message has been submitted successfully.");
       if (res.status === 200) {
         resetButton();
@@ -103,6 +108,8 @@ const Registration = () => {
       }
     } catch (err) {
       toast.error("Something went Wrong. please try again later.");
+    } finally {
+      setIsSubmitting(false); // Reset the submitting state
     }
   }
   async function resetButton() {
@@ -188,8 +195,8 @@ const Registration = () => {
                 </div>
                 <div className="mb-3 col-md-4 d-flex align-items-end justify-content-center gap-5">
                   <div className="mb- col-md-4 d-flex align-items-end justify-content-center registrationBtnResp gap-4">
-                    <button className="btn btn-danger px-4" type="submit">
-                      Submit
+                    <button className="btn btn-danger px-4" type="submit" disabled={isSubmitting}> 
+                    {isSubmitting ? "Submitting..." : "Submit"}
                     </button>
                     <button className="btn btn-danger px-4" type="reset">
                       Reset
