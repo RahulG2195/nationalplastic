@@ -557,3 +557,7 @@
   overflow: visible;
   -webkit-line-clamp: 3;
 }
+
+.fancybox__container {
+  z-index: 9999999999999 !important;
+}
