@@ -27,37 +27,45 @@ export async function GET(request) {
 export async function POST(req) {
     try {
         const body = await req.json();
-        const {email} = body;
+        const { email } = body;
 
-        // Construct the SQL query to insert the new coupon
-        const insertQuery = `
-            INSERT INTO newsletter (email)
-            VALUES (?)
-        `;
+        // Check if email already exists
+        const checkQuery = `SELECT 1 FROM newsletter WHERE email = ? LIMIT 1`;
+        const checkResult = await query({
+            query: checkQuery,
+            values: [email],
+        });
 
-        // Execute the insert query
-        const result = await query({
+        if (checkResult.length > 0) {
+            return NextResponse.json({
+                message: "Email already subscribed",
+                success: false,
+                status: 409,
+            });
+        }
+
+        // Insert if it doesn't exist
+        const insertQuery = `INSERT INTO newsletter (email) VALUES (?)`;
+        const insertResult = await query({
             query: insertQuery,
             values: [email],
         });
 
         return NextResponse.json({
-            result,
-            status: 200,
+            result: insertResult,
             success: true,
-        })
+            status: 200,
+        });
+
     } catch (err) {
         return NextResponse.json({
-            error: "Failed to fetch data",
+            error: "Failed to subscribe",
             success: false,
-            response: result,
             status: 500,
             errorMessage: err.message
-        })
+        });
     }
 }
-
-
 
 export async function DELETE(req) {
     try {

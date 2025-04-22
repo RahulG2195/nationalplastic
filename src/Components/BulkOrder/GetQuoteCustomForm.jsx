@@ -25,6 +25,8 @@ const GetQuoteCustomForm = (props) => {
     Requirements: "",
     city: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const router = useRouter();
 
   const validation = (userInput) => {
@@ -53,14 +55,24 @@ const GetQuoteCustomForm = (props) => {
   };
   const handleOnSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return; 
     const isValid = await validation(formData);
     if (!isValid) return;
+    setIsSubmitting(true);
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/bulkOrderEmail`,
         formData
       );
       notify("Mail sent successfully");
+      setFromData({
+        fullName: "",
+        Email: "",
+        ProductName: props.prodName || "",
+        Mobile: "",
+        Requirements: "",
+        city: "",
+      });
       router.push("/BulkOrderThankYou");
       if (props.modalRef.current) {
         const modalElement = props.modalRef.current;
@@ -69,6 +81,8 @@ const GetQuoteCustomForm = (props) => {
       }
     } catch (error) {
       notifyError(error.message);
+    } finally {
+      setIsSubmitting(false); // re-enable form
     }
   };
 
@@ -142,7 +156,7 @@ const GetQuoteCustomForm = (props) => {
             ></textarea>
           </div>
           <div className="small text-white mb-4 reqCaptRes">
-            Please include details of product, quantity, type of service etc.??*
+            Please include details of product, quantity, type of service etc.*
           </div>
           <div className="mb-4">
             <input
@@ -162,8 +176,9 @@ const GetQuoteCustomForm = (props) => {
                   ? props.className
                   : "btn bg-white darkBlue fw-semibold px-4"
               }
+              disabled={isSubmitting} 
             >
-              Submit
+              {isSubmitting ? "Submitting..." : "Submit"}
             </button>
           </div>
         </form>

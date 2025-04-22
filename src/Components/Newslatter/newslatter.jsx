@@ -23,7 +23,7 @@ function Newslatter() {
           });
     
           if (!response.data.success) {
-            throw new Error("Failed to subscribe");
+            throw new Error(response.data.message || "Failed to subscribe");
           }
           notify("Subscribed successfully!");
           form.resetFields();
