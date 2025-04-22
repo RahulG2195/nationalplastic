@@ -47,7 +47,6 @@ function Banner() {
   //   "/Assets/images/banner/mobile_banner.jpg",
   //   "/Assets/images/banner/mobile_banner.jpg",
   // ];
-
   useEffect(() => {
     const fetchImages = async () => {
       try {
@@ -55,8 +54,8 @@ function Banner() {
         const data = response.data.allHeroSections || [];
   
         setHeroSections(data);
-        const desktopImgs = data.map(section => `/${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}${section.image_name}`);
-        const mobileImgs = data.map(section => `/${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}${section.mobile_image_name}`);
+        const desktopImgs = data.map(section => `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}${section.image_name}`);
+        const mobileImgs = data.map(section => `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}${section.mobile_image_name}`);
         console.log("Fetched Hero Sections:", data);
         console.log("Desktop Images:", desktopImgs);
         console.log("Mobile Images:", mobileImgs);
