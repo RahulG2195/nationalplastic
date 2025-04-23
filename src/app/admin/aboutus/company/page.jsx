@@ -37,9 +37,7 @@ const ContentTable = ({ content, onEdit, onDelete }) => {
       render: (_, record) => (
         <span>
           <Button onClick={() => onEdit(record)} style={{ marginRight: 8 }}>Edit</Button>
-          <Popconfirm title="Are you sure you want to delete this?" onConfirm={() => onDelete(record.id)}>
-            <Button danger>Delete</Button>
-          </Popconfirm>
+
         </span>
       ),
     },

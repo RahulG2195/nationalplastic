@@ -54,7 +54,7 @@ const EditableBanner = ({ data }) => {
                             <Label for="image">Image:</Label>
                             <Input type="file" id="image" onChange={handleImageChange} />
                         </FormGroup>
-                        <FormGroup>
+                        {/* <FormGroup>
                             <Label for="redirection_link">Redirection Link:</Label>
                             <Input
                                 type="text"
@@ -64,7 +64,7 @@ const EditableBanner = ({ data }) => {
                                 onChange={handleInputChange}
                                 placeholder="Enter redirection link"
                             />
-                        </FormGroup>
+                        </FormGroup> */}
                         <Button color="primary mx-3" onClick={handleSave} disabled={loading}>
                             {loading ? 'Saving...' : 'Save'}
                         </Button>
@@ -76,7 +76,7 @@ const EditableBanner = ({ data }) => {
                 ) : (
                     <div className="text-center">
                         <img src={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BANNERS_PATH_DIR}${formData.image}`} alt="Banner" className="img-fluid mb-3" style={{ maxWidth: '300px' }} />
-                        <p className='fw-bold'>Redirection Link: <span className='fw-normal'>{formData.redirection_link}</span></p>
+                        <p className='fw-bold invisible'>Redirection Link: <span className='fw-normal'>{formData.redirection_link}</span></p>
                         <Button color="primary" onClick={() => setIsEditMode(true)}>
                             Edit
                         </Button>
