@@ -125,7 +125,7 @@ const Catalogue = () => {
                     </i>
                   </p>
                   <a
-                    href={`/Assets/images/catalogue/pdf/${brochure.pdf}`}
+                    href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BROCHURE}${brochure.pdf}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >

@@ -46,7 +46,7 @@ export async function GET() {
 
 // Handle PUT request
 
-export async function PUT(request) {
+export async function POST(request) {
     try {
       const formData = await request.formData();
       const message = formData.get('message') || '';

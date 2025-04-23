@@ -105,7 +105,7 @@ const EditDataComponent = () => {
     });
 
     try {
-      const response = await axios.put("/api/investorKYC", formData);
+      const response = await axios.post("/api/investorKYC", formData);
       if (response.status === 200) {
         toast.success("Data updated successfully!", { autoClose: 1000 });
         setEditMode(false);
