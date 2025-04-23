@@ -26,7 +26,7 @@ export async function GET(request) {
   }
 }
 
-export async function PUT(request) {
+export async function POST(request) {
     try {
       const { row } = await request.json();
   
@@ -81,4 +81,4 @@ export async function PUT(request) {
         { status: 500, headers: { 'Content-Type': 'application/json' } }
       );
     }
-  }
+}

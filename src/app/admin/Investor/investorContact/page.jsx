@@ -37,7 +37,7 @@ const EditInvestorContact = () => {
     const handleSubmit = async (e, rowIndex) => {
         e.preventDefault();
         try {
-            await axios.put('/api/investorsContact', { row: rows[rowIndex] });
+            await axios.post('/api/investorsContact', { row: rows[rowIndex] });
             setEditingRowIndex(false); // Exit edit mode for the current row
             toast.success(`Data for Row ${rowIndex + 1} updated successfully!`, { autoClose: 1000 });
         } catch (error) {
