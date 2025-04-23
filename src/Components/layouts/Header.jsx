@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import TopBar from "./TopBar";
-// import BottomBar from "./BottomBar";
+import BottomBar from "./BottomBar";
 import "../../styles/header.css";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -734,7 +734,7 @@ export default function Header() {
                 </div>
               </div>
             </nav>
-            {/* {shouldRenderBottomBar ? <BottomBar /> : <PlaceholderBar />} */}
+            {shouldRenderBottomBar ? <BottomBar /> : <PlaceholderBar />}
 
           </div>
         </>
