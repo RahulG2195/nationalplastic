@@ -14,7 +14,7 @@ const uploadFile = async (file) => {
     }
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const uploadDir = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_BROCHURE}`;
+    const uploadDir = `${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_BROCHURE}`;
     try {
       await fs.access(uploadDir);
     } catch {
