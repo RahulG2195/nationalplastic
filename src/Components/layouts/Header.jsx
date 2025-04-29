@@ -589,7 +589,7 @@ export default function Header() {
                     <li className="nav-item brdr d-none d-md-none d-xl-block">
                       <Link
                         className="nav-link"
-                        href="/Wishlist"
+                        href="/wishlist"
                         onClick={isClicked ? handleShow : null}>
                         <Image
                           height={100}
@@ -605,14 +605,14 @@ export default function Header() {
                       {isLoggedIn ? (
                         <Link
                           className="nav-link position-relative profile"
-                          href="/ProfilePage"
+                          href="/profilepage"
                           onClick={isClicked ? handleShow : null}>
                           <span className="InitialName">{InitialName}</span>
                         </Link>
                       ) : (
                         <Link
                           className="nav-link"
-                          href="/Login"
+                          href="/login"
                           onClick={isClicked ? handleShow : null}>
                           <Image
                             height={100}
@@ -628,7 +628,7 @@ export default function Header() {
                     <li className="nav-item brdr d-none d-md-block d-xl-block">
                       <Link
                         className="nav-link AddToCartNav-link  position-relative"
-                        href="/AddToCart"
+                        href="/addtocart"
                         onClick={isClicked ? handleShow : null}>
                         <Image
                           height={100}
@@ -664,7 +664,7 @@ export default function Header() {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/Wishlist">
+                      <Link href="/wishlist">
                         <Image
                           src="/Assets/svg/Path 3.svg"
                           height={50}
@@ -679,7 +679,7 @@ export default function Header() {
                     </li>
                     <li>
 
-                      <Link href="/AllCategories">
+                      <Link href="/allcategories">
                         <Image
                           src="/Assets/svg/categorysvg.svg"
                           height={50}
@@ -694,12 +694,12 @@ export default function Header() {
                     </li>
                     <li>
                       {isLoggedIn ? (
-                        <Link href="/ProfilePage">
+                        <Link href="/profilepage">
                           <span className="InitialName">{InitialName}</span>
                           <p className="icon-name" style={{ marginTop: "5px" }}>ProfilePage</p>
                         </Link>
                       ) : (
-                        <Link href="/Login">
+                        <Link href="/login">
                           <Image
                             src="/Assets/svg/Group 4.svg"
                             height={50}
@@ -714,7 +714,7 @@ export default function Header() {
                       )}
                     </li>
                     <li>
-                      <Link href="/AddToCart" className=" position-relative">
+                      <Link href="/addtocart" className=" position-relative">
                         <Image
                           src="/Assets/svg/Group 5.svg"
                           height={50}

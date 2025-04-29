@@ -98,7 +98,7 @@ const RecentlyViewed = ({id}) => {
       const isLoggedInResult = await isLoggedIn();
       if (!isLoggedInResult) {
       notifyError("Login to add to WISHLIST")
-        router.push("/Login");
+        router.push("/login");
       } else {
         dispatch(
           addItemToWishlist({

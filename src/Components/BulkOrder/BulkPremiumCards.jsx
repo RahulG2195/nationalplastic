@@ -146,7 +146,7 @@ const BulkPremiumCards = ({ proddata }) => {
       const isLoggedInResult = await isLoggedIn();
       if (!isLoggedInResult) {
         notifyError();
-        router.push("/Login");
+        router.push("/login");
       } else {
         dispatch(
           addItemToWishlist({

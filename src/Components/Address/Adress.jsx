@@ -10,10 +10,10 @@ const AddHeader = () => {
     <div className="AddHeader-container">
       <div className="row">
         <div className="ATCflow">
-          <Link href="/AddToCart" className={`nav-link ${path === "/AddToCart" ? "highlight" : ""}`}>
+          <Link href="/addtocart" className={`nav-link ${path === "/addtocart" ? "highlight" : ""}`}>
               Add to Cart <span> ------- </span>
           </Link>
-          <Link href="/Address" className={`nav-link ${path === "/Address" ? "highlight" : ""}`}>
+          <Link href="/address" className={`nav-link ${path === "/address" ? "highlight" : ""}`}>
               Address <span> ------- </span>
           </Link>
           <Link href="" className={`nav-link ${path === "/Payment" ? "highlight" : ""}`}>

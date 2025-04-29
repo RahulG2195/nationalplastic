@@ -78,7 +78,7 @@ const CartProduct = ({
     const isLoggedInResult = await isLoggedIn();
     if (!isLoggedInResult) {
       notifyError("Login to Add to cart");
-      router.push("/Login");
+      router.push("/login");
     } else {
       dispatch(addItemToWishlist({ product_id: product_id }));
     }

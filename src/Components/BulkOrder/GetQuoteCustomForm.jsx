@@ -73,7 +73,7 @@ const GetQuoteCustomForm = (props) => {
         Requirements: "",
         city: "",
       });
-      router.push("/BulkOrderThankYou");
+      router.push("/bulkorderthankyou");
       if (props.modalRef.current) {
         const modalElement = props.modalRef.current;
         const modalInstance = Modal.getInstance(modalElement); // Get the modal instance

@@ -1,7 +1,7 @@
 "use client";
 // import FooterRow from "@/Components/FooterRow/FooterRow";
 import "../../styles/profilepage.css";
-import Wishlist from "../Wishlist/page";
+import Wishlist from "../wishlist/page";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import axios from "axios";
@@ -67,7 +67,7 @@ function ProfilePage() {
     const isAdmin = localStorage.getItem('isAdmin') === 'true';
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     if (!isLoggedIn) {
-      router.push("/Login");
+      router.push("/login");
       return;
     }
     if (isAdmin) {

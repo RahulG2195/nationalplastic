@@ -139,7 +139,7 @@ function Login() {
   };
 
   const handleRegisterClick = () => {
-    router.push("/Register");
+    router.push("/register");
   };
 
   const handleSubmit = async (event) => {

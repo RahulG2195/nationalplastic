@@ -102,7 +102,7 @@ const Registration = () => {
       if (res.status === 200) {
         resetButton();
         notify();
-        router.push("/CareerThankYou");
+        router.push("/careerthankyou");
       } else {
         notifyError();
       }

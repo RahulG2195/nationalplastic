@@ -11,7 +11,7 @@ export const config = {
 export async function middleware(request) {
   const token = request.cookies.get('token')?.value;
   if (!token) {
-    return NextResponse.redirect(new URL('/Login', request.url));
+    return NextResponse.redirect(new URL('/login', request.url));
   }
   
   try {
@@ -21,9 +21,9 @@ export async function middleware(request) {
       return NextResponse.next();
     }
   } catch (error) {
-    return NextResponse.redirect(new URL('/Login', request.url));
+    return NextResponse.redirect(new URL('/login', request.url));
   }
   
   notifyError("Session Expired Please Login Again");
-  return NextResponse.redirect(new URL('/Login', request.url));
+  return NextResponse.redirect(new URL('/login', request.url));
 }

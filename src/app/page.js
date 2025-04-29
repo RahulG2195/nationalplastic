@@ -13,7 +13,7 @@ import Catalogue from "@/Components/Home/Catalogue";
 import "../styles/home_prod.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import CommingSoon from "./CommingSoon/page";
+import CommingSoon from "./commingsoon/page";
 
 export const metadata = {
   title: 'India\'s Largest House hold Product Manufacturers | High Quality Plastic Durable Products',

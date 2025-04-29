@@ -171,7 +171,7 @@ const Register = () => {
 
         if (response.status === 201) {
           setMessage('Registration successful!');
-          setTimeout(() => router.push('/Login'), 2000); // Redirect after 2 seconds
+          setTimeout(() => router.push('/login'), 2000); // Redirect after 2 seconds
         } else {
           throw new Error(response.data.message || 'Failed to complete registration');
         }
@@ -324,7 +324,7 @@ const Register = () => {
                 </div>
                 {message && <div className="alert alert-info">{message}</div>}
                 <div className="mt-3 text-center">
-                  <p>Already Registered? <a href="/Login">Login</a></p>
+                  <p>Already Registered? <a href="/login">Login</a></p>
                 </div>
               </div>
             </form>

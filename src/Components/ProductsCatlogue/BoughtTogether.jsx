@@ -85,7 +85,7 @@ const BoughtTogether = () => {
     const isLoggedInResult = await isLoggedIn();
     if (!isLoggedInResult) {
       notify();
-      route.push("/Login");
+      route.push("/login");
     } else {
       dispatch(
         addItemToWishlist({

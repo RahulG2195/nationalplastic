@@ -325,7 +325,7 @@ function ProdData({ category_id }) {
     const isLoggedInResult = await isLoggedIn();
     if (!isLoggedInResult) {
       notify();
-      route.push("/Login");
+      route.push("/login");
     } else {
       dispatch(
         addItemToWishlist({
@@ -539,7 +539,7 @@ function ProdData({ category_id }) {
                 </div>
 
                 <Link
-                  href={userState ? "/Address" : "#"}
+                  href={userState ? "/address" : "#"}
                   className={`btn m-2 px-md-5 ProdbtnRes ${
                     !userState ? "disabled-button" : ""
                   }`}

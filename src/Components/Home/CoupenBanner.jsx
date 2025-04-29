@@ -42,7 +42,7 @@ function CoupenBanner() {
                 </div>
                 <div className="">
                   <div className="signup_div">
-                    <Link href="/Login">
+                    <Link href="/login">
                       <button className="signup px-4  fw-medium">SIGN UP NOW</button>
                     </Link>
                     <p className="ltc text-center fw-medium">As in Life, T&C applied</p>
@@ -68,7 +68,7 @@ function CoupenBanner() {
                 </div>
                 <div className="">
                   <div className="signup_div">
-                    <Link href="/Login">
+                    <Link href="/login">
                       <button className="signup " >Sign Up Now</button>
                     </Link>
                     <p className="ltcM">As in Life, T&C applied</p>

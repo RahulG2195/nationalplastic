@@ -121,7 +121,7 @@ const PreChairsCards = () => {
     switch (isLoggedInResult) {
       case false:
         notify();
-        route.push("/Login");
+        route.push("/login");
         break;
       case true:
         dispatch(

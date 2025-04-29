@@ -154,7 +154,7 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
           sendPaymentSuccessMail(response.data.response);
           dispatch(emptyCartAsync(customer_id))
           dispatch(removeCoupon());
-          router.push("/ThankYouPage");
+          router.push("/thankyoupage");
         }
       },
       prefill: {
@@ -275,7 +275,7 @@ const PriceDetailsCard = ({ itemCount, totalDiscount, totalPay, redirect }) => {
         </div>
         <div className="d-flex justify-content-center mt-2">
           {redirect ? (
-            <Link href={`${userState ? "/Address" : "/Login"}`}>
+            <Link href={`${userState ? "/address" : "/login"}`}>
               <button
                 type="submit"
                 className="btn btn-danger px-md-5 placeOrderResp"

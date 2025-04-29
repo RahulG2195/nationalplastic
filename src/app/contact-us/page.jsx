@@ -132,7 +132,7 @@ function ContactUs() {
       });
       notify();
     setIsSubmitting(false); // re-enable form
-      router.push("/ContactThankYou");
+      router.push("/contactthankyou");
     } else {
     setIsSubmitting(false); // re-enable form
       notifyError();

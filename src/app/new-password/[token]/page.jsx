@@ -68,7 +68,7 @@ const PasswordToken = () => {
       );
       notify("Password Changed Successfully");
       localStorage.clear();
-      setTimeout(() => router.push("/Login"), 2000);
+      setTimeout(() => router.push("/login"), 2000);
     } catch (error) {
       notifyError("Process Failed. Try Again!", "error");
       console.error("Error submitting form:", error);

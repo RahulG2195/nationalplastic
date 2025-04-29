@@ -18,7 +18,7 @@ function ThankYouPage() {
         <div className="row error-text">
           <h1>Order Successful</h1>
           <h5>Thankyou so much for your order</h5>
-          <Link href="/TrackYourOrder">
+          <Link href="/trackyourorder">
           <button className="error-homepage-btn">CHECK STATUS</button>
           </Link>
         </div>

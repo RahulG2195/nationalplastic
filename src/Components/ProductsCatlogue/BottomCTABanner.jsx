@@ -3,7 +3,7 @@ import Link from "next/link"
 const BottomCTABanner = () => {
     return (
         <>
-            <Link href="/About">
+            <Link href="/about">
                 <div className="my-md-5 my-2">
                     <Image
                         className="mt-md-5 mt-2"
