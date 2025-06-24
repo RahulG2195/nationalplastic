@@ -1,0 +1,19 @@
+.committee-box {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.committee-header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: #f7f7f7;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid #333;
+}
+
+.committee-entry {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
