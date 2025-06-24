@@ -175,6 +175,10 @@ const navigation = [
         title: "EDiting CSR content",
         href: "/admin/csr",
       },
+      {
+        title: "CSR Members and Pdf",
+        href: "/admin/csr/pdfManager",
+      },
 
     ],
     icon: "bi bi-globe",
