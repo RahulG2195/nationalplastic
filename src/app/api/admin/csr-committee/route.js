@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const results = await query({ query: "SELECT * FROM csr_committee ORDER BY id DESC" });
+    const results = await query({ query: "SELECT * FROM csr_committee ORDER BY id ASC" });
     return NextResponse.json({ data: results });
   } catch (error) {
     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
