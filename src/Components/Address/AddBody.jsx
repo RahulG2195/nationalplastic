@@ -363,7 +363,7 @@ const AddBody = () => {
             </div>
 
             <div className="col-md-3 AddRight text-start">
-              <div className="row">
+              {/* <div className="row">
                 <div className="col-md-12 BGcolor summary mb-2 p-3">
                   <PriceDetailsCard
                     itemCount={totalCount}
@@ -373,7 +373,7 @@ const AddBody = () => {
                     InstallationCharges={installationCharges}
                   />
                 </div>
-              </div>
+              </div> */}
               <div className="row">
                 <div className="col-md-12 BGcolor">
                   <p className="text-start fw-semibold confirm bordrBtm p-3">

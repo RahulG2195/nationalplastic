@@ -16,11 +16,6 @@ const nextConfig = {
       },
     ],
   },
-  api: {
-    bodyParser: {
-      sizeLimit: "100mb",
-    },
-  },
 
   webpack: (config) => {
     config.resolve.alias["@uploads"] = path.resolve("/var/www/uploads");

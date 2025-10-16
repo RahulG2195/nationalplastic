@@ -82,6 +82,10 @@ const navigation = [
         title: "IEPF",
         href: "/admin/Investor/IEPF",
       },
+      {
+        title: "Saaksham Niveshak",
+        href: "/admin/Investor/SaakshamNiveshak",
+      },
 
     ],
     icon: "bi bi-bank",
