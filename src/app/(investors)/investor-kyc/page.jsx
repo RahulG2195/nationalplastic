@@ -7,6 +7,59 @@ import { FileOutlined, WarningOutlined } from '@ant-design/icons';
 const { Title, Paragraph, Link } = Typography;
 const { Content } = Layout;
 
+const SaakshamNiveshakSection = () => {
+  const [data, setData] = useState([]);
+  const [heading, setHeading] = useState({ sn_heading: '', sn_sub_para: '' });
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/api/admin/saaksham-niveshak');
+        setData(response.data.results);
+        setHeading(response.data.heading);
+      } catch (error) {
+        console.error('Error fetching Saaksham Niveshak data:', error);
+        setError('Failed to load data. Please try again later.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+
+  }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  return (
+    <Card>
+      <Title level={3}>{heading.sn_heading}</Title>
+      <Paragraph>{heading.sn_sub_para}</Paragraph>
+      <List
+        dataSource={data}
+        renderItem={(item) => (
+          <List.Item>
+            <Space>
+              <span>{item.sn_content}</span>
+              <a href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${item.sn_pdf}`} target="_blank" rel="noopener noreferrer">
+                <i className="fa fa-download" aria-hidden="true"></i>
+              </a>
+            </Space>
+          </List.Item>
+        )}
+      />
+    </Card>
+  );
+};
+
 const InvestorKYC = () => {
   const [data, setData] = useState({
     message: '',
@@ -71,6 +124,8 @@ const InvestorKYC = () => {
               )}
             />
           </Card>
+
+          <SaakshamNiveshakSection />
 
           <Alert
             message="Important Notice"

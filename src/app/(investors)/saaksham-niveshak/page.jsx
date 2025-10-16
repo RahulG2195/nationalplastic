@@ -37,14 +37,14 @@ const SaakshamNiveshak = () => {
   }
 
   return (
-    <section className='investor_sec my-5 py-5'>
+    <section className='investor_sec my-5 py-5 '>
       <div className='container'>
         <div className='row'>
           <div className='col-12'>
             <div className='table-responsive'>
               <h3>{heading.sn_heading}</h3>
               <p>{heading.sn_sub_para}</p>
-              <table className="table table-striped table-light table-bordered">
+              <table className="table tabler-border table-striped table-light table-bordered">
                 <tbody>
                   {data.map((item, index) => (
                     <tr key={index}>

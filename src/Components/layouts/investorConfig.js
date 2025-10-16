@@ -101,7 +101,6 @@ export const staticInvestorConfig = [
       { label: "Investor KYC", link: "/investor-kyc" },
       { label: "IEPF", link: "/iepf" },
       { label: "Advertisements", link: "/advertisements" },
-      { label: "Saaksham Niveshak", link: "/saaksham-niveshak" },
     ],
   },
 ];
