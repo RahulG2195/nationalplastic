@@ -34,20 +34,22 @@ export async function uploadFile(file){
     }
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const uploadDir = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
-    try {
-      await fs.access(uploadDir);
-    } catch {
-      await fs.mkdir(uploadDir, { recursive: true });
-    }
-    const filePath = path.join(uploadDir, file.name);
-    await fs.writeFile(filePath, buffer);
-    try{
+    
+    if (process.env.NODE_ENV === 'production') {
+      const uploadDir = `${process.env.NEXT_PUBLIC_EXTERNAL_PATH_DIR}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}`;
+      try {
+        await fs.access(uploadDir);
+      } catch {
+        await fs.mkdir(uploadDir, { recursive: true });
+      }
+      const filePath = path.join(uploadDir, file.name);
+      await fs.writeFile(filePath, buffer);
+    } else {
       const filePath = path.join(local_UPLOAD_DIR, file.name);
       await writeFile(filePath, buffer);
-    }catch(error){
-      console.log("error writing file locally", error)
     }
+
+
     return file.name;
   } catch (error) {
     throw new Error(`PDF upload failed: ${error.message}`);

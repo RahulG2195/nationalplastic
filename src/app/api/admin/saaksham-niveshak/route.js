@@ -1,8 +1,7 @@
 
 import { query } from '@/lib/db';
 import {NextResponse} from 'next/server';
-import path from "path";
-import fs from "fs/promises";
+import { uploadFile } from "@/utils/fileUploader";
 
 export async function GET(request) {
   try {
@@ -50,10 +49,7 @@ export async function POST(request) {
       );
     }
 
-    const file_name = sn_pdf.name;
-    const buffer = Buffer.from(await sn_pdf.arrayBuffer());
-    const uploadDir = path.join(process.cwd(), "public", "Assets", "uploads", "Investors");
-    await fs.writeFile(path.join(uploadDir, file_name), buffer);
+    const file_name = await uploadFile(sn_pdf);
 
     await query({
       query: "INSERT INTO saaksham_niveshak (sn_content, sn_pdf, sn_status, created_on) VALUES (?, ?, 1, NOW())",
@@ -96,10 +92,7 @@ export async function PUT(request) {
 
     let file_name;
     if (sn_pdf && typeof sn_pdf !== 'string') {
-      file_name = sn_pdf.name;
-      const buffer = Buffer.from(await sn_pdf.arrayBuffer());
-      const uploadDir = path.join(process.cwd(), "public", "Assets", "uploads", "Investors");
-      await fs.writeFile(path.join(uploadDir, file_name), buffer);
+      file_name = await uploadFile(sn_pdf);
     }
 
     if (file_name) {

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Typography, Layout, Space, Card, List, Alert, Spin } from 'antd';
+import { Typography, Layout, Space, Card, List, Alert, Spin, Table } from 'antd';
 import { FileOutlined, WarningOutlined } from '@ant-design/icons';
 
 const { Title, Paragraph, Link } = Typography;
@@ -43,18 +43,25 @@ const SaakshamNiveshakSection = () => {
     <Card>
       <Title level={3}>{heading.sn_heading}</Title>
       <Paragraph>{heading.sn_sub_para}</Paragraph>
-      <List
+      <Table
         dataSource={data}
-        renderItem={(item) => (
-          <List.Item>
-            <Space>
-              <span>{item.sn_content}</span>
-              <a href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${item.sn_pdf}`} target="_blank" rel="noopener noreferrer">
+        columns={[
+          {
+            title: 'Title',
+            dataIndex: 'sn_content',
+            key: 'sn_content',
+          },
+          {
+            title: 'Download',
+            key: 'action',
+            render: (text, record) => (
+              <a href={`${process.env.NEXT_PUBLIC_URL}${process.env.NEXT_PUBLIC_INVESTORS_PATH_DIR}${record.sn_pdf}`} target="_blank" rel="noopener noreferrer">
                 <i className="fa fa-download" aria-hidden="true"></i>
               </a>
-            </Space>
-          </List.Item>
-        )}
+            ),
+          },
+        ]}
+        pagination={false}
       />
     </Card>
   );
