@@ -5,6 +5,7 @@ import { Layout, Button, Dropdown, Modal, Input, Form, Space, Spin, Typography }
 import { UserOutlined, LogoutOutlined, LockOutlined } from "@ant-design/icons";
 import { signOut } from "next-auth/react";
 import { notify, notifyError } from "@/utils/notify";
+import Link from 'next/link';
 
 const { Header: AntHeader } = Layout;
 const { Title, Text } = Typography;
@@ -138,6 +139,11 @@ const Header = () => {
       key: 'info',
       label: <Text strong>{username || 'Admin'}</Text>,
       disabled: true,
+    },
+    {
+      key: 'settings',
+      label: <Link href="/admin/settings">Settings</Link>,
+      icon: <UserOutlined />,
     },
     {
       key: 'reset',

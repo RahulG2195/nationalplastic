@@ -2,7 +2,7 @@
 import Image from "next/image";
 import "../../styles/addtocart.css";
 import CartProduct from "../../Components/AddToCart/CartProduct";
-// import PriceDetailsCard from "../../Components/PriceDetails/PriceDetailsCard";
+import PriceDetailsCard from "../../Components/PriceDetails/PriceDetailsCard";
 // import FooterRow from "@/Components/FooterRow/FooterRow";
 import FooterRow from "../../Components/FooterRow/FooterRow.jsx";
 import React, { useEffect, useState } from "react";
@@ -33,6 +33,7 @@ function AddToCart() {
   const CartStates = useSelector((state) => state.cart);
   const tempCartStates = useSelector((state) => state.temp);
   const userState = useSelector((state) => state.userData.isLoggedIn);
+  const [priceVisible, setPriceVisible] = useState(false);
   const productCount = useSelector((state) => {
     const cartType = state.userData.isLoggedIn ? state.cart : state.temp;
     return cartType?.products?.length || 0;
@@ -83,6 +84,20 @@ function AddToCart() {
   useEffect(() => {
     setCount(productCount); // Update localCount whenever productCount changes
   }, [productCount]);
+
+  useEffect(() => {
+        const fetchPriceVisibility = async () => {
+          try {
+            const response = await axios.get('/api/settings/price-visibility');
+            setPriceVisible(response.data.set_status === 1);
+            
+          } catch (error) {
+            console.error('Error fetching price visibility:', error);
+          }
+        };
+    
+        fetchPriceVisibility();
+      }, []);
 
   useEffect(() => {
     let cartData;
@@ -475,14 +490,14 @@ function AddToCart() {
                 </div>
               </form>
             </div>
-            {/* <PriceDetailsCard
+           {priceVisible && ( <PriceDetailsCard
               itemCount={totalCount}
               cartPrice={totalPrice}
               totalDiscount={discount}
               totalPay={totalPayble}
               InstallationCharges={installationCharges}
               redirect={true}
-            /> */}
+            />)}
           </div>
         </div>
       </div>

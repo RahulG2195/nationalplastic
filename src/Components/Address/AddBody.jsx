@@ -33,6 +33,7 @@ const AddBody = () => {
   const [showFields, setShowFields] = useState(false);
   const [companyName, setCompanyName] = useState('');
   const [gstNumber, setGstNumber] = useState('');
+  const [priceVisible, setPriceVisible] = useState(false);
 
   const handleCheckboxChange = () => {
     setShowFields(!showFields);
@@ -195,10 +196,24 @@ const AddBody = () => {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const fetchPriceVisibility = async () => {
+      try {
+        const response = await axios.get('/api/settings/price-visibility');
+        setPriceVisible(response.data.set_status === 1);
+        
+      } catch (error) {
+        console.error('Error fetching price visibility:', error);
+      }
+    };
+
+    fetchPriceVisibility();
+  }, []);
   if (isLoading) {
     return <div>Loading...</div>;
   }
-
+  
   return (
     <>
       <div className="main_container  position-relative">
@@ -363,7 +378,8 @@ const AddBody = () => {
             </div>
 
             <div className="col-md-3 AddRight text-start">
-              {/* <div className="row">
+              {priceVisible && (
+              <div className="row">
                 <div className="col-md-12 BGcolor summary mb-2 p-3">
                   <PriceDetailsCard
                     itemCount={totalCount}
@@ -373,7 +389,8 @@ const AddBody = () => {
                     InstallationCharges={installationCharges}
                   />
                 </div>
-              </div> */}
+              </div>
+              )}
               <div className="row">
                 <div className="col-md-12 BGcolor">
                   <p className="text-start fw-semibold confirm bordrBtm p-3">

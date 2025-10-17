@@ -37,7 +37,7 @@ function ProdData({ category_id }) {
   const [isHovered, setIsHovered] = useState(false);
   const [descriptionToShow, setDescriptionToShow] = useState([]);
   const [fulldescription, setFulldescription] = useState([]);
-
+  const [priceVisible, setPriceVisible] = useState(false);
   const [inWishlist, setInWishlist] = useState(false);
 
   const cartData = useSelector((state) => state.cart.products);
@@ -55,6 +55,20 @@ function ProdData({ category_id }) {
   const toggleDescription = () => {
     setIsFullDescription((prevState) => !prevState);
   };
+
+  useEffect(() => {
+    const fetchPriceVisibility = async () => {
+      try {
+        const response = await axios.get('/api/settings/price-visibility');
+        setPriceVisible(response.data.set_status === 1);
+        
+      } catch (error) {
+        console.error('Error fetching price visibility:', error);
+      }
+    };
+
+    fetchPriceVisibility();
+  }, []);
 
   const ProductCount = () => {
     if (!userState) {
@@ -336,6 +350,8 @@ function ProdData({ category_id }) {
     }
   };
 
+  
+
   return (
     <>
       <div className="container">
@@ -365,12 +381,12 @@ function ProdData({ category_id }) {
                 </div>
 
                 <div className="reviews-counter d-flex flex-wrap gap-2">
-                  {/* <div className="mrp">
+                  {priceVisible && (<div className="mrp">
                     <h6>
                       <strong className="text-danger"> ₹{price}</strong>
                     </h6>
                     <del style={{ fontSize: "16px" }}> ₹{orignalPrice}</del>
-                  </div> */}
+                  </div>)}
                 </div>
                 <div>
                   <i

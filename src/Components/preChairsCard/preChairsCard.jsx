@@ -12,7 +12,7 @@ import Image from "next/image";
 const PreChairsCard = (props) => {
   const [inWishlist, setInWishlist] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-
+const [priceVisible, setPriceVisible] = useState(false);
   const handleAddToCart = () => {
     props.onAddToCart(props.id);
   };
@@ -45,6 +45,20 @@ const PreChairsCard = (props) => {
     setInWishlist(true);
   };
   const Np = "National Plastic";
+
+  useEffect(() => {
+      const fetchPriceVisibility = async () => {
+        try {
+          const response = await axios.get('/api/settings/price-visibility');
+          setPriceVisible(response.data.set_status === 1);
+          
+        } catch (error) {
+          console.error('Error fetching price visibility:', error);
+        }
+      };
+  
+      fetchPriceVisibility();
+    }, []);
   return (
     <>
       <div className={`card preCont mt-3 position-relative  my-4 ${props.recentClass ? props.recentClass : ""}`}>
@@ -88,14 +102,15 @@ const PreChairsCard = (props) => {
                   Get Quote
                 </button>
               )}
-              {/* {props.Price && (
+
+              {priceVisible && (props.Price && (
                 <>
                   <span className="new-price pr-2 pr-md-0">₹{numberWithCommas(props.Price)}</span>
                   {props.orignalPrice && (
                     <small className="old-price text-right"><del style={{paddingLeft:"5px", fontSize:"14px"}}>₹{numberWithCommas(props.orignalPrice)}</del></small>
                   )}
                 </>
-              )} */}
+              ))}
             </div>
           </div>
           {/* <div className="d-flex justify-content-between align-items-center pt-1">

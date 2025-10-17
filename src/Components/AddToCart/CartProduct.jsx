@@ -37,6 +37,7 @@ const CartProduct = ({
   const [initialCount, setInitialCount] = useState(quantity);
   const dispatch = useDispatch();
   const Np = "National Plastic";
+  const [priceVisible, setPriceVisible] = useState(false);
 
   const handleIncrement = async () => {
     const isLoggedInResult = await isLoggedIn();
@@ -98,6 +99,20 @@ const CartProduct = ({
     localStorage.setItem("myId", productId);
   };
 
+  useEffect(() => {
+      const fetchPriceVisibility = async () => {
+        try {
+          const response = await axios.get('/api/settings/price-visibility');
+          setPriceVisible(response.data.set_status === 1);
+          
+        } catch (error) {
+          console.error('Error fetching price visibility:', error);
+        }
+      };
+  
+      fetchPriceVisibility();
+    }, []);
+
   return (
     <>
       <div className="col-md-4">
@@ -150,13 +165,13 @@ const CartProduct = ({
           </div>
 
           {/* Price Section */}
-          {/*<div className="productPrice">
+          {priceVisible && (<div className="productPrice">
             <p className="fw-bold">₹ {numberWithCommas(productPrice)}</p>
             <p>
               <del className="fw-semibold">₹ {numberWithCommas(discountedPrice)}</del>
               <span>{discPer}% Off</span>
             </p>
-          </div>*/}
+          </div>)}
         </div>
 
         <div className="InstallationCharges align-items-center my-5">
