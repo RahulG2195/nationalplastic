@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, FormGroup, Label, Input, Container, Table } from 'reactstrap';
 import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
 const SaakshamNiveshakAdmin = () => {
     const [data, setData] = useState([]);
@@ -13,6 +14,7 @@ const SaakshamNiveshakAdmin = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [editId, setEditId] = useState(null);
     const [currentPdf, setCurrentPdf] = useState('');
+    const fileInputRef = React.useRef(null);
 
     useEffect(() => {
         fetchData();
@@ -68,8 +70,10 @@ const SaakshamNiveshakAdmin = () => {
             }
             resetForm();
             fetchData();
+            toast.success('Form submitted successfully!');
         } catch (error) {
             console.error('Error submitting form:', error);
+            toast.error('An error occurred while submitting the form.');
         }
     };
 
@@ -95,10 +99,14 @@ const SaakshamNiveshakAdmin = () => {
         setIsEditing(false);
         setEditId(null);
         setCurrentPdf('');
+        if (fileInputRef.current) {
+            fileInputRef.current.value = '';
+        }
     };
 
     return (
         <Container className='pt-5'>
+            <Toaster />
             <h1 className="fs-3 fw-bold">Saaksham Niveshak</h1>
             <Form onSubmit={handleHeadingSubmit} className="bg-light p-4 rounded shadow mb-5">
                 <FormGroup>
@@ -146,6 +154,7 @@ const SaakshamNiveshakAdmin = () => {
                         id="sn_pdf"
                         onChange={handleFileChange}
                         required={!isEditing}
+                        ref={fileInputRef}
                     />
                     {isEditing && currentPdf && <p>Current file: {currentPdf}</p>}
                 </FormGroup>
