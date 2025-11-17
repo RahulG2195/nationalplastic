@@ -201,7 +201,7 @@ const AddBody = () => {
     const fetchPriceVisibility = async () => {
       try {
 const response = await axios.get(
-          '/api/settings/price-visibility',
+          '/api/admin/settings/price-visibility',
           {
             // Add these headers to prevent caching
             headers: {

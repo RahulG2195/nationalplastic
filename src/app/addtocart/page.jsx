@@ -89,7 +89,7 @@ function AddToCart() {
         const fetchPriceVisibility = async () => {
           try {
            const response = await axios.get(
-          '/api/settings/price-visibility',
+          '/api/admin/settings/price-visibility',
           {
             // Add these headers to prevent caching
             headers: {
@@ -99,6 +99,7 @@ function AddToCart() {
             },
           }
         );
+        console.log('Price visibility response:', response.data);
         setPriceVisible(response.data.set_status === 1);
             
           } catch (error) {

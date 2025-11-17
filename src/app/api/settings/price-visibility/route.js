@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 export async function GET() {
   try {
     const result = await query({
-      query: "SELECT set_status FROM setting WHERE set_type = 'price_visibility'",
+      query: "SELECT set_status FROM settings WHERE set_type = 'price_visibility'",
       values: [],
     });
 
