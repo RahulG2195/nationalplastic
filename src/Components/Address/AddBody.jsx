@@ -200,7 +200,17 @@ const AddBody = () => {
   useEffect(() => {
     const fetchPriceVisibility = async () => {
       try {
-        const response = await axios.get('/api/settings/price-visibility');
+const response = await axios.get(
+          '/api/settings/price-visibility',
+          {
+            // Add these headers to prevent caching
+            headers: {
+              'Cache-Control': 'no-cache, no-store, must-revalidate',
+              'Pragma': 'no-cache',
+              'Expires': '0',
+            },
+          }
+        );
         setPriceVisible(response.data.set_status === 1);
         
       } catch (error) {

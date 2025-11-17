@@ -18,7 +18,7 @@ import { isLoggedIn } from "../../utils/validation";
 import { Bounce, toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { notifyError } from "../../utils/notify";
-
+import axios from 'axios';
 const CartProduct = ({
   src,
   productName,
@@ -102,8 +102,18 @@ const CartProduct = ({
   useEffect(() => {
       const fetchPriceVisibility = async () => {
         try {
-          const response = await axios.get('/api/settings/price-visibility');
-          setPriceVisible(response.data.set_status === 1);
+const response = await axios.get(
+          '/api/settings/price-visibility',
+          {
+            // Add these headers to prevent caching
+            headers: {
+              'Cache-Control': 'no-cache, no-store, must-revalidate',
+              'Pragma': 'no-cache',
+              'Expires': '0',
+            },
+          }
+        );
+        setPriceVisible(response.data.set_status === 1);
           
         } catch (error) {
           console.error('Error fetching price visibility:', error);
